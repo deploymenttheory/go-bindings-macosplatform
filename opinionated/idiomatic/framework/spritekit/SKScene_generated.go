@@ -49,343 +49,527 @@ func sceneAdopt(id objc.ID) *Scene {
 
 // NewSceneWithSize initializes a new scene object.
 func NewSceneWithSize(size corefoundation.CGSize) *Scene {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SKScene")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSize:"), size)
-	return sceneAdopt(_id)
+	var _mainthread0 *Scene
+	purego.Main(func() {
+		_mainthread0 = func() *Scene {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SKScene")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSize:"), size)
+			return sceneAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithSize sets the dimensions of the scene, in points.
 func (s *Scene) WithSize(size corefoundation.CGSize) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setSize:"), size)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setSize:"), size)
+	})
 	return s
 }
 
 // WithScaleMode sets a setting that defines how the scene is mapped to the view that presents it.
 func (s *Scene) WithScaleMode(scaleMode SceneScaleMode) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setScaleMode:"), scaleMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setScaleMode:"), scaleMode)
+	})
 	return s
 }
 
 // WithCamera sets the camera node in the scene that determines what part of the scene’s coordinate space is visible in the view.
 func (s *Scene) WithCamera(camera *CameraNode) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCamera:"), objref.IDOf(camera))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCamera:"), objref.IDOf(camera))
+	})
 	return s
 }
 
 // WithListener sets a node used to determine the position of the listener for positional audio in the scene.
 func (s *Scene) WithListener(listener NodeProvider) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setListener:"), objref.IDOf(listener))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setListener:"), objref.IDOf(listener))
+	})
 	return s
 }
 
 // WithBackgroundColor sets the background color of the scene.
 func (s *Scene) WithBackgroundColor(backgroundColor obj.Object) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	})
 	return s
 }
 
 // WithAnchorPoint sets the point in the view’s frame that corresponds to the scene’s origin.
 func (s *Scene) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAnchorPoint:"), anchorPoint)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAnchorPoint:"), anchorPoint)
+	})
 	return s
 }
 
 // WithFilter sets the Core Image filter to apply.
 func (s *Scene) WithFilter(filter obj.Object) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFilter:"), objref.IDOf(filter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFilter:"), objref.IDOf(filter))
+	})
 	return s
 }
 
 // WithShouldCenterFilter sets a Boolean value that determines whether the effect node automatically sets the filter’s image center.
 func (s *Scene) WithShouldCenterFilter(shouldCenterFilter bool) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShouldCenterFilter:"), shouldCenterFilter)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShouldCenterFilter:"), shouldCenterFilter)
+	})
 	return s
 }
 
 // WithShouldEnableEffects sets a Boolean value that determines whether the effect node applies the filter to its children as they are drawn.
 func (s *Scene) WithShouldEnableEffects(shouldEnableEffects bool) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShouldEnableEffects:"), shouldEnableEffects)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShouldEnableEffects:"), shouldEnableEffects)
+	})
 	return s
 }
 
 // WithShouldRasterize sets a Boolean value that indicates whether the results of rendering the child nodes should be cached.
 func (s *Scene) WithShouldRasterize(shouldRasterize bool) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
+	})
 	return s
 }
 
 // WithBlendMode sets the blend mode used to draw the node’s contents into its parent’s framebuffer.
 func (s *Scene) WithBlendMode(blendMode BlendMode) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBlendMode:"), blendMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBlendMode:"), blendMode)
+	})
 	return s
 }
 
 // WithShader sets a custom shader that is called when the effect node is blended into the parent’s framebuffer.
 func (s *Scene) WithShader(shader *Shader) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShader:"), objref.IDOf(shader))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShader:"), objref.IDOf(shader))
+	})
 	return s
 }
 
 // WithPosition sets the position of the node in its parent’s coordinate system.
 func (s *Scene) WithPosition(position corefoundation.CGPoint) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPosition:"), position)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPosition:"), position)
+	})
 	return s
 }
 
 // WithZPosition sets the height of the node relative to its parent.
 func (s *Scene) WithZPosition(zPosition float64) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setZPosition:"), zPosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setZPosition:"), zPosition)
+	})
 	return s
 }
 
 // WithZRotation sets the Euler rotation about the z axis (in radians).
 func (s *Scene) WithZRotation(zRotation float64) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setZRotation:"), zRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setZRotation:"), zRotation)
+	})
 	return s
 }
 
 // WithXScale sets a scaling factor that multiplies the width of a node and its children.
 func (s *Scene) WithXScale(xScale float64) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setXScale:"), xScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setXScale:"), xScale)
+	})
 	return s
 }
 
 // WithYScale sets a scaling factor that multiplies the height of a node and its children.
 func (s *Scene) WithYScale(yScale float64) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setYScale:"), yScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setYScale:"), yScale)
+	})
 	return s
 }
 
 // WithSpeed sets a speed modifier applied to all actions executed by a node and its descendants.
 func (s *Scene) WithSpeed(speed float64) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setSpeed:"), speed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setSpeed:"), speed)
+	})
 	return s
 }
 
 // WithAlpha sets the transparency value applied to the node’s contents.
 func (s *Scene) WithAlpha(alpha float64) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAlpha:"), alpha)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAlpha:"), alpha)
+	})
 	return s
 }
 
 // WithPaused sets a Boolean value that determines whether actions on the node and its descendants are processed.
 func (s *Scene) WithPaused(paused bool) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPaused:"), paused)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPaused:"), paused)
+	})
 	return s
 }
 
 // WithHidden sets a Boolean value that determines whether a node and its descendants are rendered.
 func (s *Scene) WithHidden(hidden bool) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHidden:"), hidden)
+	})
 	return s
 }
 
 // WithUserInteractionEnabled sets a Boolean value that indicates whether the node receives touch events.
 func (s *Scene) WithUserInteractionEnabled(userInteractionEnabled bool) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	})
 	return s
 }
 
 // WithName sets the node’s assignable name.
 func (s *Scene) WithName(name string) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setName:"), purego.NSString(name))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setName:"), purego.NSString(name))
+	})
 	return s
 }
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (s *Scene) WithPhysicsBody(physicsBody *PhysicsBody) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	})
 	return s
 }
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (s *Scene) WithUserData(userData obj.Object) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	})
 	return s
 }
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (s *Scene) WithReachConstraints(reachConstraints *ReachConstraints) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	})
 	return s
 }
 
 // WithConstraints sets a list of constraints to apply to the node.
 func (s *Scene) WithConstraints(items ...*Constraint) *Scene {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setConstraints:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setConstraints:"), _arr)
+	})
 	return s
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
 func (s *Scene) WithAttributeValues(attributeValues obj.Object) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	})
 	return s
 }
 
 // WithAccessibilityElement sets a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (s *Scene) WithAccessibilityElement(accessibilityElement bool) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	})
 	return s
 }
 
 // WithAccessibilityRole sets a string value describing the user interface element type; for example, a button.
 func (s *Scene) WithAccessibilityRole(accessibilityRole string) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	})
 	return s
 }
 
 // WithAccessibilityRoleDescription sets a string value describing the user interface element name and type; for example, the Buy button.
 func (s *Scene) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	})
 	return s
 }
 
 // WithAccessibilitySubrole sets a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (s *Scene) WithAccessibilitySubrole(accessibilitySubrole string) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	})
 	return s
 }
 
 // WithAccessibilityFrame sets the size of this user interface element, in screen points.
 func (s *Scene) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	})
 	return s
 }
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (s *Scene) WithAccessibilityParent(accessibilityParent obj.Object) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	})
 	return s
 }
 
 // WithAccessibilityHelp sets the help description of this user interface element; for example, the text shown in a tooltip.
 func (s *Scene) WithAccessibilityHelp(accessibilityHelp string) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	})
 	return s
 }
 
 // WithAccessibilityLabel sets a short description of this user interface element.
 func (s *Scene) WithAccessibilityLabel(accessibilityLabel string) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	})
 	return s
 }
 
 // WithAccessibilityEnabled sets a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (s *Scene) WithAccessibilityEnabled(accessibilityEnabled bool) *Scene {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	})
 	return s
 }
 
 // SceneDidLoad tells you when the scene is presented.
 func (s *Scene) SceneDidLoad() {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("sceneDidLoad"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("sceneDidLoad"))
+	})
+
 }
 
 // ConvertPointFromView converts a point from view coordinates to scene coordinates.
 func (s *Scene) ConvertPointFromView(point corefoundation.CGPoint) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(s), objc.RegisterName("convertPointFromView:"), point)
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(s), objc.RegisterName("convertPointFromView:"), point)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ConvertPointToView converts a point from scene coordinates to view coordinates.
 func (s *Scene) ConvertPointToView(point corefoundation.CGPoint) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(s), objc.RegisterName("convertPointToView:"), point)
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(s), objc.RegisterName("convertPointToView:"), point)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Update tells your app to perform any app-specific logic to update your scene.
 func (s *Scene) Update(currentTime float64) {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("update:"), currentTime)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("update:"), currentTime)
+	})
+
 }
 
 // DidEvaluateActions tells your app to peform any necessary logic after scene actions are evaluated.
 func (s *Scene) DidEvaluateActions() {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didEvaluateActions"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didEvaluateActions"))
+	})
+
 }
 
 // DidSimulatePhysics tells your app to peform any necessary logic after physics simulations are performed.
 func (s *Scene) DidSimulatePhysics() {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didSimulatePhysics"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didSimulatePhysics"))
+	})
+
 }
 
 // DidApplyConstraints tells your app to peform any necessary logic after constraints are applied.
 func (s *Scene) DidApplyConstraints() {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didApplyConstraints"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didApplyConstraints"))
+	})
+
 }
 
 // DidFinishUpdate tells your app to peform any necessary logic after the scene has finished all of the steps required to process animations.
 func (s *Scene) DidFinishUpdate() {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didFinishUpdate"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didFinishUpdate"))
+	})
+
 }
 
 // DidMoveToView tells you when the scene is presented by a view.
 func (s *Scene) DidMoveToView(view *View) {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didMoveToView:"), objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didMoveToView:"), objref.IDOf(view))
+	})
+
 }
 
 // WillMoveFromView tells you when the scene is about to be removed from a view.
 func (s *Scene) WillMoveFromView(view *View) {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("willMoveFromView:"), objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("willMoveFromView:"), objref.IDOf(view))
+	})
+
 }
 
 // DidChangeSize tells you when the scene’s size has changed.
 func (s *Scene) DidChangeSize(oldSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didChangeSize:"), oldSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didChangeSize:"), oldSize)
+	})
+
 }
 
 // Size returns the size.
 func (s *Scene) Size() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(s), objc.RegisterName("size"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(s), objc.RegisterName("size"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ScaleMode returns used to determine how to scale the scene to match the SKView it is being displayed in.
 func (s *Scene) ScaleMode() SceneScaleMode {
-	_r := objc.Send[SceneScaleMode](objref.IDOf(s), objc.RegisterName("scaleMode"))
-	return _r
+	var _mainthread0 SceneScaleMode
+	purego.Main(func() {
+		_mainthread0 = func() SceneScaleMode {
+			_r := objc.Send[SceneScaleMode](objref.IDOf(s), objc.RegisterName("scaleMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Camera returns the camera that is used to obtain the view scale and translation based on where the camera is in relation to the scene.
 func (s *Scene) Camera() *CameraNode {
-	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("camera"))
-	return CameraNodeFromID(_r)
+	var _mainthread0 *CameraNode
+	purego.Main(func() {
+		_mainthread0 = func() *CameraNode {
+			_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("camera"))
+			return CameraNodeFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Listener returns the node that is currently the listener for positional audio coming from SKAudioNodes
 func (s *Scene) Listener() *Node {
-	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("listener"))
-	return NodeFromID(_r)
+	var _mainthread0 *Node
+	purego.Main(func() {
+		_mainthread0 = func() *Node {
+			_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("listener"))
+			return NodeFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AudioEngine returns the audio engine.
 func (s *Scene) AudioEngine() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("audioEngine"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("audioEngine"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BackgroundColor returns background color, defaults to gray
 func (s *Scene) BackgroundColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("backgroundColor"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("backgroundColor"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AnchorPoint returns used to choose the origin of the scene's coordinate system
 func (s *Scene) AnchorPoint() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(s), objc.RegisterName("anchorPoint"))
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(s), objc.RegisterName("anchorPoint"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PhysicsWorld returns physics simulation functionality
 func (s *Scene) PhysicsWorld() *PhysicsWorld {
-	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("physicsWorld"))
-	return PhysicsWorldFromID(_r)
+	var _mainthread0 *PhysicsWorld
+	purego.Main(func() {
+		_mainthread0 = func() *PhysicsWorld {
+			_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("physicsWorld"))
+			return PhysicsWorldFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // View returns the SKView this scene is currently presented in, or nil if it is not being presented.
 func (s *Scene) View() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("view"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("view"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ EffectNodeProvider = (*Scene)(nil)

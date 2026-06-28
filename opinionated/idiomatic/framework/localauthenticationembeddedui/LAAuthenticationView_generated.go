@@ -68,13 +68,26 @@ func (av *AuthenticationView) String() string {
 
 // NewAuthenticationViewWithContext creates a new authentication icon that reflects the current authentication state.
 func NewAuthenticationViewWithContext(context_ obj.Object) *AuthenticationView {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("LAAuthenticationView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContext:"), objref.IDOf(context_))
-	return authenticationViewAdopt(_id)
+	var _mainthread0 *AuthenticationView
+	purego.Main(func() {
+		_mainthread0 = func() *AuthenticationView {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("LAAuthenticationView")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContext:"), objref.IDOf(context_))
+			return authenticationViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // Context returns the context.
 func (av *AuthenticationView) Context() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("context"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("context"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

@@ -51,198 +51,281 @@ func transformNodeAdopt(id objc.ID) *TransformNode {
 
 // NewTransformNode creates a new TransformNode.
 func NewTransformNode() *TransformNode {
-	_id := objc.Send[objc.ID](objc.ID(_class("SKTransformNode")), objc.RegisterName("new"))
-	return transformNodeAdopt(_id)
+	var _mainthread0 *TransformNode
+	purego.Main(func() {
+		_mainthread0 = func() *TransformNode {
+			_id := objc.Send[objc.ID](objc.ID(_class("SKTransformNode")), objc.RegisterName("new"))
+			return transformNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithXRotation sets the x rotation.
 func (tn *TransformNode) WithXRotation(xRotation float64) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setXRotation:"), xRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setXRotation:"), xRotation)
+	})
 	return tn
 }
 
 // WithYRotation sets the y rotation.
 func (tn *TransformNode) WithYRotation(yRotation float64) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setYRotation:"), yRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setYRotation:"), yRotation)
+	})
 	return tn
 }
 
 // WithPosition sets the position of the node in its parent’s coordinate system.
 func (tn *TransformNode) WithPosition(position corefoundation.CGPoint) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setPosition:"), position)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setPosition:"), position)
+	})
 	return tn
 }
 
 // WithZPosition sets the height of the node relative to its parent.
 func (tn *TransformNode) WithZPosition(zPosition float64) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setZPosition:"), zPosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setZPosition:"), zPosition)
+	})
 	return tn
 }
 
 // WithZRotation sets the Euler rotation about the z axis (in radians).
 func (tn *TransformNode) WithZRotation(zRotation float64) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setZRotation:"), zRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setZRotation:"), zRotation)
+	})
 	return tn
 }
 
 // WithXScale sets a scaling factor that multiplies the width of a node and its children.
 func (tn *TransformNode) WithXScale(xScale float64) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setXScale:"), xScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setXScale:"), xScale)
+	})
 	return tn
 }
 
 // WithYScale sets a scaling factor that multiplies the height of a node and its children.
 func (tn *TransformNode) WithYScale(yScale float64) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setYScale:"), yScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setYScale:"), yScale)
+	})
 	return tn
 }
 
 // WithSpeed sets a speed modifier applied to all actions executed by a node and its descendants.
 func (tn *TransformNode) WithSpeed(speed float64) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setSpeed:"), speed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setSpeed:"), speed)
+	})
 	return tn
 }
 
 // WithAlpha sets the transparency value applied to the node’s contents.
 func (tn *TransformNode) WithAlpha(alpha float64) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAlpha:"), alpha)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAlpha:"), alpha)
+	})
 	return tn
 }
 
 // WithPaused sets a Boolean value that determines whether actions on the node and its descendants are processed.
 func (tn *TransformNode) WithPaused(paused bool) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setPaused:"), paused)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setPaused:"), paused)
+	})
 	return tn
 }
 
 // WithHidden sets a Boolean value that determines whether a node and its descendants are rendered.
 func (tn *TransformNode) WithHidden(hidden bool) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setHidden:"), hidden)
+	})
 	return tn
 }
 
 // WithUserInteractionEnabled sets a Boolean value that indicates whether the node receives touch events.
 func (tn *TransformNode) WithUserInteractionEnabled(userInteractionEnabled bool) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	})
 	return tn
 }
 
 // WithName sets the node’s assignable name.
 func (tn *TransformNode) WithName(name string) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setName:"), purego.NSString(name))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setName:"), purego.NSString(name))
+	})
 	return tn
 }
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (tn *TransformNode) WithPhysicsBody(physicsBody *PhysicsBody) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	})
 	return tn
 }
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (tn *TransformNode) WithUserData(userData obj.Object) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	})
 	return tn
 }
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (tn *TransformNode) WithReachConstraints(reachConstraints *ReachConstraints) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	})
 	return tn
 }
 
 // WithConstraints sets a list of constraints to apply to the node.
 func (tn *TransformNode) WithConstraints(items ...*Constraint) *TransformNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setConstraints:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setConstraints:"), _arr)
+	})
 	return tn
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
 func (tn *TransformNode) WithAttributeValues(attributeValues obj.Object) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	})
 	return tn
 }
 
 // WithAccessibilityElement sets a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (tn *TransformNode) WithAccessibilityElement(accessibilityElement bool) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	})
 	return tn
 }
 
 // WithAccessibilityRole sets a string value describing the user interface element type; for example, a button.
 func (tn *TransformNode) WithAccessibilityRole(accessibilityRole string) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	})
 	return tn
 }
 
 // WithAccessibilityRoleDescription sets a string value describing the user interface element name and type; for example, the Buy button.
 func (tn *TransformNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	})
 	return tn
 }
 
 // WithAccessibilitySubrole sets a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (tn *TransformNode) WithAccessibilitySubrole(accessibilitySubrole string) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	})
 	return tn
 }
 
 // WithAccessibilityFrame sets the size of this user interface element, in screen points.
 func (tn *TransformNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	})
 	return tn
 }
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (tn *TransformNode) WithAccessibilityParent(accessibilityParent obj.Object) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	})
 	return tn
 }
 
 // WithAccessibilityHelp sets the help description of this user interface element; for example, the text shown in a tooltip.
 func (tn *TransformNode) WithAccessibilityHelp(accessibilityHelp string) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	})
 	return tn
 }
 
 // WithAccessibilityLabel sets a short description of this user interface element.
 func (tn *TransformNode) WithAccessibilityLabel(accessibilityLabel string) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	})
 	return tn
 }
 
 // WithAccessibilityEnabled sets a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (tn *TransformNode) WithAccessibilityEnabled(accessibilityEnabled bool) *TransformNode {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	})
 	return tn
 }
 
 // SetEulerAngles wraps the corresponding Objective-C method.
 func (tn *TransformNode) SetEulerAngles(euler unsafe.Pointer) {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setEulerAngles:"), euler)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setEulerAngles:"), euler)
+	})
+
 }
 
 // SetRotationMatrix wraps the corresponding Objective-C method.
 func (tn *TransformNode) SetRotationMatrix(rotationMatrix unsafe.Pointer) {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setRotationMatrix:"), rotationMatrix)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setRotationMatrix:"), rotationMatrix)
+	})
+
 }
 
 // SetQuaternion wraps the corresponding Objective-C method.
 func (tn *TransformNode) SetQuaternion(quaternion unsafe.Pointer) {
-	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setQuaternion:"), quaternion)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setQuaternion:"), quaternion)
+	})
+
 }
 
 // XRotation returns the x rotation.
 func (tn *TransformNode) XRotation() float64 {
-	_r := objc.Send[float64](objref.IDOf(tn), objc.RegisterName("xRotation"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(tn), objc.RegisterName("xRotation"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // YRotation returns the y rotation.
 func (tn *TransformNode) YRotation() float64 {
-	_r := objc.Send[float64](objref.IDOf(tn), objc.RegisterName("yRotation"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(tn), objc.RegisterName("yRotation"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ NodeProvider = (*TransformNode)(nil)

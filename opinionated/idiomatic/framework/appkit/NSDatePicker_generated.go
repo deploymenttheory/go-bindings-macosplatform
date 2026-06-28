@@ -50,636 +50,930 @@ func datePickerAdopt(id objc.ID) *DatePicker {
 
 // NewDatePicker creates a new DatePicker.
 func NewDatePicker() *DatePicker {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSDatePicker")), objc.RegisterName("new"))
-	return datePickerAdopt(_id)
+	var _mainthread0 *DatePicker
+	purego.Main(func() {
+		_mainthread0 = func() *DatePicker {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSDatePicker")), objc.RegisterName("new"))
+			return datePickerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithDatePickerStyle sets the date picker’s style.
 func (dp *DatePicker) WithDatePickerStyle(datePickerStyle DatePickerStyle) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setDatePickerStyle:"), datePickerStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setDatePickerStyle:"), datePickerStyle)
+	})
 	return dp
 }
 
 // WithBezeled sets a Boolean value that indicates whether the date picker draws a bezeled border.
 func (dp *DatePicker) WithBezeled(bezeled bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setBezeled:"), bezeled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setBezeled:"), bezeled)
+	})
 	return dp
 }
 
 // WithBordered sets a Boolean value that indicates whether the date picker has a plain border.
 func (dp *DatePicker) WithBordered(bordered bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setBordered:"), bordered)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setBordered:"), bordered)
+	})
 	return dp
 }
 
 // WithDrawsBackground sets a Boolean value that indicates whether the date picker draws the background.
 func (dp *DatePicker) WithDrawsBackground(drawsBackground bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	})
 	return dp
 }
 
 // WithBackgroundColor sets the date picker’s background color.
 func (dp *DatePicker) WithBackgroundColor(backgroundColor *Color) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	})
 	return dp
 }
 
 // WithTextColor sets the date picker’s text color.
 func (dp *DatePicker) WithTextColor(textColor *Color) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
+	})
 	return dp
 }
 
 // WithDatePickerMode sets the date picker’s mode.
 func (dp *DatePicker) WithDatePickerMode(datePickerMode DatePickerMode) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setDatePickerMode:"), datePickerMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setDatePickerMode:"), datePickerMode)
+	})
 	return dp
 }
 
 // WithDatePickerElements sets a bitmask that indicates which visual elements of the date picker are currently shown, and which won’t be usable because they are hidden.
 func (dp *DatePicker) WithDatePickerElements(datePickerElements DatePickerElementFlags) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setDatePickerElements:"), datePickerElements)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setDatePickerElements:"), datePickerElements)
+	})
 	return dp
 }
 
 // WithCalendar sets the calendar used by the date picker.
 func (dp *DatePicker) WithCalendar(calendar obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
+	})
 	return dp
 }
 
 // WithLocale sets the date picker’s locale.
 func (dp *DatePicker) WithLocale(locale obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setLocale:"), objref.IDOf(locale))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setLocale:"), objref.IDOf(locale))
+	})
 	return dp
 }
 
 // WithTimeZone sets the time zone for the date picker.
 func (dp *DatePicker) WithTimeZone(timeZone obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
+	})
 	return dp
 }
 
 // WithDateValue sets the date selected by the date picker.
 func (dp *DatePicker) WithDateValue(dateValue obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setDateValue:"), objref.IDOf(dateValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setDateValue:"), objref.IDOf(dateValue))
+	})
 	return dp
 }
 
 // WithTimeInterval sets the time interval selected by the date picker.
 func (dp *DatePicker) WithTimeInterval(timeInterval float64) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setTimeInterval:"), timeInterval)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setTimeInterval:"), timeInterval)
+	})
 	return dp
 }
 
 // WithMinDate sets the date picker’s minimum date value.
 func (dp *DatePicker) WithMinDate(minDate obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setMinDate:"), objref.IDOf(minDate))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setMinDate:"), objref.IDOf(minDate))
+	})
 	return dp
 }
 
 // WithMaxDate sets the date picker’s maximum date value.
 func (dp *DatePicker) WithMaxDate(maxDate obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setMaxDate:"), objref.IDOf(maxDate))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setMaxDate:"), objref.IDOf(maxDate))
+	})
 	return dp
 }
 
 // WithPresentsCalendarOverlay sets a Boolean value that indicates whether to present a graphical calendar overlay when editing a calendar element within a text-field style date picker.
 func (dp *DatePicker) WithPresentsCalendarOverlay(presentsCalendarOverlay bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setPresentsCalendarOverlay:"), presentsCalendarOverlay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setPresentsCalendarOverlay:"), presentsCalendarOverlay)
+	})
 	return dp
 }
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (dp *DatePicker) WithTarget(target obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return dp
 }
 
 // WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
 func (dp *DatePicker) WithTag(tag int) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setTag:"), tag)
+	})
 	return dp
 }
 
 // WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 func (dp *DatePicker) WithIgnoresMultiClick(ignoresMultiClick bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	})
 	return dp
 }
 
 // WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 func (dp *DatePicker) WithContinuous(continuous bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return dp
 }
 
 // WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
 func (dp *DatePicker) WithEnabled(enabled bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return dp
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
 func (dp *DatePicker) WithRefusesFirstResponder(refusesFirstResponder bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return dp
 }
 
 // WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
 func (dp *DatePicker) WithHighlighted(highlighted bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return dp
 }
 
 // WithControlSize sets the size of the control.
 func (dp *DatePicker) WithControlSize(controlSize ControlSize) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return dp
 }
 
 // WithFormatter sets the receiver’s formatter.
 func (dp *DatePicker) WithFormatter(formatter obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return dp
 }
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (dp *DatePicker) WithObjectValue(objectValue obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return dp
 }
 
 // WithStringValue sets the value of the receiver’s cell as an NSString object.
 func (dp *DatePicker) WithStringValue(stringValue string) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return dp
 }
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (dp *DatePicker) WithAttributedStringValue(attributedStringValue obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return dp
 }
 
 // WithIntValue sets the value of the receiver’s cell as an integer.
 func (dp *DatePicker) WithIntValue(intValue int) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return dp
 }
 
 // WithIntegerValue sets the value of the receiver’s cell as an integer value.
 func (dp *DatePicker) WithIntegerValue(integerValue int) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return dp
 }
 
 // WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
 func (dp *DatePicker) WithFloatValue(floatValue float32) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return dp
 }
 
 // WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
 func (dp *DatePicker) WithDoubleValue(doubleValue float64) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return dp
 }
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (dp *DatePicker) WithFont(font *Font) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return dp
 }
 
 // WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
 func (dp *DatePicker) WithUsesSingleLineMode(usesSingleLineMode bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return dp
 }
 
 // WithLineBreakMode sets the line break mode to use for text in the control’s cell.
 func (dp *DatePicker) WithLineBreakMode(lineBreakMode LineBreakMode) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return dp
 }
 
 // WithAlignment sets the alignment mode of the text in the receiver’s cell.
 func (dp *DatePicker) WithAlignment(alignment TextAlignment) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return dp
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (dp *DatePicker) WithBaseWritingDirection(baseWritingDirection WritingDirection) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return dp
 }
 
 // WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 func (dp *DatePicker) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	})
 	return dp
 }
 
 // WithCell sets the cell.
 func (dp *DatePicker) WithCell(cell CellProvider) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	})
 	return dp
 }
 
 // WithSubviews sets the subviews.
 func (dp *DatePicker) WithSubviews(items ...ViewProvider) *DatePicker {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return dp
 }
 
 // WithHidden sets the hidden.
 func (dp *DatePicker) WithHidden(hidden bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setHidden:"), hidden)
+	})
 	return dp
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (dp *DatePicker) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return dp
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (dp *DatePicker) WithAutoresizesSubviews(autoresizesSubviews bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return dp
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (dp *DatePicker) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return dp
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (dp *DatePicker) WithFrame(frame corefoundation.CGRect) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setFrame:"), frame)
+	})
 	return dp
 }
 
 // WithFrameRotation sets the frame rotation.
 func (dp *DatePicker) WithFrameRotation(frameRotation float64) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return dp
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (dp *DatePicker) WithFrameCenterRotation(frameCenterRotation float64) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return dp
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (dp *DatePicker) WithBoundsRotation(boundsRotation float64) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return dp
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (dp *DatePicker) WithBounds(bounds corefoundation.CGRect) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setBounds:"), bounds)
+	})
 	return dp
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (dp *DatePicker) WithCanDrawConcurrently(canDrawConcurrently bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return dp
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (dp *DatePicker) WithNeedsDisplay(needsDisplay bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return dp
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (dp *DatePicker) WithAcceptsTouchEvents(acceptsTouchEvents bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return dp
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (dp *DatePicker) WithWantsRestingTouches(wantsRestingTouches bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return dp
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (dp *DatePicker) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return dp
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (dp *DatePicker) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return dp
 }
 
 // WithWantsLayer sets the wants layer.
 func (dp *DatePicker) WithWantsLayer(wantsLayer bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return dp
 }
 
 // WithLayer sets the layer.
 func (dp *DatePicker) WithLayer(layer obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return dp
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (dp *DatePicker) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return dp
 }
 
 // WithNeedsLayout sets the needs layout.
 func (dp *DatePicker) WithNeedsLayout(needsLayout bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return dp
 }
 
 // WithAlphaValue sets the alpha value.
 func (dp *DatePicker) WithAlphaValue(alphaValue float64) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return dp
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (dp *DatePicker) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return dp
 }
 
 // WithBackgroundFilters sets the background filters.
 func (dp *DatePicker) WithBackgroundFilters(items ...obj.Object) *DatePicker {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return dp
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (dp *DatePicker) WithCompositingFilter(compositingFilter obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return dp
 }
 
 // WithContentFilters sets the content filters.
 func (dp *DatePicker) WithContentFilters(items ...obj.Object) *DatePicker {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return dp
 }
 
 // WithShadow sets the shadow.
 func (dp *DatePicker) WithShadow(shadow *Shadow) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return dp
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (dp *DatePicker) WithClipsToBounds(clipsToBounds bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return dp
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (dp *DatePicker) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return dp
 }
 
 // WithToolTip sets the tool tip.
 func (dp *DatePicker) WithToolTip(toolTip string) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return dp
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (dp *DatePicker) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return dp
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (dp *DatePicker) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return dp
 }
 
 // WithNextKeyView sets the next key view.
 func (dp *DatePicker) WithNextKeyView(nextKeyView ViewProvider) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return dp
 }
 
 // WithFocusRingType sets the focus ring type.
 func (dp *DatePicker) WithFocusRingType(focusRingType FocusRingType) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return dp
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (dp *DatePicker) WithGestureRecognizers(items ...GestureRecognizerProvider) *DatePicker {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return dp
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (dp *DatePicker) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return dp
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (dp *DatePicker) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return dp
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (dp *DatePicker) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return dp
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (dp *DatePicker) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return dp
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (dp *DatePicker) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return dp
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (dp *DatePicker) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return dp
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (dp *DatePicker) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return dp
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (dp *DatePicker) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return dp
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (dp *DatePicker) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return dp
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (dp *DatePicker) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return dp
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (dp *DatePicker) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return dp
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (dp *DatePicker) WithNextResponder(nextResponder ResponderProvider) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return dp
 }
 
 // WithMenu sets returns the responder’s menu.
 func (dp *DatePicker) WithMenu(menu *Menu) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return dp
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (dp *DatePicker) WithUserActivity(userActivity obj.Object) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return dp
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (dp *DatePicker) WithTouchBar(touchBar *TouchBar) *DatePicker {
-	objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return dp
 }
 
 // DatePickerStyle returns the date picker style.
 func (dp *DatePicker) DatePickerStyle() DatePickerStyle {
-	_r := objc.Send[DatePickerStyle](objref.IDOf(dp), objc.RegisterName("datePickerStyle"))
-	return _r
+	var _mainthread0 DatePickerStyle
+	purego.Main(func() {
+		_mainthread0 = func() DatePickerStyle {
+			_r := objc.Send[DatePickerStyle](objref.IDOf(dp), objc.RegisterName("datePickerStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsBezeled reports whether the object is bezeled.
 func (dp *DatePicker) IsBezeled() bool {
-	_r := objc.Send[bool](objref.IDOf(dp), objc.RegisterName("isBezeled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(dp), objc.RegisterName("isBezeled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsBordered reports whether the object is bordered.
 func (dp *DatePicker) IsBordered() bool {
-	_r := objc.Send[bool](objref.IDOf(dp), objc.RegisterName("isBordered"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(dp), objc.RegisterName("isBordered"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DrawsBackground wraps the corresponding Objective-C method.
 func (dp *DatePicker) DrawsBackground() bool {
-	_r := objc.Send[bool](objref.IDOf(dp), objc.RegisterName("drawsBackground"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(dp), objc.RegisterName("drawsBackground"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BackgroundColor returns the background color.
 func (dp *DatePicker) BackgroundColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("backgroundColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("backgroundColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TextColor returns the text color.
 func (dp *DatePicker) TextColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("textColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("textColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DatePickerMode returns the date picker mode.
 func (dp *DatePicker) DatePickerMode() DatePickerMode {
-	_r := objc.Send[DatePickerMode](objref.IDOf(dp), objc.RegisterName("datePickerMode"))
-	return _r
+	var _mainthread0 DatePickerMode
+	purego.Main(func() {
+		_mainthread0 = func() DatePickerMode {
+			_r := objc.Send[DatePickerMode](objref.IDOf(dp), objc.RegisterName("datePickerMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DatePickerElements returns the date picker elements.
 func (dp *DatePicker) DatePickerElements() DatePickerElementFlags {
-	_r := objc.Send[DatePickerElementFlags](objref.IDOf(dp), objc.RegisterName("datePickerElements"))
-	return _r
+	var _mainthread0 DatePickerElementFlags
+	purego.Main(func() {
+		_mainthread0 = func() DatePickerElementFlags {
+			_r := objc.Send[DatePickerElementFlags](objref.IDOf(dp), objc.RegisterName("datePickerElements"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Calendar returns the calendar.
 func (dp *DatePicker) Calendar() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("calendar"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("calendar"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Locale returns the locale.
 func (dp *DatePicker) Locale() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("locale"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("locale"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TimeZone returns the time zone.
 func (dp *DatePicker) TimeZone() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("timeZone"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("timeZone"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DateValue returns the date value.
 func (dp *DatePicker) DateValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("dateValue"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("dateValue"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TimeInterval returns the time interval.
 func (dp *DatePicker) TimeInterval() float64 {
-	_r := objc.Send[float64](objref.IDOf(dp), objc.RegisterName("timeInterval"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(dp), objc.RegisterName("timeInterval"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MinDate returns the min date.
 func (dp *DatePicker) MinDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("minDate"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("minDate"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MaxDate returns the max date.
 func (dp *DatePicker) MaxDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("maxDate"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("maxDate"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PresentsCalendarOverlay wraps the corresponding Objective-C method.
 func (dp *DatePicker) PresentsCalendarOverlay() bool {
-	_r := objc.Send[bool](objref.IDOf(dp), objc.RegisterName("presentsCalendarOverlay"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(dp), objc.RegisterName("presentsCalendarOverlay"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ControlProvider = (*DatePicker)(nil)

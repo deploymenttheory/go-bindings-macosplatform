@@ -47,89 +47,150 @@ func groupTouchBarItemAdopt(id objc.ID) *GroupTouchBarItem {
 
 // NewGroupTouchBarItem creates a new GroupTouchBarItem.
 func NewGroupTouchBarItem() *GroupTouchBarItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSGroupTouchBarItem")), objc.RegisterName("new"))
-	return groupTouchBarItemAdopt(_id)
+	var _mainthread0 *GroupTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *GroupTouchBarItem {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSGroupTouchBarItem")), objc.RegisterName("new"))
+			return groupTouchBarItemAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithGroupTouchBar sets a bar that holds this group’s items.
 func (gtbi *GroupTouchBarItem) WithGroupTouchBar(groupTouchBar *TouchBar) *GroupTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(gtbi), objc.RegisterName("setGroupTouchBar:"), objref.IDOf(groupTouchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gtbi), objc.RegisterName("setGroupTouchBar:"), objref.IDOf(groupTouchBar))
+	})
 	return gtbi
 }
 
 // WithCustomizationLabel sets the user-visible string identifying this item during bar customization.
 func (gtbi *GroupTouchBarItem) WithCustomizationLabel(customizationLabel string) *GroupTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(gtbi), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gtbi), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
+	})
 	return gtbi
 }
 
 // WithGroupUserInterfaceLayoutDirection sets the user interface direction that controls the layout order of the items.
 func (gtbi *GroupTouchBarItem) WithGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection UserInterfaceLayoutDirection) *GroupTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(gtbi), objc.RegisterName("setGroupUserInterfaceLayoutDirection:"), groupUserInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gtbi), objc.RegisterName("setGroupUserInterfaceLayoutDirection:"), groupUserInterfaceLayoutDirection)
+	})
 	return gtbi
 }
 
 // WithPrefersEqualWidths sets a Boolean value that specifies that items should have equal widths when possible.
 func (gtbi *GroupTouchBarItem) WithPrefersEqualWidths(prefersEqualWidths bool) *GroupTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(gtbi), objc.RegisterName("setPrefersEqualWidths:"), prefersEqualWidths)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gtbi), objc.RegisterName("setPrefersEqualWidths:"), prefersEqualWidths)
+	})
 	return gtbi
 }
 
 // WithPreferredItemWidth sets the preferred width for items in the group.
 func (gtbi *GroupTouchBarItem) WithPreferredItemWidth(preferredItemWidth float64) *GroupTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(gtbi), objc.RegisterName("setPreferredItemWidth:"), preferredItemWidth)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gtbi), objc.RegisterName("setPreferredItemWidth:"), preferredItemWidth)
+	})
 	return gtbi
 }
 
 // WithPrioritizedCompressionOptions sets the allowed compression options, in the order they should be applied.
 func (gtbi *GroupTouchBarItem) WithPrioritizedCompressionOptions(items ...*UserInterfaceCompressionOptions) *GroupTouchBarItem {
 	_arr := purego.SliceToNSArray(items, func(_v *UserInterfaceCompressionOptions) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(gtbi), objc.RegisterName("setPrioritizedCompressionOptions:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gtbi), objc.RegisterName("setPrioritizedCompressionOptions:"), _arr)
+	})
 	return gtbi
 }
 
 // WithVisibilityPriority sets determines which items are shown in a bar when space is limited.
 func (gtbi *GroupTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *GroupTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(gtbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gtbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	})
 	return gtbi
 }
 
 // GroupTouchBar returns the group touch bar.
 func (gtbi *GroupTouchBarItem) GroupTouchBar() *TouchBar {
-	_r := objc.Send[objc.ID](objref.IDOf(gtbi), objc.RegisterName("groupTouchBar"))
-	return TouchBarFromID(_r)
+	var _mainthread0 *TouchBar
+	purego.Main(func() {
+		_mainthread0 = func() *TouchBar {
+			_r := objc.Send[objc.ID](objref.IDOf(gtbi), objc.RegisterName("groupTouchBar"))
+			return TouchBarFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // GroupUserInterfaceLayoutDirection returns the group user interface layout direction.
 func (gtbi *GroupTouchBarItem) GroupUserInterfaceLayoutDirection() UserInterfaceLayoutDirection {
-	_r := objc.Send[UserInterfaceLayoutDirection](objref.IDOf(gtbi), objc.RegisterName("groupUserInterfaceLayoutDirection"))
-	return _r
+	var _mainthread0 UserInterfaceLayoutDirection
+	purego.Main(func() {
+		_mainthread0 = func() UserInterfaceLayoutDirection {
+			_r := objc.Send[UserInterfaceLayoutDirection](objref.IDOf(gtbi), objc.RegisterName("groupUserInterfaceLayoutDirection"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PrefersEqualWidths wraps the corresponding Objective-C method.
 func (gtbi *GroupTouchBarItem) PrefersEqualWidths() bool {
-	_r := objc.Send[bool](objref.IDOf(gtbi), objc.RegisterName("prefersEqualWidths"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(gtbi), objc.RegisterName("prefersEqualWidths"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PreferredItemWidth returns the preferred item width.
 func (gtbi *GroupTouchBarItem) PreferredItemWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(gtbi), objc.RegisterName("preferredItemWidth"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(gtbi), objc.RegisterName("preferredItemWidth"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // EffectiveCompressionOptions returns the effective compression options.
 func (gtbi *GroupTouchBarItem) EffectiveCompressionOptions() *UserInterfaceCompressionOptions {
-	_r := objc.Send[objc.ID](objref.IDOf(gtbi), objc.RegisterName("effectiveCompressionOptions"))
-	return UserInterfaceCompressionOptionsFromID(_r)
+	var _mainthread0 *UserInterfaceCompressionOptions
+	purego.Main(func() {
+		_mainthread0 = func() *UserInterfaceCompressionOptions {
+			_r := objc.Send[objc.ID](objref.IDOf(gtbi), objc.RegisterName("effectiveCompressionOptions"))
+			return UserInterfaceCompressionOptionsFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PrioritizedCompressionOptions returns the prioritized compression options.
 //
 // PrioritizedCompressionOptions returns the collection as a Go slice.
 func (gtbi *GroupTouchBarItem) PrioritizedCompressionOptions() []*UserInterfaceCompressionOptions {
-	_arr := objc.Send[objc.ID](objref.IDOf(gtbi), objc.RegisterName("prioritizedCompressionOptions"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UserInterfaceCompressionOptions { return UserInterfaceCompressionOptionsFromID(_id) })
+	var _mainthread0 []*UserInterfaceCompressionOptions
+	purego.Main(func() {
+		_mainthread0 = func() []*UserInterfaceCompressionOptions {
+			_arr := objc.Send[objc.ID](objref.IDOf(gtbi), objc.RegisterName("prioritizedCompressionOptions"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UserInterfaceCompressionOptions { return UserInterfaceCompressionOptionsFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 var _ TouchBarItemProvider = (*GroupTouchBarItem)(nil)

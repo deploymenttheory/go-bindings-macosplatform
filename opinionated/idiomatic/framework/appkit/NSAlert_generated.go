@@ -68,150 +68,268 @@ func (a *Alert) String() string {
 
 // NewAlert creates a new Alert.
 func NewAlert() *Alert {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSAlert")), objc.RegisterName("new"))
-	return alertAdopt(_id)
+	var _mainthread0 *Alert
+	purego.Main(func() {
+		_mainthread0 = func() *Alert {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSAlert")), objc.RegisterName("new"))
+			return alertAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithMessageText sets the alert’s message text or title.
 func (a *Alert) WithMessageText(messageText string) *Alert {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setMessageText:"), purego.NSString(messageText))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setMessageText:"), purego.NSString(messageText))
+	})
 	return a
 }
 
 // WithInformativeText sets the alert’s informative text.
 func (a *Alert) WithInformativeText(informativeText string) *Alert {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setInformativeText:"), purego.NSString(informativeText))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setInformativeText:"), purego.NSString(informativeText))
+	})
 	return a
 }
 
 // WithIcon sets the custom icon displayed in the alert.
 func (a *Alert) WithIcon(icon *Image) *Alert {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setIcon:"), objref.IDOf(icon))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setIcon:"), objref.IDOf(icon))
+	})
 	return a
 }
 
 // WithAlertStyle sets indicates the alert’s severity level.
 func (a *Alert) WithAlertStyle(alertStyle AlertStyle) *Alert {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setAlertStyle:"), alertStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setAlertStyle:"), alertStyle)
+	})
 	return a
 }
 
 // WithShowsHelp sets specifies whether the alert has a help button.
 func (a *Alert) WithShowsHelp(showsHelp bool) *Alert {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setShowsHelp:"), showsHelp)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setShowsHelp:"), showsHelp)
+	})
 	return a
 }
 
 // WithHelpAnchor sets the alert’s HTML help anchor.
 func (a *Alert) WithHelpAnchor(helpAnchor obj.Object) *Alert {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setHelpAnchor:"), objref.IDOf(helpAnchor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setHelpAnchor:"), objref.IDOf(helpAnchor))
+	})
 	return a
 }
 
 // WithAccessoryView sets the alert’s accessory view.
 func (a *Alert) WithAccessoryView(accessoryView ViewProvider) *Alert {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
+	})
 	return a
 }
 
 // WithShowsSuppressionButton sets specifies whether the alert includes a suppression checkbox, which you can employ to allow a user to opt out of seeing the alert again.
 func (a *Alert) WithShowsSuppressionButton(showsSuppressionButton bool) *Alert {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setShowsSuppressionButton:"), showsSuppressionButton)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setShowsSuppressionButton:"), showsSuppressionButton)
+	})
 	return a
 }
 
 // AddButtonWithTitle adds a button with a given title to the alert.
 func (a *Alert) AddButtonWithTitle(title string) *Button {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("addButtonWithTitle:"), purego.NSString(title))
-	return ButtonFromID(_r)
+	var _mainthread0 *Button
+	purego.Main(func() {
+		_mainthread0 = func() *Button {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("addButtonWithTitle:"), purego.NSString(title))
+			return ButtonFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Layout specifies that the alert must do immediate layout instead of lazily just before display.
 func (a *Alert) Layout() {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("layout"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("layout"))
+	})
+
 }
 
 // RunModal returns runs the alert as an app-modal dialog and returns the constant that identifies the button clicked.
 func (a *Alert) RunModal() int {
-	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("runModal"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("runModal"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BeginSheetModalForWindowCompletionHandler runs the alert modally as a sheet attached to the specified window.
 func (a *Alert) BeginSheetModalForWindowCompletionHandler(sheetWindow *Window, handler func(int)) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("beginSheetModalForWindow:completionHandler:"), objref.IDOf(sheetWindow), objc.NewBlock(func(_ objc.Block, _b0 int) { handler(_b0) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("beginSheetModalForWindow:completionHandler:"), objref.IDOf(sheetWindow), objc.NewBlock(func(_ objc.Block, _b0 int) { handler(_b0) }))
+	})
+
 }
 
 // MessageText returns the text that is displayed prominently in the alert. - Note: Use this string to get the user’s attention and communicate the reason for displaying the alert.
 func (a *Alert) MessageText() string {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("messageText"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("messageText"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // InformativeText returns the descriptive text that provides more details about the reason for the alert. - Note: The informative text string is displayed below the message text and is less prominent. Use this string to provide additional context about the reason for the alert or about the actions that the user might take.
 func (a *Alert) InformativeText() string {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("informativeText"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("informativeText"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Icon returns the custom icon displayed in the alert. By default, the image used in an alert is the app icon. If you set this property’s value, your specified custom image is used in place of the app icon. If you’ve set a custom alert icon, you can clear it by setting this property’s value to `nil`, which restores use of the app icon for the alert. - Note: AppKit may omit the icon from the alert if it’s the app icon and the alert’s context is clear, such as being presented as a sheet on an app window.
 func (a *Alert) Icon() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("icon"))
-	return ImageFromID(_r)
+	var _mainthread0 *Image
+	purego.Main(func() {
+		_mainthread0 = func() *Image {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("icon"))
+			return ImageFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Buttons returns the array of response buttons for the alert. The buttons are in the order in which they were added, and do not necessarily reflect the order they are arranged visually. The array does not include the default “OK” button that is shown in an alert presented without any buttons added with `-addButtonWithTitle:`.
 //
 // Buttons returns the collection as a Go slice.
 func (a *Alert) Buttons() []*Button {
-	_arr := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("buttons"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Button { return ButtonFromID(_id) })
+	var _mainthread0 []*Button
+	purego.Main(func() {
+		_mainthread0 = func() []*Button {
+			_arr := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("buttons"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Button { return ButtonFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // AlertStyle indicates the alert’s severity level. See the `NSAlertStyle` enumeration for the list of alert style constants.
 func (a *Alert) AlertStyle() AlertStyle {
-	_r := objc.Send[AlertStyle](objref.IDOf(a), objc.RegisterName("alertStyle"))
-	return _r
+	var _mainthread0 AlertStyle
+	purego.Main(func() {
+		_mainthread0 = func() AlertStyle {
+			_r := objc.Send[AlertStyle](objref.IDOf(a), objc.RegisterName("alertStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsHelp reports whether the alert has a help button. Set this property’s value to `YES` to specify that the alert has a help button, or `NO` to specify it does not. When a user clicks an alert’s help button, the alert delegate (`delegate`) receives an `alertShowHelp:` message. The delegate is responsible for displaying the help information related to this particular alert. Clicking an alert’s help button can alternately cause the `-openHelpAnchor:inBook:` message to be sent to the app’s help manager with a `nil` book and the anchor specified by the `helpAnchor` property, if any of the following conditions are true: - There is no alert delegate. - The alert delegate does not implement `-alertShowHelp:`. - The alert delegate implements `-alertShowHelp:` but returns `NO`. When this is the case, an exception is raised if no help anchor is set.
 func (a *Alert) ShowsHelp() bool {
-	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("showsHelp"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("showsHelp"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HelpAnchor returns the alert’s HTML help anchor used when the user clicks the alert’s help button
 func (a *Alert) HelpAnchor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("helpAnchor"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("helpAnchor"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AccessoryView returns the accessory view displayed in the alert, placed between the informative text or suppression checkbox (if present) and the response buttons. Before changing the location of the accessory view, first call the `-layout` method.
 func (a *Alert) AccessoryView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("accessoryView"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("accessoryView"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsSuppressionButton reports whether the alert includes a suppression checkbox, which can be employed to allow a user to opt out of seeing the alert again. The default value of this property is `NO`, which specifies the absence of a suppression checkbox in the alert. Set the value to `YES` to show a suppression checkbox in the alert. By default, a suppression checkbox has the title, “Do not show this message again.” In macOS 11.0 and later, if the alert displays multiple buttons that prompt the user to make a choice, the title is “Do not ask again.” To customize it, use the checkbox’s title property, as follows: myAlert.suppressionButton.title =
 func (a *Alert) ShowsSuppressionButton() bool {
-	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("showsSuppressionButton"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("showsSuppressionButton"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SuppressionButton returns the alert’s suppression checkbox. The checkbox may be customized, including the title and the initial state. Additionally, use this method to get the state of the button after the alert is dismissed, which may be stored in user defaults and checked before showing the alert again. In order to show the suppression button in the alert panel, you must set `showsSuppressionButton` to `YES`.
 func (a *Alert) SuppressionButton() *Button {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("suppressionButton"))
-	return ButtonFromID(_r)
+	var _mainthread0 *Button
+	purego.Main(func() {
+		_mainthread0 = func() *Button {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("suppressionButton"))
+			return ButtonFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Window returns the app-modal panel or document-modal sheet that corresponds to the alert
 func (a *Alert) Window() *Window {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("window"))
-	return WindowFromID(_r)
+	var _mainthread0 *Window
+	purego.Main(func() {
+		_mainthread0 = func() *Window {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("window"))
+			return WindowFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }

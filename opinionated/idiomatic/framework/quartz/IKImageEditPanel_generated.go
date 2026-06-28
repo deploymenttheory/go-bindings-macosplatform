@@ -68,29 +68,54 @@ func (iiep *IKImageEditPanel) String() string {
 
 // NewIKImageEditPanel creates a new IKImageEditPanel.
 func NewIKImageEditPanel() *IKImageEditPanel {
-	_id := objc.Send[objc.ID](objc.ID(_class("IKImageEditPanel")), objc.RegisterName("new"))
-	return iKImageEditPanelAdopt(_id)
+	var _mainthread0 *IKImageEditPanel
+	purego.Main(func() {
+		_mainthread0 = func() *IKImageEditPanel {
+			_id := objc.Send[objc.ID](objc.ID(_class("IKImageEditPanel")), objc.RegisterName("new"))
+			return iKImageEditPanelAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithDataSource sets specifies the edit panel’s dataSource.
 func (iiep *IKImageEditPanel) WithDataSource(dataSource obj.Object) *IKImageEditPanel {
-	objc.Send[objc.ID](objref.IDOf(iiep), objc.RegisterName("setDataSource:"), objref.IDOf(dataSource))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiep), objc.RegisterName("setDataSource:"), objref.IDOf(dataSource))
+	})
 	return iiep
 }
 
 // ReloadData reloads the data from the data associated with an image editing panel.
 func (iiep *IKImageEditPanel) ReloadData() {
-	objc.Send[objc.ID](objref.IDOf(iiep), objc.RegisterName("reloadData"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiep), objc.RegisterName("reloadData"))
+	})
+
 }
 
 // DataSource returns data source associated with an image editing panel
 func (iiep *IKImageEditPanel) DataSource() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(iiep), objc.RegisterName("dataSource"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(iiep), objc.RegisterName("dataSource"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FilterArray returns array of filters reflecting the current user adjustments in the adjust or effects tab.
 func (iiep *IKImageEditPanel) FilterArray() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(iiep), objc.RegisterName("filterArray"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(iiep), objc.RegisterName("filterArray"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

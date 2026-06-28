@@ -71,302 +71,528 @@ func (ti *ToolbarItem) String() string {
 
 // NewToolbarItemWithItemIdentifier creates a toolbar item with the specified identifier.
 func NewToolbarItemWithItemIdentifier(itemIdentifier obj.Object) *ToolbarItem {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSToolbarItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemIdentifier:"), objref.IDOf(itemIdentifier))
-	return toolbarItemAdopt(_id)
+	var _mainthread0 *ToolbarItem
+	purego.Main(func() {
+		_mainthread0 = func() *ToolbarItem {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSToolbarItem")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemIdentifier:"), objref.IDOf(itemIdentifier))
+			return toolbarItemAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithLabel sets the label that appears for this item in the toolbar.
 func (ti *ToolbarItem) WithLabel(label string) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setLabel:"), purego.NSString(label))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setLabel:"), purego.NSString(label))
+	})
 	return ti
 }
 
 // WithPaletteLabel sets the label that appears when the toolbar item is in the customization palette.
 func (ti *ToolbarItem) WithPaletteLabel(paletteLabel string) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setPaletteLabel:"), purego.NSString(paletteLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setPaletteLabel:"), purego.NSString(paletteLabel))
+	})
 	return ti
 }
 
 // WithPossibleLabels sets the set of labels that the item might display.
 func (ti *ToolbarItem) WithPossibleLabels(possibleLabels obj.Object) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setPossibleLabels:"), objref.IDOf(possibleLabels))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setPossibleLabels:"), objref.IDOf(possibleLabels))
+	})
 	return ti
 }
 
 // WithToolTip sets the tooltip to display when someone hovers over the item in the toolbar.
 func (ti *ToolbarItem) WithToolTip(toolTip string) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return ti
 }
 
 // WithMenuFormRepresentation sets the menu item to use when the toolbar item is in the overflow menu.
 func (ti *ToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setMenuFormRepresentation:"), objref.IDOf(menuFormRepresentation))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setMenuFormRepresentation:"), objref.IDOf(menuFormRepresentation))
+	})
 	return ti
 }
 
 // WithTag sets an integer tag you can use to identify the toolbar item.
 func (ti *ToolbarItem) WithTag(tag int) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setTag:"), tag)
+	})
 	return ti
 }
 
 // WithTarget sets the object that defines the action method the toolbar item calls when clicked.
 func (ti *ToolbarItem) WithTarget(target obj.Object) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return ti
 }
 
 // WithEnabled sets a Boolean value that indicates whether the item is enabled.
 func (ti *ToolbarItem) WithEnabled(enabled bool) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return ti
 }
 
 // WithImage sets the image to display for the toolbar item.
 func (ti *ToolbarItem) WithImage(image *Image) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setImage:"), objref.IDOf(image))
+	})
 	return ti
 }
 
 // WithTitle sets the title of the toolbar item.
 func (ti *ToolbarItem) WithTitle(title string) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return ti
 }
 
 // WithBordered sets a Boolean value that indicates whether the toolbar item has a bordered style.
 func (ti *ToolbarItem) WithBordered(bordered bool) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setBordered:"), bordered)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setBordered:"), bordered)
+	})
 	return ti
 }
 
 // WithBackgroundTintColor sets the background tint color.
 func (ti *ToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
+	})
 	return ti
 }
 
 // WithStyle sets defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items’ background.
 func (ti *ToolbarItem) WithStyle(style ToolbarItemStyle) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setStyle:"), style)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setStyle:"), style)
+	})
 	return ti
 }
 
 // WithNavigational sets a Boolean value that indicates whether the item behaves as a navigation item in the toolbar.
 func (ti *ToolbarItem) WithNavigational(navigational bool) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setNavigational:"), navigational)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setNavigational:"), navigational)
+	})
 	return ti
 }
 
 // WithView sets the custom view you use to draw the toolbar item.
 func (ti *ToolbarItem) WithView(view ViewProvider) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setView:"), objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setView:"), objref.IDOf(view))
+	})
 	return ti
 }
 
 // WithHidden sets determines whether an item is visible in the toolbar.
 func (ti *ToolbarItem) WithHidden(hidden bool) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setHidden:"), hidden)
+	})
 	return ti
 }
 
 // WithMinSize sets the toolbar item’s minimum size.
 func (ti *ToolbarItem) WithMinSize(minSize corefoundation.CGSize) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setMinSize:"), minSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setMinSize:"), minSize)
+	})
 	return ti
 }
 
 // WithMaxSize sets the toolbar item’s maximum size.
 func (ti *ToolbarItem) WithMaxSize(maxSize corefoundation.CGSize) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setMaxSize:"), maxSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setMaxSize:"), maxSize)
+	})
 	return ti
 }
 
 // WithVisibilityPriority sets the display priority associated with the toolbar item.
 func (ti *ToolbarItem) WithVisibilityPriority(visibilityPriority int) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	})
 	return ti
 }
 
 // WithBadge sets a badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
 func (ti *ToolbarItem) WithBadge(badge *ItemBadge) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setBadge:"), objref.IDOf(badge))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setBadge:"), objref.IDOf(badge))
+	})
 	return ti
 }
 
 // WithAutovalidates sets a Boolean value that indicates whether the toolbar automatically validates the item.
 func (ti *ToolbarItem) WithAutovalidates(autovalidates bool) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setAutovalidates:"), autovalidates)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setAutovalidates:"), autovalidates)
+	})
 	return ti
 }
 
 // Validate validates the toolbar item’s menu and its ability to perfrom its action.
 func (ti *ToolbarItem) Validate() {
-	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("validate"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("validate"))
+	})
+
 }
 
 // ItemIdentifier returns the item identifier.
 func (ti *ToolbarItem) ItemIdentifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("itemIdentifier"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("itemIdentifier"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Toolbar returns use this to determine the toolbar in which an item is currently displayed.
 func (ti *ToolbarItem) Toolbar() *Toolbar {
-	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("toolbar"))
-	return ToolbarFromID(_r)
+	var _mainthread0 *Toolbar
+	purego.Main(func() {
+		_mainthread0 = func() *Toolbar {
+			_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("toolbar"))
+			return ToolbarFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Label returns use this to set the item's label that appears in the toolbar. The label may also be used for the default `menuFormRepresentation` of the item. Also, developers should make sure the length of the label is appropriate and not too long.
 func (ti *ToolbarItem) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("label"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("label"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PaletteLabel returns use this to set the item's label that appears when the item is in the customization palette. All Items must have a palette label, and for most things it is reasonable to set them to the same string as the label used in the toolbar.
 func (ti *ToolbarItem) PaletteLabel() string {
-	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("paletteLabel"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("paletteLabel"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PossibleLabels returns an array of all alternate labels this item may display. The item will use the size of the longest label to prevent resizing when the label is changed.
 func (ti *ToolbarItem) PossibleLabels() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("possibleLabels"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("possibleLabels"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ToolTip returns use this to set a tooltip to be used when the item is displayed in the toolbar. (forwards to `-view` if it responds)
 func (ti *ToolbarItem) ToolTip() string {
-	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("toolTip"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("toolTip"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MenuFormRepresentation returns the menu form of a toolbar item's purpose is twofold. First, when the window is too small to display an item, it will be clipped but remain accessible from a "clipped items" menu containing the menu item returned here. Second, in text only mode, the menu returned will be used to create the displayed items. Singleton menu items will be clickable, while submenu items will be represented as a pull down. For instance, say you want a button that allows you to switch between modes A, B, and C. You could represent this as a menu by: a menu item "mode" with three submenu items "A", "B", and "C". By default, this method returns a singleton menu item with item label as the title. For standard items, the target, action is set.
 func (ti *ToolbarItem) MenuFormRepresentation() *MenuItem {
-	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("menuFormRepresentation"))
-	return MenuItemFromID(_r)
+	var _mainthread0 *MenuItem
+	purego.Main(func() {
+		_mainthread0 = func() *MenuItem {
+			_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("menuFormRepresentation"))
+			return MenuItemFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Tag returns tag for your own custom purpose. (forwards to `-view` if it responds)
 func (ti *ToolbarItem) Tag() int {
-	_r := objc.Send[int](objref.IDOf(ti), objc.RegisterName("tag"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(ti), objc.RegisterName("tag"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Target set and get the action of an item. (forwards to `-view` if it responds)
 func (ti *ToolbarItem) Target() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("target"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("target"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsEnabled reports whether set and get the enabled flag of an item. For custom views, this method will call `-setEnabled:` on the view if it responds. (forwards to `-view` if it responds)
 func (ti *ToolbarItem) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("isEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("isEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Image returns the image.
 func (ti *ToolbarItem) Image() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("image"))
-	return ImageFromID(_r)
+	var _mainthread0 *Image
+	purego.Main(func() {
+		_mainthread0 = func() *Image {
+			_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("image"))
+			return ImageFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Title set and get the title of an item. For custom views, this method will call `-setTitle:` on the view if it responds. (forwards to `-view` if it responds)
 func (ti *ToolbarItem) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("title"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("title"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsBordered reports whether when set on an item without a custom view, the button produced will have a bordered style. Defaults to false.
 func (ti *ToolbarItem) IsBordered() bool {
-	_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("isBordered"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("isBordered"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BackgroundTintColor returns the background tint color.
 func (ti *ToolbarItem) BackgroundTintColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("backgroundTintColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("backgroundTintColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Style defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items' background.
 func (ti *ToolbarItem) Style() ToolbarItemStyle {
-	_r := objc.Send[ToolbarItemStyle](objref.IDOf(ti), objc.RegisterName("style"))
-	return _r
+	var _mainthread0 ToolbarItemStyle
+	purego.Main(func() {
+		_mainthread0 = func() ToolbarItemStyle {
+			_r := objc.Send[ToolbarItemStyle](objref.IDOf(ti), objc.RegisterName("style"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsNavigational reports whether the item behaves as a navigation item (i.e. back/forward) in the toolbar. Navigation items may be specially positioned by the system outside the normal list of items of the toolbar in the order specified by `-toolbarDefaultItemIdentifiers:`. Defaults to false.
 func (ti *ToolbarItem) IsNavigational() bool {
-	_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("isNavigational"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("isNavigational"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // View returns items with automatically generated views will return nil from this getter. Custom views may be provided but not all `NSToolbarItem` subclasses support custom views. Note that, by default, many of the set/get methods will be implemented by calls forwarded to the view you set, if it responds to it.
 func (ti *ToolbarItem) View() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("view"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("view"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsVisible reports whether an item is visible if it is present in the NSToolbar and not in the overflow menu. This property is key value observable.
 func (ti *ToolbarItem) IsVisible() bool {
-	_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("isVisible"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("isVisible"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsHidden reports whether an item is visible in the toolbar. The item will still be visible in the customization panel. Because hidden items may be visible during user customization, use the `visible` property to determine if an item is currently displayed. Note that even hidden toolbar items are sync'd to other toolbars with a shared identifier, but its `hidden` state can be unique to each instance. Use this property to show a toolbar item in one toolbar instance but not another.
 func (ti *ToolbarItem) IsHidden() bool {
-	_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("isHidden"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("isHidden"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MinSize returns unless you have already set your own custom view, you should not call these methods. The min size should be small enough to look nice in all display modes. If you do not set a min/max size, the view's size properties will be calculated using constraints. Apps linked before 10.14 will use the view's current size. In general, apps should rely on the automatic measurements and constraints to define min/max sizes rather than setting these properties since this will account for localizations.
 func (ti *ToolbarItem) MinSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(ti), objc.RegisterName("minSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(ti), objc.RegisterName("minSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MaxSize returns the max size.
 func (ti *ToolbarItem) MaxSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(ti), objc.RegisterName("maxSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(ti), objc.RegisterName("maxSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // VisibilityPriority returns when a toolbar does not have enough space to fit all its items, it must push some into the overflow menu. Items with the highest `visibilityPriority` level are chosen last for the overflow menu. The default `visibilityPriority` value is `NSToolbarItemVisibilityPriorityStandard`. To suggest that an item always remain visible, give it a value greater than `NSToolbarItemVisibilityPriorityStandard`, but less than `NSToolbarItemVisibilityPriorityUser`. In 10.7, users can no longer modify the toolbar item visibility priority.
 func (ti *ToolbarItem) VisibilityPriority() int {
-	_r := objc.Send[int](objref.IDOf(ti), objc.RegisterName("visibilityPriority"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(ti), objc.RegisterName("visibilityPriority"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Badge returns a badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
 func (ti *ToolbarItem) Badge() *ItemBadge {
-	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("badge"))
-	return ItemBadgeFromID(_r)
+	var _mainthread0 *ItemBadge
+	purego.Main(func() {
+		_mainthread0 = func() *ItemBadge {
+			_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("badge"))
+			return ItemBadgeFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Autovalidates reports whether this property only affects automatic validation performed by NSToolbar. Explicit validation requests, such as the `-[NSToolbar validateVisibleItems]` method, will invoke the `-validate` method even if `autovalidates` is `NO`. Defaults to true.
 func (ti *ToolbarItem) Autovalidates() bool {
-	_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("autovalidates"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("autovalidates"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsDuplicatesInToolbar reports whether duplicate items outside of spaces are not allowed.
 func (ti *ToolbarItem) AllowsDuplicatesInToolbar() bool {
-	_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("allowsDuplicatesInToolbar"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("allowsDuplicatesInToolbar"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // isToolbarItem marks ToolbarItem — and, by embedding promotion, its

@@ -68,19 +68,34 @@ func (aaib *AuthorizationAppleIDButton) String() string {
 
 // NewAuthorizationAppleIDButtonWithAuthorizationButtonTypeAuthorizationButtonStyle creates a new Sign In with Apple authorization button with the given type and style.
 func NewAuthorizationAppleIDButtonWithAuthorizationButtonTypeAuthorizationButtonStyle(type_ AuthorizationAppleIDButtonType, style AuthorizationAppleIDButtonStyle) *AuthorizationAppleIDButton {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationAppleIDButton")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAuthorizationButtonType:authorizationButtonStyle:"), type_, style)
-	return authorizationAppleIDButtonAdopt(_id)
+	var _mainthread0 *AuthorizationAppleIDButton
+	purego.Main(func() {
+		_mainthread0 = func() *AuthorizationAppleIDButton {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationAppleIDButton")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAuthorizationButtonType:authorizationButtonStyle:"), type_, style)
+			return authorizationAppleIDButtonAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithCornerRadius sets the radius, in points, for the rounded corners on the Apple ID sign-in button.
 func (aaib *AuthorizationAppleIDButton) WithCornerRadius(cornerRadius float64) *AuthorizationAppleIDButton {
-	objc.Send[objc.ID](objref.IDOf(aaib), objc.RegisterName("setCornerRadius:"), cornerRadius)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(aaib), objc.RegisterName("setCornerRadius:"), cornerRadius)
+	})
 	return aaib
 }
 
 // CornerRadius returns the corner radius.
 func (aaib *AuthorizationAppleIDButton) CornerRadius() float64 {
-	_r := objc.Send[float64](objref.IDOf(aaib), objc.RegisterName("cornerRadius"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(aaib), objc.RegisterName("cornerRadius"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

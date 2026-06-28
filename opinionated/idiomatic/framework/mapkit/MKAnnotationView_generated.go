@@ -71,282 +71,491 @@ func (av *AnnotationView) String() string {
 
 // NewAnnotationViewWithCoder creates an annotation view using data from the specified unarchiver.
 func NewAnnotationViewWithCoder(aDecoder obj.Object) *AnnotationView {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("MKAnnotationView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
-	return annotationViewAdopt(_id)
+	var _mainthread0 *AnnotationView
+	purego.Main(func() {
+		_mainthread0 = func() *AnnotationView {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("MKAnnotationView")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
+			return annotationViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithImage sets the image the annotation view displays.
 func (av *AnnotationView) WithImage(image obj.Object) *AnnotationView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setImage:"), objref.IDOf(image))
+	})
 	return av
 }
 
 // WithCenterOffset sets the offset (in points) at which to display the view.
 func (av *AnnotationView) WithCenterOffset(centerOffset corefoundation.CGPoint) *AnnotationView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setCenterOffset:"), centerOffset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setCenterOffset:"), centerOffset)
+	})
 	return av
 }
 
 // WithAccessoryOffset sets an offset that changes the accessory’s default anchor point.
 func (av *AnnotationView) WithAccessoryOffset(accessoryOffset corefoundation.CGPoint) *AnnotationView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setAccessoryOffset:"), accessoryOffset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setAccessoryOffset:"), accessoryOffset)
+	})
 	return av
 }
 
 // WithCalloutOffset sets the offset (in points) at which to place the callout.
 func (av *AnnotationView) WithCalloutOffset(calloutOffset corefoundation.CGPoint) *AnnotationView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setCalloutOffset:"), calloutOffset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setCalloutOffset:"), calloutOffset)
+	})
 	return av
 }
 
 // WithLeftCalloutOffset sets the offset in points from the middle-left of the annotation view.
 func (av *AnnotationView) WithLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) *AnnotationView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setLeftCalloutOffset:"), leftCalloutOffset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setLeftCalloutOffset:"), leftCalloutOffset)
+	})
 	return av
 }
 
 // WithRightCalloutOffset sets the offset in points from the middle-right of the annotation view.
 func (av *AnnotationView) WithRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) *AnnotationView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setRightCalloutOffset:"), rightCalloutOffset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setRightCalloutOffset:"), rightCalloutOffset)
+	})
 	return av
 }
 
 // WithEnabled sets a Boolean value that indicates whether the annotation is in an enabled state.
 func (av *AnnotationView) WithEnabled(enabled bool) *AnnotationView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return av
 }
 
 // WithHighlighted sets a Boolean value that indicates whether the map view highlights the annotation view.
 func (av *AnnotationView) WithHighlighted(highlighted bool) *AnnotationView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return av
 }
 
 // WithSelected sets a Boolean value that indicates whether the annotation view is in a selected state.
 func (av *AnnotationView) WithSelected(selected bool) *AnnotationView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setSelected:"), selected)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setSelected:"), selected)
+	})
 	return av
 }
 
 // WithCanShowCallout sets a Boolean value that indicates whether the annotation view is able to display extra information in a callout.
 func (av *AnnotationView) WithCanShowCallout(canShowCallout bool) *AnnotationView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setCanShowCallout:"), canShowCallout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setCanShowCallout:"), canShowCallout)
+	})
 	return av
 }
 
 // WithLeftCalloutAccessoryView sets the view to display on the left side of the standard callout.
 func (av *AnnotationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryView obj.Object) *AnnotationView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setLeftCalloutAccessoryView:"), objref.IDOf(leftCalloutAccessoryView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setLeftCalloutAccessoryView:"), objref.IDOf(leftCalloutAccessoryView))
+	})
 	return av
 }
 
 // WithRightCalloutAccessoryView sets the view to display on the right side of the standard callout.
 func (av *AnnotationView) WithRightCalloutAccessoryView(rightCalloutAccessoryView obj.Object) *AnnotationView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setRightCalloutAccessoryView:"), objref.IDOf(rightCalloutAccessoryView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setRightCalloutAccessoryView:"), objref.IDOf(rightCalloutAccessoryView))
+	})
 	return av
 }
 
 // WithDetailCalloutAccessoryView sets the detail accessory view to use in the standard callout.
 func (av *AnnotationView) WithDetailCalloutAccessoryView(detailCalloutAccessoryView obj.Object) *AnnotationView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setDetailCalloutAccessoryView:"), objref.IDOf(detailCalloutAccessoryView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setDetailCalloutAccessoryView:"), objref.IDOf(detailCalloutAccessoryView))
+	})
 	return av
 }
 
 // WithDraggable sets a Boolean value that indicates whether the annotation view is draggable.
 func (av *AnnotationView) WithDraggable(draggable bool) *AnnotationView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setDraggable:"), draggable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setDraggable:"), draggable)
+	})
 	return av
 }
 
 // WithDragState sets the drag state of the annotation view.
 func (av *AnnotationView) WithDragState(dragState AnnotationViewDragState) *AnnotationView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setDragState:"), dragState)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setDragState:"), dragState)
+	})
 	return av
 }
 
 // WithClusteringIdentifier sets an identifier that determines whether the annotation view participates in clustering.
 func (av *AnnotationView) WithClusteringIdentifier(clusteringIdentifier string) *AnnotationView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setClusteringIdentifier:"), purego.NSString(clusteringIdentifier))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setClusteringIdentifier:"), purego.NSString(clusteringIdentifier))
+	})
 	return av
 }
 
 // WithDisplayPriority sets the display priority of the annotation view.
 func (av *AnnotationView) WithDisplayPriority(displayPriority float32) *AnnotationView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setDisplayPriority:"), displayPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setDisplayPriority:"), displayPriority)
+	})
 	return av
 }
 
 // WithZPriority sets the relative importance of the annotation view when in an unselected state with respect to its ordering along the z-axis.
 func (av *AnnotationView) WithZPriority(zPriority float32) *AnnotationView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setZPriority:"), zPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setZPriority:"), zPriority)
+	})
 	return av
 }
 
 // WithSelectedZPriority sets the relative importance of the annotation view when in a selected state with respect to its ordering along the z-axis.
 func (av *AnnotationView) WithSelectedZPriority(selectedZPriority float32) *AnnotationView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setSelectedZPriority:"), selectedZPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setSelectedZPriority:"), selectedZPriority)
+	})
 	return av
 }
 
 // WithCollisionMode sets the collision mode to use when interpreting the collision frame rectangle.
 func (av *AnnotationView) WithCollisionMode(collisionMode AnnotationViewCollisionMode) *AnnotationView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setCollisionMode:"), collisionMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setCollisionMode:"), collisionMode)
+	})
 	return av
 }
 
 // PrepareForDisplay notifies the annotation view that the map view is about to display it.
 func (av *AnnotationView) PrepareForDisplay() {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("prepareForDisplay"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("prepareForDisplay"))
+	})
+
 }
 
 // SetSelectedAnimated sets the selection state of the annotation view.
 func (av *AnnotationView) SetSelectedAnimated(selected bool, animated bool) {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setSelected:animated:"), selected, animated)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setSelected:animated:"), selected, animated)
+	})
+
 }
 
 // SetDragStateAnimated sets the drag state for the annotation view.
 func (av *AnnotationView) SetDragStateAnimated(newDragState AnnotationViewDragState, animated bool) {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setDragState:animated:"), newDragState, animated)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setDragState:animated:"), newDragState, animated)
+	})
+
 }
 
 // ReuseIdentifier returns the reuse identifier.
 func (av *AnnotationView) ReuseIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("reuseIdentifier"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("reuseIdentifier"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Image returns the image.
 func (av *AnnotationView) Image() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("image"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("image"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CenterOffset returns the center offset.
 func (av *AnnotationView) CenterOffset() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(av), objc.RegisterName("centerOffset"))
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(av), objc.RegisterName("centerOffset"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AccessoryOffset returns the accessory offset.
 func (av *AnnotationView) AccessoryOffset() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(av), objc.RegisterName("accessoryOffset"))
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(av), objc.RegisterName("accessoryOffset"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CalloutOffset returns the callout offset.
 func (av *AnnotationView) CalloutOffset() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(av), objc.RegisterName("calloutOffset"))
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(av), objc.RegisterName("calloutOffset"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LeftCalloutOffset returns the left callout offset.
 func (av *AnnotationView) LeftCalloutOffset() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(av), objc.RegisterName("leftCalloutOffset"))
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(av), objc.RegisterName("leftCalloutOffset"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RightCalloutOffset returns the right callout offset.
 func (av *AnnotationView) RightCalloutOffset() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(av), objc.RegisterName("rightCalloutOffset"))
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(av), objc.RegisterName("rightCalloutOffset"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsEnabled reports whether the object is enabled.
 func (av *AnnotationView) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(av), objc.RegisterName("isEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(av), objc.RegisterName("isEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsHighlighted reports whether the object is highlighted.
 func (av *AnnotationView) IsHighlighted() bool {
-	_r := objc.Send[bool](objref.IDOf(av), objc.RegisterName("isHighlighted"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(av), objc.RegisterName("isHighlighted"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsSelected reports whether the object is selected.
 func (av *AnnotationView) IsSelected() bool {
-	_r := objc.Send[bool](objref.IDOf(av), objc.RegisterName("isSelected"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(av), objc.RegisterName("isSelected"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CanShowCallout wraps the corresponding Objective-C method.
 func (av *AnnotationView) CanShowCallout() bool {
-	_r := objc.Send[bool](objref.IDOf(av), objc.RegisterName("canShowCallout"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(av), objc.RegisterName("canShowCallout"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LeftCalloutAccessoryView returns the left callout accessory view.
 func (av *AnnotationView) LeftCalloutAccessoryView() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("leftCalloutAccessoryView"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("leftCalloutAccessoryView"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RightCalloutAccessoryView returns the right callout accessory view.
 func (av *AnnotationView) RightCalloutAccessoryView() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("rightCalloutAccessoryView"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("rightCalloutAccessoryView"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DetailCalloutAccessoryView returns the detail callout accessory view.
 func (av *AnnotationView) DetailCalloutAccessoryView() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("detailCalloutAccessoryView"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("detailCalloutAccessoryView"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsDraggable reports whether the object is draggable.
 func (av *AnnotationView) IsDraggable() bool {
-	_r := objc.Send[bool](objref.IDOf(av), objc.RegisterName("isDraggable"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(av), objc.RegisterName("isDraggable"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DragState returns the drag state.
 func (av *AnnotationView) DragState() AnnotationViewDragState {
-	_r := objc.Send[AnnotationViewDragState](objref.IDOf(av), objc.RegisterName("dragState"))
-	return _r
+	var _mainthread0 AnnotationViewDragState
+	purego.Main(func() {
+		_mainthread0 = func() AnnotationViewDragState {
+			_r := objc.Send[AnnotationViewDragState](objref.IDOf(av), objc.RegisterName("dragState"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ClusteringIdentifier returns the clustering identifier.
 func (av *AnnotationView) ClusteringIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("clusteringIdentifier"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("clusteringIdentifier"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ClusterAnnotationView returns the cluster annotation view.
 func (av *AnnotationView) ClusterAnnotationView() *AnnotationView {
-	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("clusterAnnotationView"))
-	return AnnotationViewFromID(_r)
+	var _mainthread0 *AnnotationView
+	purego.Main(func() {
+		_mainthread0 = func() *AnnotationView {
+			_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("clusterAnnotationView"))
+			return AnnotationViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DisplayPriority returns the display priority.
 func (av *AnnotationView) DisplayPriority() float32 {
-	_r := objc.Send[float32](objref.IDOf(av), objc.RegisterName("displayPriority"))
-	return _r
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_r := objc.Send[float32](objref.IDOf(av), objc.RegisterName("displayPriority"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ZPriority returns the z priority.
 func (av *AnnotationView) ZPriority() float32 {
-	_r := objc.Send[float32](objref.IDOf(av), objc.RegisterName("zPriority"))
-	return _r
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_r := objc.Send[float32](objref.IDOf(av), objc.RegisterName("zPriority"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SelectedZPriority returns the selected z priority.
 func (av *AnnotationView) SelectedZPriority() float32 {
-	_r := objc.Send[float32](objref.IDOf(av), objc.RegisterName("selectedZPriority"))
-	return _r
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_r := objc.Send[float32](objref.IDOf(av), objc.RegisterName("selectedZPriority"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CollisionMode returns the collision mode.
 func (av *AnnotationView) CollisionMode() AnnotationViewCollisionMode {
-	_r := objc.Send[AnnotationViewCollisionMode](objref.IDOf(av), objc.RegisterName("collisionMode"))
-	return _r
+	var _mainthread0 AnnotationViewCollisionMode
+	purego.Main(func() {
+		_mainthread0 = func() AnnotationViewCollisionMode {
+			_r := objc.Send[AnnotationViewCollisionMode](objref.IDOf(av), objc.RegisterName("collisionMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // isAnnotationView marks AnnotationView — and, by embedding promotion, its

@@ -50,348 +50,481 @@ func textInsertionIndicatorAdopt(id objc.ID) *TextInsertionIndicator {
 
 // NewTextInsertionIndicator creates a new TextInsertionIndicator.
 func NewTextInsertionIndicator() *TextInsertionIndicator {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSTextInsertionIndicator")), objc.RegisterName("new"))
-	return textInsertionIndicatorAdopt(_id)
+	var _mainthread0 *TextInsertionIndicator
+	purego.Main(func() {
+		_mainthread0 = func() *TextInsertionIndicator {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSTextInsertionIndicator")), objc.RegisterName("new"))
+			return textInsertionIndicatorAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithDisplayMode sets a value that describes the display mode of an indicator.
 func (tii *TextInsertionIndicator) WithDisplayMode(displayMode TextInsertionIndicatorDisplayMode) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setDisplayMode:"), displayMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setDisplayMode:"), displayMode)
+	})
 	return tii
 }
 
 // WithColor sets the color of this indicator.
 func (tii *TextInsertionIndicator) WithColor(color *Color) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setColor:"), objref.IDOf(color))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setColor:"), objref.IDOf(color))
+	})
 	return tii
 }
 
 // WithAutomaticModeOptions sets options that affect the automatic display mode.
 func (tii *TextInsertionIndicator) WithAutomaticModeOptions(automaticModeOptions TextInsertionIndicatorAutomaticModeOptions) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setAutomaticModeOptions:"), automaticModeOptions)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setAutomaticModeOptions:"), automaticModeOptions)
+	})
 	return tii
 }
 
 // WithEffectsViewInserter sets an optional closure the system calls during dictation.
 func (tii *TextInsertionIndicator) WithEffectsViewInserter(effectsViewInserter func(obj.Object)) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setEffectsViewInserter:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { effectsViewInserter(obj.Wrap(_b0)) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setEffectsViewInserter:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { effectsViewInserter(obj.Wrap(_b0)) }))
+	})
 	return tii
 }
 
 // WithSubviews sets the subviews.
 func (tii *TextInsertionIndicator) WithSubviews(items ...ViewProvider) *TextInsertionIndicator {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return tii
 }
 
 // WithHidden sets the hidden.
 func (tii *TextInsertionIndicator) WithHidden(hidden bool) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setHidden:"), hidden)
+	})
 	return tii
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (tii *TextInsertionIndicator) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return tii
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (tii *TextInsertionIndicator) WithAutoresizesSubviews(autoresizesSubviews bool) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return tii
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (tii *TextInsertionIndicator) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return tii
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (tii *TextInsertionIndicator) WithFrame(frame corefoundation.CGRect) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setFrame:"), frame)
+	})
 	return tii
 }
 
 // WithFrameRotation sets the frame rotation.
 func (tii *TextInsertionIndicator) WithFrameRotation(frameRotation float64) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return tii
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (tii *TextInsertionIndicator) WithFrameCenterRotation(frameCenterRotation float64) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return tii
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (tii *TextInsertionIndicator) WithBoundsRotation(boundsRotation float64) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return tii
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (tii *TextInsertionIndicator) WithBounds(bounds corefoundation.CGRect) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setBounds:"), bounds)
+	})
 	return tii
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (tii *TextInsertionIndicator) WithCanDrawConcurrently(canDrawConcurrently bool) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return tii
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (tii *TextInsertionIndicator) WithNeedsDisplay(needsDisplay bool) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return tii
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (tii *TextInsertionIndicator) WithAcceptsTouchEvents(acceptsTouchEvents bool) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return tii
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (tii *TextInsertionIndicator) WithWantsRestingTouches(wantsRestingTouches bool) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return tii
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (tii *TextInsertionIndicator) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return tii
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (tii *TextInsertionIndicator) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return tii
 }
 
 // WithWantsLayer sets the wants layer.
 func (tii *TextInsertionIndicator) WithWantsLayer(wantsLayer bool) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return tii
 }
 
 // WithLayer sets the layer.
 func (tii *TextInsertionIndicator) WithLayer(layer obj.Object) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return tii
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (tii *TextInsertionIndicator) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return tii
 }
 
 // WithNeedsLayout sets the needs layout.
 func (tii *TextInsertionIndicator) WithNeedsLayout(needsLayout bool) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return tii
 }
 
 // WithAlphaValue sets the alpha value.
 func (tii *TextInsertionIndicator) WithAlphaValue(alphaValue float64) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return tii
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (tii *TextInsertionIndicator) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return tii
 }
 
 // WithBackgroundFilters sets the background filters.
 func (tii *TextInsertionIndicator) WithBackgroundFilters(items ...obj.Object) *TextInsertionIndicator {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return tii
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (tii *TextInsertionIndicator) WithCompositingFilter(compositingFilter obj.Object) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return tii
 }
 
 // WithContentFilters sets the content filters.
 func (tii *TextInsertionIndicator) WithContentFilters(items ...obj.Object) *TextInsertionIndicator {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return tii
 }
 
 // WithShadow sets the shadow.
 func (tii *TextInsertionIndicator) WithShadow(shadow *Shadow) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return tii
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (tii *TextInsertionIndicator) WithClipsToBounds(clipsToBounds bool) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return tii
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (tii *TextInsertionIndicator) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return tii
 }
 
 // WithToolTip sets the tool tip.
 func (tii *TextInsertionIndicator) WithToolTip(toolTip string) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return tii
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (tii *TextInsertionIndicator) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return tii
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (tii *TextInsertionIndicator) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return tii
 }
 
 // WithNextKeyView sets the next key view.
 func (tii *TextInsertionIndicator) WithNextKeyView(nextKeyView ViewProvider) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return tii
 }
 
 // WithFocusRingType sets the focus ring type.
 func (tii *TextInsertionIndicator) WithFocusRingType(focusRingType FocusRingType) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return tii
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (tii *TextInsertionIndicator) WithGestureRecognizers(items ...GestureRecognizerProvider) *TextInsertionIndicator {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return tii
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (tii *TextInsertionIndicator) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return tii
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (tii *TextInsertionIndicator) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return tii
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (tii *TextInsertionIndicator) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return tii
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (tii *TextInsertionIndicator) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return tii
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (tii *TextInsertionIndicator) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return tii
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (tii *TextInsertionIndicator) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return tii
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (tii *TextInsertionIndicator) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return tii
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (tii *TextInsertionIndicator) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return tii
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (tii *TextInsertionIndicator) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return tii
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (tii *TextInsertionIndicator) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return tii
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (tii *TextInsertionIndicator) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return tii
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (tii *TextInsertionIndicator) WithNextResponder(nextResponder ResponderProvider) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return tii
 }
 
 // WithMenu sets returns the responder’s menu.
 func (tii *TextInsertionIndicator) WithMenu(menu *Menu) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return tii
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (tii *TextInsertionIndicator) WithUserActivity(userActivity obj.Object) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return tii
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (tii *TextInsertionIndicator) WithTouchBar(touchBar *TouchBar) *TextInsertionIndicator {
-	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return tii
 }
 
 // DisplayMode returns sets-returns the indicator's display mode.
 func (tii *TextInsertionIndicator) DisplayMode() TextInsertionIndicatorDisplayMode {
-	_r := objc.Send[TextInsertionIndicatorDisplayMode](objref.IDOf(tii), objc.RegisterName("displayMode"))
-	return _r
+	var _mainthread0 TextInsertionIndicatorDisplayMode
+	purego.Main(func() {
+		_mainthread0 = func() TextInsertionIndicatorDisplayMode {
+			_r := objc.Send[TextInsertionIndicatorDisplayMode](objref.IDOf(tii), objc.RegisterName("displayMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Color returns the color of the indicator. Defaults to NSColor.textInsertionPointColor.
 func (tii *TextInsertionIndicator) Color() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("color"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("color"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AutomaticModeOptions returns options for the NSTextInsertionIndicatorDisplayModeAutomatic display mode. Defaults to NSTextInsertionIndicatorAutomaticModeOptionsShowEffectsView.
 func (tii *TextInsertionIndicator) AutomaticModeOptions() TextInsertionIndicatorAutomaticModeOptions {
-	_r := objc.Send[TextInsertionIndicatorAutomaticModeOptions](objref.IDOf(tii), objc.RegisterName("automaticModeOptions"))
-	return _r
+	var _mainthread0 TextInsertionIndicatorAutomaticModeOptions
+	purego.Main(func() {
+		_mainthread0 = func() TextInsertionIndicatorAutomaticModeOptions {
+			_r := objc.Send[TextInsertionIndicatorAutomaticModeOptions](objref.IDOf(tii), objc.RegisterName("automaticModeOptions"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ViewProvider = (*TextInsertionIndicator)(nil)

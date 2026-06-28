@@ -48,44 +48,72 @@ func collectionViewFlowLayoutInvalidationContextAdopt(id objc.ID) *CollectionVie
 
 // NewCollectionViewFlowLayoutInvalidationContext creates a new CollectionViewFlowLayoutInvalidationContext.
 func NewCollectionViewFlowLayoutInvalidationContext() *CollectionViewFlowLayoutInvalidationContext {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewFlowLayoutInvalidationContext")), objc.RegisterName("new"))
-	return collectionViewFlowLayoutInvalidationContextAdopt(_id)
+	var _mainthread0 *CollectionViewFlowLayoutInvalidationContext
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewFlowLayoutInvalidationContext {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewFlowLayoutInvalidationContext")), objc.RegisterName("new"))
+			return collectionViewFlowLayoutInvalidationContextAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithInvalidateFlowLayoutDelegateMetrics sets a Boolean value indicating whether the flow layout object should fetch new size information from its delegate.
 func (cvflic *CollectionViewFlowLayoutInvalidationContext) WithInvalidateFlowLayoutDelegateMetrics(invalidateFlowLayoutDelegateMetrics bool) *CollectionViewFlowLayoutInvalidationContext {
-	objc.Send[objc.ID](objref.IDOf(cvflic), objc.RegisterName("setInvalidateFlowLayoutDelegateMetrics:"), invalidateFlowLayoutDelegateMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvflic), objc.RegisterName("setInvalidateFlowLayoutDelegateMetrics:"), invalidateFlowLayoutDelegateMetrics)
+	})
 	return cvflic
 }
 
 // WithInvalidateFlowLayoutAttributes sets a Boolean value indicating whether the flow layout object should invalidate its current attributes.
 func (cvflic *CollectionViewFlowLayoutInvalidationContext) WithInvalidateFlowLayoutAttributes(invalidateFlowLayoutAttributes bool) *CollectionViewFlowLayoutInvalidationContext {
-	objc.Send[objc.ID](objref.IDOf(cvflic), objc.RegisterName("setInvalidateFlowLayoutAttributes:"), invalidateFlowLayoutAttributes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvflic), objc.RegisterName("setInvalidateFlowLayoutAttributes:"), invalidateFlowLayoutAttributes)
+	})
 	return cvflic
 }
 
 // WithContentOffsetAdjustment sets the delta value to add to the collection view’s content offset.
 func (cvflic *CollectionViewFlowLayoutInvalidationContext) WithContentOffsetAdjustment(contentOffsetAdjustment corefoundation.CGPoint) *CollectionViewFlowLayoutInvalidationContext {
-	objc.Send[objc.ID](objref.IDOf(cvflic), objc.RegisterName("setContentOffsetAdjustment:"), contentOffsetAdjustment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvflic), objc.RegisterName("setContentOffsetAdjustment:"), contentOffsetAdjustment)
+	})
 	return cvflic
 }
 
 // WithContentSizeAdjustment sets the delta value to add to the collection view’s content size.
 func (cvflic *CollectionViewFlowLayoutInvalidationContext) WithContentSizeAdjustment(contentSizeAdjustment corefoundation.CGSize) *CollectionViewFlowLayoutInvalidationContext {
-	objc.Send[objc.ID](objref.IDOf(cvflic), objc.RegisterName("setContentSizeAdjustment:"), contentSizeAdjustment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvflic), objc.RegisterName("setContentSizeAdjustment:"), contentSizeAdjustment)
+	})
 	return cvflic
 }
 
 // InvalidateFlowLayoutDelegateMetrics wraps the corresponding Objective-C method.
 func (cvflic *CollectionViewFlowLayoutInvalidationContext) InvalidateFlowLayoutDelegateMetrics() bool {
-	_r := objc.Send[bool](objref.IDOf(cvflic), objc.RegisterName("invalidateFlowLayoutDelegateMetrics"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cvflic), objc.RegisterName("invalidateFlowLayoutDelegateMetrics"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // InvalidateFlowLayoutAttributes wraps the corresponding Objective-C method.
 func (cvflic *CollectionViewFlowLayoutInvalidationContext) InvalidateFlowLayoutAttributes() bool {
-	_r := objc.Send[bool](objref.IDOf(cvflic), objc.RegisterName("invalidateFlowLayoutAttributes"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cvflic), objc.RegisterName("invalidateFlowLayoutAttributes"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ CollectionViewLayoutInvalidationContextProvider = (*CollectionViewFlowLayoutInvalidationContext)(nil)

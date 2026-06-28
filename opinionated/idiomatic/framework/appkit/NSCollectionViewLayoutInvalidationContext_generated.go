@@ -71,71 +71,133 @@ func (cvlic *CollectionViewLayoutInvalidationContext) String() string {
 
 // WithContentOffsetAdjustment sets the delta value to add to the collection view’s content offset.
 func (cvlic *CollectionViewLayoutInvalidationContext) WithContentOffsetAdjustment(contentOffsetAdjustment corefoundation.CGPoint) *CollectionViewLayoutInvalidationContext {
-	objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("setContentOffsetAdjustment:"), contentOffsetAdjustment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("setContentOffsetAdjustment:"), contentOffsetAdjustment)
+	})
 	return cvlic
 }
 
 // WithContentSizeAdjustment sets the delta value to add to the collection view’s content size.
 func (cvlic *CollectionViewLayoutInvalidationContext) WithContentSizeAdjustment(contentSizeAdjustment corefoundation.CGSize) *CollectionViewLayoutInvalidationContext {
-	objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("setContentSizeAdjustment:"), contentSizeAdjustment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("setContentSizeAdjustment:"), contentSizeAdjustment)
+	})
 	return cvlic
 }
 
 // InvalidateItemsAtIndexPaths marks the specified items as invalid so that their layout information can be updated.
 func (cvlic *CollectionViewLayoutInvalidationContext) InvalidateItemsAtIndexPaths(indexPaths obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("invalidateItemsAtIndexPaths:"), objref.IDOf(indexPaths))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("invalidateItemsAtIndexPaths:"), objref.IDOf(indexPaths))
+	})
+
 }
 
 // InvalidateSupplementaryElementsOfKindAtIndexPaths marks the specified supplementary views as invalid so that their layout information can be updated.
 func (cvlic *CollectionViewLayoutInvalidationContext) InvalidateSupplementaryElementsOfKindAtIndexPaths(elementKind obj.Object, indexPaths obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("invalidateSupplementaryElementsOfKind:atIndexPaths:"), objref.IDOf(elementKind), objref.IDOf(indexPaths))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("invalidateSupplementaryElementsOfKind:atIndexPaths:"), objref.IDOf(elementKind), objref.IDOf(indexPaths))
+	})
+
 }
 
 // InvalidateDecorationElementsOfKindAtIndexPaths marks the specified decoration views as invalid so that their layout information can be updated.
 func (cvlic *CollectionViewLayoutInvalidationContext) InvalidateDecorationElementsOfKindAtIndexPaths(elementKind obj.Object, indexPaths obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("invalidateDecorationElementsOfKind:atIndexPaths:"), objref.IDOf(elementKind), objref.IDOf(indexPaths))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("invalidateDecorationElementsOfKind:atIndexPaths:"), objref.IDOf(elementKind), objref.IDOf(indexPaths))
+	})
+
 }
 
 // InvalidateEverything wraps the corresponding Objective-C method.
 func (cvlic *CollectionViewLayoutInvalidationContext) InvalidateEverything() bool {
-	_r := objc.Send[bool](objref.IDOf(cvlic), objc.RegisterName("invalidateEverything"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cvlic), objc.RegisterName("invalidateEverything"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // InvalidateDataSourceCounts wraps the corresponding Objective-C method.
 func (cvlic *CollectionViewLayoutInvalidationContext) InvalidateDataSourceCounts() bool {
-	_r := objc.Send[bool](objref.IDOf(cvlic), objc.RegisterName("invalidateDataSourceCounts"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cvlic), objc.RegisterName("invalidateDataSourceCounts"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // InvalidatedItemIndexPaths returns the invalidated item index paths.
 func (cvlic *CollectionViewLayoutInvalidationContext) InvalidatedItemIndexPaths() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("invalidatedItemIndexPaths"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("invalidatedItemIndexPaths"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // InvalidatedSupplementaryIndexPaths returns the invalidated supplementary index paths.
 func (cvlic *CollectionViewLayoutInvalidationContext) InvalidatedSupplementaryIndexPaths() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("invalidatedSupplementaryIndexPaths"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("invalidatedSupplementaryIndexPaths"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // InvalidatedDecorationIndexPaths returns the invalidated decoration index paths.
 func (cvlic *CollectionViewLayoutInvalidationContext) InvalidatedDecorationIndexPaths() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("invalidatedDecorationIndexPaths"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("invalidatedDecorationIndexPaths"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ContentOffsetAdjustment returns the content offset adjustment.
 func (cvlic *CollectionViewLayoutInvalidationContext) ContentOffsetAdjustment() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(cvlic), objc.RegisterName("contentOffsetAdjustment"))
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(cvlic), objc.RegisterName("contentOffsetAdjustment"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ContentSizeAdjustment returns the content size adjustment.
 func (cvlic *CollectionViewLayoutInvalidationContext) ContentSizeAdjustment() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvlic), objc.RegisterName("contentSizeAdjustment"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvlic), objc.RegisterName("contentSizeAdjustment"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // isCollectionViewLayoutInvalidationContext marks CollectionViewLayoutInvalidationContext — and, by embedding promotion, its

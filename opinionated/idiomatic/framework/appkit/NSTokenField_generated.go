@@ -50,620 +50,843 @@ func tokenFieldAdopt(id objc.ID) *TokenField {
 
 // NewTokenField creates a new TokenField.
 func NewTokenField() *TokenField {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSTokenField")), objc.RegisterName("new"))
-	return tokenFieldAdopt(_id)
+	var _mainthread0 *TokenField
+	purego.Main(func() {
+		_mainthread0 = func() *TokenField {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSTokenField")), objc.RegisterName("new"))
+			return tokenFieldAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithTokenStyle sets the token style of the receiver.
 func (tf *TokenField) WithTokenStyle(tokenStyle TokenStyle) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTokenStyle:"), tokenStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTokenStyle:"), tokenStyle)
+	})
 	return tf
 }
 
 // WithCompletionDelay sets the receiver’s completion delay.
 func (tf *TokenField) WithCompletionDelay(completionDelay float64) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setCompletionDelay:"), completionDelay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setCompletionDelay:"), completionDelay)
+	})
 	return tf
 }
 
 // WithTokenizingCharacterSet sets the recevier’s tokenizing character set to characterSet.
 func (tf *TokenField) WithTokenizingCharacterSet(tokenizingCharacterSet obj.Object) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTokenizingCharacterSet:"), objref.IDOf(tokenizingCharacterSet))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTokenizingCharacterSet:"), objref.IDOf(tokenizingCharacterSet))
+	})
 	return tf
 }
 
 // WithPlaceholderString sets the string the text field displays when empty to help the user understand the text field’s purpose.
 func (tf *TokenField) WithPlaceholderString(placeholderString string) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
+	})
 	return tf
 }
 
 // WithPlaceholderAttributedString sets the attributed string the text field displays when empty to help the user understand the text field’s purpose.
 func (tf *TokenField) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
+	})
 	return tf
 }
 
 // WithBackgroundColor sets the color of the background the text field’s cell draws behind the text.
 func (tf *TokenField) WithBackgroundColor(backgroundColor *Color) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	})
 	return tf
 }
 
 // WithDrawsBackground sets a Boolean value that controls whether the text field’s cell draws a background color behind the text.
 func (tf *TokenField) WithDrawsBackground(drawsBackground bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	})
 	return tf
 }
 
 // WithTextColor sets the color of the text field’s content.
 func (tf *TokenField) WithTextColor(textColor *Color) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
+	})
 	return tf
 }
 
 // WithBordered sets a Boolean value that controls whether the text field draws a solid black border around its contents.
 func (tf *TokenField) WithBordered(bordered bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBordered:"), bordered)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBordered:"), bordered)
+	})
 	return tf
 }
 
 // WithBezeled sets a Boolean value that controls whether the text field draws a bezeled background around its contents.
 func (tf *TokenField) WithBezeled(bezeled bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBezeled:"), bezeled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBezeled:"), bezeled)
+	})
 	return tf
 }
 
 // WithEditable sets a Boolean value that controls whether the user can edit the value in the text field.
 func (tf *TokenField) WithEditable(editable bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setEditable:"), editable)
+	})
 	return tf
 }
 
 // WithSelectable sets a Boolean value that determines whether the user can select the content of the text field.
 func (tf *TokenField) WithSelectable(selectable bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setSelectable:"), selectable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setSelectable:"), selectable)
+	})
 	return tf
 }
 
 // WithBezelStyle sets the text field’s bezel style, square or rounded.
 func (tf *TokenField) WithBezelStyle(bezelStyle TextFieldBezelStyle) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBezelStyle:"), bezelStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBezelStyle:"), bezelStyle)
+	})
 	return tf
 }
 
 // WithPreferredMaxLayoutWidth sets the maximum width of the text field’s intrinsic content size.
 func (tf *TokenField) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
+	})
 	return tf
 }
 
 // WithMaximumNumberOfLines sets the maximum number of lines a wrapping text field displays before clipping or truncating the text.
 func (tf *TokenField) WithMaximumNumberOfLines(maximumNumberOfLines int) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setMaximumNumberOfLines:"), maximumNumberOfLines)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setMaximumNumberOfLines:"), maximumNumberOfLines)
+	})
 	return tf
 }
 
 // WithAllowsDefaultTighteningForTruncation sets a Boolean value that controls whether single-line text fields tighten intercharacter spacing before truncating the text.
 func (tf *TokenField) WithAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAllowsDefaultTighteningForTruncation:"), allowsDefaultTighteningForTruncation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAllowsDefaultTighteningForTruncation:"), allowsDefaultTighteningForTruncation)
+	})
 	return tf
 }
 
 // WithLineBreakStrategy sets the strategy that the system uses to break lines when laying out multiple lines of text.
 func (tf *TokenField) WithLineBreakStrategy(lineBreakStrategy LineBreakStrategy) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setLineBreakStrategy:"), lineBreakStrategy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setLineBreakStrategy:"), lineBreakStrategy)
+	})
 	return tf
 }
 
 // WithAllowsWritingTools sets the allows writing tools.
 func (tf *TokenField) WithAllowsWritingTools(allowsWritingTools bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAllowsWritingTools:"), allowsWritingTools)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAllowsWritingTools:"), allowsWritingTools)
+	})
 	return tf
 }
 
 // WithAllowsWritingToolsAffordance sets the allows writing tools affordance.
 func (tf *TokenField) WithAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAllowsWritingToolsAffordance:"), allowsWritingToolsAffordance)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAllowsWritingToolsAffordance:"), allowsWritingToolsAffordance)
+	})
 	return tf
 }
 
 // WithPlaceholderStrings sets the placeholder strings.
 func (tf *TokenField) WithPlaceholderStrings(items ...obj.Object) *TokenField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPlaceholderStrings:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPlaceholderStrings:"), _arr)
+	})
 	return tf
 }
 
 // WithPlaceholderAttributedStrings sets the placeholder attributed strings.
 func (tf *TokenField) WithPlaceholderAttributedStrings(items ...obj.Object) *TokenField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPlaceholderAttributedStrings:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPlaceholderAttributedStrings:"), _arr)
+	})
 	return tf
 }
 
 // WithResolvesNaturalAlignmentWithBaseWritingDirection sets specifies the behavior for resolving NSTextAlignmentNatural to the visual alignment.
 func (tf *TokenField) WithResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setResolvesNaturalAlignmentWithBaseWritingDirection:"), resolvesNaturalAlignmentWithBaseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setResolvesNaturalAlignmentWithBaseWritingDirection:"), resolvesNaturalAlignmentWithBaseWritingDirection)
+	})
 	return tf
 }
 
 // WithAutomaticTextCompletionEnabled sets a Boolean value that indicates whether the text field automatically completes text as the user types.
 func (tf *TokenField) WithAutomaticTextCompletionEnabled(automaticTextCompletionEnabled bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAutomaticTextCompletionEnabled:"), automaticTextCompletionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAutomaticTextCompletionEnabled:"), automaticTextCompletionEnabled)
+	})
 	return tf
 }
 
 // WithAllowsCharacterPickerTouchBarItem sets a Boolean value that controls whether the Touch Bar displays the character picker item for rich text fields.
 func (tf *TokenField) WithAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAllowsCharacterPickerTouchBarItem:"), allowsCharacterPickerTouchBarItem)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAllowsCharacterPickerTouchBarItem:"), allowsCharacterPickerTouchBarItem)
+	})
 	return tf
 }
 
 // WithAllowsEditingTextAttributes sets a Boolean value that controls whether the user can change font attributes of the text field’s string.
 func (tf *TokenField) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	})
 	return tf
 }
 
 // WithImportsGraphics sets a Boolean value that controls whether the user can drag image files into the text field.
 func (tf *TokenField) WithImportsGraphics(importsGraphics bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	})
 	return tf
 }
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (tf *TokenField) WithTarget(target obj.Object) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return tf
 }
 
 // WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
 func (tf *TokenField) WithTag(tag int) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTag:"), tag)
+	})
 	return tf
 }
 
 // WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 func (tf *TokenField) WithIgnoresMultiClick(ignoresMultiClick bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	})
 	return tf
 }
 
 // WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 func (tf *TokenField) WithContinuous(continuous bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return tf
 }
 
 // WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
 func (tf *TokenField) WithEnabled(enabled bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return tf
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
 func (tf *TokenField) WithRefusesFirstResponder(refusesFirstResponder bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return tf
 }
 
 // WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
 func (tf *TokenField) WithHighlighted(highlighted bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return tf
 }
 
 // WithControlSize sets the size of the control.
 func (tf *TokenField) WithControlSize(controlSize ControlSize) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return tf
 }
 
 // WithFormatter sets the receiver’s formatter.
 func (tf *TokenField) WithFormatter(formatter obj.Object) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return tf
 }
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (tf *TokenField) WithObjectValue(objectValue obj.Object) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return tf
 }
 
 // WithStringValue sets the value of the receiver’s cell as an NSString object.
 func (tf *TokenField) WithStringValue(stringValue string) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return tf
 }
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (tf *TokenField) WithAttributedStringValue(attributedStringValue obj.Object) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return tf
 }
 
 // WithIntValue sets the value of the receiver’s cell as an integer.
 func (tf *TokenField) WithIntValue(intValue int) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return tf
 }
 
 // WithIntegerValue sets the value of the receiver’s cell as an integer value.
 func (tf *TokenField) WithIntegerValue(integerValue int) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return tf
 }
 
 // WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
 func (tf *TokenField) WithFloatValue(floatValue float32) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return tf
 }
 
 // WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
 func (tf *TokenField) WithDoubleValue(doubleValue float64) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return tf
 }
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (tf *TokenField) WithFont(font *Font) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return tf
 }
 
 // WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
 func (tf *TokenField) WithUsesSingleLineMode(usesSingleLineMode bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return tf
 }
 
 // WithLineBreakMode sets the line break mode to use for text in the control’s cell.
 func (tf *TokenField) WithLineBreakMode(lineBreakMode LineBreakMode) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return tf
 }
 
 // WithAlignment sets the alignment mode of the text in the receiver’s cell.
 func (tf *TokenField) WithAlignment(alignment TextAlignment) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return tf
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (tf *TokenField) WithBaseWritingDirection(baseWritingDirection WritingDirection) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return tf
 }
 
 // WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 func (tf *TokenField) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	})
 	return tf
 }
 
 // WithCell sets the cell.
 func (tf *TokenField) WithCell(cell CellProvider) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	})
 	return tf
 }
 
 // WithSubviews sets the subviews.
 func (tf *TokenField) WithSubviews(items ...ViewProvider) *TokenField {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return tf
 }
 
 // WithHidden sets the hidden.
 func (tf *TokenField) WithHidden(hidden bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setHidden:"), hidden)
+	})
 	return tf
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (tf *TokenField) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return tf
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (tf *TokenField) WithAutoresizesSubviews(autoresizesSubviews bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return tf
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (tf *TokenField) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return tf
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (tf *TokenField) WithFrame(frame corefoundation.CGRect) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFrame:"), frame)
+	})
 	return tf
 }
 
 // WithFrameRotation sets the frame rotation.
 func (tf *TokenField) WithFrameRotation(frameRotation float64) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return tf
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (tf *TokenField) WithFrameCenterRotation(frameCenterRotation float64) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return tf
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (tf *TokenField) WithBoundsRotation(boundsRotation float64) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return tf
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (tf *TokenField) WithBounds(bounds corefoundation.CGRect) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBounds:"), bounds)
+	})
 	return tf
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (tf *TokenField) WithCanDrawConcurrently(canDrawConcurrently bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return tf
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (tf *TokenField) WithNeedsDisplay(needsDisplay bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return tf
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (tf *TokenField) WithAcceptsTouchEvents(acceptsTouchEvents bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return tf
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (tf *TokenField) WithWantsRestingTouches(wantsRestingTouches bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return tf
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (tf *TokenField) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return tf
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (tf *TokenField) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return tf
 }
 
 // WithWantsLayer sets the wants layer.
 func (tf *TokenField) WithWantsLayer(wantsLayer bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return tf
 }
 
 // WithLayer sets the layer.
 func (tf *TokenField) WithLayer(layer obj.Object) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return tf
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (tf *TokenField) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return tf
 }
 
 // WithNeedsLayout sets the needs layout.
 func (tf *TokenField) WithNeedsLayout(needsLayout bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return tf
 }
 
 // WithAlphaValue sets the alpha value.
 func (tf *TokenField) WithAlphaValue(alphaValue float64) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return tf
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (tf *TokenField) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return tf
 }
 
 // WithBackgroundFilters sets the background filters.
 func (tf *TokenField) WithBackgroundFilters(items ...obj.Object) *TokenField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return tf
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (tf *TokenField) WithCompositingFilter(compositingFilter obj.Object) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return tf
 }
 
 // WithContentFilters sets the content filters.
 func (tf *TokenField) WithContentFilters(items ...obj.Object) *TokenField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return tf
 }
 
 // WithShadow sets the shadow.
 func (tf *TokenField) WithShadow(shadow *Shadow) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return tf
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (tf *TokenField) WithClipsToBounds(clipsToBounds bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return tf
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (tf *TokenField) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return tf
 }
 
 // WithToolTip sets the tool tip.
 func (tf *TokenField) WithToolTip(toolTip string) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return tf
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (tf *TokenField) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return tf
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (tf *TokenField) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return tf
 }
 
 // WithNextKeyView sets the next key view.
 func (tf *TokenField) WithNextKeyView(nextKeyView ViewProvider) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return tf
 }
 
 // WithFocusRingType sets the focus ring type.
 func (tf *TokenField) WithFocusRingType(focusRingType FocusRingType) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return tf
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (tf *TokenField) WithGestureRecognizers(items ...GestureRecognizerProvider) *TokenField {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return tf
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (tf *TokenField) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return tf
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (tf *TokenField) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return tf
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (tf *TokenField) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return tf
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (tf *TokenField) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return tf
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (tf *TokenField) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return tf
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (tf *TokenField) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return tf
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (tf *TokenField) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return tf
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (tf *TokenField) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return tf
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (tf *TokenField) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return tf
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (tf *TokenField) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return tf
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (tf *TokenField) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return tf
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (tf *TokenField) WithNextResponder(nextResponder ResponderProvider) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return tf
 }
 
 // WithMenu sets returns the responder’s menu.
 func (tf *TokenField) WithMenu(menu *Menu) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return tf
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (tf *TokenField) WithUserActivity(userActivity obj.Object) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return tf
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (tf *TokenField) WithTouchBar(touchBar *TouchBar) *TokenField {
-	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return tf
 }
 
 // TokenStyle returns the token style.
 func (tf *TokenField) TokenStyle() TokenStyle {
-	_r := objc.Send[TokenStyle](objref.IDOf(tf), objc.RegisterName("tokenStyle"))
-	return _r
+	var _mainthread0 TokenStyle
+	purego.Main(func() {
+		_mainthread0 = func() TokenStyle {
+			_r := objc.Send[TokenStyle](objref.IDOf(tf), objc.RegisterName("tokenStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CompletionDelay returns the completion delay.
 func (tf *TokenField) CompletionDelay() float64 {
-	_r := objc.Send[float64](objref.IDOf(tf), objc.RegisterName("completionDelay"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(tf), objc.RegisterName("completionDelay"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TokenizingCharacterSet returns the tokenizing character set.
 func (tf *TokenField) TokenizingCharacterSet() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("tokenizingCharacterSet"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("tokenizingCharacterSet"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ TextFieldProvider = (*TokenField)(nil)

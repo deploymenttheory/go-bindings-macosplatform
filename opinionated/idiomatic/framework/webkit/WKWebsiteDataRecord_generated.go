@@ -68,21 +68,41 @@ func (wwdr *WKWebsiteDataRecord) String() string {
 
 // NewWKWebsiteDataRecord creates a new WKWebsiteDataRecord.
 func NewWKWebsiteDataRecord() *WKWebsiteDataRecord {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKWebsiteDataRecord")), objc.RegisterName("new"))
-	return wKWebsiteDataRecordAdopt(_id)
+	var _mainthread0 *WKWebsiteDataRecord
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebsiteDataRecord {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKWebsiteDataRecord")), objc.RegisterName("new"))
+			return wKWebsiteDataRecordAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // DisplayName returns the display name for the data record. This is usually the domain name.
 func (wwdr *WKWebsiteDataRecord) DisplayName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wwdr), objc.RegisterName("displayName"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wwdr), objc.RegisterName("displayName"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DataTypes returns the various types of website data that exist for this data record.
 func (wwdr *WKWebsiteDataRecord) DataTypes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwdr), objc.RegisterName("dataTypes"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwdr), objc.RegisterName("dataTypes"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

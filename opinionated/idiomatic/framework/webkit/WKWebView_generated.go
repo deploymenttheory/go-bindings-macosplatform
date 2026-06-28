@@ -70,459 +70,868 @@ func (wwv *WKWebView) String() string {
 
 // NewWKWebViewWithFrameConfiguration creates a web view and initializes it with the specified frame and configuration data.
 func NewWKWebViewWithFrameConfiguration(frame corefoundation.CGRect, configuration *WKWebViewConfiguration) *WKWebView {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("WKWebView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:configuration:"), frame, objref.IDOf(configuration))
-	return wKWebViewAdopt(_id)
+	var _mainthread0 *WKWebView
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebView {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("WKWebView")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:configuration:"), frame, objref.IDOf(configuration))
+			return wKWebViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewWKWebViewWithCoder returns an object initialized from data in the specified coder object.
 func NewWKWebViewWithCoder(coder obj.Object) *WKWebView {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("WKWebView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
-	return wKWebViewAdopt(_id)
+	var _mainthread0 *WKWebView
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebView {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("WKWebView")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+			return wKWebViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithAllowsBackForwardNavigationGestures sets a Boolean value that indicates whether horizontal swipe gestures trigger backward and forward page navigation.
 func (wwv *WKWebView) WithAllowsBackForwardNavigationGestures(allowsBackForwardNavigationGestures bool) *WKWebView {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setAllowsBackForwardNavigationGestures:"), allowsBackForwardNavigationGestures)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setAllowsBackForwardNavigationGestures:"), allowsBackForwardNavigationGestures)
+	})
 	return wwv
 }
 
 // WithCustomUserAgent sets the custom user agent string.
 func (wwv *WKWebView) WithCustomUserAgent(customUserAgent string) *WKWebView {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setCustomUserAgent:"), purego.NSString(customUserAgent))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setCustomUserAgent:"), purego.NSString(customUserAgent))
+	})
 	return wwv
 }
 
 // WithAllowsLinkPreview sets a Boolean value that determines whether pressing a link displays a preview of the destination for the link.
 func (wwv *WKWebView) WithAllowsLinkPreview(allowsLinkPreview bool) *WKWebView {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setAllowsLinkPreview:"), allowsLinkPreview)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setAllowsLinkPreview:"), allowsLinkPreview)
+	})
 	return wwv
 }
 
 // WithAllowsMagnification sets a Boolean value that indicates whether magnify gestures change the web view’s magnification.
 func (wwv *WKWebView) WithAllowsMagnification(allowsMagnification bool) *WKWebView {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setAllowsMagnification:"), allowsMagnification)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setAllowsMagnification:"), allowsMagnification)
+	})
 	return wwv
 }
 
 // WithMagnification sets the factor by which the page content is currently scaled.
 func (wwv *WKWebView) WithMagnification(magnification float64) *WKWebView {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setMagnification:"), magnification)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setMagnification:"), magnification)
+	})
 	return wwv
 }
 
 // WithPageZoom sets the scale factor by which the web view scales content relative to its bounds.
 func (wwv *WKWebView) WithPageZoom(pageZoom float64) *WKWebView {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setPageZoom:"), pageZoom)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setPageZoom:"), pageZoom)
+	})
 	return wwv
 }
 
 // WithMediaType sets the media type for the contents of the web view.
 func (wwv *WKWebView) WithMediaType(mediaType string) *WKWebView {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setMediaType:"), purego.NSString(mediaType))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setMediaType:"), purego.NSString(mediaType))
+	})
 	return wwv
 }
 
 // WithInteractionState sets an object you use to capture the current state of interaction in a web view so that you can restore that state later to another web view.
 func (wwv *WKWebView) WithInteractionState(interactionState obj.Object) *WKWebView {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setInteractionState:"), objref.IDOf(interactionState))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setInteractionState:"), objref.IDOf(interactionState))
+	})
 	return wwv
 }
 
 // WithUnderPageBackgroundColor sets the color the web view displays behind the active page, visible when the user scrolls beyond the bounds of the page.
 func (wwv *WKWebView) WithUnderPageBackgroundColor(underPageBackgroundColor obj.Object) *WKWebView {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setUnderPageBackgroundColor:"), objref.IDOf(underPageBackgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setUnderPageBackgroundColor:"), objref.IDOf(underPageBackgroundColor))
+	})
 	return wwv
 }
 
 // WithInspectable sets a Boolean value that indicates whether you can inspect the view with Safari Web Inspector.
 func (wwv *WKWebView) WithInspectable(inspectable bool) *WKWebView {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setInspectable:"), inspectable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setInspectable:"), inspectable)
+	})
 	return wwv
 }
 
 // WithObscuredContentInsets sets the obscured content insets.
 func (wwv *WKWebView) WithObscuredContentInsets(obscuredContentInsets foundation.NSEdgeInsets) *WKWebView {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setObscuredContentInsets:"), obscuredContentInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setObscuredContentInsets:"), obscuredContentInsets)
+	})
 	return wwv
 }
 
 // LoadRequest navigates to a requested URL.
 func (wwv *WKWebView) LoadRequest(request obj.Object) *WKNavigation {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("loadRequest:"), objref.IDOf(request))
-	return WKNavigationFromID(_r)
+	var _mainthread0 *WKNavigation
+	purego.Main(func() {
+		_mainthread0 = func() *WKNavigation {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("loadRequest:"), objref.IDOf(request))
+			return WKNavigationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LoadFileURLAllowingReadAccessToURL loads the web content from the specified file and navigates to it.
 func (wwv *WKWebView) LoadFileURLAllowingReadAccessToURL(uRL string, readAccessURL string) *WKNavigation {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("loadFileURL:allowingReadAccessToURL:"), rt.FileURL(uRL), rt.FileURL(readAccessURL))
-	return WKNavigationFromID(_r)
+	var _mainthread0 *WKNavigation
+	purego.Main(func() {
+		_mainthread0 = func() *WKNavigation {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("loadFileURL:allowingReadAccessToURL:"), rt.FileURL(uRL), rt.FileURL(readAccessURL))
+			return WKNavigationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LoadHTMLStringBaseURL loads the contents of the specified HTML string and navigates to it.
 func (wwv *WKWebView) LoadHTMLStringBaseURL(string_ string, baseURL string) *WKNavigation {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("loadHTMLString:baseURL:"), purego.NSString(string_), rt.FileURL(baseURL))
-	return WKNavigationFromID(_r)
+	var _mainthread0 *WKNavigation
+	purego.Main(func() {
+		_mainthread0 = func() *WKNavigation {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("loadHTMLString:baseURL:"), purego.NSString(string_), rt.FileURL(baseURL))
+			return WKNavigationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LoadDataMIMETypeCharacterEncodingNameBaseURL loads the content of the specified data object and navigates to it.
 func (wwv *WKWebView) LoadDataMIMETypeCharacterEncodingNameBaseURL(data obj.Object, mIMEType string, characterEncodingName string, baseURL string) *WKNavigation {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("loadData:MIMEType:characterEncodingName:baseURL:"), objref.IDOf(data), purego.NSString(mIMEType), purego.NSString(characterEncodingName), rt.FileURL(baseURL))
-	return WKNavigationFromID(_r)
+	var _mainthread0 *WKNavigation
+	purego.Main(func() {
+		_mainthread0 = func() *WKNavigation {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("loadData:MIMEType:characterEncodingName:baseURL:"), objref.IDOf(data), purego.NSString(mIMEType), purego.NSString(characterEncodingName), rt.FileURL(baseURL))
+			return WKNavigationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // GoToBackForwardListItem navigates to an item from the back-forward list and sets it as the current item.
 func (wwv *WKWebView) GoToBackForwardListItem(item *WKBackForwardListItem) *WKNavigation {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("goToBackForwardListItem:"), objref.IDOf(item))
-	return WKNavigationFromID(_r)
+	var _mainthread0 *WKNavigation
+	purego.Main(func() {
+		_mainthread0 = func() *WKNavigation {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("goToBackForwardListItem:"), objref.IDOf(item))
+			return WKNavigationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // GoBack returns navigates to the back item in the back-forward list.
 func (wwv *WKWebView) GoBack() *WKNavigation {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("goBack"))
-	return WKNavigationFromID(_r)
+	var _mainthread0 *WKNavigation
+	purego.Main(func() {
+		_mainthread0 = func() *WKNavigation {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("goBack"))
+			return WKNavigationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // GoForward returns navigates to the forward item in the back-forward list.
 func (wwv *WKWebView) GoForward() *WKNavigation {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("goForward"))
-	return WKNavigationFromID(_r)
+	var _mainthread0 *WKNavigation
+	purego.Main(func() {
+		_mainthread0 = func() *WKNavigation {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("goForward"))
+			return WKNavigationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Reload returns reloads the current webpage.
 func (wwv *WKWebView) Reload() *WKNavigation {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("reload"))
-	return WKNavigationFromID(_r)
+	var _mainthread0 *WKNavigation
+	purego.Main(func() {
+		_mainthread0 = func() *WKNavigation {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("reload"))
+			return WKNavigationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ReloadFromOrigin returns reloads the current webpage, and performs end-to-end revalidation of the content using cache-validating conditionals, if possible.
 func (wwv *WKWebView) ReloadFromOrigin() *WKNavigation {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("reloadFromOrigin"))
-	return WKNavigationFromID(_r)
+	var _mainthread0 *WKNavigation
+	purego.Main(func() {
+		_mainthread0 = func() *WKNavigation {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("reloadFromOrigin"))
+			return WKNavigationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // StopLoading stops loading all resources on the current page.
 func (wwv *WKWebView) StopLoading() {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("stopLoading"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("stopLoading"))
+	})
+
 }
 
 // CloseAllMediaPresentationsWithCompletionHandler closes all media the web view is presenting, including picture-in-picture video and fullscreen video.
 func (wwv *WKWebView) CloseAllMediaPresentationsWithCompletionHandler(completionHandler func() int) {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("closeAllMediaPresentationsWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("closeAllMediaPresentationsWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+	})
+
 }
 
 // CloseAllMediaPresentations closes all media presentations.
 func (wwv *WKWebView) CloseAllMediaPresentations() {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("closeAllMediaPresentations"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("closeAllMediaPresentations"))
+	})
+
 }
 
 // PauseAllMediaPlaybackWithCompletionHandler pauses playback of all media in the web view.
 func (wwv *WKWebView) PauseAllMediaPlaybackWithCompletionHandler(completionHandler func() int) {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("pauseAllMediaPlaybackWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("pauseAllMediaPlaybackWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+	})
+
 }
 
 // PauseAllMediaPlayback pauses playback of all media in the web view.
 func (wwv *WKWebView) PauseAllMediaPlayback(completionHandler func() int) {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("pauseAllMediaPlayback:"), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("pauseAllMediaPlayback:"), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+	})
+
 }
 
 // SetAllMediaPlaybackSuspendedCompletionHandler changes whether the webpage is suspending playback of all media in the page.
 func (wwv *WKWebView) SetAllMediaPlaybackSuspendedCompletionHandler(suspended bool, completionHandler func() int) {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setAllMediaPlaybackSuspended:completionHandler:"), suspended, objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setAllMediaPlaybackSuspended:completionHandler:"), suspended, objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+	})
+
 }
 
 // ResumeAllMediaPlayback resumes playback of all media in a web view.
 func (wwv *WKWebView) ResumeAllMediaPlayback(completionHandler func() int) {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("resumeAllMediaPlayback:"), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("resumeAllMediaPlayback:"), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+	})
+
 }
 
 // SuspendAllMediaPlayback changes whether the webpage is suspending playback of all media in the page.
 func (wwv *WKWebView) SuspendAllMediaPlayback(completionHandler func() int) {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("suspendAllMediaPlayback:"), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("suspendAllMediaPlayback:"), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+	})
+
 }
 
 // SetCameraCaptureStateCompletionHandler changes whether the webpage is using the camera to capture images or video.
 func (wwv *WKWebView) SetCameraCaptureStateCompletionHandler(state WKMediaCaptureState, completionHandler func() int) {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setCameraCaptureState:completionHandler:"), state, objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setCameraCaptureState:completionHandler:"), state, objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+	})
+
 }
 
 // SetMicrophoneCaptureStateCompletionHandler changes whether the webpage is using the microphone to capture audio.
 func (wwv *WKWebView) SetMicrophoneCaptureStateCompletionHandler(state WKMediaCaptureState, completionHandler func() int) {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setMicrophoneCaptureState:completionHandler:"), state, objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setMicrophoneCaptureState:completionHandler:"), state, objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+	})
+
 }
 
 // SetMagnificationCenteredAtPoint scales the page content and centers the result on the specified point.
 func (wwv *WKWebView) SetMagnificationCenteredAtPoint(magnification float64, point corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setMagnification:centeredAtPoint:"), magnification, point)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setMagnification:centeredAtPoint:"), magnification, point)
+	})
+
 }
 
 // FindStringWithConfigurationCompletionHandler searches for the specified string in the web view’s content.
 func (wwv *WKWebView) FindStringWithConfigurationCompletionHandler(string_ string, configuration *WKFindConfiguration, completionHandler func(obj.Object) int) {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("findString:withConfiguration:completionHandler:"), purego.NSString(string_), objref.IDOf(configuration), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return completionHandler(obj.Wrap(_b0)) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("findString:withConfiguration:completionHandler:"), purego.NSString(string_), objref.IDOf(configuration), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return completionHandler(obj.Wrap(_b0)) }))
+	})
+
 }
 
 // StartDownloadUsingRequestCompletionHandler starts to download the resource at the URL in the request.
 func (wwv *WKWebView) StartDownloadUsingRequestCompletionHandler(request obj.Object, completionHandler func(obj.Object) int) {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("startDownloadUsingRequest:completionHandler:"), objref.IDOf(request), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return completionHandler(obj.Wrap(_b0)) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("startDownloadUsingRequest:completionHandler:"), objref.IDOf(request), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return completionHandler(obj.Wrap(_b0)) }))
+	})
+
 }
 
 // ResumeDownloadFromResumeDataCompletionHandler resumes a failed or canceled download.
 func (wwv *WKWebView) ResumeDownloadFromResumeDataCompletionHandler(resumeData obj.Object, completionHandler func(obj.Object) int) {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("resumeDownloadFromResumeData:completionHandler:"), objref.IDOf(resumeData), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return completionHandler(obj.Wrap(_b0)) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("resumeDownloadFromResumeData:completionHandler:"), objref.IDOf(resumeData), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return completionHandler(obj.Wrap(_b0)) }))
+	})
+
 }
 
 // LoadSimulatedRequestResponseResponseData loads the web content from the data you provide as if the data were the response to the request.
 func (wwv *WKWebView) LoadSimulatedRequestResponseResponseData(request obj.Object, response obj.Object, data obj.Object) *WKNavigation {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("loadSimulatedRequest:response:responseData:"), objref.IDOf(request), objref.IDOf(response), objref.IDOf(data))
-	return WKNavigationFromID(_r)
+	var _mainthread0 *WKNavigation
+	purego.Main(func() {
+		_mainthread0 = func() *WKNavigation {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("loadSimulatedRequest:response:responseData:"), objref.IDOf(request), objref.IDOf(response), objref.IDOf(data))
+			return WKNavigationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LoadSimulatedRequestWithResponseResponseData loads simulated request with response response data.
 func (wwv *WKWebView) LoadSimulatedRequestWithResponseResponseData(request obj.Object, response obj.Object, data obj.Object) *WKNavigation {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("loadSimulatedRequest:withResponse:responseData:"), objref.IDOf(request), objref.IDOf(response), objref.IDOf(data))
-	return WKNavigationFromID(_r)
+	var _mainthread0 *WKNavigation
+	purego.Main(func() {
+		_mainthread0 = func() *WKNavigation {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("loadSimulatedRequest:withResponse:responseData:"), objref.IDOf(request), objref.IDOf(response), objref.IDOf(data))
+			return WKNavigationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LoadFileRequestAllowingReadAccessToURL loads the web content from the file the URL request object specifies and navigates to that content.
 func (wwv *WKWebView) LoadFileRequestAllowingReadAccessToURL(request obj.Object, readAccessURL string) *WKNavigation {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("loadFileRequest:allowingReadAccessToURL:"), objref.IDOf(request), rt.FileURL(readAccessURL))
-	return WKNavigationFromID(_r)
+	var _mainthread0 *WKNavigation
+	purego.Main(func() {
+		_mainthread0 = func() *WKNavigation {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("loadFileRequest:allowingReadAccessToURL:"), objref.IDOf(request), rt.FileURL(readAccessURL))
+			return WKNavigationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LoadSimulatedRequestResponseHTMLString loads the web content from the HTML you provide as if the HTML were the response to the request.
 func (wwv *WKWebView) LoadSimulatedRequestResponseHTMLString(request obj.Object, string_ string) *WKNavigation {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("loadSimulatedRequest:responseHTMLString:"), objref.IDOf(request), purego.NSString(string_))
-	return WKNavigationFromID(_r)
+	var _mainthread0 *WKNavigation
+	purego.Main(func() {
+		_mainthread0 = func() *WKNavigation {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("loadSimulatedRequest:responseHTMLString:"), objref.IDOf(request), purego.NSString(string_))
+			return WKNavigationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LoadSimulatedRequestWithResponseHTMLString loads simulated request with response HTML string.
 func (wwv *WKWebView) LoadSimulatedRequestWithResponseHTMLString(request obj.Object, string_ string) *WKNavigation {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("loadSimulatedRequest:withResponseHTMLString:"), objref.IDOf(request), purego.NSString(string_))
-	return WKNavigationFromID(_r)
+	var _mainthread0 *WKNavigation
+	purego.Main(func() {
+		_mainthread0 = func() *WKNavigation {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("loadSimulatedRequest:withResponseHTMLString:"), objref.IDOf(request), purego.NSString(string_))
+			return WKNavigationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PrintOperationWithPrintInfo returns the print operation object to use when printing the contents of the web view.
 func (wwv *WKWebView) PrintOperationWithPrintInfo(printInfo obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("printOperationWithPrintInfo:"), objref.IDOf(printInfo))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("printOperationWithPrintInfo:"), objref.IDOf(printInfo))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetMinimumViewportInsetMaximumViewportInset wraps the corresponding Objective-C method.
 func (wwv *WKWebView) SetMinimumViewportInsetMaximumViewportInset(minimumViewportInset foundation.NSEdgeInsets, maximumViewportInset foundation.NSEdgeInsets) {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setMinimumViewportInset:maximumViewportInset:"), minimumViewportInset, maximumViewportInset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setMinimumViewportInset:maximumViewportInset:"), minimumViewportInset, maximumViewportInset)
+	})
+
 }
 
 // Configuration returns a copy of the configuration with which the web view was initialized.
 func (wwv *WKWebView) Configuration() *WKWebViewConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("configuration"))
-	return WKWebViewConfigurationFromID(_r)
+	var _mainthread0 *WKWebViewConfiguration
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebViewConfiguration {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("configuration"))
+			return WKWebViewConfigurationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BackForwardList returns the web view's back-forward list.
 func (wwv *WKWebView) BackForwardList() *WKBackForwardList {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("backForwardList"))
-	return WKBackForwardListFromID(_r)
+	var _mainthread0 *WKBackForwardList
+	purego.Main(func() {
+		_mainthread0 = func() *WKBackForwardList {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("backForwardList"))
+			return WKBackForwardListFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Title returns the page title.
 func (wwv *WKWebView) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("title"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("title"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // URL returns the active URL. This is the URL that should be reflected in the user interface.
 func (wwv *WKWebView) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("URL"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsLoading reports whether the view is currently loading content.
 func (wwv *WKWebView) IsLoading() bool {
-	_r := objc.Send[bool](objref.IDOf(wwv), objc.RegisterName("isLoading"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwv), objc.RegisterName("isLoading"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // EstimatedProgress returns an estimate of what fraction of the current navigation has been completed. This value ranges from 0.0 to 1.0 based on the total number of bytes expected to be received, including the main document and all of its potential subresources. After a navigation completes, the value remains at 1.0 until a new navigation starts, at which point it is reset to 0.0.
 func (wwv *WKWebView) EstimatedProgress() float64 {
-	_r := objc.Send[float64](objref.IDOf(wwv), objc.RegisterName("estimatedProgress"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(wwv), objc.RegisterName("estimatedProgress"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasOnlySecureContent reports whether all resources on the page have been loaded over securely encrypted connections.
 func (wwv *WKWebView) HasOnlySecureContent() bool {
-	_r := objc.Send[bool](objref.IDOf(wwv), objc.RegisterName("hasOnlySecureContent"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwv), objc.RegisterName("hasOnlySecureContent"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ServerTrust returns a SecTrustRef for the currently committed navigation.
 func (wwv *WKWebView) ServerTrust() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("serverTrust"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("serverTrust"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CanGoBack reports whether there is a back item in the back-forward list that can be navigated to.
 func (wwv *WKWebView) CanGoBack() bool {
-	_r := objc.Send[bool](objref.IDOf(wwv), objc.RegisterName("canGoBack"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwv), objc.RegisterName("canGoBack"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CanGoForward reports whether there is a forward item in the back-forward list that can be navigated to.
 func (wwv *WKWebView) CanGoForward() bool {
-	_r := objc.Send[bool](objref.IDOf(wwv), objc.RegisterName("canGoForward"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwv), objc.RegisterName("canGoForward"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CameraCaptureState returns the state of camera capture on a web page.
 func (wwv *WKWebView) CameraCaptureState() WKMediaCaptureState {
-	_r := objc.Send[WKMediaCaptureState](objref.IDOf(wwv), objc.RegisterName("cameraCaptureState"))
-	return _r
+	var _mainthread0 WKMediaCaptureState
+	purego.Main(func() {
+		_mainthread0 = func() WKMediaCaptureState {
+			_r := objc.Send[WKMediaCaptureState](objref.IDOf(wwv), objc.RegisterName("cameraCaptureState"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MicrophoneCaptureState returns the state of microphone capture on a web page.
 func (wwv *WKWebView) MicrophoneCaptureState() WKMediaCaptureState {
-	_r := objc.Send[WKMediaCaptureState](objref.IDOf(wwv), objc.RegisterName("microphoneCaptureState"))
-	return _r
+	var _mainthread0 WKMediaCaptureState
+	purego.Main(func() {
+		_mainthread0 = func() WKMediaCaptureState {
+			_r := objc.Send[WKMediaCaptureState](objref.IDOf(wwv), objc.RegisterName("microphoneCaptureState"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsBackForwardNavigationGestures reports whether horizontal swipe gestures will trigger back-forward list navigations. The default value is false.
 func (wwv *WKWebView) AllowsBackForwardNavigationGestures() bool {
-	_r := objc.Send[bool](objref.IDOf(wwv), objc.RegisterName("allowsBackForwardNavigationGestures"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwv), objc.RegisterName("allowsBackForwardNavigationGestures"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CustomUserAgent returns the custom user agent string or nil if no custom user agent string has been set.
 func (wwv *WKWebView) CustomUserAgent() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("customUserAgent"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("customUserAgent"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsLinkPreview reports whether link preview is allowed for any links inside this WKWebView. The default value is true on Mac and iOS.
 func (wwv *WKWebView) AllowsLinkPreview() bool {
-	_r := objc.Send[bool](objref.IDOf(wwv), objc.RegisterName("allowsLinkPreview"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwv), objc.RegisterName("allowsLinkPreview"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsMagnification wraps the corresponding Objective-C method.
 func (wwv *WKWebView) AllowsMagnification() bool {
-	_r := objc.Send[bool](objref.IDOf(wwv), objc.RegisterName("allowsMagnification"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwv), objc.RegisterName("allowsMagnification"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Magnification returns the magnification.
 func (wwv *WKWebView) Magnification() float64 {
-	_r := objc.Send[float64](objref.IDOf(wwv), objc.RegisterName("magnification"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(wwv), objc.RegisterName("magnification"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PageZoom returns the page zoom.
 func (wwv *WKWebView) PageZoom() float64 {
-	_r := objc.Send[float64](objref.IDOf(wwv), objc.RegisterName("pageZoom"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(wwv), objc.RegisterName("pageZoom"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MediaType returns the media type.
 func (wwv *WKWebView) MediaType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("mediaType"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("mediaType"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // InteractionState returns the interaction state.
 func (wwv *WKWebView) InteractionState() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("interactionState"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("interactionState"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsBlockedByScreenTime reports whether screen Time blocking has occurred.
 func (wwv *WKWebView) IsBlockedByScreenTime() bool {
-	_r := objc.Send[bool](objref.IDOf(wwv), objc.RegisterName("isBlockedByScreenTime"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwv), objc.RegisterName("isBlockedByScreenTime"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ThemeColor returns the theme color.
 func (wwv *WKWebView) ThemeColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("themeColor"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("themeColor"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UnderPageBackgroundColor returns the under page background color.
 func (wwv *WKWebView) UnderPageBackgroundColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("underPageBackgroundColor"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("underPageBackgroundColor"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FullscreenState returns a WKWebView's fullscreen state.
 func (wwv *WKWebView) FullscreenState() WKFullscreenState {
-	_r := objc.Send[WKFullscreenState](objref.IDOf(wwv), objc.RegisterName("fullscreenState"))
-	return _r
+	var _mainthread0 WKFullscreenState
+	purego.Main(func() {
+		_mainthread0 = func() WKFullscreenState {
+			_r := objc.Send[WKFullscreenState](objref.IDOf(wwv), objc.RegisterName("fullscreenState"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MinimumViewportInset returns the minimum viewport inset.
 func (wwv *WKWebView) MinimumViewportInset() foundation.NSEdgeInsets {
-	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(wwv), objc.RegisterName("minimumViewportInset"))
-	return _r
+	var _mainthread0 foundation.NSEdgeInsets
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSEdgeInsets {
+			_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(wwv), objc.RegisterName("minimumViewportInset"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MaximumViewportInset returns the maximum viewport inset.
 func (wwv *WKWebView) MaximumViewportInset() foundation.NSEdgeInsets {
-	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(wwv), objc.RegisterName("maximumViewportInset"))
-	return _r
+	var _mainthread0 foundation.NSEdgeInsets
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSEdgeInsets {
+			_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(wwv), objc.RegisterName("maximumViewportInset"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsInspectable reports whether controls whether this The default value is false.
 func (wwv *WKWebView) IsInspectable() bool {
-	_r := objc.Send[bool](objref.IDOf(wwv), objc.RegisterName("isInspectable"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwv), objc.RegisterName("isInspectable"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsWritingToolsActive reports whether writing Tools is active for the view.
 func (wwv *WKWebView) IsWritingToolsActive() bool {
-	_r := objc.Send[bool](objref.IDOf(wwv), objc.RegisterName("isWritingToolsActive"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwv), objc.RegisterName("isWritingToolsActive"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ObscuredContentInsets returns the obscured content insets.
 func (wwv *WKWebView) ObscuredContentInsets() foundation.NSEdgeInsets {
-	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(wwv), objc.RegisterName("obscuredContentInsets"))
-	return _r
+	var _mainthread0 foundation.NSEdgeInsets
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSEdgeInsets {
+			_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(wwv), objc.RegisterName("obscuredContentInsets"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // GoBack2 navigates to the back item in the back-forward list.
 func (wwv *WKWebView) GoBack2(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("goBack:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("goBack:"), objref.IDOf(sender))
+	})
+
 }
 
 // GoForward2 navigates to the forward item in the back-forward list.
 func (wwv *WKWebView) GoForward2(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("goForward:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("goForward:"), objref.IDOf(sender))
+	})
+
 }
 
 // Reload2 reloads the current webpage.
 func (wwv *WKWebView) Reload2(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("reload:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("reload:"), objref.IDOf(sender))
+	})
+
 }
 
 // ReloadFromOrigin2 reloads the current webpage, and performs end-to-end revalidation of the content using cache-validating conditionals, if possible.
 func (wwv *WKWebView) ReloadFromOrigin2(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("reloadFromOrigin:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("reloadFromOrigin:"), objref.IDOf(sender))
+	})
+
 }
 
 // StopLoading2 stops loading all resources on the current page.
 func (wwv *WKWebView) StopLoading2(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("stopLoading:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("stopLoading:"), objref.IDOf(sender))
+	})
+
 }
 
 // CertificateChain returns the certificate chain.
 func (wwv *WKWebView) CertificateChain() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("certificateChain"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("certificateChain"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

@@ -68,86 +68,150 @@ func (mvc *MatchmakerViewController) String() string {
 
 // NewMatchmakerViewControllerWithMatchRequest creates a matchmaker view controller for the local player to start inviting other players.
 func NewMatchmakerViewControllerWithMatchRequest(request *MatchRequest) *MatchmakerViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("GKMatchmakerViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMatchRequest:"), objref.IDOf(request))
-	return matchmakerViewControllerAdopt(_id)
+	var _mainthread0 *MatchmakerViewController
+	purego.Main(func() {
+		_mainthread0 = func() *MatchmakerViewController {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("GKMatchmakerViewController")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMatchRequest:"), objref.IDOf(request))
+			return matchmakerViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewMatchmakerViewControllerWithInvite creates a matchmaker view controller to present to a player who accepts an invitation.
 func NewMatchmakerViewControllerWithInvite(invite *Invite) *MatchmakerViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("GKMatchmakerViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInvite:"), objref.IDOf(invite))
-	return matchmakerViewControllerAdopt(_id)
+	var _mainthread0 *MatchmakerViewController
+	purego.Main(func() {
+		_mainthread0 = func() *MatchmakerViewController {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("GKMatchmakerViewController")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInvite:"), objref.IDOf(invite))
+			return matchmakerViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithHosted sets a Boolean value that indicates whether the match is hosted or peer-to-peer.
 func (mvc *MatchmakerViewController) WithHosted(hosted bool) *MatchmakerViewController {
-	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setHosted:"), hosted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setHosted:"), hosted)
+	})
 	return mvc
 }
 
 // WithMatchmakingMode sets the mode that a multiplayer game uses to find players.
 func (mvc *MatchmakerViewController) WithMatchmakingMode(matchmakingMode MatchmakingMode) *MatchmakerViewController {
-	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setMatchmakingMode:"), matchmakingMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setMatchmakingMode:"), matchmakingMode)
+	})
 	return mvc
 }
 
 // WithCanStartWithMinimumPlayers sets a Boolean value that indicates whether your game can start after a minimum number of players join a match.
 func (mvc *MatchmakerViewController) WithCanStartWithMinimumPlayers(canStartWithMinimumPlayers bool) *MatchmakerViewController {
-	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setCanStartWithMinimumPlayers:"), canStartWithMinimumPlayers)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setCanStartWithMinimumPlayers:"), canStartWithMinimumPlayers)
+	})
 	return mvc
 }
 
 // WithDefaultInvitationMessage sets the default invitation message sent to a player.
 func (mvc *MatchmakerViewController) WithDefaultInvitationMessage(defaultInvitationMessage string) *MatchmakerViewController {
-	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setDefaultInvitationMessage:"), purego.NSString(defaultInvitationMessage))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setDefaultInvitationMessage:"), purego.NSString(defaultInvitationMessage))
+	})
 	return mvc
 }
 
 // AddPlayersToMatch invites additional players to join an existing match.
 func (mvc *MatchmakerViewController) AddPlayersToMatch(match *Match) {
-	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("addPlayersToMatch:"), objref.IDOf(match))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("addPlayersToMatch:"), objref.IDOf(match))
+	})
+
 }
 
 // SetHostedPlayerDidConnect updates the connection status of a player in a hosted game.
 func (mvc *MatchmakerViewController) SetHostedPlayerDidConnect(player *Player, connected bool) {
-	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setHostedPlayer:didConnect:"), objref.IDOf(player), connected)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setHostedPlayer:didConnect:"), objref.IDOf(player), connected)
+	})
+
 }
 
 // MatchRequest returns the match request.
 func (mvc *MatchmakerViewController) MatchRequest() *MatchRequest {
-	_r := objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("matchRequest"))
-	return MatchRequestFromID(_r)
+	var _mainthread0 *MatchRequest
+	purego.Main(func() {
+		_mainthread0 = func() *MatchRequest {
+			_r := objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("matchRequest"))
+			return MatchRequestFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsHosted reports whether set to true to receive hosted (eg. not peer-to-peer) match results. Will cause the controller to return an array of players instead of a match.
 func (mvc *MatchmakerViewController) IsHosted() bool {
-	_r := objc.Send[bool](objref.IDOf(mvc), objc.RegisterName("isHosted"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(mvc), objc.RegisterName("isHosted"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MatchmakingMode returns this controls which mode of matchmaking to support in the UI (all, nearby only, automatch only, invite only).  Throws an exeption if you can not set to the desired mode (due to restrictions)
 func (mvc *MatchmakerViewController) MatchmakingMode() MatchmakingMode {
-	_r := objc.Send[MatchmakingMode](objref.IDOf(mvc), objc.RegisterName("matchmakingMode"))
-	return _r
+	var _mainthread0 MatchmakingMode
+	purego.Main(func() {
+		_mainthread0 = func() MatchmakingMode {
+			_r := objc.Send[MatchmakingMode](objref.IDOf(mvc), objc.RegisterName("matchmakingMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CanStartWithMinimumPlayers reports whether a BOOL value to allow the GKMatchMakerViewController to return control to the game once the minimum number of players are connected. By default the value is false, and the multiplayer match can only proceed after all players are connected. If the value is set to true, then once the number of connected players is greater than or equal to minPlayers of the match request, matchmakerViewController:didFindMatch: will be called and the game can get the match instance, and update the game scene accordingly. The remaining players wil continue to connect.
 func (mvc *MatchmakerViewController) CanStartWithMinimumPlayers() bool {
-	_r := objc.Send[bool](objref.IDOf(mvc), objc.RegisterName("canStartWithMinimumPlayers"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(mvc), objc.RegisterName("canStartWithMinimumPlayers"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DefaultInvitationMessage returns deprecated, set the message on the match request instead
 func (mvc *MatchmakerViewController) DefaultInvitationMessage() string {
-	_r := objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("defaultInvitationMessage"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("defaultInvitationMessage"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetHostedPlayerConnected updates a player’s status on the view to show that the player has connected or disconnected from your server.
 func (mvc *MatchmakerViewController) SetHostedPlayerConnected(playerID string, connected bool) {
-	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setHostedPlayer:connected:"), purego.NSString(playerID), connected)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setHostedPlayer:connected:"), purego.NSString(playerID), connected)
+	})
+
 }

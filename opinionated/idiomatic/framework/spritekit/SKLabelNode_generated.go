@@ -49,310 +49,474 @@ func labelNodeAdopt(id objc.ID) *LabelNode {
 
 // NewLabelNodeWithFontNamed initializes a new label object with a specified font.
 func NewLabelNodeWithFontNamed(fontName string) *LabelNode {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SKLabelNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFontNamed:"), purego.NSString(fontName))
-	return labelNodeAdopt(_id)
+	var _mainthread0 *LabelNode
+	purego.Main(func() {
+		_mainthread0 = func() *LabelNode {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SKLabelNode")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFontNamed:"), purego.NSString(fontName))
+			return labelNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithVerticalAlignmentMode sets the vertical position of the text within the node.
 func (ln *LabelNode) WithVerticalAlignmentMode(verticalAlignmentMode LabelVerticalAlignmentMode) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setVerticalAlignmentMode:"), verticalAlignmentMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setVerticalAlignmentMode:"), verticalAlignmentMode)
+	})
 	return ln
 }
 
 // WithHorizontalAlignmentMode sets the horizontal position of the text within the node.
 func (ln *LabelNode) WithHorizontalAlignmentMode(horizontalAlignmentMode LabelHorizontalAlignmentMode) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setHorizontalAlignmentMode:"), horizontalAlignmentMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setHorizontalAlignmentMode:"), horizontalAlignmentMode)
+	})
 	return ln
 }
 
 // WithNumberOfLines sets determines the number of lines to draw.
 func (ln *LabelNode) WithNumberOfLines(numberOfLines int) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setNumberOfLines:"), numberOfLines)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setNumberOfLines:"), numberOfLines)
+	})
 	return ln
 }
 
 // WithPreferredMaxLayoutWidth sets the width, in screen points, after which line-break mode should be applied.
 func (ln *LabelNode) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
+	})
 	return ln
 }
 
 // WithFontName sets the font used for the text in the label.
 func (ln *LabelNode) WithFontName(fontName string) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setFontName:"), purego.NSString(fontName))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setFontName:"), purego.NSString(fontName))
+	})
 	return ln
 }
 
 // WithText sets the string that the label node displays.
 func (ln *LabelNode) WithText(text string) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setText:"), purego.NSString(text))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setText:"), purego.NSString(text))
+	})
 	return ln
 }
 
 // WithAttributedText sets the attributed string displayed by the label.
 func (ln *LabelNode) WithAttributedText(attributedText obj.Object) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAttributedText:"), objref.IDOf(attributedText))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAttributedText:"), objref.IDOf(attributedText))
+	})
 	return ln
 }
 
 // WithFontSize sets the size of the font used in the label.
 func (ln *LabelNode) WithFontSize(fontSize float64) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setFontSize:"), fontSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setFontSize:"), fontSize)
+	})
 	return ln
 }
 
 // WithFontColor sets the color of the label.
 func (ln *LabelNode) WithFontColor(fontColor obj.Object) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
+	})
 	return ln
 }
 
 // WithColorBlendFactor sets a floating-point value that describes how the color is blended with the font color.
 func (ln *LabelNode) WithColorBlendFactor(colorBlendFactor float64) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setColorBlendFactor:"), colorBlendFactor)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setColorBlendFactor:"), colorBlendFactor)
+	})
 	return ln
 }
 
 // WithColor sets an alternative to the font color that can be used for animations.
 func (ln *LabelNode) WithColor(color obj.Object) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setColor:"), objref.IDOf(color))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setColor:"), objref.IDOf(color))
+	})
 	return ln
 }
 
 // WithBlendMode sets the blend mode used to draw the label into the parent’s framebuffer.
 func (ln *LabelNode) WithBlendMode(blendMode BlendMode) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setBlendMode:"), blendMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setBlendMode:"), blendMode)
+	})
 	return ln
 }
 
 // WithPosition sets the position of the node in its parent’s coordinate system.
 func (ln *LabelNode) WithPosition(position corefoundation.CGPoint) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setPosition:"), position)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setPosition:"), position)
+	})
 	return ln
 }
 
 // WithZPosition sets the height of the node relative to its parent.
 func (ln *LabelNode) WithZPosition(zPosition float64) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setZPosition:"), zPosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setZPosition:"), zPosition)
+	})
 	return ln
 }
 
 // WithZRotation sets the Euler rotation about the z axis (in radians).
 func (ln *LabelNode) WithZRotation(zRotation float64) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setZRotation:"), zRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setZRotation:"), zRotation)
+	})
 	return ln
 }
 
 // WithXScale sets a scaling factor that multiplies the width of a node and its children.
 func (ln *LabelNode) WithXScale(xScale float64) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setXScale:"), xScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setXScale:"), xScale)
+	})
 	return ln
 }
 
 // WithYScale sets a scaling factor that multiplies the height of a node and its children.
 func (ln *LabelNode) WithYScale(yScale float64) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setYScale:"), yScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setYScale:"), yScale)
+	})
 	return ln
 }
 
 // WithSpeed sets a speed modifier applied to all actions executed by a node and its descendants.
 func (ln *LabelNode) WithSpeed(speed float64) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setSpeed:"), speed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setSpeed:"), speed)
+	})
 	return ln
 }
 
 // WithAlpha sets the transparency value applied to the node’s contents.
 func (ln *LabelNode) WithAlpha(alpha float64) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAlpha:"), alpha)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAlpha:"), alpha)
+	})
 	return ln
 }
 
 // WithPaused sets a Boolean value that determines whether actions on the node and its descendants are processed.
 func (ln *LabelNode) WithPaused(paused bool) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setPaused:"), paused)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setPaused:"), paused)
+	})
 	return ln
 }
 
 // WithHidden sets a Boolean value that determines whether a node and its descendants are rendered.
 func (ln *LabelNode) WithHidden(hidden bool) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setHidden:"), hidden)
+	})
 	return ln
 }
 
 // WithUserInteractionEnabled sets a Boolean value that indicates whether the node receives touch events.
 func (ln *LabelNode) WithUserInteractionEnabled(userInteractionEnabled bool) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	})
 	return ln
 }
 
 // WithName sets the node’s assignable name.
 func (ln *LabelNode) WithName(name string) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setName:"), purego.NSString(name))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setName:"), purego.NSString(name))
+	})
 	return ln
 }
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (ln *LabelNode) WithPhysicsBody(physicsBody *PhysicsBody) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	})
 	return ln
 }
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (ln *LabelNode) WithUserData(userData obj.Object) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	})
 	return ln
 }
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (ln *LabelNode) WithReachConstraints(reachConstraints *ReachConstraints) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	})
 	return ln
 }
 
 // WithConstraints sets a list of constraints to apply to the node.
 func (ln *LabelNode) WithConstraints(items ...*Constraint) *LabelNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setConstraints:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setConstraints:"), _arr)
+	})
 	return ln
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
 func (ln *LabelNode) WithAttributeValues(attributeValues obj.Object) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	})
 	return ln
 }
 
 // WithAccessibilityElement sets a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (ln *LabelNode) WithAccessibilityElement(accessibilityElement bool) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	})
 	return ln
 }
 
 // WithAccessibilityRole sets a string value describing the user interface element type; for example, a button.
 func (ln *LabelNode) WithAccessibilityRole(accessibilityRole string) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	})
 	return ln
 }
 
 // WithAccessibilityRoleDescription sets a string value describing the user interface element name and type; for example, the Buy button.
 func (ln *LabelNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	})
 	return ln
 }
 
 // WithAccessibilitySubrole sets a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (ln *LabelNode) WithAccessibilitySubrole(accessibilitySubrole string) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	})
 	return ln
 }
 
 // WithAccessibilityFrame sets the size of this user interface element, in screen points.
 func (ln *LabelNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	})
 	return ln
 }
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (ln *LabelNode) WithAccessibilityParent(accessibilityParent obj.Object) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	})
 	return ln
 }
 
 // WithAccessibilityHelp sets the help description of this user interface element; for example, the text shown in a tooltip.
 func (ln *LabelNode) WithAccessibilityHelp(accessibilityHelp string) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	})
 	return ln
 }
 
 // WithAccessibilityLabel sets a short description of this user interface element.
 func (ln *LabelNode) WithAccessibilityLabel(accessibilityLabel string) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	})
 	return ln
 }
 
 // WithAccessibilityEnabled sets a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (ln *LabelNode) WithAccessibilityEnabled(accessibilityEnabled bool) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	})
 	return ln
 }
 
 // VerticalAlignmentMode returns the vertical alignment mode.
 func (ln *LabelNode) VerticalAlignmentMode() LabelVerticalAlignmentMode {
-	_r := objc.Send[LabelVerticalAlignmentMode](objref.IDOf(ln), objc.RegisterName("verticalAlignmentMode"))
-	return _r
+	var _mainthread0 LabelVerticalAlignmentMode
+	purego.Main(func() {
+		_mainthread0 = func() LabelVerticalAlignmentMode {
+			_r := objc.Send[LabelVerticalAlignmentMode](objref.IDOf(ln), objc.RegisterName("verticalAlignmentMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HorizontalAlignmentMode returns the horizontal alignment mode.
 func (ln *LabelNode) HorizontalAlignmentMode() LabelHorizontalAlignmentMode {
-	_r := objc.Send[LabelHorizontalAlignmentMode](objref.IDOf(ln), objc.RegisterName("horizontalAlignmentMode"))
-	return _r
+	var _mainthread0 LabelHorizontalAlignmentMode
+	purego.Main(func() {
+		_mainthread0 = func() LabelHorizontalAlignmentMode {
+			_r := objc.Send[LabelHorizontalAlignmentMode](objref.IDOf(ln), objc.RegisterName("horizontalAlignmentMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NumberOfLines determines the number of lines to draw. The default value is 1 (single line). A value of 0 means no limit. If the height of the text reaches the # of lines the text will be truncated using the line break mode.
 func (ln *LabelNode) NumberOfLines() int {
-	_r := objc.Send[int](objref.IDOf(ln), objc.RegisterName("numberOfLines"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(ln), objc.RegisterName("numberOfLines"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PreferredMaxLayoutWidth returns if nonzero, this is used when determining layout width for multiline labels. Default is zero.
 func (ln *LabelNode) PreferredMaxLayoutWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(ln), objc.RegisterName("preferredMaxLayoutWidth"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(ln), objc.RegisterName("preferredMaxLayoutWidth"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FontName returns the font name.
 func (ln *LabelNode) FontName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("fontName"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("fontName"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Text returns the text.
 func (ln *LabelNode) Text() string {
-	_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("text"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("text"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AttributedText returns the attributed text.
 func (ln *LabelNode) AttributedText() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("attributedText"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("attributedText"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FontSize returns the font size.
 func (ln *LabelNode) FontSize() float64 {
-	_r := objc.Send[float64](objref.IDOf(ln), objc.RegisterName("fontSize"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(ln), objc.RegisterName("fontSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FontColor returns base color that the text is rendered with (if supported by the font)
 func (ln *LabelNode) FontColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("fontColor"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("fontColor"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ColorBlendFactor returns controls the blending between the rendered text and a color. The valid interval of values is from 0.0 up to and including 1.0. A value above or below that interval is clamped to the minimum (0.0) if below or the maximum (1.0) if above.
 func (ln *LabelNode) ColorBlendFactor() float64 {
-	_r := objc.Send[float64](objref.IDOf(ln), objc.RegisterName("colorBlendFactor"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(ln), objc.RegisterName("colorBlendFactor"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Color returns color to be blended with the text based on the colorBlendFactor
 func (ln *LabelNode) Color() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("color"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("color"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BlendMode sets the blend mode to use when composing the sprite with the final framebuffer.
 func (ln *LabelNode) BlendMode() BlendMode {
-	_r := objc.Send[BlendMode](objref.IDOf(ln), objc.RegisterName("blendMode"))
-	return _r
+	var _mainthread0 BlendMode
+	purego.Main(func() {
+		_mainthread0 = func() BlendMode {
+			_r := objc.Send[BlendMode](objref.IDOf(ln), objc.RegisterName("blendMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ NodeProvider = (*LabelNode)(nil)

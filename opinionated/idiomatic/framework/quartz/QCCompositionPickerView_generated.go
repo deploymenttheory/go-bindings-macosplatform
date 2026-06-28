@@ -69,153 +69,288 @@ func (qcpv *QCCompositionPickerView) String() string {
 
 // NewQCCompositionPickerView creates a new QCCompositionPickerView.
 func NewQCCompositionPickerView() *QCCompositionPickerView {
-	_id := objc.Send[objc.ID](objc.ID(_class("QCCompositionPickerView")), objc.RegisterName("new"))
-	return qCCompositionPickerViewAdopt(_id)
+	var _mainthread0 *QCCompositionPickerView
+	purego.Main(func() {
+		_mainthread0 = func() *QCCompositionPickerView {
+			_id := objc.Send[objc.ID](objc.ID(_class("QCCompositionPickerView")), objc.RegisterName("new"))
+			return qCCompositionPickerViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // SetCompositionsFromRepositoryWithProtocolAndAttributes sets the compositions in the composition picker view to those that match the specified criteria.
 func (qcpv *QCCompositionPickerView) SetCompositionsFromRepositoryWithProtocolAndAttributes(protocol string, attributes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setCompositionsFromRepositoryWithProtocol:andAttributes:"), purego.NSString(protocol), objref.IDOf(attributes))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setCompositionsFromRepositoryWithProtocol:andAttributes:"), purego.NSString(protocol), objref.IDOf(attributes))
+	})
+
 }
 
 // Compositions returns the list of compositions that are currently in the composition picker view.
 func (qcpv *QCCompositionPickerView) Compositions() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("compositions"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("compositions"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetDelegate sets the composition picker view delegate.
 func (qcpv *QCCompositionPickerView) SetDelegate(delegate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	})
+
 }
 
 // Delegate returns retrieves the composition picker view delegate.
 func (qcpv *QCCompositionPickerView) Delegate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("delegate"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("delegate"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetShowsCompositionNames enables the display of composition names in the composition picker view.
 func (qcpv *QCCompositionPickerView) SetShowsCompositionNames(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setShowsCompositionNames:"), flag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setShowsCompositionNames:"), flag)
+	})
+
 }
 
 // ShowsCompositionNames reports whether retrieves whether composition names can be shown in the composition picker view.
 func (qcpv *QCCompositionPickerView) ShowsCompositionNames() bool {
-	_r := objc.Send[bool](objref.IDOf(qcpv), objc.RegisterName("showsCompositionNames"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(qcpv), objc.RegisterName("showsCompositionNames"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetAllowsEmptySelection sets whether to allow an empty selection in the composition picker view.
 func (qcpv *QCCompositionPickerView) SetAllowsEmptySelection(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setAllowsEmptySelection:"), flag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setAllowsEmptySelection:"), flag)
+	})
+
 }
 
 // AllowsEmptySelection reports whether retrieves the empty-selection state of the composition picker view.
 func (qcpv *QCCompositionPickerView) AllowsEmptySelection() bool {
-	_r := objc.Send[bool](objref.IDOf(qcpv), objc.RegisterName("allowsEmptySelection"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(qcpv), objc.RegisterName("allowsEmptySelection"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetCompositionAspectRatio sets the aspect ratio used to display compositions in the composition picker view.
 func (qcpv *QCCompositionPickerView) SetCompositionAspectRatio(ratio corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setCompositionAspectRatio:"), ratio)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setCompositionAspectRatio:"), ratio)
+	})
+
 }
 
 // CompositionAspectRatio returns retrieves the aspect ratio used to display compositions in the composition picker view.
 func (qcpv *QCCompositionPickerView) CompositionAspectRatio() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(qcpv), objc.RegisterName("compositionAspectRatio"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(qcpv), objc.RegisterName("compositionAspectRatio"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetDefaultValueForInputKey sets the default value to use for a composition input parameter.
 func (qcpv *QCCompositionPickerView) SetDefaultValueForInputKey(value obj.Object, key string) {
-	objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setDefaultValue:forInputKey:"), objref.IDOf(value), purego.NSString(key))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setDefaultValue:forInputKey:"), objref.IDOf(value), purego.NSString(key))
+	})
+
 }
 
 // ResetDefaultInputValues clears all previously set default values for composition input parameters.
 func (qcpv *QCCompositionPickerView) ResetDefaultInputValues() {
-	objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("resetDefaultInputValues"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("resetDefaultInputValues"))
+	})
+
 }
 
 // SetSelectedComposition sets a composition as selected in the composition picker view.
 func (qcpv *QCCompositionPickerView) SetSelectedComposition(composition *QCComposition) {
-	objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setSelectedComposition:"), objref.IDOf(composition))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setSelectedComposition:"), objref.IDOf(composition))
+	})
+
 }
 
 // SelectedComposition returns the composition that is currently selected in the composition picker view.
 func (qcpv *QCCompositionPickerView) SelectedComposition() *QCComposition {
-	_r := objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("selectedComposition"))
-	return QCCompositionFromID(_r)
+	var _mainthread0 *QCComposition
+	purego.Main(func() {
+		_mainthread0 = func() *QCComposition {
+			_r := objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("selectedComposition"))
+			return QCCompositionFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // StartAnimation starts animating the composition in the composition picker view.
 func (qcpv *QCCompositionPickerView) StartAnimation(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("startAnimation:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("startAnimation:"), objref.IDOf(sender))
+	})
+
 }
 
 // StopAnimation stops animating the composition that is currently animating in the composition picker view.
 func (qcpv *QCCompositionPickerView) StopAnimation(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("stopAnimation:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("stopAnimation:"), objref.IDOf(sender))
+	})
+
 }
 
 // IsAnimating reports whether the composition picker view is currently animating its composition.
 func (qcpv *QCCompositionPickerView) IsAnimating() bool {
-	_r := objc.Send[bool](objref.IDOf(qcpv), objc.RegisterName("isAnimating"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(qcpv), objc.RegisterName("isAnimating"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetMaxAnimationFrameRate sets the maximum frame rate for animating compositions.
 func (qcpv *QCCompositionPickerView) SetMaxAnimationFrameRate(maxFPS float32) {
-	objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setMaxAnimationFrameRate:"), maxFPS)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setMaxAnimationFrameRate:"), maxFPS)
+	})
+
 }
 
 // MaxAnimationFrameRate returns retrieves the maximum frame rate for animating compositions.
 func (qcpv *QCCompositionPickerView) MaxAnimationFrameRate() float32 {
-	_r := objc.Send[float32](objref.IDOf(qcpv), objc.RegisterName("maxAnimationFrameRate"))
-	return _r
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_r := objc.Send[float32](objref.IDOf(qcpv), objc.RegisterName("maxAnimationFrameRate"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetBackgroundColor sets the background color for the composition picker view.
 func (qcpv *QCCompositionPickerView) SetBackgroundColor(color obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(color))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(color))
+	})
+
 }
 
 // BackgroundColor returns the background color of the composition picker view.
 func (qcpv *QCCompositionPickerView) BackgroundColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("backgroundColor"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("backgroundColor"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetDrawsBackground sets whether the composition picker view draws its background.
 func (qcpv *QCCompositionPickerView) SetDrawsBackground(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setDrawsBackground:"), flag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setDrawsBackground:"), flag)
+	})
+
 }
 
 // DrawsBackground reports whether the composition picker view draws its background.
 func (qcpv *QCCompositionPickerView) DrawsBackground() bool {
-	_r := objc.Send[bool](objref.IDOf(qcpv), objc.RegisterName("drawsBackground"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(qcpv), objc.RegisterName("drawsBackground"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NumberOfColumns returns retrieves the number of columns in the composition picker view.
 func (qcpv *QCCompositionPickerView) NumberOfColumns() int {
-	_r := objc.Send[int](objref.IDOf(qcpv), objc.RegisterName("numberOfColumns"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(qcpv), objc.RegisterName("numberOfColumns"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetNumberOfColumns sets the number of columns in the composition picker view.
 func (qcpv *QCCompositionPickerView) SetNumberOfColumns(columns int) {
-	objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setNumberOfColumns:"), columns)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setNumberOfColumns:"), columns)
+	})
+
 }
 
 // NumberOfRows returns retrieves the number of rows in the composition picker view.
 func (qcpv *QCCompositionPickerView) NumberOfRows() int {
-	_r := objc.Send[int](objref.IDOf(qcpv), objc.RegisterName("numberOfRows"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(qcpv), objc.RegisterName("numberOfRows"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetNumberOfRows sets the number of rows in the composition picker view.
 func (qcpv *QCCompositionPickerView) SetNumberOfRows(rows int) {
-	objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setNumberOfRows:"), rows)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setNumberOfRows:"), rows)
+	})
+
 }

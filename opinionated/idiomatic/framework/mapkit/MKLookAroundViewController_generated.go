@@ -68,81 +68,144 @@ func (lavc *LookAroundViewController) String() string {
 
 // NewLookAroundViewControllerWithScene creates a new LookAround view controller with the specified scene.
 func NewLookAroundViewControllerWithScene(scene *LookAroundScene) *LookAroundViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("MKLookAroundViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScene:"), objref.IDOf(scene))
-	return lookAroundViewControllerAdopt(_id)
+	var _mainthread0 *LookAroundViewController
+	purego.Main(func() {
+		_mainthread0 = func() *LookAroundViewController {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("MKLookAroundViewController")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScene:"), objref.IDOf(scene))
+			return lookAroundViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewLookAroundViewControllerWithNibNameBundle creates a new LookAround view controller from the specified nib and bundle.
 func NewLookAroundViewControllerWithNibNameBundle(nibNameOrNil string, nibBundleOrNil obj.Object) *LookAroundViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("MKLookAroundViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNibName:bundle:"), purego.NSString(nibNameOrNil), objref.IDOf(nibBundleOrNil))
-	return lookAroundViewControllerAdopt(_id)
+	var _mainthread0 *LookAroundViewController
+	purego.Main(func() {
+		_mainthread0 = func() *LookAroundViewController {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("MKLookAroundViewController")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNibName:bundle:"), purego.NSString(nibNameOrNil), objref.IDOf(nibBundleOrNil))
+			return lookAroundViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewLookAroundViewControllerWithCoder creates a new LookAround view controller object from a coder object provided by a storyboard or nib file.
 func NewLookAroundViewControllerWithCoder(coder obj.Object) *LookAroundViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("MKLookAroundViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
-	return lookAroundViewControllerAdopt(_id)
+	var _mainthread0 *LookAroundViewController
+	purego.Main(func() {
+		_mainthread0 = func() *LookAroundViewController {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("MKLookAroundViewController")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+			return lookAroundViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithScene sets the LookAround scene.
 func (lavc *LookAroundViewController) WithScene(scene *LookAroundScene) *LookAroundViewController {
-	objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("setScene:"), objref.IDOf(scene))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("setScene:"), objref.IDOf(scene))
+	})
 	return lavc
 }
 
 // WithNavigationEnabled sets a Boolean value that indicates whether the map’s navigation controls are visible.
 func (lavc *LookAroundViewController) WithNavigationEnabled(navigationEnabled bool) *LookAroundViewController {
-	objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("setNavigationEnabled:"), navigationEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("setNavigationEnabled:"), navigationEnabled)
+	})
 	return lavc
 }
 
 // WithShowsRoadLabels sets a Boolean value that indicates whether the map display road labels.
 func (lavc *LookAroundViewController) WithShowsRoadLabels(showsRoadLabels bool) *LookAroundViewController {
-	objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("setShowsRoadLabels:"), showsRoadLabels)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("setShowsRoadLabels:"), showsRoadLabels)
+	})
 	return lavc
 }
 
 // WithPointOfInterestFilter sets the filter used to determine the points of interest shown on the map.
 func (lavc *LookAroundViewController) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LookAroundViewController {
-	objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
+	})
 	return lavc
 }
 
 // WithBadgePosition sets a value that indicates the badge’s position on the LookAround view.
 func (lavc *LookAroundViewController) WithBadgePosition(badgePosition LookAroundBadgePosition) *LookAroundViewController {
-	objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("setBadgePosition:"), badgePosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("setBadgePosition:"), badgePosition)
+	})
 	return lavc
 }
 
 // Scene returns the scene.
 func (lavc *LookAroundViewController) Scene() *LookAroundScene {
-	_r := objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("scene"))
-	return LookAroundSceneFromID(_r)
+	var _mainthread0 *LookAroundScene
+	purego.Main(func() {
+		_mainthread0 = func() *LookAroundScene {
+			_r := objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("scene"))
+			return LookAroundSceneFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsNavigationEnabled reports whether the object is navigation enabled.
 func (lavc *LookAroundViewController) IsNavigationEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(lavc), objc.RegisterName("isNavigationEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(lavc), objc.RegisterName("isNavigationEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsRoadLabels wraps the corresponding Objective-C method.
 func (lavc *LookAroundViewController) ShowsRoadLabels() bool {
-	_r := objc.Send[bool](objref.IDOf(lavc), objc.RegisterName("showsRoadLabels"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(lavc), objc.RegisterName("showsRoadLabels"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PointOfInterestFilter returns the point of interest filter.
 func (lavc *LookAroundViewController) PointOfInterestFilter() *PointOfInterestFilter {
-	_r := objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("pointOfInterestFilter"))
-	return PointOfInterestFilterFromID(_r)
+	var _mainthread0 *PointOfInterestFilter
+	purego.Main(func() {
+		_mainthread0 = func() *PointOfInterestFilter {
+			_r := objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("pointOfInterestFilter"))
+			return PointOfInterestFilterFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BadgePosition returns the badge position.
 func (lavc *LookAroundViewController) BadgePosition() LookAroundBadgePosition {
-	_r := objc.Send[LookAroundBadgePosition](objref.IDOf(lavc), objc.RegisterName("badgePosition"))
-	return _r
+	var _mainthread0 LookAroundBadgePosition
+	purego.Main(func() {
+		_mainthread0 = func() LookAroundBadgePosition {
+			_r := objc.Send[LookAroundBadgePosition](objref.IDOf(lavc), objc.RegisterName("badgePosition"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

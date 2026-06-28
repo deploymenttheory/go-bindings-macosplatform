@@ -68,63 +68,118 @@ func (pl *PageLayout) String() string {
 
 // NewPageLayout creates a new PageLayout.
 func NewPageLayout() *PageLayout {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSPageLayout")), objc.RegisterName("new"))
-	return pageLayoutAdopt(_id)
+	var _mainthread0 *PageLayout
+	purego.Main(func() {
+		_mainthread0 = func() *PageLayout {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSPageLayout")), objc.RegisterName("new"))
+			return pageLayoutAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // AddAccessoryController adds the specified controller of an accessory view to be presented in the page setup panel.
 func (pl *PageLayout) AddAccessoryController(accessoryController *ViewController) {
-	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("addAccessoryController:"), objref.IDOf(accessoryController))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("addAccessoryController:"), objref.IDOf(accessoryController))
+	})
+
 }
 
 // RemoveAccessoryController removes the specified controller of an accessory view.
 func (pl *PageLayout) RemoveAccessoryController(accessoryController *ViewController) {
-	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("removeAccessoryController:"), objref.IDOf(accessoryController))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("removeAccessoryController:"), objref.IDOf(accessoryController))
+	})
+
 }
 
 // RunModalWithPrintInfo displays the page layout panel and begins the modal loop using the specified print info object.
 func (pl *PageLayout) RunModalWithPrintInfo(printInfo *PrintInfo) int {
-	_r := objc.Send[int](objref.IDOf(pl), objc.RegisterName("runModalWithPrintInfo:"), objref.IDOf(printInfo))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(pl), objc.RegisterName("runModalWithPrintInfo:"), objref.IDOf(printInfo))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RunModal returns displays the page layout panel and begins the modal loop using the shared print info object.
 func (pl *PageLayout) RunModal() int {
-	_r := objc.Send[int](objref.IDOf(pl), objc.RegisterName("runModal"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(pl), objc.RegisterName("runModal"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AccessoryControllers returns the accessory controllers.
 //
 // AccessoryControllers returns the collection as a Go slice.
 func (pl *PageLayout) AccessoryControllers() []*ViewController {
-	_arr := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("accessoryControllers"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ViewController { return ViewControllerFromID(_id) })
+	var _mainthread0 []*ViewController
+	purego.Main(func() {
+		_mainthread0 = func() []*ViewController {
+			_arr := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("accessoryControllers"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ViewController { return ViewControllerFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // PrintInfo returns the print info.
 func (pl *PageLayout) PrintInfo() *PrintInfo {
-	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("printInfo"))
-	return PrintInfoFromID(_r)
+	var _mainthread0 *PrintInfo
+	purego.Main(func() {
+		_mainthread0 = func() *PrintInfo {
+			_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("printInfo"))
+			return PrintInfoFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetAccessoryView adds a view object to the page layout panel.
 func (pl *PageLayout) SetAccessoryView(accessoryView *View) {
-	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
+	})
+
 }
 
 // AccessoryView returns the page layout panel’s accessory view.
 func (pl *PageLayout) AccessoryView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("accessoryView"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("accessoryView"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ReadPrintInfo sets the page layout’s values to those stored in the print info object used when the page layout panel is run.
 func (pl *PageLayout) ReadPrintInfo() {
-	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("readPrintInfo"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("readPrintInfo"))
+	})
+
 }
 
 // WritePrintInfo writes the page layout’s values to the print info object used when the page layout panel is run.
 func (pl *PageLayout) WritePrintInfo() {
-	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("writePrintInfo"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("writePrintInfo"))
+	})
+
 }

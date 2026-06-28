@@ -66,18 +66,33 @@ func (citcv *ChooseIdentityTableCellView) String() string {
 
 // NewChooseIdentityTableCellView creates a new ChooseIdentityTableCellView.
 func NewChooseIdentityTableCellView() *ChooseIdentityTableCellView {
-	_id := objc.Send[objc.ID](objc.ID(_class("SFChooseIdentityTableCellView")), objc.RegisterName("new"))
-	return chooseIdentityTableCellViewAdopt(_id)
+	var _mainthread0 *ChooseIdentityTableCellView
+	purego.Main(func() {
+		_mainthread0 = func() *ChooseIdentityTableCellView {
+			_id := objc.Send[objc.ID](objc.ID(_class("SFChooseIdentityTableCellView")), objc.RegisterName("new"))
+			return chooseIdentityTableCellViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithIssuerTextField sets the issuer text field.
 func (citcv *ChooseIdentityTableCellView) WithIssuerTextField(issuerTextField obj.Object) *ChooseIdentityTableCellView {
-	objc.Send[objc.ID](objref.IDOf(citcv), objc.RegisterName("setIssuerTextField:"), objref.IDOf(issuerTextField))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(citcv), objc.RegisterName("setIssuerTextField:"), objref.IDOf(issuerTextField))
+	})
 	return citcv
 }
 
 // IssuerTextField returns the issuer text field.
 func (citcv *ChooseIdentityTableCellView) IssuerTextField() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(citcv), objc.RegisterName("issuerTextField"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(citcv), objc.RegisterName("issuerTextField"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

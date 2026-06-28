@@ -68,18 +68,33 @@ func (cvc *ContactViewController) String() string {
 
 // NewContactViewController creates a new ContactViewController.
 func NewContactViewController() *ContactViewController {
-	_id := objc.Send[objc.ID](objc.ID(_class("CNContactViewController")), objc.RegisterName("new"))
-	return contactViewControllerAdopt(_id)
+	var _mainthread0 *ContactViewController
+	purego.Main(func() {
+		_mainthread0 = func() *ContactViewController {
+			_id := objc.Send[objc.ID](objc.ID(_class("CNContactViewController")), objc.RegisterName("new"))
+			return contactViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithContact sets the contact being displayed.
 func (cvc *ContactViewController) WithContact(contact obj.Object) *ContactViewController {
-	objc.Send[objc.ID](objref.IDOf(cvc), objc.RegisterName("setContact:"), objref.IDOf(contact))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvc), objc.RegisterName("setContact:"), objref.IDOf(contact))
+	})
 	return cvc
 }
 
 // Contact returns the contact.
 func (cvc *ContactViewController) Contact() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cvc), objc.RegisterName("contact"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cvc), objc.RegisterName("contact"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

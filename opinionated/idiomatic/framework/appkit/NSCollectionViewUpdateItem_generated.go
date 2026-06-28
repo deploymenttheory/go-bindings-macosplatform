@@ -68,24 +68,51 @@ func (cvui *CollectionViewUpdateItem) String() string {
 
 // NewCollectionViewUpdateItem creates a new CollectionViewUpdateItem.
 func NewCollectionViewUpdateItem() *CollectionViewUpdateItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewUpdateItem")), objc.RegisterName("new"))
-	return collectionViewUpdateItemAdopt(_id)
+	var _mainthread0 *CollectionViewUpdateItem
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewUpdateItem {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewUpdateItem")), objc.RegisterName("new"))
+			return collectionViewUpdateItemAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // IndexPathBeforeUpdate returns the index path before update.
 func (cvui *CollectionViewUpdateItem) IndexPathBeforeUpdate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cvui), objc.RegisterName("indexPathBeforeUpdate"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cvui), objc.RegisterName("indexPathBeforeUpdate"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IndexPathAfterUpdate returns the index path after update.
 func (cvui *CollectionViewUpdateItem) IndexPathAfterUpdate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cvui), objc.RegisterName("indexPathAfterUpdate"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cvui), objc.RegisterName("indexPathAfterUpdate"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UpdateAction returns the update action.
 func (cvui *CollectionViewUpdateItem) UpdateAction() CollectionUpdateAction {
-	_r := objc.Send[CollectionUpdateAction](objref.IDOf(cvui), objc.RegisterName("updateAction"))
-	return _r
+	var _mainthread0 CollectionUpdateAction
+	purego.Main(func() {
+		_mainthread0 = func() CollectionUpdateAction {
+			_r := objc.Send[CollectionUpdateAction](objref.IDOf(cvui), objc.RegisterName("updateAction"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

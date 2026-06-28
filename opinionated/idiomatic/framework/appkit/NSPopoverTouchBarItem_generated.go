@@ -48,111 +48,188 @@ func popoverTouchBarItemAdopt(id objc.ID) *PopoverTouchBarItem {
 
 // NewPopoverTouchBarItem creates a new PopoverTouchBarItem.
 func NewPopoverTouchBarItem() *PopoverTouchBarItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSPopoverTouchBarItem")), objc.RegisterName("new"))
-	return popoverTouchBarItemAdopt(_id)
+	var _mainthread0 *PopoverTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *PopoverTouchBarItem {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSPopoverTouchBarItem")), objc.RegisterName("new"))
+			return popoverTouchBarItemAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithPopoverTouchBar sets the bar displayed when this item is “popped.”
 func (ptbi *PopoverTouchBarItem) WithPopoverTouchBar(popoverTouchBar *TouchBar) *PopoverTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setPopoverTouchBar:"), objref.IDOf(popoverTouchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setPopoverTouchBar:"), objref.IDOf(popoverTouchBar))
+	})
 	return ptbi
 }
 
 // WithCustomizationLabel sets the user-visible string identifying this item during bar customization.
 func (ptbi *PopoverTouchBarItem) WithCustomizationLabel(customizationLabel string) *PopoverTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
+	})
 	return ptbi
 }
 
 // WithCollapsedRepresentation sets the view displayed when this item is displayed in its parent bar.
 func (ptbi *PopoverTouchBarItem) WithCollapsedRepresentation(collapsedRepresentation ViewProvider) *PopoverTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setCollapsedRepresentation:"), objref.IDOf(collapsedRepresentation))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setCollapsedRepresentation:"), objref.IDOf(collapsedRepresentation))
+	})
 	return ptbi
 }
 
 // WithCollapsedRepresentationImage sets the image displayed by the button for the default collapsed representation.
 func (ptbi *PopoverTouchBarItem) WithCollapsedRepresentationImage(collapsedRepresentationImage *Image) *PopoverTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setCollapsedRepresentationImage:"), objref.IDOf(collapsedRepresentationImage))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setCollapsedRepresentationImage:"), objref.IDOf(collapsedRepresentationImage))
+	})
 	return ptbi
 }
 
 // WithCollapsedRepresentationLabel sets the localized string displayed by the button for the default collapsed representation.
 func (ptbi *PopoverTouchBarItem) WithCollapsedRepresentationLabel(collapsedRepresentationLabel string) *PopoverTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setCollapsedRepresentationLabel:"), purego.NSString(collapsedRepresentationLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setCollapsedRepresentationLabel:"), purego.NSString(collapsedRepresentationLabel))
+	})
 	return ptbi
 }
 
 // WithPressAndHoldTouchBar sets the bar that is displayed when a user press-and-holds on the popover item.
 func (ptbi *PopoverTouchBarItem) WithPressAndHoldTouchBar(pressAndHoldTouchBar *TouchBar) *PopoverTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setPressAndHoldTouchBar:"), objref.IDOf(pressAndHoldTouchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setPressAndHoldTouchBar:"), objref.IDOf(pressAndHoldTouchBar))
+	})
 	return ptbi
 }
 
 // WithShowsCloseButton sets a Boolean value that determines whether a close button should be shown on the popover bar.
 func (ptbi *PopoverTouchBarItem) WithShowsCloseButton(showsCloseButton bool) *PopoverTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setShowsCloseButton:"), showsCloseButton)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setShowsCloseButton:"), showsCloseButton)
+	})
 	return ptbi
 }
 
 // WithVisibilityPriority sets determines which items are shown in a bar when space is limited.
 func (ptbi *PopoverTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *PopoverTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	})
 	return ptbi
 }
 
 // ShowPopover replaces the main bar with this item’s popover bar.
 func (ptbi *PopoverTouchBarItem) ShowPopover(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("showPopover:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("showPopover:"), objref.IDOf(sender))
+	})
+
 }
 
 // DismissPopover restores the previously visible main bar.
 func (ptbi *PopoverTouchBarItem) DismissPopover(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("dismissPopover:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("dismissPopover:"), objref.IDOf(sender))
+	})
+
 }
 
 // MakeStandardActivatePopoverGestureRecognizer returns a gesture recognizer, configured to invoke the showPopover: method.
 func (ptbi *PopoverTouchBarItem) MakeStandardActivatePopoverGestureRecognizer() *GestureRecognizer {
-	_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("makeStandardActivatePopoverGestureRecognizer"))
-	return GestureRecognizerFromID(_r)
+	var _mainthread0 *GestureRecognizer
+	purego.Main(func() {
+		_mainthread0 = func() *GestureRecognizer {
+			_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("makeStandardActivatePopoverGestureRecognizer"))
+			return GestureRecognizerFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PopoverTouchBar returns the popover touch bar.
 func (ptbi *PopoverTouchBarItem) PopoverTouchBar() *TouchBar {
-	_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("popoverTouchBar"))
-	return TouchBarFromID(_r)
+	var _mainthread0 *TouchBar
+	purego.Main(func() {
+		_mainthread0 = func() *TouchBar {
+			_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("popoverTouchBar"))
+			return TouchBarFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CollapsedRepresentation returns the collapsed representation.
 func (ptbi *PopoverTouchBarItem) CollapsedRepresentation() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("collapsedRepresentation"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("collapsedRepresentation"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CollapsedRepresentationImage returns the collapsed representation image.
 func (ptbi *PopoverTouchBarItem) CollapsedRepresentationImage() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("collapsedRepresentationImage"))
-	return ImageFromID(_r)
+	var _mainthread0 *Image
+	purego.Main(func() {
+		_mainthread0 = func() *Image {
+			_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("collapsedRepresentationImage"))
+			return ImageFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CollapsedRepresentationLabel returns the collapsed representation label.
 func (ptbi *PopoverTouchBarItem) CollapsedRepresentationLabel() string {
-	_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("collapsedRepresentationLabel"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("collapsedRepresentationLabel"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PressAndHoldTouchBar returns the press and hold touch bar.
 func (ptbi *PopoverTouchBarItem) PressAndHoldTouchBar() *TouchBar {
-	_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("pressAndHoldTouchBar"))
-	return TouchBarFromID(_r)
+	var _mainthread0 *TouchBar
+	purego.Main(func() {
+		_mainthread0 = func() *TouchBar {
+			_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("pressAndHoldTouchBar"))
+			return TouchBarFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsCloseButton wraps the corresponding Objective-C method.
 func (ptbi *PopoverTouchBarItem) ShowsCloseButton() bool {
-	_r := objc.Send[bool](objref.IDOf(ptbi), objc.RegisterName("showsCloseButton"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(ptbi), objc.RegisterName("showsCloseButton"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ TouchBarItemProvider = (*PopoverTouchBarItem)(nil)

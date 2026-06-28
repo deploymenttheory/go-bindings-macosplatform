@@ -50,707 +50,1007 @@ func searchFieldAdopt(id objc.ID) *SearchField {
 
 // NewSearchField creates a new SearchField.
 func NewSearchField() *SearchField {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSSearchField")), objc.RegisterName("new"))
-	return searchFieldAdopt(_id)
+	var _mainthread0 *SearchField
+	purego.Main(func() {
+		_mainthread0 = func() *SearchField {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSSearchField")), objc.RegisterName("new"))
+			return searchFieldAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithRecentSearches sets the list of recent search strings for the control.
 func (sf *SearchField) WithRecentSearches(items ...obj.Object) *SearchField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setRecentSearches:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setRecentSearches:"), _arr)
+	})
 	return sf
 }
 
 // WithRecentsAutosaveName sets the name under which the search field automatically archives the list of recent search strings.
 func (sf *SearchField) WithRecentsAutosaveName(recentsAutosaveName obj.Object) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setRecentsAutosaveName:"), objref.IDOf(recentsAutosaveName))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setRecentsAutosaveName:"), objref.IDOf(recentsAutosaveName))
+	})
 	return sf
 }
 
 // WithSearchMenuTemplate sets the menu object used to dynamically construct the search field’s pop-up icon menu.
 func (sf *SearchField) WithSearchMenuTemplate(searchMenuTemplate *Menu) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setSearchMenuTemplate:"), objref.IDOf(searchMenuTemplate))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setSearchMenuTemplate:"), objref.IDOf(searchMenuTemplate))
+	})
 	return sf
 }
 
 // WithSendsWholeSearchString sets a Boolean value indicating whether the cell calls its search action method when the user clicks the search button or presses Return, or after each keystroke.
 func (sf *SearchField) WithSendsWholeSearchString(sendsWholeSearchString bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setSendsWholeSearchString:"), sendsWholeSearchString)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setSendsWholeSearchString:"), sendsWholeSearchString)
+	})
 	return sf
 }
 
 // WithMaximumRecents sets the maximum number of search strings that can appear in the search menu.
 func (sf *SearchField) WithMaximumRecents(maximumRecents int) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setMaximumRecents:"), maximumRecents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setMaximumRecents:"), maximumRecents)
+	})
 	return sf
 }
 
 // WithSendsSearchStringImmediately sets a Boolean value indicating whether the cell calls its action method immediately when an appropriate action occurs.
 func (sf *SearchField) WithSendsSearchStringImmediately(sendsSearchStringImmediately bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setSendsSearchStringImmediately:"), sendsSearchStringImmediately)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setSendsSearchStringImmediately:"), sendsSearchStringImmediately)
+	})
 	return sf
 }
 
 // WithCentersPlaceholder sets a Boolean value that determines whether the search field’s components are centered within the control.
 func (sf *SearchField) WithCentersPlaceholder(centersPlaceholder bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setCentersPlaceholder:"), centersPlaceholder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setCentersPlaceholder:"), centersPlaceholder)
+	})
 	return sf
 }
 
 // WithPlaceholderString sets the string the text field displays when empty to help the user understand the text field’s purpose.
 func (sf *SearchField) WithPlaceholderString(placeholderString string) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
+	})
 	return sf
 }
 
 // WithPlaceholderAttributedString sets the attributed string the text field displays when empty to help the user understand the text field’s purpose.
 func (sf *SearchField) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
+	})
 	return sf
 }
 
 // WithBackgroundColor sets the color of the background the text field’s cell draws behind the text.
 func (sf *SearchField) WithBackgroundColor(backgroundColor *Color) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	})
 	return sf
 }
 
 // WithDrawsBackground sets a Boolean value that controls whether the text field’s cell draws a background color behind the text.
 func (sf *SearchField) WithDrawsBackground(drawsBackground bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	})
 	return sf
 }
 
 // WithTextColor sets the color of the text field’s content.
 func (sf *SearchField) WithTextColor(textColor *Color) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
+	})
 	return sf
 }
 
 // WithBordered sets a Boolean value that controls whether the text field draws a solid black border around its contents.
 func (sf *SearchField) WithBordered(bordered bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setBordered:"), bordered)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setBordered:"), bordered)
+	})
 	return sf
 }
 
 // WithBezeled sets a Boolean value that controls whether the text field draws a bezeled background around its contents.
 func (sf *SearchField) WithBezeled(bezeled bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setBezeled:"), bezeled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setBezeled:"), bezeled)
+	})
 	return sf
 }
 
 // WithEditable sets a Boolean value that controls whether the user can edit the value in the text field.
 func (sf *SearchField) WithEditable(editable bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setEditable:"), editable)
+	})
 	return sf
 }
 
 // WithSelectable sets a Boolean value that determines whether the user can select the content of the text field.
 func (sf *SearchField) WithSelectable(selectable bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setSelectable:"), selectable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setSelectable:"), selectable)
+	})
 	return sf
 }
 
 // WithBezelStyle sets the text field’s bezel style, square or rounded.
 func (sf *SearchField) WithBezelStyle(bezelStyle TextFieldBezelStyle) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setBezelStyle:"), bezelStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setBezelStyle:"), bezelStyle)
+	})
 	return sf
 }
 
 // WithPreferredMaxLayoutWidth sets the maximum width of the text field’s intrinsic content size.
 func (sf *SearchField) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
+	})
 	return sf
 }
 
 // WithMaximumNumberOfLines sets the maximum number of lines a wrapping text field displays before clipping or truncating the text.
 func (sf *SearchField) WithMaximumNumberOfLines(maximumNumberOfLines int) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setMaximumNumberOfLines:"), maximumNumberOfLines)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setMaximumNumberOfLines:"), maximumNumberOfLines)
+	})
 	return sf
 }
 
 // WithAllowsDefaultTighteningForTruncation sets a Boolean value that controls whether single-line text fields tighten intercharacter spacing before truncating the text.
 func (sf *SearchField) WithAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAllowsDefaultTighteningForTruncation:"), allowsDefaultTighteningForTruncation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAllowsDefaultTighteningForTruncation:"), allowsDefaultTighteningForTruncation)
+	})
 	return sf
 }
 
 // WithLineBreakStrategy sets the strategy that the system uses to break lines when laying out multiple lines of text.
 func (sf *SearchField) WithLineBreakStrategy(lineBreakStrategy LineBreakStrategy) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setLineBreakStrategy:"), lineBreakStrategy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setLineBreakStrategy:"), lineBreakStrategy)
+	})
 	return sf
 }
 
 // WithAllowsWritingTools sets the allows writing tools.
 func (sf *SearchField) WithAllowsWritingTools(allowsWritingTools bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAllowsWritingTools:"), allowsWritingTools)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAllowsWritingTools:"), allowsWritingTools)
+	})
 	return sf
 }
 
 // WithAllowsWritingToolsAffordance sets the allows writing tools affordance.
 func (sf *SearchField) WithAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAllowsWritingToolsAffordance:"), allowsWritingToolsAffordance)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAllowsWritingToolsAffordance:"), allowsWritingToolsAffordance)
+	})
 	return sf
 }
 
 // WithPlaceholderStrings sets the placeholder strings.
 func (sf *SearchField) WithPlaceholderStrings(items ...obj.Object) *SearchField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPlaceholderStrings:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPlaceholderStrings:"), _arr)
+	})
 	return sf
 }
 
 // WithPlaceholderAttributedStrings sets the placeholder attributed strings.
 func (sf *SearchField) WithPlaceholderAttributedStrings(items ...obj.Object) *SearchField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPlaceholderAttributedStrings:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPlaceholderAttributedStrings:"), _arr)
+	})
 	return sf
 }
 
 // WithResolvesNaturalAlignmentWithBaseWritingDirection sets specifies the behavior for resolving NSTextAlignmentNatural to the visual alignment.
 func (sf *SearchField) WithResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setResolvesNaturalAlignmentWithBaseWritingDirection:"), resolvesNaturalAlignmentWithBaseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setResolvesNaturalAlignmentWithBaseWritingDirection:"), resolvesNaturalAlignmentWithBaseWritingDirection)
+	})
 	return sf
 }
 
 // WithAutomaticTextCompletionEnabled sets a Boolean value that indicates whether the text field automatically completes text as the user types.
 func (sf *SearchField) WithAutomaticTextCompletionEnabled(automaticTextCompletionEnabled bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAutomaticTextCompletionEnabled:"), automaticTextCompletionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAutomaticTextCompletionEnabled:"), automaticTextCompletionEnabled)
+	})
 	return sf
 }
 
 // WithAllowsCharacterPickerTouchBarItem sets a Boolean value that controls whether the Touch Bar displays the character picker item for rich text fields.
 func (sf *SearchField) WithAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAllowsCharacterPickerTouchBarItem:"), allowsCharacterPickerTouchBarItem)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAllowsCharacterPickerTouchBarItem:"), allowsCharacterPickerTouchBarItem)
+	})
 	return sf
 }
 
 // WithAllowsEditingTextAttributes sets a Boolean value that controls whether the user can change font attributes of the text field’s string.
 func (sf *SearchField) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	})
 	return sf
 }
 
 // WithImportsGraphics sets a Boolean value that controls whether the user can drag image files into the text field.
 func (sf *SearchField) WithImportsGraphics(importsGraphics bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	})
 	return sf
 }
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (sf *SearchField) WithTarget(target obj.Object) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return sf
 }
 
 // WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
 func (sf *SearchField) WithTag(tag int) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setTag:"), tag)
+	})
 	return sf
 }
 
 // WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 func (sf *SearchField) WithIgnoresMultiClick(ignoresMultiClick bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	})
 	return sf
 }
 
 // WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 func (sf *SearchField) WithContinuous(continuous bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return sf
 }
 
 // WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
 func (sf *SearchField) WithEnabled(enabled bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return sf
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
 func (sf *SearchField) WithRefusesFirstResponder(refusesFirstResponder bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return sf
 }
 
 // WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
 func (sf *SearchField) WithHighlighted(highlighted bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return sf
 }
 
 // WithControlSize sets the size of the control.
 func (sf *SearchField) WithControlSize(controlSize ControlSize) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return sf
 }
 
 // WithFormatter sets the receiver’s formatter.
 func (sf *SearchField) WithFormatter(formatter obj.Object) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return sf
 }
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (sf *SearchField) WithObjectValue(objectValue obj.Object) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return sf
 }
 
 // WithStringValue sets the value of the receiver’s cell as an NSString object.
 func (sf *SearchField) WithStringValue(stringValue string) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return sf
 }
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (sf *SearchField) WithAttributedStringValue(attributedStringValue obj.Object) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return sf
 }
 
 // WithIntValue sets the value of the receiver’s cell as an integer.
 func (sf *SearchField) WithIntValue(intValue int) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return sf
 }
 
 // WithIntegerValue sets the value of the receiver’s cell as an integer value.
 func (sf *SearchField) WithIntegerValue(integerValue int) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return sf
 }
 
 // WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
 func (sf *SearchField) WithFloatValue(floatValue float32) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return sf
 }
 
 // WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
 func (sf *SearchField) WithDoubleValue(doubleValue float64) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return sf
 }
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (sf *SearchField) WithFont(font *Font) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return sf
 }
 
 // WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
 func (sf *SearchField) WithUsesSingleLineMode(usesSingleLineMode bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return sf
 }
 
 // WithLineBreakMode sets the line break mode to use for text in the control’s cell.
 func (sf *SearchField) WithLineBreakMode(lineBreakMode LineBreakMode) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return sf
 }
 
 // WithAlignment sets the alignment mode of the text in the receiver’s cell.
 func (sf *SearchField) WithAlignment(alignment TextAlignment) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return sf
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (sf *SearchField) WithBaseWritingDirection(baseWritingDirection WritingDirection) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return sf
 }
 
 // WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 func (sf *SearchField) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	})
 	return sf
 }
 
 // WithCell sets the cell.
 func (sf *SearchField) WithCell(cell CellProvider) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	})
 	return sf
 }
 
 // WithSubviews sets the subviews.
 func (sf *SearchField) WithSubviews(items ...ViewProvider) *SearchField {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return sf
 }
 
 // WithHidden sets the hidden.
 func (sf *SearchField) WithHidden(hidden bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setHidden:"), hidden)
+	})
 	return sf
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (sf *SearchField) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return sf
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (sf *SearchField) WithAutoresizesSubviews(autoresizesSubviews bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return sf
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (sf *SearchField) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return sf
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (sf *SearchField) WithFrame(frame corefoundation.CGRect) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setFrame:"), frame)
+	})
 	return sf
 }
 
 // WithFrameRotation sets the frame rotation.
 func (sf *SearchField) WithFrameRotation(frameRotation float64) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return sf
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (sf *SearchField) WithFrameCenterRotation(frameCenterRotation float64) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return sf
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (sf *SearchField) WithBoundsRotation(boundsRotation float64) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return sf
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (sf *SearchField) WithBounds(bounds corefoundation.CGRect) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setBounds:"), bounds)
+	})
 	return sf
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (sf *SearchField) WithCanDrawConcurrently(canDrawConcurrently bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return sf
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (sf *SearchField) WithNeedsDisplay(needsDisplay bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return sf
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (sf *SearchField) WithAcceptsTouchEvents(acceptsTouchEvents bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return sf
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (sf *SearchField) WithWantsRestingTouches(wantsRestingTouches bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return sf
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (sf *SearchField) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return sf
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (sf *SearchField) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return sf
 }
 
 // WithWantsLayer sets the wants layer.
 func (sf *SearchField) WithWantsLayer(wantsLayer bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return sf
 }
 
 // WithLayer sets the layer.
 func (sf *SearchField) WithLayer(layer obj.Object) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return sf
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (sf *SearchField) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return sf
 }
 
 // WithNeedsLayout sets the needs layout.
 func (sf *SearchField) WithNeedsLayout(needsLayout bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return sf
 }
 
 // WithAlphaValue sets the alpha value.
 func (sf *SearchField) WithAlphaValue(alphaValue float64) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return sf
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (sf *SearchField) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return sf
 }
 
 // WithBackgroundFilters sets the background filters.
 func (sf *SearchField) WithBackgroundFilters(items ...obj.Object) *SearchField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return sf
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (sf *SearchField) WithCompositingFilter(compositingFilter obj.Object) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return sf
 }
 
 // WithContentFilters sets the content filters.
 func (sf *SearchField) WithContentFilters(items ...obj.Object) *SearchField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return sf
 }
 
 // WithShadow sets the shadow.
 func (sf *SearchField) WithShadow(shadow *Shadow) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return sf
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (sf *SearchField) WithClipsToBounds(clipsToBounds bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return sf
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (sf *SearchField) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return sf
 }
 
 // WithToolTip sets the tool tip.
 func (sf *SearchField) WithToolTip(toolTip string) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return sf
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (sf *SearchField) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return sf
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (sf *SearchField) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return sf
 }
 
 // WithNextKeyView sets the next key view.
 func (sf *SearchField) WithNextKeyView(nextKeyView ViewProvider) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return sf
 }
 
 // WithFocusRingType sets the focus ring type.
 func (sf *SearchField) WithFocusRingType(focusRingType FocusRingType) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return sf
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (sf *SearchField) WithGestureRecognizers(items ...GestureRecognizerProvider) *SearchField {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return sf
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (sf *SearchField) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return sf
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (sf *SearchField) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return sf
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (sf *SearchField) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return sf
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (sf *SearchField) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return sf
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (sf *SearchField) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return sf
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (sf *SearchField) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return sf
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (sf *SearchField) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return sf
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (sf *SearchField) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return sf
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (sf *SearchField) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return sf
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (sf *SearchField) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return sf
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (sf *SearchField) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return sf
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (sf *SearchField) WithNextResponder(nextResponder ResponderProvider) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return sf
 }
 
 // WithMenu sets returns the responder’s menu.
 func (sf *SearchField) WithMenu(menu *Menu) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return sf
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (sf *SearchField) WithUserActivity(userActivity obj.Object) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return sf
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (sf *SearchField) WithTouchBar(touchBar *TouchBar) *SearchField {
-	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return sf
 }
 
 // SearchTextBounds returns the search text bounds.
 func (sf *SearchField) SearchTextBounds() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sf), objc.RegisterName("searchTextBounds"))
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(sf), objc.RegisterName("searchTextBounds"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SearchButtonBounds returns the search button bounds.
 func (sf *SearchField) SearchButtonBounds() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sf), objc.RegisterName("searchButtonBounds"))
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(sf), objc.RegisterName("searchButtonBounds"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CancelButtonBounds returns the cancel button bounds.
 func (sf *SearchField) CancelButtonBounds() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sf), objc.RegisterName("cancelButtonBounds"))
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(sf), objc.RegisterName("cancelButtonBounds"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RecentSearches returns the recent searches.
 //
 // RecentSearches returns the collection as a Go slice.
 func (sf *SearchField) RecentSearches() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("recentSearches"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
+	var _mainthread0 []string
+	purego.Main(func() {
+		_mainthread0 = func() []string {
+			_arr := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("recentSearches"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // RecentsAutosaveName returns the recents autosave name.
 func (sf *SearchField) RecentsAutosaveName() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("recentsAutosaveName"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("recentsAutosaveName"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SearchMenuTemplate returns the search menu template.
 func (sf *SearchField) SearchMenuTemplate() *Menu {
-	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("searchMenuTemplate"))
-	return MenuFromID(_r)
+	var _mainthread0 *Menu
+	purego.Main(func() {
+		_mainthread0 = func() *Menu {
+			_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("searchMenuTemplate"))
+			return MenuFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SendsWholeSearchString wraps the corresponding Objective-C method.
 func (sf *SearchField) SendsWholeSearchString() bool {
-	_r := objc.Send[bool](objref.IDOf(sf), objc.RegisterName("sendsWholeSearchString"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sf), objc.RegisterName("sendsWholeSearchString"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MaximumRecents returns the maximum recents.
 func (sf *SearchField) MaximumRecents() int {
-	_r := objc.Send[int](objref.IDOf(sf), objc.RegisterName("maximumRecents"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(sf), objc.RegisterName("maximumRecents"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SendsSearchStringImmediately wraps the corresponding Objective-C method.
 func (sf *SearchField) SendsSearchStringImmediately() bool {
-	_r := objc.Send[bool](objref.IDOf(sf), objc.RegisterName("sendsSearchStringImmediately"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sf), objc.RegisterName("sendsSearchStringImmediately"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RectForSearchTextWhenCentered the rectangle for the search text within the bounds of the field.
 func (sf *SearchField) RectForSearchTextWhenCentered(isCentered bool) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sf), objc.RegisterName("rectForSearchTextWhenCentered:"), isCentered)
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(sf), objc.RegisterName("rectForSearchTextWhenCentered:"), isCentered)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RectForSearchButtonWhenCentered the rectangle for the search button within the bounds of the search field.
 func (sf *SearchField) RectForSearchButtonWhenCentered(isCentered bool) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sf), objc.RegisterName("rectForSearchButtonWhenCentered:"), isCentered)
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(sf), objc.RegisterName("rectForSearchButtonWhenCentered:"), isCentered)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RectForCancelButtonWhenCentered the rectangle for the cancel button within the bounds of the search field.
 func (sf *SearchField) RectForCancelButtonWhenCentered(isCentered bool) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sf), objc.RegisterName("rectForCancelButtonWhenCentered:"), isCentered)
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(sf), objc.RegisterName("rectForCancelButtonWhenCentered:"), isCentered)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CentersPlaceholder wraps the corresponding Objective-C method.
 func (sf *SearchField) CentersPlaceholder() bool {
-	_r := objc.Send[bool](objref.IDOf(sf), objc.RegisterName("centersPlaceholder"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sf), objc.RegisterName("centersPlaceholder"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ TextFieldProvider = (*SearchField)(nil)

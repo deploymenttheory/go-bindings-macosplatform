@@ -66,45 +66,88 @@ func (cpv *CompositionParameterView) String() string {
 
 // NewCompositionParameterView creates a new CompositionParameterView.
 func NewCompositionParameterView() *CompositionParameterView {
-	_id := objc.Send[objc.ID](objc.ID(_class("QCCompositionParameterView")), objc.RegisterName("new"))
-	return compositionParameterViewAdopt(_id)
+	var _mainthread0 *CompositionParameterView
+	purego.Main(func() {
+		_mainthread0 = func() *CompositionParameterView {
+			_id := objc.Send[objc.ID](objc.ID(_class("QCCompositionParameterView")), objc.RegisterName("new"))
+			return compositionParameterViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // HasParameters reports whether the object has parameters.
 func (cpv *CompositionParameterView) HasParameters() bool {
-	_r := objc.Send[bool](objref.IDOf(cpv), objc.RegisterName("hasParameters"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cpv), objc.RegisterName("hasParameters"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetBackgroundColor wraps the corresponding Objective-C method.
 func (cpv *CompositionParameterView) SetBackgroundColor(color obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(color))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(color))
+	})
+
 }
 
 // BackgroundColor returns the background color.
 func (cpv *CompositionParameterView) BackgroundColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("backgroundColor"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("backgroundColor"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetDrawsBackground wraps the corresponding Objective-C method.
 func (cpv *CompositionParameterView) SetDrawsBackground(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setDrawsBackground:"), flag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setDrawsBackground:"), flag)
+	})
+
 }
 
 // DrawsBackground wraps the corresponding Objective-C method.
 func (cpv *CompositionParameterView) DrawsBackground() bool {
-	_r := objc.Send[bool](objref.IDOf(cpv), objc.RegisterName("drawsBackground"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cpv), objc.RegisterName("drawsBackground"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetDelegate wraps the corresponding Objective-C method.
 func (cpv *CompositionParameterView) SetDelegate(delegate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	})
+
 }
 
 // Delegate returns the delegate.
 func (cpv *CompositionParameterView) Delegate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("delegate"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("delegate"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

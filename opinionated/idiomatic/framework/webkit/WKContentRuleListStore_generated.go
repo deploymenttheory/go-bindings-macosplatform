@@ -71,8 +71,14 @@ func (wcrls *WKContentRuleListStore) String() string {
 
 // NewWKContentRuleListStore creates a new WKContentRuleListStore.
 func NewWKContentRuleListStore() *WKContentRuleListStore {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKContentRuleListStore")), objc.RegisterName("new"))
-	return wKContentRuleListStoreAdopt(_id)
+	var _mainthread0 *WKContentRuleListStore
+	purego.Main(func() {
+		_mainthread0 = func() *WKContentRuleListStore {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKContentRuleListStore")), objc.RegisterName("new"))
+			return wKContentRuleListStoreAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // CompileContentRuleListForIdentifierEncodedContentRuleList compiles the specified JSON content into a new rule list and adds it to the current data store.

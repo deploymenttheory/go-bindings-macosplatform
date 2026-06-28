@@ -66,48 +66,96 @@ func (wwedr *WKWebExtensionDataRecord) String() string {
 
 // NewWKWebExtensionDataRecord creates a new WKWebExtensionDataRecord.
 func NewWKWebExtensionDataRecord() *WKWebExtensionDataRecord {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionDataRecord")), objc.RegisterName("new"))
-	return wKWebExtensionDataRecordAdopt(_id)
+	var _mainthread0 *WKWebExtensionDataRecord
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtensionDataRecord {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionDataRecord")), objc.RegisterName("new"))
+			return wKWebExtensionDataRecordAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // SizeInBytesOfTypes retrieves the size in bytes of the specific data types in this data record.
 func (wwedr *WKWebExtensionDataRecord) SizeInBytesOfTypes(dataTypes obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(wwedr), objc.RegisterName("sizeInBytesOfTypes:"), objref.IDOf(dataTypes))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(wwedr), objc.RegisterName("sizeInBytesOfTypes:"), objref.IDOf(dataTypes))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DisplayName returns the display name for the web extension to which this data record belongs.
 func (wwedr *WKWebExtensionDataRecord) DisplayName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wwedr), objc.RegisterName("displayName"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wwedr), objc.RegisterName("displayName"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UniqueIdentifier returns unique identifier for the web extension context to which this data record belongs.
 func (wwedr *WKWebExtensionDataRecord) UniqueIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wwedr), objc.RegisterName("uniqueIdentifier"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wwedr), objc.RegisterName("uniqueIdentifier"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ContainedDataTypes returns the set of data types contained in this data record.
 func (wwedr *WKWebExtensionDataRecord) ContainedDataTypes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwedr), objc.RegisterName("containedDataTypes"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwedr), objc.RegisterName("containedDataTypes"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Errors returns an array of errors that may have occurred when either calculating or deleting storage.
 func (wwedr *WKWebExtensionDataRecord) Errors() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwedr), objc.RegisterName("errors"))
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwedr), objc.RegisterName("errors"))
+			return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TotalSizeInBytes returns the total size in bytes of all data types contained in this data record.
 func (wwedr *WKWebExtensionDataRecord) TotalSizeInBytes() int {
-	_r := objc.Send[int](objref.IDOf(wwedr), objc.RegisterName("totalSizeInBytes"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(wwedr), objc.RegisterName("totalSizeInBytes"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

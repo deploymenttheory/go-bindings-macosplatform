@@ -68,50 +68,86 @@ func (pp *PDFPanel) String() string {
 
 // NewPDFPanel creates a new PDFPanel.
 func NewPDFPanel() *PDFPanel {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSPDFPanel")), objc.RegisterName("new"))
-	return pDFPanelAdopt(_id)
+	var _mainthread0 *PDFPanel
+	purego.Main(func() {
+		_mainthread0 = func() *PDFPanel {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSPDFPanel")), objc.RegisterName("new"))
+			return pDFPanelAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithAccessoryController sets a view controller for the accessory view that the panel can present.
 func (pp *PDFPanel) WithAccessoryController(accessoryController ViewControllerProvider) *PDFPanel {
-	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setAccessoryController:"), objref.IDOf(accessoryController))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setAccessoryController:"), objref.IDOf(accessoryController))
+	})
 	return pp
 }
 
 // WithOptions sets a set of configuration options that determine the accessory views the PDF panel should display.
 func (pp *PDFPanel) WithOptions(options PDFPanelOptions) *PDFPanel {
-	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setOptions:"), options)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setOptions:"), options)
+	})
 	return pp
 }
 
 // WithDefaultFileName sets the initial value for the user-editable filename shown in the name field of the PDF panel.
 func (pp *PDFPanel) WithDefaultFileName(defaultFileName string) *PDFPanel {
-	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setDefaultFileName:"), purego.NSString(defaultFileName))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setDefaultFileName:"), purego.NSString(defaultFileName))
+	})
 	return pp
 }
 
 // BeginSheetWithPDFInfoModalForWindowCompletionHandler presents a document-modal PDF panel.
 func (pp *PDFPanel) BeginSheetWithPDFInfoModalForWindowCompletionHandler(pdfInfo *PDFInfo, docWindow *Window, completionHandler func(int)) {
-	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("beginSheetWithPDFInfo:modalForWindow:completionHandler:"), objref.IDOf(pdfInfo), objref.IDOf(docWindow), objc.NewBlock(func(_ objc.Block, _b0 int) { completionHandler(_b0) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("beginSheetWithPDFInfo:modalForWindow:completionHandler:"), objref.IDOf(pdfInfo), objref.IDOf(docWindow), objc.NewBlock(func(_ objc.Block, _b0 int) { completionHandler(_b0) }))
+	})
+
 }
 
 // AccessoryController returns the accessory controller.
 func (pp *PDFPanel) AccessoryController() *ViewController {
-	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("accessoryController"))
-	return ViewControllerFromID(_r)
+	var _mainthread0 *ViewController
+	purego.Main(func() {
+		_mainthread0 = func() *ViewController {
+			_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("accessoryController"))
+			return ViewControllerFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Options returns the options.
 func (pp *PDFPanel) Options() PDFPanelOptions {
-	_r := objc.Send[PDFPanelOptions](objref.IDOf(pp), objc.RegisterName("options"))
-	return _r
+	var _mainthread0 PDFPanelOptions
+	purego.Main(func() {
+		_mainthread0 = func() PDFPanelOptions {
+			_r := objc.Send[PDFPanelOptions](objref.IDOf(pp), objc.RegisterName("options"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DefaultFileName returns the default file name.
 func (pp *PDFPanel) DefaultFileName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("defaultFileName"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("defaultFileName"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }

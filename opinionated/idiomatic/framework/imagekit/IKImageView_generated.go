@@ -67,298 +67,528 @@ func (iv *ImageView) String() string {
 
 // NewImageView creates a new ImageView.
 func NewImageView() *ImageView {
-	_id := objc.Send[objc.ID](objc.ID(_class("IKImageView")), objc.RegisterName("new"))
-	return imageViewAdopt(_id)
+	var _mainthread0 *ImageView
+	purego.Main(func() {
+		_mainthread0 = func() *ImageView {
+			_id := objc.Send[objc.ID](objc.ID(_class("IKImageView")), objc.RegisterName("new"))
+			return imageViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithDelegate sets specifies the delegate object of the receiver.
 func (iv *ImageView) WithDelegate(delegate obj.Object) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	})
 	return iv
 }
 
 // WithZoomFactor sets specifies the zoom factor for the image view.
 func (iv *ImageView) WithZoomFactor(zoomFactor float64) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setZoomFactor:"), zoomFactor)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setZoomFactor:"), zoomFactor)
+	})
 	return iv
 }
 
 // WithRotationAngle sets specifies the rotation angle for the image view.
 func (iv *ImageView) WithRotationAngle(rotationAngle float64) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setRotationAngle:"), rotationAngle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setRotationAngle:"), rotationAngle)
+	})
 	return iv
 }
 
 // WithCurrentToolMode sets specifies the current tool mode for the image view.
 func (iv *ImageView) WithCurrentToolMode(currentToolMode string) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setCurrentToolMode:"), purego.NSString(currentToolMode))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setCurrentToolMode:"), purego.NSString(currentToolMode))
+	})
 	return iv
 }
 
 // WithAutoresizes sets specifies the automatic resizing state for the image view.
 func (iv *ImageView) WithAutoresizes(autoresizes bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAutoresizes:"), autoresizes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAutoresizes:"), autoresizes)
+	})
 	return iv
 }
 
 // WithHasHorizontalScroller sets specifies the horizontal scroll bar state for the image view.
 func (iv *ImageView) WithHasHorizontalScroller(hasHorizontalScroller bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setHasHorizontalScroller:"), hasHorizontalScroller)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setHasHorizontalScroller:"), hasHorizontalScroller)
+	})
 	return iv
 }
 
 // WithHasVerticalScroller sets specifies the vertical scroll bar state for the image view.
 func (iv *ImageView) WithHasVerticalScroller(hasVerticalScroller bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setHasVerticalScroller:"), hasVerticalScroller)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setHasVerticalScroller:"), hasVerticalScroller)
+	})
 	return iv
 }
 
 // WithAutohidesScrollers sets specifies the automatic-hiding scroll bar state for the image view.
 func (iv *ImageView) WithAutohidesScrollers(autohidesScrollers bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAutohidesScrollers:"), autohidesScrollers)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAutohidesScrollers:"), autohidesScrollers)
+	})
 	return iv
 }
 
 // WithSupportsDragAndDrop sets specifies the drag-and-drop support state for the image view.
 func (iv *ImageView) WithSupportsDragAndDrop(supportsDragAndDrop bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setSupportsDragAndDrop:"), supportsDragAndDrop)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setSupportsDragAndDrop:"), supportsDragAndDrop)
+	})
 	return iv
 }
 
 // WithEditable sets specifies the editable state for the image view.
 func (iv *ImageView) WithEditable(editable bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setEditable:"), editable)
+	})
 	return iv
 }
 
 // WithDoubleClickOpensImageEditPanel sets specifies the image-opening state of the editing pane in the image view.
 func (iv *ImageView) WithDoubleClickOpensImageEditPanel(doubleClickOpensImageEditPanel bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setDoubleClickOpensImageEditPanel:"), doubleClickOpensImageEditPanel)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setDoubleClickOpensImageEditPanel:"), doubleClickOpensImageEditPanel)
+	})
 	return iv
 }
 
 // WithImageCorrection sets specifies a Core Image filter for image correction.
 func (iv *ImageView) WithImageCorrection(imageCorrection obj.Object) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImageCorrection:"), objref.IDOf(imageCorrection))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImageCorrection:"), objref.IDOf(imageCorrection))
+	})
 	return iv
 }
 
 // WithBackgroundColor sets specifies the background color for the image view.
 func (iv *ImageView) WithBackgroundColor(backgroundColor obj.Object) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	})
 	return iv
 }
 
 // SetImageImageProperties sets the image & metadata (both retrieved from ImageIO).
 func (iv *ImageView) SetImageImageProperties(image obj.Object, metaData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImage:imageProperties:"), objref.IDOf(image), objref.IDOf(metaData))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImage:imageProperties:"), objref.IDOf(image), objref.IDOf(metaData))
+	})
+
 }
 
 // SetImageWithURL initializes an image view with the image specified by a URL.
 func (iv *ImageView) SetImageWithURL(url string) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImageWithURL:"), rt.FileURL(url))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImageWithURL:"), rt.FileURL(url))
+	})
+
 }
 
 // Image returns the image associated with the view, after any image corrections.
 func (iv *ImageView) Image() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("image"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("image"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ImageSize returns the size of the image in the image view.
 func (iv *ImageView) ImageSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(iv), objc.RegisterName("imageSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(iv), objc.RegisterName("imageSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ImageProperties returns the metadata for the image in the view.
 func (iv *ImageView) ImageProperties() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("imageProperties"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("imageProperties"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetRotationAngleCenterPoint sets the rotation angle at the provided origin.
 func (iv *ImageView) SetRotationAngleCenterPoint(rotationAngle float64, centerPoint corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setRotationAngle:centerPoint:"), rotationAngle, centerPoint)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setRotationAngle:centerPoint:"), rotationAngle, centerPoint)
+	})
+
 }
 
 // RotateImageLeft rotates the image left.
 func (iv *ImageView) RotateImageLeft(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("rotateImageLeft:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("rotateImageLeft:"), objref.IDOf(sender))
+	})
+
 }
 
 // RotateImageRight rotates the image right.
 func (iv *ImageView) RotateImageRight(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("rotateImageRight:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("rotateImageRight:"), objref.IDOf(sender))
+	})
+
 }
 
 // SetImageZoomFactorCenterPoint sets the zoom factor at the provided origin.
 func (iv *ImageView) SetImageZoomFactorCenterPoint(zoomFactor float64, centerPoint corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImageZoomFactor:centerPoint:"), zoomFactor, centerPoint)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImageZoomFactor:centerPoint:"), zoomFactor, centerPoint)
+	})
+
 }
 
 // ZoomImageToRect zooms the image so that it fits in the specified rectangle.
 func (iv *ImageView) ZoomImageToRect(rect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("zoomImageToRect:"), rect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("zoomImageToRect:"), rect)
+	})
+
 }
 
 // ZoomImageToFit zooms the image so that it fits in the image view.
 func (iv *ImageView) ZoomImageToFit(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("zoomImageToFit:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("zoomImageToFit:"), objref.IDOf(sender))
+	})
+
 }
 
 // ZoomImageToActualSize zooms the image so that it is displayed using its true size.
 func (iv *ImageView) ZoomImageToActualSize(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("zoomImageToActualSize:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("zoomImageToActualSize:"), objref.IDOf(sender))
+	})
+
 }
 
 // ZoomIn zooms the image in.
 func (iv *ImageView) ZoomIn(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("zoomIn:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("zoomIn:"), objref.IDOf(sender))
+	})
+
 }
 
 // ZoomOut zooms the image out.
 func (iv *ImageView) ZoomOut(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("zoomOut:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("zoomOut:"), objref.IDOf(sender))
+	})
+
 }
 
 // FlipImageHorizontal flips an image along the horizontal axis.
 func (iv *ImageView) FlipImageHorizontal(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("flipImageHorizontal:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("flipImageHorizontal:"), objref.IDOf(sender))
+	})
+
 }
 
 // FlipImageVertical flips an image along the vertical axis.
 func (iv *ImageView) FlipImageVertical(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("flipImageVertical:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("flipImageVertical:"), objref.IDOf(sender))
+	})
+
 }
 
 // Crop crops the image using the current selection.
 func (iv *ImageView) Crop(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("crop:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("crop:"), objref.IDOf(sender))
+	})
+
 }
 
 // SetOverlayForType sets an overlay (Core Animation layer) for the image or the image background.
 func (iv *ImageView) SetOverlayForType(layer obj.Object, layerType string) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setOverlay:forType:"), objref.IDOf(layer), purego.NSString(layerType))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setOverlay:forType:"), objref.IDOf(layer), purego.NSString(layerType))
+	})
+
 }
 
 // OverlayForType returns the overlay (Core Animation layer) for the image or the image background.
 func (iv *ImageView) OverlayForType(layerType string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("overlayForType:"), purego.NSString(layerType))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("overlayForType:"), purego.NSString(layerType))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ScrollToPoint scrolls the view to the specified point.
 func (iv *ImageView) ScrollToPoint(point corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("scrollToPoint:"), point)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("scrollToPoint:"), point)
+	})
+
 }
 
 // ScrollToRect scrolls the view so that it includes the provided rectangular area.
 func (iv *ImageView) ScrollToRect(rect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("scrollToRect:"), rect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("scrollToRect:"), rect)
+	})
+
 }
 
 // ConvertViewPointToImagePoint converts an image view coordinate to an image coordinate.
 func (iv *ImageView) ConvertViewPointToImagePoint(viewPoint corefoundation.CGPoint) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(iv), objc.RegisterName("convertViewPointToImagePoint:"), viewPoint)
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(iv), objc.RegisterName("convertViewPointToImagePoint:"), viewPoint)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ConvertViewRectToImageRect converts an image view rectangle to an image rectangle.
 func (iv *ImageView) ConvertViewRectToImageRect(viewRect corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(iv), objc.RegisterName("convertViewRectToImageRect:"), viewRect)
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(iv), objc.RegisterName("convertViewRectToImageRect:"), viewRect)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ConvertImagePointToViewPoint converts an image coordinate to an image view coordinate.
 func (iv *ImageView) ConvertImagePointToViewPoint(imagePoint corefoundation.CGPoint) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(iv), objc.RegisterName("convertImagePointToViewPoint:"), imagePoint)
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(iv), objc.RegisterName("convertImagePointToViewPoint:"), imagePoint)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ConvertImageRectToViewRect converts an image rectangle to an image view rectangle.
 func (iv *ImageView) ConvertImageRectToViewRect(imageRect corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(iv), objc.RegisterName("convertImageRectToViewRect:"), imageRect)
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(iv), objc.RegisterName("convertImageRectToViewRect:"), imageRect)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Delegate specifies the delegate object of the receiver.
 func (iv *ImageView) Delegate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("delegate"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("delegate"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ZoomFactor specifies the zoom factor for the image view.
 func (iv *ImageView) ZoomFactor() float64 {
-	_r := objc.Send[float64](objref.IDOf(iv), objc.RegisterName("zoomFactor"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(iv), objc.RegisterName("zoomFactor"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RotationAngle specifies the rotation angle for the image view.
 func (iv *ImageView) RotationAngle() float64 {
-	_r := objc.Send[float64](objref.IDOf(iv), objc.RegisterName("rotationAngle"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(iv), objc.RegisterName("rotationAngle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CurrentToolMode specifies the current tool mode for the image view.
 func (iv *ImageView) CurrentToolMode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("currentToolMode"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("currentToolMode"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Autoresizes reports whether specifies the automatic resizing state for the image view.
 func (iv *ImageView) Autoresizes() bool {
-	_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("autoresizes"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("autoresizes"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasHorizontalScroller reports whether specifies the horizontal scroll bar state for the image view.
 func (iv *ImageView) HasHorizontalScroller() bool {
-	_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("hasHorizontalScroller"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("hasHorizontalScroller"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasVerticalScroller reports whether specifies the vertical scroll bar state for the image view.
 func (iv *ImageView) HasVerticalScroller() bool {
-	_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("hasVerticalScroller"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("hasVerticalScroller"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AutohidesScrollers reports whether specifies the automatic-hiding scroll bar state for the image view.
 func (iv *ImageView) AutohidesScrollers() bool {
-	_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("autohidesScrollers"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("autohidesScrollers"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SupportsDragAndDrop reports whether specifies the drag-and-drop support state for the image view.
 func (iv *ImageView) SupportsDragAndDrop() bool {
-	_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("supportsDragAndDrop"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("supportsDragAndDrop"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Editable reports whether specifies the editable state for the image view.
 func (iv *ImageView) Editable() bool {
-	_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("editable"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("editable"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DoubleClickOpensImageEditPanel reports whether specifies the image-opening state of the editing pane in the image view.
 func (iv *ImageView) DoubleClickOpensImageEditPanel() bool {
-	_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("doubleClickOpensImageEditPanel"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("doubleClickOpensImageEditPanel"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ImageCorrection specifies a Core Image filter for image correction.
 func (iv *ImageView) ImageCorrection() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("imageCorrection"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("imageCorrection"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BackgroundColor specifies the background color for the image view.
 func (iv *ImageView) BackgroundColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("backgroundColor"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("backgroundColor"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

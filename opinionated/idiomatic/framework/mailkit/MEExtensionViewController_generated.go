@@ -68,6 +68,12 @@ func (evc *ExtensionViewController) String() string {
 
 // NewExtensionViewController creates a new ExtensionViewController.
 func NewExtensionViewController() *ExtensionViewController {
-	_id := objc.Send[objc.ID](objc.ID(_class("MEExtensionViewController")), objc.RegisterName("new"))
-	return extensionViewControllerAdopt(_id)
+	var _mainthread0 *ExtensionViewController
+	purego.Main(func() {
+		_mainthread0 = func() *ExtensionViewController {
+			_id := objc.Send[objc.ID](objc.ID(_class("MEExtensionViewController")), objc.RegisterName("new"))
+			return extensionViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }

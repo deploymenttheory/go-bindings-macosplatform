@@ -68,6 +68,12 @@ func (spvc *StoreProductViewController) String() string {
 
 // NewStoreProductViewController creates a new StoreProductViewController.
 func NewStoreProductViewController() *StoreProductViewController {
-	_id := objc.Send[objc.ID](objc.ID(_class("SKStoreProductViewController")), objc.RegisterName("new"))
-	return storeProductViewControllerAdopt(_id)
+	var _mainthread0 *StoreProductViewController
+	purego.Main(func() {
+		_mainthread0 = func() *StoreProductViewController {
+			_id := objc.Send[objc.ID](objc.ID(_class("SKStoreProductViewController")), objc.RegisterName("new"))
+			return storeProductViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }

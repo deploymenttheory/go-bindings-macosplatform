@@ -66,42 +66,80 @@ func (wwecc *WKWebExtensionControllerConfiguration) String() string {
 
 // NewWKWebExtensionControllerConfiguration creates a new WKWebExtensionControllerConfiguration.
 func NewWKWebExtensionControllerConfiguration() *WKWebExtensionControllerConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionControllerConfiguration")), objc.RegisterName("new"))
-	return wKWebExtensionControllerConfigurationAdopt(_id)
+	var _mainthread0 *WKWebExtensionControllerConfiguration
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtensionControllerConfiguration {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionControllerConfiguration")), objc.RegisterName("new"))
+			return wKWebExtensionControllerConfigurationAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithWebViewConfiguration sets the web view configuration to be used as a basis for configuring web views in extension contexts.
 func (wwecc *WKWebExtensionControllerConfiguration) WithWebViewConfiguration(webViewConfiguration *WKWebViewConfiguration) *WKWebExtensionControllerConfiguration {
-	objc.Send[objc.ID](objref.IDOf(wwecc), objc.RegisterName("setWebViewConfiguration:"), objref.IDOf(webViewConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwecc), objc.RegisterName("setWebViewConfiguration:"), objref.IDOf(webViewConfiguration))
+	})
 	return wwecc
 }
 
 // WithDefaultWebsiteDataStore sets the default data store for website data and cookie access in extension contexts. This property sets the primary data store for managing website data, including cookies, which extensions can access, subject to the granted permissions within the extension contexts. Defaults to “WKWebsiteDataStore.defaultDataStore“.
 func (wwecc *WKWebExtensionControllerConfiguration) WithDefaultWebsiteDataStore(defaultWebsiteDataStore *WKWebsiteDataStore) *WKWebExtensionControllerConfiguration {
-	objc.Send[objc.ID](objref.IDOf(wwecc), objc.RegisterName("setDefaultWebsiteDataStore:"), objref.IDOf(defaultWebsiteDataStore))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwecc), objc.RegisterName("setDefaultWebsiteDataStore:"), objref.IDOf(defaultWebsiteDataStore))
+	})
 	return wwecc
 }
 
 // IsPersistent reports whether a Boolean value indicating if this context will write data to the the file system.
 func (wwecc *WKWebExtensionControllerConfiguration) IsPersistent() bool {
-	_r := objc.Send[bool](objref.IDOf(wwecc), objc.RegisterName("isPersistent"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwecc), objc.RegisterName("isPersistent"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Identifier returns the unique identifier used for persistent configuration storage, or `nil` when it is the default or not persistent.
 func (wwecc *WKWebExtensionControllerConfiguration) Identifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwecc), objc.RegisterName("identifier"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwecc), objc.RegisterName("identifier"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // WebViewConfiguration returns the web view configuration to be used as a basis for configuring web views in extension contexts.
 func (wwecc *WKWebExtensionControllerConfiguration) WebViewConfiguration() *WKWebViewConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(wwecc), objc.RegisterName("webViewConfiguration"))
-	return WKWebViewConfigurationFromID(_r)
+	var _mainthread0 *WKWebViewConfiguration
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebViewConfiguration {
+			_r := objc.Send[objc.ID](objref.IDOf(wwecc), objc.RegisterName("webViewConfiguration"))
+			return WKWebViewConfigurationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DefaultWebsiteDataStore returns the default data store for website data and cookie access in extension contexts. This property sets the primary data store for managing website data, including cookies, which extensions can access, subject to the granted permissions within the extension contexts. Defaults to “WKWebsiteDataStore.defaultDataStore“.
 func (wwecc *WKWebExtensionControllerConfiguration) DefaultWebsiteDataStore() *WKWebsiteDataStore {
-	_r := objc.Send[objc.ID](objref.IDOf(wwecc), objc.RegisterName("defaultWebsiteDataStore"))
-	return WKWebsiteDataStoreFromID(_r)
+	var _mainthread0 *WKWebsiteDataStore
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebsiteDataStore {
+			_r := objc.Send[objc.ID](objref.IDOf(wwecc), objc.RegisterName("defaultWebsiteDataStore"))
+			return WKWebsiteDataStoreFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }

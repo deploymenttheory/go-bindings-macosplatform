@@ -50,476 +50,712 @@ func tableRowViewAdopt(id objc.ID) *TableRowView {
 
 // NewTableRowView creates a new TableRowView.
 func NewTableRowView() *TableRowView {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSTableRowView")), objc.RegisterName("new"))
-	return tableRowViewAdopt(_id)
+	var _mainthread0 *TableRowView
+	purego.Main(func() {
+		_mainthread0 = func() *TableRowView {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSTableRowView")), objc.RegisterName("new"))
+			return tableRowViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithSelectionHighlightStyle sets specifies the selection highlight style.
 func (trv *TableRowView) WithSelectionHighlightStyle(selectionHighlightStyle TableViewSelectionHighlightStyle) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setSelectionHighlightStyle:"), selectionHighlightStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setSelectionHighlightStyle:"), selectionHighlightStyle)
+	})
 	return trv
 }
 
 // WithEmphasized sets determines whether the row will draw with the alternate or secondary color (unless overridden).
 func (trv *TableRowView) WithEmphasized(emphasized bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setEmphasized:"), emphasized)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setEmphasized:"), emphasized)
+	})
 	return trv
 }
 
 // WithGroupRowStyle sets specifies whether this row view is a group row.
 func (trv *TableRowView) WithGroupRowStyle(groupRowStyle bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setGroupRowStyle:"), groupRowStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setGroupRowStyle:"), groupRowStyle)
+	})
 	return trv
 }
 
 // WithSelected sets determines whether the row is selected.
 func (trv *TableRowView) WithSelected(selected bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setSelected:"), selected)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setSelected:"), selected)
+	})
 	return trv
 }
 
 // WithPreviousRowSelected sets the previous row selected.
 func (trv *TableRowView) WithPreviousRowSelected(previousRowSelected bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setPreviousRowSelected:"), previousRowSelected)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setPreviousRowSelected:"), previousRowSelected)
+	})
 	return trv
 }
 
 // WithNextRowSelected sets the next row selected.
 func (trv *TableRowView) WithNextRowSelected(nextRowSelected bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setNextRowSelected:"), nextRowSelected)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setNextRowSelected:"), nextRowSelected)
+	})
 	return trv
 }
 
 // WithFloating sets specifies whether the row is drawn using the floating style.
 func (trv *TableRowView) WithFloating(floating bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setFloating:"), floating)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setFloating:"), floating)
+	})
 	return trv
 }
 
 // WithTargetForDropOperation sets specifies whether this row will draw a drop indicator based on the current dragging feedback style.
 func (trv *TableRowView) WithTargetForDropOperation(targetForDropOperation bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setTargetForDropOperation:"), targetForDropOperation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setTargetForDropOperation:"), targetForDropOperation)
+	})
 	return trv
 }
 
 // WithDraggingDestinationFeedbackStyle sets specifies the dragging destination feedback style.
 func (trv *TableRowView) WithDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle TableViewDraggingDestinationFeedbackStyle) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setDraggingDestinationFeedbackStyle:"), draggingDestinationFeedbackStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setDraggingDestinationFeedbackStyle:"), draggingDestinationFeedbackStyle)
+	})
 	return trv
 }
 
 // WithIndentationForDropOperation sets defines the amount the drag target for a row should be indented.
 func (trv *TableRowView) WithIndentationForDropOperation(indentationForDropOperation float64) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setIndentationForDropOperation:"), indentationForDropOperation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setIndentationForDropOperation:"), indentationForDropOperation)
+	})
 	return trv
 }
 
 // WithBackgroundColor sets the background color of the row.
 func (trv *TableRowView) WithBackgroundColor(backgroundColor *Color) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	})
 	return trv
 }
 
 // WithSubviews sets the subviews.
 func (trv *TableRowView) WithSubviews(items ...ViewProvider) *TableRowView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return trv
 }
 
 // WithHidden sets the hidden.
 func (trv *TableRowView) WithHidden(hidden bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setHidden:"), hidden)
+	})
 	return trv
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (trv *TableRowView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return trv
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (trv *TableRowView) WithAutoresizesSubviews(autoresizesSubviews bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return trv
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (trv *TableRowView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return trv
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (trv *TableRowView) WithFrame(frame corefoundation.CGRect) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setFrame:"), frame)
+	})
 	return trv
 }
 
 // WithFrameRotation sets the frame rotation.
 func (trv *TableRowView) WithFrameRotation(frameRotation float64) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return trv
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (trv *TableRowView) WithFrameCenterRotation(frameCenterRotation float64) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return trv
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (trv *TableRowView) WithBoundsRotation(boundsRotation float64) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return trv
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (trv *TableRowView) WithBounds(bounds corefoundation.CGRect) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setBounds:"), bounds)
+	})
 	return trv
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (trv *TableRowView) WithCanDrawConcurrently(canDrawConcurrently bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return trv
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (trv *TableRowView) WithNeedsDisplay(needsDisplay bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return trv
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (trv *TableRowView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return trv
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (trv *TableRowView) WithWantsRestingTouches(wantsRestingTouches bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return trv
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (trv *TableRowView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return trv
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (trv *TableRowView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return trv
 }
 
 // WithWantsLayer sets the wants layer.
 func (trv *TableRowView) WithWantsLayer(wantsLayer bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return trv
 }
 
 // WithLayer sets the layer.
 func (trv *TableRowView) WithLayer(layer obj.Object) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return trv
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (trv *TableRowView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return trv
 }
 
 // WithNeedsLayout sets the needs layout.
 func (trv *TableRowView) WithNeedsLayout(needsLayout bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return trv
 }
 
 // WithAlphaValue sets the alpha value.
 func (trv *TableRowView) WithAlphaValue(alphaValue float64) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return trv
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (trv *TableRowView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return trv
 }
 
 // WithBackgroundFilters sets the background filters.
 func (trv *TableRowView) WithBackgroundFilters(items ...obj.Object) *TableRowView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return trv
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (trv *TableRowView) WithCompositingFilter(compositingFilter obj.Object) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return trv
 }
 
 // WithContentFilters sets the content filters.
 func (trv *TableRowView) WithContentFilters(items ...obj.Object) *TableRowView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return trv
 }
 
 // WithShadow sets the shadow.
 func (trv *TableRowView) WithShadow(shadow *Shadow) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return trv
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (trv *TableRowView) WithClipsToBounds(clipsToBounds bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return trv
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (trv *TableRowView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return trv
 }
 
 // WithToolTip sets the tool tip.
 func (trv *TableRowView) WithToolTip(toolTip string) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return trv
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (trv *TableRowView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return trv
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (trv *TableRowView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return trv
 }
 
 // WithNextKeyView sets the next key view.
 func (trv *TableRowView) WithNextKeyView(nextKeyView ViewProvider) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return trv
 }
 
 // WithFocusRingType sets the focus ring type.
 func (trv *TableRowView) WithFocusRingType(focusRingType FocusRingType) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return trv
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (trv *TableRowView) WithGestureRecognizers(items ...GestureRecognizerProvider) *TableRowView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return trv
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (trv *TableRowView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return trv
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (trv *TableRowView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return trv
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (trv *TableRowView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return trv
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (trv *TableRowView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return trv
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (trv *TableRowView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return trv
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (trv *TableRowView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return trv
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (trv *TableRowView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return trv
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (trv *TableRowView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return trv
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (trv *TableRowView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return trv
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (trv *TableRowView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return trv
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (trv *TableRowView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return trv
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (trv *TableRowView) WithNextResponder(nextResponder ResponderProvider) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return trv
 }
 
 // WithMenu sets returns the responder’s menu.
 func (trv *TableRowView) WithMenu(menu *Menu) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return trv
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (trv *TableRowView) WithUserActivity(userActivity obj.Object) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return trv
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (trv *TableRowView) WithTouchBar(touchBar *TouchBar) *TableRowView {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return trv
 }
 
 // DrawBackgroundInRect draws the background of the row in the rectangle.
 func (trv *TableRowView) DrawBackgroundInRect(dirtyRect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("drawBackgroundInRect:"), dirtyRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("drawBackgroundInRect:"), dirtyRect)
+	})
+
 }
 
 // DrawSelectionInRect draws the selected row.
 func (trv *TableRowView) DrawSelectionInRect(dirtyRect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("drawSelectionInRect:"), dirtyRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("drawSelectionInRect:"), dirtyRect)
+	})
+
 }
 
 // DrawSeparatorInRect draws the horizontal separator between table rows.
 func (trv *TableRowView) DrawSeparatorInRect(dirtyRect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("drawSeparatorInRect:"), dirtyRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("drawSeparatorInRect:"), dirtyRect)
+	})
+
 }
 
 // DrawDraggingDestinationFeedbackInRect draws the row’s dragging destination feedback when the entire row is a drop target.
 func (trv *TableRowView) DrawDraggingDestinationFeedbackInRect(dirtyRect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("drawDraggingDestinationFeedbackInRect:"), dirtyRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("drawDraggingDestinationFeedbackInRect:"), dirtyRect)
+	})
+
 }
 
 // ViewAtColumn provides access to the given view at a particular column.
 func (trv *TableRowView) ViewAtColumn(column int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("viewAtColumn:"), column)
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("viewAtColumn:"), column)
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SelectionHighlightStyle returns the selection highlight style.
 func (trv *TableRowView) SelectionHighlightStyle() TableViewSelectionHighlightStyle {
-	_r := objc.Send[TableViewSelectionHighlightStyle](objref.IDOf(trv), objc.RegisterName("selectionHighlightStyle"))
-	return _r
+	var _mainthread0 TableViewSelectionHighlightStyle
+	purego.Main(func() {
+		_mainthread0 = func() TableViewSelectionHighlightStyle {
+			_r := objc.Send[TableViewSelectionHighlightStyle](objref.IDOf(trv), objc.RegisterName("selectionHighlightStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsEmphasized reports whether the object is emphasized.
 func (trv *TableRowView) IsEmphasized() bool {
-	_r := objc.Send[bool](objref.IDOf(trv), objc.RegisterName("isEmphasized"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(trv), objc.RegisterName("isEmphasized"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsGroupRowStyle reports whether the object is group row style.
 func (trv *TableRowView) IsGroupRowStyle() bool {
-	_r := objc.Send[bool](objref.IDOf(trv), objc.RegisterName("isGroupRowStyle"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(trv), objc.RegisterName("isGroupRowStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsSelected reports whether the object is selected.
 func (trv *TableRowView) IsSelected() bool {
-	_r := objc.Send[bool](objref.IDOf(trv), objc.RegisterName("isSelected"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(trv), objc.RegisterName("isSelected"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsPreviousRowSelected reports whether the object is previous row selected.
 func (trv *TableRowView) IsPreviousRowSelected() bool {
-	_r := objc.Send[bool](objref.IDOf(trv), objc.RegisterName("isPreviousRowSelected"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(trv), objc.RegisterName("isPreviousRowSelected"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsNextRowSelected reports whether the object is next row selected.
 func (trv *TableRowView) IsNextRowSelected() bool {
-	_r := objc.Send[bool](objref.IDOf(trv), objc.RegisterName("isNextRowSelected"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(trv), objc.RegisterName("isNextRowSelected"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsFloating reports whether the object is floating.
 func (trv *TableRowView) IsFloating() bool {
-	_r := objc.Send[bool](objref.IDOf(trv), objc.RegisterName("isFloating"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(trv), objc.RegisterName("isFloating"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsTargetForDropOperation reports whether the object is target for drop operation.
 func (trv *TableRowView) IsTargetForDropOperation() bool {
-	_r := objc.Send[bool](objref.IDOf(trv), objc.RegisterName("isTargetForDropOperation"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(trv), objc.RegisterName("isTargetForDropOperation"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DraggingDestinationFeedbackStyle returns the dragging destination feedback style.
 func (trv *TableRowView) DraggingDestinationFeedbackStyle() TableViewDraggingDestinationFeedbackStyle {
-	_r := objc.Send[TableViewDraggingDestinationFeedbackStyle](objref.IDOf(trv), objc.RegisterName("draggingDestinationFeedbackStyle"))
-	return _r
+	var _mainthread0 TableViewDraggingDestinationFeedbackStyle
+	purego.Main(func() {
+		_mainthread0 = func() TableViewDraggingDestinationFeedbackStyle {
+			_r := objc.Send[TableViewDraggingDestinationFeedbackStyle](objref.IDOf(trv), objc.RegisterName("draggingDestinationFeedbackStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IndentationForDropOperation returns the indentation for drop operation.
 func (trv *TableRowView) IndentationForDropOperation() float64 {
-	_r := objc.Send[float64](objref.IDOf(trv), objc.RegisterName("indentationForDropOperation"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(trv), objc.RegisterName("indentationForDropOperation"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // InteriorBackgroundStyle returns the interior background style.
 func (trv *TableRowView) InteriorBackgroundStyle() BackgroundStyle {
-	_r := objc.Send[BackgroundStyle](objref.IDOf(trv), objc.RegisterName("interiorBackgroundStyle"))
-	return _r
+	var _mainthread0 BackgroundStyle
+	purego.Main(func() {
+		_mainthread0 = func() BackgroundStyle {
+			_r := objc.Send[BackgroundStyle](objref.IDOf(trv), objc.RegisterName("interiorBackgroundStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BackgroundColor returns the background color.
 func (trv *TableRowView) BackgroundColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("backgroundColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(trv), objc.RegisterName("backgroundColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NumberOfColumns returns the number of columns.
 func (trv *TableRowView) NumberOfColumns() int {
-	_r := objc.Send[int](objref.IDOf(trv), objc.RegisterName("numberOfColumns"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(trv), objc.RegisterName("numberOfColumns"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ViewProvider = (*TableRowView)(nil)

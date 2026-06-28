@@ -71,28 +71,51 @@ func (hvc *HostViewController) String() string {
 
 // NewHostViewController creates a new HostViewController.
 func NewHostViewController() *HostViewController {
-	_id := objc.Send[objc.ID](objc.ID(_class("EXHostViewController")), objc.RegisterName("new"))
-	return hostViewControllerAdopt(_id)
+	var _mainthread0 *HostViewController
+	purego.Main(func() {
+		_mainthread0 = func() *HostViewController {
+			_id := objc.Send[objc.ID](objc.ID(_class("EXHostViewController")), objc.RegisterName("new"))
+			return hostViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithPlaceholderView sets the view to display when the view controller has no app extension content to display.
 func (hvc *HostViewController) WithPlaceholderView(placeholderView obj.Object) *HostViewController {
-	objc.Send[objc.ID](objref.IDOf(hvc), objc.RegisterName("setPlaceholderView:"), objref.IDOf(placeholderView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(hvc), objc.RegisterName("setPlaceholderView:"), objref.IDOf(placeholderView))
+	})
 	return hvc
 }
 
 // MakeXPCConnectionWithError initiates an XPC connection to the app extension’s scene. Call this method from your delegate's “EXHostViewControllerDelegate/hostViewControllerDidActivate:“ method to initiate a scene-specific connection to the app extension. - Returns: An object representing the connection.
 func (hvc *HostViewController) MakeXPCConnectionWithError() (result obj.Object, err error) {
-	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(hvc), objc.RegisterName("makeXPCConnectionWithError:"), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
-	}
-	return obj.Wrap(_r), nil
+	var _mainthread0 obj.Object
+	var _mainthread1 error
+	purego.Main(func() {
+		_mainthread0, _mainthread1 = func() (result obj.Object, err error) {
+			var _nsErr uintptr
+			_r := objc.Send[objc.ID](objref.IDOf(hvc), objc.RegisterName("makeXPCConnectionWithError:"), unsafe.Pointer(&_nsErr))
+			if _nsErr != 0 {
+				return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+			}
+			return obj.Wrap(_r), nil
+		}()
+	})
+	return _mainthread0, _mainthread1
+
 }
 
 // PlaceholderView returns the view to display when the view controller has no app extension content to display.
 func (hvc *HostViewController) PlaceholderView() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(hvc), objc.RegisterName("placeholderView"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(hvc), objc.RegisterName("placeholderView"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

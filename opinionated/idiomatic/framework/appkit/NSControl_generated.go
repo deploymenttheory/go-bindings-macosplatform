@@ -50,739 +50,1164 @@ func controlAdopt(id objc.ID) *Control {
 
 // NewControlWithFrame initializes a control with the specified frame rectangle.
 func NewControlWithFrame(frameRect corefoundation.CGRect) *Control {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSControl")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:"), frameRect)
-	return controlAdopt(_id)
+	var _mainthread0 *Control
+	purego.Main(func() {
+		_mainthread0 = func() *Control {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSControl")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:"), frameRect)
+			return controlAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewControlWithCoder initializes a control with data in an unarchiver.
 func NewControlWithCoder(coder obj.Object) *Control {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSControl")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
-	return controlAdopt(_id)
+	var _mainthread0 *Control
+	purego.Main(func() {
+		_mainthread0 = func() *Control {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSControl")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+			return controlAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (c *Control) WithTarget(target obj.Object) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return c
 }
 
 // WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
 func (c *Control) WithTag(tag int) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTag:"), tag)
+	})
 	return c
 }
 
 // WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 func (c *Control) WithIgnoresMultiClick(ignoresMultiClick bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	})
 	return c
 }
 
 // WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 func (c *Control) WithContinuous(continuous bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return c
 }
 
 // WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
 func (c *Control) WithEnabled(enabled bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return c
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
 func (c *Control) WithRefusesFirstResponder(refusesFirstResponder bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return c
 }
 
 // WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
 func (c *Control) WithHighlighted(highlighted bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return c
 }
 
 // WithControlSize sets the size of the control.
 func (c *Control) WithControlSize(controlSize ControlSize) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return c
 }
 
 // WithFormatter sets the receiver’s formatter.
 func (c *Control) WithFormatter(formatter obj.Object) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return c
 }
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (c *Control) WithObjectValue(objectValue obj.Object) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return c
 }
 
 // WithStringValue sets the value of the receiver’s cell as an NSString object.
 func (c *Control) WithStringValue(stringValue string) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return c
 }
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (c *Control) WithAttributedStringValue(attributedStringValue obj.Object) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return c
 }
 
 // WithIntValue sets the value of the receiver’s cell as an integer.
 func (c *Control) WithIntValue(intValue int) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return c
 }
 
 // WithIntegerValue sets the value of the receiver’s cell as an integer value.
 func (c *Control) WithIntegerValue(integerValue int) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return c
 }
 
 // WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
 func (c *Control) WithFloatValue(floatValue float32) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return c
 }
 
 // WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
 func (c *Control) WithDoubleValue(doubleValue float64) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return c
 }
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (c *Control) WithFont(font *Font) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return c
 }
 
 // WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
 func (c *Control) WithUsesSingleLineMode(usesSingleLineMode bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return c
 }
 
 // WithLineBreakMode sets the line break mode to use for text in the control’s cell.
 func (c *Control) WithLineBreakMode(lineBreakMode LineBreakMode) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return c
 }
 
 // WithAlignment sets the alignment mode of the text in the receiver’s cell.
 func (c *Control) WithAlignment(alignment TextAlignment) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return c
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (c *Control) WithBaseWritingDirection(baseWritingDirection WritingDirection) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return c
 }
 
 // WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 func (c *Control) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	})
 	return c
 }
 
 // WithCell sets the cell.
 func (c *Control) WithCell(cell CellProvider) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	})
 	return c
 }
 
 // WithSubviews sets the subviews.
 func (c *Control) WithSubviews(items ...ViewProvider) *Control {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return c
 }
 
 // WithHidden sets the hidden.
 func (c *Control) WithHidden(hidden bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setHidden:"), hidden)
+	})
 	return c
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (c *Control) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return c
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (c *Control) WithAutoresizesSubviews(autoresizesSubviews bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return c
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (c *Control) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return c
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (c *Control) WithFrame(frame corefoundation.CGRect) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFrame:"), frame)
+	})
 	return c
 }
 
 // WithFrameRotation sets the frame rotation.
 func (c *Control) WithFrameRotation(frameRotation float64) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return c
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (c *Control) WithFrameCenterRotation(frameCenterRotation float64) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return c
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (c *Control) WithBoundsRotation(boundsRotation float64) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return c
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (c *Control) WithBounds(bounds corefoundation.CGRect) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setBounds:"), bounds)
+	})
 	return c
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (c *Control) WithCanDrawConcurrently(canDrawConcurrently bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return c
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (c *Control) WithNeedsDisplay(needsDisplay bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return c
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (c *Control) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return c
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (c *Control) WithWantsRestingTouches(wantsRestingTouches bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return c
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (c *Control) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return c
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (c *Control) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return c
 }
 
 // WithWantsLayer sets the wants layer.
 func (c *Control) WithWantsLayer(wantsLayer bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return c
 }
 
 // WithLayer sets the layer.
 func (c *Control) WithLayer(layer obj.Object) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return c
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (c *Control) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return c
 }
 
 // WithNeedsLayout sets the needs layout.
 func (c *Control) WithNeedsLayout(needsLayout bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return c
 }
 
 // WithAlphaValue sets the alpha value.
 func (c *Control) WithAlphaValue(alphaValue float64) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return c
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (c *Control) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return c
 }
 
 // WithBackgroundFilters sets the background filters.
 func (c *Control) WithBackgroundFilters(items ...obj.Object) *Control {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return c
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (c *Control) WithCompositingFilter(compositingFilter obj.Object) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return c
 }
 
 // WithContentFilters sets the content filters.
 func (c *Control) WithContentFilters(items ...obj.Object) *Control {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return c
 }
 
 // WithShadow sets the shadow.
 func (c *Control) WithShadow(shadow *Shadow) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return c
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (c *Control) WithClipsToBounds(clipsToBounds bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return c
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (c *Control) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return c
 }
 
 // WithToolTip sets the tool tip.
 func (c *Control) WithToolTip(toolTip string) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return c
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (c *Control) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return c
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (c *Control) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return c
 }
 
 // WithNextKeyView sets the next key view.
 func (c *Control) WithNextKeyView(nextKeyView ViewProvider) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return c
 }
 
 // WithFocusRingType sets the focus ring type.
 func (c *Control) WithFocusRingType(focusRingType FocusRingType) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return c
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (c *Control) WithGestureRecognizers(items ...GestureRecognizerProvider) *Control {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return c
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (c *Control) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return c
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (c *Control) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return c
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (c *Control) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return c
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (c *Control) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return c
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (c *Control) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return c
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (c *Control) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return c
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (c *Control) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return c
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (c *Control) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return c
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (c *Control) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return c
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (c *Control) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return c
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (c *Control) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return c
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (c *Control) WithNextResponder(nextResponder ResponderProvider) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return c
 }
 
 // WithMenu sets returns the responder’s menu.
 func (c *Control) WithMenu(menu *Menu) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return c
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (c *Control) WithUserActivity(userActivity obj.Object) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return c
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (c *Control) WithTouchBar(touchBar *TouchBar) *Control {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return c
 }
 
 // SizeThatFits asks the control to calculate and return the size that best fits the specified size.
 func (c *Control) SizeThatFits(size corefoundation.CGSize) corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(c), objc.RegisterName("sizeThatFits:"), size)
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(c), objc.RegisterName("sizeThatFits:"), size)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SizeToFit resizes the receiver’s frame so that it’s the minimum size needed to contain its cell.
 func (c *Control) SizeToFit() {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("sizeToFit"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("sizeToFit"))
+	})
+
 }
 
 // SendActionOn sets the conditions on which the receiver sends action messages to its target.
 func (c *Control) SendActionOn(mask EventMask) int {
-	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("sendActionOn:"), mask)
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("sendActionOn:"), mask)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TakeIntValueFrom sets the value of the receiver’s cell to an integer value obtained from the specified object.
 func (c *Control) TakeIntValueFrom(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("takeIntValueFrom:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("takeIntValueFrom:"), objref.IDOf(sender))
+	})
+
 }
 
 // TakeFloatValueFrom sets the value of the receiver’s cell to a single-precision floating-point value obtained from the specified object.
 func (c *Control) TakeFloatValueFrom(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("takeFloatValueFrom:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("takeFloatValueFrom:"), objref.IDOf(sender))
+	})
+
 }
 
 // TakeDoubleValueFrom sets the value of the receiver’s cell to a double-precision floating-point value obtained from the specified object.
 func (c *Control) TakeDoubleValueFrom(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("takeDoubleValueFrom:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("takeDoubleValueFrom:"), objref.IDOf(sender))
+	})
+
 }
 
 // TakeStringValueFrom sets the value of the receiver’s cell to the string value obtained from the specified object.
 func (c *Control) TakeStringValueFrom(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("takeStringValueFrom:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("takeStringValueFrom:"), objref.IDOf(sender))
+	})
+
 }
 
 // TakeObjectValueFrom sets the value of the receiver’s cell to the object value obtained from the specified object.
 func (c *Control) TakeObjectValueFrom(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("takeObjectValueFrom:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("takeObjectValueFrom:"), objref.IDOf(sender))
+	})
+
 }
 
 // TakeIntegerValueFrom sets the value of the receiver’s cell to an NSInteger value obtained from the specified object.
 func (c *Control) TakeIntegerValueFrom(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("takeIntegerValueFrom:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("takeIntegerValueFrom:"), objref.IDOf(sender))
+	})
+
 }
 
 // PerformClick simulates a single mouse click on the receiver.
 func (c *Control) PerformClick(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("performClick:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("performClick:"), objref.IDOf(sender))
+	})
+
 }
 
 // ExpansionFrameWithFrame the frame in which a tool tip can be displayed, if needed.
 func (c *Control) ExpansionFrameWithFrame(contentFrame corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(c), objc.RegisterName("expansionFrameWithFrame:"), contentFrame)
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(c), objc.RegisterName("expansionFrameWithFrame:"), contentFrame)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DrawWithExpansionFrameInView performs custom expansion tool tip drawing.
 func (c *Control) DrawWithExpansionFrameInView(contentFrame corefoundation.CGRect, view *View) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("drawWithExpansionFrame:inView:"), contentFrame, objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("drawWithExpansionFrame:inView:"), contentFrame, objref.IDOf(view))
+	})
+
 }
 
 // Target returns the target.
 func (c *Control) Target() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("target"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("target"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IgnoresMultiClick wraps the corresponding Objective-C method.
 func (c *Control) IgnoresMultiClick() bool {
-	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("ignoresMultiClick"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("ignoresMultiClick"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsContinuous reports whether the object is continuous.
 func (c *Control) IsContinuous() bool {
-	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isContinuous"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isContinuous"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsEnabled reports whether the object is enabled.
 func (c *Control) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RefusesFirstResponder wraps the corresponding Objective-C method.
 func (c *Control) RefusesFirstResponder() bool {
-	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("refusesFirstResponder"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("refusesFirstResponder"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsHighlighted reports whether the object is highlighted.
 func (c *Control) IsHighlighted() bool {
-	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isHighlighted"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isHighlighted"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ControlSize returns the control size.
 func (c *Control) ControlSize() ControlSize {
-	_r := objc.Send[ControlSize](objref.IDOf(c), objc.RegisterName("controlSize"))
-	return _r
+	var _mainthread0 ControlSize
+	purego.Main(func() {
+		_mainthread0 = func() ControlSize {
+			_r := objc.Send[ControlSize](objref.IDOf(c), objc.RegisterName("controlSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Formatter returns the formatter.
 func (c *Control) Formatter() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("formatter"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("formatter"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ObjectValue returns the object value.
 func (c *Control) ObjectValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("objectValue"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("objectValue"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // StringValue returns the string value.
 func (c *Control) StringValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("stringValue"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("stringValue"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AttributedStringValue returns the attributed string value.
 func (c *Control) AttributedStringValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("attributedStringValue"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("attributedStringValue"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IntValue returns the int value.
 func (c *Control) IntValue() int {
-	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("intValue"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("intValue"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IntegerValue returns the integer value.
 func (c *Control) IntegerValue() int {
-	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("integerValue"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("integerValue"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FloatValue returns the float value.
 func (c *Control) FloatValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("floatValue"))
-	return _r
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("floatValue"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DoubleValue returns the double value.
 func (c *Control) DoubleValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("doubleValue"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("doubleValue"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Font returns the font.
 func (c *Control) Font() *Font {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("font"))
-	return FontFromID(_r)
+	var _mainthread0 *Font
+	purego.Main(func() {
+		_mainthread0 = func() *Font {
+			_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("font"))
+			return FontFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UsesSingleLineMode wraps the corresponding Objective-C method.
 func (c *Control) UsesSingleLineMode() bool {
-	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("usesSingleLineMode"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("usesSingleLineMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LineBreakMode returns the line break mode.
 func (c *Control) LineBreakMode() LineBreakMode {
-	_r := objc.Send[LineBreakMode](objref.IDOf(c), objc.RegisterName("lineBreakMode"))
-	return _r
+	var _mainthread0 LineBreakMode
+	purego.Main(func() {
+		_mainthread0 = func() LineBreakMode {
+			_r := objc.Send[LineBreakMode](objref.IDOf(c), objc.RegisterName("lineBreakMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Alignment returns the alignment.
 func (c *Control) Alignment() TextAlignment {
-	_r := objc.Send[TextAlignment](objref.IDOf(c), objc.RegisterName("alignment"))
-	return _r
+	var _mainthread0 TextAlignment
+	purego.Main(func() {
+		_mainthread0 = func() TextAlignment {
+			_r := objc.Send[TextAlignment](objref.IDOf(c), objc.RegisterName("alignment"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BaseWritingDirection returns the base writing direction.
 func (c *Control) BaseWritingDirection() WritingDirection {
-	_r := objc.Send[WritingDirection](objref.IDOf(c), objc.RegisterName("baseWritingDirection"))
-	return _r
+	var _mainthread0 WritingDirection
+	purego.Main(func() {
+		_mainthread0 = func() WritingDirection {
+			_r := objc.Send[WritingDirection](objref.IDOf(c), objc.RegisterName("baseWritingDirection"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsExpansionToolTips wraps the corresponding Objective-C method.
 func (c *Control) AllowsExpansionToolTips() bool {
-	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("allowsExpansionToolTips"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("allowsExpansionToolTips"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CurrentEditor returns the current field editor for the control.
 func (c *Control) CurrentEditor() *Text {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("currentEditor"))
-	return TextFromID(_r)
+	var _mainthread0 *Text
+	purego.Main(func() {
+		_mainthread0 = func() *Text {
+			_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("currentEditor"))
+			return TextFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AbortEditing reports whether terminates the current editing operation and discards any edited text.
 func (c *Control) AbortEditing() bool {
-	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("abortEditing"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("abortEditing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ValidateEditing validates changes to any user-typed text.
 func (c *Control) ValidateEditing() {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("validateEditing"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("validateEditing"))
+	})
+
 }
 
 // EditWithFrameEditorDelegateEvent begins editing of the receiver’s text using the specified field editor.
 func (c *Control) EditWithFrameEditorDelegateEvent(rect corefoundation.CGRect, textObj *Text, delegate obj.Object, event *Event) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("editWithFrame:editor:delegate:event:"), rect, objref.IDOf(textObj), objref.IDOf(delegate), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("editWithFrame:editor:delegate:event:"), rect, objref.IDOf(textObj), objref.IDOf(delegate), objref.IDOf(event))
+	})
+
 }
 
 // SelectWithFrameEditorDelegateStartLength selects the specified text range in the receiver’s field editor.
 func (c *Control) SelectWithFrameEditorDelegateStartLength(rect corefoundation.CGRect, textObj *Text, delegate obj.Object, selStart int, selLength int) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("selectWithFrame:editor:delegate:start:length:"), rect, objref.IDOf(textObj), objref.IDOf(delegate), selStart, selLength)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("selectWithFrame:editor:delegate:start:length:"), rect, objref.IDOf(textObj), objref.IDOf(delegate), selStart, selLength)
+	})
+
 }
 
 // EndEditing ends the editing of text in the receiver using the specified field editor.
 func (c *Control) EndEditing(textObj *Text) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("endEditing:"), objref.IDOf(textObj))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("endEditing:"), objref.IDOf(textObj))
+	})
+
 }
 
 // SetFloatingPointFormatLeftRight sets the auto-ranging and floating point number format of the receiver’s cell.
 func (c *Control) SetFloatingPointFormatLeftRight(autoRange bool, leftDigits int, rightDigits int) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFloatingPointFormat:left:right:"), autoRange, leftDigits, rightDigits)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFloatingPointFormat:left:right:"), autoRange, leftDigits, rightDigits)
+	})
+
 }
 
 // SelectedCell returns the selected cell.
 func (c *Control) SelectedCell() *Cell {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("selectedCell"))
-	return CellFromID(_r)
+	var _mainthread0 *Cell
+	purego.Main(func() {
+		_mainthread0 = func() *Cell {
+			_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("selectedCell"))
+			return CellFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SelectedTag returns the selected tag.
 func (c *Control) SelectedTag() int {
-	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("selectedTag"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("selectedTag"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetNeedsDisplay wraps the corresponding Objective-C method.
 func (c *Control) SetNeedsDisplay() {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setNeedsDisplay"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setNeedsDisplay"))
+	})
+
 }
 
 // CalcSize wraps the corresponding Objective-C method.
 func (c *Control) CalcSize() {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("calcSize"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("calcSize"))
+	})
+
 }
 
 // UpdateCell updates cell.
 func (c *Control) UpdateCell(cell *Cell) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("updateCell:"), objref.IDOf(cell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("updateCell:"), objref.IDOf(cell))
+	})
+
 }
 
 // UpdateCellInside updates cell inside.
 func (c *Control) UpdateCellInside(cell *Cell) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("updateCellInside:"), objref.IDOf(cell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("updateCellInside:"), objref.IDOf(cell))
+	})
+
 }
 
 // DrawCellInside draws cell inside.
 func (c *Control) DrawCellInside(cell *Cell) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("drawCellInside:"), objref.IDOf(cell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("drawCellInside:"), objref.IDOf(cell))
+	})
+
 }
 
 // DrawCell draws cell.
 func (c *Control) DrawCell(cell *Cell) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("drawCell:"), objref.IDOf(cell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("drawCell:"), objref.IDOf(cell))
+	})
+
 }
 
 // SelectCell selects cell.
 func (c *Control) SelectCell(cell *Cell) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("selectCell:"), objref.IDOf(cell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("selectCell:"), objref.IDOf(cell))
+	})
+
 }
 
 // Cell returns the cell.
 func (c *Control) Cell() *Cell {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("cell"))
-	return CellFromID(_r)
+	var _mainthread0 *Cell
+	purego.Main(func() {
+		_mainthread0 = func() *Cell {
+			_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("cell"))
+			return CellFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // InvalidateIntrinsicContentSizeForCell notifies the control that the intrinsic content size for its cell is no longer valid.
 func (c *Control) InvalidateIntrinsicContentSizeForCell(cell *Cell) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("invalidateIntrinsicContentSizeForCell:"), objref.IDOf(cell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("invalidateIntrinsicContentSizeForCell:"), objref.IDOf(cell))
+	})
+
 }
 
 // isControl marks Control — and, by embedding promotion, its

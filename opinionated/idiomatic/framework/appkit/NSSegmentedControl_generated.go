@@ -50,702 +50,1072 @@ func segmentedControlAdopt(id objc.ID) *SegmentedControl {
 
 // NewSegmentedControl creates a new SegmentedControl.
 func NewSegmentedControl() *SegmentedControl {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSSegmentedControl")), objc.RegisterName("new"))
-	return segmentedControlAdopt(_id)
+	var _mainthread0 *SegmentedControl
+	purego.Main(func() {
+		_mainthread0 = func() *SegmentedControl {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSSegmentedControl")), objc.RegisterName("new"))
+			return segmentedControlAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithSegmentCount sets the number of segments in the control.
 func (sc *SegmentedControl) WithSegmentCount(segmentCount int) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSegmentCount:"), segmentCount)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSegmentCount:"), segmentCount)
+	})
 	return sc
 }
 
 // WithSelectedSegment sets the index of the selected segment of the control, or -1 if no segment is selected.
 func (sc *SegmentedControl) WithSelectedSegment(selectedSegment int) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSelectedSegment:"), selectedSegment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSelectedSegment:"), selectedSegment)
+	})
 	return sc
 }
 
 // WithSegmentStyle sets the visual style used to display the control.
 func (sc *SegmentedControl) WithSegmentStyle(segmentStyle SegmentStyle) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSegmentStyle:"), segmentStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSegmentStyle:"), segmentStyle)
+	})
 	return sc
 }
 
 // WithSpringLoaded sets a Boolean value that indicates whether spring loading is enabled for the control.
 func (sc *SegmentedControl) WithSpringLoaded(springLoaded bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSpringLoaded:"), springLoaded)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSpringLoaded:"), springLoaded)
+	})
 	return sc
 }
 
 // WithTrackingMode sets the type of tracking behavior the control exhibits.
 func (sc *SegmentedControl) WithTrackingMode(trackingMode SegmentSwitchTracking) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTrackingMode:"), trackingMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTrackingMode:"), trackingMode)
+	})
 	return sc
 }
 
 // WithSelectedSegmentBezelColor sets the color of the selected segment’s bezel, in appearances that support it.
 func (sc *SegmentedControl) WithSelectedSegmentBezelColor(selectedSegmentBezelColor *Color) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSelectedSegmentBezelColor:"), objref.IDOf(selectedSegmentBezelColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSelectedSegmentBezelColor:"), objref.IDOf(selectedSegmentBezelColor))
+	})
 	return sc
 }
 
 // WithSegmentDistribution sets the segment distribution.
 func (sc *SegmentedControl) WithSegmentDistribution(segmentDistribution SegmentDistribution) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSegmentDistribution:"), segmentDistribution)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSegmentDistribution:"), segmentDistribution)
+	})
 	return sc
 }
 
 // WithBorderShape sets the border shape.
 func (sc *SegmentedControl) WithBorderShape(borderShape ControlBorderShape) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBorderShape:"), borderShape)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBorderShape:"), borderShape)
+	})
 	return sc
 }
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (sc *SegmentedControl) WithTarget(target obj.Object) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return sc
 }
 
 // WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
 func (sc *SegmentedControl) WithTag(tag int) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTag:"), tag)
+	})
 	return sc
 }
 
 // WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 func (sc *SegmentedControl) WithIgnoresMultiClick(ignoresMultiClick bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	})
 	return sc
 }
 
 // WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 func (sc *SegmentedControl) WithContinuous(continuous bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return sc
 }
 
 // WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
 func (sc *SegmentedControl) WithEnabled(enabled bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return sc
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
 func (sc *SegmentedControl) WithRefusesFirstResponder(refusesFirstResponder bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return sc
 }
 
 // WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
 func (sc *SegmentedControl) WithHighlighted(highlighted bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return sc
 }
 
 // WithControlSize sets the size of the control.
 func (sc *SegmentedControl) WithControlSize(controlSize ControlSize) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return sc
 }
 
 // WithFormatter sets the receiver’s formatter.
 func (sc *SegmentedControl) WithFormatter(formatter obj.Object) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return sc
 }
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (sc *SegmentedControl) WithObjectValue(objectValue obj.Object) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return sc
 }
 
 // WithStringValue sets the value of the receiver’s cell as an NSString object.
 func (sc *SegmentedControl) WithStringValue(stringValue string) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return sc
 }
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (sc *SegmentedControl) WithAttributedStringValue(attributedStringValue obj.Object) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return sc
 }
 
 // WithIntValue sets the value of the receiver’s cell as an integer.
 func (sc *SegmentedControl) WithIntValue(intValue int) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return sc
 }
 
 // WithIntegerValue sets the value of the receiver’s cell as an integer value.
 func (sc *SegmentedControl) WithIntegerValue(integerValue int) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return sc
 }
 
 // WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
 func (sc *SegmentedControl) WithFloatValue(floatValue float32) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return sc
 }
 
 // WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
 func (sc *SegmentedControl) WithDoubleValue(doubleValue float64) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return sc
 }
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (sc *SegmentedControl) WithFont(font *Font) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return sc
 }
 
 // WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
 func (sc *SegmentedControl) WithUsesSingleLineMode(usesSingleLineMode bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return sc
 }
 
 // WithLineBreakMode sets the line break mode to use for text in the control’s cell.
 func (sc *SegmentedControl) WithLineBreakMode(lineBreakMode LineBreakMode) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return sc
 }
 
 // WithAlignment sets the alignment mode of the text in the receiver’s cell.
 func (sc *SegmentedControl) WithAlignment(alignment TextAlignment) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return sc
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (sc *SegmentedControl) WithBaseWritingDirection(baseWritingDirection WritingDirection) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return sc
 }
 
 // WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 func (sc *SegmentedControl) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	})
 	return sc
 }
 
 // WithCell sets the cell.
 func (sc *SegmentedControl) WithCell(cell CellProvider) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	})
 	return sc
 }
 
 // WithSubviews sets the subviews.
 func (sc *SegmentedControl) WithSubviews(items ...ViewProvider) *SegmentedControl {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return sc
 }
 
 // WithHidden sets the hidden.
 func (sc *SegmentedControl) WithHidden(hidden bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setHidden:"), hidden)
+	})
 	return sc
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (sc *SegmentedControl) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return sc
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (sc *SegmentedControl) WithAutoresizesSubviews(autoresizesSubviews bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return sc
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (sc *SegmentedControl) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return sc
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (sc *SegmentedControl) WithFrame(frame corefoundation.CGRect) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFrame:"), frame)
+	})
 	return sc
 }
 
 // WithFrameRotation sets the frame rotation.
 func (sc *SegmentedControl) WithFrameRotation(frameRotation float64) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return sc
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (sc *SegmentedControl) WithFrameCenterRotation(frameCenterRotation float64) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return sc
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (sc *SegmentedControl) WithBoundsRotation(boundsRotation float64) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return sc
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (sc *SegmentedControl) WithBounds(bounds corefoundation.CGRect) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBounds:"), bounds)
+	})
 	return sc
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (sc *SegmentedControl) WithCanDrawConcurrently(canDrawConcurrently bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return sc
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (sc *SegmentedControl) WithNeedsDisplay(needsDisplay bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return sc
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (sc *SegmentedControl) WithAcceptsTouchEvents(acceptsTouchEvents bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return sc
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (sc *SegmentedControl) WithWantsRestingTouches(wantsRestingTouches bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return sc
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (sc *SegmentedControl) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return sc
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (sc *SegmentedControl) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return sc
 }
 
 // WithWantsLayer sets the wants layer.
 func (sc *SegmentedControl) WithWantsLayer(wantsLayer bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return sc
 }
 
 // WithLayer sets the layer.
 func (sc *SegmentedControl) WithLayer(layer obj.Object) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return sc
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (sc *SegmentedControl) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return sc
 }
 
 // WithNeedsLayout sets the needs layout.
 func (sc *SegmentedControl) WithNeedsLayout(needsLayout bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return sc
 }
 
 // WithAlphaValue sets the alpha value.
 func (sc *SegmentedControl) WithAlphaValue(alphaValue float64) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return sc
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (sc *SegmentedControl) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return sc
 }
 
 // WithBackgroundFilters sets the background filters.
 func (sc *SegmentedControl) WithBackgroundFilters(items ...obj.Object) *SegmentedControl {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return sc
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (sc *SegmentedControl) WithCompositingFilter(compositingFilter obj.Object) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return sc
 }
 
 // WithContentFilters sets the content filters.
 func (sc *SegmentedControl) WithContentFilters(items ...obj.Object) *SegmentedControl {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return sc
 }
 
 // WithShadow sets the shadow.
 func (sc *SegmentedControl) WithShadow(shadow *Shadow) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return sc
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (sc *SegmentedControl) WithClipsToBounds(clipsToBounds bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return sc
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (sc *SegmentedControl) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return sc
 }
 
 // WithToolTip sets the tool tip.
 func (sc *SegmentedControl) WithToolTip(toolTip string) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return sc
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (sc *SegmentedControl) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return sc
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (sc *SegmentedControl) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return sc
 }
 
 // WithNextKeyView sets the next key view.
 func (sc *SegmentedControl) WithNextKeyView(nextKeyView ViewProvider) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return sc
 }
 
 // WithFocusRingType sets the focus ring type.
 func (sc *SegmentedControl) WithFocusRingType(focusRingType FocusRingType) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return sc
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (sc *SegmentedControl) WithGestureRecognizers(items ...GestureRecognizerProvider) *SegmentedControl {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return sc
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (sc *SegmentedControl) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return sc
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (sc *SegmentedControl) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return sc
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (sc *SegmentedControl) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return sc
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (sc *SegmentedControl) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return sc
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (sc *SegmentedControl) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return sc
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (sc *SegmentedControl) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return sc
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (sc *SegmentedControl) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return sc
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (sc *SegmentedControl) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return sc
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (sc *SegmentedControl) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return sc
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (sc *SegmentedControl) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return sc
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (sc *SegmentedControl) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return sc
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (sc *SegmentedControl) WithNextResponder(nextResponder ResponderProvider) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return sc
 }
 
 // WithMenu sets returns the responder’s menu.
 func (sc *SegmentedControl) WithMenu(menu *Menu) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return sc
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (sc *SegmentedControl) WithUserActivity(userActivity obj.Object) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return sc
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (sc *SegmentedControl) WithTouchBar(touchBar *TouchBar) *SegmentedControl {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return sc
 }
 
 // SelectSegmentWithTag selects the segment with the specified tag.
 func (sc *SegmentedControl) SelectSegmentWithTag(tag int) bool {
-	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("selectSegmentWithTag:"), tag)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("selectSegmentWithTag:"), tag)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetWidthForSegment sets the width of the specified segment.
 func (sc *SegmentedControl) SetWidthForSegment(width float64, segment int) {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWidth:forSegment:"), width, segment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWidth:forSegment:"), width, segment)
+	})
+
 }
 
 // WidthForSegment returns the width of the specified segment.
 func (sc *SegmentedControl) WidthForSegment(segment int) float64 {
-	_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("widthForSegment:"), segment)
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("widthForSegment:"), segment)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetImageForSegment sets the image for the specified segment.
 func (sc *SegmentedControl) SetImageForSegment(image *Image, segment int) {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setImage:forSegment:"), objref.IDOf(image), segment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setImage:forSegment:"), objref.IDOf(image), segment)
+	})
+
 }
 
 // ImageForSegment returns the image associated with the specified segment.
 func (sc *SegmentedControl) ImageForSegment(segment int) *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("imageForSegment:"), segment)
-	return ImageFromID(_r)
+	var _mainthread0 *Image
+	purego.Main(func() {
+		_mainthread0 = func() *Image {
+			_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("imageForSegment:"), segment)
+			return ImageFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetImageScalingForSegment sets the scaling mode used to display the specified segment’s image.
 func (sc *SegmentedControl) SetImageScalingForSegment(scaling ImageScaling, segment int) {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setImageScaling:forSegment:"), scaling, segment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setImageScaling:forSegment:"), scaling, segment)
+	})
+
 }
 
 // ImageScalingForSegment returns the scaling mode used to display the specified segment’s image.
 func (sc *SegmentedControl) ImageScalingForSegment(segment int) ImageScaling {
-	_r := objc.Send[ImageScaling](objref.IDOf(sc), objc.RegisterName("imageScalingForSegment:"), segment)
-	return _r
+	var _mainthread0 ImageScaling
+	purego.Main(func() {
+		_mainthread0 = func() ImageScaling {
+			_r := objc.Send[ImageScaling](objref.IDOf(sc), objc.RegisterName("imageScalingForSegment:"), segment)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetLabelForSegment sets the label for the specified segment.
 func (sc *SegmentedControl) SetLabelForSegment(label string, segment int) {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLabel:forSegment:"), purego.NSString(label), segment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLabel:forSegment:"), purego.NSString(label), segment)
+	})
+
 }
 
 // LabelForSegment returns the label of the specified segment.
 func (sc *SegmentedControl) LabelForSegment(segment int) string {
-	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("labelForSegment:"), segment)
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("labelForSegment:"), segment)
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetMenuForSegment sets the menu for the specified segment.
 func (sc *SegmentedControl) SetMenuForSegment(menu *Menu, segment int) {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setMenu:forSegment:"), objref.IDOf(menu), segment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setMenu:forSegment:"), objref.IDOf(menu), segment)
+	})
+
 }
 
 // MenuForSegment returns the menu for the specified segment.
 func (sc *SegmentedControl) MenuForSegment(segment int) *Menu {
-	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("menuForSegment:"), segment)
-	return MenuFromID(_r)
+	var _mainthread0 *Menu
+	purego.Main(func() {
+		_mainthread0 = func() *Menu {
+			_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("menuForSegment:"), segment)
+			return MenuFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetSelectedForSegment sets the selection state of the specified segment.
 func (sc *SegmentedControl) SetSelectedForSegment(selected bool, segment int) {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSelected:forSegment:"), selected, segment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSelected:forSegment:"), selected, segment)
+	})
+
 }
 
 // IsSelectedForSegment returns a Boolean value indicating whether the specified segment is selected.
 func (sc *SegmentedControl) IsSelectedForSegment(segment int) bool {
-	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("isSelectedForSegment:"), segment)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("isSelectedForSegment:"), segment)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetEnabledForSegment sets the enabled state of the specified segment
 func (sc *SegmentedControl) SetEnabledForSegment(enabled bool, segment int) {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setEnabled:forSegment:"), enabled, segment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setEnabled:forSegment:"), enabled, segment)
+	})
+
 }
 
 // IsEnabledForSegment returns a Boolean value indicating whether the specified segment is enabled.
 func (sc *SegmentedControl) IsEnabledForSegment(segment int) bool {
-	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("isEnabledForSegment:"), segment)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("isEnabledForSegment:"), segment)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetToolTipForSegment wraps the corresponding Objective-C method.
 func (sc *SegmentedControl) SetToolTipForSegment(toolTip string, segment int) {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setToolTip:forSegment:"), purego.NSString(toolTip), segment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setToolTip:forSegment:"), purego.NSString(toolTip), segment)
+	})
+
 }
 
 // ToolTipForSegment wraps the corresponding Objective-C method.
 func (sc *SegmentedControl) ToolTipForSegment(segment int) string {
-	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("toolTipForSegment:"), segment)
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("toolTipForSegment:"), segment)
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetTagForSegment wraps the corresponding Objective-C method.
 func (sc *SegmentedControl) SetTagForSegment(tag int, segment int) {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTag:forSegment:"), tag, segment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTag:forSegment:"), tag, segment)
+	})
+
 }
 
 // TagForSegment wraps the corresponding Objective-C method.
 func (sc *SegmentedControl) TagForSegment(segment int) int {
-	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("tagForSegment:"), segment)
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("tagForSegment:"), segment)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetShowsMenuIndicatorForSegment wraps the corresponding Objective-C method.
 func (sc *SegmentedControl) SetShowsMenuIndicatorForSegment(showsMenuIndicator bool, segment int) {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setShowsMenuIndicator:forSegment:"), showsMenuIndicator, segment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setShowsMenuIndicator:forSegment:"), showsMenuIndicator, segment)
+	})
+
 }
 
 // ShowsMenuIndicatorForSegment wraps the corresponding Objective-C method.
 func (sc *SegmentedControl) ShowsMenuIndicatorForSegment(segment int) bool {
-	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("showsMenuIndicatorForSegment:"), segment)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("showsMenuIndicatorForSegment:"), segment)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetAlignmentForSegment wraps the corresponding Objective-C method.
 func (sc *SegmentedControl) SetAlignmentForSegment(alignment TextAlignment, segment int) {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAlignment:forSegment:"), alignment, segment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAlignment:forSegment:"), alignment, segment)
+	})
+
 }
 
 // AlignmentForSegment wraps the corresponding Objective-C method.
 func (sc *SegmentedControl) AlignmentForSegment(segment int) TextAlignment {
-	_r := objc.Send[TextAlignment](objref.IDOf(sc), objc.RegisterName("alignmentForSegment:"), segment)
-	return _r
+	var _mainthread0 TextAlignment
+	purego.Main(func() {
+		_mainthread0 = func() TextAlignment {
+			_r := objc.Send[TextAlignment](objref.IDOf(sc), objc.RegisterName("alignmentForSegment:"), segment)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CompressWithPrioritizedCompressionOptions wraps the corresponding Objective-C method.
 func (sc *SegmentedControl) CompressWithPrioritizedCompressionOptions(prioritizedOptions []*UserInterfaceCompressionOptions) {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("compressWithPrioritizedCompressionOptions:"), purego.SliceToNSArray(prioritizedOptions, func(_v *UserInterfaceCompressionOptions) objc.ID { return objref.IDOf(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("compressWithPrioritizedCompressionOptions:"), purego.SliceToNSArray(prioritizedOptions, func(_v *UserInterfaceCompressionOptions) objc.ID { return objref.IDOf(_v) }))
+	})
+
 }
 
 // MinimumSizeWithPrioritizedCompressionOptions wraps the corresponding Objective-C method.
 func (sc *SegmentedControl) MinimumSizeWithPrioritizedCompressionOptions(prioritizedOptions []*UserInterfaceCompressionOptions) corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(sc), objc.RegisterName("minimumSizeWithPrioritizedCompressionOptions:"), purego.SliceToNSArray(prioritizedOptions, func(_v *UserInterfaceCompressionOptions) objc.ID { return objref.IDOf(_v) }))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(sc), objc.RegisterName("minimumSizeWithPrioritizedCompressionOptions:"), purego.SliceToNSArray(prioritizedOptions, func(_v *UserInterfaceCompressionOptions) objc.ID { return objref.IDOf(_v) }))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SegmentCount returns the segment count.
 func (sc *SegmentedControl) SegmentCount() int {
-	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("segmentCount"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("segmentCount"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SelectedSegment returns the selected segment.
 func (sc *SegmentedControl) SelectedSegment() int {
-	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("selectedSegment"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("selectedSegment"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SegmentStyle returns the segment style.
 func (sc *SegmentedControl) SegmentStyle() SegmentStyle {
-	_r := objc.Send[SegmentStyle](objref.IDOf(sc), objc.RegisterName("segmentStyle"))
-	return _r
+	var _mainthread0 SegmentStyle
+	purego.Main(func() {
+		_mainthread0 = func() SegmentStyle {
+			_r := objc.Send[SegmentStyle](objref.IDOf(sc), objc.RegisterName("segmentStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsSpringLoaded reports whether the object is spring loaded.
 func (sc *SegmentedControl) IsSpringLoaded() bool {
-	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("isSpringLoaded"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("isSpringLoaded"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TrackingMode returns the tracking mode.
 func (sc *SegmentedControl) TrackingMode() SegmentSwitchTracking {
-	_r := objc.Send[SegmentSwitchTracking](objref.IDOf(sc), objc.RegisterName("trackingMode"))
-	return _r
+	var _mainthread0 SegmentSwitchTracking
+	purego.Main(func() {
+		_mainthread0 = func() SegmentSwitchTracking {
+			_r := objc.Send[SegmentSwitchTracking](objref.IDOf(sc), objc.RegisterName("trackingMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DoubleValueForSelectedSegment returns the double value for selected segment.
 func (sc *SegmentedControl) DoubleValueForSelectedSegment() float64 {
-	_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("doubleValueForSelectedSegment"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("doubleValueForSelectedSegment"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SelectedSegmentBezelColor returns the selected segment bezel color.
 func (sc *SegmentedControl) SelectedSegmentBezelColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("selectedSegmentBezelColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("selectedSegmentBezelColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IndexOfSelectedItem returns the index of selected item.
 func (sc *SegmentedControl) IndexOfSelectedItem() int {
-	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("indexOfSelectedItem"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("indexOfSelectedItem"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SegmentDistribution returns the segment distribution.
 func (sc *SegmentedControl) SegmentDistribution() SegmentDistribution {
-	_r := objc.Send[SegmentDistribution](objref.IDOf(sc), objc.RegisterName("segmentDistribution"))
-	return _r
+	var _mainthread0 SegmentDistribution
+	purego.Main(func() {
+		_mainthread0 = func() SegmentDistribution {
+			_r := objc.Send[SegmentDistribution](objref.IDOf(sc), objc.RegisterName("segmentDistribution"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ActiveCompressionOptions returns the active compression options.
 func (sc *SegmentedControl) ActiveCompressionOptions() *UserInterfaceCompressionOptions {
-	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("activeCompressionOptions"))
-	return UserInterfaceCompressionOptionsFromID(_r)
+	var _mainthread0 *UserInterfaceCompressionOptions
+	purego.Main(func() {
+		_mainthread0 = func() *UserInterfaceCompressionOptions {
+			_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("activeCompressionOptions"))
+			return UserInterfaceCompressionOptionsFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BorderShape returns the border shape.
 func (sc *SegmentedControl) BorderShape() ControlBorderShape {
-	_r := objc.Send[ControlBorderShape](objref.IDOf(sc), objc.RegisterName("borderShape"))
-	return _r
+	var _mainthread0 ControlBorderShape
+	purego.Main(func() {
+		_mainthread0 = func() ControlBorderShape {
+			_r := objc.Send[ControlBorderShape](objref.IDOf(sc), objc.RegisterName("borderShape"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ControlProvider = (*SegmentedControl)(nil)

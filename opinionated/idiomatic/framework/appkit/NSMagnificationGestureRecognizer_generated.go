@@ -48,92 +48,131 @@ func magnificationGestureRecognizerAdopt(id objc.ID) *MagnificationGestureRecogn
 
 // NewMagnificationGestureRecognizer creates a new MagnificationGestureRecognizer.
 func NewMagnificationGestureRecognizer() *MagnificationGestureRecognizer {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSMagnificationGestureRecognizer")), objc.RegisterName("new"))
-	return magnificationGestureRecognizerAdopt(_id)
+	var _mainthread0 *MagnificationGestureRecognizer
+	purego.Main(func() {
+		_mainthread0 = func() *MagnificationGestureRecognizer {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSMagnificationGestureRecognizer")), objc.RegisterName("new"))
+			return magnificationGestureRecognizerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithMagnification sets the amount of magnification to apply.
 func (mgr *MagnificationGestureRecognizer) WithMagnification(magnification float64) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setMagnification:"), magnification)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setMagnification:"), magnification)
+	})
 	return mgr
 }
 
 // WithTarget sets the object that implements the action method.
 func (mgr *MagnificationGestureRecognizer) WithTarget(target obj.Object) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return mgr
 }
 
 // WithState sets the current state of the gesture recognizer.
 func (mgr *MagnificationGestureRecognizer) WithState(state GestureRecognizerState) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setState:"), state)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setState:"), state)
+	})
 	return mgr
 }
 
 // WithEnabled sets a Boolean value indicating whether the gesture recognizer is able to handle events.
 func (mgr *MagnificationGestureRecognizer) WithEnabled(enabled bool) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return mgr
 }
 
 // WithPressureConfiguration sets configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
 func (mgr *MagnificationGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return mgr
 }
 
 // WithDelaysPrimaryMouseButtonEvents sets a Boolean value that indicates whether primary mouse button events are delivered only after gesture recognition fails.
 func (mgr *MagnificationGestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setDelaysPrimaryMouseButtonEvents:"), delaysPrimaryMouseButtonEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setDelaysPrimaryMouseButtonEvents:"), delaysPrimaryMouseButtonEvents)
+	})
 	return mgr
 }
 
 // WithDelaysSecondaryMouseButtonEvents sets a Boolean value that indicates whether secondary mouse button events are delivered only after gesture recognition fails.
 func (mgr *MagnificationGestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setDelaysSecondaryMouseButtonEvents:"), delaysSecondaryMouseButtonEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setDelaysSecondaryMouseButtonEvents:"), delaysSecondaryMouseButtonEvents)
+	})
 	return mgr
 }
 
 // WithDelaysOtherMouseButtonEvents sets a Boolean value that indicates whether other mouse button events are delivered only after gesture recognition fails.
 func (mgr *MagnificationGestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setDelaysOtherMouseButtonEvents:"), delaysOtherMouseButtonEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setDelaysOtherMouseButtonEvents:"), delaysOtherMouseButtonEvents)
+	})
 	return mgr
 }
 
 // WithDelaysKeyEvents sets a Boolean value that indicates whether key events are delivered only after gesture recognition fails.
 func (mgr *MagnificationGestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setDelaysKeyEvents:"), delaysKeyEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setDelaysKeyEvents:"), delaysKeyEvents)
+	})
 	return mgr
 }
 
 // WithDelaysMagnificationEvents sets a Boolean value that indicates whether magnification events are delivered only after gesture recognition fails.
 func (mgr *MagnificationGestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setDelaysMagnificationEvents:"), delaysMagnificationEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setDelaysMagnificationEvents:"), delaysMagnificationEvents)
+	})
 	return mgr
 }
 
 // WithDelaysRotationEvents sets a Boolean value that indicates whether rotation events are delivered only after gesture recognition fails.
 func (mgr *MagnificationGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setDelaysRotationEvents:"), delaysRotationEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setDelaysRotationEvents:"), delaysRotationEvents)
+	})
 	return mgr
 }
 
 // WithName sets the name.
 func (mgr *MagnificationGestureRecognizer) WithName(name string) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setName:"), purego.NSString(name))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setName:"), purego.NSString(name))
+	})
 	return mgr
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (mgr *MagnificationGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *MagnificationGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return mgr
 }
 
 // Magnification returns the magnification.
 func (mgr *MagnificationGestureRecognizer) Magnification() float64 {
-	_r := objc.Send[float64](objref.IDOf(mgr), objc.RegisterName("magnification"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(mgr), objc.RegisterName("magnification"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ GestureRecognizerProvider = (*MagnificationGestureRecognizer)(nil)

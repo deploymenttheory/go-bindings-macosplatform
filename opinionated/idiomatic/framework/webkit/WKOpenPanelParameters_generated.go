@@ -68,18 +68,38 @@ func (wopp *WKOpenPanelParameters) String() string {
 
 // NewWKOpenPanelParameters creates a new WKOpenPanelParameters.
 func NewWKOpenPanelParameters() *WKOpenPanelParameters {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKOpenPanelParameters")), objc.RegisterName("new"))
-	return wKOpenPanelParametersAdopt(_id)
+	var _mainthread0 *WKOpenPanelParameters
+	purego.Main(func() {
+		_mainthread0 = func() *WKOpenPanelParameters {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKOpenPanelParameters")), objc.RegisterName("new"))
+			return wKOpenPanelParametersAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // AllowsMultipleSelection reports whether the file upload control supports multiple files.
 func (wopp *WKOpenPanelParameters) AllowsMultipleSelection() bool {
-	_r := objc.Send[bool](objref.IDOf(wopp), objc.RegisterName("allowsMultipleSelection"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wopp), objc.RegisterName("allowsMultipleSelection"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsDirectories reports whether the file upload control supports selecting directories.
 func (wopp *WKOpenPanelParameters) AllowsDirectories() bool {
-	_r := objc.Send[bool](objref.IDOf(wopp), objc.RegisterName("allowsDirectories"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wopp), objc.RegisterName("allowsDirectories"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

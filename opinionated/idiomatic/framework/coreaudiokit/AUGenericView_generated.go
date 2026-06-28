@@ -68,18 +68,33 @@ func (agv *AUGenericView) String() string {
 
 // NewAUGenericView creates a new AUGenericView.
 func NewAUGenericView() *AUGenericView {
-	_id := objc.Send[objc.ID](objc.ID(_class("AUGenericView")), objc.RegisterName("new"))
-	return aUGenericViewAdopt(_id)
+	var _mainthread0 *AUGenericView
+	purego.Main(func() {
+		_mainthread0 = func() *AUGenericView {
+			_id := objc.Send[objc.ID](objc.ID(_class("AUGenericView")), objc.RegisterName("new"))
+			return aUGenericViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithShowsExpertParameters sets indicates whether or not controls for expert audio unit parameters are displayed in the generic view.
 func (agv *AUGenericView) WithShowsExpertParameters(showsExpertParameters bool) *AUGenericView {
-	objc.Send[objc.ID](objref.IDOf(agv), objc.RegisterName("setShowsExpertParameters:"), showsExpertParameters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(agv), objc.RegisterName("setShowsExpertParameters:"), showsExpertParameters)
+	})
 	return agv
 }
 
 // ShowsExpertParameters wraps the corresponding Objective-C method.
 func (agv *AUGenericView) ShowsExpertParameters() bool {
-	_r := objc.Send[bool](objref.IDOf(agv), objc.RegisterName("showsExpertParameters"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(agv), objc.RegisterName("showsExpertParameters"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

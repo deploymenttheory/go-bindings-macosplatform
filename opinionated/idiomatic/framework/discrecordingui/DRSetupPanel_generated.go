@@ -70,56 +70,97 @@ func (sp *SetupPanel) String() string {
 
 // NewSetupPanelWithNibName initializes the receiver to use the panel from the nibName nib file.
 func NewSetupPanelWithNibName(nibName string) *SetupPanel {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("DRSetupPanel")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNibName:"), purego.NSString(nibName))
-	return setupPanelAdopt(_id)
+	var _mainthread0 *SetupPanel
+	purego.Main(func() {
+		_mainthread0 = func() *SetupPanel {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("DRSetupPanel")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNibName:"), purego.NSString(nibName))
+			return setupPanelAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // RunSetupPanel returns displays the receiver and begins its event loop. Invokes NSApplication's
 func (sp *SetupPanel) RunSetupPanel() int {
-	_r := objc.Send[int](objref.IDOf(sp), objc.RegisterName("runSetupPanel"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(sp), objc.RegisterName("runSetupPanel"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Ok invoked when the user clicks the panel's default button.
 func (sp *SetupPanel) Ok(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("ok:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("ok:"), objref.IDOf(sender))
+	})
+
 }
 
 // Cancel invoked when the user clicks the panel's cancel button.
 func (sp *SetupPanel) Cancel(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("cancel:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("cancel:"), objref.IDOf(sender))
+	})
+
 }
 
 // Eject invoked when the user clicks the panel's eject button.
 func (sp *SetupPanel) Eject(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("eject:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("eject:"), objref.IDOf(sender))
+	})
+
 }
 
 // Open invoked when the user clicks the panel's open button.
 func (sp *SetupPanel) Open(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("open:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("open:"), objref.IDOf(sender))
+	})
+
 }
 
 // Close invoked when the user clicks the panel's close button.
 func (sp *SetupPanel) Close(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("close:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("close:"), objref.IDOf(sender))
+	})
+
 }
 
 // DeviceSelectionChanged invoked when the user changes the device selected in the device popup. If the device currently selected is disconnected from the machine, the device popup will remove the device from itself and select a new device. This will act as if the user changed the device selected. Because of this, device may be nil if no eligible devices are currently connected to the machine.
 func (sp *SetupPanel) DeviceSelectionChanged(device obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("deviceSelectionChanged:"), objref.IDOf(device))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("deviceSelectionChanged:"), objref.IDOf(device))
+	})
+
 }
 
 // MediaStateChanged invoked when the media state of the currently selected device changes. This can include media being ejected, inserted, being used by another application, etc.
 func (sp *SetupPanel) MediaStateChanged(status obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(sp), objc.RegisterName("mediaStateChanged:"), objref.IDOf(status))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sp), objc.RegisterName("mediaStateChanged:"), objref.IDOf(status))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetupForDisplay this method is called immediately before panel is displayed on the screen. Any setup to be done in preparation for display should be done here.
 func (sp *SetupPanel) SetupForDisplay() {
-	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setupForDisplay"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setupForDisplay"))
+	})
+
 }
 
 // isSetupPanel marks SetupPanel — and, by embedding promotion, its

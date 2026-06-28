@@ -68,126 +68,218 @@ func (tb *TouchBar) String() string {
 
 // NewTouchBar creates a new TouchBar.
 func NewTouchBar() *TouchBar {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSTouchBar")), objc.RegisterName("new"))
-	return touchBarAdopt(_id)
+	var _mainthread0 *TouchBar
+	purego.Main(func() {
+		_mainthread0 = func() *TouchBar {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSTouchBar")), objc.RegisterName("new"))
+			return touchBarAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewTouchBarWithCoder creates a Touch Bar object from a coder object provided by a storyboard or NIB file.
 func NewTouchBarWithCoder(coder obj.Object) *TouchBar {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTouchBar")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
-	return touchBarAdopt(_id)
+	var _mainthread0 *TouchBar
+	purego.Main(func() {
+		_mainthread0 = func() *TouchBar {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSTouchBar")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+			return touchBarAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithCustomizationIdentifier sets a globally unique string that makes the Touch Bar eligible for user customization.
 func (tb *TouchBar) WithCustomizationIdentifier(customizationIdentifier obj.Object) *TouchBar {
-	objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setCustomizationIdentifier:"), objref.IDOf(customizationIdentifier))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setCustomizationIdentifier:"), objref.IDOf(customizationIdentifier))
+	})
 	return tb
 }
 
 // WithCustomizationAllowedItemIdentifiers sets a list of identifiers for items to show in the Touch Bar’s customization UI.
 func (tb *TouchBar) WithCustomizationAllowedItemIdentifiers(items ...obj.Object) *TouchBar {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setCustomizationAllowedItemIdentifiers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setCustomizationAllowedItemIdentifiers:"), _arr)
+	})
 	return tb
 }
 
 // WithCustomizationRequiredItemIdentifiers sets an optional list of identifiers for items you want to always appear in the Touch Bar and which the user can’t remove during customization.
 func (tb *TouchBar) WithCustomizationRequiredItemIdentifiers(items ...obj.Object) *TouchBar {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setCustomizationRequiredItemIdentifiers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setCustomizationRequiredItemIdentifiers:"), _arr)
+	})
 	return tb
 }
 
 // WithDefaultItemIdentifiers sets a required list of identifiers for items that you want to appear in the Touch Bar after instantiating it.
 func (tb *TouchBar) WithDefaultItemIdentifiers(items ...obj.Object) *TouchBar {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setDefaultItemIdentifiers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setDefaultItemIdentifiers:"), _arr)
+	})
 	return tb
 }
 
 // WithPrincipalItemIdentifier sets the identifier of an item you want the system to center in the Touch Bar.
 func (tb *TouchBar) WithPrincipalItemIdentifier(principalItemIdentifier obj.Object) *TouchBar {
-	objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setPrincipalItemIdentifier:"), objref.IDOf(principalItemIdentifier))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setPrincipalItemIdentifier:"), objref.IDOf(principalItemIdentifier))
+	})
 	return tb
 }
 
 // WithEscapeKeyReplacementItemIdentifier sets the identifier of an item that replaces the system-provided button in the Touch Bar.
 func (tb *TouchBar) WithEscapeKeyReplacementItemIdentifier(escapeKeyReplacementItemIdentifier obj.Object) *TouchBar {
-	objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setEscapeKeyReplacementItemIdentifier:"), objref.IDOf(escapeKeyReplacementItemIdentifier))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setEscapeKeyReplacementItemIdentifier:"), objref.IDOf(escapeKeyReplacementItemIdentifier))
+	})
 	return tb
 }
 
 // WithTemplateItems sets the primary source of items that the Touch Bar uses to fill its private items array, unless you provide items using a delegate.
 func (tb *TouchBar) WithTemplateItems(templateItems obj.Object) *TouchBar {
-	objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setTemplateItems:"), objref.IDOf(templateItems))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setTemplateItems:"), objref.IDOf(templateItems))
+	})
 	return tb
 }
 
 // ItemForIdentifier returns the Touch Bar item that corresponds to a given identifier.
 func (tb *TouchBar) ItemForIdentifier(identifier obj.Object) *TouchBarItem {
-	_r := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("itemForIdentifier:"), objref.IDOf(identifier))
-	return TouchBarItemFromID(_r)
+	var _mainthread0 *TouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *TouchBarItem {
+			_r := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("itemForIdentifier:"), objref.IDOf(identifier))
+			return TouchBarItemFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CustomizationIdentifier returns the customization identifier.
 func (tb *TouchBar) CustomizationIdentifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("customizationIdentifier"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("customizationIdentifier"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CustomizationAllowedItemIdentifiers returns the customization allowed item identifiers.
 //
 // CustomizationAllowedItemIdentifiers returns the collection as a Go slice.
 func (tb *TouchBar) CustomizationAllowedItemIdentifiers() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("customizationAllowedItemIdentifiers"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_arr := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("customizationAllowedItemIdentifiers"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // CustomizationRequiredItemIdentifiers returns the customization required item identifiers.
 //
 // CustomizationRequiredItemIdentifiers returns the collection as a Go slice.
 func (tb *TouchBar) CustomizationRequiredItemIdentifiers() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("customizationRequiredItemIdentifiers"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_arr := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("customizationRequiredItemIdentifiers"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // DefaultItemIdentifiers returns the default item identifiers.
 //
 // DefaultItemIdentifiers returns the collection as a Go slice.
 func (tb *TouchBar) DefaultItemIdentifiers() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("defaultItemIdentifiers"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_arr := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("defaultItemIdentifiers"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // ItemIdentifiers returns the item identifiers.
 //
 // ItemIdentifiers returns the collection as a Go slice.
 func (tb *TouchBar) ItemIdentifiers() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("itemIdentifiers"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_arr := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("itemIdentifiers"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // PrincipalItemIdentifier returns the principal item identifier.
 func (tb *TouchBar) PrincipalItemIdentifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("principalItemIdentifier"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("principalItemIdentifier"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // EscapeKeyReplacementItemIdentifier returns the escape key replacement item identifier.
 func (tb *TouchBar) EscapeKeyReplacementItemIdentifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("escapeKeyReplacementItemIdentifier"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("escapeKeyReplacementItemIdentifier"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TemplateItems returns the template items.
 func (tb *TouchBar) TemplateItems() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("templateItems"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("templateItems"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsVisible reports whether the object is visible.
 func (tb *TouchBar) IsVisible() bool {
-	_r := objc.Send[bool](objref.IDOf(tb), objc.RegisterName("isVisible"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tb), objc.RegisterName("isVisible"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

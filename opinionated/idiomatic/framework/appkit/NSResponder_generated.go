@@ -72,376 +72,657 @@ func (r *Responder) String() string {
 
 // NewResponderWithCoder creates a new responder object with data in an unarchiver.
 func NewResponderWithCoder(coder obj.Object) *Responder {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSResponder")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
-	return responderAdopt(_id)
+	var _mainthread0 *Responder
+	purego.Main(func() {
+		_mainthread0 = func() *Responder {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSResponder")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+			return responderAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (r *Responder) WithNextResponder(nextResponder ResponderProvider) *Responder {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return r
 }
 
 // WithMenu sets returns the responder’s menu.
 func (r *Responder) WithMenu(menu *Menu) *Responder {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return r
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (r *Responder) WithUserActivity(userActivity obj.Object) *Responder {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return r
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (r *Responder) WithTouchBar(touchBar *TouchBar) *Responder {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return r
 }
 
 // PerformKeyEquivalent handle a key equivalent.
 func (r *Responder) PerformKeyEquivalent(event *Event) bool {
-	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("performKeyEquivalent:"), objref.IDOf(event))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("performKeyEquivalent:"), objref.IDOf(event))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ValidRequestorForSendTypeReturnType overridden by subclasses to determine what services are available.
 func (r *Responder) ValidRequestorForSendTypeReturnType(sendType obj.Object, returnType obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("validRequestorForSendType:returnType:"), objref.IDOf(sendType), objref.IDOf(returnType))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("validRequestorForSendType:returnType:"), objref.IDOf(sendType), objref.IDOf(returnType))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MouseDown informs the receiver that the user has pressed the left mouse button.
 func (r *Responder) MouseDown(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("mouseDown:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("mouseDown:"), objref.IDOf(event))
+	})
+
 }
 
 // RightMouseDown informs the receiver that the user has pressed the right mouse button.
 func (r *Responder) RightMouseDown(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("rightMouseDown:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("rightMouseDown:"), objref.IDOf(event))
+	})
+
 }
 
 // OtherMouseDown informs the receiver that the user has pressed a mouse button other than the left or right one.
 func (r *Responder) OtherMouseDown(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("otherMouseDown:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("otherMouseDown:"), objref.IDOf(event))
+	})
+
 }
 
 // MouseUp informs the receiver that the user has released the left mouse button.
 func (r *Responder) MouseUp(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("mouseUp:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("mouseUp:"), objref.IDOf(event))
+	})
+
 }
 
 // RightMouseUp informs the receiver that the user has released the right mouse button.
 func (r *Responder) RightMouseUp(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("rightMouseUp:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("rightMouseUp:"), objref.IDOf(event))
+	})
+
 }
 
 // OtherMouseUp informs the receiver that the user has released a mouse button other than the left or right button.
 func (r *Responder) OtherMouseUp(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("otherMouseUp:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("otherMouseUp:"), objref.IDOf(event))
+	})
+
 }
 
 // MouseMoved informs the receiver that the mouse has moved.
 func (r *Responder) MouseMoved(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("mouseMoved:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("mouseMoved:"), objref.IDOf(event))
+	})
+
 }
 
 // MouseDragged informs the receiver that the user has moved the mouse with the left button pressed.
 func (r *Responder) MouseDragged(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("mouseDragged:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("mouseDragged:"), objref.IDOf(event))
+	})
+
 }
 
 // MouseCancelled wraps the corresponding Objective-C method.
 func (r *Responder) MouseCancelled(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("mouseCancelled:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("mouseCancelled:"), objref.IDOf(event))
+	})
+
 }
 
 // ScrollWheel informs the receiver that the mouse’s scroll wheel has moved.
 func (r *Responder) ScrollWheel(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("scrollWheel:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("scrollWheel:"), objref.IDOf(event))
+	})
+
 }
 
 // RightMouseDragged informs the receiver that the user has moved the mouse with the right button pressed.
 func (r *Responder) RightMouseDragged(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("rightMouseDragged:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("rightMouseDragged:"), objref.IDOf(event))
+	})
+
 }
 
 // OtherMouseDragged informs the receiver that the user has moved the mouse with a button other than the left or right button pressed.
 func (r *Responder) OtherMouseDragged(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("otherMouseDragged:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("otherMouseDragged:"), objref.IDOf(event))
+	})
+
 }
 
 // MouseEntered informs the receiver that the cursor has entered a tracking rectangle.
 func (r *Responder) MouseEntered(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("mouseEntered:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("mouseEntered:"), objref.IDOf(event))
+	})
+
 }
 
 // MouseExited informs the receiver that the cursor has exited a tracking rectangle.
 func (r *Responder) MouseExited(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("mouseExited:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("mouseExited:"), objref.IDOf(event))
+	})
+
 }
 
 // KeyDown informs the receiver that the user has pressed a key.
 func (r *Responder) KeyDown(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("keyDown:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("keyDown:"), objref.IDOf(event))
+	})
+
 }
 
 // KeyUp informs the receiver that the user has released a key.
 func (r *Responder) KeyUp(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("keyUp:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("keyUp:"), objref.IDOf(event))
+	})
+
 }
 
 // FlagsChanged informs the receiver that the user has pressed or released a modifier key (Shift, Control, and so on).
 func (r *Responder) FlagsChanged(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("flagsChanged:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("flagsChanged:"), objref.IDOf(event))
+	})
+
 }
 
 // TabletPoint informs the receiver that a tablet-point event has occurred.
 func (r *Responder) TabletPoint(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("tabletPoint:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("tabletPoint:"), objref.IDOf(event))
+	})
+
 }
 
 // TabletProximity informs the receiver that a tablet-proximity event has occurred.
 func (r *Responder) TabletProximity(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("tabletProximity:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("tabletProximity:"), objref.IDOf(event))
+	})
+
 }
 
 // CursorUpdate informs the receiver that the mouse cursor has moved into a cursor rectangle.
 func (r *Responder) CursorUpdate(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("cursorUpdate:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("cursorUpdate:"), objref.IDOf(event))
+	})
+
 }
 
 // MagnifyWithEvent informs the receiver that the user has begun a pinch gesture.
 func (r *Responder) MagnifyWithEvent(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("magnifyWithEvent:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("magnifyWithEvent:"), objref.IDOf(event))
+	})
+
 }
 
 // RotateWithEvent informs the receiver that the user has begun a rotation gesture.
 func (r *Responder) RotateWithEvent(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("rotateWithEvent:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("rotateWithEvent:"), objref.IDOf(event))
+	})
+
 }
 
 // SwipeWithEvent informs the receiver that the user has begun a swipe gesture.
 func (r *Responder) SwipeWithEvent(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("swipeWithEvent:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("swipeWithEvent:"), objref.IDOf(event))
+	})
+
 }
 
 // BeginGestureWithEvent informs the receiver that the user has begun a touch gesture.
 func (r *Responder) BeginGestureWithEvent(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("beginGestureWithEvent:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("beginGestureWithEvent:"), objref.IDOf(event))
+	})
+
 }
 
 // EndGestureWithEvent informs the receiver that the user has ended a touch gesture.
 func (r *Responder) EndGestureWithEvent(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("endGestureWithEvent:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("endGestureWithEvent:"), objref.IDOf(event))
+	})
+
 }
 
 // SmartMagnifyWithEvent informs the receiver that the user performed a smart zoom gesture.
 func (r *Responder) SmartMagnifyWithEvent(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("smartMagnifyWithEvent:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("smartMagnifyWithEvent:"), objref.IDOf(event))
+	})
+
 }
 
 // ChangeModeWithEvent informs the responder that performed a double-tap on the side of an Apple Pencil.
 func (r *Responder) ChangeModeWithEvent(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("changeModeWithEvent:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("changeModeWithEvent:"), objref.IDOf(event))
+	})
+
 }
 
 // TouchesBeganWithEvent informs the receiver that new set of touches has been recognized.
 func (r *Responder) TouchesBeganWithEvent(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("touchesBeganWithEvent:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("touchesBeganWithEvent:"), objref.IDOf(event))
+	})
+
 }
 
 // TouchesMovedWithEvent informs the receiver that one or more touches has moved.
 func (r *Responder) TouchesMovedWithEvent(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("touchesMovedWithEvent:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("touchesMovedWithEvent:"), objref.IDOf(event))
+	})
+
 }
 
 // TouchesEndedWithEvent returns that a set of touches have been removed.
 func (r *Responder) TouchesEndedWithEvent(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("touchesEndedWithEvent:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("touchesEndedWithEvent:"), objref.IDOf(event))
+	})
+
 }
 
 // TouchesCancelledWithEvent informs the receiver that tracking of touches has been cancelled for any reason.
 func (r *Responder) TouchesCancelledWithEvent(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("touchesCancelledWithEvent:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("touchesCancelledWithEvent:"), objref.IDOf(event))
+	})
+
 }
 
 // QuickLookWithEvent performs a Quick Look on the content at the location specified by the supplied event.
 func (r *Responder) QuickLookWithEvent(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("quickLookWithEvent:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("quickLookWithEvent:"), objref.IDOf(event))
+	})
+
 }
 
 // PressureChangeWithEvent indicates a pressure change as the result of a user input event on a system that supports pressure sensitivity.
 func (r *Responder) PressureChangeWithEvent(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("pressureChangeWithEvent:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("pressureChangeWithEvent:"), objref.IDOf(event))
+	})
+
 }
 
 // ContextMenuKeyDown handle a key event that should present a context menu at the user focus. Most applications should not override this method. Instead, you should customize the context menu displayed from a keyboard event by implementing `menuForEvent:` and `selectionAnchorRect`, or `showContextMenuForSelection:`, rather than this method. You should only override this method when you do not want the system-provided default behavior for the context menu hotkey, either for a specific key combination, or for the hotkey in general. For example, if your application already provides a different behavior for control-Return (the default context menu hotkey definition), and you want to preserve that behavior, you should override this method to handle that specific key combination, and then return without calling `super`. Note that the user may customize the hotkey to a different key combination, so in this example, if any other key combination is passed to your method, you would call `super`. An implementation of this method should call `[super contextMenuKeyDown:event]` to pass the request up the responder chain. If the message reaches the application object, NSApplication's implementation of this method will send `showContextMenuForSelection:` to the responder chain. If you do not call `super`, then no further handling of the key event will be performed.
 func (r *Responder) ContextMenuKeyDown(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("contextMenuKeyDown:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("contextMenuKeyDown:"), objref.IDOf(event))
+	})
+
 }
 
 // BecomeFirstResponder reports whether notifies the receiver that it’s about to become first responder in its NSWindow.
 func (r *Responder) BecomeFirstResponder() bool {
-	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("becomeFirstResponder"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("becomeFirstResponder"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ResignFirstResponder reports whether notifies the receiver that it’s been asked to relinquish its status as first responder in its window.
 func (r *Responder) ResignFirstResponder() bool {
-	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("resignFirstResponder"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("resignFirstResponder"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // InterpretKeyEvents handles a series of key events.
 func (r *Responder) InterpretKeyEvents(eventArray []*Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("interpretKeyEvents:"), purego.SliceToNSArray(eventArray, func(_v *Event) objc.ID { return objref.IDOf(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("interpretKeyEvents:"), purego.SliceToNSArray(eventArray, func(_v *Event) objc.ID { return objref.IDOf(_v) }))
+	})
+
 }
 
 // FlushBufferedKeyEvents clears any unprocessed key events when overridden by subclasses.
 func (r *Responder) FlushBufferedKeyEvents() {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("flushBufferedKeyEvents"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("flushBufferedKeyEvents"))
+	})
+
 }
 
 // ShowContextHelp shows context help.
 func (r *Responder) ShowContextHelp(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("showContextHelp:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("showContextHelp:"), objref.IDOf(sender))
+	})
+
 }
 
 // HelpRequested displays context-sensitive help for the receiver if help has been registered.
 func (r *Responder) HelpRequested(eventPtr *Event) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("helpRequested:"), objref.IDOf(eventPtr))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("helpRequested:"), objref.IDOf(eventPtr))
+	})
+
 }
 
 // ShouldBeTreatedAsInkEvent indicates whether a pen-down event should be treated as an ink event.
 func (r *Responder) ShouldBeTreatedAsInkEvent(event *Event) bool {
-	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("shouldBeTreatedAsInkEvent:"), objref.IDOf(event))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("shouldBeTreatedAsInkEvent:"), objref.IDOf(event))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // WantsScrollEventsForSwipeTrackingOnAxis implement this method to track gesture scroll events such as a swipe.
 func (r *Responder) WantsScrollEventsForSwipeTrackingOnAxis(axis EventGestureAxis) bool {
-	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("wantsScrollEventsForSwipeTrackingOnAxis:"), axis)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("wantsScrollEventsForSwipeTrackingOnAxis:"), axis)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // WantsForwardedScrollEventsForAxis returns whether to forward elastic scrolling gesture events up the responder.
 func (r *Responder) WantsForwardedScrollEventsForAxis(axis EventGestureAxis) bool {
-	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("wantsForwardedScrollEventsForAxis:"), axis)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("wantsForwardedScrollEventsForAxis:"), axis)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NextResponder returns the next responder.
 func (r *Responder) NextResponder() *Responder {
-	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("nextResponder"))
-	return ResponderFromID(_r)
+	var _mainthread0 *Responder
+	purego.Main(func() {
+		_mainthread0 = func() *Responder {
+			_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("nextResponder"))
+			return ResponderFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AcceptsFirstResponder wraps the corresponding Objective-C method.
 func (r *Responder) AcceptsFirstResponder() bool {
-	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("acceptsFirstResponder"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("acceptsFirstResponder"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Menu returns the menu.
 func (r *Responder) Menu() *Menu {
-	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("menu"))
-	return MenuFromID(_r)
+	var _mainthread0 *Menu
+	purego.Main(func() {
+		_mainthread0 = func() *Menu {
+			_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("menu"))
+			return MenuFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UndoManager returns the undo manager.
 func (r *Responder) UndoManager() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("undoManager"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("undoManager"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ValidateProposedFirstResponderForEvent allows controls to determine when they should become first responder.
 func (r *Responder) ValidateProposedFirstResponderForEvent(responder *Responder, event *Event) bool {
-	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("validateProposedFirstResponder:forEvent:"), objref.IDOf(responder), objref.IDOf(event))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("validateProposedFirstResponder:forEvent:"), objref.IDOf(responder), objref.IDOf(event))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PresentError presents an error alert to the user as an application-modal dialog.
 func (r *Responder) PresentError(error_ unsafe.Pointer) bool {
-	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("presentError:"), error_)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("presentError:"), error_)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PerformTextFinderAction performs all find oriented actions.
 func (r *Responder) PerformTextFinderAction(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("performTextFinderAction:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("performTextFinderAction:"), objref.IDOf(sender))
+	})
+
 }
 
 // NewWindowForTab creates a new window to show as a tab in a tabbed window.
 func (r *Responder) NewWindowForTab(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("newWindowForTab:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("newWindowForTab:"), objref.IDOf(sender))
+	})
+
 }
 
 // ShowWritingTools shows writing tools.
 func (r *Responder) ShowWritingTools(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("showWritingTools:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("showWritingTools:"), objref.IDOf(sender))
+	})
+
 }
 
 // PerformMnemonic handle a mnemonic.
 func (r *Responder) PerformMnemonic(string_ string) bool {
-	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("performMnemonic:"), purego.NSString(string_))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("performMnemonic:"), purego.NSString(string_))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UpdateUserActivityState updates the state of the given user activity.
 func (r *Responder) UpdateUserActivityState(userActivity obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("updateUserActivityState:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("updateUserActivityState:"), objref.IDOf(userActivity))
+	})
+
 }
 
 // UserActivity returns the user activity.
 func (r *Responder) UserActivity() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("userActivity"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("userActivity"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MakeTouchBar returns your custom subclass of the NSResponder class should override this method to create and configure your subclass’s default NSTouchBar object.
 func (r *Responder) MakeTouchBar() *TouchBar {
-	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("makeTouchBar"))
-	return TouchBarFromID(_r)
+	var _mainthread0 *TouchBar
+	purego.Main(func() {
+		_mainthread0 = func() *TouchBar {
+			_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("makeTouchBar"))
+			return TouchBarFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TouchBar returns the touch bar.
 func (r *Responder) TouchBar() *TouchBar {
-	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("touchBar"))
-	return TouchBarFromID(_r)
+	var _mainthread0 *TouchBar
+	purego.Main(func() {
+		_mainthread0 = func() *TouchBar {
+			_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("touchBar"))
+			return TouchBarFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // InterfaceStyle returns the receiver’s interface style.
 func (r *Responder) InterfaceStyle() int {
-	_r := objc.Send[int](objref.IDOf(r), objc.RegisterName("interfaceStyle"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(r), objc.RegisterName("interfaceStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetInterfaceStyle sets the receiver’s style to the style specified by interfaceStyle, such as NSMacintoshInterfaceStyle or NSWindows95InterfaceStyle.
 func (r *Responder) SetInterfaceStyle(interfaceStyle int) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setInterfaceStyle:"), interfaceStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setInterfaceStyle:"), interfaceStyle)
+	})
+
 }
 
 // EncodeRestorableStateWithCoder saves the interface-related state of the responder.
 func (r *Responder) EncodeRestorableStateWithCoder(coder obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("encodeRestorableStateWithCoder:"), objref.IDOf(coder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("encodeRestorableStateWithCoder:"), objref.IDOf(coder))
+	})
+
 }
 
 // EncodeRestorableStateWithCoderBackgroundQueue saves the interface-related state of the responder to a keyed archiver either synchronously or asynchronously on the given operation queue.
 func (r *Responder) EncodeRestorableStateWithCoderBackgroundQueue(coder obj.Object, queue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("encodeRestorableStateWithCoder:backgroundQueue:"), objref.IDOf(coder), objref.IDOf(queue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("encodeRestorableStateWithCoder:backgroundQueue:"), objref.IDOf(coder), objref.IDOf(queue))
+	})
+
 }
 
 // RestoreStateWithCoder restores the interface-related state of the responder.
 func (r *Responder) RestoreStateWithCoder(coder obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("restoreStateWithCoder:"), objref.IDOf(coder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("restoreStateWithCoder:"), objref.IDOf(coder))
+	})
+
 }
 
 // InvalidateRestorableState marks the responder’s interface-related state as dirty.
 func (r *Responder) InvalidateRestorableState() {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("invalidateRestorableState"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("invalidateRestorableState"))
+	})
+
 }
 
 // isResponder marks Responder — and, by embedding promotion, its

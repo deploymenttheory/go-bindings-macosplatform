@@ -70,66 +70,123 @@ func (cp *CertificatePanel) String() string {
 
 // RunModalForTrustShowGroup displays a certificate chain in a modal panel.
 func (cp *CertificatePanel) RunModalForTrustShowGroup(trust obj.Object, showGroup bool) int {
-	_r := objc.Send[int](objref.IDOf(cp), objc.RegisterName("runModalForTrust:showGroup:"), objref.IDOf(trust), showGroup)
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(cp), objc.RegisterName("runModalForTrust:showGroup:"), objref.IDOf(trust), showGroup)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RunModalForCertificatesShowGroup displays one or more specified certificates in a modal panel.
 func (cp *CertificatePanel) RunModalForCertificatesShowGroup(certificates obj.Object, showGroup bool) int {
-	_r := objc.Send[int](objref.IDOf(cp), objc.RegisterName("runModalForCertificates:showGroup:"), objref.IDOf(certificates), showGroup)
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(cp), objc.RegisterName("runModalForCertificates:showGroup:"), objref.IDOf(certificates), showGroup)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetPolicies specifies one or more policies that apply to the displayed certificates.
 func (cp *CertificatePanel) SetPolicies(policies obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setPolicies:"), objref.IDOf(policies))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setPolicies:"), objref.IDOf(policies))
+	})
+
 }
 
 // Policies returns an array of policies used to evaluate the status of the displayed certificates.
 func (cp *CertificatePanel) Policies() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("policies"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("policies"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetDefaultButtonTitle customizes the title of the default button.
 func (cp *CertificatePanel) SetDefaultButtonTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setDefaultButtonTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setDefaultButtonTitle:"), purego.NSString(title))
+	})
+
 }
 
 // SetAlternateButtonTitle customizes the title of the alternate button.
 func (cp *CertificatePanel) SetAlternateButtonTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAlternateButtonTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAlternateButtonTitle:"), purego.NSString(title))
+	})
+
 }
 
 // SetShowsHelp displays a Help button in the sheet or panel.
 func (cp *CertificatePanel) SetShowsHelp(showsHelp bool) {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setShowsHelp:"), showsHelp)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setShowsHelp:"), showsHelp)
+	})
+
 }
 
 // ShowsHelp reports whether the help button is currently set to be displayed.
 func (cp *CertificatePanel) ShowsHelp() bool {
-	_r := objc.Send[bool](objref.IDOf(cp), objc.RegisterName("showsHelp"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cp), objc.RegisterName("showsHelp"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetHelpAnchor sets the help anchor string for the sheet or modal panel.
 func (cp *CertificatePanel) SetHelpAnchor(anchor string) {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setHelpAnchor:"), purego.NSString(anchor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setHelpAnchor:"), purego.NSString(anchor))
+	})
+
 }
 
 // HelpAnchor returns the current help anchor string for the sheet or panel.
 func (cp *CertificatePanel) HelpAnchor() string {
-	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("helpAnchor"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("helpAnchor"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CertificateView returns the certificate view for the modal panel.
 func (cp *CertificatePanel) CertificateView() *CertificateView {
-	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("certificateView"))
-	return CertificateViewFromID(_r)
+	var _mainthread0 *CertificateView
+	purego.Main(func() {
+		_mainthread0 = func() *CertificateView {
+			_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("certificateView"))
+			return CertificateViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // isCertificatePanel marks CertificatePanel — and, by embedding promotion, its

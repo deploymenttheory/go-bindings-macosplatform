@@ -68,260 +68,457 @@ func (t *Toolbar) String() string {
 
 // NewToolbar creates a new Toolbar.
 func NewToolbar() *Toolbar {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSToolbar")), objc.RegisterName("new"))
-	return toolbarAdopt(_id)
+	var _mainthread0 *Toolbar
+	purego.Main(func() {
+		_mainthread0 = func() *Toolbar {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSToolbar")), objc.RegisterName("new"))
+			return toolbarAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewToolbarWithIdentifier creates a newly allocated toolbar with the specified identifier.
 func NewToolbarWithIdentifier(identifier obj.Object) *Toolbar {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSToolbar")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), objref.IDOf(identifier))
-	return toolbarAdopt(_id)
+	var _mainthread0 *Toolbar
+	purego.Main(func() {
+		_mainthread0 = func() *Toolbar {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSToolbar")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), objref.IDOf(identifier))
+			return toolbarAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithVisible sets a Boolean value that indicates whether the toolbar is visible.
 func (t *Toolbar) WithVisible(visible bool) *Toolbar {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setVisible:"), visible)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setVisible:"), visible)
+	})
 	return t
 }
 
 // WithDisplayMode sets a value that indicates whether the toolbar displays items using a name, icon, or combination of elements.
 func (t *Toolbar) WithDisplayMode(displayMode ToolbarDisplayMode) *Toolbar {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setDisplayMode:"), displayMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setDisplayMode:"), displayMode)
+	})
 	return t
 }
 
 // WithSelectedItemIdentifier sets the identifier of the toolbar’s currently selected item.
 func (t *Toolbar) WithSelectedItemIdentifier(selectedItemIdentifier obj.Object) *Toolbar {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setSelectedItemIdentifier:"), objref.IDOf(selectedItemIdentifier))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setSelectedItemIdentifier:"), objref.IDOf(selectedItemIdentifier))
+	})
 	return t
 }
 
 // WithAllowsUserCustomization sets a Boolean value that indicates whether users can modify the contents of the toolbar.
 func (t *Toolbar) WithAllowsUserCustomization(allowsUserCustomization bool) *Toolbar {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAllowsUserCustomization:"), allowsUserCustomization)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAllowsUserCustomization:"), allowsUserCustomization)
+	})
 	return t
 }
 
 // WithAllowsDisplayModeCustomization sets whether or not the user is allowed to change display modes at run time. This functionality is independent of customizing the order of the items themselves. Only disable when the functionality or legibility of your toolbar could not be improved by another display mode. The user’s selection will be persisted using the toolbar’s identifier when autosavesConfiguration is enabled. The default is YES for apps linked on macOS 15.0 and above.
 func (t *Toolbar) WithAllowsDisplayModeCustomization(allowsDisplayModeCustomization bool) *Toolbar {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAllowsDisplayModeCustomization:"), allowsDisplayModeCustomization)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAllowsDisplayModeCustomization:"), allowsDisplayModeCustomization)
+	})
 	return t
 }
 
 // WithItemIdentifiers sets an array of itemIdentifiers that represent the current items in the toolbar. Setting this property will set the current items in the toolbar by diffing against items that already exist. Use this with great caution if allowsUserCustomization is enabled as it will override any customizations the user has made. This property is key value observable.
 func (t *Toolbar) WithItemIdentifiers(items ...obj.Object) *Toolbar {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setItemIdentifiers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setItemIdentifiers:"), _arr)
+	})
 	return t
 }
 
 // WithCenteredItemIdentifiers sets the set of custom items to display in the center of the toolbar.
 func (t *Toolbar) WithCenteredItemIdentifiers(centeredItemIdentifiers obj.Object) *Toolbar {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCenteredItemIdentifiers:"), objref.IDOf(centeredItemIdentifiers))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCenteredItemIdentifiers:"), objref.IDOf(centeredItemIdentifiers))
+	})
 	return t
 }
 
 // WithAutosavesConfiguration sets a Boolean value that indicates whether the toolbar autosaves its configuration.
 func (t *Toolbar) WithAutosavesConfiguration(autosavesConfiguration bool) *Toolbar {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAutosavesConfiguration:"), autosavesConfiguration)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAutosavesConfiguration:"), autosavesConfiguration)
+	})
 	return t
 }
 
 // WithAllowsExtensionItems sets a Boolean value that indicates whether the toolbar can add items for Action extensions.
 func (t *Toolbar) WithAllowsExtensionItems(allowsExtensionItems bool) *Toolbar {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAllowsExtensionItems:"), allowsExtensionItems)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAllowsExtensionItems:"), allowsExtensionItems)
+	})
 	return t
 }
 
 // WithSizeMode sets the toolbar’s size mode.
 func (t *Toolbar) WithSizeMode(sizeMode ToolbarSizeMode) *Toolbar {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setSizeMode:"), sizeMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setSizeMode:"), sizeMode)
+	})
 	return t
 }
 
 // WithCenteredItemIdentifier sets the item to display in the center of the toolbar.
 func (t *Toolbar) WithCenteredItemIdentifier(centeredItemIdentifier obj.Object) *Toolbar {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCenteredItemIdentifier:"), objref.IDOf(centeredItemIdentifier))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCenteredItemIdentifier:"), objref.IDOf(centeredItemIdentifier))
+	})
 	return t
 }
 
 // WithFullScreenAccessoryView sets the toolbar’s full screen accessory view.
 func (t *Toolbar) WithFullScreenAccessoryView(fullScreenAccessoryView ViewProvider) *Toolbar {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFullScreenAccessoryView:"), objref.IDOf(fullScreenAccessoryView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFullScreenAccessoryView:"), objref.IDOf(fullScreenAccessoryView))
+	})
 	return t
 }
 
 // WithFullScreenAccessoryViewMinHeight sets the minimum height of the toolbar’s full screen accessory view.
 func (t *Toolbar) WithFullScreenAccessoryViewMinHeight(fullScreenAccessoryViewMinHeight float64) *Toolbar {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFullScreenAccessoryViewMinHeight:"), fullScreenAccessoryViewMinHeight)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFullScreenAccessoryViewMinHeight:"), fullScreenAccessoryViewMinHeight)
+	})
 	return t
 }
 
 // WithFullScreenAccessoryViewMaxHeight sets the maximum height of the toolbar’s full screen accessory view, in points.
 func (t *Toolbar) WithFullScreenAccessoryViewMaxHeight(fullScreenAccessoryViewMaxHeight float64) *Toolbar {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFullScreenAccessoryViewMaxHeight:"), fullScreenAccessoryViewMaxHeight)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFullScreenAccessoryViewMaxHeight:"), fullScreenAccessoryViewMaxHeight)
+	})
 	return t
 }
 
 // WithShowsBaselineSeparator sets a Boolean value that indicates whether the toolbar shows the separator between the toolbar and the main window contents.
 func (t *Toolbar) WithShowsBaselineSeparator(showsBaselineSeparator bool) *Toolbar {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setShowsBaselineSeparator:"), showsBaselineSeparator)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setShowsBaselineSeparator:"), showsBaselineSeparator)
+	})
 	return t
 }
 
 // InsertItemWithItemIdentifierAtIndex inserts an item into the toolbar at the specified index.
 func (t *Toolbar) InsertItemWithItemIdentifierAtIndex(itemIdentifier obj.Object, index int) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("insertItemWithItemIdentifier:atIndex:"), objref.IDOf(itemIdentifier), index)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("insertItemWithItemIdentifier:atIndex:"), objref.IDOf(itemIdentifier), index)
+	})
+
 }
 
 // RemoveItemAtIndex removes the item at the specified index in the toolbar.
 func (t *Toolbar) RemoveItemAtIndex(index int) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("removeItemAtIndex:"), index)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("removeItemAtIndex:"), index)
+	})
+
 }
 
 // RemoveItemWithItemIdentifier removes the item with matching itemIdentifier in the receiving toolbar. If multiple items share the same identifier (as is the case with space items) all matching items will be removed. To remove only a single space item, use -removeItemAtIndex: instead.
 func (t *Toolbar) RemoveItemWithItemIdentifier(itemIdentifier obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("removeItemWithItemIdentifier:"), objref.IDOf(itemIdentifier))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("removeItemWithItemIdentifier:"), objref.IDOf(itemIdentifier))
+	})
+
 }
 
 // RunCustomizationPalette displays the toolbar’s customization palette and handles any user-initiated customizations.
 func (t *Toolbar) RunCustomizationPalette(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("runCustomizationPalette:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("runCustomizationPalette:"), objref.IDOf(sender))
+	})
+
 }
 
 // ValidateVisibleItems validates the toolbar’s visible items during a window update.
 func (t *Toolbar) ValidateVisibleItems() {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("validateVisibleItems"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("validateVisibleItems"))
+	})
+
 }
 
 // IsVisible reports whether toggles the visibility of the toolbar. This property may be modified by the user in toolbars with `allowsUserCustomization` enabled. This property is key value observable on macOS 14.0 and higher.
 func (t *Toolbar) IsVisible() bool {
-	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isVisible"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isVisible"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CustomizationPaletteIsRunning reports whether the customization palette is currently running. On macOS 15.0 and above this property is key value observable.
 func (t *Toolbar) CustomizationPaletteIsRunning() bool {
-	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("customizationPaletteIsRunning"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("customizationPaletteIsRunning"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DisplayMode returns the current display mode of items in the toolbar. In toolbars with `allowsDisplayModeCustomization` enabled this is a user modifiable property. This property is key value observable.
 func (t *Toolbar) DisplayMode() ToolbarDisplayMode {
-	_r := objc.Send[ToolbarDisplayMode](objref.IDOf(t), objc.RegisterName("displayMode"))
-	return _r
+	var _mainthread0 ToolbarDisplayMode
+	purego.Main(func() {
+		_mainthread0 = func() ToolbarDisplayMode {
+			_r := objc.Send[ToolbarDisplayMode](objref.IDOf(t), objc.RegisterName("displayMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SelectedItemIdentifier sets the toolbar's selected item by identifier. Use this to force an item identifier to be selected. Toolbar manages selection of image items automatically. This method can be used to select identifiers of custom view items, or to force a selection change. See `-toolbarSelectableItemIdentifiers:` delegate method for more details. This property is key value observable.
 func (t *Toolbar) SelectedItemIdentifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("selectedItemIdentifier"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("selectedItemIdentifier"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsUserCustomization reports whether this flag controls whether or not users can configure the toolbar by dragging items around, and whether or not the customization palette can be used. The default value is false, but can be changed at any time. For instance, a developer may not want users to be able to edit the toolbar while some event is being processed.
 func (t *Toolbar) AllowsUserCustomization() bool {
-	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("allowsUserCustomization"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("allowsUserCustomization"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsDisplayModeCustomization reports whether the user is allowed to change display modes at run time. This functionality is independent of customizing the order of the items themselves. Only disable when the functionality or legibility of your toolbar could not be improved by another display mode. The user's selection will be persisted using the toolbar's `identifier` when `autosavesConfiguration` is enabled. The default is true for apps linked on macOS 15.0 and above.
 func (t *Toolbar) AllowsDisplayModeCustomization() bool {
-	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("allowsDisplayModeCustomization"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("allowsDisplayModeCustomization"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Identifier returns all toolbars with the same name will share the same display attributes, and item order. If a toolbar autosaves its configuration, the item identifier will be used as the autosave name.
 func (t *Toolbar) Identifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("identifier"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("identifier"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Items returns allows you to access all current items in the toolbar.
 //
 // Items returns the collection as a Go slice.
 func (t *Toolbar) Items() []*ToolbarItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("items"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ToolbarItem { return ToolbarItemFromID(_id) })
+	var _mainthread0 []*ToolbarItem
+	purego.Main(func() {
+		_mainthread0 = func() []*ToolbarItem {
+			_arr := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("items"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ToolbarItem { return ToolbarItemFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // VisibleItems returns allows you to access the current visible items (non clipped).
 //
 // VisibleItems returns the collection as a Go slice.
 func (t *Toolbar) VisibleItems() []*ToolbarItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("visibleItems"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ToolbarItem { return ToolbarItemFromID(_id) })
+	var _mainthread0 []*ToolbarItem
+	purego.Main(func() {
+		_mainthread0 = func() []*ToolbarItem {
+			_arr := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("visibleItems"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ToolbarItem { return ToolbarItemFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // ItemIdentifiers returns an array of itemIdentifiers that represent the current items in the toolbar. Setting this property will set the current items in the toolbar by diffing against items that already exist. Use this with great caution if `allowsUserCustomization` is enabled as it will override any customizations the user has made. This property is key value observable.
 //
 // ItemIdentifiers returns the collection as a Go slice.
 func (t *Toolbar) ItemIdentifiers() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("itemIdentifiers"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_arr := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("itemIdentifiers"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // CenteredItemIdentifiers returns items with centered identifiers will be centered together in the Toolbar relative to the window assuming space allows. The order of items is initially defined by the default set of identifiers, but may be customized by the user. Centered items may not be moved outside of the center set of items by the user. This property is archived.
 func (t *Toolbar) CenteredItemIdentifiers() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("centeredItemIdentifiers"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("centeredItemIdentifiers"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AutosavesConfiguration reports whether if `autosavesConfiguration` is true, the toolbar will automatically write changes the user makes to user defaults. Customizable toolbars will want to set this flag to true. Setting this to false means changes in configuration are not written automatically, however you can use the `configurationDictionary` method to do it yourself. Default is false.
 func (t *Toolbar) AutosavesConfiguration() bool {
-	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("autosavesConfiguration"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("autosavesConfiguration"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsExtensionItems reports whether when true, the receiver can dynamically create toolbar items for Action extensions in the toolbar configuration panel. To be included, an extension needs to declare NSExtensionServiceAllowsToolbarItem=YES in its Info.plist. The default value is false.
 func (t *Toolbar) AllowsExtensionItems() bool {
-	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("allowsExtensionItems"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("allowsExtensionItems"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetConfigurationFromDictionary specifies the new configuration details for the toolbar.
 func (t *Toolbar) SetConfigurationFromDictionary(configDict obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setConfigurationFromDictionary:"), objref.IDOf(configDict))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setConfigurationFromDictionary:"), objref.IDOf(configDict))
+	})
+
 }
 
 // SizeMode returns the size mode.
 func (t *Toolbar) SizeMode() ToolbarSizeMode {
-	_r := objc.Send[ToolbarSizeMode](objref.IDOf(t), objc.RegisterName("sizeMode"))
-	return _r
+	var _mainthread0 ToolbarSizeMode
+	purego.Main(func() {
+		_mainthread0 = func() ToolbarSizeMode {
+			_r := objc.Send[ToolbarSizeMode](objref.IDOf(t), objc.RegisterName("sizeMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CenteredItemIdentifier returns the centered item identifier.
 func (t *Toolbar) CenteredItemIdentifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("centeredItemIdentifier"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("centeredItemIdentifier"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FullScreenAccessoryView returns the full screen accessory view.
 func (t *Toolbar) FullScreenAccessoryView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("fullScreenAccessoryView"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("fullScreenAccessoryView"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FullScreenAccessoryViewMinHeight returns the full screen accessory view min height.
 func (t *Toolbar) FullScreenAccessoryViewMinHeight() float64 {
-	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("fullScreenAccessoryViewMinHeight"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("fullScreenAccessoryViewMinHeight"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FullScreenAccessoryViewMaxHeight returns the full screen accessory view max height.
 func (t *Toolbar) FullScreenAccessoryViewMaxHeight() float64 {
-	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("fullScreenAccessoryViewMaxHeight"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("fullScreenAccessoryViewMaxHeight"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsBaselineSeparator wraps the corresponding Objective-C method.
 func (t *Toolbar) ShowsBaselineSeparator() bool {
-	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("showsBaselineSeparator"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("showsBaselineSeparator"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ConfigurationDictionary returns the configuration dictionary.
 func (t *Toolbar) ConfigurationDictionary() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("configurationDictionary"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("configurationDictionary"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

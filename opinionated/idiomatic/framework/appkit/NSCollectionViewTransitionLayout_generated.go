@@ -48,44 +48,83 @@ func collectionViewTransitionLayoutAdopt(id objc.ID) *CollectionViewTransitionLa
 
 // NewCollectionViewTransitionLayoutWithCurrentLayoutNextLayout initializes and returns the transition layout object.
 func NewCollectionViewTransitionLayoutWithCurrentLayoutNextLayout(currentLayout *CollectionViewLayout, newLayout *CollectionViewLayout) *CollectionViewTransitionLayout {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewTransitionLayout")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCurrentLayout:nextLayout:"), objref.IDOf(currentLayout), objref.IDOf(newLayout))
-	return collectionViewTransitionLayoutAdopt(_id)
+	var _mainthread0 *CollectionViewTransitionLayout
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewTransitionLayout {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewTransitionLayout")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCurrentLayout:nextLayout:"), objref.IDOf(currentLayout), objref.IDOf(newLayout))
+			return collectionViewTransitionLayoutAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithTransitionProgress sets the completion percentage of the transition.
 func (cvtl *CollectionViewTransitionLayout) WithTransitionProgress(transitionProgress float64) *CollectionViewTransitionLayout {
-	objc.Send[objc.ID](objref.IDOf(cvtl), objc.RegisterName("setTransitionProgress:"), transitionProgress)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvtl), objc.RegisterName("setTransitionProgress:"), transitionProgress)
+	})
 	return cvtl
 }
 
 // UpdateValueForAnimatedKey sets the value of a key whose value you use during the animation.
 func (cvtl *CollectionViewTransitionLayout) UpdateValueForAnimatedKey(value float64, key obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(cvtl), objc.RegisterName("updateValue:forAnimatedKey:"), value, objref.IDOf(key))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvtl), objc.RegisterName("updateValue:forAnimatedKey:"), value, objref.IDOf(key))
+	})
+
 }
 
 // ValueForAnimatedKey returns the most recently set value for the specified key.
 func (cvtl *CollectionViewTransitionLayout) ValueForAnimatedKey(key obj.Object) float64 {
-	_r := objc.Send[float64](objref.IDOf(cvtl), objc.RegisterName("valueForAnimatedKey:"), objref.IDOf(key))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(cvtl), objc.RegisterName("valueForAnimatedKey:"), objref.IDOf(key))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TransitionProgress returns the transition progress.
 func (cvtl *CollectionViewTransitionLayout) TransitionProgress() float64 {
-	_r := objc.Send[float64](objref.IDOf(cvtl), objc.RegisterName("transitionProgress"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(cvtl), objc.RegisterName("transitionProgress"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CurrentLayout returns the current layout.
 func (cvtl *CollectionViewTransitionLayout) CurrentLayout() *CollectionViewLayout {
-	_r := objc.Send[objc.ID](objref.IDOf(cvtl), objc.RegisterName("currentLayout"))
-	return CollectionViewLayoutFromID(_r)
+	var _mainthread0 *CollectionViewLayout
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewLayout {
+			_r := objc.Send[objc.ID](objref.IDOf(cvtl), objc.RegisterName("currentLayout"))
+			return CollectionViewLayoutFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NextLayout returns the next layout.
 func (cvtl *CollectionViewTransitionLayout) NextLayout() *CollectionViewLayout {
-	_r := objc.Send[objc.ID](objref.IDOf(cvtl), objc.RegisterName("nextLayout"))
-	return CollectionViewLayoutFromID(_r)
+	var _mainthread0 *CollectionViewLayout
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewLayout {
+			_r := objc.Send[objc.ID](objref.IDOf(cvtl), objc.RegisterName("nextLayout"))
+			return CollectionViewLayoutFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ CollectionViewLayoutProvider = (*CollectionViewTransitionLayout)(nil)

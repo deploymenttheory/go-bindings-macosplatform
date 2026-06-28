@@ -68,7 +68,13 @@ func (avsvc *AddVoiceShortcutViewController) String() string {
 
 // NewAddVoiceShortcutViewControllerWithShortcut creates a view controller with a shortcut the user can add to Siri.
 func NewAddVoiceShortcutViewControllerWithShortcut(shortcut obj.Object) *AddVoiceShortcutViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("INUIAddVoiceShortcutViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShortcut:"), objref.IDOf(shortcut))
-	return addVoiceShortcutViewControllerAdopt(_id)
+	var _mainthread0 *AddVoiceShortcutViewController
+	purego.Main(func() {
+		_mainthread0 = func() *AddVoiceShortcutViewController {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("INUIAddVoiceShortcutViewController")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShortcut:"), objref.IDOf(shortcut))
+			return addVoiceShortcutViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }

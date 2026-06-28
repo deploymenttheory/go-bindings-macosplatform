@@ -68,32 +68,56 @@ func (pit *PlayerItemTrack) String() string {
 
 // NewPlayerItemTrack creates a new PlayerItemTrack.
 func NewPlayerItemTrack() *PlayerItemTrack {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemTrack")), objc.RegisterName("new"))
-	return playerItemTrackAdopt(_id)
+	var _mainthread0 *PlayerItemTrack
+	purego.Main(func() {
+		_mainthread0 = func() *PlayerItemTrack {
+			_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemTrack")), objc.RegisterName("new"))
+			return playerItemTrackAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithEnabled sets a Boolean value that indicates whether the player item presents the track’s media during playback.
 func (pit *PlayerItemTrack) WithEnabled(enabled bool) *PlayerItemTrack {
-	objc.Send[objc.ID](objref.IDOf(pit), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pit), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return pit
 }
 
 // WithVideoFieldMode sets a mode that specifies the handling of video frames that contain multiple fields.
 func (pit *PlayerItemTrack) WithVideoFieldMode(videoFieldMode string) *PlayerItemTrack {
-	objc.Send[objc.ID](objref.IDOf(pit), objc.RegisterName("setVideoFieldMode:"), purego.NSString(videoFieldMode))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pit), objc.RegisterName("setVideoFieldMode:"), purego.NSString(videoFieldMode))
+	})
 	return pit
 }
 
 // AssetTrack indicates the AVAssetTrack for which the AVPlayerItemTrack represents presentation state. This property is not observable. Clients must serialize their access to the resulting AVAssetTrack and related objects on the associated AVPlayer's notification queue.  By default, this queue is the main queue.
 func (pit *PlayerItemTrack) AssetTrack() *AssetTrack {
-	_r := objc.Send[objc.ID](objref.IDOf(pit), objc.RegisterName("assetTrack"))
-	return AssetTrackFromID(_r)
+	var _mainthread0 *AssetTrack
+	purego.Main(func() {
+		_mainthread0 = func() *AssetTrack {
+			_r := objc.Send[objc.ID](objref.IDOf(pit), objc.RegisterName("assetTrack"))
+			return AssetTrackFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsEnabled reports whether the track is enabled for presentation during playback. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
 func (pit *PlayerItemTrack) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(pit), objc.RegisterName("isEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(pit), objc.RegisterName("isEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CurrentVideoFrameRate returns if the media type of the assetTrack is AVMediaTypeVideo, indicates the current frame rate of the track as it plays, in units of frames per second. If the item is not playing, or if the media type of the track is not video, the value of this property is 0. This property is not observable. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.

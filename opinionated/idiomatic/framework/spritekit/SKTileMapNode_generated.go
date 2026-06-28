@@ -49,357 +49,575 @@ func tileMapNodeAdopt(id objc.ID) *TileMapNode {
 
 // NewTileMapNodeWithTileSetColumnsRowsTileSize initialize a tile map node with the specified tile set and dimensions. The tiles of the map will be empty, equivalent to the nil tile definition/group.
 func NewTileMapNodeWithTileSetColumnsRowsTileSize(tileSet *TileSet, columns int, rows int, tileSize corefoundation.CGSize) *TileMapNode {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SKTileMapNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTileSet:columns:rows:tileSize:"), objref.IDOf(tileSet), columns, rows, tileSize)
-	return tileMapNodeAdopt(_id)
+	var _mainthread0 *TileMapNode
+	purego.Main(func() {
+		_mainthread0 = func() *TileMapNode {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SKTileMapNode")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTileSet:columns:rows:tileSize:"), objref.IDOf(tileSet), columns, rows, tileSize)
+			return tileMapNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewTileMapNodeWithTileSetColumnsRowsTileSizeFillWithTileGroup initialize a tile map node with the specified tile set and dimensions, and fill it with the specified tile group.
 func NewTileMapNodeWithTileSetColumnsRowsTileSizeFillWithTileGroup(tileSet *TileSet, columns int, rows int, tileSize corefoundation.CGSize, tileGroup *TileGroup) *TileMapNode {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SKTileMapNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTileSet:columns:rows:tileSize:fillWithTileGroup:"), objref.IDOf(tileSet), columns, rows, tileSize, objref.IDOf(tileGroup))
-	return tileMapNodeAdopt(_id)
+	var _mainthread0 *TileMapNode
+	purego.Main(func() {
+		_mainthread0 = func() *TileMapNode {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SKTileMapNode")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTileSet:columns:rows:tileSize:fillWithTileGroup:"), objref.IDOf(tileSet), columns, rows, tileSize, objref.IDOf(tileGroup))
+			return tileMapNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewTileMapNodeWithTileSetColumnsRowsTileSizeTileGroupLayout initialize a tile map node with the specified tile set and dimensions, and fill it with a specific layout of tile groups that belong to the provided tile set. The tileGroupLayout array should match the dimensions of the tile map (i.e., the number of elements should be equal to columns * rows). Index 0 of the array maps to column 0, row 0 of the tile map. Index 1 is column 1, row 0, and so on, wrapping around to the next row once the index passes the number of columns in the tile map. If the array has fewer elements than the number of tiles in the map, the remaining tiles are initialized with the nil tile group. If the array has more elements than the number of tiles in the map, the extra tile groups are ignored.
 func NewTileMapNodeWithTileSetColumnsRowsTileSizeTileGroupLayout(tileSet *TileSet, columns int, rows int, tileSize corefoundation.CGSize, tileGroupLayout []*TileGroup) *TileMapNode {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SKTileMapNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTileSet:columns:rows:tileSize:tileGroupLayout:"), objref.IDOf(tileSet), columns, rows, tileSize, purego.SliceToNSArray(tileGroupLayout, func(_v *TileGroup) objc.ID { return objref.IDOf(_v) }))
-	return tileMapNodeAdopt(_id)
+	var _mainthread0 *TileMapNode
+	purego.Main(func() {
+		_mainthread0 = func() *TileMapNode {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SKTileMapNode")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTileSet:columns:rows:tileSize:tileGroupLayout:"), objref.IDOf(tileSet), columns, rows, tileSize, purego.SliceToNSArray(tileGroupLayout, func(_v *TileGroup) objc.ID { return objref.IDOf(_v) }))
+			return tileMapNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithNumberOfColumns sets the number of columns in the tile map
 func (tmn *TileMapNode) WithNumberOfColumns(numberOfColumns int) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setNumberOfColumns:"), numberOfColumns)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setNumberOfColumns:"), numberOfColumns)
+	})
 	return tmn
 }
 
 // WithNumberOfRows sets the number of rows in the tile map.
 func (tmn *TileMapNode) WithNumberOfRows(numberOfRows int) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setNumberOfRows:"), numberOfRows)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setNumberOfRows:"), numberOfRows)
+	})
 	return tmn
 }
 
 // WithTileSize sets the size of each tile in points.
 func (tmn *TileMapNode) WithTileSize(tileSize corefoundation.CGSize) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setTileSize:"), tileSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setTileSize:"), tileSize)
+	})
 	return tmn
 }
 
 // WithTileSet sets the tile set being used by this tile map. The tile map object can only display tiles that exist in this set.
 func (tmn *TileMapNode) WithTileSet(tileSet *TileSet) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setTileSet:"), objref.IDOf(tileSet))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setTileSet:"), objref.IDOf(tileSet))
+	})
 	return tmn
 }
 
 // WithColorBlendFactor sets controls the blending between the texture and the tile map object’s color. Values are clamped between zero and one where zero has no color blending and one has the maximum color blending.
 func (tmn *TileMapNode) WithColorBlendFactor(colorBlendFactor float64) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setColorBlendFactor:"), colorBlendFactor)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setColorBlendFactor:"), colorBlendFactor)
+	})
 	return tmn
 }
 
 // WithColor sets the base color for the tile map. The influence of the color over the tile map node’s textures is controlled by colorBlendFactor.
 func (tmn *TileMapNode) WithColor(color obj.Object) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setColor:"), objref.IDOf(color))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setColor:"), objref.IDOf(color))
+	})
 	return tmn
 }
 
 // WithBlendMode sets defines the blend mode to use when compositing the tile map over other nodes.
 func (tmn *TileMapNode) WithBlendMode(blendMode BlendMode) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setBlendMode:"), blendMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setBlendMode:"), blendMode)
+	})
 	return tmn
 }
 
 // WithAnchorPoint sets defines the point in the tile map that corresponds to its position.
 func (tmn *TileMapNode) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAnchorPoint:"), anchorPoint)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAnchorPoint:"), anchorPoint)
+	})
 	return tmn
 }
 
 // WithShader sets defines a shader which is applied to each tile of the tile map.
 func (tmn *TileMapNode) WithShader(shader *Shader) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setShader:"), objref.IDOf(shader))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setShader:"), objref.IDOf(shader))
+	})
 	return tmn
 }
 
 // WithLightingBitMask sets a mask that defines how the tile map is lit by light nodes in the scene.
 func (tmn *TileMapNode) WithLightingBitMask(lightingBitMask uint32) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setLightingBitMask:"), lightingBitMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setLightingBitMask:"), lightingBitMask)
+	})
 	return tmn
 }
 
 // WithEnableAutomapping sets the enable automapping.
 func (tmn *TileMapNode) WithEnableAutomapping(enableAutomapping bool) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setEnableAutomapping:"), enableAutomapping)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setEnableAutomapping:"), enableAutomapping)
+	})
 	return tmn
 }
 
 // WithPosition sets the position of the node in its parent’s coordinate system.
 func (tmn *TileMapNode) WithPosition(position corefoundation.CGPoint) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setPosition:"), position)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setPosition:"), position)
+	})
 	return tmn
 }
 
 // WithZPosition sets the height of the node relative to its parent.
 func (tmn *TileMapNode) WithZPosition(zPosition float64) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setZPosition:"), zPosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setZPosition:"), zPosition)
+	})
 	return tmn
 }
 
 // WithZRotation sets the Euler rotation about the z axis (in radians).
 func (tmn *TileMapNode) WithZRotation(zRotation float64) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setZRotation:"), zRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setZRotation:"), zRotation)
+	})
 	return tmn
 }
 
 // WithXScale sets a scaling factor that multiplies the width of a node and its children.
 func (tmn *TileMapNode) WithXScale(xScale float64) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setXScale:"), xScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setXScale:"), xScale)
+	})
 	return tmn
 }
 
 // WithYScale sets a scaling factor that multiplies the height of a node and its children.
 func (tmn *TileMapNode) WithYScale(yScale float64) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setYScale:"), yScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setYScale:"), yScale)
+	})
 	return tmn
 }
 
 // WithSpeed sets a speed modifier applied to all actions executed by a node and its descendants.
 func (tmn *TileMapNode) WithSpeed(speed float64) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setSpeed:"), speed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setSpeed:"), speed)
+	})
 	return tmn
 }
 
 // WithAlpha sets the transparency value applied to the node’s contents.
 func (tmn *TileMapNode) WithAlpha(alpha float64) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAlpha:"), alpha)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAlpha:"), alpha)
+	})
 	return tmn
 }
 
 // WithPaused sets a Boolean value that determines whether actions on the node and its descendants are processed.
 func (tmn *TileMapNode) WithPaused(paused bool) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setPaused:"), paused)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setPaused:"), paused)
+	})
 	return tmn
 }
 
 // WithHidden sets a Boolean value that determines whether a node and its descendants are rendered.
 func (tmn *TileMapNode) WithHidden(hidden bool) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setHidden:"), hidden)
+	})
 	return tmn
 }
 
 // WithUserInteractionEnabled sets a Boolean value that indicates whether the node receives touch events.
 func (tmn *TileMapNode) WithUserInteractionEnabled(userInteractionEnabled bool) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	})
 	return tmn
 }
 
 // WithName sets the node’s assignable name.
 func (tmn *TileMapNode) WithName(name string) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setName:"), purego.NSString(name))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setName:"), purego.NSString(name))
+	})
 	return tmn
 }
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (tmn *TileMapNode) WithPhysicsBody(physicsBody *PhysicsBody) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	})
 	return tmn
 }
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (tmn *TileMapNode) WithUserData(userData obj.Object) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	})
 	return tmn
 }
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (tmn *TileMapNode) WithReachConstraints(reachConstraints *ReachConstraints) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	})
 	return tmn
 }
 
 // WithConstraints sets a list of constraints to apply to the node.
 func (tmn *TileMapNode) WithConstraints(items ...*Constraint) *TileMapNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setConstraints:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setConstraints:"), _arr)
+	})
 	return tmn
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
 func (tmn *TileMapNode) WithAttributeValues(attributeValues obj.Object) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	})
 	return tmn
 }
 
 // WithAccessibilityElement sets a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (tmn *TileMapNode) WithAccessibilityElement(accessibilityElement bool) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	})
 	return tmn
 }
 
 // WithAccessibilityRole sets a string value describing the user interface element type; for example, a button.
 func (tmn *TileMapNode) WithAccessibilityRole(accessibilityRole string) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	})
 	return tmn
 }
 
 // WithAccessibilityRoleDescription sets a string value describing the user interface element name and type; for example, the Buy button.
 func (tmn *TileMapNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	})
 	return tmn
 }
 
 // WithAccessibilitySubrole sets a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (tmn *TileMapNode) WithAccessibilitySubrole(accessibilitySubrole string) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	})
 	return tmn
 }
 
 // WithAccessibilityFrame sets the size of this user interface element, in screen points.
 func (tmn *TileMapNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	})
 	return tmn
 }
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (tmn *TileMapNode) WithAccessibilityParent(accessibilityParent obj.Object) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	})
 	return tmn
 }
 
 // WithAccessibilityHelp sets the help description of this user interface element; for example, the text shown in a tooltip.
 func (tmn *TileMapNode) WithAccessibilityHelp(accessibilityHelp string) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	})
 	return tmn
 }
 
 // WithAccessibilityLabel sets a short description of this user interface element.
 func (tmn *TileMapNode) WithAccessibilityLabel(accessibilityLabel string) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	})
 	return tmn
 }
 
 // WithAccessibilityEnabled sets a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (tmn *TileMapNode) WithAccessibilityEnabled(accessibilityEnabled bool) *TileMapNode {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	})
 	return tmn
 }
 
 // FillWithTileGroup when creating a tile map node programmatically, this function performs a fill operation with the specified tile group.
 func (tmn *TileMapNode) FillWithTileGroup(tileGroup *TileGroup) {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("fillWithTileGroup:"), objref.IDOf(tileGroup))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("fillWithTileGroup:"), objref.IDOf(tileGroup))
+	})
+
 }
 
 // TileDefinitionAtColumnRow look up the tile definition at the specified tile index.
 func (tmn *TileMapNode) TileDefinitionAtColumnRow(column int, row int) *TileDefinition {
-	_r := objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("tileDefinitionAtColumn:row:"), column, row)
-	return TileDefinitionFromID(_r)
+	var _mainthread0 *TileDefinition
+	purego.Main(func() {
+		_mainthread0 = func() *TileDefinition {
+			_r := objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("tileDefinitionAtColumn:row:"), column, row)
+			return TileDefinitionFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TileGroupAtColumnRow look up the tile group at the specified tile index.
 func (tmn *TileMapNode) TileGroupAtColumnRow(column int, row int) *TileGroup {
-	_r := objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("tileGroupAtColumn:row:"), column, row)
-	return TileGroupFromID(_r)
+	var _mainthread0 *TileGroup
+	purego.Main(func() {
+		_mainthread0 = func() *TileGroup {
+			_r := objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("tileGroupAtColumn:row:"), column, row)
+			return TileGroupFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetTileGroupForColumnRow set the tile group at the specified tile index. When automapping is enabled, the appropriate tile definitions will automatically be selected and placed, possibly modifying neighboring tiles. When automapping is disabled, it will simply place the default center tile definition for the group, and will not modify any of the neihboring tiles.
 func (tmn *TileMapNode) SetTileGroupForColumnRow(tileGroup *TileGroup, column int, row int) {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setTileGroup:forColumn:row:"), objref.IDOf(tileGroup), column, row)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setTileGroup:forColumn:row:"), objref.IDOf(tileGroup), column, row)
+	})
+
 }
 
 // SetTileGroupAndTileDefinitionForColumnRow set the tile group and tile definition at the specified tile index.
 func (tmn *TileMapNode) SetTileGroupAndTileDefinitionForColumnRow(tileGroup *TileGroup, tileDefinition *TileDefinition, column int, row int) {
-	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setTileGroup:andTileDefinition:forColumn:row:"), objref.IDOf(tileGroup), objref.IDOf(tileDefinition), column, row)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setTileGroup:andTileDefinition:forColumn:row:"), objref.IDOf(tileGroup), objref.IDOf(tileDefinition), column, row)
+	})
+
 }
 
 // TileColumnIndexFromPosition returns the column index of the tile that lies under the specified position. Returns NSUIntegerMax if the position does not fall within the tile map.
 func (tmn *TileMapNode) TileColumnIndexFromPosition(position corefoundation.CGPoint) int {
-	_r := objc.Send[int](objref.IDOf(tmn), objc.RegisterName("tileColumnIndexFromPosition:"), position)
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(tmn), objc.RegisterName("tileColumnIndexFromPosition:"), position)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TileRowIndexFromPosition returns the tile map node object’s tile row index for the specified position in points.
 func (tmn *TileMapNode) TileRowIndexFromPosition(position corefoundation.CGPoint) int {
-	_r := objc.Send[int](objref.IDOf(tmn), objc.RegisterName("tileRowIndexFromPosition:"), position)
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(tmn), objc.RegisterName("tileRowIndexFromPosition:"), position)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CenterOfTileAtColumnRow returns the position of the center of the tile at the specified column and row.
 func (tmn *TileMapNode) CenterOfTileAtColumnRow(column int, row int) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(tmn), objc.RegisterName("centerOfTileAtColumn:row:"), column, row)
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(tmn), objc.RegisterName("centerOfTileAtColumn:row:"), column, row)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NumberOfColumns returns the number of columns in the tile map.
 func (tmn *TileMapNode) NumberOfColumns() int {
-	_r := objc.Send[int](objref.IDOf(tmn), objc.RegisterName("numberOfColumns"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(tmn), objc.RegisterName("numberOfColumns"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NumberOfRows returns the number of rows in the tile map.
 func (tmn *TileMapNode) NumberOfRows() int {
-	_r := objc.Send[int](objref.IDOf(tmn), objc.RegisterName("numberOfRows"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(tmn), objc.RegisterName("numberOfRows"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TileSize returns the size of each tile in the map.
 func (tmn *TileMapNode) TileSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(tmn), objc.RegisterName("tileSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(tmn), objc.RegisterName("tileSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MapSize returns the size of the tile map. This is dependent on the tileSize, the number of columns and rows in the map, and the tile set type.
 func (tmn *TileMapNode) MapSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(tmn), objc.RegisterName("mapSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(tmn), objc.RegisterName("mapSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TileSet returns the tile set being used by this tile map.
 func (tmn *TileMapNode) TileSet() *TileSet {
-	_r := objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("tileSet"))
-	return TileSetFromID(_r)
+	var _mainthread0 *TileSet
+	purego.Main(func() {
+		_mainthread0 = func() *TileSet {
+			_r := objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("tileSet"))
+			return TileSetFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ColorBlendFactor returns controls the blending between the texture and the tile map color. The valid interval of values is from 0.0 up to and including 1.0. A value above or below that interval is clamped to the minimum (0.0) if below or the maximum (1.0) if above.
 func (tmn *TileMapNode) ColorBlendFactor() float64 {
-	_r := objc.Send[float64](objref.IDOf(tmn), objc.RegisterName("colorBlendFactor"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(tmn), objc.RegisterName("colorBlendFactor"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Color returns base color for the tile map (If no texture is present, the color still is drawn).
 func (tmn *TileMapNode) Color() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("color"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("color"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BlendMode sets the blend mode to use when composing the tile map with the final framebuffer.
 func (tmn *TileMapNode) BlendMode() BlendMode {
-	_r := objc.Send[BlendMode](objref.IDOf(tmn), objc.RegisterName("blendMode"))
-	return _r
+	var _mainthread0 BlendMode
+	purego.Main(func() {
+		_mainthread0 = func() BlendMode {
+			_r := objc.Send[BlendMode](objref.IDOf(tmn), objc.RegisterName("blendMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AnchorPoint returns used to choose the location in the tile map that maps to its 'position' in the parent's coordinate space. The valid interval for each input is from 0.0 up to and including 1.0.
 func (tmn *TileMapNode) AnchorPoint() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(tmn), objc.RegisterName("anchorPoint"))
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(tmn), objc.RegisterName("anchorPoint"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Shader returns a property that determines whether the tile map is rendered using a custom shader.
 func (tmn *TileMapNode) Shader() *Shader {
-	_r := objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("shader"))
-	return ShaderFromID(_r)
+	var _mainthread0 *Shader
+	purego.Main(func() {
+		_mainthread0 = func() *Shader {
+			_r := objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("shader"))
+			return ShaderFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LightingBitMask returns bitmask to indicate being lit by a set of lights using overlapping lighting categories. A light whose category is set to a value that masks to non-zero using this mask will apply light to this sprite. When used together with a normal texture, complex lighting effects can be used.
 func (tmn *TileMapNode) LightingBitMask() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(tmn), objc.RegisterName("lightingBitMask"))
-	return _r
+	var _mainthread0 uint32
+	purego.Main(func() {
+		_mainthread0 = func() uint32 {
+			_r := objc.Send[uint32](objref.IDOf(tmn), objc.RegisterName("lightingBitMask"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // EnableAutomapping wraps the corresponding Objective-C method.
 func (tmn *TileMapNode) EnableAutomapping() bool {
-	_r := objc.Send[bool](objref.IDOf(tmn), objc.RegisterName("enableAutomapping"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tmn), objc.RegisterName("enableAutomapping"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ NodeProvider = (*TileMapNode)(nil)

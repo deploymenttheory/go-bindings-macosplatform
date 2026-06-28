@@ -66,6 +66,12 @@ func (baiic *BluetoothAccessibilityIgnoredImageCell) String() string {
 
 // NewBluetoothAccessibilityIgnoredImageCell creates a new BluetoothAccessibilityIgnoredImageCell.
 func NewBluetoothAccessibilityIgnoredImageCell() *BluetoothAccessibilityIgnoredImageCell {
-	_id := objc.Send[objc.ID](objc.ID(_class("IOBluetoothAccessibilityIgnoredImageCell")), objc.RegisterName("new"))
-	return bluetoothAccessibilityIgnoredImageCellAdopt(_id)
+	var _mainthread0 *BluetoothAccessibilityIgnoredImageCell
+	purego.Main(func() {
+		_mainthread0 = func() *BluetoothAccessibilityIgnoredImageCell {
+			_id := objc.Send[objc.ID](objc.ID(_class("IOBluetoothAccessibilityIgnoredImageCell")), objc.RegisterName("new"))
+			return bluetoothAccessibilityIgnoredImageCellAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }

@@ -52,920 +52,1447 @@ func matrixAdopt(id objc.ID) *Matrix {
 
 // NewMatrixWithFrame initializes a newly allocated matrix with the specified frame.
 func NewMatrixWithFrame(frameRect corefoundation.CGRect) *Matrix {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMatrix")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:"), frameRect)
-	return matrixAdopt(_id)
+	var _mainthread0 *Matrix
+	purego.Main(func() {
+		_mainthread0 = func() *Matrix {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSMatrix")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:"), frameRect)
+			return matrixAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewMatrixWithFrameModePrototypeNumberOfRowsNumberOfColumns initializes and returns a newly allocated matrix of the specified size using the given cell as a prototype.
 func NewMatrixWithFrameModePrototypeNumberOfRowsNumberOfColumns(frameRect corefoundation.CGRect, mode MatrixMode, cell *Cell, rowsHigh int, colsWide int) *Matrix {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMatrix")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:mode:prototype:numberOfRows:numberOfColumns:"), frameRect, mode, objref.IDOf(cell), rowsHigh, colsWide)
-	return matrixAdopt(_id)
+	var _mainthread0 *Matrix
+	purego.Main(func() {
+		_mainthread0 = func() *Matrix {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSMatrix")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:mode:prototype:numberOfRows:numberOfColumns:"), frameRect, mode, objref.IDOf(cell), rowsHigh, colsWide)
+			return matrixAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithPrototype sets the prototype cell that’s copied whenever the matrix creates a new cell.
 func (m *Matrix) WithPrototype(prototype CellProvider) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setPrototype:"), objref.IDOf(prototype))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setPrototype:"), objref.IDOf(prototype))
+	})
 	return m
 }
 
 // WithMode sets the selection mode of the receiver.
 func (m *Matrix) WithMode(mode MatrixMode) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setMode:"), mode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setMode:"), mode)
+	})
 	return m
 }
 
 // WithAllowsEmptySelection sets a Boolean that indicates whether a radio-mode matrix supports an empty selection.
 func (m *Matrix) WithAllowsEmptySelection(allowsEmptySelection bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAllowsEmptySelection:"), allowsEmptySelection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAllowsEmptySelection:"), allowsEmptySelection)
+	})
 	return m
 }
 
 // WithSelectionByRect sets a Boolean that indicates whether the user can select a rectangle of cells in the receiver by dragging the cursor.
 func (m *Matrix) WithSelectionByRect(selectionByRect bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setSelectionByRect:"), selectionByRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setSelectionByRect:"), selectionByRect)
+	})
 	return m
 }
 
 // WithCellSize sets the size of each cell in the matrix.
 func (m *Matrix) WithCellSize(cellSize corefoundation.CGSize) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setCellSize:"), cellSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setCellSize:"), cellSize)
+	})
 	return m
 }
 
 // WithIntercellSpacing sets the vertical and horizontal spacing between cells in the matrix.
 func (m *Matrix) WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setIntercellSpacing:"), intercellSpacing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setIntercellSpacing:"), intercellSpacing)
+	})
 	return m
 }
 
 // WithBackgroundColor sets the background color of the matrix (the space between the cells).
 func (m *Matrix) WithBackgroundColor(backgroundColor *Color) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	})
 	return m
 }
 
 // WithCellBackgroundColor sets the background color of the matrix’s cells.
 func (m *Matrix) WithCellBackgroundColor(cellBackgroundColor *Color) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setCellBackgroundColor:"), objref.IDOf(cellBackgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setCellBackgroundColor:"), objref.IDOf(cellBackgroundColor))
+	})
 	return m
 }
 
 // WithDrawsCellBackground sets a Boolean that indicates whether the matrix draws the background within each of its cells.
 func (m *Matrix) WithDrawsCellBackground(drawsCellBackground bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setDrawsCellBackground:"), drawsCellBackground)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setDrawsCellBackground:"), drawsCellBackground)
+	})
 	return m
 }
 
 // WithDrawsBackground sets a Boolean that indicates whether the matrix draws its background.
 func (m *Matrix) WithDrawsBackground(drawsBackground bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	})
 	return m
 }
 
 // WithAutosizesCells sets a Boolean that indicates whether the cell sizes change when the receiver is resized.
 func (m *Matrix) WithAutosizesCells(autosizesCells bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAutosizesCells:"), autosizesCells)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAutosizesCells:"), autosizesCells)
+	})
 	return m
 }
 
 // WithAutoscroll sets a Boolean that indicates whether the receiver is automatically scrolled.
 func (m *Matrix) WithAutoscroll(autoscroll bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAutoscroll:"), autoscroll)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAutoscroll:"), autoscroll)
+	})
 	return m
 }
 
 // WithAutorecalculatesCellSize sets a Boolean that indicates whether the matrix auto-recalculates its cell size.
 func (m *Matrix) WithAutorecalculatesCellSize(autorecalculatesCellSize bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAutorecalculatesCellSize:"), autorecalculatesCellSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAutorecalculatesCellSize:"), autorecalculatesCellSize)
+	})
 	return m
 }
 
 // WithTabKeyTraversesCells sets a Boolean that indicates whether pressing the Tab key advances the key cell to the next selectable cell.
 func (m *Matrix) WithTabKeyTraversesCells(tabKeyTraversesCells bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setTabKeyTraversesCells:"), tabKeyTraversesCells)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setTabKeyTraversesCells:"), tabKeyTraversesCells)
+	})
 	return m
 }
 
 // WithKeyCell sets the cell that will be clicked when the user presses the Space bar.
 func (m *Matrix) WithKeyCell(keyCell CellProvider) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setKeyCell:"), objref.IDOf(keyCell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setKeyCell:"), objref.IDOf(keyCell))
+	})
 	return m
 }
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (m *Matrix) WithTarget(target obj.Object) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return m
 }
 
 // WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
 func (m *Matrix) WithTag(tag int) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setTag:"), tag)
+	})
 	return m
 }
 
 // WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 func (m *Matrix) WithIgnoresMultiClick(ignoresMultiClick bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	})
 	return m
 }
 
 // WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 func (m *Matrix) WithContinuous(continuous bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return m
 }
 
 // WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
 func (m *Matrix) WithEnabled(enabled bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return m
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
 func (m *Matrix) WithRefusesFirstResponder(refusesFirstResponder bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return m
 }
 
 // WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
 func (m *Matrix) WithHighlighted(highlighted bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return m
 }
 
 // WithControlSize sets the size of the control.
 func (m *Matrix) WithControlSize(controlSize ControlSize) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return m
 }
 
 // WithFormatter sets the receiver’s formatter.
 func (m *Matrix) WithFormatter(formatter obj.Object) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return m
 }
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (m *Matrix) WithObjectValue(objectValue obj.Object) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return m
 }
 
 // WithStringValue sets the value of the receiver’s cell as an NSString object.
 func (m *Matrix) WithStringValue(stringValue string) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return m
 }
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (m *Matrix) WithAttributedStringValue(attributedStringValue obj.Object) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return m
 }
 
 // WithIntValue sets the value of the receiver’s cell as an integer.
 func (m *Matrix) WithIntValue(intValue int) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return m
 }
 
 // WithIntegerValue sets the value of the receiver’s cell as an integer value.
 func (m *Matrix) WithIntegerValue(integerValue int) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return m
 }
 
 // WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
 func (m *Matrix) WithFloatValue(floatValue float32) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return m
 }
 
 // WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
 func (m *Matrix) WithDoubleValue(doubleValue float64) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return m
 }
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (m *Matrix) WithFont(font *Font) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return m
 }
 
 // WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
 func (m *Matrix) WithUsesSingleLineMode(usesSingleLineMode bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return m
 }
 
 // WithLineBreakMode sets the line break mode to use for text in the control’s cell.
 func (m *Matrix) WithLineBreakMode(lineBreakMode LineBreakMode) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return m
 }
 
 // WithAlignment sets the alignment mode of the text in the receiver’s cell.
 func (m *Matrix) WithAlignment(alignment TextAlignment) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return m
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (m *Matrix) WithBaseWritingDirection(baseWritingDirection WritingDirection) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return m
 }
 
 // WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 func (m *Matrix) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	})
 	return m
 }
 
 // WithCell sets the cell.
 func (m *Matrix) WithCell(cell CellProvider) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	})
 	return m
 }
 
 // WithSubviews sets the subviews.
 func (m *Matrix) WithSubviews(items ...ViewProvider) *Matrix {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return m
 }
 
 // WithHidden sets the hidden.
 func (m *Matrix) WithHidden(hidden bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setHidden:"), hidden)
+	})
 	return m
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (m *Matrix) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return m
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (m *Matrix) WithAutoresizesSubviews(autoresizesSubviews bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return m
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (m *Matrix) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return m
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (m *Matrix) WithFrame(frame corefoundation.CGRect) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setFrame:"), frame)
+	})
 	return m
 }
 
 // WithFrameRotation sets the frame rotation.
 func (m *Matrix) WithFrameRotation(frameRotation float64) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return m
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (m *Matrix) WithFrameCenterRotation(frameCenterRotation float64) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return m
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (m *Matrix) WithBoundsRotation(boundsRotation float64) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return m
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (m *Matrix) WithBounds(bounds corefoundation.CGRect) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setBounds:"), bounds)
+	})
 	return m
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (m *Matrix) WithCanDrawConcurrently(canDrawConcurrently bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return m
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (m *Matrix) WithNeedsDisplay(needsDisplay bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return m
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (m *Matrix) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return m
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (m *Matrix) WithWantsRestingTouches(wantsRestingTouches bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return m
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (m *Matrix) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return m
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (m *Matrix) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return m
 }
 
 // WithWantsLayer sets the wants layer.
 func (m *Matrix) WithWantsLayer(wantsLayer bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return m
 }
 
 // WithLayer sets the layer.
 func (m *Matrix) WithLayer(layer obj.Object) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return m
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (m *Matrix) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return m
 }
 
 // WithNeedsLayout sets the needs layout.
 func (m *Matrix) WithNeedsLayout(needsLayout bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return m
 }
 
 // WithAlphaValue sets the alpha value.
 func (m *Matrix) WithAlphaValue(alphaValue float64) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return m
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (m *Matrix) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return m
 }
 
 // WithBackgroundFilters sets the background filters.
 func (m *Matrix) WithBackgroundFilters(items ...obj.Object) *Matrix {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return m
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (m *Matrix) WithCompositingFilter(compositingFilter obj.Object) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return m
 }
 
 // WithContentFilters sets the content filters.
 func (m *Matrix) WithContentFilters(items ...obj.Object) *Matrix {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return m
 }
 
 // WithShadow sets the shadow.
 func (m *Matrix) WithShadow(shadow *Shadow) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return m
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (m *Matrix) WithClipsToBounds(clipsToBounds bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return m
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (m *Matrix) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return m
 }
 
 // WithToolTip sets the tool tip.
 func (m *Matrix) WithToolTip(toolTip string) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return m
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (m *Matrix) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return m
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (m *Matrix) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return m
 }
 
 // WithNextKeyView sets the next key view.
 func (m *Matrix) WithNextKeyView(nextKeyView ViewProvider) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return m
 }
 
 // WithFocusRingType sets the focus ring type.
 func (m *Matrix) WithFocusRingType(focusRingType FocusRingType) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return m
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (m *Matrix) WithGestureRecognizers(items ...GestureRecognizerProvider) *Matrix {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return m
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (m *Matrix) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return m
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (m *Matrix) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return m
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (m *Matrix) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return m
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (m *Matrix) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return m
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (m *Matrix) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return m
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (m *Matrix) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return m
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (m *Matrix) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return m
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (m *Matrix) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return m
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (m *Matrix) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return m
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (m *Matrix) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return m
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (m *Matrix) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return m
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (m *Matrix) WithNextResponder(nextResponder ResponderProvider) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return m
 }
 
 // WithMenu sets returns the responder’s menu.
 func (m *Matrix) WithMenu(menu *Menu) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return m
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (m *Matrix) WithUserActivity(userActivity obj.Object) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return m
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (m *Matrix) WithTouchBar(touchBar *TouchBar) *Matrix {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return m
 }
 
 // MakeCellAtRowColumn creates a new cell at the location specified by the given row and column in the receiver.
 func (m *Matrix) MakeCellAtRowColumn(row int, col int) *Cell {
-	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("makeCellAtRow:column:"), row, col)
-	return CellFromID(_r)
+	var _mainthread0 *Cell
+	purego.Main(func() {
+		_mainthread0 = func() *Cell {
+			_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("makeCellAtRow:column:"), row, col)
+			return CellFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SortUsingFunctionContext sorts the receiver’s cells in ascending order as defined by the specified comparison function.
 func (m *Matrix) SortUsingFunctionContext(compare unsafe.Pointer, context_ unsafe.Pointer) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("sortUsingFunction:context:"), compare, context_)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("sortUsingFunction:context:"), compare, context_)
+	})
+
 }
 
 // SetSelectionFromToAnchorHighlight programmatically selects a range of cells.
 func (m *Matrix) SetSelectionFromToAnchorHighlight(startPos int, endPos int, anchorPos int, lit bool) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setSelectionFrom:to:anchor:highlight:"), startPos, endPos, anchorPos, lit)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setSelectionFrom:to:anchor:highlight:"), startPos, endPos, anchorPos, lit)
+	})
+
 }
 
 // DeselectSelectedCell deselects the selected cell or cells.
 func (m *Matrix) DeselectSelectedCell() {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("deselectSelectedCell"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("deselectSelectedCell"))
+	})
+
 }
 
 // DeselectAllCells deselects all cells in the receiver and, if necessary, redisplays the receiver.
 func (m *Matrix) DeselectAllCells() {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("deselectAllCells"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("deselectAllCells"))
+	})
+
 }
 
 // SelectCellAtRowColumn selects the cell at the specified row and column within the receiver.
 func (m *Matrix) SelectCellAtRowColumn(row int, col int) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("selectCellAtRow:column:"), row, col)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("selectCellAtRow:column:"), row, col)
+	})
+
 }
 
 // SelectAll selects and highlights all cells in the receiver.
 func (m *Matrix) SelectAll(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("selectAll:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("selectAll:"), objref.IDOf(sender))
+	})
+
 }
 
 // SelectCellWithTag selects the last cell with the given tag.
 func (m *Matrix) SelectCellWithTag(tag int) bool {
-	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("selectCellWithTag:"), tag)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("selectCellWithTag:"), tag)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetScrollable specifies whether the cells in the matrix are scrollable.
 func (m *Matrix) SetScrollable(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setScrollable:"), flag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setScrollable:"), flag)
+	})
+
 }
 
 // SetStateAtRowColumn sets the state of the cell at specified location.
 func (m *Matrix) SetStateAtRowColumn(value int, row int, col int) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setState:atRow:column:"), value, row, col)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setState:atRow:column:"), value, row, col)
+	})
+
 }
 
 // GetNumberOfRowsColumns obtains the number of rows and columns in the receiver.
 func (m *Matrix) GetNumberOfRowsColumns() (rowCount int64, colCount int64) {
-	var _out0 int64
-	var _out1 int64
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("getNumberOfRows:columns:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return _out0, _out1
+	var _mainthread0 int64
+	var _mainthread1 int64
+	purego.Main(func() {
+		_mainthread0, _mainthread1 = func() (rowCount int64, colCount int64) {
+			var _out0 int64
+			var _out1 int64
+			objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("getNumberOfRows:columns:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+			return _out0, _out1
+		}()
+	})
+	return _mainthread0, _mainthread1
+
 }
 
 // CellAtRowColumn returns the cell at the specified row and column.
 func (m *Matrix) CellAtRowColumn(row int, col int) *Cell {
-	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("cellAtRow:column:"), row, col)
-	return CellFromID(_r)
+	var _mainthread0 *Cell
+	purego.Main(func() {
+		_mainthread0 = func() *Cell {
+			_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("cellAtRow:column:"), row, col)
+			return CellFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CellFrameAtRowColumn returns the frame rectangle of the cell that would be drawn at the specified location.
 func (m *Matrix) CellFrameAtRowColumn(row int, col int) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(m), objc.RegisterName("cellFrameAtRow:column:"), row, col)
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(m), objc.RegisterName("cellFrameAtRow:column:"), row, col)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // GetRowColumnOfCell searches the receiver for the specified cell and returns the row and column of the cell
 func (m *Matrix) GetRowColumnOfCell(cell *Cell) (ok bool, row int64, col int64) {
-	var _out0 int64
-	var _out1 int64
-	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("getRow:column:ofCell:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), objref.IDOf(cell))
-	return _r, _out0, _out1
+	var _mainthread0 bool
+	var _mainthread1 int64
+	var _mainthread2 int64
+	purego.Main(func() {
+		_mainthread0, _mainthread1, _mainthread2 = func() (ok bool, row int64, col int64) {
+			var _out0 int64
+			var _out1 int64
+			_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("getRow:column:ofCell:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), objref.IDOf(cell))
+			return _r, _out0, _out1
+		}()
+	})
+	return _mainthread0, _mainthread1, _mainthread2
+
 }
 
 // GetRowColumnForPoint indicates whether the specified point lies within one of the cells of the matrix and returns the location of the cell within which the point lies.
 func (m *Matrix) GetRowColumnForPoint(point corefoundation.CGPoint) (ok bool, row int64, col int64) {
-	var _out0 int64
-	var _out1 int64
-	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("getRow:column:forPoint:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), point)
-	return _r, _out0, _out1
+	var _mainthread0 bool
+	var _mainthread1 int64
+	var _mainthread2 int64
+	purego.Main(func() {
+		_mainthread0, _mainthread1, _mainthread2 = func() (ok bool, row int64, col int64) {
+			var _out0 int64
+			var _out1 int64
+			_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("getRow:column:forPoint:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), point)
+			return _r, _out0, _out1
+		}()
+	})
+	return _mainthread0, _mainthread1, _mainthread2
+
 }
 
 // RenewRowsColumns changes the number of rows and columns in the receiver.
 func (m *Matrix) RenewRowsColumns(newRows int, newCols int) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("renewRows:columns:"), newRows, newCols)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("renewRows:columns:"), newRows, newCols)
+	})
+
 }
 
 // PutCellAtRowColumn replaces the cell at the specified row and column with the new cell.
 func (m *Matrix) PutCellAtRowColumn(newCell *Cell, row int, col int) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("putCell:atRow:column:"), objref.IDOf(newCell), row, col)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("putCell:atRow:column:"), objref.IDOf(newCell), row, col)
+	})
+
 }
 
 // AddRow adds a new row of cells below the last row.
 func (m *Matrix) AddRow() {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("addRow"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("addRow"))
+	})
+
 }
 
 // AddRowWithCells adds a new row of cells below the last row, using the specified cells.
 func (m *Matrix) AddRowWithCells(newCells []*Cell) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("addRowWithCells:"), purego.SliceToNSArray(newCells, func(_v *Cell) objc.ID { return objref.IDOf(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("addRowWithCells:"), purego.SliceToNSArray(newCells, func(_v *Cell) objc.ID { return objref.IDOf(_v) }))
+	})
+
 }
 
 // InsertRow inserts a new row of cells before the specified row.
 func (m *Matrix) InsertRow(row int) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("insertRow:"), row)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("insertRow:"), row)
+	})
+
 }
 
 // InsertRowWithCells inserts a new row of cells before the specified row, using the given cells.
 func (m *Matrix) InsertRowWithCells(row int, newCells []*Cell) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("insertRow:withCells:"), row, purego.SliceToNSArray(newCells, func(_v *Cell) objc.ID { return objref.IDOf(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("insertRow:withCells:"), row, purego.SliceToNSArray(newCells, func(_v *Cell) objc.ID { return objref.IDOf(_v) }))
+	})
+
 }
 
 // RemoveRow removes the specified row from the receiver.
 func (m *Matrix) RemoveRow(row int) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("removeRow:"), row)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("removeRow:"), row)
+	})
+
 }
 
 // AddColumn adds a new column of cells to the right of the last column.
 func (m *Matrix) AddColumn() {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("addColumn"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("addColumn"))
+	})
+
 }
 
 // AddColumnWithCells adds a new column of cells to the right of the last column, using the given cells.
 func (m *Matrix) AddColumnWithCells(newCells []*Cell) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("addColumnWithCells:"), purego.SliceToNSArray(newCells, func(_v *Cell) objc.ID { return objref.IDOf(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("addColumnWithCells:"), purego.SliceToNSArray(newCells, func(_v *Cell) objc.ID { return objref.IDOf(_v) }))
+	})
+
 }
 
 // InsertColumn inserts a new column of cells at the specified location.
 func (m *Matrix) InsertColumn(column int) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("insertColumn:"), column)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("insertColumn:"), column)
+	})
+
 }
 
 // InsertColumnWithCells inserts a new column of cells before the specified column, using the given cells.
 func (m *Matrix) InsertColumnWithCells(column int, newCells []*Cell) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("insertColumn:withCells:"), column, purego.SliceToNSArray(newCells, func(_v *Cell) objc.ID { return objref.IDOf(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("insertColumn:withCells:"), column, purego.SliceToNSArray(newCells, func(_v *Cell) objc.ID { return objref.IDOf(_v) }))
+	})
+
 }
 
 // RemoveColumn removes the specified column at from the receiver.
 func (m *Matrix) RemoveColumn(col int) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("removeColumn:"), col)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("removeColumn:"), col)
+	})
+
 }
 
 // CellWithTag searches the receiver and returns the last cell matching the specified tag.
 func (m *Matrix) CellWithTag(tag int) *Cell {
-	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("cellWithTag:"), tag)
-	return CellFromID(_r)
+	var _mainthread0 *Cell
+	purego.Main(func() {
+		_mainthread0 = func() *Cell {
+			_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("cellWithTag:"), tag)
+			return CellFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SizeToCells changes the width and the height of the receiver’s frame so it exactly contains the cells.
 func (m *Matrix) SizeToCells() {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("sizeToCells"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("sizeToCells"))
+	})
+
 }
 
 // SetValidateSize specifies whether the receiver’s size information is validated.
 func (m *Matrix) SetValidateSize(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setValidateSize:"), flag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setValidateSize:"), flag)
+	})
+
 }
 
 // DrawCellAtRowColumn displays the cell at the specified row and column.
 func (m *Matrix) DrawCellAtRowColumn(row int, col int) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("drawCellAtRow:column:"), row, col)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("drawCellAtRow:column:"), row, col)
+	})
+
 }
 
 // HighlightCellAtRowColumn highlights or unhighlights the cell at the specified row and column location.
 func (m *Matrix) HighlightCellAtRowColumn(flag bool, row int, col int) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("highlightCell:atRow:column:"), flag, row, col)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("highlightCell:atRow:column:"), flag, row, col)
+	})
+
 }
 
 // ScrollCellToVisibleAtRowColumn scrolls the receiver so the specified cell is visible.
 func (m *Matrix) ScrollCellToVisibleAtRowColumn(row int, col int) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("scrollCellToVisibleAtRow:column:"), row, col)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("scrollCellToVisibleAtRow:column:"), row, col)
+	})
+
 }
 
 // SendAction reports whether if the selected cell has both an action and a target, sends its action to its target.
 func (m *Matrix) SendAction() bool {
-	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("sendAction"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("sendAction"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SendDoubleAction sends the double-click action message to the target of the receiver.
 func (m *Matrix) SendDoubleAction() {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("sendDoubleAction"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("sendDoubleAction"))
+	})
+
 }
 
 // TextShouldBeginEditing requests permission to begin editing text.
 func (m *Matrix) TextShouldBeginEditing(textObject *Text) bool {
-	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("textShouldBeginEditing:"), objref.IDOf(textObject))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("textShouldBeginEditing:"), objref.IDOf(textObject))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TextShouldEndEditing requests permission to end editing.
 func (m *Matrix) TextShouldEndEditing(textObject *Text) bool {
-	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("textShouldEndEditing:"), objref.IDOf(textObject))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("textShouldEndEditing:"), objref.IDOf(textObject))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TextDidBeginEditing invoked when there’s a change in the text after the receiver gains first responder status.
 func (m *Matrix) TextDidBeginEditing(notification obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("textDidBeginEditing:"), objref.IDOf(notification))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("textDidBeginEditing:"), objref.IDOf(notification))
+	})
+
 }
 
 // TextDidEndEditing invoked when text editing ends.
 func (m *Matrix) TextDidEndEditing(notification obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("textDidEndEditing:"), objref.IDOf(notification))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("textDidEndEditing:"), objref.IDOf(notification))
+	})
+
 }
 
 // TextDidChange invoked when a key-down event or paste operation occurs that changes the receiver’s contents.
 func (m *Matrix) TextDidChange(notification obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("textDidChange:"), objref.IDOf(notification))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("textDidChange:"), objref.IDOf(notification))
+	})
+
 }
 
 // SelectText selects text in the currently selected cell or in the key cell.
 func (m *Matrix) SelectText(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("selectText:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("selectText:"), objref.IDOf(sender))
+	})
+
 }
 
 // SelectTextAtRowColumn selects the text in the cell at the specified location and returns the cell.
 func (m *Matrix) SelectTextAtRowColumn(row int, col int) *Cell {
-	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("selectTextAtRow:column:"), row, col)
-	return CellFromID(_r)
+	var _mainthread0 *Cell
+	purego.Main(func() {
+		_mainthread0 = func() *Cell {
+			_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("selectTextAtRow:column:"), row, col)
+			return CellFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetToolTipForCell sets the tooltip for the cell.
 func (m *Matrix) SetToolTipForCell(toolTipString string, cell *Cell) {
-	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setToolTip:forCell:"), purego.NSString(toolTipString), objref.IDOf(cell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setToolTip:forCell:"), purego.NSString(toolTipString), objref.IDOf(cell))
+	})
+
 }
 
 // ToolTipForCell returns the tooltip for the specified cell.
 func (m *Matrix) ToolTipForCell(cell *Cell) string {
-	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("toolTipForCell:"), objref.IDOf(cell))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("toolTipForCell:"), objref.IDOf(cell))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Prototype returns the prototype.
 func (m *Matrix) Prototype() *Cell {
-	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("prototype"))
-	return CellFromID(_r)
+	var _mainthread0 *Cell
+	purego.Main(func() {
+		_mainthread0 = func() *Cell {
+			_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("prototype"))
+			return CellFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Mode returns the mode.
 func (m *Matrix) Mode() MatrixMode {
-	_r := objc.Send[MatrixMode](objref.IDOf(m), objc.RegisterName("mode"))
-	return _r
+	var _mainthread0 MatrixMode
+	purego.Main(func() {
+		_mainthread0 = func() MatrixMode {
+			_r := objc.Send[MatrixMode](objref.IDOf(m), objc.RegisterName("mode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsEmptySelection wraps the corresponding Objective-C method.
 func (m *Matrix) AllowsEmptySelection() bool {
-	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("allowsEmptySelection"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("allowsEmptySelection"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Cells returns the cells.
 //
 // Cells returns the collection as a Go slice.
 func (m *Matrix) Cells() []*Cell {
-	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("cells"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Cell { return CellFromID(_id) })
+	var _mainthread0 []*Cell
+	purego.Main(func() {
+		_mainthread0 = func() []*Cell {
+			_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("cells"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Cell { return CellFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // SelectedCells returns the selected cells.
 //
 // SelectedCells returns the collection as a Go slice.
 func (m *Matrix) SelectedCells() []*Cell {
-	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("selectedCells"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Cell { return CellFromID(_id) })
+	var _mainthread0 []*Cell
+	purego.Main(func() {
+		_mainthread0 = func() []*Cell {
+			_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("selectedCells"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Cell { return CellFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // SelectedRow returns the selected row.
 func (m *Matrix) SelectedRow() int {
-	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("selectedRow"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("selectedRow"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SelectedColumn returns the selected column.
 func (m *Matrix) SelectedColumn() int {
-	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("selectedColumn"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("selectedColumn"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsSelectionByRect reports whether the object is selection by rect.
 func (m *Matrix) IsSelectionByRect() bool {
-	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("isSelectionByRect"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("isSelectionByRect"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CellSize returns the cell size.
 func (m *Matrix) CellSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(m), objc.RegisterName("cellSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(m), objc.RegisterName("cellSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IntercellSpacing returns the intercell spacing.
 func (m *Matrix) IntercellSpacing() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(m), objc.RegisterName("intercellSpacing"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(m), objc.RegisterName("intercellSpacing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BackgroundColor returns the background color.
 func (m *Matrix) BackgroundColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("backgroundColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("backgroundColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CellBackgroundColor returns the cell background color.
 func (m *Matrix) CellBackgroundColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("cellBackgroundColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("cellBackgroundColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DrawsCellBackground wraps the corresponding Objective-C method.
 func (m *Matrix) DrawsCellBackground() bool {
-	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("drawsCellBackground"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("drawsCellBackground"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DrawsBackground wraps the corresponding Objective-C method.
 func (m *Matrix) DrawsBackground() bool {
-	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("drawsBackground"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("drawsBackground"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NumberOfRows returns the number of rows.
 func (m *Matrix) NumberOfRows() int {
-	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("numberOfRows"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("numberOfRows"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NumberOfColumns returns the number of columns.
 func (m *Matrix) NumberOfColumns() int {
-	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("numberOfColumns"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("numberOfColumns"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AutosizesCells wraps the corresponding Objective-C method.
 func (m *Matrix) AutosizesCells() bool {
-	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("autosizesCells"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("autosizesCells"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsAutoscroll reports whether the object is autoscroll.
 func (m *Matrix) IsAutoscroll() bool {
-	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("isAutoscroll"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("isAutoscroll"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MouseDownFlags returns the mouse down flags.
 func (m *Matrix) MouseDownFlags() int {
-	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("mouseDownFlags"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("mouseDownFlags"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AutorecalculatesCellSize wraps the corresponding Objective-C method.
 func (m *Matrix) AutorecalculatesCellSize() bool {
-	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("autorecalculatesCellSize"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("autorecalculatesCellSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TabKeyTraversesCells wraps the corresponding Objective-C method.
 func (m *Matrix) TabKeyTraversesCells() bool {
-	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("tabKeyTraversesCells"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("tabKeyTraversesCells"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // KeyCell returns the key cell.
 func (m *Matrix) KeyCell() *Cell {
-	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("keyCell"))
-	return CellFromID(_r)
+	var _mainthread0 *Cell
+	purego.Main(func() {
+		_mainthread0 = func() *Cell {
+			_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("keyCell"))
+			return CellFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // isMatrix marks Matrix — and, by embedding promotion, its

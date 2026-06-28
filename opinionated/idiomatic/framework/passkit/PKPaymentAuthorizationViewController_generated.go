@@ -68,14 +68,26 @@ func (pavc *PaymentAuthorizationViewController) String() string {
 
 // NewPaymentAuthorizationViewControllerWithPaymentRequest initializes and returns a payment authorization view controller.
 func NewPaymentAuthorizationViewControllerWithPaymentRequest(request *PaymentRequest) *PaymentAuthorizationViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPaymentAuthorizationViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentRequest:"), objref.IDOf(request))
-	return paymentAuthorizationViewControllerAdopt(_id)
+	var _mainthread0 *PaymentAuthorizationViewController
+	purego.Main(func() {
+		_mainthread0 = func() *PaymentAuthorizationViewController {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("PKPaymentAuthorizationViewController")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentRequest:"), objref.IDOf(request))
+			return paymentAuthorizationViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewPaymentAuthorizationViewControllerWithDisbursementRequest initializes and returns a new payment authorization view controller with the provided disbursement request.
 func NewPaymentAuthorizationViewControllerWithDisbursementRequest(request *DisbursementRequest) *PaymentAuthorizationViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPaymentAuthorizationViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisbursementRequest:"), objref.IDOf(request))
-	return paymentAuthorizationViewControllerAdopt(_id)
+	var _mainthread0 *PaymentAuthorizationViewController
+	purego.Main(func() {
+		_mainthread0 = func() *PaymentAuthorizationViewController {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("PKPaymentAuthorizationViewController")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisbursementRequest:"), objref.IDOf(request))
+			return paymentAuthorizationViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }

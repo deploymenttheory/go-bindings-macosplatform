@@ -50,486 +50,728 @@ func boxAdopt(id objc.ID) *Box {
 
 // NewBox creates a new Box.
 func NewBox() *Box {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSBox")), objc.RegisterName("new"))
-	return boxAdopt(_id)
+	var _mainthread0 *Box
+	purego.Main(func() {
+		_mainthread0 = func() *Box {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSBox")), objc.RegisterName("new"))
+			return boxAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithBoxType sets the receiver’s box type.
 func (b *Box) WithBoxType(boxType BoxType) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBoxType:"), boxType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBoxType:"), boxType)
+	})
 	return b
 }
 
 // WithTitlePosition sets a constant representing the title position.
 func (b *Box) WithTitlePosition(titlePosition TitlePosition) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTitlePosition:"), titlePosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTitlePosition:"), titlePosition)
+	})
 	return b
 }
 
 // WithTitle sets the receiver’s title.
 func (b *Box) WithTitle(title string) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return b
 }
 
 // WithTitleFont sets the font object used to draw the receiver’s title.
 func (b *Box) WithTitleFont(titleFont *Font) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTitleFont:"), objref.IDOf(titleFont))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTitleFont:"), objref.IDOf(titleFont))
+	})
 	return b
 }
 
 // WithContentViewMargins sets the distances between the border and the content view.
 func (b *Box) WithContentViewMargins(contentViewMargins corefoundation.CGSize) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setContentViewMargins:"), contentViewMargins)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setContentViewMargins:"), contentViewMargins)
+	})
 	return b
 }
 
 // WithContentView sets the receiver’s content view.
 func (b *Box) WithContentView(contentView ViewProvider) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
+	})
 	return b
 }
 
 // WithTransparent sets a Boolean value that indicates whether the receiver is transparent.
 func (b *Box) WithTransparent(transparent bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTransparent:"), transparent)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTransparent:"), transparent)
+	})
 	return b
 }
 
 // WithBorderWidth sets the width of the receiver’s border when the receiver is a custom box with a simple line border.
 func (b *Box) WithBorderWidth(borderWidth float64) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBorderWidth:"), borderWidth)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBorderWidth:"), borderWidth)
+	})
 	return b
 }
 
 // WithCornerRadius sets the radius of the receiver’s corners when the receiver is a custom box with a simple line border.
 func (b *Box) WithCornerRadius(cornerRadius float64) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCornerRadius:"), cornerRadius)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCornerRadius:"), cornerRadius)
+	})
 	return b
 }
 
 // WithBorderColor sets the color of the receiver’s border when the receiver is a custom box with a simple line border.
 func (b *Box) WithBorderColor(borderColor *Color) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
+	})
 	return b
 }
 
 // WithFillColor sets the color of the receiver’s background when the receiver is a custom box with a simple line border.
 func (b *Box) WithFillColor(fillColor *Color) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
+	})
 	return b
 }
 
 // WithBorderType sets the receiver’s border type.
 func (b *Box) WithBorderType(borderType BorderType) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBorderType:"), borderType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBorderType:"), borderType)
+	})
 	return b
 }
 
 // WithSubviews sets the subviews.
 func (b *Box) WithSubviews(items ...ViewProvider) *Box {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return b
 }
 
 // WithHidden sets the hidden.
 func (b *Box) WithHidden(hidden bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setHidden:"), hidden)
+	})
 	return b
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (b *Box) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return b
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (b *Box) WithAutoresizesSubviews(autoresizesSubviews bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return b
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (b *Box) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return b
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (b *Box) WithFrame(frame corefoundation.CGRect) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFrame:"), frame)
+	})
 	return b
 }
 
 // WithFrameRotation sets the frame rotation.
 func (b *Box) WithFrameRotation(frameRotation float64) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return b
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (b *Box) WithFrameCenterRotation(frameCenterRotation float64) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return b
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (b *Box) WithBoundsRotation(boundsRotation float64) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return b
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (b *Box) WithBounds(bounds corefoundation.CGRect) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBounds:"), bounds)
+	})
 	return b
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (b *Box) WithCanDrawConcurrently(canDrawConcurrently bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return b
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (b *Box) WithNeedsDisplay(needsDisplay bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return b
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (b *Box) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return b
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (b *Box) WithWantsRestingTouches(wantsRestingTouches bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return b
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (b *Box) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return b
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (b *Box) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return b
 }
 
 // WithWantsLayer sets the wants layer.
 func (b *Box) WithWantsLayer(wantsLayer bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return b
 }
 
 // WithLayer sets the layer.
 func (b *Box) WithLayer(layer obj.Object) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return b
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (b *Box) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return b
 }
 
 // WithNeedsLayout sets the needs layout.
 func (b *Box) WithNeedsLayout(needsLayout bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return b
 }
 
 // WithAlphaValue sets the alpha value.
 func (b *Box) WithAlphaValue(alphaValue float64) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return b
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (b *Box) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return b
 }
 
 // WithBackgroundFilters sets the background filters.
 func (b *Box) WithBackgroundFilters(items ...obj.Object) *Box {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return b
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (b *Box) WithCompositingFilter(compositingFilter obj.Object) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return b
 }
 
 // WithContentFilters sets the content filters.
 func (b *Box) WithContentFilters(items ...obj.Object) *Box {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return b
 }
 
 // WithShadow sets the shadow.
 func (b *Box) WithShadow(shadow *Shadow) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return b
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (b *Box) WithClipsToBounds(clipsToBounds bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return b
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (b *Box) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return b
 }
 
 // WithToolTip sets the tool tip.
 func (b *Box) WithToolTip(toolTip string) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return b
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (b *Box) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return b
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (b *Box) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return b
 }
 
 // WithNextKeyView sets the next key view.
 func (b *Box) WithNextKeyView(nextKeyView ViewProvider) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return b
 }
 
 // WithFocusRingType sets the focus ring type.
 func (b *Box) WithFocusRingType(focusRingType FocusRingType) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return b
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (b *Box) WithGestureRecognizers(items ...GestureRecognizerProvider) *Box {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return b
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (b *Box) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return b
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (b *Box) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return b
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (b *Box) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return b
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (b *Box) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return b
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (b *Box) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return b
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (b *Box) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return b
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (b *Box) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return b
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (b *Box) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return b
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (b *Box) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return b
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (b *Box) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return b
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (b *Box) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return b
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (b *Box) WithNextResponder(nextResponder ResponderProvider) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return b
 }
 
 // WithMenu sets returns the responder’s menu.
 func (b *Box) WithMenu(menu *Menu) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return b
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (b *Box) WithUserActivity(userActivity obj.Object) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return b
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (b *Box) WithTouchBar(touchBar *TouchBar) *Box {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return b
 }
 
 // SizeToFit resizes and moves the receiver’s content view so it just encloses its subviews.
 func (b *Box) SizeToFit() {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("sizeToFit"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("sizeToFit"))
+	})
+
 }
 
 // SetFrameFromContentFrame places the receiver so its content view lies on the specified frame.
 func (b *Box) SetFrameFromContentFrame(contentFrame corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFrameFromContentFrame:"), contentFrame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFrameFromContentFrame:"), contentFrame)
+	})
+
 }
 
 // BoxType returns the box type.
 func (b *Box) BoxType() BoxType {
-	_r := objc.Send[BoxType](objref.IDOf(b), objc.RegisterName("boxType"))
-	return _r
+	var _mainthread0 BoxType
+	purego.Main(func() {
+		_mainthread0 = func() BoxType {
+			_r := objc.Send[BoxType](objref.IDOf(b), objc.RegisterName("boxType"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TitlePosition returns the title position.
 func (b *Box) TitlePosition() TitlePosition {
-	_r := objc.Send[TitlePosition](objref.IDOf(b), objc.RegisterName("titlePosition"))
-	return _r
+	var _mainthread0 TitlePosition
+	purego.Main(func() {
+		_mainthread0 = func() TitlePosition {
+			_r := objc.Send[TitlePosition](objref.IDOf(b), objc.RegisterName("titlePosition"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Title returns the title.
 func (b *Box) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("title"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("title"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TitleFont returns the title font.
 func (b *Box) TitleFont() *Font {
-	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("titleFont"))
-	return FontFromID(_r)
+	var _mainthread0 *Font
+	purego.Main(func() {
+		_mainthread0 = func() *Font {
+			_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("titleFont"))
+			return FontFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BorderRect returns the border rect.
 func (b *Box) BorderRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(b), objc.RegisterName("borderRect"))
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(b), objc.RegisterName("borderRect"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TitleRect returns the title rect.
 func (b *Box) TitleRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(b), objc.RegisterName("titleRect"))
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(b), objc.RegisterName("titleRect"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TitleCell returns the title cell.
 func (b *Box) TitleCell() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("titleCell"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("titleCell"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ContentViewMargins returns the content view margins.
 func (b *Box) ContentViewMargins() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(b), objc.RegisterName("contentViewMargins"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(b), objc.RegisterName("contentViewMargins"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ContentView returns the content view.
 func (b *Box) ContentView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("contentView"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("contentView"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsTransparent reports whether the object is transparent.
 func (b *Box) IsTransparent() bool {
-	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("isTransparent"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("isTransparent"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BorderWidth returns the border width.
 func (b *Box) BorderWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(b), objc.RegisterName("borderWidth"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(b), objc.RegisterName("borderWidth"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CornerRadius returns the corner radius.
 func (b *Box) CornerRadius() float64 {
-	_r := objc.Send[float64](objref.IDOf(b), objc.RegisterName("cornerRadius"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(b), objc.RegisterName("cornerRadius"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BorderColor returns the border color.
 func (b *Box) BorderColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("borderColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("borderColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FillColor returns the fill color.
 func (b *Box) FillColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("fillColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("fillColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetTitleWithMnemonic sets the title of the receiver with a character denoted as an access key.
 func (b *Box) SetTitleWithMnemonic(stringWithAmpersand string) {
-	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTitleWithMnemonic:"), purego.NSString(stringWithAmpersand))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTitleWithMnemonic:"), purego.NSString(stringWithAmpersand))
+	})
+
 }
 
 // BorderType returns the border type.
 func (b *Box) BorderType() BorderType {
-	_r := objc.Send[BorderType](objref.IDOf(b), objc.RegisterName("borderType"))
-	return _r
+	var _mainthread0 BorderType
+	purego.Main(func() {
+		_mainthread0 = func() BorderType {
+			_r := objc.Send[BorderType](objref.IDOf(b), objc.RegisterName("borderType"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ViewProvider = (*Box)(nil)

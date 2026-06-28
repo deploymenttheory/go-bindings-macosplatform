@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "framework": "PassKit",
+  "main_actor_selectors": {
+    "PKPaymentAuthorizationControllerDelegate": [
+      "paymentAuthorizationController:didAuthorizePayment:handler:",
+      "paymentAuthorizationController:didChangeCouponCode:handler:",
+      "paymentAuthorizationController:didRequestMerchantSessionUpdate:",
+      "paymentAuthorizationController:didSelectPaymentMethod:handler:",
+      "paymentAuthorizationController:didSelectShippingContact:handler:",
+      "paymentAuthorizationController:didSelectShippingMethod:handler:",
+      "paymentAuthorizationControllerDidFinish:",
+      "paymentAuthorizationControllerWillAuthorizePayment:"
+    ]
+  },
+  "nonisolated_selectors": {
+    "PKPaymentAuthorizationViewController": [
+      "+canMakePayments",
+      "+canMakePaymentsUsingNetworks:",
+      "+canMakePaymentsUsingNetworks:capabilities:",
+      "+supportsDisbursements",
+      "+supportsDisbursementsUsingNetworks:",
+      "+supportsDisbursementsUsingNetworks:capabilities:"
+    ]
+  }
+}

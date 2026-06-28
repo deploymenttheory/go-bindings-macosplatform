@@ -50,339 +50,463 @@ func scrubberTextItemViewAdopt(id objc.ID) *ScrubberTextItemView {
 
 // NewScrubberTextItemView creates a new ScrubberTextItemView.
 func NewScrubberTextItemView() *ScrubberTextItemView {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSScrubberTextItemView")), objc.RegisterName("new"))
-	return scrubberTextItemViewAdopt(_id)
+	var _mainthread0 *ScrubberTextItemView
+	purego.Main(func() {
+		_mainthread0 = func() *ScrubberTextItemView {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSScrubberTextItemView")), objc.RegisterName("new"))
+			return scrubberTextItemViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithTitle sets the text displayed for the scrubber item.
 func (stiv *ScrubberTextItemView) WithTitle(title string) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return stiv
 }
 
 // WithSelected sets a Boolean value that specifies whether the current view is selected.
 func (stiv *ScrubberTextItemView) WithSelected(selected bool) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setSelected:"), selected)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setSelected:"), selected)
+	})
 	return stiv
 }
 
 // WithHighlighted sets a Boolean value that specifies whether the view is currently highlighted.
 func (stiv *ScrubberTextItemView) WithHighlighted(highlighted bool) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return stiv
 }
 
 // WithSubviews sets the subviews.
 func (stiv *ScrubberTextItemView) WithSubviews(items ...ViewProvider) *ScrubberTextItemView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return stiv
 }
 
 // WithHidden sets the hidden.
 func (stiv *ScrubberTextItemView) WithHidden(hidden bool) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setHidden:"), hidden)
+	})
 	return stiv
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (stiv *ScrubberTextItemView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return stiv
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (stiv *ScrubberTextItemView) WithAutoresizesSubviews(autoresizesSubviews bool) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return stiv
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (stiv *ScrubberTextItemView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return stiv
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (stiv *ScrubberTextItemView) WithFrame(frame corefoundation.CGRect) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setFrame:"), frame)
+	})
 	return stiv
 }
 
 // WithFrameRotation sets the frame rotation.
 func (stiv *ScrubberTextItemView) WithFrameRotation(frameRotation float64) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return stiv
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (stiv *ScrubberTextItemView) WithFrameCenterRotation(frameCenterRotation float64) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return stiv
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (stiv *ScrubberTextItemView) WithBoundsRotation(boundsRotation float64) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return stiv
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (stiv *ScrubberTextItemView) WithBounds(bounds corefoundation.CGRect) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setBounds:"), bounds)
+	})
 	return stiv
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (stiv *ScrubberTextItemView) WithCanDrawConcurrently(canDrawConcurrently bool) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return stiv
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (stiv *ScrubberTextItemView) WithNeedsDisplay(needsDisplay bool) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return stiv
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (stiv *ScrubberTextItemView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return stiv
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (stiv *ScrubberTextItemView) WithWantsRestingTouches(wantsRestingTouches bool) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return stiv
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (stiv *ScrubberTextItemView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return stiv
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (stiv *ScrubberTextItemView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return stiv
 }
 
 // WithWantsLayer sets the wants layer.
 func (stiv *ScrubberTextItemView) WithWantsLayer(wantsLayer bool) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return stiv
 }
 
 // WithLayer sets the layer.
 func (stiv *ScrubberTextItemView) WithLayer(layer obj.Object) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return stiv
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (stiv *ScrubberTextItemView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return stiv
 }
 
 // WithNeedsLayout sets the needs layout.
 func (stiv *ScrubberTextItemView) WithNeedsLayout(needsLayout bool) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return stiv
 }
 
 // WithAlphaValue sets the alpha value.
 func (stiv *ScrubberTextItemView) WithAlphaValue(alphaValue float64) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return stiv
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (stiv *ScrubberTextItemView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return stiv
 }
 
 // WithBackgroundFilters sets the background filters.
 func (stiv *ScrubberTextItemView) WithBackgroundFilters(items ...obj.Object) *ScrubberTextItemView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return stiv
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (stiv *ScrubberTextItemView) WithCompositingFilter(compositingFilter obj.Object) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return stiv
 }
 
 // WithContentFilters sets the content filters.
 func (stiv *ScrubberTextItemView) WithContentFilters(items ...obj.Object) *ScrubberTextItemView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return stiv
 }
 
 // WithShadow sets the shadow.
 func (stiv *ScrubberTextItemView) WithShadow(shadow *Shadow) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return stiv
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (stiv *ScrubberTextItemView) WithClipsToBounds(clipsToBounds bool) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return stiv
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (stiv *ScrubberTextItemView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return stiv
 }
 
 // WithToolTip sets the tool tip.
 func (stiv *ScrubberTextItemView) WithToolTip(toolTip string) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return stiv
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (stiv *ScrubberTextItemView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return stiv
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (stiv *ScrubberTextItemView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return stiv
 }
 
 // WithNextKeyView sets the next key view.
 func (stiv *ScrubberTextItemView) WithNextKeyView(nextKeyView ViewProvider) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return stiv
 }
 
 // WithFocusRingType sets the focus ring type.
 func (stiv *ScrubberTextItemView) WithFocusRingType(focusRingType FocusRingType) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return stiv
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (stiv *ScrubberTextItemView) WithGestureRecognizers(items ...GestureRecognizerProvider) *ScrubberTextItemView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return stiv
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (stiv *ScrubberTextItemView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return stiv
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (stiv *ScrubberTextItemView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return stiv
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (stiv *ScrubberTextItemView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return stiv
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (stiv *ScrubberTextItemView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return stiv
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (stiv *ScrubberTextItemView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return stiv
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (stiv *ScrubberTextItemView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return stiv
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (stiv *ScrubberTextItemView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return stiv
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (stiv *ScrubberTextItemView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return stiv
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (stiv *ScrubberTextItemView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return stiv
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (stiv *ScrubberTextItemView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return stiv
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (stiv *ScrubberTextItemView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return stiv
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (stiv *ScrubberTextItemView) WithNextResponder(nextResponder ResponderProvider) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return stiv
 }
 
 // WithMenu sets returns the responder’s menu.
 func (stiv *ScrubberTextItemView) WithMenu(menu *Menu) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return stiv
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (stiv *ScrubberTextItemView) WithUserActivity(userActivity obj.Object) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return stiv
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (stiv *ScrubberTextItemView) WithTouchBar(touchBar *TouchBar) *ScrubberTextItemView {
-	objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return stiv
 }
 
 // TextField returns the text field.
 func (stiv *ScrubberTextItemView) TextField() *TextField {
-	_r := objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("textField"))
-	return TextFieldFromID(_r)
+	var _mainthread0 *TextField
+	purego.Main(func() {
+		_mainthread0 = func() *TextField {
+			_r := objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("textField"))
+			return TextFieldFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Title returns the title.
 func (stiv *ScrubberTextItemView) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("title"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(stiv), objc.RegisterName("title"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ScrubberItemViewProvider = (*ScrubberTextItemView)(nil)

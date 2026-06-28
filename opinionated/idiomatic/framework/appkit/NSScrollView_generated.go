@@ -50,783 +50,1246 @@ func scrollViewAdopt(id objc.ID) *ScrollView {
 
 // NewScrollViewWithFrame creates a new ScrollView.
 func NewScrollViewWithFrame(frameRect corefoundation.CGRect) *ScrollView {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScrollView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:"), frameRect)
-	return scrollViewAdopt(_id)
+	var _mainthread0 *ScrollView
+	purego.Main(func() {
+		_mainthread0 = func() *ScrollView {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSScrollView")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:"), frameRect)
+			return scrollViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewScrollViewWithCoder creates a new ScrollView.
 func NewScrollViewWithCoder(coder obj.Object) *ScrollView {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScrollView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
-	return scrollViewAdopt(_id)
+	var _mainthread0 *ScrollView
+	purego.Main(func() {
+		_mainthread0 = func() *ScrollView {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSScrollView")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+			return scrollViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithDocumentView sets the view the scroll view scrolls within its content view.
 func (sv *ScrollView) WithDocumentView(documentView ViewProvider) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setDocumentView:"), objref.IDOf(documentView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setDocumentView:"), objref.IDOf(documentView))
+	})
 	return sv
 }
 
 // WithContentView sets the scroll view’s content view, the view that clips the document view.
 func (sv *ScrollView) WithContentView(contentView *ClipView) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
+	})
 	return sv
 }
 
 // WithDocumentCursor sets the content view’s document cursor.
 func (sv *ScrollView) WithDocumentCursor(documentCursor *Cursor) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setDocumentCursor:"), objref.IDOf(documentCursor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setDocumentCursor:"), objref.IDOf(documentCursor))
+	})
 	return sv
 }
 
 // WithBorderType sets a value that specifies the appearance of the scroll view’s border.
 func (sv *ScrollView) WithBorderType(borderType BorderType) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBorderType:"), borderType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBorderType:"), borderType)
+	})
 	return sv
 }
 
 // WithBackgroundColor sets the color of the content view’s background.
 func (sv *ScrollView) WithBackgroundColor(backgroundColor *Color) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	})
 	return sv
 }
 
 // WithDrawsBackground sets a Boolean that indicates whether the scroll view draws its background.
 func (sv *ScrollView) WithDrawsBackground(drawsBackground bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	})
 	return sv
 }
 
 // WithHasVerticalScroller sets a Boolean that indicates whether the scroll view has a vertical scroller.
 func (sv *ScrollView) WithHasVerticalScroller(hasVerticalScroller bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHasVerticalScroller:"), hasVerticalScroller)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHasVerticalScroller:"), hasVerticalScroller)
+	})
 	return sv
 }
 
 // WithHasHorizontalScroller sets a Boolean that indicates whether the scroll view has a horizontal scroller.
 func (sv *ScrollView) WithHasHorizontalScroller(hasHorizontalScroller bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHasHorizontalScroller:"), hasHorizontalScroller)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHasHorizontalScroller:"), hasHorizontalScroller)
+	})
 	return sv
 }
 
 // WithVerticalScroller sets the scroll view’s vertical scroller.
 func (sv *ScrollView) WithVerticalScroller(verticalScroller *Scroller) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVerticalScroller:"), objref.IDOf(verticalScroller))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVerticalScroller:"), objref.IDOf(verticalScroller))
+	})
 	return sv
 }
 
 // WithHorizontalScroller sets the scroll view’s horizontal scroller.
 func (sv *ScrollView) WithHorizontalScroller(horizontalScroller *Scroller) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHorizontalScroller:"), objref.IDOf(horizontalScroller))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHorizontalScroller:"), objref.IDOf(horizontalScroller))
+	})
 	return sv
 }
 
 // WithAutohidesScrollers sets a Boolean that indicates whether the scroll view automatically hides its scroll bars when they are not needed.
 func (sv *ScrollView) WithAutohidesScrollers(autohidesScrollers bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAutohidesScrollers:"), autohidesScrollers)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAutohidesScrollers:"), autohidesScrollers)
+	})
 	return sv
 }
 
 // WithHorizontalLineScroll sets the scroll view’s horizontal line by line scroll amount.
 func (sv *ScrollView) WithHorizontalLineScroll(horizontalLineScroll float64) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHorizontalLineScroll:"), horizontalLineScroll)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHorizontalLineScroll:"), horizontalLineScroll)
+	})
 	return sv
 }
 
 // WithVerticalLineScroll sets the scroll view’s vertical line by line scroll amount.
 func (sv *ScrollView) WithVerticalLineScroll(verticalLineScroll float64) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVerticalLineScroll:"), verticalLineScroll)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVerticalLineScroll:"), verticalLineScroll)
+	})
 	return sv
 }
 
 // WithLineScroll sets the scroll view’s line by line scroll amount.
 func (sv *ScrollView) WithLineScroll(lineScroll float64) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLineScroll:"), lineScroll)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLineScroll:"), lineScroll)
+	})
 	return sv
 }
 
 // WithHorizontalPageScroll sets the amount of the document view kept visible when scrolling horizontally page by page.
 func (sv *ScrollView) WithHorizontalPageScroll(horizontalPageScroll float64) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHorizontalPageScroll:"), horizontalPageScroll)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHorizontalPageScroll:"), horizontalPageScroll)
+	})
 	return sv
 }
 
 // WithVerticalPageScroll sets the amount of the document view kept visible when scrolling vertically page by page.
 func (sv *ScrollView) WithVerticalPageScroll(verticalPageScroll float64) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVerticalPageScroll:"), verticalPageScroll)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVerticalPageScroll:"), verticalPageScroll)
+	})
 	return sv
 }
 
 // WithPageScroll sets the amount of the document view kept visible when scrolling page by page.
 func (sv *ScrollView) WithPageScroll(pageScroll float64) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPageScroll:"), pageScroll)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPageScroll:"), pageScroll)
+	})
 	return sv
 }
 
 // WithScrollsDynamically sets a Boolean that indicates whether the scroll view redraws its document view while scrolling continuously.
 func (sv *ScrollView) WithScrollsDynamically(scrollsDynamically bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setScrollsDynamically:"), scrollsDynamically)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setScrollsDynamically:"), scrollsDynamically)
+	})
 	return sv
 }
 
 // WithScrollerStyle sets the scroller style used by the scroll view.
 func (sv *ScrollView) WithScrollerStyle(scrollerStyle ScrollerStyle) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setScrollerStyle:"), scrollerStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setScrollerStyle:"), scrollerStyle)
+	})
 	return sv
 }
 
 // WithScrollerKnobStyle sets the knob style of scroll views that use the overlay scroller style.
 func (sv *ScrollView) WithScrollerKnobStyle(scrollerKnobStyle ScrollerKnobStyle) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setScrollerKnobStyle:"), scrollerKnobStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setScrollerKnobStyle:"), scrollerKnobStyle)
+	})
 	return sv
 }
 
 // WithHorizontalScrollElasticity sets the scroll view’s horizontal scrolling elasticity mode.
 func (sv *ScrollView) WithHorizontalScrollElasticity(horizontalScrollElasticity ScrollElasticity) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHorizontalScrollElasticity:"), horizontalScrollElasticity)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHorizontalScrollElasticity:"), horizontalScrollElasticity)
+	})
 	return sv
 }
 
 // WithVerticalScrollElasticity sets the scroll view’s vertical scrolling elasticity mode.
 func (sv *ScrollView) WithVerticalScrollElasticity(verticalScrollElasticity ScrollElasticity) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVerticalScrollElasticity:"), verticalScrollElasticity)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVerticalScrollElasticity:"), verticalScrollElasticity)
+	})
 	return sv
 }
 
 // WithUsesPredominantAxisScrolling sets a Boolean that indicates whether the scroll view uses a predominant scrolling axis for content.
 func (sv *ScrollView) WithUsesPredominantAxisScrolling(usesPredominantAxisScrolling bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setUsesPredominantAxisScrolling:"), usesPredominantAxisScrolling)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setUsesPredominantAxisScrolling:"), usesPredominantAxisScrolling)
+	})
 	return sv
 }
 
 // WithAllowsMagnification sets allows the user to magnify the scroll view.
 func (sv *ScrollView) WithAllowsMagnification(allowsMagnification bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAllowsMagnification:"), allowsMagnification)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAllowsMagnification:"), allowsMagnification)
+	})
 	return sv
 }
 
 // WithMagnification sets the amount by which the content is currently scaled.
 func (sv *ScrollView) WithMagnification(magnification float64) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setMagnification:"), magnification)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setMagnification:"), magnification)
+	})
 	return sv
 }
 
 // WithMaxMagnification sets the maximum value to which the content can be magnified.
 func (sv *ScrollView) WithMaxMagnification(maxMagnification float64) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setMaxMagnification:"), maxMagnification)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setMaxMagnification:"), maxMagnification)
+	})
 	return sv
 }
 
 // WithMinMagnification sets the minimum value to which the content can be magnified.
 func (sv *ScrollView) WithMinMagnification(minMagnification float64) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setMinMagnification:"), minMagnification)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setMinMagnification:"), minMagnification)
+	})
 	return sv
 }
 
 // WithAutomaticallyAdjustsContentInsets sets a Boolean that indicates whether the scroll view automatically adjusts its content insets.
 func (sv *ScrollView) WithAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAutomaticallyAdjustsContentInsets:"), automaticallyAdjustsContentInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAutomaticallyAdjustsContentInsets:"), automaticallyAdjustsContentInsets)
+	})
 	return sv
 }
 
 // WithContentInsets sets the distance that the scroll view’s subviews are inset from the enclosing scroll view during tiling.
 func (sv *ScrollView) WithContentInsets(contentInsets foundation.NSEdgeInsets) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setContentInsets:"), contentInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setContentInsets:"), contentInsets)
+	})
 	return sv
 }
 
 // WithScrollerInsets sets the distance the scrollers are inset from the edge of the scroll view.
 func (sv *ScrollView) WithScrollerInsets(scrollerInsets foundation.NSEdgeInsets) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setScrollerInsets:"), scrollerInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setScrollerInsets:"), scrollerInsets)
+	})
 	return sv
 }
 
 // WithRulersVisible sets a Boolean that indicates whether the scroll view displays its rulers.
 func (sv *ScrollView) WithRulersVisible(rulersVisible bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setRulersVisible:"), rulersVisible)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setRulersVisible:"), rulersVisible)
+	})
 	return sv
 }
 
 // WithHasHorizontalRuler sets a Boolean that indicates whether the scroll view keeps a horizontal ruler object.
 func (sv *ScrollView) WithHasHorizontalRuler(hasHorizontalRuler bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHasHorizontalRuler:"), hasHorizontalRuler)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHasHorizontalRuler:"), hasHorizontalRuler)
+	})
 	return sv
 }
 
 // WithHasVerticalRuler sets a Boolean that indicates whether the scroll view keeps a vertical ruler object.
 func (sv *ScrollView) WithHasVerticalRuler(hasVerticalRuler bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHasVerticalRuler:"), hasVerticalRuler)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHasVerticalRuler:"), hasVerticalRuler)
+	})
 	return sv
 }
 
 // WithHorizontalRulerView sets the scroll view’s horizontal ruler view.
 func (sv *ScrollView) WithHorizontalRulerView(horizontalRulerView *RulerView) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHorizontalRulerView:"), objref.IDOf(horizontalRulerView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHorizontalRulerView:"), objref.IDOf(horizontalRulerView))
+	})
 	return sv
 }
 
 // WithVerticalRulerView sets the scroll view’s vertical ruler view.
 func (sv *ScrollView) WithVerticalRulerView(verticalRulerView *RulerView) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVerticalRulerView:"), objref.IDOf(verticalRulerView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVerticalRulerView:"), objref.IDOf(verticalRulerView))
+	})
 	return sv
 }
 
 // WithFindBarPosition sets the position of the find bar.
 func (sv *ScrollView) WithFindBarPosition(findBarPosition ScrollViewFindBarPosition) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFindBarPosition:"), findBarPosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFindBarPosition:"), findBarPosition)
+	})
 	return sv
 }
 
 // WithSubviews sets the subviews.
 func (sv *ScrollView) WithSubviews(items ...ViewProvider) *ScrollView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return sv
 }
 
 // WithHidden sets the hidden.
 func (sv *ScrollView) WithHidden(hidden bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHidden:"), hidden)
+	})
 	return sv
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (sv *ScrollView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return sv
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (sv *ScrollView) WithAutoresizesSubviews(autoresizesSubviews bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return sv
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (sv *ScrollView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return sv
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (sv *ScrollView) WithFrame(frame corefoundation.CGRect) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFrame:"), frame)
+	})
 	return sv
 }
 
 // WithFrameRotation sets the frame rotation.
 func (sv *ScrollView) WithFrameRotation(frameRotation float64) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return sv
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (sv *ScrollView) WithFrameCenterRotation(frameCenterRotation float64) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return sv
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (sv *ScrollView) WithBoundsRotation(boundsRotation float64) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return sv
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (sv *ScrollView) WithBounds(bounds corefoundation.CGRect) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBounds:"), bounds)
+	})
 	return sv
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (sv *ScrollView) WithCanDrawConcurrently(canDrawConcurrently bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return sv
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (sv *ScrollView) WithNeedsDisplay(needsDisplay bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return sv
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (sv *ScrollView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return sv
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (sv *ScrollView) WithWantsRestingTouches(wantsRestingTouches bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return sv
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (sv *ScrollView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return sv
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (sv *ScrollView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return sv
 }
 
 // WithWantsLayer sets the wants layer.
 func (sv *ScrollView) WithWantsLayer(wantsLayer bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return sv
 }
 
 // WithLayer sets the layer.
 func (sv *ScrollView) WithLayer(layer obj.Object) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return sv
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (sv *ScrollView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return sv
 }
 
 // WithNeedsLayout sets the needs layout.
 func (sv *ScrollView) WithNeedsLayout(needsLayout bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return sv
 }
 
 // WithAlphaValue sets the alpha value.
 func (sv *ScrollView) WithAlphaValue(alphaValue float64) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return sv
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (sv *ScrollView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return sv
 }
 
 // WithBackgroundFilters sets the background filters.
 func (sv *ScrollView) WithBackgroundFilters(items ...obj.Object) *ScrollView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return sv
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (sv *ScrollView) WithCompositingFilter(compositingFilter obj.Object) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return sv
 }
 
 // WithContentFilters sets the content filters.
 func (sv *ScrollView) WithContentFilters(items ...obj.Object) *ScrollView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return sv
 }
 
 // WithShadow sets the shadow.
 func (sv *ScrollView) WithShadow(shadow *Shadow) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return sv
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (sv *ScrollView) WithClipsToBounds(clipsToBounds bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return sv
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (sv *ScrollView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return sv
 }
 
 // WithToolTip sets the tool tip.
 func (sv *ScrollView) WithToolTip(toolTip string) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return sv
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (sv *ScrollView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return sv
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (sv *ScrollView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return sv
 }
 
 // WithNextKeyView sets the next key view.
 func (sv *ScrollView) WithNextKeyView(nextKeyView ViewProvider) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return sv
 }
 
 // WithFocusRingType sets the focus ring type.
 func (sv *ScrollView) WithFocusRingType(focusRingType FocusRingType) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return sv
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (sv *ScrollView) WithGestureRecognizers(items ...GestureRecognizerProvider) *ScrollView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return sv
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (sv *ScrollView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return sv
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (sv *ScrollView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return sv
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (sv *ScrollView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return sv
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (sv *ScrollView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return sv
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (sv *ScrollView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return sv
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (sv *ScrollView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return sv
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (sv *ScrollView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return sv
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (sv *ScrollView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return sv
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (sv *ScrollView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return sv
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (sv *ScrollView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return sv
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (sv *ScrollView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return sv
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (sv *ScrollView) WithNextResponder(nextResponder ResponderProvider) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return sv
 }
 
 // WithMenu sets returns the responder’s menu.
 func (sv *ScrollView) WithMenu(menu *Menu) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return sv
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (sv *ScrollView) WithUserActivity(userActivity obj.Object) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return sv
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (sv *ScrollView) WithTouchBar(touchBar *TouchBar) *ScrollView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return sv
 }
 
 // Tile lays out the components of the receiver: the content view, the scrollers, and the ruler views.
 func (sv *ScrollView) Tile() {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("tile"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("tile"))
+	})
+
 }
 
 // FlashScrollers flash the overlay scroll bars.
 func (sv *ScrollView) FlashScrollers() {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("flashScrollers"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("flashScrollers"))
+	})
+
 }
 
 // MagnifyToFitRect magnifies the content view proportionally such that the given rectangle fits centered in the scroll view.
 func (sv *ScrollView) MagnifyToFitRect(rect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("magnifyToFitRect:"), rect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("magnifyToFitRect:"), rect)
+	})
+
 }
 
 // SetMagnificationCenteredAtPoint magnify the content by the given amount and center the result on the given point.
 func (sv *ScrollView) SetMagnificationCenteredAtPoint(magnification float64, point corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setMagnification:centeredAtPoint:"), magnification, point)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setMagnification:centeredAtPoint:"), magnification, point)
+	})
+
 }
 
 // AddFloatingSubviewForAxis adds a floating subview to the document view.
 func (sv *ScrollView) AddFloatingSubviewForAxis(view *View, axis EventGestureAxis) {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("addFloatingSubview:forAxis:"), objref.IDOf(view), axis)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("addFloatingSubview:forAxis:"), objref.IDOf(view), axis)
+	})
+
 }
 
 // DocumentVisibleRect returns the document visible rect.
 func (sv *ScrollView) DocumentVisibleRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sv), objc.RegisterName("documentVisibleRect"))
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(sv), objc.RegisterName("documentVisibleRect"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ContentSize returns the content size.
 func (sv *ScrollView) ContentSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(sv), objc.RegisterName("contentSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(sv), objc.RegisterName("contentSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DocumentView returns the document view.
 func (sv *ScrollView) DocumentView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("documentView"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("documentView"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ContentView returns the content view.
 func (sv *ScrollView) ContentView() *ClipView {
-	_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("contentView"))
-	return ClipViewFromID(_r)
+	var _mainthread0 *ClipView
+	purego.Main(func() {
+		_mainthread0 = func() *ClipView {
+			_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("contentView"))
+			return ClipViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DocumentCursor returns the document cursor.
 func (sv *ScrollView) DocumentCursor() *Cursor {
-	_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("documentCursor"))
-	return CursorFromID(_r)
+	var _mainthread0 *Cursor
+	purego.Main(func() {
+		_mainthread0 = func() *Cursor {
+			_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("documentCursor"))
+			return CursorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BorderType returns the border type.
 func (sv *ScrollView) BorderType() BorderType {
-	_r := objc.Send[BorderType](objref.IDOf(sv), objc.RegisterName("borderType"))
-	return _r
+	var _mainthread0 BorderType
+	purego.Main(func() {
+		_mainthread0 = func() BorderType {
+			_r := objc.Send[BorderType](objref.IDOf(sv), objc.RegisterName("borderType"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BackgroundColor returns the background color.
 func (sv *ScrollView) BackgroundColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("backgroundColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("backgroundColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DrawsBackground wraps the corresponding Objective-C method.
 func (sv *ScrollView) DrawsBackground() bool {
-	_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("drawsBackground"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("drawsBackground"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasVerticalScroller reports whether the object has vertical scroller.
 func (sv *ScrollView) HasVerticalScroller() bool {
-	_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("hasVerticalScroller"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("hasVerticalScroller"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasHorizontalScroller reports whether the object has horizontal scroller.
 func (sv *ScrollView) HasHorizontalScroller() bool {
-	_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("hasHorizontalScroller"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("hasHorizontalScroller"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // VerticalScroller returns the vertical scroller.
 func (sv *ScrollView) VerticalScroller() *Scroller {
-	_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("verticalScroller"))
-	return ScrollerFromID(_r)
+	var _mainthread0 *Scroller
+	purego.Main(func() {
+		_mainthread0 = func() *Scroller {
+			_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("verticalScroller"))
+			return ScrollerFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HorizontalScroller returns the horizontal scroller.
 func (sv *ScrollView) HorizontalScroller() *Scroller {
-	_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("horizontalScroller"))
-	return ScrollerFromID(_r)
+	var _mainthread0 *Scroller
+	purego.Main(func() {
+		_mainthread0 = func() *Scroller {
+			_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("horizontalScroller"))
+			return ScrollerFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AutohidesScrollers wraps the corresponding Objective-C method.
 func (sv *ScrollView) AutohidesScrollers() bool {
-	_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("autohidesScrollers"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("autohidesScrollers"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HorizontalLineScroll returns the horizontal line scroll.
 func (sv *ScrollView) HorizontalLineScroll() float64 {
-	_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("horizontalLineScroll"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("horizontalLineScroll"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // VerticalLineScroll returns the vertical line scroll.
 func (sv *ScrollView) VerticalLineScroll() float64 {
-	_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("verticalLineScroll"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("verticalLineScroll"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LineScroll returns the line scroll.
 func (sv *ScrollView) LineScroll() float64 {
-	_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("lineScroll"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("lineScroll"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HorizontalPageScroll returns the horizontal page scroll.
 func (sv *ScrollView) HorizontalPageScroll() float64 {
-	_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("horizontalPageScroll"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("horizontalPageScroll"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // VerticalPageScroll returns the vertical page scroll.
 func (sv *ScrollView) VerticalPageScroll() float64 {
-	_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("verticalPageScroll"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("verticalPageScroll"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PageScroll returns the page scroll.
 func (sv *ScrollView) PageScroll() float64 {
-	_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("pageScroll"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("pageScroll"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ScrollsDynamically wraps the corresponding Objective-C method.
 func (sv *ScrollView) ScrollsDynamically() bool {
-	_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("scrollsDynamically"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("scrollsDynamically"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ScrollerStyle returns the scroller style.
 func (sv *ScrollView) ScrollerStyle() ScrollerStyle {
-	_r := objc.Send[ScrollerStyle](objref.IDOf(sv), objc.RegisterName("scrollerStyle"))
-	return _r
+	var _mainthread0 ScrollerStyle
+	purego.Main(func() {
+		_mainthread0 = func() ScrollerStyle {
+			_r := objc.Send[ScrollerStyle](objref.IDOf(sv), objc.RegisterName("scrollerStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ScrollerKnobStyle returns the scroller knob style.
 func (sv *ScrollView) ScrollerKnobStyle() ScrollerKnobStyle {
-	_r := objc.Send[ScrollerKnobStyle](objref.IDOf(sv), objc.RegisterName("scrollerKnobStyle"))
-	return _r
+	var _mainthread0 ScrollerKnobStyle
+	purego.Main(func() {
+		_mainthread0 = func() ScrollerKnobStyle {
+			_r := objc.Send[ScrollerKnobStyle](objref.IDOf(sv), objc.RegisterName("scrollerKnobStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HorizontalScrollElasticity returns the horizontal scroll elasticity.
 func (sv *ScrollView) HorizontalScrollElasticity() ScrollElasticity {
-	_r := objc.Send[ScrollElasticity](objref.IDOf(sv), objc.RegisterName("horizontalScrollElasticity"))
-	return _r
+	var _mainthread0 ScrollElasticity
+	purego.Main(func() {
+		_mainthread0 = func() ScrollElasticity {
+			_r := objc.Send[ScrollElasticity](objref.IDOf(sv), objc.RegisterName("horizontalScrollElasticity"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // VerticalScrollElasticity returns the vertical scroll elasticity.
 func (sv *ScrollView) VerticalScrollElasticity() ScrollElasticity {
-	_r := objc.Send[ScrollElasticity](objref.IDOf(sv), objc.RegisterName("verticalScrollElasticity"))
-	return _r
+	var _mainthread0 ScrollElasticity
+	purego.Main(func() {
+		_mainthread0 = func() ScrollElasticity {
+			_r := objc.Send[ScrollElasticity](objref.IDOf(sv), objc.RegisterName("verticalScrollElasticity"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UsesPredominantAxisScrolling wraps the corresponding Objective-C method.
 func (sv *ScrollView) UsesPredominantAxisScrolling() bool {
-	_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("usesPredominantAxisScrolling"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("usesPredominantAxisScrolling"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsMagnification wraps the corresponding Objective-C method.
 func (sv *ScrollView) AllowsMagnification() bool {
-	_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("allowsMagnification"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("allowsMagnification"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Magnification returns the magnification.
 func (sv *ScrollView) Magnification() float64 {
-	_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("magnification"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("magnification"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MaxMagnification returns the max magnification.
 func (sv *ScrollView) MaxMagnification() float64 {
-	_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("maxMagnification"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("maxMagnification"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MinMagnification returns the min magnification.
 func (sv *ScrollView) MinMagnification() float64 {
-	_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("minMagnification"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("minMagnification"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AutomaticallyAdjustsContentInsets wraps the corresponding Objective-C method.
 func (sv *ScrollView) AutomaticallyAdjustsContentInsets() bool {
-	_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("automaticallyAdjustsContentInsets"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("automaticallyAdjustsContentInsets"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ContentInsets returns the content insets.
 func (sv *ScrollView) ContentInsets() foundation.NSEdgeInsets {
-	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(sv), objc.RegisterName("contentInsets"))
-	return _r
+	var _mainthread0 foundation.NSEdgeInsets
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSEdgeInsets {
+			_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(sv), objc.RegisterName("contentInsets"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ScrollerInsets returns the scroller insets.
 func (sv *ScrollView) ScrollerInsets() foundation.NSEdgeInsets {
-	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(sv), objc.RegisterName("scrollerInsets"))
-	return _r
+	var _mainthread0 foundation.NSEdgeInsets
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSEdgeInsets {
+			_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(sv), objc.RegisterName("scrollerInsets"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RulersVisible wraps the corresponding Objective-C method.
 func (sv *ScrollView) RulersVisible() bool {
-	_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("rulersVisible"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("rulersVisible"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasHorizontalRuler reports whether the object has horizontal ruler.
 func (sv *ScrollView) HasHorizontalRuler() bool {
-	_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("hasHorizontalRuler"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("hasHorizontalRuler"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasVerticalRuler reports whether the object has vertical ruler.
 func (sv *ScrollView) HasVerticalRuler() bool {
-	_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("hasVerticalRuler"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("hasVerticalRuler"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HorizontalRulerView returns the horizontal ruler view.
 func (sv *ScrollView) HorizontalRulerView() *RulerView {
-	_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("horizontalRulerView"))
-	return RulerViewFromID(_r)
+	var _mainthread0 *RulerView
+	purego.Main(func() {
+		_mainthread0 = func() *RulerView {
+			_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("horizontalRulerView"))
+			return RulerViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // VerticalRulerView returns the vertical ruler view.
 func (sv *ScrollView) VerticalRulerView() *RulerView {
-	_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("verticalRulerView"))
-	return RulerViewFromID(_r)
+	var _mainthread0 *RulerView
+	purego.Main(func() {
+		_mainthread0 = func() *RulerView {
+			_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("verticalRulerView"))
+			return RulerViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FindBarPosition returns the find bar position.
 func (sv *ScrollView) FindBarPosition() ScrollViewFindBarPosition {
-	_r := objc.Send[ScrollViewFindBarPosition](objref.IDOf(sv), objc.RegisterName("findBarPosition"))
-	return _r
+	var _mainthread0 ScrollViewFindBarPosition
+	purego.Main(func() {
+		_mainthread0 = func() ScrollViewFindBarPosition {
+			_r := objc.Send[ScrollViewFindBarPosition](objref.IDOf(sv), objc.RegisterName("findBarPosition"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ViewProvider = (*ScrollView)(nil)

@@ -48,80 +48,135 @@ func stepperTouchBarItemAdopt(id objc.ID) *StepperTouchBarItem {
 
 // NewStepperTouchBarItem creates a new StepperTouchBarItem.
 func NewStepperTouchBarItem() *StepperTouchBarItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSStepperTouchBarItem")), objc.RegisterName("new"))
-	return stepperTouchBarItemAdopt(_id)
+	var _mainthread0 *StepperTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *StepperTouchBarItem {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSStepperTouchBarItem")), objc.RegisterName("new"))
+			return stepperTouchBarItemAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithMaxValue sets the stepper’s maximum value.
 func (stbi *StepperTouchBarItem) WithMaxValue(maxValue float64) *StepperTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setMaxValue:"), maxValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setMaxValue:"), maxValue)
+	})
 	return stbi
 }
 
 // WithMinValue sets the stepper’s minimum value.
 func (stbi *StepperTouchBarItem) WithMinValue(minValue float64) *StepperTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setMinValue:"), minValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setMinValue:"), minValue)
+	})
 	return stbi
 }
 
 // WithIncrement sets the stepper’s increment value.
 func (stbi *StepperTouchBarItem) WithIncrement(increment float64) *StepperTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setIncrement:"), increment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setIncrement:"), increment)
+	})
 	return stbi
 }
 
 // WithValue sets the current value of the stepper.
 func (stbi *StepperTouchBarItem) WithValue(value float64) *StepperTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setValue:"), value)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setValue:"), value)
+	})
 	return stbi
 }
 
 // WithTarget sets the target object that receives action messages from the stepper.
 func (stbi *StepperTouchBarItem) WithTarget(target obj.Object) *StepperTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return stbi
 }
 
 // WithCustomizationLabel sets the localized string labeling this item during user customization.
 func (stbi *StepperTouchBarItem) WithCustomizationLabel(customizationLabel string) *StepperTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
+	})
 	return stbi
 }
 
 // WithVisibilityPriority sets determines which items are shown in a bar when space is limited.
 func (stbi *StepperTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *StepperTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	})
 	return stbi
 }
 
 // MaxValue returns the stepper's maximum value. The default is `59.0`.
 func (stbi *StepperTouchBarItem) MaxValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(stbi), objc.RegisterName("maxValue"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(stbi), objc.RegisterName("maxValue"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MinValue returns the stepper's minimum value. The default is `0.0`.
 func (stbi *StepperTouchBarItem) MinValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(stbi), objc.RegisterName("minValue"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(stbi), objc.RegisterName("minValue"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Increment returns the stepper's increment value. The default value is `1.0`.
 func (stbi *StepperTouchBarItem) Increment() float64 {
-	_r := objc.Send[float64](objref.IDOf(stbi), objc.RegisterName("increment"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(stbi), objc.RegisterName("increment"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Value returns the current value of the stepper.
 func (stbi *StepperTouchBarItem) Value() float64 {
-	_r := objc.Send[float64](objref.IDOf(stbi), objc.RegisterName("value"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(stbi), objc.RegisterName("value"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Target returns the target object that receives action messages from the stepper.
 func (stbi *StepperTouchBarItem) Target() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("target"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("target"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ TouchBarItemProvider = (*StepperTouchBarItem)(nil)

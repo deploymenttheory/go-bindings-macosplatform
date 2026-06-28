@@ -48,56 +48,98 @@ func collectionLayoutBoundarySupplementaryItemAdopt(id objc.ID) *CollectionLayou
 
 // NewCollectionLayoutBoundarySupplementaryItem creates a new CollectionLayoutBoundarySupplementaryItem.
 func NewCollectionLayoutBoundarySupplementaryItem() *CollectionLayoutBoundarySupplementaryItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutBoundarySupplementaryItem")), objc.RegisterName("new"))
-	return collectionLayoutBoundarySupplementaryItemAdopt(_id)
+	var _mainthread0 *CollectionLayoutBoundarySupplementaryItem
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionLayoutBoundarySupplementaryItem {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutBoundarySupplementaryItem")), objc.RegisterName("new"))
+			return collectionLayoutBoundarySupplementaryItemAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithExtendsBoundary sets a Boolean value that indicates whether a boundary supplementary item extends the content area of the section or layout it’s attached to.
 func (clbsi *CollectionLayoutBoundarySupplementaryItem) WithExtendsBoundary(extendsBoundary bool) *CollectionLayoutBoundarySupplementaryItem {
-	objc.Send[objc.ID](objref.IDOf(clbsi), objc.RegisterName("setExtendsBoundary:"), extendsBoundary)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(clbsi), objc.RegisterName("setExtendsBoundary:"), extendsBoundary)
+	})
 	return clbsi
 }
 
 // WithPinToVisibleBounds sets a Boolean value that indicates whether a header or footer is pinned to the top or bottom visible boundary of the section or layout it’s attached to.
 func (clbsi *CollectionLayoutBoundarySupplementaryItem) WithPinToVisibleBounds(pinToVisibleBounds bool) *CollectionLayoutBoundarySupplementaryItem {
-	objc.Send[objc.ID](objref.IDOf(clbsi), objc.RegisterName("setPinToVisibleBounds:"), pinToVisibleBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(clbsi), objc.RegisterName("setPinToVisibleBounds:"), pinToVisibleBounds)
+	})
 	return clbsi
 }
 
 // WithZIndex sets the vertical stacking order of the supplementary item in relation to other items in the section.
 func (clbsi *CollectionLayoutBoundarySupplementaryItem) WithZIndex(zIndex int) *CollectionLayoutBoundarySupplementaryItem {
-	objc.Send[objc.ID](objref.IDOf(clbsi), objc.RegisterName("setZIndex:"), zIndex)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(clbsi), objc.RegisterName("setZIndex:"), zIndex)
+	})
 	return clbsi
 }
 
 // WithEdgeSpacing sets the amount of space added around the boundaries of the item between other items and this item’s container.
 func (clbsi *CollectionLayoutBoundarySupplementaryItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutBoundarySupplementaryItem {
-	objc.Send[objc.ID](objref.IDOf(clbsi), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(clbsi), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
+	})
 	return clbsi
 }
 
 // ExtendsBoundary wraps the corresponding Objective-C method.
 func (clbsi *CollectionLayoutBoundarySupplementaryItem) ExtendsBoundary() bool {
-	_r := objc.Send[bool](objref.IDOf(clbsi), objc.RegisterName("extendsBoundary"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(clbsi), objc.RegisterName("extendsBoundary"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PinToVisibleBounds wraps the corresponding Objective-C method.
 func (clbsi *CollectionLayoutBoundarySupplementaryItem) PinToVisibleBounds() bool {
-	_r := objc.Send[bool](objref.IDOf(clbsi), objc.RegisterName("pinToVisibleBounds"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(clbsi), objc.RegisterName("pinToVisibleBounds"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Alignment returns the alignment.
 func (clbsi *CollectionLayoutBoundarySupplementaryItem) Alignment() RectAlignment {
-	_r := objc.Send[RectAlignment](objref.IDOf(clbsi), objc.RegisterName("alignment"))
-	return _r
+	var _mainthread0 RectAlignment
+	purego.Main(func() {
+		_mainthread0 = func() RectAlignment {
+			_r := objc.Send[RectAlignment](objref.IDOf(clbsi), objc.RegisterName("alignment"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Offset returns the offset.
 func (clbsi *CollectionLayoutBoundarySupplementaryItem) Offset() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(clbsi), objc.RegisterName("offset"))
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(clbsi), objc.RegisterName("offset"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ CollectionLayoutSupplementaryItemProvider = (*CollectionLayoutBoundarySupplementaryItem)(nil)

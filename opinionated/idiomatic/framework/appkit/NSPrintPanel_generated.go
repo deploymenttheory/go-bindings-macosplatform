@@ -68,113 +68,205 @@ func (pp *PrintPanel) String() string {
 
 // NewPrintPanel creates a new PrintPanel.
 func NewPrintPanel() *PrintPanel {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSPrintPanel")), objc.RegisterName("new"))
-	return printPanelAdopt(_id)
+	var _mainthread0 *PrintPanel
+	purego.Main(func() {
+		_mainthread0 = func() *PrintPanel {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSPrintPanel")), objc.RegisterName("new"))
+			return printPanelAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithOptions sets the current configuration options for the Print panel.
 func (pp *PrintPanel) WithOptions(options PrintPanelOptions) *PrintPanel {
-	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setOptions:"), options)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setOptions:"), options)
+	})
 	return pp
 }
 
 // WithHelpAnchor sets the HTML help anchor associated with the Print panel.
 func (pp *PrintPanel) WithHelpAnchor(helpAnchor obj.Object) *PrintPanel {
-	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setHelpAnchor:"), objref.IDOf(helpAnchor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setHelpAnchor:"), objref.IDOf(helpAnchor))
+	})
 	return pp
 }
 
 // WithJobStyleHint sets the type of settings that the print panel displays.
 func (pp *PrintPanel) WithJobStyleHint(jobStyleHint obj.Object) *PrintPanel {
-	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setJobStyleHint:"), objref.IDOf(jobStyleHint))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setJobStyleHint:"), objref.IDOf(jobStyleHint))
+	})
 	return pp
 }
 
 // AddAccessoryController adds a custom controller to the Print panel to manage an accessory view.
 func (pp *PrintPanel) AddAccessoryController(accessoryController *ViewController) {
-	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("addAccessoryController:"), objref.IDOf(accessoryController))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("addAccessoryController:"), objref.IDOf(accessoryController))
+	})
+
 }
 
 // RemoveAccessoryController removes the specified controller and accessory view from the Print panel.
 func (pp *PrintPanel) RemoveAccessoryController(accessoryController *ViewController) {
-	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("removeAccessoryController:"), objref.IDOf(accessoryController))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("removeAccessoryController:"), objref.IDOf(accessoryController))
+	})
+
 }
 
 // SetDefaultButtonTitle sets the title of the Print panel’s default button.
 func (pp *PrintPanel) SetDefaultButtonTitle(defaultButtonTitle string) {
-	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setDefaultButtonTitle:"), purego.NSString(defaultButtonTitle))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setDefaultButtonTitle:"), purego.NSString(defaultButtonTitle))
+	})
+
 }
 
 // DefaultButtonTitle returns the title of the Print panel’s default button.
 func (pp *PrintPanel) DefaultButtonTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("defaultButtonTitle"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("defaultButtonTitle"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RunModalWithPrintInfo displays the Print panel and runs the modal loop using the specified printing information.
 func (pp *PrintPanel) RunModalWithPrintInfo(printInfo *PrintInfo) int {
-	_r := objc.Send[int](objref.IDOf(pp), objc.RegisterName("runModalWithPrintInfo:"), objref.IDOf(printInfo))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(pp), objc.RegisterName("runModalWithPrintInfo:"), objref.IDOf(printInfo))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RunModal returns displays the Print panel and begins the modal loop.
 func (pp *PrintPanel) RunModal() int {
-	_r := objc.Send[int](objref.IDOf(pp), objc.RegisterName("runModal"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(pp), objc.RegisterName("runModal"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AccessoryControllers returns the accessory controllers.
 //
 // AccessoryControllers returns the collection as a Go slice.
 func (pp *PrintPanel) AccessoryControllers() []*ViewController {
-	_arr := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("accessoryControllers"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ViewController { return ViewControllerFromID(_id) })
+	var _mainthread0 []*ViewController
+	purego.Main(func() {
+		_mainthread0 = func() []*ViewController {
+			_arr := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("accessoryControllers"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ViewController { return ViewControllerFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // Options returns the options.
 func (pp *PrintPanel) Options() PrintPanelOptions {
-	_r := objc.Send[PrintPanelOptions](objref.IDOf(pp), objc.RegisterName("options"))
-	return _r
+	var _mainthread0 PrintPanelOptions
+	purego.Main(func() {
+		_mainthread0 = func() PrintPanelOptions {
+			_r := objc.Send[PrintPanelOptions](objref.IDOf(pp), objc.RegisterName("options"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HelpAnchor returns the help anchor.
 func (pp *PrintPanel) HelpAnchor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("helpAnchor"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("helpAnchor"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // JobStyleHint returns the job style hint.
 func (pp *PrintPanel) JobStyleHint() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("jobStyleHint"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("jobStyleHint"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PrintInfo returns the print info.
 func (pp *PrintPanel) PrintInfo() *PrintInfo {
-	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("printInfo"))
-	return PrintInfoFromID(_r)
+	var _mainthread0 *PrintInfo
+	purego.Main(func() {
+		_mainthread0 = func() *PrintInfo {
+			_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("printInfo"))
+			return PrintInfoFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetAccessoryView sets the accessory view for the Print panel.
 func (pp *PrintPanel) SetAccessoryView(accessoryView *View) {
-	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
+	})
+
 }
 
 // AccessoryView returns the accessory view of the Print panel.
 func (pp *PrintPanel) AccessoryView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("accessoryView"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("accessoryView"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UpdateFromPrintInfo updates the Print panel with information from the current print operation object.
 func (pp *PrintPanel) UpdateFromPrintInfo() {
-	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("updateFromPrintInfo"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("updateFromPrintInfo"))
+	})
+
 }
 
 // FinalWritePrintInfo writes the Print panel’s printing attributes to the current print operation object.
 func (pp *PrintPanel) FinalWritePrintInfo() {
-	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("finalWritePrintInfo"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("finalWritePrintInfo"))
+	})
+
 }

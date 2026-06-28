@@ -50,184 +50,258 @@ func referenceNodeAdopt(id objc.ID) *ReferenceNode {
 
 // NewReferenceNodeWithURL initializes a reference node from a URL.
 func NewReferenceNodeWithURL(url string) *ReferenceNode {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SKReferenceNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
-	return referenceNodeAdopt(_id)
+	var _mainthread0 *ReferenceNode
+	purego.Main(func() {
+		_mainthread0 = func() *ReferenceNode {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SKReferenceNode")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
+			return referenceNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewReferenceNodeWithFileNamed initializes a reference node from a file in the app’s main bundle.
 func NewReferenceNodeWithFileNamed(fileName string) *ReferenceNode {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SKReferenceNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileNamed:"), purego.NSString(fileName))
-	return referenceNodeAdopt(_id)
+	var _mainthread0 *ReferenceNode
+	purego.Main(func() {
+		_mainthread0 = func() *ReferenceNode {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SKReferenceNode")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileNamed:"), purego.NSString(fileName))
+			return referenceNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewReferenceNodeWithCoder a method that initializes a reference node from an archive.
 func NewReferenceNodeWithCoder(aDecoder obj.Object) *ReferenceNode {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SKReferenceNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
-	return referenceNodeAdopt(_id)
+	var _mainthread0 *ReferenceNode
+	purego.Main(func() {
+		_mainthread0 = func() *ReferenceNode {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SKReferenceNode")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
+			return referenceNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithPosition sets the position of the node in its parent’s coordinate system.
 func (rn *ReferenceNode) WithPosition(position corefoundation.CGPoint) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setPosition:"), position)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setPosition:"), position)
+	})
 	return rn
 }
 
 // WithZPosition sets the height of the node relative to its parent.
 func (rn *ReferenceNode) WithZPosition(zPosition float64) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setZPosition:"), zPosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setZPosition:"), zPosition)
+	})
 	return rn
 }
 
 // WithZRotation sets the Euler rotation about the z axis (in radians).
 func (rn *ReferenceNode) WithZRotation(zRotation float64) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setZRotation:"), zRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setZRotation:"), zRotation)
+	})
 	return rn
 }
 
 // WithXScale sets a scaling factor that multiplies the width of a node and its children.
 func (rn *ReferenceNode) WithXScale(xScale float64) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setXScale:"), xScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setXScale:"), xScale)
+	})
 	return rn
 }
 
 // WithYScale sets a scaling factor that multiplies the height of a node and its children.
 func (rn *ReferenceNode) WithYScale(yScale float64) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setYScale:"), yScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setYScale:"), yScale)
+	})
 	return rn
 }
 
 // WithSpeed sets a speed modifier applied to all actions executed by a node and its descendants.
 func (rn *ReferenceNode) WithSpeed(speed float64) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setSpeed:"), speed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setSpeed:"), speed)
+	})
 	return rn
 }
 
 // WithAlpha sets the transparency value applied to the node’s contents.
 func (rn *ReferenceNode) WithAlpha(alpha float64) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAlpha:"), alpha)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAlpha:"), alpha)
+	})
 	return rn
 }
 
 // WithPaused sets a Boolean value that determines whether actions on the node and its descendants are processed.
 func (rn *ReferenceNode) WithPaused(paused bool) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setPaused:"), paused)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setPaused:"), paused)
+	})
 	return rn
 }
 
 // WithHidden sets a Boolean value that determines whether a node and its descendants are rendered.
 func (rn *ReferenceNode) WithHidden(hidden bool) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setHidden:"), hidden)
+	})
 	return rn
 }
 
 // WithUserInteractionEnabled sets a Boolean value that indicates whether the node receives touch events.
 func (rn *ReferenceNode) WithUserInteractionEnabled(userInteractionEnabled bool) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	})
 	return rn
 }
 
 // WithName sets the node’s assignable name.
 func (rn *ReferenceNode) WithName(name string) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setName:"), purego.NSString(name))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setName:"), purego.NSString(name))
+	})
 	return rn
 }
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (rn *ReferenceNode) WithPhysicsBody(physicsBody *PhysicsBody) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	})
 	return rn
 }
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (rn *ReferenceNode) WithUserData(userData obj.Object) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	})
 	return rn
 }
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (rn *ReferenceNode) WithReachConstraints(reachConstraints *ReachConstraints) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	})
 	return rn
 }
 
 // WithConstraints sets a list of constraints to apply to the node.
 func (rn *ReferenceNode) WithConstraints(items ...*Constraint) *ReferenceNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setConstraints:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setConstraints:"), _arr)
+	})
 	return rn
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
 func (rn *ReferenceNode) WithAttributeValues(attributeValues obj.Object) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	})
 	return rn
 }
 
 // WithAccessibilityElement sets a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (rn *ReferenceNode) WithAccessibilityElement(accessibilityElement bool) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	})
 	return rn
 }
 
 // WithAccessibilityRole sets a string value describing the user interface element type; for example, a button.
 func (rn *ReferenceNode) WithAccessibilityRole(accessibilityRole string) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	})
 	return rn
 }
 
 // WithAccessibilityRoleDescription sets a string value describing the user interface element name and type; for example, the Buy button.
 func (rn *ReferenceNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	})
 	return rn
 }
 
 // WithAccessibilitySubrole sets a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (rn *ReferenceNode) WithAccessibilitySubrole(accessibilitySubrole string) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	})
 	return rn
 }
 
 // WithAccessibilityFrame sets the size of this user interface element, in screen points.
 func (rn *ReferenceNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	})
 	return rn
 }
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (rn *ReferenceNode) WithAccessibilityParent(accessibilityParent obj.Object) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	})
 	return rn
 }
 
 // WithAccessibilityHelp sets the help description of this user interface element; for example, the text shown in a tooltip.
 func (rn *ReferenceNode) WithAccessibilityHelp(accessibilityHelp string) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	})
 	return rn
 }
 
 // WithAccessibilityLabel sets a short description of this user interface element.
 func (rn *ReferenceNode) WithAccessibilityLabel(accessibilityLabel string) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	})
 	return rn
 }
 
 // WithAccessibilityEnabled sets a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (rn *ReferenceNode) WithAccessibilityEnabled(accessibilityEnabled bool) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	})
 	return rn
 }
 
 // DidLoadReferenceNode a method called by SpriteKit after the reference node’s contents are loaded.
 func (rn *ReferenceNode) DidLoadReferenceNode(node *Node) {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("didLoadReferenceNode:"), objref.IDOf(node))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("didLoadReferenceNode:"), objref.IDOf(node))
+	})
+
 }
 
 // ResolveReferenceNode loads the reference node’s content and adds it as a new child node.
 func (rn *ReferenceNode) ResolveReferenceNode() {
-	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("resolveReferenceNode"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("resolveReferenceNode"))
+	})
+
 }
 
 var _ NodeProvider = (*ReferenceNode)(nil)

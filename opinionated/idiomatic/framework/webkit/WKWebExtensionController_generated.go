@@ -72,47 +72,87 @@ func (wwec *WKWebExtensionController) String() string {
 
 // NewWKWebExtensionController creates a new WKWebExtensionController.
 func NewWKWebExtensionController() *WKWebExtensionController {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionController")), objc.RegisterName("new"))
-	return wKWebExtensionControllerAdopt(_id)
+	var _mainthread0 *WKWebExtensionController
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtensionController {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionController")), objc.RegisterName("new"))
+			return wKWebExtensionControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewWKWebExtensionControllerWithConfiguration returns a web extension controller initialized with the specified configuration.
 func NewWKWebExtensionControllerWithConfiguration(configuration *WKWebExtensionControllerConfiguration) *WKWebExtensionController {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), objref.IDOf(configuration))
-	return wKWebExtensionControllerAdopt(_id)
+	var _mainthread0 *WKWebExtensionController
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtensionController {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionController")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), objref.IDOf(configuration))
+			return wKWebExtensionControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // LoadExtensionContext loads the specified extension context.
 func (wwec *WKWebExtensionController) LoadExtensionContext(extensionContext *WKWebExtensionContext) error {
-	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(wwec), objc.RegisterName("loadExtensionContext:error:"), objref.IDOf(extensionContext), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
-	}
-	return nil
+	var _mainthread0 error
+	purego.Main(func() {
+		_mainthread0 = func() error {
+			var _nsErr uintptr
+			_ = objc.Send[bool](objref.IDOf(wwec), objc.RegisterName("loadExtensionContext:error:"), objref.IDOf(extensionContext), unsafe.Pointer(&_nsErr))
+			if _nsErr != 0 {
+				return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+			}
+			return nil
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UnloadExtensionContext unloads the specified extension context.
 func (wwec *WKWebExtensionController) UnloadExtensionContext(extensionContext *WKWebExtensionContext) error {
-	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(wwec), objc.RegisterName("unloadExtensionContext:error:"), objref.IDOf(extensionContext), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
-	}
-	return nil
+	var _mainthread0 error
+	purego.Main(func() {
+		_mainthread0 = func() error {
+			var _nsErr uintptr
+			_ = objc.Send[bool](objref.IDOf(wwec), objc.RegisterName("unloadExtensionContext:error:"), objref.IDOf(extensionContext), unsafe.Pointer(&_nsErr))
+			if _nsErr != 0 {
+				return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+			}
+			return nil
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ExtensionContextForExtension returns a loaded extension context for the specified extension.
 func (wwec *WKWebExtensionController) ExtensionContextForExtension(extension *WKWebExtension) *WKWebExtensionContext {
-	_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("extensionContextForExtension:"), objref.IDOf(extension))
-	return WKWebExtensionContextFromID(_r)
+	var _mainthread0 *WKWebExtensionContext
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtensionContext {
+			_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("extensionContextForExtension:"), objref.IDOf(extension))
+			return WKWebExtensionContextFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ExtensionContextForURL returns a loaded extension context matching the specified URL.
 func (wwec *WKWebExtensionController) ExtensionContextForURL(uRL string) *WKWebExtensionContext {
-	_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("extensionContextForURL:"), rt.FileURL(uRL))
-	return WKWebExtensionContextFromID(_r)
+	var _mainthread0 *WKWebExtensionContext
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtensionContext {
+			_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("extensionContextForURL:"), rt.FileURL(uRL))
+			return WKWebExtensionContextFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FetchDataRecordsOfTypes fetches data records containing the given extension data types for all known extensions.
@@ -182,28 +222,55 @@ func (wwec *WKWebExtensionController) RemoveDataOfTypesFromDataRecords(ctx conte
 
 // DidSelectTabs should be called by the app when tabs are selected to fire appropriate events with all loaded web extensions.
 func (wwec *WKWebExtensionController) DidSelectTabs(selectedTabs []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("didSelectTabs:"), purego.SliceToNSArray(selectedTabs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("didSelectTabs:"), purego.SliceToNSArray(selectedTabs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	})
+
 }
 
 // DidDeselectTabs should be called by the app when tabs are deselected to fire appropriate events with all loaded web extensions.
 func (wwec *WKWebExtensionController) DidDeselectTabs(deselectedTabs []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("didDeselectTabs:"), purego.SliceToNSArray(deselectedTabs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("didDeselectTabs:"), purego.SliceToNSArray(deselectedTabs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	})
+
 }
 
 // Configuration returns a copy of the configuration with which the web extension controller was initialized. Mutating the configuration has no effect on the web extension controller.
 func (wwec *WKWebExtensionController) Configuration() *WKWebExtensionControllerConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("configuration"))
-	return WKWebExtensionControllerConfigurationFromID(_r)
+	var _mainthread0 *WKWebExtensionControllerConfiguration
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtensionControllerConfiguration {
+			_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("configuration"))
+			return WKWebExtensionControllerConfigurationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Extensions returns a set of all the currently loaded extensions.
 func (wwec *WKWebExtensionController) Extensions() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("extensions"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("extensions"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ExtensionContexts returns a set of all the currently loaded extension contexts.
 func (wwec *WKWebExtensionController) ExtensionContexts() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("extensionContexts"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("extensionContexts"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

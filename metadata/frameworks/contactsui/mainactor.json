@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "framework": "ContactsUI",
+  "nonisolated_selectors": {
+    "CNContactViewController": [
+      "+descriptorForRequiredKeys"
+    ]
+  }
+}

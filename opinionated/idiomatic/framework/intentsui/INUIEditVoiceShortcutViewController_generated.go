@@ -68,7 +68,13 @@ func (evsvc *EditVoiceShortcutViewController) String() string {
 
 // NewEditVoiceShortcutViewControllerWithVoiceShortcut creates a view controller with the shortcut to edit or remove.
 func NewEditVoiceShortcutViewControllerWithVoiceShortcut(voiceShortcut obj.Object) *EditVoiceShortcutViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("INUIEditVoiceShortcutViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVoiceShortcut:"), objref.IDOf(voiceShortcut))
-	return editVoiceShortcutViewControllerAdopt(_id)
+	var _mainthread0 *EditVoiceShortcutViewController
+	purego.Main(func() {
+		_mainthread0 = func() *EditVoiceShortcutViewController {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("INUIEditVoiceShortcutViewController")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVoiceShortcut:"), objref.IDOf(voiceShortcut))
+			return editVoiceShortcutViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }

@@ -49,309 +49,480 @@ func shapeNodeAdopt(id objc.ID) *ShapeNode {
 
 // NewShapeNode creates a new ShapeNode.
 func NewShapeNode() *ShapeNode {
-	_id := objc.Send[objc.ID](objc.ID(_class("SKShapeNode")), objc.RegisterName("new"))
-	return shapeNodeAdopt(_id)
+	var _mainthread0 *ShapeNode
+	purego.Main(func() {
+		_mainthread0 = func() *ShapeNode {
+			_id := objc.Send[objc.ID](objc.ID(_class("SKShapeNode")), objc.RegisterName("new"))
+			return shapeNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithPath sets the path that defines the shape.
 func (sn *ShapeNode) WithPath(path obj.Object) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setPath:"), objref.IDOf(path))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setPath:"), objref.IDOf(path))
+	})
 	return sn
 }
 
 // WithStrokeColor sets the color used to stroke the shape.
 func (sn *ShapeNode) WithStrokeColor(strokeColor obj.Object) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
+	})
 	return sn
 }
 
 // WithFillColor sets the color used to fill the shape.
 func (sn *ShapeNode) WithFillColor(fillColor obj.Object) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
+	})
 	return sn
 }
 
 // WithBlendMode sets the blend mode used to blend the shape into the parent’s framebuffer.
 func (sn *ShapeNode) WithBlendMode(blendMode BlendMode) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setBlendMode:"), blendMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setBlendMode:"), blendMode)
+	})
 	return sn
 }
 
 // WithAntialiased sets a Boolean value that determines whether the stroked path is smoothed when drawn.
 func (sn *ShapeNode) WithAntialiased(antialiased bool) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAntialiased:"), antialiased)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAntialiased:"), antialiased)
+	})
 	return sn
 }
 
 // WithLineWidth sets the width used to stroke the path.
 func (sn *ShapeNode) WithLineWidth(lineWidth float64) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setLineWidth:"), lineWidth)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setLineWidth:"), lineWidth)
+	})
 	return sn
 }
 
 // WithGlowWidth sets a glow that extends outward from the stroked line.
 func (sn *ShapeNode) WithGlowWidth(glowWidth float64) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setGlowWidth:"), glowWidth)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setGlowWidth:"), glowWidth)
+	})
 	return sn
 }
 
 // WithMiterLimit sets the miter limit to use when the line is stroked using a miter join style.
 func (sn *ShapeNode) WithMiterLimit(miterLimit float64) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setMiterLimit:"), miterLimit)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setMiterLimit:"), miterLimit)
+	})
 	return sn
 }
 
 // WithFillTexture sets the texture used to fill the shape.
 func (sn *ShapeNode) WithFillTexture(fillTexture TextureProvider) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setFillTexture:"), objref.IDOf(fillTexture))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setFillTexture:"), objref.IDOf(fillTexture))
+	})
 	return sn
 }
 
 // WithFillShader sets a custom shader used to determine the color of the filled portion of the shape node.
 func (sn *ShapeNode) WithFillShader(fillShader *Shader) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setFillShader:"), objref.IDOf(fillShader))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setFillShader:"), objref.IDOf(fillShader))
+	})
 	return sn
 }
 
 // WithStrokeTexture sets the texture used to stroke the shape.
 func (sn *ShapeNode) WithStrokeTexture(strokeTexture TextureProvider) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setStrokeTexture:"), objref.IDOf(strokeTexture))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setStrokeTexture:"), objref.IDOf(strokeTexture))
+	})
 	return sn
 }
 
 // WithStrokeShader sets a custom shader used to determine the color of the stroked portion of the shape node.
 func (sn *ShapeNode) WithStrokeShader(strokeShader *Shader) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setStrokeShader:"), objref.IDOf(strokeShader))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setStrokeShader:"), objref.IDOf(strokeShader))
+	})
 	return sn
 }
 
 // WithPosition sets the position of the node in its parent’s coordinate system.
 func (sn *ShapeNode) WithPosition(position corefoundation.CGPoint) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setPosition:"), position)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setPosition:"), position)
+	})
 	return sn
 }
 
 // WithZPosition sets the height of the node relative to its parent.
 func (sn *ShapeNode) WithZPosition(zPosition float64) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setZPosition:"), zPosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setZPosition:"), zPosition)
+	})
 	return sn
 }
 
 // WithZRotation sets the Euler rotation about the z axis (in radians).
 func (sn *ShapeNode) WithZRotation(zRotation float64) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setZRotation:"), zRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setZRotation:"), zRotation)
+	})
 	return sn
 }
 
 // WithXScale sets a scaling factor that multiplies the width of a node and its children.
 func (sn *ShapeNode) WithXScale(xScale float64) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setXScale:"), xScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setXScale:"), xScale)
+	})
 	return sn
 }
 
 // WithYScale sets a scaling factor that multiplies the height of a node and its children.
 func (sn *ShapeNode) WithYScale(yScale float64) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setYScale:"), yScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setYScale:"), yScale)
+	})
 	return sn
 }
 
 // WithSpeed sets a speed modifier applied to all actions executed by a node and its descendants.
 func (sn *ShapeNode) WithSpeed(speed float64) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setSpeed:"), speed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setSpeed:"), speed)
+	})
 	return sn
 }
 
 // WithAlpha sets the transparency value applied to the node’s contents.
 func (sn *ShapeNode) WithAlpha(alpha float64) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAlpha:"), alpha)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAlpha:"), alpha)
+	})
 	return sn
 }
 
 // WithPaused sets a Boolean value that determines whether actions on the node and its descendants are processed.
 func (sn *ShapeNode) WithPaused(paused bool) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setPaused:"), paused)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setPaused:"), paused)
+	})
 	return sn
 }
 
 // WithHidden sets a Boolean value that determines whether a node and its descendants are rendered.
 func (sn *ShapeNode) WithHidden(hidden bool) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setHidden:"), hidden)
+	})
 	return sn
 }
 
 // WithUserInteractionEnabled sets a Boolean value that indicates whether the node receives touch events.
 func (sn *ShapeNode) WithUserInteractionEnabled(userInteractionEnabled bool) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	})
 	return sn
 }
 
 // WithName sets the node’s assignable name.
 func (sn *ShapeNode) WithName(name string) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setName:"), purego.NSString(name))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setName:"), purego.NSString(name))
+	})
 	return sn
 }
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (sn *ShapeNode) WithPhysicsBody(physicsBody *PhysicsBody) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	})
 	return sn
 }
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (sn *ShapeNode) WithUserData(userData obj.Object) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	})
 	return sn
 }
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (sn *ShapeNode) WithReachConstraints(reachConstraints *ReachConstraints) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	})
 	return sn
 }
 
 // WithConstraints sets a list of constraints to apply to the node.
 func (sn *ShapeNode) WithConstraints(items ...*Constraint) *ShapeNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setConstraints:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setConstraints:"), _arr)
+	})
 	return sn
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
 func (sn *ShapeNode) WithAttributeValues(attributeValues obj.Object) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	})
 	return sn
 }
 
 // WithAccessibilityElement sets a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (sn *ShapeNode) WithAccessibilityElement(accessibilityElement bool) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	})
 	return sn
 }
 
 // WithAccessibilityRole sets a string value describing the user interface element type; for example, a button.
 func (sn *ShapeNode) WithAccessibilityRole(accessibilityRole string) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	})
 	return sn
 }
 
 // WithAccessibilityRoleDescription sets a string value describing the user interface element name and type; for example, the Buy button.
 func (sn *ShapeNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	})
 	return sn
 }
 
 // WithAccessibilitySubrole sets a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (sn *ShapeNode) WithAccessibilitySubrole(accessibilitySubrole string) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	})
 	return sn
 }
 
 // WithAccessibilityFrame sets the size of this user interface element, in screen points.
 func (sn *ShapeNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	})
 	return sn
 }
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (sn *ShapeNode) WithAccessibilityParent(accessibilityParent obj.Object) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	})
 	return sn
 }
 
 // WithAccessibilityHelp sets the help description of this user interface element; for example, the text shown in a tooltip.
 func (sn *ShapeNode) WithAccessibilityHelp(accessibilityHelp string) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	})
 	return sn
 }
 
 // WithAccessibilityLabel sets a short description of this user interface element.
 func (sn *ShapeNode) WithAccessibilityLabel(accessibilityLabel string) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	})
 	return sn
 }
 
 // WithAccessibilityEnabled sets a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (sn *ShapeNode) WithAccessibilityEnabled(accessibilityEnabled bool) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	})
 	return sn
 }
 
 // Path returns the CGPath to be drawn (in the Node's coordinate space)
 func (sn *ShapeNode) Path() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("path"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("path"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // StrokeColor returns the color to draw the path with. (for no stroke use [SKColor clearColor]). Defaults to [SKColor whiteColor].
 func (sn *ShapeNode) StrokeColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("strokeColor"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("strokeColor"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FillColor returns the color to fill the path with. Defaults to [SKColor clearColor] (no fill).
 func (sn *ShapeNode) FillColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("fillColor"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("fillColor"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BlendMode sets the blend mode to use when composing the shape with the final framebuffer.
 func (sn *ShapeNode) BlendMode() BlendMode {
-	_r := objc.Send[BlendMode](objref.IDOf(sn), objc.RegisterName("blendMode"))
-	return _r
+	var _mainthread0 BlendMode
+	purego.Main(func() {
+		_mainthread0 = func() BlendMode {
+			_r := objc.Send[BlendMode](objref.IDOf(sn), objc.RegisterName("blendMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsAntialiased reports whether if set to true, the path stroke edges and caps is smoothed (antialiased) when drawn.
 func (sn *ShapeNode) IsAntialiased() bool {
-	_r := objc.Send[bool](objref.IDOf(sn), objc.RegisterName("isAntialiased"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sn), objc.RegisterName("isAntialiased"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LineWidth returns the width used to stroke the path. Widths larger than 2.0 may result in artifacts. Defaults to 1.0.
 func (sn *ShapeNode) LineWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(sn), objc.RegisterName("lineWidth"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sn), objc.RegisterName("lineWidth"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // GlowWidth returns add a glow to the path stroke of the specified width. Defaults to 0.0 (no glow)
 func (sn *ShapeNode) GlowWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(sn), objc.RegisterName("glowWidth"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sn), objc.RegisterName("glowWidth"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MiterLimit returns when a miter join is used, the maximum ratio of miter length to line with to be used
 func (sn *ShapeNode) MiterLimit() float64 {
-	_r := objc.Send[float64](objref.IDOf(sn), objc.RegisterName("miterLimit"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sn), objc.RegisterName("miterLimit"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LineLength returns the length of the node's path if it were to be stroked
 func (sn *ShapeNode) LineLength() float64 {
-	_r := objc.Send[float64](objref.IDOf(sn), objc.RegisterName("lineLength"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sn), objc.RegisterName("lineLength"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FillTexture returns the fill texture.
 func (sn *ShapeNode) FillTexture() *Texture {
-	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("fillTexture"))
-	return TextureFromID(_r)
+	var _mainthread0 *Texture
+	purego.Main(func() {
+		_mainthread0 = func() *Texture {
+			_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("fillTexture"))
+			return TextureFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FillShader returns the fill shader.
 func (sn *ShapeNode) FillShader() *Shader {
-	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("fillShader"))
-	return ShaderFromID(_r)
+	var _mainthread0 *Shader
+	purego.Main(func() {
+		_mainthread0 = func() *Shader {
+			_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("fillShader"))
+			return ShaderFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // StrokeTexture returns the stroke texture.
 func (sn *ShapeNode) StrokeTexture() *Texture {
-	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("strokeTexture"))
-	return TextureFromID(_r)
+	var _mainthread0 *Texture
+	purego.Main(func() {
+		_mainthread0 = func() *Texture {
+			_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("strokeTexture"))
+			return TextureFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // StrokeShader returns the stroke shader.
 func (sn *ShapeNode) StrokeShader() *Shader {
-	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("strokeShader"))
-	return ShaderFromID(_r)
+	var _mainthread0 *Shader
+	purego.Main(func() {
+		_mainthread0 = func() *Shader {
+			_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("strokeShader"))
+			return ShaderFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ NodeProvider = (*ShapeNode)(nil)

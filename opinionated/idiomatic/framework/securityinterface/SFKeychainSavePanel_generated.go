@@ -68,17 +68,33 @@ func (ksp *KeychainSavePanel) String() string {
 
 // NewKeychainSavePanel creates a new KeychainSavePanel.
 func NewKeychainSavePanel() *KeychainSavePanel {
-	_id := objc.Send[objc.ID](objc.ID(_class("SFKeychainSavePanel")), objc.RegisterName("new"))
-	return keychainSavePanelAdopt(_id)
+	var _mainthread0 *KeychainSavePanel
+	purego.Main(func() {
+		_mainthread0 = func() *KeychainSavePanel {
+			_id := objc.Send[objc.ID](objc.ID(_class("SFKeychainSavePanel")), objc.RegisterName("new"))
+			return keychainSavePanelAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // SetPassword specifies the password for the keychain that will be created.
 func (ksp *KeychainSavePanel) SetPassword(password string) {
-	objc.Send[objc.ID](objref.IDOf(ksp), objc.RegisterName("setPassword:"), purego.NSString(password))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ksp), objc.RegisterName("setPassword:"), purego.NSString(password))
+	})
+
 }
 
 // Keychain returns the keychain created by the keychain save panel.
 func (ksp *KeychainSavePanel) Keychain() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(ksp), objc.RegisterName("keychain"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(ksp), objc.RegisterName("keychain"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

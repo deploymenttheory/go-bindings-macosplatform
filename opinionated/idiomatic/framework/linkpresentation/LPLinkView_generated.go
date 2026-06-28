@@ -68,26 +68,47 @@ func (lv *LinkView) String() string {
 
 // NewLinkViewWithURL initializes a placeholder link view without metadata for a given URL.
 func NewLinkViewWithURL(uRL string) *LinkView {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("LPLinkView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(uRL))
-	return linkViewAdopt(_id)
+	var _mainthread0 *LinkView
+	purego.Main(func() {
+		_mainthread0 = func() *LinkView {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("LPLinkView")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(uRL))
+			return linkViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewLinkViewWithMetadata initializes a link view with specified metadata.
 func NewLinkViewWithMetadata(metadata *LinkMetadata) *LinkView {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("LPLinkView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMetadata:"), objref.IDOf(metadata))
-	return linkViewAdopt(_id)
+	var _mainthread0 *LinkView
+	purego.Main(func() {
+		_mainthread0 = func() *LinkView {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("LPLinkView")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMetadata:"), objref.IDOf(metadata))
+			return linkViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithMetadata sets the metadata from which to generate a rich presentation.
 func (lv *LinkView) WithMetadata(metadata *LinkMetadata) *LinkView {
-	objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("setMetadata:"), objref.IDOf(metadata))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("setMetadata:"), objref.IDOf(metadata))
+	})
 	return lv
 }
 
 // Metadata returns the metadata.
 func (lv *LinkView) Metadata() *LinkMetadata {
-	_r := objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("metadata"))
-	return LinkMetadataFromID(_r)
+	var _mainthread0 *LinkMetadata
+	purego.Main(func() {
+		_mainthread0 = func() *LinkMetadata {
+			_r := objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("metadata"))
+			return LinkMetadataFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }

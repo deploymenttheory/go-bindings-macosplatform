@@ -66,40 +66,80 @@ func (pt *PictureTaker) String() string {
 
 // NewPictureTaker creates a new PictureTaker.
 func NewPictureTaker() *PictureTaker {
-	_id := objc.Send[objc.ID](objc.ID(_class("IKPictureTaker")), objc.RegisterName("new"))
-	return pictureTakerAdopt(_id)
+	var _mainthread0 *PictureTaker
+	purego.Main(func() {
+		_mainthread0 = func() *PictureTaker {
+			_id := objc.Send[objc.ID](objc.ID(_class("IKPictureTaker")), objc.RegisterName("new"))
+			return pictureTakerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // RunModal returns launches a modal PictureTaker session.
 func (pt *PictureTaker) RunModal() int {
-	_r := objc.Send[int](objref.IDOf(pt), objc.RegisterName("runModal"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(pt), objc.RegisterName("runModal"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetInputImage set the image input for the PictureTaker. The input image is never modified by the PictureTaker.
 func (pt *PictureTaker) SetInputImage(image obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("setInputImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("setInputImage:"), objref.IDOf(image))
+	})
+
 }
 
 // InputImage returns the original PictureTaker's input-image. The input image is never modified by the PictureTaker.
 func (pt *PictureTaker) InputImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("inputImage"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("inputImage"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // OutputImage returns the edited image.
 func (pt *PictureTaker) OutputImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("outputImage"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("outputImage"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetMirroring controls whether the receiver enable/disable video mirroring durring snapshots (default is YES).
 func (pt *PictureTaker) SetMirroring(b bool) {
-	objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("setMirroring:"), b)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("setMirroring:"), b)
+	})
+
 }
 
 // Mirroring reports whether video mirroring is enabled.
 func (pt *PictureTaker) Mirroring() bool {
-	_r := objc.Send[bool](objref.IDOf(pt), objc.RegisterName("mirroring"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(pt), objc.RegisterName("mirroring"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

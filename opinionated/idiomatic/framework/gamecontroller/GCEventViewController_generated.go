@@ -68,18 +68,33 @@ func (evc *EventViewController) String() string {
 
 // NewEventViewController creates a new EventViewController.
 func NewEventViewController() *EventViewController {
-	_id := objc.Send[objc.ID](objc.ID(_class("GCEventViewController")), objc.RegisterName("new"))
-	return eventViewControllerAdopt(_id)
+	var _mainthread0 *EventViewController
+	purego.Main(func() {
+		_mainthread0 = func() *EventViewController {
+			_id := objc.Send[objc.ID](objc.ID(_class("GCEventViewController")), objc.RegisterName("new"))
+			return eventViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithControllerUserInteractionEnabled sets a Boolean value that indicates whether the system delivers game controller input to profile objects or to views using the responder chain.
 func (evc *EventViewController) WithControllerUserInteractionEnabled(controllerUserInteractionEnabled bool) *EventViewController {
-	objc.Send[objc.ID](objref.IDOf(evc), objc.RegisterName("setControllerUserInteractionEnabled:"), controllerUserInteractionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(evc), objc.RegisterName("setControllerUserInteractionEnabled:"), controllerUserInteractionEnabled)
+	})
 	return evc
 }
 
 // ControllerUserInteractionEnabled wraps the corresponding Objective-C method.
 func (evc *EventViewController) ControllerUserInteractionEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(evc), objc.RegisterName("controllerUserInteractionEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(evc), objc.RegisterName("controllerUserInteractionEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

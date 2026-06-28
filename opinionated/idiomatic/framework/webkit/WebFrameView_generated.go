@@ -68,53 +68,106 @@ func (wfv *WebFrameView) String() string {
 
 // NewWebFrameView creates a new WebFrameView.
 func NewWebFrameView() *WebFrameView {
-	_id := objc.Send[objc.ID](objc.ID(_class("WebFrameView")), objc.RegisterName("new"))
-	return webFrameViewAdopt(_id)
+	var _mainthread0 *WebFrameView
+	purego.Main(func() {
+		_mainthread0 = func() *WebFrameView {
+			_id := objc.Send[objc.ID](objc.ID(_class("WebFrameView")), objc.RegisterName("new"))
+			return webFrameViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithAllowsScrolling sets a Boolean that indicates whether the frame view should allow users to scroll.
 func (wfv *WebFrameView) WithAllowsScrolling(allowsScrolling bool) *WebFrameView {
-	objc.Send[objc.ID](objref.IDOf(wfv), objc.RegisterName("setAllowsScrolling:"), allowsScrolling)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wfv), objc.RegisterName("setAllowsScrolling:"), allowsScrolling)
+	})
 	return wfv
 }
 
 // PrintOperationWithPrintInfo returns a print operation object to print this frame.
 func (wfv *WebFrameView) PrintOperationWithPrintInfo(printInfo obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wfv), objc.RegisterName("printOperationWithPrintInfo:"), objref.IDOf(printInfo))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wfv), objc.RegisterName("printOperationWithPrintInfo:"), objref.IDOf(printInfo))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PrintDocumentView prints the receiver.
 func (wfv *WebFrameView) PrintDocumentView() {
-	objc.Send[objc.ID](objref.IDOf(wfv), objc.RegisterName("printDocumentView"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wfv), objc.RegisterName("printDocumentView"))
+	})
+
 }
 
 // WebFrame returns the WebFrame associated with this WebFrameView
 func (wfv *WebFrameView) WebFrame() *WebFrame {
-	_r := objc.Send[objc.ID](objref.IDOf(wfv), objc.RegisterName("webFrame"))
-	return WebFrameFromID(_r)
+	var _mainthread0 *WebFrame
+	purego.Main(func() {
+		_mainthread0 = func() *WebFrame {
+			_r := objc.Send[objc.ID](objref.IDOf(wfv), objc.RegisterName("webFrame"))
+			return WebFrameFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DocumentView returns the WebFrameView's document subview The subview that renders the WebFrameView's contents
 func (wfv *WebFrameView) DocumentView() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wfv), objc.RegisterName("documentView"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wfv), objc.RegisterName("documentView"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsScrolling reports whether the WebFrameView allows its document to be scrolled
 func (wfv *WebFrameView) AllowsScrolling() bool {
-	_r := objc.Send[bool](objref.IDOf(wfv), objc.RegisterName("allowsScrolling"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wfv), objc.RegisterName("allowsScrolling"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CanPrintHeadersAndFooters reports whether this frame can print headers and footers
 func (wfv *WebFrameView) CanPrintHeadersAndFooters() bool {
-	_r := objc.Send[bool](objref.IDOf(wfv), objc.RegisterName("canPrintHeadersAndFooters"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wfv), objc.RegisterName("canPrintHeadersAndFooters"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DocumentViewShouldHandlePrint reports whether called by the host application before it initializes and runs a print operation. If false is returned, the host application will abort its print operation and call -printDocumentView on the WebFrameView. The document view is then expected to run its own print operation. If true is returned, the host application's print operation will continue as normal.
 func (wfv *WebFrameView) DocumentViewShouldHandlePrint() bool {
-	_r := objc.Send[bool](objref.IDOf(wfv), objc.RegisterName("documentViewShouldHandlePrint"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wfv), objc.RegisterName("documentViewShouldHandlePrint"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

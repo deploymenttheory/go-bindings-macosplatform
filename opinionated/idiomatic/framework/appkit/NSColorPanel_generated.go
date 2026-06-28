@@ -52,558 +52,786 @@ func colorPanelAdopt(id objc.ID) *ColorPanel {
 
 // NewColorPanel creates a new ColorPanel.
 func NewColorPanel() *ColorPanel {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSColorPanel")), objc.RegisterName("new"))
-	return colorPanelAdopt(_id)
+	var _mainthread0 *ColorPanel
+	purego.Main(func() {
+		_mainthread0 = func() *ColorPanel {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSColorPanel")), objc.RegisterName("new"))
+			return colorPanelAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithAccessoryView sets the accessory view.
 func (cp *ColorPanel) WithAccessoryView(accessoryView ViewProvider) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
+	})
 	return cp
 }
 
 // WithContinuous sets a Boolean value indicating whether the receiver continuously sends the action message to the target.
 func (cp *ColorPanel) WithContinuous(continuous bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return cp
 }
 
 // WithShowsAlpha sets a Boolean value that indicates whether the receiver shows alpha values and an opacity slider.
 func (cp *ColorPanel) WithShowsAlpha(showsAlpha bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setShowsAlpha:"), showsAlpha)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setShowsAlpha:"), showsAlpha)
+	})
 	return cp
 }
 
 // WithMode sets the mode of the receiver the mode is one of the modes allowed by the color mask.
 func (cp *ColorPanel) WithMode(mode ColorPanelMode) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMode:"), mode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMode:"), mode)
+	})
 	return cp
 }
 
 // WithColor sets the color of the receiver.
 func (cp *ColorPanel) WithColor(color *Color) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setColor:"), objref.IDOf(color))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setColor:"), objref.IDOf(color))
+	})
 	return cp
 }
 
 // WithMaximumLinearExposure sets the maximum linear exposure that can be set on a color picked in the color panel. Defaults to 1 and ignores any value less than 1. If set to a value >= 2, the color picked by the panel may have a linear exposure applied to it.
 func (cp *ColorPanel) WithMaximumLinearExposure(maximumLinearExposure float64) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMaximumLinearExposure:"), maximumLinearExposure)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMaximumLinearExposure:"), maximumLinearExposure)
+	})
 	return cp
 }
 
 // WithFloatingPanel sets a Boolean value that indicates whether the receiver is a floating panel.
 func (cp *ColorPanel) WithFloatingPanel(floatingPanel bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setFloatingPanel:"), floatingPanel)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setFloatingPanel:"), floatingPanel)
+	})
 	return cp
 }
 
 // WithBecomesKeyOnlyIfNeeded sets a Boolean value that indicates whether the receiver becomes the key window only when needed.
 func (cp *ColorPanel) WithBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setBecomesKeyOnlyIfNeeded:"), becomesKeyOnlyIfNeeded)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setBecomesKeyOnlyIfNeeded:"), becomesKeyOnlyIfNeeded)
+	})
 	return cp
 }
 
 // WithWorksWhenModal sets a Boolean value that indicates whether the panel receives keyboard and mouse events even when some other window is being run modally.
 func (cp *ColorPanel) WithWorksWhenModal(worksWhenModal bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setWorksWhenModal:"), worksWhenModal)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setWorksWhenModal:"), worksWhenModal)
+	})
 	return cp
 }
 
 // WithTitle sets the string that appears in the title bar of the window or the path to the represented file.
 func (cp *ColorPanel) WithTitle(title string) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return cp
 }
 
 // WithSubtitle sets a secondary line of text that appears in the title bar of the window.
 func (cp *ColorPanel) WithSubtitle(subtitle string) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
+	})
 	return cp
 }
 
 // WithTitleVisibility sets a value that indicates the visibility of the window’s title and title bar buttons.
 func (cp *ColorPanel) WithTitleVisibility(titleVisibility WindowTitleVisibility) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setTitleVisibility:"), titleVisibility)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setTitleVisibility:"), titleVisibility)
+	})
 	return cp
 }
 
 // WithTitlebarAppearsTransparent sets a Boolean value that indicates whether the title bar draws its background.
 func (cp *ColorPanel) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setTitlebarAppearsTransparent:"), titlebarAppearsTransparent)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setTitlebarAppearsTransparent:"), titlebarAppearsTransparent)
+	})
 	return cp
 }
 
 // WithToolbarStyle sets the style that determines the appearance and location of the toolbar in relation to the title bar.
 func (cp *ColorPanel) WithToolbarStyle(toolbarStyle WindowToolbarStyle) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setToolbarStyle:"), toolbarStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setToolbarStyle:"), toolbarStyle)
+	})
 	return cp
 }
 
 // WithTitlebarAccessoryViewControllers sets an array of title bar accessory view controllers that are currently added to the window.
 func (cp *ColorPanel) WithTitlebarAccessoryViewControllers(items ...*TitlebarAccessoryViewController) *ColorPanel {
 	_arr := purego.SliceToNSArray(items, func(_v *TitlebarAccessoryViewController) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setTitlebarAccessoryViewControllers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setTitlebarAccessoryViewControllers:"), _arr)
+	})
 	return cp
 }
 
 // WithRepresentedURL sets the URL of the file the window represents.
 func (cp *ColorPanel) WithRepresentedURL(representedURL string) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setRepresentedURL:"), rt.FileURL(representedURL))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setRepresentedURL:"), rt.FileURL(representedURL))
+	})
 	return cp
 }
 
 // WithRepresentedFilename sets the path to the file of the window’s represented file.
 func (cp *ColorPanel) WithRepresentedFilename(representedFilename string) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setRepresentedFilename:"), purego.NSString(representedFilename))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setRepresentedFilename:"), purego.NSString(representedFilename))
+	})
 	return cp
 }
 
 // WithExcludedFromWindowsMenu sets a Boolean value that indicates whether the window is excluded from the application’s Windows menu.
 func (cp *ColorPanel) WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setExcludedFromWindowsMenu:"), excludedFromWindowsMenu)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setExcludedFromWindowsMenu:"), excludedFromWindowsMenu)
+	})
 	return cp
 }
 
 // WithContentView sets the window’s content view, the highest accessible view object in the window’s view hierarchy.
 func (cp *ColorPanel) WithContentView(contentView ViewProvider) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
+	})
 	return cp
 }
 
 // WithStyleMask sets flags that describe the window’s current style, such as if it’s resizable or in full-screen mode.
 func (cp *ColorPanel) WithStyleMask(styleMask WindowStyleMask) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setStyleMask:"), styleMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setStyleMask:"), styleMask)
+	})
 	return cp
 }
 
 // WithResizeIncrements sets the window’s resizing increments.
 func (cp *ColorPanel) WithResizeIncrements(resizeIncrements corefoundation.CGSize) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setResizeIncrements:"), resizeIncrements)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setResizeIncrements:"), resizeIncrements)
+	})
 	return cp
 }
 
 // WithAspectRatio sets the window’s aspect ratio, which constrains the size of its frame rectangle to integral multiples of this ratio when the user resizes it.
 func (cp *ColorPanel) WithAspectRatio(aspectRatio corefoundation.CGSize) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAspectRatio:"), aspectRatio)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAspectRatio:"), aspectRatio)
+	})
 	return cp
 }
 
 // WithContentResizeIncrements sets the window’s content-view resizing increments.
 func (cp *ColorPanel) WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setContentResizeIncrements:"), contentResizeIncrements)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setContentResizeIncrements:"), contentResizeIncrements)
+	})
 	return cp
 }
 
 // WithContentAspectRatio sets the window’s content aspect ratio.
 func (cp *ColorPanel) WithContentAspectRatio(contentAspectRatio corefoundation.CGSize) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setContentAspectRatio:"), contentAspectRatio)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setContentAspectRatio:"), contentAspectRatio)
+	})
 	return cp
 }
 
 // WithViewsNeedDisplay sets a Boolean value that indicates whether any of the window’s views need to be displayed.
 func (cp *ColorPanel) WithViewsNeedDisplay(viewsNeedDisplay bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setViewsNeedDisplay:"), viewsNeedDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setViewsNeedDisplay:"), viewsNeedDisplay)
+	})
 	return cp
 }
 
 // WithPreservesContentDuringLiveResize sets a Boolean value that indicates whether the window tries to optimize user-initiated resize operations by preserving the content of views that have not changed.
 func (cp *ColorPanel) WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setPreservesContentDuringLiveResize:"), preservesContentDuringLiveResize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setPreservesContentDuringLiveResize:"), preservesContentDuringLiveResize)
+	})
 	return cp
 }
 
 // WithReleasedWhenClosed sets a Boolean value that indicates whether the window is released when it receives the close message.
 func (cp *ColorPanel) WithReleasedWhenClosed(releasedWhenClosed bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setReleasedWhenClosed:"), releasedWhenClosed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setReleasedWhenClosed:"), releasedWhenClosed)
+	})
 	return cp
 }
 
 // WithBackgroundColor sets the color of the window’s background.
 func (cp *ColorPanel) WithBackgroundColor(backgroundColor *Color) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	})
 	return cp
 }
 
 // WithMovable sets a Boolean value that indicates whether the window can be dragged by clicking in its title bar or background.
 func (cp *ColorPanel) WithMovable(movable bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMovable:"), movable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMovable:"), movable)
+	})
 	return cp
 }
 
 // WithMovableByWindowBackground sets a Boolean value that indicates whether the window is movable by clicking and dragging anywhere in its background.
 func (cp *ColorPanel) WithMovableByWindowBackground(movableByWindowBackground bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMovableByWindowBackground:"), movableByWindowBackground)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMovableByWindowBackground:"), movableByWindowBackground)
+	})
 	return cp
 }
 
 // WithHidesOnDeactivate sets a Boolean value that indicates whether the window is removed from the screen when its application becomes inactive.
 func (cp *ColorPanel) WithHidesOnDeactivate(hidesOnDeactivate bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setHidesOnDeactivate:"), hidesOnDeactivate)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setHidesOnDeactivate:"), hidesOnDeactivate)
+	})
 	return cp
 }
 
 // WithCanHide sets a Boolean value that indicates whether the window can hide when its application becomes hidden.
 func (cp *ColorPanel) WithCanHide(canHide bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setCanHide:"), canHide)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setCanHide:"), canHide)
+	})
 	return cp
 }
 
 // WithMiniwindowImage sets the custom miniaturized window image of the window.
 func (cp *ColorPanel) WithMiniwindowImage(miniwindowImage *Image) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMiniwindowImage:"), objref.IDOf(miniwindowImage))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMiniwindowImage:"), objref.IDOf(miniwindowImage))
+	})
 	return cp
 }
 
 // WithMiniwindowTitle sets the title displayed in the window’s minimized window.
 func (cp *ColorPanel) WithMiniwindowTitle(miniwindowTitle string) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMiniwindowTitle:"), purego.NSString(miniwindowTitle))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMiniwindowTitle:"), purego.NSString(miniwindowTitle))
+	})
 	return cp
 }
 
 // WithDocumentEdited sets a Boolean value that indicates whether the window’s document has been edited.
 func (cp *ColorPanel) WithDocumentEdited(documentEdited bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setDocumentEdited:"), documentEdited)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setDocumentEdited:"), documentEdited)
+	})
 	return cp
 }
 
 // WithPreventsApplicationTerminationWhenModal sets a Boolean value that indicates whether the window prevents application termination when modal.
 func (cp *ColorPanel) WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setPreventsApplicationTerminationWhenModal:"), preventsApplicationTerminationWhenModal)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setPreventsApplicationTerminationWhenModal:"), preventsApplicationTerminationWhenModal)
+	})
 	return cp
 }
 
 // WithAllowsToolTipsWhenApplicationIsInactive sets a Boolean value that indicates whether the window can display tooltips even when the application is in the background.
 func (cp *ColorPanel) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAllowsToolTipsWhenApplicationIsInactive:"), allowsToolTipsWhenApplicationIsInactive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAllowsToolTipsWhenApplicationIsInactive:"), allowsToolTipsWhenApplicationIsInactive)
+	})
 	return cp
 }
 
 // WithBackingType sets the window’s backing store type.
 func (cp *ColorPanel) WithBackingType(backingType BackingStoreType) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setBackingType:"), backingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setBackingType:"), backingType)
+	})
 	return cp
 }
 
 // WithLevel sets the window level of the window.
 func (cp *ColorPanel) WithLevel(level int) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setLevel:"), level)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setLevel:"), level)
+	})
 	return cp
 }
 
 // WithDepthLimit sets the depth limit of the window.
 func (cp *ColorPanel) WithDepthLimit(depthLimit WindowDepth) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setDepthLimit:"), depthLimit)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setDepthLimit:"), depthLimit)
+	})
 	return cp
 }
 
 // WithHasShadow sets a Boolean value that indicates whether the window has a shadow.
 func (cp *ColorPanel) WithHasShadow(hasShadow bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setHasShadow:"), hasShadow)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setHasShadow:"), hasShadow)
+	})
 	return cp
 }
 
 // WithAlphaValue sets the window’s alpha value.
 func (cp *ColorPanel) WithAlphaValue(alphaValue float64) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return cp
 }
 
 // WithOpaque sets a Boolean value that indicates whether the window is opaque.
 func (cp *ColorPanel) WithOpaque(opaque bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setOpaque:"), opaque)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setOpaque:"), opaque)
+	})
 	return cp
 }
 
 // WithSharingType sets a Boolean value that indicates the level of access other processes have to the window’s content.
 func (cp *ColorPanel) WithSharingType(sharingType WindowSharingType) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setSharingType:"), sharingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setSharingType:"), sharingType)
+	})
 	return cp
 }
 
 // WithAllowsConcurrentViewDrawing sets a Boolean value that indicates whether the window allows multithreaded view drawing.
 func (cp *ColorPanel) WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAllowsConcurrentViewDrawing:"), allowsConcurrentViewDrawing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAllowsConcurrentViewDrawing:"), allowsConcurrentViewDrawing)
+	})
 	return cp
 }
 
 // WithDisplaysWhenScreenProfileChanges sets a Boolean value that indicates whether the window context should be updated when the screen profile changes or when the window moves to a different screen.
 func (cp *ColorPanel) WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setDisplaysWhenScreenProfileChanges:"), displaysWhenScreenProfileChanges)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setDisplaysWhenScreenProfileChanges:"), displaysWhenScreenProfileChanges)
+	})
 	return cp
 }
 
 // WithCanBecomeVisibleWithoutLogin sets a Boolean value that indicates whether the window can be displayed at the login window.
 func (cp *ColorPanel) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setCanBecomeVisibleWithoutLogin:"), canBecomeVisibleWithoutLogin)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setCanBecomeVisibleWithoutLogin:"), canBecomeVisibleWithoutLogin)
+	})
 	return cp
 }
 
 // WithCollectionBehavior sets a value that identifies the window’s behavior in window collections.
 func (cp *ColorPanel) WithCollectionBehavior(collectionBehavior WindowCollectionBehavior) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setCollectionBehavior:"), collectionBehavior)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setCollectionBehavior:"), collectionBehavior)
+	})
 	return cp
 }
 
 // WithAnimationBehavior sets the window’s automatic animation behavior.
 func (cp *ColorPanel) WithAnimationBehavior(animationBehavior WindowAnimationBehavior) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAnimationBehavior:"), animationBehavior)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAnimationBehavior:"), animationBehavior)
+	})
 	return cp
 }
 
 // WithFrameAutosaveName sets the name used to automatically save the window’s frame rectangle data in the defaults system.
 func (cp *ColorPanel) WithFrameAutosaveName(frameAutosaveName obj.Object) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setFrameAutosaveName:"), objref.IDOf(frameAutosaveName))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setFrameAutosaveName:"), objref.IDOf(frameAutosaveName))
+	})
 	return cp
 }
 
 // WithMinSize sets the minimum size to which the window’s frame (including its title bar) can be sized.
 func (cp *ColorPanel) WithMinSize(minSize corefoundation.CGSize) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMinSize:"), minSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMinSize:"), minSize)
+	})
 	return cp
 }
 
 // WithMaxSize sets the maximum size to which the window’s frame (including its title bar) can be sized.
 func (cp *ColorPanel) WithMaxSize(maxSize corefoundation.CGSize) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMaxSize:"), maxSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMaxSize:"), maxSize)
+	})
 	return cp
 }
 
 // WithContentMinSize sets the minimum size of the window’s content view in the window’s base coordinate system.
 func (cp *ColorPanel) WithContentMinSize(contentMinSize corefoundation.CGSize) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setContentMinSize:"), contentMinSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setContentMinSize:"), contentMinSize)
+	})
 	return cp
 }
 
 // WithContentMaxSize sets the maximum size of the window’s content view in the window’s base coordinate system.
 func (cp *ColorPanel) WithContentMaxSize(contentMaxSize corefoundation.CGSize) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setContentMaxSize:"), contentMaxSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setContentMaxSize:"), contentMaxSize)
+	})
 	return cp
 }
 
 // WithMinFullScreenContentSize sets a minimum size that is used to determine if a window can fit when it is in full screen in a tile.
 func (cp *ColorPanel) WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMinFullScreenContentSize:"), minFullScreenContentSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMinFullScreenContentSize:"), minFullScreenContentSize)
+	})
 	return cp
 }
 
 // WithMaxFullScreenContentSize sets a maximum size that is used to determine if a window can fit when it is in full screen in a tile.
 func (cp *ColorPanel) WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMaxFullScreenContentSize:"), maxFullScreenContentSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMaxFullScreenContentSize:"), maxFullScreenContentSize)
+	})
 	return cp
 }
 
 // WithWindowController sets the window’s window controller.
 func (cp *ColorPanel) WithWindowController(windowController *WindowController) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setWindowController:"), objref.IDOf(windowController))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setWindowController:"), objref.IDOf(windowController))
+	})
 	return cp
 }
 
 // WithParentWindow sets the parent window to which the window is attached as a child.
 func (cp *ColorPanel) WithParentWindow(parentWindow WindowProvider) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
+	})
 	return cp
 }
 
 // WithAppearanceSource sets an object that the window inherits its appearance from.
 func (cp *ColorPanel) WithAppearanceSource(appearanceSource obj.Object) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAppearanceSource:"), objref.IDOf(appearanceSource))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAppearanceSource:"), objref.IDOf(appearanceSource))
+	})
 	return cp
 }
 
 // WithColorSpace sets the window’s color space.
 func (cp *ColorPanel) WithColorSpace(colorSpace *ColorSpace) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace))
+	})
 	return cp
 }
 
 // WithTitlebarSeparatorStyle sets the type of separator that the app displays between the title bar and content of a window.
 func (cp *ColorPanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle TitlebarSeparatorStyle) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setTitlebarSeparatorStyle:"), titlebarSeparatorStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setTitlebarSeparatorStyle:"), titlebarSeparatorStyle)
+	})
 	return cp
 }
 
 // WithContentViewController sets the main content view controller for the window.
 func (cp *ColorPanel) WithContentViewController(contentViewController ViewControllerProvider) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
+	})
 	return cp
 }
 
 // WithInitialFirstResponder sets the view that’s made first responder (also called the key view) the first time the window is placed onscreen.
 func (cp *ColorPanel) WithInitialFirstResponder(initialFirstResponder ViewProvider) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setInitialFirstResponder:"), objref.IDOf(initialFirstResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setInitialFirstResponder:"), objref.IDOf(initialFirstResponder))
+	})
 	return cp
 }
 
 // WithDefaultButtonCell sets the button cell that performs as if clicked when the window receives a Return (or Enter) key event.
 func (cp *ColorPanel) WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setDefaultButtonCell:"), objref.IDOf(defaultButtonCell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setDefaultButtonCell:"), objref.IDOf(defaultButtonCell))
+	})
 	return cp
 }
 
 // WithAutorecalculatesKeyViewLoop sets a Boolean value that indicates whether the window automatically recalculates the key view loop when views are added.
 func (cp *ColorPanel) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAutorecalculatesKeyViewLoop:"), autorecalculatesKeyViewLoop)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAutorecalculatesKeyViewLoop:"), autorecalculatesKeyViewLoop)
+	})
 	return cp
 }
 
 // WithToolbar sets the window’s toolbar.
 func (cp *ColorPanel) WithToolbar(toolbar *Toolbar) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setToolbar:"), objref.IDOf(toolbar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setToolbar:"), objref.IDOf(toolbar))
+	})
 	return cp
 }
 
 // WithShowsToolbarButton sets a Boolean value that indicates whether the toolbar control button is currently displayed.
 func (cp *ColorPanel) WithShowsToolbarButton(showsToolbarButton bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setShowsToolbarButton:"), showsToolbarButton)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setShowsToolbarButton:"), showsToolbarButton)
+	})
 	return cp
 }
 
 // WithTabbingMode sets a value that indicates when a window displays tabs.
 func (cp *ColorPanel) WithTabbingMode(tabbingMode WindowTabbingMode) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setTabbingMode:"), tabbingMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setTabbingMode:"), tabbingMode)
+	})
 	return cp
 }
 
 // WithTabbingIdentifier sets a value that allows a group of related windows.
 func (cp *ColorPanel) WithTabbingIdentifier(tabbingIdentifier obj.Object) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setTabbingIdentifier:"), objref.IDOf(tabbingIdentifier))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setTabbingIdentifier:"), objref.IDOf(tabbingIdentifier))
+	})
 	return cp
 }
 
 // WithAcceptsMouseMovedEvents sets a Boolean value that indicates whether the window accepts mouse-moved events.
 func (cp *ColorPanel) WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAcceptsMouseMovedEvents:"), acceptsMouseMovedEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAcceptsMouseMovedEvents:"), acceptsMouseMovedEvents)
+	})
 	return cp
 }
 
 // WithIgnoresMouseEvents sets a Boolean value that indicates whether the window is transparent to mouse events.
 func (cp *ColorPanel) WithIgnoresMouseEvents(ignoresMouseEvents bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setIgnoresMouseEvents:"), ignoresMouseEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setIgnoresMouseEvents:"), ignoresMouseEvents)
+	})
 	return cp
 }
 
 // WithAutodisplay sets the autodisplay.
 func (cp *ColorPanel) WithAutodisplay(autodisplay bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAutodisplay:"), autodisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAutodisplay:"), autodisplay)
+	})
 	return cp
 }
 
 // WithOneShot sets the one shot.
 func (cp *ColorPanel) WithOneShot(oneShot bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setOneShot:"), oneShot)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setOneShot:"), oneShot)
+	})
 	return cp
 }
 
 // WithPreferredBackingLocation sets the preferred backing location.
 func (cp *ColorPanel) WithPreferredBackingLocation(preferredBackingLocation WindowBackingLocation) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setPreferredBackingLocation:"), preferredBackingLocation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setPreferredBackingLocation:"), preferredBackingLocation)
+	})
 	return cp
 }
 
 // WithShowsResizeIndicator sets the shows resize indicator.
 func (cp *ColorPanel) WithShowsResizeIndicator(showsResizeIndicator bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setShowsResizeIndicator:"), showsResizeIndicator)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setShowsResizeIndicator:"), showsResizeIndicator)
+	})
 	return cp
 }
 
 // WithOrderedIndex sets the zero-based position of the window, based on its order from front to back among all visible application windows.
 func (cp *ColorPanel) WithOrderedIndex(orderedIndex int) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setOrderedIndex:"), orderedIndex)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setOrderedIndex:"), orderedIndex)
+	})
 	return cp
 }
 
 // WithRestorable sets a Boolean value indicating whether the window configuration is preserved between application launches.
 func (cp *ColorPanel) WithRestorable(restorable bool) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setRestorable:"), restorable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setRestorable:"), restorable)
+	})
 	return cp
 }
 
 // WithRestorationClass sets the restoration class associated with the window.
 func (cp *ColorPanel) WithRestorationClass(restorationClass unsafe.Pointer) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setRestorationClass:"), restorationClass)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setRestorationClass:"), restorationClass)
+	})
 	return cp
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (cp *ColorPanel) WithNextResponder(nextResponder ResponderProvider) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return cp
 }
 
 // WithMenu sets returns the responder’s menu.
 func (cp *ColorPanel) WithMenu(menu *Menu) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return cp
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (cp *ColorPanel) WithUserActivity(userActivity obj.Object) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return cp
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (cp *ColorPanel) WithTouchBar(touchBar *TouchBar) *ColorPanel {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return cp
 }
 
 // SetTarget sets the target of the receiver.
 func (cp *ColorPanel) SetTarget(target obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
+
 }
 
 // AttachColorList adds the list of NSColor objects specified to all the color pickers in the receiver that display color lists by invoking attachColorList: on all color pickers in the application.
 func (cp *ColorPanel) AttachColorList(colorList *ColorList) {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("attachColorList:"), objref.IDOf(colorList))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("attachColorList:"), objref.IDOf(colorList))
+	})
+
 }
 
 // DetachColorList removes the list of colors from all the color pickers in the receiver that display color lists by invoking detachColorList: on all color pickers in the application.
 func (cp *ColorPanel) DetachColorList(colorList *ColorList) {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("detachColorList:"), objref.IDOf(colorList))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("detachColorList:"), objref.IDOf(colorList))
+	})
+
 }
 
 // AccessoryView returns the accessory view.
 func (cp *ColorPanel) AccessoryView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("accessoryView"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("accessoryView"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsContinuous reports whether the object is continuous.
 func (cp *ColorPanel) IsContinuous() bool {
-	_r := objc.Send[bool](objref.IDOf(cp), objc.RegisterName("isContinuous"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cp), objc.RegisterName("isContinuous"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsAlpha wraps the corresponding Objective-C method.
 func (cp *ColorPanel) ShowsAlpha() bool {
-	_r := objc.Send[bool](objref.IDOf(cp), objc.RegisterName("showsAlpha"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cp), objc.RegisterName("showsAlpha"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Mode returns the mode.
 func (cp *ColorPanel) Mode() ColorPanelMode {
-	_r := objc.Send[ColorPanelMode](objref.IDOf(cp), objc.RegisterName("mode"))
-	return _r
+	var _mainthread0 ColorPanelMode
+	purego.Main(func() {
+		_mainthread0 = func() ColorPanelMode {
+			_r := objc.Send[ColorPanelMode](objref.IDOf(cp), objc.RegisterName("mode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Color returns the color.
 func (cp *ColorPanel) Color() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("color"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("color"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Alpha returns the alpha.
 func (cp *ColorPanel) Alpha() float64 {
-	_r := objc.Send[float64](objref.IDOf(cp), objc.RegisterName("alpha"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(cp), objc.RegisterName("alpha"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MaximumLinearExposure returns the maximum linear exposure that can be set on a color picked in the color panel. Defaults to 1 and ignores any value less than 1. If set to a value >= 2, the color picked by the panel may have a linear exposure applied to it.
 func (cp *ColorPanel) MaximumLinearExposure() float64 {
-	_r := objc.Send[float64](objref.IDOf(cp), objc.RegisterName("maximumLinearExposure"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(cp), objc.RegisterName("maximumLinearExposure"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ PanelProvider = (*ColorPanel)(nil)

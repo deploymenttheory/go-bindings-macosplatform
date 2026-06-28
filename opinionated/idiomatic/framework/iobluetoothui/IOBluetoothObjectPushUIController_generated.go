@@ -68,53 +68,95 @@ func (bopuc *BluetoothObjectPushUIController) String() string {
 
 // NewBluetoothObjectPushUIControllerObjectPushWithBluetoothDeviceWithFilesDelegate creates and returns a new IOBluetoothObjectPush object
 func NewBluetoothObjectPushUIControllerObjectPushWithBluetoothDeviceWithFilesDelegate(inDevice obj.Object, inFiles obj.Object, inDelegate obj.Object) *BluetoothObjectPushUIController {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("IOBluetoothObjectPushUIController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initObjectPushWithBluetoothDevice:withFiles:delegate:"), objref.IDOf(inDevice), objref.IDOf(inFiles), objref.IDOf(inDelegate))
-	return bluetoothObjectPushUIControllerAdopt(_id)
+	var _mainthread0 *BluetoothObjectPushUIController
+	purego.Main(func() {
+		_mainthread0 = func() *BluetoothObjectPushUIController {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("IOBluetoothObjectPushUIController")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initObjectPushWithBluetoothDevice:withFiles:delegate:"), objref.IDOf(inDevice), objref.IDOf(inFiles), objref.IDOf(inDelegate))
+			return bluetoothObjectPushUIControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // RunModal runs the transfer UI panel in a modal session
 func (bopuc *BluetoothObjectPushUIController) RunModal() {
-	objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("runModal"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("runModal"))
+	})
+
 }
 
 // RunPanel runs the transfer UI as a panel with no modal session
 func (bopuc *BluetoothObjectPushUIController) RunPanel() {
-	objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("runPanel"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("runPanel"))
+	})
+
 }
 
 // Stop stops the transfer UI
 func (bopuc *BluetoothObjectPushUIController) Stop() {
-	objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("stop"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("stop"))
+	})
+
 }
 
 // SetTitle sets the title of the panel when not run as a sheet.
 func (bopuc *BluetoothObjectPushUIController) SetTitle(windowTitle string) {
-	objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("setTitle:"), purego.NSString(windowTitle))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("setTitle:"), purego.NSString(windowTitle))
+	})
+
 }
 
 // Title returns the title of the transfer panel.
 func (bopuc *BluetoothObjectPushUIController) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("getTitle"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("getTitle"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetIconImage manually sets the icon used in the panel.
 func (bopuc *BluetoothObjectPushUIController) SetIconImage(image obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("setIconImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("setIconImage:"), objref.IDOf(image))
+	})
+
 }
 
 // Device gets the object representing the remote target device in the transfer.
 func (bopuc *BluetoothObjectPushUIController) Device() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("getDevice"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("getDevice"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsTransferInProgress reports whether gets state of the transfer
 func (bopuc *BluetoothObjectPushUIController) IsTransferInProgress() bool {
-	_r := objc.Send[bool](objref.IDOf(bopuc), objc.RegisterName("isTransferInProgress"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(bopuc), objc.RegisterName("isTransferInProgress"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

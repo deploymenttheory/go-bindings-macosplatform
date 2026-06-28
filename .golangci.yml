@@ -118,7 +118,7 @@ linters:
 
       # the .gometa.json schema and its sibling config/report formats use
       # snake_case keys by design (matches the committed metadata tree)
-      - path: (internal/meta/|internal/purecg/meta/|internal/overrides/|internal/metadiff/|internal/scanner/)
+      - path: (internal/meta/|internal/purecg/meta/|internal/overrides/|internal/metadiff/|internal/scanner/|internal/mainactor/)
         linters:
           - tagliatelle
 

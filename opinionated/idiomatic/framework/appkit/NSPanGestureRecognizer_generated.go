@@ -49,121 +49,186 @@ func panGestureRecognizerAdopt(id objc.ID) *PanGestureRecognizer {
 
 // NewPanGestureRecognizer creates a new PanGestureRecognizer.
 func NewPanGestureRecognizer() *PanGestureRecognizer {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSPanGestureRecognizer")), objc.RegisterName("new"))
-	return panGestureRecognizerAdopt(_id)
+	var _mainthread0 *PanGestureRecognizer
+	purego.Main(func() {
+		_mainthread0 = func() *PanGestureRecognizer {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSPanGestureRecognizer")), objc.RegisterName("new"))
+			return panGestureRecognizerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithButtonMask sets a bit mask of the button (or buttons) required to recognize this gesture.
 func (pgr *PanGestureRecognizer) WithButtonMask(buttonMask int) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setButtonMask:"), buttonMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setButtonMask:"), buttonMask)
+	})
 	return pgr
 }
 
 // WithNumberOfTouchesRequired sets the number of necessary touches on a Touch Bar for the gesture recognizer to match.
 func (pgr *PanGestureRecognizer) WithNumberOfTouchesRequired(numberOfTouchesRequired int) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setNumberOfTouchesRequired:"), numberOfTouchesRequired)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setNumberOfTouchesRequired:"), numberOfTouchesRequired)
+	})
 	return pgr
 }
 
 // WithTarget sets the object that implements the action method.
 func (pgr *PanGestureRecognizer) WithTarget(target obj.Object) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return pgr
 }
 
 // WithState sets the current state of the gesture recognizer.
 func (pgr *PanGestureRecognizer) WithState(state GestureRecognizerState) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setState:"), state)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setState:"), state)
+	})
 	return pgr
 }
 
 // WithEnabled sets a Boolean value indicating whether the gesture recognizer is able to handle events.
 func (pgr *PanGestureRecognizer) WithEnabled(enabled bool) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return pgr
 }
 
 // WithPressureConfiguration sets configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
 func (pgr *PanGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return pgr
 }
 
 // WithDelaysPrimaryMouseButtonEvents sets a Boolean value that indicates whether primary mouse button events are delivered only after gesture recognition fails.
 func (pgr *PanGestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysPrimaryMouseButtonEvents:"), delaysPrimaryMouseButtonEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysPrimaryMouseButtonEvents:"), delaysPrimaryMouseButtonEvents)
+	})
 	return pgr
 }
 
 // WithDelaysSecondaryMouseButtonEvents sets a Boolean value that indicates whether secondary mouse button events are delivered only after gesture recognition fails.
 func (pgr *PanGestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysSecondaryMouseButtonEvents:"), delaysSecondaryMouseButtonEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysSecondaryMouseButtonEvents:"), delaysSecondaryMouseButtonEvents)
+	})
 	return pgr
 }
 
 // WithDelaysOtherMouseButtonEvents sets a Boolean value that indicates whether other mouse button events are delivered only after gesture recognition fails.
 func (pgr *PanGestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysOtherMouseButtonEvents:"), delaysOtherMouseButtonEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysOtherMouseButtonEvents:"), delaysOtherMouseButtonEvents)
+	})
 	return pgr
 }
 
 // WithDelaysKeyEvents sets a Boolean value that indicates whether key events are delivered only after gesture recognition fails.
 func (pgr *PanGestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysKeyEvents:"), delaysKeyEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysKeyEvents:"), delaysKeyEvents)
+	})
 	return pgr
 }
 
 // WithDelaysMagnificationEvents sets a Boolean value that indicates whether magnification events are delivered only after gesture recognition fails.
 func (pgr *PanGestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysMagnificationEvents:"), delaysMagnificationEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysMagnificationEvents:"), delaysMagnificationEvents)
+	})
 	return pgr
 }
 
 // WithDelaysRotationEvents sets a Boolean value that indicates whether rotation events are delivered only after gesture recognition fails.
 func (pgr *PanGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysRotationEvents:"), delaysRotationEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysRotationEvents:"), delaysRotationEvents)
+	})
 	return pgr
 }
 
 // WithName sets the name.
 func (pgr *PanGestureRecognizer) WithName(name string) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setName:"), purego.NSString(name))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setName:"), purego.NSString(name))
+	})
 	return pgr
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (pgr *PanGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return pgr
 }
 
 // TranslationInView the distance traveled by the mouse during the gesture.
 func (pgr *PanGestureRecognizer) TranslationInView(view *View) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(pgr), objc.RegisterName("translationInView:"), objref.IDOf(view))
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(pgr), objc.RegisterName("translationInView:"), objref.IDOf(view))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetTranslationInView changes the current translation value of the gesture recognizer.
 func (pgr *PanGestureRecognizer) SetTranslationInView(translation corefoundation.CGPoint, view *View) {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setTranslation:inView:"), translation, objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setTranslation:inView:"), translation, objref.IDOf(view))
+	})
+
 }
 
 // VelocityInView the velocity of the pan, measured in points per second.
 func (pgr *PanGestureRecognizer) VelocityInView(view *View) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(pgr), objc.RegisterName("velocityInView:"), objref.IDOf(view))
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(pgr), objc.RegisterName("velocityInView:"), objref.IDOf(view))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ButtonMask returns the button mask.
 func (pgr *PanGestureRecognizer) ButtonMask() int {
-	_r := objc.Send[int](objref.IDOf(pgr), objc.RegisterName("buttonMask"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(pgr), objc.RegisterName("buttonMask"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NumberOfTouchesRequired returns the number of touches required.
 func (pgr *PanGestureRecognizer) NumberOfTouchesRequired() int {
-	_r := objc.Send[int](objref.IDOf(pgr), objc.RegisterName("numberOfTouchesRequired"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(pgr), objc.RegisterName("numberOfTouchesRequired"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ GestureRecognizerProvider = (*PanGestureRecognizer)(nil)

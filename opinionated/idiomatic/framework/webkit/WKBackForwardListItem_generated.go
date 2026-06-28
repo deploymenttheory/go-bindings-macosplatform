@@ -68,21 +68,41 @@ func (wbfli *WKBackForwardListItem) String() string {
 
 // NewWKBackForwardListItem creates a new WKBackForwardListItem.
 func NewWKBackForwardListItem() *WKBackForwardListItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKBackForwardListItem")), objc.RegisterName("new"))
-	return wKBackForwardListItemAdopt(_id)
+	var _mainthread0 *WKBackForwardListItem
+	purego.Main(func() {
+		_mainthread0 = func() *WKBackForwardListItem {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKBackForwardListItem")), objc.RegisterName("new"))
+			return wKBackForwardListItemAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // URL returns the URL of the webpage represented by this item.
 func (wbfli *WKBackForwardListItem) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wbfli), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wbfli), objc.RegisterName("URL"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Title returns the title of the webpage represented by this item.
 func (wbfli *WKBackForwardListItem) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wbfli), objc.RegisterName("title"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wbfli), objc.RegisterName("title"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }

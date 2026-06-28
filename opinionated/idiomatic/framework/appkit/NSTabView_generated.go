@@ -50,520 +50,793 @@ func tabViewAdopt(id objc.ID) *TabView {
 
 // NewTabView creates a new TabView.
 func NewTabView() *TabView {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSTabView")), objc.RegisterName("new"))
-	return tabViewAdopt(_id)
+	var _mainthread0 *TabView
+	purego.Main(func() {
+		_mainthread0 = func() *TabView {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSTabView")), objc.RegisterName("new"))
+			return tabViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithFont sets the font used for the tab view’s label text.
 func (tv *TabView) WithFont(font *Font) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return tv
 }
 
 // WithTabViewType sets the tab type to display the tabs.
 func (tv *TabView) WithTabViewType(tabViewType TabViewType) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTabViewType:"), tabViewType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTabViewType:"), tabViewType)
+	})
 	return tv
 }
 
 // WithTabPosition sets the tab position.
 func (tv *TabView) WithTabPosition(tabPosition TabPosition) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTabPosition:"), tabPosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTabPosition:"), tabPosition)
+	})
 	return tv
 }
 
 // WithTabViewBorderType sets the tab view border type.
 func (tv *TabView) WithTabViewBorderType(tabViewBorderType TabViewBorderType) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTabViewBorderType:"), tabViewBorderType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTabViewBorderType:"), tabViewBorderType)
+	})
 	return tv
 }
 
 // WithTabViewItems sets the tab view’s array of tab view items.
 func (tv *TabView) WithTabViewItems(items ...*TabViewItem) *TabView {
 	_arr := purego.SliceToNSArray(items, func(_v *TabViewItem) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTabViewItems:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTabViewItems:"), _arr)
+	})
 	return tv
 }
 
 // WithAllowsTruncatedLabels sets a Boolean value that indicates if the tab view allows truncating for labels that don’t fit on a tab.
 func (tv *TabView) WithAllowsTruncatedLabels(allowsTruncatedLabels bool) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowsTruncatedLabels:"), allowsTruncatedLabels)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowsTruncatedLabels:"), allowsTruncatedLabels)
+	})
 	return tv
 }
 
 // WithDrawsBackground sets a Boolean value that indicates if the tab view draws a background color when its type is NSNoTabsNoBorder.
 func (tv *TabView) WithDrawsBackground(drawsBackground bool) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	})
 	return tv
 }
 
 // WithControlSize sets the size of the tab view.
 func (tv *TabView) WithControlSize(controlSize ControlSize) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return tv
 }
 
 // WithControlTint sets the tab view’s control tint.
 func (tv *TabView) WithControlTint(controlTint ControlTint) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setControlTint:"), controlTint)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setControlTint:"), controlTint)
+	})
 	return tv
 }
 
 // WithSubviews sets the subviews.
 func (tv *TabView) WithSubviews(items ...ViewProvider) *TabView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return tv
 }
 
 // WithHidden sets the hidden.
 func (tv *TabView) WithHidden(hidden bool) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setHidden:"), hidden)
+	})
 	return tv
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (tv *TabView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return tv
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (tv *TabView) WithAutoresizesSubviews(autoresizesSubviews bool) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return tv
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (tv *TabView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return tv
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (tv *TabView) WithFrame(frame corefoundation.CGRect) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFrame:"), frame)
+	})
 	return tv
 }
 
 // WithFrameRotation sets the frame rotation.
 func (tv *TabView) WithFrameRotation(frameRotation float64) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return tv
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (tv *TabView) WithFrameCenterRotation(frameCenterRotation float64) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return tv
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (tv *TabView) WithBoundsRotation(boundsRotation float64) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return tv
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (tv *TabView) WithBounds(bounds corefoundation.CGRect) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBounds:"), bounds)
+	})
 	return tv
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (tv *TabView) WithCanDrawConcurrently(canDrawConcurrently bool) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return tv
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (tv *TabView) WithNeedsDisplay(needsDisplay bool) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return tv
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (tv *TabView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return tv
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (tv *TabView) WithWantsRestingTouches(wantsRestingTouches bool) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return tv
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (tv *TabView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return tv
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (tv *TabView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return tv
 }
 
 // WithWantsLayer sets the wants layer.
 func (tv *TabView) WithWantsLayer(wantsLayer bool) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return tv
 }
 
 // WithLayer sets the layer.
 func (tv *TabView) WithLayer(layer obj.Object) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return tv
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (tv *TabView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return tv
 }
 
 // WithNeedsLayout sets the needs layout.
 func (tv *TabView) WithNeedsLayout(needsLayout bool) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return tv
 }
 
 // WithAlphaValue sets the alpha value.
 func (tv *TabView) WithAlphaValue(alphaValue float64) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return tv
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (tv *TabView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return tv
 }
 
 // WithBackgroundFilters sets the background filters.
 func (tv *TabView) WithBackgroundFilters(items ...obj.Object) *TabView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return tv
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (tv *TabView) WithCompositingFilter(compositingFilter obj.Object) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return tv
 }
 
 // WithContentFilters sets the content filters.
 func (tv *TabView) WithContentFilters(items ...obj.Object) *TabView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return tv
 }
 
 // WithShadow sets the shadow.
 func (tv *TabView) WithShadow(shadow *Shadow) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return tv
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (tv *TabView) WithClipsToBounds(clipsToBounds bool) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return tv
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (tv *TabView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return tv
 }
 
 // WithToolTip sets the tool tip.
 func (tv *TabView) WithToolTip(toolTip string) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return tv
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (tv *TabView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return tv
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (tv *TabView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return tv
 }
 
 // WithNextKeyView sets the next key view.
 func (tv *TabView) WithNextKeyView(nextKeyView ViewProvider) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return tv
 }
 
 // WithFocusRingType sets the focus ring type.
 func (tv *TabView) WithFocusRingType(focusRingType FocusRingType) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return tv
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (tv *TabView) WithGestureRecognizers(items ...GestureRecognizerProvider) *TabView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return tv
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (tv *TabView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return tv
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (tv *TabView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return tv
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (tv *TabView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return tv
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (tv *TabView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return tv
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (tv *TabView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return tv
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (tv *TabView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return tv
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (tv *TabView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return tv
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (tv *TabView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return tv
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (tv *TabView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return tv
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (tv *TabView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return tv
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (tv *TabView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return tv
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (tv *TabView) WithNextResponder(nextResponder ResponderProvider) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return tv
 }
 
 // WithMenu sets returns the responder’s menu.
 func (tv *TabView) WithMenu(menu *Menu) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return tv
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (tv *TabView) WithUserActivity(userActivity obj.Object) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return tv
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (tv *TabView) WithTouchBar(touchBar *TouchBar) *TabView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return tv
 }
 
 // SelectTabViewItem selects the specified tab view item.
 func (tv *TabView) SelectTabViewItem(tabViewItem *TabViewItem) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectTabViewItem:"), objref.IDOf(tabViewItem))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectTabViewItem:"), objref.IDOf(tabViewItem))
+	})
+
 }
 
 // SelectTabViewItemAtIndex selects the tab view item specified by index.
 func (tv *TabView) SelectTabViewItemAtIndex(index int) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectTabViewItemAtIndex:"), index)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectTabViewItemAtIndex:"), index)
+	})
+
 }
 
 // SelectTabViewItemWithIdentifier selects the tab view item specified by identifier.
 func (tv *TabView) SelectTabViewItemWithIdentifier(identifier obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectTabViewItemWithIdentifier:"), objref.IDOf(identifier))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectTabViewItemWithIdentifier:"), objref.IDOf(identifier))
+	})
+
 }
 
 // TakeSelectedTabViewItemFromSender sets the selected tab view item to the selected item obtained from the sender.
 func (tv *TabView) TakeSelectedTabViewItemFromSender(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("takeSelectedTabViewItemFromSender:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("takeSelectedTabViewItemFromSender:"), objref.IDOf(sender))
+	})
+
 }
 
 // SelectFirstTabViewItem this action method selects the first tab view item.
 func (tv *TabView) SelectFirstTabViewItem(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectFirstTabViewItem:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectFirstTabViewItem:"), objref.IDOf(sender))
+	})
+
 }
 
 // SelectLastTabViewItem this action method selects the last tab view item.
 func (tv *TabView) SelectLastTabViewItem(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectLastTabViewItem:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectLastTabViewItem:"), objref.IDOf(sender))
+	})
+
 }
 
 // SelectNextTabViewItem this action method selects the next tab view item in the sequence.
 func (tv *TabView) SelectNextTabViewItem(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectNextTabViewItem:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectNextTabViewItem:"), objref.IDOf(sender))
+	})
+
 }
 
 // SelectPreviousTabViewItem this action method selects the previous tab view item in the sequence.
 func (tv *TabView) SelectPreviousTabViewItem(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectPreviousTabViewItem:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectPreviousTabViewItem:"), objref.IDOf(sender))
+	})
+
 }
 
 // AddTabViewItem adds the specified tab item.
 func (tv *TabView) AddTabViewItem(tabViewItem *TabViewItem) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("addTabViewItem:"), objref.IDOf(tabViewItem))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("addTabViewItem:"), objref.IDOf(tabViewItem))
+	})
+
 }
 
 // InsertTabViewItemAtIndex inserts the specified item into the tab view’s array of tab view items at the specified index.
 func (tv *TabView) InsertTabViewItemAtIndex(tabViewItem *TabViewItem, index int) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("insertTabViewItem:atIndex:"), objref.IDOf(tabViewItem), index)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("insertTabViewItem:atIndex:"), objref.IDOf(tabViewItem), index)
+	})
+
 }
 
 // RemoveTabViewItem removes the specified item from the tab view’s array of tab view items.
 func (tv *TabView) RemoveTabViewItem(tabViewItem *TabViewItem) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("removeTabViewItem:"), objref.IDOf(tabViewItem))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("removeTabViewItem:"), objref.IDOf(tabViewItem))
+	})
+
 }
 
 // TabViewItemAtPoint returns the tab view item at the specified point.
 func (tv *TabView) TabViewItemAtPoint(point corefoundation.CGPoint) *TabViewItem {
-	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("tabViewItemAtPoint:"), point)
-	return TabViewItemFromID(_r)
+	var _mainthread0 *TabViewItem
+	purego.Main(func() {
+		_mainthread0 = func() *TabViewItem {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("tabViewItemAtPoint:"), point)
+			return TabViewItemFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IndexOfTabViewItem returns the index of the specified item in the tab view.
 func (tv *TabView) IndexOfTabViewItem(tabViewItem *TabViewItem) int {
-	_r := objc.Send[int](objref.IDOf(tv), objc.RegisterName("indexOfTabViewItem:"), objref.IDOf(tabViewItem))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(tv), objc.RegisterName("indexOfTabViewItem:"), objref.IDOf(tabViewItem))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TabViewItemAtIndex returns the tab view item at index in the tab view’s array of items.
 func (tv *TabView) TabViewItemAtIndex(index int) *TabViewItem {
-	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("tabViewItemAtIndex:"), index)
-	return TabViewItemFromID(_r)
+	var _mainthread0 *TabViewItem
+	purego.Main(func() {
+		_mainthread0 = func() *TabViewItem {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("tabViewItemAtIndex:"), index)
+			return TabViewItemFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IndexOfTabViewItemWithIdentifier returns the index of the item that matches the specified identifier or NSNotFound if the item is not found.
 func (tv *TabView) IndexOfTabViewItemWithIdentifier(identifier obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(tv), objc.RegisterName("indexOfTabViewItemWithIdentifier:"), objref.IDOf(identifier))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(tv), objc.RegisterName("indexOfTabViewItemWithIdentifier:"), objref.IDOf(identifier))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SelectedTabViewItem returns the selected tab view item.
 func (tv *TabView) SelectedTabViewItem() *TabViewItem {
-	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectedTabViewItem"))
-	return TabViewItemFromID(_r)
+	var _mainthread0 *TabViewItem
+	purego.Main(func() {
+		_mainthread0 = func() *TabViewItem {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectedTabViewItem"))
+			return TabViewItemFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Font returns the font.
 func (tv *TabView) Font() *Font {
-	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("font"))
-	return FontFromID(_r)
+	var _mainthread0 *Font
+	purego.Main(func() {
+		_mainthread0 = func() *Font {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("font"))
+			return FontFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TabViewType returns the tab view type.
 func (tv *TabView) TabViewType() TabViewType {
-	_r := objc.Send[TabViewType](objref.IDOf(tv), objc.RegisterName("tabViewType"))
-	return _r
+	var _mainthread0 TabViewType
+	purego.Main(func() {
+		_mainthread0 = func() TabViewType {
+			_r := objc.Send[TabViewType](objref.IDOf(tv), objc.RegisterName("tabViewType"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TabPosition returns the tab position.
 func (tv *TabView) TabPosition() TabPosition {
-	_r := objc.Send[TabPosition](objref.IDOf(tv), objc.RegisterName("tabPosition"))
-	return _r
+	var _mainthread0 TabPosition
+	purego.Main(func() {
+		_mainthread0 = func() TabPosition {
+			_r := objc.Send[TabPosition](objref.IDOf(tv), objc.RegisterName("tabPosition"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TabViewBorderType returns the tab view border type.
 func (tv *TabView) TabViewBorderType() TabViewBorderType {
-	_r := objc.Send[TabViewBorderType](objref.IDOf(tv), objc.RegisterName("tabViewBorderType"))
-	return _r
+	var _mainthread0 TabViewBorderType
+	purego.Main(func() {
+		_mainthread0 = func() TabViewBorderType {
+			_r := objc.Send[TabViewBorderType](objref.IDOf(tv), objc.RegisterName("tabViewBorderType"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TabViewItems returns the tab view items.
 //
 // TabViewItems returns the collection as a Go slice.
 func (tv *TabView) TabViewItems() []*TabViewItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("tabViewItems"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TabViewItem { return TabViewItemFromID(_id) })
+	var _mainthread0 []*TabViewItem
+	purego.Main(func() {
+		_mainthread0 = func() []*TabViewItem {
+			_arr := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("tabViewItems"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TabViewItem { return TabViewItemFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // AllowsTruncatedLabels wraps the corresponding Objective-C method.
 func (tv *TabView) AllowsTruncatedLabels() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("allowsTruncatedLabels"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("allowsTruncatedLabels"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MinimumSize returns the minimum size.
 func (tv *TabView) MinimumSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(tv), objc.RegisterName("minimumSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(tv), objc.RegisterName("minimumSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DrawsBackground wraps the corresponding Objective-C method.
 func (tv *TabView) DrawsBackground() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("drawsBackground"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("drawsBackground"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ControlSize returns the control size.
 func (tv *TabView) ControlSize() ControlSize {
-	_r := objc.Send[ControlSize](objref.IDOf(tv), objc.RegisterName("controlSize"))
-	return _r
+	var _mainthread0 ControlSize
+	purego.Main(func() {
+		_mainthread0 = func() ControlSize {
+			_r := objc.Send[ControlSize](objref.IDOf(tv), objc.RegisterName("controlSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ContentRect returns the content rect.
 func (tv *TabView) ContentRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tv), objc.RegisterName("contentRect"))
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(tv), objc.RegisterName("contentRect"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NumberOfTabViewItems returns the number of tab view items.
 func (tv *TabView) NumberOfTabViewItems() int {
-	_r := objc.Send[int](objref.IDOf(tv), objc.RegisterName("numberOfTabViewItems"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(tv), objc.RegisterName("numberOfTabViewItems"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ControlTint returns the control tint.
 func (tv *TabView) ControlTint() ControlTint {
-	_r := objc.Send[ControlTint](objref.IDOf(tv), objc.RegisterName("controlTint"))
-	return _r
+	var _mainthread0 ControlTint
+	purego.Main(func() {
+		_mainthread0 = func() ControlTint {
+			_r := objc.Send[ControlTint](objref.IDOf(tv), objc.RegisterName("controlTint"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ViewProvider = (*TabView)(nil)

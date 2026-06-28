@@ -48,131 +48,222 @@ func sliderTouchBarItemAdopt(id objc.ID) *SliderTouchBarItem {
 
 // NewSliderTouchBarItem creates a new SliderTouchBarItem.
 func NewSliderTouchBarItem() *SliderTouchBarItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSSliderTouchBarItem")), objc.RegisterName("new"))
-	return sliderTouchBarItemAdopt(_id)
+	var _mainthread0 *SliderTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *SliderTouchBarItem {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSSliderTouchBarItem")), objc.RegisterName("new"))
+			return sliderTouchBarItemAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithSlider sets the slider displayed by the bar item.
 func (stbi *SliderTouchBarItem) WithSlider(slider *Slider) *SliderTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setSlider:"), objref.IDOf(slider))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setSlider:"), objref.IDOf(slider))
+	})
 	return stbi
 }
 
 // WithDoubleValue sets the double value of the slider.
 func (stbi *SliderTouchBarItem) WithDoubleValue(doubleValue float64) *SliderTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return stbi
 }
 
 // WithMinimumSliderWidth sets the minimum width of the slider’s track.
 func (stbi *SliderTouchBarItem) WithMinimumSliderWidth(minimumSliderWidth float64) *SliderTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setMinimumSliderWidth:"), minimumSliderWidth)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setMinimumSliderWidth:"), minimumSliderWidth)
+	})
 	return stbi
 }
 
 // WithMaximumSliderWidth sets the maximum width of the slider’s track.
 func (stbi *SliderTouchBarItem) WithMaximumSliderWidth(maximumSliderWidth float64) *SliderTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setMaximumSliderWidth:"), maximumSliderWidth)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setMaximumSliderWidth:"), maximumSliderWidth)
+	})
 	return stbi
 }
 
 // WithLabel sets the text displayed alongside the slider.
 func (stbi *SliderTouchBarItem) WithLabel(label string) *SliderTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setLabel:"), purego.NSString(label))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setLabel:"), purego.NSString(label))
+	})
 	return stbi
 }
 
 // WithMinimumValueAccessory sets the accessory that appears at the end of the slider with the minimum value.
 func (stbi *SliderTouchBarItem) WithMinimumValueAccessory(minimumValueAccessory *SliderAccessory) *SliderTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setMinimumValueAccessory:"), objref.IDOf(minimumValueAccessory))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setMinimumValueAccessory:"), objref.IDOf(minimumValueAccessory))
+	})
 	return stbi
 }
 
 // WithMaximumValueAccessory sets the accessory that appears at the end of the slider with the maximum value.
 func (stbi *SliderTouchBarItem) WithMaximumValueAccessory(maximumValueAccessory *SliderAccessory) *SliderTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setMaximumValueAccessory:"), objref.IDOf(maximumValueAccessory))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setMaximumValueAccessory:"), objref.IDOf(maximumValueAccessory))
+	})
 	return stbi
 }
 
 // WithValueAccessoryWidth sets the width of the value accessories that appear at either end of the slider.
 func (stbi *SliderTouchBarItem) WithValueAccessoryWidth(valueAccessoryWidth float64) *SliderTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setValueAccessoryWidth:"), valueAccessoryWidth)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setValueAccessoryWidth:"), valueAccessoryWidth)
+	})
 	return stbi
 }
 
 // WithTarget sets an object that is notified when a user interacts with the slider or either of the accessories.
 func (stbi *SliderTouchBarItem) WithTarget(target obj.Object) *SliderTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return stbi
 }
 
 // WithCustomizationLabel sets the user-visible string identifying this item during bar customization.
 func (stbi *SliderTouchBarItem) WithCustomizationLabel(customizationLabel string) *SliderTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
+	})
 	return stbi
 }
 
 // WithVisibilityPriority sets determines which items are shown in a bar when space is limited.
 func (stbi *SliderTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *SliderTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	})
 	return stbi
 }
 
 // Slider returns the slider displayed by the bar item. It is automatically created, but can be set to a custom subclass. doubleValue, minValue, maxValue, etc can all be read and set through the slider.
 func (stbi *SliderTouchBarItem) Slider() *Slider {
-	_r := objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("slider"))
-	return SliderFromID(_r)
+	var _mainthread0 *Slider
+	purego.Main(func() {
+		_mainthread0 = func() *Slider {
+			_r := objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("slider"))
+			return SliderFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DoubleValue returns the double value of the control
 func (stbi *SliderTouchBarItem) DoubleValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(stbi), objc.RegisterName("doubleValue"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(stbi), objc.RegisterName("doubleValue"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MinimumSliderWidth returns the width boundaries of the slider track of this item. The system defines the default minimum. The maximum defaults to MAXFLOAT
 func (stbi *SliderTouchBarItem) MinimumSliderWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(stbi), objc.RegisterName("minimumSliderWidth"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(stbi), objc.RegisterName("minimumSliderWidth"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MaximumSliderWidth returns the maximum slider width.
 func (stbi *SliderTouchBarItem) MaximumSliderWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(stbi), objc.RegisterName("maximumSliderWidth"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(stbi), objc.RegisterName("maximumSliderWidth"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Label returns the text label displayed along with the slider. If set to nil, the label will not have space reserved in the item.
 func (stbi *SliderTouchBarItem) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("label"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("label"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MinimumValueAccessory returns the accessory that appears on the end of the slider with the minimum value
 func (stbi *SliderTouchBarItem) MinimumValueAccessory() *SliderAccessory {
-	_r := objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("minimumValueAccessory"))
-	return SliderAccessoryFromID(_r)
+	var _mainthread0 *SliderAccessory
+	purego.Main(func() {
+		_mainthread0 = func() *SliderAccessory {
+			_r := objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("minimumValueAccessory"))
+			return SliderAccessoryFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MaximumValueAccessory returns the accessory that appears on the end of the slider with the maximum value
 func (stbi *SliderTouchBarItem) MaximumValueAccessory() *SliderAccessory {
-	_r := objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("maximumValueAccessory"))
-	return SliderAccessoryFromID(_r)
+	var _mainthread0 *SliderAccessory
+	purego.Main(func() {
+		_mainthread0 = func() *SliderAccessory {
+			_r := objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("maximumValueAccessory"))
+			return SliderAccessoryFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ValueAccessoryWidth returns the width of the value accessories. Defaults to `.default`, but can be set to `.wide` or a custom value.
 func (stbi *SliderTouchBarItem) ValueAccessoryWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(stbi), objc.RegisterName("valueAccessoryWidth"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(stbi), objc.RegisterName("valueAccessoryWidth"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Target returns the target of the item, notified when the slider or accessories receive user interaction.
 func (stbi *SliderTouchBarItem) Target() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("target"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("target"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ TouchBarItemProvider = (*SliderTouchBarItem)(nil)

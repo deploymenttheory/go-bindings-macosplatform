@@ -50,372 +50,528 @@ func visualEffectViewAdopt(id objc.ID) *VisualEffectView {
 
 // NewVisualEffectView creates a new VisualEffectView.
 func NewVisualEffectView() *VisualEffectView {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSVisualEffectView")), objc.RegisterName("new"))
-	return visualEffectViewAdopt(_id)
+	var _mainthread0 *VisualEffectView
+	purego.Main(func() {
+		_mainthread0 = func() *VisualEffectView {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSVisualEffectView")), objc.RegisterName("new"))
+			return visualEffectViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithMaterial sets the material shown by the visual effect view.
 func (vev *VisualEffectView) WithMaterial(material VisualEffectMaterial) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setMaterial:"), material)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setMaterial:"), material)
+	})
 	return vev
 }
 
 // WithBlendingMode sets a value indicating how the view’s contents blend with the surrounding content.
 func (vev *VisualEffectView) WithBlendingMode(blendingMode VisualEffectBlendingMode) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setBlendingMode:"), blendingMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setBlendingMode:"), blendingMode)
+	})
 	return vev
 }
 
 // WithState sets a value that indicates whether a view has a visual effect applied.
 func (vev *VisualEffectView) WithState(state VisualEffectState) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setState:"), state)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setState:"), state)
+	})
 	return vev
 }
 
 // WithMaskImage sets an image whose alpha channel masks the visual effect view’s material.
 func (vev *VisualEffectView) WithMaskImage(maskImage *Image) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setMaskImage:"), objref.IDOf(maskImage))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setMaskImage:"), objref.IDOf(maskImage))
+	})
 	return vev
 }
 
 // WithEmphasized sets a Boolean value indicating whether to emphasize the look of the material.
 func (vev *VisualEffectView) WithEmphasized(emphasized bool) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setEmphasized:"), emphasized)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setEmphasized:"), emphasized)
+	})
 	return vev
 }
 
 // WithSubviews sets the subviews.
 func (vev *VisualEffectView) WithSubviews(items ...ViewProvider) *VisualEffectView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return vev
 }
 
 // WithHidden sets the hidden.
 func (vev *VisualEffectView) WithHidden(hidden bool) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setHidden:"), hidden)
+	})
 	return vev
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (vev *VisualEffectView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return vev
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (vev *VisualEffectView) WithAutoresizesSubviews(autoresizesSubviews bool) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return vev
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (vev *VisualEffectView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return vev
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (vev *VisualEffectView) WithFrame(frame corefoundation.CGRect) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setFrame:"), frame)
+	})
 	return vev
 }
 
 // WithFrameRotation sets the frame rotation.
 func (vev *VisualEffectView) WithFrameRotation(frameRotation float64) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return vev
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (vev *VisualEffectView) WithFrameCenterRotation(frameCenterRotation float64) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return vev
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (vev *VisualEffectView) WithBoundsRotation(boundsRotation float64) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return vev
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (vev *VisualEffectView) WithBounds(bounds corefoundation.CGRect) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setBounds:"), bounds)
+	})
 	return vev
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (vev *VisualEffectView) WithCanDrawConcurrently(canDrawConcurrently bool) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return vev
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (vev *VisualEffectView) WithNeedsDisplay(needsDisplay bool) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return vev
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (vev *VisualEffectView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return vev
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (vev *VisualEffectView) WithWantsRestingTouches(wantsRestingTouches bool) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return vev
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (vev *VisualEffectView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return vev
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (vev *VisualEffectView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return vev
 }
 
 // WithWantsLayer sets the wants layer.
 func (vev *VisualEffectView) WithWantsLayer(wantsLayer bool) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return vev
 }
 
 // WithLayer sets the layer.
 func (vev *VisualEffectView) WithLayer(layer obj.Object) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return vev
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (vev *VisualEffectView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return vev
 }
 
 // WithNeedsLayout sets the needs layout.
 func (vev *VisualEffectView) WithNeedsLayout(needsLayout bool) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return vev
 }
 
 // WithAlphaValue sets the alpha value.
 func (vev *VisualEffectView) WithAlphaValue(alphaValue float64) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return vev
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (vev *VisualEffectView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return vev
 }
 
 // WithBackgroundFilters sets the background filters.
 func (vev *VisualEffectView) WithBackgroundFilters(items ...obj.Object) *VisualEffectView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return vev
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (vev *VisualEffectView) WithCompositingFilter(compositingFilter obj.Object) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return vev
 }
 
 // WithContentFilters sets the content filters.
 func (vev *VisualEffectView) WithContentFilters(items ...obj.Object) *VisualEffectView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return vev
 }
 
 // WithShadow sets the shadow.
 func (vev *VisualEffectView) WithShadow(shadow *Shadow) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return vev
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (vev *VisualEffectView) WithClipsToBounds(clipsToBounds bool) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return vev
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (vev *VisualEffectView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return vev
 }
 
 // WithToolTip sets the tool tip.
 func (vev *VisualEffectView) WithToolTip(toolTip string) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return vev
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (vev *VisualEffectView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return vev
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (vev *VisualEffectView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return vev
 }
 
 // WithNextKeyView sets the next key view.
 func (vev *VisualEffectView) WithNextKeyView(nextKeyView ViewProvider) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return vev
 }
 
 // WithFocusRingType sets the focus ring type.
 func (vev *VisualEffectView) WithFocusRingType(focusRingType FocusRingType) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return vev
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (vev *VisualEffectView) WithGestureRecognizers(items ...GestureRecognizerProvider) *VisualEffectView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return vev
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (vev *VisualEffectView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return vev
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (vev *VisualEffectView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return vev
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (vev *VisualEffectView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return vev
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (vev *VisualEffectView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return vev
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (vev *VisualEffectView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return vev
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (vev *VisualEffectView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return vev
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (vev *VisualEffectView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return vev
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (vev *VisualEffectView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return vev
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (vev *VisualEffectView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return vev
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (vev *VisualEffectView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return vev
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (vev *VisualEffectView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return vev
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (vev *VisualEffectView) WithNextResponder(nextResponder ResponderProvider) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return vev
 }
 
 // WithMenu sets returns the responder’s menu.
 func (vev *VisualEffectView) WithMenu(menu *Menu) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return vev
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (vev *VisualEffectView) WithUserActivity(userActivity obj.Object) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return vev
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (vev *VisualEffectView) WithTouchBar(touchBar *TouchBar) *VisualEffectView {
-	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return vev
 }
 
 // Material returns a value indicating which material is shown by the NSVisualEffectView.  See the comments on NSVisualEffectMaterial.  Defaults to NSVisualEffectMaterialAppearanceBased.  You should instead specify an appropriate semantic material value.  See the comments on NSVisualEffectMaterial.
 func (vev *VisualEffectView) Material() VisualEffectMaterial {
-	_r := objc.Send[VisualEffectMaterial](objref.IDOf(vev), objc.RegisterName("material"))
-	return _r
+	var _mainthread0 VisualEffectMaterial
+	purego.Main(func() {
+		_mainthread0 = func() VisualEffectMaterial {
+			_r := objc.Send[VisualEffectMaterial](objref.IDOf(vev), objc.RegisterName("material"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // InteriorBackgroundStyle returns an NSBackgroundStyle value that most closely matches the look of the material shown by the NSVisualEffectView.
 func (vev *VisualEffectView) InteriorBackgroundStyle() BackgroundStyle {
-	_r := objc.Send[BackgroundStyle](objref.IDOf(vev), objc.RegisterName("interiorBackgroundStyle"))
-	return _r
+	var _mainthread0 BackgroundStyle
+	purego.Main(func() {
+		_mainthread0 = func() BackgroundStyle {
+			_r := objc.Send[BackgroundStyle](objref.IDOf(vev), objc.RegisterName("interiorBackgroundStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BlendingMode returns a value controlling how the NSVisualEffectView generates its material.  See the comments on NSVisualEffectBlendingMode.  Not all materials support both blending modes, so NSVisualEffectView may fall back to a more appropriate blending mode as needed.  Defaults to NSVisualEffectBlendingModeBehindWindow.
 func (vev *VisualEffectView) BlendingMode() VisualEffectBlendingMode {
-	_r := objc.Send[VisualEffectBlendingMode](objref.IDOf(vev), objc.RegisterName("blendingMode"))
-	return _r
+	var _mainthread0 VisualEffectBlendingMode
+	purego.Main(func() {
+		_mainthread0 = func() VisualEffectBlendingMode {
+			_r := objc.Send[VisualEffectBlendingMode](objref.IDOf(vev), objc.RegisterName("blendingMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // State returns a value controlling when the NSVisualEffectView takes on the active look.  See the comments on NSVisualEffectState.  Defaults to NSVisualEffectStateFollowsWindowActiveState.
 func (vev *VisualEffectView) State() VisualEffectState {
-	_r := objc.Send[VisualEffectState](objref.IDOf(vev), objc.RegisterName("state"))
-	return _r
+	var _mainthread0 VisualEffectState
+	purego.Main(func() {
+		_mainthread0 = func() VisualEffectState {
+			_r := objc.Send[VisualEffectState](objref.IDOf(vev), objc.RegisterName("state"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MaskImage returns an image whose alpha channel is used to mask the material generated by the NSVisualEffectView.  (It does not also mask subviews.)  Defaults to nil.  It is best to set this to the smallest mask image possible and properly set the image's capInsets property to stretch it.  Setting the maskImage on an NSVisualEffectView that is the contentView of a window will correctly influence the window's shadow.
 func (vev *VisualEffectView) MaskImage() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("maskImage"))
-	return ImageFromID(_r)
+	var _mainthread0 *Image
+	purego.Main(func() {
+		_mainthread0 = func() *Image {
+			_r := objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("maskImage"))
+			return ImageFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsEmphasized reports whether when true, the material takes on the emphasized look. Defaults to false. Some, but not all, materials change their look when emphasized. This is used to indicate that an associated view has firstResponder status.
 func (vev *VisualEffectView) IsEmphasized() bool {
-	_r := objc.Send[bool](objref.IDOf(vev), objc.RegisterName("isEmphasized"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(vev), objc.RegisterName("isEmphasized"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ViewProvider = (*VisualEffectView)(nil)

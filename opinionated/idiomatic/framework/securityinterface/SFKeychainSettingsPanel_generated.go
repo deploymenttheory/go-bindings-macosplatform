@@ -68,6 +68,12 @@ func (ksp *KeychainSettingsPanel) String() string {
 
 // NewKeychainSettingsPanel creates a new KeychainSettingsPanel.
 func NewKeychainSettingsPanel() *KeychainSettingsPanel {
-	_id := objc.Send[objc.ID](objc.ID(_class("SFKeychainSettingsPanel")), objc.RegisterName("new"))
-	return keychainSettingsPanelAdopt(_id)
+	var _mainthread0 *KeychainSettingsPanel
+	purego.Main(func() {
+		_mainthread0 = func() *KeychainSettingsPanel {
+			_id := objc.Send[objc.ID](objc.ID(_class("SFKeychainSettingsPanel")), objc.RegisterName("new"))
+			return keychainSettingsPanelAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }

@@ -68,18 +68,38 @@ func (cls *CollectionLayoutSize) String() string {
 
 // NewCollectionLayoutSize creates a new CollectionLayoutSize.
 func NewCollectionLayoutSize() *CollectionLayoutSize {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutSize")), objc.RegisterName("new"))
-	return collectionLayoutSizeAdopt(_id)
+	var _mainthread0 *CollectionLayoutSize
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionLayoutSize {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutSize")), objc.RegisterName("new"))
+			return collectionLayoutSizeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WidthDimension returns the width dimension.
 func (cls *CollectionLayoutSize) WidthDimension() *CollectionLayoutDimension {
-	_r := objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("widthDimension"))
-	return CollectionLayoutDimensionFromID(_r)
+	var _mainthread0 *CollectionLayoutDimension
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionLayoutDimension {
+			_r := objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("widthDimension"))
+			return CollectionLayoutDimensionFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HeightDimension returns the height dimension.
 func (cls *CollectionLayoutSize) HeightDimension() *CollectionLayoutDimension {
-	_r := objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("heightDimension"))
-	return CollectionLayoutDimensionFromID(_r)
+	var _mainthread0 *CollectionLayoutDimension
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionLayoutDimension {
+			_r := objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("heightDimension"))
+			return CollectionLayoutDimensionFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }

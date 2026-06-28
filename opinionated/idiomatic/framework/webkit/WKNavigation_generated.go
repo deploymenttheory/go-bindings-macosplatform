@@ -68,12 +68,25 @@ func (wn *WKNavigation) String() string {
 
 // NewWKNavigation creates a new WKNavigation.
 func NewWKNavigation() *WKNavigation {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKNavigation")), objc.RegisterName("new"))
-	return wKNavigationAdopt(_id)
+	var _mainthread0 *WKNavigation
+	purego.Main(func() {
+		_mainthread0 = func() *WKNavigation {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKNavigation")), objc.RegisterName("new"))
+			return wKNavigationAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // EffectiveContentMode returns the effective content mode.
 func (wn *WKNavigation) EffectiveContentMode() WKContentMode {
-	_r := objc.Send[WKContentMode](objref.IDOf(wn), objc.RegisterName("effectiveContentMode"))
-	return _r
+	var _mainthread0 WKContentMode
+	purego.Main(func() {
+		_mainthread0 = func() WKContentMode {
+			_r := objc.Send[WKContentMode](objref.IDOf(wn), objc.RegisterName("effectiveContentMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

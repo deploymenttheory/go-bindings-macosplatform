@@ -68,32 +68,62 @@ func (fbp *FilterBrowserPanel) String() string {
 
 // NewFilterBrowserPanel creates a new FilterBrowserPanel.
 func NewFilterBrowserPanel() *FilterBrowserPanel {
-	_id := objc.Send[objc.ID](objc.ID(_class("IKFilterBrowserPanel")), objc.RegisterName("new"))
-	return filterBrowserPanelAdopt(_id)
+	var _mainthread0 *FilterBrowserPanel
+	purego.Main(func() {
+		_mainthread0 = func() *FilterBrowserPanel {
+			_id := objc.Send[objc.ID](objc.ID(_class("IKFilterBrowserPanel")), objc.RegisterName("new"))
+			return filterBrowserPanelAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // FilterName returns the name of the currently selected filter. Use this method in response to a IKFilterBrowserFilterSelectedNotification or IKFilterBrowserFilterDoubleClickNotification or afer returning from a modal session.
 func (fbp *FilterBrowserPanel) FilterName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(fbp), objc.RegisterName("filterName"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(fbp), objc.RegisterName("filterName"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RunModalWithOptions displays the FilterBrowser in a modal dialog. Use this method to run the IKFilterBrowser in a modal dialog. The value passed as returnCode will be either NSCancelButton or NSOKButton.
 func (fbp *FilterBrowserPanel) RunModalWithOptions(inOptions obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(fbp), objc.RegisterName("runModalWithOptions:"), objref.IDOf(inOptions))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(fbp), objc.RegisterName("runModalWithOptions:"), objref.IDOf(inOptions))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FilterBrowserViewWithOptions returns a view containing the FilterBrowser. Use this method to run the IKFilterBrowser in your own UI. To dismiss it, invoke the finish action as described below.
 func (fbp *FilterBrowserPanel) FilterBrowserViewWithOptions(inOptions obj.Object) *FilterBrowserView {
-	_r := objc.Send[objc.ID](objref.IDOf(fbp), objc.RegisterName("filterBrowserViewWithOptions:"), objref.IDOf(inOptions))
-	return FilterBrowserViewFromID(_r)
+	var _mainthread0 *FilterBrowserView
+	purego.Main(func() {
+		_mainthread0 = func() *FilterBrowserView {
+			_r := objc.Send[objc.ID](objref.IDOf(fbp), objc.RegisterName("filterBrowserViewWithOptions:"), objref.IDOf(inOptions))
+			return FilterBrowserViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Finish closes the IKFilterBrowser. Invoke this action for instance from your OK or Cancel button when you are running the IKFilterBrowserView modal in your own UI.
 func (fbp *FilterBrowserPanel) Finish(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(fbp), objc.RegisterName("finish:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fbp), objc.RegisterName("finish:"), objref.IDOf(sender))
+	})
+
 }

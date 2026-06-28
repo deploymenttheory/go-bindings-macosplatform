@@ -68,24 +68,51 @@ func (wnr *WKNavigationResponse) String() string {
 
 // NewWKNavigationResponse creates a new WKNavigationResponse.
 func NewWKNavigationResponse() *WKNavigationResponse {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKNavigationResponse")), objc.RegisterName("new"))
-	return wKNavigationResponseAdopt(_id)
+	var _mainthread0 *WKNavigationResponse
+	purego.Main(func() {
+		_mainthread0 = func() *WKNavigationResponse {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKNavigationResponse")), objc.RegisterName("new"))
+			return wKNavigationResponseAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // IsForMainFrame reports whether the frame being navigated is the main frame.
 func (wnr *WKNavigationResponse) IsForMainFrame() bool {
-	_r := objc.Send[bool](objref.IDOf(wnr), objc.RegisterName("isForMainFrame"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wnr), objc.RegisterName("isForMainFrame"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Response returns the frame's response.
 func (wnr *WKNavigationResponse) Response() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wnr), objc.RegisterName("response"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wnr), objc.RegisterName("response"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CanShowMIMEType reports whether webKit can display the response's MIME type natively. Allowing a navigation response with a MIME type that can't be shown will cause the navigation to fail.
 func (wnr *WKNavigationResponse) CanShowMIMEType() bool {
-	_r := objc.Send[bool](objref.IDOf(wnr), objc.RegisterName("canShowMIMEType"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wnr), objc.RegisterName("canShowMIMEType"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

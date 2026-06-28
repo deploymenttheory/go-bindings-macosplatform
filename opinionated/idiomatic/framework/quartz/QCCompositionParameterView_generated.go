@@ -68,56 +68,109 @@ func (qcpv *QCCompositionParameterView) String() string {
 
 // NewQCCompositionParameterView creates a new QCCompositionParameterView.
 func NewQCCompositionParameterView() *QCCompositionParameterView {
-	_id := objc.Send[objc.ID](objc.ID(_class("QCCompositionParameterView")), objc.RegisterName("new"))
-	return qCCompositionParameterViewAdopt(_id)
+	var _mainthread0 *QCCompositionParameterView
+	purego.Main(func() {
+		_mainthread0 = func() *QCCompositionParameterView {
+			_id := objc.Send[objc.ID](objc.ID(_class("QCCompositionParameterView")), objc.RegisterName("new"))
+			return qCCompositionParameterViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // SetCompositionRenderer sets the composition parameter view for editing the input parameters of the provided renderer object.
 func (qcpv *QCCompositionParameterView) SetCompositionRenderer(renderer obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setCompositionRenderer:"), objref.IDOf(renderer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setCompositionRenderer:"), objref.IDOf(renderer))
+	})
+
 }
 
 // CompositionRenderer returns the renderer object associated with the composition parameter view.
 func (qcpv *QCCompositionParameterView) CompositionRenderer() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("compositionRenderer"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("compositionRenderer"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasParameters reports whether checks whether the composition that is currently edited by the composition parameter view has any input parameters.
 func (qcpv *QCCompositionParameterView) HasParameters() bool {
-	_r := objc.Send[bool](objref.IDOf(qcpv), objc.RegisterName("hasParameters"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(qcpv), objc.RegisterName("hasParameters"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetBackgroundColor sets the background color of the composition parameter view.
 func (qcpv *QCCompositionParameterView) SetBackgroundColor(color obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(color))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(color))
+	})
+
 }
 
 // BackgroundColor returns retrieves the background color of the composition parameter view.
 func (qcpv *QCCompositionParameterView) BackgroundColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("backgroundColor"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("backgroundColor"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetDrawsBackground sets whether the composition parameter view draws its background.
 func (qcpv *QCCompositionParameterView) SetDrawsBackground(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setDrawsBackground:"), flag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setDrawsBackground:"), flag)
+	})
+
 }
 
 // DrawsBackground reports whether the composition parameter view draws its background.
 func (qcpv *QCCompositionParameterView) DrawsBackground() bool {
-	_r := objc.Send[bool](objref.IDOf(qcpv), objc.RegisterName("drawsBackground"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(qcpv), objc.RegisterName("drawsBackground"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetDelegate sets the composition parameter view delegate.
 func (qcpv *QCCompositionParameterView) SetDelegate(delegate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	})
+
 }
 
 // Delegate returns the composition parameter view delegate.
 func (qcpv *QCCompositionParameterView) Delegate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("delegate"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("delegate"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

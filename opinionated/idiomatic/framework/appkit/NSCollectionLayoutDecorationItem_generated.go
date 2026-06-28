@@ -47,35 +47,59 @@ func collectionLayoutDecorationItemAdopt(id objc.ID) *CollectionLayoutDecoration
 
 // NewCollectionLayoutDecorationItem creates a new CollectionLayoutDecorationItem.
 func NewCollectionLayoutDecorationItem() *CollectionLayoutDecorationItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutDecorationItem")), objc.RegisterName("new"))
-	return collectionLayoutDecorationItemAdopt(_id)
+	var _mainthread0 *CollectionLayoutDecorationItem
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionLayoutDecorationItem {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutDecorationItem")), objc.RegisterName("new"))
+			return collectionLayoutDecorationItemAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithZIndex sets the vertical stacking order of the decoration item in relation to other items in the section.
 func (cldi *CollectionLayoutDecorationItem) WithZIndex(zIndex int) *CollectionLayoutDecorationItem {
-	objc.Send[objc.ID](objref.IDOf(cldi), objc.RegisterName("setZIndex:"), zIndex)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cldi), objc.RegisterName("setZIndex:"), zIndex)
+	})
 	return cldi
 }
 
 // WithEdgeSpacing sets the amount of space added around the boundaries of the item between other items and this item’s container.
 func (cldi *CollectionLayoutDecorationItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutDecorationItem {
-	objc.Send[objc.ID](objref.IDOf(cldi), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cldi), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
+	})
 	return cldi
 }
 
 // ZIndex returns the z index.
 func (cldi *CollectionLayoutDecorationItem) ZIndex() int {
-	_r := objc.Send[int](objref.IDOf(cldi), objc.RegisterName("zIndex"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(cldi), objc.RegisterName("zIndex"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ElementKind returns the element kind.
 func (cldi *CollectionLayoutDecorationItem) ElementKind() string {
-	_r := objc.Send[objc.ID](objref.IDOf(cldi), objc.RegisterName("elementKind"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(cldi), objc.RegisterName("elementKind"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ CollectionLayoutItemProvider = (*CollectionLayoutDecorationItem)(nil)

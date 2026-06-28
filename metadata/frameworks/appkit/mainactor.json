@@ -1,0 +1,839 @@
+{
+  "schema_version": 1,
+  "framework": "AppKit",
+  "main_actor_classes": [
+    "NSAlert",
+    "NSCell",
+    "NSCollectionLayoutAnchor",
+    "NSCollectionLayoutDimension",
+    "NSCollectionLayoutEdgeSpacing",
+    "NSCollectionLayoutGroupCustomItem",
+    "NSCollectionLayoutItem",
+    "NSCollectionLayoutSection",
+    "NSCollectionLayoutSize",
+    "NSCollectionLayoutSpacing",
+    "NSCollectionView",
+    "NSCollectionViewCompositionalLayoutConfiguration",
+    "NSCollectionViewLayout",
+    "NSCollectionViewLayoutAttributes",
+    "NSCollectionViewLayoutInvalidationContext",
+    "NSCollectionViewUpdateItem",
+    "NSDocument",
+    "NSDocumentController",
+    "NSGestureRecognizer",
+    "NSGridCell",
+    "NSGridColumn",
+    "NSGridRow",
+    "NSHelpManager",
+    "NSPDFPanel",
+    "NSPageLayout",
+    "NSPanel",
+    "NSPrintOperation",
+    "NSPrintPanel",
+    "NSResponder",
+    "NSSavePanel",
+    "NSScrollEdgeEffectStyle",
+    "NSScrubberLayout",
+    "NSScrubberSelectionStyle",
+    "NSSliderAccessory",
+    "NSSliderAccessoryBehavior",
+    "NSTableColumn",
+    "NSTextPreview",
+    "NSToolbar",
+    "NSToolbarItem",
+    "NSTouchBar",
+    "NSTouchBarItem",
+    "NSView",
+    "NSWindow",
+    "NSWritingToolsCoordinator"
+  ],
+  "main_actor_protocols": [
+    "NSCollectionLayoutContainer",
+    "NSCollectionLayoutEnvironment",
+    "NSCollectionLayoutVisibleItem",
+    "NSStandardKeyBindingResponding"
+  ],
+  "main_actor_selectors": {
+    "NSAlertDelegate": [
+      "alertShowHelp:"
+    ],
+    "NSApplicationDelegate": [
+      "application:continueUserActivity:restorationHandler:",
+      "application:delegateHandlesKey:",
+      "application:didDecodeRestorableState:",
+      "application:didFailToContinueUserActivityWithType:error:",
+      "application:didFailToRegisterForRemoteNotificationsWithError:",
+      "application:didReceiveRemoteNotification:",
+      "application:didRegisterForRemoteNotificationsWithDeviceToken:",
+      "application:didUpdateUserActivity:",
+      "application:handlerForIntent:",
+      "application:openFile:",
+      "application:openFileWithoutUI:",
+      "application:openFiles:",
+      "application:openTempFile:",
+      "application:openURLs:",
+      "application:printFile:",
+      "application:printFiles:withSettings:showPrintPanels:",
+      "application:userDidAcceptCloudKitShareWithMetadata:",
+      "application:willContinueUserActivityWithType:",
+      "application:willEncodeRestorableState:",
+      "application:willPresentError:",
+      "applicationDidBecomeActive:",
+      "applicationDidChangeOcclusionState:",
+      "applicationDidChangeScreenParameters:",
+      "applicationDidFinishLaunching:",
+      "applicationDidHide:",
+      "applicationDidResignActive:",
+      "applicationDidUnhide:",
+      "applicationDidUpdate:",
+      "applicationDockMenu:",
+      "applicationOpenUntitledFile:",
+      "applicationProtectedDataDidBecomeAvailable:",
+      "applicationProtectedDataWillBecomeUnavailable:",
+      "applicationShouldAutomaticallyLocalizeKeyEquivalents:",
+      "applicationShouldHandleReopen:hasVisibleWindows:",
+      "applicationShouldOpenUntitledFile:",
+      "applicationShouldTerminate:",
+      "applicationShouldTerminateAfterLastWindowClosed:",
+      "applicationSupportsSecureRestorableState:",
+      "applicationWillBecomeActive:",
+      "applicationWillFinishLaunching:",
+      "applicationWillHide:",
+      "applicationWillResignActive:",
+      "applicationWillTerminate:",
+      "applicationWillUnhide:",
+      "applicationWillUpdate:"
+    ],
+    "NSBrowserDelegate": [
+      "browser:acceptDrop:atRow:column:dropOperation:",
+      "browser:canDragRowsWithIndexes:inColumn:withEvent:",
+      "browser:child:ofItem:",
+      "browser:createRowsForColumn:inMatrix:",
+      "browser:didChangeLastColumn:toColumn:",
+      "browser:draggingImageForRowsWithIndexes:inColumn:withEvent:offset:",
+      "browser:headerViewControllerForItem:",
+      "browser:heightOfRow:inColumn:",
+      "browser:isColumnValid:",
+      "browser:isLeafItem:",
+      "browser:nextTypeSelectMatchFromRow:toRow:inColumn:forString:",
+      "browser:numberOfChildrenOfItem:",
+      "browser:numberOfRowsInColumn:",
+      "browser:objectValueForItem:",
+      "browser:previewViewControllerForLeafItem:",
+      "browser:selectCellWithString:inColumn:",
+      "browser:selectRow:inColumn:",
+      "browser:selectionIndexesForProposedSelection:inColumn:",
+      "browser:setObjectValue:forItem:",
+      "browser:shouldEditItem:",
+      "browser:shouldShowCellExpansionForRow:column:",
+      "browser:shouldSizeColumn:forUserResize:toWidth:",
+      "browser:shouldTypeSelectForEvent:withCurrentSearchString:",
+      "browser:sizeToFitWidthOfColumn:",
+      "browser:titleOfColumn:",
+      "browser:typeSelectStringForRow:inColumn:",
+      "browser:validateDrop:proposedRow:column:dropOperation:",
+      "browser:willDisplayCell:atRow:column:",
+      "browser:writeRowsWithIndexes:inColumn:toPasteboard:",
+      "browserColumnConfigurationDidChange:",
+      "browserDidScroll:",
+      "browserWillScroll:",
+      "rootItemForBrowser:"
+    ],
+    "NSCandidateListTouchBarItemDelegate": [
+      "candidateListTouchBarItem:beginSelectingCandidateAtIndex:",
+      "candidateListTouchBarItem:changeSelectionFromCandidateAtIndex:toIndex:",
+      "candidateListTouchBarItem:changedCandidateListVisibility:",
+      "candidateListTouchBarItem:endSelectingCandidateAtIndex:"
+    ],
+    "NSCloudSharingValidation": [
+      "cloudShareForUserInterfaceItem:"
+    ],
+    "NSCollectionViewDataSource": [
+      "collectionView:itemForRepresentedObjectAtIndexPath:",
+      "collectionView:numberOfItemsInSection:",
+      "collectionView:viewForSupplementaryElementOfKind:atIndexPath:",
+      "numberOfSectionsInCollectionView:"
+    ],
+    "NSCollectionViewDelegate": [
+      "collectionView:acceptDrop:index:dropOperation:",
+      "collectionView:acceptDrop:indexPath:dropOperation:",
+      "collectionView:canDragItemsAtIndexPaths:withEvent:",
+      "collectionView:canDragItemsAtIndexes:withEvent:",
+      "collectionView:didChangeItemsAtIndexPaths:toHighlightState:",
+      "collectionView:didDeselectItemsAtIndexPaths:",
+      "collectionView:didEndDisplayingItem:forRepresentedObjectAtIndexPath:",
+      "collectionView:didEndDisplayingSupplementaryView:forElementOfKind:atIndexPath:",
+      "collectionView:didSelectItemsAtIndexPaths:",
+      "collectionView:draggingImageForItemsAtIndexPaths:withEvent:offset:",
+      "collectionView:draggingImageForItemsAtIndexes:withEvent:offset:",
+      "collectionView:draggingSession:endedAtPoint:dragOperation:",
+      "collectionView:draggingSession:willBeginAtPoint:forItemsAtIndexPaths:",
+      "collectionView:draggingSession:willBeginAtPoint:forItemsAtIndexes:",
+      "collectionView:pasteboardWriterForItemAtIndex:",
+      "collectionView:pasteboardWriterForItemAtIndexPath:",
+      "collectionView:shouldChangeItemsAtIndexPaths:toHighlightState:",
+      "collectionView:shouldDeselectItemsAtIndexPaths:",
+      "collectionView:shouldSelectItemsAtIndexPaths:",
+      "collectionView:transitionLayoutForOldLayout:newLayout:",
+      "collectionView:updateDraggingItemsForDrag:",
+      "collectionView:validateDrop:proposedIndex:dropOperation:",
+      "collectionView:validateDrop:proposedIndexPath:dropOperation:",
+      "collectionView:willDisplayItem:forRepresentedObjectAtIndexPath:",
+      "collectionView:willDisplaySupplementaryView:forElementKind:atIndexPath:"
+    ],
+    "NSCollectionViewDelegateFlowLayout": [
+      "collectionView:layout:insetForSectionAtIndex:",
+      "collectionView:layout:minimumInteritemSpacingForSectionAtIndex:",
+      "collectionView:layout:minimumLineSpacingForSectionAtIndex:",
+      "collectionView:layout:referenceSizeForFooterInSection:",
+      "collectionView:layout:referenceSizeForHeaderInSection:",
+      "collectionView:layout:sizeForItemAtIndexPath:"
+    ],
+    "NSCollectionViewElement": [
+      "applyLayoutAttributes:",
+      "didTransitionFromLayout:toLayout:",
+      "preferredLayoutAttributesFittingAttributes:",
+      "prepareForReuse",
+      "willTransitionFromLayout:toLayout:"
+    ],
+    "NSCollectionViewPrefetching": [
+      "collectionView:cancelPrefetchingForItemsAtIndexPaths:",
+      "collectionView:prefetchItemsAtIndexPaths:"
+    ],
+    "NSCollectionViewSectionHeaderView": [
+      "sectionCollapseButton"
+    ],
+    "NSColorPicker": [
+      "attachColorList:",
+      "detachColorList:",
+      "initWithPickerMask:colorPanel:",
+      "insertNewButtonImage:in:",
+      "setMode:",
+      "viewSizeChanged:"
+    ],
+    "NSColorPickingCustom": [
+      "currentMode",
+      "provideNewView:",
+      "setColor:",
+      "supportsMode:"
+    ],
+    "NSColorPickingDefault": [
+      "alphaControlAddedOrRemoved:",
+      "attachColorList:",
+      "buttonToolTip",
+      "detachColorList:",
+      "initWithPickerMask:colorPanel:",
+      "insertNewButtonImage:in:",
+      "minContentSize",
+      "provideNewButtonImage",
+      "setMode:",
+      "viewSizeChanged:"
+    ],
+    "NSComboBoxDataSource": [
+      "comboBox:completedString:",
+      "comboBox:indexOfItemWithStringValue:",
+      "comboBox:objectValueForItemAtIndex:",
+      "numberOfItemsInComboBox:"
+    ],
+    "NSComboBoxDelegate": [
+      "comboBoxSelectionDidChange:",
+      "comboBoxSelectionIsChanging:",
+      "comboBoxWillDismiss:",
+      "comboBoxWillPopUp:"
+    ],
+    "NSControlTextEditingDelegate": [
+      "control:didFailToFormatString:errorDescription:",
+      "control:didFailToValidatePartialString:errorDescription:",
+      "control:isValidObject:",
+      "control:textShouldBeginEditing:",
+      "control:textShouldEndEditing:",
+      "control:textView:completions:forPartialWordRange:indexOfSelectedItem:",
+      "control:textView:doCommandBySelector:",
+      "controlTextDidBeginEditing:",
+      "controlTextDidChange:",
+      "controlTextDidEndEditing:"
+    ],
+    "NSController": [
+      "commitEditing",
+      "commitEditingWithDelegate:didCommitSelector:contextInfo:",
+      "discardEditing",
+      "objectDidBeginEditing:",
+      "objectDidEndEditing:"
+    ],
+    "NSDatePickerCellDelegate": [
+      "datePickerCell:validateProposedDateValue:timeInterval:"
+    ],
+    "NSDraggingDestination": [
+      "concludeDragOperation:",
+      "draggingEnded:",
+      "draggingEntered:",
+      "draggingExited:",
+      "draggingUpdated:",
+      "performDragOperation:",
+      "prepareForDragOperation:",
+      "updateDraggingItemsForDrag:",
+      "wantsPeriodicDraggingUpdates"
+    ],
+    "NSDraggingInfo": [
+      "animatesToDestination",
+      "draggedImageLocation",
+      "draggingDestinationWindow",
+      "draggingFormation",
+      "draggingLocation",
+      "draggingPasteboard",
+      "draggingSequenceNumber",
+      "draggingSource",
+      "draggingSourceOperationMask",
+      "enumerateDraggingItemsWithOptions:forView:classes:searchOptions:usingBlock:",
+      "numberOfValidItemsForDrop",
+      "resetSpringLoading",
+      "slideDraggedImageTo:",
+      "springLoadingHighlight"
+    ],
+    "NSDraggingSource": [
+      "draggingSession:endedAtPoint:operation:",
+      "draggingSession:movedToPoint:",
+      "draggingSession:sourceOperationMaskForDraggingContext:",
+      "draggingSession:willBeginAtPoint:",
+      "ignoreModifierKeysForDraggingSession:"
+    ],
+    "NSEditor": [
+      "commitEditing",
+      "commitEditingAndReturnError:",
+      "commitEditingWithDelegate:didCommitSelector:contextInfo:",
+      "discardEditing"
+    ],
+    "NSEditorRegistration": [
+      "objectDidBeginEditing:",
+      "objectDidEndEditing:"
+    ],
+    "NSFilePromiseProviderDelegate": [
+      "filePromiseProvider:fileNameForType:",
+      "operationQueueForFilePromiseProvider:"
+    ],
+    "NSFontChanging": [
+      "changeFont:",
+      "validModesForFontPanel:"
+    ],
+    "NSGestureRecognizerDelegate": [
+      "gestureRecognizer:shouldAttemptToRecognizeWithEvent:",
+      "gestureRecognizer:shouldBeRequiredToFailByGestureRecognizer:",
+      "gestureRecognizer:shouldReceiveTouch:",
+      "gestureRecognizer:shouldRecognizeSimultaneouslyWithGestureRecognizer:",
+      "gestureRecognizer:shouldRequireFailureOfGestureRecognizer:",
+      "gestureRecognizerShouldBegin:"
+    ],
+    "NSMenuDelegate": [
+      "confinementRectForMenu:onScreen:",
+      "menu:updateItem:atIndex:shouldCancel:",
+      "menu:willHighlightItem:",
+      "menuDidClose:",
+      "menuHasKeyEquivalent:forEvent:target:action:",
+      "menuNeedsUpdate:",
+      "menuWillOpen:",
+      "numberOfItemsInMenu:"
+    ],
+    "NSMenuItemValidation": [
+      "validateMenuItem:"
+    ],
+    "NSOpenGLContext": [
+      "update",
+      "view"
+    ],
+    "NSOpenSavePanelDelegate": [
+      "panel:didChangeToDirectoryURL:",
+      "panel:didSelectType:",
+      "panel:displayNameForType:",
+      "panel:shouldEnableURL:",
+      "panel:userEnteredFilename:confirmed:",
+      "panel:validateURL:error:",
+      "panel:willExpand:",
+      "panelSelectionDidChange:"
+    ],
+    "NSOutlineViewDataSource": [
+      "outlineView:acceptDrop:item:childIndex:",
+      "outlineView:child:ofItem:",
+      "outlineView:draggingSession:endedAtPoint:operation:",
+      "outlineView:draggingSession:willBeginAtPoint:forItems:",
+      "outlineView:isItemExpandable:",
+      "outlineView:itemForPersistentObject:",
+      "outlineView:numberOfChildrenOfItem:",
+      "outlineView:objectValueForTableColumn:byItem:",
+      "outlineView:pasteboardWriterForItem:",
+      "outlineView:persistentObjectForItem:",
+      "outlineView:setObjectValue:forTableColumn:byItem:",
+      "outlineView:sortDescriptorsDidChange:",
+      "outlineView:updateDraggingItemsForDrag:",
+      "outlineView:validateDrop:proposedItem:proposedChildIndex:"
+    ],
+    "NSOutlineViewDelegate": [
+      "outlineView:dataCellForTableColumn:item:",
+      "outlineView:didAddRowView:forRow:",
+      "outlineView:didClickTableColumn:",
+      "outlineView:didDragTableColumn:",
+      "outlineView:didRemoveRowView:forRow:",
+      "outlineView:heightOfRowByItem:",
+      "outlineView:isGroupItem:",
+      "outlineView:mouseDownInHeaderOfTableColumn:",
+      "outlineView:nextTypeSelectMatchFromItem:toItem:forString:",
+      "outlineView:rowViewForItem:",
+      "outlineView:selectionIndexesForProposedSelection:",
+      "outlineView:shouldCollapseItem:",
+      "outlineView:shouldEditTableColumn:item:",
+      "outlineView:shouldExpandItem:",
+      "outlineView:shouldReorderColumn:toColumn:",
+      "outlineView:shouldSelectItem:",
+      "outlineView:shouldSelectTableColumn:",
+      "outlineView:shouldShowCellExpansionForTableColumn:item:",
+      "outlineView:shouldShowOutlineCellForItem:",
+      "outlineView:shouldTrackCell:forTableColumn:item:",
+      "outlineView:shouldTypeSelectForEvent:withCurrentSearchString:",
+      "outlineView:sizeToFitWidthOfColumn:",
+      "outlineView:tintConfigurationForItem:",
+      "outlineView:toolTipForCell:rect:tableColumn:item:mouseLocation:",
+      "outlineView:typeSelectStringForTableColumn:item:",
+      "outlineView:userCanChangeVisibilityOfTableColumn:",
+      "outlineView:userDidChangeVisibilityOfTableColumns:",
+      "outlineView:viewForTableColumn:item:",
+      "outlineView:willDisplayCell:forTableColumn:item:",
+      "outlineView:willDisplayOutlineCell:forTableColumn:item:",
+      "outlineViewColumnDidMove:",
+      "outlineViewColumnDidResize:",
+      "outlineViewItemDidCollapse:",
+      "outlineViewItemDidExpand:",
+      "outlineViewItemWillCollapse:",
+      "outlineViewItemWillExpand:",
+      "outlineViewSelectionDidChange:",
+      "outlineViewSelectionIsChanging:",
+      "selectionShouldChangeInOutlineView:"
+    ],
+    "NSPageControllerDelegate": [
+      "pageController:didTransitionToObject:",
+      "pageController:frameForObject:",
+      "pageController:identifierForObject:",
+      "pageController:prepareViewController:withObject:",
+      "pageController:viewControllerForIdentifier:",
+      "pageControllerDidEndLiveTransition:",
+      "pageControllerWillStartLiveTransition:"
+    ],
+    "NSPathCellDelegate": [
+      "pathCell:willDisplayOpenPanel:",
+      "pathCell:willPopUpMenu:"
+    ],
+    "NSPathControlDelegate": [
+      "pathControl:acceptDrop:",
+      "pathControl:shouldDragItem:withPasteboard:",
+      "pathControl:shouldDragPathComponentCell:withPasteboard:",
+      "pathControl:validateDrop:",
+      "pathControl:willDisplayOpenPanel:",
+      "pathControl:willPopUpMenu:"
+    ],
+    "NSPopoverDelegate": [
+      "detachableWindowForPopover:",
+      "popoverDidClose:",
+      "popoverDidDetach:",
+      "popoverDidShow:",
+      "popoverShouldClose:",
+      "popoverShouldDetach:",
+      "popoverWillClose:",
+      "popoverWillShow:"
+    ],
+    "NSPrintPanelAccessorizing": [
+      "keyPathsForValuesAffectingPreview",
+      "localizedSummaryItems"
+    ],
+    "NSRuleEditorDelegate": [
+      "ruleEditor:child:forCriterion:withRowType:",
+      "ruleEditor:displayValueForCriterion:inRow:",
+      "ruleEditor:numberOfChildrenForCriterion:withRowType:",
+      "ruleEditor:predicatePartsForCriterion:withDisplayValue:inRow:",
+      "ruleEditorRowsDidChange:"
+    ],
+    "NSScrubberDataSource": [
+      "numberOfItemsForScrubber:",
+      "scrubber:viewForItemAtIndex:"
+    ],
+    "NSScrubberDelegate": [
+      "didBeginInteractingWithScrubber:",
+      "didCancelInteractingWithScrubber:",
+      "didFinishInteractingWithScrubber:",
+      "scrubber:didChangeVisibleRange:",
+      "scrubber:didHighlightItemAtIndex:",
+      "scrubber:didSelectItemAtIndex:"
+    ],
+    "NSSearchFieldDelegate": [
+      "searchFieldDidEndSearching:",
+      "searchFieldDidStartSearching:"
+    ],
+    "NSSeguePerforming": [
+      "performSegueWithIdentifier:sender:",
+      "prepareForSegue:sender:",
+      "shouldPerformSegueWithIdentifier:sender:"
+    ],
+    "NSSharingServiceDelegate": [
+      "anchoringViewForSharingService:showRelativeToRect:preferredEdge:",
+      "sharingService:didFailToShareItems:error:",
+      "sharingService:didShareItems:",
+      "sharingService:sourceFrameOnScreenForShareItem:",
+      "sharingService:sourceWindowForShareItems:sharingContentScope:",
+      "sharingService:transitionImageForShareItem:contentRect:",
+      "sharingService:willShareItems:"
+    ],
+    "NSSharingServicePickerToolbarItemDelegate": [
+      "itemsForSharingServicePickerToolbarItem:"
+    ],
+    "NSSharingServicePickerTouchBarItemDelegate": [
+      "itemsForSharingServicePickerTouchBarItem:"
+    ],
+    "NSSoundDelegate": [
+      "sound:didFinishPlaying:"
+    ],
+    "NSSpeechRecognizerDelegate": [
+      "speechRecognizer:didRecognizeCommand:"
+    ],
+    "NSSpeechSynthesizerDelegate": [
+      "speechSynthesizer:didEncounterErrorAtIndex:ofString:message:",
+      "speechSynthesizer:didEncounterSyncMessage:",
+      "speechSynthesizer:didFinishSpeaking:",
+      "speechSynthesizer:willSpeakPhoneme:",
+      "speechSynthesizer:willSpeakWord:ofString:"
+    ],
+    "NSSplitViewController": [
+      "splitView:additionalEffectiveRectOfDividerAtIndex:",
+      "splitView:canCollapseSubview:",
+      "splitView:effectiveRect:forDrawnRect:ofDividerAtIndex:",
+      "splitView:shouldHideDividerAtIndex:",
+      "validateUserInterfaceItem:"
+    ],
+    "NSSplitViewDelegate": [
+      "splitView:additionalEffectiveRectOfDividerAtIndex:",
+      "splitView:canCollapseSubview:",
+      "splitView:constrainMaxCoordinate:ofSubviewAt:",
+      "splitView:constrainMinCoordinate:ofSubviewAt:",
+      "splitView:constrainSplitPosition:ofSubviewAt:",
+      "splitView:effectiveRect:forDrawnRect:ofDividerAtIndex:",
+      "splitView:resizeSubviewsWithOldSize:",
+      "splitView:shouldAdjustSizeOfSubview:",
+      "splitView:shouldHideDividerAtIndex:",
+      "splitViewDidResizeSubviews:",
+      "splitViewWillResizeSubviews:"
+    ],
+    "NSSpringLoadingDestination": [
+      "draggingEnded:",
+      "springLoadingActivated:draggingInfo:",
+      "springLoadingEntered:",
+      "springLoadingExited:",
+      "springLoadingHighlightChanged:",
+      "springLoadingUpdated:"
+    ],
+    "NSStackViewDelegate": [
+      "stackView:didReattachViews:",
+      "stackView:willDetachViews:"
+    ],
+    "NSTabViewController": [
+      "tabView:didSelectTabViewItem:",
+      "tabView:shouldSelectTabViewItem:",
+      "tabView:willSelectTabViewItem:",
+      "toolbar:itemForItemIdentifier:willBeInsertedIntoToolbar:",
+      "toolbarAllowedItemIdentifiers:",
+      "toolbarDefaultItemIdentifiers:",
+      "toolbarSelectableItemIdentifiers:"
+    ],
+    "NSTabViewDelegate": [
+      "tabView:didSelectTabViewItem:",
+      "tabView:shouldSelectTabViewItem:",
+      "tabView:willSelectTabViewItem:",
+      "tabViewDidChangeNumberOfTabViewItems:"
+    ],
+    "NSTableViewDataSource": [
+      "numberOfRowsInTableView:",
+      "tableView:acceptDrop:row:dropOperation:",
+      "tableView:draggingSession:endedAtPoint:operation:",
+      "tableView:draggingSession:willBeginAtPoint:forRowIndexes:",
+      "tableView:objectValueForTableColumn:row:",
+      "tableView:pasteboardWriterForRow:",
+      "tableView:setObjectValue:forTableColumn:row:",
+      "tableView:sortDescriptorsDidChange:",
+      "tableView:updateDraggingItemsForDrag:",
+      "tableView:validateDrop:proposedRow:proposedDropOperation:"
+    ],
+    "NSTableViewDelegate": [
+      "selectionShouldChangeInTableView:",
+      "tableView:dataCellForTableColumn:row:",
+      "tableView:didAddRowView:forRow:",
+      "tableView:didClickTableColumn:",
+      "tableView:didDragTableColumn:",
+      "tableView:didRemoveRowView:forRow:",
+      "tableView:heightOfRow:",
+      "tableView:isGroupRow:",
+      "tableView:mouseDownInHeaderOfTableColumn:",
+      "tableView:nextTypeSelectMatchFromRow:toRow:forString:",
+      "tableView:rowActionsForRow:edge:",
+      "tableView:rowViewForRow:",
+      "tableView:selectionIndexesForProposedSelection:",
+      "tableView:shouldEditTableColumn:row:",
+      "tableView:shouldReorderColumn:toColumn:",
+      "tableView:shouldSelectRow:",
+      "tableView:shouldSelectTableColumn:",
+      "tableView:shouldShowCellExpansionForTableColumn:row:",
+      "tableView:shouldTrackCell:forTableColumn:row:",
+      "tableView:shouldTypeSelectForEvent:withCurrentSearchString:",
+      "tableView:sizeToFitWidthOfColumn:",
+      "tableView:toolTipForCell:rect:tableColumn:row:mouseLocation:",
+      "tableView:typeSelectStringForTableColumn:row:",
+      "tableView:viewForTableColumn:row:",
+      "tableView:willDisplayCell:forTableColumn:row:",
+      "tableViewColumnDidMove:",
+      "tableViewColumnDidResize:",
+      "tableViewSelectionDidChange:",
+      "tableViewSelectionIsChanging:"
+    ],
+    "NSTextAttachmentCell": [
+      "drawWithFrame:inView:",
+      "drawWithFrame:inView:characterIndex:",
+      "drawWithFrame:inView:characterIndex:layoutManager:",
+      "highlight:withFrame:inView:",
+      "trackMouse:inRect:ofView:atCharacterIndex:untilMouseUp:",
+      "trackMouse:inRect:ofView:untilMouseUp:",
+      "wantsToTrackMouse",
+      "wantsToTrackMouseForEvent:inRect:ofView:atCharacterIndex:"
+    ],
+    "NSTextDelegate": [
+      "textDidBeginEditing:",
+      "textDidChange:",
+      "textDidEndEditing:",
+      "textShouldBeginEditing:",
+      "textShouldEndEditing:"
+    ],
+    "NSTextFieldDelegate": [
+      "textField:textView:candidates:forSelectedRange:",
+      "textField:textView:candidatesForSelectedRange:",
+      "textField:textView:shouldSelectCandidateAtIndex:"
+    ],
+    "NSTextViewDelegate": [
+      "textView:URLForContentsOfTextAttachment:atIndex:",
+      "textView:candidates:forSelectedRange:",
+      "textView:candidatesForSelectedRange:",
+      "textView:clickedOnCell:inRect:atIndex:",
+      "textView:clickedOnLink:atIndex:",
+      "textView:completions:forPartialWordRange:indexOfSelectedItem:",
+      "textView:didCheckTextInRange:types:options:results:orthography:wordCount:",
+      "textView:doCommandBySelector:",
+      "textView:doubleClickedOnCell:inRect:atIndex:",
+      "textView:draggedCell:inRect:event:atIndex:",
+      "textView:menu:forEvent:atIndex:",
+      "textView:shouldChangeTextInRange:replacementString:",
+      "textView:shouldChangeTextInRanges:replacementStrings:",
+      "textView:shouldChangeTypingAttributes:toAttributes:",
+      "textView:shouldSelectCandidateAtIndex:",
+      "textView:shouldSetSpellingState:range:",
+      "textView:shouldUpdateTouchBarItemIdentifiers:",
+      "textView:willChangeSelectionFromCharacterRange:toCharacterRange:",
+      "textView:willChangeSelectionFromCharacterRanges:toCharacterRanges:",
+      "textView:willCheckTextInRange:options:types:",
+      "textView:willDisplayToolTip:forCharacterAtIndex:",
+      "textView:willShowSharingServicePicker:forItems:",
+      "textView:writablePasteboardTypesForCell:atIndex:",
+      "textView:writeCell:atIndex:toPasteboard:type:",
+      "textView:writingToolsIgnoredRangesInEnclosingRange:",
+      "textViewDidChangeSelection:",
+      "textViewDidChangeTypingAttributes:",
+      "textViewWritingToolsDidEnd:",
+      "textViewWritingToolsWillBegin:",
+      "undoManagerForTextView:"
+    ],
+    "NSTokenFieldCellDelegate": [
+      "tokenFieldCell:completionsForSubstring:indexOfToken:indexOfSelectedItem:",
+      "tokenFieldCell:displayStringForRepresentedObject:",
+      "tokenFieldCell:editingStringForRepresentedObject:",
+      "tokenFieldCell:hasMenuForRepresentedObject:",
+      "tokenFieldCell:menuForRepresentedObject:",
+      "tokenFieldCell:readFromPasteboard:",
+      "tokenFieldCell:representedObjectForEditingString:",
+      "tokenFieldCell:shouldAddObjects:atIndex:",
+      "tokenFieldCell:styleForRepresentedObject:",
+      "tokenFieldCell:writeRepresentedObjects:toPasteboard:"
+    ],
+    "NSTokenFieldDelegate": [
+      "tokenField:completionsForSubstring:indexOfToken:indexOfSelectedItem:",
+      "tokenField:displayStringForRepresentedObject:",
+      "tokenField:editingStringForRepresentedObject:",
+      "tokenField:hasMenuForRepresentedObject:",
+      "tokenField:menuForRepresentedObject:",
+      "tokenField:readFromPasteboard:",
+      "tokenField:representedObjectForEditingString:",
+      "tokenField:shouldAddObjects:atIndex:",
+      "tokenField:styleForRepresentedObject:",
+      "tokenField:writeRepresentedObjects:toPasteboard:"
+    ],
+    "NSToolbarDelegate": [
+      "toolbar:itemForItemIdentifier:willBeInsertedIntoToolbar:",
+      "toolbar:itemIdentifier:canBeInsertedAtIndex:",
+      "toolbarAllowedItemIdentifiers:",
+      "toolbarDefaultItemIdentifiers:",
+      "toolbarDidRemoveItem:",
+      "toolbarImmovableItemIdentifiers:",
+      "toolbarSelectableItemIdentifiers:",
+      "toolbarWillAddItem:"
+    ],
+    "NSToolbarItemValidation": [
+      "validateToolbarItem:"
+    ],
+    "NSTouchBarDelegate": [
+      "touchBar:makeItemForIdentifier:"
+    ],
+    "NSTouchBarProvider": [
+      "touchBar"
+    ],
+    "NSUserActivityRestoring": [
+      "restoreUserActivityState:"
+    ],
+    "NSUserInterfaceValidations": [
+      "validateUserInterfaceItem:"
+    ],
+    "NSValidatedUserInterfaceItem": [
+      "action",
+      "tag"
+    ],
+    "NSViewController": [
+      "commitEditing",
+      "commitEditingWithDelegate:didCommitSelector:contextInfo:",
+      "discardEditing"
+    ],
+    "NSViewControllerPresentationAnimator": [
+      "animateDismissalOfViewController:fromViewController:",
+      "animatePresentationOfViewController:fromViewController:"
+    ],
+    "NSViewToolTipOwner": [
+      "view:stringForToolTip:point:userData:"
+    ],
+    "NSWindowDelegate": [
+      "customWindowsToEnterFullScreenForWindow:",
+      "customWindowsToEnterFullScreenForWindow:onScreen:",
+      "customWindowsToExitFullScreenForWindow:",
+      "previewRepresentableActivityItemsForWindow:",
+      "window:didDecodeRestorableState:",
+      "window:shouldDragDocumentWithEvent:from:withPasteboard:",
+      "window:shouldPopUpDocumentPathMenu:",
+      "window:startCustomAnimationToEnterFullScreenOnScreen:withDuration:",
+      "window:startCustomAnimationToEnterFullScreenWithDuration:",
+      "window:startCustomAnimationToExitFullScreenWithDuration:",
+      "window:willEncodeRestorableState:",
+      "window:willPositionSheet:usingRect:",
+      "window:willResizeForVersionBrowserWithMaxPreferredSize:maxAllowedSize:",
+      "window:willUseFullScreenContentSize:",
+      "window:willUseFullScreenPresentationOptions:",
+      "windowDidBecomeKey:",
+      "windowDidBecomeMain:",
+      "windowDidChangeBackingProperties:",
+      "windowDidChangeOcclusionState:",
+      "windowDidChangeScreen:",
+      "windowDidChangeScreenProfile:",
+      "windowDidDeminiaturize:",
+      "windowDidEndLiveResize:",
+      "windowDidEndSheet:",
+      "windowDidEnterFullScreen:",
+      "windowDidEnterVersionBrowser:",
+      "windowDidExitFullScreen:",
+      "windowDidExitVersionBrowser:",
+      "windowDidExpose:",
+      "windowDidFailToEnterFullScreen:",
+      "windowDidFailToExitFullScreen:",
+      "windowDidMiniaturize:",
+      "windowDidMove:",
+      "windowDidResignKey:",
+      "windowDidResignMain:",
+      "windowDidResize:",
+      "windowDidUpdate:",
+      "windowForSharingRequestFromWindow:",
+      "windowShouldClose:",
+      "windowShouldZoom:toFrame:",
+      "windowWillBeginSheet:",
+      "windowWillClose:",
+      "windowWillEnterFullScreen:",
+      "windowWillEnterVersionBrowser:",
+      "windowWillExitFullScreen:",
+      "windowWillExitVersionBrowser:",
+      "windowWillMiniaturize:",
+      "windowWillMove:",
+      "windowWillResize:toSize:",
+      "windowWillReturnFieldEditor:toObject:",
+      "windowWillReturnUndoManager:",
+      "windowWillStartLiveResize:",
+      "windowWillUseStandardFrame:defaultFrame:"
+    ],
+    "NSWindowRestoration": [
+      "+restoreWindowWithIdentifier:state:completionHandler:"
+    ]
+  },
+  "nonisolated_selectors": {
+    "NSAnimationDelegate": [
+      "animation:didReachProgressMark:",
+      "animation:valueForProgress:",
+      "animationDidEnd:",
+      "animationDidStop:",
+      "animationShouldStart:"
+    ],
+    "NSDocument": [
+      "accommodatePresentedItemDeletionWithCompletionHandler:",
+      "autosavedContentsFileURL",
+      "autosavingFileType",
+      "backupFileURL",
+      "continueAsynchronousWorkOnMainThreadUsingBlock:",
+      "draft",
+      "entireFileLoaded",
+      "fileAttributesToWriteToURL:ofType:forSaveOperation:originalContentsURL:error:",
+      "fileModificationDate",
+      "fileNameExtensionForType:saveOperation:",
+      "fileNameExtensionWasHiddenInLastRunSavePanel",
+      "fileType",
+      "fileTypeFromLastRunSavePanel",
+      "fileURL",
+      "keepBackupFile",
+      "observedPresentedItemUbiquityAttributes",
+      "performAsynchronousFileAccessUsingBlock:",
+      "performSynchronousFileAccessUsingBlock:",
+      "presentedItemDidChange",
+      "presentedItemDidChangeUbiquityAttributes:",
+      "presentedItemDidGainVersion:",
+      "presentedItemDidLoseVersion:",
+      "presentedItemDidMoveToURL:",
+      "presentedItemDidResolveConflictVersion:",
+      "presentedItemURL",
+      "readFromData:ofType:error:",
+      "readFromFileWrapper:ofType:error:",
+      "readFromURL:ofType:error:",
+      "relinquishPresentedItemToReader:",
+      "relinquishPresentedItemToWriter:",
+      "savePresentedItemChangesWithCompletionHandler:",
+      "unblockUserInteraction",
+      "writableTypesForSaveOperation:",
+      "writeSafelyToURL:ofType:forSaveOperation:error:",
+      "writeToURL:ofType:error:",
+      "writeToURL:ofType:forSaveOperation:originalContentsURL:error:"
+    ],
+    "NSFilePromiseProviderDelegate": [
+      "filePromiseProvider:writePromiseToURL:completionHandler:"
+    ],
+    "NSImageDelegate": [
+      "imageDidNotDraw:inRect:"
+    ],
+    "NSPasteboardItemDataProvider": [
+      "pasteboard:item:provideDataForType:",
+      "pasteboardFinishedWithDataProvider:"
+    ],
+    "NSPersistentDocument": [
+      "readFromURL:ofType:error:",
+      "writeToURL:ofType:forSaveOperation:originalContentsURL:error:"
+    ],
+    "NSTextAttachmentCell": [
+      "attachment",
+      "cellBaselineOffset",
+      "cellFrameForTextContainer:proposedLineFragment:glyphPosition:characterIndex:",
+      "cellSize"
+    ],
+    "NSViewLayerContentScaleDelegate": [
+      "layer:shouldInheritContentsScale:fromWindow:"
+    ]
+  }
+}

@@ -47,31 +47,45 @@ func achievementViewControllerAdopt(id objc.ID) *AchievementViewController {
 
 // NewAchievementViewController creates a new AchievementViewController.
 func NewAchievementViewController() *AchievementViewController {
-	_id := objc.Send[objc.ID](objc.ID(_class("GKAchievementViewController")), objc.RegisterName("new"))
-	return achievementViewControllerAdopt(_id)
+	var _mainthread0 *AchievementViewController
+	purego.Main(func() {
+		_mainthread0 = func() *AchievementViewController {
+			_id := objc.Send[objc.ID](objc.ID(_class("GKAchievementViewController")), objc.RegisterName("new"))
+			return achievementViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithViewState sets the view state.
 func (avc *AchievementViewController) WithViewState(viewState GameCenterViewControllerState) *AchievementViewController {
-	objc.Send[objc.ID](objref.IDOf(avc), objc.RegisterName("setViewState:"), viewState)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(avc), objc.RegisterName("setViewState:"), viewState)
+	})
 	return avc
 }
 
 // WithLeaderboardTimeScope sets the leaderboard time scope.
 func (avc *AchievementViewController) WithLeaderboardTimeScope(leaderboardTimeScope LeaderboardTimeScope) *AchievementViewController {
-	objc.Send[objc.ID](objref.IDOf(avc), objc.RegisterName("setLeaderboardTimeScope:"), leaderboardTimeScope)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(avc), objc.RegisterName("setLeaderboardTimeScope:"), leaderboardTimeScope)
+	})
 	return avc
 }
 
 // WithLeaderboardIdentifier sets the leaderboard identifier.
 func (avc *AchievementViewController) WithLeaderboardIdentifier(leaderboardIdentifier string) *AchievementViewController {
-	objc.Send[objc.ID](objref.IDOf(avc), objc.RegisterName("setLeaderboardIdentifier:"), purego.NSString(leaderboardIdentifier))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(avc), objc.RegisterName("setLeaderboardIdentifier:"), purego.NSString(leaderboardIdentifier))
+	})
 	return avc
 }
 
 // WithLeaderboardCategory sets the leaderboard category.
 func (avc *AchievementViewController) WithLeaderboardCategory(leaderboardCategory string) *AchievementViewController {
-	objc.Send[objc.ID](objref.IDOf(avc), objc.RegisterName("setLeaderboardCategory:"), purego.NSString(leaderboardCategory))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(avc), objc.RegisterName("setLeaderboardCategory:"), purego.NSString(leaderboardCategory))
+	})
 	return avc
 }
 

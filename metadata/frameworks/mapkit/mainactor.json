@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "framework": "MapKit",
+  "main_actor_protocols": [
+    "MKMapItemDetailViewControllerDelegate",
+    "MKMapViewDelegate"
+  ]
+}

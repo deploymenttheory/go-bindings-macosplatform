@@ -68,74 +68,123 @@ func (cls *CollectionLayoutSection) String() string {
 
 // NewCollectionLayoutSection creates a new CollectionLayoutSection.
 func NewCollectionLayoutSection() *CollectionLayoutSection {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutSection")), objc.RegisterName("new"))
-	return collectionLayoutSectionAdopt(_id)
+	var _mainthread0 *CollectionLayoutSection
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionLayoutSection {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutSection")), objc.RegisterName("new"))
+			return collectionLayoutSectionAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithInterGroupSpacing sets the amount of space between the groups in the section.
 func (cls *CollectionLayoutSection) WithInterGroupSpacing(interGroupSpacing float64) *CollectionLayoutSection {
-	objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("setInterGroupSpacing:"), interGroupSpacing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("setInterGroupSpacing:"), interGroupSpacing)
+	})
 	return cls
 }
 
 // WithOrthogonalScrollingBehavior sets the section’s scrolling behavior in relation to the main layout axis.
 func (cls *CollectionLayoutSection) WithOrthogonalScrollingBehavior(orthogonalScrollingBehavior CollectionLayoutSectionOrthogonalScrollingBehavior) *CollectionLayoutSection {
-	objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("setOrthogonalScrollingBehavior:"), orthogonalScrollingBehavior)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("setOrthogonalScrollingBehavior:"), orthogonalScrollingBehavior)
+	})
 	return cls
 }
 
 // WithBoundarySupplementaryItems sets an array of the supplementary items that are associated with the boundary edges of the section, such as headers and footers.
 func (cls *CollectionLayoutSection) WithBoundarySupplementaryItems(items ...*CollectionLayoutBoundarySupplementaryItem) *CollectionLayoutSection {
 	_arr := purego.SliceToNSArray(items, func(_v *CollectionLayoutBoundarySupplementaryItem) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("setBoundarySupplementaryItems:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("setBoundarySupplementaryItems:"), _arr)
+	})
 	return cls
 }
 
 // WithSupplementariesFollowContentInsets sets a Boolean value that indicates whether the section’s supplementary items follow the specified content insets for the section.
 func (cls *CollectionLayoutSection) WithSupplementariesFollowContentInsets(supplementariesFollowContentInsets bool) *CollectionLayoutSection {
-	objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("setSupplementariesFollowContentInsets:"), supplementariesFollowContentInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("setSupplementariesFollowContentInsets:"), supplementariesFollowContentInsets)
+	})
 	return cls
 }
 
 // WithDecorationItems sets an array of the decoration items that are anchored to the section, such as background decoration views.
 func (cls *CollectionLayoutSection) WithDecorationItems(items ...*CollectionLayoutDecorationItem) *CollectionLayoutSection {
 	_arr := purego.SliceToNSArray(items, func(_v *CollectionLayoutDecorationItem) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("setDecorationItems:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("setDecorationItems:"), _arr)
+	})
 	return cls
 }
 
 // InterGroupSpacing returns the inter group spacing.
 func (cls *CollectionLayoutSection) InterGroupSpacing() float64 {
-	_r := objc.Send[float64](objref.IDOf(cls), objc.RegisterName("interGroupSpacing"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(cls), objc.RegisterName("interGroupSpacing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // OrthogonalScrollingBehavior returns the orthogonal scrolling behavior.
 func (cls *CollectionLayoutSection) OrthogonalScrollingBehavior() CollectionLayoutSectionOrthogonalScrollingBehavior {
-	_r := objc.Send[CollectionLayoutSectionOrthogonalScrollingBehavior](objref.IDOf(cls), objc.RegisterName("orthogonalScrollingBehavior"))
-	return _r
+	var _mainthread0 CollectionLayoutSectionOrthogonalScrollingBehavior
+	purego.Main(func() {
+		_mainthread0 = func() CollectionLayoutSectionOrthogonalScrollingBehavior {
+			_r := objc.Send[CollectionLayoutSectionOrthogonalScrollingBehavior](objref.IDOf(cls), objc.RegisterName("orthogonalScrollingBehavior"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BoundarySupplementaryItems returns the boundary supplementary items.
 //
 // BoundarySupplementaryItems returns the collection as a Go slice.
 func (cls *CollectionLayoutSection) BoundarySupplementaryItems() []*CollectionLayoutBoundarySupplementaryItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("boundarySupplementaryItems"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CollectionLayoutBoundarySupplementaryItem {
-		return CollectionLayoutBoundarySupplementaryItemFromID(_id)
+	var _mainthread0 []*CollectionLayoutBoundarySupplementaryItem
+	purego.Main(func() {
+		_mainthread0 = func() []*CollectionLayoutBoundarySupplementaryItem {
+			_arr := objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("boundarySupplementaryItems"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CollectionLayoutBoundarySupplementaryItem {
+				return CollectionLayoutBoundarySupplementaryItemFromID(_id)
+			})
+		}()
 	})
+	return _mainthread0
 }
 
 // SupplementariesFollowContentInsets wraps the corresponding Objective-C method.
 func (cls *CollectionLayoutSection) SupplementariesFollowContentInsets() bool {
-	_r := objc.Send[bool](objref.IDOf(cls), objc.RegisterName("supplementariesFollowContentInsets"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cls), objc.RegisterName("supplementariesFollowContentInsets"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DecorationItems returns the decoration items.
 //
 // DecorationItems returns the collection as a Go slice.
 func (cls *CollectionLayoutSection) DecorationItems() []*CollectionLayoutDecorationItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("decorationItems"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CollectionLayoutDecorationItem { return CollectionLayoutDecorationItemFromID(_id) })
+	var _mainthread0 []*CollectionLayoutDecorationItem
+	purego.Main(func() {
+		_mainthread0 = func() []*CollectionLayoutDecorationItem {
+			_arr := objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("decorationItems"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CollectionLayoutDecorationItem { return CollectionLayoutDecorationItemFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }

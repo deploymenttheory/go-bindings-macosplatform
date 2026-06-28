@@ -50,698 +50,1086 @@ func textAdopt(id objc.ID) *Text {
 
 // NewTextWithFrame creates a new Text.
 func NewTextWithFrame(frameRect corefoundation.CGRect) *Text {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSText")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:"), frameRect)
-	return textAdopt(_id)
+	var _mainthread0 *Text
+	purego.Main(func() {
+		_mainthread0 = func() *Text {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSText")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:"), frameRect)
+			return textAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewTextWithCoder creates a new Text.
 func NewTextWithCoder(coder obj.Object) *Text {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSText")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
-	return textAdopt(_id)
+	var _mainthread0 *Text
+	purego.Main(func() {
+		_mainthread0 = func() *Text {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSText")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+			return textAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithString sets the characters of the receiver’s text.
 func (t *Text) WithString(string_ string) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setString:"), purego.NSString(string_))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setString:"), purego.NSString(string_))
+	})
 	return t
 }
 
 // WithEditable sets a Boolean that controls whether the receiver allows the user to edit its text.
 func (t *Text) WithEditable(editable bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setEditable:"), editable)
+	})
 	return t
 }
 
 // WithSelectable sets a Boolean that controls whether the receiver allows the user to select its text.
 func (t *Text) WithSelectable(selectable bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setSelectable:"), selectable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setSelectable:"), selectable)
+	})
 	return t
 }
 
 // WithRichText sets a Boolean that controls whether the receiver allows the user to apply attributes to specific ranges of the text.
 func (t *Text) WithRichText(richText bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setRichText:"), richText)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setRichText:"), richText)
+	})
 	return t
 }
 
 // WithImportsGraphics sets a Boolean that controls whether the receiver allows the user to import files by dragging.
 func (t *Text) WithImportsGraphics(importsGraphics bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	})
 	return t
 }
 
 // WithFieldEditor sets a Boolean that controls whether the receiver interprets Tab, Shift-Tab, and Return (Enter) as cues to end editing and possibly to change the first responder.
 func (t *Text) WithFieldEditor(fieldEditor bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFieldEditor:"), fieldEditor)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFieldEditor:"), fieldEditor)
+	})
 	return t
 }
 
 // WithUsesFontPanel sets a Boolean that controls whether the receiver uses the Font panel and Font menu.
 func (t *Text) WithUsesFontPanel(usesFontPanel bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setUsesFontPanel:"), usesFontPanel)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setUsesFontPanel:"), usesFontPanel)
+	})
 	return t
 }
 
 // WithDrawsBackground sets a Boolean that controls whether the receiver draws its background.
 func (t *Text) WithDrawsBackground(drawsBackground bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	})
 	return t
 }
 
 // WithBackgroundColor sets the receiver’s background color to a given color.
 func (t *Text) WithBackgroundColor(backgroundColor *Color) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	})
 	return t
 }
 
 // WithSelectedRange sets the receiver’s characters within aRange.
 func (t *Text) WithSelectedRange(selectedRange foundation.NSRange) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setSelectedRange:"), selectedRange)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setSelectedRange:"), selectedRange)
+	})
 	return t
 }
 
 // WithFont sets the font of all the receiver’s text.
 func (t *Text) WithFont(font *Font) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return t
 }
 
 // WithTextColor sets the text color of all characters in the receiver.
 func (t *Text) WithTextColor(textColor *Color) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
+	})
 	return t
 }
 
 // WithAlignment sets the alignment of all the receiver’s text.
 func (t *Text) WithAlignment(alignment TextAlignment) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return t
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (t *Text) WithBaseWritingDirection(baseWritingDirection WritingDirection) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return t
 }
 
 // WithMaxSize sets the receiver’s maximum size.
 func (t *Text) WithMaxSize(maxSize corefoundation.CGSize) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setMaxSize:"), maxSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setMaxSize:"), maxSize)
+	})
 	return t
 }
 
 // WithMinSize sets the receiver’s minimum size.
 func (t *Text) WithMinSize(minSize corefoundation.CGSize) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setMinSize:"), minSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setMinSize:"), minSize)
+	})
 	return t
 }
 
 // WithHorizontallyResizable sets a Boolean that controls whether the receiver changes its width to fit the width of its text.
 func (t *Text) WithHorizontallyResizable(horizontallyResizable bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setHorizontallyResizable:"), horizontallyResizable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setHorizontallyResizable:"), horizontallyResizable)
+	})
 	return t
 }
 
 // WithVerticallyResizable sets a Boolean that controls whether the receiver changes its height to fit the height of its text.
 func (t *Text) WithVerticallyResizable(verticallyResizable bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setVerticallyResizable:"), verticallyResizable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setVerticallyResizable:"), verticallyResizable)
+	})
 	return t
 }
 
 // WithSubviews sets the subviews.
 func (t *Text) WithSubviews(items ...ViewProvider) *Text {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return t
 }
 
 // WithHidden sets the hidden.
 func (t *Text) WithHidden(hidden bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setHidden:"), hidden)
+	})
 	return t
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (t *Text) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return t
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (t *Text) WithAutoresizesSubviews(autoresizesSubviews bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return t
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (t *Text) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return t
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (t *Text) WithFrame(frame corefoundation.CGRect) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFrame:"), frame)
+	})
 	return t
 }
 
 // WithFrameRotation sets the frame rotation.
 func (t *Text) WithFrameRotation(frameRotation float64) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return t
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (t *Text) WithFrameCenterRotation(frameCenterRotation float64) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return t
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (t *Text) WithBoundsRotation(boundsRotation float64) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return t
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (t *Text) WithBounds(bounds corefoundation.CGRect) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setBounds:"), bounds)
+	})
 	return t
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (t *Text) WithCanDrawConcurrently(canDrawConcurrently bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return t
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (t *Text) WithNeedsDisplay(needsDisplay bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return t
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (t *Text) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return t
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (t *Text) WithWantsRestingTouches(wantsRestingTouches bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return t
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (t *Text) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return t
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (t *Text) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return t
 }
 
 // WithWantsLayer sets the wants layer.
 func (t *Text) WithWantsLayer(wantsLayer bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return t
 }
 
 // WithLayer sets the layer.
 func (t *Text) WithLayer(layer obj.Object) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return t
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (t *Text) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return t
 }
 
 // WithNeedsLayout sets the needs layout.
 func (t *Text) WithNeedsLayout(needsLayout bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return t
 }
 
 // WithAlphaValue sets the alpha value.
 func (t *Text) WithAlphaValue(alphaValue float64) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return t
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (t *Text) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return t
 }
 
 // WithBackgroundFilters sets the background filters.
 func (t *Text) WithBackgroundFilters(items ...obj.Object) *Text {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return t
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (t *Text) WithCompositingFilter(compositingFilter obj.Object) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return t
 }
 
 // WithContentFilters sets the content filters.
 func (t *Text) WithContentFilters(items ...obj.Object) *Text {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return t
 }
 
 // WithShadow sets the shadow.
 func (t *Text) WithShadow(shadow *Shadow) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return t
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (t *Text) WithClipsToBounds(clipsToBounds bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return t
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (t *Text) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return t
 }
 
 // WithToolTip sets the tool tip.
 func (t *Text) WithToolTip(toolTip string) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return t
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (t *Text) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return t
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (t *Text) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return t
 }
 
 // WithNextKeyView sets the next key view.
 func (t *Text) WithNextKeyView(nextKeyView ViewProvider) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return t
 }
 
 // WithFocusRingType sets the focus ring type.
 func (t *Text) WithFocusRingType(focusRingType FocusRingType) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return t
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (t *Text) WithGestureRecognizers(items ...GestureRecognizerProvider) *Text {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return t
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (t *Text) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return t
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (t *Text) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return t
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (t *Text) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return t
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (t *Text) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return t
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (t *Text) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return t
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (t *Text) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return t
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (t *Text) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return t
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (t *Text) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return t
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (t *Text) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return t
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (t *Text) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return t
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (t *Text) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return t
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (t *Text) WithNextResponder(nextResponder ResponderProvider) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return t
 }
 
 // WithMenu sets returns the responder’s menu.
 func (t *Text) WithMenu(menu *Menu) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return t
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (t *Text) WithUserActivity(userActivity obj.Object) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return t
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (t *Text) WithTouchBar(touchBar *TouchBar) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return t
 }
 
 // ReplaceCharactersInRangeWithString replaces the characters in the given range with those in the given string.
 func (t *Text) ReplaceCharactersInRangeWithString(range_ foundation.NSRange, string_ string) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("replaceCharactersInRange:withString:"), range_, purego.NSString(string_))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("replaceCharactersInRange:withString:"), range_, purego.NSString(string_))
+	})
+
 }
 
 // ReplaceCharactersInRangeWithRTF replaces the characters in the given range with RTF text interpreted from the given RTF data.
 func (t *Text) ReplaceCharactersInRangeWithRTF(range_ foundation.NSRange, rtfData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("replaceCharactersInRange:withRTF:"), range_, objref.IDOf(rtfData))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("replaceCharactersInRange:withRTF:"), range_, objref.IDOf(rtfData))
+	})
+
 }
 
 // ReplaceCharactersInRangeWithRTFD replaces the characters in the given range with RTFD text interpreted from the given RTFD data.
 func (t *Text) ReplaceCharactersInRangeWithRTFD(range_ foundation.NSRange, rtfdData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("replaceCharactersInRange:withRTFD:"), range_, objref.IDOf(rtfdData))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("replaceCharactersInRange:withRTFD:"), range_, objref.IDOf(rtfdData))
+	})
+
 }
 
 // RTFFromRange returns an NSData object that contains an RTF stream corresponding to the characters and attributes within aRange, omitting any attachment characters and attributes.
 func (t *Text) RTFFromRange(range_ foundation.NSRange) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("RTFFromRange:"), range_)
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("RTFFromRange:"), range_)
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RTFDFromRange returns an NSData object that contains an RTFD stream corresponding to the characters and attributes within aRange.
 func (t *Text) RTFDFromRange(range_ foundation.NSRange) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("RTFDFromRange:"), range_)
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("RTFDFromRange:"), range_)
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // WriteRTFDToFileAtomically writes the receiver’s text as RTF with attachments to a file or directory at path.
 func (t *Text) WriteRTFDToFileAtomically(path string, flag bool) bool {
-	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("writeRTFDToFile:atomically:"), purego.NSString(path), flag)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("writeRTFDToFile:atomically:"), purego.NSString(path), flag)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ReadRTFDFromFile attempts to read the RTFD file at the specified path.
 func (t *Text) ReadRTFDFromFile(path string) bool {
-	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("readRTFDFromFile:"), purego.NSString(path))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("readRTFDFromFile:"), purego.NSString(path))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ScrollRangeToVisible scrolls the receiver in its enclosing scroll view so the first characters of aRange are visible.
 func (t *Text) ScrollRangeToVisible(range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("scrollRangeToVisible:"), range_)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("scrollRangeToVisible:"), range_)
+	})
+
 }
 
 // SetTextColorRange sets the text color of characters within the specified range to the specified color.
 func (t *Text) SetTextColorRange(color *Color, range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTextColor:range:"), objref.IDOf(color), range_)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTextColor:range:"), objref.IDOf(color), range_)
+	})
+
 }
 
 // SetFontRange sets the font of characters within aRange to aFont.
 func (t *Text) SetFontRange(font *Font, range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFont:range:"), objref.IDOf(font), range_)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFont:range:"), objref.IDOf(font), range_)
+	})
+
 }
 
 // SizeToFit resizes the receiver to fit its text.
 func (t *Text) SizeToFit() {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("sizeToFit"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("sizeToFit"))
+	})
+
 }
 
 // Copy this action method copies the selected text onto the general pasteboard, in as many formats as the receiver supports.
 func (t *Text) Copy(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("copy:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("copy:"), objref.IDOf(sender))
+	})
+
 }
 
 // CopyFont this action method copies the font information for the first character of the selection (or for the insertion point) onto the font pasteboard, as NSFontPboardType.
 func (t *Text) CopyFont(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("copyFont:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("copyFont:"), objref.IDOf(sender))
+	})
+
 }
 
 // CopyRuler this action method copies the paragraph style information for first selected paragraph onto the ruler pasteboard, as NSRulerPboardType, and expands the selection to paragraph boundaries.
 func (t *Text) CopyRuler(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("copyRuler:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("copyRuler:"), objref.IDOf(sender))
+	})
+
 }
 
 // Cut this action method deletes the selected text and places it onto the general pasteboard, in as many formats as the receiver supports.
 func (t *Text) Cut(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("cut:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("cut:"), objref.IDOf(sender))
+	})
+
 }
 
 // Delete this action method deletes the selected text.
 func (t *Text) Delete(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("delete:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("delete:"), objref.IDOf(sender))
+	})
+
 }
 
 // Paste this action method pastes text from the general pasteboard at the insertion point or over the selection.
 func (t *Text) Paste(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("paste:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("paste:"), objref.IDOf(sender))
+	})
+
 }
 
 // PasteFont this action method pastes font information from the font pasteboard onto the selected text or insertion point of a rich text object, or over all text of a plain text object.
 func (t *Text) PasteFont(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("pasteFont:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("pasteFont:"), objref.IDOf(sender))
+	})
+
 }
 
 // PasteRuler this action method pastes paragraph style information from the ruler pasteboard onto the selected paragraphs of a rich text object.
 func (t *Text) PasteRuler(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("pasteRuler:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("pasteRuler:"), objref.IDOf(sender))
+	})
+
 }
 
 // SelectAll this action method selects all of the receiver’s text.
 func (t *Text) SelectAll(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("selectAll:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("selectAll:"), objref.IDOf(sender))
+	})
+
 }
 
 // ChangeFont this action method changes the font of the selection for a rich text object, or of all text for a plain text object.
 func (t *Text) ChangeFont(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("changeFont:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("changeFont:"), objref.IDOf(sender))
+	})
+
 }
 
 // AlignLeft this action method applies left alignment to selected paragraphs (or all text if the receiver is a plain text object).
 func (t *Text) AlignLeft(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("alignLeft:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("alignLeft:"), objref.IDOf(sender))
+	})
+
 }
 
 // AlignRight this action method applies right alignment to selected paragraphs (or all text if the receiver is a plain text object).
 func (t *Text) AlignRight(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("alignRight:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("alignRight:"), objref.IDOf(sender))
+	})
+
 }
 
 // AlignCenter this action method applies center alignment to selected paragraphs (or all text if the receiver is a plain text object).
 func (t *Text) AlignCenter(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("alignCenter:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("alignCenter:"), objref.IDOf(sender))
+	})
+
 }
 
 // Subscript this action method applies a subscript attribute to selected text (or all text if the receiver is a plain text object), lowering its baseline offset by a predefined amount.
 func (t *Text) Subscript(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("subscript:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("subscript:"), objref.IDOf(sender))
+	})
+
 }
 
 // Superscript this action method applies a superscript attribute to selected text (or all text if the receiver is a plain text object), raising its baseline offset by a predefined amount.
 func (t *Text) Superscript(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("superscript:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("superscript:"), objref.IDOf(sender))
+	})
+
 }
 
 // Underline adds the underline attribute to the selected text attributes if absent; removes the attribute if present.
 func (t *Text) Underline(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("underline:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("underline:"), objref.IDOf(sender))
+	})
+
 }
 
 // Unscript this action method removes any superscripting or subscripting from selected text (or all text if the receiver is a plain text object).
 func (t *Text) Unscript(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("unscript:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("unscript:"), objref.IDOf(sender))
+	})
+
 }
 
 // ShowGuessPanel this action method opens the Spelling panel, allowing the user to make a correction during spell checking.
 func (t *Text) ShowGuessPanel(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("showGuessPanel:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("showGuessPanel:"), objref.IDOf(sender))
+	})
+
 }
 
 // CheckSpelling this action method searches for a misspelled word in the receiver’s text.
 func (t *Text) CheckSpelling(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("checkSpelling:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("checkSpelling:"), objref.IDOf(sender))
+	})
+
 }
 
 // ToggleRuler this action method shows or hides the ruler, if the receiver is enclosed in a scroll view.
 func (t *Text) ToggleRuler(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("toggleRuler:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("toggleRuler:"), objref.IDOf(sender))
+	})
+
 }
 
 // String returns the string.
 func (t *Text) String() string {
-	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("string"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("string"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsEditable reports whether the object is editable.
 func (t *Text) IsEditable() bool {
-	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isEditable"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isEditable"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsSelectable reports whether the object is selectable.
 func (t *Text) IsSelectable() bool {
-	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isSelectable"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isSelectable"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsRichText reports whether the object is rich text.
 func (t *Text) IsRichText() bool {
-	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isRichText"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isRichText"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ImportsGraphics wraps the corresponding Objective-C method.
 func (t *Text) ImportsGraphics() bool {
-	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("importsGraphics"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("importsGraphics"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsFieldEditor reports whether the object is field editor.
 func (t *Text) IsFieldEditor() bool {
-	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isFieldEditor"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isFieldEditor"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UsesFontPanel wraps the corresponding Objective-C method.
 func (t *Text) UsesFontPanel() bool {
-	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("usesFontPanel"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("usesFontPanel"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DrawsBackground wraps the corresponding Objective-C method.
 func (t *Text) DrawsBackground() bool {
-	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("drawsBackground"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("drawsBackground"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BackgroundColor returns the background color.
 func (t *Text) BackgroundColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("backgroundColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("backgroundColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsRulerVisible reports whether the object is ruler visible.
 func (t *Text) IsRulerVisible() bool {
-	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isRulerVisible"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isRulerVisible"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SelectedRange returns the selected range.
 func (t *Text) SelectedRange() foundation.NSRange {
-	_r := objc.Send[foundation.NSRange](objref.IDOf(t), objc.RegisterName("selectedRange"))
-	return _r
+	var _mainthread0 foundation.NSRange
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSRange {
+			_r := objc.Send[foundation.NSRange](objref.IDOf(t), objc.RegisterName("selectedRange"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Font returns the font.
 func (t *Text) Font() *Font {
-	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("font"))
-	return FontFromID(_r)
+	var _mainthread0 *Font
+	purego.Main(func() {
+		_mainthread0 = func() *Font {
+			_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("font"))
+			return FontFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TextColor returns the text color.
 func (t *Text) TextColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("textColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("textColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Alignment returns the alignment.
 func (t *Text) Alignment() TextAlignment {
-	_r := objc.Send[TextAlignment](objref.IDOf(t), objc.RegisterName("alignment"))
-	return _r
+	var _mainthread0 TextAlignment
+	purego.Main(func() {
+		_mainthread0 = func() TextAlignment {
+			_r := objc.Send[TextAlignment](objref.IDOf(t), objc.RegisterName("alignment"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BaseWritingDirection returns the base writing direction.
 func (t *Text) BaseWritingDirection() WritingDirection {
-	_r := objc.Send[WritingDirection](objref.IDOf(t), objc.RegisterName("baseWritingDirection"))
-	return _r
+	var _mainthread0 WritingDirection
+	purego.Main(func() {
+		_mainthread0 = func() WritingDirection {
+			_r := objc.Send[WritingDirection](objref.IDOf(t), objc.RegisterName("baseWritingDirection"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MaxSize returns the max size.
 func (t *Text) MaxSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(t), objc.RegisterName("maxSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(t), objc.RegisterName("maxSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MinSize returns the min size.
 func (t *Text) MinSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(t), objc.RegisterName("minSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(t), objc.RegisterName("minSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsHorizontallyResizable reports whether the object is horizontally resizable.
 func (t *Text) IsHorizontallyResizable() bool {
-	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isHorizontallyResizable"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isHorizontallyResizable"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsVerticallyResizable reports whether the object is vertically resizable.
 func (t *Text) IsVerticallyResizable() bool {
-	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isVerticallyResizable"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isVerticallyResizable"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // isText marks Text — and, by embedding promotion, its

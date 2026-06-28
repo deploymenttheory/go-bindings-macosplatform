@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "framework": "SpriteKit",
+  "main_actor_classes": [
+    "SKNode"
+  ]
+}

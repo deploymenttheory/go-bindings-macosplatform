@@ -49,225 +49,329 @@ func effectNodeAdopt(id objc.ID) *EffectNode {
 
 // WithFilter sets the Core Image filter to apply.
 func (en *EffectNode) WithFilter(filter obj.Object) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setFilter:"), objref.IDOf(filter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setFilter:"), objref.IDOf(filter))
+	})
 	return en
 }
 
 // WithShouldCenterFilter sets a Boolean value that determines whether the effect node automatically sets the filter’s image center.
 func (en *EffectNode) WithShouldCenterFilter(shouldCenterFilter bool) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setShouldCenterFilter:"), shouldCenterFilter)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setShouldCenterFilter:"), shouldCenterFilter)
+	})
 	return en
 }
 
 // WithShouldEnableEffects sets a Boolean value that determines whether the effect node applies the filter to its children as they are drawn.
 func (en *EffectNode) WithShouldEnableEffects(shouldEnableEffects bool) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setShouldEnableEffects:"), shouldEnableEffects)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setShouldEnableEffects:"), shouldEnableEffects)
+	})
 	return en
 }
 
 // WithShouldRasterize sets a Boolean value that indicates whether the results of rendering the child nodes should be cached.
 func (en *EffectNode) WithShouldRasterize(shouldRasterize bool) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
+	})
 	return en
 }
 
 // WithBlendMode sets the blend mode used to draw the node’s contents into its parent’s framebuffer.
 func (en *EffectNode) WithBlendMode(blendMode BlendMode) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setBlendMode:"), blendMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setBlendMode:"), blendMode)
+	})
 	return en
 }
 
 // WithShader sets a custom shader that is called when the effect node is blended into the parent’s framebuffer.
 func (en *EffectNode) WithShader(shader *Shader) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setShader:"), objref.IDOf(shader))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setShader:"), objref.IDOf(shader))
+	})
 	return en
 }
 
 // WithPosition sets the position of the node in its parent’s coordinate system.
 func (en *EffectNode) WithPosition(position corefoundation.CGPoint) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setPosition:"), position)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setPosition:"), position)
+	})
 	return en
 }
 
 // WithZPosition sets the height of the node relative to its parent.
 func (en *EffectNode) WithZPosition(zPosition float64) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setZPosition:"), zPosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setZPosition:"), zPosition)
+	})
 	return en
 }
 
 // WithZRotation sets the Euler rotation about the z axis (in radians).
 func (en *EffectNode) WithZRotation(zRotation float64) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setZRotation:"), zRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setZRotation:"), zRotation)
+	})
 	return en
 }
 
 // WithXScale sets a scaling factor that multiplies the width of a node and its children.
 func (en *EffectNode) WithXScale(xScale float64) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setXScale:"), xScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setXScale:"), xScale)
+	})
 	return en
 }
 
 // WithYScale sets a scaling factor that multiplies the height of a node and its children.
 func (en *EffectNode) WithYScale(yScale float64) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setYScale:"), yScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setYScale:"), yScale)
+	})
 	return en
 }
 
 // WithSpeed sets a speed modifier applied to all actions executed by a node and its descendants.
 func (en *EffectNode) WithSpeed(speed float64) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setSpeed:"), speed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setSpeed:"), speed)
+	})
 	return en
 }
 
 // WithAlpha sets the transparency value applied to the node’s contents.
 func (en *EffectNode) WithAlpha(alpha float64) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAlpha:"), alpha)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAlpha:"), alpha)
+	})
 	return en
 }
 
 // WithPaused sets a Boolean value that determines whether actions on the node and its descendants are processed.
 func (en *EffectNode) WithPaused(paused bool) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setPaused:"), paused)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setPaused:"), paused)
+	})
 	return en
 }
 
 // WithHidden sets a Boolean value that determines whether a node and its descendants are rendered.
 func (en *EffectNode) WithHidden(hidden bool) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setHidden:"), hidden)
+	})
 	return en
 }
 
 // WithUserInteractionEnabled sets a Boolean value that indicates whether the node receives touch events.
 func (en *EffectNode) WithUserInteractionEnabled(userInteractionEnabled bool) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	})
 	return en
 }
 
 // WithName sets the node’s assignable name.
 func (en *EffectNode) WithName(name string) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setName:"), purego.NSString(name))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setName:"), purego.NSString(name))
+	})
 	return en
 }
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (en *EffectNode) WithPhysicsBody(physicsBody *PhysicsBody) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	})
 	return en
 }
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (en *EffectNode) WithUserData(userData obj.Object) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	})
 	return en
 }
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (en *EffectNode) WithReachConstraints(reachConstraints *ReachConstraints) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	})
 	return en
 }
 
 // WithConstraints sets a list of constraints to apply to the node.
 func (en *EffectNode) WithConstraints(items ...*Constraint) *EffectNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setConstraints:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setConstraints:"), _arr)
+	})
 	return en
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
 func (en *EffectNode) WithAttributeValues(attributeValues obj.Object) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	})
 	return en
 }
 
 // WithAccessibilityElement sets a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (en *EffectNode) WithAccessibilityElement(accessibilityElement bool) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	})
 	return en
 }
 
 // WithAccessibilityRole sets a string value describing the user interface element type; for example, a button.
 func (en *EffectNode) WithAccessibilityRole(accessibilityRole string) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	})
 	return en
 }
 
 // WithAccessibilityRoleDescription sets a string value describing the user interface element name and type; for example, the Buy button.
 func (en *EffectNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	})
 	return en
 }
 
 // WithAccessibilitySubrole sets a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (en *EffectNode) WithAccessibilitySubrole(accessibilitySubrole string) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	})
 	return en
 }
 
 // WithAccessibilityFrame sets the size of this user interface element, in screen points.
 func (en *EffectNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	})
 	return en
 }
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (en *EffectNode) WithAccessibilityParent(accessibilityParent obj.Object) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	})
 	return en
 }
 
 // WithAccessibilityHelp sets the help description of this user interface element; for example, the text shown in a tooltip.
 func (en *EffectNode) WithAccessibilityHelp(accessibilityHelp string) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	})
 	return en
 }
 
 // WithAccessibilityLabel sets a short description of this user interface element.
 func (en *EffectNode) WithAccessibilityLabel(accessibilityLabel string) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	})
 	return en
 }
 
 // WithAccessibilityEnabled sets a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (en *EffectNode) WithAccessibilityEnabled(accessibilityEnabled bool) *EffectNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	})
 	return en
 }
 
 // Filter returns a CIFilter to be used as an effect Any CIFilter that requires only a single "inputImage" and produces an "outputImage" is allowed. The filter is applied to all children of the SKEffectNode. If the filter is nil, the children of this node is flattened before being drawn as long as the SKEffectNode is enabled.
 func (en *EffectNode) Filter() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("filter"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("filter"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShouldCenterFilter wraps the corresponding Objective-C method.
 func (en *EffectNode) ShouldCenterFilter() bool {
-	_r := objc.Send[bool](objref.IDOf(en), objc.RegisterName("shouldCenterFilter"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(en), objc.RegisterName("shouldCenterFilter"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShouldEnableEffects reports whether enable the SKEffectNode. The SKEffectNode has no effect when appliesEffects is not enabled, this is useful for setting up an effect to use later on. Defaults to true.
 func (en *EffectNode) ShouldEnableEffects() bool {
-	_r := objc.Send[bool](objref.IDOf(en), objc.RegisterName("shouldEnableEffects"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(en), objc.RegisterName("shouldEnableEffects"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShouldRasterize reports whether enable the rasterization on the SKEffectNode. The SKEffectNode's output is rasterized and cached internally. This cache is reused when rendering. When the SKEffectNode's children change, the cache is updated, but changing properties on the CIFilter does *not* cause an update (you must disable rasterization and then re-enable it for the changes to apply). This is more expensive than not rasterizing if the node's children change frequently, only enable this option if you know the children is largely static.
 func (en *EffectNode) ShouldRasterize() bool {
-	_r := objc.Send[bool](objref.IDOf(en), objc.RegisterName("shouldRasterize"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(en), objc.RegisterName("shouldRasterize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BlendMode sets the blend mode to use when composing the effect with the final framebuffer.
 func (en *EffectNode) BlendMode() BlendMode {
-	_r := objc.Send[BlendMode](objref.IDOf(en), objc.RegisterName("blendMode"))
-	return _r
+	var _mainthread0 BlendMode
+	purego.Main(func() {
+		_mainthread0 = func() BlendMode {
+			_r := objc.Send[BlendMode](objref.IDOf(en), objc.RegisterName("blendMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Shader returns the shader.
 func (en *EffectNode) Shader() *Shader {
-	_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("shader"))
-	return ShaderFromID(_r)
+	var _mainthread0 *Shader
+	purego.Main(func() {
+		_mainthread0 = func() *Shader {
+			_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("shader"))
+			return ShaderFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // isEffectNode marks EffectNode — and, by embedding promotion, its

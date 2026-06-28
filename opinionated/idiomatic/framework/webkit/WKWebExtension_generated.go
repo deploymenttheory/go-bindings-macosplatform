@@ -69,165 +69,339 @@ func (wwe *WKWebExtension) String() string {
 
 // NewWKWebExtension creates a new WKWebExtension.
 func NewWKWebExtension() *WKWebExtension {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKWebExtension")), objc.RegisterName("new"))
-	return wKWebExtensionAdopt(_id)
+	var _mainthread0 *WKWebExtension
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtension {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKWebExtension")), objc.RegisterName("new"))
+			return wKWebExtensionAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // SupportsManifestVersion checks if a manifest version is supported by the extension.
 func (wwe *WKWebExtension) SupportsManifestVersion(manifestVersion float64) bool {
-	_r := objc.Send[bool](objref.IDOf(wwe), objc.RegisterName("supportsManifestVersion:"), manifestVersion)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwe), objc.RegisterName("supportsManifestVersion:"), manifestVersion)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IconForSize returns the extension’s icon image for the specified size.
 func (wwe *WKWebExtension) IconForSize(size corefoundation.CGSize) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("iconForSize:"), size)
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("iconForSize:"), size)
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ActionIconForSize returns the default action icon for the specified size.
 func (wwe *WKWebExtension) ActionIconForSize(size corefoundation.CGSize) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("actionIconForSize:"), size)
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("actionIconForSize:"), size)
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Errors returns an array of all errors that occurred during the processing of the extension. Provides an array of all parse-time errors for the extension, with repeat errors consolidated into a single entry for the original occurrence only. If no errors occurred, an empty array is returned.
 func (wwe *WKWebExtension) Errors() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("errors"))
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("errors"))
+			return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Manifest returns the parsed manifest as a dictionary.
 func (wwe *WKWebExtension) Manifest() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("manifest"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("manifest"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ManifestVersion returns the parsed manifest version, or `0` if there is no version specified in the manifest.
 func (wwe *WKWebExtension) ManifestVersion() float64 {
-	_r := objc.Send[float64](objref.IDOf(wwe), objc.RegisterName("manifestVersion"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(wwe), objc.RegisterName("manifestVersion"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DefaultLocale returns the default locale for the extension. Returns `nil` if there was no default locale specified.
 func (wwe *WKWebExtension) DefaultLocale() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("defaultLocale"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("defaultLocale"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DisplayName returns the localized extension name. Returns `nil` if there was no name specified.
 func (wwe *WKWebExtension) DisplayName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("displayName"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("displayName"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DisplayShortName returns the localized extension short name. Returns `nil` if there was no short name specified.
 func (wwe *WKWebExtension) DisplayShortName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("displayShortName"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("displayShortName"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DisplayVersion returns the localized extension display version. Returns `nil` if there was no display version specified.
 func (wwe *WKWebExtension) DisplayVersion() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("displayVersion"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("displayVersion"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DisplayDescription returns the localized extension description. Returns `nil` if there was no description specified.
 func (wwe *WKWebExtension) DisplayDescription() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("displayDescription"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("displayDescription"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DisplayActionLabel returns the default localized extension action label. Returns `nil` if there was no default action label specified. This label serves as a default and should be used to represent the extension in contexts like action sheets or toolbars prior to the extension being loaded into an extension context. Once the extension is loaded, use the “actionForTab:“ API to get the tab-specific label.
 func (wwe *WKWebExtension) DisplayActionLabel() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("displayActionLabel"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("displayActionLabel"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RequestedPermissions returns the set of permissions that the extension requires for its base functionality.
 func (wwe *WKWebExtension) RequestedPermissions() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("requestedPermissions"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("requestedPermissions"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // OptionalPermissions returns the set of permissions that the extension may need for optional functionality. These permissions can be requested by the extension at a later time.
 func (wwe *WKWebExtension) OptionalPermissions() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("optionalPermissions"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("optionalPermissions"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RequestedPermissionMatchPatterns returns the set of websites that the extension requires access to for its base functionality.
 func (wwe *WKWebExtension) RequestedPermissionMatchPatterns() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("requestedPermissionMatchPatterns"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("requestedPermissionMatchPatterns"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // OptionalPermissionMatchPatterns returns the set of websites that the extension may need access to for optional functionality. These match patterns can be requested by the extension at a later time.
 func (wwe *WKWebExtension) OptionalPermissionMatchPatterns() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("optionalPermissionMatchPatterns"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("optionalPermissionMatchPatterns"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllRequestedMatchPatterns returns the set of websites that the extension requires access to for injected content and for receiving messages from websites.
 func (wwe *WKWebExtension) AllRequestedMatchPatterns() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("allRequestedMatchPatterns"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("allRequestedMatchPatterns"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasBackgroundContent reports whether the extension has background content that can run when needed. If this property is `YES`, the extension can run in the background even when no webpages are open.
 func (wwe *WKWebExtension) HasBackgroundContent() bool {
-	_r := objc.Send[bool](objref.IDOf(wwe), objc.RegisterName("hasBackgroundContent"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwe), objc.RegisterName("hasBackgroundContent"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasPersistentBackgroundContent reports whether the extension has background content that stays in memory as long as the extension is loaded.
 func (wwe *WKWebExtension) HasPersistentBackgroundContent() bool {
-	_r := objc.Send[bool](objref.IDOf(wwe), objc.RegisterName("hasPersistentBackgroundContent"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwe), objc.RegisterName("hasPersistentBackgroundContent"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasInjectedContent reports whether the extension has script or stylesheet content that can be injected into webpages. If this property is `YES`, the extension has content that can be injected by matching against the extension's requested match patterns.
 func (wwe *WKWebExtension) HasInjectedContent() bool {
-	_r := objc.Send[bool](objref.IDOf(wwe), objc.RegisterName("hasInjectedContent"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwe), objc.RegisterName("hasInjectedContent"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasOptionsPage reports whether the extension has an options page. If this property is `YES`, the extension includes a dedicated options page where users can customize settings. The app should provide access to this page through a user interface element, which can be accessed via “optionsPageURL“ on an extension context.
 func (wwe *WKWebExtension) HasOptionsPage() bool {
-	_r := objc.Send[bool](objref.IDOf(wwe), objc.RegisterName("hasOptionsPage"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwe), objc.RegisterName("hasOptionsPage"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasOverrideNewTabPage reports whether the extension provides an alternative to the default new tab page. If this property is `YES`, the extension can specify a custom page that can be displayed when a new tab is opened in the app, instead of the default new tab page. The app should prompt the user for permission to use the extension's new tab page as the default, which can be accessed via “overrideNewTabPageURL“ on an extension context.
 func (wwe *WKWebExtension) HasOverrideNewTabPage() bool {
-	_r := objc.Send[bool](objref.IDOf(wwe), objc.RegisterName("hasOverrideNewTabPage"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwe), objc.RegisterName("hasOverrideNewTabPage"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasCommands reports whether the extension includes commands that users can invoke. If this property is `YES`, the extension contains one or more commands that can be performed by the user. These commands should be accessible via keyboard shortcuts, menu items, or other user interface elements provided by the app. The list of commands can be accessed via “commands“ on an extension context, and invoked via “performCommand:“.
 func (wwe *WKWebExtension) HasCommands() bool {
-	_r := objc.Send[bool](objref.IDOf(wwe), objc.RegisterName("hasCommands"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwe), objc.RegisterName("hasCommands"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasContentModificationRules reports whether the extension includes rules used for content modification or blocking.
 func (wwe *WKWebExtension) HasContentModificationRules() bool {
-	_r := objc.Send[bool](objref.IDOf(wwe), objc.RegisterName("hasContentModificationRules"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwe), objc.RegisterName("hasContentModificationRules"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

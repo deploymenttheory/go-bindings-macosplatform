@@ -68,29 +68,54 @@ func (dc *DialogController) String() string {
 
 // NewDialogController creates a new DialogController.
 func NewDialogController() *DialogController {
-	_id := objc.Send[objc.ID](objc.ID(_class("GKDialogController")), objc.RegisterName("new"))
-	return dialogControllerAdopt(_id)
+	var _mainthread0 *DialogController
+	purego.Main(func() {
+		_mainthread0 = func() *DialogController {
+			_id := objc.Send[objc.ID](objc.ID(_class("GKDialogController")), objc.RegisterName("new"))
+			return dialogControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithParentWindow sets the window that displays the dashboard.
 func (dc *DialogController) WithParentWindow(parentWindow obj.Object) *DialogController {
-	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
+	})
 	return dc
 }
 
 // PresentViewController presents the dashboard in the window.
 func (dc *DialogController) PresentViewController(viewController obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(dc), objc.RegisterName("presentViewController:"), objref.IDOf(viewController))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(dc), objc.RegisterName("presentViewController:"), objref.IDOf(viewController))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Dismiss dismisses the dashboard.
 func (dc *DialogController) Dismiss(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("dismiss:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("dismiss:"), objref.IDOf(sender))
+	})
+
 }
 
 // ParentWindow returns the parent window.
 func (dc *DialogController) ParentWindow() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("parentWindow"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("parentWindow"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

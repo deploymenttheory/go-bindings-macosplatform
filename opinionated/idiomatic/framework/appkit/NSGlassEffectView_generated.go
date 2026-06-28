@@ -50,354 +50,494 @@ func glassEffectViewAdopt(id objc.ID) *GlassEffectView {
 
 // NewGlassEffectView creates a new GlassEffectView.
 func NewGlassEffectView() *GlassEffectView {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSGlassEffectView")), objc.RegisterName("new"))
-	return glassEffectViewAdopt(_id)
+	var _mainthread0 *GlassEffectView
+	purego.Main(func() {
+		_mainthread0 = func() *GlassEffectView {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSGlassEffectView")), objc.RegisterName("new"))
+			return glassEffectViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithContentView sets the view to embed in glass.
 func (gev *GlassEffectView) WithContentView(contentView ViewProvider) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
+	})
 	return gev
 }
 
 // WithCornerRadius sets the amount of curvature for all corners of the glass.
 func (gev *GlassEffectView) WithCornerRadius(cornerRadius float64) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setCornerRadius:"), cornerRadius)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setCornerRadius:"), cornerRadius)
+	})
 	return gev
 }
 
 // WithTintColor sets the color the glass effect view uses to tint the background and glass effect toward.
 func (gev *GlassEffectView) WithTintColor(tintColor *Color) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setTintColor:"), objref.IDOf(tintColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setTintColor:"), objref.IDOf(tintColor))
+	})
 	return gev
 }
 
 // WithStyle sets the style of glass this view uses.
 func (gev *GlassEffectView) WithStyle(style GlassEffectViewStyle) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setStyle:"), style)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setStyle:"), style)
+	})
 	return gev
 }
 
 // WithSubviews sets the subviews.
 func (gev *GlassEffectView) WithSubviews(items ...ViewProvider) *GlassEffectView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return gev
 }
 
 // WithHidden sets the hidden.
 func (gev *GlassEffectView) WithHidden(hidden bool) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setHidden:"), hidden)
+	})
 	return gev
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (gev *GlassEffectView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return gev
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (gev *GlassEffectView) WithAutoresizesSubviews(autoresizesSubviews bool) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return gev
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (gev *GlassEffectView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return gev
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (gev *GlassEffectView) WithFrame(frame corefoundation.CGRect) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setFrame:"), frame)
+	})
 	return gev
 }
 
 // WithFrameRotation sets the frame rotation.
 func (gev *GlassEffectView) WithFrameRotation(frameRotation float64) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return gev
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (gev *GlassEffectView) WithFrameCenterRotation(frameCenterRotation float64) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return gev
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (gev *GlassEffectView) WithBoundsRotation(boundsRotation float64) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return gev
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (gev *GlassEffectView) WithBounds(bounds corefoundation.CGRect) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setBounds:"), bounds)
+	})
 	return gev
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (gev *GlassEffectView) WithCanDrawConcurrently(canDrawConcurrently bool) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return gev
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (gev *GlassEffectView) WithNeedsDisplay(needsDisplay bool) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return gev
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (gev *GlassEffectView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return gev
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (gev *GlassEffectView) WithWantsRestingTouches(wantsRestingTouches bool) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return gev
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (gev *GlassEffectView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return gev
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (gev *GlassEffectView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return gev
 }
 
 // WithWantsLayer sets the wants layer.
 func (gev *GlassEffectView) WithWantsLayer(wantsLayer bool) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return gev
 }
 
 // WithLayer sets the layer.
 func (gev *GlassEffectView) WithLayer(layer obj.Object) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return gev
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (gev *GlassEffectView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return gev
 }
 
 // WithNeedsLayout sets the needs layout.
 func (gev *GlassEffectView) WithNeedsLayout(needsLayout bool) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return gev
 }
 
 // WithAlphaValue sets the alpha value.
 func (gev *GlassEffectView) WithAlphaValue(alphaValue float64) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return gev
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (gev *GlassEffectView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return gev
 }
 
 // WithBackgroundFilters sets the background filters.
 func (gev *GlassEffectView) WithBackgroundFilters(items ...obj.Object) *GlassEffectView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return gev
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (gev *GlassEffectView) WithCompositingFilter(compositingFilter obj.Object) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return gev
 }
 
 // WithContentFilters sets the content filters.
 func (gev *GlassEffectView) WithContentFilters(items ...obj.Object) *GlassEffectView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return gev
 }
 
 // WithShadow sets the shadow.
 func (gev *GlassEffectView) WithShadow(shadow *Shadow) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return gev
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (gev *GlassEffectView) WithClipsToBounds(clipsToBounds bool) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return gev
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (gev *GlassEffectView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return gev
 }
 
 // WithToolTip sets the tool tip.
 func (gev *GlassEffectView) WithToolTip(toolTip string) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return gev
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (gev *GlassEffectView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return gev
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (gev *GlassEffectView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return gev
 }
 
 // WithNextKeyView sets the next key view.
 func (gev *GlassEffectView) WithNextKeyView(nextKeyView ViewProvider) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return gev
 }
 
 // WithFocusRingType sets the focus ring type.
 func (gev *GlassEffectView) WithFocusRingType(focusRingType FocusRingType) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return gev
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (gev *GlassEffectView) WithGestureRecognizers(items ...GestureRecognizerProvider) *GlassEffectView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return gev
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (gev *GlassEffectView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return gev
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (gev *GlassEffectView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return gev
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (gev *GlassEffectView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return gev
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (gev *GlassEffectView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return gev
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (gev *GlassEffectView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return gev
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (gev *GlassEffectView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return gev
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (gev *GlassEffectView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return gev
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (gev *GlassEffectView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return gev
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (gev *GlassEffectView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return gev
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (gev *GlassEffectView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return gev
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (gev *GlassEffectView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return gev
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (gev *GlassEffectView) WithNextResponder(nextResponder ResponderProvider) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return gev
 }
 
 // WithMenu sets returns the responder’s menu.
 func (gev *GlassEffectView) WithMenu(menu *Menu) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return gev
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (gev *GlassEffectView) WithUserActivity(userActivity obj.Object) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return gev
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (gev *GlassEffectView) WithTouchBar(touchBar *TouchBar) *GlassEffectView {
-	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return gev
 }
 
 // ContentView returns the view to embed in glass. - Important: `NSGlassEffectView` only guarantees the `contentView` will be placed inside the glass effect; arbitrary subviews aren't guaranteed specific behavior with regard to z-order in relation to the content view or glass effect.
 func (gev *GlassEffectView) ContentView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("contentView"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("contentView"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CornerRadius returns the amount of curvature for all corners of the glass.
 func (gev *GlassEffectView) CornerRadius() float64 {
-	_r := objc.Send[float64](objref.IDOf(gev), objc.RegisterName("cornerRadius"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(gev), objc.RegisterName("cornerRadius"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TintColor returns the color the glass effect view uses to tint the background and glass effect toward.
 func (gev *GlassEffectView) TintColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("tintColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("tintColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Style returns the style of glass this view uses.
 func (gev *GlassEffectView) Style() GlassEffectViewStyle {
-	_r := objc.Send[GlassEffectViewStyle](objref.IDOf(gev), objc.RegisterName("style"))
-	return _r
+	var _mainthread0 GlassEffectViewStyle
+	purego.Main(func() {
+		_mainthread0 = func() GlassEffectViewStyle {
+			_r := objc.Send[GlassEffectViewStyle](objref.IDOf(gev), objc.RegisterName("style"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ViewProvider = (*GlassEffectView)(nil)

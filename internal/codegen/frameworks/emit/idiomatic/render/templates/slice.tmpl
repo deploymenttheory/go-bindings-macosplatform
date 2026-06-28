@@ -2,23 +2,50 @@
     slice.tmpl renders an Objective-C array-returning method as a Go method that
     returns a slice. Each element is converted by ConvClosure (an expression
     resolved in gather). One shape returns the slice directly; the other also
-    returns an error when the underlying getter reports one.
+    returns an error when the underlying getter reports one. When the selector is
+    @MainActor-isolated the call is run on the main thread via purego.Main, the
+    body sub-template reused verbatim inside an inner closure.
 */}}
 {{define "slice"}}{{if .DocComment}}{{.DocComment}}//
 {{end}}// {{.GoName}} returns the collection as a Go slice.
 {{if .HasError -}}
 func {{.Recv}}{{.GoName}}() (result []{{.ElemGoType}}, err error) {
+{{- if .MainThread}}
+purego.Main(func() {
+result, err = func() ([]{{.ElemGoType}}, error) {
+{{- template "slice_body_err" .}}
+}()
+})
+return
+{{- else}}{{template "slice_body_err" .}}
+{{- end}}
+}
+{{else -}}
+func {{.Recv}}{{.GoName}}() []{{.ElemGoType}} {
+{{- if .MainThread}}
+var _mainthread0 []{{.ElemGoType}}
+purego.Main(func() {
+_mainthread0 = func() []{{.ElemGoType}} {
+{{- template "slice_body_plain" .}}
+}()
+})
+return _mainthread0
+{{- else}}{{template "slice_body_plain" .}}
+{{- end}}
+}
+{{end}}
+{{end}}
+
+{{define "slice_body_err"}}
 var _nsErr uintptr
 _arr := objc.Send[objc.ID]({{.RecvExpr}}, objc.RegisterName({{.Selector | printf "%q"}}), unsafe.Pointer(&_nsErr))
 if _nsErr != 0 {
 return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 }
 return purego.NSArrayToSlice(_arr, {{.ConvClosure}}), nil
-}
-{{else -}}
-func {{.Recv}}{{.GoName}}() []{{.ElemGoType}} {
+{{- end}}
+
+{{define "slice_body_plain"}}
 _arr := objc.Send[objc.ID]({{.RecvExpr}}, objc.RegisterName({{.Selector | printf "%q"}}))
 return purego.NSArrayToSlice(_arr, {{.ConvClosure}})
-}
-{{end}}
-{{end}}
+{{- end}}

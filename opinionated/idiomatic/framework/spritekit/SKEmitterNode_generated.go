@@ -49,745 +49,1239 @@ func emitterNodeAdopt(id objc.ID) *EmitterNode {
 
 // NewEmitterNode creates a new EmitterNode.
 func NewEmitterNode() *EmitterNode {
-	_id := objc.Send[objc.ID](objc.ID(_class("SKEmitterNode")), objc.RegisterName("new"))
-	return emitterNodeAdopt(_id)
+	var _mainthread0 *EmitterNode
+	purego.Main(func() {
+		_mainthread0 = func() *EmitterNode {
+			_id := objc.Send[objc.ID](objc.ID(_class("SKEmitterNode")), objc.RegisterName("new"))
+			return emitterNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithParticleTexture sets the texture to use to render a particle.
 func (en *EmitterNode) WithParticleTexture(particleTexture TextureProvider) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleTexture:"), objref.IDOf(particleTexture))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleTexture:"), objref.IDOf(particleTexture))
+	})
 	return en
 }
 
 // WithParticleBlendMode sets the blending mode used to blend particles into the framebuffer.
 func (en *EmitterNode) WithParticleBlendMode(particleBlendMode BlendMode) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleBlendMode:"), particleBlendMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleBlendMode:"), particleBlendMode)
+	})
 	return en
 }
 
 // WithParticleColor sets the average initial color for a particle.
 func (en *EmitterNode) WithParticleColor(particleColor obj.Object) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColor:"), objref.IDOf(particleColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColor:"), objref.IDOf(particleColor))
+	})
 	return en
 }
 
 // WithParticleColorRedRange sets the range of allowed random values for the red component of a particle’s initial color.
 func (en *EmitterNode) WithParticleColorRedRange(particleColorRedRange float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorRedRange:"), particleColorRedRange)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorRedRange:"), particleColorRedRange)
+	})
 	return en
 }
 
 // WithParticleColorGreenRange sets the range of allowed random values for the green component of a particle’s initial color.
 func (en *EmitterNode) WithParticleColorGreenRange(particleColorGreenRange float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorGreenRange:"), particleColorGreenRange)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorGreenRange:"), particleColorGreenRange)
+	})
 	return en
 }
 
 // WithParticleColorBlueRange sets the range of allowed random values for the blue component of a particle’s initial color.
 func (en *EmitterNode) WithParticleColorBlueRange(particleColorBlueRange float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorBlueRange:"), particleColorBlueRange)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorBlueRange:"), particleColorBlueRange)
+	})
 	return en
 }
 
 // WithParticleColorAlphaRange sets the range of allowed random values for the alpha component of a particle’s initial color.
 func (en *EmitterNode) WithParticleColorAlphaRange(particleColorAlphaRange float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorAlphaRange:"), particleColorAlphaRange)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorAlphaRange:"), particleColorAlphaRange)
+	})
 	return en
 }
 
 // WithParticleColorRedSpeed sets the rate at which the red component of a particle’s color changes per second.
 func (en *EmitterNode) WithParticleColorRedSpeed(particleColorRedSpeed float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorRedSpeed:"), particleColorRedSpeed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorRedSpeed:"), particleColorRedSpeed)
+	})
 	return en
 }
 
 // WithParticleColorGreenSpeed sets the rate at which the green component of a particle’s color changes per second.
 func (en *EmitterNode) WithParticleColorGreenSpeed(particleColorGreenSpeed float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorGreenSpeed:"), particleColorGreenSpeed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorGreenSpeed:"), particleColorGreenSpeed)
+	})
 	return en
 }
 
 // WithParticleColorBlueSpeed sets the rate at which the blue component of a particle’s color changes per second.
 func (en *EmitterNode) WithParticleColorBlueSpeed(particleColorBlueSpeed float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorBlueSpeed:"), particleColorBlueSpeed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorBlueSpeed:"), particleColorBlueSpeed)
+	})
 	return en
 }
 
 // WithParticleColorAlphaSpeed sets the rate at which the alpha component of a particle’s color changes per second.
 func (en *EmitterNode) WithParticleColorAlphaSpeed(particleColorAlphaSpeed float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorAlphaSpeed:"), particleColorAlphaSpeed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorAlphaSpeed:"), particleColorAlphaSpeed)
+	})
 	return en
 }
 
 // WithParticleColorSequence sets the sequence used to specify the color components of a particle over its lifetime.
 func (en *EmitterNode) WithParticleColorSequence(particleColorSequence *KeyframeSequence) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorSequence:"), objref.IDOf(particleColorSequence))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorSequence:"), objref.IDOf(particleColorSequence))
+	})
 	return en
 }
 
 // WithParticleColorBlendFactor sets the average starting value for the color blend factor.
 func (en *EmitterNode) WithParticleColorBlendFactor(particleColorBlendFactor float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorBlendFactor:"), particleColorBlendFactor)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorBlendFactor:"), particleColorBlendFactor)
+	})
 	return en
 }
 
 // WithParticleColorBlendFactorRange sets the range of allowed random values for a particle’s starting color blend factor.
 func (en *EmitterNode) WithParticleColorBlendFactorRange(particleColorBlendFactorRange float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorBlendFactorRange:"), particleColorBlendFactorRange)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorBlendFactorRange:"), particleColorBlendFactorRange)
+	})
 	return en
 }
 
 // WithParticleColorBlendFactorSpeed sets the rate at which the color blend factor changes per second.
 func (en *EmitterNode) WithParticleColorBlendFactorSpeed(particleColorBlendFactorSpeed float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorBlendFactorSpeed:"), particleColorBlendFactorSpeed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorBlendFactorSpeed:"), particleColorBlendFactorSpeed)
+	})
 	return en
 }
 
 // WithParticleColorBlendFactorSequence sets the sequence used to specify the color blend factor of a particle over its lifetime.
 func (en *EmitterNode) WithParticleColorBlendFactorSequence(particleColorBlendFactorSequence *KeyframeSequence) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorBlendFactorSequence:"), objref.IDOf(particleColorBlendFactorSequence))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleColorBlendFactorSequence:"), objref.IDOf(particleColorBlendFactorSequence))
+	})
 	return en
 }
 
 // WithParticlePosition sets the average starting position for a particle.
 func (en *EmitterNode) WithParticlePosition(particlePosition corefoundation.CGPoint) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticlePosition:"), particlePosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticlePosition:"), particlePosition)
+	})
 	return en
 }
 
 // WithParticlePositionRange sets the range of allowed random values for a particle’s position.
 func (en *EmitterNode) WithParticlePositionRange(particlePositionRange corefoundation.CGVector) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticlePositionRange:"), particlePositionRange)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticlePositionRange:"), particlePositionRange)
+	})
 	return en
 }
 
 // WithParticleSpeed sets the average initial speed of a new particle, in points per second.
 func (en *EmitterNode) WithParticleSpeed(particleSpeed float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleSpeed:"), particleSpeed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleSpeed:"), particleSpeed)
+	})
 	return en
 }
 
 // WithParticleSpeedRange sets the range of allowed random values for a particle’s initial speed.
 func (en *EmitterNode) WithParticleSpeedRange(particleSpeedRange float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleSpeedRange:"), particleSpeedRange)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleSpeedRange:"), particleSpeedRange)
+	})
 	return en
 }
 
 // WithEmissionAngle sets the average initial direction of a particle, expressed as an angle in radians.
 func (en *EmitterNode) WithEmissionAngle(emissionAngle float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setEmissionAngle:"), emissionAngle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setEmissionAngle:"), emissionAngle)
+	})
 	return en
 }
 
 // WithEmissionAngleRange sets the range of allowed random values for a particle’s initial direction, expressed as an angle in radians.
 func (en *EmitterNode) WithEmissionAngleRange(emissionAngleRange float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setEmissionAngleRange:"), emissionAngleRange)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setEmissionAngleRange:"), emissionAngleRange)
+	})
 	return en
 }
 
 // WithXAcceleration sets the acceleration to apply to a particle’s horizontal velocity.
 func (en *EmitterNode) WithXAcceleration(xAcceleration float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setXAcceleration:"), xAcceleration)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setXAcceleration:"), xAcceleration)
+	})
 	return en
 }
 
 // WithYAcceleration sets the acceleration to apply to a particle’s vertical velocity.
 func (en *EmitterNode) WithYAcceleration(yAcceleration float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setYAcceleration:"), yAcceleration)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setYAcceleration:"), yAcceleration)
+	})
 	return en
 }
 
 // WithParticleBirthRate sets the rate at which new particles are created.
 func (en *EmitterNode) WithParticleBirthRate(particleBirthRate float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleBirthRate:"), particleBirthRate)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleBirthRate:"), particleBirthRate)
+	})
 	return en
 }
 
 // WithNumParticlesToEmit sets the number of particles the emitter should emit before stopping.
 func (en *EmitterNode) WithNumParticlesToEmit(numParticlesToEmit int) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setNumParticlesToEmit:"), numParticlesToEmit)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setNumParticlesToEmit:"), numParticlesToEmit)
+	})
 	return en
 }
 
 // WithParticleLifetime sets the average lifetime of a particle, in seconds.
 func (en *EmitterNode) WithParticleLifetime(particleLifetime float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleLifetime:"), particleLifetime)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleLifetime:"), particleLifetime)
+	})
 	return en
 }
 
 // WithParticleLifetimeRange sets the range of allowed random values for a particle’s lifetime.
 func (en *EmitterNode) WithParticleLifetimeRange(particleLifetimeRange float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleLifetimeRange:"), particleLifetimeRange)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleLifetimeRange:"), particleLifetimeRange)
+	})
 	return en
 }
 
 // WithParticleRotation sets the average initial rotation of a particle, expressed as an angle in radians.
 func (en *EmitterNode) WithParticleRotation(particleRotation float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleRotation:"), particleRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleRotation:"), particleRotation)
+	})
 	return en
 }
 
 // WithParticleRotationRange sets the range of allowed random values for a particle’s initial rotation, expressed as an angle in radians.
 func (en *EmitterNode) WithParticleRotationRange(particleRotationRange float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleRotationRange:"), particleRotationRange)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleRotationRange:"), particleRotationRange)
+	})
 	return en
 }
 
 // WithParticleRotationSpeed sets the speed at which a particle rotates, expressed in radians per second.
 func (en *EmitterNode) WithParticleRotationSpeed(particleRotationSpeed float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleRotationSpeed:"), particleRotationSpeed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleRotationSpeed:"), particleRotationSpeed)
+	})
 	return en
 }
 
 // WithParticleSize sets the starting size of each particle.
 func (en *EmitterNode) WithParticleSize(particleSize corefoundation.CGSize) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleSize:"), particleSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleSize:"), particleSize)
+	})
 	return en
 }
 
 // WithParticleScale sets the average initial scale factor of a particle.
 func (en *EmitterNode) WithParticleScale(particleScale float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleScale:"), particleScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleScale:"), particleScale)
+	})
 	return en
 }
 
 // WithParticleScaleRange sets the range of allowed random values for a particle’s initial scale.
 func (en *EmitterNode) WithParticleScaleRange(particleScaleRange float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleScaleRange:"), particleScaleRange)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleScaleRange:"), particleScaleRange)
+	})
 	return en
 }
 
 // WithParticleScaleSpeed sets the rate at which a particle’s scale factor changes per second.
 func (en *EmitterNode) WithParticleScaleSpeed(particleScaleSpeed float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleScaleSpeed:"), particleScaleSpeed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleScaleSpeed:"), particleScaleSpeed)
+	})
 	return en
 }
 
 // WithParticleScaleSequence sets the sequence used to specify the scale factor of a particle over its lifetime.
 func (en *EmitterNode) WithParticleScaleSequence(particleScaleSequence *KeyframeSequence) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleScaleSequence:"), objref.IDOf(particleScaleSequence))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleScaleSequence:"), objref.IDOf(particleScaleSequence))
+	})
 	return en
 }
 
 // WithParticleAlpha sets the average starting alpha value for a particle.
 func (en *EmitterNode) WithParticleAlpha(particleAlpha float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleAlpha:"), particleAlpha)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleAlpha:"), particleAlpha)
+	})
 	return en
 }
 
 // WithParticleAlphaRange sets the range of allowed random values for a particle’s starting alpha value.
 func (en *EmitterNode) WithParticleAlphaRange(particleAlphaRange float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleAlphaRange:"), particleAlphaRange)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleAlphaRange:"), particleAlphaRange)
+	})
 	return en
 }
 
 // WithParticleAlphaSpeed sets the rate at which the alpha value of a particle changes per second.
 func (en *EmitterNode) WithParticleAlphaSpeed(particleAlphaSpeed float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleAlphaSpeed:"), particleAlphaSpeed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleAlphaSpeed:"), particleAlphaSpeed)
+	})
 	return en
 }
 
 // WithParticleAlphaSequence sets the sequence used to specify the alpha value of a particle over its lifetime.
 func (en *EmitterNode) WithParticleAlphaSequence(particleAlphaSequence *KeyframeSequence) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleAlphaSequence:"), objref.IDOf(particleAlphaSequence))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleAlphaSequence:"), objref.IDOf(particleAlphaSequence))
+	})
 	return en
 }
 
 // WithParticleAction sets an action executed by new particles.
 func (en *EmitterNode) WithParticleAction(particleAction *Action) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleAction:"), objref.IDOf(particleAction))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleAction:"), objref.IDOf(particleAction))
+	})
 	return en
 }
 
 // WithFieldBitMask sets a mask that defines which categories of physics fields can exert forces on the particles.
 func (en *EmitterNode) WithFieldBitMask(fieldBitMask uint32) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setFieldBitMask:"), fieldBitMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setFieldBitMask:"), fieldBitMask)
+	})
 	return en
 }
 
 // WithTargetNode sets the target node that renders the emitter’s particles.
 func (en *EmitterNode) WithTargetNode(targetNode NodeProvider) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setTargetNode:"), objref.IDOf(targetNode))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setTargetNode:"), objref.IDOf(targetNode))
+	})
 	return en
 }
 
 // WithShader sets a custom shader used to determine how particles are rendered.
 func (en *EmitterNode) WithShader(shader *Shader) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setShader:"), objref.IDOf(shader))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setShader:"), objref.IDOf(shader))
+	})
 	return en
 }
 
 // WithParticleZPosition sets the average starting depth of a particle.
 func (en *EmitterNode) WithParticleZPosition(particleZPosition float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleZPosition:"), particleZPosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleZPosition:"), particleZPosition)
+	})
 	return en
 }
 
 // WithParticleRenderOrder sets the order in which the emitter’s particles are rendered.
 func (en *EmitterNode) WithParticleRenderOrder(particleRenderOrder ParticleRenderOrder) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleRenderOrder:"), particleRenderOrder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleRenderOrder:"), particleRenderOrder)
+	})
 	return en
 }
 
 // WithParticleZPositionRange sets the range of allowed random values for a particle’s depth.
 func (en *EmitterNode) WithParticleZPositionRange(particleZPositionRange float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleZPositionRange:"), particleZPositionRange)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleZPositionRange:"), particleZPositionRange)
+	})
 	return en
 }
 
 // WithParticleZPositionSpeed sets the speed at which the particle’s depth changes.
 func (en *EmitterNode) WithParticleZPositionSpeed(particleZPositionSpeed float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleZPositionSpeed:"), particleZPositionSpeed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setParticleZPositionSpeed:"), particleZPositionSpeed)
+	})
 	return en
 }
 
 // WithPosition sets the position of the node in its parent’s coordinate system.
 func (en *EmitterNode) WithPosition(position corefoundation.CGPoint) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setPosition:"), position)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setPosition:"), position)
+	})
 	return en
 }
 
 // WithZPosition sets the height of the node relative to its parent.
 func (en *EmitterNode) WithZPosition(zPosition float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setZPosition:"), zPosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setZPosition:"), zPosition)
+	})
 	return en
 }
 
 // WithZRotation sets the Euler rotation about the z axis (in radians).
 func (en *EmitterNode) WithZRotation(zRotation float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setZRotation:"), zRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setZRotation:"), zRotation)
+	})
 	return en
 }
 
 // WithXScale sets a scaling factor that multiplies the width of a node and its children.
 func (en *EmitterNode) WithXScale(xScale float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setXScale:"), xScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setXScale:"), xScale)
+	})
 	return en
 }
 
 // WithYScale sets a scaling factor that multiplies the height of a node and its children.
 func (en *EmitterNode) WithYScale(yScale float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setYScale:"), yScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setYScale:"), yScale)
+	})
 	return en
 }
 
 // WithSpeed sets a speed modifier applied to all actions executed by a node and its descendants.
 func (en *EmitterNode) WithSpeed(speed float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setSpeed:"), speed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setSpeed:"), speed)
+	})
 	return en
 }
 
 // WithAlpha sets the transparency value applied to the node’s contents.
 func (en *EmitterNode) WithAlpha(alpha float64) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAlpha:"), alpha)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAlpha:"), alpha)
+	})
 	return en
 }
 
 // WithPaused sets a Boolean value that determines whether actions on the node and its descendants are processed.
 func (en *EmitterNode) WithPaused(paused bool) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setPaused:"), paused)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setPaused:"), paused)
+	})
 	return en
 }
 
 // WithHidden sets a Boolean value that determines whether a node and its descendants are rendered.
 func (en *EmitterNode) WithHidden(hidden bool) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setHidden:"), hidden)
+	})
 	return en
 }
 
 // WithUserInteractionEnabled sets a Boolean value that indicates whether the node receives touch events.
 func (en *EmitterNode) WithUserInteractionEnabled(userInteractionEnabled bool) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	})
 	return en
 }
 
 // WithName sets the node’s assignable name.
 func (en *EmitterNode) WithName(name string) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setName:"), purego.NSString(name))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setName:"), purego.NSString(name))
+	})
 	return en
 }
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (en *EmitterNode) WithPhysicsBody(physicsBody *PhysicsBody) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	})
 	return en
 }
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (en *EmitterNode) WithUserData(userData obj.Object) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	})
 	return en
 }
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (en *EmitterNode) WithReachConstraints(reachConstraints *ReachConstraints) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	})
 	return en
 }
 
 // WithConstraints sets a list of constraints to apply to the node.
 func (en *EmitterNode) WithConstraints(items ...*Constraint) *EmitterNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setConstraints:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setConstraints:"), _arr)
+	})
 	return en
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
 func (en *EmitterNode) WithAttributeValues(attributeValues obj.Object) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	})
 	return en
 }
 
 // WithAccessibilityElement sets a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (en *EmitterNode) WithAccessibilityElement(accessibilityElement bool) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	})
 	return en
 }
 
 // WithAccessibilityRole sets a string value describing the user interface element type; for example, a button.
 func (en *EmitterNode) WithAccessibilityRole(accessibilityRole string) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	})
 	return en
 }
 
 // WithAccessibilityRoleDescription sets a string value describing the user interface element name and type; for example, the Buy button.
 func (en *EmitterNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	})
 	return en
 }
 
 // WithAccessibilitySubrole sets a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (en *EmitterNode) WithAccessibilitySubrole(accessibilitySubrole string) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	})
 	return en
 }
 
 // WithAccessibilityFrame sets the size of this user interface element, in screen points.
 func (en *EmitterNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	})
 	return en
 }
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (en *EmitterNode) WithAccessibilityParent(accessibilityParent obj.Object) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	})
 	return en
 }
 
 // WithAccessibilityHelp sets the help description of this user interface element; for example, the text shown in a tooltip.
 func (en *EmitterNode) WithAccessibilityHelp(accessibilityHelp string) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	})
 	return en
 }
 
 // WithAccessibilityLabel sets a short description of this user interface element.
 func (en *EmitterNode) WithAccessibilityLabel(accessibilityLabel string) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	})
 	return en
 }
 
 // WithAccessibilityEnabled sets a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (en *EmitterNode) WithAccessibilityEnabled(accessibilityEnabled bool) *EmitterNode {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	})
 	return en
 }
 
 // AdvanceSimulationTime advances the emitter particle simulation.
 func (en *EmitterNode) AdvanceSimulationTime(sec float64) {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("advanceSimulationTime:"), sec)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("advanceSimulationTime:"), sec)
+	})
+
 }
 
 // ResetSimulation removes all existing particles and restarts the simulation.
 func (en *EmitterNode) ResetSimulation() {
-	objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("resetSimulation"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("resetSimulation"))
+	})
+
 }
 
 // ParticleTexture returns the texture to be used for the particles.
 func (en *EmitterNode) ParticleTexture() *Texture {
-	_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("particleTexture"))
-	return TextureFromID(_r)
+	var _mainthread0 *Texture
+	purego.Main(func() {
+		_mainthread0 = func() *Texture {
+			_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("particleTexture"))
+			return TextureFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleBlendMode returns the blend mode for each particle. Defaults to SKBlendModeAlpha.
 func (en *EmitterNode) ParticleBlendMode() BlendMode {
-	_r := objc.Send[BlendMode](objref.IDOf(en), objc.RegisterName("particleBlendMode"))
-	return _r
+	var _mainthread0 BlendMode
+	purego.Main(func() {
+		_mainthread0 = func() BlendMode {
+			_r := objc.Send[BlendMode](objref.IDOf(en), objc.RegisterName("particleBlendMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleColor returns the starting color for each particle. Defaults to clear.
 func (en *EmitterNode) ParticleColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("particleColor"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("particleColor"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleColorRedRange returns the random variance about each color component for each particle. Defaults to 0.0.
 func (en *EmitterNode) ParticleColorRedRange() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorRedRange"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorRedRange"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleColorGreenRange returns the particle color green range.
 func (en *EmitterNode) ParticleColorGreenRange() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorGreenRange"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorGreenRange"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleColorBlueRange returns the particle color blue range.
 func (en *EmitterNode) ParticleColorBlueRange() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorBlueRange"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorBlueRange"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleColorAlphaRange returns the particle color alpha range.
 func (en *EmitterNode) ParticleColorAlphaRange() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorAlphaRange"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorAlphaRange"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleColorRedSpeed returns the rate at which to modify each color component for each particle (per second).
 func (en *EmitterNode) ParticleColorRedSpeed() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorRedSpeed"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorRedSpeed"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleColorGreenSpeed returns the particle color green speed.
 func (en *EmitterNode) ParticleColorGreenSpeed() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorGreenSpeed"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorGreenSpeed"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleColorBlueSpeed returns the particle color blue speed.
 func (en *EmitterNode) ParticleColorBlueSpeed() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorBlueSpeed"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorBlueSpeed"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleColorAlphaSpeed returns the particle color alpha speed.
 func (en *EmitterNode) ParticleColorAlphaSpeed() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorAlphaSpeed"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorAlphaSpeed"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleColorSequence returns the particle color sequence.
 func (en *EmitterNode) ParticleColorSequence() *KeyframeSequence {
-	_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("particleColorSequence"))
-	return KeyframeSequenceFromID(_r)
+	var _mainthread0 *KeyframeSequence
+	purego.Main(func() {
+		_mainthread0 = func() *KeyframeSequence {
+			_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("particleColorSequence"))
+			return KeyframeSequenceFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleColorBlendFactor returns the starting color blend for each particle. Behaves the same as SKSpriteNode. Defaults to 0.0.
 func (en *EmitterNode) ParticleColorBlendFactor() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorBlendFactor"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorBlendFactor"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleColorBlendFactorRange returns the random variance about the starting color blend for each particle. Defaults to 0.0.
 func (en *EmitterNode) ParticleColorBlendFactorRange() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorBlendFactorRange"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorBlendFactorRange"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleColorBlendFactorSpeed returns the rate at which to modify the color blend for each particle. Defaults to 0.0.
 func (en *EmitterNode) ParticleColorBlendFactorSpeed() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorBlendFactorSpeed"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorBlendFactorSpeed"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleColorBlendFactorSequence returns the particle color blend factor sequence.
 func (en *EmitterNode) ParticleColorBlendFactorSequence() *KeyframeSequence {
-	_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("particleColorBlendFactorSequence"))
-	return KeyframeSequenceFromID(_r)
+	var _mainthread0 *KeyframeSequence
+	purego.Main(func() {
+		_mainthread0 = func() *KeyframeSequence {
+			_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("particleColorBlendFactorSequence"))
+			return KeyframeSequenceFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticlePosition returns the starting position for each particle in the emitter's coordinate space. Defaults to (0.0, 0,0).
 func (en *EmitterNode) ParticlePosition() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(en), objc.RegisterName("particlePosition"))
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(en), objc.RegisterName("particlePosition"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticlePositionRange returns the random variance about the starting position for each particle in the emitter's coordinate space. Defaults to (0.0, 0,0).
 func (en *EmitterNode) ParticlePositionRange() corefoundation.CGVector {
-	_r := objc.Send[corefoundation.CGVector](objref.IDOf(en), objc.RegisterName("particlePositionRange"))
-	return _r
+	var _mainthread0 corefoundation.CGVector
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGVector {
+			_r := objc.Send[corefoundation.CGVector](objref.IDOf(en), objc.RegisterName("particlePositionRange"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleSpeed returns the starting speed for each particle along its emission vector. Defaults to 0.0.
 func (en *EmitterNode) ParticleSpeed() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleSpeed"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleSpeed"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleSpeedRange returns the random variance about the starting speed for each particle along its emission vector. Defaults to 0.0.
 func (en *EmitterNode) ParticleSpeedRange() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleSpeedRange"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleSpeedRange"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // EmissionAngle returns the angle at which to emit each new particle, in radians. Defaults to 0.0.
 func (en *EmitterNode) EmissionAngle() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("emissionAngle"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("emissionAngle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // EmissionAngleRange returns the random variance about the angle at which to emit each new particle, in radians. Defaults to 0.0.
 func (en *EmitterNode) EmissionAngleRange() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("emissionAngleRange"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("emissionAngleRange"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // XAcceleration returns the acceleration to apply to each particles velocity. Useful for simulating effects such as wind or gravity. Defaults to 0.0.
 func (en *EmitterNode) XAcceleration() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("xAcceleration"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("xAcceleration"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // YAcceleration returns the y acceleration.
 func (en *EmitterNode) YAcceleration() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("yAcceleration"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("yAcceleration"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleBirthRate returns the rate at which new particles are generated, in particles per second. Defaults to 0.0.
 func (en *EmitterNode) ParticleBirthRate() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleBirthRate"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleBirthRate"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NumParticlesToEmit returns the number of particles that will be emitted. If set to 0, there is no limit. Defaults to 0.
 func (en *EmitterNode) NumParticlesToEmit() int {
-	_r := objc.Send[int](objref.IDOf(en), objc.RegisterName("numParticlesToEmit"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(en), objc.RegisterName("numParticlesToEmit"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleLifetime returns the lifetime of each particle, in seconds. Defaults to 0.0.
 func (en *EmitterNode) ParticleLifetime() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleLifetime"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleLifetime"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleLifetimeRange returns the random variance about the lifetime of each particle, in seconds. Defaults to 0.0.
 func (en *EmitterNode) ParticleLifetimeRange() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleLifetimeRange"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleLifetimeRange"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleRotation returns the starting z-rotation for each particle. Defaults to 0.0.
 func (en *EmitterNode) ParticleRotation() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleRotation"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleRotation"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleRotationRange returns the random variance about the starting z-rotation for each particle. Defaults to 0.0.
 func (en *EmitterNode) ParticleRotationRange() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleRotationRange"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleRotationRange"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleRotationSpeed returns the rate at which to modify the z-rotation for each particle. Defaults to 0.0.
 func (en *EmitterNode) ParticleRotationSpeed() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleRotationSpeed"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleRotationSpeed"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleSize returns the starting size for each particle. If set to CGSizeZero (the default) the particles will start at the size of the texture assigned to particleTexture. Note that particleScale and particleScaleRange will also have an effect on the effective size of each new particle.
 func (en *EmitterNode) ParticleSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(en), objc.RegisterName("particleSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(en), objc.RegisterName("particleSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleScale returns the starting scale for each particle. Defaults to 1.0.
 func (en *EmitterNode) ParticleScale() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleScale"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleScale"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleScaleRange returns the random variance about the starting scale for each particle. Defaults to 0.0.
 func (en *EmitterNode) ParticleScaleRange() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleScaleRange"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleScaleRange"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleScaleSpeed returns the rate at which to modify the scale for each particle. Defaults to 0.0.
 func (en *EmitterNode) ParticleScaleSpeed() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleScaleSpeed"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleScaleSpeed"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleScaleSequence returns the particle scale sequence.
 func (en *EmitterNode) ParticleScaleSequence() *KeyframeSequence {
-	_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("particleScaleSequence"))
-	return KeyframeSequenceFromID(_r)
+	var _mainthread0 *KeyframeSequence
+	purego.Main(func() {
+		_mainthread0 = func() *KeyframeSequence {
+			_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("particleScaleSequence"))
+			return KeyframeSequenceFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleAlpha returns the starting alpha for each particle. Defaults to 1.0.
 func (en *EmitterNode) ParticleAlpha() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleAlpha"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleAlpha"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleAlphaRange returns the random variance about the starting alpha for each particle. Defaults to 1.0.
 func (en *EmitterNode) ParticleAlphaRange() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleAlphaRange"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleAlphaRange"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleAlphaSpeed returns the rate at which to modify the alpha for each particle. Defaults to 1.0.
 func (en *EmitterNode) ParticleAlphaSpeed() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleAlphaSpeed"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleAlphaSpeed"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleAlphaSequence returns the particle alpha sequence.
 func (en *EmitterNode) ParticleAlphaSequence() *KeyframeSequence {
-	_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("particleAlphaSequence"))
-	return KeyframeSequenceFromID(_r)
+	var _mainthread0 *KeyframeSequence
+	purego.Main(func() {
+		_mainthread0 = func() *KeyframeSequence {
+			_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("particleAlphaSequence"))
+			return KeyframeSequenceFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleAction specifies an action executed by new particles.
 func (en *EmitterNode) ParticleAction() *Action {
-	_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("particleAction"))
-	return ActionFromID(_r)
+	var _mainthread0 *Action
+	purego.Main(func() {
+		_mainthread0 = func() *Action {
+			_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("particleAction"))
+			return ActionFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FieldBitMask defines what logical 'categories' of fields this particles emitted respond to. Defaults to all bits set (all categories). Can be forced off via affectedByGravity.
 func (en *EmitterNode) FieldBitMask() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(en), objc.RegisterName("fieldBitMask"))
-	return _r
+	var _mainthread0 uint32
+	purego.Main(func() {
+		_mainthread0 = func() uint32 {
+			_r := objc.Send[uint32](objref.IDOf(en), objc.RegisterName("fieldBitMask"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TargetNode returns normally the particles are rendered as if they were a child of the SKEmitterNode, they can also be rendered as if they were a child of any other node in the scene by setting the targetNode property. Defaults to nil (standard behavior).
 func (en *EmitterNode) TargetNode() *Node {
-	_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("targetNode"))
-	return NodeFromID(_r)
+	var _mainthread0 *Node
+	purego.Main(func() {
+		_mainthread0 = func() *Node {
+			_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("targetNode"))
+			return NodeFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Shader returns the shader.
 func (en *EmitterNode) Shader() *Shader {
-	_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("shader"))
-	return ShaderFromID(_r)
+	var _mainthread0 *Shader
+	purego.Main(func() {
+		_mainthread0 = func() *Shader {
+			_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("shader"))
+			return ShaderFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleZPosition returns the starting z-position for each particle. Defaults to 0.0.
 func (en *EmitterNode) ParticleZPosition() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleZPosition"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleZPosition"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleRenderOrder returns the order in which particles will be rendered. Defaults to SKParticleRenderOrderOldestLast.
 func (en *EmitterNode) ParticleRenderOrder() ParticleRenderOrder {
-	_r := objc.Send[ParticleRenderOrder](objref.IDOf(en), objc.RegisterName("particleRenderOrder"))
-	return _r
+	var _mainthread0 ParticleRenderOrder
+	purego.Main(func() {
+		_mainthread0 = func() ParticleRenderOrder {
+			_r := objc.Send[ParticleRenderOrder](objref.IDOf(en), objc.RegisterName("particleRenderOrder"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleZPositionRange returns the random variance about the starting z-position for each particle. Defaults to 0.0.
 func (en *EmitterNode) ParticleZPositionRange() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleZPositionRange"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleZPositionRange"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParticleZPositionSpeed returns the rate at which to modify the z-position for each particle. Defaults to 0.0.
 func (en *EmitterNode) ParticleZPositionSpeed() float64 {
-	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleZPositionSpeed"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleZPositionSpeed"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ NodeProvider = (*EmitterNode)(nil)

@@ -50,625 +50,905 @@ func imageViewAdopt(id objc.ID) *ImageView {
 
 // NewImageView creates a new ImageView.
 func NewImageView() *ImageView {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSImageView")), objc.RegisterName("new"))
-	return imageViewAdopt(_id)
+	var _mainthread0 *ImageView
+	purego.Main(func() {
+		_mainthread0 = func() *ImageView {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSImageView")), objc.RegisterName("new"))
+			return imageViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithImage sets the image displayed by the image view.
 func (iv *ImageView) WithImage(image *Image) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImage:"), objref.IDOf(image))
+	})
 	return iv
 }
 
 // WithEditable sets a Boolean value indicating whether the user can drag a new image into the image view.
 func (iv *ImageView) WithEditable(editable bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setEditable:"), editable)
+	})
 	return iv
 }
 
 // WithImageAlignment sets the alignment of the cell’s image inside the image view.
 func (iv *ImageView) WithImageAlignment(imageAlignment ImageAlignment) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImageAlignment:"), imageAlignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImageAlignment:"), imageAlignment)
+	})
 	return iv
 }
 
 // WithImageScaling sets the scaling mode applied to make the cell’s image fit the frame of the image view.
 func (iv *ImageView) WithImageScaling(imageScaling ImageScaling) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImageScaling:"), imageScaling)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImageScaling:"), imageScaling)
+	})
 	return iv
 }
 
 // WithImageFrameStyle sets the style of frame that appears around the image.
 func (iv *ImageView) WithImageFrameStyle(imageFrameStyle ImageFrameStyle) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImageFrameStyle:"), imageFrameStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImageFrameStyle:"), imageFrameStyle)
+	})
 	return iv
 }
 
 // WithSymbolConfiguration sets specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images.
 func (iv *ImageView) WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setSymbolConfiguration:"), objref.IDOf(symbolConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setSymbolConfiguration:"), objref.IDOf(symbolConfiguration))
+	})
 	return iv
 }
 
 // WithContentTintColor sets a tint color to be used when rendering template image content.
 func (iv *ImageView) WithContentTintColor(contentTintColor *Color) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setContentTintColor:"), objref.IDOf(contentTintColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setContentTintColor:"), objref.IDOf(contentTintColor))
+	})
 	return iv
 }
 
 // WithAnimates sets a Boolean value indicating whether the image view automatically plays animated images.
 func (iv *ImageView) WithAnimates(animates bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAnimates:"), animates)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAnimates:"), animates)
+	})
 	return iv
 }
 
 // WithAllowsCutCopyPaste sets a Boolean value indicating whether the image view lets the user cut, copy, and paste the image contents.
 func (iv *ImageView) WithAllowsCutCopyPaste(allowsCutCopyPaste bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAllowsCutCopyPaste:"), allowsCutCopyPaste)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAllowsCutCopyPaste:"), allowsCutCopyPaste)
+	})
 	return iv
 }
 
 // WithPreferredImageDynamicRange sets the preferred dynamic range when displaying an image in the receiving image view.
 func (iv *ImageView) WithPreferredImageDynamicRange(preferredImageDynamicRange ImageDynamicRange) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setPreferredImageDynamicRange:"), preferredImageDynamicRange)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setPreferredImageDynamicRange:"), preferredImageDynamicRange)
+	})
 	return iv
 }
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (iv *ImageView) WithTarget(target obj.Object) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return iv
 }
 
 // WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
 func (iv *ImageView) WithTag(tag int) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setTag:"), tag)
+	})
 	return iv
 }
 
 // WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 func (iv *ImageView) WithIgnoresMultiClick(ignoresMultiClick bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	})
 	return iv
 }
 
 // WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 func (iv *ImageView) WithContinuous(continuous bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return iv
 }
 
 // WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
 func (iv *ImageView) WithEnabled(enabled bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return iv
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
 func (iv *ImageView) WithRefusesFirstResponder(refusesFirstResponder bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return iv
 }
 
 // WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
 func (iv *ImageView) WithHighlighted(highlighted bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return iv
 }
 
 // WithControlSize sets the size of the control.
 func (iv *ImageView) WithControlSize(controlSize ControlSize) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return iv
 }
 
 // WithFormatter sets the receiver’s formatter.
 func (iv *ImageView) WithFormatter(formatter obj.Object) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return iv
 }
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (iv *ImageView) WithObjectValue(objectValue obj.Object) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return iv
 }
 
 // WithStringValue sets the value of the receiver’s cell as an NSString object.
 func (iv *ImageView) WithStringValue(stringValue string) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return iv
 }
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (iv *ImageView) WithAttributedStringValue(attributedStringValue obj.Object) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return iv
 }
 
 // WithIntValue sets the value of the receiver’s cell as an integer.
 func (iv *ImageView) WithIntValue(intValue int) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return iv
 }
 
 // WithIntegerValue sets the value of the receiver’s cell as an integer value.
 func (iv *ImageView) WithIntegerValue(integerValue int) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return iv
 }
 
 // WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
 func (iv *ImageView) WithFloatValue(floatValue float32) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return iv
 }
 
 // WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
 func (iv *ImageView) WithDoubleValue(doubleValue float64) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return iv
 }
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (iv *ImageView) WithFont(font *Font) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return iv
 }
 
 // WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
 func (iv *ImageView) WithUsesSingleLineMode(usesSingleLineMode bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return iv
 }
 
 // WithLineBreakMode sets the line break mode to use for text in the control’s cell.
 func (iv *ImageView) WithLineBreakMode(lineBreakMode LineBreakMode) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return iv
 }
 
 // WithAlignment sets the alignment mode of the text in the receiver’s cell.
 func (iv *ImageView) WithAlignment(alignment TextAlignment) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return iv
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (iv *ImageView) WithBaseWritingDirection(baseWritingDirection WritingDirection) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return iv
 }
 
 // WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 func (iv *ImageView) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	})
 	return iv
 }
 
 // WithCell sets the cell.
 func (iv *ImageView) WithCell(cell CellProvider) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	})
 	return iv
 }
 
 // WithSubviews sets the subviews.
 func (iv *ImageView) WithSubviews(items ...ViewProvider) *ImageView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return iv
 }
 
 // WithHidden sets the hidden.
 func (iv *ImageView) WithHidden(hidden bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setHidden:"), hidden)
+	})
 	return iv
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (iv *ImageView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return iv
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (iv *ImageView) WithAutoresizesSubviews(autoresizesSubviews bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return iv
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (iv *ImageView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return iv
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (iv *ImageView) WithFrame(frame corefoundation.CGRect) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFrame:"), frame)
+	})
 	return iv
 }
 
 // WithFrameRotation sets the frame rotation.
 func (iv *ImageView) WithFrameRotation(frameRotation float64) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return iv
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (iv *ImageView) WithFrameCenterRotation(frameCenterRotation float64) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return iv
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (iv *ImageView) WithBoundsRotation(boundsRotation float64) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return iv
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (iv *ImageView) WithBounds(bounds corefoundation.CGRect) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setBounds:"), bounds)
+	})
 	return iv
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (iv *ImageView) WithCanDrawConcurrently(canDrawConcurrently bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return iv
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (iv *ImageView) WithNeedsDisplay(needsDisplay bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return iv
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (iv *ImageView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return iv
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (iv *ImageView) WithWantsRestingTouches(wantsRestingTouches bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return iv
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (iv *ImageView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return iv
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (iv *ImageView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return iv
 }
 
 // WithWantsLayer sets the wants layer.
 func (iv *ImageView) WithWantsLayer(wantsLayer bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return iv
 }
 
 // WithLayer sets the layer.
 func (iv *ImageView) WithLayer(layer obj.Object) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return iv
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (iv *ImageView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return iv
 }
 
 // WithNeedsLayout sets the needs layout.
 func (iv *ImageView) WithNeedsLayout(needsLayout bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return iv
 }
 
 // WithAlphaValue sets the alpha value.
 func (iv *ImageView) WithAlphaValue(alphaValue float64) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return iv
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (iv *ImageView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return iv
 }
 
 // WithBackgroundFilters sets the background filters.
 func (iv *ImageView) WithBackgroundFilters(items ...obj.Object) *ImageView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return iv
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (iv *ImageView) WithCompositingFilter(compositingFilter obj.Object) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return iv
 }
 
 // WithContentFilters sets the content filters.
 func (iv *ImageView) WithContentFilters(items ...obj.Object) *ImageView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return iv
 }
 
 // WithShadow sets the shadow.
 func (iv *ImageView) WithShadow(shadow *Shadow) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return iv
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (iv *ImageView) WithClipsToBounds(clipsToBounds bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return iv
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (iv *ImageView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return iv
 }
 
 // WithToolTip sets the tool tip.
 func (iv *ImageView) WithToolTip(toolTip string) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return iv
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (iv *ImageView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return iv
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (iv *ImageView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return iv
 }
 
 // WithNextKeyView sets the next key view.
 func (iv *ImageView) WithNextKeyView(nextKeyView ViewProvider) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return iv
 }
 
 // WithFocusRingType sets the focus ring type.
 func (iv *ImageView) WithFocusRingType(focusRingType FocusRingType) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return iv
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (iv *ImageView) WithGestureRecognizers(items ...GestureRecognizerProvider) *ImageView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return iv
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (iv *ImageView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return iv
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (iv *ImageView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return iv
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (iv *ImageView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return iv
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (iv *ImageView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return iv
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (iv *ImageView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return iv
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (iv *ImageView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return iv
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (iv *ImageView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return iv
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (iv *ImageView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return iv
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (iv *ImageView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return iv
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (iv *ImageView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return iv
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (iv *ImageView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return iv
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (iv *ImageView) WithNextResponder(nextResponder ResponderProvider) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return iv
 }
 
 // WithMenu sets returns the responder’s menu.
 func (iv *ImageView) WithMenu(menu *Menu) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return iv
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (iv *ImageView) WithUserActivity(userActivity obj.Object) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return iv
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (iv *ImageView) WithTouchBar(touchBar *TouchBar) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return iv
 }
 
 // Image returns the image.
 func (iv *ImageView) Image() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("image"))
-	return ImageFromID(_r)
+	var _mainthread0 *Image
+	purego.Main(func() {
+		_mainthread0 = func() *Image {
+			_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("image"))
+			return ImageFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsEditable reports whether the object is editable.
 func (iv *ImageView) IsEditable() bool {
-	_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("isEditable"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("isEditable"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ImageAlignment returns the image alignment.
 func (iv *ImageView) ImageAlignment() ImageAlignment {
-	_r := objc.Send[ImageAlignment](objref.IDOf(iv), objc.RegisterName("imageAlignment"))
-	return _r
+	var _mainthread0 ImageAlignment
+	purego.Main(func() {
+		_mainthread0 = func() ImageAlignment {
+			_r := objc.Send[ImageAlignment](objref.IDOf(iv), objc.RegisterName("imageAlignment"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ImageScaling returns the image scaling.
 func (iv *ImageView) ImageScaling() ImageScaling {
-	_r := objc.Send[ImageScaling](objref.IDOf(iv), objc.RegisterName("imageScaling"))
-	return _r
+	var _mainthread0 ImageScaling
+	purego.Main(func() {
+		_mainthread0 = func() ImageScaling {
+			_r := objc.Send[ImageScaling](objref.IDOf(iv), objc.RegisterName("imageScaling"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ImageFrameStyle returns the image frame style.
 func (iv *ImageView) ImageFrameStyle() ImageFrameStyle {
-	_r := objc.Send[ImageFrameStyle](objref.IDOf(iv), objc.RegisterName("imageFrameStyle"))
-	return _r
+	var _mainthread0 ImageFrameStyle
+	purego.Main(func() {
+		_mainthread0 = func() ImageFrameStyle {
+			_r := objc.Send[ImageFrameStyle](objref.IDOf(iv), objc.RegisterName("imageFrameStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SymbolConfiguration specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images. If a symbol configuration isn't provided, the image view uses a default size, weight, and scale provided by the system. The default value is `nil`.
 func (iv *ImageView) SymbolConfiguration() *ImageSymbolConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("symbolConfiguration"))
-	return ImageSymbolConfigurationFromID(_r)
+	var _mainthread0 *ImageSymbolConfiguration
+	purego.Main(func() {
+		_mainthread0 = func() *ImageSymbolConfiguration {
+			_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("symbolConfiguration"))
+			return ImageSymbolConfigurationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ContentTintColor returns a tint color to be used when rendering template image content. This color may be combined with other effects to produce a theme-appropriate rendition of the template image. A `nil` value indicates the standard set of effects without color modification. The default value is `nil`.
 func (iv *ImageView) ContentTintColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("contentTintColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("contentTintColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Animates wraps the corresponding Objective-C method.
 func (iv *ImageView) Animates() bool {
-	_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("animates"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("animates"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsCutCopyPaste wraps the corresponding Objective-C method.
 func (iv *ImageView) AllowsCutCopyPaste() bool {
-	_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("allowsCutCopyPaste"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("allowsCutCopyPaste"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PreferredImageDynamicRange returns preferred dynamic range when displaying an image in the receiving image view.
 func (iv *ImageView) PreferredImageDynamicRange() ImageDynamicRange {
-	_r := objc.Send[ImageDynamicRange](objref.IDOf(iv), objc.RegisterName("preferredImageDynamicRange"))
-	return _r
+	var _mainthread0 ImageDynamicRange
+	purego.Main(func() {
+		_mainthread0 = func() ImageDynamicRange {
+			_r := objc.Send[ImageDynamicRange](objref.IDOf(iv), objc.RegisterName("preferredImageDynamicRange"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ImageDynamicRange returns resolved dynamic range based on fully resolved image content. Note: this will return `NSImageDynamicRangeUnspecified` if the image view has not or can not resolve the content (either because it has no resolvable image content or has not resolved because the image view hasn't displayed.)
 func (iv *ImageView) ImageDynamicRange() ImageDynamicRange {
-	_r := objc.Send[ImageDynamicRange](objref.IDOf(iv), objc.RegisterName("imageDynamicRange"))
-	return _r
+	var _mainthread0 ImageDynamicRange
+	purego.Main(func() {
+		_mainthread0 = func() ImageDynamicRange {
+			_r := objc.Send[ImageDynamicRange](objref.IDOf(iv), objc.RegisterName("imageDynamicRange"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AddSymbolEffect adds a symbol effect to the image view with default options and animation.
 func (iv *ImageView) AddSymbolEffect(symbolEffect obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("addSymbolEffect:"), objref.IDOf(symbolEffect))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("addSymbolEffect:"), objref.IDOf(symbolEffect))
+	})
+
 }
 
 // AddSymbolEffectOptions adds a symbol effect to the image view with the specified options and default animation.
 func (iv *ImageView) AddSymbolEffectOptions(symbolEffect obj.Object, options obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("addSymbolEffect:options:"), objref.IDOf(symbolEffect), objref.IDOf(options))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("addSymbolEffect:options:"), objref.IDOf(symbolEffect), objref.IDOf(options))
+	})
+
 }
 
 // AddSymbolEffectOptionsAnimated adds a symbol effect to the image view with the specified options and animation.
 func (iv *ImageView) AddSymbolEffectOptionsAnimated(symbolEffect obj.Object, options obj.Object, animated bool) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("addSymbolEffect:options:animated:"), objref.IDOf(symbolEffect), objref.IDOf(options), animated)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("addSymbolEffect:options:animated:"), objref.IDOf(symbolEffect), objref.IDOf(options), animated)
+	})
+
 }
 
 // RemoveSymbolEffectOfType removes the symbol effect that matches the specified effect type.
 func (iv *ImageView) RemoveSymbolEffectOfType(symbolEffect obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("removeSymbolEffectOfType:"), objref.IDOf(symbolEffect))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("removeSymbolEffectOfType:"), objref.IDOf(symbolEffect))
+	})
+
 }
 
 // RemoveSymbolEffectOfTypeOptions removes the symbol effect that matches the specified effect type, using the specified options.
 func (iv *ImageView) RemoveSymbolEffectOfTypeOptions(symbolEffect obj.Object, options obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("removeSymbolEffectOfType:options:"), objref.IDOf(symbolEffect), objref.IDOf(options))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("removeSymbolEffectOfType:options:"), objref.IDOf(symbolEffect), objref.IDOf(options))
+	})
+
 }
 
 // RemoveSymbolEffectOfTypeOptionsAnimated removes the symbol effect that matches the specified effect type, using the specified options and animation setting.
 func (iv *ImageView) RemoveSymbolEffectOfTypeOptionsAnimated(symbolEffect obj.Object, options obj.Object, animated bool) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("removeSymbolEffectOfType:options:animated:"), objref.IDOf(symbolEffect), objref.IDOf(options), animated)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("removeSymbolEffectOfType:options:animated:"), objref.IDOf(symbolEffect), objref.IDOf(options), animated)
+	})
+
 }
 
 // RemoveAllSymbolEffects removes all symbol effects from the image view.
 func (iv *ImageView) RemoveAllSymbolEffects() {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("removeAllSymbolEffects"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("removeAllSymbolEffects"))
+	})
+
 }
 
 // RemoveAllSymbolEffectsWithOptions removes all symbol effects from the image view, using the specified options.
 func (iv *ImageView) RemoveAllSymbolEffectsWithOptions(options obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("removeAllSymbolEffectsWithOptions:"), objref.IDOf(options))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("removeAllSymbolEffectsWithOptions:"), objref.IDOf(options))
+	})
+
 }
 
 // RemoveAllSymbolEffectsWithOptionsAnimated removes all symbol effects from the image view, using the specified options and animation setting.
 func (iv *ImageView) RemoveAllSymbolEffectsWithOptionsAnimated(options obj.Object, animated bool) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("removeAllSymbolEffectsWithOptions:animated:"), objref.IDOf(options), animated)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("removeAllSymbolEffectsWithOptions:animated:"), objref.IDOf(options), animated)
+	})
+
 }
 
 // SetSymbolImageWithContentTransition sets a symbol image using the specified content-transition effect.
 func (iv *ImageView) SetSymbolImageWithContentTransition(symbolImage *Image, transition obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setSymbolImage:withContentTransition:"), objref.IDOf(symbolImage), objref.IDOf(transition))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setSymbolImage:withContentTransition:"), objref.IDOf(symbolImage), objref.IDOf(transition))
+	})
+
 }
 
 // SetSymbolImageWithContentTransitionOptions sets a symbol image using the specified content-transition effect and options.
 func (iv *ImageView) SetSymbolImageWithContentTransitionOptions(symbolImage *Image, transition obj.Object, options obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setSymbolImage:withContentTransition:options:"), objref.IDOf(symbolImage), objref.IDOf(transition), objref.IDOf(options))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setSymbolImage:withContentTransition:options:"), objref.IDOf(symbolImage), objref.IDOf(transition), objref.IDOf(options))
+	})
+
 }
 
 var _ ControlProvider = (*ImageView)(nil)

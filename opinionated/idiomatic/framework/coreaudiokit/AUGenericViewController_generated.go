@@ -66,18 +66,33 @@ func (agvc *AUGenericViewController) String() string {
 
 // NewAUGenericViewController creates a new AUGenericViewController.
 func NewAUGenericViewController() *AUGenericViewController {
-	_id := objc.Send[objc.ID](objc.ID(_class("AUGenericViewController")), objc.RegisterName("new"))
-	return aUGenericViewControllerAdopt(_id)
+	var _mainthread0 *AUGenericViewController
+	purego.Main(func() {
+		_mainthread0 = func() *AUGenericViewController {
+			_id := objc.Send[objc.ID](objc.ID(_class("AUGenericViewController")), objc.RegisterName("new"))
+			return aUGenericViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithAuAudioUnit sets the au audio unit.
 func (agvc *AUGenericViewController) WithAuAudioUnit(auAudioUnit obj.Object) *AUGenericViewController {
-	objc.Send[objc.ID](objref.IDOf(agvc), objc.RegisterName("setAuAudioUnit:"), objref.IDOf(auAudioUnit))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(agvc), objc.RegisterName("setAuAudioUnit:"), objref.IDOf(auAudioUnit))
+	})
 	return agvc
 }
 
 // AuAudioUnit returns the au audio unit.
 func (agvc *AUGenericViewController) AuAudioUnit() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(agvc), objc.RegisterName("auAudioUnit"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(agvc), objc.RegisterName("auAudioUnit"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

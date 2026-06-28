@@ -66,51 +66,94 @@ func (wwec *WKWebExtensionCommand) String() string {
 
 // NewWKWebExtensionCommand creates a new WKWebExtensionCommand.
 func NewWKWebExtensionCommand() *WKWebExtensionCommand {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionCommand")), objc.RegisterName("new"))
-	return wKWebExtensionCommandAdopt(_id)
+	var _mainthread0 *WKWebExtensionCommand
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtensionCommand {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionCommand")), objc.RegisterName("new"))
+			return wKWebExtensionCommandAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithActivationKey sets the primary key used to trigger the command, distinct from any modifier flags. This property can be customized within the app to avoid conflicts with existing shortcuts or to enable user personalization. It should accurately represent the activation key as used by the app, which the extension can use to display the complete shortcut in its interface. If no shortcut is desired for the command, the property should be set to `nil`. This value should be saved and restored as needed by the app.
 func (wwec *WKWebExtensionCommand) WithActivationKey(activationKey string) *WKWebExtensionCommand {
-	objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("setActivationKey:"), purego.NSString(activationKey))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("setActivationKey:"), purego.NSString(activationKey))
+	})
 	return wwec
 }
 
 // WebExtensionContext returns the web extension context associated with the command.
 func (wwec *WKWebExtensionCommand) WebExtensionContext() *WKWebExtensionContext {
-	_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("webExtensionContext"))
-	return WKWebExtensionContextFromID(_r)
+	var _mainthread0 *WKWebExtensionContext
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtensionContext {
+			_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("webExtensionContext"))
+			return WKWebExtensionContextFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Identifier returns a unique identifier for the command.
 func (wwec *WKWebExtensionCommand) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("identifier"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("identifier"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Title returns descriptive title for the command aiding discoverability. This title can be displayed in user interface elements such as keyboard shortcuts lists or menu items to help users understand its purpose.
 func (wwec *WKWebExtensionCommand) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("title"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("title"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ActivationKey returns the primary key used to trigger the command, distinct from any modifier flags. This property can be customized within the app to avoid conflicts with existing shortcuts or to enable user personalization. It should accurately represent the activation key as used by the app, which the extension can use to display the complete shortcut in its interface. If no shortcut is desired for the command, the property should be set to `nil`. This value should be saved and restored as needed by the app.
 func (wwec *WKWebExtensionCommand) ActivationKey() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("activationKey"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("activationKey"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MenuItem returns the menu item.
 func (wwec *WKWebExtensionCommand) MenuItem() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("menuItem"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("menuItem"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

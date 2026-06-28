@@ -49,107 +49,184 @@ func collectionViewGridLayoutAdopt(id objc.ID) *CollectionViewGridLayout {
 
 // NewCollectionViewGridLayout creates a new CollectionViewGridLayout.
 func NewCollectionViewGridLayout() *CollectionViewGridLayout {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewGridLayout")), objc.RegisterName("new"))
-	return collectionViewGridLayoutAdopt(_id)
+	var _mainthread0 *CollectionViewGridLayout
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewGridLayout {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewGridLayout")), objc.RegisterName("new"))
+			return collectionViewGridLayoutAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithMargins sets the amount of empty space (in points) around the grid’s content.
 func (cvgl *CollectionViewGridLayout) WithMargins(margins foundation.NSEdgeInsets) *CollectionViewGridLayout {
-	objc.Send[objc.ID](objref.IDOf(cvgl), objc.RegisterName("setMargins:"), margins)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvgl), objc.RegisterName("setMargins:"), margins)
+	})
 	return cvgl
 }
 
 // WithMinimumInteritemSpacing sets the minimum spacing (in points) to use between items in the same row or column.
 func (cvgl *CollectionViewGridLayout) WithMinimumInteritemSpacing(minimumInteritemSpacing float64) *CollectionViewGridLayout {
-	objc.Send[objc.ID](objref.IDOf(cvgl), objc.RegisterName("setMinimumInteritemSpacing:"), minimumInteritemSpacing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvgl), objc.RegisterName("setMinimumInteritemSpacing:"), minimumInteritemSpacing)
+	})
 	return cvgl
 }
 
 // WithMinimumLineSpacing sets the minimum spacing (in points) to use between rows or columns.
 func (cvgl *CollectionViewGridLayout) WithMinimumLineSpacing(minimumLineSpacing float64) *CollectionViewGridLayout {
-	objc.Send[objc.ID](objref.IDOf(cvgl), objc.RegisterName("setMinimumLineSpacing:"), minimumLineSpacing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvgl), objc.RegisterName("setMinimumLineSpacing:"), minimumLineSpacing)
+	})
 	return cvgl
 }
 
 // WithMaximumNumberOfRows sets the maximum number of rows to display in the collection view’s visible area.
 func (cvgl *CollectionViewGridLayout) WithMaximumNumberOfRows(maximumNumberOfRows int) *CollectionViewGridLayout {
-	objc.Send[objc.ID](objref.IDOf(cvgl), objc.RegisterName("setMaximumNumberOfRows:"), maximumNumberOfRows)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvgl), objc.RegisterName("setMaximumNumberOfRows:"), maximumNumberOfRows)
+	})
 	return cvgl
 }
 
 // WithMaximumNumberOfColumns sets the maximum number of columns to display in the collection view’s visible area.
 func (cvgl *CollectionViewGridLayout) WithMaximumNumberOfColumns(maximumNumberOfColumns int) *CollectionViewGridLayout {
-	objc.Send[objc.ID](objref.IDOf(cvgl), objc.RegisterName("setMaximumNumberOfColumns:"), maximumNumberOfColumns)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvgl), objc.RegisterName("setMaximumNumberOfColumns:"), maximumNumberOfColumns)
+	})
 	return cvgl
 }
 
 // WithMinimumItemSize sets the smallest allowable size for an item’s view.
 func (cvgl *CollectionViewGridLayout) WithMinimumItemSize(minimumItemSize corefoundation.CGSize) *CollectionViewGridLayout {
-	objc.Send[objc.ID](objref.IDOf(cvgl), objc.RegisterName("setMinimumItemSize:"), minimumItemSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvgl), objc.RegisterName("setMinimumItemSize:"), minimumItemSize)
+	})
 	return cvgl
 }
 
 // WithMaximumItemSize sets the largest allowable size for an item’s view.
 func (cvgl *CollectionViewGridLayout) WithMaximumItemSize(maximumItemSize corefoundation.CGSize) *CollectionViewGridLayout {
-	objc.Send[objc.ID](objref.IDOf(cvgl), objc.RegisterName("setMaximumItemSize:"), maximumItemSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvgl), objc.RegisterName("setMaximumItemSize:"), maximumItemSize)
+	})
 	return cvgl
 }
 
 // WithBackgroundColors sets the array of background colors to use when drawing the grid.
 func (cvgl *CollectionViewGridLayout) WithBackgroundColors(items ...*Color) *CollectionViewGridLayout {
 	_arr := purego.SliceToNSArray(items, func(_v *Color) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(cvgl), objc.RegisterName("setBackgroundColors:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvgl), objc.RegisterName("setBackgroundColors:"), _arr)
+	})
 	return cvgl
 }
 
 // Margins returns the margins.
 func (cvgl *CollectionViewGridLayout) Margins() foundation.NSEdgeInsets {
-	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(cvgl), objc.RegisterName("margins"))
-	return _r
+	var _mainthread0 foundation.NSEdgeInsets
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSEdgeInsets {
+			_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(cvgl), objc.RegisterName("margins"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MinimumInteritemSpacing returns the minimum interitem spacing.
 func (cvgl *CollectionViewGridLayout) MinimumInteritemSpacing() float64 {
-	_r := objc.Send[float64](objref.IDOf(cvgl), objc.RegisterName("minimumInteritemSpacing"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(cvgl), objc.RegisterName("minimumInteritemSpacing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MinimumLineSpacing returns the minimum line spacing.
 func (cvgl *CollectionViewGridLayout) MinimumLineSpacing() float64 {
-	_r := objc.Send[float64](objref.IDOf(cvgl), objc.RegisterName("minimumLineSpacing"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(cvgl), objc.RegisterName("minimumLineSpacing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MaximumNumberOfRows returns the maximum number of rows.
 func (cvgl *CollectionViewGridLayout) MaximumNumberOfRows() int {
-	_r := objc.Send[int](objref.IDOf(cvgl), objc.RegisterName("maximumNumberOfRows"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(cvgl), objc.RegisterName("maximumNumberOfRows"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MaximumNumberOfColumns returns the maximum number of columns.
 func (cvgl *CollectionViewGridLayout) MaximumNumberOfColumns() int {
-	_r := objc.Send[int](objref.IDOf(cvgl), objc.RegisterName("maximumNumberOfColumns"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(cvgl), objc.RegisterName("maximumNumberOfColumns"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MinimumItemSize returns the minimum item size.
 func (cvgl *CollectionViewGridLayout) MinimumItemSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvgl), objc.RegisterName("minimumItemSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvgl), objc.RegisterName("minimumItemSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MaximumItemSize returns the maximum item size.
 func (cvgl *CollectionViewGridLayout) MaximumItemSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvgl), objc.RegisterName("maximumItemSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvgl), objc.RegisterName("maximumItemSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BackgroundColors returns the background colors.
 //
 // BackgroundColors returns the collection as a Go slice.
 func (cvgl *CollectionViewGridLayout) BackgroundColors() []*Color {
-	_arr := objc.Send[objc.ID](objref.IDOf(cvgl), objc.RegisterName("backgroundColors"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Color { return ColorFromID(_id) })
+	var _mainthread0 []*Color
+	purego.Main(func() {
+		_mainthread0 = func() []*Color {
+			_arr := objc.Send[objc.ID](objref.IDOf(cvgl), objc.RegisterName("backgroundColors"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Color { return ColorFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 var _ CollectionViewLayoutProvider = (*CollectionViewGridLayout)(nil)

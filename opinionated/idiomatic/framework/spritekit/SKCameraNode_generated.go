@@ -49,171 +49,241 @@ func cameraNodeAdopt(id objc.ID) *CameraNode {
 
 // NewCameraNode creates a new CameraNode.
 func NewCameraNode() *CameraNode {
-	_id := objc.Send[objc.ID](objc.ID(_class("SKCameraNode")), objc.RegisterName("new"))
-	return cameraNodeAdopt(_id)
+	var _mainthread0 *CameraNode
+	purego.Main(func() {
+		_mainthread0 = func() *CameraNode {
+			_id := objc.Send[objc.ID](objc.ID(_class("SKCameraNode")), objc.RegisterName("new"))
+			return cameraNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithPosition sets the position of the node in its parent’s coordinate system.
 func (cn *CameraNode) WithPosition(position corefoundation.CGPoint) *CameraNode {
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setPosition:"), position)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setPosition:"), position)
+	})
 	return cn
 }
 
 // WithZPosition sets the height of the node relative to its parent.
 func (cn *CameraNode) WithZPosition(zPosition float64) *CameraNode {
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setZPosition:"), zPosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setZPosition:"), zPosition)
+	})
 	return cn
 }
 
 // WithZRotation sets the Euler rotation about the z axis (in radians).
 func (cn *CameraNode) WithZRotation(zRotation float64) *CameraNode {
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setZRotation:"), zRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setZRotation:"), zRotation)
+	})
 	return cn
 }
 
 // WithXScale sets a scaling factor that multiplies the width of a node and its children.
 func (cn *CameraNode) WithXScale(xScale float64) *CameraNode {
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setXScale:"), xScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setXScale:"), xScale)
+	})
 	return cn
 }
 
 // WithYScale sets a scaling factor that multiplies the height of a node and its children.
 func (cn *CameraNode) WithYScale(yScale float64) *CameraNode {
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setYScale:"), yScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setYScale:"), yScale)
+	})
 	return cn
 }
 
 // WithSpeed sets a speed modifier applied to all actions executed by a node and its descendants.
 func (cn *CameraNode) WithSpeed(speed float64) *CameraNode {
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setSpeed:"), speed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setSpeed:"), speed)
+	})
 	return cn
 }
 
 // WithAlpha sets the transparency value applied to the node’s contents.
 func (cn *CameraNode) WithAlpha(alpha float64) *CameraNode {
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAlpha:"), alpha)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAlpha:"), alpha)
+	})
 	return cn
 }
 
 // WithPaused sets a Boolean value that determines whether actions on the node and its descendants are processed.
 func (cn *CameraNode) WithPaused(paused bool) *CameraNode {
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setPaused:"), paused)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setPaused:"), paused)
+	})
 	return cn
 }
 
 // WithHidden sets a Boolean value that determines whether a node and its descendants are rendered.
 func (cn *CameraNode) WithHidden(hidden bool) *CameraNode {
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setHidden:"), hidden)
+	})
 	return cn
 }
 
 // WithUserInteractionEnabled sets a Boolean value that indicates whether the node receives touch events.
 func (cn *CameraNode) WithUserInteractionEnabled(userInteractionEnabled bool) *CameraNode {
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	})
 	return cn
 }
 
 // WithName sets the node’s assignable name.
 func (cn *CameraNode) WithName(name string) *CameraNode {
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setName:"), purego.NSString(name))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setName:"), purego.NSString(name))
+	})
 	return cn
 }
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (cn *CameraNode) WithPhysicsBody(physicsBody *PhysicsBody) *CameraNode {
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	})
 	return cn
 }
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (cn *CameraNode) WithUserData(userData obj.Object) *CameraNode {
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	})
 	return cn
 }
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (cn *CameraNode) WithReachConstraints(reachConstraints *ReachConstraints) *CameraNode {
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	})
 	return cn
 }
 
 // WithConstraints sets a list of constraints to apply to the node.
 func (cn *CameraNode) WithConstraints(items ...*Constraint) *CameraNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setConstraints:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setConstraints:"), _arr)
+	})
 	return cn
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
 func (cn *CameraNode) WithAttributeValues(attributeValues obj.Object) *CameraNode {
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	})
 	return cn
 }
 
 // WithAccessibilityElement sets a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (cn *CameraNode) WithAccessibilityElement(accessibilityElement bool) *CameraNode {
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	})
 	return cn
 }
 
 // WithAccessibilityRole sets a string value describing the user interface element type; for example, a button.
 func (cn *CameraNode) WithAccessibilityRole(accessibilityRole string) *CameraNode {
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	})
 	return cn
 }
 
 // WithAccessibilityRoleDescription sets a string value describing the user interface element name and type; for example, the Buy button.
 func (cn *CameraNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *CameraNode {
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	})
 	return cn
 }
 
 // WithAccessibilitySubrole sets a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (cn *CameraNode) WithAccessibilitySubrole(accessibilitySubrole string) *CameraNode {
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	})
 	return cn
 }
 
 // WithAccessibilityFrame sets the size of this user interface element, in screen points.
 func (cn *CameraNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *CameraNode {
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	})
 	return cn
 }
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (cn *CameraNode) WithAccessibilityParent(accessibilityParent obj.Object) *CameraNode {
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	})
 	return cn
 }
 
 // WithAccessibilityHelp sets the help description of this user interface element; for example, the text shown in a tooltip.
 func (cn *CameraNode) WithAccessibilityHelp(accessibilityHelp string) *CameraNode {
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	})
 	return cn
 }
 
 // WithAccessibilityLabel sets a short description of this user interface element.
 func (cn *CameraNode) WithAccessibilityLabel(accessibilityLabel string) *CameraNode {
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	})
 	return cn
 }
 
 // WithAccessibilityEnabled sets a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (cn *CameraNode) WithAccessibilityEnabled(accessibilityEnabled bool) *CameraNode {
-	objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	})
 	return cn
 }
 
 // ContainsNode checks to see if a node is visible in the camera’s viewport.
 func (cn *CameraNode) ContainsNode(node *Node) bool {
-	_r := objc.Send[bool](objref.IDOf(cn), objc.RegisterName("containsNode:"), objref.IDOf(node))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cn), objc.RegisterName("containsNode:"), objref.IDOf(node))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ContainedNodeSet returns finds nodes that are visible in the camera’s viewport.
 func (cn *CameraNode) ContainedNodeSet() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("containedNodeSet"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("containedNodeSet"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ NodeProvider = (*CameraNode)(nil)

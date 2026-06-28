@@ -66,138 +66,234 @@ func (bpd *BluetoothPasskeyDisplay) String() string {
 
 // NewBluetoothPasskeyDisplay creates a new BluetoothPasskeyDisplay.
 func NewBluetoothPasskeyDisplay() *BluetoothPasskeyDisplay {
-	_id := objc.Send[objc.ID](objc.ID(_class("IOBluetoothPasskeyDisplay")), objc.RegisterName("new"))
-	return bluetoothPasskeyDisplayAdopt(_id)
+	var _mainthread0 *BluetoothPasskeyDisplay
+	purego.Main(func() {
+		_mainthread0 = func() *BluetoothPasskeyDisplay {
+			_id := objc.Send[objc.ID](objc.ID(_class("IOBluetoothPasskeyDisplay")), objc.RegisterName("new"))
+			return bluetoothPasskeyDisplayAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithUsePasskeyNotificaitons sets the use passkey notificaitons.
 func (bpd *BluetoothPasskeyDisplay) WithUsePasskeyNotificaitons(usePasskeyNotificaitons bool) *BluetoothPasskeyDisplay {
-	objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setUsePasskeyNotificaitons:"), usePasskeyNotificaitons)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setUsePasskeyNotificaitons:"), usePasskeyNotificaitons)
+	})
 	return bpd
 }
 
 // WithIsIncomingRequest sets the is incoming request.
 func (bpd *BluetoothPasskeyDisplay) WithIsIncomingRequest(isIncomingRequest bool) *BluetoothPasskeyDisplay {
-	objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setIsIncomingRequest:"), isIncomingRequest)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setIsIncomingRequest:"), isIncomingRequest)
+	})
 	return bpd
 }
 
 // WithPasskey sets the passkey.
 func (bpd *BluetoothPasskeyDisplay) WithPasskey(passkey string) *BluetoothPasskeyDisplay {
-	objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setPasskey:"), purego.NSString(passkey))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setPasskey:"), purego.NSString(passkey))
+	})
 	return bpd
 }
 
 // WithReturnImage sets the return image.
 func (bpd *BluetoothPasskeyDisplay) WithReturnImage(returnImage obj.Object) *BluetoothPasskeyDisplay {
-	objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setReturnImage:"), objref.IDOf(returnImage))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setReturnImage:"), objref.IDOf(returnImage))
+	})
 	return bpd
 }
 
 // WithReturnHighlightImage sets the return highlight image.
 func (bpd *BluetoothPasskeyDisplay) WithReturnHighlightImage(returnHighlightImage obj.Object) *BluetoothPasskeyDisplay {
-	objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setReturnHighlightImage:"), objref.IDOf(returnHighlightImage))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setReturnHighlightImage:"), objref.IDOf(returnHighlightImage))
+	})
 	return bpd
 }
 
 // WithCenteredView sets the centered view.
 func (bpd *BluetoothPasskeyDisplay) WithCenteredView(centeredView obj.Object) *BluetoothPasskeyDisplay {
-	objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setCenteredView:"), objref.IDOf(centeredView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setCenteredView:"), objref.IDOf(centeredView))
+	})
 	return bpd
 }
 
 // WithBackgroundImageConstraint sets the background image constraint.
 func (bpd *BluetoothPasskeyDisplay) WithBackgroundImageConstraint(backgroundImageConstraint obj.Object) *BluetoothPasskeyDisplay {
-	objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setBackgroundImageConstraint:"), objref.IDOf(backgroundImageConstraint))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setBackgroundImageConstraint:"), objref.IDOf(backgroundImageConstraint))
+	})
 	return bpd
 }
 
 // SetPasskeyForDeviceUsingSSP wraps the corresponding Objective-C method.
 func (bpd *BluetoothPasskeyDisplay) SetPasskeyForDeviceUsingSSP(inString string, device obj.Object, isSSP bool) {
-	objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setPasskey:forDevice:usingSSP:"), purego.NSString(inString), objref.IDOf(device), isSSP)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setPasskey:forDevice:usingSSP:"), purego.NSString(inString), objref.IDOf(device), isSSP)
+	})
+
 }
 
 // AdvancePasskeyIndicator wraps the corresponding Objective-C method.
 func (bpd *BluetoothPasskeyDisplay) AdvancePasskeyIndicator() {
-	objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("advancePasskeyIndicator"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("advancePasskeyIndicator"))
+	})
+
 }
 
 // RetreatPasskeyIndicator wraps the corresponding Objective-C method.
 func (bpd *BluetoothPasskeyDisplay) RetreatPasskeyIndicator() {
-	objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("retreatPasskeyIndicator"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("retreatPasskeyIndicator"))
+	})
+
 }
 
 // ResetPasskeyIndicator resets passkey indicator.
 func (bpd *BluetoothPasskeyDisplay) ResetPasskeyIndicator() {
-	objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("resetPasskeyIndicator"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("resetPasskeyIndicator"))
+	})
+
 }
 
 // SetupUIForDevice wraps the corresponding Objective-C method.
 func (bpd *BluetoothPasskeyDisplay) SetupUIForDevice(device obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setupUIForDevice:"), objref.IDOf(device))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setupUIForDevice:"), objref.IDOf(device))
+	})
+
 }
 
 // SetupUIForSSPDevice wraps the corresponding Objective-C method.
 func (bpd *BluetoothPasskeyDisplay) SetupUIForSSPDevice(device obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setupUIForSSPDevice:"), objref.IDOf(device))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setupUIForSSPDevice:"), objref.IDOf(device))
+	})
+
 }
 
 // SetPasskeyString wraps the corresponding Objective-C method.
 func (bpd *BluetoothPasskeyDisplay) SetPasskeyString(inString string) {
-	objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setPasskeyString:"), purego.NSString(inString))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setPasskeyString:"), purego.NSString(inString))
+	})
+
 }
 
 // SetPasskeyIndicatorEnabled wraps the corresponding Objective-C method.
 func (bpd *BluetoothPasskeyDisplay) SetPasskeyIndicatorEnabled(inEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setPasskeyIndicatorEnabled:"), inEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setPasskeyIndicatorEnabled:"), inEnabled)
+	})
+
 }
 
 // ResetAll resets all.
 func (bpd *BluetoothPasskeyDisplay) ResetAll() {
-	objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("resetAll"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("resetAll"))
+	})
+
 }
 
 // UsePasskeyNotificaitons wraps the corresponding Objective-C method.
 func (bpd *BluetoothPasskeyDisplay) UsePasskeyNotificaitons() bool {
-	_r := objc.Send[bool](objref.IDOf(bpd), objc.RegisterName("usePasskeyNotificaitons"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(bpd), objc.RegisterName("usePasskeyNotificaitons"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsIncomingRequest reports whether the object is incoming request.
 func (bpd *BluetoothPasskeyDisplay) IsIncomingRequest() bool {
-	_r := objc.Send[bool](objref.IDOf(bpd), objc.RegisterName("isIncomingRequest"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(bpd), objc.RegisterName("isIncomingRequest"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Passkey returns the passkey.
 func (bpd *BluetoothPasskeyDisplay) Passkey() string {
-	_r := objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("passkey"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("passkey"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ReturnImage returns the return image.
 func (bpd *BluetoothPasskeyDisplay) ReturnImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("returnImage"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("returnImage"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ReturnHighlightImage returns the return highlight image.
 func (bpd *BluetoothPasskeyDisplay) ReturnHighlightImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("returnHighlightImage"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("returnHighlightImage"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CenteredView returns the centered view.
 func (bpd *BluetoothPasskeyDisplay) CenteredView() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("centeredView"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("centeredView"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BackgroundImageConstraint returns the background image constraint.
 func (bpd *BluetoothPasskeyDisplay) BackgroundImageConstraint() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("backgroundImageConstraint"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("backgroundImageConstraint"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

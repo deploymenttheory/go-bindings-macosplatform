@@ -68,24 +68,51 @@ func (cls *CollectionLayoutSpacing) String() string {
 
 // NewCollectionLayoutSpacing creates a new CollectionLayoutSpacing.
 func NewCollectionLayoutSpacing() *CollectionLayoutSpacing {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutSpacing")), objc.RegisterName("new"))
-	return collectionLayoutSpacingAdopt(_id)
+	var _mainthread0 *CollectionLayoutSpacing
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionLayoutSpacing {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutSpacing")), objc.RegisterName("new"))
+			return collectionLayoutSpacingAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // Spacing returns the spacing.
 func (cls *CollectionLayoutSpacing) Spacing() float64 {
-	_r := objc.Send[float64](objref.IDOf(cls), objc.RegisterName("spacing"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(cls), objc.RegisterName("spacing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsFlexibleSpacing reports whether the object is flexible spacing.
 func (cls *CollectionLayoutSpacing) IsFlexibleSpacing() bool {
-	_r := objc.Send[bool](objref.IDOf(cls), objc.RegisterName("isFlexibleSpacing"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cls), objc.RegisterName("isFlexibleSpacing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsFixedSpacing reports whether the object is fixed spacing.
 func (cls *CollectionLayoutSpacing) IsFixedSpacing() bool {
-	_r := objc.Send[bool](objref.IDOf(cls), objc.RegisterName("isFixedSpacing"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cls), objc.RegisterName("isFixedSpacing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

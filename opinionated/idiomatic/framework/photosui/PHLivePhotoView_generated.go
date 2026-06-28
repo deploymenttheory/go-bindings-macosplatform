@@ -69,87 +69,154 @@ func (lpv *LivePhotoView) String() string {
 
 // NewLivePhotoView creates a new LivePhotoView.
 func NewLivePhotoView() *LivePhotoView {
-	_id := objc.Send[objc.ID](objc.ID(_class("PHLivePhotoView")), objc.RegisterName("new"))
-	return livePhotoViewAdopt(_id)
+	var _mainthread0 *LivePhotoView
+	purego.Main(func() {
+		_mainthread0 = func() *LivePhotoView {
+			_id := objc.Send[objc.ID](objc.ID(_class("PHLivePhotoView")), objc.RegisterName("new"))
+			return livePhotoViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithLivePhoto sets the Live Photo displayed in the view.
 func (lpv *LivePhotoView) WithLivePhoto(livePhoto obj.Object) *LivePhotoView {
-	objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("setLivePhoto:"), objref.IDOf(livePhoto))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("setLivePhoto:"), objref.IDOf(livePhoto))
+	})
 	return lpv
 }
 
 // WithContentMode sets the mode in which the view displays its content.
 func (lpv *LivePhotoView) WithContentMode(contentMode LivePhotoViewContentMode) *LivePhotoView {
-	objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("setContentMode:"), contentMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("setContentMode:"), contentMode)
+	})
 	return lpv
 }
 
 // WithContentsRect sets the rectangle, in the unit coordinate space, that defines the portion of the Live Photo contents that should be displayed. In this coordinate system, the point `{0.0,0.0}` refers to the upper left corner of the Live Photo, and `{1.0,1.0}` refers to the bottom right corner.
 func (lpv *LivePhotoView) WithContentsRect(contentsRect corefoundation.CGRect) *LivePhotoView {
-	objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("setContentsRect:"), contentsRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("setContentsRect:"), contentsRect)
+	})
 	return lpv
 }
 
 // WithAudioVolume sets the audio gain to apply to the Live Photo’s movie content during playback.
 func (lpv *LivePhotoView) WithAudioVolume(audioVolume float32) *LivePhotoView {
-	objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("setAudioVolume:"), audioVolume)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("setAudioVolume:"), audioVolume)
+	})
 	return lpv
 }
 
 // WithMuted sets a Boolean value that determines whether the view plays the audio content of its Live Photo.
 func (lpv *LivePhotoView) WithMuted(muted bool) *LivePhotoView {
-	objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("setMuted:"), muted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("setMuted:"), muted)
+	})
 	return lpv
 }
 
 // StartPlaybackWithStyle begins playback of Live Photo content in the view.
 func (lpv *LivePhotoView) StartPlaybackWithStyle(playbackStyle LivePhotoViewPlaybackStyle) {
-	objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("startPlaybackWithStyle:"), playbackStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("startPlaybackWithStyle:"), playbackStyle)
+	})
+
 }
 
 // StopPlayback stops playback of a Live Photo.
 func (lpv *LivePhotoView) StopPlayback() {
-	objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("stopPlayback"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("stopPlayback"))
+	})
+
 }
 
 // StopPlaybackAnimated stops playback of a Live Photo in an animated manner.
 func (lpv *LivePhotoView) StopPlaybackAnimated(animated bool) {
-	objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("stopPlaybackAnimated:"), animated)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("stopPlaybackAnimated:"), animated)
+	})
+
 }
 
 // LivePhoto returns live photo displayed in the receiver.
 func (lpv *LivePhotoView) LivePhoto() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("livePhoto"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("livePhoto"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ContentMode returns the mode in which the receiver will display its content. Defaults to PHLivePhotoViewContentModeAspectFit.
 func (lpv *LivePhotoView) ContentMode() LivePhotoViewContentMode {
-	_r := objc.Send[LivePhotoViewContentMode](objref.IDOf(lpv), objc.RegisterName("contentMode"))
-	return _r
+	var _mainthread0 LivePhotoViewContentMode
+	purego.Main(func() {
+		_mainthread0 = func() LivePhotoViewContentMode {
+			_r := objc.Send[LivePhotoViewContentMode](objref.IDOf(lpv), objc.RegisterName("contentMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ContentsRect returns the rectangle, in the unit coordinate space, that defines the portion of the Live Photo contents that should be displayed. In this coordinate system, the point `{0.0,0.0}` refers to the upper left corner of the Live Photo, and `{1.0,1.0}` refers to the bottom right corner.
 func (lpv *LivePhotoView) ContentsRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(lpv), objc.RegisterName("contentsRect"))
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(lpv), objc.RegisterName("contentsRect"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AudioVolume returns the audio volume during playback
 func (lpv *LivePhotoView) AudioVolume() float32 {
-	_r := objc.Send[float32](objref.IDOf(lpv), objc.RegisterName("audioVolume"))
-	return _r
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_r := objc.Send[float32](objref.IDOf(lpv), objc.RegisterName("audioVolume"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsMuted reports whether the audio of the Live Photo is muted.
 func (lpv *LivePhotoView) IsMuted() bool {
-	_r := objc.Send[bool](objref.IDOf(lpv), objc.RegisterName("isMuted"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(lpv), objc.RegisterName("isMuted"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LivePhotoBadgeView returns directly access the livePhotoBadge in cases where it should be added to a different place in the view hierarchy and not the live photo view. This can be useful when the live photo view is added to a scroll view.
 func (lpv *LivePhotoView) LivePhotoBadgeView() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("livePhotoBadgeView"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(lpv), objc.RegisterName("livePhotoBadgeView"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

@@ -48,59 +48,99 @@ func burnSetupPanelAdopt(id objc.ID) *BurnSetupPanel {
 
 // NewBurnSetupPanel creates a new BurnSetupPanel.
 func NewBurnSetupPanel() *BurnSetupPanel {
-	_id := objc.Send[objc.ID](objc.ID(_class("DRBurnSetupPanel")), objc.RegisterName("new"))
-	return burnSetupPanelAdopt(_id)
+	var _mainthread0 *BurnSetupPanel
+	purego.Main(func() {
+		_mainthread0 = func() *BurnSetupPanel {
+			_id := objc.Send[objc.ID](objc.ID(_class("DRBurnSetupPanel")), objc.RegisterName("new"))
+			return burnSetupPanelAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // SetDefaultButtonTitle sets the title for the receiver's default button to title. Normally, the default button is &ldquo;Burn&rdquo;.
 func (bsp *BurnSetupPanel) SetDefaultButtonTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(bsp), objc.RegisterName("setDefaultButtonTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bsp), objc.RegisterName("setDefaultButtonTitle:"), purego.NSString(title))
+	})
+
 }
 
 // SetCanSelectTestBurn specifies whether the user can choose to make a test burn. This method controls whether a checkbox should be added to the receiver that allows the user to set the burn to be a test burn. By default, the test burn button is not displayed. This method must be called before the panel is displayed.
 func (bsp *BurnSetupPanel) SetCanSelectTestBurn(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(bsp), objc.RegisterName("setCanSelectTestBurn:"), flag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bsp), objc.RegisterName("setCanSelectTestBurn:"), flag)
+	})
+
 }
 
 // SetCanSelectAppendableMedia specifies whether the user can choose to leave the disc appendable. This method controls whether the appendable checkbox is enabled. If the data being writen to disc does not lend itself to having more data appended on to it, you can disable the ability of the user to leave the disc open. This method must be called before the panel is displayed.
 func (bsp *BurnSetupPanel) SetCanSelectAppendableMedia(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(bsp), objc.RegisterName("setCanSelectAppendableMedia:"), flag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bsp), objc.RegisterName("setCanSelectAppendableMedia:"), flag)
+	})
+
 }
 
 // BurnObject creates and returns a new DRBurn object that's configured to write data to the currently selected device. The new DRBurn object is configured based on the settings in the setup panel when the user clicks the OK button. Do not invoke this method within a modal session (
 func (bsp *BurnSetupPanel) BurnObject() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(bsp), objc.RegisterName("burnObject"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(bsp), objc.RegisterName("burnObject"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Expand invoked when the user clicks the panel's expand button.
 func (bsp *BurnSetupPanel) Expand(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(bsp), objc.RegisterName("expand:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bsp), objc.RegisterName("expand:"), objref.IDOf(sender))
+	})
+
 }
 
 // BurnSpeed invoked when the user clicks the panel's burn speed popup button.
 func (bsp *BurnSetupPanel) BurnSpeed(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(bsp), objc.RegisterName("burnSpeed:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bsp), objc.RegisterName("burnSpeed:"), objref.IDOf(sender))
+	})
+
 }
 
 // Appendable invoked when the user clicks the panel's appendable checkbox.
 func (bsp *BurnSetupPanel) Appendable(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(bsp), objc.RegisterName("appendable:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bsp), objc.RegisterName("appendable:"), objref.IDOf(sender))
+	})
+
 }
 
 // CompletionAction invoked when the user clicks one of the panel's completion action radio buttons.
 func (bsp *BurnSetupPanel) CompletionAction(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(bsp), objc.RegisterName("completionAction:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bsp), objc.RegisterName("completionAction:"), objref.IDOf(sender))
+	})
+
 }
 
 // TestBurn invoked when the user clicks the panel's test burn checkbox.
 func (bsp *BurnSetupPanel) TestBurn(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(bsp), objc.RegisterName("testBurn:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bsp), objc.RegisterName("testBurn:"), objref.IDOf(sender))
+	})
+
 }
 
 // VerifyBurn invoked when the user clicks the panel's verify burn checkbox.
 func (bsp *BurnSetupPanel) VerifyBurn(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(bsp), objc.RegisterName("verifyBurn:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bsp), objc.RegisterName("verifyBurn:"), objref.IDOf(sender))
+	})
+
 }
 
 var _ SetupPanelProvider = (*BurnSetupPanel)(nil)

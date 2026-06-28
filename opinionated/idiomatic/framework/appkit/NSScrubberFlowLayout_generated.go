@@ -49,37 +49,64 @@ func scrubberFlowLayoutAdopt(id objc.ID) *ScrubberFlowLayout {
 
 // NewScrubberFlowLayout creates a new ScrubberFlowLayout.
 func NewScrubberFlowLayout() *ScrubberFlowLayout {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSScrubberFlowLayout")), objc.RegisterName("new"))
-	return scrubberFlowLayoutAdopt(_id)
+	var _mainthread0 *ScrubberFlowLayout
+	purego.Main(func() {
+		_mainthread0 = func() *ScrubberFlowLayout {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSScrubberFlowLayout")), objc.RegisterName("new"))
+			return scrubberFlowLayoutAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithItemSpacing sets the horizontal spacing between items, specified in points.
 func (sfl *ScrubberFlowLayout) WithItemSpacing(itemSpacing float64) *ScrubberFlowLayout {
-	objc.Send[objc.ID](objref.IDOf(sfl), objc.RegisterName("setItemSpacing:"), itemSpacing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sfl), objc.RegisterName("setItemSpacing:"), itemSpacing)
+	})
 	return sfl
 }
 
 // WithItemSize sets the frame size for each item in the scrubber.
 func (sfl *ScrubberFlowLayout) WithItemSize(itemSize corefoundation.CGSize) *ScrubberFlowLayout {
-	objc.Send[objc.ID](objref.IDOf(sfl), objc.RegisterName("setItemSize:"), itemSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sfl), objc.RegisterName("setItemSize:"), itemSize)
+	})
 	return sfl
 }
 
 // InvalidateLayoutForItemsAtIndexes informs the scrubber that it should perform a new layout pass for the items at the specified indexes.
 func (sfl *ScrubberFlowLayout) InvalidateLayoutForItemsAtIndexes(invalidItemIndexes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(sfl), objc.RegisterName("invalidateLayoutForItemsAtIndexes:"), objref.IDOf(invalidItemIndexes))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sfl), objc.RegisterName("invalidateLayoutForItemsAtIndexes:"), objref.IDOf(invalidItemIndexes))
+	})
+
 }
 
 // ItemSpacing returns the amount of horizontal spacing between items in points. The default value is 0.0.
 func (sfl *ScrubberFlowLayout) ItemSpacing() float64 {
-	_r := objc.Send[float64](objref.IDOf(sfl), objc.RegisterName("itemSpacing"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sfl), objc.RegisterName("itemSpacing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ItemSize returns the frame size for each item, if not provided by the scrubber's delegate. The default value is { 50.0, 30.0 }.
 func (sfl *ScrubberFlowLayout) ItemSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(sfl), objc.RegisterName("itemSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(sfl), objc.RegisterName("itemSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ScrubberLayoutProvider = (*ScrubberFlowLayout)(nil)

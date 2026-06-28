@@ -69,98 +69,173 @@ func (tv *ThumbnailView) String() string {
 
 // NewThumbnailView creates a new ThumbnailView.
 func NewThumbnailView() *ThumbnailView {
-	_id := objc.Send[objc.ID](objc.ID(_class("PDFThumbnailView")), objc.RegisterName("new"))
-	return thumbnailViewAdopt(_id)
+	var _mainthread0 *ThumbnailView
+	purego.Main(func() {
+		_mainthread0 = func() *ThumbnailView {
+			_id := objc.Send[objc.ID](objc.ID(_class("PDFThumbnailView")), objc.RegisterName("new"))
+			return thumbnailViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithPDFView sets returns the PDFView object associated with the thumbnail view.
 func (tv *ThumbnailView) WithPDFView(pDFView *View) *ThumbnailView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPDFView:"), objref.IDOf(pDFView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPDFView:"), objref.IDOf(pDFView))
+	})
 	return tv
 }
 
 // WithBackgroundColor sets returns the color used in the background of the thumbnail view.
 func (tv *ThumbnailView) WithBackgroundColor(backgroundColor obj.Object) *ThumbnailView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	})
 	return tv
 }
 
 // WithThumbnailSize sets returns the maximum width and height of the thumbnails in the thumbnail view.
 func (tv *ThumbnailView) WithThumbnailSize(thumbnailSize corefoundation.CGSize) *ThumbnailView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setThumbnailSize:"), thumbnailSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setThumbnailSize:"), thumbnailSize)
+	})
 	return tv
 }
 
 // WithMaximumNumberOfColumns sets returns the maximum number of columns of thumbnails the thumbnail view can display.
 func (tv *ThumbnailView) WithMaximumNumberOfColumns(maximumNumberOfColumns int) *ThumbnailView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setMaximumNumberOfColumns:"), maximumNumberOfColumns)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setMaximumNumberOfColumns:"), maximumNumberOfColumns)
+	})
 	return tv
 }
 
 // WithLabelFont sets returns the font used to label the thumbnails.
 func (tv *ThumbnailView) WithLabelFont(labelFont obj.Object) *ThumbnailView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLabelFont:"), objref.IDOf(labelFont))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLabelFont:"), objref.IDOf(labelFont))
+	})
 	return tv
 }
 
 // WithAllowsDragging sets returns a Boolean value indicating whether users can drag thumbnails (that is, re-order pages in the document) within the thumbnail view.
 func (tv *ThumbnailView) WithAllowsDragging(allowsDragging bool) *ThumbnailView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowsDragging:"), allowsDragging)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowsDragging:"), allowsDragging)
+	})
 	return tv
 }
 
 // WithAllowsMultipleSelection sets returns a Boolean value indicating whether users can select multiple thumbnails in the thumbnail view at one time.
 func (tv *ThumbnailView) WithAllowsMultipleSelection(allowsMultipleSelection bool) *ThumbnailView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowsMultipleSelection:"), allowsMultipleSelection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowsMultipleSelection:"), allowsMultipleSelection)
+	})
 	return tv
 }
 
 // PDFView returns the pdf view.
 func (tv *ThumbnailView) PDFView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("PDFView"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("PDFView"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BackgroundColor returns the background color.
 func (tv *ThumbnailView) BackgroundColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("backgroundColor"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("backgroundColor"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SelectedPages returns the selected pages.
 //
 // SelectedPages returns the collection as a Go slice.
 func (tv *ThumbnailView) SelectedPages() []*Page {
-	_arr := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectedPages"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Page { return PageFromID(_id) })
+	var _mainthread0 []*Page
+	purego.Main(func() {
+		_mainthread0 = func() []*Page {
+			_arr := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectedPages"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Page { return PageFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // ThumbnailSize returns the thumbnail size.
 func (tv *ThumbnailView) ThumbnailSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(tv), objc.RegisterName("thumbnailSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(tv), objc.RegisterName("thumbnailSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MaximumNumberOfColumns returns the maximum number of columns.
 func (tv *ThumbnailView) MaximumNumberOfColumns() int {
-	_r := objc.Send[int](objref.IDOf(tv), objc.RegisterName("maximumNumberOfColumns"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(tv), objc.RegisterName("maximumNumberOfColumns"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LabelFont returns the label font.
 func (tv *ThumbnailView) LabelFont() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("labelFont"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("labelFont"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsDragging wraps the corresponding Objective-C method.
 func (tv *ThumbnailView) AllowsDragging() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("allowsDragging"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("allowsDragging"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsMultipleSelection wraps the corresponding Objective-C method.
 func (tv *ThumbnailView) AllowsMultipleSelection() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("allowsMultipleSelection"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("allowsMultipleSelection"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

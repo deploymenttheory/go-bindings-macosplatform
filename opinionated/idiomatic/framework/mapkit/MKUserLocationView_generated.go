@@ -49,127 +49,173 @@ func userLocationViewAdopt(id objc.ID) *UserLocationView {
 
 // NewUserLocationView creates a new UserLocationView.
 func NewUserLocationView() *UserLocationView {
-	_id := objc.Send[objc.ID](objc.ID(_class("MKUserLocationView")), objc.RegisterName("new"))
-	return userLocationViewAdopt(_id)
+	var _mainthread0 *UserLocationView
+	purego.Main(func() {
+		_mainthread0 = func() *UserLocationView {
+			_id := objc.Send[objc.ID](objc.ID(_class("MKUserLocationView")), objc.RegisterName("new"))
+			return userLocationViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithImage sets the image the annotation view displays.
 func (ulv *UserLocationView) WithImage(image obj.Object) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setImage:"), objref.IDOf(image))
+	})
 	return ulv
 }
 
 // WithCenterOffset sets the offset (in points) at which to display the view.
 func (ulv *UserLocationView) WithCenterOffset(centerOffset corefoundation.CGPoint) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setCenterOffset:"), centerOffset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setCenterOffset:"), centerOffset)
+	})
 	return ulv
 }
 
 // WithAccessoryOffset sets an offset that changes the accessory’s default anchor point.
 func (ulv *UserLocationView) WithAccessoryOffset(accessoryOffset corefoundation.CGPoint) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setAccessoryOffset:"), accessoryOffset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setAccessoryOffset:"), accessoryOffset)
+	})
 	return ulv
 }
 
 // WithCalloutOffset sets the offset (in points) at which to place the callout.
 func (ulv *UserLocationView) WithCalloutOffset(calloutOffset corefoundation.CGPoint) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setCalloutOffset:"), calloutOffset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setCalloutOffset:"), calloutOffset)
+	})
 	return ulv
 }
 
 // WithLeftCalloutOffset sets the offset in points from the middle-left of the annotation view.
 func (ulv *UserLocationView) WithLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setLeftCalloutOffset:"), leftCalloutOffset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setLeftCalloutOffset:"), leftCalloutOffset)
+	})
 	return ulv
 }
 
 // WithRightCalloutOffset sets the offset in points from the middle-right of the annotation view.
 func (ulv *UserLocationView) WithRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setRightCalloutOffset:"), rightCalloutOffset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setRightCalloutOffset:"), rightCalloutOffset)
+	})
 	return ulv
 }
 
 // WithEnabled sets a Boolean value that indicates whether the annotation is in an enabled state.
 func (ulv *UserLocationView) WithEnabled(enabled bool) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return ulv
 }
 
 // WithHighlighted sets a Boolean value that indicates whether the map view highlights the annotation view.
 func (ulv *UserLocationView) WithHighlighted(highlighted bool) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return ulv
 }
 
 // WithSelected sets a Boolean value that indicates whether the annotation view is in a selected state.
 func (ulv *UserLocationView) WithSelected(selected bool) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setSelected:"), selected)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setSelected:"), selected)
+	})
 	return ulv
 }
 
 // WithCanShowCallout sets a Boolean value that indicates whether the annotation view is able to display extra information in a callout.
 func (ulv *UserLocationView) WithCanShowCallout(canShowCallout bool) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setCanShowCallout:"), canShowCallout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setCanShowCallout:"), canShowCallout)
+	})
 	return ulv
 }
 
 // WithLeftCalloutAccessoryView sets the view to display on the left side of the standard callout.
 func (ulv *UserLocationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryView obj.Object) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setLeftCalloutAccessoryView:"), objref.IDOf(leftCalloutAccessoryView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setLeftCalloutAccessoryView:"), objref.IDOf(leftCalloutAccessoryView))
+	})
 	return ulv
 }
 
 // WithRightCalloutAccessoryView sets the view to display on the right side of the standard callout.
 func (ulv *UserLocationView) WithRightCalloutAccessoryView(rightCalloutAccessoryView obj.Object) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setRightCalloutAccessoryView:"), objref.IDOf(rightCalloutAccessoryView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setRightCalloutAccessoryView:"), objref.IDOf(rightCalloutAccessoryView))
+	})
 	return ulv
 }
 
 // WithDetailCalloutAccessoryView sets the detail accessory view to use in the standard callout.
 func (ulv *UserLocationView) WithDetailCalloutAccessoryView(detailCalloutAccessoryView obj.Object) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setDetailCalloutAccessoryView:"), objref.IDOf(detailCalloutAccessoryView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setDetailCalloutAccessoryView:"), objref.IDOf(detailCalloutAccessoryView))
+	})
 	return ulv
 }
 
 // WithDraggable sets a Boolean value that indicates whether the annotation view is draggable.
 func (ulv *UserLocationView) WithDraggable(draggable bool) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setDraggable:"), draggable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setDraggable:"), draggable)
+	})
 	return ulv
 }
 
 // WithDragState sets the drag state of the annotation view.
 func (ulv *UserLocationView) WithDragState(dragState AnnotationViewDragState) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setDragState:"), dragState)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setDragState:"), dragState)
+	})
 	return ulv
 }
 
 // WithClusteringIdentifier sets an identifier that determines whether the annotation view participates in clustering.
 func (ulv *UserLocationView) WithClusteringIdentifier(clusteringIdentifier string) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setClusteringIdentifier:"), purego.NSString(clusteringIdentifier))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setClusteringIdentifier:"), purego.NSString(clusteringIdentifier))
+	})
 	return ulv
 }
 
 // WithDisplayPriority sets the display priority of the annotation view.
 func (ulv *UserLocationView) WithDisplayPriority(displayPriority float32) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setDisplayPriority:"), displayPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setDisplayPriority:"), displayPriority)
+	})
 	return ulv
 }
 
 // WithZPriority sets the relative importance of the annotation view when in an unselected state with respect to its ordering along the z-axis.
 func (ulv *UserLocationView) WithZPriority(zPriority float32) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setZPriority:"), zPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setZPriority:"), zPriority)
+	})
 	return ulv
 }
 
 // WithSelectedZPriority sets the relative importance of the annotation view when in a selected state with respect to its ordering along the z-axis.
 func (ulv *UserLocationView) WithSelectedZPriority(selectedZPriority float32) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setSelectedZPriority:"), selectedZPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setSelectedZPriority:"), selectedZPriority)
+	})
 	return ulv
 }
 
 // WithCollisionMode sets the collision mode to use when interpreting the collision frame rectangle.
 func (ulv *UserLocationView) WithCollisionMode(collisionMode AnnotationViewCollisionMode) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setCollisionMode:"), collisionMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setCollisionMode:"), collisionMode)
+	})
 	return ulv
 }
 

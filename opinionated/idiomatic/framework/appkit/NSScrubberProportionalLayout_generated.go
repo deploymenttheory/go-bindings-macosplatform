@@ -48,28 +48,49 @@ func scrubberProportionalLayoutAdopt(id objc.ID) *ScrubberProportionalLayout {
 
 // NewScrubberProportionalLayoutWithNumberOfVisibleItems initializes and returns a newly allocated proportional layout, configured to display the given number of items.
 func NewScrubberProportionalLayoutWithNumberOfVisibleItems(numberOfVisibleItems int) *ScrubberProportionalLayout {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScrubberProportionalLayout")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNumberOfVisibleItems:"), numberOfVisibleItems)
-	return scrubberProportionalLayoutAdopt(_id)
+	var _mainthread0 *ScrubberProportionalLayout
+	purego.Main(func() {
+		_mainthread0 = func() *ScrubberProportionalLayout {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSScrubberProportionalLayout")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNumberOfVisibleItems:"), numberOfVisibleItems)
+			return scrubberProportionalLayoutAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewScrubberProportionalLayoutWithCoder initializes and returns a newly allocated proprotional layout object from a storyboard or nib file.
 func NewScrubberProportionalLayoutWithCoder(coder obj.Object) *ScrubberProportionalLayout {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScrubberProportionalLayout")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
-	return scrubberProportionalLayoutAdopt(_id)
+	var _mainthread0 *ScrubberProportionalLayout
+	purego.Main(func() {
+		_mainthread0 = func() *ScrubberProportionalLayout {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSScrubberProportionalLayout")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+			return scrubberProportionalLayoutAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithNumberOfVisibleItems sets the number of items visible in the scrubber at once.
 func (spl *ScrubberProportionalLayout) WithNumberOfVisibleItems(numberOfVisibleItems int) *ScrubberProportionalLayout {
-	objc.Send[objc.ID](objref.IDOf(spl), objc.RegisterName("setNumberOfVisibleItems:"), numberOfVisibleItems)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(spl), objc.RegisterName("setNumberOfVisibleItems:"), numberOfVisibleItems)
+	})
 	return spl
 }
 
 // NumberOfVisibleItems returns the number of items that should fit within the scrubber's viewport at once.
 func (spl *ScrubberProportionalLayout) NumberOfVisibleItems() int {
-	_r := objc.Send[int](objref.IDOf(spl), objc.RegisterName("numberOfVisibleItems"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(spl), objc.RegisterName("numberOfVisibleItems"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ScrubberLayoutProvider = (*ScrubberProportionalLayout)(nil)

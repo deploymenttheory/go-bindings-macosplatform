@@ -52,1534 +52,2521 @@ func textViewAdopt(id objc.ID) *TextView {
 
 // NewTextViewWithFrameTextContainer initializes a text view.
 func NewTextViewWithFrameTextContainer(frameRect corefoundation.CGRect, container *TextContainer) *TextView {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:textContainer:"), frameRect, objref.IDOf(container))
-	return textViewAdopt(_id)
+	var _mainthread0 *TextView
+	purego.Main(func() {
+		_mainthread0 = func() *TextView {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextView")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:textContainer:"), frameRect, objref.IDOf(container))
+			return textViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewTextViewWithCoder initializes a text view with data in an unarchiver.
 func NewTextViewWithCoder(coder obj.Object) *TextView {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
-	return textViewAdopt(_id)
+	var _mainthread0 *TextView
+	purego.Main(func() {
+		_mainthread0 = func() *TextView {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextView")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+			return textViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewTextViewWithFrame initializes a text view.
 func NewTextViewWithFrame(frameRect corefoundation.CGRect) *TextView {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:"), frameRect)
-	return textViewAdopt(_id)
+	var _mainthread0 *TextView
+	purego.Main(func() {
+		_mainthread0 = func() *TextView {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextView")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:"), frameRect)
+			return textViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewTextViewUsingTextLayoutManager creates a new TextView.
 func NewTextViewUsingTextLayoutManager(usingTextLayoutManager bool) *TextView {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initUsingTextLayoutManager:"), usingTextLayoutManager)
-	return textViewAdopt(_id)
+	var _mainthread0 *TextView
+	purego.Main(func() {
+		_mainthread0 = func() *TextView {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextView")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initUsingTextLayoutManager:"), usingTextLayoutManager)
+			return textViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithTextContainer sets the receiver’s text container.
 func (tv *TextView) WithTextContainer(textContainer *TextContainer) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTextContainer:"), objref.IDOf(textContainer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTextContainer:"), objref.IDOf(textContainer))
+	})
 	return tv
 }
 
 // WithTextContainerInset sets the empty space the receiver leaves around its associated text container.
 func (tv *TextView) WithTextContainerInset(textContainerInset corefoundation.CGSize) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTextContainerInset:"), textContainerInset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTextContainerInset:"), textContainerInset)
+	})
 	return tv
 }
 
 // WithUsesAdaptiveColorMappingForDarkAppearance sets a Boolean value that indicates whether the framework should use adaptive color mapping for dark appearance.
 func (tv *TextView) WithUsesAdaptiveColorMappingForDarkAppearance(usesAdaptiveColorMappingForDarkAppearance bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUsesAdaptiveColorMappingForDarkAppearance:"), usesAdaptiveColorMappingForDarkAppearance)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUsesAdaptiveColorMappingForDarkAppearance:"), usesAdaptiveColorMappingForDarkAppearance)
+	})
 	return tv
 }
 
 // WithSelectedRanges sets an array containing the ranges of characters selected in the receiver’s layout manager.
 func (tv *TextView) WithSelectedRanges(items ...obj.Object) *TextView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSelectedRanges:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSelectedRanges:"), _arr)
+	})
 	return tv
 }
 
 // WithSelectionGranularity sets the selection granularity for subsequent extension of a selection.
 func (tv *TextView) WithSelectionGranularity(selectionGranularity SelectionGranularity) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSelectionGranularity:"), selectionGranularity)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSelectionGranularity:"), selectionGranularity)
+	})
 	return tv
 }
 
 // WithSelectedTextAttributes sets the attributes used to indicate the selection.
 func (tv *TextView) WithSelectedTextAttributes(selectedTextAttributes obj.Object) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSelectedTextAttributes:"), objref.IDOf(selectedTextAttributes))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSelectedTextAttributes:"), objref.IDOf(selectedTextAttributes))
+	})
 	return tv
 }
 
 // WithInsertionPointColor sets the color of the insertion point.
 func (tv *TextView) WithInsertionPointColor(insertionPointColor *Color) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setInsertionPointColor:"), objref.IDOf(insertionPointColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setInsertionPointColor:"), objref.IDOf(insertionPointColor))
+	})
 	return tv
 }
 
 // WithMarkedTextAttributes sets the attributes used to draw marked text.
 func (tv *TextView) WithMarkedTextAttributes(markedTextAttributes obj.Object) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setMarkedTextAttributes:"), objref.IDOf(markedTextAttributes))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setMarkedTextAttributes:"), objref.IDOf(markedTextAttributes))
+	})
 	return tv
 }
 
 // WithLinkTextAttributes sets the attributes used to draw the onscreen presentation of link text.
 func (tv *TextView) WithLinkTextAttributes(linkTextAttributes obj.Object) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLinkTextAttributes:"), objref.IDOf(linkTextAttributes))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLinkTextAttributes:"), objref.IDOf(linkTextAttributes))
+	})
 	return tv
 }
 
 // WithDisplaysLinkToolTips sets a Boolean value that indicates whether the text view automatically supplies the destination of a link as a tooltip for text that has a link attribute.
 func (tv *TextView) WithDisplaysLinkToolTips(displaysLinkToolTips bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setDisplaysLinkToolTips:"), displaysLinkToolTips)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setDisplaysLinkToolTips:"), displaysLinkToolTips)
+	})
 	return tv
 }
 
 // WithAcceptsGlyphInfo sets a Boolean value that indicates whether the receiver accepts the glyph info attribute.
 func (tv *TextView) WithAcceptsGlyphInfo(acceptsGlyphInfo bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAcceptsGlyphInfo:"), acceptsGlyphInfo)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAcceptsGlyphInfo:"), acceptsGlyphInfo)
+	})
 	return tv
 }
 
 // WithUsesRuler sets a Boolean value that controls whether the text views sharing the receiver’s layout manager use a ruler.
 func (tv *TextView) WithUsesRuler(usesRuler bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUsesRuler:"), usesRuler)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUsesRuler:"), usesRuler)
+	})
 	return tv
 }
 
 // WithUsesInspectorBar sets a Boolean value that indicates whether this text view uses the inspector bar.
 func (tv *TextView) WithUsesInspectorBar(usesInspectorBar bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUsesInspectorBar:"), usesInspectorBar)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUsesInspectorBar:"), usesInspectorBar)
+	})
 	return tv
 }
 
 // WithContinuousSpellCheckingEnabled sets a Boolean value that indicates whether the receiver has continuous spell checking enabled.
 func (tv *TextView) WithContinuousSpellCheckingEnabled(continuousSpellCheckingEnabled bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setContinuousSpellCheckingEnabled:"), continuousSpellCheckingEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setContinuousSpellCheckingEnabled:"), continuousSpellCheckingEnabled)
+	})
 	return tv
 }
 
 // WithGrammarCheckingEnabled sets enables and disables grammar checking.
 func (tv *TextView) WithGrammarCheckingEnabled(grammarCheckingEnabled bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setGrammarCheckingEnabled:"), grammarCheckingEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setGrammarCheckingEnabled:"), grammarCheckingEnabled)
+	})
 	return tv
 }
 
 // WithTypingAttributes sets the receiver’s typing attributes.
 func (tv *TextView) WithTypingAttributes(typingAttributes obj.Object) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTypingAttributes:"), objref.IDOf(typingAttributes))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTypingAttributes:"), objref.IDOf(typingAttributes))
+	})
 	return tv
 }
 
 // WithAllowsDocumentBackgroundColorChange sets a Boolean value that indicates whether the receiver allows its background color to change.
 func (tv *TextView) WithAllowsDocumentBackgroundColorChange(allowsDocumentBackgroundColorChange bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowsDocumentBackgroundColorChange:"), allowsDocumentBackgroundColorChange)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowsDocumentBackgroundColorChange:"), allowsDocumentBackgroundColorChange)
+	})
 	return tv
 }
 
 // WithDefaultParagraphStyle sets the receiver’s default paragraph style.
 func (tv *TextView) WithDefaultParagraphStyle(defaultParagraphStyle ParagraphStyleProvider) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setDefaultParagraphStyle:"), objref.IDOf(defaultParagraphStyle))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setDefaultParagraphStyle:"), objref.IDOf(defaultParagraphStyle))
+	})
 	return tv
 }
 
 // WithAllowsUndo sets a Boolean value that indicates whether the receiver allows undo.
 func (tv *TextView) WithAllowsUndo(allowsUndo bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	})
 	return tv
 }
 
 // WithAllowsImageEditing sets indicates whether image attachments should permit editing of their images.
 func (tv *TextView) WithAllowsImageEditing(allowsImageEditing bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowsImageEditing:"), allowsImageEditing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowsImageEditing:"), allowsImageEditing)
+	})
 	return tv
 }
 
 // WithUsesRolloverButtonForSelection sets the uses rollover button for selection.
 func (tv *TextView) WithUsesRolloverButtonForSelection(usesRolloverButtonForSelection bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUsesRolloverButtonForSelection:"), usesRolloverButtonForSelection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUsesRolloverButtonForSelection:"), usesRolloverButtonForSelection)
+	})
 	return tv
 }
 
 // WithRulerVisible sets a Boolean value that controls whether the scroll view enclosing text views sharing the receiver’s layout manager displays the ruler.
 func (tv *TextView) WithRulerVisible(rulerVisible bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setRulerVisible:"), rulerVisible)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setRulerVisible:"), rulerVisible)
+	})
 	return tv
 }
 
 // WithAllowedInputSourceLocales sets an array of locale identifiers representing input sources that are allowed to be enabled when the receiver has the keyboard focus.
 func (tv *TextView) WithAllowedInputSourceLocales(items ...obj.Object) *TextView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowedInputSourceLocales:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowedInputSourceLocales:"), _arr)
+	})
 	return tv
 }
 
 // WithWritingToolsBehavior sets the writing tools behavior.
 func (tv *TextView) WithWritingToolsBehavior(writingToolsBehavior WritingToolsBehavior) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWritingToolsBehavior:"), writingToolsBehavior)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWritingToolsBehavior:"), writingToolsBehavior)
+	})
 	return tv
 }
 
 // WithAllowedWritingToolsResultOptions sets the allowed writing tools result options.
 func (tv *TextView) WithAllowedWritingToolsResultOptions(allowedWritingToolsResultOptions WritingToolsResultOptions) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowedWritingToolsResultOptions:"), allowedWritingToolsResultOptions)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowedWritingToolsResultOptions:"), allowedWritingToolsResultOptions)
+	})
 	return tv
 }
 
 // WithSmartInsertDeleteEnabled sets a Boolean value that controls whether the receiver inserts or deletes space around selected words so as to preserve proper spacing and punctuation.
 func (tv *TextView) WithSmartInsertDeleteEnabled(smartInsertDeleteEnabled bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSmartInsertDeleteEnabled:"), smartInsertDeleteEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSmartInsertDeleteEnabled:"), smartInsertDeleteEnabled)
+	})
 	return tv
 }
 
 // WithAutomaticQuoteSubstitutionEnabled sets a Boolean value that enables and disables automatic quotation mark substitution.
 func (tv *TextView) WithAutomaticQuoteSubstitutionEnabled(automaticQuoteSubstitutionEnabled bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutomaticQuoteSubstitutionEnabled:"), automaticQuoteSubstitutionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutomaticQuoteSubstitutionEnabled:"), automaticQuoteSubstitutionEnabled)
+	})
 	return tv
 }
 
 // WithAutomaticLinkDetectionEnabled sets a Boolean value that enables or disables automatic link detection.
 func (tv *TextView) WithAutomaticLinkDetectionEnabled(automaticLinkDetectionEnabled bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutomaticLinkDetectionEnabled:"), automaticLinkDetectionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutomaticLinkDetectionEnabled:"), automaticLinkDetectionEnabled)
+	})
 	return tv
 }
 
 // WithAutomaticDataDetectionEnabled sets a Boolean value that indicates whether automatic data detection is enabled.
 func (tv *TextView) WithAutomaticDataDetectionEnabled(automaticDataDetectionEnabled bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutomaticDataDetectionEnabled:"), automaticDataDetectionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutomaticDataDetectionEnabled:"), automaticDataDetectionEnabled)
+	})
 	return tv
 }
 
 // WithAutomaticDashSubstitutionEnabled sets a Boolean value that indicates whether automatic dash substitution is enabled.
 func (tv *TextView) WithAutomaticDashSubstitutionEnabled(automaticDashSubstitutionEnabled bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutomaticDashSubstitutionEnabled:"), automaticDashSubstitutionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutomaticDashSubstitutionEnabled:"), automaticDashSubstitutionEnabled)
+	})
 	return tv
 }
 
 // WithAutomaticTextReplacementEnabled sets a Boolean value that indicates whether automatic text replacement is enabled.
 func (tv *TextView) WithAutomaticTextReplacementEnabled(automaticTextReplacementEnabled bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutomaticTextReplacementEnabled:"), automaticTextReplacementEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutomaticTextReplacementEnabled:"), automaticTextReplacementEnabled)
+	})
 	return tv
 }
 
 // WithAutomaticSpellingCorrectionEnabled sets a Boolean value that indicates whether automatic spelling correction is enabled.
 func (tv *TextView) WithAutomaticSpellingCorrectionEnabled(automaticSpellingCorrectionEnabled bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutomaticSpellingCorrectionEnabled:"), automaticSpellingCorrectionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutomaticSpellingCorrectionEnabled:"), automaticSpellingCorrectionEnabled)
+	})
 	return tv
 }
 
 // WithEnabledTextCheckingTypes sets the default text checking types.
 func (tv *TextView) WithEnabledTextCheckingTypes(enabledTextCheckingTypes uint64) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setEnabledTextCheckingTypes:"), enabledTextCheckingTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setEnabledTextCheckingTypes:"), enabledTextCheckingTypes)
+	})
 	return tv
 }
 
 // WithUsesFindPanel sets a Boolean value that indicates whether the receiver allows for a find panel.
 func (tv *TextView) WithUsesFindPanel(usesFindPanel bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUsesFindPanel:"), usesFindPanel)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUsesFindPanel:"), usesFindPanel)
+	})
 	return tv
 }
 
 // WithUsesFindBar sets a Boolean value that indicates whether to use the find bar for this text view.
 func (tv *TextView) WithUsesFindBar(usesFindBar bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUsesFindBar:"), usesFindBar)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUsesFindBar:"), usesFindBar)
+	})
 	return tv
 }
 
 // WithIncrementalSearchingEnabled sets a Boolean value that indicates whether incremental searching is enabled.
 func (tv *TextView) WithIncrementalSearchingEnabled(incrementalSearchingEnabled bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setIncrementalSearchingEnabled:"), incrementalSearchingEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setIncrementalSearchingEnabled:"), incrementalSearchingEnabled)
+	})
 	return tv
 }
 
 // WithInlinePredictionType sets the inline prediction type.
 func (tv *TextView) WithInlinePredictionType(inlinePredictionType TextInputTraitType) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setInlinePredictionType:"), inlinePredictionType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setInlinePredictionType:"), inlinePredictionType)
+	})
 	return tv
 }
 
 // WithMathExpressionCompletionType sets the math expression completion type.
 func (tv *TextView) WithMathExpressionCompletionType(mathExpressionCompletionType TextInputTraitType) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setMathExpressionCompletionType:"), mathExpressionCompletionType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setMathExpressionCompletionType:"), mathExpressionCompletionType)
+	})
 	return tv
 }
 
 // WithAutomaticTextCompletionEnabled sets a Boolean value that indicates whether the text view supplies autocompletion suggestions as the user types.
 func (tv *TextView) WithAutomaticTextCompletionEnabled(automaticTextCompletionEnabled bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutomaticTextCompletionEnabled:"), automaticTextCompletionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutomaticTextCompletionEnabled:"), automaticTextCompletionEnabled)
+	})
 	return tv
 }
 
 // WithAllowsCharacterPickerTouchBarItem sets the allows character picker touch bar item.
 func (tv *TextView) WithAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowsCharacterPickerTouchBarItem:"), allowsCharacterPickerTouchBarItem)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowsCharacterPickerTouchBarItem:"), allowsCharacterPickerTouchBarItem)
+	})
 	return tv
 }
 
 // WithTextHighlightAttributes sets ************************* Text Highlight support **************************
 func (tv *TextView) WithTextHighlightAttributes(textHighlightAttributes obj.Object) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTextHighlightAttributes:"), objref.IDOf(textHighlightAttributes))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTextHighlightAttributes:"), objref.IDOf(textHighlightAttributes))
+	})
 	return tv
 }
 
 // WithString sets the characters of the receiver’s text.
 func (tv *TextView) WithString(string_ string) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setString:"), purego.NSString(string_))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setString:"), purego.NSString(string_))
+	})
 	return tv
 }
 
 // WithEditable sets a Boolean that controls whether the receiver allows the user to edit its text.
 func (tv *TextView) WithEditable(editable bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setEditable:"), editable)
+	})
 	return tv
 }
 
 // WithSelectable sets a Boolean that controls whether the receiver allows the user to select its text.
 func (tv *TextView) WithSelectable(selectable bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSelectable:"), selectable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSelectable:"), selectable)
+	})
 	return tv
 }
 
 // WithRichText sets a Boolean that controls whether the receiver allows the user to apply attributes to specific ranges of the text.
 func (tv *TextView) WithRichText(richText bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setRichText:"), richText)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setRichText:"), richText)
+	})
 	return tv
 }
 
 // WithImportsGraphics sets a Boolean that controls whether the receiver allows the user to import files by dragging.
 func (tv *TextView) WithImportsGraphics(importsGraphics bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	})
 	return tv
 }
 
 // WithFieldEditor sets a Boolean that controls whether the receiver interprets Tab, Shift-Tab, and Return (Enter) as cues to end editing and possibly to change the first responder.
 func (tv *TextView) WithFieldEditor(fieldEditor bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFieldEditor:"), fieldEditor)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFieldEditor:"), fieldEditor)
+	})
 	return tv
 }
 
 // WithUsesFontPanel sets a Boolean that controls whether the receiver uses the Font panel and Font menu.
 func (tv *TextView) WithUsesFontPanel(usesFontPanel bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUsesFontPanel:"), usesFontPanel)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUsesFontPanel:"), usesFontPanel)
+	})
 	return tv
 }
 
 // WithDrawsBackground sets a Boolean that controls whether the receiver draws its background.
 func (tv *TextView) WithDrawsBackground(drawsBackground bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	})
 	return tv
 }
 
 // WithBackgroundColor sets the receiver’s background color to a given color.
 func (tv *TextView) WithBackgroundColor(backgroundColor *Color) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	})
 	return tv
 }
 
 // WithSelectedRange sets the receiver’s characters within aRange.
 func (tv *TextView) WithSelectedRange(selectedRange foundation.NSRange) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSelectedRange:"), selectedRange)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSelectedRange:"), selectedRange)
+	})
 	return tv
 }
 
 // WithFont sets the font of all the receiver’s text.
 func (tv *TextView) WithFont(font *Font) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return tv
 }
 
 // WithTextColor sets the text color of all characters in the receiver.
 func (tv *TextView) WithTextColor(textColor *Color) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
+	})
 	return tv
 }
 
 // WithAlignment sets the alignment of all the receiver’s text.
 func (tv *TextView) WithAlignment(alignment TextAlignment) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return tv
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (tv *TextView) WithBaseWritingDirection(baseWritingDirection WritingDirection) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return tv
 }
 
 // WithMaxSize sets the receiver’s maximum size.
 func (tv *TextView) WithMaxSize(maxSize corefoundation.CGSize) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setMaxSize:"), maxSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setMaxSize:"), maxSize)
+	})
 	return tv
 }
 
 // WithMinSize sets the receiver’s minimum size.
 func (tv *TextView) WithMinSize(minSize corefoundation.CGSize) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setMinSize:"), minSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setMinSize:"), minSize)
+	})
 	return tv
 }
 
 // WithHorizontallyResizable sets a Boolean that controls whether the receiver changes its width to fit the width of its text.
 func (tv *TextView) WithHorizontallyResizable(horizontallyResizable bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setHorizontallyResizable:"), horizontallyResizable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setHorizontallyResizable:"), horizontallyResizable)
+	})
 	return tv
 }
 
 // WithVerticallyResizable sets a Boolean that controls whether the receiver changes its height to fit the height of its text.
 func (tv *TextView) WithVerticallyResizable(verticallyResizable bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setVerticallyResizable:"), verticallyResizable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setVerticallyResizable:"), verticallyResizable)
+	})
 	return tv
 }
 
 // WithSubviews sets the subviews.
 func (tv *TextView) WithSubviews(items ...ViewProvider) *TextView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return tv
 }
 
 // WithHidden sets the hidden.
 func (tv *TextView) WithHidden(hidden bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setHidden:"), hidden)
+	})
 	return tv
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (tv *TextView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return tv
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (tv *TextView) WithAutoresizesSubviews(autoresizesSubviews bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return tv
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (tv *TextView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return tv
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (tv *TextView) WithFrame(frame corefoundation.CGRect) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFrame:"), frame)
+	})
 	return tv
 }
 
 // WithFrameRotation sets the frame rotation.
 func (tv *TextView) WithFrameRotation(frameRotation float64) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return tv
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (tv *TextView) WithFrameCenterRotation(frameCenterRotation float64) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return tv
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (tv *TextView) WithBoundsRotation(boundsRotation float64) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return tv
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (tv *TextView) WithBounds(bounds corefoundation.CGRect) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBounds:"), bounds)
+	})
 	return tv
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (tv *TextView) WithCanDrawConcurrently(canDrawConcurrently bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return tv
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (tv *TextView) WithNeedsDisplay(needsDisplay bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return tv
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (tv *TextView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return tv
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (tv *TextView) WithWantsRestingTouches(wantsRestingTouches bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return tv
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (tv *TextView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return tv
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (tv *TextView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return tv
 }
 
 // WithWantsLayer sets the wants layer.
 func (tv *TextView) WithWantsLayer(wantsLayer bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return tv
 }
 
 // WithLayer sets the layer.
 func (tv *TextView) WithLayer(layer obj.Object) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return tv
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (tv *TextView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return tv
 }
 
 // WithNeedsLayout sets the needs layout.
 func (tv *TextView) WithNeedsLayout(needsLayout bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return tv
 }
 
 // WithAlphaValue sets the alpha value.
 func (tv *TextView) WithAlphaValue(alphaValue float64) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return tv
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (tv *TextView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return tv
 }
 
 // WithBackgroundFilters sets the background filters.
 func (tv *TextView) WithBackgroundFilters(items ...obj.Object) *TextView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return tv
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (tv *TextView) WithCompositingFilter(compositingFilter obj.Object) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return tv
 }
 
 // WithContentFilters sets the content filters.
 func (tv *TextView) WithContentFilters(items ...obj.Object) *TextView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return tv
 }
 
 // WithShadow sets the shadow.
 func (tv *TextView) WithShadow(shadow *Shadow) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return tv
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (tv *TextView) WithClipsToBounds(clipsToBounds bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return tv
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (tv *TextView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return tv
 }
 
 // WithToolTip sets the tool tip.
 func (tv *TextView) WithToolTip(toolTip string) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return tv
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (tv *TextView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return tv
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (tv *TextView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return tv
 }
 
 // WithNextKeyView sets the next key view.
 func (tv *TextView) WithNextKeyView(nextKeyView ViewProvider) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return tv
 }
 
 // WithFocusRingType sets the focus ring type.
 func (tv *TextView) WithFocusRingType(focusRingType FocusRingType) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return tv
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (tv *TextView) WithGestureRecognizers(items ...GestureRecognizerProvider) *TextView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return tv
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (tv *TextView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return tv
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (tv *TextView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return tv
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (tv *TextView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return tv
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (tv *TextView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return tv
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (tv *TextView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return tv
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (tv *TextView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return tv
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (tv *TextView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return tv
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (tv *TextView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return tv
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (tv *TextView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return tv
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (tv *TextView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return tv
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (tv *TextView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return tv
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (tv *TextView) WithNextResponder(nextResponder ResponderProvider) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return tv
 }
 
 // WithMenu sets returns the responder’s menu.
 func (tv *TextView) WithMenu(menu *Menu) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return tv
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (tv *TextView) WithUserActivity(userActivity obj.Object) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return tv
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (tv *TextView) WithTouchBar(touchBar *TouchBar) *TextView {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return tv
 }
 
 // ReplaceTextContainer replaces the text container for the group of text system objects containing the receiver, keeping the association between the receiver and its layout manager intact.
 func (tv *TextView) ReplaceTextContainer(newContainer *TextContainer) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("replaceTextContainer:"), objref.IDOf(newContainer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("replaceTextContainer:"), objref.IDOf(newContainer))
+	})
+
 }
 
 // InvalidateTextContainerOrigin invalidates the calculated origin of the text container.
 func (tv *TextView) InvalidateTextContainerOrigin() {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("invalidateTextContainerOrigin"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("invalidateTextContainerOrigin"))
+	})
+
 }
 
 // InsertText inserts aString into the receiver’s text at the insertion point if there is one, otherwise replacing the selection.
 func (tv *TextView) InsertText(insertString obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("insertText:"), objref.IDOf(insertString))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("insertText:"), objref.IDOf(insertString))
+	})
+
 }
 
 // SetConstrainedFrameSize attempts to set the frame size as if by user action.
 func (tv *TextView) SetConstrainedFrameSize(desiredSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setConstrainedFrameSize:"), desiredSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setConstrainedFrameSize:"), desiredSize)
+	})
+
 }
 
 // SetAlignmentRange sets the alignment of the paragraphs containing characters in the specified range.
 func (tv *TextView) SetAlignmentRange(alignment TextAlignment, range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAlignment:range:"), alignment, range_)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAlignment:range:"), alignment, range_)
+	})
+
 }
 
 // SetBaseWritingDirectionRange sets the base writing direction of a range of text.
 func (tv *TextView) SetBaseWritingDirectionRange(writingDirection WritingDirection, range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBaseWritingDirection:range:"), writingDirection, range_)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBaseWritingDirection:range:"), writingDirection, range_)
+	})
+
 }
 
 // TurnOffKerning sets the receiver to use nominal glyph spacing for the glyphs in its selection, or for all glyphs if the receiver is a plain text view.
 func (tv *TextView) TurnOffKerning(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("turnOffKerning:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("turnOffKerning:"), objref.IDOf(sender))
+	})
+
 }
 
 // TightenKerning decreases the space between glyphs in the receiver’s selection, or for all glyphs if the receiver is a plain text view.
 func (tv *TextView) TightenKerning(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("tightenKerning:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("tightenKerning:"), objref.IDOf(sender))
+	})
+
 }
 
 // LoosenKerning increases the space between glyphs in the receiver’s selection, or in all text if the receiver is a plain text view.
 func (tv *TextView) LoosenKerning(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("loosenKerning:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("loosenKerning:"), objref.IDOf(sender))
+	})
+
 }
 
 // UseStandardKerning set the receiver to use pair kerning data for the glyphs in its selection, or for all glyphs if the receiver is a plain text view.
 func (tv *TextView) UseStandardKerning(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("useStandardKerning:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("useStandardKerning:"), objref.IDOf(sender))
+	})
+
 }
 
 // TurnOffLigatures sets the receiver to use only required ligatures when setting text, for the glyphs in the selection if the receiver is a rich text view, or for all glyphs if it’s a plain text view.
 func (tv *TextView) TurnOffLigatures(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("turnOffLigatures:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("turnOffLigatures:"), objref.IDOf(sender))
+	})
+
 }
 
 // UseStandardLigatures sets the receiver to use the standard ligatures available for the fonts and languages used when setting text, for the glyphs in the selection if the receiver is a rich text view, or for all glyphs if it’s a plain text view.
 func (tv *TextView) UseStandardLigatures(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("useStandardLigatures:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("useStandardLigatures:"), objref.IDOf(sender))
+	})
+
 }
 
 // UseAllLigatures sets the receiver to use all ligatures available for the fonts and languages used when setting text, for the glyphs in the selection if the receiver is a rich text view, or for all glyphs if it’s a plain text view.
 func (tv *TextView) UseAllLigatures(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("useAllLigatures:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("useAllLigatures:"), objref.IDOf(sender))
+	})
+
 }
 
 // RaiseBaseline raises the baseline offset of selected text by 1 point, or of all text if the receiver is a plain text view.
 func (tv *TextView) RaiseBaseline(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("raiseBaseline:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("raiseBaseline:"), objref.IDOf(sender))
+	})
+
 }
 
 // LowerBaseline lowers the baseline offset of selected text by 1 point, or of all text if the receiver is a plain text view.
 func (tv *TextView) LowerBaseline(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("lowerBaseline:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("lowerBaseline:"), objref.IDOf(sender))
+	})
+
 }
 
 // ToggleTraditionalCharacterShape toggles the NSCharacterShapeAttributeName attribute at the current selection.
 func (tv *TextView) ToggleTraditionalCharacterShape(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleTraditionalCharacterShape:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleTraditionalCharacterShape:"), objref.IDOf(sender))
+	})
+
 }
 
 // Outline adds the outline attribute to the selected text attributes if absent; removes the attribute if present.
 func (tv *TextView) Outline(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("outline:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("outline:"), objref.IDOf(sender))
+	})
+
 }
 
 // PerformFindPanelAction performs a find panel action specified by the sender’s tag.
 func (tv *TextView) PerformFindPanelAction(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("performFindPanelAction:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("performFindPanelAction:"), objref.IDOf(sender))
+	})
+
 }
 
 // AlignJustified applies full justification to selected paragraphs (or all text, if the receiver is a plain text object).
 func (tv *TextView) AlignJustified(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("alignJustified:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("alignJustified:"), objref.IDOf(sender))
+	})
+
 }
 
 // ChangeColor sets the color of the selected text.
 func (tv *TextView) ChangeColor(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("changeColor:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("changeColor:"), objref.IDOf(sender))
+	})
+
 }
 
 // ChangeAttributes changes the attributes of the current selection.
 func (tv *TextView) ChangeAttributes(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("changeAttributes:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("changeAttributes:"), objref.IDOf(sender))
+	})
+
 }
 
 // ChangeDocumentBackgroundColor an action method used to set the background color.
 func (tv *TextView) ChangeDocumentBackgroundColor(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("changeDocumentBackgroundColor:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("changeDocumentBackgroundColor:"), objref.IDOf(sender))
+	})
+
 }
 
 // OrderFrontSpacingPanel brings forward a panel allowing the user to manipulate text line heights, interline spacing, and paragraph spacing, in the text view.
 func (tv *TextView) OrderFrontSpacingPanel(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("orderFrontSpacingPanel:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("orderFrontSpacingPanel:"), objref.IDOf(sender))
+	})
+
 }
 
 // OrderFrontLinkPanel brings forward a panel allowing the user to manipulate links in the text view.
 func (tv *TextView) OrderFrontLinkPanel(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("orderFrontLinkPanel:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("orderFrontLinkPanel:"), objref.IDOf(sender))
+	})
+
 }
 
 // OrderFrontListPanel brings forward a panel allowing the user to manipulate text lists in the text view.
 func (tv *TextView) OrderFrontListPanel(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("orderFrontListPanel:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("orderFrontListPanel:"), objref.IDOf(sender))
+	})
+
 }
 
 // OrderFrontTablePanel brings forward a panel allowing the user to manipulate text tables in the text view.
 func (tv *TextView) OrderFrontTablePanel(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("orderFrontTablePanel:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("orderFrontTablePanel:"), objref.IDOf(sender))
+	})
+
 }
 
 // SetNeedsDisplayInRectAvoidAdditionalLayout marks the receiver as requiring display.
 func (tv *TextView) SetNeedsDisplayInRectAvoidAdditionalLayout(rect corefoundation.CGRect, flag bool) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNeedsDisplayInRect:avoidAdditionalLayout:"), rect, flag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNeedsDisplayInRect:avoidAdditionalLayout:"), rect, flag)
+	})
+
 }
 
 // DrawInsertionPointInRectColorTurnedOn draws or erases the insertion point.
 func (tv *TextView) DrawInsertionPointInRectColorTurnedOn(rect corefoundation.CGRect, color *Color, flag bool) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("drawInsertionPointInRect:color:turnedOn:"), rect, objref.IDOf(color), flag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("drawInsertionPointInRect:color:turnedOn:"), rect, objref.IDOf(color), flag)
+	})
+
 }
 
 // DrawViewBackgroundInRect draws the background of the text view.
 func (tv *TextView) DrawViewBackgroundInRect(rect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("drawViewBackgroundInRect:"), rect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("drawViewBackgroundInRect:"), rect)
+	})
+
 }
 
 // UpdateRuler updates the ruler view in the receiver’s enclosing scroll view to reflect the selection’s paragraph and marker attributes.
 func (tv *TextView) UpdateRuler() {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateRuler"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateRuler"))
+	})
+
 }
 
 // UpdateFontPanel updates the Font panel to contain the font attributes of the selection.
 func (tv *TextView) UpdateFontPanel() {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateFontPanel"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateFontPanel"))
+	})
+
 }
 
 // UpdateDragTypeRegistration updates the acceptable drag types of all text views associated with the receiver’s layout manager.
 func (tv *TextView) UpdateDragTypeRegistration() {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateDragTypeRegistration"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateDragTypeRegistration"))
+	})
+
 }
 
 // SelectionRangeForProposedRangeGranularity returns an adjusted selected range based on the selection granularity.
 func (tv *TextView) SelectionRangeForProposedRangeGranularity(proposedCharRange foundation.NSRange, granularity SelectionGranularity) foundation.NSRange {
-	_r := objc.Send[foundation.NSRange](objref.IDOf(tv), objc.RegisterName("selectionRangeForProposedRange:granularity:"), proposedCharRange, granularity)
-	return _r
+	var _mainthread0 foundation.NSRange
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSRange {
+			_r := objc.Send[foundation.NSRange](objref.IDOf(tv), objc.RegisterName("selectionRangeForProposedRange:granularity:"), proposedCharRange, granularity)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ClickedOnLinkAtIndex causes the text view to act as if the user clicked on some text with the given link as the value of a link attribute associated with the text.
 func (tv *TextView) ClickedOnLinkAtIndex(link obj.Object, charIndex int) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("clickedOnLink:atIndex:"), objref.IDOf(link), charIndex)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("clickedOnLink:atIndex:"), objref.IDOf(link), charIndex)
+	})
+
 }
 
 // StartSpeaking speaks the selected text, or all text if no selection.
 func (tv *TextView) StartSpeaking(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("startSpeaking:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("startSpeaking:"), objref.IDOf(sender))
+	})
+
 }
 
 // StopSpeaking stops the speaking of text.
 func (tv *TextView) StopSpeaking(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("stopSpeaking:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("stopSpeaking:"), objref.IDOf(sender))
+	})
+
 }
 
 // SetLayoutOrientation changes the receiver’s layout orientation and invalidates the contents.
 func (tv *TextView) SetLayoutOrientation(orientation TextLayoutOrientation) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayoutOrientation:"), orientation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayoutOrientation:"), orientation)
+	})
+
 }
 
 // ChangeLayoutOrientation an action method that sets the layout orientation of the text.
 func (tv *TextView) ChangeLayoutOrientation(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("changeLayoutOrientation:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("changeLayoutOrientation:"), objref.IDOf(sender))
+	})
+
 }
 
 // CharacterIndexForInsertionAtPoint returns a character index appropriate for placing a zero-length selection for an insertion point associated with the mouse at the given point.
 func (tv *TextView) CharacterIndexForInsertionAtPoint(point corefoundation.CGPoint) int {
-	_r := objc.Send[int](objref.IDOf(tv), objc.RegisterName("characterIndexForInsertionAtPoint:"), point)
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(tv), objc.RegisterName("characterIndexForInsertionAtPoint:"), point)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PerformValidatedReplacementInRangeWithAttributedString replaces text in the range you specify with the attributed string you provide.
 func (tv *TextView) PerformValidatedReplacementInRangeWithAttributedString(range_ foundation.NSRange, attributedString obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("performValidatedReplacementInRange:withAttributedString:"), range_, objref.IDOf(attributedString))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("performValidatedReplacementInRange:withAttributedString:"), range_, objref.IDOf(attributedString))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TextContainer returns the text container.
 func (tv *TextView) TextContainer() *TextContainer {
-	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("textContainer"))
-	return TextContainerFromID(_r)
+	var _mainthread0 *TextContainer
+	purego.Main(func() {
+		_mainthread0 = func() *TextContainer {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("textContainer"))
+			return TextContainerFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TextContainerInset returns the text container inset.
 func (tv *TextView) TextContainerInset() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(tv), objc.RegisterName("textContainerInset"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(tv), objc.RegisterName("textContainerInset"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TextContainerOrigin returns the text container origin.
 func (tv *TextView) TextContainerOrigin() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(tv), objc.RegisterName("textContainerOrigin"))
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(tv), objc.RegisterName("textContainerOrigin"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LayoutManager returns the layout manager.
 func (tv *TextView) LayoutManager() *LayoutManager {
-	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("layoutManager"))
-	return LayoutManagerFromID(_r)
+	var _mainthread0 *LayoutManager
+	purego.Main(func() {
+		_mainthread0 = func() *LayoutManager {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("layoutManager"))
+			return LayoutManagerFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TextStorage returns the text storage.
 func (tv *TextView) TextStorage() *TextStorage {
-	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("textStorage"))
-	return TextStorageFromID(_r)
+	var _mainthread0 *TextStorage
+	purego.Main(func() {
+		_mainthread0 = func() *TextStorage {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("textStorage"))
+			return TextStorageFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TextLayoutManager returns the text layout manager.
 func (tv *TextView) TextLayoutManager() *TextLayoutManager {
-	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("textLayoutManager"))
-	return TextLayoutManagerFromID(_r)
+	var _mainthread0 *TextLayoutManager
+	purego.Main(func() {
+		_mainthread0 = func() *TextLayoutManager {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("textLayoutManager"))
+			return TextLayoutManagerFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TextContentStorage returns the text content storage.
 func (tv *TextView) TextContentStorage() *TextContentStorage {
-	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("textContentStorage"))
-	return TextContentStorageFromID(_r)
+	var _mainthread0 *TextContentStorage
+	purego.Main(func() {
+		_mainthread0 = func() *TextContentStorage {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("textContentStorage"))
+			return TextContentStorageFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShouldDrawInsertionPoint wraps the corresponding Objective-C method.
 func (tv *TextView) ShouldDrawInsertionPoint() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("shouldDrawInsertionPoint"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("shouldDrawInsertionPoint"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UsesAdaptiveColorMappingForDarkAppearance wraps the corresponding Objective-C method.
 func (tv *TextView) UsesAdaptiveColorMappingForDarkAppearance() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("usesAdaptiveColorMappingForDarkAppearance"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("usesAdaptiveColorMappingForDarkAppearance"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Complete invokes completion in a text view.
 func (tv *TextView) Complete(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("complete:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("complete:"), objref.IDOf(sender))
+	})
+
 }
 
 // CompletionsForPartialWordRangeIndexOfSelectedItem returns an array of potential completions, in the order to be presented, representing possible word completions available from a partial word.
 func (tv *TextView) CompletionsForPartialWordRangeIndexOfSelectedItem(charRange foundation.NSRange) (result []string, index int64) {
-	var _out0 int64
-	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("completionsForPartialWordRange:indexOfSelectedItem:"), charRange, unsafe.Pointer(&_out0))
-	_v := purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
-	return _v, _out0
+	var _mainthread0 []string
+	var _mainthread1 int64
+	purego.Main(func() {
+		_mainthread0, _mainthread1 = func() (result []string, index int64) {
+			var _out0 int64
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("completionsForPartialWordRange:indexOfSelectedItem:"), charRange, unsafe.Pointer(&_out0))
+			_v := purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
+			return _v, _out0
+		}()
+	})
+	return _mainthread0, _mainthread1
+
 }
 
 // InsertCompletionForPartialWordRangeMovementIsFinal inserts the selected completion into the text at the appropriate location.
 func (tv *TextView) InsertCompletionForPartialWordRangeMovementIsFinal(word string, charRange foundation.NSRange, movement int, flag bool) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("insertCompletion:forPartialWordRange:movement:isFinal:"), purego.NSString(word), charRange, movement, flag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("insertCompletion:forPartialWordRange:movement:isFinal:"), purego.NSString(word), charRange, movement, flag)
+	})
+
 }
 
 // RangeForUserCompletion returns the range for user completion.
 func (tv *TextView) RangeForUserCompletion() foundation.NSRange {
-	_r := objc.Send[foundation.NSRange](objref.IDOf(tv), objc.RegisterName("rangeForUserCompletion"))
-	return _r
+	var _mainthread0 foundation.NSRange
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSRange {
+			_r := objc.Send[foundation.NSRange](objref.IDOf(tv), objc.RegisterName("rangeForUserCompletion"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // WriteSelectionToPasteboardType writes the current selection to the specified pasteboard using the given type.
 func (tv *TextView) WriteSelectionToPasteboardType(pboard *Pasteboard, type_ obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("writeSelectionToPasteboard:type:"), objref.IDOf(pboard), objref.IDOf(type_))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("writeSelectionToPasteboard:type:"), objref.IDOf(pboard), objref.IDOf(type_))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // WriteSelectionToPasteboardTypes writes the current selection to the specified pasteboard under each given type.
 func (tv *TextView) WriteSelectionToPasteboardTypes(pboard *Pasteboard, types []obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("writeSelectionToPasteboard:types:"), objref.IDOf(pboard), purego.SliceToNSArray(types, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("writeSelectionToPasteboard:types:"), objref.IDOf(pboard), purego.SliceToNSArray(types, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PreferredPasteboardTypeFromArrayRestrictedToTypesFromArray returns whatever type on the pasteboard would be most preferred for copying data.
 func (tv *TextView) PreferredPasteboardTypeFromArrayRestrictedToTypesFromArray(availableTypes []obj.Object, allowedTypes []obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("preferredPasteboardTypeFromArray:restrictedToTypesFromArray:"), purego.SliceToNSArray(availableTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(allowedTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("preferredPasteboardTypeFromArray:restrictedToTypesFromArray:"), purego.SliceToNSArray(availableTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(allowedTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ReadSelectionFromPasteboardType reads data of the given type from the specified pasteboard.
 func (tv *TextView) ReadSelectionFromPasteboardType(pboard *Pasteboard, type_ obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("readSelectionFromPasteboard:type:"), objref.IDOf(pboard), objref.IDOf(type_))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("readSelectionFromPasteboard:type:"), objref.IDOf(pboard), objref.IDOf(type_))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ReadSelectionFromPasteboard reads the text view’s preferred type of data from the specified pasteboard.
 func (tv *TextView) ReadSelectionFromPasteboard(pboard *Pasteboard) bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("readSelectionFromPasteboard:"), objref.IDOf(pboard))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("readSelectionFromPasteboard:"), objref.IDOf(pboard))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PasteAsPlainText inserts the contents of the pasteboard into the receiver’s text as plain text.
 func (tv *TextView) PasteAsPlainText(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("pasteAsPlainText:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("pasteAsPlainText:"), objref.IDOf(sender))
+	})
+
 }
 
 // PasteAsRichText this action method inserts the contents of the pasteboard into the receiver’s text as rich text, maintaining its attributes.
 func (tv *TextView) PasteAsRichText(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("pasteAsRichText:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("pasteAsRichText:"), objref.IDOf(sender))
+	})
+
 }
 
 // WritablePasteboardTypes returns the writable pasteboard types.
 //
 // WritablePasteboardTypes returns the collection as a Go slice.
 func (tv *TextView) WritablePasteboardTypes() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("writablePasteboardTypes"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_arr := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("writablePasteboardTypes"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // ReadablePasteboardTypes returns the readable pasteboard types.
 //
 // ReadablePasteboardTypes returns the collection as a Go slice.
 func (tv *TextView) ReadablePasteboardTypes() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("readablePasteboardTypes"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_arr := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("readablePasteboardTypes"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // DragSelectionWithEventOffsetSlideBack begins dragging the current selected text range.
 func (tv *TextView) DragSelectionWithEventOffsetSlideBack(event *Event, mouseOffset corefoundation.CGSize, slideBack bool) bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("dragSelectionWithEvent:offset:slideBack:"), objref.IDOf(event), mouseOffset, slideBack)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("dragSelectionWithEvent:offset:slideBack:"), objref.IDOf(event), mouseOffset, slideBack)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CleanUpAfterDragOperation releases the drag information still existing after the dragging session has completed.
 func (tv *TextView) CleanUpAfterDragOperation() {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("cleanUpAfterDragOperation"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("cleanUpAfterDragOperation"))
+	})
+
 }
 
 // AcceptableDragTypes returns the acceptable drag types.
 //
 // AcceptableDragTypes returns the collection as a Go slice.
 func (tv *TextView) AcceptableDragTypes() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("acceptableDragTypes"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_arr := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("acceptableDragTypes"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // SetSelectedRangesAffinityStillSelecting sets the selection to the characters in an array of ranges in response to user action.
 func (tv *TextView) SetSelectedRangesAffinityStillSelecting(ranges []obj.Object, affinity SelectionAffinity, stillSelectingFlag bool) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSelectedRanges:affinity:stillSelecting:"), purego.SliceToNSArray(ranges, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), affinity, stillSelectingFlag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSelectedRanges:affinity:stillSelecting:"), purego.SliceToNSArray(ranges, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), affinity, stillSelectingFlag)
+	})
+
 }
 
 // SetSelectedRangeAffinityStillSelecting sets the selection to a range of characters in response to user action.
 func (tv *TextView) SetSelectedRangeAffinityStillSelecting(charRange foundation.NSRange, affinity SelectionAffinity, stillSelectingFlag bool) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSelectedRange:affinity:stillSelecting:"), charRange, affinity, stillSelectingFlag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSelectedRange:affinity:stillSelecting:"), charRange, affinity, stillSelectingFlag)
+	})
+
 }
 
 // UpdateInsertionPointStateAndRestartTimer updates the insertion point’s location and optionally restarts the blinking cursor timer.
 func (tv *TextView) UpdateInsertionPointStateAndRestartTimer(restartFlag bool) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateInsertionPointStateAndRestartTimer:"), restartFlag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateInsertionPointStateAndRestartTimer:"), restartFlag)
+	})
+
 }
 
 // ToggleContinuousSpellChecking toggles whether continuous spell checking is enabled for the receiver.
 func (tv *TextView) ToggleContinuousSpellChecking(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleContinuousSpellChecking:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleContinuousSpellChecking:"), objref.IDOf(sender))
+	})
+
 }
 
 // ToggleGrammarChecking changes the state of grammar checking from enabled to disabled and vice versa.
 func (tv *TextView) ToggleGrammarChecking(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleGrammarChecking:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleGrammarChecking:"), objref.IDOf(sender))
+	})
+
 }
 
 // SetSpellingStateRange sets the spelling state, which controls the display of the spelling and grammar indicators on the given text range.
 func (tv *TextView) SetSpellingStateRange(value int, charRange foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSpellingState:range:"), value, charRange)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSpellingState:range:"), value, charRange)
+	})
+
 }
 
 // ShouldChangeTextInRangesReplacementStrings initiates a series of delegate messages (and general notifications) to determine whether modifications can be made to the characters and attributes of the receiver’s text.
 func (tv *TextView) ShouldChangeTextInRangesReplacementStrings(affectedRanges []obj.Object, replacementStrings []string) bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("shouldChangeTextInRanges:replacementStrings:"), purego.SliceToNSArray(affectedRanges, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(replacementStrings, func(_v string) objc.ID { return purego.NSString(_v) }))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("shouldChangeTextInRanges:replacementStrings:"), purego.SliceToNSArray(affectedRanges, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(replacementStrings, func(_v string) objc.ID { return purego.NSString(_v) }))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShouldChangeTextInRangeReplacementString initiates a series of delegate messages (and general notifications) to determine whether modifications can be made to the characters and attributes of the receiver’s text.
 func (tv *TextView) ShouldChangeTextInRangeReplacementString(affectedCharRange foundation.NSRange, replacementString string) bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("shouldChangeTextInRange:replacementString:"), affectedCharRange, purego.NSString(replacementString))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("shouldChangeTextInRange:replacementString:"), affectedCharRange, purego.NSString(replacementString))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DidChangeText sends out necessary notifications when a text change completes.
 func (tv *TextView) DidChangeText() {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("didChangeText"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("didChangeText"))
+	})
+
 }
 
 // BreakUndoCoalescing informs the receiver that it should begin coalescing successive typing operations in a new undo grouping.
 func (tv *TextView) BreakUndoCoalescing() {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("breakUndoCoalescing"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("breakUndoCoalescing"))
+	})
+
 }
 
 // ShowFindIndicatorForRange causes a temporary highlighting effect to appear around the visible portion (or portions) of the specified range.
 func (tv *TextView) ShowFindIndicatorForRange(charRange foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("showFindIndicatorForRange:"), charRange)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("showFindIndicatorForRange:"), charRange)
+	})
+
 }
 
 // SelectedRanges returns the selected ranges.
 //
 // SelectedRanges returns the collection as a Go slice.
 func (tv *TextView) SelectedRanges() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectedRanges"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_arr := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectedRanges"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // SelectionAffinity returns the selection affinity.
 func (tv *TextView) SelectionAffinity() SelectionAffinity {
-	_r := objc.Send[SelectionAffinity](objref.IDOf(tv), objc.RegisterName("selectionAffinity"))
-	return _r
+	var _mainthread0 SelectionAffinity
+	purego.Main(func() {
+		_mainthread0 = func() SelectionAffinity {
+			_r := objc.Send[SelectionAffinity](objref.IDOf(tv), objc.RegisterName("selectionAffinity"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SelectionGranularity returns the selection granularity.
 func (tv *TextView) SelectionGranularity() SelectionGranularity {
-	_r := objc.Send[SelectionGranularity](objref.IDOf(tv), objc.RegisterName("selectionGranularity"))
-	return _r
+	var _mainthread0 SelectionGranularity
+	purego.Main(func() {
+		_mainthread0 = func() SelectionGranularity {
+			_r := objc.Send[SelectionGranularity](objref.IDOf(tv), objc.RegisterName("selectionGranularity"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SelectedTextAttributes returns the selected text attributes.
 func (tv *TextView) SelectedTextAttributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectedTextAttributes"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectedTextAttributes"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // InsertionPointColor returns the insertion point color.
 func (tv *TextView) InsertionPointColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("insertionPointColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("insertionPointColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MarkedTextAttributes returns the marked text attributes.
 func (tv *TextView) MarkedTextAttributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("markedTextAttributes"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("markedTextAttributes"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LinkTextAttributes returns the link text attributes.
 func (tv *TextView) LinkTextAttributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("linkTextAttributes"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("linkTextAttributes"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DisplaysLinkToolTips wraps the corresponding Objective-C method.
 func (tv *TextView) DisplaysLinkToolTips() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("displaysLinkToolTips"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("displaysLinkToolTips"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AcceptsGlyphInfo wraps the corresponding Objective-C method.
 func (tv *TextView) AcceptsGlyphInfo() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("acceptsGlyphInfo"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("acceptsGlyphInfo"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UsesRuler wraps the corresponding Objective-C method.
 func (tv *TextView) UsesRuler() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("usesRuler"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("usesRuler"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UsesInspectorBar wraps the corresponding Objective-C method.
 func (tv *TextView) UsesInspectorBar() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("usesInspectorBar"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("usesInspectorBar"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsContinuousSpellCheckingEnabled reports whether the object is continuous spell checking enabled.
 func (tv *TextView) IsContinuousSpellCheckingEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isContinuousSpellCheckingEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isContinuousSpellCheckingEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SpellCheckerDocumentTag returns the spell checker document tag.
 func (tv *TextView) SpellCheckerDocumentTag() int {
-	_r := objc.Send[int](objref.IDOf(tv), objc.RegisterName("spellCheckerDocumentTag"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(tv), objc.RegisterName("spellCheckerDocumentTag"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsGrammarCheckingEnabled reports whether the object is grammar checking enabled.
 func (tv *TextView) IsGrammarCheckingEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isGrammarCheckingEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isGrammarCheckingEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TypingAttributes returns the typing attributes.
 func (tv *TextView) TypingAttributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("typingAttributes"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("typingAttributes"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RangesForUserTextChange returns the ranges for user text change.
 //
 // RangesForUserTextChange returns the collection as a Go slice.
 func (tv *TextView) RangesForUserTextChange() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("rangesForUserTextChange"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_arr := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("rangesForUserTextChange"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // RangesForUserCharacterAttributeChange returns the ranges for user character attribute change.
 //
 // RangesForUserCharacterAttributeChange returns the collection as a Go slice.
 func (tv *TextView) RangesForUserCharacterAttributeChange() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("rangesForUserCharacterAttributeChange"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_arr := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("rangesForUserCharacterAttributeChange"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // RangesForUserParagraphAttributeChange returns the ranges for user paragraph attribute change.
 //
 // RangesForUserParagraphAttributeChange returns the collection as a Go slice.
 func (tv *TextView) RangesForUserParagraphAttributeChange() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("rangesForUserParagraphAttributeChange"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_arr := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("rangesForUserParagraphAttributeChange"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // RangeForUserTextChange returns the range for user text change.
 func (tv *TextView) RangeForUserTextChange() foundation.NSRange {
-	_r := objc.Send[foundation.NSRange](objref.IDOf(tv), objc.RegisterName("rangeForUserTextChange"))
-	return _r
+	var _mainthread0 foundation.NSRange
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSRange {
+			_r := objc.Send[foundation.NSRange](objref.IDOf(tv), objc.RegisterName("rangeForUserTextChange"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RangeForUserCharacterAttributeChange returns the range for user character attribute change.
 func (tv *TextView) RangeForUserCharacterAttributeChange() foundation.NSRange {
-	_r := objc.Send[foundation.NSRange](objref.IDOf(tv), objc.RegisterName("rangeForUserCharacterAttributeChange"))
-	return _r
+	var _mainthread0 foundation.NSRange
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSRange {
+			_r := objc.Send[foundation.NSRange](objref.IDOf(tv), objc.RegisterName("rangeForUserCharacterAttributeChange"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RangeForUserParagraphAttributeChange returns the range for user paragraph attribute change.
 func (tv *TextView) RangeForUserParagraphAttributeChange() foundation.NSRange {
-	_r := objc.Send[foundation.NSRange](objref.IDOf(tv), objc.RegisterName("rangeForUserParagraphAttributeChange"))
-	return _r
+	var _mainthread0 foundation.NSRange
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSRange {
+			_r := objc.Send[foundation.NSRange](objref.IDOf(tv), objc.RegisterName("rangeForUserParagraphAttributeChange"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsDocumentBackgroundColorChange wraps the corresponding Objective-C method.
 func (tv *TextView) AllowsDocumentBackgroundColorChange() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("allowsDocumentBackgroundColorChange"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("allowsDocumentBackgroundColorChange"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DefaultParagraphStyle returns the default paragraph style.
 func (tv *TextView) DefaultParagraphStyle() *ParagraphStyle {
-	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("defaultParagraphStyle"))
-	return ParagraphStyleFromID(_r)
+	var _mainthread0 *ParagraphStyle
+	purego.Main(func() {
+		_mainthread0 = func() *ParagraphStyle {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("defaultParagraphStyle"))
+			return ParagraphStyleFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsUndo wraps the corresponding Objective-C method.
 func (tv *TextView) AllowsUndo() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("allowsUndo"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("allowsUndo"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsCoalescingUndo reports whether the object is coalescing undo.
 func (tv *TextView) IsCoalescingUndo() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isCoalescingUndo"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isCoalescingUndo"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsImageEditing wraps the corresponding Objective-C method.
 func (tv *TextView) AllowsImageEditing() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("allowsImageEditing"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("allowsImageEditing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UsesRolloverButtonForSelection wraps the corresponding Objective-C method.
 func (tv *TextView) UsesRolloverButtonForSelection() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("usesRolloverButtonForSelection"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("usesRolloverButtonForSelection"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowedInputSourceLocales returns the allowed input source locales.
 //
 // AllowedInputSourceLocales returns the collection as a Go slice.
 func (tv *TextView) AllowedInputSourceLocales() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("allowedInputSourceLocales"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
+	var _mainthread0 []string
+	purego.Main(func() {
+		_mainthread0 = func() []string {
+			_arr := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("allowedInputSourceLocales"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // IsWritingToolsActive reports whether the object is writing tools active.
 func (tv *TextView) IsWritingToolsActive() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isWritingToolsActive"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isWritingToolsActive"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // WritingToolsBehavior returns the writing tools behavior.
 func (tv *TextView) WritingToolsBehavior() WritingToolsBehavior {
-	_r := objc.Send[WritingToolsBehavior](objref.IDOf(tv), objc.RegisterName("writingToolsBehavior"))
-	return _r
+	var _mainthread0 WritingToolsBehavior
+	purego.Main(func() {
+		_mainthread0 = func() WritingToolsBehavior {
+			_r := objc.Send[WritingToolsBehavior](objref.IDOf(tv), objc.RegisterName("writingToolsBehavior"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowedWritingToolsResultOptions returns the allowed writing tools result options.
 func (tv *TextView) AllowedWritingToolsResultOptions() WritingToolsResultOptions {
-	_r := objc.Send[WritingToolsResultOptions](objref.IDOf(tv), objc.RegisterName("allowedWritingToolsResultOptions"))
-	return _r
+	var _mainthread0 WritingToolsResultOptions
+	purego.Main(func() {
+		_mainthread0 = func() WritingToolsResultOptions {
+			_r := objc.Send[WritingToolsResultOptions](objref.IDOf(tv), objc.RegisterName("allowedWritingToolsResultOptions"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SmartDeleteRangeForProposedRange returns an extended range that includes adjacent whitespace that should be deleted along with the proposed range in order to preserve proper spacing and punctuation.
 func (tv *TextView) SmartDeleteRangeForProposedRange(proposedCharRange foundation.NSRange) foundation.NSRange {
-	_r := objc.Send[foundation.NSRange](objref.IDOf(tv), objc.RegisterName("smartDeleteRangeForProposedRange:"), proposedCharRange)
-	return _r
+	var _mainthread0 foundation.NSRange
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSRange {
+			_r := objc.Send[foundation.NSRange](objref.IDOf(tv), objc.RegisterName("smartDeleteRangeForProposedRange:"), proposedCharRange)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ToggleSmartInsertDelete changes the state of smart insert and delete from enabled to disabled and vice versa.
 func (tv *TextView) ToggleSmartInsertDelete(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleSmartInsertDelete:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleSmartInsertDelete:"), objref.IDOf(sender))
+	})
+
 }
 
 // SmartInsertForStringReplacingRangeBeforeStringAfterString determines whether whitespace needs to be added around the string to preserve proper spacing and punctuation when it replaces the characters in the specified range.
 func (tv *TextView) SmartInsertForStringReplacingRangeBeforeStringAfterString(pasteString string, charRangeToReplace foundation.NSRange, beforeString string, afterString string) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("smartInsertForString:replacingRange:beforeString:afterString:"), purego.NSString(pasteString), charRangeToReplace, purego.NSString(beforeString), purego.NSString(afterString))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("smartInsertForString:replacingRange:beforeString:afterString:"), purego.NSString(pasteString), charRangeToReplace, purego.NSString(beforeString), purego.NSString(afterString))
+	})
+
 }
 
 // SmartInsertBeforeStringForStringReplacingRange returns any whitespace that needs to be added before the string to preserve proper spacing and punctuation when the string replaces the characters in the specified range.
 func (tv *TextView) SmartInsertBeforeStringForStringReplacingRange(pasteString string, charRangeToReplace foundation.NSRange) string {
-	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("smartInsertBeforeStringForString:replacingRange:"), purego.NSString(pasteString), charRangeToReplace)
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("smartInsertBeforeStringForString:replacingRange:"), purego.NSString(pasteString), charRangeToReplace)
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SmartInsertAfterStringForStringReplacingRange returns any whitespace that needs to be added after the string to preserve proper spacing and punctuation when the string replaces the characters in the specified range.
 func (tv *TextView) SmartInsertAfterStringForStringReplacingRange(pasteString string, charRangeToReplace foundation.NSRange) string {
-	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("smartInsertAfterStringForString:replacingRange:"), purego.NSString(pasteString), charRangeToReplace)
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("smartInsertAfterStringForString:replacingRange:"), purego.NSString(pasteString), charRangeToReplace)
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ToggleAutomaticQuoteSubstitution changes the state of automatic quotation mark substitution from enabled to disabled and vice versa.
 func (tv *TextView) ToggleAutomaticQuoteSubstitution(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleAutomaticQuoteSubstitution:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleAutomaticQuoteSubstitution:"), objref.IDOf(sender))
+	})
+
 }
 
 // ToggleAutomaticLinkDetection changes the state of automatic link detection from enabled to disabled and vice versa.
 func (tv *TextView) ToggleAutomaticLinkDetection(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleAutomaticLinkDetection:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleAutomaticLinkDetection:"), objref.IDOf(sender))
+	})
+
 }
 
 // ToggleAutomaticDataDetection toggles the state of the automatic data detection.
 func (tv *TextView) ToggleAutomaticDataDetection(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleAutomaticDataDetection:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleAutomaticDataDetection:"), objref.IDOf(sender))
+	})
+
 }
 
 // ToggleAutomaticDashSubstitution toggles the state of the automatic dash substitution.
 func (tv *TextView) ToggleAutomaticDashSubstitution(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleAutomaticDashSubstitution:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleAutomaticDashSubstitution:"), objref.IDOf(sender))
+	})
+
 }
 
 // ToggleAutomaticTextReplacement toggles the state of the automatic text replacement.
 func (tv *TextView) ToggleAutomaticTextReplacement(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleAutomaticTextReplacement:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleAutomaticTextReplacement:"), objref.IDOf(sender))
+	})
+
 }
 
 // ToggleAutomaticSpellingCorrection toggles the state of the automatic spelling correction.
 func (tv *TextView) ToggleAutomaticSpellingCorrection(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleAutomaticSpellingCorrection:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleAutomaticSpellingCorrection:"), objref.IDOf(sender))
+	})
+
 }
 
 // CheckTextInRangeTypesOptions check and replace the text in the range using the specified checking types and options.
 func (tv *TextView) CheckTextInRangeTypesOptions(range_ foundation.NSRange, checkingTypes uint64, options obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("checkTextInRange:types:options:"), range_, checkingTypes, objref.IDOf(options))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("checkTextInRange:types:options:"), range_, checkingTypes, objref.IDOf(options))
+	})
+
 }
 
 // HandleTextCheckingResultsForRangeTypesOptionsOrthographyWordCount handles the text checking results returned by the text view
 func (tv *TextView) HandleTextCheckingResultsForRangeTypesOptionsOrthographyWordCount(results []obj.Object, range_ foundation.NSRange, checkingTypes uint64, options obj.Object, orthography obj.Object, wordCount int) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("handleTextCheckingResults:forRange:types:options:orthography:wordCount:"), purego.SliceToNSArray(results, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), range_, checkingTypes, objref.IDOf(options), objref.IDOf(orthography), wordCount)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("handleTextCheckingResults:forRange:types:options:orthography:wordCount:"), purego.SliceToNSArray(results, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), range_, checkingTypes, objref.IDOf(options), objref.IDOf(orthography), wordCount)
+	})
+
 }
 
 // OrderFrontSubstitutionsPanel brings forward a panel allowing the user to specify string substitutions in the text view.
 func (tv *TextView) OrderFrontSubstitutionsPanel(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("orderFrontSubstitutionsPanel:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("orderFrontSubstitutionsPanel:"), objref.IDOf(sender))
+	})
+
 }
 
 // CheckTextInSelection performs the default text checking on the current selection.
 func (tv *TextView) CheckTextInSelection(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("checkTextInSelection:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("checkTextInSelection:"), objref.IDOf(sender))
+	})
+
 }
 
 // CheckTextInDocument performs the default text checking on the entire document.
 func (tv *TextView) CheckTextInDocument(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("checkTextInDocument:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("checkTextInDocument:"), objref.IDOf(sender))
+	})
+
 }
 
 // SmartInsertDeleteEnabled wraps the corresponding Objective-C method.
 func (tv *TextView) SmartInsertDeleteEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("smartInsertDeleteEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("smartInsertDeleteEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsAutomaticQuoteSubstitutionEnabled reports whether the object is automatic quote substitution enabled.
 func (tv *TextView) IsAutomaticQuoteSubstitutionEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isAutomaticQuoteSubstitutionEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isAutomaticQuoteSubstitutionEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsAutomaticLinkDetectionEnabled reports whether the object is automatic link detection enabled.
 func (tv *TextView) IsAutomaticLinkDetectionEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isAutomaticLinkDetectionEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isAutomaticLinkDetectionEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsAutomaticDataDetectionEnabled reports whether the object is automatic data detection enabled.
 func (tv *TextView) IsAutomaticDataDetectionEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isAutomaticDataDetectionEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isAutomaticDataDetectionEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsAutomaticDashSubstitutionEnabled reports whether the object is automatic dash substitution enabled.
 func (tv *TextView) IsAutomaticDashSubstitutionEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isAutomaticDashSubstitutionEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isAutomaticDashSubstitutionEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsAutomaticTextReplacementEnabled reports whether the object is automatic text replacement enabled.
 func (tv *TextView) IsAutomaticTextReplacementEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isAutomaticTextReplacementEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isAutomaticTextReplacementEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsAutomaticSpellingCorrectionEnabled reports whether the object is automatic spelling correction enabled.
 func (tv *TextView) IsAutomaticSpellingCorrectionEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isAutomaticSpellingCorrectionEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isAutomaticSpellingCorrectionEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // EnabledTextCheckingTypes returns the enabled text checking types.
 func (tv *TextView) EnabledTextCheckingTypes() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(tv), objc.RegisterName("enabledTextCheckingTypes"))
-	return _r
+	var _mainthread0 uint64
+	purego.Main(func() {
+		_mainthread0 = func() uint64 {
+			_r := objc.Send[uint64](objref.IDOf(tv), objc.RegisterName("enabledTextCheckingTypes"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UsesFindPanel wraps the corresponding Objective-C method.
 func (tv *TextView) UsesFindPanel() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("usesFindPanel"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("usesFindPanel"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UsesFindBar wraps the corresponding Objective-C method.
 func (tv *TextView) UsesFindBar() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("usesFindBar"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("usesFindBar"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsIncrementalSearchingEnabled reports whether the object is incremental searching enabled.
 func (tv *TextView) IsIncrementalSearchingEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isIncrementalSearchingEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isIncrementalSearchingEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // InlinePredictionType returns the inline prediction type.
 func (tv *TextView) InlinePredictionType() TextInputTraitType {
-	_r := objc.Send[TextInputTraitType](objref.IDOf(tv), objc.RegisterName("inlinePredictionType"))
-	return _r
+	var _mainthread0 TextInputTraitType
+	purego.Main(func() {
+		_mainthread0 = func() TextInputTraitType {
+			_r := objc.Send[TextInputTraitType](objref.IDOf(tv), objc.RegisterName("inlinePredictionType"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MathExpressionCompletionType returns the math expression completion type.
 func (tv *TextView) MathExpressionCompletionType() TextInputTraitType {
-	_r := objc.Send[TextInputTraitType](objref.IDOf(tv), objc.RegisterName("mathExpressionCompletionType"))
-	return _r
+	var _mainthread0 TextInputTraitType
+	purego.Main(func() {
+		_mainthread0 = func() TextInputTraitType {
+			_r := objc.Send[TextInputTraitType](objref.IDOf(tv), objc.RegisterName("mathExpressionCompletionType"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ToggleQuickLookPreviewPanel an action message that toggles the visibility state of the Quick Look preview panel.
 func (tv *TextView) ToggleQuickLookPreviewPanel(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleQuickLookPreviewPanel:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleQuickLookPreviewPanel:"), objref.IDOf(sender))
+	})
+
 }
 
 // QuickLookPreviewableItemsInRanges returns an array of URLs for items that can be displayed by QuickLook in the specified ranges.
 func (tv *TextView) QuickLookPreviewableItemsInRanges(ranges []obj.Object) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("quickLookPreviewableItemsInRanges:"), purego.SliceToNSArray(ranges, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("quickLookPreviewableItemsInRanges:"), purego.SliceToNSArray(ranges, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+			return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UpdateQuickLookPreviewPanel notifies the QuickLook panel that an update may be required.
 func (tv *TextView) UpdateQuickLookPreviewPanel() {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateQuickLookPreviewPanel"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateQuickLookPreviewPanel"))
+	})
+
 }
 
 // OrderFrontSharingServicePicker creates and displays a new instance of the sharing service picker.
 func (tv *TextView) OrderFrontSharingServicePicker(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("orderFrontSharingServicePicker:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("orderFrontSharingServicePicker:"), objref.IDOf(sender))
+	})
+
 }
 
 // ToggleAutomaticTextCompletion toggles automatic text completion.
 func (tv *TextView) ToggleAutomaticTextCompletion(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleAutomaticTextCompletion:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleAutomaticTextCompletion:"), objref.IDOf(sender))
+	})
+
 }
 
 // UpdateTouchBarItemIdentifiers updates touch bar item identifiers.
 func (tv *TextView) UpdateTouchBarItemIdentifiers() {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateTouchBarItemIdentifiers"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateTouchBarItemIdentifiers"))
+	})
+
 }
 
 // UpdateTextTouchBarItems updates text touch bar items.
 func (tv *TextView) UpdateTextTouchBarItems() {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateTextTouchBarItems"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateTextTouchBarItems"))
+	})
+
 }
 
 // UpdateCandidates updates candidates.
 func (tv *TextView) UpdateCandidates() {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateCandidates"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateCandidates"))
+	})
+
 }
 
 // IsAutomaticTextCompletionEnabled reports whether the object is automatic text completion enabled.
 func (tv *TextView) IsAutomaticTextCompletionEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isAutomaticTextCompletionEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isAutomaticTextCompletionEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsCharacterPickerTouchBarItem wraps the corresponding Objective-C method.
 func (tv *TextView) AllowsCharacterPickerTouchBarItem() bool {
-	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("allowsCharacterPickerTouchBarItem"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("allowsCharacterPickerTouchBarItem"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DrawTextHighlightBackgroundForTextRangeOrigin draws text highlight background for text range origin.
 func (tv *TextView) DrawTextHighlightBackgroundForTextRangeOrigin(textRange *TextRange, origin corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("drawTextHighlightBackgroundForTextRange:origin:"), objref.IDOf(textRange), origin)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("drawTextHighlightBackgroundForTextRange:origin:"), objref.IDOf(textRange), origin)
+	})
+
 }
 
 // Highlight an action for toggling NSTextHighlightStyleAttributeName in the receiver’s selected range. The sender should be a menu item with a representedObject of type (NSTextHighlightColorScheme).
 func (tv *TextView) Highlight(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("highlight:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("highlight:"), objref.IDOf(sender))
+	})
+
 }
 
 // TextHighlightAttributes returns the text highlight attributes.
 func (tv *TextView) TextHighlightAttributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("textHighlightAttributes"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("textHighlightAttributes"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ToggleBaseWritingDirection changes the base writing direction of a paragraph between left-to-right and right-to-left.
 func (tv *TextView) ToggleBaseWritingDirection(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleBaseWritingDirection:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleBaseWritingDirection:"), objref.IDOf(sender))
+	})
+
 }
 
 var _ TextProvider = (*TextView)(nil)

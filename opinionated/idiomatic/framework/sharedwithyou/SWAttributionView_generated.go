@@ -68,99 +68,175 @@ func (av *AttributionView) String() string {
 
 // NewAttributionView creates a new AttributionView.
 func NewAttributionView() *AttributionView {
-	_id := objc.Send[objc.ID](objc.ID(_class("SWAttributionView")), objc.RegisterName("new"))
-	return attributionViewAdopt(_id)
+	var _mainthread0 *AttributionView
+	purego.Main(func() {
+		_mainthread0 = func() *AttributionView {
+			_id := objc.Send[objc.ID](objc.ID(_class("SWAttributionView")), objc.RegisterName("new"))
+			return attributionViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithHighlight sets the highlight you use to display this attribution.
 func (av *AttributionView) WithHighlight(highlight HighlightProvider) *AttributionView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setHighlight:"), objref.IDOf(highlight))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setHighlight:"), objref.IDOf(highlight))
+	})
 	return av
 }
 
 // WithDisplayContext sets the context for the content the system displays with this view.
 func (av *AttributionView) WithDisplayContext(displayContext AttributionViewDisplayContext) *AttributionView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setDisplayContext:"), displayContext)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setDisplayContext:"), displayContext)
+	})
 	return av
 }
 
 // WithHorizontalAlignment sets the horizontal alignment of the view.
 func (av *AttributionView) WithHorizontalAlignment(horizontalAlignment AttributionViewHorizontalAlignment) *AttributionView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setHorizontalAlignment:"), horizontalAlignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setHorizontalAlignment:"), horizontalAlignment)
+	})
 	return av
 }
 
 // WithBackgroundStyle sets the background style of the child view that contains names and avatars.
 func (av *AttributionView) WithBackgroundStyle(backgroundStyle AttributionViewBackgroundStyle) *AttributionView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	})
 	return av
 }
 
 // WithPreferredMaxLayoutWidth sets a width the system uses to constrain the view contents.
 func (av *AttributionView) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *AttributionView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
+	})
 	return av
 }
 
 // WithMenuTitleForHideAction sets a localized string the system uses as a custom title for the hide menu item.
 func (av *AttributionView) WithMenuTitleForHideAction(menuTitleForHideAction string) *AttributionView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setMenuTitleForHideAction:"), purego.NSString(menuTitleForHideAction))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setMenuTitleForHideAction:"), purego.NSString(menuTitleForHideAction))
+	})
 	return av
 }
 
 // WithSupplementalMenu sets a supplemental menu to augment the attribution view’s existing menu.
 func (av *AttributionView) WithSupplementalMenu(supplementalMenu obj.Object) *AttributionView {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setSupplementalMenu:"), objref.IDOf(supplementalMenu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setSupplementalMenu:"), objref.IDOf(supplementalMenu))
+	})
 	return av
 }
 
 // Highlight returns the SWHighlight to use for displaying this attribution. When this property is set to a new highlight, the contents of the view will be reloaded.
 func (av *AttributionView) Highlight() *Highlight {
-	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("highlight"))
-	return HighlightFromID(_r)
+	var _mainthread0 *Highlight
+	purego.Main(func() {
+		_mainthread0 = func() *Highlight {
+			_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("highlight"))
+			return HighlightFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DisplayContext returns the context for the content being displayed with this view. Set this prior to adding this view to your view hierarchy.
 func (av *AttributionView) DisplayContext() AttributionViewDisplayContext {
-	_r := objc.Send[AttributionViewDisplayContext](objref.IDOf(av), objc.RegisterName("displayContext"))
-	return _r
+	var _mainthread0 AttributionViewDisplayContext
+	purego.Main(func() {
+		_mainthread0 = func() AttributionViewDisplayContext {
+			_r := objc.Send[AttributionViewDisplayContext](objref.IDOf(av), objc.RegisterName("displayContext"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HorizontalAlignment returns the horizontal alignment of the view. You should specify a value, in case the internal default ever changes. This value specifies the horizontal anchor for the view's contents. This only has an effect when the width of the contents are less than the available width.
 func (av *AttributionView) HorizontalAlignment() AttributionViewHorizontalAlignment {
-	_r := objc.Send[AttributionViewHorizontalAlignment](objref.IDOf(av), objc.RegisterName("horizontalAlignment"))
-	return _r
+	var _mainthread0 AttributionViewHorizontalAlignment
+	purego.Main(func() {
+		_mainthread0 = func() AttributionViewHorizontalAlignment {
+			_r := objc.Send[AttributionViewHorizontalAlignment](objref.IDOf(av), objc.RegisterName("horizontalAlignment"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BackgroundStyle returns the background style of the inner view containing names and avatars. If you do not specify a background style, one will be chosen automatically. In general, .color looks best on monochrome backgrounds, while .material looks better on colored backgrounds.
 func (av *AttributionView) BackgroundStyle() AttributionViewBackgroundStyle {
-	_r := objc.Send[AttributionViewBackgroundStyle](objref.IDOf(av), objc.RegisterName("backgroundStyle"))
-	return _r
+	var _mainthread0 AttributionViewBackgroundStyle
+	purego.Main(func() {
+		_mainthread0 = func() AttributionViewBackgroundStyle {
+			_r := objc.Send[AttributionViewBackgroundStyle](objref.IDOf(av), objc.RegisterName("backgroundStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PreferredMaxLayoutWidth returns for use when embedding this view in a SwiftUI view representable. When using this view in SwiftUI, this view will constrain its contents to this width. If you are not using SwiftUI this property should not be necessary, as SWAttributionView otherwise derives the maximum width from the frame or constraints you set.
 func (av *AttributionView) PreferredMaxLayoutWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(av), objc.RegisterName("preferredMaxLayoutWidth"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(av), objc.RegisterName("preferredMaxLayoutWidth"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HighlightMenu returns the highlight menu.
 func (av *AttributionView) HighlightMenu() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("highlightMenu"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("highlightMenu"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MenuTitleForHideAction returns a custom localized string to be used as the title for the "Hide" menu item title. A nil value will result in the default title. SWAttributionView manages a context menu which includes the option for the user to hide the content for the SWHighlight represented by this view. Set a title to be used as the title for that context menu. An app that displays articles, for example, might set
 func (av *AttributionView) MenuTitleForHideAction() string {
-	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("menuTitleForHideAction"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("menuTitleForHideAction"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SupplementalMenu returns the supplemental menu.
 func (av *AttributionView) SupplementalMenu() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("supplementalMenu"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("supplementalMenu"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

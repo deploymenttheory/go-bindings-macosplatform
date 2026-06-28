@@ -68,12 +68,25 @@ func (wfr *WKFindResult) String() string {
 
 // NewWKFindResult creates a new WKFindResult.
 func NewWKFindResult() *WKFindResult {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKFindResult")), objc.RegisterName("new"))
-	return wKFindResultAdopt(_id)
+	var _mainthread0 *WKFindResult
+	purego.Main(func() {
+		_mainthread0 = func() *WKFindResult {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKFindResult")), objc.RegisterName("new"))
+			return wKFindResultAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // MatchFound wraps the corresponding Objective-C method.
 func (wfr *WKFindResult) MatchFound() bool {
-	_r := objc.Send[bool](objref.IDOf(wfr), objc.RegisterName("matchFound"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wfr), objc.RegisterName("matchFound"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

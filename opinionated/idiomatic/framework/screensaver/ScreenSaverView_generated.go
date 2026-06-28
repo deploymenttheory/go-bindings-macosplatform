@@ -69,58 +69,110 @@ func (ssv *ScreenSaverView) String() string {
 
 // NewScreenSaverViewWithFrameIsPreview creates a newly allocated screen saver view with the specified frame rectangle and preview information.
 func NewScreenSaverViewWithFrameIsPreview(frame corefoundation.CGRect, isPreview bool) *ScreenSaverView {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("ScreenSaverView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:isPreview:"), frame, isPreview)
-	return screenSaverViewAdopt(_id)
+	var _mainthread0 *ScreenSaverView
+	purego.Main(func() {
+		_mainthread0 = func() *ScreenSaverView {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("ScreenSaverView")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:isPreview:"), frame, isPreview)
+			return screenSaverViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithAnimationTimeInterval sets the time interval between animation frames.
 func (ssv *ScreenSaverView) WithAnimationTimeInterval(animationTimeInterval float64) *ScreenSaverView {
-	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setAnimationTimeInterval:"), animationTimeInterval)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setAnimationTimeInterval:"), animationTimeInterval)
+	})
 	return ssv
 }
 
 // StartAnimation activates the periodic timer that animates the screen saver.
 func (ssv *ScreenSaverView) StartAnimation() {
-	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("startAnimation"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("startAnimation"))
+	})
+
 }
 
 // StopAnimation deactivates the timer that advances the animation.
 func (ssv *ScreenSaverView) StopAnimation() {
-	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("stopAnimation"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("stopAnimation"))
+	})
+
 }
 
 // AnimateOneFrame advances the screen saver’s animation by a single frame.
 func (ssv *ScreenSaverView) AnimateOneFrame() {
-	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("animateOneFrame"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("animateOneFrame"))
+	})
+
 }
 
 // AnimationTimeInterval returns the time interval between animation frames. If your screen saver has particular requirements for time between animation frames, call this method to set the animation rate to a reasonable value.
 func (ssv *ScreenSaverView) AnimationTimeInterval() float64 {
-	_r := objc.Send[float64](objref.IDOf(ssv), objc.RegisterName("animationTimeInterval"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(ssv), objc.RegisterName("animationTimeInterval"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsAnimating reports whether the screen saver is animating. ## Overview The value of this property is <doc://com.apple.documentation/documentation/objectivec/yes> when the screen saver is animating, and <doc://com.apple.documentation/documentation/objectivec/no> when it isn’t. ## See also - “ScreenSaver/ScreenSaverView/stopAnimation“ - “ScreenSaver/ScreenSaverView/startAnimation“
 func (ssv *ScreenSaverView) IsAnimating() bool {
-	_r := objc.Send[bool](objref.IDOf(ssv), objc.RegisterName("isAnimating"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(ssv), objc.RegisterName("isAnimating"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasConfigureSheet reports whether the screen saver has an associated configuration sheet. If you provide a configuration sheet in your bundle, override this method and return <doc://com.apple.documentation/documentation/objectivec/yes>. ## See also - “ScreenSaver/ScreenSaverView/configureSheet“
 func (ssv *ScreenSaverView) HasConfigureSheet() bool {
-	_r := objc.Send[bool](objref.IDOf(ssv), objc.RegisterName("hasConfigureSheet"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(ssv), objc.RegisterName("hasConfigureSheet"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ConfigureSheet returns the window that contains the controls to configure the screen saver. The system runs this window as a sheet, so include buttons that allow the user to end the modal session in which the sheet runs. When the user dismisses the sheet, the controller in charge of the sheet must end the document modal session by calling the <doc://com.apple.documentation/documentation/appkit/nsapplication> method <doc://com.apple.documentation/documentation/appkit/nsapplication/1428503-endsheet> with the sheet’s window as the argument. ## See also - “ScreenSaver/ScreenSaverView/hasConfigureSheet“
 func (ssv *ScreenSaverView) ConfigureSheet() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("configureSheet"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("configureSheet"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsPreview reports whether the screen saver view is set to a size suitable for previewing its content. ## Overview The system sets the value of this property to <doc://com.apple.documentation/documentation/objectivec/yes> when it creates a smaller preview of your screen saver. When the value is <doc://com.apple.documentation/documentation/objectivec/no>, your view matches the size of the screen. Use this property to adjust the content you present. For example, you might change the drawing parameters or data you display in your view.
 func (ssv *ScreenSaverView) IsPreview() bool {
-	_r := objc.Send[bool](objref.IDOf(ssv), objc.RegisterName("isPreview"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(ssv), objc.RegisterName("isPreview"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

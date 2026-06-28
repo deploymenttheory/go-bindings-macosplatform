@@ -66,48 +66,103 @@ func (wwetc *WKWebExtensionTabConfiguration) String() string {
 
 // NewWKWebExtensionTabConfiguration creates a new WKWebExtensionTabConfiguration.
 func NewWKWebExtensionTabConfiguration() *WKWebExtensionTabConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionTabConfiguration")), objc.RegisterName("new"))
-	return wKWebExtensionTabConfigurationAdopt(_id)
+	var _mainthread0 *WKWebExtensionTabConfiguration
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtensionTabConfiguration {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionTabConfiguration")), objc.RegisterName("new"))
+			return wKWebExtensionTabConfigurationAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // Index indicates the position where the tab should be opened within the window.
 func (wwetc *WKWebExtensionTabConfiguration) Index() int {
-	_r := objc.Send[int](objref.IDOf(wwetc), objc.RegisterName("index"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(wwetc), objc.RegisterName("index"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // URL indicates the initial URL for the tab. If this property is `nil`, the app's default "start page" should appear in the tab.
 func (wwetc *WKWebExtensionTabConfiguration) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwetc), objc.RegisterName("url"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwetc), objc.RegisterName("url"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShouldBeActive reports whether the tab should be the active tab. If this property is `YES`, the tab should be made active in the window, ensuring it is the frontmost tab. Being active implies the tab is also selected. If this property is `NO`, the tab shouldn't affect the currently active tab.
 func (wwetc *WKWebExtensionTabConfiguration) ShouldBeActive() bool {
-	_r := objc.Send[bool](objref.IDOf(wwetc), objc.RegisterName("shouldBeActive"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwetc), objc.RegisterName("shouldBeActive"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShouldAddToSelection reports whether the tab should be added to the current tab selection. If this property is `YES`, the tab should be part of the current selection, but not necessarily become the active tab unless “shouldBeActive“ is also `YES`. If this property is `NO`, the tab shouldn't be part of the current selection.
 func (wwetc *WKWebExtensionTabConfiguration) ShouldAddToSelection() bool {
-	_r := objc.Send[bool](objref.IDOf(wwetc), objc.RegisterName("shouldAddToSelection"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwetc), objc.RegisterName("shouldAddToSelection"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShouldBePinned reports whether the tab should be pinned.
 func (wwetc *WKWebExtensionTabConfiguration) ShouldBePinned() bool {
-	_r := objc.Send[bool](objref.IDOf(wwetc), objc.RegisterName("shouldBePinned"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwetc), objc.RegisterName("shouldBePinned"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShouldBeMuted reports whether the tab should be muted.
 func (wwetc *WKWebExtensionTabConfiguration) ShouldBeMuted() bool {
-	_r := objc.Send[bool](objref.IDOf(wwetc), objc.RegisterName("shouldBeMuted"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwetc), objc.RegisterName("shouldBeMuted"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShouldReaderModeBeActive reports whether reader mode in the tab should be active.
 func (wwetc *WKWebExtensionTabConfiguration) ShouldReaderModeBeActive() bool {
-	_r := objc.Send[bool](objref.IDOf(wwetc), objc.RegisterName("shouldReaderModeBeActive"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwetc), objc.RegisterName("shouldReaderModeBeActive"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

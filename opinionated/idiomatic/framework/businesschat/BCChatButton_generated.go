@@ -66,14 +66,26 @@ func (cb *ChatButton) String() string {
 
 // NewChatButtonWithStyle creates and returns a BCChatButton configured for a given style.
 func NewChatButtonWithStyle(style ChatButtonStyle) *ChatButton {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("BCChatButton")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStyle:"), style)
-	return chatButtonAdopt(_id)
+	var _mainthread0 *ChatButton
+	purego.Main(func() {
+		_mainthread0 = func() *ChatButton {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("BCChatButton")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStyle:"), style)
+			return chatButtonAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewChatButtonWithCoder creates a new ChatButton.
 func NewChatButtonWithCoder(coder obj.Object) *ChatButton {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("BCChatButton")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
-	return chatButtonAdopt(_id)
+	var _mainthread0 *ChatButton
+	purego.Main(func() {
+		_mainthread0 = func() *ChatButton {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("BCChatButton")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+			return chatButtonAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }

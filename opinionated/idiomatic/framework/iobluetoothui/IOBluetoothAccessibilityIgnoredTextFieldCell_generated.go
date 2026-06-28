@@ -66,6 +66,12 @@ func (baitfc *BluetoothAccessibilityIgnoredTextFieldCell) String() string {
 
 // NewBluetoothAccessibilityIgnoredTextFieldCell creates a new BluetoothAccessibilityIgnoredTextFieldCell.
 func NewBluetoothAccessibilityIgnoredTextFieldCell() *BluetoothAccessibilityIgnoredTextFieldCell {
-	_id := objc.Send[objc.ID](objc.ID(_class("IOBluetoothAccessibilityIgnoredTextFieldCell")), objc.RegisterName("new"))
-	return bluetoothAccessibilityIgnoredTextFieldCellAdopt(_id)
+	var _mainthread0 *BluetoothAccessibilityIgnoredTextFieldCell
+	purego.Main(func() {
+		_mainthread0 = func() *BluetoothAccessibilityIgnoredTextFieldCell {
+			_id := objc.Send[objc.ID](objc.ID(_class("IOBluetoothAccessibilityIgnoredTextFieldCell")), objc.RegisterName("new"))
+			return bluetoothAccessibilityIgnoredTextFieldCellAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }

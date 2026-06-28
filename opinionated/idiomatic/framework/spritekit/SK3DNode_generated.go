@@ -49,257 +49,389 @@ func sK3DNodeAdopt(id objc.ID) *SK3DNode {
 
 // NewSK3DNodeWithViewportSize initializes a new 3D node.
 func NewSK3DNodeWithViewportSize(viewportSize corefoundation.CGSize) *SK3DNode {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SK3DNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithViewportSize:"), viewportSize)
-	return sK3DNodeAdopt(_id)
+	var _mainthread0 *SK3DNode
+	purego.Main(func() {
+		_mainthread0 = func() *SK3DNode {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SK3DNode")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithViewportSize:"), viewportSize)
+			return sK3DNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewSK3DNodeWithCoder tells you when to initialize a 3D node that has been unarchived.
 func NewSK3DNodeWithCoder(aDecoder obj.Object) *SK3DNode {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SK3DNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
-	return sK3DNodeAdopt(_id)
+	var _mainthread0 *SK3DNode
+	purego.Main(func() {
+		_mainthread0 = func() *SK3DNode {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SK3DNode")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
+			return sK3DNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithViewportSize sets the size of the image rendered by the node.
 func (sdn *SK3DNode) WithViewportSize(viewportSize corefoundation.CGSize) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setViewportSize:"), viewportSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setViewportSize:"), viewportSize)
+	})
 	return sdn
 }
 
 // WithScnScene sets the SceneKit scene to render.
 func (sdn *SK3DNode) WithScnScene(scnScene obj.Object) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setScnScene:"), objref.IDOf(scnScene))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setScnScene:"), objref.IDOf(scnScene))
+	})
 	return sdn
 }
 
 // WithSceneTime sets the current scene time.
 func (sdn *SK3DNode) WithSceneTime(sceneTime float64) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setSceneTime:"), sceneTime)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setSceneTime:"), sceneTime)
+	})
 	return sdn
 }
 
 // WithPlaying sets a Boolean value that determines whether the scene is playing.
 func (sdn *SK3DNode) WithPlaying(playing bool) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setPlaying:"), playing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setPlaying:"), playing)
+	})
 	return sdn
 }
 
 // WithLoops sets a Boolean value that determines whether Scene Kit restarts the scene time after all animations in the scene have played.
 func (sdn *SK3DNode) WithLoops(loops bool) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setLoops:"), loops)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setLoops:"), loops)
+	})
 	return sdn
 }
 
 // WithPointOfView sets the Scene Kit node from which the scene’s contents are viewed when rendered.
 func (sdn *SK3DNode) WithPointOfView(pointOfView obj.Object) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setPointOfView:"), objref.IDOf(pointOfView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setPointOfView:"), objref.IDOf(pointOfView))
+	})
 	return sdn
 }
 
 // WithAutoenablesDefaultLighting sets a Boolean value that determines whether Scene Kit automatically adds lights to a scene.
 func (sdn *SK3DNode) WithAutoenablesDefaultLighting(autoenablesDefaultLighting bool) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAutoenablesDefaultLighting:"), autoenablesDefaultLighting)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAutoenablesDefaultLighting:"), autoenablesDefaultLighting)
+	})
 	return sdn
 }
 
 // WithPosition sets the position of the node in its parent’s coordinate system.
 func (sdn *SK3DNode) WithPosition(position corefoundation.CGPoint) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setPosition:"), position)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setPosition:"), position)
+	})
 	return sdn
 }
 
 // WithZPosition sets the height of the node relative to its parent.
 func (sdn *SK3DNode) WithZPosition(zPosition float64) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setZPosition:"), zPosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setZPosition:"), zPosition)
+	})
 	return sdn
 }
 
 // WithZRotation sets the Euler rotation about the z axis (in radians).
 func (sdn *SK3DNode) WithZRotation(zRotation float64) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setZRotation:"), zRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setZRotation:"), zRotation)
+	})
 	return sdn
 }
 
 // WithXScale sets a scaling factor that multiplies the width of a node and its children.
 func (sdn *SK3DNode) WithXScale(xScale float64) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setXScale:"), xScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setXScale:"), xScale)
+	})
 	return sdn
 }
 
 // WithYScale sets a scaling factor that multiplies the height of a node and its children.
 func (sdn *SK3DNode) WithYScale(yScale float64) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setYScale:"), yScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setYScale:"), yScale)
+	})
 	return sdn
 }
 
 // WithSpeed sets a speed modifier applied to all actions executed by a node and its descendants.
 func (sdn *SK3DNode) WithSpeed(speed float64) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setSpeed:"), speed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setSpeed:"), speed)
+	})
 	return sdn
 }
 
 // WithAlpha sets the transparency value applied to the node’s contents.
 func (sdn *SK3DNode) WithAlpha(alpha float64) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAlpha:"), alpha)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAlpha:"), alpha)
+	})
 	return sdn
 }
 
 // WithPaused sets a Boolean value that determines whether actions on the node and its descendants are processed.
 func (sdn *SK3DNode) WithPaused(paused bool) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setPaused:"), paused)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setPaused:"), paused)
+	})
 	return sdn
 }
 
 // WithHidden sets a Boolean value that determines whether a node and its descendants are rendered.
 func (sdn *SK3DNode) WithHidden(hidden bool) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setHidden:"), hidden)
+	})
 	return sdn
 }
 
 // WithUserInteractionEnabled sets a Boolean value that indicates whether the node receives touch events.
 func (sdn *SK3DNode) WithUserInteractionEnabled(userInteractionEnabled bool) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	})
 	return sdn
 }
 
 // WithName sets the node’s assignable name.
 func (sdn *SK3DNode) WithName(name string) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setName:"), purego.NSString(name))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setName:"), purego.NSString(name))
+	})
 	return sdn
 }
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (sdn *SK3DNode) WithPhysicsBody(physicsBody *PhysicsBody) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	})
 	return sdn
 }
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (sdn *SK3DNode) WithUserData(userData obj.Object) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	})
 	return sdn
 }
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (sdn *SK3DNode) WithReachConstraints(reachConstraints *ReachConstraints) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	})
 	return sdn
 }
 
 // WithConstraints sets a list of constraints to apply to the node.
 func (sdn *SK3DNode) WithConstraints(items ...*Constraint) *SK3DNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setConstraints:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setConstraints:"), _arr)
+	})
 	return sdn
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
 func (sdn *SK3DNode) WithAttributeValues(attributeValues obj.Object) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	})
 	return sdn
 }
 
 // WithAccessibilityElement sets a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (sdn *SK3DNode) WithAccessibilityElement(accessibilityElement bool) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	})
 	return sdn
 }
 
 // WithAccessibilityRole sets a string value describing the user interface element type; for example, a button.
 func (sdn *SK3DNode) WithAccessibilityRole(accessibilityRole string) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	})
 	return sdn
 }
 
 // WithAccessibilityRoleDescription sets a string value describing the user interface element name and type; for example, the Buy button.
 func (sdn *SK3DNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	})
 	return sdn
 }
 
 // WithAccessibilitySubrole sets a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (sdn *SK3DNode) WithAccessibilitySubrole(accessibilitySubrole string) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	})
 	return sdn
 }
 
 // WithAccessibilityFrame sets the size of this user interface element, in screen points.
 func (sdn *SK3DNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	})
 	return sdn
 }
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (sdn *SK3DNode) WithAccessibilityParent(accessibilityParent obj.Object) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	})
 	return sdn
 }
 
 // WithAccessibilityHelp sets the help description of this user interface element; for example, the text shown in a tooltip.
 func (sdn *SK3DNode) WithAccessibilityHelp(accessibilityHelp string) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	})
 	return sdn
 }
 
 // WithAccessibilityLabel sets a short description of this user interface element.
 func (sdn *SK3DNode) WithAccessibilityLabel(accessibilityLabel string) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	})
 	return sdn
 }
 
 // WithAccessibilityEnabled sets a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (sdn *SK3DNode) WithAccessibilityEnabled(accessibilityEnabled bool) *SK3DNode {
-	objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	})
 	return sdn
 }
 
 // HitTestOptions searches the Scene Kit scene for objects corresponding to a point in the rendered image.
 func (sdn *SK3DNode) HitTestOptions(point corefoundation.CGPoint, options obj.Object) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("hitTest:options:"), point, objref.IDOf(options))
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("hitTest:options:"), point, objref.IDOf(options))
+			return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ViewportSize returns the viewport size that the 3D content will be rendered with
 func (sdn *SK3DNode) ViewportSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(sdn), objc.RegisterName("viewportSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(sdn), objc.RegisterName("viewportSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ScnScene returns a SceneKit scene
 func (sdn *SK3DNode) ScnScene() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("scnScene"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("scnScene"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SceneTime specifies the current time to display the scene.
 func (sdn *SK3DNode) SceneTime() float64 {
-	_r := objc.Send[float64](objref.IDOf(sdn), objc.RegisterName("sceneTime"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sdn), objc.RegisterName("sceneTime"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsPlaying reports whether the scene is playing.
 func (sdn *SK3DNode) IsPlaying() bool {
-	_r := objc.Send[bool](objref.IDOf(sdn), objc.RegisterName("isPlaying"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sdn), objc.RegisterName("isPlaying"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Loops reports whether the receiver restarts playback when it reaches the end of its content. Default: true. true when the receiver restarts playback when it finishes.
 func (sdn *SK3DNode) Loops() bool {
-	_r := objc.Send[bool](objref.IDOf(sdn), objc.RegisterName("loops"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sdn), objc.RegisterName("loops"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PointOfView specifies the point of view used to render the scene. A point of view must have either a camera or a spot light attached.
 func (sdn *SK3DNode) PointOfView() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("pointOfView"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("pointOfView"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AutoenablesDefaultLighting reports whether the receiver should automatically light up scenes that have no light source. The default is false. When enabled, a diffuse light is automatically added and placed while rendering scenes that have no light or only ambient lights.
 func (sdn *SK3DNode) AutoenablesDefaultLighting() bool {
-	_r := objc.Send[bool](objref.IDOf(sdn), objc.RegisterName("autoenablesDefaultLighting"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sdn), objc.RegisterName("autoenablesDefaultLighting"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ NodeProvider = (*SK3DNode)(nil)

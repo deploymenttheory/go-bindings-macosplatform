@@ -71,73 +71,148 @@ func (sl *ScrubberLayout) String() string {
 
 // NewScrubberLayoutWithCoder initializes and returns a newly allocated scrubber layout object from a storyboard or nib file.
 func NewScrubberLayoutWithCoder(coder obj.Object) *ScrubberLayout {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScrubberLayout")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
-	return scrubberLayoutAdopt(_id)
+	var _mainthread0 *ScrubberLayout
+	purego.Main(func() {
+		_mainthread0 = func() *ScrubberLayout {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSScrubberLayout")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+			return scrubberLayoutAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // InvalidateLayout signals that the layout has been invalidated, and that the scrubber control should perform a new layout pass.
 func (sl *ScrubberLayout) InvalidateLayout() {
-	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("invalidateLayout"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("invalidateLayout"))
+	})
+
 }
 
 // PrepareLayout gives you an opportunity to perform layout calculations when the scrubber’s layout is invalidated.
 func (sl *ScrubberLayout) PrepareLayout() {
-	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("prepareLayout"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("prepareLayout"))
+	})
+
 }
 
 // LayoutAttributesForItemAtIndex the layout attributes for the item with the specified index.
 func (sl *ScrubberLayout) LayoutAttributesForItemAtIndex(index int) *ScrubberLayoutAttributes {
-	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("layoutAttributesForItemAtIndex:"), index)
-	return ScrubberLayoutAttributesFromID(_r)
+	var _mainthread0 *ScrubberLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *ScrubberLayoutAttributes {
+			_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("layoutAttributesForItemAtIndex:"), index)
+			return ScrubberLayoutAttributesFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LayoutAttributesForItemsInRect the set of layout attributes for all items within the provided rectangle.
 func (sl *ScrubberLayout) LayoutAttributesForItemsInRect(rect corefoundation.CGRect) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("layoutAttributesForItemsInRect:"), rect)
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("layoutAttributesForItemsInRect:"), rect)
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShouldInvalidateLayoutForChangeFromVisibleRectToVisibleRect determines whether the scrubber should refresh its layout in response to a change of its visible region.
 func (sl *ScrubberLayout) ShouldInvalidateLayoutForChangeFromVisibleRectToVisibleRect(fromVisibleRect corefoundation.CGRect, toVisibleRect corefoundation.CGRect) bool {
-	_r := objc.Send[bool](objref.IDOf(sl), objc.RegisterName("shouldInvalidateLayoutForChangeFromVisibleRect:toVisibleRect:"), fromVisibleRect, toVisibleRect)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sl), objc.RegisterName("shouldInvalidateLayoutForChangeFromVisibleRect:toVisibleRect:"), fromVisibleRect, toVisibleRect)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Scrubber returns the NSScrubber control that this layout is assigned to, or
 func (sl *ScrubberLayout) Scrubber() *Scrubber {
-	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("scrubber"))
-	return ScrubberFromID(_r)
+	var _mainthread0 *Scrubber
+	purego.Main(func() {
+		_mainthread0 = func() *Scrubber {
+			_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("scrubber"))
+			return ScrubberFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // VisibleRect returns the currently visible rectangle, in the coordinate space of the scrubber content. Returns
 func (sl *ScrubberLayout) VisibleRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sl), objc.RegisterName("visibleRect"))
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(sl), objc.RegisterName("visibleRect"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ScrubberContentSize returns the content size for all elements within the scrubber. The base implementation returns
 func (sl *ScrubberLayout) ScrubberContentSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(sl), objc.RegisterName("scrubberContentSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(sl), objc.RegisterName("scrubberContentSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShouldInvalidateLayoutForSelectionChange reports whether if
 func (sl *ScrubberLayout) ShouldInvalidateLayoutForSelectionChange() bool {
-	_r := objc.Send[bool](objref.IDOf(sl), objc.RegisterName("shouldInvalidateLayoutForSelectionChange"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sl), objc.RegisterName("shouldInvalidateLayoutForSelectionChange"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShouldInvalidateLayoutForHighlightChange reports whether if
 func (sl *ScrubberLayout) ShouldInvalidateLayoutForHighlightChange() bool {
-	_r := objc.Send[bool](objref.IDOf(sl), objc.RegisterName("shouldInvalidateLayoutForHighlightChange"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sl), objc.RegisterName("shouldInvalidateLayoutForHighlightChange"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AutomaticallyMirrorsInRightToLeftLayout reports whether if
 func (sl *ScrubberLayout) AutomaticallyMirrorsInRightToLeftLayout() bool {
-	_r := objc.Send[bool](objref.IDOf(sl), objc.RegisterName("automaticallyMirrorsInRightToLeftLayout"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sl), objc.RegisterName("automaticallyMirrorsInRightToLeftLayout"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // isScrubberLayout marks ScrubberLayout — and, by embedding promotion, its

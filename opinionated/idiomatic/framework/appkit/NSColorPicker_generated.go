@@ -76,27 +76,42 @@ func NewColorPickerWithPickerMaskColorPanel(mask int, owningColorPanel *ColorPan
 
 // InsertNewButtonImageIn sets the image used for the specified button cell.
 func (cp *ColorPicker) InsertNewButtonImageIn(newButtonImage *Image, buttonCell *ButtonCell) {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("insertNewButtonImage:in:"), objref.IDOf(newButtonImage), objref.IDOf(buttonCell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("insertNewButtonImage:in:"), objref.IDOf(newButtonImage), objref.IDOf(buttonCell))
+	})
+
 }
 
 // ViewSizeChanged overriden to respond to a size change.
 func (cp *ColorPicker) ViewSizeChanged(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("viewSizeChanged:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("viewSizeChanged:"), objref.IDOf(sender))
+	})
+
 }
 
 // AttachColorList overriden to attach a color list to a color picker.
 func (cp *ColorPicker) AttachColorList(colorList *ColorList) {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("attachColorList:"), objref.IDOf(colorList))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("attachColorList:"), objref.IDOf(colorList))
+	})
+
 }
 
 // DetachColorList overriden to detach a color list from a color picker.
 func (cp *ColorPicker) DetachColorList(colorList *ColorList) {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("detachColorList:"), objref.IDOf(colorList))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("detachColorList:"), objref.IDOf(colorList))
+	})
+
 }
 
 // SetMode overriden to set the color picker’s mode.
 func (cp *ColorPicker) SetMode(mode ColorPanelMode) {
-	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMode:"), mode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMode:"), mode)
+	})
+
 }
 
 // ColorPanel returns the color panel.

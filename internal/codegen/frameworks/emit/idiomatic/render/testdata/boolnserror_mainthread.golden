@@ -1,0 +1,16 @@
+// Save returns an error if the operation did not succeed.
+func (x *NSDocument) Save() error {
+var _mainthread0 error
+purego.Main(func() {
+_mainthread0 = func() error {
+var _nsErr uintptr
+objc.Send[bool](objref.IDOf(x), objc.RegisterName("saveWithError:"), unsafe.Pointer(&_nsErr))
+if _nsErr != 0 {
+return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+}
+return nil
+}()
+})
+return _mainthread0
+}
+

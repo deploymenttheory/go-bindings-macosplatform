@@ -103,7 +103,10 @@ func (las *LookAroundSnapshotter) GetSnapshot(ctx context.Context) (result *Look
 
 // Cancel cancels an in-progress snapshot request.
 func (las *LookAroundSnapshotter) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(las), objc.RegisterName("cancel"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(las), objc.RegisterName("cancel"))
+	})
+
 }
 
 // IsLoading reports whether the object is loading.

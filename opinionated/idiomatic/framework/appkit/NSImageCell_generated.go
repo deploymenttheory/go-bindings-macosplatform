@@ -48,308 +48,429 @@ func imageCellAdopt(id objc.ID) *ImageCell {
 
 // NewImageCell creates a new ImageCell.
 func NewImageCell() *ImageCell {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSImageCell")), objc.RegisterName("new"))
-	return imageCellAdopt(_id)
+	var _mainthread0 *ImageCell
+	purego.Main(func() {
+		_mainthread0 = func() *ImageCell {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSImageCell")), objc.RegisterName("new"))
+			return imageCellAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithImageAlignment sets the alignment of the receiver’s image relative to its frame.
 func (ic *ImageCell) WithImageAlignment(imageAlignment ImageAlignment) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setImageAlignment:"), imageAlignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setImageAlignment:"), imageAlignment)
+	})
 	return ic
 }
 
 // WithImageScaling sets the scaling mode used to fit the receiver’s image into the frame.
 func (ic *ImageCell) WithImageScaling(imageScaling ImageScaling) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setImageScaling:"), imageScaling)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setImageScaling:"), imageScaling)
+	})
 	return ic
 }
 
 // WithImageFrameStyle sets the style of the frame that borders the image.
 func (ic *ImageCell) WithImageFrameStyle(imageFrameStyle ImageFrameStyle) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setImageFrameStyle:"), imageFrameStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setImageFrameStyle:"), imageFrameStyle)
+	})
 	return ic
 }
 
 // WithControlView sets the view associated with the cell.
 func (ic *ImageCell) WithControlView(controlView ViewProvider) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	})
 	return ic
 }
 
 // WithType sets the type of the cell.
 func (ic *ImageCell) WithType(type_ CellType) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setType:"), type_)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setType:"), type_)
+	})
 	return ic
 }
 
 // WithState sets the cell’s current state.
 func (ic *ImageCell) WithState(state int) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setState:"), state)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setState:"), state)
+	})
 	return ic
 }
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (ic *ImageCell) WithTarget(target obj.Object) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return ic
 }
 
 // WithTag sets a tag for identifying the cell.
 func (ic *ImageCell) WithTag(tag int) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setTag:"), tag)
+	})
 	return ic
 }
 
 // WithTitle sets the cell’s title text.
 func (ic *ImageCell) WithTitle(title string) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return ic
 }
 
 // WithEnabled sets a Boolean value indicating whether the cell is currently enabled.
 func (ic *ImageCell) WithEnabled(enabled bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return ic
 }
 
 // WithContinuous sets a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 func (ic *ImageCell) WithContinuous(continuous bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return ic
 }
 
 // WithEditable sets a Boolean value indicating whether the cell is editable.
 func (ic *ImageCell) WithEditable(editable bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setEditable:"), editable)
+	})
 	return ic
 }
 
 // WithSelectable sets a Boolean value indicating whether the cell’s text can be selected.
 func (ic *ImageCell) WithSelectable(selectable bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setSelectable:"), selectable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setSelectable:"), selectable)
+	})
 	return ic
 }
 
 // WithBordered sets a Boolean value indicating whether the cell draws itself outlined with a plain border.
 func (ic *ImageCell) WithBordered(bordered bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setBordered:"), bordered)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setBordered:"), bordered)
+	})
 	return ic
 }
 
 // WithBezeled sets a Boolean value indicating whether the cell has a bezeled border.
 func (ic *ImageCell) WithBezeled(bezeled bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setBezeled:"), bezeled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setBezeled:"), bezeled)
+	})
 	return ic
 }
 
 // WithScrollable sets a Boolean value indicating whether excess text scrolls past the cell’s bounds.
 func (ic *ImageCell) WithScrollable(scrollable bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setScrollable:"), scrollable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setScrollable:"), scrollable)
+	})
 	return ic
 }
 
 // WithHighlighted sets a Boolean value indicating whether the cell has a highlighted appearance.
 func (ic *ImageCell) WithHighlighted(highlighted bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return ic
 }
 
 // WithAlignment sets the alignment of the cell’s text.
 func (ic *ImageCell) WithAlignment(alignment TextAlignment) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return ic
 }
 
 // WithWraps sets a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 func (ic *ImageCell) WithWraps(wraps bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setWraps:"), wraps)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setWraps:"), wraps)
+	})
 	return ic
 }
 
 // WithFont sets the font that the cell uses to display text.
 func (ic *ImageCell) WithFont(font *Font) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return ic
 }
 
 // WithFormatter sets the cell’s formatter object.
 func (ic *ImageCell) WithFormatter(formatter obj.Object) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return ic
 }
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (ic *ImageCell) WithObjectValue(objectValue obj.Object) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return ic
 }
 
 // WithStringValue sets the cell’s value as a string.
 func (ic *ImageCell) WithStringValue(stringValue string) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return ic
 }
 
 // WithIntValue sets the cell’s value as an integer.
 func (ic *ImageCell) WithIntValue(intValue int) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return ic
 }
 
 // WithFloatValue sets the cell’s value as a single-precision floating-point number.
 func (ic *ImageCell) WithFloatValue(floatValue float32) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return ic
 }
 
 // WithDoubleValue sets the cell’s value as a double-precision floating-point number.
 func (ic *ImageCell) WithDoubleValue(doubleValue float64) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return ic
 }
 
 // WithIntegerValue sets the cell’s value as an integer value.
 func (ic *ImageCell) WithIntegerValue(integerValue int) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return ic
 }
 
 // WithImage sets the image displayed by the cell, if any.
 func (ic *ImageCell) WithImage(image *Image) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setImage:"), objref.IDOf(image))
+	})
 	return ic
 }
 
 // WithControlSize sets the size of the cell.
 func (ic *ImageCell) WithControlSize(controlSize ControlSize) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return ic
 }
 
 // WithRepresentedObject sets the object represented by the cell.
 func (ic *ImageCell) WithRepresentedObject(representedObject obj.Object) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	})
 	return ic
 }
 
 // WithMenu sets the cell’s contextual menu.
 func (ic *ImageCell) WithMenu(menu *Menu) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return ic
 }
 
 // WithSendsActionOnEndEditing sets a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 func (ic *ImageCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	})
 	return ic
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (ic *ImageCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return ic
 }
 
 // WithLineBreakMode sets the line break mode to use when drawing text in the cell.
 func (ic *ImageCell) WithLineBreakMode(lineBreakMode LineBreakMode) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return ic
 }
 
 // WithAllowsUndo sets a Boolean value indicating whether the cell assumes responsibility for undo operations.
 func (ic *ImageCell) WithAllowsUndo(allowsUndo bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	})
 	return ic
 }
 
 // WithTruncatesLastVisibleLine sets a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 func (ic *ImageCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	})
 	return ic
 }
 
 // WithUserInterfaceLayoutDirection sets the layout direction of the user interface.
 func (ic *ImageCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return ic
 }
 
 // WithUsesSingleLineMode sets a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 func (ic *ImageCell) WithUsesSingleLineMode(usesSingleLineMode bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return ic
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the cell refuses the first responder status.
 func (ic *ImageCell) WithRefusesFirstResponder(refusesFirstResponder bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return ic
 }
 
 // WithShowsFirstResponder sets a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 func (ic *ImageCell) WithShowsFirstResponder(showsFirstResponder bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	})
 	return ic
 }
 
 // WithFocusRingType sets the type of focus ring to use with the associated view.
 func (ic *ImageCell) WithFocusRingType(focusRingType FocusRingType) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return ic
 }
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (ic *ImageCell) WithAttributedStringValue(attributedStringValue obj.Object) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return ic
 }
 
 // WithAllowsEditingTextAttributes sets a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 func (ic *ImageCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	})
 	return ic
 }
 
 // WithImportsGraphics sets a Boolean value indicating whether the cell supports the importation of images into its text.
 func (ic *ImageCell) WithImportsGraphics(importsGraphics bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	})
 	return ic
 }
 
 // WithAllowsMixedState sets a Boolean value indicating whether the cell supports three states instead of two.
 func (ic *ImageCell) WithAllowsMixedState(allowsMixedState bool) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	})
 	return ic
 }
 
 // WithBackgroundStyle sets the cell’s background style.
 func (ic *ImageCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	})
 	return ic
 }
 
 // WithControlTint sets the cell’s control tint.
 func (ic *ImageCell) WithControlTint(controlTint ControlTint) *ImageCell {
-	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setControlTint:"), controlTint)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setControlTint:"), controlTint)
+	})
 	return ic
 }
 
 // ImageAlignment returns the image alignment.
 func (ic *ImageCell) ImageAlignment() ImageAlignment {
-	_r := objc.Send[ImageAlignment](objref.IDOf(ic), objc.RegisterName("imageAlignment"))
-	return _r
+	var _mainthread0 ImageAlignment
+	purego.Main(func() {
+		_mainthread0 = func() ImageAlignment {
+			_r := objc.Send[ImageAlignment](objref.IDOf(ic), objc.RegisterName("imageAlignment"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ImageScaling returns the image scaling.
 func (ic *ImageCell) ImageScaling() ImageScaling {
-	_r := objc.Send[ImageScaling](objref.IDOf(ic), objc.RegisterName("imageScaling"))
-	return _r
+	var _mainthread0 ImageScaling
+	purego.Main(func() {
+		_mainthread0 = func() ImageScaling {
+			_r := objc.Send[ImageScaling](objref.IDOf(ic), objc.RegisterName("imageScaling"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ImageFrameStyle returns the image frame style.
 func (ic *ImageCell) ImageFrameStyle() ImageFrameStyle {
-	_r := objc.Send[ImageFrameStyle](objref.IDOf(ic), objc.RegisterName("imageFrameStyle"))
-	return _r
+	var _mainthread0 ImageFrameStyle
+	purego.Main(func() {
+		_mainthread0 = func() ImageFrameStyle {
+			_r := objc.Send[ImageFrameStyle](objref.IDOf(ic), objc.RegisterName("imageFrameStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ CellProvider = (*ImageCell)(nil)

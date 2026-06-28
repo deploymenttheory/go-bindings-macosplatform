@@ -68,48 +68,103 @@ func (wna *WKNavigationAction) String() string {
 
 // NewWKNavigationAction creates a new WKNavigationAction.
 func NewWKNavigationAction() *WKNavigationAction {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKNavigationAction")), objc.RegisterName("new"))
-	return wKNavigationActionAdopt(_id)
+	var _mainthread0 *WKNavigationAction
+	purego.Main(func() {
+		_mainthread0 = func() *WKNavigationAction {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKNavigationAction")), objc.RegisterName("new"))
+			return wKNavigationActionAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // SourceFrame returns the frame requesting the navigation.
 func (wna *WKNavigationAction) SourceFrame() *WKFrameInfo {
-	_r := objc.Send[objc.ID](objref.IDOf(wna), objc.RegisterName("sourceFrame"))
-	return WKFrameInfoFromID(_r)
+	var _mainthread0 *WKFrameInfo
+	purego.Main(func() {
+		_mainthread0 = func() *WKFrameInfo {
+			_r := objc.Send[objc.ID](objref.IDOf(wna), objc.RegisterName("sourceFrame"))
+			return WKFrameInfoFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TargetFrame returns the target frame, or nil if this is a new window navigation.
 func (wna *WKNavigationAction) TargetFrame() *WKFrameInfo {
-	_r := objc.Send[objc.ID](objref.IDOf(wna), objc.RegisterName("targetFrame"))
-	return WKFrameInfoFromID(_r)
+	var _mainthread0 *WKFrameInfo
+	purego.Main(func() {
+		_mainthread0 = func() *WKFrameInfo {
+			_r := objc.Send[objc.ID](objref.IDOf(wna), objc.RegisterName("targetFrame"))
+			return WKFrameInfoFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NavigationType returns the type of action that triggered the navigation. The value is one of the constants of the enumerated type WKNavigationType.
 func (wna *WKNavigationAction) NavigationType() WKNavigationType {
-	_r := objc.Send[WKNavigationType](objref.IDOf(wna), objc.RegisterName("navigationType"))
-	return _r
+	var _mainthread0 WKNavigationType
+	purego.Main(func() {
+		_mainthread0 = func() WKNavigationType {
+			_r := objc.Send[WKNavigationType](objref.IDOf(wna), objc.RegisterName("navigationType"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Request returns the navigation's request.
 func (wna *WKNavigationAction) Request() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wna), objc.RegisterName("request"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wna), objc.RegisterName("request"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShouldPerformDownload reports whether the web content used a download attribute to indicate that this should be downloaded.
 func (wna *WKNavigationAction) ShouldPerformDownload() bool {
-	_r := objc.Send[bool](objref.IDOf(wna), objc.RegisterName("shouldPerformDownload"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wna), objc.RegisterName("shouldPerformDownload"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsContentRuleListRedirect reports whether the navigation is a redirect from a content rule list.
 func (wna *WKNavigationAction) IsContentRuleListRedirect() bool {
-	_r := objc.Send[bool](objref.IDOf(wna), objc.RegisterName("isContentRuleListRedirect"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wna), objc.RegisterName("isContentRuleListRedirect"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ButtonNumber returns the number of the mouse button causing the navigation to be requested.
 func (wna *WKNavigationAction) ButtonNumber() int {
-	_r := objc.Send[int](objref.IDOf(wna), objc.RegisterName("buttonNumber"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(wna), objc.RegisterName("buttonNumber"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

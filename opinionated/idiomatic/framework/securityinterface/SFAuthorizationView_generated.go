@@ -68,73 +68,143 @@ func (av *AuthorizationView) String() string {
 
 // NewAuthorizationView creates a new AuthorizationView.
 func NewAuthorizationView() *AuthorizationView {
-	_id := objc.Send[objc.ID](objc.ID(_class("SFAuthorizationView")), objc.RegisterName("new"))
-	return authorizationViewAdopt(_id)
+	var _mainthread0 *AuthorizationView
+	purego.Main(func() {
+		_mainthread0 = func() *AuthorizationView {
+			_id := objc.Send[objc.ID](objc.ID(_class("SFAuthorizationView")), objc.RegisterName("new"))
+			return authorizationViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // SetString sets the requested-right string to use with the default authorization rights set.
 func (av *AuthorizationView) SetString(authorizationString string) {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setString:"), authorizationString)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setString:"), authorizationString)
+	})
+
 }
 
 // Authorization returns the authorization object associated with this view.
 func (av *AuthorizationView) Authorization() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("authorization"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("authorization"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UpdateStatus manually updates the authorization view.
 func (av *AuthorizationView) UpdateStatus(inSender obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(av), objc.RegisterName("updateStatus:"), objref.IDOf(inSender))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(av), objc.RegisterName("updateStatus:"), objref.IDOf(inSender))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetAutoupdate sets the authorization view to update itself automatically.
 func (av *AuthorizationView) SetAutoupdate(autoupdate bool) {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setAutoupdate:"), autoupdate)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setAutoupdate:"), autoupdate)
+	})
+
 }
 
 // SetAutoupdateInterval sets the authorization view to update itself at a specific interval.
 func (av *AuthorizationView) SetAutoupdateInterval(autoupdate bool, interval float64) {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setAutoupdate:interval:"), autoupdate, interval)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setAutoupdate:interval:"), autoupdate, interval)
+	})
+
 }
 
 // AuthorizationState returns the current state of the authorization view.
 func (av *AuthorizationView) AuthorizationState() AuthorizationViewState {
-	_r := objc.Send[AuthorizationViewState](objref.IDOf(av), objc.RegisterName("authorizationState"))
-	return _r
+	var _mainthread0 AuthorizationViewState
+	purego.Main(func() {
+		_mainthread0 = func() AuthorizationViewState {
+			_r := objc.Send[AuthorizationViewState](objref.IDOf(av), objc.RegisterName("authorizationState"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetEnabled sets the current state of the authorization view.
 func (av *AuthorizationView) SetEnabled(enabled bool) {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setEnabled:"), enabled)
+	})
+
 }
 
 // IsEnabled reports whether the authorization view is enabled (true) or disabled (false).
 func (av *AuthorizationView) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(av), objc.RegisterName("isEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(av), objc.RegisterName("isEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetDelegate sets the delegate for this authorization view.
 func (av *AuthorizationView) SetDelegate(delegate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	})
+
 }
 
 // Delegate returns the delegate for this view.
 func (av *AuthorizationView) Delegate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("delegate"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("delegate"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Authorize attempts to unlock the lock icon in the view.
 func (av *AuthorizationView) Authorize(inSender obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(av), objc.RegisterName("authorize:"), objref.IDOf(inSender))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(av), objc.RegisterName("authorize:"), objref.IDOf(inSender))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Deauthorize sets the authorization state to unauthorized and locks the lock icon in the view.
 func (av *AuthorizationView) Deauthorize(inSender obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(av), objc.RegisterName("deauthorize:"), objref.IDOf(inSender))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(av), objc.RegisterName("deauthorize:"), objref.IDOf(inSender))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

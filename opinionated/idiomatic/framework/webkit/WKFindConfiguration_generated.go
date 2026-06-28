@@ -68,42 +68,75 @@ func (wfc *WKFindConfiguration) String() string {
 
 // NewWKFindConfiguration creates a new WKFindConfiguration.
 func NewWKFindConfiguration() *WKFindConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKFindConfiguration")), objc.RegisterName("new"))
-	return wKFindConfigurationAdopt(_id)
+	var _mainthread0 *WKFindConfiguration
+	purego.Main(func() {
+		_mainthread0 = func() *WKFindConfiguration {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKFindConfiguration")), objc.RegisterName("new"))
+			return wKFindConfigurationAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithBackwards sets a Boolean value that indicates the search direction, relative to the current selection.
 func (wfc *WKFindConfiguration) WithBackwards(backwards bool) *WKFindConfiguration {
-	objc.Send[objc.ID](objref.IDOf(wfc), objc.RegisterName("setBackwards:"), backwards)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wfc), objc.RegisterName("setBackwards:"), backwards)
+	})
 	return wfc
 }
 
 // WithCaseSensitive sets a Boolean value that indicates whether to consider case when matching the search string.
 func (wfc *WKFindConfiguration) WithCaseSensitive(caseSensitive bool) *WKFindConfiguration {
-	objc.Send[objc.ID](objref.IDOf(wfc), objc.RegisterName("setCaseSensitive:"), caseSensitive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wfc), objc.RegisterName("setCaseSensitive:"), caseSensitive)
+	})
 	return wfc
 }
 
 // WithWraps sets a Boolean value that indicates whether the search wraps around to the other side of the page.
 func (wfc *WKFindConfiguration) WithWraps(wraps bool) *WKFindConfiguration {
-	objc.Send[objc.ID](objref.IDOf(wfc), objc.RegisterName("setWraps:"), wraps)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wfc), objc.RegisterName("setWraps:"), wraps)
+	})
 	return wfc
 }
 
 // Backwards wraps the corresponding Objective-C method.
 func (wfc *WKFindConfiguration) Backwards() bool {
-	_r := objc.Send[bool](objref.IDOf(wfc), objc.RegisterName("backwards"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wfc), objc.RegisterName("backwards"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CaseSensitive wraps the corresponding Objective-C method.
 func (wfc *WKFindConfiguration) CaseSensitive() bool {
-	_r := objc.Send[bool](objref.IDOf(wfc), objc.RegisterName("caseSensitive"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wfc), objc.RegisterName("caseSensitive"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Wraps wraps the corresponding Objective-C method.
 func (wfc *WKFindConfiguration) Wraps() bool {
-	_r := objc.Send[bool](objref.IDOf(wfc), objc.RegisterName("wraps"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wfc), objc.RegisterName("wraps"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

@@ -1,0 +1,6 @@
+func (x *NSView) Layout() {purego.Main(func() {
+objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layout"))
+})
+
+}
+

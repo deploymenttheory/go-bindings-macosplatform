@@ -50,444 +50,663 @@ func splitViewAdopt(id objc.ID) *SplitView {
 
 // NewSplitView creates a new SplitView.
 func NewSplitView() *SplitView {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSSplitView")), objc.RegisterName("new"))
-	return splitViewAdopt(_id)
+	var _mainthread0 *SplitView
+	purego.Main(func() {
+		_mainthread0 = func() *SplitView {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSSplitView")), objc.RegisterName("new"))
+			return splitViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithVertical sets a Boolean value that determines the geometric orientation of the split view’s dividers.
 func (sv *SplitView) WithVertical(vertical bool) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVertical:"), vertical)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVertical:"), vertical)
+	})
 	return sv
 }
 
 // WithDividerStyle sets the style of divider between views.
 func (sv *SplitView) WithDividerStyle(dividerStyle SplitViewDividerStyle) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setDividerStyle:"), dividerStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setDividerStyle:"), dividerStyle)
+	})
 	return sv
 }
 
 // WithAutosaveName sets the name to use when the system automatically saves the split view’s divider configuration.
 func (sv *SplitView) WithAutosaveName(autosaveName obj.Object) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAutosaveName:"), objref.IDOf(autosaveName))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAutosaveName:"), objref.IDOf(autosaveName))
+	})
 	return sv
 }
 
 // WithArrangesAllSubviews sets a Boolean value that determines whether the split view arranges all of its subviews as split panes.
 func (sv *SplitView) WithArrangesAllSubviews(arrangesAllSubviews bool) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setArrangesAllSubviews:"), arrangesAllSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setArrangesAllSubviews:"), arrangesAllSubviews)
+	})
 	return sv
 }
 
 // WithSubviews sets the subviews.
 func (sv *SplitView) WithSubviews(items ...ViewProvider) *SplitView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return sv
 }
 
 // WithHidden sets the hidden.
 func (sv *SplitView) WithHidden(hidden bool) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHidden:"), hidden)
+	})
 	return sv
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (sv *SplitView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return sv
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (sv *SplitView) WithAutoresizesSubviews(autoresizesSubviews bool) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return sv
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (sv *SplitView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return sv
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (sv *SplitView) WithFrame(frame corefoundation.CGRect) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFrame:"), frame)
+	})
 	return sv
 }
 
 // WithFrameRotation sets the frame rotation.
 func (sv *SplitView) WithFrameRotation(frameRotation float64) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return sv
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (sv *SplitView) WithFrameCenterRotation(frameCenterRotation float64) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return sv
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (sv *SplitView) WithBoundsRotation(boundsRotation float64) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return sv
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (sv *SplitView) WithBounds(bounds corefoundation.CGRect) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBounds:"), bounds)
+	})
 	return sv
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (sv *SplitView) WithCanDrawConcurrently(canDrawConcurrently bool) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return sv
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (sv *SplitView) WithNeedsDisplay(needsDisplay bool) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return sv
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (sv *SplitView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return sv
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (sv *SplitView) WithWantsRestingTouches(wantsRestingTouches bool) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return sv
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (sv *SplitView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return sv
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (sv *SplitView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return sv
 }
 
 // WithWantsLayer sets the wants layer.
 func (sv *SplitView) WithWantsLayer(wantsLayer bool) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return sv
 }
 
 // WithLayer sets the layer.
 func (sv *SplitView) WithLayer(layer obj.Object) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return sv
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (sv *SplitView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return sv
 }
 
 // WithNeedsLayout sets the needs layout.
 func (sv *SplitView) WithNeedsLayout(needsLayout bool) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return sv
 }
 
 // WithAlphaValue sets the alpha value.
 func (sv *SplitView) WithAlphaValue(alphaValue float64) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return sv
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (sv *SplitView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return sv
 }
 
 // WithBackgroundFilters sets the background filters.
 func (sv *SplitView) WithBackgroundFilters(items ...obj.Object) *SplitView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return sv
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (sv *SplitView) WithCompositingFilter(compositingFilter obj.Object) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return sv
 }
 
 // WithContentFilters sets the content filters.
 func (sv *SplitView) WithContentFilters(items ...obj.Object) *SplitView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return sv
 }
 
 // WithShadow sets the shadow.
 func (sv *SplitView) WithShadow(shadow *Shadow) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return sv
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (sv *SplitView) WithClipsToBounds(clipsToBounds bool) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return sv
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (sv *SplitView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return sv
 }
 
 // WithToolTip sets the tool tip.
 func (sv *SplitView) WithToolTip(toolTip string) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return sv
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (sv *SplitView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return sv
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (sv *SplitView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return sv
 }
 
 // WithNextKeyView sets the next key view.
 func (sv *SplitView) WithNextKeyView(nextKeyView ViewProvider) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return sv
 }
 
 // WithFocusRingType sets the focus ring type.
 func (sv *SplitView) WithFocusRingType(focusRingType FocusRingType) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return sv
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (sv *SplitView) WithGestureRecognizers(items ...GestureRecognizerProvider) *SplitView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return sv
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (sv *SplitView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return sv
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (sv *SplitView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return sv
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (sv *SplitView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return sv
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (sv *SplitView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return sv
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (sv *SplitView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return sv
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (sv *SplitView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return sv
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (sv *SplitView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return sv
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (sv *SplitView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return sv
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (sv *SplitView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return sv
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (sv *SplitView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return sv
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (sv *SplitView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return sv
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (sv *SplitView) WithNextResponder(nextResponder ResponderProvider) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return sv
 }
 
 // WithMenu sets returns the responder’s menu.
 func (sv *SplitView) WithMenu(menu *Menu) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return sv
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (sv *SplitView) WithUserActivity(userActivity obj.Object) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return sv
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (sv *SplitView) WithTouchBar(touchBar *TouchBar) *SplitView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return sv
 }
 
 // DrawDividerInRect draws a divider between two of the split view’s subviews.
 func (sv *SplitView) DrawDividerInRect(rect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("drawDividerInRect:"), rect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("drawDividerInRect:"), rect)
+	})
+
 }
 
 // AdjustSubviews adjusts the sizes of the split view’s subviews so they (plus the dividers) fill the split view.
 func (sv *SplitView) AdjustSubviews() {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("adjustSubviews"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("adjustSubviews"))
+	})
+
 }
 
 // IsSubviewCollapsed returns whether the specified view is in a collapsed state.
 func (sv *SplitView) IsSubviewCollapsed(subview *View) bool {
-	_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("isSubviewCollapsed:"), objref.IDOf(subview))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("isSubviewCollapsed:"), objref.IDOf(subview))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MinPossiblePositionOfDividerAtIndex returns the minimum possible position of the divider at the specified index.
 func (sv *SplitView) MinPossiblePositionOfDividerAtIndex(dividerIndex int) float64 {
-	_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("minPossiblePositionOfDividerAtIndex:"), dividerIndex)
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("minPossiblePositionOfDividerAtIndex:"), dividerIndex)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MaxPossiblePositionOfDividerAtIndex returns the maximum possible position of the divider at the specified index.
 func (sv *SplitView) MaxPossiblePositionOfDividerAtIndex(dividerIndex int) float64 {
-	_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("maxPossiblePositionOfDividerAtIndex:"), dividerIndex)
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("maxPossiblePositionOfDividerAtIndex:"), dividerIndex)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetPositionOfDividerAtIndex updates the location of a divider you specify by index.
 func (sv *SplitView) SetPositionOfDividerAtIndex(position float64, dividerIndex int) {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPosition:ofDividerAtIndex:"), position, dividerIndex)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPosition:ofDividerAtIndex:"), position, dividerIndex)
+	})
+
 }
 
 // HoldingPriorityForSubviewAtIndex returns the priority of the subview’s width or height when resizing.
 func (sv *SplitView) HoldingPriorityForSubviewAtIndex(subviewIndex int) float32 {
-	_r := objc.Send[float32](objref.IDOf(sv), objc.RegisterName("holdingPriorityForSubviewAtIndex:"), subviewIndex)
-	return _r
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_r := objc.Send[float32](objref.IDOf(sv), objc.RegisterName("holdingPriorityForSubviewAtIndex:"), subviewIndex)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetHoldingPriorityForSubviewAtIndex sets the priority for split view subviews to maintain their width or height.
 func (sv *SplitView) SetHoldingPriorityForSubviewAtIndex(priority float32, subviewIndex int) {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHoldingPriority:forSubviewAtIndex:"), priority, subviewIndex)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHoldingPriority:forSubviewAtIndex:"), priority, subviewIndex)
+	})
+
 }
 
 // IsVertical reports whether the object is vertical.
 func (sv *SplitView) IsVertical() bool {
-	_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("isVertical"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("isVertical"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DividerStyle returns the divider style.
 func (sv *SplitView) DividerStyle() SplitViewDividerStyle {
-	_r := objc.Send[SplitViewDividerStyle](objref.IDOf(sv), objc.RegisterName("dividerStyle"))
-	return _r
+	var _mainthread0 SplitViewDividerStyle
+	purego.Main(func() {
+		_mainthread0 = func() SplitViewDividerStyle {
+			_r := objc.Send[SplitViewDividerStyle](objref.IDOf(sv), objc.RegisterName("dividerStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AutosaveName returns the autosave name.
 func (sv *SplitView) AutosaveName() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("autosaveName"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("autosaveName"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DividerColor returns the divider color.
 func (sv *SplitView) DividerColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("dividerColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("dividerColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DividerThickness returns the divider thickness.
 func (sv *SplitView) DividerThickness() float64 {
-	_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("dividerThickness"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("dividerThickness"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AddArrangedSubview adds a view as an arranged split pane.
 func (sv *SplitView) AddArrangedSubview(view *View) {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("addArrangedSubview:"), objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("addArrangedSubview:"), objref.IDOf(view))
+	})
+
 }
 
 // InsertArrangedSubviewAtIndex adds a view as an arranged split pane at the specified index.
 func (sv *SplitView) InsertArrangedSubviewAtIndex(view *View, index int) {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("insertArrangedSubview:atIndex:"), objref.IDOf(view), index)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("insertArrangedSubview:atIndex:"), objref.IDOf(view), index)
+	})
+
 }
 
 // RemoveArrangedSubview removes a view as an arranged split pane.
 func (sv *SplitView) RemoveArrangedSubview(view *View) {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("removeArrangedSubview:"), objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("removeArrangedSubview:"), objref.IDOf(view))
+	})
+
 }
 
 // ArrangesAllSubviews reports whether all subviews will be added as arranged views. When false, a subview must be explicitly added as an arrangedSubview if the view should be arranged as a split pane. When true, \c -arrangedSubviews always be identical to \c -subviews. Defaults to true. Setting this from true to false will leave all existing subviews as \c -arrangedSubviews. Setting this from false to true will cause \c -arrangedSubviews to become the value of \c -subviews.
 func (sv *SplitView) ArrangesAllSubviews() bool {
-	_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("arrangesAllSubviews"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("arrangesAllSubviews"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ArrangedSubviews returns the list of views that are arranged as split panes in the receiver. They are a subset of \c -subviews, with potential difference in ordering. If \c -arrangesAllSubviews is YES, then \c -arrangedSubviews is identical to \c -subviews.
 //
 // ArrangedSubviews returns the collection as a Go slice.
 func (sv *SplitView) ArrangedSubviews() []*View {
-	_arr := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("arrangedSubviews"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *View { return ViewFromID(_id) })
+	var _mainthread0 []*View
+	purego.Main(func() {
+		_mainthread0 = func() []*View {
+			_arr := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("arrangedSubviews"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *View { return ViewFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // SetIsPaneSplitter sets the type of splitter.
 func (sv *SplitView) SetIsPaneSplitter(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setIsPaneSplitter:"), flag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setIsPaneSplitter:"), flag)
+	})
+
 }
 
 // IsPaneSplitter reports whether the type of pane splitter.
 func (sv *SplitView) IsPaneSplitter() bool {
-	_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("isPaneSplitter"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("isPaneSplitter"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ViewProvider = (*SplitView)(nil)

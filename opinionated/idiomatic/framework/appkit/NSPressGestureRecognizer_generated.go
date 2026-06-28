@@ -48,128 +48,194 @@ func pressGestureRecognizerAdopt(id objc.ID) *PressGestureRecognizer {
 
 // NewPressGestureRecognizer creates a new PressGestureRecognizer.
 func NewPressGestureRecognizer() *PressGestureRecognizer {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSPressGestureRecognizer")), objc.RegisterName("new"))
-	return pressGestureRecognizerAdopt(_id)
+	var _mainthread0 *PressGestureRecognizer
+	purego.Main(func() {
+		_mainthread0 = func() *PressGestureRecognizer {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSPressGestureRecognizer")), objc.RegisterName("new"))
+			return pressGestureRecognizerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithButtonMask sets a bit mask of the buttons required to recognize this press.
 func (pgr *PressGestureRecognizer) WithButtonMask(buttonMask int) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setButtonMask:"), buttonMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setButtonMask:"), buttonMask)
+	})
 	return pgr
 }
 
 // WithMinimumPressDuration sets the minimum time (in seconds) that the user must hold the mouse button in the view for a valid gesture.
 func (pgr *PressGestureRecognizer) WithMinimumPressDuration(minimumPressDuration float64) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setMinimumPressDuration:"), minimumPressDuration)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setMinimumPressDuration:"), minimumPressDuration)
+	})
 	return pgr
 }
 
 // WithAllowableMovement sets the maximum movement of the mouse in the view before the gesture fails.
 func (pgr *PressGestureRecognizer) WithAllowableMovement(allowableMovement float64) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setAllowableMovement:"), allowableMovement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setAllowableMovement:"), allowableMovement)
+	})
 	return pgr
 }
 
 // WithNumberOfTouchesRequired sets the number of necessary touches on a Touch Bar for the gesture recognizer to match.
 func (pgr *PressGestureRecognizer) WithNumberOfTouchesRequired(numberOfTouchesRequired int) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setNumberOfTouchesRequired:"), numberOfTouchesRequired)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setNumberOfTouchesRequired:"), numberOfTouchesRequired)
+	})
 	return pgr
 }
 
 // WithTarget sets the object that implements the action method.
 func (pgr *PressGestureRecognizer) WithTarget(target obj.Object) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return pgr
 }
 
 // WithState sets the current state of the gesture recognizer.
 func (pgr *PressGestureRecognizer) WithState(state GestureRecognizerState) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setState:"), state)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setState:"), state)
+	})
 	return pgr
 }
 
 // WithEnabled sets a Boolean value indicating whether the gesture recognizer is able to handle events.
 func (pgr *PressGestureRecognizer) WithEnabled(enabled bool) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return pgr
 }
 
 // WithPressureConfiguration sets configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
 func (pgr *PressGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return pgr
 }
 
 // WithDelaysPrimaryMouseButtonEvents sets a Boolean value that indicates whether primary mouse button events are delivered only after gesture recognition fails.
 func (pgr *PressGestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysPrimaryMouseButtonEvents:"), delaysPrimaryMouseButtonEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysPrimaryMouseButtonEvents:"), delaysPrimaryMouseButtonEvents)
+	})
 	return pgr
 }
 
 // WithDelaysSecondaryMouseButtonEvents sets a Boolean value that indicates whether secondary mouse button events are delivered only after gesture recognition fails.
 func (pgr *PressGestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysSecondaryMouseButtonEvents:"), delaysSecondaryMouseButtonEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysSecondaryMouseButtonEvents:"), delaysSecondaryMouseButtonEvents)
+	})
 	return pgr
 }
 
 // WithDelaysOtherMouseButtonEvents sets a Boolean value that indicates whether other mouse button events are delivered only after gesture recognition fails.
 func (pgr *PressGestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysOtherMouseButtonEvents:"), delaysOtherMouseButtonEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysOtherMouseButtonEvents:"), delaysOtherMouseButtonEvents)
+	})
 	return pgr
 }
 
 // WithDelaysKeyEvents sets a Boolean value that indicates whether key events are delivered only after gesture recognition fails.
 func (pgr *PressGestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysKeyEvents:"), delaysKeyEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysKeyEvents:"), delaysKeyEvents)
+	})
 	return pgr
 }
 
 // WithDelaysMagnificationEvents sets a Boolean value that indicates whether magnification events are delivered only after gesture recognition fails.
 func (pgr *PressGestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysMagnificationEvents:"), delaysMagnificationEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysMagnificationEvents:"), delaysMagnificationEvents)
+	})
 	return pgr
 }
 
 // WithDelaysRotationEvents sets a Boolean value that indicates whether rotation events are delivered only after gesture recognition fails.
 func (pgr *PressGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysRotationEvents:"), delaysRotationEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysRotationEvents:"), delaysRotationEvents)
+	})
 	return pgr
 }
 
 // WithName sets the name.
 func (pgr *PressGestureRecognizer) WithName(name string) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setName:"), purego.NSString(name))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setName:"), purego.NSString(name))
+	})
 	return pgr
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (pgr *PressGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return pgr
 }
 
 // ButtonMask returns the button mask.
 func (pgr *PressGestureRecognizer) ButtonMask() int {
-	_r := objc.Send[int](objref.IDOf(pgr), objc.RegisterName("buttonMask"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(pgr), objc.RegisterName("buttonMask"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MinimumPressDuration returns the minimum press duration.
 func (pgr *PressGestureRecognizer) MinimumPressDuration() float64 {
-	_r := objc.Send[float64](objref.IDOf(pgr), objc.RegisterName("minimumPressDuration"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(pgr), objc.RegisterName("minimumPressDuration"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowableMovement returns the allowable movement.
 func (pgr *PressGestureRecognizer) AllowableMovement() float64 {
-	_r := objc.Send[float64](objref.IDOf(pgr), objc.RegisterName("allowableMovement"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(pgr), objc.RegisterName("allowableMovement"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NumberOfTouchesRequired returns the number of touches required.
 func (pgr *PressGestureRecognizer) NumberOfTouchesRequired() int {
-	_r := objc.Send[int](objref.IDOf(pgr), objc.RegisterName("numberOfTouchesRequired"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(pgr), objc.RegisterName("numberOfTouchesRequired"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ GestureRecognizerProvider = (*PressGestureRecognizer)(nil)

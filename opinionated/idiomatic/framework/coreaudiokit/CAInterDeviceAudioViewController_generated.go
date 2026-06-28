@@ -68,6 +68,12 @@ func (cidavc *CAInterDeviceAudioViewController) String() string {
 
 // NewCAInterDeviceAudioViewController creates a new CAInterDeviceAudioViewController.
 func NewCAInterDeviceAudioViewController() *CAInterDeviceAudioViewController {
-	_id := objc.Send[objc.ID](objc.ID(_class("CAInterDeviceAudioViewController")), objc.RegisterName("new"))
-	return cAInterDeviceAudioViewControllerAdopt(_id)
+	var _mainthread0 *CAInterDeviceAudioViewController
+	purego.Main(func() {
+		_mainthread0 = func() *CAInterDeviceAudioViewController {
+			_id := objc.Send[objc.ID](objc.ID(_class("CAInterDeviceAudioViewController")), objc.RegisterName("new"))
+			return cAInterDeviceAudioViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }

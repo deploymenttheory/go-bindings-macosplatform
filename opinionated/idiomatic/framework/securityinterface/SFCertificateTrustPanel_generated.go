@@ -48,28 +48,51 @@ func certificateTrustPanelAdopt(id objc.ID) *CertificateTrustPanel {
 
 // NewCertificateTrustPanel creates a new CertificateTrustPanel.
 func NewCertificateTrustPanel() *CertificateTrustPanel {
-	_id := objc.Send[objc.ID](objc.ID(_class("SFCertificateTrustPanel")), objc.RegisterName("new"))
-	return certificateTrustPanelAdopt(_id)
+	var _mainthread0 *CertificateTrustPanel
+	purego.Main(func() {
+		_mainthread0 = func() *CertificateTrustPanel {
+			_id := objc.Send[objc.ID](objc.ID(_class("SFCertificateTrustPanel")), objc.RegisterName("new"))
+			return certificateTrustPanelAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // RunModalForTrustMessage displays a modal panel that shows the results of a certificate trust evaluation and that allows the user to edit trust settings.
 func (ctp *CertificateTrustPanel) RunModalForTrustMessage(trust obj.Object, message string) int {
-	_r := objc.Send[int](objref.IDOf(ctp), objc.RegisterName("runModalForTrust:message:"), objref.IDOf(trust), purego.NSString(message))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(ctp), objc.RegisterName("runModalForTrust:message:"), objref.IDOf(trust), purego.NSString(message))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetInformativeText sets the (optional) informative text displayed in the panel.
 func (ctp *CertificateTrustPanel) SetInformativeText(informativeText string) {
-	objc.Send[objc.ID](objref.IDOf(ctp), objc.RegisterName("setInformativeText:"), purego.NSString(informativeText))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ctp), objc.RegisterName("setInformativeText:"), purego.NSString(informativeText))
+	})
+
 }
 
 // InformativeText returns the (optional) informative text currently displayed in the panel.
 func (ctp *CertificateTrustPanel) InformativeText() string {
-	_r := objc.Send[objc.ID](objref.IDOf(ctp), objc.RegisterName("informativeText"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(ctp), objc.RegisterName("informativeText"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ CertificatePanelProvider = (*CertificateTrustPanel)(nil)

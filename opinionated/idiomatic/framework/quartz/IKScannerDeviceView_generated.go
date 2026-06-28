@@ -68,171 +68,294 @@ func (isdv *IKScannerDeviceView) String() string {
 
 // NewIKScannerDeviceView creates a new IKScannerDeviceView.
 func NewIKScannerDeviceView() *IKScannerDeviceView {
-	_id := objc.Send[objc.ID](objc.ID(_class("IKScannerDeviceView")), objc.RegisterName("new"))
-	return iKScannerDeviceViewAdopt(_id)
+	var _mainthread0 *IKScannerDeviceView
+	purego.Main(func() {
+		_mainthread0 = func() *IKScannerDeviceView {
+			_id := objc.Send[objc.ID](objc.ID(_class("IKScannerDeviceView")), objc.RegisterName("new"))
+			return iKScannerDeviceViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithDelegate sets the scanner device delegate
 func (isdv *IKScannerDeviceView) WithDelegate(delegate obj.Object) *IKScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	})
 	return isdv
 }
 
 // WithScannerDevice sets the device used for scanning
 func (isdv *IKScannerDeviceView) WithScannerDevice(scannerDevice obj.Object) *IKScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setScannerDevice:"), objref.IDOf(scannerDevice))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setScannerDevice:"), objref.IDOf(scannerDevice))
+	})
 	return isdv
 }
 
 // WithMode sets the display mode used by the device view.
 func (isdv *IKScannerDeviceView) WithMode(mode obj.Object) *IKScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setMode:"), objref.IDOf(mode))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setMode:"), objref.IDOf(mode))
+	})
 	return isdv
 }
 
 // WithHasDisplayModeSimple sets the property that determines whether the scanner view uses the simple display mode.
 func (isdv *IKScannerDeviceView) WithHasDisplayModeSimple(hasDisplayModeSimple bool) *IKScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setHasDisplayModeSimple:"), hasDisplayModeSimple)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setHasDisplayModeSimple:"), hasDisplayModeSimple)
+	})
 	return isdv
 }
 
 // WithHasDisplayModeAdvanced sets the property that determines whether the scanner view uses the advanced display mode.
 func (isdv *IKScannerDeviceView) WithHasDisplayModeAdvanced(hasDisplayModeAdvanced bool) *IKScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setHasDisplayModeAdvanced:"), hasDisplayModeAdvanced)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setHasDisplayModeAdvanced:"), hasDisplayModeAdvanced)
+	})
 	return isdv
 }
 
 // WithTransferMode sets determines how the scanned content is provided to the delegate.
 func (isdv *IKScannerDeviceView) WithTransferMode(transferMode obj.Object) *IKScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setTransferMode:"), objref.IDOf(transferMode))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setTransferMode:"), objref.IDOf(transferMode))
+	})
 	return isdv
 }
 
 // WithScanControlLabel sets allows customization of the “Scan” label.
 func (isdv *IKScannerDeviceView) WithScanControlLabel(scanControlLabel string) *IKScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setScanControlLabel:"), purego.NSString(scanControlLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setScanControlLabel:"), purego.NSString(scanControlLabel))
+	})
 	return isdv
 }
 
 // WithOverviewControlLabel sets allows customization of the “Overview” label.
 func (isdv *IKScannerDeviceView) WithOverviewControlLabel(overviewControlLabel string) *IKScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setOverviewControlLabel:"), purego.NSString(overviewControlLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setOverviewControlLabel:"), purego.NSString(overviewControlLabel))
+	})
 	return isdv
 }
 
 // WithDisplaysDownloadsDirectoryControl sets determines whether the downloads directory control is displayed.
 func (isdv *IKScannerDeviceView) WithDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) *IKScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setDisplaysDownloadsDirectoryControl:"), displaysDownloadsDirectoryControl)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setDisplaysDownloadsDirectoryControl:"), displaysDownloadsDirectoryControl)
+	})
 	return isdv
 }
 
 // WithDownloadsDirectory sets the directory where scans are saved.
 func (isdv *IKScannerDeviceView) WithDownloadsDirectory(downloadsDirectory string) *IKScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setDownloadsDirectory:"), rt.FileURL(downloadsDirectory))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setDownloadsDirectory:"), rt.FileURL(downloadsDirectory))
+	})
 	return isdv
 }
 
 // WithDocumentName sets returns the document name.
 func (isdv *IKScannerDeviceView) WithDocumentName(documentName string) *IKScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setDocumentName:"), purego.NSString(documentName))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setDocumentName:"), purego.NSString(documentName))
+	})
 	return isdv
 }
 
 // WithDisplaysPostProcessApplicationControl sets specifies whether the post processing application control is displayed.
 func (isdv *IKScannerDeviceView) WithDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) *IKScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setDisplaysPostProcessApplicationControl:"), displaysPostProcessApplicationControl)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setDisplaysPostProcessApplicationControl:"), displaysPostProcessApplicationControl)
+	})
 	return isdv
 }
 
 // WithPostProcessApplication sets the URL of the application to use for post processing of the scan.
 func (isdv *IKScannerDeviceView) WithPostProcessApplication(postProcessApplication string) *IKScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setPostProcessApplication:"), rt.FileURL(postProcessApplication))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("setPostProcessApplication:"), rt.FileURL(postProcessApplication))
+	})
 	return isdv
 }
 
 // Delegate returns delegate of the IKScannerDeviceView.
 func (isdv *IKScannerDeviceView) Delegate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("delegate"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("delegate"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ScannerDevice returns the scanner device.
 func (isdv *IKScannerDeviceView) ScannerDevice() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("scannerDevice"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("scannerDevice"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Mode returns current display mode.
 func (isdv *IKScannerDeviceView) Mode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("mode"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("mode"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasDisplayModeSimple reports whether support a simple scanning UI.
 func (isdv *IKScannerDeviceView) HasDisplayModeSimple() bool {
-	_r := objc.Send[bool](objref.IDOf(isdv), objc.RegisterName("hasDisplayModeSimple"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(isdv), objc.RegisterName("hasDisplayModeSimple"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasDisplayModeAdvanced reports whether support advanced scanning UI.
 func (isdv *IKScannerDeviceView) HasDisplayModeAdvanced() bool {
-	_r := objc.Send[bool](objref.IDOf(isdv), objc.RegisterName("hasDisplayModeAdvanced"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(isdv), objc.RegisterName("hasDisplayModeAdvanced"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TransferMode returns transfer mode either file based - or - in memory.
 func (isdv *IKScannerDeviceView) TransferMode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("transferMode"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("transferMode"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ScanControlLabel returns label for the 'Scan' control.
 func (isdv *IKScannerDeviceView) ScanControlLabel() string {
-	_r := objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("scanControlLabel"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("scanControlLabel"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // OverviewControlLabel returns label for the 'Overview' control.
 func (isdv *IKScannerDeviceView) OverviewControlLabel() string {
-	_r := objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("overviewControlLabel"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("overviewControlLabel"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DisplaysDownloadsDirectoryControl reports whether show a downloads directory control.
 func (isdv *IKScannerDeviceView) DisplaysDownloadsDirectoryControl() bool {
-	_r := objc.Send[bool](objref.IDOf(isdv), objc.RegisterName("displaysDownloadsDirectoryControl"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(isdv), objc.RegisterName("displaysDownloadsDirectoryControl"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DownloadsDirectory returns downloads directory.
 func (isdv *IKScannerDeviceView) DownloadsDirectory() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("downloadsDirectory"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("downloadsDirectory"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DocumentName returns document name.
 func (isdv *IKScannerDeviceView) DocumentName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("documentName"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("documentName"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DisplaysPostProcessApplicationControl reports whether show a postprocessing application control.
 func (isdv *IKScannerDeviceView) DisplaysPostProcessApplicationControl() bool {
-	_r := objc.Send[bool](objref.IDOf(isdv), objc.RegisterName("displaysPostProcessApplicationControl"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(isdv), objc.RegisterName("displaysPostProcessApplicationControl"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PostProcessApplication returns postprocessing application.
 func (isdv *IKScannerDeviceView) PostProcessApplication() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("postProcessApplication"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(isdv), objc.RegisterName("postProcessApplication"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

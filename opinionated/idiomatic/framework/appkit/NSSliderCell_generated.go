@@ -49,475 +49,741 @@ func sliderCellAdopt(id objc.ID) *SliderCell {
 
 // NewSliderCell creates a new SliderCell.
 func NewSliderCell() *SliderCell {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSSliderCell")), objc.RegisterName("new"))
-	return sliderCellAdopt(_id)
+	var _mainthread0 *SliderCell
+	purego.Main(func() {
+		_mainthread0 = func() *SliderCell {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSSliderCell")), objc.RegisterName("new"))
+			return sliderCellAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithMinValue sets the minimum value the slider can send to its target.
 func (sc *SliderCell) WithMinValue(minValue float64) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setMinValue:"), minValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setMinValue:"), minValue)
+	})
 	return sc
 }
 
 // WithMaxValue sets the maximum value the slider can send to its target.
 func (sc *SliderCell) WithMaxValue(maxValue float64) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setMaxValue:"), maxValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setMaxValue:"), maxValue)
+	})
 	return sc
 }
 
 // WithAltIncrementValue sets the amount by which the slider changes its value when the user Option-drags the knob.
 func (sc *SliderCell) WithAltIncrementValue(altIncrementValue float64) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAltIncrementValue:"), altIncrementValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAltIncrementValue:"), altIncrementValue)
+	})
 	return sc
 }
 
 // WithSliderType sets the slider type, either linear or circular.
 func (sc *SliderCell) WithSliderType(sliderType SliderType) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSliderType:"), sliderType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSliderType:"), sliderType)
+	})
 	return sc
 }
 
 // WithVertical sets an integer indicating the orientation (vertical or horizontal) of the slider.
 func (sc *SliderCell) WithVertical(vertical bool) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setVertical:"), vertical)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setVertical:"), vertical)
+	})
 	return sc
 }
 
 // WithKnobThickness sets the thickness of the slider knob, in pixels.
 func (sc *SliderCell) WithKnobThickness(knobThickness float64) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setKnobThickness:"), knobThickness)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setKnobThickness:"), knobThickness)
+	})
 	return sc
 }
 
 // WithNumberOfTickMarks sets the number of tick marks associated with the slider, including the tick marks assigned to the minimum and maximum values.
 func (sc *SliderCell) WithNumberOfTickMarks(numberOfTickMarks int) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setNumberOfTickMarks:"), numberOfTickMarks)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setNumberOfTickMarks:"), numberOfTickMarks)
+	})
 	return sc
 }
 
 // WithTickMarkPosition sets the position of the tick marks relative to the receiver.
 func (sc *SliderCell) WithTickMarkPosition(tickMarkPosition TickMarkPosition) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTickMarkPosition:"), tickMarkPosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTickMarkPosition:"), tickMarkPosition)
+	})
 	return sc
 }
 
 // WithAllowsTickMarkValuesOnly sets a Boolean value indicating whether the receiver fixes its values to those values represented by its tick marks.
 func (sc *SliderCell) WithAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAllowsTickMarkValuesOnly:"), allowsTickMarkValuesOnly)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAllowsTickMarkValuesOnly:"), allowsTickMarkValuesOnly)
+	})
 	return sc
 }
 
 // WithControlView sets the view associated with the cell.
 func (sc *SliderCell) WithControlView(controlView ViewProvider) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	})
 	return sc
 }
 
 // WithType sets the type of the cell.
 func (sc *SliderCell) WithType(type_ CellType) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setType:"), type_)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setType:"), type_)
+	})
 	return sc
 }
 
 // WithState sets the cell’s current state.
 func (sc *SliderCell) WithState(state int) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setState:"), state)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setState:"), state)
+	})
 	return sc
 }
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (sc *SliderCell) WithTarget(target obj.Object) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return sc
 }
 
 // WithTag sets a tag for identifying the cell.
 func (sc *SliderCell) WithTag(tag int) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTag:"), tag)
+	})
 	return sc
 }
 
 // WithTitle sets the cell’s title text.
 func (sc *SliderCell) WithTitle(title string) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return sc
 }
 
 // WithEnabled sets a Boolean value indicating whether the cell is currently enabled.
 func (sc *SliderCell) WithEnabled(enabled bool) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return sc
 }
 
 // WithContinuous sets a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 func (sc *SliderCell) WithContinuous(continuous bool) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return sc
 }
 
 // WithEditable sets a Boolean value indicating whether the cell is editable.
 func (sc *SliderCell) WithEditable(editable bool) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setEditable:"), editable)
+	})
 	return sc
 }
 
 // WithSelectable sets a Boolean value indicating whether the cell’s text can be selected.
 func (sc *SliderCell) WithSelectable(selectable bool) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSelectable:"), selectable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSelectable:"), selectable)
+	})
 	return sc
 }
 
 // WithBordered sets a Boolean value indicating whether the cell draws itself outlined with a plain border.
 func (sc *SliderCell) WithBordered(bordered bool) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBordered:"), bordered)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBordered:"), bordered)
+	})
 	return sc
 }
 
 // WithBezeled sets a Boolean value indicating whether the cell has a bezeled border.
 func (sc *SliderCell) WithBezeled(bezeled bool) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBezeled:"), bezeled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBezeled:"), bezeled)
+	})
 	return sc
 }
 
 // WithScrollable sets a Boolean value indicating whether excess text scrolls past the cell’s bounds.
 func (sc *SliderCell) WithScrollable(scrollable bool) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setScrollable:"), scrollable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setScrollable:"), scrollable)
+	})
 	return sc
 }
 
 // WithHighlighted sets a Boolean value indicating whether the cell has a highlighted appearance.
 func (sc *SliderCell) WithHighlighted(highlighted bool) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return sc
 }
 
 // WithAlignment sets the alignment of the cell’s text.
 func (sc *SliderCell) WithAlignment(alignment TextAlignment) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return sc
 }
 
 // WithWraps sets a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 func (sc *SliderCell) WithWraps(wraps bool) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWraps:"), wraps)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWraps:"), wraps)
+	})
 	return sc
 }
 
 // WithFont sets the font that the cell uses to display text.
 func (sc *SliderCell) WithFont(font *Font) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return sc
 }
 
 // WithFormatter sets the cell’s formatter object.
 func (sc *SliderCell) WithFormatter(formatter obj.Object) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return sc
 }
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (sc *SliderCell) WithObjectValue(objectValue obj.Object) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return sc
 }
 
 // WithStringValue sets the cell’s value as a string.
 func (sc *SliderCell) WithStringValue(stringValue string) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return sc
 }
 
 // WithIntValue sets the cell’s value as an integer.
 func (sc *SliderCell) WithIntValue(intValue int) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return sc
 }
 
 // WithFloatValue sets the cell’s value as a single-precision floating-point number.
 func (sc *SliderCell) WithFloatValue(floatValue float32) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return sc
 }
 
 // WithDoubleValue sets the cell’s value as a double-precision floating-point number.
 func (sc *SliderCell) WithDoubleValue(doubleValue float64) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return sc
 }
 
 // WithIntegerValue sets the cell’s value as an integer value.
 func (sc *SliderCell) WithIntegerValue(integerValue int) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return sc
 }
 
 // WithImage sets the image displayed by the cell, if any.
 func (sc *SliderCell) WithImage(image *Image) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setImage:"), objref.IDOf(image))
+	})
 	return sc
 }
 
 // WithControlSize sets the size of the cell.
 func (sc *SliderCell) WithControlSize(controlSize ControlSize) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return sc
 }
 
 // WithRepresentedObject sets the object represented by the cell.
 func (sc *SliderCell) WithRepresentedObject(representedObject obj.Object) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	})
 	return sc
 }
 
 // WithMenu sets the cell’s contextual menu.
 func (sc *SliderCell) WithMenu(menu *Menu) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return sc
 }
 
 // WithSendsActionOnEndEditing sets a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 func (sc *SliderCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	})
 	return sc
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (sc *SliderCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return sc
 }
 
 // WithLineBreakMode sets the line break mode to use when drawing text in the cell.
 func (sc *SliderCell) WithLineBreakMode(lineBreakMode LineBreakMode) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return sc
 }
 
 // WithAllowsUndo sets a Boolean value indicating whether the cell assumes responsibility for undo operations.
 func (sc *SliderCell) WithAllowsUndo(allowsUndo bool) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	})
 	return sc
 }
 
 // WithTruncatesLastVisibleLine sets a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 func (sc *SliderCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	})
 	return sc
 }
 
 // WithUserInterfaceLayoutDirection sets the layout direction of the user interface.
 func (sc *SliderCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return sc
 }
 
 // WithUsesSingleLineMode sets a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 func (sc *SliderCell) WithUsesSingleLineMode(usesSingleLineMode bool) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return sc
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the cell refuses the first responder status.
 func (sc *SliderCell) WithRefusesFirstResponder(refusesFirstResponder bool) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return sc
 }
 
 // WithShowsFirstResponder sets a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 func (sc *SliderCell) WithShowsFirstResponder(showsFirstResponder bool) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	})
 	return sc
 }
 
 // WithFocusRingType sets the type of focus ring to use with the associated view.
 func (sc *SliderCell) WithFocusRingType(focusRingType FocusRingType) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return sc
 }
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (sc *SliderCell) WithAttributedStringValue(attributedStringValue obj.Object) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return sc
 }
 
 // WithAllowsEditingTextAttributes sets a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 func (sc *SliderCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	})
 	return sc
 }
 
 // WithImportsGraphics sets a Boolean value indicating whether the cell supports the importation of images into its text.
 func (sc *SliderCell) WithImportsGraphics(importsGraphics bool) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	})
 	return sc
 }
 
 // WithAllowsMixedState sets a Boolean value indicating whether the cell supports three states instead of two.
 func (sc *SliderCell) WithAllowsMixedState(allowsMixedState bool) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	})
 	return sc
 }
 
 // WithBackgroundStyle sets the cell’s background style.
 func (sc *SliderCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	})
 	return sc
 }
 
 // WithControlTint sets the cell’s control tint.
 func (sc *SliderCell) WithControlTint(controlTint ControlTint) *SliderCell {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setControlTint:"), controlTint)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setControlTint:"), controlTint)
+	})
 	return sc
 }
 
 // KnobRectFlipped returns the rectangle in which the slider knob is drawn.
 func (sc *SliderCell) KnobRectFlipped(flipped bool) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sc), objc.RegisterName("knobRectFlipped:"), flipped)
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(sc), objc.RegisterName("knobRectFlipped:"), flipped)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BarRectFlipped returns the rectangle in which the bar is drawn.
 func (sc *SliderCell) BarRectFlipped(flipped bool) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sc), objc.RegisterName("barRectFlipped:"), flipped)
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(sc), objc.RegisterName("barRectFlipped:"), flipped)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DrawKnob draws the slider knob in the given rectangle.
 func (sc *SliderCell) DrawKnob(knobRect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("drawKnob:"), knobRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("drawKnob:"), knobRect)
+	})
+
 }
 
 // DrawKnob2 calculates the rectangle in which the knob should be drawn, then calls drawKnob: to actually draw the knob.
 func (sc *SliderCell) DrawKnob2() {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("drawKnob"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("drawKnob"))
+	})
+
 }
 
 // DrawBarInsideFlipped draws the slider’s bar—but not its bezel or knob—inside the specified rectangle.
 func (sc *SliderCell) DrawBarInsideFlipped(rect corefoundation.CGRect, flipped bool) {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("drawBarInside:flipped:"), rect, flipped)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("drawBarInside:flipped:"), rect, flipped)
+	})
+
 }
 
 // MinValue returns the min value.
 func (sc *SliderCell) MinValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("minValue"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("minValue"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MaxValue returns the max value.
 func (sc *SliderCell) MaxValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("maxValue"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("maxValue"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AltIncrementValue returns the alt increment value.
 func (sc *SliderCell) AltIncrementValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("altIncrementValue"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("altIncrementValue"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SliderType returns the slider type.
 func (sc *SliderCell) SliderType() SliderType {
-	_r := objc.Send[SliderType](objref.IDOf(sc), objc.RegisterName("sliderType"))
-	return _r
+	var _mainthread0 SliderType
+	purego.Main(func() {
+		_mainthread0 = func() SliderType {
+			_r := objc.Send[SliderType](objref.IDOf(sc), objc.RegisterName("sliderType"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsVertical reports whether the object is vertical.
 func (sc *SliderCell) IsVertical() bool {
-	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("isVertical"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("isVertical"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TrackRect returns the track rect.
 func (sc *SliderCell) TrackRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sc), objc.RegisterName("trackRect"))
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(sc), objc.RegisterName("trackRect"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // KnobThickness returns the knob thickness.
 func (sc *SliderCell) KnobThickness() float64 {
-	_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("knobThickness"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("knobThickness"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TickMarkValueAtIndex returns the receiver’s value represented by the tick mark at the specified index.
 func (sc *SliderCell) TickMarkValueAtIndex(index int) float64 {
-	_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("tickMarkValueAtIndex:"), index)
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("tickMarkValueAtIndex:"), index)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RectOfTickMarkAtIndex returns the bounding rectangle of the tick mark at the specified index.
 func (sc *SliderCell) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sc), objc.RegisterName("rectOfTickMarkAtIndex:"), index)
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(sc), objc.RegisterName("rectOfTickMarkAtIndex:"), index)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IndexOfTickMarkAtPoint returns the index of the tick mark closest to the location of the slider represented by the specified point.
 func (sc *SliderCell) IndexOfTickMarkAtPoint(point corefoundation.CGPoint) int {
-	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("indexOfTickMarkAtPoint:"), point)
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("indexOfTickMarkAtPoint:"), point)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ClosestTickMarkValueToValue returns the value of the tick mark closest to the specified value.
 func (sc *SliderCell) ClosestTickMarkValueToValue(value float64) float64 {
-	_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("closestTickMarkValueToValue:"), value)
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("closestTickMarkValueToValue:"), value)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DrawTickMarks draws the slider’s tick marks.
 func (sc *SliderCell) DrawTickMarks() {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("drawTickMarks"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("drawTickMarks"))
+	})
+
 }
 
 // NumberOfTickMarks returns the number of tick marks.
 func (sc *SliderCell) NumberOfTickMarks() int {
-	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("numberOfTickMarks"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("numberOfTickMarks"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TickMarkPosition returns the tick mark position.
 func (sc *SliderCell) TickMarkPosition() TickMarkPosition {
-	_r := objc.Send[TickMarkPosition](objref.IDOf(sc), objc.RegisterName("tickMarkPosition"))
-	return _r
+	var _mainthread0 TickMarkPosition
+	purego.Main(func() {
+		_mainthread0 = func() TickMarkPosition {
+			_r := objc.Send[TickMarkPosition](objref.IDOf(sc), objc.RegisterName("tickMarkPosition"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsTickMarkValuesOnly wraps the corresponding Objective-C method.
 func (sc *SliderCell) AllowsTickMarkValuesOnly() bool {
-	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("allowsTickMarkValuesOnly"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("allowsTickMarkValuesOnly"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetTitleCell sets the cell used to draw the slider’s title.
 func (sc *SliderCell) SetTitleCell(cell *Cell) {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTitleCell:"), objref.IDOf(cell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTitleCell:"), objref.IDOf(cell))
+	})
+
 }
 
 // TitleCell returns nil.
 func (sc *SliderCell) TitleCell() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("titleCell"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("titleCell"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetTitleColor sets the color used to draw the slider’s title.
 func (sc *SliderCell) SetTitleColor(newColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTitleColor:"), objref.IDOf(newColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTitleColor:"), objref.IDOf(newColor))
+	})
+
 }
 
 // TitleColor returns nil.
 func (sc *SliderCell) TitleColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("titleColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("titleColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetTitleFont sets the font used to draw the slider’s title.
 func (sc *SliderCell) SetTitleFont(fontObj *Font) {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTitleFont:"), objref.IDOf(fontObj))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTitleFont:"), objref.IDOf(fontObj))
+	})
+
 }
 
 // TitleFont returns nil.
 func (sc *SliderCell) TitleFont() *Font {
-	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("titleFont"))
-	return FontFromID(_r)
+	var _mainthread0 *Font
+	purego.Main(func() {
+		_mainthread0 = func() *Font {
+			_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("titleFont"))
+			return FontFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ActionCellProvider = (*SliderCell)(nil)

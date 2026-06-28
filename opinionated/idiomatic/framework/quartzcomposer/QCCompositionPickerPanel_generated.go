@@ -66,12 +66,25 @@ func (cpp *CompositionPickerPanel) String() string {
 
 // NewCompositionPickerPanel creates a new CompositionPickerPanel.
 func NewCompositionPickerPanel() *CompositionPickerPanel {
-	_id := objc.Send[objc.ID](objc.ID(_class("QCCompositionPickerPanel")), objc.RegisterName("new"))
-	return compositionPickerPanelAdopt(_id)
+	var _mainthread0 *CompositionPickerPanel
+	purego.Main(func() {
+		_mainthread0 = func() *CompositionPickerPanel {
+			_id := objc.Send[objc.ID](objc.ID(_class("QCCompositionPickerPanel")), objc.RegisterName("new"))
+			return compositionPickerPanelAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // CompositionPickerView returns the composition picker view.
 func (cpp *CompositionPickerPanel) CompositionPickerView() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cpp), objc.RegisterName("compositionPickerView"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cpp), objc.RegisterName("compositionPickerView"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

@@ -25,6 +25,41 @@ func buildConstructors(
 	trialNames trialNameMap,
 	abstractBases abstractBaseIndex,
 ) []ctorEntry {
+	result := buildConstructorList(
+		cls,
+		className,
+		goTypeName,
+		fc,
+		ctx,
+		m,
+		rawPkgAlias,
+		trialNames,
+		abstractBases,
+	)
+	// A constructor of a @MainActor class allocates and initialises a UI object,
+	// which must happen on the main thread; the template wraps it in purego.Main.
+	if cls.IsMainThreadRequired {
+		for i := range result {
+			result[i].mainThread = true
+			if result[i].extraImports == nil {
+				result[i].extraImports = map[string]string{}
+			}
+			result[i].extraImports["purego"] = pureobjcImportPath
+		}
+	}
+	return result
+}
+
+func buildConstructorList(
+	cls meta.Class,
+	className, goTypeName string,
+	fc *frameworkContext,
+	ctx typemap.Context,
+	m *typemap.Mapper,
+	rawPkgAlias string,
+	trialNames trialNameMap,
+	abstractBases abstractBaseIndex,
+) []ctorEntry {
 	var ctors []ctorEntry
 	hasExplicitParamInit := false
 
@@ -79,6 +114,7 @@ type ctorEntry struct {
 	params          []ctorParam
 	hasNSError      bool
 	needsFoundation bool
+	mainThread      bool // run alloc/init on the main thread (@MainActor class)
 	extraImports    map[string]string
 	// preamble is rendered verbatim at the top of the constructor body, before
 	// alloc/init — used to build a raw NSArray from a variadic ergonomic param.
@@ -180,6 +216,7 @@ func writeConstructor(
 		Preamble:   c.preamble,
 		IsPlainNew: c.rawInitGoName == "",
 		HasNSError: c.hasNSError,
+		MainThread: c.mainThread,
 	}
 	if !view.IsPlainNew {
 		// alloc + send the init selector directly via objc.Send[objc.ID],
@@ -213,6 +250,7 @@ type constructorView struct {
 	Preamble    string
 	IsPlainNew  bool
 	HasNSError  bool
+	MainThread  bool   // wrap alloc/init in purego.Main (@MainActor class)
 	SendAllArgs string // alloc-init path: `_alloc, objc.RegisterName("sel"), …`
 }
 

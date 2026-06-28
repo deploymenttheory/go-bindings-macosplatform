@@ -66,93 +66,162 @@ func (sv *ScriptView) String() string {
 
 // NewScriptView creates a new ScriptView.
 func NewScriptView() *ScriptView {
-	_id := objc.Send[objc.ID](objc.ID(_class("OSAScriptView")), objc.RegisterName("new"))
-	return scriptViewAdopt(_id)
+	var _mainthread0 *ScriptView
+	purego.Main(func() {
+		_mainthread0 = func() *ScriptView {
+			_id := objc.Send[objc.ID](objc.ID(_class("OSAScriptView")), objc.RegisterName("new"))
+			return scriptViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithSource sets the source.
 func (sv *ScriptView) WithSource(source string) *ScriptView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setSource:"), purego.NSString(source))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setSource:"), purego.NSString(source))
+	})
 	return sv
 }
 
 // WithUsesScriptAssistant sets the uses script assistant.
 func (sv *ScriptView) WithUsesScriptAssistant(usesScriptAssistant bool) *ScriptView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setUsesScriptAssistant:"), usesScriptAssistant)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setUsesScriptAssistant:"), usesScriptAssistant)
+	})
 	return sv
 }
 
 // WithUsesTabs sets the uses tabs.
 func (sv *ScriptView) WithUsesTabs(usesTabs bool) *ScriptView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setUsesTabs:"), usesTabs)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setUsesTabs:"), usesTabs)
+	})
 	return sv
 }
 
 // WithTabWidth sets the tab width.
 func (sv *ScriptView) WithTabWidth(tabWidth int) *ScriptView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setTabWidth:"), tabWidth)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setTabWidth:"), tabWidth)
+	})
 	return sv
 }
 
 // WithWrapsLines sets the wraps lines.
 func (sv *ScriptView) WithWrapsLines(wrapsLines bool) *ScriptView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWrapsLines:"), wrapsLines)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWrapsLines:"), wrapsLines)
+	})
 	return sv
 }
 
 // WithIndentsWrappedLines sets the indents wrapped lines.
 func (sv *ScriptView) WithIndentsWrappedLines(indentsWrappedLines bool) *ScriptView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setIndentsWrappedLines:"), indentsWrappedLines)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setIndentsWrappedLines:"), indentsWrappedLines)
+	})
 	return sv
 }
 
 // WithIndentWidth sets the indent width.
 func (sv *ScriptView) WithIndentWidth(indentWidth int) *ScriptView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setIndentWidth:"), indentWidth)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setIndentWidth:"), indentWidth)
+	})
 	return sv
 }
 
 // Source returns the source.
 func (sv *ScriptView) Source() string {
-	_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("source"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("source"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UsesScriptAssistant wraps the corresponding Objective-C method.
 func (sv *ScriptView) UsesScriptAssistant() bool {
-	_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("usesScriptAssistant"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("usesScriptAssistant"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UsesTabs wraps the corresponding Objective-C method.
 func (sv *ScriptView) UsesTabs() bool {
-	_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("usesTabs"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("usesTabs"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TabWidth returns the tab width.
 func (sv *ScriptView) TabWidth() int {
-	_r := objc.Send[int](objref.IDOf(sv), objc.RegisterName("tabWidth"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(sv), objc.RegisterName("tabWidth"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // WrapsLines wraps the corresponding Objective-C method.
 func (sv *ScriptView) WrapsLines() bool {
-	_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("wrapsLines"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("wrapsLines"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IndentsWrappedLines wraps the corresponding Objective-C method.
 func (sv *ScriptView) IndentsWrappedLines() bool {
-	_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("indentsWrappedLines"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("indentsWrappedLines"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IndentWidth returns the indent width.
 func (sv *ScriptView) IndentWidth() int {
-	_r := objc.Send[int](objref.IDOf(sv), objc.RegisterName("indentWidth"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(sv), objc.RegisterName("indentWidth"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "framework": "ExtensionKit",
+  "main_actor_selectors": {
+    "EXHostViewControllerDelegate": [
+      "hostViewControllerDidActivate:",
+      "hostViewControllerWillDeactivate:error:"
+    ]
+  }
+}

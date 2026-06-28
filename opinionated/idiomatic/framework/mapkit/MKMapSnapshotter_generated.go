@@ -75,7 +75,10 @@ func NewMapSnapshotterWithOptions(options *MapSnapshotOptions) *MapSnapshotter {
 
 // Cancel cancels the request to create a snapshot.
 func (ms *MapSnapshotter) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("cancel"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("cancel"))
+	})
+
 }
 
 // IsLoading reports whether the object is loading.

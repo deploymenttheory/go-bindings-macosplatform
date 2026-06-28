@@ -68,20 +68,36 @@ func (ifbv *IKFilterBrowserView) String() string {
 
 // NewIKFilterBrowserView creates a new IKFilterBrowserView.
 func NewIKFilterBrowserView() *IKFilterBrowserView {
-	_id := objc.Send[objc.ID](objc.ID(_class("IKFilterBrowserView")), objc.RegisterName("new"))
-	return iKFilterBrowserViewAdopt(_id)
+	var _mainthread0 *IKFilterBrowserView
+	purego.Main(func() {
+		_mainthread0 = func() *IKFilterBrowserView {
+			_id := objc.Send[objc.ID](objc.ID(_class("IKFilterBrowserView")), objc.RegisterName("new"))
+			return iKFilterBrowserViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // SetPreviewState sets the preview state.
 func (ifbv *IKFilterBrowserView) SetPreviewState(inState bool) {
-	objc.Send[objc.ID](objref.IDOf(ifbv), objc.RegisterName("setPreviewState:"), inState)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ifbv), objc.RegisterName("setPreviewState:"), inState)
+	})
+
 }
 
 // FilterName returns the name of the filter that is currently selected in the filter browser.
 func (ifbv *IKFilterBrowserView) FilterName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(ifbv), objc.RegisterName("filterName"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(ifbv), objc.RegisterName("filterName"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }

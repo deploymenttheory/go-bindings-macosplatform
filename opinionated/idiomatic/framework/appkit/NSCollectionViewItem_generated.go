@@ -49,137 +49,214 @@ func collectionViewItemAdopt(id objc.ID) *CollectionViewItem {
 
 // NewCollectionViewItem creates a new CollectionViewItem.
 func NewCollectionViewItem() *CollectionViewItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewItem")), objc.RegisterName("new"))
-	return collectionViewItemAdopt(_id)
+	var _mainthread0 *CollectionViewItem
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewItem {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewItem")), objc.RegisterName("new"))
+			return collectionViewItemAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithSelected sets a Boolean indicating whether the item is currently selected.
 func (cvi *CollectionViewItem) WithSelected(selected bool) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setSelected:"), selected)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setSelected:"), selected)
+	})
 	return cvi
 }
 
 // WithHighlightState sets the highlight state currently applied to the item.
 func (cvi *CollectionViewItem) WithHighlightState(highlightState CollectionViewItemHighlightState) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setHighlightState:"), highlightState)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setHighlightState:"), highlightState)
+	})
 	return cvi
 }
 
 // WithImageView sets an image view outlet that you can use to display images.
 func (cvi *CollectionViewItem) WithImageView(imageView *ImageView) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setImageView:"), objref.IDOf(imageView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setImageView:"), objref.IDOf(imageView))
+	})
 	return cvi
 }
 
 // WithTextField sets a text field outlet that you can use to display a string.
 func (cvi *CollectionViewItem) WithTextField(textField TextFieldProvider) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setTextField:"), objref.IDOf(textField))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setTextField:"), objref.IDOf(textField))
+	})
 	return cvi
 }
 
 // WithRepresentedObject sets the object whose value is presented in the receiver’s primary view.
 func (cvi *CollectionViewItem) WithRepresentedObject(representedObject obj.Object) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	})
 	return cvi
 }
 
 // WithTitle sets the localized title of the receiver’s primary view.
 func (cvi *CollectionViewItem) WithTitle(title string) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return cvi
 }
 
 // WithView sets the view controller’s primary view.
 func (cvi *CollectionViewItem) WithView(view ViewProvider) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setView:"), objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setView:"), objref.IDOf(view))
+	})
 	return cvi
 }
 
 // WithPreferredContentSize sets the desired size of the view controller’s view, in screen units.
 func (cvi *CollectionViewItem) WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setPreferredContentSize:"), preferredContentSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setPreferredContentSize:"), preferredContentSize)
+	})
 	return cvi
 }
 
 // WithChildViewControllers sets an array of view controllers that are hierarchical children of the view controller.
 func (cvi *CollectionViewItem) WithChildViewControllers(items ...ViewControllerProvider) *CollectionViewItem {
 	_arr := purego.SliceToNSArray(items, func(_v ViewControllerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setChildViewControllers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setChildViewControllers:"), _arr)
+	})
 	return cvi
 }
 
 // WithSourceItemView sets the source item view.
 func (cvi *CollectionViewItem) WithSourceItemView(sourceItemView ViewProvider) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
+	})
 	return cvi
 }
 
 // WithPreferredScreenOrigin sets for a view controller that is part of an app extension, the preferred screen origin.
 func (cvi *CollectionViewItem) WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setPreferredScreenOrigin:"), preferredScreenOrigin)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setPreferredScreenOrigin:"), preferredScreenOrigin)
+	})
 	return cvi
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (cvi *CollectionViewItem) WithNextResponder(nextResponder ResponderProvider) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return cvi
 }
 
 // WithMenu sets returns the responder’s menu.
 func (cvi *CollectionViewItem) WithMenu(menu *Menu) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return cvi
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (cvi *CollectionViewItem) WithUserActivity(userActivity obj.Object) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return cvi
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (cvi *CollectionViewItem) WithTouchBar(touchBar *TouchBar) *CollectionViewItem {
-	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return cvi
 }
 
 // CollectionView returns the collection view.
 func (cvi *CollectionViewItem) CollectionView() *CollectionView {
-	_r := objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("collectionView"))
-	return CollectionViewFromID(_r)
+	var _mainthread0 *CollectionView
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionView {
+			_r := objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("collectionView"))
+			return CollectionViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsSelected reports whether the object is selected.
 func (cvi *CollectionViewItem) IsSelected() bool {
-	_r := objc.Send[bool](objref.IDOf(cvi), objc.RegisterName("isSelected"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cvi), objc.RegisterName("isSelected"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HighlightState returns the highlight state.
 func (cvi *CollectionViewItem) HighlightState() CollectionViewItemHighlightState {
-	_r := objc.Send[CollectionViewItemHighlightState](objref.IDOf(cvi), objc.RegisterName("highlightState"))
-	return _r
+	var _mainthread0 CollectionViewItemHighlightState
+	purego.Main(func() {
+		_mainthread0 = func() CollectionViewItemHighlightState {
+			_r := objc.Send[CollectionViewItemHighlightState](objref.IDOf(cvi), objc.RegisterName("highlightState"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ImageView returns the image view.
 func (cvi *CollectionViewItem) ImageView() *ImageView {
-	_r := objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("imageView"))
-	return ImageViewFromID(_r)
+	var _mainthread0 *ImageView
+	purego.Main(func() {
+		_mainthread0 = func() *ImageView {
+			_r := objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("imageView"))
+			return ImageViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TextField returns the text field.
 func (cvi *CollectionViewItem) TextField() *TextField {
-	_r := objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("textField"))
-	return TextFieldFromID(_r)
+	var _mainthread0 *TextField
+	purego.Main(func() {
+		_mainthread0 = func() *TextField {
+			_r := objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("textField"))
+			return TextFieldFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DraggingImageComponents returns the dragging image components.
 //
 // DraggingImageComponents returns the collection as a Go slice.
 func (cvi *CollectionViewItem) DraggingImageComponents() []*DraggingImageComponent {
-	_arr := objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("draggingImageComponents"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DraggingImageComponent { return DraggingImageComponentFromID(_id) })
+	var _mainthread0 []*DraggingImageComponent
+	purego.Main(func() {
+		_mainthread0 = func() []*DraggingImageComponent {
+			_arr := objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("draggingImageComponents"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DraggingImageComponent { return DraggingImageComponentFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 var _ ViewControllerProvider = (*CollectionViewItem)(nil)

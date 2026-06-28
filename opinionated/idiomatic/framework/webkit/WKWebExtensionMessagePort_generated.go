@@ -70,8 +70,14 @@ func (wwemp *WKWebExtensionMessagePort) String() string {
 
 // NewWKWebExtensionMessagePort creates a new WKWebExtensionMessagePort.
 func NewWKWebExtensionMessagePort() *WKWebExtensionMessagePort {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionMessagePort")), objc.RegisterName("new"))
-	return wKWebExtensionMessagePortAdopt(_id)
+	var _mainthread0 *WKWebExtensionMessagePort
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtensionMessagePort {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionMessagePort")), objc.RegisterName("new"))
+			return wKWebExtensionMessagePortAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // SendMessage sends a message to the connected web extension.
@@ -95,21 +101,34 @@ func (wwemp *WKWebExtensionMessagePort) SendMessage(ctx context.Context, message
 
 // Disconnect disconnects the port, terminating all further messages.
 func (wwemp *WKWebExtensionMessagePort) Disconnect() {
-	objc.Send[objc.ID](objref.IDOf(wwemp), objc.RegisterName("disconnect"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwemp), objc.RegisterName("disconnect"))
+	})
+
 }
 
 // DisconnectWithError disconnects the port, terminating all further messages with an optional error.
 func (wwemp *WKWebExtensionMessagePort) DisconnectWithError(error_ unsafe.Pointer) {
-	objc.Send[objc.ID](objref.IDOf(wwemp), objc.RegisterName("disconnectWithError:"), error_)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwemp), objc.RegisterName("disconnectWithError:"), error_)
+	})
+
 }
 
 // ApplicationIdentifier returns the unique identifier for the app to which this port should be connected. This identifier is provided by the web extension and may or may not be used by the app. It's up to the app to decide how to interpret this identifier.
 func (wwemp *WKWebExtensionMessagePort) ApplicationIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wwemp), objc.RegisterName("applicationIdentifier"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wwemp), objc.RegisterName("applicationIdentifier"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetDisconnectHandler wraps the corresponding Objective-C method.
@@ -133,6 +152,13 @@ func (wwemp *WKWebExtensionMessagePort) SetDisconnectHandler(ctx context.Context
 
 // IsDisconnected reports whether the message port is disconnected.
 func (wwemp *WKWebExtensionMessagePort) IsDisconnected() bool {
-	_r := objc.Send[bool](objref.IDOf(wwemp), objc.RegisterName("isDisconnected"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwemp), objc.RegisterName("isDisconnected"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

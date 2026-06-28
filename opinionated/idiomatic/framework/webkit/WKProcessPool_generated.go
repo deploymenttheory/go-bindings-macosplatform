@@ -68,6 +68,12 @@ func (wpp *WKProcessPool) String() string {
 
 // NewWKProcessPool creates a new WKProcessPool.
 func NewWKProcessPool() *WKProcessPool {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKProcessPool")), objc.RegisterName("new"))
-	return wKProcessPoolAdopt(_id)
+	var _mainthread0 *WKProcessPool
+	purego.Main(func() {
+		_mainthread0 = func() *WKProcessPool {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKProcessPool")), objc.RegisterName("new"))
+			return wKProcessPoolAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }

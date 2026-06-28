@@ -66,6 +66,12 @@ func (cvc *ChallengesViewController) String() string {
 
 // NewChallengesViewController creates a new ChallengesViewController.
 func NewChallengesViewController() *ChallengesViewController {
-	_id := objc.Send[objc.ID](objc.ID(_class("GKChallengesViewController")), objc.RegisterName("new"))
-	return challengesViewControllerAdopt(_id)
+	var _mainthread0 *ChallengesViewController
+	purego.Main(func() {
+		_mainthread0 = func() *ChallengesViewController {
+			_id := objc.Send[objc.ID](objc.ID(_class("GKChallengesViewController")), objc.RegisterName("new"))
+			return challengesViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }

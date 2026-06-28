@@ -69,18 +69,38 @@ func (clgci *CollectionLayoutGroupCustomItem) String() string {
 
 // NewCollectionLayoutGroupCustomItem creates a new CollectionLayoutGroupCustomItem.
 func NewCollectionLayoutGroupCustomItem() *CollectionLayoutGroupCustomItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutGroupCustomItem")), objc.RegisterName("new"))
-	return collectionLayoutGroupCustomItemAdopt(_id)
+	var _mainthread0 *CollectionLayoutGroupCustomItem
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionLayoutGroupCustomItem {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutGroupCustomItem")), objc.RegisterName("new"))
+			return collectionLayoutGroupCustomItemAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // Frame returns the frame.
 func (clgci *CollectionLayoutGroupCustomItem) Frame() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(clgci), objc.RegisterName("frame"))
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(clgci), objc.RegisterName("frame"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ZIndex returns the z index.
 func (clgci *CollectionLayoutGroupCustomItem) ZIndex() int {
-	_r := objc.Send[int](objref.IDOf(clgci), objc.RegisterName("zIndex"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(clgci), objc.RegisterName("zIndex"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

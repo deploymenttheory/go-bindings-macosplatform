@@ -69,105 +69,193 @@ func (wtc *WritingToolsCoordinator) String() string {
 
 // NewWritingToolsCoordinator creates a new WritingToolsCoordinator.
 func NewWritingToolsCoordinator() *WritingToolsCoordinator {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSWritingToolsCoordinator")), objc.RegisterName("new"))
-	return writingToolsCoordinatorAdopt(_id)
+	var _mainthread0 *WritingToolsCoordinator
+	purego.Main(func() {
+		_mainthread0 = func() *WritingToolsCoordinator {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSWritingToolsCoordinator")), objc.RegisterName("new"))
+			return writingToolsCoordinatorAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithEffectContainerView sets the view that Writing Tools uses to display visual effects during the text-rewriting process.
 func (wtc *WritingToolsCoordinator) WithEffectContainerView(effectContainerView ViewProvider) *WritingToolsCoordinator {
-	objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("setEffectContainerView:"), objref.IDOf(effectContainerView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("setEffectContainerView:"), objref.IDOf(effectContainerView))
+	})
 	return wtc
 }
 
 // WithDecorationContainerView sets the view that Writing Tools uses to display background decorations such as proofreading marks.
 func (wtc *WritingToolsCoordinator) WithDecorationContainerView(decorationContainerView ViewProvider) *WritingToolsCoordinator {
-	objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("setDecorationContainerView:"), objref.IDOf(decorationContainerView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("setDecorationContainerView:"), objref.IDOf(decorationContainerView))
+	})
 	return wtc
 }
 
 // WithPreferredBehavior sets the level of Writing Tools support you want the system to provide for your view.
 func (wtc *WritingToolsCoordinator) WithPreferredBehavior(preferredBehavior WritingToolsBehavior) *WritingToolsCoordinator {
-	objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("setPreferredBehavior:"), preferredBehavior)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("setPreferredBehavior:"), preferredBehavior)
+	})
 	return wtc
 }
 
 // WithPreferredResultOptions sets the type of content you allow Writing Tools to generate for your custom text view.
 func (wtc *WritingToolsCoordinator) WithPreferredResultOptions(preferredResultOptions WritingToolsResultOptions) *WritingToolsCoordinator {
-	objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("setPreferredResultOptions:"), preferredResultOptions)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("setPreferredResultOptions:"), preferredResultOptions)
+	})
 	return wtc
 }
 
 // WithIncludesTextListMarkers sets the includes text list markers.
 func (wtc *WritingToolsCoordinator) WithIncludesTextListMarkers(includesTextListMarkers bool) *WritingToolsCoordinator {
-	objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("setIncludesTextListMarkers:"), includesTextListMarkers)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("setIncludesTextListMarkers:"), includesTextListMarkers)
+	})
 	return wtc
 }
 
 // StopWritingTools stops the current Writing Tools operation and dismisses the system UI.
 func (wtc *WritingToolsCoordinator) StopWritingTools() {
-	objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("stopWritingTools"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("stopWritingTools"))
+	})
+
 }
 
 // UpdateRangeWithTextReasonForContextWithIdentifier informs the coordinator about changes your app made to the text in the specified context object.
 func (wtc *WritingToolsCoordinator) UpdateRangeWithTextReasonForContextWithIdentifier(range_ foundation.NSRange, replacementText obj.Object, reason WritingToolsCoordinatorTextUpdateReason, contextID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("updateRange:withText:reason:forContextWithIdentifier:"), range_, objref.IDOf(replacementText), reason, objref.IDOf(contextID))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("updateRange:withText:reason:forContextWithIdentifier:"), range_, objref.IDOf(replacementText), reason, objref.IDOf(contextID))
+	})
+
 }
 
 // UpdateForReflowedTextInContextWithIdentifier informs the coordinator that a change occurred to the view or its text that requires a layout update.
 func (wtc *WritingToolsCoordinator) UpdateForReflowedTextInContextWithIdentifier(contextID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("updateForReflowedTextInContextWithIdentifier:"), objref.IDOf(contextID))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("updateForReflowedTextInContextWithIdentifier:"), objref.IDOf(contextID))
+	})
+
 }
 
 // View returns the view that currently uses the writing tools coordinator. Use this property to refer to the view that currently owns the coordinator object. The system updates this property automatically when you assign the coordinator to the “NSView/writingToolsCoordinator“ property of your view. The value of this property is `nil` if there is no associated view.
 func (wtc *WritingToolsCoordinator) View() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("view"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("view"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // EffectContainerView returns the view that Writing Tools uses to display visual effects during the text-rewriting process. Writing Tools uses the view in this property to host the visual effects it creates when making interactive changes to your view’s content. These visual effects let people know the state of the text and provide feedback about what’s happening to it. Set this property to a subview that sits visually above, and covers, all of the text in your custom text view. If you don’t assign a value to this property, the coordinator places its own effect view in front of the subviews in your custom view. The default value of this property is `nil`. If you display your view’s text using multiple text containers, implement the “NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:requestsSingleContainerSubrangesOf:in:completion:)“ method to request multiple previews.
 func (wtc *WritingToolsCoordinator) EffectContainerView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("effectContainerView"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("effectContainerView"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DecorationContainerView returns the view that Writing Tools uses to display background decorations such as proofreading marks. Writing Tools uses the view in this property to host proofreading marks and other visual elements that show any suggested changes. Set this property to a subview situated visibly below the text in your custom text view. It's also satisfactory to place this view visually in front of the text. Make sure the size of the view is big enough to cover all of the affected text. If you don’t assign a value to this property, the coordinator places its own decoration view behind the subviews in your custom view. The default value of this property is `nil`. If you display your view’s text using multiple text containers, implement the “NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:requestsSingleContainerSubrangesOf:in:completion:)“ and “NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:requestsDecorationContainerViewFor:in:completion:)“ methods to provide separate decoration views for each container.
 func (wtc *WritingToolsCoordinator) DecorationContainerView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("decorationContainerView"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("decorationContainerView"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // State returns the current level of Writing Tools activity in your view. Use this property to determine when Writing Tools is actively making changes to your view. During the course of Writing Tools interactions, the system reports state changes to the delegate’s “NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:willChangeTo:completion:)“ method and updates this property accordingly.
 func (wtc *WritingToolsCoordinator) State() WritingToolsCoordinatorState {
-	_r := objc.Send[WritingToolsCoordinatorState](objref.IDOf(wtc), objc.RegisterName("state"))
-	return _r
+	var _mainthread0 WritingToolsCoordinatorState
+	purego.Main(func() {
+		_mainthread0 = func() WritingToolsCoordinatorState {
+			_r := objc.Send[WritingToolsCoordinatorState](objref.IDOf(wtc), objc.RegisterName("state"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PreferredBehavior returns the level of Writing Tools support you want the system to provide for your view. Use this property to request an inline or panel-based experience, or to disable Writing Tools for your view altogether. The default value of this property is “NSWritingToolsBehavior/default“.
 func (wtc *WritingToolsCoordinator) PreferredBehavior() WritingToolsBehavior {
-	_r := objc.Send[WritingToolsBehavior](objref.IDOf(wtc), objc.RegisterName("preferredBehavior"))
-	return _r
+	var _mainthread0 WritingToolsBehavior
+	purego.Main(func() {
+		_mainthread0 = func() WritingToolsBehavior {
+			_r := objc.Send[WritingToolsBehavior](objref.IDOf(wtc), objc.RegisterName("preferredBehavior"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Behavior returns the actual level of Writing Tools support the system provides for your view. The system chooses this value based on the device capabilities, and takes the value in the “preferredBehavior“ property into consideration when making the choice. The value in this property is never the default option, and is instead one of the specific options such as “NSWritingToolsBehavior/none“, “NSWritingToolsBehavior/limited“, or “NSWritingToolsBehavior/complete“.
 func (wtc *WritingToolsCoordinator) Behavior() WritingToolsBehavior {
-	_r := objc.Send[WritingToolsBehavior](objref.IDOf(wtc), objc.RegisterName("behavior"))
-	return _r
+	var _mainthread0 WritingToolsBehavior
+	purego.Main(func() {
+		_mainthread0 = func() WritingToolsBehavior {
+			_r := objc.Send[WritingToolsBehavior](objref.IDOf(wtc), objc.RegisterName("behavior"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PreferredResultOptions returns the type of content you allow Writing Tools to generate for your custom text view. Writing Tools can create plain text or rich text, and it can format text using lists or tables as needed. If your view doesn’t support specific types of content, specify the types you do support in this property. The default value of this property is “NSWritingToolsResultOptions/default“, which lets the system determine the type of content to generate.
 func (wtc *WritingToolsCoordinator) PreferredResultOptions() WritingToolsResultOptions {
-	_r := objc.Send[WritingToolsResultOptions](objref.IDOf(wtc), objc.RegisterName("preferredResultOptions"))
-	return _r
+	var _mainthread0 WritingToolsResultOptions
+	purego.Main(func() {
+		_mainthread0 = func() WritingToolsResultOptions {
+			_r := objc.Send[WritingToolsResultOptions](objref.IDOf(wtc), objc.RegisterName("preferredResultOptions"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ResultOptions returns the type of content the system generates for your custom text view. This property contains the set of options that Writing Tools outputs for your view. Writing Tools takes the value in the “NSWritingToolsCoordinator/preferredResultOptions“ property into consideration when determining this value.
 func (wtc *WritingToolsCoordinator) ResultOptions() WritingToolsResultOptions {
-	_r := objc.Send[WritingToolsResultOptions](objref.IDOf(wtc), objc.RegisterName("resultOptions"))
-	return _r
+	var _mainthread0 WritingToolsResultOptions
+	purego.Main(func() {
+		_mainthread0 = func() WritingToolsResultOptions {
+			_r := objc.Send[WritingToolsResultOptions](objref.IDOf(wtc), objc.RegisterName("resultOptions"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IncludesTextListMarkers wraps the corresponding Objective-C method.
 func (wtc *WritingToolsCoordinator) IncludesTextListMarkers() bool {
-	_r := objc.Send[bool](objref.IDOf(wtc), objc.RegisterName("includesTextListMarkers"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wtc), objc.RegisterName("includesTextListMarkers"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

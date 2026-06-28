@@ -68,46 +68,92 @@ func (wbfl *WKBackForwardList) String() string {
 
 // NewWKBackForwardList creates a new WKBackForwardList.
 func NewWKBackForwardList() *WKBackForwardList {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKBackForwardList")), objc.RegisterName("new"))
-	return wKBackForwardListAdopt(_id)
+	var _mainthread0 *WKBackForwardList
+	purego.Main(func() {
+		_mainthread0 = func() *WKBackForwardList {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKBackForwardList")), objc.RegisterName("new"))
+			return wKBackForwardListAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // ItemAtIndex returns the item at the relative offset from the current item.
 func (wbfl *WKBackForwardList) ItemAtIndex(index int) *WKBackForwardListItem {
-	_r := objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("itemAtIndex:"), index)
-	return WKBackForwardListItemFromID(_r)
+	var _mainthread0 *WKBackForwardListItem
+	purego.Main(func() {
+		_mainthread0 = func() *WKBackForwardListItem {
+			_r := objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("itemAtIndex:"), index)
+			return WKBackForwardListItemFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CurrentItem returns the current item.
 func (wbfl *WKBackForwardList) CurrentItem() *WKBackForwardListItem {
-	_r := objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("currentItem"))
-	return WKBackForwardListItemFromID(_r)
+	var _mainthread0 *WKBackForwardListItem
+	purego.Main(func() {
+		_mainthread0 = func() *WKBackForwardListItem {
+			_r := objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("currentItem"))
+			return WKBackForwardListItemFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BackItem returns the item immediately preceding the current item, or nil if there isn't one.
 func (wbfl *WKBackForwardList) BackItem() *WKBackForwardListItem {
-	_r := objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("backItem"))
-	return WKBackForwardListItemFromID(_r)
+	var _mainthread0 *WKBackForwardListItem
+	purego.Main(func() {
+		_mainthread0 = func() *WKBackForwardListItem {
+			_r := objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("backItem"))
+			return WKBackForwardListItemFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ForwardItem returns the item immediately following the current item, or nil if there isn't one.
 func (wbfl *WKBackForwardList) ForwardItem() *WKBackForwardListItem {
-	_r := objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("forwardItem"))
-	return WKBackForwardListItemFromID(_r)
+	var _mainthread0 *WKBackForwardListItem
+	purego.Main(func() {
+		_mainthread0 = func() *WKBackForwardListItem {
+			_r := objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("forwardItem"))
+			return WKBackForwardListItemFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BackList returns the portion of the list preceding the current item. The items are in the order in which they were originally visited.
 //
 // BackList returns the collection as a Go slice.
 func (wbfl *WKBackForwardList) BackList() []*WKBackForwardListItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("backList"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WKBackForwardListItem { return WKBackForwardListItemFromID(_id) })
+	var _mainthread0 []*WKBackForwardListItem
+	purego.Main(func() {
+		_mainthread0 = func() []*WKBackForwardListItem {
+			_arr := objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("backList"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WKBackForwardListItem { return WKBackForwardListItemFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // ForwardList returns the portion of the list following the current item. The items are in the order in which they were originally visited.
 //
 // ForwardList returns the collection as a Go slice.
 func (wbfl *WKBackForwardList) ForwardList() []*WKBackForwardListItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("forwardList"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WKBackForwardListItem { return WKBackForwardListItemFromID(_id) })
+	var _mainthread0 []*WKBackForwardListItem
+	purego.Main(func() {
+		_mainthread0 = func() []*WKBackForwardListItem {
+			_arr := objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("forwardList"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WKBackForwardListItem { return WKBackForwardListItemFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }

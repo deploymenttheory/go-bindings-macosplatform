@@ -49,180 +49,261 @@ func searchToolbarItemAdopt(id objc.ID) *SearchToolbarItem {
 
 // NewSearchToolbarItem creates a new SearchToolbarItem.
 func NewSearchToolbarItem() *SearchToolbarItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSSearchToolbarItem")), objc.RegisterName("new"))
-	return searchToolbarItemAdopt(_id)
+	var _mainthread0 *SearchToolbarItem
+	purego.Main(func() {
+		_mainthread0 = func() *SearchToolbarItem {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSSearchToolbarItem")), objc.RegisterName("new"))
+			return searchToolbarItemAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithSearchField sets the search field inside the toolbar item.
 func (sti *SearchToolbarItem) WithSearchField(searchField *SearchField) *SearchToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setSearchField:"), objref.IDOf(searchField))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setSearchField:"), objref.IDOf(searchField))
+	})
 	return sti
 }
 
 // WithResignsFirstResponderWithCancel sets a Boolean value that enables the cancel button in the search field to resign the first responder in addition to clearing the contents.
 func (sti *SearchToolbarItem) WithResignsFirstResponderWithCancel(resignsFirstResponderWithCancel bool) *SearchToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setResignsFirstResponderWithCancel:"), resignsFirstResponderWithCancel)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setResignsFirstResponderWithCancel:"), resignsFirstResponderWithCancel)
+	})
 	return sti
 }
 
 // WithPreferredWidthForSearchField sets the preferred width for the toolbar item when it has keyboard focus.
 func (sti *SearchToolbarItem) WithPreferredWidthForSearchField(preferredWidthForSearchField float64) *SearchToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setPreferredWidthForSearchField:"), preferredWidthForSearchField)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setPreferredWidthForSearchField:"), preferredWidthForSearchField)
+	})
 	return sti
 }
 
 // WithLabel sets the label that appears for this item in the toolbar.
 func (sti *SearchToolbarItem) WithLabel(label string) *SearchToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setLabel:"), purego.NSString(label))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setLabel:"), purego.NSString(label))
+	})
 	return sti
 }
 
 // WithPaletteLabel sets the label that appears when the toolbar item is in the customization palette.
 func (sti *SearchToolbarItem) WithPaletteLabel(paletteLabel string) *SearchToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setPaletteLabel:"), purego.NSString(paletteLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setPaletteLabel:"), purego.NSString(paletteLabel))
+	})
 	return sti
 }
 
 // WithPossibleLabels sets the set of labels that the item might display.
 func (sti *SearchToolbarItem) WithPossibleLabels(possibleLabels obj.Object) *SearchToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setPossibleLabels:"), objref.IDOf(possibleLabels))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setPossibleLabels:"), objref.IDOf(possibleLabels))
+	})
 	return sti
 }
 
 // WithToolTip sets the tooltip to display when someone hovers over the item in the toolbar.
 func (sti *SearchToolbarItem) WithToolTip(toolTip string) *SearchToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return sti
 }
 
 // WithMenuFormRepresentation sets the menu item to use when the toolbar item is in the overflow menu.
 func (sti *SearchToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *SearchToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setMenuFormRepresentation:"), objref.IDOf(menuFormRepresentation))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setMenuFormRepresentation:"), objref.IDOf(menuFormRepresentation))
+	})
 	return sti
 }
 
 // WithTag sets an integer tag you can use to identify the toolbar item.
 func (sti *SearchToolbarItem) WithTag(tag int) *SearchToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setTag:"), tag)
+	})
 	return sti
 }
 
 // WithTarget sets the object that defines the action method the toolbar item calls when clicked.
 func (sti *SearchToolbarItem) WithTarget(target obj.Object) *SearchToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return sti
 }
 
 // WithEnabled sets a Boolean value that indicates whether the item is enabled.
 func (sti *SearchToolbarItem) WithEnabled(enabled bool) *SearchToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return sti
 }
 
 // WithImage sets the image to display for the toolbar item.
 func (sti *SearchToolbarItem) WithImage(image *Image) *SearchToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setImage:"), objref.IDOf(image))
+	})
 	return sti
 }
 
 // WithTitle sets the title of the toolbar item.
 func (sti *SearchToolbarItem) WithTitle(title string) *SearchToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return sti
 }
 
 // WithBordered sets a Boolean value that indicates whether the toolbar item has a bordered style.
 func (sti *SearchToolbarItem) WithBordered(bordered bool) *SearchToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setBordered:"), bordered)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setBordered:"), bordered)
+	})
 	return sti
 }
 
 // WithBackgroundTintColor sets the background tint color.
 func (sti *SearchToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *SearchToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
+	})
 	return sti
 }
 
 // WithStyle sets defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items’ background.
 func (sti *SearchToolbarItem) WithStyle(style ToolbarItemStyle) *SearchToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setStyle:"), style)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setStyle:"), style)
+	})
 	return sti
 }
 
 // WithNavigational sets a Boolean value that indicates whether the item behaves as a navigation item in the toolbar.
 func (sti *SearchToolbarItem) WithNavigational(navigational bool) *SearchToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setNavigational:"), navigational)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setNavigational:"), navigational)
+	})
 	return sti
 }
 
 // WithView sets the custom view you use to draw the toolbar item.
 func (sti *SearchToolbarItem) WithView(view ViewProvider) *SearchToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setView:"), objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setView:"), objref.IDOf(view))
+	})
 	return sti
 }
 
 // WithHidden sets determines whether an item is visible in the toolbar.
 func (sti *SearchToolbarItem) WithHidden(hidden bool) *SearchToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setHidden:"), hidden)
+	})
 	return sti
 }
 
 // WithMinSize sets the toolbar item’s minimum size.
 func (sti *SearchToolbarItem) WithMinSize(minSize corefoundation.CGSize) *SearchToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setMinSize:"), minSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setMinSize:"), minSize)
+	})
 	return sti
 }
 
 // WithMaxSize sets the toolbar item’s maximum size.
 func (sti *SearchToolbarItem) WithMaxSize(maxSize corefoundation.CGSize) *SearchToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setMaxSize:"), maxSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setMaxSize:"), maxSize)
+	})
 	return sti
 }
 
 // WithVisibilityPriority sets the display priority associated with the toolbar item.
 func (sti *SearchToolbarItem) WithVisibilityPriority(visibilityPriority int) *SearchToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	})
 	return sti
 }
 
 // WithBadge sets a badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
 func (sti *SearchToolbarItem) WithBadge(badge *ItemBadge) *SearchToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setBadge:"), objref.IDOf(badge))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setBadge:"), objref.IDOf(badge))
+	})
 	return sti
 }
 
 // WithAutovalidates sets a Boolean value that indicates whether the toolbar automatically validates the item.
 func (sti *SearchToolbarItem) WithAutovalidates(autovalidates bool) *SearchToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setAutovalidates:"), autovalidates)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setAutovalidates:"), autovalidates)
+	})
 	return sti
 }
 
 // BeginSearchInteraction starts a search interaction and moves the keyboard focus to the search field.
 func (sti *SearchToolbarItem) BeginSearchInteraction() {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("beginSearchInteraction"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("beginSearchInteraction"))
+	})
+
 }
 
 // EndSearchInteraction ends a search interaction by giving up the first responder and adjusting the size of the search field to the available width for the toolbar item if necessary.
 func (sti *SearchToolbarItem) EndSearchInteraction() {
-	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("endSearchInteraction"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("endSearchInteraction"))
+	})
+
 }
 
 // SearchField returns an `NSSearchField` displayed in the toolbar item. While inside the toolbar item, the field properties and layout constraints are managed by the item. The field should be configured before assigned. The width constraint for the field could be updated after assigned. When set to nil, will reset to a search field with the default configuration.
 func (sti *SearchToolbarItem) SearchField() *SearchField {
-	_r := objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("searchField"))
-	return SearchFieldFromID(_r)
+	var _mainthread0 *SearchField
+	purego.Main(func() {
+		_mainthread0 = func() *SearchField {
+			_r := objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("searchField"))
+			return SearchFieldFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ResignsFirstResponderWithCancel reports whether when true, the cancel button in the field resigns the first responder status of the search field as clearing the contents. The default is true.
 func (sti *SearchToolbarItem) ResignsFirstResponderWithCancel() bool {
-	_r := objc.Send[bool](objref.IDOf(sti), objc.RegisterName("resignsFirstResponderWithCancel"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sti), objc.RegisterName("resignsFirstResponderWithCancel"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PreferredWidthForSearchField returns the preferred width for the search field. This value is used to configure the search field width whenever it gets the keyboard focus. If specifying custom width constraints to the search field, they should not conflict with this value.
 func (sti *SearchToolbarItem) PreferredWidthForSearchField() float64 {
-	_r := objc.Send[float64](objref.IDOf(sti), objc.RegisterName("preferredWidthForSearchField"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sti), objc.RegisterName("preferredWidthForSearchField"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ToolbarItemProvider = (*SearchToolbarItem)(nil)

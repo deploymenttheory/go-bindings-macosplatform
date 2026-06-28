@@ -1,0 +1,12 @@
+// Subviews returns the collection as a Go slice.
+func (x *NSView) Subviews() []obj.Object {
+var _mainthread0 []obj.Object
+purego.Main(func() {
+_mainthread0 = func() []obj.Object {
+_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subviews"))
+return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}()
+})
+return _mainthread0
+}
+

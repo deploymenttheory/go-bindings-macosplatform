@@ -68,15 +68,28 @@ func (wcrl *WKContentRuleList) String() string {
 
 // NewWKContentRuleList creates a new WKContentRuleList.
 func NewWKContentRuleList() *WKContentRuleList {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKContentRuleList")), objc.RegisterName("new"))
-	return wKContentRuleListAdopt(_id)
+	var _mainthread0 *WKContentRuleList
+	purego.Main(func() {
+		_mainthread0 = func() *WKContentRuleList {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKContentRuleList")), objc.RegisterName("new"))
+			return wKContentRuleListAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // Identifier returns the identifier.
 func (wcrl *WKContentRuleList) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wcrl), objc.RegisterName("identifier"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wcrl), objc.RegisterName("identifier"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }

@@ -48,83 +48,138 @@ func buttonTouchBarItemAdopt(id objc.ID) *ButtonTouchBarItem {
 
 // NewButtonTouchBarItem creates a new ButtonTouchBarItem.
 func NewButtonTouchBarItem() *ButtonTouchBarItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSButtonTouchBarItem")), objc.RegisterName("new"))
-	return buttonTouchBarItemAdopt(_id)
+	var _mainthread0 *ButtonTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *ButtonTouchBarItem {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSButtonTouchBarItem")), objc.RegisterName("new"))
+			return buttonTouchBarItemAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithTitle sets the title.
 func (btbi *ButtonTouchBarItem) WithTitle(title string) *ButtonTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return btbi
 }
 
 // WithImage sets the image.
 func (btbi *ButtonTouchBarItem) WithImage(image *Image) *ButtonTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setImage:"), objref.IDOf(image))
+	})
 	return btbi
 }
 
 // WithBezelColor sets the bezel color.
 func (btbi *ButtonTouchBarItem) WithBezelColor(bezelColor *Color) *ButtonTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setBezelColor:"), objref.IDOf(bezelColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setBezelColor:"), objref.IDOf(bezelColor))
+	})
 	return btbi
 }
 
 // WithTarget sets the target.
 func (btbi *ButtonTouchBarItem) WithTarget(target obj.Object) *ButtonTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return btbi
 }
 
 // WithEnabled sets the enabled.
 func (btbi *ButtonTouchBarItem) WithEnabled(enabled bool) *ButtonTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return btbi
 }
 
 // WithCustomizationLabel sets the localized string labeling this item during user customization. The default value is empty string.
 func (btbi *ButtonTouchBarItem) WithCustomizationLabel(customizationLabel string) *ButtonTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
+	})
 	return btbi
 }
 
 // WithVisibilityPriority sets determines which items are shown in a bar when space is limited.
 func (btbi *ButtonTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *ButtonTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	})
 	return btbi
 }
 
 // Title returns the title.
 func (btbi *ButtonTouchBarItem) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("title"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("title"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Image returns the image.
 func (btbi *ButtonTouchBarItem) Image() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("image"))
-	return ImageFromID(_r)
+	var _mainthread0 *Image
+	purego.Main(func() {
+		_mainthread0 = func() *Image {
+			_r := objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("image"))
+			return ImageFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BezelColor returns the bezel color.
 func (btbi *ButtonTouchBarItem) BezelColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("bezelColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("bezelColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Target returns the target.
 func (btbi *ButtonTouchBarItem) Target() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("target"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("target"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsEnabled reports whether the object is enabled.
 func (btbi *ButtonTouchBarItem) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(btbi), objc.RegisterName("isEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(btbi), objc.RegisterName("isEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ TouchBarItemProvider = (*ButtonTouchBarItem)(nil)

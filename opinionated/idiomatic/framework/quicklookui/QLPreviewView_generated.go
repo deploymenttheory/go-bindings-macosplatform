@@ -69,60 +69,105 @@ func (pv *PreviewView) String() string {
 
 // NewPreviewViewWithFrameStyle creates a preview view with the provided frame and style.
 func NewPreviewViewWithFrameStyle(frame corefoundation.CGRect, style PreviewViewStyle) *PreviewView {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("QLPreviewView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:style:"), frame, style)
-	return previewViewAdopt(_id)
+	var _mainthread0 *PreviewView
+	purego.Main(func() {
+		_mainthread0 = func() *PreviewView {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("QLPreviewView")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:style:"), frame, style)
+			return previewViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewPreviewViewWithFrame creates a preview view with the provided frame.
 func NewPreviewViewWithFrame(frame corefoundation.CGRect) *PreviewView {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("QLPreviewView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:"), frame)
-	return previewViewAdopt(_id)
+	var _mainthread0 *PreviewView
+	purego.Main(func() {
+		_mainthread0 = func() *PreviewView {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("QLPreviewView")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:"), frame)
+			return previewViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithDisplayState sets the current display state of the previewItem.
 func (pv *PreviewView) WithDisplayState(displayState obj.Object) *PreviewView {
-	objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("setDisplayState:"), objref.IDOf(displayState))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("setDisplayState:"), objref.IDOf(displayState))
+	})
 	return pv
 }
 
 // WithShouldCloseWithWindow sets a Boolean value that determines whether the preview should close when its window closes.
 func (pv *PreviewView) WithShouldCloseWithWindow(shouldCloseWithWindow bool) *PreviewView {
-	objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("setShouldCloseWithWindow:"), shouldCloseWithWindow)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("setShouldCloseWithWindow:"), shouldCloseWithWindow)
+	})
 	return pv
 }
 
 // WithAutostarts sets a Boolean value that determines whether the preview starts automatically.
 func (pv *PreviewView) WithAutostarts(autostarts bool) *PreviewView {
-	objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("setAutostarts:"), autostarts)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("setAutostarts:"), autostarts)
+	})
 	return pv
 }
 
 // RefreshPreviewItem updates the preview to display the currently previewed item.
 func (pv *PreviewView) RefreshPreviewItem() {
-	objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("refreshPreviewItem"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("refreshPreviewItem"))
+	})
+
 }
 
 // Close closes the view, releasing the current preview item.
 func (pv *PreviewView) Close() {
-	objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("close"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("close"))
+	})
+
 }
 
 // DisplayState returns the current display state of the <doc://com.apple.documentation/documentation/quicklookui/qlpreviewview/1504747-previewitem>. This property is an opaque object that Quick Look uses to get and set the current display state of the preview. The display state could be, for example, the currently displayed page, the zoom factor on an image, or the position in a movie. You can use this property to get and save the current display state of the preview before switching to another. This saving allows you to restore a preview later on when the user switches back to it.
 func (pv *PreviewView) DisplayState() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("displayState"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("displayState"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShouldCloseWithWindow reports whether a Boolean value that determines whether the preview should close when its window closes. The default value of this property is <doc://com.apple.documentation/documentation/objectivec/yes>, which means that the preview automatically closes when its window closes. If you set this property to <doc://com.apple.documentation/documentation/objectivec/no>, close the preview by calling the “QuickLookUI/QLPreviewView/close“ method when finished with it. Once you close a “QuickLookUI/QLPreviewView“, it won’t accept any more preview items.
 func (pv *PreviewView) ShouldCloseWithWindow() bool {
-	_r := objc.Send[bool](objref.IDOf(pv), objc.RegisterName("shouldCloseWithWindow"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(pv), objc.RegisterName("shouldCloseWithWindow"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Autostarts reports whether a Boolean value that determines whether the preview starts automatically. Set this property to allow previews of movie files to start playback automatically when displayed.
 func (pv *PreviewView) Autostarts() bool {
-	_r := objc.Send[bool](objref.IDOf(pv), objc.RegisterName("autostarts"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(pv), objc.RegisterName("autostarts"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

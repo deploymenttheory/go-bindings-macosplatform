@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "framework": "UserNotificationsUI",
+  "main_actor_selectors": {
+    "UNNotificationContentExtension": [
+      "didReceiveNotification:"
+    ]
+  }
+}

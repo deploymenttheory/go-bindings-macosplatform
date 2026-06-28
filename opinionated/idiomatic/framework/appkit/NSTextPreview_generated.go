@@ -69,34 +69,66 @@ func (tp *TextPreview) String() string {
 
 // NewTextPreviewWithSnapshotImagePresentationFrameCandidateRects creates a text preview using the specified image and rectangles that indicate the portions of text to highlight.
 func NewTextPreviewWithSnapshotImagePresentationFrameCandidateRects(snapshotImage obj.Object, presentationFrame corefoundation.CGRect, candidateRects []obj.Object) *TextPreview {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextPreview")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSnapshotImage:presentationFrame:candidateRects:"), objref.IDOf(snapshotImage), presentationFrame, purego.SliceToNSArray(candidateRects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-	return textPreviewAdopt(_id)
+	var _mainthread0 *TextPreview
+	purego.Main(func() {
+		_mainthread0 = func() *TextPreview {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextPreview")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSnapshotImage:presentationFrame:candidateRects:"), objref.IDOf(snapshotImage), presentationFrame, purego.SliceToNSArray(candidateRects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+			return textPreviewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewTextPreviewWithSnapshotImagePresentationFrame creates a text preview using the specified image.
 func NewTextPreviewWithSnapshotImagePresentationFrame(snapshotImage obj.Object, presentationFrame corefoundation.CGRect) *TextPreview {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextPreview")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSnapshotImage:presentationFrame:"), objref.IDOf(snapshotImage), presentationFrame)
-	return textPreviewAdopt(_id)
+	var _mainthread0 *TextPreview
+	purego.Main(func() {
+		_mainthread0 = func() *TextPreview {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextPreview")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSnapshotImage:presentationFrame:"), objref.IDOf(snapshotImage), presentationFrame)
+			return textPreviewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // PreviewImage returns the image that contains the requested text from your view. You specify this image at initialization time. The system uses it to implement any visual effects involving your view’s text. Create the image with your text on a transparent background.
 func (tp *TextPreview) PreviewImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("previewImage"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("previewImage"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PresentationFrame returns the frame rectangle that places the preview image directly over the matching text. You specify this value at initialization time. The system uses it to position the preview image over the text in your view. Make sure the frame rectangle is in your view's coordinate space.
 func (tp *TextPreview) PresentationFrame() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tp), objc.RegisterName("presentationFrame"))
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(tp), objc.RegisterName("presentationFrame"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CandidateRects returns rectangles that define the specific portions of text to highlight. At initialization time, you set this property to an array of <doc://com.apple.documentation/documentation/foundation/nsvalue> objects, each of which contains an <doc://com.apple.documentation/documentation/foundation/nsrect> in the coordinate space of the target view. Each rectangle contains a bounding rectangle for text that is part of the preview. When applying visual effects, the system adds highlights only to the text in the specified rectangles.
 //
 // CandidateRects returns the collection as a Go slice.
 func (tp *TextPreview) CandidateRects() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("candidateRects"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_arr := objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("candidateRects"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
 }

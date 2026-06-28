@@ -51,229 +51,384 @@ func viewControllerAdopt(id objc.ID) *ViewController {
 
 // NewViewControllerWithNibNameBundle returns a view controller object initialized to the nib file in the specified bundle.
 func NewViewControllerWithNibNameBundle(nibNameOrNil obj.Object, nibBundleOrNil obj.Object) *ViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNibName:bundle:"), objref.IDOf(nibNameOrNil), objref.IDOf(nibBundleOrNil))
-	return viewControllerAdopt(_id)
+	var _mainthread0 *ViewController
+	purego.Main(func() {
+		_mainthread0 = func() *ViewController {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSViewController")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNibName:bundle:"), objref.IDOf(nibNameOrNil), objref.IDOf(nibBundleOrNil))
+			return viewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewViewControllerWithCoder creates a new ViewController.
 func NewViewControllerWithCoder(coder obj.Object) *ViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
-	return viewControllerAdopt(_id)
+	var _mainthread0 *ViewController
+	purego.Main(func() {
+		_mainthread0 = func() *ViewController {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSViewController")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+			return viewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithRepresentedObject sets the object whose value is presented in the receiver’s primary view.
 func (vc *ViewController) WithRepresentedObject(representedObject obj.Object) *ViewController {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	})
 	return vc
 }
 
 // WithTitle sets the localized title of the receiver’s primary view.
 func (vc *ViewController) WithTitle(title string) *ViewController {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return vc
 }
 
 // WithView sets the view controller’s primary view.
 func (vc *ViewController) WithView(view ViewProvider) *ViewController {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setView:"), objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setView:"), objref.IDOf(view))
+	})
 	return vc
 }
 
 // WithPreferredContentSize sets the desired size of the view controller’s view, in screen units.
 func (vc *ViewController) WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *ViewController {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setPreferredContentSize:"), preferredContentSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setPreferredContentSize:"), preferredContentSize)
+	})
 	return vc
 }
 
 // WithChildViewControllers sets an array of view controllers that are hierarchical children of the view controller.
 func (vc *ViewController) WithChildViewControllers(items ...ViewControllerProvider) *ViewController {
 	_arr := purego.SliceToNSArray(items, func(_v ViewControllerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setChildViewControllers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setChildViewControllers:"), _arr)
+	})
 	return vc
 }
 
 // WithSourceItemView sets the source item view.
 func (vc *ViewController) WithSourceItemView(sourceItemView ViewProvider) *ViewController {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
+	})
 	return vc
 }
 
 // WithPreferredScreenOrigin sets for a view controller that is part of an app extension, the preferred screen origin.
 func (vc *ViewController) WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *ViewController {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setPreferredScreenOrigin:"), preferredScreenOrigin)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setPreferredScreenOrigin:"), preferredScreenOrigin)
+	})
 	return vc
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (vc *ViewController) WithNextResponder(nextResponder ResponderProvider) *ViewController {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return vc
 }
 
 // WithMenu sets returns the responder’s menu.
 func (vc *ViewController) WithMenu(menu *Menu) *ViewController {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return vc
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (vc *ViewController) WithUserActivity(userActivity obj.Object) *ViewController {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return vc
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (vc *ViewController) WithTouchBar(touchBar *TouchBar) *ViewController {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return vc
 }
 
 // LoadView instantiates a view from a nib file and sets the value of the view property.
 func (vc *ViewController) LoadView() {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("loadView"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("loadView"))
+	})
+
 }
 
 // LoadViewIfNeeded loads view if needed.
 func (vc *ViewController) LoadViewIfNeeded() {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("loadViewIfNeeded"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("loadViewIfNeeded"))
+	})
+
 }
 
 // CommitEditing reports whether the receiver was able to commit any pending edits.
 func (vc *ViewController) CommitEditing() bool {
-	_r := objc.Send[bool](objref.IDOf(vc), objc.RegisterName("commitEditing"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(vc), objc.RegisterName("commitEditing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DiscardEditing causes the receiver to discard any changes, restoring the previous values.
 func (vc *ViewController) DiscardEditing() {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("discardEditing"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("discardEditing"))
+	})
+
 }
 
 // ViewDidLoad called after the view controller’s view has been loaded into memory.
 func (vc *ViewController) ViewDidLoad() {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewDidLoad"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewDidLoad"))
+	})
+
 }
 
 // ViewWillAppear called after the view controller’s view has been loaded into memory is about to be added to the view hierarchy in the window.
 func (vc *ViewController) ViewWillAppear() {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewWillAppear"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewWillAppear"))
+	})
+
 }
 
 // ViewDidAppear called when the view controller’s view is fully transitioned onto the screen.
 func (vc *ViewController) ViewDidAppear() {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewDidAppear"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewDidAppear"))
+	})
+
 }
 
 // ViewWillDisappear called when the view controller’s view is about to be removed from the view hierarchy in the window.
 func (vc *ViewController) ViewWillDisappear() {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewWillDisappear"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewWillDisappear"))
+	})
+
 }
 
 // ViewDidDisappear called after the view controller’s view is removed from the view hierarchy in a window.
 func (vc *ViewController) ViewDidDisappear() {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewDidDisappear"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewDidDisappear"))
+	})
+
 }
 
 // UpdateViewConstraints called during Auto Layout constraint updating to enable the view controller to mediate the process.
 func (vc *ViewController) UpdateViewConstraints() {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("updateViewConstraints"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("updateViewConstraints"))
+	})
+
 }
 
 // ViewWillLayout called just before the layout method of the view controller’s view is called.
 func (vc *ViewController) ViewWillLayout() {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewWillLayout"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewWillLayout"))
+	})
+
 }
 
 // ViewDidLayout called immediately after the layout method of the view controller’s view is called.
 func (vc *ViewController) ViewDidLayout() {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewDidLayout"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewDidLayout"))
+	})
+
 }
 
 // NibName returns the nib name.
 func (vc *ViewController) NibName() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("nibName"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("nibName"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NibBundle returns the nib bundle.
 func (vc *ViewController) NibBundle() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("nibBundle"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("nibBundle"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RepresentedObject returns the represented object.
 func (vc *ViewController) RepresentedObject() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("representedObject"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("representedObject"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Title returns the title.
 func (vc *ViewController) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("title"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("title"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // View returns the view.
 func (vc *ViewController) View() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("view"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("view"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ViewIfLoaded returns the view if loaded.
 func (vc *ViewController) ViewIfLoaded() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewIfLoaded"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewIfLoaded"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsViewLoaded reports whether the object is view loaded.
 func (vc *ViewController) IsViewLoaded() bool {
-	_r := objc.Send[bool](objref.IDOf(vc), objc.RegisterName("isViewLoaded"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(vc), objc.RegisterName("isViewLoaded"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PreferredContentSize returns the preferred content size.
 func (vc *ViewController) PreferredContentSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(vc), objc.RegisterName("preferredContentSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(vc), objc.RegisterName("preferredContentSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DismissViewController dismisses a presented view controller, using the same animator that presented it.
 func (vc *ViewController) DismissViewController(viewController *ViewController) {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("dismissViewController:"), objref.IDOf(viewController))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("dismissViewController:"), objref.IDOf(viewController))
+	})
+
 }
 
 // DismissController dismisses controller.
 func (vc *ViewController) DismissController(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("dismissController:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("dismissController:"), objref.IDOf(sender))
+	})
+
 }
 
 // PresentedViewControllers returns the presented view controllers.
 //
 // PresentedViewControllers returns the collection as a Go slice.
 func (vc *ViewController) PresentedViewControllers() []*ViewController {
-	_arr := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("presentedViewControllers"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ViewController { return ViewControllerFromID(_id) })
+	var _mainthread0 []*ViewController
+	purego.Main(func() {
+		_mainthread0 = func() []*ViewController {
+			_arr := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("presentedViewControllers"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ViewController { return ViewControllerFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // PresentingViewController returns the presenting view controller.
 func (vc *ViewController) PresentingViewController() *ViewController {
-	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("presentingViewController"))
-	return ViewControllerFromID(_r)
+	var _mainthread0 *ViewController
+	purego.Main(func() {
+		_mainthread0 = func() *ViewController {
+			_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("presentingViewController"))
+			return ViewControllerFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PresentViewControllerAsSheet presents another view controller as a sheet.
 func (vc *ViewController) PresentViewControllerAsSheet(viewController *ViewController) {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("presentViewControllerAsSheet:"), objref.IDOf(viewController))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("presentViewControllerAsSheet:"), objref.IDOf(viewController))
+	})
+
 }
 
 // PresentViewControllerAsModalWindow presents another view controller as a modal window, also known as an alert.
 func (vc *ViewController) PresentViewControllerAsModalWindow(viewController *ViewController) {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("presentViewControllerAsModalWindow:"), objref.IDOf(viewController))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("presentViewControllerAsModalWindow:"), objref.IDOf(viewController))
+	})
+
 }
 
 // TransitionFromViewControllerToViewControllerOptions performs a transition between two sibling child view controllers of the view controller.
@@ -295,82 +450,155 @@ func (vc *ViewController) TransitionFromViewControllerToViewControllerOptions(ct
 
 // AddChildViewController a convenience method for adding a child view controller at the end of the childViewControllers array.
 func (vc *ViewController) AddChildViewController(childViewController *ViewController) {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("addChildViewController:"), objref.IDOf(childViewController))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("addChildViewController:"), objref.IDOf(childViewController))
+	})
+
 }
 
 // RemoveFromParentViewController removes the called view controller from its parent view controller.
 func (vc *ViewController) RemoveFromParentViewController() {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("removeFromParentViewController"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("removeFromParentViewController"))
+	})
+
 }
 
 // InsertChildViewControllerAtIndex inserts a specified child view controller into the childViewControllers array at a specified position.
 func (vc *ViewController) InsertChildViewControllerAtIndex(childViewController *ViewController, index int) {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("insertChildViewController:atIndex:"), objref.IDOf(childViewController), index)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("insertChildViewController:atIndex:"), objref.IDOf(childViewController), index)
+	})
+
 }
 
 // RemoveChildViewControllerAtIndex removes a specified child controller from the view controller.
 func (vc *ViewController) RemoveChildViewControllerAtIndex(index int) {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("removeChildViewControllerAtIndex:"), index)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("removeChildViewControllerAtIndex:"), index)
+	})
+
 }
 
 // PreferredContentSizeDidChangeForViewController called when there is a change in value of the preferredContentSize property of a child view controller or a presented view controller.
 func (vc *ViewController) PreferredContentSizeDidChangeForViewController(viewController *ViewController) {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("preferredContentSizeDidChangeForViewController:"), objref.IDOf(viewController))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("preferredContentSizeDidChangeForViewController:"), objref.IDOf(viewController))
+	})
+
 }
 
 // ViewWillTransitionToSize for a view controller that is part of an app extension, called when its view is about to be resized.
 func (vc *ViewController) ViewWillTransitionToSize(newSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewWillTransitionToSize:"), newSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewWillTransitionToSize:"), newSize)
+	})
+
 }
 
 // ParentViewController returns the parent view controller.
 func (vc *ViewController) ParentViewController() *ViewController {
-	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("parentViewController"))
-	return ViewControllerFromID(_r)
+	var _mainthread0 *ViewController
+	purego.Main(func() {
+		_mainthread0 = func() *ViewController {
+			_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("parentViewController"))
+			return ViewControllerFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ChildViewControllers returns the child view controllers.
 //
 // ChildViewControllers returns the collection as a Go slice.
 func (vc *ViewController) ChildViewControllers() []*ViewController {
-	_arr := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("childViewControllers"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ViewController { return ViewControllerFromID(_id) })
+	var _mainthread0 []*ViewController
+	purego.Main(func() {
+		_mainthread0 = func() []*ViewController {
+			_arr := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("childViewControllers"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ViewController { return ViewControllerFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // Storyboard returns the storyboard.
 func (vc *ViewController) Storyboard() *Storyboard {
-	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("storyboard"))
-	return StoryboardFromID(_r)
+	var _mainthread0 *Storyboard
+	purego.Main(func() {
+		_mainthread0 = func() *Storyboard {
+			_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("storyboard"))
+			return StoryboardFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ExtensionContext returns the extension context.
 func (vc *ViewController) ExtensionContext() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("extensionContext"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("extensionContext"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SourceItemView returns the source item view.
 func (vc *ViewController) SourceItemView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("sourceItemView"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("sourceItemView"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PreferredScreenOrigin returns the preferred screen origin.
 func (vc *ViewController) PreferredScreenOrigin() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(vc), objc.RegisterName("preferredScreenOrigin"))
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(vc), objc.RegisterName("preferredScreenOrigin"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PreferredMinimumSize returns the preferred minimum size.
 func (vc *ViewController) PreferredMinimumSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(vc), objc.RegisterName("preferredMinimumSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(vc), objc.RegisterName("preferredMinimumSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PreferredMaximumSize returns the preferred maximum size.
 func (vc *ViewController) PreferredMaximumSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(vc), objc.RegisterName("preferredMaximumSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(vc), objc.RegisterName("preferredMaximumSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // isViewController marks ViewController — and, by embedding promotion, its

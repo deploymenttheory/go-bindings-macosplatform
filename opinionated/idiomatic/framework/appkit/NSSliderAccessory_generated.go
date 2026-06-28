@@ -66,30 +66,54 @@ func (sa *SliderAccessory) String() string {
 
 // NewSliderAccessory creates a new SliderAccessory.
 func NewSliderAccessory() *SliderAccessory {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSSliderAccessory")), objc.RegisterName("new"))
-	return sliderAccessoryAdopt(_id)
+	var _mainthread0 *SliderAccessory
+	purego.Main(func() {
+		_mainthread0 = func() *SliderAccessory {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSSliderAccessory")), objc.RegisterName("new"))
+			return sliderAccessoryAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithBehavior sets the effect on interaction with the accessory.
 func (sa *SliderAccessory) WithBehavior(behavior *SliderAccessoryBehavior) *SliderAccessory {
-	objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("setBehavior:"), objref.IDOf(behavior))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("setBehavior:"), objref.IDOf(behavior))
+	})
 	return sa
 }
 
 // WithEnabled sets determines whether or not the accessory is interactive and draws with an enabled appearance. Defaults to true.
 func (sa *SliderAccessory) WithEnabled(enabled bool) *SliderAccessory {
-	objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return sa
 }
 
 // Behavior returns the effect on interaction with the accessory. The default value is `automaticBehavior`.
 func (sa *SliderAccessory) Behavior() *SliderAccessoryBehavior {
-	_r := objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("behavior"))
-	return SliderAccessoryBehaviorFromID(_r)
+	var _mainthread0 *SliderAccessoryBehavior
+	purego.Main(func() {
+		_mainthread0 = func() *SliderAccessoryBehavior {
+			_r := objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("behavior"))
+			return SliderAccessoryBehaviorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsEnabled reports whether or not the accessory is interactive and draws with an enabled appearance. Defaults to `true`.
 func (sa *SliderAccessory) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(sa), objc.RegisterName("isEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sa), objc.RegisterName("isEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

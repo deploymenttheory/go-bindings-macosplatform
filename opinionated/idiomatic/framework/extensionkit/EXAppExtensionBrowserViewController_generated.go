@@ -68,6 +68,12 @@ func (aebvc *AppExtensionBrowserViewController) String() string {
 
 // NewAppExtensionBrowserViewController creates a new AppExtensionBrowserViewController.
 func NewAppExtensionBrowserViewController() *AppExtensionBrowserViewController {
-	_id := objc.Send[objc.ID](objc.ID(_class("EXAppExtensionBrowserViewController")), objc.RegisterName("new"))
-	return appExtensionBrowserViewControllerAdopt(_id)
+	var _mainthread0 *AppExtensionBrowserViewController
+	purego.Main(func() {
+		_mainthread0 = func() *AppExtensionBrowserViewController {
+			_id := objc.Send[objc.ID](objc.ID(_class("EXAppExtensionBrowserViewController")), objc.RegisterName("new"))
+			return appExtensionBrowserViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
