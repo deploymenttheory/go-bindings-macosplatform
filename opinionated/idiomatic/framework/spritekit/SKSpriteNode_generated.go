@@ -49,337 +49,528 @@ func spriteNodeAdopt(id objc.ID) *SpriteNode {
 
 // NewSpriteNodeWithTextureColorSize initializes a textured sprite in color using an existing texture object.
 func NewSpriteNodeWithTextureColorSize(texture *Texture, color obj.Object, size corefoundation.CGSize) *SpriteNode {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTexture:color:size:"), objref.IDOf(texture), objref.IDOf(color), size)
-	return spriteNodeAdopt(_id)
+	var _mainthread0 *SpriteNode
+	purego.Main(func() {
+		_mainthread0 = func() *SpriteNode {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTexture:color:size:"), objref.IDOf(texture), objref.IDOf(color), size)
+			return spriteNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewSpriteNodeWithTexture initializes a textured sprite using an existing texture object.
 func NewSpriteNodeWithTexture(texture *Texture) *SpriteNode {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTexture:"), objref.IDOf(texture))
-	return spriteNodeAdopt(_id)
+	var _mainthread0 *SpriteNode
+	purego.Main(func() {
+		_mainthread0 = func() *SpriteNode {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTexture:"), objref.IDOf(texture))
+			return spriteNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewSpriteNodeWithImageNamed initializes a textured sprite using an image file.
 func NewSpriteNodeWithImageNamed(name string) *SpriteNode {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImageNamed:"), purego.NSString(name))
-	return spriteNodeAdopt(_id)
+	var _mainthread0 *SpriteNode
+	purego.Main(func() {
+		_mainthread0 = func() *SpriteNode {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImageNamed:"), purego.NSString(name))
+			return spriteNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewSpriteNodeWithColorSize initializes a single-color sprite node.
 func NewSpriteNodeWithColorSize(color obj.Object, size corefoundation.CGSize) *SpriteNode {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithColor:size:"), objref.IDOf(color), size)
-	return spriteNodeAdopt(_id)
+	var _mainthread0 *SpriteNode
+	purego.Main(func() {
+		_mainthread0 = func() *SpriteNode {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithColor:size:"), objref.IDOf(color), size)
+			return spriteNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewSpriteNodeWithCoder tells you when to initialize a sprite from an archive.
 func NewSpriteNodeWithCoder(aDecoder obj.Object) *SpriteNode {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
-	return spriteNodeAdopt(_id)
+	var _mainthread0 *SpriteNode
+	purego.Main(func() {
+		_mainthread0 = func() *SpriteNode {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SKSpriteNode")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
+			return spriteNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithTexture sets the texture used to draw the sprite.
 func (sn *SpriteNode) WithTexture(texture TextureProvider) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setTexture:"), objref.IDOf(texture))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setTexture:"), objref.IDOf(texture))
+	})
 	return sn
 }
 
 // WithNormalTexture sets a texture that specifies the normal map for the sprite.
 func (sn *SpriteNode) WithNormalTexture(normalTexture TextureProvider) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setNormalTexture:"), objref.IDOf(normalTexture))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setNormalTexture:"), objref.IDOf(normalTexture))
+	})
 	return sn
 }
 
 // WithLightingBitMask sets a mask that defines how this sprite is lit by light nodes in the scene.
 func (sn *SpriteNode) WithLightingBitMask(lightingBitMask uint32) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setLightingBitMask:"), lightingBitMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setLightingBitMask:"), lightingBitMask)
+	})
 	return sn
 }
 
 // WithShadowCastBitMask sets a mask that defines which lights are occluded by this sprite.
 func (sn *SpriteNode) WithShadowCastBitMask(shadowCastBitMask uint32) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setShadowCastBitMask:"), shadowCastBitMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setShadowCastBitMask:"), shadowCastBitMask)
+	})
 	return sn
 }
 
 // WithShadowedBitMask sets a mask that defines which lights add shadows to the sprite.
 func (sn *SpriteNode) WithShadowedBitMask(shadowedBitMask uint32) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setShadowedBitMask:"), shadowedBitMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setShadowedBitMask:"), shadowedBitMask)
+	})
 	return sn
 }
 
 // WithCenterRect sets enable nine-part stretching of the sprite’s texture.
 func (sn *SpriteNode) WithCenterRect(centerRect corefoundation.CGRect) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setCenterRect:"), centerRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setCenterRect:"), centerRect)
+	})
 	return sn
 }
 
 // WithColorBlendFactor sets a floating-point value that describes how the color is blended with the sprite’s texture.
 func (sn *SpriteNode) WithColorBlendFactor(colorBlendFactor float64) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setColorBlendFactor:"), colorBlendFactor)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setColorBlendFactor:"), colorBlendFactor)
+	})
 	return sn
 }
 
 // WithColor sets the sprite’s color.
 func (sn *SpriteNode) WithColor(color obj.Object) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setColor:"), objref.IDOf(color))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setColor:"), objref.IDOf(color))
+	})
 	return sn
 }
 
 // WithBlendMode sets the blend mode used to draw the sprite into the parent’s framebuffer.
 func (sn *SpriteNode) WithBlendMode(blendMode BlendMode) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setBlendMode:"), blendMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setBlendMode:"), blendMode)
+	})
 	return sn
 }
 
 // WithAnchorPoint sets defines the point in the sprite that corresponds to the node’s position.
 func (sn *SpriteNode) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAnchorPoint:"), anchorPoint)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAnchorPoint:"), anchorPoint)
+	})
 	return sn
 }
 
 // WithSize sets the dimensions of the sprite, in points.
 func (sn *SpriteNode) WithSize(size corefoundation.CGSize) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setSize:"), size)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setSize:"), size)
+	})
 	return sn
 }
 
 // WithShader sets a text file that defines code that does custom per-pixel drawing or colorization.
 func (sn *SpriteNode) WithShader(shader *Shader) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setShader:"), objref.IDOf(shader))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setShader:"), objref.IDOf(shader))
+	})
 	return sn
 }
 
 // WithPosition sets the position of the node in its parent’s coordinate system.
 func (sn *SpriteNode) WithPosition(position corefoundation.CGPoint) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setPosition:"), position)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setPosition:"), position)
+	})
 	return sn
 }
 
 // WithZPosition sets the height of the node relative to its parent.
 func (sn *SpriteNode) WithZPosition(zPosition float64) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setZPosition:"), zPosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setZPosition:"), zPosition)
+	})
 	return sn
 }
 
 // WithZRotation sets the Euler rotation about the z axis (in radians).
 func (sn *SpriteNode) WithZRotation(zRotation float64) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setZRotation:"), zRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setZRotation:"), zRotation)
+	})
 	return sn
 }
 
 // WithXScale sets a scaling factor that multiplies the width of a node and its children.
 func (sn *SpriteNode) WithXScale(xScale float64) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setXScale:"), xScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setXScale:"), xScale)
+	})
 	return sn
 }
 
 // WithYScale sets a scaling factor that multiplies the height of a node and its children.
 func (sn *SpriteNode) WithYScale(yScale float64) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setYScale:"), yScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setYScale:"), yScale)
+	})
 	return sn
 }
 
 // WithSpeed sets a speed modifier applied to all actions executed by a node and its descendants.
 func (sn *SpriteNode) WithSpeed(speed float64) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setSpeed:"), speed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setSpeed:"), speed)
+	})
 	return sn
 }
 
 // WithAlpha sets the transparency value applied to the node’s contents.
 func (sn *SpriteNode) WithAlpha(alpha float64) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAlpha:"), alpha)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAlpha:"), alpha)
+	})
 	return sn
 }
 
 // WithPaused sets a Boolean value that determines whether actions on the node and its descendants are processed.
 func (sn *SpriteNode) WithPaused(paused bool) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setPaused:"), paused)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setPaused:"), paused)
+	})
 	return sn
 }
 
 // WithHidden sets a Boolean value that determines whether a node and its descendants are rendered.
 func (sn *SpriteNode) WithHidden(hidden bool) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setHidden:"), hidden)
+	})
 	return sn
 }
 
 // WithUserInteractionEnabled sets a Boolean value that indicates whether the node receives touch events.
 func (sn *SpriteNode) WithUserInteractionEnabled(userInteractionEnabled bool) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	})
 	return sn
 }
 
 // WithName sets the node’s assignable name.
 func (sn *SpriteNode) WithName(name string) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setName:"), purego.NSString(name))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setName:"), purego.NSString(name))
+	})
 	return sn
 }
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (sn *SpriteNode) WithPhysicsBody(physicsBody *PhysicsBody) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	})
 	return sn
 }
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (sn *SpriteNode) WithUserData(userData obj.Object) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	})
 	return sn
 }
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (sn *SpriteNode) WithReachConstraints(reachConstraints *ReachConstraints) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	})
 	return sn
 }
 
 // WithConstraints sets a list of constraints to apply to the node.
 func (sn *SpriteNode) WithConstraints(items ...*Constraint) *SpriteNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setConstraints:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setConstraints:"), _arr)
+	})
 	return sn
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
 func (sn *SpriteNode) WithAttributeValues(attributeValues obj.Object) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	})
 	return sn
 }
 
 // WithAccessibilityElement sets a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (sn *SpriteNode) WithAccessibilityElement(accessibilityElement bool) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	})
 	return sn
 }
 
 // WithAccessibilityRole sets a string value describing the user interface element type; for example, a button.
 func (sn *SpriteNode) WithAccessibilityRole(accessibilityRole string) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	})
 	return sn
 }
 
 // WithAccessibilityRoleDescription sets a string value describing the user interface element name and type; for example, the Buy button.
 func (sn *SpriteNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	})
 	return sn
 }
 
 // WithAccessibilitySubrole sets a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (sn *SpriteNode) WithAccessibilitySubrole(accessibilitySubrole string) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	})
 	return sn
 }
 
 // WithAccessibilityFrame sets the size of this user interface element, in screen points.
 func (sn *SpriteNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	})
 	return sn
 }
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (sn *SpriteNode) WithAccessibilityParent(accessibilityParent obj.Object) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	})
 	return sn
 }
 
 // WithAccessibilityHelp sets the help description of this user interface element; for example, the text shown in a tooltip.
 func (sn *SpriteNode) WithAccessibilityHelp(accessibilityHelp string) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	})
 	return sn
 }
 
 // WithAccessibilityLabel sets a short description of this user interface element.
 func (sn *SpriteNode) WithAccessibilityLabel(accessibilityLabel string) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	})
 	return sn
 }
 
 // WithAccessibilityEnabled sets a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (sn *SpriteNode) WithAccessibilityEnabled(accessibilityEnabled bool) *SpriteNode {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	})
 	return sn
 }
 
 // ScaleToSize scales the sprite node to a specified size.
 func (sn *SpriteNode) ScaleToSize(size corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("scaleToSize:"), size)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("scaleToSize:"), size)
+	})
+
 }
 
 // Texture returns texture to be drawn (is stretched to fill the sprite)
 func (sn *SpriteNode) Texture() *Texture {
-	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("texture"))
-	return TextureFromID(_r)
+	var _mainthread0 *Texture
+	purego.Main(func() {
+		_mainthread0 = func() *Texture {
+			_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("texture"))
+			return TextureFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NormalTexture returns texture to use for generating normals that lights use to light this sprite. This will only be used if the sprite is lit by at least one light.
 func (sn *SpriteNode) NormalTexture() *Texture {
-	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("normalTexture"))
-	return TextureFromID(_r)
+	var _mainthread0 *Texture
+	purego.Main(func() {
+		_mainthread0 = func() *Texture {
+			_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("normalTexture"))
+			return TextureFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LightingBitMask returns bitmask to indicate being lit by a set of lights using overlapping lighting categories. A light whose category is set to a value that masks to non-zero using this mask will apply light to this sprite. When used together with a normal texture, complex lighting effects can be used.
 func (sn *SpriteNode) LightingBitMask() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(sn), objc.RegisterName("lightingBitMask"))
-	return _r
+	var _mainthread0 uint32
+	purego.Main(func() {
+		_mainthread0 = func() uint32 {
+			_r := objc.Send[uint32](objref.IDOf(sn), objc.RegisterName("lightingBitMask"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShadowCastBitMask returns the shadow cast bit mask.
 func (sn *SpriteNode) ShadowCastBitMask() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(sn), objc.RegisterName("shadowCastBitMask"))
-	return _r
+	var _mainthread0 uint32
+	purego.Main(func() {
+		_mainthread0 = func() uint32 {
+			_r := objc.Send[uint32](objref.IDOf(sn), objc.RegisterName("shadowCastBitMask"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShadowedBitMask returns the shadowed bit mask.
 func (sn *SpriteNode) ShadowedBitMask() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(sn), objc.RegisterName("shadowedBitMask"))
-	return _r
+	var _mainthread0 uint32
+	purego.Main(func() {
+		_mainthread0 = func() uint32 {
+			_r := objc.Send[uint32](objref.IDOf(sn), objc.RegisterName("shadowedBitMask"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CenterRect returns controls how the texture is stretched to fill the SKSpriteNode. Stretching is performed via a 9-part algorithm where the upper & lower middle parts are scaled horizontally, the left and right middle parts are scaled vertically, the center is scaled in both directions, and the corners are preserved. The centerRect defines the center region in a (0.0 - 1.0) coordinate space. Defaults to {(0,0) (1,1)} (the entire texture is stretched).
 func (sn *SpriteNode) CenterRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sn), objc.RegisterName("centerRect"))
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(sn), objc.RegisterName("centerRect"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ColorBlendFactor returns controls the blending between the texture and the sprite's color. The valid interval of values is from 0.0 up to and including 1.0. A value above or below that interval is clamped to the minimum (0.0) if below or the maximum (1.0) if above.
 func (sn *SpriteNode) ColorBlendFactor() float64 {
-	_r := objc.Send[float64](objref.IDOf(sn), objc.RegisterName("colorBlendFactor"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sn), objc.RegisterName("colorBlendFactor"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Color returns base color for the sprite (If no texture is present, the color still is drawn)
 func (sn *SpriteNode) Color() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("color"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("color"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BlendMode sets the blend mode to use when composing the sprite with the final framebuffer.
 func (sn *SpriteNode) BlendMode() BlendMode {
-	_r := objc.Send[BlendMode](objref.IDOf(sn), objc.RegisterName("blendMode"))
-	return _r
+	var _mainthread0 BlendMode
+	purego.Main(func() {
+		_mainthread0 = func() BlendMode {
+			_r := objc.Send[BlendMode](objref.IDOf(sn), objc.RegisterName("blendMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AnchorPoint returns used to choose the location in the sprite that maps to its 'position' in the parent's coordinate space. The valid interval for each input is from 0.0 up to and including 1.0.
 func (sn *SpriteNode) AnchorPoint() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(sn), objc.RegisterName("anchorPoint"))
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(sn), objc.RegisterName("anchorPoint"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Size set the size of the sprite (in parent's coordinate space)
 func (sn *SpriteNode) Size() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(sn), objc.RegisterName("size"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(sn), objc.RegisterName("size"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Shader returns the shader.
 func (sn *SpriteNode) Shader() *Shader {
-	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("shader"))
-	return ShaderFromID(_r)
+	var _mainthread0 *Shader
+	purego.Main(func() {
+		_mainthread0 = func() *Shader {
+			_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("shader"))
+			return ShaderFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ NodeProvider = (*SpriteNode)(nil)

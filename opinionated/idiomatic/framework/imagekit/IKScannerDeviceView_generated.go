@@ -66,159 +66,273 @@ func (sdv *ScannerDeviceView) String() string {
 
 // NewScannerDeviceView creates a new ScannerDeviceView.
 func NewScannerDeviceView() *ScannerDeviceView {
-	_id := objc.Send[objc.ID](objc.ID(_class("IKScannerDeviceView")), objc.RegisterName("new"))
-	return scannerDeviceViewAdopt(_id)
+	var _mainthread0 *ScannerDeviceView
+	purego.Main(func() {
+		_mainthread0 = func() *ScannerDeviceView {
+			_id := objc.Send[objc.ID](objc.ID(_class("IKScannerDeviceView")), objc.RegisterName("new"))
+			return scannerDeviceViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithScannerDevice sets the scanner device.
 func (sdv *ScannerDeviceView) WithScannerDevice(scannerDevice obj.Object) *ScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setScannerDevice:"), objref.IDOf(scannerDevice))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setScannerDevice:"), objref.IDOf(scannerDevice))
+	})
 	return sdv
 }
 
 // WithMode sets current display mode.
 func (sdv *ScannerDeviceView) WithMode(mode ScannerDeviceViewDisplayMode) *ScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setMode:"), mode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setMode:"), mode)
+	})
 	return sdv
 }
 
 // WithHasDisplayModeSimple sets support a simple scanning UI.
 func (sdv *ScannerDeviceView) WithHasDisplayModeSimple(hasDisplayModeSimple bool) *ScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setHasDisplayModeSimple:"), hasDisplayModeSimple)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setHasDisplayModeSimple:"), hasDisplayModeSimple)
+	})
 	return sdv
 }
 
 // WithHasDisplayModeAdvanced sets support advanced scanning UI.
 func (sdv *ScannerDeviceView) WithHasDisplayModeAdvanced(hasDisplayModeAdvanced bool) *ScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setHasDisplayModeAdvanced:"), hasDisplayModeAdvanced)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setHasDisplayModeAdvanced:"), hasDisplayModeAdvanced)
+	})
 	return sdv
 }
 
 // WithTransferMode sets transfer mode either file based - or - in memory.
 func (sdv *ScannerDeviceView) WithTransferMode(transferMode ScannerDeviceViewTransferMode) *ScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setTransferMode:"), transferMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setTransferMode:"), transferMode)
+	})
 	return sdv
 }
 
 // WithScanControlLabel sets label for the 'Scan' control.
 func (sdv *ScannerDeviceView) WithScanControlLabel(scanControlLabel string) *ScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setScanControlLabel:"), purego.NSString(scanControlLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setScanControlLabel:"), purego.NSString(scanControlLabel))
+	})
 	return sdv
 }
 
 // WithOverviewControlLabel sets label for the 'Overview' control.
 func (sdv *ScannerDeviceView) WithOverviewControlLabel(overviewControlLabel string) *ScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setOverviewControlLabel:"), purego.NSString(overviewControlLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setOverviewControlLabel:"), purego.NSString(overviewControlLabel))
+	})
 	return sdv
 }
 
 // WithDisplaysDownloadsDirectoryControl sets show a downloads directory control.
 func (sdv *ScannerDeviceView) WithDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) *ScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setDisplaysDownloadsDirectoryControl:"), displaysDownloadsDirectoryControl)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setDisplaysDownloadsDirectoryControl:"), displaysDownloadsDirectoryControl)
+	})
 	return sdv
 }
 
 // WithDownloadsDirectory sets downloads directory.
 func (sdv *ScannerDeviceView) WithDownloadsDirectory(downloadsDirectory string) *ScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setDownloadsDirectory:"), rt.FileURL(downloadsDirectory))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setDownloadsDirectory:"), rt.FileURL(downloadsDirectory))
+	})
 	return sdv
 }
 
 // WithDocumentName sets document name.
 func (sdv *ScannerDeviceView) WithDocumentName(documentName string) *ScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setDocumentName:"), purego.NSString(documentName))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setDocumentName:"), purego.NSString(documentName))
+	})
 	return sdv
 }
 
 // WithDisplaysPostProcessApplicationControl sets show a postprocessing application control.
 func (sdv *ScannerDeviceView) WithDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) *ScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setDisplaysPostProcessApplicationControl:"), displaysPostProcessApplicationControl)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setDisplaysPostProcessApplicationControl:"), displaysPostProcessApplicationControl)
+	})
 	return sdv
 }
 
 // WithPostProcessApplication sets postprocessing application.
 func (sdv *ScannerDeviceView) WithPostProcessApplication(postProcessApplication string) *ScannerDeviceView {
-	objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setPostProcessApplication:"), rt.FileURL(postProcessApplication))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("setPostProcessApplication:"), rt.FileURL(postProcessApplication))
+	})
 	return sdv
 }
 
 // ScannerDevice returns the scanner device.
 func (sdv *ScannerDeviceView) ScannerDevice() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("scannerDevice"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("scannerDevice"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Mode returns current display mode.
 func (sdv *ScannerDeviceView) Mode() ScannerDeviceViewDisplayMode {
-	_r := objc.Send[ScannerDeviceViewDisplayMode](objref.IDOf(sdv), objc.RegisterName("mode"))
-	return _r
+	var _mainthread0 ScannerDeviceViewDisplayMode
+	purego.Main(func() {
+		_mainthread0 = func() ScannerDeviceViewDisplayMode {
+			_r := objc.Send[ScannerDeviceViewDisplayMode](objref.IDOf(sdv), objc.RegisterName("mode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasDisplayModeSimple reports whether support a simple scanning UI.
 func (sdv *ScannerDeviceView) HasDisplayModeSimple() bool {
-	_r := objc.Send[bool](objref.IDOf(sdv), objc.RegisterName("hasDisplayModeSimple"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sdv), objc.RegisterName("hasDisplayModeSimple"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasDisplayModeAdvanced reports whether support advanced scanning UI.
 func (sdv *ScannerDeviceView) HasDisplayModeAdvanced() bool {
-	_r := objc.Send[bool](objref.IDOf(sdv), objc.RegisterName("hasDisplayModeAdvanced"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sdv), objc.RegisterName("hasDisplayModeAdvanced"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TransferMode returns transfer mode either file based - or - in memory.
 func (sdv *ScannerDeviceView) TransferMode() ScannerDeviceViewTransferMode {
-	_r := objc.Send[ScannerDeviceViewTransferMode](objref.IDOf(sdv), objc.RegisterName("transferMode"))
-	return _r
+	var _mainthread0 ScannerDeviceViewTransferMode
+	purego.Main(func() {
+		_mainthread0 = func() ScannerDeviceViewTransferMode {
+			_r := objc.Send[ScannerDeviceViewTransferMode](objref.IDOf(sdv), objc.RegisterName("transferMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ScanControlLabel returns label for the 'Scan' control.
 func (sdv *ScannerDeviceView) ScanControlLabel() string {
-	_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("scanControlLabel"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("scanControlLabel"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // OverviewControlLabel returns label for the 'Overview' control.
 func (sdv *ScannerDeviceView) OverviewControlLabel() string {
-	_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("overviewControlLabel"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("overviewControlLabel"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DisplaysDownloadsDirectoryControl reports whether show a downloads directory control.
 func (sdv *ScannerDeviceView) DisplaysDownloadsDirectoryControl() bool {
-	_r := objc.Send[bool](objref.IDOf(sdv), objc.RegisterName("displaysDownloadsDirectoryControl"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sdv), objc.RegisterName("displaysDownloadsDirectoryControl"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DownloadsDirectory returns downloads directory.
 func (sdv *ScannerDeviceView) DownloadsDirectory() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("downloadsDirectory"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("downloadsDirectory"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DocumentName returns document name.
 func (sdv *ScannerDeviceView) DocumentName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("documentName"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("documentName"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DisplaysPostProcessApplicationControl reports whether show a postprocessing application control.
 func (sdv *ScannerDeviceView) DisplaysPostProcessApplicationControl() bool {
-	_r := objc.Send[bool](objref.IDOf(sdv), objc.RegisterName("displaysPostProcessApplicationControl"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sdv), objc.RegisterName("displaysPostProcessApplicationControl"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PostProcessApplication returns postprocessing application.
 func (sdv *ScannerDeviceView) PostProcessApplication() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("postProcessApplication"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(sdv), objc.RegisterName("postProcessApplication"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

@@ -50,499 +50,752 @@ func stackViewAdopt(id objc.ID) *StackView {
 
 // NewStackView creates a new StackView.
 func NewStackView() *StackView {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSStackView")), objc.RegisterName("new"))
-	return stackViewAdopt(_id)
+	var _mainthread0 *StackView
+	purego.Main(func() {
+		_mainthread0 = func() *StackView {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSStackView")), objc.RegisterName("new"))
+			return stackViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithOrientation sets the horizontal or vertical layout direction of the stack view.
 func (sv *StackView) WithOrientation(orientation UserInterfaceLayoutOrientation) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setOrientation:"), orientation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setOrientation:"), orientation)
+	})
 	return sv
 }
 
 // WithAlignment sets the view alignment within the stack view.
 func (sv *StackView) WithAlignment(alignment LayoutAttribute) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return sv
 }
 
 // WithEdgeInsets sets the geometric padding, in points, inside the stack view, surrounding its views.
 func (sv *StackView) WithEdgeInsets(edgeInsets foundation.NSEdgeInsets) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setEdgeInsets:"), edgeInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setEdgeInsets:"), edgeInsets)
+	})
 	return sv
 }
 
 // WithDistribution sets the spacing and sizing distribution of stacked views along the primary axis.
 func (sv *StackView) WithDistribution(distribution StackViewDistribution) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setDistribution:"), distribution)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setDistribution:"), distribution)
+	})
 	return sv
 }
 
 // WithSpacing sets the minimum spacing, in points, between adjacent views in the stack view.
 func (sv *StackView) WithSpacing(spacing float64) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setSpacing:"), spacing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setSpacing:"), spacing)
+	})
 	return sv
 }
 
 // WithDetachesHiddenViews sets a Boolean value that indicates whether the stack view removes hidden views from its view hierarchy.
 func (sv *StackView) WithDetachesHiddenViews(detachesHiddenViews bool) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setDetachesHiddenViews:"), detachesHiddenViews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setDetachesHiddenViews:"), detachesHiddenViews)
+	})
 	return sv
 }
 
 // WithHasEqualSpacing sets a Boolean value that indicates whether the spacing between adjacent views should be equal to each other.
 func (sv *StackView) WithHasEqualSpacing(hasEqualSpacing bool) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHasEqualSpacing:"), hasEqualSpacing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHasEqualSpacing:"), hasEqualSpacing)
+	})
 	return sv
 }
 
 // WithSubviews sets the subviews.
 func (sv *StackView) WithSubviews(items ...ViewProvider) *StackView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return sv
 }
 
 // WithHidden sets the hidden.
 func (sv *StackView) WithHidden(hidden bool) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHidden:"), hidden)
+	})
 	return sv
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (sv *StackView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return sv
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (sv *StackView) WithAutoresizesSubviews(autoresizesSubviews bool) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return sv
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (sv *StackView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return sv
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (sv *StackView) WithFrame(frame corefoundation.CGRect) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFrame:"), frame)
+	})
 	return sv
 }
 
 // WithFrameRotation sets the frame rotation.
 func (sv *StackView) WithFrameRotation(frameRotation float64) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return sv
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (sv *StackView) WithFrameCenterRotation(frameCenterRotation float64) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return sv
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (sv *StackView) WithBoundsRotation(boundsRotation float64) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return sv
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (sv *StackView) WithBounds(bounds corefoundation.CGRect) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBounds:"), bounds)
+	})
 	return sv
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (sv *StackView) WithCanDrawConcurrently(canDrawConcurrently bool) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return sv
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (sv *StackView) WithNeedsDisplay(needsDisplay bool) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return sv
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (sv *StackView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return sv
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (sv *StackView) WithWantsRestingTouches(wantsRestingTouches bool) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return sv
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (sv *StackView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return sv
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (sv *StackView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return sv
 }
 
 // WithWantsLayer sets the wants layer.
 func (sv *StackView) WithWantsLayer(wantsLayer bool) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return sv
 }
 
 // WithLayer sets the layer.
 func (sv *StackView) WithLayer(layer obj.Object) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return sv
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (sv *StackView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return sv
 }
 
 // WithNeedsLayout sets the needs layout.
 func (sv *StackView) WithNeedsLayout(needsLayout bool) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return sv
 }
 
 // WithAlphaValue sets the alpha value.
 func (sv *StackView) WithAlphaValue(alphaValue float64) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return sv
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (sv *StackView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return sv
 }
 
 // WithBackgroundFilters sets the background filters.
 func (sv *StackView) WithBackgroundFilters(items ...obj.Object) *StackView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return sv
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (sv *StackView) WithCompositingFilter(compositingFilter obj.Object) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return sv
 }
 
 // WithContentFilters sets the content filters.
 func (sv *StackView) WithContentFilters(items ...obj.Object) *StackView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return sv
 }
 
 // WithShadow sets the shadow.
 func (sv *StackView) WithShadow(shadow *Shadow) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return sv
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (sv *StackView) WithClipsToBounds(clipsToBounds bool) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return sv
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (sv *StackView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return sv
 }
 
 // WithToolTip sets the tool tip.
 func (sv *StackView) WithToolTip(toolTip string) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return sv
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (sv *StackView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return sv
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (sv *StackView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return sv
 }
 
 // WithNextKeyView sets the next key view.
 func (sv *StackView) WithNextKeyView(nextKeyView ViewProvider) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return sv
 }
 
 // WithFocusRingType sets the focus ring type.
 func (sv *StackView) WithFocusRingType(focusRingType FocusRingType) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return sv
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (sv *StackView) WithGestureRecognizers(items ...GestureRecognizerProvider) *StackView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return sv
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (sv *StackView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return sv
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (sv *StackView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return sv
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (sv *StackView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return sv
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (sv *StackView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return sv
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (sv *StackView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return sv
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (sv *StackView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return sv
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (sv *StackView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return sv
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (sv *StackView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return sv
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (sv *StackView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return sv
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (sv *StackView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return sv
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (sv *StackView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return sv
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (sv *StackView) WithNextResponder(nextResponder ResponderProvider) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return sv
 }
 
 // WithMenu sets returns the responder’s menu.
 func (sv *StackView) WithMenu(menu *Menu) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return sv
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (sv *StackView) WithUserActivity(userActivity obj.Object) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return sv
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (sv *StackView) WithTouchBar(touchBar *TouchBar) *StackView {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return sv
 }
 
 // SetCustomSpacingAfterView specifies the custom spacing, in points, between a specified view and the view that follows it in the stack view.
 func (sv *StackView) SetCustomSpacingAfterView(spacing float64, view *View) {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCustomSpacing:afterView:"), spacing, objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCustomSpacing:afterView:"), spacing, objref.IDOf(view))
+	})
+
 }
 
 // CustomSpacingAfterView returns the custom spacing, in points, between a specified view in the stack view and the view that follows it.
 func (sv *StackView) CustomSpacingAfterView(view *View) float64 {
-	_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("customSpacingAfterView:"), objref.IDOf(view))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("customSpacingAfterView:"), objref.IDOf(view))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AddArrangedSubview adds the specified view to the end of the arranged subviews list.
 func (sv *StackView) AddArrangedSubview(view *View) {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("addArrangedSubview:"), objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("addArrangedSubview:"), objref.IDOf(view))
+	})
+
 }
 
 // InsertArrangedSubviewAtIndex adds the provided view to the array of arranged subviews at the specified index.
 func (sv *StackView) InsertArrangedSubviewAtIndex(view *View, index int) {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("insertArrangedSubview:atIndex:"), objref.IDOf(view), index)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("insertArrangedSubview:atIndex:"), objref.IDOf(view), index)
+	})
+
 }
 
 // RemoveArrangedSubview removes the provided view from the stack’s array of arranged subviews.
 func (sv *StackView) RemoveArrangedSubview(view *View) {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("removeArrangedSubview:"), objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("removeArrangedSubview:"), objref.IDOf(view))
+	})
+
 }
 
 // SetVisibilityPriorityForView sets the Auto Layout priority for a view to remain attached to the stack view when Auto Layout reduces the stack view’s size.
 func (sv *StackView) SetVisibilityPriorityForView(priority float32, view *View) {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVisibilityPriority:forView:"), priority, objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVisibilityPriority:forView:"), priority, objref.IDOf(view))
+	})
+
 }
 
 // VisibilityPriorityForView returns the visibility priority for a specified view in the stack view.
 func (sv *StackView) VisibilityPriorityForView(view *View) float32 {
-	_r := objc.Send[float32](objref.IDOf(sv), objc.RegisterName("visibilityPriorityForView:"), objref.IDOf(view))
-	return _r
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_r := objc.Send[float32](objref.IDOf(sv), objc.RegisterName("visibilityPriorityForView:"), objref.IDOf(view))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ClippingResistancePriorityForOrientation returns the Auto Layout priority for resisting clipping of views in the stack view when Auto Layout attempts to reduce the stack view’s size.
 func (sv *StackView) ClippingResistancePriorityForOrientation(orientation LayoutConstraintOrientation) float32 {
-	_r := objc.Send[float32](objref.IDOf(sv), objc.RegisterName("clippingResistancePriorityForOrientation:"), orientation)
-	return _r
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_r := objc.Send[float32](objref.IDOf(sv), objc.RegisterName("clippingResistancePriorityForOrientation:"), orientation)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetClippingResistancePriorityForOrientation sets the Auto Layout priority for resisting clipping of views in the stack view when Auto Layout attempts to reduce the stack view’s size.
 func (sv *StackView) SetClippingResistancePriorityForOrientation(clippingResistancePriority float32, orientation LayoutConstraintOrientation) {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setClippingResistancePriority:forOrientation:"), clippingResistancePriority, orientation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setClippingResistancePriority:forOrientation:"), clippingResistancePriority, orientation)
+	})
+
 }
 
 // HuggingPriorityForOrientation returns the Auto Layout priority for the stack view to minimize its size to fit its contained views as closely as possible, for a specified user interface axis.
 func (sv *StackView) HuggingPriorityForOrientation(orientation LayoutConstraintOrientation) float32 {
-	_r := objc.Send[float32](objref.IDOf(sv), objc.RegisterName("huggingPriorityForOrientation:"), orientation)
-	return _r
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_r := objc.Send[float32](objref.IDOf(sv), objc.RegisterName("huggingPriorityForOrientation:"), orientation)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetHuggingPriorityForOrientation sets the Auto Layout priority for the stack view to minimize its size, for a specified user interface axis.
 func (sv *StackView) SetHuggingPriorityForOrientation(huggingPriority float32, orientation LayoutConstraintOrientation) {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHuggingPriority:forOrientation:"), huggingPriority, orientation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHuggingPriority:forOrientation:"), huggingPriority, orientation)
+	})
+
 }
 
 // Orientation returns orientation of the StackView, defaults to NSUserInterfaceLayoutOrientationHorizontal
 func (sv *StackView) Orientation() UserInterfaceLayoutOrientation {
-	_r := objc.Send[UserInterfaceLayoutOrientation](objref.IDOf(sv), objc.RegisterName("orientation"))
-	return _r
+	var _mainthread0 UserInterfaceLayoutOrientation
+	purego.Main(func() {
+		_mainthread0 = func() UserInterfaceLayoutOrientation {
+			_r := objc.Send[UserInterfaceLayoutOrientation](objref.IDOf(sv), objc.RegisterName("orientation"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Alignment describes how subviews are aligned within the StackView, defaults to `NSLayoutAttributeCenterY` for horizontal stacks, `NSLayoutAttributeCenterX` for vertical stacks. Setting `NSLayoutAttributeNotAnAttribute` will cause the internal alignment constraints to not be created, and could result in an ambiguous layout. Setting an inapplicable attribute for the set orientation will result in the alignment being ignored (similar to its handling with NSLayoutAttributeNotAnAttribute). The alignment constraints are established at a priority of `NSLayoutPriorityDefaultLow` and are overridable for individual views using external constraints.
 func (sv *StackView) Alignment() LayoutAttribute {
-	_r := objc.Send[LayoutAttribute](objref.IDOf(sv), objc.RegisterName("alignment"))
-	return _r
+	var _mainthread0 LayoutAttribute
+	purego.Main(func() {
+		_mainthread0 = func() LayoutAttribute {
+			_r := objc.Send[LayoutAttribute](objref.IDOf(sv), objc.RegisterName("alignment"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // EdgeInsets returns default padding inside the StackView, around all of the subviews.
 func (sv *StackView) EdgeInsets() foundation.NSEdgeInsets {
-	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(sv), objc.RegisterName("edgeInsets"))
-	return _r
+	var _mainthread0 foundation.NSEdgeInsets
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSEdgeInsets {
+			_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(sv), objc.RegisterName("edgeInsets"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Distribution returns the spacing and sizing distribution of stacked views along the primary axis. The default value is `gravityAreas`.
 func (sv *StackView) Distribution() StackViewDistribution {
-	_r := objc.Send[StackViewDistribution](objref.IDOf(sv), objc.RegisterName("distribution"))
-	return _r
+	var _mainthread0 StackViewDistribution
+	purego.Main(func() {
+		_mainthread0 = func() StackViewDistribution {
+			_r := objc.Send[StackViewDistribution](objref.IDOf(sv), objc.RegisterName("distribution"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Spacing returns default (minimum) spacing between each view
 func (sv *StackView) Spacing() float64 {
-	_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("spacing"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("spacing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DetachesHiddenViews reports whether if true, when a stacked view's `hidden` property is set to true, the view will be detached from the stack and reattached when set to false. Similarly, if the view has a lowered visibility priority and is detached from the stack view, it will be set as `hidden` rather than removed from the view hierarchy. Defaults to true for apps linked on the 10.11 SDK or later.
 func (sv *StackView) DetachesHiddenViews() bool {
-	_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("detachesHiddenViews"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("detachesHiddenViews"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ArrangedSubviews returns the list of views that are arranged in a stack by the receiver. They are a subset of \c -subviews, with potential difference in ordering.
 //
 // ArrangedSubviews returns the collection as a Go slice.
 func (sv *StackView) ArrangedSubviews() []*View {
-	_arr := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("arrangedSubviews"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *View { return ViewFromID(_id) })
+	var _mainthread0 []*View
+	purego.Main(func() {
+		_mainthread0 = func() []*View {
+			_arr := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("arrangedSubviews"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *View { return ViewFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // DetachedViews returns the arrangedSubviews that are currently detached/hidden.
 //
 // DetachedViews returns the collection as a Go slice.
 func (sv *StackView) DetachedViews() []*View {
-	_arr := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("detachedViews"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *View { return ViewFromID(_id) })
+	var _mainthread0 []*View
+	purego.Main(func() {
+		_mainthread0 = func() []*View {
+			_arr := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("detachedViews"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *View { return ViewFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // AddViewInGravity adds a view to the end of the stack view gravity area.
 func (sv *StackView) AddViewInGravity(view *View, gravity StackViewGravity) {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("addView:inGravity:"), objref.IDOf(view), gravity)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("addView:inGravity:"), objref.IDOf(view), gravity)
+	})
+
 }
 
 // InsertViewAtIndexInGravity adds a view to a stack view gravity area at a specified index position.
 func (sv *StackView) InsertViewAtIndexInGravity(view *View, index int, gravity StackViewGravity) {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("insertView:atIndex:inGravity:"), objref.IDOf(view), index, gravity)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("insertView:atIndex:inGravity:"), objref.IDOf(view), index, gravity)
+	})
+
 }
 
 // RemoveView removes a specified view from the stack view.
 func (sv *StackView) RemoveView(view *View) {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("removeView:"), objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("removeView:"), objref.IDOf(view))
+	})
+
 }
 
 // ViewsInGravity returns the array of views in the specified gravity area in the stack view.
 func (sv *StackView) ViewsInGravity(gravity StackViewGravity) []*View {
-	_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("viewsInGravity:"), gravity)
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) *View { return ViewFromID(_id) })
+	var _mainthread0 []*View
+	purego.Main(func() {
+		_mainthread0 = func() []*View {
+			_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("viewsInGravity:"), gravity)
+			return purego.NSArrayToSlice(_r, func(_id objc.ID) *View { return ViewFromID(_id) })
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetViewsInGravity specifies an array of views for a specified gravity area in the stack view, replacing any previous views in that area.
 func (sv *StackView) SetViewsInGravity(views []*View, gravity StackViewGravity) {
-	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setViews:inGravity:"), purego.SliceToNSArray(views, func(_v *View) objc.ID { return objref.IDOf(_v) }), gravity)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setViews:inGravity:"), purego.SliceToNSArray(views, func(_v *View) objc.ID { return objref.IDOf(_v) }), gravity)
+	})
+
 }
 
 // Views returns the views.
 //
 // Views returns the collection as a Go slice.
 func (sv *StackView) Views() []*View {
-	_arr := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("views"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *View { return ViewFromID(_id) })
+	var _mainthread0 []*View
+	purego.Main(func() {
+		_mainthread0 = func() []*View {
+			_arr := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("views"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *View { return ViewFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // HasEqualSpacing reports whether the object has equal spacing.
 func (sv *StackView) HasEqualSpacing() bool {
-	_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("hasEqualSpacing"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("hasEqualSpacing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ViewProvider = (*StackView)(nil)

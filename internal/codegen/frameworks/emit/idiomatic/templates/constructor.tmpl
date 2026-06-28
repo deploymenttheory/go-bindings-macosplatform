@@ -4,12 +4,38 @@
     ("new"), an allocate-then-initialize creation, and an initialize that can
     fail (it takes an error out-parameter, so the function returns (*T, error)).
     The Adopt helper wraps the new object; the object was just created, so the Go
-    side already owns its reference. Spacing is loose here; gofmt tidies it.
+    side already owns its reference. When the class is @MainActor-isolated the
+    alloc/init runs on the main thread via purego.Main, the body sub-template
+    reused verbatim inside an inner closure. Spacing is loose here; gofmt tidies.
 */}}
 {{define "constructor"}}{{.DocComment}}func {{.GoName}}({{.ParamStr}}) {{.RetStr}} {
 {{- if .Preamble}}
 {{.Preamble}}
 {{- end}}
+{{- if .MainThread}}
+{{- if .HasNSError}}
+purego.Main(func() {
+result, err = func() (*{{.GoTypeName}}, error) {
+{{- template "constructor_body" .}}
+}()
+})
+return
+{{- else}}
+var _mainthread0 *{{.GoTypeName}}
+purego.Main(func() {
+_mainthread0 = func() *{{.GoTypeName}} {
+{{- template "constructor_body" .}}
+}()
+})
+return _mainthread0
+{{- end}}
+{{- else}}{{template "constructor_body" .}}
+{{- end}}
+}
+
+{{end}}
+
+{{define "constructor_body"}}
 {{- if .IsPlainNew}}
 _id := objc.Send[objc.ID](objc.ID(_class({{.ClassName | printf "%q"}})), objc.RegisterName("new"))
 return {{.AdoptFn}}(_id)
@@ -27,6 +53,4 @@ _id := objc.Send[objc.ID]({{.SendAllArgs}})
 return {{.AdoptFn}}(_id)
 {{- end}}
 {{- end}}
-}
-
-{{end}}
+{{- end}}

@@ -96,7 +96,10 @@ func (ogc *OpenGLContext) WithCurrentVirtualScreen(currentVirtualScreen int32) *
 
 // SetFullScreen sets the OpenGL context to full-screen mode.
 func (ogc *OpenGLContext) SetFullScreen() {
-	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("setFullScreen"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("setFullScreen"))
+	})
+
 }
 
 // SetOffScreenWidthHeightRowbytes instructs the OpenGL context to render into an offscreen buffer with the specified attributes.
@@ -111,7 +114,10 @@ func (ogc *OpenGLContext) ClearDrawable() {
 
 // Update updates the OpenGL context’s drawable object.
 func (ogc *OpenGLContext) Update() {
-	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("update"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("update"))
+	})
+
 }
 
 // FlushBuffer copies the back buffer to the front buffer of the OpenGL context.
@@ -156,8 +162,15 @@ func (ogc *OpenGLContext) PixelFormat() *OpenGLPixelFormat {
 
 // View returns the view.
 func (ogc *OpenGLContext) View() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("view"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("view"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CurrentVirtualScreen returns the current virtual screen.

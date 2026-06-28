@@ -68,39 +68,80 @@ func (wsm *WKScriptMessage) String() string {
 
 // NewWKScriptMessage creates a new WKScriptMessage.
 func NewWKScriptMessage() *WKScriptMessage {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKScriptMessage")), objc.RegisterName("new"))
-	return wKScriptMessageAdopt(_id)
+	var _mainthread0 *WKScriptMessage
+	purego.Main(func() {
+		_mainthread0 = func() *WKScriptMessage {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKScriptMessage")), objc.RegisterName("new"))
+			return wKScriptMessageAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // Body returns the body of the message. Allowed types are NSNumber, NSString, NSDate, NSArray, NSDictionary, and NSNull.
 func (wsm *WKScriptMessage) Body() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wsm), objc.RegisterName("body"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wsm), objc.RegisterName("body"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // WebView returns the web view sending the message.
 func (wsm *WKScriptMessage) WebView() *WKWebView {
-	_r := objc.Send[objc.ID](objref.IDOf(wsm), objc.RegisterName("webView"))
-	return WKWebViewFromID(_r)
+	var _mainthread0 *WKWebView
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebView {
+			_r := objc.Send[objc.ID](objref.IDOf(wsm), objc.RegisterName("webView"))
+			return WKWebViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FrameInfo returns the frame sending the message.
 func (wsm *WKScriptMessage) FrameInfo() *WKFrameInfo {
-	_r := objc.Send[objc.ID](objref.IDOf(wsm), objc.RegisterName("frameInfo"))
-	return WKFrameInfoFromID(_r)
+	var _mainthread0 *WKFrameInfo
+	purego.Main(func() {
+		_mainthread0 = func() *WKFrameInfo {
+			_r := objc.Send[objc.ID](objref.IDOf(wsm), objc.RegisterName("frameInfo"))
+			return WKFrameInfoFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Name returns the name of the message handler to which the message is sent.
 func (wsm *WKScriptMessage) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wsm), objc.RegisterName("name"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wsm), objc.RegisterName("name"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // World returns the content world from which the message was sent.
 func (wsm *WKScriptMessage) World() *WKContentWorld {
-	_r := objc.Send[objc.ID](objref.IDOf(wsm), objc.RegisterName("world"))
-	return WKContentWorldFromID(_r)
+	var _mainthread0 *WKContentWorld
+	purego.Main(func() {
+		_mainthread0 = func() *WKContentWorld {
+			_r := objc.Send[objc.ID](objref.IDOf(wsm), objc.RegisterName("world"))
+			return WKContentWorldFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }

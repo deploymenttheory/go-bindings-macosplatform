@@ -50,583 +50,779 @@ func secureTextFieldAdopt(id objc.ID) *SecureTextField {
 
 // NewSecureTextField creates a new SecureTextField.
 func NewSecureTextField() *SecureTextField {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSSecureTextField")), objc.RegisterName("new"))
-	return secureTextFieldAdopt(_id)
+	var _mainthread0 *SecureTextField
+	purego.Main(func() {
+		_mainthread0 = func() *SecureTextField {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSSecureTextField")), objc.RegisterName("new"))
+			return secureTextFieldAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithPlaceholderString sets the string the text field displays when empty to help the user understand the text field’s purpose.
 func (stf *SecureTextField) WithPlaceholderString(placeholderString string) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
+	})
 	return stf
 }
 
 // WithPlaceholderAttributedString sets the attributed string the text field displays when empty to help the user understand the text field’s purpose.
 func (stf *SecureTextField) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
+	})
 	return stf
 }
 
 // WithBackgroundColor sets the color of the background the text field’s cell draws behind the text.
 func (stf *SecureTextField) WithBackgroundColor(backgroundColor *Color) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	})
 	return stf
 }
 
 // WithDrawsBackground sets a Boolean value that controls whether the text field’s cell draws a background color behind the text.
 func (stf *SecureTextField) WithDrawsBackground(drawsBackground bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	})
 	return stf
 }
 
 // WithTextColor sets the color of the text field’s content.
 func (stf *SecureTextField) WithTextColor(textColor *Color) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
+	})
 	return stf
 }
 
 // WithBordered sets a Boolean value that controls whether the text field draws a solid black border around its contents.
 func (stf *SecureTextField) WithBordered(bordered bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setBordered:"), bordered)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setBordered:"), bordered)
+	})
 	return stf
 }
 
 // WithBezeled sets a Boolean value that controls whether the text field draws a bezeled background around its contents.
 func (stf *SecureTextField) WithBezeled(bezeled bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setBezeled:"), bezeled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setBezeled:"), bezeled)
+	})
 	return stf
 }
 
 // WithEditable sets a Boolean value that controls whether the user can edit the value in the text field.
 func (stf *SecureTextField) WithEditable(editable bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setEditable:"), editable)
+	})
 	return stf
 }
 
 // WithSelectable sets a Boolean value that determines whether the user can select the content of the text field.
 func (stf *SecureTextField) WithSelectable(selectable bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setSelectable:"), selectable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setSelectable:"), selectable)
+	})
 	return stf
 }
 
 // WithBezelStyle sets the text field’s bezel style, square or rounded.
 func (stf *SecureTextField) WithBezelStyle(bezelStyle TextFieldBezelStyle) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setBezelStyle:"), bezelStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setBezelStyle:"), bezelStyle)
+	})
 	return stf
 }
 
 // WithPreferredMaxLayoutWidth sets the maximum width of the text field’s intrinsic content size.
 func (stf *SecureTextField) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
+	})
 	return stf
 }
 
 // WithMaximumNumberOfLines sets the maximum number of lines a wrapping text field displays before clipping or truncating the text.
 func (stf *SecureTextField) WithMaximumNumberOfLines(maximumNumberOfLines int) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setMaximumNumberOfLines:"), maximumNumberOfLines)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setMaximumNumberOfLines:"), maximumNumberOfLines)
+	})
 	return stf
 }
 
 // WithAllowsDefaultTighteningForTruncation sets a Boolean value that controls whether single-line text fields tighten intercharacter spacing before truncating the text.
 func (stf *SecureTextField) WithAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAllowsDefaultTighteningForTruncation:"), allowsDefaultTighteningForTruncation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAllowsDefaultTighteningForTruncation:"), allowsDefaultTighteningForTruncation)
+	})
 	return stf
 }
 
 // WithLineBreakStrategy sets the strategy that the system uses to break lines when laying out multiple lines of text.
 func (stf *SecureTextField) WithLineBreakStrategy(lineBreakStrategy LineBreakStrategy) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setLineBreakStrategy:"), lineBreakStrategy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setLineBreakStrategy:"), lineBreakStrategy)
+	})
 	return stf
 }
 
 // WithAllowsWritingTools sets the allows writing tools.
 func (stf *SecureTextField) WithAllowsWritingTools(allowsWritingTools bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAllowsWritingTools:"), allowsWritingTools)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAllowsWritingTools:"), allowsWritingTools)
+	})
 	return stf
 }
 
 // WithAllowsWritingToolsAffordance sets the allows writing tools affordance.
 func (stf *SecureTextField) WithAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAllowsWritingToolsAffordance:"), allowsWritingToolsAffordance)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAllowsWritingToolsAffordance:"), allowsWritingToolsAffordance)
+	})
 	return stf
 }
 
 // WithPlaceholderStrings sets the placeholder strings.
 func (stf *SecureTextField) WithPlaceholderStrings(items ...obj.Object) *SecureTextField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPlaceholderStrings:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPlaceholderStrings:"), _arr)
+	})
 	return stf
 }
 
 // WithPlaceholderAttributedStrings sets the placeholder attributed strings.
 func (stf *SecureTextField) WithPlaceholderAttributedStrings(items ...obj.Object) *SecureTextField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPlaceholderAttributedStrings:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPlaceholderAttributedStrings:"), _arr)
+	})
 	return stf
 }
 
 // WithResolvesNaturalAlignmentWithBaseWritingDirection sets specifies the behavior for resolving NSTextAlignmentNatural to the visual alignment.
 func (stf *SecureTextField) WithResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setResolvesNaturalAlignmentWithBaseWritingDirection:"), resolvesNaturalAlignmentWithBaseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setResolvesNaturalAlignmentWithBaseWritingDirection:"), resolvesNaturalAlignmentWithBaseWritingDirection)
+	})
 	return stf
 }
 
 // WithAutomaticTextCompletionEnabled sets a Boolean value that indicates whether the text field automatically completes text as the user types.
 func (stf *SecureTextField) WithAutomaticTextCompletionEnabled(automaticTextCompletionEnabled bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAutomaticTextCompletionEnabled:"), automaticTextCompletionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAutomaticTextCompletionEnabled:"), automaticTextCompletionEnabled)
+	})
 	return stf
 }
 
 // WithAllowsCharacterPickerTouchBarItem sets a Boolean value that controls whether the Touch Bar displays the character picker item for rich text fields.
 func (stf *SecureTextField) WithAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAllowsCharacterPickerTouchBarItem:"), allowsCharacterPickerTouchBarItem)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAllowsCharacterPickerTouchBarItem:"), allowsCharacterPickerTouchBarItem)
+	})
 	return stf
 }
 
 // WithAllowsEditingTextAttributes sets a Boolean value that controls whether the user can change font attributes of the text field’s string.
 func (stf *SecureTextField) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	})
 	return stf
 }
 
 // WithImportsGraphics sets a Boolean value that controls whether the user can drag image files into the text field.
 func (stf *SecureTextField) WithImportsGraphics(importsGraphics bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	})
 	return stf
 }
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (stf *SecureTextField) WithTarget(target obj.Object) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return stf
 }
 
 // WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
 func (stf *SecureTextField) WithTag(tag int) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setTag:"), tag)
+	})
 	return stf
 }
 
 // WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 func (stf *SecureTextField) WithIgnoresMultiClick(ignoresMultiClick bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	})
 	return stf
 }
 
 // WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 func (stf *SecureTextField) WithContinuous(continuous bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return stf
 }
 
 // WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
 func (stf *SecureTextField) WithEnabled(enabled bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return stf
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
 func (stf *SecureTextField) WithRefusesFirstResponder(refusesFirstResponder bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return stf
 }
 
 // WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
 func (stf *SecureTextField) WithHighlighted(highlighted bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return stf
 }
 
 // WithControlSize sets the size of the control.
 func (stf *SecureTextField) WithControlSize(controlSize ControlSize) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return stf
 }
 
 // WithFormatter sets the receiver’s formatter.
 func (stf *SecureTextField) WithFormatter(formatter obj.Object) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return stf
 }
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (stf *SecureTextField) WithObjectValue(objectValue obj.Object) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return stf
 }
 
 // WithStringValue sets the value of the receiver’s cell as an NSString object.
 func (stf *SecureTextField) WithStringValue(stringValue string) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return stf
 }
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (stf *SecureTextField) WithAttributedStringValue(attributedStringValue obj.Object) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return stf
 }
 
 // WithIntValue sets the value of the receiver’s cell as an integer.
 func (stf *SecureTextField) WithIntValue(intValue int) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return stf
 }
 
 // WithIntegerValue sets the value of the receiver’s cell as an integer value.
 func (stf *SecureTextField) WithIntegerValue(integerValue int) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return stf
 }
 
 // WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
 func (stf *SecureTextField) WithFloatValue(floatValue float32) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return stf
 }
 
 // WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
 func (stf *SecureTextField) WithDoubleValue(doubleValue float64) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return stf
 }
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (stf *SecureTextField) WithFont(font *Font) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return stf
 }
 
 // WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
 func (stf *SecureTextField) WithUsesSingleLineMode(usesSingleLineMode bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return stf
 }
 
 // WithLineBreakMode sets the line break mode to use for text in the control’s cell.
 func (stf *SecureTextField) WithLineBreakMode(lineBreakMode LineBreakMode) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return stf
 }
 
 // WithAlignment sets the alignment mode of the text in the receiver’s cell.
 func (stf *SecureTextField) WithAlignment(alignment TextAlignment) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return stf
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (stf *SecureTextField) WithBaseWritingDirection(baseWritingDirection WritingDirection) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return stf
 }
 
 // WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 func (stf *SecureTextField) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	})
 	return stf
 }
 
 // WithCell sets the cell.
 func (stf *SecureTextField) WithCell(cell CellProvider) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	})
 	return stf
 }
 
 // WithSubviews sets the subviews.
 func (stf *SecureTextField) WithSubviews(items ...ViewProvider) *SecureTextField {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return stf
 }
 
 // WithHidden sets the hidden.
 func (stf *SecureTextField) WithHidden(hidden bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setHidden:"), hidden)
+	})
 	return stf
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (stf *SecureTextField) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return stf
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (stf *SecureTextField) WithAutoresizesSubviews(autoresizesSubviews bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return stf
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (stf *SecureTextField) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return stf
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (stf *SecureTextField) WithFrame(frame corefoundation.CGRect) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setFrame:"), frame)
+	})
 	return stf
 }
 
 // WithFrameRotation sets the frame rotation.
 func (stf *SecureTextField) WithFrameRotation(frameRotation float64) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return stf
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (stf *SecureTextField) WithFrameCenterRotation(frameCenterRotation float64) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return stf
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (stf *SecureTextField) WithBoundsRotation(boundsRotation float64) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return stf
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (stf *SecureTextField) WithBounds(bounds corefoundation.CGRect) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setBounds:"), bounds)
+	})
 	return stf
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (stf *SecureTextField) WithCanDrawConcurrently(canDrawConcurrently bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return stf
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (stf *SecureTextField) WithNeedsDisplay(needsDisplay bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return stf
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (stf *SecureTextField) WithAcceptsTouchEvents(acceptsTouchEvents bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return stf
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (stf *SecureTextField) WithWantsRestingTouches(wantsRestingTouches bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return stf
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (stf *SecureTextField) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return stf
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (stf *SecureTextField) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return stf
 }
 
 // WithWantsLayer sets the wants layer.
 func (stf *SecureTextField) WithWantsLayer(wantsLayer bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return stf
 }
 
 // WithLayer sets the layer.
 func (stf *SecureTextField) WithLayer(layer obj.Object) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return stf
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (stf *SecureTextField) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return stf
 }
 
 // WithNeedsLayout sets the needs layout.
 func (stf *SecureTextField) WithNeedsLayout(needsLayout bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return stf
 }
 
 // WithAlphaValue sets the alpha value.
 func (stf *SecureTextField) WithAlphaValue(alphaValue float64) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return stf
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (stf *SecureTextField) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return stf
 }
 
 // WithBackgroundFilters sets the background filters.
 func (stf *SecureTextField) WithBackgroundFilters(items ...obj.Object) *SecureTextField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return stf
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (stf *SecureTextField) WithCompositingFilter(compositingFilter obj.Object) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return stf
 }
 
 // WithContentFilters sets the content filters.
 func (stf *SecureTextField) WithContentFilters(items ...obj.Object) *SecureTextField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return stf
 }
 
 // WithShadow sets the shadow.
 func (stf *SecureTextField) WithShadow(shadow *Shadow) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return stf
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (stf *SecureTextField) WithClipsToBounds(clipsToBounds bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return stf
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (stf *SecureTextField) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return stf
 }
 
 // WithToolTip sets the tool tip.
 func (stf *SecureTextField) WithToolTip(toolTip string) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return stf
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (stf *SecureTextField) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return stf
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (stf *SecureTextField) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return stf
 }
 
 // WithNextKeyView sets the next key view.
 func (stf *SecureTextField) WithNextKeyView(nextKeyView ViewProvider) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return stf
 }
 
 // WithFocusRingType sets the focus ring type.
 func (stf *SecureTextField) WithFocusRingType(focusRingType FocusRingType) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return stf
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (stf *SecureTextField) WithGestureRecognizers(items ...GestureRecognizerProvider) *SecureTextField {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return stf
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (stf *SecureTextField) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return stf
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (stf *SecureTextField) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return stf
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (stf *SecureTextField) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return stf
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (stf *SecureTextField) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return stf
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (stf *SecureTextField) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return stf
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (stf *SecureTextField) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return stf
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (stf *SecureTextField) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return stf
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (stf *SecureTextField) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return stf
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (stf *SecureTextField) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return stf
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (stf *SecureTextField) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return stf
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (stf *SecureTextField) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return stf
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (stf *SecureTextField) WithNextResponder(nextResponder ResponderProvider) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return stf
 }
 
 // WithMenu sets returns the responder’s menu.
 func (stf *SecureTextField) WithMenu(menu *Menu) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return stf
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (stf *SecureTextField) WithUserActivity(userActivity obj.Object) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return stf
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (stf *SecureTextField) WithTouchBar(touchBar *TouchBar) *SecureTextField {
-	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return stf
 }
 

@@ -49,133 +49,181 @@ func sharingServicePickerToolbarItemAdopt(id objc.ID) *SharingServicePickerToolb
 
 // NewSharingServicePickerToolbarItem creates a new SharingServicePickerToolbarItem.
 func NewSharingServicePickerToolbarItem() *SharingServicePickerToolbarItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSSharingServicePickerToolbarItem")), objc.RegisterName("new"))
-	return sharingServicePickerToolbarItemAdopt(_id)
+	var _mainthread0 *SharingServicePickerToolbarItem
+	purego.Main(func() {
+		_mainthread0 = func() *SharingServicePickerToolbarItem {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSSharingServicePickerToolbarItem")), objc.RegisterName("new"))
+			return sharingServicePickerToolbarItemAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithLabel sets the label that appears for this item in the toolbar.
 func (sspti *SharingServicePickerToolbarItem) WithLabel(label string) *SharingServicePickerToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setLabel:"), purego.NSString(label))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setLabel:"), purego.NSString(label))
+	})
 	return sspti
 }
 
 // WithPaletteLabel sets the label that appears when the toolbar item is in the customization palette.
 func (sspti *SharingServicePickerToolbarItem) WithPaletteLabel(paletteLabel string) *SharingServicePickerToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setPaletteLabel:"), purego.NSString(paletteLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setPaletteLabel:"), purego.NSString(paletteLabel))
+	})
 	return sspti
 }
 
 // WithPossibleLabels sets the set of labels that the item might display.
 func (sspti *SharingServicePickerToolbarItem) WithPossibleLabels(possibleLabels obj.Object) *SharingServicePickerToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setPossibleLabels:"), objref.IDOf(possibleLabels))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setPossibleLabels:"), objref.IDOf(possibleLabels))
+	})
 	return sspti
 }
 
 // WithToolTip sets the tooltip to display when someone hovers over the item in the toolbar.
 func (sspti *SharingServicePickerToolbarItem) WithToolTip(toolTip string) *SharingServicePickerToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return sspti
 }
 
 // WithMenuFormRepresentation sets the menu item to use when the toolbar item is in the overflow menu.
 func (sspti *SharingServicePickerToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *SharingServicePickerToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setMenuFormRepresentation:"), objref.IDOf(menuFormRepresentation))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setMenuFormRepresentation:"), objref.IDOf(menuFormRepresentation))
+	})
 	return sspti
 }
 
 // WithTag sets an integer tag you can use to identify the toolbar item.
 func (sspti *SharingServicePickerToolbarItem) WithTag(tag int) *SharingServicePickerToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setTag:"), tag)
+	})
 	return sspti
 }
 
 // WithTarget sets the object that defines the action method the toolbar item calls when clicked.
 func (sspti *SharingServicePickerToolbarItem) WithTarget(target obj.Object) *SharingServicePickerToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return sspti
 }
 
 // WithEnabled sets a Boolean value that indicates whether the item is enabled.
 func (sspti *SharingServicePickerToolbarItem) WithEnabled(enabled bool) *SharingServicePickerToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return sspti
 }
 
 // WithImage sets the image to display for the toolbar item.
 func (sspti *SharingServicePickerToolbarItem) WithImage(image *Image) *SharingServicePickerToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setImage:"), objref.IDOf(image))
+	})
 	return sspti
 }
 
 // WithTitle sets the title of the toolbar item.
 func (sspti *SharingServicePickerToolbarItem) WithTitle(title string) *SharingServicePickerToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return sspti
 }
 
 // WithBordered sets a Boolean value that indicates whether the toolbar item has a bordered style.
 func (sspti *SharingServicePickerToolbarItem) WithBordered(bordered bool) *SharingServicePickerToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setBordered:"), bordered)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setBordered:"), bordered)
+	})
 	return sspti
 }
 
 // WithBackgroundTintColor sets the background tint color.
 func (sspti *SharingServicePickerToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *SharingServicePickerToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
+	})
 	return sspti
 }
 
 // WithStyle sets defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items’ background.
 func (sspti *SharingServicePickerToolbarItem) WithStyle(style ToolbarItemStyle) *SharingServicePickerToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setStyle:"), style)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setStyle:"), style)
+	})
 	return sspti
 }
 
 // WithNavigational sets a Boolean value that indicates whether the item behaves as a navigation item in the toolbar.
 func (sspti *SharingServicePickerToolbarItem) WithNavigational(navigational bool) *SharingServicePickerToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setNavigational:"), navigational)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setNavigational:"), navigational)
+	})
 	return sspti
 }
 
 // WithView sets the custom view you use to draw the toolbar item.
 func (sspti *SharingServicePickerToolbarItem) WithView(view ViewProvider) *SharingServicePickerToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setView:"), objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setView:"), objref.IDOf(view))
+	})
 	return sspti
 }
 
 // WithHidden sets determines whether an item is visible in the toolbar.
 func (sspti *SharingServicePickerToolbarItem) WithHidden(hidden bool) *SharingServicePickerToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setHidden:"), hidden)
+	})
 	return sspti
 }
 
 // WithMinSize sets the toolbar item’s minimum size.
 func (sspti *SharingServicePickerToolbarItem) WithMinSize(minSize corefoundation.CGSize) *SharingServicePickerToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setMinSize:"), minSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setMinSize:"), minSize)
+	})
 	return sspti
 }
 
 // WithMaxSize sets the toolbar item’s maximum size.
 func (sspti *SharingServicePickerToolbarItem) WithMaxSize(maxSize corefoundation.CGSize) *SharingServicePickerToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setMaxSize:"), maxSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setMaxSize:"), maxSize)
+	})
 	return sspti
 }
 
 // WithVisibilityPriority sets the display priority associated with the toolbar item.
 func (sspti *SharingServicePickerToolbarItem) WithVisibilityPriority(visibilityPriority int) *SharingServicePickerToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	})
 	return sspti
 }
 
 // WithBadge sets a badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
 func (sspti *SharingServicePickerToolbarItem) WithBadge(badge *ItemBadge) *SharingServicePickerToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setBadge:"), objref.IDOf(badge))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setBadge:"), objref.IDOf(badge))
+	})
 	return sspti
 }
 
 // WithAutovalidates sets a Boolean value that indicates whether the toolbar automatically validates the item.
 func (sspti *SharingServicePickerToolbarItem) WithAutovalidates(autovalidates bool) *SharingServicePickerToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setAutovalidates:"), autovalidates)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setAutovalidates:"), autovalidates)
+	})
 	return sspti
 }
 

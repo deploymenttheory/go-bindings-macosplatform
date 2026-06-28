@@ -71,383 +71,682 @@ func (mv *MapView) String() string {
 
 // NewMapView creates a new MapView.
 func NewMapView() *MapView {
-	_id := objc.Send[objc.ID](objc.ID(_class("MKMapView")), objc.RegisterName("new"))
-	return mapViewAdopt(_id)
+	var _mainthread0 *MapView
+	purego.Main(func() {
+		_mainthread0 = func() *MapView {
+			_id := objc.Send[objc.ID](objc.ID(_class("MKMapView")), objc.RegisterName("new"))
+			return mapViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithMapType sets the type of data the map view displays.
 func (mv *MapView) WithMapType(mapType MapType) *MapView {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setMapType:"), mapType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setMapType:"), mapType)
+	})
 	return mv
 }
 
 // WithPreferredConfiguration sets the characteristics of the map view, including the map type and features the map displays.
 func (mv *MapView) WithPreferredConfiguration(preferredConfiguration MapConfigurationProvider) *MapView {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setPreferredConfiguration:"), objref.IDOf(preferredConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setPreferredConfiguration:"), objref.IDOf(preferredConfiguration))
+	})
 	return mv
 }
 
 // WithCenterCoordinate sets the map coordinate at the center of the map view.
 func (mv *MapView) WithCenterCoordinate(centerCoordinate unsafe.Pointer) *MapView {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCenterCoordinate:"), centerCoordinate)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCenterCoordinate:"), centerCoordinate)
+	})
 	return mv
 }
 
 // WithCamera sets the camera to use for determining the appearance of the map.
 func (mv *MapView) WithCamera(camera *MapCamera) *MapView {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCamera:"), objref.IDOf(camera))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCamera:"), objref.IDOf(camera))
+	})
 	return mv
 }
 
 // WithCameraZoomRange sets the zoom range to apply to the map view.
 func (mv *MapView) WithCameraZoomRange(cameraZoomRange *MapCameraZoomRange) *MapView {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCameraZoomRange:"), objref.IDOf(cameraZoomRange))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCameraZoomRange:"), objref.IDOf(cameraZoomRange))
+	})
 	return mv
 }
 
 // WithCameraBoundary sets the boundary of the area within which the map view’s center needs to remain.
 func (mv *MapView) WithCameraBoundary(cameraBoundary *MapCameraBoundary) *MapView {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCameraBoundary:"), objref.IDOf(cameraBoundary))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCameraBoundary:"), objref.IDOf(cameraBoundary))
+	})
 	return mv
 }
 
 // WithZoomEnabled sets a Boolean value that determines whether the user may use pinch gestures to zoom in and out of the map.
 func (mv *MapView) WithZoomEnabled(zoomEnabled bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setZoomEnabled:"), zoomEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setZoomEnabled:"), zoomEnabled)
+	})
 	return mv
 }
 
 // WithScrollEnabled sets a Boolean value that determines whether the user may scroll around the map.
 func (mv *MapView) WithScrollEnabled(scrollEnabled bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setScrollEnabled:"), scrollEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setScrollEnabled:"), scrollEnabled)
+	})
 	return mv
 }
 
 // WithRotateEnabled sets a Boolean value that indicates whether the map uses the camera’s heading information.
 func (mv *MapView) WithRotateEnabled(rotateEnabled bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setRotateEnabled:"), rotateEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setRotateEnabled:"), rotateEnabled)
+	})
 	return mv
 }
 
 // WithPitchEnabled sets a Boolean value that indicates whether the map uses the camera’s pitch information.
 func (mv *MapView) WithPitchEnabled(pitchEnabled bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setPitchEnabled:"), pitchEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setPitchEnabled:"), pitchEnabled)
+	})
 	return mv
 }
 
 // WithShowsUserTrackingButton sets a Boolean value that indicates whether the map displays the user tracking button.
 func (mv *MapView) WithShowsUserTrackingButton(showsUserTrackingButton bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsUserTrackingButton:"), showsUserTrackingButton)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsUserTrackingButton:"), showsUserTrackingButton)
+	})
 	return mv
 }
 
 // WithPitchButtonVisibility sets a value that indicates whether the map’s pitch button is visible.
 func (mv *MapView) WithPitchButtonVisibility(pitchButtonVisibility FeatureVisibility) *MapView {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setPitchButtonVisibility:"), pitchButtonVisibility)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setPitchButtonVisibility:"), pitchButtonVisibility)
+	})
 	return mv
 }
 
 // WithShowsPitchControl sets a Boolean value that indicates whether the map displays the pitch control.
 func (mv *MapView) WithShowsPitchControl(showsPitchControl bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsPitchControl:"), showsPitchControl)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsPitchControl:"), showsPitchControl)
+	})
 	return mv
 }
 
 // WithShowsZoomControls sets a Boolean value that indicates whether the map displays zoom controls.
 func (mv *MapView) WithShowsZoomControls(showsZoomControls bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsZoomControls:"), showsZoomControls)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsZoomControls:"), showsZoomControls)
+	})
 	return mv
 }
 
 // WithShowsCompass sets a Boolean value that indicates whether the map displays a compass control.
 func (mv *MapView) WithShowsCompass(showsCompass bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsCompass:"), showsCompass)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsCompass:"), showsCompass)
+	})
 	return mv
 }
 
 // WithShowsScale sets a Boolean value that indicates whether the map shows scale information.
 func (mv *MapView) WithShowsScale(showsScale bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsScale:"), showsScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsScale:"), showsScale)
+	})
 	return mv
 }
 
 // WithPointOfInterestFilter sets the filter to use for determining the points of interest that appear on the map.
 func (mv *MapView) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *MapView {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
+	})
 	return mv
 }
 
 // WithShowsPointsOfInterest sets a Boolean value that indicates whether the map displays point-of-interest information.
 func (mv *MapView) WithShowsPointsOfInterest(showsPointsOfInterest bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsPointsOfInterest:"), showsPointsOfInterest)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsPointsOfInterest:"), showsPointsOfInterest)
+	})
 	return mv
 }
 
 // WithShowsBuildings sets a Boolean value that indicates whether the map displays extruded building information on supported map types.
 func (mv *MapView) WithShowsBuildings(showsBuildings bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsBuildings:"), showsBuildings)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsBuildings:"), showsBuildings)
+	})
 	return mv
 }
 
 // WithShowsTraffic sets a Boolean value that indicates whether the map displays traffic information.
 func (mv *MapView) WithShowsTraffic(showsTraffic bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsTraffic:"), showsTraffic)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsTraffic:"), showsTraffic)
+	})
 	return mv
 }
 
 // WithShowsUserLocation sets a Boolean value that indicates whether the map tries to display the user’s location.
 func (mv *MapView) WithShowsUserLocation(showsUserLocation bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsUserLocation:"), showsUserLocation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsUserLocation:"), showsUserLocation)
+	})
 	return mv
 }
 
 // WithUserTrackingMode sets the mode to use for tracking the user’s location.
 func (mv *MapView) WithUserTrackingMode(userTrackingMode UserTrackingMode) *MapView {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setUserTrackingMode:"), userTrackingMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setUserTrackingMode:"), userTrackingMode)
+	})
 	return mv
 }
 
 // SetCenterCoordinateAnimated changes the center coordinate of the map, and optionally animates the change.
 func (mv *MapView) SetCenterCoordinateAnimated(coordinate unsafe.Pointer, animated bool) {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCenterCoordinate:animated:"), coordinate, animated)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCenterCoordinate:animated:"), coordinate, animated)
+	})
+
 }
 
 // SetCameraAnimated changes the camera to use for determining the map’s viewing parameters, and optionally animates the change.
 func (mv *MapView) SetCameraAnimated(camera *MapCamera, animated bool) {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCamera:animated:"), objref.IDOf(camera), animated)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCamera:animated:"), objref.IDOf(camera), animated)
+	})
+
 }
 
 // SetCameraZoomRangeAnimated sets the camera zoom range for the map view, specifying whether to use animation.
 func (mv *MapView) SetCameraZoomRangeAnimated(cameraZoomRange *MapCameraZoomRange, animated bool) {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCameraZoomRange:animated:"), objref.IDOf(cameraZoomRange), animated)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCameraZoomRange:animated:"), objref.IDOf(cameraZoomRange), animated)
+	})
+
 }
 
 // SetCameraBoundaryAnimated sets the camera boundary for the map view, specifying whether to use animation.
 func (mv *MapView) SetCameraBoundaryAnimated(cameraBoundary *MapCameraBoundary, animated bool) {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCameraBoundary:animated:"), objref.IDOf(cameraBoundary), animated)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCameraBoundary:animated:"), objref.IDOf(cameraBoundary), animated)
+	})
+
 }
 
 // ConvertCoordinateToPointToView converts a map coordinate to a point in the specified view.
 func (mv *MapView) ConvertCoordinateToPointToView(coordinate unsafe.Pointer, view obj.Object) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(mv), objc.RegisterName("convertCoordinate:toPointToView:"), coordinate, objref.IDOf(view))
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(mv), objc.RegisterName("convertCoordinate:toPointToView:"), coordinate, objref.IDOf(view))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetUserTrackingModeAnimated sets the mode to use for tracking the user’s location, with optional animation.
 func (mv *MapView) SetUserTrackingModeAnimated(mode UserTrackingMode, animated bool) {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setUserTrackingMode:animated:"), mode, animated)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setUserTrackingMode:animated:"), mode, animated)
+	})
+
 }
 
 // AddAnnotations adds an array of annotation objects to the map view.
 func (mv *MapView) AddAnnotations(annotations []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("addAnnotations:"), purego.SliceToNSArray(annotations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("addAnnotations:"), purego.SliceToNSArray(annotations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	})
+
 }
 
 // RemoveAnnotations removes an array of annotation objects from the map view.
 func (mv *MapView) RemoveAnnotations(annotations []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("removeAnnotations:"), purego.SliceToNSArray(annotations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("removeAnnotations:"), purego.SliceToNSArray(annotations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	})
+
 }
 
 // DequeueReusableAnnotationViewWithIdentifier returns a reusable annotation view using its identifier.
 func (mv *MapView) DequeueReusableAnnotationViewWithIdentifier(identifier string) *AnnotationView {
-	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("dequeueReusableAnnotationViewWithIdentifier:"), purego.NSString(identifier))
-	return AnnotationViewFromID(_r)
+	var _mainthread0 *AnnotationView
+	purego.Main(func() {
+		_mainthread0 = func() *AnnotationView {
+			_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("dequeueReusableAnnotationViewWithIdentifier:"), purego.NSString(identifier))
+			return AnnotationViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowAnnotationsAnimated sets the visible region so that the map displays the specified annotations.
 func (mv *MapView) ShowAnnotationsAnimated(annotations []obj.Object, animated bool) {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("showAnnotations:animated:"), purego.SliceToNSArray(annotations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), animated)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("showAnnotations:animated:"), purego.SliceToNSArray(annotations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), animated)
+	})
+
 }
 
 // MapType returns the map type.
 func (mv *MapView) MapType() MapType {
-	_r := objc.Send[MapType](objref.IDOf(mv), objc.RegisterName("mapType"))
-	return _r
+	var _mainthread0 MapType
+	purego.Main(func() {
+		_mainthread0 = func() MapType {
+			_r := objc.Send[MapType](objref.IDOf(mv), objc.RegisterName("mapType"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PreferredConfiguration returns the preferred configuration.
 func (mv *MapView) PreferredConfiguration() *MapConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("preferredConfiguration"))
-	return MapConfigurationFromID(_r)
+	var _mainthread0 *MapConfiguration
+	purego.Main(func() {
+		_mainthread0 = func() *MapConfiguration {
+			_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("preferredConfiguration"))
+			return MapConfigurationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Camera returns the camera.
 func (mv *MapView) Camera() *MapCamera {
-	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("camera"))
-	return MapCameraFromID(_r)
+	var _mainthread0 *MapCamera
+	purego.Main(func() {
+		_mainthread0 = func() *MapCamera {
+			_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("camera"))
+			return MapCameraFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CameraZoomRange returns the camera zoom range.
 func (mv *MapView) CameraZoomRange() *MapCameraZoomRange {
-	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("cameraZoomRange"))
-	return MapCameraZoomRangeFromID(_r)
+	var _mainthread0 *MapCameraZoomRange
+	purego.Main(func() {
+		_mainthread0 = func() *MapCameraZoomRange {
+			_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("cameraZoomRange"))
+			return MapCameraZoomRangeFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CameraBoundary returns the camera boundary.
 func (mv *MapView) CameraBoundary() *MapCameraBoundary {
-	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("cameraBoundary"))
-	return MapCameraBoundaryFromID(_r)
+	var _mainthread0 *MapCameraBoundary
+	purego.Main(func() {
+		_mainthread0 = func() *MapCameraBoundary {
+			_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("cameraBoundary"))
+			return MapCameraBoundaryFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsZoomEnabled reports whether the object is zoom enabled.
 func (mv *MapView) IsZoomEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("isZoomEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("isZoomEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsScrollEnabled reports whether the object is scroll enabled.
 func (mv *MapView) IsScrollEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("isScrollEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("isScrollEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsRotateEnabled reports whether the object is rotate enabled.
 func (mv *MapView) IsRotateEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("isRotateEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("isRotateEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsPitchEnabled reports whether the object is pitch enabled.
 func (mv *MapView) IsPitchEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("isPitchEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("isPitchEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsUserTrackingButton wraps the corresponding Objective-C method.
 func (mv *MapView) ShowsUserTrackingButton() bool {
-	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsUserTrackingButton"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsUserTrackingButton"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PitchButtonVisibility returns the pitch button visibility.
 func (mv *MapView) PitchButtonVisibility() FeatureVisibility {
-	_r := objc.Send[FeatureVisibility](objref.IDOf(mv), objc.RegisterName("pitchButtonVisibility"))
-	return _r
+	var _mainthread0 FeatureVisibility
+	purego.Main(func() {
+		_mainthread0 = func() FeatureVisibility {
+			_r := objc.Send[FeatureVisibility](objref.IDOf(mv), objc.RegisterName("pitchButtonVisibility"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsPitchControl wraps the corresponding Objective-C method.
 func (mv *MapView) ShowsPitchControl() bool {
-	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsPitchControl"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsPitchControl"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsZoomControls wraps the corresponding Objective-C method.
 func (mv *MapView) ShowsZoomControls() bool {
-	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsZoomControls"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsZoomControls"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsCompass wraps the corresponding Objective-C method.
 func (mv *MapView) ShowsCompass() bool {
-	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsCompass"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsCompass"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsScale wraps the corresponding Objective-C method.
 func (mv *MapView) ShowsScale() bool {
-	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsScale"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsScale"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PointOfInterestFilter returns the point of interest filter.
 func (mv *MapView) PointOfInterestFilter() *PointOfInterestFilter {
-	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("pointOfInterestFilter"))
-	return PointOfInterestFilterFromID(_r)
+	var _mainthread0 *PointOfInterestFilter
+	purego.Main(func() {
+		_mainthread0 = func() *PointOfInterestFilter {
+			_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("pointOfInterestFilter"))
+			return PointOfInterestFilterFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsPointsOfInterest wraps the corresponding Objective-C method.
 func (mv *MapView) ShowsPointsOfInterest() bool {
-	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsPointsOfInterest"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsPointsOfInterest"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsBuildings wraps the corresponding Objective-C method.
 func (mv *MapView) ShowsBuildings() bool {
-	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsBuildings"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsBuildings"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsTraffic wraps the corresponding Objective-C method.
 func (mv *MapView) ShowsTraffic() bool {
-	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsTraffic"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsTraffic"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsUserLocation wraps the corresponding Objective-C method.
 func (mv *MapView) ShowsUserLocation() bool {
-	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsUserLocation"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsUserLocation"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UserLocation returns the user location.
 func (mv *MapView) UserLocation() *UserLocation {
-	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("userLocation"))
-	return UserLocationFromID(_r)
+	var _mainthread0 *UserLocation
+	purego.Main(func() {
+		_mainthread0 = func() *UserLocation {
+			_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("userLocation"))
+			return UserLocationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UserTrackingMode returns the user tracking mode.
 func (mv *MapView) UserTrackingMode() UserTrackingMode {
-	_r := objc.Send[UserTrackingMode](objref.IDOf(mv), objc.RegisterName("userTrackingMode"))
-	return _r
+	var _mainthread0 UserTrackingMode
+	purego.Main(func() {
+		_mainthread0 = func() UserTrackingMode {
+			_r := objc.Send[UserTrackingMode](objref.IDOf(mv), objc.RegisterName("userTrackingMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsUserLocationVisible reports whether the object is user location visible.
 func (mv *MapView) IsUserLocationVisible() bool {
-	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("isUserLocationVisible"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("isUserLocationVisible"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Annotations returns the annotations.
 func (mv *MapView) Annotations() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("annotations"))
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("annotations"))
+			return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SelectedAnnotations returns the selected annotations.
 func (mv *MapView) SelectedAnnotations() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("selectedAnnotations"))
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("selectedAnnotations"))
+			return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetSelectedAnnotations wraps the corresponding Objective-C method.
 func (mv *MapView) SetSelectedAnnotations(selectedAnnotations []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setSelectedAnnotations:"), purego.SliceToNSArray(selectedAnnotations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setSelectedAnnotations:"), purego.SliceToNSArray(selectedAnnotations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	})
+
 }
 
 // AnnotationVisibleRect returns the annotation visible rect.
 func (mv *MapView) AnnotationVisibleRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(mv), objc.RegisterName("annotationVisibleRect"))
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(mv), objc.RegisterName("annotationVisibleRect"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AddOverlaysLevel adds an array of overlay objects to the map at the specified level.
 func (mv *MapView) AddOverlaysLevel(overlays []obj.Object, level OverlayLevel) {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("addOverlays:level:"), purego.SliceToNSArray(overlays, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), level)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("addOverlays:level:"), purego.SliceToNSArray(overlays, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), level)
+	})
+
 }
 
 // RemoveOverlays removes one or more overlay objects from the map.
 func (mv *MapView) RemoveOverlays(overlays []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("removeOverlays:"), purego.SliceToNSArray(overlays, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("removeOverlays:"), purego.SliceToNSArray(overlays, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	})
+
 }
 
 // OverlaysInLevel returns overlay objects in the specified level of the map.
 func (mv *MapView) OverlaysInLevel(level OverlayLevel) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("overlaysInLevel:"), level)
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("overlaysInLevel:"), level)
+			return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AddOverlays adds an array of overlay objects to the map.
 func (mv *MapView) AddOverlays(overlays []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("addOverlays:"), purego.SliceToNSArray(overlays, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("addOverlays:"), purego.SliceToNSArray(overlays, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	})
+
 }
 
 // ExchangeOverlayAtIndexWithOverlayAtIndex exchanges the position of two overlay objects at the specified index.
 func (mv *MapView) ExchangeOverlayAtIndexWithOverlayAtIndex(index1 int, index2 int) {
-	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("exchangeOverlayAtIndex:withOverlayAtIndex:"), index1, index2)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("exchangeOverlayAtIndex:withOverlayAtIndex:"), index1, index2)
+	})
+
 }
 
 // Overlays returns the overlays.
 func (mv *MapView) Overlays() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("overlays"))
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("overlays"))
+			return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
+
 }

@@ -48,351 +48,486 @@ func tokenFieldCellAdopt(id objc.ID) *TokenFieldCell {
 
 // NewTokenFieldCell creates a new TokenFieldCell.
 func NewTokenFieldCell() *TokenFieldCell {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSTokenFieldCell")), objc.RegisterName("new"))
-	return tokenFieldCellAdopt(_id)
+	var _mainthread0 *TokenFieldCell
+	purego.Main(func() {
+		_mainthread0 = func() *TokenFieldCell {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSTokenFieldCell")), objc.RegisterName("new"))
+			return tokenFieldCellAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithTokenStyle sets the token style of the receiver.
 func (tfc *TokenFieldCell) WithTokenStyle(tokenStyle TokenStyle) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTokenStyle:"), tokenStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTokenStyle:"), tokenStyle)
+	})
 	return tfc
 }
 
 // WithCompletionDelay sets the receiver’s completion delay to a given delay.
 func (tfc *TokenFieldCell) WithCompletionDelay(completionDelay float64) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setCompletionDelay:"), completionDelay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setCompletionDelay:"), completionDelay)
+	})
 	return tfc
 }
 
 // WithTokenizingCharacterSet sets the receiver’s tokenizing character set to a given character set.
 func (tfc *TokenFieldCell) WithTokenizingCharacterSet(tokenizingCharacterSet obj.Object) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTokenizingCharacterSet:"), objref.IDOf(tokenizingCharacterSet))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTokenizingCharacterSet:"), objref.IDOf(tokenizingCharacterSet))
+	})
 	return tfc
 }
 
 // WithBackgroundColor sets the color of the cell’s background.
 func (tfc *TokenFieldCell) WithBackgroundColor(backgroundColor *Color) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	})
 	return tfc
 }
 
 // WithDrawsBackground sets a Boolean value that indicates whether the cell draws its background color.
 func (tfc *TokenFieldCell) WithDrawsBackground(drawsBackground bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	})
 	return tfc
 }
 
 // WithTextColor sets the color to use to draw the cell’s text.
 func (tfc *TokenFieldCell) WithTextColor(textColor *Color) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
+	})
 	return tfc
 }
 
 // WithBezelStyle sets the bezel style to use when drawing the text field.
 func (tfc *TokenFieldCell) WithBezelStyle(bezelStyle TextFieldBezelStyle) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBezelStyle:"), bezelStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBezelStyle:"), bezelStyle)
+	})
 	return tfc
 }
 
 // WithPlaceholderString sets the placeholder text for the cell, specified as a plain text string.
 func (tfc *TokenFieldCell) WithPlaceholderString(placeholderString string) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
+	})
 	return tfc
 }
 
 // WithPlaceholderAttributedString sets the placeholder text for the cell, specified as an attributed string.
 func (tfc *TokenFieldCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
+	})
 	return tfc
 }
 
 // WithAllowedInputSourceLocales sets an array of locale identifiers that represent the allowed input sources when the text field has the keyboard focus.
 func (tfc *TokenFieldCell) WithAllowedInputSourceLocales(items ...obj.Object) *TokenFieldCell {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAllowedInputSourceLocales:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAllowedInputSourceLocales:"), _arr)
+	})
 	return tfc
 }
 
 // WithControlView sets the view associated with the cell.
 func (tfc *TokenFieldCell) WithControlView(controlView ViewProvider) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	})
 	return tfc
 }
 
 // WithType sets the type of the cell.
 func (tfc *TokenFieldCell) WithType(type_ CellType) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setType:"), type_)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setType:"), type_)
+	})
 	return tfc
 }
 
 // WithState sets the cell’s current state.
 func (tfc *TokenFieldCell) WithState(state int) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setState:"), state)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setState:"), state)
+	})
 	return tfc
 }
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (tfc *TokenFieldCell) WithTarget(target obj.Object) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return tfc
 }
 
 // WithTag sets a tag for identifying the cell.
 func (tfc *TokenFieldCell) WithTag(tag int) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTag:"), tag)
+	})
 	return tfc
 }
 
 // WithTitle sets the cell’s title text.
 func (tfc *TokenFieldCell) WithTitle(title string) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return tfc
 }
 
 // WithEnabled sets a Boolean value indicating whether the cell is currently enabled.
 func (tfc *TokenFieldCell) WithEnabled(enabled bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return tfc
 }
 
 // WithContinuous sets a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 func (tfc *TokenFieldCell) WithContinuous(continuous bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return tfc
 }
 
 // WithEditable sets a Boolean value indicating whether the cell is editable.
 func (tfc *TokenFieldCell) WithEditable(editable bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setEditable:"), editable)
+	})
 	return tfc
 }
 
 // WithSelectable sets a Boolean value indicating whether the cell’s text can be selected.
 func (tfc *TokenFieldCell) WithSelectable(selectable bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setSelectable:"), selectable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setSelectable:"), selectable)
+	})
 	return tfc
 }
 
 // WithBordered sets a Boolean value indicating whether the cell draws itself outlined with a plain border.
 func (tfc *TokenFieldCell) WithBordered(bordered bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBordered:"), bordered)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBordered:"), bordered)
+	})
 	return tfc
 }
 
 // WithBezeled sets a Boolean value indicating whether the cell has a bezeled border.
 func (tfc *TokenFieldCell) WithBezeled(bezeled bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBezeled:"), bezeled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBezeled:"), bezeled)
+	})
 	return tfc
 }
 
 // WithScrollable sets a Boolean value indicating whether excess text scrolls past the cell’s bounds.
 func (tfc *TokenFieldCell) WithScrollable(scrollable bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setScrollable:"), scrollable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setScrollable:"), scrollable)
+	})
 	return tfc
 }
 
 // WithHighlighted sets a Boolean value indicating whether the cell has a highlighted appearance.
 func (tfc *TokenFieldCell) WithHighlighted(highlighted bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return tfc
 }
 
 // WithAlignment sets the alignment of the cell’s text.
 func (tfc *TokenFieldCell) WithAlignment(alignment TextAlignment) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return tfc
 }
 
 // WithWraps sets a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 func (tfc *TokenFieldCell) WithWraps(wraps bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setWraps:"), wraps)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setWraps:"), wraps)
+	})
 	return tfc
 }
 
 // WithFont sets the font that the cell uses to display text.
 func (tfc *TokenFieldCell) WithFont(font *Font) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return tfc
 }
 
 // WithFormatter sets the cell’s formatter object.
 func (tfc *TokenFieldCell) WithFormatter(formatter obj.Object) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return tfc
 }
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (tfc *TokenFieldCell) WithObjectValue(objectValue obj.Object) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return tfc
 }
 
 // WithStringValue sets the cell’s value as a string.
 func (tfc *TokenFieldCell) WithStringValue(stringValue string) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return tfc
 }
 
 // WithIntValue sets the cell’s value as an integer.
 func (tfc *TokenFieldCell) WithIntValue(intValue int) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return tfc
 }
 
 // WithFloatValue sets the cell’s value as a single-precision floating-point number.
 func (tfc *TokenFieldCell) WithFloatValue(floatValue float32) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return tfc
 }
 
 // WithDoubleValue sets the cell’s value as a double-precision floating-point number.
 func (tfc *TokenFieldCell) WithDoubleValue(doubleValue float64) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return tfc
 }
 
 // WithIntegerValue sets the cell’s value as an integer value.
 func (tfc *TokenFieldCell) WithIntegerValue(integerValue int) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return tfc
 }
 
 // WithImage sets the image displayed by the cell, if any.
 func (tfc *TokenFieldCell) WithImage(image *Image) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setImage:"), objref.IDOf(image))
+	})
 	return tfc
 }
 
 // WithControlSize sets the size of the cell.
 func (tfc *TokenFieldCell) WithControlSize(controlSize ControlSize) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return tfc
 }
 
 // WithRepresentedObject sets the object represented by the cell.
 func (tfc *TokenFieldCell) WithRepresentedObject(representedObject obj.Object) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	})
 	return tfc
 }
 
 // WithMenu sets the cell’s contextual menu.
 func (tfc *TokenFieldCell) WithMenu(menu *Menu) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return tfc
 }
 
 // WithSendsActionOnEndEditing sets a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 func (tfc *TokenFieldCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	})
 	return tfc
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (tfc *TokenFieldCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return tfc
 }
 
 // WithLineBreakMode sets the line break mode to use when drawing text in the cell.
 func (tfc *TokenFieldCell) WithLineBreakMode(lineBreakMode LineBreakMode) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return tfc
 }
 
 // WithAllowsUndo sets a Boolean value indicating whether the cell assumes responsibility for undo operations.
 func (tfc *TokenFieldCell) WithAllowsUndo(allowsUndo bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	})
 	return tfc
 }
 
 // WithTruncatesLastVisibleLine sets a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 func (tfc *TokenFieldCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	})
 	return tfc
 }
 
 // WithUserInterfaceLayoutDirection sets the layout direction of the user interface.
 func (tfc *TokenFieldCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return tfc
 }
 
 // WithUsesSingleLineMode sets a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 func (tfc *TokenFieldCell) WithUsesSingleLineMode(usesSingleLineMode bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return tfc
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the cell refuses the first responder status.
 func (tfc *TokenFieldCell) WithRefusesFirstResponder(refusesFirstResponder bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return tfc
 }
 
 // WithShowsFirstResponder sets a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 func (tfc *TokenFieldCell) WithShowsFirstResponder(showsFirstResponder bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	})
 	return tfc
 }
 
 // WithFocusRingType sets the type of focus ring to use with the associated view.
 func (tfc *TokenFieldCell) WithFocusRingType(focusRingType FocusRingType) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return tfc
 }
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (tfc *TokenFieldCell) WithAttributedStringValue(attributedStringValue obj.Object) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return tfc
 }
 
 // WithAllowsEditingTextAttributes sets a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 func (tfc *TokenFieldCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	})
 	return tfc
 }
 
 // WithImportsGraphics sets a Boolean value indicating whether the cell supports the importation of images into its text.
 func (tfc *TokenFieldCell) WithImportsGraphics(importsGraphics bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	})
 	return tfc
 }
 
 // WithAllowsMixedState sets a Boolean value indicating whether the cell supports three states instead of two.
 func (tfc *TokenFieldCell) WithAllowsMixedState(allowsMixedState bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	})
 	return tfc
 }
 
 // WithBackgroundStyle sets the cell’s background style.
 func (tfc *TokenFieldCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	})
 	return tfc
 }
 
 // WithControlTint sets the cell’s control tint.
 func (tfc *TokenFieldCell) WithControlTint(controlTint ControlTint) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setControlTint:"), controlTint)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setControlTint:"), controlTint)
+	})
 	return tfc
 }
 
 // TokenStyle returns the token style.
 func (tfc *TokenFieldCell) TokenStyle() TokenStyle {
-	_r := objc.Send[TokenStyle](objref.IDOf(tfc), objc.RegisterName("tokenStyle"))
-	return _r
+	var _mainthread0 TokenStyle
+	purego.Main(func() {
+		_mainthread0 = func() TokenStyle {
+			_r := objc.Send[TokenStyle](objref.IDOf(tfc), objc.RegisterName("tokenStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CompletionDelay returns the completion delay.
 func (tfc *TokenFieldCell) CompletionDelay() float64 {
-	_r := objc.Send[float64](objref.IDOf(tfc), objc.RegisterName("completionDelay"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(tfc), objc.RegisterName("completionDelay"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TokenizingCharacterSet returns the tokenizing character set.
 func (tfc *TokenFieldCell) TokenizingCharacterSet() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("tokenizingCharacterSet"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("tokenizingCharacterSet"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ TextFieldCellProvider = (*TokenFieldCell)(nil)

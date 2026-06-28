@@ -50,429 +50,633 @@ func clipViewAdopt(id objc.ID) *ClipView {
 
 // NewClipView creates a new ClipView.
 func NewClipView() *ClipView {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSClipView")), objc.RegisterName("new"))
-	return clipViewAdopt(_id)
+	var _mainthread0 *ClipView
+	purego.Main(func() {
+		_mainthread0 = func() *ClipView {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSClipView")), objc.RegisterName("new"))
+			return clipViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithBackgroundColor sets the color of the clip view’s background.
 func (cv *ClipView) WithBackgroundColor(backgroundColor *Color) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	})
 	return cv
 }
 
 // WithDrawsBackground sets a Boolean value that indicates if the clip view draws its background color.
 func (cv *ClipView) WithDrawsBackground(drawsBackground bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	})
 	return cv
 }
 
 // WithDocumentView sets the clip view’s document view.
 func (cv *ClipView) WithDocumentView(documentView ViewProvider) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setDocumentView:"), objref.IDOf(documentView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setDocumentView:"), objref.IDOf(documentView))
+	})
 	return cv
 }
 
 // WithDocumentCursor sets the cursor object used when the pointer lies over the view.
 func (cv *ClipView) WithDocumentCursor(documentCursor *Cursor) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setDocumentCursor:"), objref.IDOf(documentCursor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setDocumentCursor:"), objref.IDOf(documentCursor))
+	})
 	return cv
 }
 
 // WithContentInsets sets the distance that the content view is inset from the enclosing scroll view.
 func (cv *ClipView) WithContentInsets(contentInsets foundation.NSEdgeInsets) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setContentInsets:"), contentInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setContentInsets:"), contentInsets)
+	})
 	return cv
 }
 
 // WithAutomaticallyAdjustsContentInsets sets a Boolean value that indicates if the clip view automatically accounts for other scroll view subviews.
 func (cv *ClipView) WithAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAutomaticallyAdjustsContentInsets:"), automaticallyAdjustsContentInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAutomaticallyAdjustsContentInsets:"), automaticallyAdjustsContentInsets)
+	})
 	return cv
 }
 
 // WithCopiesOnScroll sets a Boolean value that indicates if the clip view copies rendered images while scrolling.
 func (cv *ClipView) WithCopiesOnScroll(copiesOnScroll bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setCopiesOnScroll:"), copiesOnScroll)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setCopiesOnScroll:"), copiesOnScroll)
+	})
 	return cv
 }
 
 // WithSubviews sets the subviews.
 func (cv *ClipView) WithSubviews(items ...ViewProvider) *ClipView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return cv
 }
 
 // WithHidden sets the hidden.
 func (cv *ClipView) WithHidden(hidden bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setHidden:"), hidden)
+	})
 	return cv
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (cv *ClipView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return cv
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (cv *ClipView) WithAutoresizesSubviews(autoresizesSubviews bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return cv
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (cv *ClipView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return cv
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (cv *ClipView) WithFrame(frame corefoundation.CGRect) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setFrame:"), frame)
+	})
 	return cv
 }
 
 // WithFrameRotation sets the frame rotation.
 func (cv *ClipView) WithFrameRotation(frameRotation float64) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return cv
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (cv *ClipView) WithFrameCenterRotation(frameCenterRotation float64) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return cv
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (cv *ClipView) WithBoundsRotation(boundsRotation float64) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return cv
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (cv *ClipView) WithBounds(bounds corefoundation.CGRect) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setBounds:"), bounds)
+	})
 	return cv
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (cv *ClipView) WithCanDrawConcurrently(canDrawConcurrently bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return cv
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (cv *ClipView) WithNeedsDisplay(needsDisplay bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return cv
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (cv *ClipView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return cv
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (cv *ClipView) WithWantsRestingTouches(wantsRestingTouches bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return cv
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (cv *ClipView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return cv
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (cv *ClipView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return cv
 }
 
 // WithWantsLayer sets the wants layer.
 func (cv *ClipView) WithWantsLayer(wantsLayer bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return cv
 }
 
 // WithLayer sets the layer.
 func (cv *ClipView) WithLayer(layer obj.Object) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return cv
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (cv *ClipView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return cv
 }
 
 // WithNeedsLayout sets the needs layout.
 func (cv *ClipView) WithNeedsLayout(needsLayout bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return cv
 }
 
 // WithAlphaValue sets the alpha value.
 func (cv *ClipView) WithAlphaValue(alphaValue float64) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return cv
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (cv *ClipView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return cv
 }
 
 // WithBackgroundFilters sets the background filters.
 func (cv *ClipView) WithBackgroundFilters(items ...obj.Object) *ClipView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return cv
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (cv *ClipView) WithCompositingFilter(compositingFilter obj.Object) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return cv
 }
 
 // WithContentFilters sets the content filters.
 func (cv *ClipView) WithContentFilters(items ...obj.Object) *ClipView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return cv
 }
 
 // WithShadow sets the shadow.
 func (cv *ClipView) WithShadow(shadow *Shadow) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return cv
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (cv *ClipView) WithClipsToBounds(clipsToBounds bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return cv
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (cv *ClipView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return cv
 }
 
 // WithToolTip sets the tool tip.
 func (cv *ClipView) WithToolTip(toolTip string) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return cv
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (cv *ClipView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return cv
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (cv *ClipView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return cv
 }
 
 // WithNextKeyView sets the next key view.
 func (cv *ClipView) WithNextKeyView(nextKeyView ViewProvider) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return cv
 }
 
 // WithFocusRingType sets the focus ring type.
 func (cv *ClipView) WithFocusRingType(focusRingType FocusRingType) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return cv
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (cv *ClipView) WithGestureRecognizers(items ...GestureRecognizerProvider) *ClipView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return cv
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (cv *ClipView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return cv
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (cv *ClipView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return cv
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (cv *ClipView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return cv
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (cv *ClipView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return cv
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (cv *ClipView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return cv
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (cv *ClipView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return cv
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (cv *ClipView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return cv
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (cv *ClipView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return cv
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (cv *ClipView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return cv
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (cv *ClipView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return cv
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (cv *ClipView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return cv
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (cv *ClipView) WithNextResponder(nextResponder ResponderProvider) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return cv
 }
 
 // WithMenu sets returns the responder’s menu.
 func (cv *ClipView) WithMenu(menu *Menu) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return cv
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (cv *ClipView) WithUserActivity(userActivity obj.Object) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return cv
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (cv *ClipView) WithTouchBar(touchBar *TouchBar) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return cv
 }
 
 // ViewFrameChanged handles an NSViewFrameDidChangeNotification, passed in the aNotification argument, by updating a containing NSScrollView based on the new frame.
 func (cv *ClipView) ViewFrameChanged(notification obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("viewFrameChanged:"), objref.IDOf(notification))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("viewFrameChanged:"), objref.IDOf(notification))
+	})
+
 }
 
 // ViewBoundsChanged handles an NSViewBoundsDidChangeNotification, passed in the aNotification argument, by updating a containing NSScrollView based on the new bounds.
 func (cv *ClipView) ViewBoundsChanged(notification obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("viewBoundsChanged:"), objref.IDOf(notification))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("viewBoundsChanged:"), objref.IDOf(notification))
+	})
+
 }
 
 // ScrollToPoint changes the origin of the clip view’s bounds rectangle to newOrigin.
 func (cv *ClipView) ScrollToPoint(newOrigin corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("scrollToPoint:"), newOrigin)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("scrollToPoint:"), newOrigin)
+	})
+
 }
 
 // ConstrainBoundsRect constrains the bounds of the clip view while the user is magnifying and scrolling.
 func (cv *ClipView) ConstrainBoundsRect(proposedBounds corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(cv), objc.RegisterName("constrainBoundsRect:"), proposedBounds)
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(cv), objc.RegisterName("constrainBoundsRect:"), proposedBounds)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BackgroundColor returns the background color.
 func (cv *ClipView) BackgroundColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("backgroundColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("backgroundColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DrawsBackground wraps the corresponding Objective-C method.
 func (cv *ClipView) DrawsBackground() bool {
-	_r := objc.Send[bool](objref.IDOf(cv), objc.RegisterName("drawsBackground"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cv), objc.RegisterName("drawsBackground"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DocumentView returns the document view.
 func (cv *ClipView) DocumentView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("documentView"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("documentView"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DocumentRect returns the document rect.
 func (cv *ClipView) DocumentRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(cv), objc.RegisterName("documentRect"))
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(cv), objc.RegisterName("documentRect"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DocumentCursor returns the document cursor.
 func (cv *ClipView) DocumentCursor() *Cursor {
-	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("documentCursor"))
-	return CursorFromID(_r)
+	var _mainthread0 *Cursor
+	purego.Main(func() {
+		_mainthread0 = func() *Cursor {
+			_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("documentCursor"))
+			return CursorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DocumentVisibleRect returns the document visible rect.
 func (cv *ClipView) DocumentVisibleRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(cv), objc.RegisterName("documentVisibleRect"))
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(cv), objc.RegisterName("documentVisibleRect"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ContentInsets returns the content insets.
 func (cv *ClipView) ContentInsets() foundation.NSEdgeInsets {
-	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(cv), objc.RegisterName("contentInsets"))
-	return _r
+	var _mainthread0 foundation.NSEdgeInsets
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSEdgeInsets {
+			_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(cv), objc.RegisterName("contentInsets"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AutomaticallyAdjustsContentInsets wraps the corresponding Objective-C method.
 func (cv *ClipView) AutomaticallyAdjustsContentInsets() bool {
-	_r := objc.Send[bool](objref.IDOf(cv), objc.RegisterName("automaticallyAdjustsContentInsets"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cv), objc.RegisterName("automaticallyAdjustsContentInsets"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ConstrainScrollPoint returns a scroll point adjusted from the proposed new origin, if necessary, to guarantee the view will lie within its document view.
 func (cv *ClipView) ConstrainScrollPoint(newOrigin corefoundation.CGPoint) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(cv), objc.RegisterName("constrainScrollPoint:"), newOrigin)
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(cv), objc.RegisterName("constrainScrollPoint:"), newOrigin)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CopiesOnScroll wraps the corresponding Objective-C method.
 func (cv *ClipView) CopiesOnScroll() bool {
-	_r := objc.Send[bool](objref.IDOf(cv), objc.RegisterName("copiesOnScroll"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cv), objc.RegisterName("copiesOnScroll"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ViewProvider = (*ClipView)(nil)

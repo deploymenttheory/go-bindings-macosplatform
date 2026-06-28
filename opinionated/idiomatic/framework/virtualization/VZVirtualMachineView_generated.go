@@ -68,42 +68,75 @@ func (vmv *VirtualMachineView) String() string {
 
 // NewVirtualMachineView creates a new VirtualMachineView.
 func NewVirtualMachineView() *VirtualMachineView {
-	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtualMachineView")), objc.RegisterName("new"))
-	return virtualMachineViewAdopt(_id)
+	var _mainthread0 *VirtualMachineView
+	purego.Main(func() {
+		_mainthread0 = func() *VirtualMachineView {
+			_id := objc.Send[objc.ID](objc.ID(_class("VZVirtualMachineView")), objc.RegisterName("new"))
+			return virtualMachineViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithVirtualMachine sets the VM to display in the view.
 func (vmv *VirtualMachineView) WithVirtualMachine(virtualMachine *VirtualMachine) *VirtualMachineView {
-	objc.Send[objc.ID](objref.IDOf(vmv), objc.RegisterName("setVirtualMachine:"), objref.IDOf(virtualMachine))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vmv), objc.RegisterName("setVirtualMachine:"), objref.IDOf(virtualMachine))
+	})
 	return vmv
 }
 
 // WithCapturesSystemKeys sets a Boolean value that determines whether the system should send certain system keyboard shortcuts to the guest instead of the host.
 func (vmv *VirtualMachineView) WithCapturesSystemKeys(capturesSystemKeys bool) *VirtualMachineView {
-	objc.Send[objc.ID](objref.IDOf(vmv), objc.RegisterName("setCapturesSystemKeys:"), capturesSystemKeys)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vmv), objc.RegisterName("setCapturesSystemKeys:"), capturesSystemKeys)
+	})
 	return vmv
 }
 
 // WithAutomaticallyReconfiguresDisplay sets a Boolean value that indicates whether the graphics display associated with this view automatically reconfigures with respect to view changes.
 func (vmv *VirtualMachineView) WithAutomaticallyReconfiguresDisplay(automaticallyReconfiguresDisplay bool) *VirtualMachineView {
-	objc.Send[objc.ID](objref.IDOf(vmv), objc.RegisterName("setAutomaticallyReconfiguresDisplay:"), automaticallyReconfiguresDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vmv), objc.RegisterName("setAutomaticallyReconfiguresDisplay:"), automaticallyReconfiguresDisplay)
+	})
 	return vmv
 }
 
 // VirtualMachine returns the virtual machine to display in the view.
 func (vmv *VirtualMachineView) VirtualMachine() *VirtualMachine {
-	_r := objc.Send[objc.ID](objref.IDOf(vmv), objc.RegisterName("virtualMachine"))
-	return VirtualMachineFromID(_r)
+	var _mainthread0 *VirtualMachine
+	purego.Main(func() {
+		_mainthread0 = func() *VirtualMachine {
+			_r := objc.Send[objc.ID](objref.IDOf(vmv), objc.RegisterName("virtualMachine"))
+			return VirtualMachineFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CapturesSystemKeys reports whether certain system hot keys should be sent to the guest instead of the host. Defaults to false.
 func (vmv *VirtualMachineView) CapturesSystemKeys() bool {
-	_r := objc.Send[bool](objref.IDOf(vmv), objc.RegisterName("capturesSystemKeys"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(vmv), objc.RegisterName("capturesSystemKeys"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AutomaticallyReconfiguresDisplay reports whether automatically reconfigures the graphics display associated with this view with respect to view changes. Defaults to false. Automatically resize or reconfigure this graphics display when the view properties update. For example, resizing the display when the view has a live resize operation. When enabled, the graphics display will automatically be reconfigured to match the host display environment. This property can only be set on a single VZVirtualMachineView targeting a particular VZGraphicsDisplay at a time. If multiple VZVirtualMachineViews targeting the same VZGraphicsDisplay enable this property, only one view will respect the property, and the other view will have had the property disabled.
 func (vmv *VirtualMachineView) AutomaticallyReconfiguresDisplay() bool {
-	_r := objc.Send[bool](objref.IDOf(vmv), objc.RegisterName("automaticallyReconfiguresDisplay"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(vmv), objc.RegisterName("automaticallyReconfiguresDisplay"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

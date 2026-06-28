@@ -47,59 +47,91 @@ func leaderboardViewControllerAdopt(id objc.ID) *LeaderboardViewController {
 
 // NewLeaderboardViewController creates a new LeaderboardViewController.
 func NewLeaderboardViewController() *LeaderboardViewController {
-	_id := objc.Send[objc.ID](objc.ID(_class("GKLeaderboardViewController")), objc.RegisterName("new"))
-	return leaderboardViewControllerAdopt(_id)
+	var _mainthread0 *LeaderboardViewController
+	purego.Main(func() {
+		_mainthread0 = func() *LeaderboardViewController {
+			_id := objc.Send[objc.ID](objc.ID(_class("GKLeaderboardViewController")), objc.RegisterName("new"))
+			return leaderboardViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithTimeScope sets a time filter used to restrict which scores are displayed to the player.
 func (lvc *LeaderboardViewController) WithTimeScope(timeScope LeaderboardTimeScope) *LeaderboardViewController {
-	objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("setTimeScope:"), timeScope)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("setTimeScope:"), timeScope)
+	})
 	return lvc
 }
 
 // WithCategory sets the named leaderboard that is displayed by the view controller.
 func (lvc *LeaderboardViewController) WithCategory(category string) *LeaderboardViewController {
-	objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("setCategory:"), purego.NSString(category))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("setCategory:"), purego.NSString(category))
+	})
 	return lvc
 }
 
 // WithViewState sets the view state.
 func (lvc *LeaderboardViewController) WithViewState(viewState GameCenterViewControllerState) *LeaderboardViewController {
-	objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("setViewState:"), viewState)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("setViewState:"), viewState)
+	})
 	return lvc
 }
 
 // WithLeaderboardTimeScope sets the leaderboard time scope.
 func (lvc *LeaderboardViewController) WithLeaderboardTimeScope(leaderboardTimeScope LeaderboardTimeScope) *LeaderboardViewController {
-	objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("setLeaderboardTimeScope:"), leaderboardTimeScope)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("setLeaderboardTimeScope:"), leaderboardTimeScope)
+	})
 	return lvc
 }
 
 // WithLeaderboardIdentifier sets the leaderboard identifier.
 func (lvc *LeaderboardViewController) WithLeaderboardIdentifier(leaderboardIdentifier string) *LeaderboardViewController {
-	objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("setLeaderboardIdentifier:"), purego.NSString(leaderboardIdentifier))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("setLeaderboardIdentifier:"), purego.NSString(leaderboardIdentifier))
+	})
 	return lvc
 }
 
 // WithLeaderboardCategory sets the leaderboard category.
 func (lvc *LeaderboardViewController) WithLeaderboardCategory(leaderboardCategory string) *LeaderboardViewController {
-	objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("setLeaderboardCategory:"), purego.NSString(leaderboardCategory))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("setLeaderboardCategory:"), purego.NSString(leaderboardCategory))
+	})
 	return lvc
 }
 
 // TimeScope returns the time scope.
 func (lvc *LeaderboardViewController) TimeScope() LeaderboardTimeScope {
-	_r := objc.Send[LeaderboardTimeScope](objref.IDOf(lvc), objc.RegisterName("timeScope"))
-	return _r
+	var _mainthread0 LeaderboardTimeScope
+	purego.Main(func() {
+		_mainthread0 = func() LeaderboardTimeScope {
+			_r := objc.Send[LeaderboardTimeScope](objref.IDOf(lvc), objc.RegisterName("timeScope"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Category returns the category.
 func (lvc *LeaderboardViewController) Category() string {
-	_r := objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("category"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("category"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ GameCenterViewControllerProvider = (*LeaderboardViewController)(nil)

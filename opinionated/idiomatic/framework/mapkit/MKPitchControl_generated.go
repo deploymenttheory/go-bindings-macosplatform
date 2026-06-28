@@ -68,18 +68,33 @@ func (pc *PitchControl) String() string {
 
 // NewPitchControl creates a new PitchControl.
 func NewPitchControl() *PitchControl {
-	_id := objc.Send[objc.ID](objc.ID(_class("MKPitchControl")), objc.RegisterName("new"))
-	return pitchControlAdopt(_id)
+	var _mainthread0 *PitchControl
+	purego.Main(func() {
+		_mainthread0 = func() *PitchControl {
+			_id := objc.Send[objc.ID](objc.ID(_class("MKPitchControl")), objc.RegisterName("new"))
+			return pitchControlAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithMapView sets the map view associated with this control.
 func (pc *PitchControl) WithMapView(mapView *MapView) *PitchControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
+	})
 	return pc
 }
 
 // MapView returns the map view.
 func (pc *PitchControl) MapView() *MapView {
-	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("mapView"))
-	return MapViewFromID(_r)
+	var _mainthread0 *MapView
+	purego.Main(func() {
+		_mainthread0 = func() *MapView {
+			_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("mapView"))
+			return MapViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }

@@ -97,6 +97,15 @@ func buildWithSetters(
 			continue
 		}
 		we.doc = prop.Doc
+		// A setter on a @MainActor class mutates UI state and must run on the main
+		// thread; the template wraps the send in purego.Main.
+		if cls.IsMainThreadRequired {
+			we.mainThread = true
+			if we.extraImports == nil {
+				we.extraImports = map[string]string{}
+			}
+			we.extraImports["purego"] = pureobjcImportPath
+		}
 		seenWithName[we.goName] = true
 		withMethods = append(withMethods, *we)
 	}
@@ -111,6 +120,7 @@ type withEntry struct {
 	param           withParam
 	isNSArray       bool   // true: variadic slice → NSArray
 	sliceElemType   string // parameter elem type (a provider interface or an object type)
+	mainThread      bool   // run the setter on the main thread (@MainActor class)
 	extraImports    map[string]string
 }
 
@@ -274,6 +284,7 @@ func writeWithMethod(w io.Writer, typeName string, we withEntry) {
 		GoName:         we.goName,
 		SetterSelector: we.setterSelector,
 		IsNSArray:      we.isNSArray,
+		MainThread:     we.mainThread,
 	}
 	if we.isNSArray {
 		view.SliceElemType = we.sliceElemType
@@ -294,6 +305,7 @@ type withSetterView struct {
 	GoName         string
 	SetterSelector string
 	IsNSArray      bool
+	MainThread     bool // wrap the setter send in purego.Main (@MainActor class)
 
 	// NSArray collection setter:
 	SliceElemType string

@@ -51,579 +51,825 @@ func pathControlAdopt(id objc.ID) *PathControl {
 
 // NewPathControl creates a new PathControl.
 func NewPathControl() *PathControl {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSPathControl")), objc.RegisterName("new"))
-	return pathControlAdopt(_id)
+	var _mainthread0 *PathControl
+	purego.Main(func() {
+		_mainthread0 = func() *PathControl {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSPathControl")), objc.RegisterName("new"))
+			return pathControlAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithEditable sets the editable.
 func (pc *PathControl) WithEditable(editable bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setEditable:"), editable)
+	})
 	return pc
 }
 
 // WithAllowedTypes sets the allowed types.
 func (pc *PathControl) WithAllowedTypes(items ...obj.Object) *PathControl {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAllowedTypes:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAllowedTypes:"), _arr)
+	})
 	return pc
 }
 
 // WithPlaceholderString sets the placeholder string.
 func (pc *PathControl) WithPlaceholderString(placeholderString string) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
+	})
 	return pc
 }
 
 // WithPlaceholderAttributedString sets the placeholder attributed string.
 func (pc *PathControl) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
+	})
 	return pc
 }
 
 // WithURL sets the path value displayed by the receiver.
 func (pc *PathControl) WithURL(uRL string) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+	})
 	return pc
 }
 
 // WithPathStyle sets the receiver’s path style.
 func (pc *PathControl) WithPathStyle(pathStyle PathStyle) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPathStyle:"), pathStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPathStyle:"), pathStyle)
+	})
 	return pc
 }
 
 // WithPathItems sets the path items.
 func (pc *PathControl) WithPathItems(items ...*PathControlItem) *PathControl {
 	_arr := purego.SliceToNSArray(items, func(_v *PathControlItem) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPathItems:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPathItems:"), _arr)
+	})
 	return pc
 }
 
 // WithBackgroundColor sets the receiver’s background color.
 func (pc *PathControl) WithBackgroundColor(backgroundColor *Color) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	})
 	return pc
 }
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (pc *PathControl) WithTarget(target obj.Object) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return pc
 }
 
 // WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
 func (pc *PathControl) WithTag(tag int) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTag:"), tag)
+	})
 	return pc
 }
 
 // WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 func (pc *PathControl) WithIgnoresMultiClick(ignoresMultiClick bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	})
 	return pc
 }
 
 // WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 func (pc *PathControl) WithContinuous(continuous bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return pc
 }
 
 // WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
 func (pc *PathControl) WithEnabled(enabled bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return pc
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
 func (pc *PathControl) WithRefusesFirstResponder(refusesFirstResponder bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return pc
 }
 
 // WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
 func (pc *PathControl) WithHighlighted(highlighted bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return pc
 }
 
 // WithControlSize sets the size of the control.
 func (pc *PathControl) WithControlSize(controlSize ControlSize) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return pc
 }
 
 // WithFormatter sets the receiver’s formatter.
 func (pc *PathControl) WithFormatter(formatter obj.Object) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return pc
 }
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (pc *PathControl) WithObjectValue(objectValue obj.Object) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return pc
 }
 
 // WithStringValue sets the value of the receiver’s cell as an NSString object.
 func (pc *PathControl) WithStringValue(stringValue string) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return pc
 }
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (pc *PathControl) WithAttributedStringValue(attributedStringValue obj.Object) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return pc
 }
 
 // WithIntValue sets the value of the receiver’s cell as an integer.
 func (pc *PathControl) WithIntValue(intValue int) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return pc
 }
 
 // WithIntegerValue sets the value of the receiver’s cell as an integer value.
 func (pc *PathControl) WithIntegerValue(integerValue int) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return pc
 }
 
 // WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
 func (pc *PathControl) WithFloatValue(floatValue float32) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return pc
 }
 
 // WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
 func (pc *PathControl) WithDoubleValue(doubleValue float64) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return pc
 }
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (pc *PathControl) WithFont(font *Font) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return pc
 }
 
 // WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
 func (pc *PathControl) WithUsesSingleLineMode(usesSingleLineMode bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return pc
 }
 
 // WithLineBreakMode sets the line break mode to use for text in the control’s cell.
 func (pc *PathControl) WithLineBreakMode(lineBreakMode LineBreakMode) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return pc
 }
 
 // WithAlignment sets the alignment mode of the text in the receiver’s cell.
 func (pc *PathControl) WithAlignment(alignment TextAlignment) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return pc
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (pc *PathControl) WithBaseWritingDirection(baseWritingDirection WritingDirection) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return pc
 }
 
 // WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 func (pc *PathControl) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	})
 	return pc
 }
 
 // WithCell sets the cell.
 func (pc *PathControl) WithCell(cell CellProvider) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	})
 	return pc
 }
 
 // WithSubviews sets the subviews.
 func (pc *PathControl) WithSubviews(items ...ViewProvider) *PathControl {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return pc
 }
 
 // WithHidden sets the hidden.
 func (pc *PathControl) WithHidden(hidden bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setHidden:"), hidden)
+	})
 	return pc
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (pc *PathControl) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return pc
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (pc *PathControl) WithAutoresizesSubviews(autoresizesSubviews bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return pc
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (pc *PathControl) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return pc
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (pc *PathControl) WithFrame(frame corefoundation.CGRect) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFrame:"), frame)
+	})
 	return pc
 }
 
 // WithFrameRotation sets the frame rotation.
 func (pc *PathControl) WithFrameRotation(frameRotation float64) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return pc
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (pc *PathControl) WithFrameCenterRotation(frameCenterRotation float64) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return pc
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (pc *PathControl) WithBoundsRotation(boundsRotation float64) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return pc
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (pc *PathControl) WithBounds(bounds corefoundation.CGRect) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBounds:"), bounds)
+	})
 	return pc
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (pc *PathControl) WithCanDrawConcurrently(canDrawConcurrently bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return pc
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (pc *PathControl) WithNeedsDisplay(needsDisplay bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return pc
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (pc *PathControl) WithAcceptsTouchEvents(acceptsTouchEvents bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return pc
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (pc *PathControl) WithWantsRestingTouches(wantsRestingTouches bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return pc
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (pc *PathControl) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return pc
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (pc *PathControl) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return pc
 }
 
 // WithWantsLayer sets the wants layer.
 func (pc *PathControl) WithWantsLayer(wantsLayer bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return pc
 }
 
 // WithLayer sets the layer.
 func (pc *PathControl) WithLayer(layer obj.Object) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return pc
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (pc *PathControl) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return pc
 }
 
 // WithNeedsLayout sets the needs layout.
 func (pc *PathControl) WithNeedsLayout(needsLayout bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return pc
 }
 
 // WithAlphaValue sets the alpha value.
 func (pc *PathControl) WithAlphaValue(alphaValue float64) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return pc
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (pc *PathControl) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return pc
 }
 
 // WithBackgroundFilters sets the background filters.
 func (pc *PathControl) WithBackgroundFilters(items ...obj.Object) *PathControl {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return pc
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (pc *PathControl) WithCompositingFilter(compositingFilter obj.Object) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return pc
 }
 
 // WithContentFilters sets the content filters.
 func (pc *PathControl) WithContentFilters(items ...obj.Object) *PathControl {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return pc
 }
 
 // WithShadow sets the shadow.
 func (pc *PathControl) WithShadow(shadow *Shadow) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return pc
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (pc *PathControl) WithClipsToBounds(clipsToBounds bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return pc
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (pc *PathControl) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return pc
 }
 
 // WithToolTip sets the tool tip.
 func (pc *PathControl) WithToolTip(toolTip string) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return pc
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (pc *PathControl) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return pc
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (pc *PathControl) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return pc
 }
 
 // WithNextKeyView sets the next key view.
 func (pc *PathControl) WithNextKeyView(nextKeyView ViewProvider) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return pc
 }
 
 // WithFocusRingType sets the focus ring type.
 func (pc *PathControl) WithFocusRingType(focusRingType FocusRingType) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return pc
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (pc *PathControl) WithGestureRecognizers(items ...GestureRecognizerProvider) *PathControl {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return pc
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (pc *PathControl) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return pc
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (pc *PathControl) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return pc
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (pc *PathControl) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return pc
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (pc *PathControl) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return pc
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (pc *PathControl) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return pc
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (pc *PathControl) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return pc
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (pc *PathControl) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return pc
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (pc *PathControl) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return pc
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (pc *PathControl) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return pc
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (pc *PathControl) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return pc
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (pc *PathControl) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return pc
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (pc *PathControl) WithNextResponder(nextResponder ResponderProvider) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return pc
 }
 
 // WithMenu sets returns the responder’s menu.
 func (pc *PathControl) WithMenu(menu *Menu) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return pc
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (pc *PathControl) WithUserActivity(userActivity obj.Object) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return pc
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (pc *PathControl) WithTouchBar(touchBar *TouchBar) *PathControl {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return pc
 }
 
 // SetDraggingSourceOperationMaskForLocal configures the drag operation mask.
 func (pc *PathControl) SetDraggingSourceOperationMaskForLocal(mask DragOperation, isLocal bool) {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setDraggingSourceOperationMask:forLocal:"), mask, isLocal)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setDraggingSourceOperationMask:forLocal:"), mask, isLocal)
+	})
+
 }
 
 // IsEditable reports whether the object is editable.
 func (pc *PathControl) IsEditable() bool {
-	_r := objc.Send[bool](objref.IDOf(pc), objc.RegisterName("isEditable"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(pc), objc.RegisterName("isEditable"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowedTypes returns the allowed types.
 //
 // AllowedTypes returns the collection as a Go slice.
 func (pc *PathControl) AllowedTypes() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("allowedTypes"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
+	var _mainthread0 []string
+	purego.Main(func() {
+		_mainthread0 = func() []string {
+			_arr := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("allowedTypes"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // PlaceholderString returns the placeholder string.
 func (pc *PathControl) PlaceholderString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("placeholderString"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("placeholderString"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PlaceholderAttributedString returns the placeholder attributed string.
 func (pc *PathControl) PlaceholderAttributedString() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("placeholderAttributedString"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("placeholderAttributedString"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // URL returns the URL.
 func (pc *PathControl) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("URL"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PathStyle returns the path style.
 func (pc *PathControl) PathStyle() PathStyle {
-	_r := objc.Send[PathStyle](objref.IDOf(pc), objc.RegisterName("pathStyle"))
-	return _r
+	var _mainthread0 PathStyle
+	purego.Main(func() {
+		_mainthread0 = func() PathStyle {
+			_r := objc.Send[PathStyle](objref.IDOf(pc), objc.RegisterName("pathStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ClickedPathItem returns the clicked path item.
 func (pc *PathControl) ClickedPathItem() *PathControlItem {
-	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("clickedPathItem"))
-	return PathControlItemFromID(_r)
+	var _mainthread0 *PathControlItem
+	purego.Main(func() {
+		_mainthread0 = func() *PathControlItem {
+			_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("clickedPathItem"))
+			return PathControlItemFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PathItems returns the path items.
 //
 // PathItems returns the collection as a Go slice.
 func (pc *PathControl) PathItems() []*PathControlItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("pathItems"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PathControlItem { return PathControlItemFromID(_id) })
+	var _mainthread0 []*PathControlItem
+	purego.Main(func() {
+		_mainthread0 = func() []*PathControlItem {
+			_arr := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("pathItems"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PathControlItem { return PathControlItemFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // BackgroundColor returns the background color.
 func (pc *PathControl) BackgroundColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("backgroundColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("backgroundColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ClickedPathComponentCell returns the clicked cell.
 func (pc *PathControl) ClickedPathComponentCell() *PathComponentCell {
-	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("clickedPathComponentCell"))
-	return PathComponentCellFromID(_r)
+	var _mainthread0 *PathComponentCell
+	purego.Main(func() {
+		_mainthread0 = func() *PathComponentCell {
+			_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("clickedPathComponentCell"))
+			return PathComponentCellFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PathComponentCells returns an array of the NSPathComponentCell objects currently being displayed.
 //
 // PathComponentCells returns the collection as a Go slice.
 func (pc *PathControl) PathComponentCells() []*PathComponentCell {
-	_arr := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("pathComponentCells"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PathComponentCell { return PathComponentCellFromID(_id) })
+	var _mainthread0 []*PathComponentCell
+	purego.Main(func() {
+		_mainthread0 = func() []*PathComponentCell {
+			_arr := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("pathComponentCells"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PathComponentCell { return PathComponentCellFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // SetPathComponentCells sets the array of NSPathComponentCell objects currently being displayed.
 func (pc *PathControl) SetPathComponentCells(cells []*PathComponentCell) {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPathComponentCells:"), purego.SliceToNSArray(cells, func(_v *PathComponentCell) objc.ID { return objref.IDOf(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPathComponentCells:"), purego.SliceToNSArray(cells, func(_v *PathComponentCell) objc.ID { return objref.IDOf(_v) }))
+	})
+
 }
 
 var _ ControlProvider = (*PathControl)(nil)

@@ -70,16 +70,28 @@ func (aevc *ActionExtensionViewController) String() string {
 
 // NewActionExtensionViewController creates a new ActionExtensionViewController.
 func NewActionExtensionViewController() *ActionExtensionViewController {
-	_id := objc.Send[objc.ID](objc.ID(_class("FPUIActionExtensionViewController")), objc.RegisterName("new"))
-	return actionExtensionViewControllerAdopt(_id)
+	var _mainthread0 *ActionExtensionViewController
+	purego.Main(func() {
+		_mainthread0 = func() *ActionExtensionViewController {
+			_id := objc.Send[objc.ID](objc.ID(_class("FPUIActionExtensionViewController")), objc.RegisterName("new"))
+			return actionExtensionViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // PrepareForError performs any necessary setup or configuration when an authentication error occurs.
 func (aevc *ActionExtensionViewController) PrepareForError(error_ unsafe.Pointer) {
-	objc.Send[objc.ID](objref.IDOf(aevc), objc.RegisterName("prepareForError:"), error_)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(aevc), objc.RegisterName("prepareForError:"), error_)
+	})
+
 }
 
 // PrepareForActionWithIdentifierItemIdentifiers performs any necessary setup or configuration for the specified action.
 func (aevc *ActionExtensionViewController) PrepareForActionWithIdentifierItemIdentifiers(actionIdentifier string, itemIdentifiers []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(aevc), objc.RegisterName("prepareForActionWithIdentifier:itemIdentifiers:"), purego.NSString(actionIdentifier), purego.SliceToNSArray(itemIdentifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(aevc), objc.RegisterName("prepareForActionWithIdentifier:itemIdentifiers:"), purego.NSString(actionIdentifier), purego.SliceToNSArray(itemIdentifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	})
+
 }

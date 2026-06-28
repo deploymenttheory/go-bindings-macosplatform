@@ -66,11 +66,20 @@ func (qfv *QuartzFilterView) String() string {
 
 // NewQuartzFilterView creates a new QuartzFilterView.
 func NewQuartzFilterView() *QuartzFilterView {
-	_id := objc.Send[objc.ID](objc.ID(_class("QuartzFilterView")), objc.RegisterName("new"))
-	return quartzFilterViewAdopt(_id)
+	var _mainthread0 *QuartzFilterView
+	purego.Main(func() {
+		_mainthread0 = func() *QuartzFilterView {
+			_id := objc.Send[objc.ID](objc.ID(_class("QuartzFilterView")), objc.RegisterName("new"))
+			return quartzFilterViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // SizeToFit wraps the corresponding Objective-C method.
 func (qfv *QuartzFilterView) SizeToFit() {
-	objc.Send[objc.ID](objref.IDOf(qfv), objc.RegisterName("sizeToFit"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qfv), objc.RegisterName("sizeToFit"))
+	})
+
 }

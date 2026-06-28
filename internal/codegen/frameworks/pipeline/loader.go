@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/appledocs"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/mainactor"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/overrides"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -105,6 +106,12 @@ func LoadAll(paths []string, modulePrefix, libraryModulePrefix string) (*Registr
 		if err := appledocs.ApplyAdjacent(p, framework); err != nil {
 			return nil, fmt.Errorf("load %s: %w", p, err)
 		}
+		// Stamp @MainActor isolation from the adjacent mainactor.json sidecar
+		// (whole-class flags, isolated selectors, nonisolated opt-outs). The
+		// cross-framework hierarchy propagation runs once after all load.
+		if err := mainactor.ApplyAdjacent(p, framework); err != nil {
+			return nil, fmt.Errorf("load %s: %w", p, err)
+		}
 		all = append(all, fmWithPath{framework, p})
 	}
 
@@ -148,6 +155,12 @@ func LoadAll(paths []string, modulePrefix, libraryModulePrefix string) (*Registr
 		frameworks = append(frameworks, lf.framework)
 		reg.Frameworks = append(reg.Frameworks, lf.framework)
 	}
+
+	// Push @MainActor isolation down the class hierarchy across all frameworks,
+	// so every subclass of a main-thread root (NSView, NSWindow, …) — including
+	// ones in other frameworks (MKMapView, PDFView, SCNView) — is marked and its
+	// instance methods stamped for purego.Main wrapping.
+	mainactor.Propagate(frameworks)
 
 	// Pass 2: canonical class ownership — fewest non-ghost methods wins.
 	type classEntry struct {

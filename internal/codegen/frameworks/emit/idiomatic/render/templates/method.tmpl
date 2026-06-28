@@ -6,9 +6,36 @@
     so only the tokens and statement order matter, not the indentation.
 */}}
 {{define "method"}}{{if .DocComment}}{{.DocComment}}{{end}}func {{.Recv}}{{.GoName}}({{.ParamStr}}){{.RetSig}} {
+{{- if .MainThread}}{{template "main_thread_body" .}}{{else}}
 {{template "dispatch_tail" .Dispatch}}
+{{- end}}
 }
 
+{{end}}
+
+{{/*
+    main_thread_body runs a method body on the main thread. The selector is
+    @MainActor-isolated, so the call must originate on the main OS thread.
+    purego.Main runs the closure there (inline when already on it). The original
+    body sub-template is reused untouched: it is lifted into an inner closure
+    typed by the method's own return clause, whose results are captured into the
+    pre-declared locals and returned. A void method needs no capture.
+*/}}
+{{define "main_thread_body"}}
+{{- range $i, $v := .RetVars}}var {{$v}} {{index $.RetTypes $i}}
+{{end -}}
+purego.Main(func() {
+{{- if .RetVars}}
+{{join .RetVars ", "}} = func(){{.RetSig}} {
+{{template "dispatch_tail" .Dispatch}}
+}()
+{{- else}}
+{{template "dispatch_tail" .Dispatch}}
+{{- end}}
+})
+{{- if .RetVars}}
+return {{join .RetVars ", "}}
+{{- end}}
 {{end}}
 
 {{/*

@@ -66,11 +66,20 @@ func (sab *SliderAccessoryBehavior) String() string {
 
 // NewSliderAccessoryBehavior creates a new SliderAccessoryBehavior.
 func NewSliderAccessoryBehavior() *SliderAccessoryBehavior {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSSliderAccessoryBehavior")), objc.RegisterName("new"))
-	return sliderAccessoryBehaviorAdopt(_id)
+	var _mainthread0 *SliderAccessoryBehavior
+	purego.Main(func() {
+		_mainthread0 = func() *SliderAccessoryBehavior {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSSliderAccessoryBehavior")), objc.RegisterName("new"))
+			return sliderAccessoryBehaviorAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // HandleAction override point for custom subclasses to handle interaction.
 func (sab *SliderAccessoryBehavior) HandleAction(sender *SliderAccessory) {
-	objc.Send[objc.ID](objref.IDOf(sab), objc.RegisterName("handleAction:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sab), objc.RegisterName("handleAction:"), objref.IDOf(sender))
+	})
+
 }

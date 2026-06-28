@@ -50,602 +50,1073 @@ func applicationAdopt(id objc.ID) *Application {
 
 // NewApplication creates a new Application.
 func NewApplication() *Application {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSApplication")), objc.RegisterName("new"))
-	return applicationAdopt(_id)
+	var _mainthread0 *Application
+	purego.Main(func() {
+		_mainthread0 = func() *Application {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSApplication")), objc.RegisterName("new"))
+			return applicationAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithMainMenu sets the main menu.
 func (a *Application) WithMainMenu(mainMenu *Menu) *Application {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setMainMenu:"), objref.IDOf(mainMenu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setMainMenu:"), objref.IDOf(mainMenu))
+	})
 	return a
 }
 
 // WithHelpMenu sets the help menu used by the app.
 func (a *Application) WithHelpMenu(helpMenu *Menu) *Application {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setHelpMenu:"), objref.IDOf(helpMenu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setHelpMenu:"), objref.IDOf(helpMenu))
+	})
 	return a
 }
 
 // WithApplicationIconImage sets the image used for the app’s icon.
 func (a *Application) WithApplicationIconImage(applicationIconImage *Image) *Application {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setApplicationIconImage:"), objref.IDOf(applicationIconImage))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setApplicationIconImage:"), objref.IDOf(applicationIconImage))
+	})
 	return a
 }
 
 // WithPresentationOptions sets the presentation options that should be in effect for the system when this app is active.
 func (a *Application) WithPresentationOptions(presentationOptions ApplicationPresentationOptions) *Application {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setPresentationOptions:"), presentationOptions)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setPresentationOptions:"), presentationOptions)
+	})
 	return a
 }
 
 // WithAppearance sets the appearance associated with the app’s windows.
 func (a *Application) WithAppearance(appearance *Appearance) *Application {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setAppearance:"), objref.IDOf(appearance))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setAppearance:"), objref.IDOf(appearance))
+	})
 	return a
 }
 
 // WithWindowsMenu sets the windows menu.
 func (a *Application) WithWindowsMenu(windowsMenu *Menu) *Application {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setWindowsMenu:"), objref.IDOf(windowsMenu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setWindowsMenu:"), objref.IDOf(windowsMenu))
+	})
 	return a
 }
 
 // WithServicesMenu sets the services menu.
 func (a *Application) WithServicesMenu(servicesMenu *Menu) *Application {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setServicesMenu:"), objref.IDOf(servicesMenu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setServicesMenu:"), objref.IDOf(servicesMenu))
+	})
 	return a
 }
 
 // WithServicesProvider sets the object that provides the services the current app advertises in the Services menu of other apps.
 func (a *Application) WithServicesProvider(servicesProvider obj.Object) *Application {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setServicesProvider:"), objref.IDOf(servicesProvider))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setServicesProvider:"), objref.IDOf(servicesProvider))
+	})
 	return a
 }
 
 // WithAutomaticCustomizeTouchBarMenuItemEnabled sets whether or not a menu item to customize the NSTouchBar can be automatically added to the main menu. It will only actually be added when Touch Bar hardware or simulator is present. Defaults to NO. Setting this property to YES is the recommended way to add the customization menu item. But if non-standard placement of the menu item is needed, creating a menu item with an action of `toggleTouchBarCustomizationPalette:` can be used instead.
 func (a *Application) WithAutomaticCustomizeTouchBarMenuItemEnabled(automaticCustomizeTouchBarMenuItemEnabled bool) *Application {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setAutomaticCustomizeTouchBarMenuItemEnabled:"), automaticCustomizeTouchBarMenuItemEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setAutomaticCustomizeTouchBarMenuItemEnabled:"), automaticCustomizeTouchBarMenuItemEnabled)
+	})
 	return a
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (a *Application) WithNextResponder(nextResponder ResponderProvider) *Application {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return a
 }
 
 // WithMenu sets returns the responder’s menu.
 func (a *Application) WithMenu(menu *Menu) *Application {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return a
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (a *Application) WithUserActivity(userActivity obj.Object) *Application {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return a
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (a *Application) WithTouchBar(touchBar *TouchBar) *Application {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return a
 }
 
 // Hide hides all the receiver’s windows, and the next app in line is activated.
 func (a *Application) Hide(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("hide:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("hide:"), objref.IDOf(sender))
+	})
+
 }
 
 // Unhide wraps the corresponding Objective-C method.
 func (a *Application) Unhide(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("unhide:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("unhide:"), objref.IDOf(sender))
+	})
+
 }
 
 // UnhideWithoutActivation restores hidden windows without activating their owner (the receiver).
 func (a *Application) UnhideWithoutActivation() {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("unhideWithoutActivation"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("unhideWithoutActivation"))
+	})
+
 }
 
 // WindowWithWindowNumber wraps the corresponding Objective-C method.
 func (a *Application) WindowWithWindowNumber(windowNum int) *Window {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("windowWithWindowNumber:"), windowNum)
-	return WindowFromID(_r)
+	var _mainthread0 *Window
+	purego.Main(func() {
+		_mainthread0 = func() *Window {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("windowWithWindowNumber:"), windowNum)
+			return WindowFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Deactivate deactivates the receiver.
 func (a *Application) Deactivate() {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("deactivate"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("deactivate"))
+	})
+
 }
 
 // ActivateIgnoringOtherApps makes the receiver the active app. - Parameter ignoreOtherApps: If `NO`, the app is activated only if no other app is currently active. If `YES`, the app activates regardless.
 func (a *Application) ActivateIgnoringOtherApps(ignoreOtherApps bool) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("activateIgnoringOtherApps:"), ignoreOtherApps)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("activateIgnoringOtherApps:"), ignoreOtherApps)
+	})
+
 }
 
 // Activate activates the receiver app, if appropriate.
 func (a *Application) Activate() {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("activate"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("activate"))
+	})
+
 }
 
 // YieldActivationToApplication explicitly allows another app to make itself active.
 func (a *Application) YieldActivationToApplication(application *RunningApplication) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("yieldActivationToApplication:"), objref.IDOf(application))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("yieldActivationToApplication:"), objref.IDOf(application))
+	})
+
 }
 
 // YieldActivationToApplicationWithBundleIdentifier explicitly allows another app to make itself active.
 func (a *Application) YieldActivationToApplicationWithBundleIdentifier(bundleIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("yieldActivationToApplicationWithBundleIdentifier:"), purego.NSString(bundleIdentifier))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("yieldActivationToApplicationWithBundleIdentifier:"), purego.NSString(bundleIdentifier))
+	})
+
 }
 
 // HideOtherApplications hides all apps, except the receiver.
 func (a *Application) HideOtherApplications(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("hideOtherApplications:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("hideOtherApplications:"), objref.IDOf(sender))
+	})
+
 }
 
 // UnhideAllApplications unhides all apps, including the receiver.
 func (a *Application) UnhideAllApplications(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("unhideAllApplications:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("unhideAllApplications:"), objref.IDOf(sender))
+	})
+
 }
 
 // FinishLaunching activates the app, opens any files specified by the NSOpen user default, and unhighlights the app’s icon.
 func (a *Application) FinishLaunching() {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("finishLaunching"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("finishLaunching"))
+	})
+
 }
 
 // Run starts the main event loop.
 func (a *Application) Run() {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("run"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("run"))
+	})
+
 }
 
 // RunModalForWindow runs modal for window.
 func (a *Application) RunModalForWindow(window *Window) int {
-	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("runModalForWindow:"), objref.IDOf(window))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("runModalForWindow:"), objref.IDOf(window))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Stop stops the main event loop.
 func (a *Application) Stop(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("stop:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("stop:"), objref.IDOf(sender))
+	})
+
 }
 
 // StopModal stops modal.
 func (a *Application) StopModal() {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("stopModal"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("stopModal"))
+	})
+
 }
 
 // StopModalWithCode stops modal with code.
 func (a *Application) StopModalWithCode(returnCode int) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("stopModalWithCode:"), returnCode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("stopModalWithCode:"), returnCode)
+	})
+
 }
 
 // AbortModal wraps the corresponding Objective-C method.
 func (a *Application) AbortModal() {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("abortModal"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("abortModal"))
+	})
+
 }
 
 // BeginModalSessionForWindow begins modal session for window.
 func (a *Application) BeginModalSessionForWindow(window *Window) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("beginModalSessionForWindow:"), objref.IDOf(window))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("beginModalSessionForWindow:"), objref.IDOf(window))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RunModalSession runs modal session.
 func (a *Application) RunModalSession(session obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("runModalSession:"), objref.IDOf(session))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("runModalSession:"), objref.IDOf(session))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // EndModalSession ends modal session.
 func (a *Application) EndModalSession(session obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("endModalSession:"), objref.IDOf(session))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("endModalSession:"), objref.IDOf(session))
+	})
+
 }
 
 // Terminate terminates the receiver.
 func (a *Application) Terminate(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("terminate:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("terminate:"), objref.IDOf(sender))
+	})
+
 }
 
 // RequestUserAttention starts a user attention request.
 func (a *Application) RequestUserAttention(requestType RequestUserAttentionType) int {
-	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("requestUserAttention:"), requestType)
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("requestUserAttention:"), requestType)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CancelUserAttentionRequest cancels a previous user attention request.
 func (a *Application) CancelUserAttentionRequest(request int) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("cancelUserAttentionRequest:"), request)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("cancelUserAttentionRequest:"), request)
+	})
+
 }
 
 // EnumerateWindowsWithOptionsUsing execute a block for each of the app's windows. Set `*stop = YES` if desired, to halt the enumeration early.
 func (a *Application) EnumerateWindowsWithOptionsUsing(options WindowListOptions, block func(obj.Object, *bool)) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("enumerateWindowsWithOptions:usingBlock:"), options, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("enumerateWindowsWithOptions:usingBlock:"), options, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
+	})
+
 }
 
 // PreventWindowOrdering wraps the corresponding Objective-C method.
 func (a *Application) PreventWindowOrdering() {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("preventWindowOrdering"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("preventWindowOrdering"))
+	})
+
 }
 
 // SetWindowsNeedUpdate wraps the corresponding Objective-C method.
 func (a *Application) SetWindowsNeedUpdate(needUpdate bool) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setWindowsNeedUpdate:"), needUpdate)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setWindowsNeedUpdate:"), needUpdate)
+	})
+
 }
 
 // UpdateWindows sends an message to each onscreen window.
 func (a *Application) UpdateWindows() {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("updateWindows"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("updateWindows"))
+	})
+
 }
 
 // ActivationPolicy returns the app’s activation policy.
 func (a *Application) ActivationPolicy() ApplicationActivationPolicy {
-	_r := objc.Send[ApplicationActivationPolicy](objref.IDOf(a), objc.RegisterName("activationPolicy"))
-	return _r
+	var _mainthread0 ApplicationActivationPolicy
+	purego.Main(func() {
+		_mainthread0 = func() ApplicationActivationPolicy {
+			_r := objc.Send[ApplicationActivationPolicy](objref.IDOf(a), objc.RegisterName("activationPolicy"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetActivationPolicy attempts to modify the app’s activation policy.
 func (a *Application) SetActivationPolicy(activationPolicy ApplicationActivationPolicy) bool {
-	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("setActivationPolicy:"), activationPolicy)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("setActivationPolicy:"), activationPolicy)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ReportException logs a given exception by calling NSLog().
 func (a *Application) ReportException(exception obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("reportException:"), objref.IDOf(exception))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("reportException:"), objref.IDOf(exception))
+	})
+
 }
 
 // ReplyToApplicationShouldTerminate responds to NSTerminateLater once the app knows whether it can terminate.
 func (a *Application) ReplyToApplicationShouldTerminate(shouldTerminate bool) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("replyToApplicationShouldTerminate:"), shouldTerminate)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("replyToApplicationShouldTerminate:"), shouldTerminate)
+	})
+
 }
 
 // ReplyToOpenOrPrint handles errors that might occur when the user attempts to open or print files.
 func (a *Application) ReplyToOpenOrPrint(reply ApplicationDelegateReply) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("replyToOpenOrPrint:"), reply)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("replyToOpenOrPrint:"), reply)
+	})
+
 }
 
 // OrderFrontCharacterPalette opens the character palette.
 func (a *Application) OrderFrontCharacterPalette(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("orderFrontCharacterPalette:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("orderFrontCharacterPalette:"), objref.IDOf(sender))
+	})
+
 }
 
 // MainWindow returns the main window.
 func (a *Application) MainWindow() *Window {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("mainWindow"))
-	return WindowFromID(_r)
+	var _mainthread0 *Window
+	purego.Main(func() {
+		_mainthread0 = func() *Window {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("mainWindow"))
+			return WindowFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // KeyWindow returns the key window.
 func (a *Application) KeyWindow() *Window {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("keyWindow"))
-	return WindowFromID(_r)
+	var _mainthread0 *Window
+	purego.Main(func() {
+		_mainthread0 = func() *Window {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("keyWindow"))
+			return WindowFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsActive reports whether the object is active.
 func (a *Application) IsActive() bool {
-	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isActive"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isActive"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsHidden reports whether the object is hidden.
 func (a *Application) IsHidden() bool {
-	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isHidden"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isHidden"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsRunning reports whether the object is running.
 func (a *Application) IsRunning() bool {
-	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isRunning"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isRunning"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ApplicationShouldSuppressHighDynamicRangeContent reports whether your application should suppress HDR content based on established policy. Built-in AppKit components such as NSImageView will automatically behave correctly with HDR content. You should use this value in conjunction with notifications (`NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification` and `NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification`) to suppress HDR content in your application when signaled to do so.
 func (a *Application) ApplicationShouldSuppressHighDynamicRangeContent() bool {
-	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("applicationShouldSuppressHighDynamicRangeContent"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("applicationShouldSuppressHighDynamicRangeContent"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ModalWindow returns the modal window.
 func (a *Application) ModalWindow() *Window {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("modalWindow"))
-	return WindowFromID(_r)
+	var _mainthread0 *Window
+	purego.Main(func() {
+		_mainthread0 = func() *Window {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("modalWindow"))
+			return WindowFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Windows returns the windows.
 //
 // Windows returns the collection as a Go slice.
 func (a *Application) Windows() []*Window {
-	_arr := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("windows"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Window { return WindowFromID(_id) })
+	var _mainthread0 []*Window
+	purego.Main(func() {
+		_mainthread0 = func() []*Window {
+			_arr := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("windows"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Window { return WindowFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // MainMenu returns the main menu.
 func (a *Application) MainMenu() *Menu {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("mainMenu"))
-	return MenuFromID(_r)
+	var _mainthread0 *Menu
+	purego.Main(func() {
+		_mainthread0 = func() *Menu {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("mainMenu"))
+			return MenuFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HelpMenu set or get the Help menu for the app.  If a non-nil menu is set as the Help menu, Spotlight for Help will be installed in it; otherwise AppKit will install Spotlight for Help into a menu of its choosing (and that menu is not returned from `-helpMenu`).  If you wish to completely suppress Spotlight for Help, you can set a menu that does not appear in the menu bar.
 func (a *Application) HelpMenu() *Menu {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("helpMenu"))
-	return MenuFromID(_r)
+	var _mainthread0 *Menu
+	purego.Main(func() {
+		_mainthread0 = func() *Menu {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("helpMenu"))
+			return MenuFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ApplicationIconImage returns the application icon image.
 func (a *Application) ApplicationIconImage() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("applicationIconImage"))
-	return ImageFromID(_r)
+	var _mainthread0 *Image
+	purego.Main(func() {
+		_mainthread0 = func() *Image {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("applicationIconImage"))
+			return ImageFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DockTile returns the dock tile.
 func (a *Application) DockTile() *DockTile {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("dockTile"))
-	return DockTileFromID(_r)
+	var _mainthread0 *DockTile
+	purego.Main(func() {
+		_mainthread0 = func() *DockTile {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("dockTile"))
+			return DockTileFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PresentationOptions gets or sets the
 func (a *Application) PresentationOptions() ApplicationPresentationOptions {
-	_r := objc.Send[ApplicationPresentationOptions](objref.IDOf(a), objc.RegisterName("presentationOptions"))
-	return _r
+	var _mainthread0 ApplicationPresentationOptions
+	purego.Main(func() {
+		_mainthread0 = func() ApplicationPresentationOptions {
+			_r := objc.Send[ApplicationPresentationOptions](objref.IDOf(a), objc.RegisterName("presentationOptions"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CurrentSystemPresentationOptions returns the current system presentation options.
 func (a *Application) CurrentSystemPresentationOptions() ApplicationPresentationOptions {
-	_r := objc.Send[ApplicationPresentationOptions](objref.IDOf(a), objc.RegisterName("currentSystemPresentationOptions"))
-	return _r
+	var _mainthread0 ApplicationPresentationOptions
+	purego.Main(func() {
+		_mainthread0 = func() ApplicationPresentationOptions {
+			_r := objc.Send[ApplicationPresentationOptions](objref.IDOf(a), objc.RegisterName("currentSystemPresentationOptions"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // OcclusionState returns the occlusion state.
 func (a *Application) OcclusionState() ApplicationOcclusionState {
-	_r := objc.Send[ApplicationOcclusionState](objref.IDOf(a), objc.RegisterName("occlusionState"))
-	return _r
+	var _mainthread0 ApplicationOcclusionState
+	purego.Main(func() {
+		_mainthread0 = func() ApplicationOcclusionState {
+			_r := objc.Send[ApplicationOcclusionState](objref.IDOf(a), objc.RegisterName("occlusionState"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsProtectedDataAvailable reports whether the object is protected data available.
 func (a *Application) IsProtectedDataAvailable() bool {
-	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isProtectedDataAvailable"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isProtectedDataAvailable"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Appearance returns the appearance.
 func (a *Application) Appearance() *Appearance {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("appearance"))
-	return AppearanceFromID(_r)
+	var _mainthread0 *Appearance
+	purego.Main(func() {
+		_mainthread0 = func() *Appearance {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("appearance"))
+			return AppearanceFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // EffectiveAppearance returns the effective appearance.
 func (a *Application) EffectiveAppearance() *Appearance {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("effectiveAppearance"))
-	return AppearanceFromID(_r)
+	var _mainthread0 *Appearance
+	purego.Main(func() {
+		_mainthread0 = func() *Appearance {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("effectiveAppearance"))
+			return AppearanceFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SendEvent dispatches an event to other objects.
 func (a *Application) SendEvent(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("sendEvent:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("sendEvent:"), objref.IDOf(event))
+	})
+
 }
 
 // PostEventAtStart adds a given event to the receiver’s event queue.
 func (a *Application) PostEventAtStart(event *Event, atStart bool) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("postEvent:atStart:"), objref.IDOf(event), atStart)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("postEvent:atStart:"), objref.IDOf(event), atStart)
+	})
+
 }
 
 // NextEventMatchingMaskUntilDateInModeDequeue returns the next event matching a given mask, or nil if no such event is found before a specified expiration date.
 func (a *Application) NextEventMatchingMaskUntilDateInModeDequeue(mask EventMask, expiration obj.Object, mode obj.Object, deqFlag bool) *Event {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("nextEventMatchingMask:untilDate:inMode:dequeue:"), mask, objref.IDOf(expiration), objref.IDOf(mode), deqFlag)
-	return EventFromID(_r)
+	var _mainthread0 *Event
+	purego.Main(func() {
+		_mainthread0 = func() *Event {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("nextEventMatchingMask:untilDate:inMode:dequeue:"), mask, objref.IDOf(expiration), objref.IDOf(mode), deqFlag)
+			return EventFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DiscardEventsMatchingMaskBeforeEvent removes all events matching the given mask and generated before the specified event.
 func (a *Application) DiscardEventsMatchingMaskBeforeEvent(mask EventMask, lastEvent *Event) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("discardEventsMatchingMask:beforeEvent:"), mask, objref.IDOf(lastEvent))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("discardEventsMatchingMask:beforeEvent:"), mask, objref.IDOf(lastEvent))
+	})
+
 }
 
 // CurrentEvent returns the current event.
 func (a *Application) CurrentEvent() *Event {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("currentEvent"))
-	return EventFromID(_r)
+	var _mainthread0 *Event
+	purego.Main(func() {
+		_mainthread0 = func() *Event {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("currentEvent"))
+			return EventFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ArrangeInFront wraps the corresponding Objective-C method.
 func (a *Application) ArrangeInFront(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("arrangeInFront:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("arrangeInFront:"), objref.IDOf(sender))
+	})
+
 }
 
 // RemoveWindowsItem removes windows item.
 func (a *Application) RemoveWindowsItem(win *Window) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("removeWindowsItem:"), objref.IDOf(win))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("removeWindowsItem:"), objref.IDOf(win))
+	})
+
 }
 
 // AddWindowsItemTitleFilename adds windows item title filename.
 func (a *Application) AddWindowsItemTitleFilename(win *Window, string_ string, isFilename bool) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("addWindowsItem:title:filename:"), objref.IDOf(win), purego.NSString(string_), isFilename)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("addWindowsItem:title:filename:"), objref.IDOf(win), purego.NSString(string_), isFilename)
+	})
+
 }
 
 // ChangeWindowsItemTitleFilename wraps the corresponding Objective-C method.
 func (a *Application) ChangeWindowsItemTitleFilename(win *Window, string_ string, isFilename bool) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("changeWindowsItem:title:filename:"), objref.IDOf(win), purego.NSString(string_), isFilename)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("changeWindowsItem:title:filename:"), objref.IDOf(win), purego.NSString(string_), isFilename)
+	})
+
 }
 
 // UpdateWindowsItem updates windows item.
 func (a *Application) UpdateWindowsItem(win *Window) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("updateWindowsItem:"), objref.IDOf(win))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("updateWindowsItem:"), objref.IDOf(win))
+	})
+
 }
 
 // MiniaturizeAll wraps the corresponding Objective-C method.
 func (a *Application) MiniaturizeAll(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("miniaturizeAll:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("miniaturizeAll:"), objref.IDOf(sender))
+	})
+
 }
 
 // WindowsMenu returns the windows menu.
 func (a *Application) WindowsMenu() *Menu {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("windowsMenu"))
-	return MenuFromID(_r)
+	var _mainthread0 *Menu
+	purego.Main(func() {
+		_mainthread0 = func() *Menu {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("windowsMenu"))
+			return MenuFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsFullKeyboardAccessEnabled reports whether keyboard navigation is enabled in System Settings > Keyboard. - Note: The value of this property is `YES` if keyboard navigation is enabled or `NO` if it’s not. You might use this value to implement your own key loop or to implement in-control tabbing behavior similar to `NSTableView`. Because of the nature of the preference storage, you won’t be notified of changes to this property if you attempt to observe it through key-value observing; however, accessing this property is fairly inexpensive, so you can access it directly rather than caching it. - Note: This property’s value isn’t necessarily reflective of the separate accessibility setting named “Full Keyboard Access” in System Settings > Accessibility > Keyboard.
 func (a *Application) IsFullKeyboardAccessEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isFullKeyboardAccessEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isFullKeyboardAccessEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RegisterServicesMenuSendTypesReturnTypes registers services menu send types return types.
 func (a *Application) RegisterServicesMenuSendTypesReturnTypes(sendTypes []obj.Object, returnTypes []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("registerServicesMenuSendTypes:returnTypes:"), purego.SliceToNSArray(sendTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(returnTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("registerServicesMenuSendTypes:returnTypes:"), purego.SliceToNSArray(sendTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(returnTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	})
+
 }
 
 // ServicesMenu returns the services menu.
 func (a *Application) ServicesMenu() *Menu {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("servicesMenu"))
-	return MenuFromID(_r)
+	var _mainthread0 *Menu
+	purego.Main(func() {
+		_mainthread0 = func() *Menu {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("servicesMenu"))
+			return MenuFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ServicesProvider returns the services provider.
 func (a *Application) ServicesProvider() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("servicesProvider"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("servicesProvider"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // OrderFrontStandardAboutPanel wraps the corresponding Objective-C method.
 func (a *Application) OrderFrontStandardAboutPanel(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("orderFrontStandardAboutPanel:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("orderFrontStandardAboutPanel:"), objref.IDOf(sender))
+	})
+
 }
 
 // OrderFrontStandardAboutPanelWithOptions wraps the corresponding Objective-C method.
 func (a *Application) OrderFrontStandardAboutPanelWithOptions(optionsDictionary obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("orderFrontStandardAboutPanelWithOptions:"), objref.IDOf(optionsDictionary))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("orderFrontStandardAboutPanelWithOptions:"), objref.IDOf(optionsDictionary))
+	})
+
 }
 
 // UserInterfaceLayoutDirection returns the user interface layout direction.
 func (a *Application) UserInterfaceLayoutDirection() UserInterfaceLayoutDirection {
-	_r := objc.Send[UserInterfaceLayoutDirection](objref.IDOf(a), objc.RegisterName("userInterfaceLayoutDirection"))
-	return _r
+	var _mainthread0 UserInterfaceLayoutDirection
+	purego.Main(func() {
+		_mainthread0 = func() UserInterfaceLayoutDirection {
+			_r := objc.Send[UserInterfaceLayoutDirection](objref.IDOf(a), objc.RegisterName("userInterfaceLayoutDirection"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DisableRelaunchOnLogin disables relaunching the app on login.
 func (a *Application) DisableRelaunchOnLogin() {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("disableRelaunchOnLogin"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("disableRelaunchOnLogin"))
+	})
+
 }
 
 // EnableRelaunchOnLogin enables relaunching the app on login.
 func (a *Application) EnableRelaunchOnLogin() {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("enableRelaunchOnLogin"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("enableRelaunchOnLogin"))
+	})
+
 }
 
 // RegisterForRemoteNotifications register for notifications sent by Apple Push Notification service (APNs).
 func (a *Application) RegisterForRemoteNotifications() {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("registerForRemoteNotifications"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("registerForRemoteNotifications"))
+	})
+
 }
 
 // UnregisterForRemoteNotifications unregister for notifications received from Apple Push Notification service.
 func (a *Application) UnregisterForRemoteNotifications() {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("unregisterForRemoteNotifications"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("unregisterForRemoteNotifications"))
+	})
+
 }
 
 // RegisterForRemoteNotificationTypes register to receive notifications of the specified types from a provider through the Apple Push Notification service.
 func (a *Application) RegisterForRemoteNotificationTypes(types RemoteNotificationType) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("registerForRemoteNotificationTypes:"), types)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("registerForRemoteNotificationTypes:"), types)
+	})
+
 }
 
 // IsRegisteredForRemoteNotifications reports whether the object is registered for remote notifications.
 func (a *Application) IsRegisteredForRemoteNotifications() bool {
-	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isRegisteredForRemoteNotifications"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isRegisteredForRemoteNotifications"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // EnabledRemoteNotificationTypes returns the enabled remote notification types.
 func (a *Application) EnabledRemoteNotificationTypes() RemoteNotificationType {
-	_r := objc.Send[RemoteNotificationType](objref.IDOf(a), objc.RegisterName("enabledRemoteNotificationTypes"))
-	return _r
+	var _mainthread0 RemoteNotificationType
+	purego.Main(func() {
+		_mainthread0 = func() RemoteNotificationType {
+			_r := objc.Send[RemoteNotificationType](objref.IDOf(a), objc.RegisterName("enabledRemoteNotificationTypes"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RunModalForWindowRelativeToWindow `-runModalForWindow:relativeToWindow:` was deprecated in Mac OS X 10.0. Please use `-[NSWindow beginSheet:completionHandler:]` instead.
 func (a *Application) RunModalForWindowRelativeToWindow(window *Window, docWindow *Window) int {
-	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("runModalForWindow:relativeToWindow:"), objref.IDOf(window), objref.IDOf(docWindow))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("runModalForWindow:relativeToWindow:"), objref.IDOf(window), objref.IDOf(docWindow))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BeginModalSessionForWindowRelativeToWindow `-beginModalSessionForWindow:relativeToWindow:` was deprecated in Mac OS X 10.0. Please use `-[NSWindow beginSheet:completionHandler:]` instead.
 func (a *Application) BeginModalSessionForWindowRelativeToWindow(window *Window, docWindow *Window) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("beginModalSessionForWindow:relativeToWindow:"), objref.IDOf(window), objref.IDOf(docWindow))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("beginModalSessionForWindow:relativeToWindow:"), objref.IDOf(window), objref.IDOf(docWindow))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ApplicationPrintFiles `-application:printFiles:` was deprecated in Mac OS X 10.4. Implement `-application:printFiles:withSettings:showPrintPanels:` in your application delegate instead.
 func (a *Application) ApplicationPrintFiles(sender *Application, filenames []string) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("application:printFiles:"), objref.IDOf(sender), purego.SliceToNSArray(filenames, func(_v string) objc.ID { return purego.NSString(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("application:printFiles:"), objref.IDOf(sender), purego.SliceToNSArray(filenames, func(_v string) objc.ID { return purego.NSString(_v) }))
+	})
+
 }
 
 // EndSheet ends sheet.
 func (a *Application) EndSheet(sheet *Window) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("endSheet:"), objref.IDOf(sheet))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("endSheet:"), objref.IDOf(sheet))
+	})
+
 }
 
 // EndSheetReturnCode ends sheet return code.
 func (a *Application) EndSheetReturnCode(sheet *Window, returnCode int) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("endSheet:returnCode:"), objref.IDOf(sheet), returnCode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("endSheet:returnCode:"), objref.IDOf(sheet), returnCode)
+	})
+
 }
 
 // Context returns this method is deprecated as of macOS 10.12. Beginning in OS X 10.11 it would always return nil. Prior to this it would return an undefined graphics context that was not generally suitable for drawing.
 func (a *Application) Context() *GraphicsContext {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("context"))
-	return GraphicsContextFromID(_r)
+	var _mainthread0 *GraphicsContext
+	purego.Main(func() {
+		_mainthread0 = func() *GraphicsContext {
+			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("context"))
+			return GraphicsContextFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ActivateContextHelpMode places the receiver in context-sensitive help mode.
 func (a *Application) ActivateContextHelpMode(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("activateContextHelpMode:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("activateContextHelpMode:"), objref.IDOf(sender))
+	})
+
 }
 
 // ShowHelp if your project is properly registered, and the necessary keys have been set in the property list, this method launches Help Viewer and displays the first page of your app’s help book.
 func (a *Application) ShowHelp(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("showHelp:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("showHelp:"), objref.IDOf(sender))
+	})
+
 }
 
 // ToggleTouchBarCustomizationPalette show or hides the interface for customizing the Touch Bar.
 func (a *Application) ToggleTouchBarCustomizationPalette(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("toggleTouchBarCustomizationPalette:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("toggleTouchBarCustomizationPalette:"), objref.IDOf(sender))
+	})
+
 }
 
 // IsAutomaticCustomizeTouchBarMenuItemEnabled reports whether a menu item to customize the NSTouchBar can be automatically added to the main menu. It will only actually be added when Touch Bar hardware or simulator is present. Defaults to false. Setting this property to true is the recommended way to add the customization menu item. But if non-standard placement of the menu item is needed, creating a menu item with an action of `toggleTouchBarCustomizationPalette:` can be used instead.
 func (a *Application) IsAutomaticCustomizeTouchBarMenuItemEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isAutomaticCustomizeTouchBarMenuItemEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isAutomaticCustomizeTouchBarMenuItemEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // OrderFrontColorPanel wraps the corresponding Objective-C method.
 func (a *Application) OrderFrontColorPanel(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("orderFrontColorPanel:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("orderFrontColorPanel:"), objref.IDOf(sender))
+	})
+
 }
 
 // RunPageLayout runs page layout.
 func (a *Application) RunPageLayout(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("runPageLayout:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("runPageLayout:"), objref.IDOf(sender))
+	})
+
 }
 
 // OrderedDocuments returns the ordered documents.
 //
 // OrderedDocuments returns the collection as a Go slice.
 func (a *Application) OrderedDocuments() []*Document {
-	_arr := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("orderedDocuments"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Document { return DocumentFromID(_id) })
+	var _mainthread0 []*Document
+	purego.Main(func() {
+		_mainthread0 = func() []*Document {
+			_arr := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("orderedDocuments"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Document { return DocumentFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // OrderedWindows returns the ordered windows.
 //
 // OrderedWindows returns the collection as a Go slice.
 func (a *Application) OrderedWindows() []*Window {
-	_arr := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("orderedWindows"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Window { return WindowFromID(_id) })
+	var _mainthread0 []*Window
+	purego.Main(func() {
+		_mainthread0 = func() []*Window {
+			_arr := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("orderedWindows"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Window { return WindowFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // ExtendStateRestoration wraps the corresponding Objective-C method.
 func (a *Application) ExtendStateRestoration() {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("extendStateRestoration"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("extendStateRestoration"))
+	})
+
 }
 
 // CompleteStateRestoration wraps the corresponding Objective-C method.
 func (a *Application) CompleteStateRestoration() {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("completeStateRestoration"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("completeStateRestoration"))
+	})
+
 }
 
 var _ ResponderProvider = (*Application)(nil)

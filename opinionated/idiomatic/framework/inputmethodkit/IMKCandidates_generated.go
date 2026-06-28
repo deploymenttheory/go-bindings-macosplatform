@@ -69,187 +69,347 @@ func (c *Candidates) String() string {
 
 // NewCandidatesWithServerPanelType returns the initialized IMKCandidates object.
 func NewCandidatesWithServerPanelType(server *Server, panelType int) *Candidates {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("IMKCandidates")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServer:panelType:"), objref.IDOf(server), panelType)
-	return candidatesAdopt(_id)
+	var _mainthread0 *Candidates
+	purego.Main(func() {
+		_mainthread0 = func() *Candidates {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("IMKCandidates")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServer:panelType:"), objref.IDOf(server), panelType)
+			return candidatesAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewCandidatesWithServerPanelTypeStyleType creates a new Candidates.
 func NewCandidatesWithServerPanelTypeStyleType(server *Server, panelType int, style int) *Candidates {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("IMKCandidates")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServer:panelType:styleType:"), objref.IDOf(server), panelType, style)
-	return candidatesAdopt(_id)
+	var _mainthread0 *Candidates
+	purego.Main(func() {
+		_mainthread0 = func() *Candidates {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("IMKCandidates")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServer:panelType:styleType:"), objref.IDOf(server), panelType, style)
+			return candidatesAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // PanelType returns the style of the candidates window.
 func (c *Candidates) PanelType() int {
-	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("panelType"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("panelType"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetPanelType sets the style of the candidates window.
 func (c *Candidates) SetPanelType(panelType int) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPanelType:"), panelType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPanelType:"), panelType)
+	})
+
 }
 
 // Show shows the candidates window.
 func (c *Candidates) Show(locationHint int) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("show:"), locationHint)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("show:"), locationHint)
+	})
+
 }
 
 // Hide hides a candidates window, if it is visible.
 func (c *Candidates) Hide() {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("hide"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("hide"))
+	})
+
 }
 
 // IsVisible reports whether the candidates window is visible.
 func (c *Candidates) IsVisible() bool {
-	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isVisible"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isVisible"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UpdateCandidates updates the candidates that are displayed in the candidates window.
 func (c *Candidates) UpdateCandidates() {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("updateCandidates"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("updateCandidates"))
+	})
+
 }
 
 // ShowAnnotation displays an annotation string in an annotation window.
 func (c *Candidates) ShowAnnotation(annotationString obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("showAnnotation:"), objref.IDOf(annotationString))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("showAnnotation:"), objref.IDOf(annotationString))
+	})
+
 }
 
 // ShowSublistSubListDelegate shows sublist sub list delegate.
 func (c *Candidates) ShowSublistSubListDelegate(candidates obj.Object, delegate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("showSublist:subListDelegate:"), objref.IDOf(candidates), objref.IDOf(delegate))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("showSublist:subListDelegate:"), objref.IDOf(candidates), objref.IDOf(delegate))
+	})
+
 }
 
 // CandidateFrame returns the candidate frame.
 func (c *Candidates) CandidateFrame() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(c), objc.RegisterName("candidateFrame"))
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(c), objc.RegisterName("candidateFrame"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetSelectionKeys sets the selection keys for the candidates.
 func (c *Candidates) SetSelectionKeys(keyCodes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setSelectionKeys:"), objref.IDOf(keyCodes))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setSelectionKeys:"), objref.IDOf(keyCodes))
+	})
+
 }
 
 // SelectionKeys returns an array of NSNumber objects where each NSNumber object represents a virtual key code.
 func (c *Candidates) SelectionKeys() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("selectionKeys"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("selectionKeys"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetSelectionKeysKeylayout sets the key layout that is used to map virtual key codes to characters.
 func (c *Candidates) SetSelectionKeysKeylayout(layout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setSelectionKeysKeylayout:"), objref.IDOf(layout))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setSelectionKeysKeylayout:"), objref.IDOf(layout))
+	})
+
 }
 
 // SelectionKeysKeylayout returns the key layout that maps virtual key codes to selection keys.
 func (c *Candidates) SelectionKeysKeylayout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("selectionKeysKeylayout"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("selectionKeysKeylayout"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetAttributes sets the style attributes for the candidates window.
 func (c *Candidates) SetAttributes(attributes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAttributes:"), objref.IDOf(attributes))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAttributes:"), objref.IDOf(attributes))
+	})
+
 }
 
 // Attributes returns a dictionary of the style attributes used for the candidates window..
 func (c *Candidates) Attributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("attributes"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("attributes"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetDismissesAutomatically sets the state of the flag that determines whether the candidates window dismisses automatically.
 func (c *Candidates) SetDismissesAutomatically(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setDismissesAutomatically:"), flag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setDismissesAutomatically:"), flag)
+	})
+
 }
 
 // DismissesAutomatically reports whether returns the state of the flag that determines whether the candidates window dismisses automatically.
 func (c *Candidates) DismissesAutomatically() bool {
-	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("dismissesAutomatically"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("dismissesAutomatically"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SelectedCandidate returns the currently selected candidate identifer. Attempts to determine the identifier for the selected candidate.  If there is no selection the return value will be NSNotFound.
 func (c *Candidates) SelectedCandidate() int {
-	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("selectedCandidate"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("selectedCandidate"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetCandidateFrameTopLeft positions the top-left corner of the candidate window’s frame rectangle at a given point in screen coordinates.
 func (c *Candidates) SetCandidateFrameTopLeft(point corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCandidateFrameTopLeft:"), point)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCandidateFrameTopLeft:"), point)
+	})
+
 }
 
 // ShowChild if the current selection has a child IMKCandidates object that will be shown. If there is a failure in showing the child this method will throw an exception.
 func (c *Candidates) ShowChild() {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("showChild"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("showChild"))
+	})
+
 }
 
 // HideChild if the current selection has a child IMKCandidates that is being shown hide it. Typically a client will not need to call this as IMKCandidates automatically hides and shows children.
 func (c *Candidates) HideChild() {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("hideChild"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("hideChild"))
+	})
+
 }
 
 // AttachChildToCandidateType attach an IMKCandidates object to the specified selection. The IMKCandidate can be a sublist or an annotation.
 func (c *Candidates) AttachChildToCandidateType(child *Candidates, candidateIdentifier int, theType int) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("attachChild:toCandidate:type:"), objref.IDOf(child), candidateIdentifier, theType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("attachChild:toCandidate:type:"), objref.IDOf(child), candidateIdentifier, theType)
+	})
+
 }
 
 // DetachChild detach the IMKCandidates object attached to candidate
 func (c *Candidates) DetachChild(candidateIdentifier int) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("detachChild:"), candidateIdentifier)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("detachChild:"), candidateIdentifier)
+	})
+
 }
 
 // SetCandidateData set the candidates data directly rather than supplying data via [IMKInputContoller candidates:]. The elements of the array can be strings or attributed strings.
 func (c *Candidates) SetCandidateData(candidatesArray obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCandidateData:"), objref.IDOf(candidatesArray))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCandidateData:"), objref.IDOf(candidatesArray))
+	})
+
 }
 
 // SelectCandidateWithIdentifier select the candidate whose identifier matches the identifier parameter.
 func (c *Candidates) SelectCandidateWithIdentifier(candidateIdentifier int) bool {
-	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("selectCandidateWithIdentifier:"), candidateIdentifier)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("selectCandidateWithIdentifier:"), candidateIdentifier)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SelectCandidate selects candidate.
 func (c *Candidates) SelectCandidate(candidateIdentifier int) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("selectCandidate:"), candidateIdentifier)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("selectCandidate:"), candidateIdentifier)
+	})
+
 }
 
 // ShowCandidates show the candidate window. This simply shows the candidates.  No effort is made to position the candidate.  The caller should move the candidate window to an appropriate location prior to showing.
 func (c *Candidates) ShowCandidates() {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("showCandidates"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("showCandidates"))
+	})
+
 }
 
 // CandidateStringIdentifier map a candidateString to an identifier. Beginning with MacOS 10.7, candidate strings are mapped internally to an unique identifier of type NSInteger.  Using identifiers to identify a particular candidate is the first stage of enabling data types other than NSString and NSAttributedString for containing the contents of a candidate.
 func (c *Candidates) CandidateStringIdentifier(candidateString obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("candidateStringIdentifier:"), objref.IDOf(candidateString))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("candidateStringIdentifier:"), objref.IDOf(candidateString))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SelectedCandidateString returns the currently selected candidate string. Attempts to determine the string for the selected candidate.  If there is no selection the return value can be nil.  The attributed string is an autoreleased object.
 func (c *Candidates) SelectedCandidateString() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("selectedCandidateString"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("selectedCandidateString"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CandidateIdentifierAtLineNumber returns the candidate identifier for a given line in the candidate window display. Maps the lineNumber to a candidate identifier.  Line number 0 corresponds to the candidate in the cell currently in the first (top for vertical) line of the candidate window.  This is convienient for input methods that support selecting a candidate by a number key. Line Number values depend on the column arrangement of your candidate.  If you are displaying a single column candidate window, lines that have been scrolled out of view will have negative values.  For a single row grid line, numbers will correspond to the cell's position in the row (i.e. the first cell will be 0, the second 1, etc).  Finally, for a grid, the line numbers correspond to the grid row.  If the line number is invalid, NSNotFound is returned.
 func (c *Candidates) CandidateIdentifierAtLineNumber(lineNumber int) int {
-	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("candidateIdentifierAtLineNumber:"), lineNumber)
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("candidateIdentifierAtLineNumber:"), lineNumber)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LineNumberForCandidateWithIdentifier returns the line number for a given CandidateID. If the cell that contains the candidate is at the top line of the candidate window, the return value will be 0.
 func (c *Candidates) LineNumberForCandidateWithIdentifier(candidateIdentifier int) int {
-	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("lineNumberForCandidateWithIdentifier:"), candidateIdentifier)
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("lineNumberForCandidateWithIdentifier:"), candidateIdentifier)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ClearSelection clears selection.
 func (c *Candidates) ClearSelection() {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("clearSelection"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("clearSelection"))
+	})
+
 }

@@ -68,47 +68,79 @@ func (cvclc *CollectionViewCompositionalLayoutConfiguration) String() string {
 
 // NewCollectionViewCompositionalLayoutConfiguration creates a new CollectionViewCompositionalLayoutConfiguration.
 func NewCollectionViewCompositionalLayoutConfiguration() *CollectionViewCompositionalLayoutConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewCompositionalLayoutConfiguration")), objc.RegisterName("new"))
-	return collectionViewCompositionalLayoutConfigurationAdopt(_id)
+	var _mainthread0 *CollectionViewCompositionalLayoutConfiguration
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewCompositionalLayoutConfiguration {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewCompositionalLayoutConfiguration")), objc.RegisterName("new"))
+			return collectionViewCompositionalLayoutConfigurationAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithScrollDirection sets the axis that the content in the collection view layout scrolls along.
 func (cvclc *CollectionViewCompositionalLayoutConfiguration) WithScrollDirection(scrollDirection CollectionViewScrollDirection) *CollectionViewCompositionalLayoutConfiguration {
-	objc.Send[objc.ID](objref.IDOf(cvclc), objc.RegisterName("setScrollDirection:"), scrollDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvclc), objc.RegisterName("setScrollDirection:"), scrollDirection)
+	})
 	return cvclc
 }
 
 // WithInterSectionSpacing sets the amount of space between the sections in the layout.
 func (cvclc *CollectionViewCompositionalLayoutConfiguration) WithInterSectionSpacing(interSectionSpacing float64) *CollectionViewCompositionalLayoutConfiguration {
-	objc.Send[objc.ID](objref.IDOf(cvclc), objc.RegisterName("setInterSectionSpacing:"), interSectionSpacing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvclc), objc.RegisterName("setInterSectionSpacing:"), interSectionSpacing)
+	})
 	return cvclc
 }
 
 // WithBoundarySupplementaryItems sets an array of the supplementary items that are associated with the boundary edges of the entire layout, such as global headers and footers.
 func (cvclc *CollectionViewCompositionalLayoutConfiguration) WithBoundarySupplementaryItems(items ...*CollectionLayoutBoundarySupplementaryItem) *CollectionViewCompositionalLayoutConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v *CollectionLayoutBoundarySupplementaryItem) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(cvclc), objc.RegisterName("setBoundarySupplementaryItems:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvclc), objc.RegisterName("setBoundarySupplementaryItems:"), _arr)
+	})
 	return cvclc
 }
 
 // ScrollDirection returns the scroll direction.
 func (cvclc *CollectionViewCompositionalLayoutConfiguration) ScrollDirection() CollectionViewScrollDirection {
-	_r := objc.Send[CollectionViewScrollDirection](objref.IDOf(cvclc), objc.RegisterName("scrollDirection"))
-	return _r
+	var _mainthread0 CollectionViewScrollDirection
+	purego.Main(func() {
+		_mainthread0 = func() CollectionViewScrollDirection {
+			_r := objc.Send[CollectionViewScrollDirection](objref.IDOf(cvclc), objc.RegisterName("scrollDirection"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // InterSectionSpacing returns the inter section spacing.
 func (cvclc *CollectionViewCompositionalLayoutConfiguration) InterSectionSpacing() float64 {
-	_r := objc.Send[float64](objref.IDOf(cvclc), objc.RegisterName("interSectionSpacing"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(cvclc), objc.RegisterName("interSectionSpacing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BoundarySupplementaryItems returns the boundary supplementary items.
 //
 // BoundarySupplementaryItems returns the collection as a Go slice.
 func (cvclc *CollectionViewCompositionalLayoutConfiguration) BoundarySupplementaryItems() []*CollectionLayoutBoundarySupplementaryItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(cvclc), objc.RegisterName("boundarySupplementaryItems"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CollectionLayoutBoundarySupplementaryItem {
-		return CollectionLayoutBoundarySupplementaryItemFromID(_id)
+	var _mainthread0 []*CollectionLayoutBoundarySupplementaryItem
+	purego.Main(func() {
+		_mainthread0 = func() []*CollectionLayoutBoundarySupplementaryItem {
+			_arr := objc.Send[objc.ID](objref.IDOf(cvclc), objc.RegisterName("boundarySupplementaryItems"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CollectionLayoutBoundarySupplementaryItem {
+				return CollectionLayoutBoundarySupplementaryItemFromID(_id)
+			})
+		}()
 	})
+	return _mainthread0
 }

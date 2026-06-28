@@ -49,156 +49,269 @@ func popoverAdopt(id objc.ID) *Popover {
 
 // NewPopover creates a new Popover.
 func NewPopover() *Popover {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSPopover")), objc.RegisterName("new"))
-	return popoverAdopt(_id)
+	var _mainthread0 *Popover
+	purego.Main(func() {
+		_mainthread0 = func() *Popover {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSPopover")), objc.RegisterName("new"))
+			return popoverAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewPopoverWithCoder creates a new Popover.
 func NewPopoverWithCoder(coder obj.Object) *Popover {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPopover")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
-	return popoverAdopt(_id)
+	var _mainthread0 *Popover
+	purego.Main(func() {
+		_mainthread0 = func() *Popover {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSPopover")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+			return popoverAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithAppearance sets the appearance of the popover.
 func (p *Popover) WithAppearance(appearance *Appearance) *Popover {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAppearance:"), objref.IDOf(appearance))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAppearance:"), objref.IDOf(appearance))
+	})
 	return p
 }
 
 // WithBehavior sets specifies the behavior of the popover.
 func (p *Popover) WithBehavior(behavior PopoverBehavior) *Popover {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setBehavior:"), behavior)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setBehavior:"), behavior)
+	})
 	return p
 }
 
 // WithAnimates sets specifies if the popover is to be animated.
 func (p *Popover) WithAnimates(animates bool) *Popover {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAnimates:"), animates)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAnimates:"), animates)
+	})
 	return p
 }
 
 // WithContentViewController sets the view controller that manages the content of the popover.
 func (p *Popover) WithContentViewController(contentViewController ViewControllerProvider) *Popover {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
+	})
 	return p
 }
 
 // WithContentSize sets the content size of the popover.
 func (p *Popover) WithContentSize(contentSize corefoundation.CGSize) *Popover {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setContentSize:"), contentSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setContentSize:"), contentSize)
+	})
 	return p
 }
 
 // WithPositioningRect sets the rectangle within the positioning view relative to which the popover should be positioned.
 func (p *Popover) WithPositioningRect(positioningRect corefoundation.CGRect) *Popover {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setPositioningRect:"), positioningRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setPositioningRect:"), positioningRect)
+	})
 	return p
 }
 
 // WithHasFullSizeContent sets a Boolean value that indicates whether the content view of the popover extends into the arrow region.
 func (p *Popover) WithHasFullSizeContent(hasFullSizeContent bool) *Popover {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setHasFullSizeContent:"), hasFullSizeContent)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setHasFullSizeContent:"), hasFullSizeContent)
+	})
 	return p
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (p *Popover) WithNextResponder(nextResponder ResponderProvider) *Popover {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return p
 }
 
 // WithMenu sets returns the responder’s menu.
 func (p *Popover) WithMenu(menu *Menu) *Popover {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return p
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (p *Popover) WithUserActivity(userActivity obj.Object) *Popover {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return p
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (p *Popover) WithTouchBar(touchBar *TouchBar) *Popover {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return p
 }
 
 // ShowRelativeToToolbarItem shows the popover anchored to the specified toolbar item.
 func (p *Popover) ShowRelativeToToolbarItem(toolbarItem *ToolbarItem) {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("showRelativeToToolbarItem:"), objref.IDOf(toolbarItem))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("showRelativeToToolbarItem:"), objref.IDOf(toolbarItem))
+	})
+
 }
 
 // PerformClose attempts to close the popover.
 func (p *Popover) PerformClose(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("performClose:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("performClose:"), objref.IDOf(sender))
+	})
+
 }
 
 // Close forces the popover to close without consulting its delegate.
 func (p *Popover) Close() {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("close"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("close"))
+	})
+
 }
 
 // Appearance returns the appearance of the popover. The popover's contentView will inherit this appearance. The default effective appearance is the NSAppearanceNameVibrantLight appearance. If nil is set, nil will be returned, and the effective appearance will return to the default. To prevent conflicts with the previous appearance property, this is only available for apps that target 10.10 and higher.
 func (p *Popover) Appearance() *Appearance {
-	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("appearance"))
-	return AppearanceFromID(_r)
+	var _mainthread0 *Appearance
+	purego.Main(func() {
+		_mainthread0 = func() *Appearance {
+			_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("appearance"))
+			return AppearanceFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // EffectiveAppearance returns the effective appearance.
 func (p *Popover) EffectiveAppearance() *Appearance {
-	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("effectiveAppearance"))
-	return AppearanceFromID(_r)
+	var _mainthread0 *Appearance
+	purego.Main(func() {
+		_mainthread0 = func() *Appearance {
+			_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("effectiveAppearance"))
+			return AppearanceFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Behavior returns the behavior.
 func (p *Popover) Behavior() PopoverBehavior {
-	_r := objc.Send[PopoverBehavior](objref.IDOf(p), objc.RegisterName("behavior"))
-	return _r
+	var _mainthread0 PopoverBehavior
+	purego.Main(func() {
+		_mainthread0 = func() PopoverBehavior {
+			_r := objc.Send[PopoverBehavior](objref.IDOf(p), objc.RegisterName("behavior"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Animates wraps the corresponding Objective-C method.
 func (p *Popover) Animates() bool {
-	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("animates"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("animates"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ContentViewController returns the content view controller.
 func (p *Popover) ContentViewController() *ViewController {
-	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("contentViewController"))
-	return ViewControllerFromID(_r)
+	var _mainthread0 *ViewController
+	purego.Main(func() {
+		_mainthread0 = func() *ViewController {
+			_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("contentViewController"))
+			return ViewControllerFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ContentSize returns the content size.
 func (p *Popover) ContentSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(p), objc.RegisterName("contentSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(p), objc.RegisterName("contentSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsShown reports whether the object is shown.
 func (p *Popover) IsShown() bool {
-	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isShown"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isShown"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsDetached reports whether returns \c true if the window is detached to an implicitly created detached window, \c false otherwise. This method does not apply when the popover is detached to a window returned with \c -detachableWindowForPopover:.
 func (p *Popover) IsDetached() bool {
-	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isDetached"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isDetached"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PositioningRect returns the positioning rect.
 func (p *Popover) PositioningRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(p), objc.RegisterName("positioningRect"))
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(p), objc.RegisterName("positioningRect"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasFullSizeContent reports whether the object has full size content.
 func (p *Popover) HasFullSizeContent() bool {
-	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("hasFullSizeContent"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("hasFullSizeContent"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ResponderProvider = (*Popover)(nil)

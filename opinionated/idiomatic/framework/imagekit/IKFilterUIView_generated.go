@@ -67,19 +67,39 @@ func (fuv *FilterUIView) String() string {
 
 // NewFilterUIViewWithFrameFilter the initWithFrame method initializes a view that retains the filter passed into it.
 func NewFilterUIViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter obj.Object) *FilterUIView {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("IKFilterUIView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:filter:"), frameRect, objref.IDOf(inFilter))
-	return filterUIViewAdopt(_id)
+	var _mainthread0 *FilterUIView
+	purego.Main(func() {
+		_mainthread0 = func() *FilterUIView {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("IKFilterUIView")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:filter:"), frameRect, objref.IDOf(inFilter))
+			return filterUIViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // Filter returns accessor method to return the filter instance that the view controls.
 func (fuv *FilterUIView) Filter() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(fuv), objc.RegisterName("filter"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(fuv), objc.RegisterName("filter"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ObjectController returns accessor method for the object controller for all bindings between the filter and the UI representation.
 func (fuv *FilterUIView) ObjectController() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(fuv), objc.RegisterName("objectController"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(fuv), objc.RegisterName("objectController"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

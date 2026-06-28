@@ -50,217 +50,318 @@ func audioNodeAdopt(id objc.ID) *AudioNode {
 
 // NewAudioNodeWithAVAudioNode initializes an audio node from an AVFoundation audio node.
 func NewAudioNodeWithAVAudioNode(node obj.Object) *AudioNode {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SKAudioNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAVAudioNode:"), objref.IDOf(node))
-	return audioNodeAdopt(_id)
+	var _mainthread0 *AudioNode
+	purego.Main(func() {
+		_mainthread0 = func() *AudioNode {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SKAudioNode")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAVAudioNode:"), objref.IDOf(node))
+			return audioNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewAudioNodeWithCoder tells you when to initialize an audio node that has been unarchived.
 func NewAudioNodeWithCoder(aDecoder obj.Object) *AudioNode {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SKAudioNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
-	return audioNodeAdopt(_id)
+	var _mainthread0 *AudioNode
+	purego.Main(func() {
+		_mainthread0 = func() *AudioNode {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SKAudioNode")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
+			return audioNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewAudioNodeWithFileNamed initializes an audio node from an audio asset with the specified filename.
 func NewAudioNodeWithFileNamed(name string) *AudioNode {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SKAudioNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileNamed:"), purego.NSString(name))
-	return audioNodeAdopt(_id)
+	var _mainthread0 *AudioNode
+	purego.Main(func() {
+		_mainthread0 = func() *AudioNode {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SKAudioNode")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileNamed:"), purego.NSString(name))
+			return audioNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewAudioNodeWithURL initializes an audio node from an audio asset with the specified URL.
 func NewAudioNodeWithURL(url string) *AudioNode {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SKAudioNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
-	return audioNodeAdopt(_id)
+	var _mainthread0 *AudioNode
+	purego.Main(func() {
+		_mainthread0 = func() *AudioNode {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SKAudioNode")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
+			return audioNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithAvAudioNode sets the audio node’s current audio asset.
 func (an *AudioNode) WithAvAudioNode(avAudioNode obj.Object) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAvAudioNode:"), objref.IDOf(avAudioNode))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAvAudioNode:"), objref.IDOf(avAudioNode))
+	})
 	return an
 }
 
 // WithAutoplayLooped sets a Boolean value that indicates whether the audio should play in a loop when the node is added to the scene.
 func (an *AudioNode) WithAutoplayLooped(autoplayLooped bool) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAutoplayLooped:"), autoplayLooped)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAutoplayLooped:"), autoplayLooped)
+	})
 	return an
 }
 
 // WithPositional sets a Boolean property that indicates whether the node’s audio is altered based on the position of the node.
 func (an *AudioNode) WithPositional(positional bool) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setPositional:"), positional)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setPositional:"), positional)
+	})
 	return an
 }
 
 // WithPosition sets the position of the node in its parent’s coordinate system.
 func (an *AudioNode) WithPosition(position corefoundation.CGPoint) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setPosition:"), position)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setPosition:"), position)
+	})
 	return an
 }
 
 // WithZPosition sets the height of the node relative to its parent.
 func (an *AudioNode) WithZPosition(zPosition float64) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setZPosition:"), zPosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setZPosition:"), zPosition)
+	})
 	return an
 }
 
 // WithZRotation sets the Euler rotation about the z axis (in radians).
 func (an *AudioNode) WithZRotation(zRotation float64) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setZRotation:"), zRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setZRotation:"), zRotation)
+	})
 	return an
 }
 
 // WithXScale sets a scaling factor that multiplies the width of a node and its children.
 func (an *AudioNode) WithXScale(xScale float64) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setXScale:"), xScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setXScale:"), xScale)
+	})
 	return an
 }
 
 // WithYScale sets a scaling factor that multiplies the height of a node and its children.
 func (an *AudioNode) WithYScale(yScale float64) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setYScale:"), yScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setYScale:"), yScale)
+	})
 	return an
 }
 
 // WithSpeed sets a speed modifier applied to all actions executed by a node and its descendants.
 func (an *AudioNode) WithSpeed(speed float64) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setSpeed:"), speed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setSpeed:"), speed)
+	})
 	return an
 }
 
 // WithAlpha sets the transparency value applied to the node’s contents.
 func (an *AudioNode) WithAlpha(alpha float64) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAlpha:"), alpha)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAlpha:"), alpha)
+	})
 	return an
 }
 
 // WithPaused sets a Boolean value that determines whether actions on the node and its descendants are processed.
 func (an *AudioNode) WithPaused(paused bool) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setPaused:"), paused)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setPaused:"), paused)
+	})
 	return an
 }
 
 // WithHidden sets a Boolean value that determines whether a node and its descendants are rendered.
 func (an *AudioNode) WithHidden(hidden bool) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setHidden:"), hidden)
+	})
 	return an
 }
 
 // WithUserInteractionEnabled sets a Boolean value that indicates whether the node receives touch events.
 func (an *AudioNode) WithUserInteractionEnabled(userInteractionEnabled bool) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	})
 	return an
 }
 
 // WithName sets the node’s assignable name.
 func (an *AudioNode) WithName(name string) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setName:"), purego.NSString(name))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setName:"), purego.NSString(name))
+	})
 	return an
 }
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (an *AudioNode) WithPhysicsBody(physicsBody *PhysicsBody) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	})
 	return an
 }
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (an *AudioNode) WithUserData(userData obj.Object) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	})
 	return an
 }
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (an *AudioNode) WithReachConstraints(reachConstraints *ReachConstraints) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	})
 	return an
 }
 
 // WithConstraints sets a list of constraints to apply to the node.
 func (an *AudioNode) WithConstraints(items ...*Constraint) *AudioNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setConstraints:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setConstraints:"), _arr)
+	})
 	return an
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
 func (an *AudioNode) WithAttributeValues(attributeValues obj.Object) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	})
 	return an
 }
 
 // WithAccessibilityElement sets a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (an *AudioNode) WithAccessibilityElement(accessibilityElement bool) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	})
 	return an
 }
 
 // WithAccessibilityRole sets a string value describing the user interface element type; for example, a button.
 func (an *AudioNode) WithAccessibilityRole(accessibilityRole string) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	})
 	return an
 }
 
 // WithAccessibilityRoleDescription sets a string value describing the user interface element name and type; for example, the Buy button.
 func (an *AudioNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	})
 	return an
 }
 
 // WithAccessibilitySubrole sets a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (an *AudioNode) WithAccessibilitySubrole(accessibilitySubrole string) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	})
 	return an
 }
 
 // WithAccessibilityFrame sets the size of this user interface element, in screen points.
 func (an *AudioNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	})
 	return an
 }
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (an *AudioNode) WithAccessibilityParent(accessibilityParent obj.Object) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	})
 	return an
 }
 
 // WithAccessibilityHelp sets the help description of this user interface element; for example, the text shown in a tooltip.
 func (an *AudioNode) WithAccessibilityHelp(accessibilityHelp string) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	})
 	return an
 }
 
 // WithAccessibilityLabel sets a short description of this user interface element.
 func (an *AudioNode) WithAccessibilityLabel(accessibilityLabel string) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	})
 	return an
 }
 
 // WithAccessibilityEnabled sets a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (an *AudioNode) WithAccessibilityEnabled(accessibilityEnabled bool) *AudioNode {
-	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	})
 	return an
 }
 
 // AvAudioNode sets or gets the current AVAudioNode used by this instance.
 func (an *AudioNode) AvAudioNode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("avAudioNode"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("avAudioNode"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AutoplayLooped reports whether the node is to automatically play sound when added to a scene. If autoplaysLooped is false, the node and its sound must be explicitly scheduled and played using the scene's engine. If true, the node will automatically play sound when added to a scene. Defaults to true.
 func (an *AudioNode) AutoplayLooped() bool {
-	_r := objc.Send[bool](objref.IDOf(an), objc.RegisterName("autoplayLooped"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(an), objc.RegisterName("autoplayLooped"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsPositional reports whether marks the audio source as positional so that the audio mix considers relative position and velocity with regards to the scene's current listener node.
 func (an *AudioNode) IsPositional() bool {
-	_r := objc.Send[bool](objref.IDOf(an), objc.RegisterName("isPositional"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(an), objc.RegisterName("isPositional"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ NodeProvider = (*AudioNode)(nil)

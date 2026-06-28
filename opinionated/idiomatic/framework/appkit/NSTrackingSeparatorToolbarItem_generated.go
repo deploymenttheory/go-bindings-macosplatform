@@ -49,158 +49,224 @@ func trackingSeparatorToolbarItemAdopt(id objc.ID) *TrackingSeparatorToolbarItem
 
 // NewTrackingSeparatorToolbarItem creates a new TrackingSeparatorToolbarItem.
 func NewTrackingSeparatorToolbarItem() *TrackingSeparatorToolbarItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSTrackingSeparatorToolbarItem")), objc.RegisterName("new"))
-	return trackingSeparatorToolbarItemAdopt(_id)
+	var _mainthread0 *TrackingSeparatorToolbarItem
+	purego.Main(func() {
+		_mainthread0 = func() *TrackingSeparatorToolbarItem {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSTrackingSeparatorToolbarItem")), objc.RegisterName("new"))
+			return trackingSeparatorToolbarItemAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithSplitView sets the vertical split view to align with the toolbar separator.
 func (tsti *TrackingSeparatorToolbarItem) WithSplitView(splitView *SplitView) *TrackingSeparatorToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setSplitView:"), objref.IDOf(splitView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setSplitView:"), objref.IDOf(splitView))
+	})
 	return tsti
 }
 
 // WithDividerIndex sets the index of the split view divider to align with the tracking separator.
 func (tsti *TrackingSeparatorToolbarItem) WithDividerIndex(dividerIndex int) *TrackingSeparatorToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setDividerIndex:"), dividerIndex)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setDividerIndex:"), dividerIndex)
+	})
 	return tsti
 }
 
 // WithLabel sets the label that appears for this item in the toolbar.
 func (tsti *TrackingSeparatorToolbarItem) WithLabel(label string) *TrackingSeparatorToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setLabel:"), purego.NSString(label))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setLabel:"), purego.NSString(label))
+	})
 	return tsti
 }
 
 // WithPaletteLabel sets the label that appears when the toolbar item is in the customization palette.
 func (tsti *TrackingSeparatorToolbarItem) WithPaletteLabel(paletteLabel string) *TrackingSeparatorToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setPaletteLabel:"), purego.NSString(paletteLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setPaletteLabel:"), purego.NSString(paletteLabel))
+	})
 	return tsti
 }
 
 // WithPossibleLabels sets the set of labels that the item might display.
 func (tsti *TrackingSeparatorToolbarItem) WithPossibleLabels(possibleLabels obj.Object) *TrackingSeparatorToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setPossibleLabels:"), objref.IDOf(possibleLabels))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setPossibleLabels:"), objref.IDOf(possibleLabels))
+	})
 	return tsti
 }
 
 // WithToolTip sets the tooltip to display when someone hovers over the item in the toolbar.
 func (tsti *TrackingSeparatorToolbarItem) WithToolTip(toolTip string) *TrackingSeparatorToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return tsti
 }
 
 // WithMenuFormRepresentation sets the menu item to use when the toolbar item is in the overflow menu.
 func (tsti *TrackingSeparatorToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *TrackingSeparatorToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setMenuFormRepresentation:"), objref.IDOf(menuFormRepresentation))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setMenuFormRepresentation:"), objref.IDOf(menuFormRepresentation))
+	})
 	return tsti
 }
 
 // WithTag sets an integer tag you can use to identify the toolbar item.
 func (tsti *TrackingSeparatorToolbarItem) WithTag(tag int) *TrackingSeparatorToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setTag:"), tag)
+	})
 	return tsti
 }
 
 // WithTarget sets the object that defines the action method the toolbar item calls when clicked.
 func (tsti *TrackingSeparatorToolbarItem) WithTarget(target obj.Object) *TrackingSeparatorToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return tsti
 }
 
 // WithEnabled sets a Boolean value that indicates whether the item is enabled.
 func (tsti *TrackingSeparatorToolbarItem) WithEnabled(enabled bool) *TrackingSeparatorToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return tsti
 }
 
 // WithImage sets the image to display for the toolbar item.
 func (tsti *TrackingSeparatorToolbarItem) WithImage(image *Image) *TrackingSeparatorToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setImage:"), objref.IDOf(image))
+	})
 	return tsti
 }
 
 // WithTitle sets the title of the toolbar item.
 func (tsti *TrackingSeparatorToolbarItem) WithTitle(title string) *TrackingSeparatorToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return tsti
 }
 
 // WithBordered sets a Boolean value that indicates whether the toolbar item has a bordered style.
 func (tsti *TrackingSeparatorToolbarItem) WithBordered(bordered bool) *TrackingSeparatorToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setBordered:"), bordered)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setBordered:"), bordered)
+	})
 	return tsti
 }
 
 // WithBackgroundTintColor sets the background tint color.
 func (tsti *TrackingSeparatorToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *TrackingSeparatorToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
+	})
 	return tsti
 }
 
 // WithStyle sets defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items’ background.
 func (tsti *TrackingSeparatorToolbarItem) WithStyle(style ToolbarItemStyle) *TrackingSeparatorToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setStyle:"), style)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setStyle:"), style)
+	})
 	return tsti
 }
 
 // WithNavigational sets a Boolean value that indicates whether the item behaves as a navigation item in the toolbar.
 func (tsti *TrackingSeparatorToolbarItem) WithNavigational(navigational bool) *TrackingSeparatorToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setNavigational:"), navigational)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setNavigational:"), navigational)
+	})
 	return tsti
 }
 
 // WithView sets the custom view you use to draw the toolbar item.
 func (tsti *TrackingSeparatorToolbarItem) WithView(view ViewProvider) *TrackingSeparatorToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setView:"), objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setView:"), objref.IDOf(view))
+	})
 	return tsti
 }
 
 // WithHidden sets determines whether an item is visible in the toolbar.
 func (tsti *TrackingSeparatorToolbarItem) WithHidden(hidden bool) *TrackingSeparatorToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setHidden:"), hidden)
+	})
 	return tsti
 }
 
 // WithMinSize sets the toolbar item’s minimum size.
 func (tsti *TrackingSeparatorToolbarItem) WithMinSize(minSize corefoundation.CGSize) *TrackingSeparatorToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setMinSize:"), minSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setMinSize:"), minSize)
+	})
 	return tsti
 }
 
 // WithMaxSize sets the toolbar item’s maximum size.
 func (tsti *TrackingSeparatorToolbarItem) WithMaxSize(maxSize corefoundation.CGSize) *TrackingSeparatorToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setMaxSize:"), maxSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setMaxSize:"), maxSize)
+	})
 	return tsti
 }
 
 // WithVisibilityPriority sets the display priority associated with the toolbar item.
 func (tsti *TrackingSeparatorToolbarItem) WithVisibilityPriority(visibilityPriority int) *TrackingSeparatorToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	})
 	return tsti
 }
 
 // WithBadge sets a badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
 func (tsti *TrackingSeparatorToolbarItem) WithBadge(badge *ItemBadge) *TrackingSeparatorToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setBadge:"), objref.IDOf(badge))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setBadge:"), objref.IDOf(badge))
+	})
 	return tsti
 }
 
 // WithAutovalidates sets a Boolean value that indicates whether the toolbar automatically validates the item.
 func (tsti *TrackingSeparatorToolbarItem) WithAutovalidates(autovalidates bool) *TrackingSeparatorToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setAutovalidates:"), autovalidates)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setAutovalidates:"), autovalidates)
+	})
 	return tsti
 }
 
 // SplitView returns the `splitView` must be in the same window as the toolbar containing this item by the time the toolbar is shown. Only vertical `splitViews` are supported.
 func (tsti *TrackingSeparatorToolbarItem) SplitView() *SplitView {
-	_r := objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("splitView"))
-	return SplitViewFromID(_r)
+	var _mainthread0 *SplitView
+	purego.Main(func() {
+		_mainthread0 = func() *SplitView {
+			_r := objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("splitView"))
+			return SplitViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DividerIndex returns the specific divider of the `splitView` which will be tracked.
 func (tsti *TrackingSeparatorToolbarItem) DividerIndex() int {
-	_r := objc.Send[int](objref.IDOf(tsti), objc.RegisterName("dividerIndex"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(tsti), objc.RegisterName("dividerIndex"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ToolbarItemProvider = (*TrackingSeparatorToolbarItem)(nil)

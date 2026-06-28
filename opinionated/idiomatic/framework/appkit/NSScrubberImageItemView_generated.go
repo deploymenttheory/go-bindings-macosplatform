@@ -50,348 +50,481 @@ func scrubberImageItemViewAdopt(id objc.ID) *ScrubberImageItemView {
 
 // NewScrubberImageItemView creates a new ScrubberImageItemView.
 func NewScrubberImageItemView() *ScrubberImageItemView {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSScrubberImageItemView")), objc.RegisterName("new"))
-	return scrubberImageItemViewAdopt(_id)
+	var _mainthread0 *ScrubberImageItemView
+	purego.Main(func() {
+		_mainthread0 = func() *ScrubberImageItemView {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSScrubberImageItemView")), objc.RegisterName("new"))
+			return scrubberImageItemViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithImage sets the image displayed by the scrubber item.
 func (siiv *ScrubberImageItemView) WithImage(image *Image) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setImage:"), objref.IDOf(image))
+	})
 	return siiv
 }
 
 // WithImageAlignment sets the alignment of the image within the scrubber item.
 func (siiv *ScrubberImageItemView) WithImageAlignment(imageAlignment ImageAlignment) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setImageAlignment:"), imageAlignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setImageAlignment:"), imageAlignment)
+	})
 	return siiv
 }
 
 // WithSelected sets a Boolean value that specifies whether the current view is selected.
 func (siiv *ScrubberImageItemView) WithSelected(selected bool) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setSelected:"), selected)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setSelected:"), selected)
+	})
 	return siiv
 }
 
 // WithHighlighted sets a Boolean value that specifies whether the view is currently highlighted.
 func (siiv *ScrubberImageItemView) WithHighlighted(highlighted bool) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return siiv
 }
 
 // WithSubviews sets the subviews.
 func (siiv *ScrubberImageItemView) WithSubviews(items ...ViewProvider) *ScrubberImageItemView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return siiv
 }
 
 // WithHidden sets the hidden.
 func (siiv *ScrubberImageItemView) WithHidden(hidden bool) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setHidden:"), hidden)
+	})
 	return siiv
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (siiv *ScrubberImageItemView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return siiv
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (siiv *ScrubberImageItemView) WithAutoresizesSubviews(autoresizesSubviews bool) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return siiv
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (siiv *ScrubberImageItemView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return siiv
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (siiv *ScrubberImageItemView) WithFrame(frame corefoundation.CGRect) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setFrame:"), frame)
+	})
 	return siiv
 }
 
 // WithFrameRotation sets the frame rotation.
 func (siiv *ScrubberImageItemView) WithFrameRotation(frameRotation float64) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return siiv
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (siiv *ScrubberImageItemView) WithFrameCenterRotation(frameCenterRotation float64) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return siiv
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (siiv *ScrubberImageItemView) WithBoundsRotation(boundsRotation float64) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return siiv
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (siiv *ScrubberImageItemView) WithBounds(bounds corefoundation.CGRect) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setBounds:"), bounds)
+	})
 	return siiv
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (siiv *ScrubberImageItemView) WithCanDrawConcurrently(canDrawConcurrently bool) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return siiv
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (siiv *ScrubberImageItemView) WithNeedsDisplay(needsDisplay bool) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return siiv
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (siiv *ScrubberImageItemView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return siiv
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (siiv *ScrubberImageItemView) WithWantsRestingTouches(wantsRestingTouches bool) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return siiv
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (siiv *ScrubberImageItemView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return siiv
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (siiv *ScrubberImageItemView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return siiv
 }
 
 // WithWantsLayer sets the wants layer.
 func (siiv *ScrubberImageItemView) WithWantsLayer(wantsLayer bool) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return siiv
 }
 
 // WithLayer sets the layer.
 func (siiv *ScrubberImageItemView) WithLayer(layer obj.Object) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return siiv
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (siiv *ScrubberImageItemView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return siiv
 }
 
 // WithNeedsLayout sets the needs layout.
 func (siiv *ScrubberImageItemView) WithNeedsLayout(needsLayout bool) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return siiv
 }
 
 // WithAlphaValue sets the alpha value.
 func (siiv *ScrubberImageItemView) WithAlphaValue(alphaValue float64) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return siiv
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (siiv *ScrubberImageItemView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return siiv
 }
 
 // WithBackgroundFilters sets the background filters.
 func (siiv *ScrubberImageItemView) WithBackgroundFilters(items ...obj.Object) *ScrubberImageItemView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return siiv
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (siiv *ScrubberImageItemView) WithCompositingFilter(compositingFilter obj.Object) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return siiv
 }
 
 // WithContentFilters sets the content filters.
 func (siiv *ScrubberImageItemView) WithContentFilters(items ...obj.Object) *ScrubberImageItemView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return siiv
 }
 
 // WithShadow sets the shadow.
 func (siiv *ScrubberImageItemView) WithShadow(shadow *Shadow) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return siiv
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (siiv *ScrubberImageItemView) WithClipsToBounds(clipsToBounds bool) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return siiv
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (siiv *ScrubberImageItemView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return siiv
 }
 
 // WithToolTip sets the tool tip.
 func (siiv *ScrubberImageItemView) WithToolTip(toolTip string) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return siiv
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (siiv *ScrubberImageItemView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return siiv
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (siiv *ScrubberImageItemView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return siiv
 }
 
 // WithNextKeyView sets the next key view.
 func (siiv *ScrubberImageItemView) WithNextKeyView(nextKeyView ViewProvider) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return siiv
 }
 
 // WithFocusRingType sets the focus ring type.
 func (siiv *ScrubberImageItemView) WithFocusRingType(focusRingType FocusRingType) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return siiv
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (siiv *ScrubberImageItemView) WithGestureRecognizers(items ...GestureRecognizerProvider) *ScrubberImageItemView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return siiv
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (siiv *ScrubberImageItemView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return siiv
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (siiv *ScrubberImageItemView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return siiv
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (siiv *ScrubberImageItemView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return siiv
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (siiv *ScrubberImageItemView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return siiv
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (siiv *ScrubberImageItemView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return siiv
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (siiv *ScrubberImageItemView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return siiv
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (siiv *ScrubberImageItemView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return siiv
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (siiv *ScrubberImageItemView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return siiv
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (siiv *ScrubberImageItemView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return siiv
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (siiv *ScrubberImageItemView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return siiv
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (siiv *ScrubberImageItemView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return siiv
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (siiv *ScrubberImageItemView) WithNextResponder(nextResponder ResponderProvider) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return siiv
 }
 
 // WithMenu sets returns the responder’s menu.
 func (siiv *ScrubberImageItemView) WithMenu(menu *Menu) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return siiv
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (siiv *ScrubberImageItemView) WithUserActivity(userActivity obj.Object) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return siiv
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (siiv *ScrubberImageItemView) WithTouchBar(touchBar *TouchBar) *ScrubberImageItemView {
-	objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return siiv
 }
 
 // ImageView returns the image view.
 func (siiv *ScrubberImageItemView) ImageView() *ImageView {
-	_r := objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("imageView"))
-	return ImageViewFromID(_r)
+	var _mainthread0 *ImageView
+	purego.Main(func() {
+		_mainthread0 = func() *ImageView {
+			_r := objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("imageView"))
+			return ImageViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Image returns the image.
 func (siiv *ScrubberImageItemView) Image() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("image"))
-	return ImageFromID(_r)
+	var _mainthread0 *Image
+	purego.Main(func() {
+		_mainthread0 = func() *Image {
+			_r := objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("image"))
+			return ImageFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ImageAlignment returns the image alignment.
 func (siiv *ScrubberImageItemView) ImageAlignment() ImageAlignment {
-	_r := objc.Send[ImageAlignment](objref.IDOf(siiv), objc.RegisterName("imageAlignment"))
-	return _r
+	var _mainthread0 ImageAlignment
+	purego.Main(func() {
+		_mainthread0 = func() ImageAlignment {
+			_r := objc.Send[ImageAlignment](objref.IDOf(siiv), objc.RegisterName("imageAlignment"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ScrubberItemViewProvider = (*ScrubberImageItemView)(nil)

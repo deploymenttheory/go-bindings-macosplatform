@@ -47,53 +47,88 @@ func sharingServicePickerTouchBarItemAdopt(id objc.ID) *SharingServicePickerTouc
 
 // NewSharingServicePickerTouchBarItem creates a new SharingServicePickerTouchBarItem.
 func NewSharingServicePickerTouchBarItem() *SharingServicePickerTouchBarItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSSharingServicePickerTouchBarItem")), objc.RegisterName("new"))
-	return sharingServicePickerTouchBarItemAdopt(_id)
+	var _mainthread0 *SharingServicePickerTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *SharingServicePickerTouchBarItem {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSSharingServicePickerTouchBarItem")), objc.RegisterName("new"))
+			return sharingServicePickerTouchBarItemAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithEnabled sets a Boolean value that specifies whether the sharing service picker item is enabled.
 func (ssptbi *SharingServicePickerTouchBarItem) WithEnabled(enabled bool) *SharingServicePickerTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(ssptbi), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ssptbi), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return ssptbi
 }
 
 // WithButtonTitle sets the text displayed in the sharing service picker item button.
 func (ssptbi *SharingServicePickerTouchBarItem) WithButtonTitle(buttonTitle string) *SharingServicePickerTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(ssptbi), objc.RegisterName("setButtonTitle:"), purego.NSString(buttonTitle))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ssptbi), objc.RegisterName("setButtonTitle:"), purego.NSString(buttonTitle))
+	})
 	return ssptbi
 }
 
 // WithButtonImage sets the image displayed in the sharing service picker item button.
 func (ssptbi *SharingServicePickerTouchBarItem) WithButtonImage(buttonImage *Image) *SharingServicePickerTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(ssptbi), objc.RegisterName("setButtonImage:"), objref.IDOf(buttonImage))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ssptbi), objc.RegisterName("setButtonImage:"), objref.IDOf(buttonImage))
+	})
 	return ssptbi
 }
 
 // WithVisibilityPriority sets determines which items are shown in a bar when space is limited.
 func (ssptbi *SharingServicePickerTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *SharingServicePickerTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(ssptbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ssptbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	})
 	return ssptbi
 }
 
 // IsEnabled reports whether the object is enabled.
 func (ssptbi *SharingServicePickerTouchBarItem) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(ssptbi), objc.RegisterName("isEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(ssptbi), objc.RegisterName("isEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ButtonTitle returns the button title.
 func (ssptbi *SharingServicePickerTouchBarItem) ButtonTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(ssptbi), objc.RegisterName("buttonTitle"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(ssptbi), objc.RegisterName("buttonTitle"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ButtonImage returns the button image.
 func (ssptbi *SharingServicePickerTouchBarItem) ButtonImage() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(ssptbi), objc.RegisterName("buttonImage"))
-	return ImageFromID(_r)
+	var _mainthread0 *Image
+	purego.Main(func() {
+		_mainthread0 = func() *Image {
+			_r := objc.Send[objc.ID](objref.IDOf(ssptbi), objc.RegisterName("buttonImage"))
+			return ImageFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ TouchBarItemProvider = (*SharingServicePickerTouchBarItem)(nil)

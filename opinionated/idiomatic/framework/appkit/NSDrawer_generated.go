@@ -49,147 +49,246 @@ func drawerAdopt(id objc.ID) *Drawer {
 
 // NewDrawer creates a new Drawer.
 func NewDrawer() *Drawer {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSDrawer")), objc.RegisterName("new"))
-	return drawerAdopt(_id)
+	var _mainthread0 *Drawer
+	purego.Main(func() {
+		_mainthread0 = func() *Drawer {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSDrawer")), objc.RegisterName("new"))
+			return drawerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithParentWindow sets the receiver’s parent window.
 func (d *Drawer) WithParentWindow(parentWindow WindowProvider) *Drawer {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
+	})
 	return d
 }
 
 // WithContentView sets the receiver’s content view.
 func (d *Drawer) WithContentView(contentView ViewProvider) *Drawer {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
+	})
 	return d
 }
 
 // WithContentSize sets the size of the receiver’s content area.
 func (d *Drawer) WithContentSize(contentSize corefoundation.CGSize) *Drawer {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setContentSize:"), contentSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setContentSize:"), contentSize)
+	})
 	return d
 }
 
 // WithMinContentSize sets the minimum allowed size of the receiver’s content area.
 func (d *Drawer) WithMinContentSize(minContentSize corefoundation.CGSize) *Drawer {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setMinContentSize:"), minContentSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setMinContentSize:"), minContentSize)
+	})
 	return d
 }
 
 // WithMaxContentSize sets the maximum allowed size of the receiver’s content area.
 func (d *Drawer) WithMaxContentSize(maxContentSize corefoundation.CGSize) *Drawer {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setMaxContentSize:"), maxContentSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setMaxContentSize:"), maxContentSize)
+	})
 	return d
 }
 
 // WithLeadingOffset sets the receiver’s leading offset.
 func (d *Drawer) WithLeadingOffset(leadingOffset float64) *Drawer {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setLeadingOffset:"), leadingOffset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setLeadingOffset:"), leadingOffset)
+	})
 	return d
 }
 
 // WithTrailingOffset sets the receiver’s trailing offset.
 func (d *Drawer) WithTrailingOffset(trailingOffset float64) *Drawer {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setTrailingOffset:"), trailingOffset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setTrailingOffset:"), trailingOffset)
+	})
 	return d
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (d *Drawer) WithNextResponder(nextResponder ResponderProvider) *Drawer {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return d
 }
 
 // WithMenu sets returns the responder’s menu.
 func (d *Drawer) WithMenu(menu *Menu) *Drawer {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return d
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (d *Drawer) WithUserActivity(userActivity obj.Object) *Drawer {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return d
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (d *Drawer) WithTouchBar(touchBar *TouchBar) *Drawer {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return d
 }
 
 // Open if the receiver is closed, this method opens it.
 func (d *Drawer) Open() {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("open"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("open"))
+	})
+
 }
 
 // Close if the receiver is open, this method closes it.
 func (d *Drawer) Close() {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("close"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("close"))
+	})
+
 }
 
 // Open2 an action method to open the drawer.
 func (d *Drawer) Open2(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("open:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("open:"), objref.IDOf(sender))
+	})
+
 }
 
 // Close2 an action method to close the receiver.
 func (d *Drawer) Close2(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("close:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("close:"), objref.IDOf(sender))
+	})
+
 }
 
 // Toggle toggles the drawer open or closed.
 func (d *Drawer) Toggle(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("toggle:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("toggle:"), objref.IDOf(sender))
+	})
+
 }
 
 // ParentWindow returns the parent window.
 func (d *Drawer) ParentWindow() *Window {
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("parentWindow"))
-	return WindowFromID(_r)
+	var _mainthread0 *Window
+	purego.Main(func() {
+		_mainthread0 = func() *Window {
+			_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("parentWindow"))
+			return WindowFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ContentView returns the content view.
 func (d *Drawer) ContentView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("contentView"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("contentView"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // State returns the state.
 func (d *Drawer) State() int {
-	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("state"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("state"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ContentSize returns the content size.
 func (d *Drawer) ContentSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(d), objc.RegisterName("contentSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(d), objc.RegisterName("contentSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MinContentSize returns the min content size.
 func (d *Drawer) MinContentSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(d), objc.RegisterName("minContentSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(d), objc.RegisterName("minContentSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MaxContentSize returns the max content size.
 func (d *Drawer) MaxContentSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(d), objc.RegisterName("maxContentSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(d), objc.RegisterName("maxContentSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LeadingOffset returns the leading offset.
 func (d *Drawer) LeadingOffset() float64 {
-	_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("leadingOffset"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("leadingOffset"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TrailingOffset returns the trailing offset.
 func (d *Drawer) TrailingOffset() float64 {
-	_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("trailingOffset"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("trailingOffset"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ResponderProvider = (*Drawer)(nil)

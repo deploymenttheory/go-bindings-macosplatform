@@ -52,505 +52,694 @@ func fontPanelAdopt(id objc.ID) *FontPanel {
 
 // NewFontPanel creates a new FontPanel.
 func NewFontPanel() *FontPanel {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSFontPanel")), objc.RegisterName("new"))
-	return fontPanelAdopt(_id)
+	var _mainthread0 *FontPanel
+	purego.Main(func() {
+		_mainthread0 = func() *FontPanel {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSFontPanel")), objc.RegisterName("new"))
+			return fontPanelAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithAccessoryView sets the specified view as the receiver’s accessory view, allowing you to add custom controls to your application’s Font panel without having to create a subclass.
 func (fp *FontPanel) WithAccessoryView(accessoryView ViewProvider) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
+	})
 	return fp
 }
 
 // WithEnabled sets a Boolean that shows whether the receiver’s Set button is enabled.
 func (fp *FontPanel) WithEnabled(enabled bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return fp
 }
 
 // WithFloatingPanel sets a Boolean value that indicates whether the receiver is a floating panel.
 func (fp *FontPanel) WithFloatingPanel(floatingPanel bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setFloatingPanel:"), floatingPanel)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setFloatingPanel:"), floatingPanel)
+	})
 	return fp
 }
 
 // WithBecomesKeyOnlyIfNeeded sets a Boolean value that indicates whether the receiver becomes the key window only when needed.
 func (fp *FontPanel) WithBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setBecomesKeyOnlyIfNeeded:"), becomesKeyOnlyIfNeeded)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setBecomesKeyOnlyIfNeeded:"), becomesKeyOnlyIfNeeded)
+	})
 	return fp
 }
 
 // WithWorksWhenModal sets a Boolean value that indicates whether the panel receives keyboard and mouse events even when some other window is being run modally.
 func (fp *FontPanel) WithWorksWhenModal(worksWhenModal bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setWorksWhenModal:"), worksWhenModal)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setWorksWhenModal:"), worksWhenModal)
+	})
 	return fp
 }
 
 // WithTitle sets the string that appears in the title bar of the window or the path to the represented file.
 func (fp *FontPanel) WithTitle(title string) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return fp
 }
 
 // WithSubtitle sets a secondary line of text that appears in the title bar of the window.
 func (fp *FontPanel) WithSubtitle(subtitle string) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
+	})
 	return fp
 }
 
 // WithTitleVisibility sets a value that indicates the visibility of the window’s title and title bar buttons.
 func (fp *FontPanel) WithTitleVisibility(titleVisibility WindowTitleVisibility) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTitleVisibility:"), titleVisibility)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTitleVisibility:"), titleVisibility)
+	})
 	return fp
 }
 
 // WithTitlebarAppearsTransparent sets a Boolean value that indicates whether the title bar draws its background.
 func (fp *FontPanel) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTitlebarAppearsTransparent:"), titlebarAppearsTransparent)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTitlebarAppearsTransparent:"), titlebarAppearsTransparent)
+	})
 	return fp
 }
 
 // WithToolbarStyle sets the style that determines the appearance and location of the toolbar in relation to the title bar.
 func (fp *FontPanel) WithToolbarStyle(toolbarStyle WindowToolbarStyle) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setToolbarStyle:"), toolbarStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setToolbarStyle:"), toolbarStyle)
+	})
 	return fp
 }
 
 // WithTitlebarAccessoryViewControllers sets an array of title bar accessory view controllers that are currently added to the window.
 func (fp *FontPanel) WithTitlebarAccessoryViewControllers(items ...*TitlebarAccessoryViewController) *FontPanel {
 	_arr := purego.SliceToNSArray(items, func(_v *TitlebarAccessoryViewController) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTitlebarAccessoryViewControllers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTitlebarAccessoryViewControllers:"), _arr)
+	})
 	return fp
 }
 
 // WithRepresentedURL sets the URL of the file the window represents.
 func (fp *FontPanel) WithRepresentedURL(representedURL string) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setRepresentedURL:"), rt.FileURL(representedURL))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setRepresentedURL:"), rt.FileURL(representedURL))
+	})
 	return fp
 }
 
 // WithRepresentedFilename sets the path to the file of the window’s represented file.
 func (fp *FontPanel) WithRepresentedFilename(representedFilename string) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setRepresentedFilename:"), purego.NSString(representedFilename))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setRepresentedFilename:"), purego.NSString(representedFilename))
+	})
 	return fp
 }
 
 // WithExcludedFromWindowsMenu sets a Boolean value that indicates whether the window is excluded from the application’s Windows menu.
 func (fp *FontPanel) WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setExcludedFromWindowsMenu:"), excludedFromWindowsMenu)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setExcludedFromWindowsMenu:"), excludedFromWindowsMenu)
+	})
 	return fp
 }
 
 // WithContentView sets the window’s content view, the highest accessible view object in the window’s view hierarchy.
 func (fp *FontPanel) WithContentView(contentView ViewProvider) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
+	})
 	return fp
 }
 
 // WithStyleMask sets flags that describe the window’s current style, such as if it’s resizable or in full-screen mode.
 func (fp *FontPanel) WithStyleMask(styleMask WindowStyleMask) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setStyleMask:"), styleMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setStyleMask:"), styleMask)
+	})
 	return fp
 }
 
 // WithResizeIncrements sets the window’s resizing increments.
 func (fp *FontPanel) WithResizeIncrements(resizeIncrements corefoundation.CGSize) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setResizeIncrements:"), resizeIncrements)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setResizeIncrements:"), resizeIncrements)
+	})
 	return fp
 }
 
 // WithAspectRatio sets the window’s aspect ratio, which constrains the size of its frame rectangle to integral multiples of this ratio when the user resizes it.
 func (fp *FontPanel) WithAspectRatio(aspectRatio corefoundation.CGSize) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAspectRatio:"), aspectRatio)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAspectRatio:"), aspectRatio)
+	})
 	return fp
 }
 
 // WithContentResizeIncrements sets the window’s content-view resizing increments.
 func (fp *FontPanel) WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setContentResizeIncrements:"), contentResizeIncrements)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setContentResizeIncrements:"), contentResizeIncrements)
+	})
 	return fp
 }
 
 // WithContentAspectRatio sets the window’s content aspect ratio.
 func (fp *FontPanel) WithContentAspectRatio(contentAspectRatio corefoundation.CGSize) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setContentAspectRatio:"), contentAspectRatio)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setContentAspectRatio:"), contentAspectRatio)
+	})
 	return fp
 }
 
 // WithViewsNeedDisplay sets a Boolean value that indicates whether any of the window’s views need to be displayed.
 func (fp *FontPanel) WithViewsNeedDisplay(viewsNeedDisplay bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setViewsNeedDisplay:"), viewsNeedDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setViewsNeedDisplay:"), viewsNeedDisplay)
+	})
 	return fp
 }
 
 // WithPreservesContentDuringLiveResize sets a Boolean value that indicates whether the window tries to optimize user-initiated resize operations by preserving the content of views that have not changed.
 func (fp *FontPanel) WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setPreservesContentDuringLiveResize:"), preservesContentDuringLiveResize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setPreservesContentDuringLiveResize:"), preservesContentDuringLiveResize)
+	})
 	return fp
 }
 
 // WithReleasedWhenClosed sets a Boolean value that indicates whether the window is released when it receives the close message.
 func (fp *FontPanel) WithReleasedWhenClosed(releasedWhenClosed bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setReleasedWhenClosed:"), releasedWhenClosed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setReleasedWhenClosed:"), releasedWhenClosed)
+	})
 	return fp
 }
 
 // WithBackgroundColor sets the color of the window’s background.
 func (fp *FontPanel) WithBackgroundColor(backgroundColor *Color) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	})
 	return fp
 }
 
 // WithMovable sets a Boolean value that indicates whether the window can be dragged by clicking in its title bar or background.
 func (fp *FontPanel) WithMovable(movable bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMovable:"), movable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMovable:"), movable)
+	})
 	return fp
 }
 
 // WithMovableByWindowBackground sets a Boolean value that indicates whether the window is movable by clicking and dragging anywhere in its background.
 func (fp *FontPanel) WithMovableByWindowBackground(movableByWindowBackground bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMovableByWindowBackground:"), movableByWindowBackground)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMovableByWindowBackground:"), movableByWindowBackground)
+	})
 	return fp
 }
 
 // WithHidesOnDeactivate sets a Boolean value that indicates whether the window is removed from the screen when its application becomes inactive.
 func (fp *FontPanel) WithHidesOnDeactivate(hidesOnDeactivate bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setHidesOnDeactivate:"), hidesOnDeactivate)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setHidesOnDeactivate:"), hidesOnDeactivate)
+	})
 	return fp
 }
 
 // WithCanHide sets a Boolean value that indicates whether the window can hide when its application becomes hidden.
 func (fp *FontPanel) WithCanHide(canHide bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setCanHide:"), canHide)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setCanHide:"), canHide)
+	})
 	return fp
 }
 
 // WithMiniwindowImage sets the custom miniaturized window image of the window.
 func (fp *FontPanel) WithMiniwindowImage(miniwindowImage *Image) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMiniwindowImage:"), objref.IDOf(miniwindowImage))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMiniwindowImage:"), objref.IDOf(miniwindowImage))
+	})
 	return fp
 }
 
 // WithMiniwindowTitle sets the title displayed in the window’s minimized window.
 func (fp *FontPanel) WithMiniwindowTitle(miniwindowTitle string) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMiniwindowTitle:"), purego.NSString(miniwindowTitle))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMiniwindowTitle:"), purego.NSString(miniwindowTitle))
+	})
 	return fp
 }
 
 // WithDocumentEdited sets a Boolean value that indicates whether the window’s document has been edited.
 func (fp *FontPanel) WithDocumentEdited(documentEdited bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setDocumentEdited:"), documentEdited)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setDocumentEdited:"), documentEdited)
+	})
 	return fp
 }
 
 // WithPreventsApplicationTerminationWhenModal sets a Boolean value that indicates whether the window prevents application termination when modal.
 func (fp *FontPanel) WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setPreventsApplicationTerminationWhenModal:"), preventsApplicationTerminationWhenModal)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setPreventsApplicationTerminationWhenModal:"), preventsApplicationTerminationWhenModal)
+	})
 	return fp
 }
 
 // WithAllowsToolTipsWhenApplicationIsInactive sets a Boolean value that indicates whether the window can display tooltips even when the application is in the background.
 func (fp *FontPanel) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAllowsToolTipsWhenApplicationIsInactive:"), allowsToolTipsWhenApplicationIsInactive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAllowsToolTipsWhenApplicationIsInactive:"), allowsToolTipsWhenApplicationIsInactive)
+	})
 	return fp
 }
 
 // WithBackingType sets the window’s backing store type.
 func (fp *FontPanel) WithBackingType(backingType BackingStoreType) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setBackingType:"), backingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setBackingType:"), backingType)
+	})
 	return fp
 }
 
 // WithLevel sets the window level of the window.
 func (fp *FontPanel) WithLevel(level int) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setLevel:"), level)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setLevel:"), level)
+	})
 	return fp
 }
 
 // WithDepthLimit sets the depth limit of the window.
 func (fp *FontPanel) WithDepthLimit(depthLimit WindowDepth) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setDepthLimit:"), depthLimit)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setDepthLimit:"), depthLimit)
+	})
 	return fp
 }
 
 // WithHasShadow sets a Boolean value that indicates whether the window has a shadow.
 func (fp *FontPanel) WithHasShadow(hasShadow bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setHasShadow:"), hasShadow)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setHasShadow:"), hasShadow)
+	})
 	return fp
 }
 
 // WithAlphaValue sets the window’s alpha value.
 func (fp *FontPanel) WithAlphaValue(alphaValue float64) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return fp
 }
 
 // WithOpaque sets a Boolean value that indicates whether the window is opaque.
 func (fp *FontPanel) WithOpaque(opaque bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setOpaque:"), opaque)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setOpaque:"), opaque)
+	})
 	return fp
 }
 
 // WithSharingType sets a Boolean value that indicates the level of access other processes have to the window’s content.
 func (fp *FontPanel) WithSharingType(sharingType WindowSharingType) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setSharingType:"), sharingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setSharingType:"), sharingType)
+	})
 	return fp
 }
 
 // WithAllowsConcurrentViewDrawing sets a Boolean value that indicates whether the window allows multithreaded view drawing.
 func (fp *FontPanel) WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAllowsConcurrentViewDrawing:"), allowsConcurrentViewDrawing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAllowsConcurrentViewDrawing:"), allowsConcurrentViewDrawing)
+	})
 	return fp
 }
 
 // WithDisplaysWhenScreenProfileChanges sets a Boolean value that indicates whether the window context should be updated when the screen profile changes or when the window moves to a different screen.
 func (fp *FontPanel) WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setDisplaysWhenScreenProfileChanges:"), displaysWhenScreenProfileChanges)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setDisplaysWhenScreenProfileChanges:"), displaysWhenScreenProfileChanges)
+	})
 	return fp
 }
 
 // WithCanBecomeVisibleWithoutLogin sets a Boolean value that indicates whether the window can be displayed at the login window.
 func (fp *FontPanel) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setCanBecomeVisibleWithoutLogin:"), canBecomeVisibleWithoutLogin)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setCanBecomeVisibleWithoutLogin:"), canBecomeVisibleWithoutLogin)
+	})
 	return fp
 }
 
 // WithCollectionBehavior sets a value that identifies the window’s behavior in window collections.
 func (fp *FontPanel) WithCollectionBehavior(collectionBehavior WindowCollectionBehavior) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setCollectionBehavior:"), collectionBehavior)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setCollectionBehavior:"), collectionBehavior)
+	})
 	return fp
 }
 
 // WithAnimationBehavior sets the window’s automatic animation behavior.
 func (fp *FontPanel) WithAnimationBehavior(animationBehavior WindowAnimationBehavior) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAnimationBehavior:"), animationBehavior)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAnimationBehavior:"), animationBehavior)
+	})
 	return fp
 }
 
 // WithFrameAutosaveName sets the name used to automatically save the window’s frame rectangle data in the defaults system.
 func (fp *FontPanel) WithFrameAutosaveName(frameAutosaveName obj.Object) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setFrameAutosaveName:"), objref.IDOf(frameAutosaveName))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setFrameAutosaveName:"), objref.IDOf(frameAutosaveName))
+	})
 	return fp
 }
 
 // WithMinSize sets the minimum size to which the window’s frame (including its title bar) can be sized.
 func (fp *FontPanel) WithMinSize(minSize corefoundation.CGSize) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMinSize:"), minSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMinSize:"), minSize)
+	})
 	return fp
 }
 
 // WithMaxSize sets the maximum size to which the window’s frame (including its title bar) can be sized.
 func (fp *FontPanel) WithMaxSize(maxSize corefoundation.CGSize) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMaxSize:"), maxSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMaxSize:"), maxSize)
+	})
 	return fp
 }
 
 // WithContentMinSize sets the minimum size of the window’s content view in the window’s base coordinate system.
 func (fp *FontPanel) WithContentMinSize(contentMinSize corefoundation.CGSize) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setContentMinSize:"), contentMinSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setContentMinSize:"), contentMinSize)
+	})
 	return fp
 }
 
 // WithContentMaxSize sets the maximum size of the window’s content view in the window’s base coordinate system.
 func (fp *FontPanel) WithContentMaxSize(contentMaxSize corefoundation.CGSize) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setContentMaxSize:"), contentMaxSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setContentMaxSize:"), contentMaxSize)
+	})
 	return fp
 }
 
 // WithMinFullScreenContentSize sets a minimum size that is used to determine if a window can fit when it is in full screen in a tile.
 func (fp *FontPanel) WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMinFullScreenContentSize:"), minFullScreenContentSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMinFullScreenContentSize:"), minFullScreenContentSize)
+	})
 	return fp
 }
 
 // WithMaxFullScreenContentSize sets a maximum size that is used to determine if a window can fit when it is in full screen in a tile.
 func (fp *FontPanel) WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMaxFullScreenContentSize:"), maxFullScreenContentSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMaxFullScreenContentSize:"), maxFullScreenContentSize)
+	})
 	return fp
 }
 
 // WithWindowController sets the window’s window controller.
 func (fp *FontPanel) WithWindowController(windowController *WindowController) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setWindowController:"), objref.IDOf(windowController))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setWindowController:"), objref.IDOf(windowController))
+	})
 	return fp
 }
 
 // WithParentWindow sets the parent window to which the window is attached as a child.
 func (fp *FontPanel) WithParentWindow(parentWindow WindowProvider) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
+	})
 	return fp
 }
 
 // WithAppearanceSource sets an object that the window inherits its appearance from.
 func (fp *FontPanel) WithAppearanceSource(appearanceSource obj.Object) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAppearanceSource:"), objref.IDOf(appearanceSource))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAppearanceSource:"), objref.IDOf(appearanceSource))
+	})
 	return fp
 }
 
 // WithColorSpace sets the window’s color space.
 func (fp *FontPanel) WithColorSpace(colorSpace *ColorSpace) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace))
+	})
 	return fp
 }
 
 // WithTitlebarSeparatorStyle sets the type of separator that the app displays between the title bar and content of a window.
 func (fp *FontPanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle TitlebarSeparatorStyle) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTitlebarSeparatorStyle:"), titlebarSeparatorStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTitlebarSeparatorStyle:"), titlebarSeparatorStyle)
+	})
 	return fp
 }
 
 // WithContentViewController sets the main content view controller for the window.
 func (fp *FontPanel) WithContentViewController(contentViewController ViewControllerProvider) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
+	})
 	return fp
 }
 
 // WithInitialFirstResponder sets the view that’s made first responder (also called the key view) the first time the window is placed onscreen.
 func (fp *FontPanel) WithInitialFirstResponder(initialFirstResponder ViewProvider) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setInitialFirstResponder:"), objref.IDOf(initialFirstResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setInitialFirstResponder:"), objref.IDOf(initialFirstResponder))
+	})
 	return fp
 }
 
 // WithDefaultButtonCell sets the button cell that performs as if clicked when the window receives a Return (or Enter) key event.
 func (fp *FontPanel) WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setDefaultButtonCell:"), objref.IDOf(defaultButtonCell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setDefaultButtonCell:"), objref.IDOf(defaultButtonCell))
+	})
 	return fp
 }
 
 // WithAutorecalculatesKeyViewLoop sets a Boolean value that indicates whether the window automatically recalculates the key view loop when views are added.
 func (fp *FontPanel) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAutorecalculatesKeyViewLoop:"), autorecalculatesKeyViewLoop)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAutorecalculatesKeyViewLoop:"), autorecalculatesKeyViewLoop)
+	})
 	return fp
 }
 
 // WithToolbar sets the window’s toolbar.
 func (fp *FontPanel) WithToolbar(toolbar *Toolbar) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setToolbar:"), objref.IDOf(toolbar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setToolbar:"), objref.IDOf(toolbar))
+	})
 	return fp
 }
 
 // WithShowsToolbarButton sets a Boolean value that indicates whether the toolbar control button is currently displayed.
 func (fp *FontPanel) WithShowsToolbarButton(showsToolbarButton bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setShowsToolbarButton:"), showsToolbarButton)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setShowsToolbarButton:"), showsToolbarButton)
+	})
 	return fp
 }
 
 // WithTabbingMode sets a value that indicates when a window displays tabs.
 func (fp *FontPanel) WithTabbingMode(tabbingMode WindowTabbingMode) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTabbingMode:"), tabbingMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTabbingMode:"), tabbingMode)
+	})
 	return fp
 }
 
 // WithTabbingIdentifier sets a value that allows a group of related windows.
 func (fp *FontPanel) WithTabbingIdentifier(tabbingIdentifier obj.Object) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTabbingIdentifier:"), objref.IDOf(tabbingIdentifier))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTabbingIdentifier:"), objref.IDOf(tabbingIdentifier))
+	})
 	return fp
 }
 
 // WithAcceptsMouseMovedEvents sets a Boolean value that indicates whether the window accepts mouse-moved events.
 func (fp *FontPanel) WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAcceptsMouseMovedEvents:"), acceptsMouseMovedEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAcceptsMouseMovedEvents:"), acceptsMouseMovedEvents)
+	})
 	return fp
 }
 
 // WithIgnoresMouseEvents sets a Boolean value that indicates whether the window is transparent to mouse events.
 func (fp *FontPanel) WithIgnoresMouseEvents(ignoresMouseEvents bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setIgnoresMouseEvents:"), ignoresMouseEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setIgnoresMouseEvents:"), ignoresMouseEvents)
+	})
 	return fp
 }
 
 // WithAutodisplay sets the autodisplay.
 func (fp *FontPanel) WithAutodisplay(autodisplay bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAutodisplay:"), autodisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAutodisplay:"), autodisplay)
+	})
 	return fp
 }
 
 // WithOneShot sets the one shot.
 func (fp *FontPanel) WithOneShot(oneShot bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setOneShot:"), oneShot)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setOneShot:"), oneShot)
+	})
 	return fp
 }
 
 // WithPreferredBackingLocation sets the preferred backing location.
 func (fp *FontPanel) WithPreferredBackingLocation(preferredBackingLocation WindowBackingLocation) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setPreferredBackingLocation:"), preferredBackingLocation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setPreferredBackingLocation:"), preferredBackingLocation)
+	})
 	return fp
 }
 
 // WithShowsResizeIndicator sets the shows resize indicator.
 func (fp *FontPanel) WithShowsResizeIndicator(showsResizeIndicator bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setShowsResizeIndicator:"), showsResizeIndicator)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setShowsResizeIndicator:"), showsResizeIndicator)
+	})
 	return fp
 }
 
 // WithOrderedIndex sets the zero-based position of the window, based on its order from front to back among all visible application windows.
 func (fp *FontPanel) WithOrderedIndex(orderedIndex int) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setOrderedIndex:"), orderedIndex)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setOrderedIndex:"), orderedIndex)
+	})
 	return fp
 }
 
 // WithRestorable sets a Boolean value indicating whether the window configuration is preserved between application launches.
 func (fp *FontPanel) WithRestorable(restorable bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setRestorable:"), restorable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setRestorable:"), restorable)
+	})
 	return fp
 }
 
 // WithRestorationClass sets the restoration class associated with the window.
 func (fp *FontPanel) WithRestorationClass(restorationClass unsafe.Pointer) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setRestorationClass:"), restorationClass)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setRestorationClass:"), restorationClass)
+	})
 	return fp
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (fp *FontPanel) WithNextResponder(nextResponder ResponderProvider) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return fp
 }
 
 // WithMenu sets returns the responder’s menu.
 func (fp *FontPanel) WithMenu(menu *Menu) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return fp
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (fp *FontPanel) WithUserActivity(userActivity obj.Object) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return fp
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (fp *FontPanel) WithTouchBar(touchBar *TouchBar) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return fp
 }
 
 // SetPanelFontIsMultiple sets the selected font in the receiver to the specified font.
 func (fp *FontPanel) SetPanelFontIsMultiple(fontObj *Font, flag bool) {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setPanelFont:isMultiple:"), objref.IDOf(fontObj), flag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setPanelFont:isMultiple:"), objref.IDOf(fontObj), flag)
+	})
+
 }
 
 // PanelConvertFont converts the specified font using the settings in the receiver, with the aid of the shared NSFontManager if necessary.
 func (fp *FontPanel) PanelConvertFont(fontObj *Font) *Font {
-	_r := objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("panelConvertFont:"), objref.IDOf(fontObj))
-	return FontFromID(_r)
+	var _mainthread0 *Font
+	purego.Main(func() {
+		_mainthread0 = func() *Font {
+			_r := objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("panelConvertFont:"), objref.IDOf(fontObj))
+			return FontFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ReloadDefaultFontFamilies triggers a reload to the default state, so that the delegate is called.
 func (fp *FontPanel) ReloadDefaultFontFamilies() {
-	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("reloadDefaultFontFamilies"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("reloadDefaultFontFamilies"))
+	})
+
 }
 
 // AccessoryView returns the accessory view.
 func (fp *FontPanel) AccessoryView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("accessoryView"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("accessoryView"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsEnabled reports whether the object is enabled.
 func (fp *FontPanel) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(fp), objc.RegisterName("isEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(fp), objc.RegisterName("isEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ PanelProvider = (*FontPanel)(nil)

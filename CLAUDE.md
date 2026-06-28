@@ -86,6 +86,16 @@ go run ./scripts/tools/appledeveloperdocs fetch --framework Foundation
 go run ./scripts/tools/appledeveloperdocs fetch --framework Foundation,AppKit --deep
 go run ./scripts/tools/appledeveloperdocs fetch --framework all
 
+# ── Main-thread (@MainActor) isolation ────────────────────────────────────────
+# Harvest Swift @MainActor isolation (which APIs must run on the main thread)
+# from the Swift symbol graph into per-framework mainactor.json sidecars next to
+# the committed metadata. The frameworks loader merges these and propagates the
+# isolation down the class hierarchy, so the next 'idiomatic' run wraps the
+# affected calls in purego.Main. Re-run after an SDK bump. Requires Xcode.
+go run ./scripts/tools/mainactorisolation fetch --framework AppKit
+go run ./scripts/tools/mainactorisolation fetch --framework AppKit,WebKit,MapKit
+go run ./scripts/tools/mainactorisolation fetch --framework all
+
 # ── List ──────────────────────────────────────────────────────────────────────
 # List all frameworks the installed SDK exposes
 go run ./cmd/generate/ list
@@ -303,7 +313,7 @@ non-negotiable — violations block PRs.
 ## Important constraints
 
 - **ARC disabled**: all bridge `.m` files use `-fno-objc-arc`. Do not mix ARC code with the bridges.
-- **Main thread**: AppKit and any UI-framework calls must be dispatched via `objc.RunOnMainThread`. The generated bindings do not do this automatically — the caller is responsible.
+- **Main thread**: Apple isolates AppKit and other UI APIs to Swift's `@MainActor` (the macro `NS_SWIFT_UI_ACTOR`). The **idiomatic** layer (`opinionated/idiomatic/framework/`) now wires this automatically: methods, setters, and constructors of an `@MainActor`-isolated class — and every subclass that inherits the isolation (e.g. `MKMapView`, `PDFView` via `NSView`) — are wrapped in `purego.Main`, which runs the call on the main thread (inline when already there). The isolation is harvested from the Swift symbol graph into committed `metadata/frameworks/<name>/mainactor.json` sidecars (see `go run ./scripts/tools/mainactorisolation`), merged and propagated down the class hierarchy at load time. The **raw** bindings (`bindings/frameworks/`) are unchanged — callers there are still responsible for `purego.Main`/`objc.RunOnMainThread`. Queue-based frameworks (Virtualization, Core Data) carry no `@MainActor` and are correctly left unwrapped.
 - **Single permitted external dependency**: `github.com/ebitengine/purego` is the only non-stdlib dependency, used by the purego framework runtime. The CGo C-library layer has no external runtime dependency (it is pure CGo over `bindings/runtime/cgo`). Do not add further external dependencies without a compelling reason reviewed by a maintainer. (OpenTelemetry was previously a foundational dependency of the CGo libraries layer via `bindings/runtime/tel`; that package and the dependency have been removed — library calls are now `context`-free and uninstrumented.)
 - **darwin-only**: scanner and generator are gated on `//go:build darwin`. Unit tests in `internal/` that don't call Clang run on any platform.
 - **Modifying the generator**: when changing `internal/` or `cmd/generate/`, re-run `go run ./cmd/generate/ bindings` and include updated `frameworks/` in the same PR. If a scanner-side change requires re-scanning a framework, run `go run ./cmd/generate/ scan --framework <Name>` so the new `.gometa.json` lands in the committed `metadata/` tree.

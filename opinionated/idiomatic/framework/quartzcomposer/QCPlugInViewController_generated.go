@@ -66,13 +66,26 @@ func (pivc *PlugInViewController) String() string {
 
 // NewPlugInViewControllerWithPlugInViewNibName creates a new PlugInViewController.
 func NewPlugInViewControllerWithPlugInViewNibName(plugIn obj.Object, name string) *PlugInViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("QCPlugInViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlugIn:viewNibName:"), objref.IDOf(plugIn), purego.NSString(name))
-	return plugInViewControllerAdopt(_id)
+	var _mainthread0 *PlugInViewController
+	purego.Main(func() {
+		_mainthread0 = func() *PlugInViewController {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("QCPlugInViewController")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlugIn:viewNibName:"), objref.IDOf(plugIn), purego.NSString(name))
+			return plugInViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // PlugIn returns the plug in.
 func (pivc *PlugInViewController) PlugIn() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(pivc), objc.RegisterName("plugIn"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(pivc), objc.RegisterName("plugIn"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

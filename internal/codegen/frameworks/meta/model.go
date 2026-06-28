@@ -51,6 +51,14 @@ type Class struct {
 	SDKLine       int          `json:"sdk_line,omitempty"`
 	SwiftName     string       `json:"swift_name,omitempty"`
 	Doc           string       `json:"doc,omitempty"`
+
+	// IsMainThreadRequired is set at load time (not scanned) when the class is
+	// isolated to Swift's @MainActor — directly or by inheriting it from an
+	// ancestor — meaning its instances must be used on the main thread. The
+	// idiomatic emitter wraps such calls in purego.Main. Populated by the
+	// mainactor sidecar merge + hierarchy propagation; never serialised to
+	// .gometa.json.
+	IsMainThreadRequired bool `json:"-"`
 }
 
 // Protocol represents an Objective-C @protocol.
@@ -78,6 +86,12 @@ type Method struct {
 	Doc                  string       `json:"doc,omitempty"`
 	IsOptional           bool         `json:"is_optional,omitempty"`
 	IsMainThreadRequired bool         `json:"main_thread_required,omitempty"`
+
+	// IsMainThreadExempt is set at load time (not scanned) when the method is
+	// `nonisolated` — it explicitly opts out of its class's @MainActor isolation
+	// and must NOT be wrapped in purego.Main even though the class is otherwise
+	// main-thread-bound. Populated by the mainactor sidecar merge.
+	IsMainThreadExempt bool `json:"-"`
 }
 
 // Param is a method argument.

@@ -50,456 +50,615 @@ func switchAdopt(id objc.ID) *Switch {
 
 // NewSwitch creates a new Switch.
 func NewSwitch() *Switch {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSSwitch")), objc.RegisterName("new"))
-	return switchAdopt(_id)
+	var _mainthread0 *Switch
+	purego.Main(func() {
+		_mainthread0 = func() *Switch {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSSwitch")), objc.RegisterName("new"))
+			return switchAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithState sets the current position of the switch.
 func (s *Switch) WithState(state int) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setState:"), state)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setState:"), state)
+	})
 	return s
 }
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (s *Switch) WithTarget(target obj.Object) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return s
 }
 
 // WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
 func (s *Switch) WithTag(tag int) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTag:"), tag)
+	})
 	return s
 }
 
 // WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 func (s *Switch) WithIgnoresMultiClick(ignoresMultiClick bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	})
 	return s
 }
 
 // WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 func (s *Switch) WithContinuous(continuous bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return s
 }
 
 // WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
 func (s *Switch) WithEnabled(enabled bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return s
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
 func (s *Switch) WithRefusesFirstResponder(refusesFirstResponder bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return s
 }
 
 // WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
 func (s *Switch) WithHighlighted(highlighted bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return s
 }
 
 // WithControlSize sets the size of the control.
 func (s *Switch) WithControlSize(controlSize ControlSize) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return s
 }
 
 // WithFormatter sets the receiver’s formatter.
 func (s *Switch) WithFormatter(formatter obj.Object) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return s
 }
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (s *Switch) WithObjectValue(objectValue obj.Object) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return s
 }
 
 // WithStringValue sets the value of the receiver’s cell as an NSString object.
 func (s *Switch) WithStringValue(stringValue string) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return s
 }
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (s *Switch) WithAttributedStringValue(attributedStringValue obj.Object) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return s
 }
 
 // WithIntValue sets the value of the receiver’s cell as an integer.
 func (s *Switch) WithIntValue(intValue int) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return s
 }
 
 // WithIntegerValue sets the value of the receiver’s cell as an integer value.
 func (s *Switch) WithIntegerValue(integerValue int) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return s
 }
 
 // WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
 func (s *Switch) WithFloatValue(floatValue float32) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return s
 }
 
 // WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
 func (s *Switch) WithDoubleValue(doubleValue float64) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return s
 }
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (s *Switch) WithFont(font *Font) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return s
 }
 
 // WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
 func (s *Switch) WithUsesSingleLineMode(usesSingleLineMode bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return s
 }
 
 // WithLineBreakMode sets the line break mode to use for text in the control’s cell.
 func (s *Switch) WithLineBreakMode(lineBreakMode LineBreakMode) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return s
 }
 
 // WithAlignment sets the alignment mode of the text in the receiver’s cell.
 func (s *Switch) WithAlignment(alignment TextAlignment) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return s
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (s *Switch) WithBaseWritingDirection(baseWritingDirection WritingDirection) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return s
 }
 
 // WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 func (s *Switch) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	})
 	return s
 }
 
 // WithCell sets the cell.
 func (s *Switch) WithCell(cell CellProvider) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	})
 	return s
 }
 
 // WithSubviews sets the subviews.
 func (s *Switch) WithSubviews(items ...ViewProvider) *Switch {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return s
 }
 
 // WithHidden sets the hidden.
 func (s *Switch) WithHidden(hidden bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHidden:"), hidden)
+	})
 	return s
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (s *Switch) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return s
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (s *Switch) WithAutoresizesSubviews(autoresizesSubviews bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return s
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (s *Switch) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return s
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (s *Switch) WithFrame(frame corefoundation.CGRect) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrame:"), frame)
+	})
 	return s
 }
 
 // WithFrameRotation sets the frame rotation.
 func (s *Switch) WithFrameRotation(frameRotation float64) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return s
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (s *Switch) WithFrameCenterRotation(frameCenterRotation float64) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return s
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (s *Switch) WithBoundsRotation(boundsRotation float64) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return s
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (s *Switch) WithBounds(bounds corefoundation.CGRect) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBounds:"), bounds)
+	})
 	return s
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (s *Switch) WithCanDrawConcurrently(canDrawConcurrently bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return s
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (s *Switch) WithNeedsDisplay(needsDisplay bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return s
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (s *Switch) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return s
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (s *Switch) WithWantsRestingTouches(wantsRestingTouches bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return s
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (s *Switch) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return s
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (s *Switch) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return s
 }
 
 // WithWantsLayer sets the wants layer.
 func (s *Switch) WithWantsLayer(wantsLayer bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return s
 }
 
 // WithLayer sets the layer.
 func (s *Switch) WithLayer(layer obj.Object) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return s
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (s *Switch) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return s
 }
 
 // WithNeedsLayout sets the needs layout.
 func (s *Switch) WithNeedsLayout(needsLayout bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return s
 }
 
 // WithAlphaValue sets the alpha value.
 func (s *Switch) WithAlphaValue(alphaValue float64) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return s
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (s *Switch) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return s
 }
 
 // WithBackgroundFilters sets the background filters.
 func (s *Switch) WithBackgroundFilters(items ...obj.Object) *Switch {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return s
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (s *Switch) WithCompositingFilter(compositingFilter obj.Object) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return s
 }
 
 // WithContentFilters sets the content filters.
 func (s *Switch) WithContentFilters(items ...obj.Object) *Switch {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return s
 }
 
 // WithShadow sets the shadow.
 func (s *Switch) WithShadow(shadow *Shadow) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return s
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (s *Switch) WithClipsToBounds(clipsToBounds bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return s
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (s *Switch) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return s
 }
 
 // WithToolTip sets the tool tip.
 func (s *Switch) WithToolTip(toolTip string) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return s
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (s *Switch) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return s
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (s *Switch) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return s
 }
 
 // WithNextKeyView sets the next key view.
 func (s *Switch) WithNextKeyView(nextKeyView ViewProvider) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return s
 }
 
 // WithFocusRingType sets the focus ring type.
 func (s *Switch) WithFocusRingType(focusRingType FocusRingType) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return s
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (s *Switch) WithGestureRecognizers(items ...GestureRecognizerProvider) *Switch {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return s
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (s *Switch) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return s
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (s *Switch) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return s
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (s *Switch) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return s
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (s *Switch) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return s
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (s *Switch) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return s
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (s *Switch) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return s
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (s *Switch) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return s
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (s *Switch) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return s
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (s *Switch) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return s
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (s *Switch) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return s
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (s *Switch) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return s
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (s *Switch) WithNextResponder(nextResponder ResponderProvider) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return s
 }
 
 // WithMenu sets returns the responder’s menu.
 func (s *Switch) WithMenu(menu *Menu) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return s
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (s *Switch) WithUserActivity(userActivity obj.Object) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return s
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (s *Switch) WithTouchBar(touchBar *TouchBar) *Switch {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return s
 }
 
 // State returns the state.
 func (s *Switch) State() int {
-	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("state"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("state"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ControlProvider = (*Switch)(nil)

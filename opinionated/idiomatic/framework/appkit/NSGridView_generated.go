@@ -50,471 +50,725 @@ func gridViewAdopt(id objc.ID) *GridView {
 
 // NewGridViewWithFrame creates a newly allocated grid view object with the specified frame rectangle.
 func NewGridViewWithFrame(frameRect corefoundation.CGRect) *GridView {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSGridView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:"), frameRect)
-	return gridViewAdopt(_id)
+	var _mainthread0 *GridView
+	purego.Main(func() {
+		_mainthread0 = func() *GridView {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSGridView")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:"), frameRect)
+			return gridViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewGridViewWithCoder creates a newly allocated grid view object from the coder.
 func NewGridViewWithCoder(coder obj.Object) *GridView {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSGridView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
-	return gridViewAdopt(_id)
+	var _mainthread0 *GridView
+	purego.Main(func() {
+		_mainthread0 = func() *GridView {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSGridView")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+			return gridViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithXPlacement sets the placement of the cell within the grid column.
 func (gv *GridView) WithXPlacement(xPlacement GridCellPlacement) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setXPlacement:"), xPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setXPlacement:"), xPlacement)
+	})
 	return gv
 }
 
 // WithYPlacement sets the placement of the cell within the grid row.
 func (gv *GridView) WithYPlacement(yPlacement GridCellPlacement) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setYPlacement:"), yPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setYPlacement:"), yPlacement)
+	})
 	return gv
 }
 
 // WithRowAlignment sets the row alignment for the grid view.
 func (gv *GridView) WithRowAlignment(rowAlignment GridRowAlignment) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setRowAlignment:"), rowAlignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setRowAlignment:"), rowAlignment)
+	})
 	return gv
 }
 
 // WithRowSpacing sets the row spacing for the grid view.
 func (gv *GridView) WithRowSpacing(rowSpacing float64) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setRowSpacing:"), rowSpacing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setRowSpacing:"), rowSpacing)
+	})
 	return gv
 }
 
 // WithColumnSpacing sets the column spacing for the grid view.
 func (gv *GridView) WithColumnSpacing(columnSpacing float64) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setColumnSpacing:"), columnSpacing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setColumnSpacing:"), columnSpacing)
+	})
 	return gv
 }
 
 // WithSubviews sets the subviews.
 func (gv *GridView) WithSubviews(items ...ViewProvider) *GridView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return gv
 }
 
 // WithHidden sets the hidden.
 func (gv *GridView) WithHidden(hidden bool) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setHidden:"), hidden)
+	})
 	return gv
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (gv *GridView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return gv
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (gv *GridView) WithAutoresizesSubviews(autoresizesSubviews bool) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return gv
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (gv *GridView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return gv
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (gv *GridView) WithFrame(frame corefoundation.CGRect) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setFrame:"), frame)
+	})
 	return gv
 }
 
 // WithFrameRotation sets the frame rotation.
 func (gv *GridView) WithFrameRotation(frameRotation float64) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return gv
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (gv *GridView) WithFrameCenterRotation(frameCenterRotation float64) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return gv
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (gv *GridView) WithBoundsRotation(boundsRotation float64) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return gv
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (gv *GridView) WithBounds(bounds corefoundation.CGRect) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setBounds:"), bounds)
+	})
 	return gv
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (gv *GridView) WithCanDrawConcurrently(canDrawConcurrently bool) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return gv
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (gv *GridView) WithNeedsDisplay(needsDisplay bool) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return gv
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (gv *GridView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return gv
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (gv *GridView) WithWantsRestingTouches(wantsRestingTouches bool) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return gv
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (gv *GridView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return gv
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (gv *GridView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return gv
 }
 
 // WithWantsLayer sets the wants layer.
 func (gv *GridView) WithWantsLayer(wantsLayer bool) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return gv
 }
 
 // WithLayer sets the layer.
 func (gv *GridView) WithLayer(layer obj.Object) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return gv
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (gv *GridView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return gv
 }
 
 // WithNeedsLayout sets the needs layout.
 func (gv *GridView) WithNeedsLayout(needsLayout bool) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return gv
 }
 
 // WithAlphaValue sets the alpha value.
 func (gv *GridView) WithAlphaValue(alphaValue float64) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return gv
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (gv *GridView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return gv
 }
 
 // WithBackgroundFilters sets the background filters.
 func (gv *GridView) WithBackgroundFilters(items ...obj.Object) *GridView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return gv
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (gv *GridView) WithCompositingFilter(compositingFilter obj.Object) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return gv
 }
 
 // WithContentFilters sets the content filters.
 func (gv *GridView) WithContentFilters(items ...obj.Object) *GridView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return gv
 }
 
 // WithShadow sets the shadow.
 func (gv *GridView) WithShadow(shadow *Shadow) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return gv
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (gv *GridView) WithClipsToBounds(clipsToBounds bool) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return gv
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (gv *GridView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return gv
 }
 
 // WithToolTip sets the tool tip.
 func (gv *GridView) WithToolTip(toolTip string) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return gv
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (gv *GridView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return gv
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (gv *GridView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return gv
 }
 
 // WithNextKeyView sets the next key view.
 func (gv *GridView) WithNextKeyView(nextKeyView ViewProvider) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return gv
 }
 
 // WithFocusRingType sets the focus ring type.
 func (gv *GridView) WithFocusRingType(focusRingType FocusRingType) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return gv
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (gv *GridView) WithGestureRecognizers(items ...GestureRecognizerProvider) *GridView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return gv
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (gv *GridView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return gv
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (gv *GridView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return gv
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (gv *GridView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return gv
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (gv *GridView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return gv
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (gv *GridView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return gv
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (gv *GridView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return gv
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (gv *GridView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return gv
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (gv *GridView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return gv
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (gv *GridView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return gv
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (gv *GridView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return gv
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (gv *GridView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return gv
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (gv *GridView) WithNextResponder(nextResponder ResponderProvider) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return gv
 }
 
 // WithMenu sets returns the responder’s menu.
 func (gv *GridView) WithMenu(menu *Menu) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return gv
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (gv *GridView) WithUserActivity(userActivity obj.Object) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return gv
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (gv *GridView) WithTouchBar(touchBar *TouchBar) *GridView {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return gv
 }
 
 // RowAtIndex returns the grid row object at the specified index.
 func (gv *GridView) RowAtIndex(index int) *GridRow {
-	_r := objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("rowAtIndex:"), index)
-	return GridRowFromID(_r)
+	var _mainthread0 *GridRow
+	purego.Main(func() {
+		_mainthread0 = func() *GridRow {
+			_r := objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("rowAtIndex:"), index)
+			return GridRowFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IndexOfRow returns the index of the specified grid row.
 func (gv *GridView) IndexOfRow(row *GridRow) int {
-	_r := objc.Send[int](objref.IDOf(gv), objc.RegisterName("indexOfRow:"), objref.IDOf(row))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(gv), objc.RegisterName("indexOfRow:"), objref.IDOf(row))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ColumnAtIndex returns the grid column object at the specified index.
 func (gv *GridView) ColumnAtIndex(index int) *GridColumn {
-	_r := objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("columnAtIndex:"), index)
-	return GridColumnFromID(_r)
+	var _mainthread0 *GridColumn
+	purego.Main(func() {
+		_mainthread0 = func() *GridColumn {
+			_r := objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("columnAtIndex:"), index)
+			return GridColumnFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IndexOfColumn returns the index of the specified grid column.
 func (gv *GridView) IndexOfColumn(column *GridColumn) int {
-	_r := objc.Send[int](objref.IDOf(gv), objc.RegisterName("indexOfColumn:"), objref.IDOf(column))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(gv), objc.RegisterName("indexOfColumn:"), objref.IDOf(column))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CellAtColumnIndexRowIndex returns the grid cell object at the specified column and row index.
 func (gv *GridView) CellAtColumnIndexRowIndex(columnIndex int, rowIndex int) *GridCell {
-	_r := objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("cellAtColumnIndex:rowIndex:"), columnIndex, rowIndex)
-	return GridCellFromID(_r)
+	var _mainthread0 *GridCell
+	purego.Main(func() {
+		_mainthread0 = func() *GridCell {
+			_r := objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("cellAtColumnIndex:rowIndex:"), columnIndex, rowIndex)
+			return GridCellFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CellForView returns the grid cell object that contains the given view or one of its ancestors.
 func (gv *GridView) CellForView(view *View) *GridCell {
-	_r := objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("cellForView:"), objref.IDOf(view))
-	return GridCellFromID(_r)
+	var _mainthread0 *GridCell
+	purego.Main(func() {
+		_mainthread0 = func() *GridCell {
+			_r := objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("cellForView:"), objref.IDOf(view))
+			return GridCellFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AddRowWithViews adds an array of views to a new row.
 func (gv *GridView) AddRowWithViews(views []*View) *GridRow {
-	_r := objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("addRowWithViews:"), purego.SliceToNSArray(views, func(_v *View) objc.ID { return objref.IDOf(_v) }))
-	return GridRowFromID(_r)
+	var _mainthread0 *GridRow
+	purego.Main(func() {
+		_mainthread0 = func() *GridRow {
+			_r := objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("addRowWithViews:"), purego.SliceToNSArray(views, func(_v *View) objc.ID { return objref.IDOf(_v) }))
+			return GridRowFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // InsertRowAtIndexWithViews inserts the array of view objects into the grid view at the index.
 func (gv *GridView) InsertRowAtIndexWithViews(index int, views []*View) *GridRow {
-	_r := objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("insertRowAtIndex:withViews:"), index, purego.SliceToNSArray(views, func(_v *View) objc.ID { return objref.IDOf(_v) }))
-	return GridRowFromID(_r)
+	var _mainthread0 *GridRow
+	purego.Main(func() {
+		_mainthread0 = func() *GridRow {
+			_r := objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("insertRowAtIndex:withViews:"), index, purego.SliceToNSArray(views, func(_v *View) objc.ID { return objref.IDOf(_v) }))
+			return GridRowFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MoveRowAtIndexToIndex moves the specified row to the new row location.
 func (gv *GridView) MoveRowAtIndexToIndex(fromIndex int, toIndex int) {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("moveRowAtIndex:toIndex:"), fromIndex, toIndex)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("moveRowAtIndex:toIndex:"), fromIndex, toIndex)
+	})
+
 }
 
 // RemoveRowAtIndex removes the row from the grid view at the index.
 func (gv *GridView) RemoveRowAtIndex(index int) {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("removeRowAtIndex:"), index)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("removeRowAtIndex:"), index)
+	})
+
 }
 
 // AddColumnWithViews adds a new column containing the array of views.
 func (gv *GridView) AddColumnWithViews(views []*View) *GridColumn {
-	_r := objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("addColumnWithViews:"), purego.SliceToNSArray(views, func(_v *View) objc.ID { return objref.IDOf(_v) }))
-	return GridColumnFromID(_r)
+	var _mainthread0 *GridColumn
+	purego.Main(func() {
+		_mainthread0 = func() *GridColumn {
+			_r := objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("addColumnWithViews:"), purego.SliceToNSArray(views, func(_v *View) objc.ID { return objref.IDOf(_v) }))
+			return GridColumnFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // InsertColumnAtIndexWithViews inserts the array of view objects at the specified index.
 func (gv *GridView) InsertColumnAtIndexWithViews(index int, views []*View) *GridColumn {
-	_r := objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("insertColumnAtIndex:withViews:"), index, purego.SliceToNSArray(views, func(_v *View) objc.ID { return objref.IDOf(_v) }))
-	return GridColumnFromID(_r)
+	var _mainthread0 *GridColumn
+	purego.Main(func() {
+		_mainthread0 = func() *GridColumn {
+			_r := objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("insertColumnAtIndex:withViews:"), index, purego.SliceToNSArray(views, func(_v *View) objc.ID { return objref.IDOf(_v) }))
+			return GridColumnFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MoveColumnAtIndexToIndex moves the specified column to a new column location.
 func (gv *GridView) MoveColumnAtIndexToIndex(fromIndex int, toIndex int) {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("moveColumnAtIndex:toIndex:"), fromIndex, toIndex)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("moveColumnAtIndex:toIndex:"), fromIndex, toIndex)
+	})
+
 }
 
 // RemoveColumnAtIndex removes the column from the grid view at the specified index.
 func (gv *GridView) RemoveColumnAtIndex(index int) {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("removeColumnAtIndex:"), index)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("removeColumnAtIndex:"), index)
+	})
+
 }
 
 // MergeCellsInHorizontalRangeVerticalRange expands the cell at the top-leading corner of the horizontal and vertical range to cover the entire area.
 func (gv *GridView) MergeCellsInHorizontalRangeVerticalRange(hRange foundation.NSRange, vRange foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("mergeCellsInHorizontalRange:verticalRange:"), hRange, vRange)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("mergeCellsInHorizontalRange:verticalRange:"), hRange, vRange)
+	})
+
 }
 
 // NumberOfRows returns the number of rows.
 func (gv *GridView) NumberOfRows() int {
-	_r := objc.Send[int](objref.IDOf(gv), objc.RegisterName("numberOfRows"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(gv), objc.RegisterName("numberOfRows"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NumberOfColumns returns the number of columns.
 func (gv *GridView) NumberOfColumns() int {
-	_r := objc.Send[int](objref.IDOf(gv), objc.RegisterName("numberOfColumns"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(gv), objc.RegisterName("numberOfColumns"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // XPlacement returns the x placement.
 func (gv *GridView) XPlacement() GridCellPlacement {
-	_r := objc.Send[GridCellPlacement](objref.IDOf(gv), objc.RegisterName("xPlacement"))
-	return _r
+	var _mainthread0 GridCellPlacement
+	purego.Main(func() {
+		_mainthread0 = func() GridCellPlacement {
+			_r := objc.Send[GridCellPlacement](objref.IDOf(gv), objc.RegisterName("xPlacement"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // YPlacement returns the y placement.
 func (gv *GridView) YPlacement() GridCellPlacement {
-	_r := objc.Send[GridCellPlacement](objref.IDOf(gv), objc.RegisterName("yPlacement"))
-	return _r
+	var _mainthread0 GridCellPlacement
+	purego.Main(func() {
+		_mainthread0 = func() GridCellPlacement {
+			_r := objc.Send[GridCellPlacement](objref.IDOf(gv), objc.RegisterName("yPlacement"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RowAlignment returns the row alignment.
 func (gv *GridView) RowAlignment() GridRowAlignment {
-	_r := objc.Send[GridRowAlignment](objref.IDOf(gv), objc.RegisterName("rowAlignment"))
-	return _r
+	var _mainthread0 GridRowAlignment
+	purego.Main(func() {
+		_mainthread0 = func() GridRowAlignment {
+			_r := objc.Send[GridRowAlignment](objref.IDOf(gv), objc.RegisterName("rowAlignment"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RowSpacing returns the row spacing.
 func (gv *GridView) RowSpacing() float64 {
-	_r := objc.Send[float64](objref.IDOf(gv), objc.RegisterName("rowSpacing"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(gv), objc.RegisterName("rowSpacing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ColumnSpacing returns the column spacing.
 func (gv *GridView) ColumnSpacing() float64 {
-	_r := objc.Send[float64](objref.IDOf(gv), objc.RegisterName("columnSpacing"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(gv), objc.RegisterName("columnSpacing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ViewProvider = (*GridView)(nil)

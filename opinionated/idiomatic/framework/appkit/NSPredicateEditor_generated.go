@@ -50,510 +50,682 @@ func predicateEditorAdopt(id objc.ID) *PredicateEditor {
 
 // NewPredicateEditor creates a new PredicateEditor.
 func NewPredicateEditor() *PredicateEditor {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSPredicateEditor")), objc.RegisterName("new"))
-	return predicateEditorAdopt(_id)
+	var _mainthread0 *PredicateEditor
+	purego.Main(func() {
+		_mainthread0 = func() *PredicateEditor {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSPredicateEditor")), objc.RegisterName("new"))
+			return predicateEditorAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithRowTemplates sets the row templates for the receiver.
 func (pe *PredicateEditor) WithRowTemplates(items ...*PredicateEditorRowTemplate) *PredicateEditor {
 	_arr := purego.SliceToNSArray(items, func(_v *PredicateEditorRowTemplate) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setRowTemplates:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setRowTemplates:"), _arr)
+	})
 	return pe
 }
 
 // WithFormattingStringsFilename sets the name of the rule editor’s strings file.
 func (pe *PredicateEditor) WithFormattingStringsFilename(formattingStringsFilename string) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFormattingStringsFilename:"), purego.NSString(formattingStringsFilename))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFormattingStringsFilename:"), purego.NSString(formattingStringsFilename))
+	})
 	return pe
 }
 
 // WithFormattingDictionary sets the formatting dictionary for the rule editor.
 func (pe *PredicateEditor) WithFormattingDictionary(formattingDictionary obj.Object) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFormattingDictionary:"), objref.IDOf(formattingDictionary))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFormattingDictionary:"), objref.IDOf(formattingDictionary))
+	})
 	return pe
 }
 
 // WithNestingMode sets the rule editor’s nesting mode.
 func (pe *PredicateEditor) WithNestingMode(nestingMode RuleEditorNestingMode) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setNestingMode:"), nestingMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setNestingMode:"), nestingMode)
+	})
 	return pe
 }
 
 // WithRowHeight sets the rule editor’s row height.
 func (pe *PredicateEditor) WithRowHeight(rowHeight float64) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setRowHeight:"), rowHeight)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setRowHeight:"), rowHeight)
+	})
 	return pe
 }
 
 // WithEditable sets a Boolean value that determines whether the rule editor is editable.
 func (pe *PredicateEditor) WithEditable(editable bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setEditable:"), editable)
+	})
 	return pe
 }
 
 // WithCanRemoveAllRows sets a Boolean value that indicates whether all the rows can be removed.
 func (pe *PredicateEditor) WithCanRemoveAllRows(canRemoveAllRows bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setCanRemoveAllRows:"), canRemoveAllRows)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setCanRemoveAllRows:"), canRemoveAllRows)
+	})
 	return pe
 }
 
 // WithRowTypeKeyPath sets the key path for the row type.
 func (pe *PredicateEditor) WithRowTypeKeyPath(rowTypeKeyPath string) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setRowTypeKeyPath:"), purego.NSString(rowTypeKeyPath))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setRowTypeKeyPath:"), purego.NSString(rowTypeKeyPath))
+	})
 	return pe
 }
 
 // WithSubrowsKeyPath sets the key path for the subrows.
 func (pe *PredicateEditor) WithSubrowsKeyPath(subrowsKeyPath string) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setSubrowsKeyPath:"), purego.NSString(subrowsKeyPath))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setSubrowsKeyPath:"), purego.NSString(subrowsKeyPath))
+	})
 	return pe
 }
 
 // WithCriteriaKeyPath sets the criteria key path.
 func (pe *PredicateEditor) WithCriteriaKeyPath(criteriaKeyPath string) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setCriteriaKeyPath:"), purego.NSString(criteriaKeyPath))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setCriteriaKeyPath:"), purego.NSString(criteriaKeyPath))
+	})
 	return pe
 }
 
 // WithDisplayValuesKeyPath sets the display values key path.
 func (pe *PredicateEditor) WithDisplayValuesKeyPath(displayValuesKeyPath string) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setDisplayValuesKeyPath:"), purego.NSString(displayValuesKeyPath))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setDisplayValuesKeyPath:"), purego.NSString(displayValuesKeyPath))
+	})
 	return pe
 }
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (pe *PredicateEditor) WithTarget(target obj.Object) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return pe
 }
 
 // WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
 func (pe *PredicateEditor) WithTag(tag int) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setTag:"), tag)
+	})
 	return pe
 }
 
 // WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 func (pe *PredicateEditor) WithIgnoresMultiClick(ignoresMultiClick bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	})
 	return pe
 }
 
 // WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 func (pe *PredicateEditor) WithContinuous(continuous bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return pe
 }
 
 // WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
 func (pe *PredicateEditor) WithEnabled(enabled bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return pe
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
 func (pe *PredicateEditor) WithRefusesFirstResponder(refusesFirstResponder bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return pe
 }
 
 // WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
 func (pe *PredicateEditor) WithHighlighted(highlighted bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return pe
 }
 
 // WithControlSize sets the size of the control.
 func (pe *PredicateEditor) WithControlSize(controlSize ControlSize) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return pe
 }
 
 // WithFormatter sets the receiver’s formatter.
 func (pe *PredicateEditor) WithFormatter(formatter obj.Object) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return pe
 }
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (pe *PredicateEditor) WithObjectValue(objectValue obj.Object) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return pe
 }
 
 // WithStringValue sets the value of the receiver’s cell as an NSString object.
 func (pe *PredicateEditor) WithStringValue(stringValue string) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return pe
 }
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (pe *PredicateEditor) WithAttributedStringValue(attributedStringValue obj.Object) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return pe
 }
 
 // WithIntValue sets the value of the receiver’s cell as an integer.
 func (pe *PredicateEditor) WithIntValue(intValue int) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return pe
 }
 
 // WithIntegerValue sets the value of the receiver’s cell as an integer value.
 func (pe *PredicateEditor) WithIntegerValue(integerValue int) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return pe
 }
 
 // WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
 func (pe *PredicateEditor) WithFloatValue(floatValue float32) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return pe
 }
 
 // WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
 func (pe *PredicateEditor) WithDoubleValue(doubleValue float64) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return pe
 }
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (pe *PredicateEditor) WithFont(font *Font) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return pe
 }
 
 // WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
 func (pe *PredicateEditor) WithUsesSingleLineMode(usesSingleLineMode bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return pe
 }
 
 // WithLineBreakMode sets the line break mode to use for text in the control’s cell.
 func (pe *PredicateEditor) WithLineBreakMode(lineBreakMode LineBreakMode) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return pe
 }
 
 // WithAlignment sets the alignment mode of the text in the receiver’s cell.
 func (pe *PredicateEditor) WithAlignment(alignment TextAlignment) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return pe
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (pe *PredicateEditor) WithBaseWritingDirection(baseWritingDirection WritingDirection) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return pe
 }
 
 // WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 func (pe *PredicateEditor) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	})
 	return pe
 }
 
 // WithCell sets the cell.
 func (pe *PredicateEditor) WithCell(cell CellProvider) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	})
 	return pe
 }
 
 // WithSubviews sets the subviews.
 func (pe *PredicateEditor) WithSubviews(items ...ViewProvider) *PredicateEditor {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return pe
 }
 
 // WithHidden sets the hidden.
 func (pe *PredicateEditor) WithHidden(hidden bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setHidden:"), hidden)
+	})
 	return pe
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (pe *PredicateEditor) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return pe
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (pe *PredicateEditor) WithAutoresizesSubviews(autoresizesSubviews bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return pe
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (pe *PredicateEditor) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return pe
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (pe *PredicateEditor) WithFrame(frame corefoundation.CGRect) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFrame:"), frame)
+	})
 	return pe
 }
 
 // WithFrameRotation sets the frame rotation.
 func (pe *PredicateEditor) WithFrameRotation(frameRotation float64) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return pe
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (pe *PredicateEditor) WithFrameCenterRotation(frameCenterRotation float64) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return pe
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (pe *PredicateEditor) WithBoundsRotation(boundsRotation float64) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return pe
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (pe *PredicateEditor) WithBounds(bounds corefoundation.CGRect) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setBounds:"), bounds)
+	})
 	return pe
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (pe *PredicateEditor) WithCanDrawConcurrently(canDrawConcurrently bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return pe
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (pe *PredicateEditor) WithNeedsDisplay(needsDisplay bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return pe
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (pe *PredicateEditor) WithAcceptsTouchEvents(acceptsTouchEvents bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return pe
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (pe *PredicateEditor) WithWantsRestingTouches(wantsRestingTouches bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return pe
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (pe *PredicateEditor) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return pe
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (pe *PredicateEditor) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return pe
 }
 
 // WithWantsLayer sets the wants layer.
 func (pe *PredicateEditor) WithWantsLayer(wantsLayer bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return pe
 }
 
 // WithLayer sets the layer.
 func (pe *PredicateEditor) WithLayer(layer obj.Object) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return pe
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (pe *PredicateEditor) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return pe
 }
 
 // WithNeedsLayout sets the needs layout.
 func (pe *PredicateEditor) WithNeedsLayout(needsLayout bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return pe
 }
 
 // WithAlphaValue sets the alpha value.
 func (pe *PredicateEditor) WithAlphaValue(alphaValue float64) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return pe
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (pe *PredicateEditor) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return pe
 }
 
 // WithBackgroundFilters sets the background filters.
 func (pe *PredicateEditor) WithBackgroundFilters(items ...obj.Object) *PredicateEditor {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return pe
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (pe *PredicateEditor) WithCompositingFilter(compositingFilter obj.Object) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return pe
 }
 
 // WithContentFilters sets the content filters.
 func (pe *PredicateEditor) WithContentFilters(items ...obj.Object) *PredicateEditor {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return pe
 }
 
 // WithShadow sets the shadow.
 func (pe *PredicateEditor) WithShadow(shadow *Shadow) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return pe
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (pe *PredicateEditor) WithClipsToBounds(clipsToBounds bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return pe
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (pe *PredicateEditor) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return pe
 }
 
 // WithToolTip sets the tool tip.
 func (pe *PredicateEditor) WithToolTip(toolTip string) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return pe
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (pe *PredicateEditor) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return pe
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (pe *PredicateEditor) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return pe
 }
 
 // WithNextKeyView sets the next key view.
 func (pe *PredicateEditor) WithNextKeyView(nextKeyView ViewProvider) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return pe
 }
 
 // WithFocusRingType sets the focus ring type.
 func (pe *PredicateEditor) WithFocusRingType(focusRingType FocusRingType) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return pe
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (pe *PredicateEditor) WithGestureRecognizers(items ...GestureRecognizerProvider) *PredicateEditor {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return pe
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (pe *PredicateEditor) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return pe
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (pe *PredicateEditor) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return pe
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (pe *PredicateEditor) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return pe
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (pe *PredicateEditor) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return pe
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (pe *PredicateEditor) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return pe
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (pe *PredicateEditor) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return pe
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (pe *PredicateEditor) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return pe
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (pe *PredicateEditor) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return pe
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (pe *PredicateEditor) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return pe
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (pe *PredicateEditor) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return pe
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (pe *PredicateEditor) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return pe
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (pe *PredicateEditor) WithNextResponder(nextResponder ResponderProvider) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return pe
 }
 
 // WithMenu sets returns the responder’s menu.
 func (pe *PredicateEditor) WithMenu(menu *Menu) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return pe
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (pe *PredicateEditor) WithUserActivity(userActivity obj.Object) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return pe
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (pe *PredicateEditor) WithTouchBar(touchBar *TouchBar) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return pe
 }
 
@@ -561,8 +733,14 @@ func (pe *PredicateEditor) WithTouchBar(touchBar *TouchBar) *PredicateEditor {
 //
 // RowTemplates returns the collection as a Go slice.
 func (pe *PredicateEditor) RowTemplates() []*PredicateEditorRowTemplate {
-	_arr := objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("rowTemplates"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PredicateEditorRowTemplate { return PredicateEditorRowTemplateFromID(_id) })
+	var _mainthread0 []*PredicateEditorRowTemplate
+	purego.Main(func() {
+		_mainthread0 = func() []*PredicateEditorRowTemplate {
+			_arr := objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("rowTemplates"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PredicateEditorRowTemplate { return PredicateEditorRowTemplateFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 var _ RuleEditorProvider = (*PredicateEditor)(nil)

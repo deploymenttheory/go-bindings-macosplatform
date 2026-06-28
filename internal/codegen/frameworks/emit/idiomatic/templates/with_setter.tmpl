@@ -2,18 +2,32 @@
     with_setter.tmpl renders a With… method that sets one Objective-C property
     and returns the receiver, so calls can be chained. There are two shapes: a
     collection property, which takes a variable number of items and builds an
-    Objective-C array from them, and a single-value property.
+    Objective-C array from them, and a single-value property. When the class is
+    @MainActor-isolated the setter send runs on the main thread via purego.Main;
+    the returned receiver is constant, so only the send is wrapped.
 */}}
 {{define "with_setter"}}{{.DocComment}}{{if .IsNSArray -}}
 func ({{.RecvVar}} *{{.TypeName}}) {{.GoName}}(items ...{{.SliceElemType}}) *{{.TypeName}} {
 _arr := purego.SliceToNSArray(items, func(_v {{.SliceElemType}}) objc.ID { return objref.IDOf(_v) })
+{{- if .MainThread}}
+purego.Main(func() {
 objc.Send[objc.ID](objref.IDOf({{.RecvVar}}), objc.RegisterName({{.SetterSelector | printf "%q"}}), _arr)
+})
+{{- else}}
+objc.Send[objc.ID](objref.IDOf({{.RecvVar}}), objc.RegisterName({{.SetterSelector | printf "%q"}}), _arr)
+{{- end}}
 return {{.RecvVar}}
 }
 
 {{else -}}
 func ({{.RecvVar}} *{{.TypeName}}) {{.GoName}}({{.ParamName}} {{.ParamType}}) *{{.TypeName}} {
+{{- if .MainThread}}
+purego.Main(func() {
 objc.Send[objc.ID](objref.IDOf({{.RecvVar}}), objc.RegisterName({{.SetterSelector | printf "%q"}}), {{.ParamRawExpr}})
+})
+{{- else}}
+objc.Send[objc.ID](objref.IDOf({{.RecvVar}}), objc.RegisterName({{.SetterSelector | printf "%q"}}), {{.ParamRawExpr}})
+{{- end}}
 return {{.RecvVar}}
 }
 

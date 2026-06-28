@@ -68,43 +68,74 @@ func (pvc *PickerViewController) String() string {
 
 // NewPickerViewControllerWithConfiguration creates a new picker view controller with the configuration you specify.
 func NewPickerViewControllerWithConfiguration(configuration *PickerConfiguration) *PickerViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("PHPickerViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), objref.IDOf(configuration))
-	return pickerViewControllerAdopt(_id)
+	var _mainthread0 *PickerViewController
+	purego.Main(func() {
+		_mainthread0 = func() *PickerViewController {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("PHPickerViewController")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), objref.IDOf(configuration))
+			return pickerViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // UpdatePickerUsingConfiguration customizes your app’s photo picker according to the given configuration.
 func (pvc *PickerViewController) UpdatePickerUsingConfiguration(configuration *PickerUpdateConfiguration) {
-	objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("updatePickerUsingConfiguration:"), objref.IDOf(configuration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("updatePickerUsingConfiguration:"), objref.IDOf(configuration))
+	})
+
 }
 
 // DeselectAssetsWithIdentifiers deselects assets that are in a selected state.
 func (pvc *PickerViewController) DeselectAssetsWithIdentifiers(identifiers []string) {
-	objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("deselectAssetsWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("deselectAssetsWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
+	})
+
 }
 
 // MoveAssetWithIdentifierAfterAssetWithIdentifier reorders assets that are in a selected state.
 func (pvc *PickerViewController) MoveAssetWithIdentifierAfterAssetWithIdentifier(identifier string, afterIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("moveAssetWithIdentifier:afterAssetWithIdentifier:"), purego.NSString(identifier), purego.NSString(afterIdentifier))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("moveAssetWithIdentifier:afterAssetWithIdentifier:"), purego.NSString(identifier), purego.NSString(afterIdentifier))
+	})
+
 }
 
 // ScrollToInitialPosition resets the visible photo thumbnails by scrolling the view to the picker’s initial position.
 func (pvc *PickerViewController) ScrollToInitialPosition() {
-	objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("scrollToInitialPosition"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("scrollToInitialPosition"))
+	})
+
 }
 
 // ZoomIn changes the picker’s content scale by making the photo thumbnails larger in the view.
 func (pvc *PickerViewController) ZoomIn() {
-	objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("zoomIn"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("zoomIn"))
+	})
+
 }
 
 // ZoomOut changes the picker’s content scale by making the photo thumbnails smaller in the view.
 func (pvc *PickerViewController) ZoomOut() {
-	objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("zoomOut"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("zoomOut"))
+	})
+
 }
 
 // Configuration returns the configuration passed in during initialization.
 func (pvc *PickerViewController) Configuration() *PickerConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("configuration"))
-	return PickerConfigurationFromID(_r)
+	var _mainthread0 *PickerConfiguration
+	purego.Main(func() {
+		_mainthread0 = func() *PickerConfiguration {
+			_r := objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("configuration"))
+			return PickerConfigurationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }

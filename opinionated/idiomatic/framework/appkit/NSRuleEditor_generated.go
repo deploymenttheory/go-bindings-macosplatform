@@ -50,673 +50,1001 @@ func ruleEditorAdopt(id objc.ID) *RuleEditor {
 
 // WithFormattingStringsFilename sets the name of the rule editor’s strings file.
 func (re *RuleEditor) WithFormattingStringsFilename(formattingStringsFilename string) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setFormattingStringsFilename:"), purego.NSString(formattingStringsFilename))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setFormattingStringsFilename:"), purego.NSString(formattingStringsFilename))
+	})
 	return re
 }
 
 // WithFormattingDictionary sets the formatting dictionary for the rule editor.
 func (re *RuleEditor) WithFormattingDictionary(formattingDictionary obj.Object) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setFormattingDictionary:"), objref.IDOf(formattingDictionary))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setFormattingDictionary:"), objref.IDOf(formattingDictionary))
+	})
 	return re
 }
 
 // WithNestingMode sets the rule editor’s nesting mode.
 func (re *RuleEditor) WithNestingMode(nestingMode RuleEditorNestingMode) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setNestingMode:"), nestingMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setNestingMode:"), nestingMode)
+	})
 	return re
 }
 
 // WithRowHeight sets the rule editor’s row height.
 func (re *RuleEditor) WithRowHeight(rowHeight float64) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setRowHeight:"), rowHeight)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setRowHeight:"), rowHeight)
+	})
 	return re
 }
 
 // WithEditable sets a Boolean value that determines whether the rule editor is editable.
 func (re *RuleEditor) WithEditable(editable bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setEditable:"), editable)
+	})
 	return re
 }
 
 // WithCanRemoveAllRows sets a Boolean value that indicates whether all the rows can be removed.
 func (re *RuleEditor) WithCanRemoveAllRows(canRemoveAllRows bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setCanRemoveAllRows:"), canRemoveAllRows)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setCanRemoveAllRows:"), canRemoveAllRows)
+	})
 	return re
 }
 
 // WithRowTypeKeyPath sets the key path for the row type.
 func (re *RuleEditor) WithRowTypeKeyPath(rowTypeKeyPath string) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setRowTypeKeyPath:"), purego.NSString(rowTypeKeyPath))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setRowTypeKeyPath:"), purego.NSString(rowTypeKeyPath))
+	})
 	return re
 }
 
 // WithSubrowsKeyPath sets the key path for the subrows.
 func (re *RuleEditor) WithSubrowsKeyPath(subrowsKeyPath string) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setSubrowsKeyPath:"), purego.NSString(subrowsKeyPath))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setSubrowsKeyPath:"), purego.NSString(subrowsKeyPath))
+	})
 	return re
 }
 
 // WithCriteriaKeyPath sets the criteria key path.
 func (re *RuleEditor) WithCriteriaKeyPath(criteriaKeyPath string) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setCriteriaKeyPath:"), purego.NSString(criteriaKeyPath))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setCriteriaKeyPath:"), purego.NSString(criteriaKeyPath))
+	})
 	return re
 }
 
 // WithDisplayValuesKeyPath sets the display values key path.
 func (re *RuleEditor) WithDisplayValuesKeyPath(displayValuesKeyPath string) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setDisplayValuesKeyPath:"), purego.NSString(displayValuesKeyPath))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setDisplayValuesKeyPath:"), purego.NSString(displayValuesKeyPath))
+	})
 	return re
 }
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (re *RuleEditor) WithTarget(target obj.Object) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return re
 }
 
 // WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
 func (re *RuleEditor) WithTag(tag int) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setTag:"), tag)
+	})
 	return re
 }
 
 // WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 func (re *RuleEditor) WithIgnoresMultiClick(ignoresMultiClick bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	})
 	return re
 }
 
 // WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 func (re *RuleEditor) WithContinuous(continuous bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return re
 }
 
 // WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
 func (re *RuleEditor) WithEnabled(enabled bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return re
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
 func (re *RuleEditor) WithRefusesFirstResponder(refusesFirstResponder bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return re
 }
 
 // WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
 func (re *RuleEditor) WithHighlighted(highlighted bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return re
 }
 
 // WithControlSize sets the size of the control.
 func (re *RuleEditor) WithControlSize(controlSize ControlSize) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return re
 }
 
 // WithFormatter sets the receiver’s formatter.
 func (re *RuleEditor) WithFormatter(formatter obj.Object) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return re
 }
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (re *RuleEditor) WithObjectValue(objectValue obj.Object) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return re
 }
 
 // WithStringValue sets the value of the receiver’s cell as an NSString object.
 func (re *RuleEditor) WithStringValue(stringValue string) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return re
 }
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (re *RuleEditor) WithAttributedStringValue(attributedStringValue obj.Object) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return re
 }
 
 // WithIntValue sets the value of the receiver’s cell as an integer.
 func (re *RuleEditor) WithIntValue(intValue int) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return re
 }
 
 // WithIntegerValue sets the value of the receiver’s cell as an integer value.
 func (re *RuleEditor) WithIntegerValue(integerValue int) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return re
 }
 
 // WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
 func (re *RuleEditor) WithFloatValue(floatValue float32) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return re
 }
 
 // WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
 func (re *RuleEditor) WithDoubleValue(doubleValue float64) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return re
 }
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (re *RuleEditor) WithFont(font *Font) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return re
 }
 
 // WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
 func (re *RuleEditor) WithUsesSingleLineMode(usesSingleLineMode bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return re
 }
 
 // WithLineBreakMode sets the line break mode to use for text in the control’s cell.
 func (re *RuleEditor) WithLineBreakMode(lineBreakMode LineBreakMode) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return re
 }
 
 // WithAlignment sets the alignment mode of the text in the receiver’s cell.
 func (re *RuleEditor) WithAlignment(alignment TextAlignment) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return re
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (re *RuleEditor) WithBaseWritingDirection(baseWritingDirection WritingDirection) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return re
 }
 
 // WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 func (re *RuleEditor) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	})
 	return re
 }
 
 // WithCell sets the cell.
 func (re *RuleEditor) WithCell(cell CellProvider) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	})
 	return re
 }
 
 // WithSubviews sets the subviews.
 func (re *RuleEditor) WithSubviews(items ...ViewProvider) *RuleEditor {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return re
 }
 
 // WithHidden sets the hidden.
 func (re *RuleEditor) WithHidden(hidden bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setHidden:"), hidden)
+	})
 	return re
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (re *RuleEditor) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return re
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (re *RuleEditor) WithAutoresizesSubviews(autoresizesSubviews bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return re
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (re *RuleEditor) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return re
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (re *RuleEditor) WithFrame(frame corefoundation.CGRect) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setFrame:"), frame)
+	})
 	return re
 }
 
 // WithFrameRotation sets the frame rotation.
 func (re *RuleEditor) WithFrameRotation(frameRotation float64) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return re
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (re *RuleEditor) WithFrameCenterRotation(frameCenterRotation float64) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return re
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (re *RuleEditor) WithBoundsRotation(boundsRotation float64) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return re
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (re *RuleEditor) WithBounds(bounds corefoundation.CGRect) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setBounds:"), bounds)
+	})
 	return re
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (re *RuleEditor) WithCanDrawConcurrently(canDrawConcurrently bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return re
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (re *RuleEditor) WithNeedsDisplay(needsDisplay bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return re
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (re *RuleEditor) WithAcceptsTouchEvents(acceptsTouchEvents bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return re
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (re *RuleEditor) WithWantsRestingTouches(wantsRestingTouches bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return re
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (re *RuleEditor) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return re
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (re *RuleEditor) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return re
 }
 
 // WithWantsLayer sets the wants layer.
 func (re *RuleEditor) WithWantsLayer(wantsLayer bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return re
 }
 
 // WithLayer sets the layer.
 func (re *RuleEditor) WithLayer(layer obj.Object) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return re
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (re *RuleEditor) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return re
 }
 
 // WithNeedsLayout sets the needs layout.
 func (re *RuleEditor) WithNeedsLayout(needsLayout bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return re
 }
 
 // WithAlphaValue sets the alpha value.
 func (re *RuleEditor) WithAlphaValue(alphaValue float64) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return re
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (re *RuleEditor) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return re
 }
 
 // WithBackgroundFilters sets the background filters.
 func (re *RuleEditor) WithBackgroundFilters(items ...obj.Object) *RuleEditor {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return re
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (re *RuleEditor) WithCompositingFilter(compositingFilter obj.Object) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return re
 }
 
 // WithContentFilters sets the content filters.
 func (re *RuleEditor) WithContentFilters(items ...obj.Object) *RuleEditor {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return re
 }
 
 // WithShadow sets the shadow.
 func (re *RuleEditor) WithShadow(shadow *Shadow) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return re
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (re *RuleEditor) WithClipsToBounds(clipsToBounds bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return re
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (re *RuleEditor) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return re
 }
 
 // WithToolTip sets the tool tip.
 func (re *RuleEditor) WithToolTip(toolTip string) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return re
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (re *RuleEditor) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return re
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (re *RuleEditor) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return re
 }
 
 // WithNextKeyView sets the next key view.
 func (re *RuleEditor) WithNextKeyView(nextKeyView ViewProvider) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return re
 }
 
 // WithFocusRingType sets the focus ring type.
 func (re *RuleEditor) WithFocusRingType(focusRingType FocusRingType) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return re
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (re *RuleEditor) WithGestureRecognizers(items ...GestureRecognizerProvider) *RuleEditor {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return re
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (re *RuleEditor) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return re
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (re *RuleEditor) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return re
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (re *RuleEditor) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return re
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (re *RuleEditor) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return re
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (re *RuleEditor) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return re
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (re *RuleEditor) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return re
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (re *RuleEditor) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return re
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (re *RuleEditor) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return re
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (re *RuleEditor) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return re
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (re *RuleEditor) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return re
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (re *RuleEditor) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return re
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (re *RuleEditor) WithNextResponder(nextResponder ResponderProvider) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return re
 }
 
 // WithMenu sets returns the responder’s menu.
 func (re *RuleEditor) WithMenu(menu *Menu) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return re
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (re *RuleEditor) WithUserActivity(userActivity obj.Object) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return re
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (re *RuleEditor) WithTouchBar(touchBar *TouchBar) *RuleEditor {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return re
 }
 
 // ReloadCriteria instructs the receiver to refetch criteria from its delegate.
 func (re *RuleEditor) ReloadCriteria() {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("reloadCriteria"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("reloadCriteria"))
+	})
+
 }
 
 // ReloadPredicate instructs the receiver to regenerate its predicate by invoking the corresponding delegate method.
 func (re *RuleEditor) ReloadPredicate() {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("reloadPredicate"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("reloadPredicate"))
+	})
+
 }
 
 // PredicateForRow returns the predicate for a given row.
 func (re *RuleEditor) PredicateForRow(row int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("predicateForRow:"), row)
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("predicateForRow:"), row)
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SubrowIndexesForRow returns the immediate subrows of a given row.
 func (re *RuleEditor) SubrowIndexesForRow(rowIndex int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("subrowIndexesForRow:"), rowIndex)
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("subrowIndexesForRow:"), rowIndex)
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CriteriaForRow returns the currently chosen items for a given row.
 func (re *RuleEditor) CriteriaForRow(row int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("criteriaForRow:"), row)
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("criteriaForRow:"), row)
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DisplayValuesForRow returns the chosen values for a given row.
 func (re *RuleEditor) DisplayValuesForRow(row int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("displayValuesForRow:"), row)
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("displayValuesForRow:"), row)
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RowForDisplayValue returns the index of the row containing a given value.
 func (re *RuleEditor) RowForDisplayValue(displayValue obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(re), objc.RegisterName("rowForDisplayValue:"), objref.IDOf(displayValue))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(re), objc.RegisterName("rowForDisplayValue:"), objref.IDOf(displayValue))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RowTypeForRow returns the type of a given row.
 func (re *RuleEditor) RowTypeForRow(rowIndex int) RuleEditorRowType {
-	_r := objc.Send[RuleEditorRowType](objref.IDOf(re), objc.RegisterName("rowTypeForRow:"), rowIndex)
-	return _r
+	var _mainthread0 RuleEditorRowType
+	purego.Main(func() {
+		_mainthread0 = func() RuleEditorRowType {
+			_r := objc.Send[RuleEditorRowType](objref.IDOf(re), objc.RegisterName("rowTypeForRow:"), rowIndex)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ParentRowForRow returns the index of the parent of a given row.
 func (re *RuleEditor) ParentRowForRow(rowIndex int) int {
-	_r := objc.Send[int](objref.IDOf(re), objc.RegisterName("parentRowForRow:"), rowIndex)
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(re), objc.RegisterName("parentRowForRow:"), rowIndex)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AddRow adds a row to the receiver.
 func (re *RuleEditor) AddRow(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("addRow:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("addRow:"), objref.IDOf(sender))
+	})
+
 }
 
 // InsertRowAtIndexWithTypeAsSubrowOfRowAnimate adds a new row of a given type at a given location.
 func (re *RuleEditor) InsertRowAtIndexWithTypeAsSubrowOfRowAnimate(rowIndex int, rowType RuleEditorRowType, parentRow int, shouldAnimate bool) {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("insertRowAtIndex:withType:asSubrowOfRow:animate:"), rowIndex, rowType, parentRow, shouldAnimate)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("insertRowAtIndex:withType:asSubrowOfRow:animate:"), rowIndex, rowType, parentRow, shouldAnimate)
+	})
+
 }
 
 // SetCriteriaAndDisplayValuesForRowAtIndex modifies the row at a given index to contain the given items and values.
 func (re *RuleEditor) SetCriteriaAndDisplayValuesForRowAtIndex(criteria obj.Object, values obj.Object, rowIndex int) {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setCriteria:andDisplayValues:forRowAtIndex:"), objref.IDOf(criteria), objref.IDOf(values), rowIndex)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setCriteria:andDisplayValues:forRowAtIndex:"), objref.IDOf(criteria), objref.IDOf(values), rowIndex)
+	})
+
 }
 
 // RemoveRowAtIndex removes the row at a given index.
 func (re *RuleEditor) RemoveRowAtIndex(rowIndex int) {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("removeRowAtIndex:"), rowIndex)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("removeRowAtIndex:"), rowIndex)
+	})
+
 }
 
 // RemoveRowsAtIndexesIncludeSubrows removes the rows at given indexes.
 func (re *RuleEditor) RemoveRowsAtIndexesIncludeSubrows(rowIndexes obj.Object, includeSubrows bool) {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("removeRowsAtIndexes:includeSubrows:"), objref.IDOf(rowIndexes), includeSubrows)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("removeRowsAtIndexes:includeSubrows:"), objref.IDOf(rowIndexes), includeSubrows)
+	})
+
 }
 
 // SelectRowIndexesByExtendingSelection sets in the receiver the indexes of rows that are selected.
 func (re *RuleEditor) SelectRowIndexesByExtendingSelection(indexes obj.Object, extend bool) {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("selectRowIndexes:byExtendingSelection:"), objref.IDOf(indexes), extend)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("selectRowIndexes:byExtendingSelection:"), objref.IDOf(indexes), extend)
+	})
+
 }
 
 // FormattingStringsFilename returns the formatting strings filename.
 func (re *RuleEditor) FormattingStringsFilename() string {
-	_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("formattingStringsFilename"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("formattingStringsFilename"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FormattingDictionary returns the formatting dictionary.
 func (re *RuleEditor) FormattingDictionary() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("formattingDictionary"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("formattingDictionary"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NestingMode returns the nesting mode.
 func (re *RuleEditor) NestingMode() RuleEditorNestingMode {
-	_r := objc.Send[RuleEditorNestingMode](objref.IDOf(re), objc.RegisterName("nestingMode"))
-	return _r
+	var _mainthread0 RuleEditorNestingMode
+	purego.Main(func() {
+		_mainthread0 = func() RuleEditorNestingMode {
+			_r := objc.Send[RuleEditorNestingMode](objref.IDOf(re), objc.RegisterName("nestingMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RowHeight returns the row height.
 func (re *RuleEditor) RowHeight() float64 {
-	_r := objc.Send[float64](objref.IDOf(re), objc.RegisterName("rowHeight"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(re), objc.RegisterName("rowHeight"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsEditable reports whether the object is editable.
 func (re *RuleEditor) IsEditable() bool {
-	_r := objc.Send[bool](objref.IDOf(re), objc.RegisterName("isEditable"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(re), objc.RegisterName("isEditable"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CanRemoveAllRows wraps the corresponding Objective-C method.
 func (re *RuleEditor) CanRemoveAllRows() bool {
-	_r := objc.Send[bool](objref.IDOf(re), objc.RegisterName("canRemoveAllRows"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(re), objc.RegisterName("canRemoveAllRows"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Predicate returns the predicate.
 func (re *RuleEditor) Predicate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("predicate"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("predicate"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NumberOfRows returns the number of rows.
 func (re *RuleEditor) NumberOfRows() int {
-	_r := objc.Send[int](objref.IDOf(re), objc.RegisterName("numberOfRows"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(re), objc.RegisterName("numberOfRows"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SelectedRowIndexes returns the selected row indexes.
 func (re *RuleEditor) SelectedRowIndexes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("selectedRowIndexes"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("selectedRowIndexes"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RowTypeKeyPath returns the row type key path.
 func (re *RuleEditor) RowTypeKeyPath() string {
-	_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("rowTypeKeyPath"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("rowTypeKeyPath"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SubrowsKeyPath returns the subrows key path.
 func (re *RuleEditor) SubrowsKeyPath() string {
-	_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("subrowsKeyPath"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("subrowsKeyPath"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CriteriaKeyPath returns the criteria key path.
 func (re *RuleEditor) CriteriaKeyPath() string {
-	_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("criteriaKeyPath"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("criteriaKeyPath"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DisplayValuesKeyPath returns the display values key path.
 func (re *RuleEditor) DisplayValuesKeyPath() string {
-	_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("displayValuesKeyPath"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("displayValuesKeyPath"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // isRuleEditor marks RuleEditor — and, by embedding promotion, its

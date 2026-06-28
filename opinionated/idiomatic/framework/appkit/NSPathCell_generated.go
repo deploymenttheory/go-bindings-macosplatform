@@ -50,393 +50,575 @@ func pathCellAdopt(id objc.ID) *PathCell {
 
 // NewPathCell creates a new PathCell.
 func NewPathCell() *PathCell {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSPathCell")), objc.RegisterName("new"))
-	return pathCellAdopt(_id)
+	var _mainthread0 *PathCell
+	purego.Main(func() {
+		_mainthread0 = func() *PathCell {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSPathCell")), objc.RegisterName("new"))
+			return pathCellAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithPathStyle sets sets the receiver’s path style.
 func (pc *PathCell) WithPathStyle(pathStyle PathStyle) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPathStyle:"), pathStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPathStyle:"), pathStyle)
+	})
 	return pc
 }
 
 // WithURL sets returns the path displayed by the receiver.
 func (pc *PathCell) WithURL(uRL string) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+	})
 	return pc
 }
 
 // WithAllowedTypes sets sets the component types allowed in the path when the cell is editable.
 func (pc *PathCell) WithAllowedTypes(items ...obj.Object) *PathCell {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAllowedTypes:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAllowedTypes:"), _arr)
+	})
 	return pc
 }
 
 // WithPathComponentCells sets sets the array of NSPathComponentCell objects currently being displayed.
 func (pc *PathCell) WithPathComponentCells(items ...*PathComponentCell) *PathCell {
 	_arr := purego.SliceToNSArray(items, func(_v *PathComponentCell) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPathComponentCells:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPathComponentCells:"), _arr)
+	})
 	return pc
 }
 
 // WithBackgroundColor sets returns the current background color of the receiver.
 func (pc *PathCell) WithBackgroundColor(backgroundColor *Color) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	})
 	return pc
 }
 
 // WithPlaceholderString sets returns the placeholder string.
 func (pc *PathCell) WithPlaceholderString(placeholderString string) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
+	})
 	return pc
 }
 
 // WithPlaceholderAttributedString sets sets the value of the placeholder attributed string.
 func (pc *PathCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
+	})
 	return pc
 }
 
 // WithControlView sets the view associated with the cell.
 func (pc *PathCell) WithControlView(controlView ViewProvider) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	})
 	return pc
 }
 
 // WithType sets the type of the cell.
 func (pc *PathCell) WithType(type_ CellType) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setType:"), type_)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setType:"), type_)
+	})
 	return pc
 }
 
 // WithState sets the cell’s current state.
 func (pc *PathCell) WithState(state int) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setState:"), state)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setState:"), state)
+	})
 	return pc
 }
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (pc *PathCell) WithTarget(target obj.Object) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return pc
 }
 
 // WithTag sets a tag for identifying the cell.
 func (pc *PathCell) WithTag(tag int) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTag:"), tag)
+	})
 	return pc
 }
 
 // WithTitle sets the cell’s title text.
 func (pc *PathCell) WithTitle(title string) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return pc
 }
 
 // WithEnabled sets a Boolean value indicating whether the cell is currently enabled.
 func (pc *PathCell) WithEnabled(enabled bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return pc
 }
 
 // WithContinuous sets a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 func (pc *PathCell) WithContinuous(continuous bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return pc
 }
 
 // WithEditable sets a Boolean value indicating whether the cell is editable.
 func (pc *PathCell) WithEditable(editable bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setEditable:"), editable)
+	})
 	return pc
 }
 
 // WithSelectable sets a Boolean value indicating whether the cell’s text can be selected.
 func (pc *PathCell) WithSelectable(selectable bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setSelectable:"), selectable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setSelectable:"), selectable)
+	})
 	return pc
 }
 
 // WithBordered sets a Boolean value indicating whether the cell draws itself outlined with a plain border.
 func (pc *PathCell) WithBordered(bordered bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBordered:"), bordered)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBordered:"), bordered)
+	})
 	return pc
 }
 
 // WithBezeled sets a Boolean value indicating whether the cell has a bezeled border.
 func (pc *PathCell) WithBezeled(bezeled bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBezeled:"), bezeled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBezeled:"), bezeled)
+	})
 	return pc
 }
 
 // WithScrollable sets a Boolean value indicating whether excess text scrolls past the cell’s bounds.
 func (pc *PathCell) WithScrollable(scrollable bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setScrollable:"), scrollable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setScrollable:"), scrollable)
+	})
 	return pc
 }
 
 // WithHighlighted sets a Boolean value indicating whether the cell has a highlighted appearance.
 func (pc *PathCell) WithHighlighted(highlighted bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return pc
 }
 
 // WithAlignment sets the alignment of the cell’s text.
 func (pc *PathCell) WithAlignment(alignment TextAlignment) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return pc
 }
 
 // WithWraps sets a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 func (pc *PathCell) WithWraps(wraps bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setWraps:"), wraps)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setWraps:"), wraps)
+	})
 	return pc
 }
 
 // WithFont sets the font that the cell uses to display text.
 func (pc *PathCell) WithFont(font *Font) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return pc
 }
 
 // WithFormatter sets the cell’s formatter object.
 func (pc *PathCell) WithFormatter(formatter obj.Object) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return pc
 }
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (pc *PathCell) WithObjectValue(objectValue obj.Object) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return pc
 }
 
 // WithStringValue sets the cell’s value as a string.
 func (pc *PathCell) WithStringValue(stringValue string) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return pc
 }
 
 // WithIntValue sets the cell’s value as an integer.
 func (pc *PathCell) WithIntValue(intValue int) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return pc
 }
 
 // WithFloatValue sets the cell’s value as a single-precision floating-point number.
 func (pc *PathCell) WithFloatValue(floatValue float32) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return pc
 }
 
 // WithDoubleValue sets the cell’s value as a double-precision floating-point number.
 func (pc *PathCell) WithDoubleValue(doubleValue float64) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return pc
 }
 
 // WithIntegerValue sets the cell’s value as an integer value.
 func (pc *PathCell) WithIntegerValue(integerValue int) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return pc
 }
 
 // WithImage sets the image displayed by the cell, if any.
 func (pc *PathCell) WithImage(image *Image) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setImage:"), objref.IDOf(image))
+	})
 	return pc
 }
 
 // WithControlSize sets the size of the cell.
 func (pc *PathCell) WithControlSize(controlSize ControlSize) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return pc
 }
 
 // WithRepresentedObject sets the object represented by the cell.
 func (pc *PathCell) WithRepresentedObject(representedObject obj.Object) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	})
 	return pc
 }
 
 // WithMenu sets the cell’s contextual menu.
 func (pc *PathCell) WithMenu(menu *Menu) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return pc
 }
 
 // WithSendsActionOnEndEditing sets a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 func (pc *PathCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	})
 	return pc
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (pc *PathCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return pc
 }
 
 // WithLineBreakMode sets the line break mode to use when drawing text in the cell.
 func (pc *PathCell) WithLineBreakMode(lineBreakMode LineBreakMode) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return pc
 }
 
 // WithAllowsUndo sets a Boolean value indicating whether the cell assumes responsibility for undo operations.
 func (pc *PathCell) WithAllowsUndo(allowsUndo bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	})
 	return pc
 }
 
 // WithTruncatesLastVisibleLine sets a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 func (pc *PathCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	})
 	return pc
 }
 
 // WithUserInterfaceLayoutDirection sets the layout direction of the user interface.
 func (pc *PathCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return pc
 }
 
 // WithUsesSingleLineMode sets a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 func (pc *PathCell) WithUsesSingleLineMode(usesSingleLineMode bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return pc
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the cell refuses the first responder status.
 func (pc *PathCell) WithRefusesFirstResponder(refusesFirstResponder bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return pc
 }
 
 // WithShowsFirstResponder sets a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 func (pc *PathCell) WithShowsFirstResponder(showsFirstResponder bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	})
 	return pc
 }
 
 // WithFocusRingType sets the type of focus ring to use with the associated view.
 func (pc *PathCell) WithFocusRingType(focusRingType FocusRingType) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return pc
 }
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (pc *PathCell) WithAttributedStringValue(attributedStringValue obj.Object) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return pc
 }
 
 // WithAllowsEditingTextAttributes sets a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 func (pc *PathCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	})
 	return pc
 }
 
 // WithImportsGraphics sets a Boolean value indicating whether the cell supports the importation of images into its text.
 func (pc *PathCell) WithImportsGraphics(importsGraphics bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	})
 	return pc
 }
 
 // WithAllowsMixedState sets a Boolean value indicating whether the cell supports three states instead of two.
 func (pc *PathCell) WithAllowsMixedState(allowsMixedState bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	})
 	return pc
 }
 
 // WithBackgroundStyle sets the cell’s background style.
 func (pc *PathCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	})
 	return pc
 }
 
 // WithControlTint sets the cell’s control tint.
 func (pc *PathCell) WithControlTint(controlTint ControlTint) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setControlTint:"), controlTint)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setControlTint:"), controlTint)
+	})
 	return pc
 }
 
 // RectOfPathComponentCellWithFrameInView returns the current rectangle being displayed for a given path component cell, with respect to a given frame in a given view.
 func (pc *PathCell) RectOfPathComponentCellWithFrameInView(cell *PathComponentCell, frame corefoundation.CGRect, view *View) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(pc), objc.RegisterName("rectOfPathComponentCell:withFrame:inView:"), objref.IDOf(cell), frame, objref.IDOf(view))
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(pc), objc.RegisterName("rectOfPathComponentCell:withFrame:inView:"), objref.IDOf(cell), frame, objref.IDOf(view))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PathComponentCellAtPointWithFrameInView returns the cell located at the given point within the given frame of the given view.
 func (pc *PathCell) PathComponentCellAtPointWithFrameInView(point corefoundation.CGPoint, frame corefoundation.CGRect, view *View) *PathComponentCell {
-	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("pathComponentCellAtPoint:withFrame:inView:"), point, frame, objref.IDOf(view))
-	return PathComponentCellFromID(_r)
+	var _mainthread0 *PathComponentCell
+	purego.Main(func() {
+		_mainthread0 = func() *PathComponentCell {
+			_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("pathComponentCellAtPoint:withFrame:inView:"), point, frame, objref.IDOf(view))
+			return PathComponentCellFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MouseEnteredWithFrameInView displays the cell component over which the mouse is hovering.
 func (pc *PathCell) MouseEnteredWithFrameInView(event *Event, frame corefoundation.CGRect, view *View) {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("mouseEntered:withFrame:inView:"), objref.IDOf(event), frame, objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("mouseEntered:withFrame:inView:"), objref.IDOf(event), frame, objref.IDOf(view))
+	})
+
 }
 
 // MouseExitedWithFrameInView hides the cell component over which the mouse is hovering.
 func (pc *PathCell) MouseExitedWithFrameInView(event *Event, frame corefoundation.CGRect, view *View) {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("mouseExited:withFrame:inView:"), objref.IDOf(event), frame, objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("mouseExited:withFrame:inView:"), objref.IDOf(event), frame, objref.IDOf(view))
+	})
+
 }
 
 // PathStyle returns the path style.
 func (pc *PathCell) PathStyle() PathStyle {
-	_r := objc.Send[PathStyle](objref.IDOf(pc), objc.RegisterName("pathStyle"))
-	return _r
+	var _mainthread0 PathStyle
+	purego.Main(func() {
+		_mainthread0 = func() PathStyle {
+			_r := objc.Send[PathStyle](objref.IDOf(pc), objc.RegisterName("pathStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // URL returns the URL.
 func (pc *PathCell) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("URL"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowedTypes returns the allowed types.
 //
 // AllowedTypes returns the collection as a Go slice.
 func (pc *PathCell) AllowedTypes() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("allowedTypes"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
+	var _mainthread0 []string
+	purego.Main(func() {
+		_mainthread0 = func() []string {
+			_arr := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("allowedTypes"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // PathComponentCells returns the path component cells.
 //
 // PathComponentCells returns the collection as a Go slice.
 func (pc *PathCell) PathComponentCells() []*PathComponentCell {
-	_arr := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("pathComponentCells"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PathComponentCell { return PathComponentCellFromID(_id) })
+	var _mainthread0 []*PathComponentCell
+	purego.Main(func() {
+		_mainthread0 = func() []*PathComponentCell {
+			_arr := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("pathComponentCells"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PathComponentCell { return PathComponentCellFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // ClickedPathComponentCell returns the clicked path component cell.
 func (pc *PathCell) ClickedPathComponentCell() *PathComponentCell {
-	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("clickedPathComponentCell"))
-	return PathComponentCellFromID(_r)
+	var _mainthread0 *PathComponentCell
+	purego.Main(func() {
+		_mainthread0 = func() *PathComponentCell {
+			_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("clickedPathComponentCell"))
+			return PathComponentCellFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BackgroundColor returns the background color.
 func (pc *PathCell) BackgroundColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("backgroundColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("backgroundColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PlaceholderString returns the placeholder string.
 func (pc *PathCell) PlaceholderString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("placeholderString"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("placeholderString"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PlaceholderAttributedString returns the placeholder attributed string.
 func (pc *PathCell) PlaceholderAttributedString() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("placeholderAttributedString"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("placeholderAttributedString"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ActionCellProvider = (*PathCell)(nil)

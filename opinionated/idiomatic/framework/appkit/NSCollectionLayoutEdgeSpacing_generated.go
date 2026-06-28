@@ -68,30 +68,64 @@ func (cles *CollectionLayoutEdgeSpacing) String() string {
 
 // NewCollectionLayoutEdgeSpacing creates a new CollectionLayoutEdgeSpacing.
 func NewCollectionLayoutEdgeSpacing() *CollectionLayoutEdgeSpacing {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutEdgeSpacing")), objc.RegisterName("new"))
-	return collectionLayoutEdgeSpacingAdopt(_id)
+	var _mainthread0 *CollectionLayoutEdgeSpacing
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionLayoutEdgeSpacing {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutEdgeSpacing")), objc.RegisterName("new"))
+			return collectionLayoutEdgeSpacingAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // Leading returns the leading.
 func (cles *CollectionLayoutEdgeSpacing) Leading() *CollectionLayoutSpacing {
-	_r := objc.Send[objc.ID](objref.IDOf(cles), objc.RegisterName("leading"))
-	return CollectionLayoutSpacingFromID(_r)
+	var _mainthread0 *CollectionLayoutSpacing
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionLayoutSpacing {
+			_r := objc.Send[objc.ID](objref.IDOf(cles), objc.RegisterName("leading"))
+			return CollectionLayoutSpacingFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Top returns the top.
 func (cles *CollectionLayoutEdgeSpacing) Top() *CollectionLayoutSpacing {
-	_r := objc.Send[objc.ID](objref.IDOf(cles), objc.RegisterName("top"))
-	return CollectionLayoutSpacingFromID(_r)
+	var _mainthread0 *CollectionLayoutSpacing
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionLayoutSpacing {
+			_r := objc.Send[objc.ID](objref.IDOf(cles), objc.RegisterName("top"))
+			return CollectionLayoutSpacingFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Trailing returns the trailing.
 func (cles *CollectionLayoutEdgeSpacing) Trailing() *CollectionLayoutSpacing {
-	_r := objc.Send[objc.ID](objref.IDOf(cles), objc.RegisterName("trailing"))
-	return CollectionLayoutSpacingFromID(_r)
+	var _mainthread0 *CollectionLayoutSpacing
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionLayoutSpacing {
+			_r := objc.Send[objc.ID](objref.IDOf(cles), objc.RegisterName("trailing"))
+			return CollectionLayoutSpacingFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Bottom returns the bottom.
 func (cles *CollectionLayoutEdgeSpacing) Bottom() *CollectionLayoutSpacing {
-	_r := objc.Send[objc.ID](objref.IDOf(cles), objc.RegisterName("bottom"))
-	return CollectionLayoutSpacingFromID(_r)
+	var _mainthread0 *CollectionLayoutSpacing
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionLayoutSpacing {
+			_r := objc.Send[objc.ID](objref.IDOf(cles), objc.RegisterName("bottom"))
+			return CollectionLayoutSpacingFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }

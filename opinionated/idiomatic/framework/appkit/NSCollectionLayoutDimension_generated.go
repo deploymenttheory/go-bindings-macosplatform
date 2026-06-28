@@ -68,36 +68,77 @@ func (cld *CollectionLayoutDimension) String() string {
 
 // NewCollectionLayoutDimension creates a new CollectionLayoutDimension.
 func NewCollectionLayoutDimension() *CollectionLayoutDimension {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutDimension")), objc.RegisterName("new"))
-	return collectionLayoutDimensionAdopt(_id)
+	var _mainthread0 *CollectionLayoutDimension
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionLayoutDimension {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutDimension")), objc.RegisterName("new"))
+			return collectionLayoutDimensionAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // IsFractionalWidth reports whether the object is fractional width.
 func (cld *CollectionLayoutDimension) IsFractionalWidth() bool {
-	_r := objc.Send[bool](objref.IDOf(cld), objc.RegisterName("isFractionalWidth"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cld), objc.RegisterName("isFractionalWidth"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsFractionalHeight reports whether the object is fractional height.
 func (cld *CollectionLayoutDimension) IsFractionalHeight() bool {
-	_r := objc.Send[bool](objref.IDOf(cld), objc.RegisterName("isFractionalHeight"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cld), objc.RegisterName("isFractionalHeight"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsAbsolute reports whether the object is absolute.
 func (cld *CollectionLayoutDimension) IsAbsolute() bool {
-	_r := objc.Send[bool](objref.IDOf(cld), objc.RegisterName("isAbsolute"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cld), objc.RegisterName("isAbsolute"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsEstimated reports whether the object is estimated.
 func (cld *CollectionLayoutDimension) IsEstimated() bool {
-	_r := objc.Send[bool](objref.IDOf(cld), objc.RegisterName("isEstimated"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cld), objc.RegisterName("isEstimated"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Dimension returns the dimension.
 func (cld *CollectionLayoutDimension) Dimension() float64 {
-	_r := objc.Send[float64](objref.IDOf(cld), objc.RegisterName("dimension"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(cld), objc.RegisterName("dimension"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

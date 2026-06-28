@@ -68,15 +68,28 @@ func (wcw *WKContentWorld) String() string {
 
 // NewWKContentWorld creates a new WKContentWorld.
 func NewWKContentWorld() *WKContentWorld {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKContentWorld")), objc.RegisterName("new"))
-	return wKContentWorldAdopt(_id)
+	var _mainthread0 *WKContentWorld
+	purego.Main(func() {
+		_mainthread0 = func() *WKContentWorld {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKContentWorld")), objc.RegisterName("new"))
+			return wKContentWorldAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // Name returns the name of the WKContentWorld The pageWorld and defaultClientWorld instances will have a nil name. All other instances will have the non-nil name they were accessed by.
 func (wcw *WKContentWorld) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wcw), objc.RegisterName("name"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wcw), objc.RegisterName("name"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }

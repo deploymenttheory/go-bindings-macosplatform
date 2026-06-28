@@ -68,84 +68,151 @@ func (idbv *IKDeviceBrowserView) String() string {
 
 // NewIKDeviceBrowserView creates a new IKDeviceBrowserView.
 func NewIKDeviceBrowserView() *IKDeviceBrowserView {
-	_id := objc.Send[objc.ID](objc.ID(_class("IKDeviceBrowserView")), objc.RegisterName("new"))
-	return iKDeviceBrowserViewAdopt(_id)
+	var _mainthread0 *IKDeviceBrowserView
+	purego.Main(func() {
+		_mainthread0 = func() *IKDeviceBrowserView {
+			_id := objc.Send[objc.ID](objc.ID(_class("IKDeviceBrowserView")), objc.RegisterName("new"))
+			return iKDeviceBrowserViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithDelegate sets specifies the delegate object.
 func (idbv *IKDeviceBrowserView) WithDelegate(delegate obj.Object) *IKDeviceBrowserView {
-	objc.Send[objc.ID](objref.IDOf(idbv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(idbv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	})
 	return idbv
 }
 
 // WithDisplaysLocalCameras sets specifies whether local cameras are displayed by the browser.
 func (idbv *IKDeviceBrowserView) WithDisplaysLocalCameras(displaysLocalCameras bool) *IKDeviceBrowserView {
-	objc.Send[objc.ID](objref.IDOf(idbv), objc.RegisterName("setDisplaysLocalCameras:"), displaysLocalCameras)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(idbv), objc.RegisterName("setDisplaysLocalCameras:"), displaysLocalCameras)
+	})
 	return idbv
 }
 
 // WithDisplaysNetworkCameras sets specifies whether network cameras are displayed by the browser.
 func (idbv *IKDeviceBrowserView) WithDisplaysNetworkCameras(displaysNetworkCameras bool) *IKDeviceBrowserView {
-	objc.Send[objc.ID](objref.IDOf(idbv), objc.RegisterName("setDisplaysNetworkCameras:"), displaysNetworkCameras)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(idbv), objc.RegisterName("setDisplaysNetworkCameras:"), displaysNetworkCameras)
+	})
 	return idbv
 }
 
 // WithDisplaysLocalScanners sets specifies whether local scanners are displayed by the browser.
 func (idbv *IKDeviceBrowserView) WithDisplaysLocalScanners(displaysLocalScanners bool) *IKDeviceBrowserView {
-	objc.Send[objc.ID](objref.IDOf(idbv), objc.RegisterName("setDisplaysLocalScanners:"), displaysLocalScanners)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(idbv), objc.RegisterName("setDisplaysLocalScanners:"), displaysLocalScanners)
+	})
 	return idbv
 }
 
 // WithDisplaysNetworkScanners sets specifies whether network scanners are displayed by the browser.
 func (idbv *IKDeviceBrowserView) WithDisplaysNetworkScanners(displaysNetworkScanners bool) *IKDeviceBrowserView {
-	objc.Send[objc.ID](objref.IDOf(idbv), objc.RegisterName("setDisplaysNetworkScanners:"), displaysNetworkScanners)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(idbv), objc.RegisterName("setDisplaysNetworkScanners:"), displaysNetworkScanners)
+	})
 	return idbv
 }
 
 // WithMode sets specifies the browser display mode.
 func (idbv *IKDeviceBrowserView) WithMode(mode obj.Object) *IKDeviceBrowserView {
-	objc.Send[objc.ID](objref.IDOf(idbv), objc.RegisterName("setMode:"), objref.IDOf(mode))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(idbv), objc.RegisterName("setMode:"), objref.IDOf(mode))
+	})
 	return idbv
 }
 
 // Delegate returns delegate of the IKDeviceBrowserView.
 func (idbv *IKDeviceBrowserView) Delegate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(idbv), objc.RegisterName("delegate"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(idbv), objc.RegisterName("delegate"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DisplaysLocalCameras reports whether for device filtering - indicates that the IKDeviceBrowserView should include local cameras.
 func (idbv *IKDeviceBrowserView) DisplaysLocalCameras() bool {
-	_r := objc.Send[bool](objref.IDOf(idbv), objc.RegisterName("displaysLocalCameras"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(idbv), objc.RegisterName("displaysLocalCameras"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DisplaysNetworkCameras reports whether for device filtering - indicates that the IKDeviceBrowserView should include network/shared cameras.
 func (idbv *IKDeviceBrowserView) DisplaysNetworkCameras() bool {
-	_r := objc.Send[bool](objref.IDOf(idbv), objc.RegisterName("displaysNetworkCameras"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(idbv), objc.RegisterName("displaysNetworkCameras"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DisplaysLocalScanners reports whether for device filtering - indicates that the IKDeviceBrowserView should include local scanners.
 func (idbv *IKDeviceBrowserView) DisplaysLocalScanners() bool {
-	_r := objc.Send[bool](objref.IDOf(idbv), objc.RegisterName("displaysLocalScanners"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(idbv), objc.RegisterName("displaysLocalScanners"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DisplaysNetworkScanners reports whether for device filtering - indicates that the IKDeviceBrowserView should include network/shared scanners.
 func (idbv *IKDeviceBrowserView) DisplaysNetworkScanners() bool {
-	_r := objc.Send[bool](objref.IDOf(idbv), objc.RegisterName("displaysNetworkScanners"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(idbv), objc.RegisterName("displaysNetworkScanners"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Mode returns one of the supported display modes (table, outline, or icon mode).
 func (idbv *IKDeviceBrowserView) Mode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(idbv), objc.RegisterName("mode"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(idbv), objc.RegisterName("mode"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SelectedDevice returns user selected device (ICCameraDevice or ICScannerDevice).
 func (idbv *IKDeviceBrowserView) SelectedDevice() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(idbv), objc.RegisterName("selectedDevice"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(idbv), objc.RegisterName("selectedDevice"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

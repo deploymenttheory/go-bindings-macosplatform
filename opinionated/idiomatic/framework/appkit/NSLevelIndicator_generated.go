@@ -50,648 +50,956 @@ func levelIndicatorAdopt(id objc.ID) *LevelIndicator {
 
 // NewLevelIndicator creates a new LevelIndicator.
 func NewLevelIndicator() *LevelIndicator {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSLevelIndicator")), objc.RegisterName("new"))
-	return levelIndicatorAdopt(_id)
+	var _mainthread0 *LevelIndicator
+	purego.Main(func() {
+		_mainthread0 = func() *LevelIndicator {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSLevelIndicator")), objc.RegisterName("new"))
+			return levelIndicatorAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithLevelIndicatorStyle sets the appearance of the indicator.
 func (li *LevelIndicator) WithLevelIndicatorStyle(levelIndicatorStyle LevelIndicatorStyle) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setLevelIndicatorStyle:"), levelIndicatorStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setLevelIndicatorStyle:"), levelIndicatorStyle)
+	})
 	return li
 }
 
 // WithEditable sets the editable.
 func (li *LevelIndicator) WithEditable(editable bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setEditable:"), editable)
+	})
 	return li
 }
 
 // WithMinValue sets the receiver’s minimum value.
 func (li *LevelIndicator) WithMinValue(minValue float64) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setMinValue:"), minValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setMinValue:"), minValue)
+	})
 	return li
 }
 
 // WithMaxValue sets the receiver’s maximum value.
 func (li *LevelIndicator) WithMaxValue(maxValue float64) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setMaxValue:"), maxValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setMaxValue:"), maxValue)
+	})
 	return li
 }
 
 // WithWarningValue sets the receiver’s warning value.
 func (li *LevelIndicator) WithWarningValue(warningValue float64) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setWarningValue:"), warningValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setWarningValue:"), warningValue)
+	})
 	return li
 }
 
 // WithCriticalValue sets the receiver’s critical value.
 func (li *LevelIndicator) WithCriticalValue(criticalValue float64) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setCriticalValue:"), criticalValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setCriticalValue:"), criticalValue)
+	})
 	return li
 }
 
 // WithTickMarkPosition sets determines how the receiver’s tick marks are aligned with it.
 func (li *LevelIndicator) WithTickMarkPosition(tickMarkPosition TickMarkPosition) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setTickMarkPosition:"), tickMarkPosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setTickMarkPosition:"), tickMarkPosition)
+	})
 	return li
 }
 
 // WithNumberOfTickMarks sets the number of tick marks associated with the receiver.
 func (li *LevelIndicator) WithNumberOfTickMarks(numberOfTickMarks int) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setNumberOfTickMarks:"), numberOfTickMarks)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setNumberOfTickMarks:"), numberOfTickMarks)
+	})
 	return li
 }
 
 // WithNumberOfMajorTickMarks sets the number of major tick marks associated with the receiver.
 func (li *LevelIndicator) WithNumberOfMajorTickMarks(numberOfMajorTickMarks int) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setNumberOfMajorTickMarks:"), numberOfMajorTickMarks)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setNumberOfMajorTickMarks:"), numberOfMajorTickMarks)
+	})
 	return li
 }
 
 // WithFillColor sets sets the fill color used by Continuous and Discrete Capacity indicators when drawing the “normal” state, and by the rating indicator when drawing stars.
 func (li *LevelIndicator) WithFillColor(fillColor *Color) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
+	})
 	return li
 }
 
 // WithWarningFillColor sets sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the “warning” threshold.
 func (li *LevelIndicator) WithWarningFillColor(warningFillColor *Color) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setWarningFillColor:"), objref.IDOf(warningFillColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setWarningFillColor:"), objref.IDOf(warningFillColor))
+	})
 	return li
 }
 
 // WithCriticalFillColor sets sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the “critical” threshold.
 func (li *LevelIndicator) WithCriticalFillColor(criticalFillColor *Color) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setCriticalFillColor:"), objref.IDOf(criticalFillColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setCriticalFillColor:"), objref.IDOf(criticalFillColor))
+	})
 	return li
 }
 
 // WithDrawsTieredCapacityLevels sets the draws tiered capacity levels.
 func (li *LevelIndicator) WithDrawsTieredCapacityLevels(drawsTieredCapacityLevels bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setDrawsTieredCapacityLevels:"), drawsTieredCapacityLevels)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setDrawsTieredCapacityLevels:"), drawsTieredCapacityLevels)
+	})
 	return li
 }
 
 // WithPlaceholderVisibility sets for a rating-style indicator, sets the conditions under which rating placeholders are displayed.
 func (li *LevelIndicator) WithPlaceholderVisibility(placeholderVisibility LevelIndicatorPlaceholderVisibility) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setPlaceholderVisibility:"), placeholderVisibility)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setPlaceholderVisibility:"), placeholderVisibility)
+	})
 	return li
 }
 
 // WithRatingImage sets sets the image used by the rating indicator style in place of the default star image.
 func (li *LevelIndicator) WithRatingImage(ratingImage *Image) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setRatingImage:"), objref.IDOf(ratingImage))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setRatingImage:"), objref.IDOf(ratingImage))
+	})
 	return li
 }
 
 // WithRatingPlaceholderImage sets sets the image used by the rating indicator style in place of the default faded placeholder image.
 func (li *LevelIndicator) WithRatingPlaceholderImage(ratingPlaceholderImage *Image) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setRatingPlaceholderImage:"), objref.IDOf(ratingPlaceholderImage))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setRatingPlaceholderImage:"), objref.IDOf(ratingPlaceholderImage))
+	})
 	return li
 }
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (li *LevelIndicator) WithTarget(target obj.Object) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return li
 }
 
 // WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
 func (li *LevelIndicator) WithTag(tag int) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setTag:"), tag)
+	})
 	return li
 }
 
 // WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 func (li *LevelIndicator) WithIgnoresMultiClick(ignoresMultiClick bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	})
 	return li
 }
 
 // WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 func (li *LevelIndicator) WithContinuous(continuous bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return li
 }
 
 // WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
 func (li *LevelIndicator) WithEnabled(enabled bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return li
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
 func (li *LevelIndicator) WithRefusesFirstResponder(refusesFirstResponder bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return li
 }
 
 // WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
 func (li *LevelIndicator) WithHighlighted(highlighted bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return li
 }
 
 // WithControlSize sets the size of the control.
 func (li *LevelIndicator) WithControlSize(controlSize ControlSize) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return li
 }
 
 // WithFormatter sets the receiver’s formatter.
 func (li *LevelIndicator) WithFormatter(formatter obj.Object) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return li
 }
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (li *LevelIndicator) WithObjectValue(objectValue obj.Object) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return li
 }
 
 // WithStringValue sets the value of the receiver’s cell as an NSString object.
 func (li *LevelIndicator) WithStringValue(stringValue string) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return li
 }
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (li *LevelIndicator) WithAttributedStringValue(attributedStringValue obj.Object) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return li
 }
 
 // WithIntValue sets the value of the receiver’s cell as an integer.
 func (li *LevelIndicator) WithIntValue(intValue int) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return li
 }
 
 // WithIntegerValue sets the value of the receiver’s cell as an integer value.
 func (li *LevelIndicator) WithIntegerValue(integerValue int) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return li
 }
 
 // WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
 func (li *LevelIndicator) WithFloatValue(floatValue float32) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return li
 }
 
 // WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
 func (li *LevelIndicator) WithDoubleValue(doubleValue float64) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return li
 }
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (li *LevelIndicator) WithFont(font *Font) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return li
 }
 
 // WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
 func (li *LevelIndicator) WithUsesSingleLineMode(usesSingleLineMode bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return li
 }
 
 // WithLineBreakMode sets the line break mode to use for text in the control’s cell.
 func (li *LevelIndicator) WithLineBreakMode(lineBreakMode LineBreakMode) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return li
 }
 
 // WithAlignment sets the alignment mode of the text in the receiver’s cell.
 func (li *LevelIndicator) WithAlignment(alignment TextAlignment) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return li
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (li *LevelIndicator) WithBaseWritingDirection(baseWritingDirection WritingDirection) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return li
 }
 
 // WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 func (li *LevelIndicator) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	})
 	return li
 }
 
 // WithCell sets the cell.
 func (li *LevelIndicator) WithCell(cell CellProvider) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	})
 	return li
 }
 
 // WithSubviews sets the subviews.
 func (li *LevelIndicator) WithSubviews(items ...ViewProvider) *LevelIndicator {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return li
 }
 
 // WithHidden sets the hidden.
 func (li *LevelIndicator) WithHidden(hidden bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setHidden:"), hidden)
+	})
 	return li
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (li *LevelIndicator) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return li
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (li *LevelIndicator) WithAutoresizesSubviews(autoresizesSubviews bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return li
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (li *LevelIndicator) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return li
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (li *LevelIndicator) WithFrame(frame corefoundation.CGRect) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFrame:"), frame)
+	})
 	return li
 }
 
 // WithFrameRotation sets the frame rotation.
 func (li *LevelIndicator) WithFrameRotation(frameRotation float64) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return li
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (li *LevelIndicator) WithFrameCenterRotation(frameCenterRotation float64) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return li
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (li *LevelIndicator) WithBoundsRotation(boundsRotation float64) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return li
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (li *LevelIndicator) WithBounds(bounds corefoundation.CGRect) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setBounds:"), bounds)
+	})
 	return li
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (li *LevelIndicator) WithCanDrawConcurrently(canDrawConcurrently bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return li
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (li *LevelIndicator) WithNeedsDisplay(needsDisplay bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return li
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (li *LevelIndicator) WithAcceptsTouchEvents(acceptsTouchEvents bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return li
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (li *LevelIndicator) WithWantsRestingTouches(wantsRestingTouches bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return li
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (li *LevelIndicator) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return li
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (li *LevelIndicator) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return li
 }
 
 // WithWantsLayer sets the wants layer.
 func (li *LevelIndicator) WithWantsLayer(wantsLayer bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return li
 }
 
 // WithLayer sets the layer.
 func (li *LevelIndicator) WithLayer(layer obj.Object) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return li
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (li *LevelIndicator) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return li
 }
 
 // WithNeedsLayout sets the needs layout.
 func (li *LevelIndicator) WithNeedsLayout(needsLayout bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return li
 }
 
 // WithAlphaValue sets the alpha value.
 func (li *LevelIndicator) WithAlphaValue(alphaValue float64) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return li
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (li *LevelIndicator) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return li
 }
 
 // WithBackgroundFilters sets the background filters.
 func (li *LevelIndicator) WithBackgroundFilters(items ...obj.Object) *LevelIndicator {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return li
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (li *LevelIndicator) WithCompositingFilter(compositingFilter obj.Object) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return li
 }
 
 // WithContentFilters sets the content filters.
 func (li *LevelIndicator) WithContentFilters(items ...obj.Object) *LevelIndicator {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return li
 }
 
 // WithShadow sets the shadow.
 func (li *LevelIndicator) WithShadow(shadow *Shadow) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return li
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (li *LevelIndicator) WithClipsToBounds(clipsToBounds bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return li
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (li *LevelIndicator) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return li
 }
 
 // WithToolTip sets the tool tip.
 func (li *LevelIndicator) WithToolTip(toolTip string) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return li
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (li *LevelIndicator) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return li
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (li *LevelIndicator) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return li
 }
 
 // WithNextKeyView sets the next key view.
 func (li *LevelIndicator) WithNextKeyView(nextKeyView ViewProvider) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return li
 }
 
 // WithFocusRingType sets the focus ring type.
 func (li *LevelIndicator) WithFocusRingType(focusRingType FocusRingType) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return li
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (li *LevelIndicator) WithGestureRecognizers(items ...GestureRecognizerProvider) *LevelIndicator {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return li
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (li *LevelIndicator) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return li
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (li *LevelIndicator) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return li
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (li *LevelIndicator) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return li
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (li *LevelIndicator) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return li
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (li *LevelIndicator) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return li
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (li *LevelIndicator) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return li
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (li *LevelIndicator) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return li
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (li *LevelIndicator) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return li
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (li *LevelIndicator) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return li
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (li *LevelIndicator) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return li
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (li *LevelIndicator) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return li
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (li *LevelIndicator) WithNextResponder(nextResponder ResponderProvider) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return li
 }
 
 // WithMenu sets returns the responder’s menu.
 func (li *LevelIndicator) WithMenu(menu *Menu) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return li
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (li *LevelIndicator) WithUserActivity(userActivity obj.Object) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return li
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (li *LevelIndicator) WithTouchBar(touchBar *TouchBar) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return li
 }
 
 // TickMarkValueAtIndex returns the receiver’s value represented by the tick mark at the specified index (the minimum-value tick mark has an index of 0).
 func (li *LevelIndicator) TickMarkValueAtIndex(index int) float64 {
-	_r := objc.Send[float64](objref.IDOf(li), objc.RegisterName("tickMarkValueAtIndex:"), index)
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(li), objc.RegisterName("tickMarkValueAtIndex:"), index)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RectOfTickMarkAtIndex returns the bounding rectangle of the tick mark identified by the specified index (the minimum-value tick mark is at index 0).
 func (li *LevelIndicator) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(li), objc.RegisterName("rectOfTickMarkAtIndex:"), index)
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(li), objc.RegisterName("rectOfTickMarkAtIndex:"), index)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LevelIndicatorStyle returns the level indicator style.
 func (li *LevelIndicator) LevelIndicatorStyle() LevelIndicatorStyle {
-	_r := objc.Send[LevelIndicatorStyle](objref.IDOf(li), objc.RegisterName("levelIndicatorStyle"))
-	return _r
+	var _mainthread0 LevelIndicatorStyle
+	purego.Main(func() {
+		_mainthread0 = func() LevelIndicatorStyle {
+			_r := objc.Send[LevelIndicatorStyle](objref.IDOf(li), objc.RegisterName("levelIndicatorStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsEditable reports whether the object is editable.
 func (li *LevelIndicator) IsEditable() bool {
-	_r := objc.Send[bool](objref.IDOf(li), objc.RegisterName("isEditable"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(li), objc.RegisterName("isEditable"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MinValue returns the min value.
 func (li *LevelIndicator) MinValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(li), objc.RegisterName("minValue"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(li), objc.RegisterName("minValue"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MaxValue returns the max value.
 func (li *LevelIndicator) MaxValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(li), objc.RegisterName("maxValue"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(li), objc.RegisterName("maxValue"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // WarningValue returns the warning value.
 func (li *LevelIndicator) WarningValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(li), objc.RegisterName("warningValue"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(li), objc.RegisterName("warningValue"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CriticalValue returns the critical value.
 func (li *LevelIndicator) CriticalValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(li), objc.RegisterName("criticalValue"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(li), objc.RegisterName("criticalValue"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TickMarkPosition returns the tick mark position.
 func (li *LevelIndicator) TickMarkPosition() TickMarkPosition {
-	_r := objc.Send[TickMarkPosition](objref.IDOf(li), objc.RegisterName("tickMarkPosition"))
-	return _r
+	var _mainthread0 TickMarkPosition
+	purego.Main(func() {
+		_mainthread0 = func() TickMarkPosition {
+			_r := objc.Send[TickMarkPosition](objref.IDOf(li), objc.RegisterName("tickMarkPosition"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NumberOfTickMarks returns the number of tick marks.
 func (li *LevelIndicator) NumberOfTickMarks() int {
-	_r := objc.Send[int](objref.IDOf(li), objc.RegisterName("numberOfTickMarks"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(li), objc.RegisterName("numberOfTickMarks"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NumberOfMajorTickMarks returns the number of major tick marks.
 func (li *LevelIndicator) NumberOfMajorTickMarks() int {
-	_r := objc.Send[int](objref.IDOf(li), objc.RegisterName("numberOfMajorTickMarks"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(li), objc.RegisterName("numberOfMajorTickMarks"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FillColor sets the fill color used by Continuous and Discrete Capacity indicators when drawing the "normal" state, and by the rating indicator when drawing stars. The default value is a system-defined color which may vary between level indicator styles and OS releases.
 func (li *LevelIndicator) FillColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("fillColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("fillColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // WarningFillColor sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the "warning" threshold. The default value is a system-defined color which may vary between level indicator styles and OS releases.
 func (li *LevelIndicator) WarningFillColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("warningFillColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("warningFillColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CriticalFillColor sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the "critical" threshold. The default value is a system-defined color which may vary between level indicator styles and OS releases.
 func (li *LevelIndicator) CriticalFillColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("criticalFillColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("criticalFillColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DrawsTieredCapacityLevels wraps the corresponding Objective-C method.
 func (li *LevelIndicator) DrawsTieredCapacityLevels() bool {
-	_r := objc.Send[bool](objref.IDOf(li), objc.RegisterName("drawsTieredCapacityLevels"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(li), objc.RegisterName("drawsTieredCapacityLevels"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PlaceholderVisibility returns for a rating-style indicator, sets the conditions under which rating placeholders are displayed. This property currently has no effect for other indicator styles. The default value is `NSLevelIndicatorPlaceholderVisibilityAutomatic`.
 func (li *LevelIndicator) PlaceholderVisibility() LevelIndicatorPlaceholderVisibility {
-	_r := objc.Send[LevelIndicatorPlaceholderVisibility](objref.IDOf(li), objc.RegisterName("placeholderVisibility"))
-	return _r
+	var _mainthread0 LevelIndicatorPlaceholderVisibility
+	purego.Main(func() {
+		_mainthread0 = func() LevelIndicatorPlaceholderVisibility {
+			_r := objc.Send[LevelIndicatorPlaceholderVisibility](objref.IDOf(li), objc.RegisterName("placeholderVisibility"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RatingImage sets the image used by the rating indicator style in place of the default star image. The default value is `nil`.
 func (li *LevelIndicator) RatingImage() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("ratingImage"))
-	return ImageFromID(_r)
+	var _mainthread0 *Image
+	purego.Main(func() {
+		_mainthread0 = func() *Image {
+			_r := objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("ratingImage"))
+			return ImageFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RatingPlaceholderImage returns the rating placeholder image.
 func (li *LevelIndicator) RatingPlaceholderImage() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("ratingPlaceholderImage"))
-	return ImageFromID(_r)
+	var _mainthread0 *Image
+	purego.Main(func() {
+		_mainthread0 = func() *Image {
+			_r := objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("ratingPlaceholderImage"))
+			return ImageFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ControlProvider = (*LevelIndicator)(nil)

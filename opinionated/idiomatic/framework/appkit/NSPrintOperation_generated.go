@@ -69,205 +69,382 @@ func (po *PrintOperation) String() string {
 
 // NewPrintOperation creates a new PrintOperation.
 func NewPrintOperation() *PrintOperation {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSPrintOperation")), objc.RegisterName("new"))
-	return printOperationAdopt(_id)
+	var _mainthread0 *PrintOperation
+	purego.Main(func() {
+		_mainthread0 = func() *PrintOperation {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSPrintOperation")), objc.RegisterName("new"))
+			return printOperationAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithJobTitle sets the custom title of the print job.
 func (po *PrintOperation) WithJobTitle(jobTitle string) *PrintOperation {
-	objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setJobTitle:"), purego.NSString(jobTitle))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setJobTitle:"), purego.NSString(jobTitle))
+	})
 	return po
 }
 
 // WithShowsPrintPanel sets a Boolean value that determines whether the print operation displays a print panel.
 func (po *PrintOperation) WithShowsPrintPanel(showsPrintPanel bool) *PrintOperation {
-	objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setShowsPrintPanel:"), showsPrintPanel)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setShowsPrintPanel:"), showsPrintPanel)
+	})
 	return po
 }
 
 // WithShowsProgressPanel sets a Boolean value that determines whether the print operation displays a progress panel.
 func (po *PrintOperation) WithShowsProgressPanel(showsProgressPanel bool) *PrintOperation {
-	objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setShowsProgressPanel:"), showsProgressPanel)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setShowsProgressPanel:"), showsProgressPanel)
+	})
 	return po
 }
 
 // WithPrintPanel sets the print panel object to use during the operation.
 func (po *PrintOperation) WithPrintPanel(printPanel *PrintPanel) *PrintOperation {
-	objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setPrintPanel:"), objref.IDOf(printPanel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setPrintPanel:"), objref.IDOf(printPanel))
+	})
 	return po
 }
 
 // WithPDFPanel sets the PDF panel object to use during the operation.
 func (po *PrintOperation) WithPDFPanel(pDFPanel *PDFPanel) *PrintOperation {
-	objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setPDFPanel:"), objref.IDOf(pDFPanel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setPDFPanel:"), objref.IDOf(pDFPanel))
+	})
 	return po
 }
 
 // WithCanSpawnSeparateThread sets a Boolean value that determines whether the print operation is allowed to spawn a separate printing thread.
 func (po *PrintOperation) WithCanSpawnSeparateThread(canSpawnSeparateThread bool) *PrintOperation {
-	objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setCanSpawnSeparateThread:"), canSpawnSeparateThread)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setCanSpawnSeparateThread:"), canSpawnSeparateThread)
+	})
 	return po
 }
 
 // WithPageOrder sets the print order for the pages of the operation.
 func (po *PrintOperation) WithPageOrder(pageOrder PrintingPageOrder) *PrintOperation {
-	objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setPageOrder:"), pageOrder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setPageOrder:"), pageOrder)
+	})
 	return po
 }
 
 // WithPrintInfo sets the printing information associated with the print operation.
 func (po *PrintOperation) WithPrintInfo(printInfo *PrintInfo) *PrintOperation {
-	objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setPrintInfo:"), objref.IDOf(printInfo))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setPrintInfo:"), objref.IDOf(printInfo))
+	})
 	return po
 }
 
 // RunOperation reports whether runs the print operation on the current thread.
 func (po *PrintOperation) RunOperation() bool {
-	_r := objc.Send[bool](objref.IDOf(po), objc.RegisterName("runOperation"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(po), objc.RegisterName("runOperation"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CreateContext creates the graphics context object used for drawing during the operation.
 func (po *PrintOperation) CreateContext() *GraphicsContext {
-	_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("createContext"))
-	return GraphicsContextFromID(_r)
+	var _mainthread0 *GraphicsContext
+	purego.Main(func() {
+		_mainthread0 = func() *GraphicsContext {
+			_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("createContext"))
+			return GraphicsContextFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DestroyContext destroys the print operation’s graphics context.
 func (po *PrintOperation) DestroyContext() {
-	objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("destroyContext"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("destroyContext"))
+	})
+
 }
 
 // DeliverResult reports whether delivers the results of the print operation to the intended destination.
 func (po *PrintOperation) DeliverResult() bool {
-	_r := objc.Send[bool](objref.IDOf(po), objc.RegisterName("deliverResult"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(po), objc.RegisterName("deliverResult"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CleanUpOperation called at the end of a print operation to remove the print operation as the current operation.
 func (po *PrintOperation) CleanUpOperation() {
-	objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("cleanUpOperation"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("cleanUpOperation"))
+	})
+
 }
 
 // IsCopyingOperation reports whether the object is copying operation.
 func (po *PrintOperation) IsCopyingOperation() bool {
-	_r := objc.Send[bool](objref.IDOf(po), objc.RegisterName("isCopyingOperation"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(po), objc.RegisterName("isCopyingOperation"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PreferredRenderingQuality returns the preferred rendering quality.
 func (po *PrintOperation) PreferredRenderingQuality() PrintRenderingQuality {
-	_r := objc.Send[PrintRenderingQuality](objref.IDOf(po), objc.RegisterName("preferredRenderingQuality"))
-	return _r
+	var _mainthread0 PrintRenderingQuality
+	purego.Main(func() {
+		_mainthread0 = func() PrintRenderingQuality {
+			_r := objc.Send[PrintRenderingQuality](objref.IDOf(po), objc.RegisterName("preferredRenderingQuality"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // JobTitle returns the job title.
 func (po *PrintOperation) JobTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("jobTitle"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("jobTitle"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsPrintPanel wraps the corresponding Objective-C method.
 func (po *PrintOperation) ShowsPrintPanel() bool {
-	_r := objc.Send[bool](objref.IDOf(po), objc.RegisterName("showsPrintPanel"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(po), objc.RegisterName("showsPrintPanel"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsProgressPanel wraps the corresponding Objective-C method.
 func (po *PrintOperation) ShowsProgressPanel() bool {
-	_r := objc.Send[bool](objref.IDOf(po), objc.RegisterName("showsProgressPanel"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(po), objc.RegisterName("showsProgressPanel"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PrintPanel returns the print panel.
 func (po *PrintOperation) PrintPanel() *PrintPanel {
-	_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("printPanel"))
-	return PrintPanelFromID(_r)
+	var _mainthread0 *PrintPanel
+	purego.Main(func() {
+		_mainthread0 = func() *PrintPanel {
+			_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("printPanel"))
+			return PrintPanelFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PDFPanel returns the pdf panel.
 func (po *PrintOperation) PDFPanel() *PDFPanel {
-	_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("PDFPanel"))
-	return PDFPanelFromID(_r)
+	var _mainthread0 *PDFPanel
+	purego.Main(func() {
+		_mainthread0 = func() *PDFPanel {
+			_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("PDFPanel"))
+			return PDFPanelFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CanSpawnSeparateThread wraps the corresponding Objective-C method.
 func (po *PrintOperation) CanSpawnSeparateThread() bool {
-	_r := objc.Send[bool](objref.IDOf(po), objc.RegisterName("canSpawnSeparateThread"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(po), objc.RegisterName("canSpawnSeparateThread"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PageOrder returns the page order.
 func (po *PrintOperation) PageOrder() PrintingPageOrder {
-	_r := objc.Send[PrintingPageOrder](objref.IDOf(po), objc.RegisterName("pageOrder"))
-	return _r
+	var _mainthread0 PrintingPageOrder
+	purego.Main(func() {
+		_mainthread0 = func() PrintingPageOrder {
+			_r := objc.Send[PrintingPageOrder](objref.IDOf(po), objc.RegisterName("pageOrder"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // View returns the view.
 func (po *PrintOperation) View() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("view"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("view"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PrintInfo returns the print info.
 func (po *PrintOperation) PrintInfo() *PrintInfo {
-	_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("printInfo"))
-	return PrintInfoFromID(_r)
+	var _mainthread0 *PrintInfo
+	purego.Main(func() {
+		_mainthread0 = func() *PrintInfo {
+			_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("printInfo"))
+			return PrintInfoFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Context returns the context.
 func (po *PrintOperation) Context() *GraphicsContext {
-	_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("context"))
-	return GraphicsContextFromID(_r)
+	var _mainthread0 *GraphicsContext
+	purego.Main(func() {
+		_mainthread0 = func() *GraphicsContext {
+			_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("context"))
+			return GraphicsContextFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PageRange returns the page range.
 func (po *PrintOperation) PageRange() foundation.NSRange {
-	_r := objc.Send[foundation.NSRange](objref.IDOf(po), objc.RegisterName("pageRange"))
-	return _r
+	var _mainthread0 foundation.NSRange
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSRange {
+			_r := objc.Send[foundation.NSRange](objref.IDOf(po), objc.RegisterName("pageRange"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CurrentPage returns the current page.
 func (po *PrintOperation) CurrentPage() int {
-	_r := objc.Send[int](objref.IDOf(po), objc.RegisterName("currentPage"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(po), objc.RegisterName("currentPage"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetAccessoryView sets the custom accessory view to be displayed by the print operation’s print panel.
 func (po *PrintOperation) SetAccessoryView(view *View) {
-	objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setAccessoryView:"), objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setAccessoryView:"), objref.IDOf(view))
+	})
+
 }
 
 // AccessoryView returns the accessory view used by the print operation’s print panel.
 func (po *PrintOperation) AccessoryView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("accessoryView"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("accessoryView"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetJobStyleHint sets the type of content that the print job is printing.
 func (po *PrintOperation) SetJobStyleHint(hint string) {
-	objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setJobStyleHint:"), purego.NSString(hint))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setJobStyleHint:"), purego.NSString(hint))
+	})
+
 }
 
 // JobStyleHint returns the type of content that the print job is printing.
 func (po *PrintOperation) JobStyleHint() string {
-	_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("jobStyleHint"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("jobStyleHint"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetShowPanels sets whether the print operation should display a print panel.
 func (po *PrintOperation) SetShowPanels(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setShowPanels:"), flag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setShowPanels:"), flag)
+	})
+
 }
 
 // ShowPanels reports whether returns a Boolean value that indicates whether the print panel is to be displayed.
 func (po *PrintOperation) ShowPanels() bool {
-	_r := objc.Send[bool](objref.IDOf(po), objc.RegisterName("showPanels"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(po), objc.RegisterName("showPanels"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

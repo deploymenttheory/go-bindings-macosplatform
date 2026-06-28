@@ -49,227 +49,345 @@ func markerAnnotationViewAdopt(id objc.ID) *MarkerAnnotationView {
 
 // NewMarkerAnnotationView creates a new MarkerAnnotationView.
 func NewMarkerAnnotationView() *MarkerAnnotationView {
-	_id := objc.Send[objc.ID](objc.ID(_class("MKMarkerAnnotationView")), objc.RegisterName("new"))
-	return markerAnnotationViewAdopt(_id)
+	var _mainthread0 *MarkerAnnotationView
+	purego.Main(func() {
+		_mainthread0 = func() *MarkerAnnotationView {
+			_id := objc.Send[objc.ID](objc.ID(_class("MKMarkerAnnotationView")), objc.RegisterName("new"))
+			return markerAnnotationViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithTitleVisibility sets the visibility of the title text rendered beneath the marker balloon.
 func (mav *MarkerAnnotationView) WithTitleVisibility(titleVisibility FeatureVisibility) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setTitleVisibility:"), titleVisibility)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setTitleVisibility:"), titleVisibility)
+	})
 	return mav
 }
 
 // WithSubtitleVisibility sets the visibility of the subtitle text rendered beneath the marker balloon.
 func (mav *MarkerAnnotationView) WithSubtitleVisibility(subtitleVisibility FeatureVisibility) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setSubtitleVisibility:"), subtitleVisibility)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setSubtitleVisibility:"), subtitleVisibility)
+	})
 	return mav
 }
 
 // WithMarkerTintColor sets the background color of the marker balloon.
 func (mav *MarkerAnnotationView) WithMarkerTintColor(markerTintColor obj.Object) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setMarkerTintColor:"), objref.IDOf(markerTintColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setMarkerTintColor:"), objref.IDOf(markerTintColor))
+	})
 	return mav
 }
 
 // WithGlyphTintColor sets the color to apply to the glyph text or image.
 func (mav *MarkerAnnotationView) WithGlyphTintColor(glyphTintColor obj.Object) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setGlyphTintColor:"), objref.IDOf(glyphTintColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setGlyphTintColor:"), objref.IDOf(glyphTintColor))
+	})
 	return mav
 }
 
 // WithGlyphText sets the text to display in the marker balloon.
 func (mav *MarkerAnnotationView) WithGlyphText(glyphText string) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setGlyphText:"), purego.NSString(glyphText))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setGlyphText:"), purego.NSString(glyphText))
+	})
 	return mav
 }
 
 // WithGlyphImage sets an image to display in the marker balloon.
 func (mav *MarkerAnnotationView) WithGlyphImage(glyphImage obj.Object) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setGlyphImage:"), objref.IDOf(glyphImage))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setGlyphImage:"), objref.IDOf(glyphImage))
+	})
 	return mav
 }
 
 // WithSelectedGlyphImage sets an image to display when the user selects the marker.
 func (mav *MarkerAnnotationView) WithSelectedGlyphImage(selectedGlyphImage obj.Object) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setSelectedGlyphImage:"), objref.IDOf(selectedGlyphImage))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setSelectedGlyphImage:"), objref.IDOf(selectedGlyphImage))
+	})
 	return mav
 }
 
 // WithAnimatesWhenAdded sets a Boolean that indicates whether the marker animates into position onscreen.
 func (mav *MarkerAnnotationView) WithAnimatesWhenAdded(animatesWhenAdded bool) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setAnimatesWhenAdded:"), animatesWhenAdded)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setAnimatesWhenAdded:"), animatesWhenAdded)
+	})
 	return mav
 }
 
 // WithImage sets the image the annotation view displays.
 func (mav *MarkerAnnotationView) WithImage(image obj.Object) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setImage:"), objref.IDOf(image))
+	})
 	return mav
 }
 
 // WithCenterOffset sets the offset (in points) at which to display the view.
 func (mav *MarkerAnnotationView) WithCenterOffset(centerOffset corefoundation.CGPoint) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setCenterOffset:"), centerOffset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setCenterOffset:"), centerOffset)
+	})
 	return mav
 }
 
 // WithAccessoryOffset sets an offset that changes the accessory’s default anchor point.
 func (mav *MarkerAnnotationView) WithAccessoryOffset(accessoryOffset corefoundation.CGPoint) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setAccessoryOffset:"), accessoryOffset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setAccessoryOffset:"), accessoryOffset)
+	})
 	return mav
 }
 
 // WithCalloutOffset sets the offset (in points) at which to place the callout.
 func (mav *MarkerAnnotationView) WithCalloutOffset(calloutOffset corefoundation.CGPoint) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setCalloutOffset:"), calloutOffset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setCalloutOffset:"), calloutOffset)
+	})
 	return mav
 }
 
 // WithLeftCalloutOffset sets the offset in points from the middle-left of the annotation view.
 func (mav *MarkerAnnotationView) WithLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setLeftCalloutOffset:"), leftCalloutOffset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setLeftCalloutOffset:"), leftCalloutOffset)
+	})
 	return mav
 }
 
 // WithRightCalloutOffset sets the offset in points from the middle-right of the annotation view.
 func (mav *MarkerAnnotationView) WithRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setRightCalloutOffset:"), rightCalloutOffset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setRightCalloutOffset:"), rightCalloutOffset)
+	})
 	return mav
 }
 
 // WithEnabled sets a Boolean value that indicates whether the annotation is in an enabled state.
 func (mav *MarkerAnnotationView) WithEnabled(enabled bool) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return mav
 }
 
 // WithHighlighted sets a Boolean value that indicates whether the map view highlights the annotation view.
 func (mav *MarkerAnnotationView) WithHighlighted(highlighted bool) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return mav
 }
 
 // WithSelected sets a Boolean value that indicates whether the annotation view is in a selected state.
 func (mav *MarkerAnnotationView) WithSelected(selected bool) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setSelected:"), selected)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setSelected:"), selected)
+	})
 	return mav
 }
 
 // WithCanShowCallout sets a Boolean value that indicates whether the annotation view is able to display extra information in a callout.
 func (mav *MarkerAnnotationView) WithCanShowCallout(canShowCallout bool) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setCanShowCallout:"), canShowCallout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setCanShowCallout:"), canShowCallout)
+	})
 	return mav
 }
 
 // WithLeftCalloutAccessoryView sets the view to display on the left side of the standard callout.
 func (mav *MarkerAnnotationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryView obj.Object) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setLeftCalloutAccessoryView:"), objref.IDOf(leftCalloutAccessoryView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setLeftCalloutAccessoryView:"), objref.IDOf(leftCalloutAccessoryView))
+	})
 	return mav
 }
 
 // WithRightCalloutAccessoryView sets the view to display on the right side of the standard callout.
 func (mav *MarkerAnnotationView) WithRightCalloutAccessoryView(rightCalloutAccessoryView obj.Object) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setRightCalloutAccessoryView:"), objref.IDOf(rightCalloutAccessoryView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setRightCalloutAccessoryView:"), objref.IDOf(rightCalloutAccessoryView))
+	})
 	return mav
 }
 
 // WithDetailCalloutAccessoryView sets the detail accessory view to use in the standard callout.
 func (mav *MarkerAnnotationView) WithDetailCalloutAccessoryView(detailCalloutAccessoryView obj.Object) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setDetailCalloutAccessoryView:"), objref.IDOf(detailCalloutAccessoryView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setDetailCalloutAccessoryView:"), objref.IDOf(detailCalloutAccessoryView))
+	})
 	return mav
 }
 
 // WithDraggable sets a Boolean value that indicates whether the annotation view is draggable.
 func (mav *MarkerAnnotationView) WithDraggable(draggable bool) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setDraggable:"), draggable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setDraggable:"), draggable)
+	})
 	return mav
 }
 
 // WithDragState sets the drag state of the annotation view.
 func (mav *MarkerAnnotationView) WithDragState(dragState AnnotationViewDragState) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setDragState:"), dragState)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setDragState:"), dragState)
+	})
 	return mav
 }
 
 // WithClusteringIdentifier sets an identifier that determines whether the annotation view participates in clustering.
 func (mav *MarkerAnnotationView) WithClusteringIdentifier(clusteringIdentifier string) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setClusteringIdentifier:"), purego.NSString(clusteringIdentifier))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setClusteringIdentifier:"), purego.NSString(clusteringIdentifier))
+	})
 	return mav
 }
 
 // WithDisplayPriority sets the display priority of the annotation view.
 func (mav *MarkerAnnotationView) WithDisplayPriority(displayPriority float32) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setDisplayPriority:"), displayPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setDisplayPriority:"), displayPriority)
+	})
 	return mav
 }
 
 // WithZPriority sets the relative importance of the annotation view when in an unselected state with respect to its ordering along the z-axis.
 func (mav *MarkerAnnotationView) WithZPriority(zPriority float32) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setZPriority:"), zPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setZPriority:"), zPriority)
+	})
 	return mav
 }
 
 // WithSelectedZPriority sets the relative importance of the annotation view when in a selected state with respect to its ordering along the z-axis.
 func (mav *MarkerAnnotationView) WithSelectedZPriority(selectedZPriority float32) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setSelectedZPriority:"), selectedZPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setSelectedZPriority:"), selectedZPriority)
+	})
 	return mav
 }
 
 // WithCollisionMode sets the collision mode to use when interpreting the collision frame rectangle.
 func (mav *MarkerAnnotationView) WithCollisionMode(collisionMode AnnotationViewCollisionMode) *MarkerAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setCollisionMode:"), collisionMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setCollisionMode:"), collisionMode)
+	})
 	return mav
 }
 
 // TitleVisibility returns the title visibility.
 func (mav *MarkerAnnotationView) TitleVisibility() FeatureVisibility {
-	_r := objc.Send[FeatureVisibility](objref.IDOf(mav), objc.RegisterName("titleVisibility"))
-	return _r
+	var _mainthread0 FeatureVisibility
+	purego.Main(func() {
+		_mainthread0 = func() FeatureVisibility {
+			_r := objc.Send[FeatureVisibility](objref.IDOf(mav), objc.RegisterName("titleVisibility"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SubtitleVisibility returns the subtitle visibility.
 func (mav *MarkerAnnotationView) SubtitleVisibility() FeatureVisibility {
-	_r := objc.Send[FeatureVisibility](objref.IDOf(mav), objc.RegisterName("subtitleVisibility"))
-	return _r
+	var _mainthread0 FeatureVisibility
+	purego.Main(func() {
+		_mainthread0 = func() FeatureVisibility {
+			_r := objc.Send[FeatureVisibility](objref.IDOf(mav), objc.RegisterName("subtitleVisibility"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MarkerTintColor returns the marker tint color.
 func (mav *MarkerAnnotationView) MarkerTintColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("markerTintColor"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("markerTintColor"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // GlyphTintColor returns the glyph tint color.
 func (mav *MarkerAnnotationView) GlyphTintColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("glyphTintColor"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("glyphTintColor"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // GlyphText returns the glyph text.
 func (mav *MarkerAnnotationView) GlyphText() string {
-	_r := objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("glyphText"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("glyphText"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // GlyphImage returns the glyph image.
 func (mav *MarkerAnnotationView) GlyphImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("glyphImage"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("glyphImage"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SelectedGlyphImage returns the selected glyph image.
 func (mav *MarkerAnnotationView) SelectedGlyphImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("selectedGlyphImage"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("selectedGlyphImage"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AnimatesWhenAdded wraps the corresponding Objective-C method.
 func (mav *MarkerAnnotationView) AnimatesWhenAdded() bool {
-	_r := objc.Send[bool](objref.IDOf(mav), objc.RegisterName("animatesWhenAdded"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(mav), objc.RegisterName("animatesWhenAdded"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ AnnotationViewProvider = (*MarkerAnnotationView)(nil)

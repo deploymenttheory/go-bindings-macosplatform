@@ -50,122 +50,166 @@ func queuePlayerAdopt(id objc.ID) *QueuePlayer {
 
 // NewQueuePlayerWithItems creates an object that plays a queue of items.
 func NewQueuePlayerWithItems(items []*PlayerItem) *QueuePlayer {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("AVQueuePlayer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItems:"), purego.SliceToNSArray(items, func(_v *PlayerItem) objc.ID { return objref.IDOf(_v) }))
-	return queuePlayerAdopt(_id)
+	var _mainthread0 *QueuePlayer
+	purego.Main(func() {
+		_mainthread0 = func() *QueuePlayer {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("AVQueuePlayer")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItems:"), purego.SliceToNSArray(items, func(_v *PlayerItem) objc.ID { return objref.IDOf(_v) }))
+			return queuePlayerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithRate sets the current playback rate.
 func (qp *QueuePlayer) WithRate(rate float32) *QueuePlayer {
-	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setRate:"), rate)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setRate:"), rate)
+	})
 	return qp
 }
 
 // WithDefaultRate sets a default rate at which to begin playback.
 func (qp *QueuePlayer) WithDefaultRate(defaultRate float32) *QueuePlayer {
-	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setDefaultRate:"), defaultRate)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setDefaultRate:"), defaultRate)
+	})
 	return qp
 }
 
 // WithActionAtItemEnd sets the action to perform when the current player item has finished playing.
 func (qp *QueuePlayer) WithActionAtItemEnd(actionAtItemEnd PlayerActionAtItemEnd) *QueuePlayer {
-	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setActionAtItemEnd:"), actionAtItemEnd)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setActionAtItemEnd:"), actionAtItemEnd)
+	})
 	return qp
 }
 
 // WithAutomaticallyWaitsToMinimizeStalling sets a Boolean value that indicates whether the player should automatically delay playback in order to minimize stalling.
 func (qp *QueuePlayer) WithAutomaticallyWaitsToMinimizeStalling(automaticallyWaitsToMinimizeStalling bool) *QueuePlayer {
-	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setAutomaticallyWaitsToMinimizeStalling:"), automaticallyWaitsToMinimizeStalling)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setAutomaticallyWaitsToMinimizeStalling:"), automaticallyWaitsToMinimizeStalling)
+	})
 	return qp
 }
 
 // WithSourceClock sets a clock the player uses for item time bases.
 func (qp *QueuePlayer) WithSourceClock(sourceClock obj.Object) *QueuePlayer {
-	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setSourceClock:"), objref.IDOf(sourceClock))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setSourceClock:"), objref.IDOf(sourceClock))
+	})
 	return qp
 }
 
 // WithVolume sets the audio playback volume for the player.
 func (qp *QueuePlayer) WithVolume(volume float32) *QueuePlayer {
-	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setVolume:"), volume)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setVolume:"), volume)
+	})
 	return qp
 }
 
 // WithMuted sets a Boolean value that indicates whether the audio output of the player is muted.
 func (qp *QueuePlayer) WithMuted(muted bool) *QueuePlayer {
-	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setMuted:"), muted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setMuted:"), muted)
+	})
 	return qp
 }
 
 // WithAppliesMediaSelectionCriteriaAutomatically sets a Boolean value that indicates whether the receiver should apply the current selection criteria automatically to player items.
 func (qp *QueuePlayer) WithAppliesMediaSelectionCriteriaAutomatically(appliesMediaSelectionCriteriaAutomatically bool) *QueuePlayer {
-	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setAppliesMediaSelectionCriteriaAutomatically:"), appliesMediaSelectionCriteriaAutomatically)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setAppliesMediaSelectionCriteriaAutomatically:"), appliesMediaSelectionCriteriaAutomatically)
+	})
 	return qp
 }
 
 // WithAudioOutputDeviceUniqueID sets specifies the unique ID of the Core Audio output device used to play audio.
 func (qp *QueuePlayer) WithAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string) *QueuePlayer {
-	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setAudioOutputDeviceUniqueID:"), purego.NSString(audioOutputDeviceUniqueID))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setAudioOutputDeviceUniqueID:"), purego.NSString(audioOutputDeviceUniqueID))
+	})
 	return qp
 }
 
 // WithAllowsExternalPlayback sets a Boolean value that indicates whether the player allows switching to external playback mode.
 func (qp *QueuePlayer) WithAllowsExternalPlayback(allowsExternalPlayback bool) *QueuePlayer {
-	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setAllowsExternalPlayback:"), allowsExternalPlayback)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setAllowsExternalPlayback:"), allowsExternalPlayback)
+	})
 	return qp
 }
 
 // WithPreferredVideoDecoderGPURegistryID sets the registry identifier for the GPU used for video decoding.
 func (qp *QueuePlayer) WithPreferredVideoDecoderGPURegistryID(preferredVideoDecoderGPURegistryID uint64) *QueuePlayer {
-	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setPreferredVideoDecoderGPURegistryID:"), preferredVideoDecoderGPURegistryID)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setPreferredVideoDecoderGPURegistryID:"), preferredVideoDecoderGPURegistryID)
+	})
 	return qp
 }
 
 // WithPreventsDisplaySleepDuringVideoPlayback sets a Boolean value that indicates whether video playback prevents display and device sleep.
 func (qp *QueuePlayer) WithPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) *QueuePlayer {
-	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setPreventsDisplaySleepDuringVideoPlayback:"), preventsDisplaySleepDuringVideoPlayback)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setPreventsDisplaySleepDuringVideoPlayback:"), preventsDisplaySleepDuringVideoPlayback)
+	})
 	return qp
 }
 
 // WithAudiovisualBackgroundPlaybackPolicy sets a policy that determines how playback of audiovisual media continues when the app transitions to the background.
 func (qp *QueuePlayer) WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy PlayerAudiovisualBackgroundPlaybackPolicy) *QueuePlayer {
-	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setAudiovisualBackgroundPlaybackPolicy:"), audiovisualBackgroundPlaybackPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setAudiovisualBackgroundPlaybackPolicy:"), audiovisualBackgroundPlaybackPolicy)
+	})
 	return qp
 }
 
 // WithVideoOutput sets the video output for this player.
 func (qp *QueuePlayer) WithVideoOutput(videoOutput *PlayerVideoOutput) *QueuePlayer {
-	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setVideoOutput:"), objref.IDOf(videoOutput))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setVideoOutput:"), objref.IDOf(videoOutput))
+	})
 	return qp
 }
 
 // WithNetworkResourcePriority sets indicates the priority of this player for network bandwidth resource distribution.
 func (qp *QueuePlayer) WithNetworkResourcePriority(networkResourcePriority PlayerNetworkResourcePriority) *QueuePlayer {
-	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setNetworkResourcePriority:"), networkResourcePriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setNetworkResourcePriority:"), networkResourcePriority)
+	})
 	return qp
 }
 
 // WithIntendedSpatialAudioExperience sets the AVPlayer’s intended spatial audio experience.
 func (qp *QueuePlayer) WithIntendedSpatialAudioExperience(intendedSpatialAudioExperience unsafe.Pointer) *QueuePlayer {
-	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setIntendedSpatialAudioExperience:"), intendedSpatialAudioExperience)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setIntendedSpatialAudioExperience:"), intendedSpatialAudioExperience)
+	})
 	return qp
 }
 
 // WithAllowsCaptureOfClearKeyVideo sets indicates whether the video output of ClearKey Encrypted Video can be captured
 func (qp *QueuePlayer) WithAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo bool) *QueuePlayer {
-	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setAllowsCaptureOfClearKeyVideo:"), allowsCaptureOfClearKeyVideo)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setAllowsCaptureOfClearKeyVideo:"), allowsCaptureOfClearKeyVideo)
+	})
 	return qp
 }
 
 // WithClosedCaptionDisplayEnabled sets a Boolean value that indicates whether the player uses closed captioning.
 func (qp *QueuePlayer) WithClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled bool) *QueuePlayer {
-	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setClosedCaptionDisplayEnabled:"), closedCaptionDisplayEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setClosedCaptionDisplayEnabled:"), closedCaptionDisplayEnabled)
+	})
 	return qp
 }
 
 // WithMasterClock sets the host clock for item time bases.
 func (qp *QueuePlayer) WithMasterClock(masterClock obj.Object) *QueuePlayer {
-	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setMasterClock:"), objref.IDOf(masterClock))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setMasterClock:"), objref.IDOf(masterClock))
+	})
 	return qp
 }
 

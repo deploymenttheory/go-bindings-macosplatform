@@ -49,90 +49,156 @@ func candidateListTouchBarItemAdopt(id objc.ID) *CandidateListTouchBarItem {
 
 // NewCandidateListTouchBarItem creates a new CandidateListTouchBarItem.
 func NewCandidateListTouchBarItem() *CandidateListTouchBarItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSCandidateListTouchBarItem")), objc.RegisterName("new"))
-	return candidateListTouchBarItemAdopt(_id)
+	var _mainthread0 *CandidateListTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *CandidateListTouchBarItem {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSCandidateListTouchBarItem")), objc.RegisterName("new"))
+			return candidateListTouchBarItemAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithClient sets the client object for the candidate list item.
 func (cltbi *CandidateListTouchBarItem) WithClient(client ViewProvider) *CandidateListTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("setClient:"), objref.IDOf(client))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("setClient:"), objref.IDOf(client))
+	})
 	return cltbi
 }
 
 // WithCollapsed sets a Boolean value that controls the visibility of the candidate list.
 func (cltbi *CandidateListTouchBarItem) WithCollapsed(collapsed bool) *CandidateListTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("setCollapsed:"), collapsed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("setCollapsed:"), collapsed)
+	})
 	return cltbi
 }
 
 // WithAllowsCollapsing sets a Boolean value that specifies whether the item can be collapsed.
 func (cltbi *CandidateListTouchBarItem) WithAllowsCollapsing(allowsCollapsing bool) *CandidateListTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("setAllowsCollapsing:"), allowsCollapsing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("setAllowsCollapsing:"), allowsCollapsing)
+	})
 	return cltbi
 }
 
 // WithAllowsTextInputContextCandidates sets a Boolean value that specifies whether a candidate list item displays candidates from text input providers.
 func (cltbi *CandidateListTouchBarItem) WithAllowsTextInputContextCandidates(allowsTextInputContextCandidates bool) *CandidateListTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("setAllowsTextInputContextCandidates:"), allowsTextInputContextCandidates)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("setAllowsTextInputContextCandidates:"), allowsTextInputContextCandidates)
+	})
 	return cltbi
 }
 
 // WithCustomizationLabel sets the user-visible string identifying this item during bar customization.
 func (cltbi *CandidateListTouchBarItem) WithCustomizationLabel(customizationLabel string) *CandidateListTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
+	})
 	return cltbi
 }
 
 // WithVisibilityPriority sets determines which items are shown in a bar when space is limited.
 func (cltbi *CandidateListTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *CandidateListTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	})
 	return cltbi
 }
 
 // UpdateWithInsertionPointVisibility updates the candidate list visibility configuration based on the client’s insertion point state.
 func (cltbi *CandidateListTouchBarItem) UpdateWithInsertionPointVisibility(isVisible bool) {
-	objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("updateWithInsertionPointVisibility:"), isVisible)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("updateWithInsertionPointVisibility:"), isVisible)
+	})
+
 }
 
 // SetCandidatesForSelectedRangeInString sets an array of candidate objects to be displayed in the candidate list bar item.
 func (cltbi *CandidateListTouchBarItem) SetCandidatesForSelectedRangeInString(candidates []obj.Object, selectedRange foundation.NSRange, originalString string) {
-	objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("setCandidates:forSelectedRange:inString:"), purego.SliceToNSArray(candidates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), selectedRange, purego.NSString(originalString))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("setCandidates:forSelectedRange:inString:"), purego.SliceToNSArray(candidates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), selectedRange, purego.NSString(originalString))
+	})
+
 }
 
 // Client returns the client.
 func (cltbi *CandidateListTouchBarItem) Client() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("client"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("client"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsCollapsed reports whether the object is collapsed.
 func (cltbi *CandidateListTouchBarItem) IsCollapsed() bool {
-	_r := objc.Send[bool](objref.IDOf(cltbi), objc.RegisterName("isCollapsed"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cltbi), objc.RegisterName("isCollapsed"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsCollapsing wraps the corresponding Objective-C method.
 func (cltbi *CandidateListTouchBarItem) AllowsCollapsing() bool {
-	_r := objc.Send[bool](objref.IDOf(cltbi), objc.RegisterName("allowsCollapsing"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cltbi), objc.RegisterName("allowsCollapsing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsCandidateListVisible reports whether the object is candidate list visible.
 func (cltbi *CandidateListTouchBarItem) IsCandidateListVisible() bool {
-	_r := objc.Send[bool](objref.IDOf(cltbi), objc.RegisterName("isCandidateListVisible"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cltbi), objc.RegisterName("isCandidateListVisible"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsTextInputContextCandidates wraps the corresponding Objective-C method.
 func (cltbi *CandidateListTouchBarItem) AllowsTextInputContextCandidates() bool {
-	_r := objc.Send[bool](objref.IDOf(cltbi), objc.RegisterName("allowsTextInputContextCandidates"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cltbi), objc.RegisterName("allowsTextInputContextCandidates"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Candidates returns the candidates.
 func (cltbi *CandidateListTouchBarItem) Candidates() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("candidates"))
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("candidates"))
+			return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ TouchBarItemProvider = (*CandidateListTouchBarItem)(nil)

@@ -109,7 +109,10 @@ func (gr *GeocodingRequest) GetMapItems(ctx context.Context) (result obj.Object,
 
 // Cancel a function you call to cancel a geocoding request that’s in progress.
 func (gr *GeocodingRequest) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("cancel"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("cancel"))
+	})
+
 }
 
 // IsCancelled reports whether the object is cancelled.

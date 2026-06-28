@@ -66,156 +66,303 @@ func (v_ *View) String() string {
 
 // NewView creates a new View.
 func NewView() *View {
-	_id := objc.Send[objc.ID](objc.ID(_class("QCView")), objc.RegisterName("new"))
-	return viewAdopt(_id)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_id := objc.Send[objc.ID](objc.ID(_class("QCView")), objc.RegisterName("new"))
+			return viewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // LoadCompositionFromFile loads composition from file.
 func (v_ *View) LoadCompositionFromFile(path string) bool {
-	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("loadCompositionFromFile:"), purego.NSString(path))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("loadCompositionFromFile:"), purego.NSString(path))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LoadComposition loads composition.
 func (v_ *View) LoadComposition(composition obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("loadComposition:"), objref.IDOf(composition))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("loadComposition:"), objref.IDOf(composition))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LoadedComposition returns the loaded composition.
 func (v_ *View) LoadedComposition() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("loadedComposition"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("loadedComposition"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UnloadComposition wraps the corresponding Objective-C method.
 func (v_ *View) UnloadComposition() {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("unloadComposition"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("unloadComposition"))
+	})
+
 }
 
 // SetAutostartsRendering wraps the corresponding Objective-C method.
 func (v_ *View) SetAutostartsRendering(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setAutostartsRendering:"), flag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setAutostartsRendering:"), flag)
+	})
+
 }
 
 // AutostartsRendering wraps the corresponding Objective-C method.
 func (v_ *View) AutostartsRendering() bool {
-	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("autostartsRendering"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("autostartsRendering"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetEraseColor wraps the corresponding Objective-C method.
 func (v_ *View) SetEraseColor(color obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setEraseColor:"), objref.IDOf(color))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setEraseColor:"), objref.IDOf(color))
+	})
+
 }
 
 // EraseColor returns the erase color.
 func (v_ *View) EraseColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("eraseColor"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("eraseColor"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetEventForwardingMask wraps the corresponding Objective-C method.
 func (v_ *View) SetEventForwardingMask(mask int) {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setEventForwardingMask:"), mask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setEventForwardingMask:"), mask)
+	})
+
 }
 
 // EventForwardingMask returns the event forwarding mask.
 func (v_ *View) EventForwardingMask() int {
-	_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("eventForwardingMask"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("eventForwardingMask"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetMaxRenderingFrameRate wraps the corresponding Objective-C method.
 func (v_ *View) SetMaxRenderingFrameRate(maxFPS float32) {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setMaxRenderingFrameRate:"), maxFPS)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setMaxRenderingFrameRate:"), maxFPS)
+	})
+
 }
 
 // MaxRenderingFrameRate returns the max rendering frame rate.
 func (v_ *View) MaxRenderingFrameRate() float32 {
-	_r := objc.Send[float32](objref.IDOf(v_), objc.RegisterName("maxRenderingFrameRate"))
-	return _r
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_r := objc.Send[float32](objref.IDOf(v_), objc.RegisterName("maxRenderingFrameRate"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Erase wraps the corresponding Objective-C method.
 func (v_ *View) Erase() {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("erase"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("erase"))
+	})
+
 }
 
 // StartRendering wraps the corresponding Objective-C method.
 func (v_ *View) StartRendering() bool {
-	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("startRendering"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("startRendering"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RenderAtTimeArguments wraps the corresponding Objective-C method.
 func (v_ *View) RenderAtTimeArguments(time_ float64, arguments obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("renderAtTime:arguments:"), time_, objref.IDOf(arguments))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("renderAtTime:arguments:"), time_, objref.IDOf(arguments))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PauseRendering pauses rendering.
 func (v_ *View) PauseRendering() {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("pauseRendering"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("pauseRendering"))
+	})
+
 }
 
 // IsPausedRendering reports whether the object is paused rendering.
 func (v_ *View) IsPausedRendering() bool {
-	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isPausedRendering"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isPausedRendering"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ResumeRendering resumes rendering.
 func (v_ *View) ResumeRendering() {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("resumeRendering"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("resumeRendering"))
+	})
+
 }
 
 // StopRendering stops rendering.
 func (v_ *View) StopRendering() {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("stopRendering"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("stopRendering"))
+	})
+
 }
 
 // IsRendering reports whether the object is rendering.
 func (v_ *View) IsRendering() bool {
-	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isRendering"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isRendering"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SnapshotImage returns the snapshot image.
 func (v_ *View) SnapshotImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("snapshotImage"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("snapshotImage"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CreateSnapshotImageOfType creates snapshot image of type.
 func (v_ *View) CreateSnapshotImageOfType(type_ string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("createSnapshotImageOfType:"), purego.NSString(type_))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("createSnapshotImageOfType:"), purego.NSString(type_))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // OpenGLContext returns the open gl context.
 func (v_ *View) OpenGLContext() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("openGLContext"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("openGLContext"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // OpenGLPixelFormat returns the open gl pixel format.
 func (v_ *View) OpenGLPixelFormat() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("openGLPixelFormat"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("openGLPixelFormat"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Start wraps the corresponding Objective-C method.
 func (v_ *View) Start(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("start:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("start:"), objref.IDOf(sender))
+	})
+
 }
 
 // Stop wraps the corresponding Objective-C method.
 func (v_ *View) Stop(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("stop:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("stop:"), objref.IDOf(sender))
+	})
+
 }
 
 // Play wraps the corresponding Objective-C method.
 func (v_ *View) Play(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("play:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("play:"), objref.IDOf(sender))
+	})
+
 }

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "framework": "MetalKit",
+  "main_actor_classes": [
+    "MTKView"
+  ],
+  "main_actor_selectors": {
+    "MTKViewDelegate": [
+      "drawInMTKView:",
+      "mtkView:drawableSizeWillChange:"
+    ]
+  }
+}

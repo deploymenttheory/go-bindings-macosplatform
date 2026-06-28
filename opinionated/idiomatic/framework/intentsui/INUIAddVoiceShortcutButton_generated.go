@@ -68,43 +68,76 @@ func (avsb *AddVoiceShortcutButton) String() string {
 
 // NewAddVoiceShortcutButtonWithStyle creates an Add to Siri button with the specified style.
 func NewAddVoiceShortcutButtonWithStyle(style AddVoiceShortcutButtonStyle) *AddVoiceShortcutButton {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("INUIAddVoiceShortcutButton")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStyle:"), style)
-	return addVoiceShortcutButtonAdopt(_id)
+	var _mainthread0 *AddVoiceShortcutButton
+	purego.Main(func() {
+		_mainthread0 = func() *AddVoiceShortcutButton {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("INUIAddVoiceShortcutButton")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStyle:"), style)
+			return addVoiceShortcutButtonAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithStyle sets the button style.
 func (avsb *AddVoiceShortcutButton) WithStyle(style AddVoiceShortcutButtonStyle) *AddVoiceShortcutButton {
-	objc.Send[objc.ID](objref.IDOf(avsb), objc.RegisterName("setStyle:"), style)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(avsb), objc.RegisterName("setStyle:"), style)
+	})
 	return avsb
 }
 
 // WithShortcut sets the shortcut Siri invokes when the user speaks the invocation phrase.
 func (avsb *AddVoiceShortcutButton) WithShortcut(shortcut obj.Object) *AddVoiceShortcutButton {
-	objc.Send[objc.ID](objref.IDOf(avsb), objc.RegisterName("setShortcut:"), objref.IDOf(shortcut))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(avsb), objc.RegisterName("setShortcut:"), objref.IDOf(shortcut))
+	})
 	return avsb
 }
 
 // WithCornerRadius sets a custom corner radius for the If the provided corner radius is greater than half of the button’s height, it will be capped at half of the button’s height.
 func (avsb *AddVoiceShortcutButton) WithCornerRadius(cornerRadius float64) *AddVoiceShortcutButton {
-	objc.Send[objc.ID](objref.IDOf(avsb), objc.RegisterName("setCornerRadius:"), cornerRadius)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(avsb), objc.RegisterName("setCornerRadius:"), cornerRadius)
+	})
 	return avsb
 }
 
 // Style returns the style.
 func (avsb *AddVoiceShortcutButton) Style() AddVoiceShortcutButtonStyle {
-	_r := objc.Send[AddVoiceShortcutButtonStyle](objref.IDOf(avsb), objc.RegisterName("style"))
-	return _r
+	var _mainthread0 AddVoiceShortcutButtonStyle
+	purego.Main(func() {
+		_mainthread0 = func() AddVoiceShortcutButtonStyle {
+			_r := objc.Send[AddVoiceShortcutButtonStyle](objref.IDOf(avsb), objc.RegisterName("style"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Shortcut returns the shortcut.
 func (avsb *AddVoiceShortcutButton) Shortcut() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(avsb), objc.RegisterName("shortcut"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(avsb), objc.RegisterName("shortcut"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CornerRadius returns a custom corner radius for the If the provided corner radius is greater than half of the button’s height, it will be capped at half of the button’s height.
 func (avsb *AddVoiceShortcutButton) CornerRadius() float64 {
-	_r := objc.Send[float64](objref.IDOf(avsb), objc.RegisterName("cornerRadius"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(avsb), objc.RegisterName("cornerRadius"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

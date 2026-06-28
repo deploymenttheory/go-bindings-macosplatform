@@ -68,77 +68,143 @@ func (wlvc *WidgetListViewController) String() string {
 
 // NewWidgetListViewController creates a new WidgetListViewController.
 func NewWidgetListViewController() *WidgetListViewController {
-	_id := objc.Send[objc.ID](objc.ID(_class("NCWidgetListViewController")), objc.RegisterName("new"))
-	return widgetListViewControllerAdopt(_id)
+	var _mainthread0 *WidgetListViewController
+	purego.Main(func() {
+		_mainthread0 = func() *WidgetListViewController {
+			_id := objc.Send[objc.ID](objc.ID(_class("NCWidgetListViewController")), objc.RegisterName("new"))
+			return widgetListViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithMinimumVisibleRowCount sets the minimum number of visible rows to display.
 func (wlvc *WidgetListViewController) WithMinimumVisibleRowCount(minimumVisibleRowCount int) *WidgetListViewController {
-	objc.Send[objc.ID](objref.IDOf(wlvc), objc.RegisterName("setMinimumVisibleRowCount:"), minimumVisibleRowCount)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wlvc), objc.RegisterName("setMinimumVisibleRowCount:"), minimumVisibleRowCount)
+	})
 	return wlvc
 }
 
 // WithHasDividerLines sets a Boolean value that indicates whether list displays divider lines between rows.
 func (wlvc *WidgetListViewController) WithHasDividerLines(hasDividerLines bool) *WidgetListViewController {
-	objc.Send[objc.ID](objref.IDOf(wlvc), objc.RegisterName("setHasDividerLines:"), hasDividerLines)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wlvc), objc.RegisterName("setHasDividerLines:"), hasDividerLines)
+	})
 	return wlvc
 }
 
 // WithEditing sets a Boolean value that indicates whether the list is in editing mode.
 func (wlvc *WidgetListViewController) WithEditing(editing bool) *WidgetListViewController {
-	objc.Send[objc.ID](objref.IDOf(wlvc), objc.RegisterName("setEditing:"), editing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wlvc), objc.RegisterName("setEditing:"), editing)
+	})
 	return wlvc
 }
 
 // WithShowsAddButtonWhenEditing sets a Boolean value that indicates whether an Add (+) button is displayed while the list is in editing mode.
 func (wlvc *WidgetListViewController) WithShowsAddButtonWhenEditing(showsAddButtonWhenEditing bool) *WidgetListViewController {
-	objc.Send[objc.ID](objref.IDOf(wlvc), objc.RegisterName("setShowsAddButtonWhenEditing:"), showsAddButtonWhenEditing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wlvc), objc.RegisterName("setShowsAddButtonWhenEditing:"), showsAddButtonWhenEditing)
+	})
 	return wlvc
 }
 
 // ViewControllerAtRowMakeIfNecessary returns the content view controller associated with the specified row, or a new content view controller if desired.
 func (wlvc *WidgetListViewController) ViewControllerAtRowMakeIfNecessary(row int, makeIfNecesary bool) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wlvc), objc.RegisterName("viewControllerAtRow:makeIfNecessary:"), row, makeIfNecesary)
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wlvc), objc.RegisterName("viewControllerAtRow:makeIfNecessary:"), row, makeIfNecesary)
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RowForViewController returns the row represented by the specified content view controller.
 func (wlvc *WidgetListViewController) RowForViewController(viewController obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(wlvc), objc.RegisterName("rowForViewController:"), objref.IDOf(viewController))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(wlvc), objc.RegisterName("rowForViewController:"), objref.IDOf(viewController))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Contents returns the contents.
 func (wlvc *WidgetListViewController) Contents() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wlvc), objc.RegisterName("contents"))
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wlvc), objc.RegisterName("contents"))
+			return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetContents wraps the corresponding Objective-C method.
 func (wlvc *WidgetListViewController) SetContents(contents []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(wlvc), objc.RegisterName("setContents:"), purego.SliceToNSArray(contents, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wlvc), objc.RegisterName("setContents:"), purego.SliceToNSArray(contents, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	})
+
 }
 
 // MinimumVisibleRowCount returns the minimum visible row count.
 func (wlvc *WidgetListViewController) MinimumVisibleRowCount() int {
-	_r := objc.Send[int](objref.IDOf(wlvc), objc.RegisterName("minimumVisibleRowCount"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(wlvc), objc.RegisterName("minimumVisibleRowCount"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasDividerLines reports whether the object has divider lines.
 func (wlvc *WidgetListViewController) HasDividerLines() bool {
-	_r := objc.Send[bool](objref.IDOf(wlvc), objc.RegisterName("hasDividerLines"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wlvc), objc.RegisterName("hasDividerLines"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Editing wraps the corresponding Objective-C method.
 func (wlvc *WidgetListViewController) Editing() bool {
-	_r := objc.Send[bool](objref.IDOf(wlvc), objc.RegisterName("editing"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wlvc), objc.RegisterName("editing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsAddButtonWhenEditing wraps the corresponding Objective-C method.
 func (wlvc *WidgetListViewController) ShowsAddButtonWhenEditing() bool {
-	_r := objc.Send[bool](objref.IDOf(wlvc), objc.RegisterName("showsAddButtonWhenEditing"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wlvc), objc.RegisterName("showsAddButtonWhenEditing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

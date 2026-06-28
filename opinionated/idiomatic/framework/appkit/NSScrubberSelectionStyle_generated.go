@@ -68,19 +68,38 @@ func (sss *ScrubberSelectionStyle) String() string {
 
 // NewScrubberSelectionStyle creates a new ScrubberSelectionStyle.
 func NewScrubberSelectionStyle() *ScrubberSelectionStyle {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSScrubberSelectionStyle")), objc.RegisterName("new"))
-	return scrubberSelectionStyleAdopt(_id)
+	var _mainthread0 *ScrubberSelectionStyle
+	purego.Main(func() {
+		_mainthread0 = func() *ScrubberSelectionStyle {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSScrubberSelectionStyle")), objc.RegisterName("new"))
+			return scrubberSelectionStyleAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewScrubberSelectionStyleWithCoder initializes a scrubber selection style when included from a nib or Storyboard.
 func NewScrubberSelectionStyleWithCoder(coder obj.Object) *ScrubberSelectionStyle {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScrubberSelectionStyle")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
-	return scrubberSelectionStyleAdopt(_id)
+	var _mainthread0 *ScrubberSelectionStyle
+	purego.Main(func() {
+		_mainthread0 = func() *ScrubberSelectionStyle {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSScrubberSelectionStyle")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+			return scrubberSelectionStyleAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // MakeSelectionView provides an opportunity to create a customized scrubber selection style.
 func (sss *ScrubberSelectionStyle) MakeSelectionView() *ScrubberSelectionView {
-	_r := objc.Send[objc.ID](objref.IDOf(sss), objc.RegisterName("makeSelectionView"))
-	return ScrubberSelectionViewFromID(_r)
+	var _mainthread0 *ScrubberSelectionView
+	purego.Main(func() {
+		_mainthread0 = func() *ScrubberSelectionView {
+			_r := objc.Send[objc.ID](objref.IDOf(sss), objc.RegisterName("makeSelectionView"))
+			return ScrubberSelectionViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }

@@ -47,28 +47,49 @@ func collectionViewCompositionalLayoutAdopt(id objc.ID) *CollectionViewCompositi
 
 // NewCollectionViewCompositionalLayoutWithSection creates a compositional layout object with a single section.
 func NewCollectionViewCompositionalLayoutWithSection(section *CollectionLayoutSection) *CollectionViewCompositionalLayout {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewCompositionalLayout")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSection:"), objref.IDOf(section))
-	return collectionViewCompositionalLayoutAdopt(_id)
+	var _mainthread0 *CollectionViewCompositionalLayout
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewCompositionalLayout {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewCompositionalLayout")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSection:"), objref.IDOf(section))
+			return collectionViewCompositionalLayoutAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewCollectionViewCompositionalLayoutWithSectionConfiguration creates a compositional layout object with a single section and an additional configuration.
 func NewCollectionViewCompositionalLayoutWithSectionConfiguration(section *CollectionLayoutSection, configuration *CollectionViewCompositionalLayoutConfiguration) *CollectionViewCompositionalLayout {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewCompositionalLayout")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSection:configuration:"), objref.IDOf(section), objref.IDOf(configuration))
-	return collectionViewCompositionalLayoutAdopt(_id)
+	var _mainthread0 *CollectionViewCompositionalLayout
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewCompositionalLayout {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewCompositionalLayout")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSection:configuration:"), objref.IDOf(section), objref.IDOf(configuration))
+			return collectionViewCompositionalLayoutAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithConfiguration sets the layout’s configuration, such as its scroll direction and section spacing.
 func (cvcl *CollectionViewCompositionalLayout) WithConfiguration(configuration *CollectionViewCompositionalLayoutConfiguration) *CollectionViewCompositionalLayout {
-	objc.Send[objc.ID](objref.IDOf(cvcl), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvcl), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
+	})
 	return cvcl
 }
 
 // Configuration returns the configuration.
 func (cvcl *CollectionViewCompositionalLayout) Configuration() *CollectionViewCompositionalLayoutConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(cvcl), objc.RegisterName("configuration"))
-	return CollectionViewCompositionalLayoutConfigurationFromID(_r)
+	var _mainthread0 *CollectionViewCompositionalLayoutConfiguration
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewCompositionalLayoutConfiguration {
+			_r := objc.Send[objc.ID](objref.IDOf(cvcl), objc.RegisterName("configuration"))
+			return CollectionViewCompositionalLayoutConfigurationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ CollectionViewLayoutProvider = (*CollectionViewCompositionalLayout)(nil)

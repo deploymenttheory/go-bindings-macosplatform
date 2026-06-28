@@ -68,41 +68,75 @@ func (rpv *RoutePickerView) String() string {
 
 // NewRoutePickerView creates a new RoutePickerView.
 func NewRoutePickerView() *RoutePickerView {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVRoutePickerView")), objc.RegisterName("new"))
-	return routePickerViewAdopt(_id)
+	var _mainthread0 *RoutePickerView
+	purego.Main(func() {
+		_mainthread0 = func() *RoutePickerView {
+			_id := objc.Send[objc.ID](objc.ID(_class("AVRoutePickerView")), objc.RegisterName("new"))
+			return routePickerViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithPlayer sets the player object to perform routing operations for.
 func (rpv *RoutePickerView) WithPlayer(player obj.Object) *RoutePickerView {
-	objc.Send[objc.ID](objref.IDOf(rpv), objc.RegisterName("setPlayer:"), objref.IDOf(player))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rpv), objc.RegisterName("setPlayer:"), objref.IDOf(player))
+	})
 	return rpv
 }
 
 // WithRoutePickerButtonBordered sets a Boolean value that indicates whether the route picker button has a border.
 func (rpv *RoutePickerView) WithRoutePickerButtonBordered(routePickerButtonBordered bool) *RoutePickerView {
-	objc.Send[objc.ID](objref.IDOf(rpv), objc.RegisterName("setRoutePickerButtonBordered:"), routePickerButtonBordered)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rpv), objc.RegisterName("setRoutePickerButtonBordered:"), routePickerButtonBordered)
+	})
 	return rpv
 }
 
 // RoutePickerButtonColorForState returns the color of the picker button for the specified state.
 func (rpv *RoutePickerView) RoutePickerButtonColorForState(state RoutePickerViewButtonState) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(rpv), objc.RegisterName("routePickerButtonColorForState:"), state)
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(rpv), objc.RegisterName("routePickerButtonColorForState:"), state)
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetRoutePickerButtonColorForState sets the route picker button color for the specified state.
 func (rpv *RoutePickerView) SetRoutePickerButtonColorForState(color obj.Object, state RoutePickerViewButtonState) {
-	objc.Send[objc.ID](objref.IDOf(rpv), objc.RegisterName("setRoutePickerButtonColor:forState:"), objref.IDOf(color), state)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rpv), objc.RegisterName("setRoutePickerButtonColor:forState:"), objref.IDOf(color), state)
+	})
+
 }
 
 // Player returns the player for which to perform routing operations.
 func (rpv *RoutePickerView) Player() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(rpv), objc.RegisterName("player"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(rpv), objc.RegisterName("player"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsRoutePickerButtonBordered reports whether the picker button has a border. Default is true.
 func (rpv *RoutePickerView) IsRoutePickerButtonBordered() bool {
-	_r := objc.Send[bool](objref.IDOf(rpv), objc.RegisterName("isRoutePickerButtonBordered"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(rpv), objc.RegisterName("isRoutePickerButtonBordered"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

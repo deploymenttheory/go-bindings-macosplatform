@@ -68,6 +68,12 @@ func (pvc *PreviewViewController) String() string {
 
 // NewPreviewViewController creates a new PreviewViewController.
 func NewPreviewViewController() *PreviewViewController {
-	_id := objc.Send[objc.ID](objc.ID(_class("RPPreviewViewController")), objc.RegisterName("new"))
-	return previewViewControllerAdopt(_id)
+	var _mainthread0 *PreviewViewController
+	purego.Main(func() {
+		_mainthread0 = func() *PreviewViewController {
+			_id := objc.Send[objc.ID](objc.ID(_class("RPPreviewViewController")), objc.RegisterName("new"))
+			return previewViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }

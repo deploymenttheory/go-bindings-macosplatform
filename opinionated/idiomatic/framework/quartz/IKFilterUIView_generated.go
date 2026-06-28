@@ -69,19 +69,39 @@ func (ifuv *IKFilterUIView) String() string {
 
 // NewIKFilterUIViewWithFrameFilter initializes a view that contains controls for the input parameters of a filter.
 func NewIKFilterUIViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter obj.Object) *IKFilterUIView {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("IKFilterUIView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:filter:"), frameRect, objref.IDOf(inFilter))
-	return iKFilterUIViewAdopt(_id)
+	var _mainthread0 *IKFilterUIView
+	purego.Main(func() {
+		_mainthread0 = func() *IKFilterUIView {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("IKFilterUIView")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:filter:"), frameRect, objref.IDOf(inFilter))
+			return iKFilterUIViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // Filter returns the Core Image filter associated with the view.
 func (ifuv *IKFilterUIView) Filter() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(ifuv), objc.RegisterName("filter"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(ifuv), objc.RegisterName("filter"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ObjectController returns the object controller for the bindings between the filter and its view.
 func (ifuv *IKFilterUIView) ObjectController() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(ifuv), objc.RegisterName("objectController"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(ifuv), objc.RegisterName("objectController"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

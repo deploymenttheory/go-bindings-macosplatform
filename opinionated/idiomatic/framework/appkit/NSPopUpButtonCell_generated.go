@@ -49,631 +49,960 @@ func popUpButtonCellAdopt(id objc.ID) *PopUpButtonCell {
 
 // NewPopUpButtonCellTextCellPullsDown returns an NSPopUpButtonCell object initialized with the specified title.
 func NewPopUpButtonCellTextCellPullsDown(stringValue string, pullDown bool) *PopUpButtonCell {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPopUpButtonCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:pullsDown:"), purego.NSString(stringValue), pullDown)
-	return popUpButtonCellAdopt(_id)
+	var _mainthread0 *PopUpButtonCell
+	purego.Main(func() {
+		_mainthread0 = func() *PopUpButtonCell {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSPopUpButtonCell")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:pullsDown:"), purego.NSString(stringValue), pullDown)
+			return popUpButtonCellAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewPopUpButtonCellWithCoder creates a new PopUpButtonCell.
 func NewPopUpButtonCellWithCoder(coder obj.Object) *PopUpButtonCell {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPopUpButtonCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
-	return popUpButtonCellAdopt(_id)
+	var _mainthread0 *PopUpButtonCell
+	purego.Main(func() {
+		_mainthread0 = func() *PopUpButtonCell {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSPopUpButtonCell")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+			return popUpButtonCellAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithPullsDown sets a Boolean value that indicates the behavior of the button’s menu.
 func (pubc *PopUpButtonCell) WithPullsDown(pullsDown bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setPullsDown:"), pullsDown)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setPullsDown:"), pullsDown)
+	})
 	return pubc
 }
 
 // WithAutoenablesItems sets a Boolean value that indicates if the button automatically enables and disables its items every time a user event occurs.
 func (pubc *PopUpButtonCell) WithAutoenablesItems(autoenablesItems bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAutoenablesItems:"), autoenablesItems)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAutoenablesItems:"), autoenablesItems)
+	})
 	return pubc
 }
 
 // WithUsesItemFromMenu sets a Boolean value that indicates if the control uses an item from the menu for its own title.
 func (pubc *PopUpButtonCell) WithUsesItemFromMenu(usesItemFromMenu bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setUsesItemFromMenu:"), usesItemFromMenu)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setUsesItemFromMenu:"), usesItemFromMenu)
+	})
 	return pubc
 }
 
 // WithAltersStateOfSelectedItem sets a Boolean value that indicates if the pop-up button links the state of the selected menu item to the current selection.
 func (pubc *PopUpButtonCell) WithAltersStateOfSelectedItem(altersStateOfSelectedItem bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAltersStateOfSelectedItem:"), altersStateOfSelectedItem)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAltersStateOfSelectedItem:"), altersStateOfSelectedItem)
+	})
 	return pubc
 }
 
 // WithArrowPosition sets the position of the arrow displayed on the button.
 func (pubc *PopUpButtonCell) WithArrowPosition(arrowPosition PopUpArrowPosition) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setArrowPosition:"), arrowPosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setArrowPosition:"), arrowPosition)
+	})
 	return pubc
 }
 
 // WithMenuItem sets the menu item object associated with the cell.
 func (pubc *PopUpButtonCell) WithMenuItem(menuItem *MenuItem) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setMenuItem:"), objref.IDOf(menuItem))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setMenuItem:"), objref.IDOf(menuItem))
+	})
 	return pubc
 }
 
 // WithNeedsSizing sets a Boolean value indicating whether the size of the menu needs to be calculated.
 func (pubc *PopUpButtonCell) WithNeedsSizing(needsSizing bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setNeedsSizing:"), needsSizing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setNeedsSizing:"), needsSizing)
+	})
 	return pubc
 }
 
 // WithNeedsDisplay sets a Boolean value indicating whether the menu item needs to be displayed.
 func (pubc *PopUpButtonCell) WithNeedsDisplay(needsDisplay bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return pubc
 }
 
 // WithBezelStyle sets the appearance of the button’s border, if it has one.
 func (pubc *PopUpButtonCell) WithBezelStyle(bezelStyle BezelStyle) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setBezelStyle:"), bezelStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setBezelStyle:"), bezelStyle)
+	})
 	return pubc
 }
 
 // WithHighlightsBy sets a set of flags that indicate how the button highlights when it receives a mouse-down event (that is, when the button is pressed).
 func (pubc *PopUpButtonCell) WithHighlightsBy(highlightsBy CellStyleMask) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setHighlightsBy:"), highlightsBy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setHighlightsBy:"), highlightsBy)
+	})
 	return pubc
 }
 
 // WithShowsStateBy sets the flags that indicate how the button cell shows its alternate state.
 func (pubc *PopUpButtonCell) WithShowsStateBy(showsStateBy CellStyleMask) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setShowsStateBy:"), showsStateBy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setShowsStateBy:"), showsStateBy)
+	})
 	return pubc
 }
 
 // WithAttributedTitle sets the title displayed by the button when it’s in its normal state as an attributed string.
 func (pubc *PopUpButtonCell) WithAttributedTitle(attributedTitle obj.Object) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
+	})
 	return pubc
 }
 
 // WithAlternateTitle sets the string displayed by the button when it’s in its alternate state.
 func (pubc *PopUpButtonCell) WithAlternateTitle(alternateTitle string) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAlternateTitle:"), purego.NSString(alternateTitle))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAlternateTitle:"), purego.NSString(alternateTitle))
+	})
 	return pubc
 }
 
 // WithAttributedAlternateTitle sets the title displayed by the button when it’s in its alternate state, as an attributed string.
 func (pubc *PopUpButtonCell) WithAttributedAlternateTitle(attributedAlternateTitle obj.Object) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAttributedAlternateTitle:"), objref.IDOf(attributedAlternateTitle))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAttributedAlternateTitle:"), objref.IDOf(attributedAlternateTitle))
+	})
 	return pubc
 }
 
 // WithAlternateImage sets the image the button displays in its alternate state.
 func (pubc *PopUpButtonCell) WithAlternateImage(alternateImage *Image) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
+	})
 	return pubc
 }
 
 // WithImagePosition sets the position of the button’s image relative to its title.
 func (pubc *PopUpButtonCell) WithImagePosition(imagePosition CellImagePosition) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setImagePosition:"), imagePosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setImagePosition:"), imagePosition)
+	})
 	return pubc
 }
 
 // WithImageScaling sets the scale factor for the button’s image.
 func (pubc *PopUpButtonCell) WithImageScaling(imageScaling ImageScaling) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setImageScaling:"), imageScaling)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setImageScaling:"), imageScaling)
+	})
 	return pubc
 }
 
 // WithKeyEquivalent sets the button’s key-equivalent character.
 func (pubc *PopUpButtonCell) WithKeyEquivalent(keyEquivalent string) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setKeyEquivalent:"), purego.NSString(keyEquivalent))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setKeyEquivalent:"), purego.NSString(keyEquivalent))
+	})
 	return pubc
 }
 
 // WithKeyEquivalentModifierMask sets the mask that identifies the modifier keys for the button’s key equivalent.
 func (pubc *PopUpButtonCell) WithKeyEquivalentModifierMask(keyEquivalentModifierMask EventModifierFlags) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setKeyEquivalentModifierMask:"), keyEquivalentModifierMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setKeyEquivalentModifierMask:"), keyEquivalentModifierMask)
+	})
 	return pubc
 }
 
 // WithTransparent sets a Boolean value that indicates if the button is transparent.
 func (pubc *PopUpButtonCell) WithTransparent(transparent bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setTransparent:"), transparent)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setTransparent:"), transparent)
+	})
 	return pubc
 }
 
 // WithImageDimsWhenDisabled sets a Boolean value that indicates if the button’s image and text appear “dim” when the button is disabled.
 func (pubc *PopUpButtonCell) WithImageDimsWhenDisabled(imageDimsWhenDisabled bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setImageDimsWhenDisabled:"), imageDimsWhenDisabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setImageDimsWhenDisabled:"), imageDimsWhenDisabled)
+	})
 	return pubc
 }
 
 // WithShowsBorderOnlyWhileMouseInside sets a Boolean value that indicates if the button displays its border only when the pointer is over it.
 func (pubc *PopUpButtonCell) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setShowsBorderOnlyWhileMouseInside:"), showsBorderOnlyWhileMouseInside)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setShowsBorderOnlyWhileMouseInside:"), showsBorderOnlyWhileMouseInside)
+	})
 	return pubc
 }
 
 // WithSound sets the sound that’s played when the user presses the button (that is during a mouse-down event).
 func (pubc *PopUpButtonCell) WithSound(sound *Sound) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setSound:"), objref.IDOf(sound))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setSound:"), objref.IDOf(sound))
+	})
 	return pubc
 }
 
 // WithBackgroundColor sets the background color of the button.
 func (pubc *PopUpButtonCell) WithBackgroundColor(backgroundColor *Color) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	})
 	return pubc
 }
 
 // WithGradientType sets the gradient of the button’s border.
 func (pubc *PopUpButtonCell) WithGradientType(gradientType GradientType) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setGradientType:"), gradientType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setGradientType:"), gradientType)
+	})
 	return pubc
 }
 
 // WithKeyEquivalentFont sets the font used to draw the button’s key equivalent.
 func (pubc *PopUpButtonCell) WithKeyEquivalentFont(keyEquivalentFont *Font) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setKeyEquivalentFont:"), objref.IDOf(keyEquivalentFont))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setKeyEquivalentFont:"), objref.IDOf(keyEquivalentFont))
+	})
 	return pubc
 }
 
 // WithControlView sets the view associated with the cell.
 func (pubc *PopUpButtonCell) WithControlView(controlView ViewProvider) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	})
 	return pubc
 }
 
 // WithType sets the type of the cell.
 func (pubc *PopUpButtonCell) WithType(type_ CellType) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setType:"), type_)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setType:"), type_)
+	})
 	return pubc
 }
 
 // WithState sets the cell’s current state.
 func (pubc *PopUpButtonCell) WithState(state int) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setState:"), state)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setState:"), state)
+	})
 	return pubc
 }
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (pubc *PopUpButtonCell) WithTarget(target obj.Object) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return pubc
 }
 
 // WithTag sets a tag for identifying the cell.
 func (pubc *PopUpButtonCell) WithTag(tag int) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setTag:"), tag)
+	})
 	return pubc
 }
 
 // WithTitle sets the cell’s title text.
 func (pubc *PopUpButtonCell) WithTitle(title string) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return pubc
 }
 
 // WithEnabled sets a Boolean value indicating whether the cell is currently enabled.
 func (pubc *PopUpButtonCell) WithEnabled(enabled bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return pubc
 }
 
 // WithContinuous sets a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 func (pubc *PopUpButtonCell) WithContinuous(continuous bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return pubc
 }
 
 // WithEditable sets a Boolean value indicating whether the cell is editable.
 func (pubc *PopUpButtonCell) WithEditable(editable bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setEditable:"), editable)
+	})
 	return pubc
 }
 
 // WithSelectable sets a Boolean value indicating whether the cell’s text can be selected.
 func (pubc *PopUpButtonCell) WithSelectable(selectable bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setSelectable:"), selectable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setSelectable:"), selectable)
+	})
 	return pubc
 }
 
 // WithBordered sets a Boolean value indicating whether the cell draws itself outlined with a plain border.
 func (pubc *PopUpButtonCell) WithBordered(bordered bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setBordered:"), bordered)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setBordered:"), bordered)
+	})
 	return pubc
 }
 
 // WithBezeled sets a Boolean value indicating whether the cell has a bezeled border.
 func (pubc *PopUpButtonCell) WithBezeled(bezeled bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setBezeled:"), bezeled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setBezeled:"), bezeled)
+	})
 	return pubc
 }
 
 // WithScrollable sets a Boolean value indicating whether excess text scrolls past the cell’s bounds.
 func (pubc *PopUpButtonCell) WithScrollable(scrollable bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setScrollable:"), scrollable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setScrollable:"), scrollable)
+	})
 	return pubc
 }
 
 // WithHighlighted sets a Boolean value indicating whether the cell has a highlighted appearance.
 func (pubc *PopUpButtonCell) WithHighlighted(highlighted bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return pubc
 }
 
 // WithAlignment sets the alignment of the cell’s text.
 func (pubc *PopUpButtonCell) WithAlignment(alignment TextAlignment) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return pubc
 }
 
 // WithWraps sets a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 func (pubc *PopUpButtonCell) WithWraps(wraps bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setWraps:"), wraps)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setWraps:"), wraps)
+	})
 	return pubc
 }
 
 // WithFont sets the font that the cell uses to display text.
 func (pubc *PopUpButtonCell) WithFont(font *Font) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return pubc
 }
 
 // WithFormatter sets the cell’s formatter object.
 func (pubc *PopUpButtonCell) WithFormatter(formatter obj.Object) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return pubc
 }
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (pubc *PopUpButtonCell) WithObjectValue(objectValue obj.Object) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return pubc
 }
 
 // WithStringValue sets the cell’s value as a string.
 func (pubc *PopUpButtonCell) WithStringValue(stringValue string) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return pubc
 }
 
 // WithIntValue sets the cell’s value as an integer.
 func (pubc *PopUpButtonCell) WithIntValue(intValue int) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return pubc
 }
 
 // WithFloatValue sets the cell’s value as a single-precision floating-point number.
 func (pubc *PopUpButtonCell) WithFloatValue(floatValue float32) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return pubc
 }
 
 // WithDoubleValue sets the cell’s value as a double-precision floating-point number.
 func (pubc *PopUpButtonCell) WithDoubleValue(doubleValue float64) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return pubc
 }
 
 // WithIntegerValue sets the cell’s value as an integer value.
 func (pubc *PopUpButtonCell) WithIntegerValue(integerValue int) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return pubc
 }
 
 // WithImage sets the image displayed by the cell, if any.
 func (pubc *PopUpButtonCell) WithImage(image *Image) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setImage:"), objref.IDOf(image))
+	})
 	return pubc
 }
 
 // WithControlSize sets the size of the cell.
 func (pubc *PopUpButtonCell) WithControlSize(controlSize ControlSize) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return pubc
 }
 
 // WithRepresentedObject sets the object represented by the cell.
 func (pubc *PopUpButtonCell) WithRepresentedObject(representedObject obj.Object) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	})
 	return pubc
 }
 
 // WithMenu sets the cell’s contextual menu.
 func (pubc *PopUpButtonCell) WithMenu(menu *Menu) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return pubc
 }
 
 // WithSendsActionOnEndEditing sets a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 func (pubc *PopUpButtonCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	})
 	return pubc
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (pubc *PopUpButtonCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return pubc
 }
 
 // WithLineBreakMode sets the line break mode to use when drawing text in the cell.
 func (pubc *PopUpButtonCell) WithLineBreakMode(lineBreakMode LineBreakMode) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return pubc
 }
 
 // WithAllowsUndo sets a Boolean value indicating whether the cell assumes responsibility for undo operations.
 func (pubc *PopUpButtonCell) WithAllowsUndo(allowsUndo bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	})
 	return pubc
 }
 
 // WithTruncatesLastVisibleLine sets a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 func (pubc *PopUpButtonCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	})
 	return pubc
 }
 
 // WithUserInterfaceLayoutDirection sets the layout direction of the user interface.
 func (pubc *PopUpButtonCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return pubc
 }
 
 // WithUsesSingleLineMode sets a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 func (pubc *PopUpButtonCell) WithUsesSingleLineMode(usesSingleLineMode bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return pubc
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the cell refuses the first responder status.
 func (pubc *PopUpButtonCell) WithRefusesFirstResponder(refusesFirstResponder bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return pubc
 }
 
 // WithShowsFirstResponder sets a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 func (pubc *PopUpButtonCell) WithShowsFirstResponder(showsFirstResponder bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	})
 	return pubc
 }
 
 // WithFocusRingType sets the type of focus ring to use with the associated view.
 func (pubc *PopUpButtonCell) WithFocusRingType(focusRingType FocusRingType) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return pubc
 }
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (pubc *PopUpButtonCell) WithAttributedStringValue(attributedStringValue obj.Object) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return pubc
 }
 
 // WithAllowsEditingTextAttributes sets a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 func (pubc *PopUpButtonCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	})
 	return pubc
 }
 
 // WithImportsGraphics sets a Boolean value indicating whether the cell supports the importation of images into its text.
 func (pubc *PopUpButtonCell) WithImportsGraphics(importsGraphics bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	})
 	return pubc
 }
 
 // WithAllowsMixedState sets a Boolean value indicating whether the cell supports three states instead of two.
 func (pubc *PopUpButtonCell) WithAllowsMixedState(allowsMixedState bool) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	})
 	return pubc
 }
 
 // WithBackgroundStyle sets the cell’s background style.
 func (pubc *PopUpButtonCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	})
 	return pubc
 }
 
 // WithControlTint sets the cell’s control tint.
 func (pubc *PopUpButtonCell) WithControlTint(controlTint ControlTint) *PopUpButtonCell {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setControlTint:"), controlTint)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setControlTint:"), controlTint)
+	})
 	return pubc
 }
 
 // AddItemWithTitle adds an item with the specified title to the end of the menu.
 func (pubc *PopUpButtonCell) AddItemWithTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("addItemWithTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("addItemWithTitle:"), purego.NSString(title))
+	})
+
 }
 
 // AddItemsWithTitles adds multiple items to the end of the menu.
 func (pubc *PopUpButtonCell) AddItemsWithTitles(itemTitles []string) {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("addItemsWithTitles:"), purego.SliceToNSArray(itemTitles, func(_v string) objc.ID { return purego.NSString(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("addItemsWithTitles:"), purego.SliceToNSArray(itemTitles, func(_v string) objc.ID { return purego.NSString(_v) }))
+	})
+
 }
 
 // InsertItemWithTitleAtIndex inserts an item at the specified position in the menu.
 func (pubc *PopUpButtonCell) InsertItemWithTitleAtIndex(title string, index int) {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("insertItemWithTitle:atIndex:"), purego.NSString(title), index)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("insertItemWithTitle:atIndex:"), purego.NSString(title), index)
+	})
+
 }
 
 // RemoveItemWithTitle removes the item with the specified title from the menu.
 func (pubc *PopUpButtonCell) RemoveItemWithTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("removeItemWithTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("removeItemWithTitle:"), purego.NSString(title))
+	})
+
 }
 
 // RemoveItemAtIndex removes the item at the specified index.
 func (pubc *PopUpButtonCell) RemoveItemAtIndex(index int) {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("removeItemAtIndex:"), index)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("removeItemAtIndex:"), index)
+	})
+
 }
 
 // RemoveAllItems removes all items in the receiver’s item menu.
 func (pubc *PopUpButtonCell) RemoveAllItems() {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("removeAllItems"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("removeAllItems"))
+	})
+
 }
 
 // IndexOfItem returns the index of the specified menu item.
 func (pubc *PopUpButtonCell) IndexOfItem(item *MenuItem) int {
-	_r := objc.Send[int](objref.IDOf(pubc), objc.RegisterName("indexOfItem:"), objref.IDOf(item))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(pubc), objc.RegisterName("indexOfItem:"), objref.IDOf(item))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IndexOfItemWithTitle returns the index of the item with the specified title.
 func (pubc *PopUpButtonCell) IndexOfItemWithTitle(title string) int {
-	_r := objc.Send[int](objref.IDOf(pubc), objc.RegisterName("indexOfItemWithTitle:"), purego.NSString(title))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(pubc), objc.RegisterName("indexOfItemWithTitle:"), purego.NSString(title))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IndexOfItemWithTag returns the index of the menu item with the specified tag.
 func (pubc *PopUpButtonCell) IndexOfItemWithTag(tag int) int {
-	_r := objc.Send[int](objref.IDOf(pubc), objc.RegisterName("indexOfItemWithTag:"), tag)
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(pubc), objc.RegisterName("indexOfItemWithTag:"), tag)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IndexOfItemWithRepresentedObject returns the index of the menu item that holds the specified represented object.
 func (pubc *PopUpButtonCell) IndexOfItemWithRepresentedObject(obj_ obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(pubc), objc.RegisterName("indexOfItemWithRepresentedObject:"), objref.IDOf(obj_))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(pubc), objc.RegisterName("indexOfItemWithRepresentedObject:"), objref.IDOf(obj_))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ItemAtIndex returns the menu item at the specified index.
 func (pubc *PopUpButtonCell) ItemAtIndex(index int) *MenuItem {
-	_r := objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("itemAtIndex:"), index)
-	return MenuItemFromID(_r)
+	var _mainthread0 *MenuItem
+	purego.Main(func() {
+		_mainthread0 = func() *MenuItem {
+			_r := objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("itemAtIndex:"), index)
+			return MenuItemFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ItemWithTitle returns the menu item with the specified title.
 func (pubc *PopUpButtonCell) ItemWithTitle(title string) *MenuItem {
-	_r := objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("itemWithTitle:"), purego.NSString(title))
-	return MenuItemFromID(_r)
+	var _mainthread0 *MenuItem
+	purego.Main(func() {
+		_mainthread0 = func() *MenuItem {
+			_r := objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("itemWithTitle:"), purego.NSString(title))
+			return MenuItemFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SelectItem selects the specified menu item.
 func (pubc *PopUpButtonCell) SelectItem(item *MenuItem) {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("selectItem:"), objref.IDOf(item))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("selectItem:"), objref.IDOf(item))
+	})
+
 }
 
 // SelectItemAtIndex selects the item in the menu at the specified index.
 func (pubc *PopUpButtonCell) SelectItemAtIndex(index int) {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("selectItemAtIndex:"), index)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("selectItemAtIndex:"), index)
+	})
+
 }
 
 // SelectItemWithTitle selects the item with the specified title.
 func (pubc *PopUpButtonCell) SelectItemWithTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("selectItemWithTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("selectItemWithTitle:"), purego.NSString(title))
+	})
+
 }
 
 // SelectItemWithTag selects the menu item with the specified tag.
 func (pubc *PopUpButtonCell) SelectItemWithTag(tag int) bool {
-	_r := objc.Send[bool](objref.IDOf(pubc), objc.RegisterName("selectItemWithTag:"), tag)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(pubc), objc.RegisterName("selectItemWithTag:"), tag)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SynchronizeTitleAndSelectedItem synchronizes the pop-up button’s displayed item with the currently selected menu item.
 func (pubc *PopUpButtonCell) SynchronizeTitleAndSelectedItem() {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("synchronizeTitleAndSelectedItem"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("synchronizeTitleAndSelectedItem"))
+	})
+
 }
 
 // ItemTitleAtIndex returns the title of the item at the specified index.
 func (pubc *PopUpButtonCell) ItemTitleAtIndex(index int) string {
-	_r := objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("itemTitleAtIndex:"), index)
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("itemTitleAtIndex:"), index)
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AttachPopUpWithFrameInView sets up the receiver to display a menu.
 func (pubc *PopUpButtonCell) AttachPopUpWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("attachPopUpWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("attachPopUpWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+	})
+
 }
 
 // DismissPopUp dismisses the pop-up button’s menu by ordering its window out.
 func (pubc *PopUpButtonCell) DismissPopUp() {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("dismissPopUp"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("dismissPopUp"))
+	})
+
 }
 
 // PerformClickWithFrameInView displays the receiver’s menu and track mouse events in it.
 func (pubc *PopUpButtonCell) PerformClickWithFrameInView(frame corefoundation.CGRect, controlView *View) {
-	objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("performClickWithFrame:inView:"), frame, objref.IDOf(controlView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("performClickWithFrame:inView:"), frame, objref.IDOf(controlView))
+	})
+
 }
 
 // PullsDown wraps the corresponding Objective-C method.
 func (pubc *PopUpButtonCell) PullsDown() bool {
-	_r := objc.Send[bool](objref.IDOf(pubc), objc.RegisterName("pullsDown"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(pubc), objc.RegisterName("pullsDown"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AutoenablesItems wraps the corresponding Objective-C method.
 func (pubc *PopUpButtonCell) AutoenablesItems() bool {
-	_r := objc.Send[bool](objref.IDOf(pubc), objc.RegisterName("autoenablesItems"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(pubc), objc.RegisterName("autoenablesItems"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UsesItemFromMenu wraps the corresponding Objective-C method.
 func (pubc *PopUpButtonCell) UsesItemFromMenu() bool {
-	_r := objc.Send[bool](objref.IDOf(pubc), objc.RegisterName("usesItemFromMenu"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(pubc), objc.RegisterName("usesItemFromMenu"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AltersStateOfSelectedItem wraps the corresponding Objective-C method.
 func (pubc *PopUpButtonCell) AltersStateOfSelectedItem() bool {
-	_r := objc.Send[bool](objref.IDOf(pubc), objc.RegisterName("altersStateOfSelectedItem"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(pubc), objc.RegisterName("altersStateOfSelectedItem"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ItemArray returns the item array.
 //
 // ItemArray returns the collection as a Go slice.
 func (pubc *PopUpButtonCell) ItemArray() []*MenuItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("itemArray"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MenuItem { return MenuItemFromID(_id) })
+	var _mainthread0 []*MenuItem
+	purego.Main(func() {
+		_mainthread0 = func() []*MenuItem {
+			_arr := objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("itemArray"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MenuItem { return MenuItemFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // NumberOfItems returns the number of items.
 func (pubc *PopUpButtonCell) NumberOfItems() int {
-	_r := objc.Send[int](objref.IDOf(pubc), objc.RegisterName("numberOfItems"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(pubc), objc.RegisterName("numberOfItems"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LastItem returns the last item.
 func (pubc *PopUpButtonCell) LastItem() *MenuItem {
-	_r := objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("lastItem"))
-	return MenuItemFromID(_r)
+	var _mainthread0 *MenuItem
+	purego.Main(func() {
+		_mainthread0 = func() *MenuItem {
+			_r := objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("lastItem"))
+			return MenuItemFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SelectedItem returns the selected item.
 func (pubc *PopUpButtonCell) SelectedItem() *MenuItem {
-	_r := objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("selectedItem"))
-	return MenuItemFromID(_r)
+	var _mainthread0 *MenuItem
+	purego.Main(func() {
+		_mainthread0 = func() *MenuItem {
+			_r := objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("selectedItem"))
+			return MenuItemFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IndexOfSelectedItem returns the index of selected item.
 func (pubc *PopUpButtonCell) IndexOfSelectedItem() int {
-	_r := objc.Send[int](objref.IDOf(pubc), objc.RegisterName("indexOfSelectedItem"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(pubc), objc.RegisterName("indexOfSelectedItem"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ItemTitles returns the item titles.
 //
 // ItemTitles returns the collection as a Go slice.
 func (pubc *PopUpButtonCell) ItemTitles() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("itemTitles"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
+	var _mainthread0 []string
+	purego.Main(func() {
+		_mainthread0 = func() []string {
+			_arr := objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("itemTitles"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // TitleOfSelectedItem returns the title of selected item.
 func (pubc *PopUpButtonCell) TitleOfSelectedItem() string {
-	_r := objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("titleOfSelectedItem"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("titleOfSelectedItem"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ArrowPosition returns the arrow position.
 func (pubc *PopUpButtonCell) ArrowPosition() PopUpArrowPosition {
-	_r := objc.Send[PopUpArrowPosition](objref.IDOf(pubc), objc.RegisterName("arrowPosition"))
-	return _r
+	var _mainthread0 PopUpArrowPosition
+	purego.Main(func() {
+		_mainthread0 = func() PopUpArrowPosition {
+			_r := objc.Send[PopUpArrowPosition](objref.IDOf(pubc), objc.RegisterName("arrowPosition"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ MenuItemCellProvider = (*PopUpButtonCell)(nil)

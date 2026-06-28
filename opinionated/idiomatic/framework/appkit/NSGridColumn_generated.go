@@ -69,89 +69,164 @@ func (gc *GridColumn) String() string {
 
 // NewGridColumn creates a new GridColumn.
 func NewGridColumn() *GridColumn {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSGridColumn")), objc.RegisterName("new"))
-	return gridColumnAdopt(_id)
+	var _mainthread0 *GridColumn
+	purego.Main(func() {
+		_mainthread0 = func() *GridColumn {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSGridColumn")), objc.RegisterName("new"))
+			return gridColumnAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithXPlacement sets the x placement.
 func (gc *GridColumn) WithXPlacement(xPlacement GridCellPlacement) *GridColumn {
-	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setXPlacement:"), xPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setXPlacement:"), xPlacement)
+	})
 	return gc
 }
 
 // WithWidth sets the width.
 func (gc *GridColumn) WithWidth(width float64) *GridColumn {
-	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setWidth:"), width)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setWidth:"), width)
+	})
 	return gc
 }
 
 // WithLeadingPadding sets the leading padding.
 func (gc *GridColumn) WithLeadingPadding(leadingPadding float64) *GridColumn {
-	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setLeadingPadding:"), leadingPadding)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setLeadingPadding:"), leadingPadding)
+	})
 	return gc
 }
 
 // WithTrailingPadding sets the trailing padding.
 func (gc *GridColumn) WithTrailingPadding(trailingPadding float64) *GridColumn {
-	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setTrailingPadding:"), trailingPadding)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setTrailingPadding:"), trailingPadding)
+	})
 	return gc
 }
 
 // WithHidden sets the hidden.
 func (gc *GridColumn) WithHidden(hidden bool) *GridColumn {
-	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setHidden:"), hidden)
+	})
 	return gc
 }
 
 // CellAtIndex wraps the corresponding Objective-C method.
 func (gc *GridColumn) CellAtIndex(index int) *GridCell {
-	_r := objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("cellAtIndex:"), index)
-	return GridCellFromID(_r)
+	var _mainthread0 *GridCell
+	purego.Main(func() {
+		_mainthread0 = func() *GridCell {
+			_r := objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("cellAtIndex:"), index)
+			return GridCellFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MergeCellsInRange wraps the corresponding Objective-C method.
 func (gc *GridColumn) MergeCellsInRange(range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("mergeCellsInRange:"), range_)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("mergeCellsInRange:"), range_)
+	})
+
 }
 
 // GridView returns the grid view.
 func (gc *GridColumn) GridView() *GridView {
-	_r := objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("gridView"))
-	return GridViewFromID(_r)
+	var _mainthread0 *GridView
+	purego.Main(func() {
+		_mainthread0 = func() *GridView {
+			_r := objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("gridView"))
+			return GridViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NumberOfCells returns the number of cells.
 func (gc *GridColumn) NumberOfCells() int {
-	_r := objc.Send[int](objref.IDOf(gc), objc.RegisterName("numberOfCells"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(gc), objc.RegisterName("numberOfCells"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // XPlacement returns the x placement.
 func (gc *GridColumn) XPlacement() GridCellPlacement {
-	_r := objc.Send[GridCellPlacement](objref.IDOf(gc), objc.RegisterName("xPlacement"))
-	return _r
+	var _mainthread0 GridCellPlacement
+	purego.Main(func() {
+		_mainthread0 = func() GridCellPlacement {
+			_r := objc.Send[GridCellPlacement](objref.IDOf(gc), objc.RegisterName("xPlacement"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Width returns the width.
 func (gc *GridColumn) Width() float64 {
-	_r := objc.Send[float64](objref.IDOf(gc), objc.RegisterName("width"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(gc), objc.RegisterName("width"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LeadingPadding returns the leading padding.
 func (gc *GridColumn) LeadingPadding() float64 {
-	_r := objc.Send[float64](objref.IDOf(gc), objc.RegisterName("leadingPadding"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(gc), objc.RegisterName("leadingPadding"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TrailingPadding returns the trailing padding.
 func (gc *GridColumn) TrailingPadding() float64 {
-	_r := objc.Send[float64](objref.IDOf(gc), objc.RegisterName("trailingPadding"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(gc), objc.RegisterName("trailingPadding"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsHidden reports whether the object is hidden.
 func (gc *GridColumn) IsHidden() bool {
-	_r := objc.Send[bool](objref.IDOf(gc), objc.RegisterName("isHidden"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(gc), objc.RegisterName("isHidden"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

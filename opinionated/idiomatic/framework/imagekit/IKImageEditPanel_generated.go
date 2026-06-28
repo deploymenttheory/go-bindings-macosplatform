@@ -66,17 +66,33 @@ func (iep *ImageEditPanel) String() string {
 
 // NewImageEditPanel creates a new ImageEditPanel.
 func NewImageEditPanel() *ImageEditPanel {
-	_id := objc.Send[objc.ID](objc.ID(_class("IKImageEditPanel")), objc.RegisterName("new"))
-	return imageEditPanelAdopt(_id)
+	var _mainthread0 *ImageEditPanel
+	purego.Main(func() {
+		_mainthread0 = func() *ImageEditPanel {
+			_id := objc.Send[objc.ID](objc.ID(_class("IKImageEditPanel")), objc.RegisterName("new"))
+			return imageEditPanelAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // ReloadData reloads the data from the data associated with an image editing panel.
 func (iep *ImageEditPanel) ReloadData() {
-	objc.Send[objc.ID](objref.IDOf(iep), objc.RegisterName("reloadData"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iep), objc.RegisterName("reloadData"))
+	})
+
 }
 
 // FilterArray returns array of filters reflecting the current user adjustments in the adjust or effects tab.
 func (iep *ImageEditPanel) FilterArray() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(iep), objc.RegisterName("filterArray"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(iep), objc.RegisterName("filterArray"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

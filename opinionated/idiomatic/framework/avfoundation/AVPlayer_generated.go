@@ -73,129 +73,179 @@ func (p *Player) String() string {
 
 // NewPlayerWithURL creates a new player to play a single audiovisual resource referenced by a given URL.
 func NewPlayerWithURL(uRL string) *Player {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(uRL))
-	return playerAdopt(_id)
+	var _mainthread0 *Player
+	purego.Main(func() {
+		_mainthread0 = func() *Player {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayer")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(uRL))
+			return playerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewPlayerWithPlayerItem creates a new player to play the specified player item.
 func NewPlayerWithPlayerItem(item *PlayerItem) *Player {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayerItem:"), objref.IDOf(item))
-	return playerAdopt(_id)
+	var _mainthread0 *Player
+	purego.Main(func() {
+		_mainthread0 = func() *Player {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayer")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayerItem:"), objref.IDOf(item))
+			return playerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithRate sets the current playback rate.
 func (p *Player) WithRate(rate float32) *Player {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setRate:"), rate)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setRate:"), rate)
+	})
 	return p
 }
 
 // WithDefaultRate sets a default rate at which to begin playback.
 func (p *Player) WithDefaultRate(defaultRate float32) *Player {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setDefaultRate:"), defaultRate)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setDefaultRate:"), defaultRate)
+	})
 	return p
 }
 
 // WithActionAtItemEnd sets the action to perform when the current player item has finished playing.
 func (p *Player) WithActionAtItemEnd(actionAtItemEnd PlayerActionAtItemEnd) *Player {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setActionAtItemEnd:"), actionAtItemEnd)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setActionAtItemEnd:"), actionAtItemEnd)
+	})
 	return p
 }
 
 // WithAutomaticallyWaitsToMinimizeStalling sets a Boolean value that indicates whether the player should automatically delay playback in order to minimize stalling.
 func (p *Player) WithAutomaticallyWaitsToMinimizeStalling(automaticallyWaitsToMinimizeStalling bool) *Player {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAutomaticallyWaitsToMinimizeStalling:"), automaticallyWaitsToMinimizeStalling)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAutomaticallyWaitsToMinimizeStalling:"), automaticallyWaitsToMinimizeStalling)
+	})
 	return p
 }
 
 // WithSourceClock sets a clock the player uses for item time bases.
 func (p *Player) WithSourceClock(sourceClock obj.Object) *Player {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setSourceClock:"), objref.IDOf(sourceClock))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setSourceClock:"), objref.IDOf(sourceClock))
+	})
 	return p
 }
 
 // WithVolume sets the audio playback volume for the player.
 func (p *Player) WithVolume(volume float32) *Player {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setVolume:"), volume)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setVolume:"), volume)
+	})
 	return p
 }
 
 // WithMuted sets a Boolean value that indicates whether the audio output of the player is muted.
 func (p *Player) WithMuted(muted bool) *Player {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setMuted:"), muted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setMuted:"), muted)
+	})
 	return p
 }
 
 // WithAppliesMediaSelectionCriteriaAutomatically sets a Boolean value that indicates whether the receiver should apply the current selection criteria automatically to player items.
 func (p *Player) WithAppliesMediaSelectionCriteriaAutomatically(appliesMediaSelectionCriteriaAutomatically bool) *Player {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAppliesMediaSelectionCriteriaAutomatically:"), appliesMediaSelectionCriteriaAutomatically)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAppliesMediaSelectionCriteriaAutomatically:"), appliesMediaSelectionCriteriaAutomatically)
+	})
 	return p
 }
 
 // WithAudioOutputDeviceUniqueID sets specifies the unique ID of the Core Audio output device used to play audio.
 func (p *Player) WithAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string) *Player {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAudioOutputDeviceUniqueID:"), purego.NSString(audioOutputDeviceUniqueID))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAudioOutputDeviceUniqueID:"), purego.NSString(audioOutputDeviceUniqueID))
+	})
 	return p
 }
 
 // WithAllowsExternalPlayback sets a Boolean value that indicates whether the player allows switching to external playback mode.
 func (p *Player) WithAllowsExternalPlayback(allowsExternalPlayback bool) *Player {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAllowsExternalPlayback:"), allowsExternalPlayback)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAllowsExternalPlayback:"), allowsExternalPlayback)
+	})
 	return p
 }
 
 // WithPreferredVideoDecoderGPURegistryID sets the registry identifier for the GPU used for video decoding.
 func (p *Player) WithPreferredVideoDecoderGPURegistryID(preferredVideoDecoderGPURegistryID uint64) *Player {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setPreferredVideoDecoderGPURegistryID:"), preferredVideoDecoderGPURegistryID)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setPreferredVideoDecoderGPURegistryID:"), preferredVideoDecoderGPURegistryID)
+	})
 	return p
 }
 
 // WithPreventsDisplaySleepDuringVideoPlayback sets a Boolean value that indicates whether video playback prevents display and device sleep.
 func (p *Player) WithPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) *Player {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setPreventsDisplaySleepDuringVideoPlayback:"), preventsDisplaySleepDuringVideoPlayback)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setPreventsDisplaySleepDuringVideoPlayback:"), preventsDisplaySleepDuringVideoPlayback)
+	})
 	return p
 }
 
 // WithAudiovisualBackgroundPlaybackPolicy sets a policy that determines how playback of audiovisual media continues when the app transitions to the background.
 func (p *Player) WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy PlayerAudiovisualBackgroundPlaybackPolicy) *Player {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAudiovisualBackgroundPlaybackPolicy:"), audiovisualBackgroundPlaybackPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAudiovisualBackgroundPlaybackPolicy:"), audiovisualBackgroundPlaybackPolicy)
+	})
 	return p
 }
 
 // WithVideoOutput sets the video output for this player.
 func (p *Player) WithVideoOutput(videoOutput *PlayerVideoOutput) *Player {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setVideoOutput:"), objref.IDOf(videoOutput))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setVideoOutput:"), objref.IDOf(videoOutput))
+	})
 	return p
 }
 
 // WithNetworkResourcePriority sets indicates the priority of this player for network bandwidth resource distribution.
 func (p *Player) WithNetworkResourcePriority(networkResourcePriority PlayerNetworkResourcePriority) *Player {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setNetworkResourcePriority:"), networkResourcePriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setNetworkResourcePriority:"), networkResourcePriority)
+	})
 	return p
 }
 
 // WithIntendedSpatialAudioExperience sets the AVPlayer’s intended spatial audio experience.
 func (p *Player) WithIntendedSpatialAudioExperience(intendedSpatialAudioExperience unsafe.Pointer) *Player {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setIntendedSpatialAudioExperience:"), intendedSpatialAudioExperience)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setIntendedSpatialAudioExperience:"), intendedSpatialAudioExperience)
+	})
 	return p
 }
 
 // WithAllowsCaptureOfClearKeyVideo sets indicates whether the video output of ClearKey Encrypted Video can be captured
 func (p *Player) WithAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo bool) *Player {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAllowsCaptureOfClearKeyVideo:"), allowsCaptureOfClearKeyVideo)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAllowsCaptureOfClearKeyVideo:"), allowsCaptureOfClearKeyVideo)
+	})
 	return p
 }
 
 // WithClosedCaptionDisplayEnabled sets a Boolean value that indicates whether the player uses closed captioning.
 func (p *Player) WithClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled bool) *Player {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setClosedCaptionDisplayEnabled:"), closedCaptionDisplayEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setClosedCaptionDisplayEnabled:"), closedCaptionDisplayEnabled)
+	})
 	return p
 }
 
 // WithMasterClock sets the host clock for item time bases.
 func (p *Player) WithMasterClock(masterClock obj.Object) *Player {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setMasterClock:"), objref.IDOf(masterClock))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setMasterClock:"), objref.IDOf(masterClock))
+	})
 	return p
 }
 
@@ -343,8 +393,15 @@ func (p *Player) Volume() float32 {
 
 // IsMuted reports whether audio output of the player is muted. Only affects audio muting for the player instance and not for the device.
 func (p *Player) IsMuted() bool {
-	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isMuted"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isMuted"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetMediaSelectionCriteriaForMediaCharacteristic applies automatic selection criteria for media that has the specified media characteristic.
@@ -381,8 +438,15 @@ func (p *Player) AllowsExternalPlayback() bool {
 
 // IsExternalPlaybackActive reports whether the player is currently playing video in "external playback" mode.
 func (p *Player) IsExternalPlaybackActive() bool {
-	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isExternalPlaybackActive"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isExternalPlaybackActive"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // OutputObscuredDueToInsufficientExternalProtection wraps the corresponding Objective-C method.
@@ -423,8 +487,15 @@ func (p *Player) VideoOutput() *PlayerVideoOutput {
 
 // NetworkResourcePriority returns the network resource priority.
 func (p *Player) NetworkResourcePriority() PlayerNetworkResourcePriority {
-	_r := objc.Send[PlayerNetworkResourcePriority](objref.IDOf(p), objc.RegisterName("networkResourcePriority"))
-	return _r
+	var _mainthread0 PlayerNetworkResourcePriority
+	purego.Main(func() {
+		_mainthread0 = func() PlayerNetworkResourcePriority {
+			_r := objc.Send[PlayerNetworkResourcePriority](objref.IDOf(p), objc.RegisterName("networkResourcePriority"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsCaptureOfClearKeyVideo wraps the corresponding Objective-C method.
@@ -435,8 +506,15 @@ func (p *Player) AllowsCaptureOfClearKeyVideo() bool {
 
 // IsClosedCaptionDisplayEnabled reports whether display of closed captions is enabled. This property is deprecated. When the value of appliesMediaSelectionCriteriaAutomatically is true, the receiver will enable closed captions automatically either according to user preferences or, if you provide them, according to AVPlayerMediaSelectionCriteria for the media characteristic AVMediaCharacteristicLegible. If you want to determine whether closed captions may be available for a given AVPlayerItem, you can examine the AVMediaSelectionOptions in the AVMediaSelectionGroup for the characteristic AVMediaCharacteristicLegible, as vended by -[AVAsset mediaSelectionGroupForMediaCharacteristic:]. See AVMediaCharacteristicTranscribesSpokenDialogForAccessibility and AVMediaCharacteristicDescribesMusicAndSoundForAccessibility as documented in AVMediaFormat.h for information about how to identify legible media selection options that offer the features of closed captions for accessibility purposes. You can select or deselect a specific AVMediaSelectionOption via -[AVPlayerItem selectMediaOption:inMediaSelectionGroup:]. For further information about Media Accessibility preferences, see MediaAccessibility framework documentation.
 func (p *Player) IsClosedCaptionDisplayEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isClosedCaptionDisplayEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isClosedCaptionDisplayEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MasterClock returns use sourceClock instead.

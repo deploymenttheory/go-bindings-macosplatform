@@ -68,150 +68,264 @@ func (wp *WKPreferences) String() string {
 
 // NewWKPreferences creates a new WKPreferences.
 func NewWKPreferences() *WKPreferences {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKPreferences")), objc.RegisterName("new"))
-	return wKPreferencesAdopt(_id)
+	var _mainthread0 *WKPreferences
+	purego.Main(func() {
+		_mainthread0 = func() *WKPreferences {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKPreferences")), objc.RegisterName("new"))
+			return wKPreferencesAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithMinimumFontSize sets the minimum font size, in points.
 func (wp *WKPreferences) WithMinimumFontSize(minimumFontSize float64) *WKPreferences {
-	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setMinimumFontSize:"), minimumFontSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setMinimumFontSize:"), minimumFontSize)
+	})
 	return wp
 }
 
 // WithJavaScriptCanOpenWindowsAutomatically sets a Boolean value that indicates whether JavaScript can open windows without user interaction.
 func (wp *WKPreferences) WithJavaScriptCanOpenWindowsAutomatically(javaScriptCanOpenWindowsAutomatically bool) *WKPreferences {
-	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setJavaScriptCanOpenWindowsAutomatically:"), javaScriptCanOpenWindowsAutomatically)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setJavaScriptCanOpenWindowsAutomatically:"), javaScriptCanOpenWindowsAutomatically)
+	})
 	return wp
 }
 
 // WithFraudulentWebsiteWarningEnabled sets a Boolean value that indicates whether the web view shows warnings for suspected fraudulent content, such as malware or phishing attemps.
 func (wp *WKPreferences) WithFraudulentWebsiteWarningEnabled(fraudulentWebsiteWarningEnabled bool) *WKPreferences {
-	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setFraudulentWebsiteWarningEnabled:"), fraudulentWebsiteWarningEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setFraudulentWebsiteWarningEnabled:"), fraudulentWebsiteWarningEnabled)
+	})
 	return wp
 }
 
 // WithShouldPrintBackgrounds sets a Boolean value that indicates whether to include any background color or graphics when printing content.
 func (wp *WKPreferences) WithShouldPrintBackgrounds(shouldPrintBackgrounds bool) *WKPreferences {
-	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setShouldPrintBackgrounds:"), shouldPrintBackgrounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setShouldPrintBackgrounds:"), shouldPrintBackgrounds)
+	})
 	return wp
 }
 
 // WithTabFocusesLinks sets a Boolean value that indicates whether pressing the tab key changes the focus to links and form controls.
 func (wp *WKPreferences) WithTabFocusesLinks(tabFocusesLinks bool) *WKPreferences {
-	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setTabFocusesLinks:"), tabFocusesLinks)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setTabFocusesLinks:"), tabFocusesLinks)
+	})
 	return wp
 }
 
 // WithTextInteractionEnabled sets a Boolean value that indicates whether to allow people to select or otherwise interact with text.
 func (wp *WKPreferences) WithTextInteractionEnabled(textInteractionEnabled bool) *WKPreferences {
-	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setTextInteractionEnabled:"), textInteractionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setTextInteractionEnabled:"), textInteractionEnabled)
+	})
 	return wp
 }
 
 // WithSiteSpecificQuirksModeEnabled sets a Boolean that indicates whether to apply site-specific compatibility workarounds.
 func (wp *WKPreferences) WithSiteSpecificQuirksModeEnabled(siteSpecificQuirksModeEnabled bool) *WKPreferences {
-	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setSiteSpecificQuirksModeEnabled:"), siteSpecificQuirksModeEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setSiteSpecificQuirksModeEnabled:"), siteSpecificQuirksModeEnabled)
+	})
 	return wp
 }
 
 // WithElementFullscreenEnabled sets a Boolean value that indicates whether a web view can display content full screen.
 func (wp *WKPreferences) WithElementFullscreenEnabled(elementFullscreenEnabled bool) *WKPreferences {
-	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setElementFullscreenEnabled:"), elementFullscreenEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setElementFullscreenEnabled:"), elementFullscreenEnabled)
+	})
 	return wp
 }
 
 // WithInactiveSchedulingPolicy sets a policy you set to specify how a web view that’s not in a window handles tasks.
 func (wp *WKPreferences) WithInactiveSchedulingPolicy(inactiveSchedulingPolicy WKInactiveSchedulingPolicy) *WKPreferences {
-	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setInactiveSchedulingPolicy:"), inactiveSchedulingPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setInactiveSchedulingPolicy:"), inactiveSchedulingPolicy)
+	})
 	return wp
 }
 
 // WithJavaEnabled sets a Boolean value that indicates whether Java is enabled.
 func (wp *WKPreferences) WithJavaEnabled(javaEnabled bool) *WKPreferences {
-	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setJavaEnabled:"), javaEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setJavaEnabled:"), javaEnabled)
+	})
 	return wp
 }
 
 // WithPlugInsEnabled sets a Boolean value that indicates whether plug-ins are enabled.
 func (wp *WKPreferences) WithPlugInsEnabled(plugInsEnabled bool) *WKPreferences {
-	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setPlugInsEnabled:"), plugInsEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setPlugInsEnabled:"), plugInsEnabled)
+	})
 	return wp
 }
 
 // WithJavaScriptEnabled sets a Boolean value that indicates whether JavaScript is enabled.
 func (wp *WKPreferences) WithJavaScriptEnabled(javaScriptEnabled bool) *WKPreferences {
-	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setJavaScriptEnabled:"), javaScriptEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setJavaScriptEnabled:"), javaScriptEnabled)
+	})
 	return wp
 }
 
 // MinimumFontSize returns the minimum font size in points. The default value is 0.
 func (wp *WKPreferences) MinimumFontSize() float64 {
-	_r := objc.Send[float64](objref.IDOf(wp), objc.RegisterName("minimumFontSize"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(wp), objc.RegisterName("minimumFontSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // JavaScriptCanOpenWindowsAutomatically reports whether javaScript can open windows without user interaction. The default value is false in iOS and true in OS X.
 func (wp *WKPreferences) JavaScriptCanOpenWindowsAutomatically() bool {
-	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("javaScriptCanOpenWindowsAutomatically"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("javaScriptCanOpenWindowsAutomatically"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsFraudulentWebsiteWarningEnabled reports whether warnings should be shown for suspected fraudulent content such as phishing or malware. The default value is true.
 func (wp *WKPreferences) IsFraudulentWebsiteWarningEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("isFraudulentWebsiteWarningEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("isFraudulentWebsiteWarningEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShouldPrintBackgrounds reports whether the web view should include backgrounds when printing. The default value is `NO`.
 func (wp *WKPreferences) ShouldPrintBackgrounds() bool {
-	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("shouldPrintBackgrounds"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("shouldPrintBackgrounds"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TabFocusesLinks reports whether if tabFocusesLinks is true, the tab key will focus links and form controls. The Option key temporarily reverses this preference.
 func (wp *WKPreferences) TabFocusesLinks() bool {
-	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("tabFocusesLinks"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("tabFocusesLinks"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsTextInteractionEnabled reports whether text interaction is disabled.
 func (wp *WKPreferences) IsTextInteractionEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("isTextInteractionEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("isTextInteractionEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsSiteSpecificQuirksModeEnabled reports whether webKit will apply built-in workarounds (quirks) to improve compatibility with certain known websites. You can disable site-specific quirks to help test your website without these workarounds. Enabled by default.
 func (wp *WKPreferences) IsSiteSpecificQuirksModeEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("isSiteSpecificQuirksModeEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("isSiteSpecificQuirksModeEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsElementFullscreenEnabled reports whether fullscreen API is enabled. The default value is false. We can set it to true to enable support for the fullscreen API.
 func (wp *WKPreferences) IsElementFullscreenEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("isElementFullscreenEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("isElementFullscreenEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // InactiveSchedulingPolicy specify the scheduling policy for the web view when it is inactive and detached from the view hierarchy. Web views are not considered idle when playing media or loading web pages. A suspended web view will pause JavaScript execution and page layout.
 func (wp *WKPreferences) InactiveSchedulingPolicy() WKInactiveSchedulingPolicy {
-	_r := objc.Send[WKInactiveSchedulingPolicy](objref.IDOf(wp), objc.RegisterName("inactiveSchedulingPolicy"))
-	return _r
+	var _mainthread0 WKInactiveSchedulingPolicy
+	purego.Main(func() {
+		_mainthread0 = func() WKInactiveSchedulingPolicy {
+			_r := objc.Send[WKInactiveSchedulingPolicy](objref.IDOf(wp), objc.RegisterName("inactiveSchedulingPolicy"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // JavaEnabled wraps the corresponding Objective-C method.
 func (wp *WKPreferences) JavaEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("javaEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("javaEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PlugInsEnabled wraps the corresponding Objective-C method.
 func (wp *WKPreferences) PlugInsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("plugInsEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("plugInsEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // JavaScriptEnabled wraps the corresponding Objective-C method.
 func (wp *WKPreferences) JavaScriptEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("javaScriptEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("javaScriptEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

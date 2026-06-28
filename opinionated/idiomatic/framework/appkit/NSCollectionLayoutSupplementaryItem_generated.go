@@ -47,41 +47,73 @@ func collectionLayoutSupplementaryItemAdopt(id objc.ID) *CollectionLayoutSupplem
 
 // WithZIndex sets the vertical stacking order of the supplementary item in relation to other items in the section.
 func (clsi *CollectionLayoutSupplementaryItem) WithZIndex(zIndex int) *CollectionLayoutSupplementaryItem {
-	objc.Send[objc.ID](objref.IDOf(clsi), objc.RegisterName("setZIndex:"), zIndex)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(clsi), objc.RegisterName("setZIndex:"), zIndex)
+	})
 	return clsi
 }
 
 // WithEdgeSpacing sets the amount of space added around the boundaries of the item between other items and this item’s container.
 func (clsi *CollectionLayoutSupplementaryItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutSupplementaryItem {
-	objc.Send[objc.ID](objref.IDOf(clsi), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(clsi), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
+	})
 	return clsi
 }
 
 // ZIndex returns the z index.
 func (clsi *CollectionLayoutSupplementaryItem) ZIndex() int {
-	_r := objc.Send[int](objref.IDOf(clsi), objc.RegisterName("zIndex"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(clsi), objc.RegisterName("zIndex"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ElementKind returns the element kind.
 func (clsi *CollectionLayoutSupplementaryItem) ElementKind() string {
-	_r := objc.Send[objc.ID](objref.IDOf(clsi), objc.RegisterName("elementKind"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(clsi), objc.RegisterName("elementKind"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ContainerAnchor returns the container anchor.
 func (clsi *CollectionLayoutSupplementaryItem) ContainerAnchor() *CollectionLayoutAnchor {
-	_r := objc.Send[objc.ID](objref.IDOf(clsi), objc.RegisterName("containerAnchor"))
-	return CollectionLayoutAnchorFromID(_r)
+	var _mainthread0 *CollectionLayoutAnchor
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionLayoutAnchor {
+			_r := objc.Send[objc.ID](objref.IDOf(clsi), objc.RegisterName("containerAnchor"))
+			return CollectionLayoutAnchorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ItemAnchor returns the item anchor.
 func (clsi *CollectionLayoutSupplementaryItem) ItemAnchor() *CollectionLayoutAnchor {
-	_r := objc.Send[objc.ID](objref.IDOf(clsi), objc.RegisterName("itemAnchor"))
-	return CollectionLayoutAnchorFromID(_r)
+	var _mainthread0 *CollectionLayoutAnchor
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionLayoutAnchor {
+			_r := objc.Send[objc.ID](objref.IDOf(clsi), objc.RegisterName("itemAnchor"))
+			return CollectionLayoutAnchorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // isCollectionLayoutSupplementaryItem marks CollectionLayoutSupplementaryItem — and, by embedding promotion, its

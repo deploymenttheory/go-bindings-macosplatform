@@ -68,6 +68,12 @@ func (sees *ScrollEdgeEffectStyle) String() string {
 
 // NewScrollEdgeEffectStyle creates a new ScrollEdgeEffectStyle.
 func NewScrollEdgeEffectStyle() *ScrollEdgeEffectStyle {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSScrollEdgeEffectStyle")), objc.RegisterName("new"))
-	return scrollEdgeEffectStyleAdopt(_id)
+	var _mainthread0 *ScrollEdgeEffectStyle
+	purego.Main(func() {
+		_mainthread0 = func() *ScrollEdgeEffectStyle {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSScrollEdgeEffectStyle")), objc.RegisterName("new"))
+			return scrollEdgeEffectStyleAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }

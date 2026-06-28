@@ -68,79 +68,139 @@ func (csvc *ComposeServiceViewController) String() string {
 
 // NewComposeServiceViewController creates a new ComposeServiceViewController.
 func NewComposeServiceViewController() *ComposeServiceViewController {
-	_id := objc.Send[objc.ID](objc.ID(_class("SLComposeServiceViewController")), objc.RegisterName("new"))
-	return composeServiceViewControllerAdopt(_id)
+	var _mainthread0 *ComposeServiceViewController
+	purego.Main(func() {
+		_mainthread0 = func() *ComposeServiceViewController {
+			_id := objc.Send[objc.ID](objc.ID(_class("SLComposeServiceViewController")), objc.RegisterName("new"))
+			return composeServiceViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithPlaceholder sets a string that’s displayed in the compose view’s text view when the text view is empty.
 func (csvc *ComposeServiceViewController) WithPlaceholder(placeholder string) *ComposeServiceViewController {
-	objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("setPlaceholder:"), purego.NSString(placeholder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("setPlaceholder:"), purego.NSString(placeholder))
+	})
 	return csvc
 }
 
 // WithCharactersRemaining sets the number of characters remaining in a custom character limit.
 func (csvc *ComposeServiceViewController) WithCharactersRemaining(charactersRemaining obj.Object) *ComposeServiceViewController {
-	objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("setCharactersRemaining:"), objref.IDOf(charactersRemaining))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("setCharactersRemaining:"), objref.IDOf(charactersRemaining))
+	})
 	return csvc
 }
 
 // PresentationAnimationDidFinish tells the compose view controller that the presentation animation is finished.
 func (csvc *ComposeServiceViewController) PresentationAnimationDidFinish() {
-	objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("presentationAnimationDidFinish"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("presentationAnimationDidFinish"))
+	})
+
 }
 
 // DidSelectPost sent to the compose view after the post animation finishes.
 func (csvc *ComposeServiceViewController) DidSelectPost() {
-	objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("didSelectPost"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("didSelectPost"))
+	})
+
 }
 
 // DidSelectCancel sent to the compose view after the cancel animation finishes.
 func (csvc *ComposeServiceViewController) DidSelectCancel() {
-	objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("didSelectCancel"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("didSelectCancel"))
+	})
+
 }
 
 // Cancel starts the animated dismissal of the compose view.
 func (csvc *ComposeServiceViewController) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("cancel"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("cancel"))
+	})
+
 }
 
 // IsContentValid reports whether the current content and attachments are valid.
 func (csvc *ComposeServiceViewController) IsContentValid() bool {
-	_r := objc.Send[bool](objref.IDOf(csvc), objc.RegisterName("isContentValid"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(csvc), objc.RegisterName("isContentValid"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ValidateContent performs validation of the current content and updates the state of the Post button, if appropriate.
 func (csvc *ComposeServiceViewController) ValidateContent() {
-	objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("validateContent"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("validateContent"))
+	})
+
 }
 
 // TextView returns the text view.
 func (csvc *ComposeServiceViewController) TextView() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("textView"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("textView"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ContentText returns the content text.
 func (csvc *ComposeServiceViewController) ContentText() string {
-	_r := objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("contentText"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("contentText"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Placeholder returns the placeholder.
 func (csvc *ComposeServiceViewController) Placeholder() string {
-	_r := objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("placeholder"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("placeholder"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CharactersRemaining returns the characters remaining.
 func (csvc *ComposeServiceViewController) CharactersRemaining() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("charactersRemaining"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("charactersRemaining"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

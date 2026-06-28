@@ -68,50 +68,94 @@ func (bvc *BrowserViewController) String() string {
 
 // NewBrowserViewControllerWithServiceTypeSession initializes a browser view controller using the provided service type and session.
 func NewBrowserViewControllerWithServiceTypeSession(serviceType string, session *Session) *BrowserViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("MCBrowserViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceType:session:"), purego.NSString(serviceType), objref.IDOf(session))
-	return browserViewControllerAdopt(_id)
+	var _mainthread0 *BrowserViewController
+	purego.Main(func() {
+		_mainthread0 = func() *BrowserViewController {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("MCBrowserViewController")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceType:session:"), purego.NSString(serviceType), objref.IDOf(session))
+			return browserViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewBrowserViewControllerWithBrowserSession initializes a browser view controller with the provided browser and session.
 func NewBrowserViewControllerWithBrowserSession(browser *NearbyServiceBrowser, session *Session) *BrowserViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("MCBrowserViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBrowser:session:"), objref.IDOf(browser), objref.IDOf(session))
-	return browserViewControllerAdopt(_id)
+	var _mainthread0 *BrowserViewController
+	purego.Main(func() {
+		_mainthread0 = func() *BrowserViewController {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("MCBrowserViewController")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBrowser:session:"), objref.IDOf(browser), objref.IDOf(session))
+			return browserViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithMinimumNumberOfPeers sets the minimum number of peers that need to be in a session, including the local peer.
 func (bvc *BrowserViewController) WithMinimumNumberOfPeers(minimumNumberOfPeers int) *BrowserViewController {
-	objc.Send[objc.ID](objref.IDOf(bvc), objc.RegisterName("setMinimumNumberOfPeers:"), minimumNumberOfPeers)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bvc), objc.RegisterName("setMinimumNumberOfPeers:"), minimumNumberOfPeers)
+	})
 	return bvc
 }
 
 // WithMaximumNumberOfPeers sets the maximum number of peers allowed in a session, including the local peer.
 func (bvc *BrowserViewController) WithMaximumNumberOfPeers(maximumNumberOfPeers int) *BrowserViewController {
-	objc.Send[objc.ID](objref.IDOf(bvc), objc.RegisterName("setMaximumNumberOfPeers:"), maximumNumberOfPeers)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bvc), objc.RegisterName("setMaximumNumberOfPeers:"), maximumNumberOfPeers)
+	})
 	return bvc
 }
 
 // Browser returns the browser.
 func (bvc *BrowserViewController) Browser() *NearbyServiceBrowser {
-	_r := objc.Send[objc.ID](objref.IDOf(bvc), objc.RegisterName("browser"))
-	return NearbyServiceBrowserFromID(_r)
+	var _mainthread0 *NearbyServiceBrowser
+	purego.Main(func() {
+		_mainthread0 = func() *NearbyServiceBrowser {
+			_r := objc.Send[objc.ID](objref.IDOf(bvc), objc.RegisterName("browser"))
+			return NearbyServiceBrowserFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Session returns the session.
 func (bvc *BrowserViewController) Session() *Session {
-	_r := objc.Send[objc.ID](objref.IDOf(bvc), objc.RegisterName("session"))
-	return SessionFromID(_r)
+	var _mainthread0 *Session
+	purego.Main(func() {
+		_mainthread0 = func() *Session {
+			_r := objc.Send[objc.ID](objref.IDOf(bvc), objc.RegisterName("session"))
+			return SessionFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MinimumNumberOfPeers returns the minimum number of peers.
 func (bvc *BrowserViewController) MinimumNumberOfPeers() int {
-	_r := objc.Send[int](objref.IDOf(bvc), objc.RegisterName("minimumNumberOfPeers"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(bvc), objc.RegisterName("minimumNumberOfPeers"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MaximumNumberOfPeers returns the maximum number of peers.
 func (bvc *BrowserViewController) MaximumNumberOfPeers() int {
-	_r := objc.Send[int](objref.IDOf(bvc), objc.RegisterName("maximumNumberOfPeers"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(bvc), objc.RegisterName("maximumNumberOfPeers"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

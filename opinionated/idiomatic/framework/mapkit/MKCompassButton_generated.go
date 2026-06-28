@@ -68,30 +68,54 @@ func (cb *CompassButton) String() string {
 
 // NewCompassButton creates a new CompassButton.
 func NewCompassButton() *CompassButton {
-	_id := objc.Send[objc.ID](objc.ID(_class("MKCompassButton")), objc.RegisterName("new"))
-	return compassButtonAdopt(_id)
+	var _mainthread0 *CompassButton
+	purego.Main(func() {
+		_mainthread0 = func() *CompassButton {
+			_id := objc.Send[objc.ID](objc.ID(_class("MKCompassButton")), objc.RegisterName("new"))
+			return compassButtonAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithMapView sets the map view that provides the heading information for the compass button.
 func (cb *CompassButton) WithMapView(mapView *MapView) *CompassButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
+	})
 	return cb
 }
 
 // WithCompassVisibility sets the visibility of the compass button.
 func (cb *CompassButton) WithCompassVisibility(compassVisibility FeatureVisibility) *CompassButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCompassVisibility:"), compassVisibility)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCompassVisibility:"), compassVisibility)
+	})
 	return cb
 }
 
 // MapView returns the map view.
 func (cb *CompassButton) MapView() *MapView {
-	_r := objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("mapView"))
-	return MapViewFromID(_r)
+	var _mainthread0 *MapView
+	purego.Main(func() {
+		_mainthread0 = func() *MapView {
+			_r := objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("mapView"))
+			return MapViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CompassVisibility returns the compass visibility.
 func (cb *CompassButton) CompassVisibility() FeatureVisibility {
-	_r := objc.Send[FeatureVisibility](objref.IDOf(cb), objc.RegisterName("compassVisibility"))
-	return _r
+	var _mainthread0 FeatureVisibility
+	purego.Main(func() {
+		_mainthread0 = func() FeatureVisibility {
+			_r := objc.Send[FeatureVisibility](objref.IDOf(cb), objc.RegisterName("compassVisibility"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

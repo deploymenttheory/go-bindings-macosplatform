@@ -68,11 +68,20 @@ func (sevc *SafariExtensionViewController) String() string {
 
 // NewSafariExtensionViewController creates a new SafariExtensionViewController.
 func NewSafariExtensionViewController() *SafariExtensionViewController {
-	_id := objc.Send[objc.ID](objc.ID(_class("SFSafariExtensionViewController")), objc.RegisterName("new"))
-	return safariExtensionViewControllerAdopt(_id)
+	var _mainthread0 *SafariExtensionViewController
+	purego.Main(func() {
+		_mainthread0 = func() *SafariExtensionViewController {
+			_id := objc.Send[objc.ID](objc.ID(_class("SFSafariExtensionViewController")), objc.RegisterName("new"))
+			return safariExtensionViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // DismissPopover dismisses popover.
 func (sevc *SafariExtensionViewController) DismissPopover() {
-	objc.Send[objc.ID](objref.IDOf(sevc), objc.RegisterName("dismissPopover"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sevc), objc.RegisterName("dismissPopover"))
+	})
+
 }

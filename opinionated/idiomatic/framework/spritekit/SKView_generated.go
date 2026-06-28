@@ -69,238 +69,429 @@ func (v_ *View) String() string {
 
 // NewView creates a new View.
 func NewView() *View {
-	_id := objc.Send[objc.ID](objc.ID(_class("SKView")), objc.RegisterName("new"))
-	return viewAdopt(_id)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_id := objc.Send[objc.ID](objc.ID(_class("SKView")), objc.RegisterName("new"))
+			return viewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithPaused sets a Boolean value that indicates whether the view’s scene animations are paused.
 func (v_ *View) WithPaused(paused bool) *View {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setPaused:"), paused)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setPaused:"), paused)
+	})
 	return v_
 }
 
 // WithShowsFPS sets a Boolean value that indicates whether the view displays a frame rate indicator.
 func (v_ *View) WithShowsFPS(showsFPS bool) *View {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setShowsFPS:"), showsFPS)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setShowsFPS:"), showsFPS)
+	})
 	return v_
 }
 
 // WithShowsDrawCount sets a Boolean value that indicates whether the view displays the number of drawing passes it needed to render the view.
 func (v_ *View) WithShowsDrawCount(showsDrawCount bool) *View {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setShowsDrawCount:"), showsDrawCount)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setShowsDrawCount:"), showsDrawCount)
+	})
 	return v_
 }
 
 // WithShowsNodeCount sets a Boolean value that indicates whether the view displays an overlay that shows physics bodies that are visible in the scene.
 func (v_ *View) WithShowsNodeCount(showsNodeCount bool) *View {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setShowsNodeCount:"), showsNodeCount)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setShowsNodeCount:"), showsNodeCount)
+	})
 	return v_
 }
 
 // WithShowsQuadCount sets a Boolean value that indicates whether the view displays the number of rectangles used to render the scene.
 func (v_ *View) WithShowsQuadCount(showsQuadCount bool) *View {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setShowsQuadCount:"), showsQuadCount)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setShowsQuadCount:"), showsQuadCount)
+	})
 	return v_
 }
 
 // WithShowsPhysics sets a Boolean value that indicates whether the view displays physics-related debugging information.
 func (v_ *View) WithShowsPhysics(showsPhysics bool) *View {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setShowsPhysics:"), showsPhysics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setShowsPhysics:"), showsPhysics)
+	})
 	return v_
 }
 
 // WithShowsFields sets a Boolean value that indicates whether the view displays information about physics fields in the scene.
 func (v_ *View) WithShowsFields(showsFields bool) *View {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setShowsFields:"), showsFields)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setShowsFields:"), showsFields)
+	})
 	return v_
 }
 
 // WithAsynchronous sets a Boolean value that indicates whether the content is rendered asynchronously.
 func (v_ *View) WithAsynchronous(asynchronous bool) *View {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setAsynchronous:"), asynchronous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setAsynchronous:"), asynchronous)
+	})
 	return v_
 }
 
 // WithAllowsTransparency sets a Boolean property that indicates whether the view is rendered using transparency.
 func (v_ *View) WithAllowsTransparency(allowsTransparency bool) *View {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setAllowsTransparency:"), allowsTransparency)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setAllowsTransparency:"), allowsTransparency)
+	})
 	return v_
 }
 
 // WithIgnoresSiblingOrder sets a Boolean value that indicates whether parent-child and sibling relationships affect the rendering order of nodes in the scene.
 func (v_ *View) WithIgnoresSiblingOrder(ignoresSiblingOrder bool) *View {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setIgnoresSiblingOrder:"), ignoresSiblingOrder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setIgnoresSiblingOrder:"), ignoresSiblingOrder)
+	})
 	return v_
 }
 
 // WithShouldCullNonVisibleNodes sets a Boolean value that indicates whether the view automatically culls non-visible nodes from the rendering tree.
 func (v_ *View) WithShouldCullNonVisibleNodes(shouldCullNonVisibleNodes bool) *View {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setShouldCullNonVisibleNodes:"), shouldCullNonVisibleNodes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setShouldCullNonVisibleNodes:"), shouldCullNonVisibleNodes)
+	})
 	return v_
 }
 
 // WithPreferredFramesPerSecond sets the animation frame rate that the view uses to render its scene.
 func (v_ *View) WithPreferredFramesPerSecond(preferredFramesPerSecond int) *View {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setPreferredFramesPerSecond:"), preferredFramesPerSecond)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setPreferredFramesPerSecond:"), preferredFramesPerSecond)
+	})
 	return v_
 }
 
 // WithDisableDepthStencilBuffer sets the disable depth stencil buffer.
 func (v_ *View) WithDisableDepthStencilBuffer(disableDepthStencilBuffer bool) *View {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setDisableDepthStencilBuffer:"), disableDepthStencilBuffer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setDisableDepthStencilBuffer:"), disableDepthStencilBuffer)
+	})
 	return v_
 }
 
 // WithDelegate sets a delegate that allows dynamic control of the view’s render rate.
 func (v_ *View) WithDelegate(delegate obj.Object) *View {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	})
 	return v_
 }
 
 // WithFrameInterval sets the number of frames that must pass before the scene is called to update its contents.
 func (v_ *View) WithFrameInterval(frameInterval int) *View {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setFrameInterval:"), frameInterval)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setFrameInterval:"), frameInterval)
+	})
 	return v_
 }
 
 // WithPreferredFrameRate sets the preferred frame rate.
 func (v_ *View) WithPreferredFrameRate(preferredFrameRate float32) *View {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setPreferredFrameRate:"), preferredFrameRate)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setPreferredFrameRate:"), preferredFrameRate)
+	})
 	return v_
 }
 
 // PresentScene presents a scene.
 func (v_ *View) PresentScene(scene *Scene) {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("presentScene:"), objref.IDOf(scene))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("presentScene:"), objref.IDOf(scene))
+	})
+
 }
 
 // PresentSceneTransition transitions from the current scene to a new scene.
 func (v_ *View) PresentSceneTransition(scene *Scene, transition *Transition) {
-	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("presentScene:transition:"), objref.IDOf(scene), objref.IDOf(transition))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("presentScene:transition:"), objref.IDOf(scene), objref.IDOf(transition))
+	})
+
 }
 
 // TextureFromNode renders the contents of a node tree and returns the rendered image as a texture.
 func (v_ *View) TextureFromNode(node *Node) *Texture {
-	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("textureFromNode:"), objref.IDOf(node))
-	return TextureFromID(_r)
+	var _mainthread0 *Texture
+	purego.Main(func() {
+		_mainthread0 = func() *Texture {
+			_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("textureFromNode:"), objref.IDOf(node))
+			return TextureFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TextureFromNodeCrop renders a portion of a node’s contents and returns the rendered image as a texture.
 func (v_ *View) TextureFromNodeCrop(node *Node, crop corefoundation.CGRect) *Texture {
-	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("textureFromNode:crop:"), objref.IDOf(node), crop)
-	return TextureFromID(_r)
+	var _mainthread0 *Texture
+	purego.Main(func() {
+		_mainthread0 = func() *Texture {
+			_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("textureFromNode:crop:"), objref.IDOf(node), crop)
+			return TextureFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ConvertPointToScene converts a point from view coordinates to scene coordinates.
 func (v_ *View) ConvertPointToScene(point corefoundation.CGPoint, scene *Scene) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(v_), objc.RegisterName("convertPoint:toScene:"), point, objref.IDOf(scene))
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(v_), objc.RegisterName("convertPoint:toScene:"), point, objref.IDOf(scene))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ConvertPointFromScene converts a point from scene coordinates to view coordinates.
 func (v_ *View) ConvertPointFromScene(point corefoundation.CGPoint, scene *Scene) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(v_), objc.RegisterName("convertPoint:fromScene:"), point, objref.IDOf(scene))
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(v_), objc.RegisterName("convertPoint:fromScene:"), point, objref.IDOf(scene))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsPaused reports whether pause the entire view
 func (v_ *View) IsPaused() bool {
-	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isPaused"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isPaused"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsFPS reports whether toggles display of performance stats in the view. All default to false.
 func (v_ *View) ShowsFPS() bool {
-	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("showsFPS"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("showsFPS"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsDrawCount wraps the corresponding Objective-C method.
 func (v_ *View) ShowsDrawCount() bool {
-	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("showsDrawCount"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("showsDrawCount"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsNodeCount wraps the corresponding Objective-C method.
 func (v_ *View) ShowsNodeCount() bool {
-	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("showsNodeCount"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("showsNodeCount"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsQuadCount wraps the corresponding Objective-C method.
 func (v_ *View) ShowsQuadCount() bool {
-	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("showsQuadCount"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("showsQuadCount"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsPhysics wraps the corresponding Objective-C method.
 func (v_ *View) ShowsPhysics() bool {
-	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("showsPhysics"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("showsPhysics"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsFields wraps the corresponding Objective-C method.
 func (v_ *View) ShowsFields() bool {
-	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("showsFields"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("showsFields"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsAsynchronous reports whether toggles whether the view updates is rendered asynchronously or aligned with Core Animation updates. Defaults to true.
 func (v_ *View) IsAsynchronous() bool {
-	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isAsynchronous"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isAsynchronous"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsTransparency reports whether toggles whether the view allows transparent rendering. This allows content under the view to show through if a non-opaque backgroundColor is set on the scene. Defaults to false.
 func (v_ *View) AllowsTransparency() bool {
-	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("allowsTransparency"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("allowsTransparency"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IgnoresSiblingOrder reports whether ignores sibling and traversal order to sort the rendered contents of a scene into the most efficient batching possible. This will require zPosition to be used in the scenes to properly guarantee elements are in front or behind each other. This defaults to false, meaning that sibling order overrides efficiency heuristics in the rendering of the scenes in the view. Setting this to true for a complex scene may substantially increase performance, but care must be taken as only zPosition determines render order before the efficiency heuristics are used.
 func (v_ *View) IgnoresSiblingOrder() bool {
-	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("ignoresSiblingOrder"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("ignoresSiblingOrder"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShouldCullNonVisibleNodes wraps the corresponding Objective-C method.
 func (v_ *View) ShouldCullNonVisibleNodes() bool {
-	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("shouldCullNonVisibleNodes"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("shouldCullNonVisibleNodes"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PreferredFramesPerSecond returns the preferred frames per second.
 func (v_ *View) PreferredFramesPerSecond() int {
-	_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("preferredFramesPerSecond"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("preferredFramesPerSecond"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DisableDepthStencilBuffer wraps the corresponding Objective-C method.
 func (v_ *View) DisableDepthStencilBuffer() bool {
-	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("disableDepthStencilBuffer"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("disableDepthStencilBuffer"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Delegate returns optional view delegate, see SKViewDelegate.
 func (v_ *View) Delegate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("delegate"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("delegate"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FrameInterval returns the frame interval.
 func (v_ *View) FrameInterval() int {
-	_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("frameInterval"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("frameInterval"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PreferredFrameRate returns the preferred frame rate.
 func (v_ *View) PreferredFrameRate() float32 {
-	_r := objc.Send[float32](objref.IDOf(v_), objc.RegisterName("preferredFrameRate"))
-	return _r
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_r := objc.Send[float32](objref.IDOf(v_), objc.RegisterName("preferredFrameRate"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Scene returns the currently presented scene, otherwise nil. If in a transition, the 'incoming' scene is returned.
 func (v_ *View) Scene() *Scene {
-	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("scene"))
-	return SceneFromID(_r)
+	var _mainthread0 *Scene
+	purego.Main(func() {
+		_mainthread0 = func() *Scene {
+			_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("scene"))
+			return SceneFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }

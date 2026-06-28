@@ -50,573 +50,823 @@ func scrollerAdopt(id objc.ID) *Scroller {
 
 // NewScroller creates a new Scroller.
 func NewScroller() *Scroller {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSScroller")), objc.RegisterName("new"))
-	return scrollerAdopt(_id)
+	var _mainthread0 *Scroller
+	purego.Main(func() {
+		_mainthread0 = func() *Scroller {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSScroller")), objc.RegisterName("new"))
+			return scrollerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithScrollerStyle sets the scroller style for this scroller.
 func (s *Scroller) WithScrollerStyle(scrollerStyle ScrollerStyle) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setScrollerStyle:"), scrollerStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setScrollerStyle:"), scrollerStyle)
+	})
 	return s
 }
 
 // WithKnobStyle sets the scroller’s knob style.
 func (s *Scroller) WithKnobStyle(knobStyle ScrollerKnobStyle) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setKnobStyle:"), knobStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setKnobStyle:"), knobStyle)
+	})
 	return s
 }
 
 // WithKnobProportion sets the proportion of the knob slot that the knob should fill.
 func (s *Scroller) WithKnobProportion(knobProportion float64) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setKnobProportion:"), knobProportion)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setKnobProportion:"), knobProportion)
+	})
 	return s
 }
 
 // WithArrowsPosition sets the location of the scroll buttons within the scroller, as described in NSScrollArrowPosition.
 func (s *Scroller) WithArrowsPosition(arrowsPosition ScrollArrowPosition) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setArrowsPosition:"), arrowsPosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setArrowsPosition:"), arrowsPosition)
+	})
 	return s
 }
 
 // WithControlTint sets the scroller’s control tint.
 func (s *Scroller) WithControlTint(controlTint ControlTint) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setControlTint:"), controlTint)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setControlTint:"), controlTint)
+	})
 	return s
 }
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (s *Scroller) WithTarget(target obj.Object) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return s
 }
 
 // WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
 func (s *Scroller) WithTag(tag int) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTag:"), tag)
+	})
 	return s
 }
 
 // WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 func (s *Scroller) WithIgnoresMultiClick(ignoresMultiClick bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	})
 	return s
 }
 
 // WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 func (s *Scroller) WithContinuous(continuous bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return s
 }
 
 // WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
 func (s *Scroller) WithEnabled(enabled bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return s
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
 func (s *Scroller) WithRefusesFirstResponder(refusesFirstResponder bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return s
 }
 
 // WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
 func (s *Scroller) WithHighlighted(highlighted bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return s
 }
 
 // WithControlSize sets the size of the control.
 func (s *Scroller) WithControlSize(controlSize ControlSize) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return s
 }
 
 // WithFormatter sets the receiver’s formatter.
 func (s *Scroller) WithFormatter(formatter obj.Object) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return s
 }
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (s *Scroller) WithObjectValue(objectValue obj.Object) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return s
 }
 
 // WithStringValue sets the value of the receiver’s cell as an NSString object.
 func (s *Scroller) WithStringValue(stringValue string) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return s
 }
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (s *Scroller) WithAttributedStringValue(attributedStringValue obj.Object) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return s
 }
 
 // WithIntValue sets the value of the receiver’s cell as an integer.
 func (s *Scroller) WithIntValue(intValue int) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return s
 }
 
 // WithIntegerValue sets the value of the receiver’s cell as an integer value.
 func (s *Scroller) WithIntegerValue(integerValue int) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return s
 }
 
 // WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
 func (s *Scroller) WithFloatValue(floatValue float32) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return s
 }
 
 // WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
 func (s *Scroller) WithDoubleValue(doubleValue float64) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return s
 }
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (s *Scroller) WithFont(font *Font) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return s
 }
 
 // WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
 func (s *Scroller) WithUsesSingleLineMode(usesSingleLineMode bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return s
 }
 
 // WithLineBreakMode sets the line break mode to use for text in the control’s cell.
 func (s *Scroller) WithLineBreakMode(lineBreakMode LineBreakMode) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return s
 }
 
 // WithAlignment sets the alignment mode of the text in the receiver’s cell.
 func (s *Scroller) WithAlignment(alignment TextAlignment) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return s
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (s *Scroller) WithBaseWritingDirection(baseWritingDirection WritingDirection) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return s
 }
 
 // WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 func (s *Scroller) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	})
 	return s
 }
 
 // WithCell sets the cell.
 func (s *Scroller) WithCell(cell CellProvider) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	})
 	return s
 }
 
 // WithSubviews sets the subviews.
 func (s *Scroller) WithSubviews(items ...ViewProvider) *Scroller {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return s
 }
 
 // WithHidden sets the hidden.
 func (s *Scroller) WithHidden(hidden bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHidden:"), hidden)
+	})
 	return s
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (s *Scroller) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return s
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (s *Scroller) WithAutoresizesSubviews(autoresizesSubviews bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return s
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (s *Scroller) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return s
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (s *Scroller) WithFrame(frame corefoundation.CGRect) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrame:"), frame)
+	})
 	return s
 }
 
 // WithFrameRotation sets the frame rotation.
 func (s *Scroller) WithFrameRotation(frameRotation float64) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return s
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (s *Scroller) WithFrameCenterRotation(frameCenterRotation float64) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return s
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (s *Scroller) WithBoundsRotation(boundsRotation float64) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return s
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (s *Scroller) WithBounds(bounds corefoundation.CGRect) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBounds:"), bounds)
+	})
 	return s
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (s *Scroller) WithCanDrawConcurrently(canDrawConcurrently bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return s
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (s *Scroller) WithNeedsDisplay(needsDisplay bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return s
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (s *Scroller) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return s
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (s *Scroller) WithWantsRestingTouches(wantsRestingTouches bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return s
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (s *Scroller) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return s
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (s *Scroller) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return s
 }
 
 // WithWantsLayer sets the wants layer.
 func (s *Scroller) WithWantsLayer(wantsLayer bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return s
 }
 
 // WithLayer sets the layer.
 func (s *Scroller) WithLayer(layer obj.Object) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return s
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (s *Scroller) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return s
 }
 
 // WithNeedsLayout sets the needs layout.
 func (s *Scroller) WithNeedsLayout(needsLayout bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return s
 }
 
 // WithAlphaValue sets the alpha value.
 func (s *Scroller) WithAlphaValue(alphaValue float64) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return s
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (s *Scroller) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return s
 }
 
 // WithBackgroundFilters sets the background filters.
 func (s *Scroller) WithBackgroundFilters(items ...obj.Object) *Scroller {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return s
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (s *Scroller) WithCompositingFilter(compositingFilter obj.Object) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return s
 }
 
 // WithContentFilters sets the content filters.
 func (s *Scroller) WithContentFilters(items ...obj.Object) *Scroller {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return s
 }
 
 // WithShadow sets the shadow.
 func (s *Scroller) WithShadow(shadow *Shadow) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return s
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (s *Scroller) WithClipsToBounds(clipsToBounds bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return s
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (s *Scroller) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return s
 }
 
 // WithToolTip sets the tool tip.
 func (s *Scroller) WithToolTip(toolTip string) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return s
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (s *Scroller) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return s
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (s *Scroller) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return s
 }
 
 // WithNextKeyView sets the next key view.
 func (s *Scroller) WithNextKeyView(nextKeyView ViewProvider) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return s
 }
 
 // WithFocusRingType sets the focus ring type.
 func (s *Scroller) WithFocusRingType(focusRingType FocusRingType) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return s
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (s *Scroller) WithGestureRecognizers(items ...GestureRecognizerProvider) *Scroller {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return s
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (s *Scroller) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return s
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (s *Scroller) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return s
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (s *Scroller) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return s
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (s *Scroller) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return s
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (s *Scroller) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return s
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (s *Scroller) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return s
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (s *Scroller) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return s
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (s *Scroller) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return s
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (s *Scroller) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return s
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (s *Scroller) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return s
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (s *Scroller) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return s
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (s *Scroller) WithNextResponder(nextResponder ResponderProvider) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return s
 }
 
 // WithMenu sets returns the responder’s menu.
 func (s *Scroller) WithMenu(menu *Menu) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return s
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (s *Scroller) WithUserActivity(userActivity obj.Object) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return s
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (s *Scroller) WithTouchBar(touchBar *TouchBar) *Scroller {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return s
 }
 
 // RectForPart returns the rectangle occupied by aPart, which for this method is interpreted literally rather than as an indicator of scrolling direction.
 func (s *Scroller) RectForPart(partCode ScrollerPart) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(s), objc.RegisterName("rectForPart:"), partCode)
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(s), objc.RegisterName("rectForPart:"), partCode)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CheckSpaceForParts checks to see if there is enough room in the receiver to display the knob and buttons.
 func (s *Scroller) CheckSpaceForParts() {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("checkSpaceForParts"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("checkSpaceForParts"))
+	})
+
 }
 
 // DrawKnob draws the knob.
 func (s *Scroller) DrawKnob() {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("drawKnob"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("drawKnob"))
+	})
+
 }
 
 // DrawKnobSlotInRectHighlight draws the portion of the scroller’s track, possibly including the line increment and decrement arrow buttons, that falls in the given rectangle.
 func (s *Scroller) DrawKnobSlotInRectHighlight(slotRect corefoundation.CGRect, flag bool) {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("drawKnobSlotInRect:highlight:"), slotRect, flag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("drawKnobSlotInRect:highlight:"), slotRect, flag)
+	})
+
 }
 
 // TestPart returns the part that would be hit by a mouse-down event at aPoint (expressed in the window’s coordinate system).
 func (s *Scroller) TestPart(point corefoundation.CGPoint) ScrollerPart {
-	_r := objc.Send[ScrollerPart](objref.IDOf(s), objc.RegisterName("testPart:"), point)
-	return _r
+	var _mainthread0 ScrollerPart
+	purego.Main(func() {
+		_mainthread0 = func() ScrollerPart {
+			_r := objc.Send[ScrollerPart](objref.IDOf(s), objc.RegisterName("testPart:"), point)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TrackKnob tracks the knob and sends action messages to the receiver’s target.
 func (s *Scroller) TrackKnob(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("trackKnob:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("trackKnob:"), objref.IDOf(event))
+	})
+
 }
 
 // ScrollerStyle returns the scroller style.
 func (s *Scroller) ScrollerStyle() ScrollerStyle {
-	_r := objc.Send[ScrollerStyle](objref.IDOf(s), objc.RegisterName("scrollerStyle"))
-	return _r
+	var _mainthread0 ScrollerStyle
+	purego.Main(func() {
+		_mainthread0 = func() ScrollerStyle {
+			_r := objc.Send[ScrollerStyle](objref.IDOf(s), objc.RegisterName("scrollerStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // KnobStyle returns the knob style.
 func (s *Scroller) KnobStyle() ScrollerKnobStyle {
-	_r := objc.Send[ScrollerKnobStyle](objref.IDOf(s), objc.RegisterName("knobStyle"))
-	return _r
+	var _mainthread0 ScrollerKnobStyle
+	purego.Main(func() {
+		_mainthread0 = func() ScrollerKnobStyle {
+			_r := objc.Send[ScrollerKnobStyle](objref.IDOf(s), objc.RegisterName("knobStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UsableParts returns the usable parts.
 func (s *Scroller) UsableParts() UsableScrollerParts {
-	_r := objc.Send[UsableScrollerParts](objref.IDOf(s), objc.RegisterName("usableParts"))
-	return _r
+	var _mainthread0 UsableScrollerParts
+	purego.Main(func() {
+		_mainthread0 = func() UsableScrollerParts {
+			_r := objc.Send[UsableScrollerParts](objref.IDOf(s), objc.RegisterName("usableParts"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HitPart returns the hit part.
 func (s *Scroller) HitPart() ScrollerPart {
-	_r := objc.Send[ScrollerPart](objref.IDOf(s), objc.RegisterName("hitPart"))
-	return _r
+	var _mainthread0 ScrollerPart
+	purego.Main(func() {
+		_mainthread0 = func() ScrollerPart {
+			_r := objc.Send[ScrollerPart](objref.IDOf(s), objc.RegisterName("hitPart"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // KnobProportion returns the knob proportion.
 func (s *Scroller) KnobProportion() float64 {
-	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("knobProportion"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("knobProportion"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetFloatValueKnobProportion sets the position of the knob to aFloat, which is a value from 0.0 (indicating the top or left end) to 1.0 (the bottom or right end).
 func (s *Scroller) SetFloatValueKnobProportion(value float32, proportion float64) {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFloatValue:knobProportion:"), value, proportion)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFloatValue:knobProportion:"), value, proportion)
+	})
+
 }
 
 // Highlight highlights or unhighlights the scroll button the user clicked.
 func (s *Scroller) Highlight(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("highlight:"), flag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("highlight:"), flag)
+	})
+
 }
 
 // TrackScrollButtons tracks the scroll buttons and sends action messages to the receiver’s target.
 func (s *Scroller) TrackScrollButtons(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("trackScrollButtons:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("trackScrollButtons:"), objref.IDOf(event))
+	})
+
 }
 
 // DrawParts caches images for the scroll buttons and knob.
 func (s *Scroller) DrawParts() {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("drawParts"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("drawParts"))
+	})
+
 }
 
 // DrawArrowHighlight draws the scroll button indicated by arrow, which is either NSScrollerIncrementArrow (the down or right scroll button) or NSScrollerDecrementArrow (up or left).
 func (s *Scroller) DrawArrowHighlight(whichArrow ScrollerArrow, flag bool) {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("drawArrow:highlight:"), whichArrow, flag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("drawArrow:highlight:"), whichArrow, flag)
+	})
+
 }
 
 // ArrowsPosition returns the arrows position.
 func (s *Scroller) ArrowsPosition() ScrollArrowPosition {
-	_r := objc.Send[ScrollArrowPosition](objref.IDOf(s), objc.RegisterName("arrowsPosition"))
-	return _r
+	var _mainthread0 ScrollArrowPosition
+	purego.Main(func() {
+		_mainthread0 = func() ScrollArrowPosition {
+			_r := objc.Send[ScrollArrowPosition](objref.IDOf(s), objc.RegisterName("arrowsPosition"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ControlTint returns the control tint.
 func (s *Scroller) ControlTint() ControlTint {
-	_r := objc.Send[ControlTint](objref.IDOf(s), objc.RegisterName("controlTint"))
-	return _r
+	var _mainthread0 ControlTint
+	purego.Main(func() {
+		_mainthread0 = func() ControlTint {
+			_r := objc.Send[ControlTint](objref.IDOf(s), objc.RegisterName("controlTint"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ControlProvider = (*Scroller)(nil)

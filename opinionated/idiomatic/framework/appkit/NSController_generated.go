@@ -77,13 +77,23 @@ func NewControllerWithCoder(coder obj.Object) *Controller {
 
 // DiscardEditing discards any pending changes by registered editors.
 func (c *Controller) DiscardEditing() {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("discardEditing"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("discardEditing"))
+	})
+
 }
 
 // CommitEditing reports whether attempts to commit any pending edits.
 func (c *Controller) CommitEditing() bool {
-	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("commitEditing"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("commitEditing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsEditing reports whether the object is editing.

@@ -49,381 +49,561 @@ func levelIndicatorCellAdopt(id objc.ID) *LevelIndicatorCell {
 
 // NewLevelIndicatorCellWithLevelIndicatorStyle initializes the receiver with the style specified by levelIndicatorStyle.
 func NewLevelIndicatorCellWithLevelIndicatorStyle(levelIndicatorStyle LevelIndicatorStyle) *LevelIndicatorCell {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSLevelIndicatorCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLevelIndicatorStyle:"), levelIndicatorStyle)
-	return levelIndicatorCellAdopt(_id)
+	var _mainthread0 *LevelIndicatorCell
+	purego.Main(func() {
+		_mainthread0 = func() *LevelIndicatorCell {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSLevelIndicatorCell")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLevelIndicatorStyle:"), levelIndicatorStyle)
+			return levelIndicatorCellAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithLevelIndicatorStyle sets the style of the level indicator control.
 func (lic *LevelIndicatorCell) WithLevelIndicatorStyle(levelIndicatorStyle LevelIndicatorStyle) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setLevelIndicatorStyle:"), levelIndicatorStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setLevelIndicatorStyle:"), levelIndicatorStyle)
+	})
 	return lic
 }
 
 // WithMinValue sets the minimum value of the control.
 func (lic *LevelIndicatorCell) WithMinValue(minValue float64) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setMinValue:"), minValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setMinValue:"), minValue)
+	})
 	return lic
 }
 
 // WithMaxValue sets the maximum value of the control.
 func (lic *LevelIndicatorCell) WithMaxValue(maxValue float64) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setMaxValue:"), maxValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setMaxValue:"), maxValue)
+	})
 	return lic
 }
 
 // WithWarningValue sets the warning value of the level indicator control.
 func (lic *LevelIndicatorCell) WithWarningValue(warningValue float64) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setWarningValue:"), warningValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setWarningValue:"), warningValue)
+	})
 	return lic
 }
 
 // WithCriticalValue sets the critical value of the level indicator control.
 func (lic *LevelIndicatorCell) WithCriticalValue(criticalValue float64) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setCriticalValue:"), criticalValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setCriticalValue:"), criticalValue)
+	})
 	return lic
 }
 
 // WithTickMarkPosition sets the placement of tick marks on the level indicator control.
 func (lic *LevelIndicatorCell) WithTickMarkPosition(tickMarkPosition TickMarkPosition) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setTickMarkPosition:"), tickMarkPosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setTickMarkPosition:"), tickMarkPosition)
+	})
 	return lic
 }
 
 // WithNumberOfTickMarks sets the number of tick marks displayed by the control.
 func (lic *LevelIndicatorCell) WithNumberOfTickMarks(numberOfTickMarks int) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setNumberOfTickMarks:"), numberOfTickMarks)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setNumberOfTickMarks:"), numberOfTickMarks)
+	})
 	return lic
 }
 
 // WithNumberOfMajorTickMarks sets the number of major tick marks displayed by the control.
 func (lic *LevelIndicatorCell) WithNumberOfMajorTickMarks(numberOfMajorTickMarks int) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setNumberOfMajorTickMarks:"), numberOfMajorTickMarks)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setNumberOfMajorTickMarks:"), numberOfMajorTickMarks)
+	})
 	return lic
 }
 
 // WithControlView sets the view associated with the cell.
 func (lic *LevelIndicatorCell) WithControlView(controlView ViewProvider) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	})
 	return lic
 }
 
 // WithType sets the type of the cell.
 func (lic *LevelIndicatorCell) WithType(type_ CellType) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setType:"), type_)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setType:"), type_)
+	})
 	return lic
 }
 
 // WithState sets the cell’s current state.
 func (lic *LevelIndicatorCell) WithState(state int) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setState:"), state)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setState:"), state)
+	})
 	return lic
 }
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (lic *LevelIndicatorCell) WithTarget(target obj.Object) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return lic
 }
 
 // WithTag sets a tag for identifying the cell.
 func (lic *LevelIndicatorCell) WithTag(tag int) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setTag:"), tag)
+	})
 	return lic
 }
 
 // WithTitle sets the cell’s title text.
 func (lic *LevelIndicatorCell) WithTitle(title string) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return lic
 }
 
 // WithEnabled sets a Boolean value indicating whether the cell is currently enabled.
 func (lic *LevelIndicatorCell) WithEnabled(enabled bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return lic
 }
 
 // WithContinuous sets a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 func (lic *LevelIndicatorCell) WithContinuous(continuous bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return lic
 }
 
 // WithEditable sets a Boolean value indicating whether the cell is editable.
 func (lic *LevelIndicatorCell) WithEditable(editable bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setEditable:"), editable)
+	})
 	return lic
 }
 
 // WithSelectable sets a Boolean value indicating whether the cell’s text can be selected.
 func (lic *LevelIndicatorCell) WithSelectable(selectable bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setSelectable:"), selectable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setSelectable:"), selectable)
+	})
 	return lic
 }
 
 // WithBordered sets a Boolean value indicating whether the cell draws itself outlined with a plain border.
 func (lic *LevelIndicatorCell) WithBordered(bordered bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setBordered:"), bordered)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setBordered:"), bordered)
+	})
 	return lic
 }
 
 // WithBezeled sets a Boolean value indicating whether the cell has a bezeled border.
 func (lic *LevelIndicatorCell) WithBezeled(bezeled bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setBezeled:"), bezeled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setBezeled:"), bezeled)
+	})
 	return lic
 }
 
 // WithScrollable sets a Boolean value indicating whether excess text scrolls past the cell’s bounds.
 func (lic *LevelIndicatorCell) WithScrollable(scrollable bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setScrollable:"), scrollable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setScrollable:"), scrollable)
+	})
 	return lic
 }
 
 // WithHighlighted sets a Boolean value indicating whether the cell has a highlighted appearance.
 func (lic *LevelIndicatorCell) WithHighlighted(highlighted bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return lic
 }
 
 // WithAlignment sets the alignment of the cell’s text.
 func (lic *LevelIndicatorCell) WithAlignment(alignment TextAlignment) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return lic
 }
 
 // WithWraps sets a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 func (lic *LevelIndicatorCell) WithWraps(wraps bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setWraps:"), wraps)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setWraps:"), wraps)
+	})
 	return lic
 }
 
 // WithFont sets the font that the cell uses to display text.
 func (lic *LevelIndicatorCell) WithFont(font *Font) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return lic
 }
 
 // WithFormatter sets the cell’s formatter object.
 func (lic *LevelIndicatorCell) WithFormatter(formatter obj.Object) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return lic
 }
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (lic *LevelIndicatorCell) WithObjectValue(objectValue obj.Object) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return lic
 }
 
 // WithStringValue sets the cell’s value as a string.
 func (lic *LevelIndicatorCell) WithStringValue(stringValue string) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return lic
 }
 
 // WithIntValue sets the cell’s value as an integer.
 func (lic *LevelIndicatorCell) WithIntValue(intValue int) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return lic
 }
 
 // WithFloatValue sets the cell’s value as a single-precision floating-point number.
 func (lic *LevelIndicatorCell) WithFloatValue(floatValue float32) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return lic
 }
 
 // WithDoubleValue sets the cell’s value as a double-precision floating-point number.
 func (lic *LevelIndicatorCell) WithDoubleValue(doubleValue float64) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return lic
 }
 
 // WithIntegerValue sets the cell’s value as an integer value.
 func (lic *LevelIndicatorCell) WithIntegerValue(integerValue int) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return lic
 }
 
 // WithImage sets the image displayed by the cell, if any.
 func (lic *LevelIndicatorCell) WithImage(image *Image) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setImage:"), objref.IDOf(image))
+	})
 	return lic
 }
 
 // WithControlSize sets the size of the cell.
 func (lic *LevelIndicatorCell) WithControlSize(controlSize ControlSize) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return lic
 }
 
 // WithRepresentedObject sets the object represented by the cell.
 func (lic *LevelIndicatorCell) WithRepresentedObject(representedObject obj.Object) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	})
 	return lic
 }
 
 // WithMenu sets the cell’s contextual menu.
 func (lic *LevelIndicatorCell) WithMenu(menu *Menu) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return lic
 }
 
 // WithSendsActionOnEndEditing sets a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 func (lic *LevelIndicatorCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	})
 	return lic
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (lic *LevelIndicatorCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return lic
 }
 
 // WithLineBreakMode sets the line break mode to use when drawing text in the cell.
 func (lic *LevelIndicatorCell) WithLineBreakMode(lineBreakMode LineBreakMode) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return lic
 }
 
 // WithAllowsUndo sets a Boolean value indicating whether the cell assumes responsibility for undo operations.
 func (lic *LevelIndicatorCell) WithAllowsUndo(allowsUndo bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	})
 	return lic
 }
 
 // WithTruncatesLastVisibleLine sets a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 func (lic *LevelIndicatorCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	})
 	return lic
 }
 
 // WithUserInterfaceLayoutDirection sets the layout direction of the user interface.
 func (lic *LevelIndicatorCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return lic
 }
 
 // WithUsesSingleLineMode sets a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 func (lic *LevelIndicatorCell) WithUsesSingleLineMode(usesSingleLineMode bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return lic
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the cell refuses the first responder status.
 func (lic *LevelIndicatorCell) WithRefusesFirstResponder(refusesFirstResponder bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return lic
 }
 
 // WithShowsFirstResponder sets a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 func (lic *LevelIndicatorCell) WithShowsFirstResponder(showsFirstResponder bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	})
 	return lic
 }
 
 // WithFocusRingType sets the type of focus ring to use with the associated view.
 func (lic *LevelIndicatorCell) WithFocusRingType(focusRingType FocusRingType) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return lic
 }
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (lic *LevelIndicatorCell) WithAttributedStringValue(attributedStringValue obj.Object) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return lic
 }
 
 // WithAllowsEditingTextAttributes sets a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 func (lic *LevelIndicatorCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	})
 	return lic
 }
 
 // WithImportsGraphics sets a Boolean value indicating whether the cell supports the importation of images into its text.
 func (lic *LevelIndicatorCell) WithImportsGraphics(importsGraphics bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	})
 	return lic
 }
 
 // WithAllowsMixedState sets a Boolean value indicating whether the cell supports three states instead of two.
 func (lic *LevelIndicatorCell) WithAllowsMixedState(allowsMixedState bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	})
 	return lic
 }
 
 // WithBackgroundStyle sets the cell’s background style.
 func (lic *LevelIndicatorCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	})
 	return lic
 }
 
 // WithControlTint sets the cell’s control tint.
 func (lic *LevelIndicatorCell) WithControlTint(controlTint ControlTint) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setControlTint:"), controlTint)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setControlTint:"), controlTint)
+	})
 	return lic
 }
 
 // RectOfTickMarkAtIndex returns the bounding rectangle of the tick mark identified by index (the minimum-value tick mark is at index 0).
 func (lic *LevelIndicatorCell) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(lic), objc.RegisterName("rectOfTickMarkAtIndex:"), index)
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(lic), objc.RegisterName("rectOfTickMarkAtIndex:"), index)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TickMarkValueAtIndex returns the receiver’s value represented by the tick mark at index (the minimum-value tick mark has an index of 0).
 func (lic *LevelIndicatorCell) TickMarkValueAtIndex(index int) float64 {
-	_r := objc.Send[float64](objref.IDOf(lic), objc.RegisterName("tickMarkValueAtIndex:"), index)
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(lic), objc.RegisterName("tickMarkValueAtIndex:"), index)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LevelIndicatorStyle returns the level indicator style.
 func (lic *LevelIndicatorCell) LevelIndicatorStyle() LevelIndicatorStyle {
-	_r := objc.Send[LevelIndicatorStyle](objref.IDOf(lic), objc.RegisterName("levelIndicatorStyle"))
-	return _r
+	var _mainthread0 LevelIndicatorStyle
+	purego.Main(func() {
+		_mainthread0 = func() LevelIndicatorStyle {
+			_r := objc.Send[LevelIndicatorStyle](objref.IDOf(lic), objc.RegisterName("levelIndicatorStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MinValue returns the min value.
 func (lic *LevelIndicatorCell) MinValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(lic), objc.RegisterName("minValue"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(lic), objc.RegisterName("minValue"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MaxValue returns the max value.
 func (lic *LevelIndicatorCell) MaxValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(lic), objc.RegisterName("maxValue"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(lic), objc.RegisterName("maxValue"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // WarningValue returns the warning value.
 func (lic *LevelIndicatorCell) WarningValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(lic), objc.RegisterName("warningValue"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(lic), objc.RegisterName("warningValue"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CriticalValue returns the critical value.
 func (lic *LevelIndicatorCell) CriticalValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(lic), objc.RegisterName("criticalValue"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(lic), objc.RegisterName("criticalValue"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TickMarkPosition returns the tick mark position.
 func (lic *LevelIndicatorCell) TickMarkPosition() TickMarkPosition {
-	_r := objc.Send[TickMarkPosition](objref.IDOf(lic), objc.RegisterName("tickMarkPosition"))
-	return _r
+	var _mainthread0 TickMarkPosition
+	purego.Main(func() {
+		_mainthread0 = func() TickMarkPosition {
+			_r := objc.Send[TickMarkPosition](objref.IDOf(lic), objc.RegisterName("tickMarkPosition"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NumberOfTickMarks returns the number of tick marks.
 func (lic *LevelIndicatorCell) NumberOfTickMarks() int {
-	_r := objc.Send[int](objref.IDOf(lic), objc.RegisterName("numberOfTickMarks"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(lic), objc.RegisterName("numberOfTickMarks"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NumberOfMajorTickMarks returns the number of major tick marks.
 func (lic *LevelIndicatorCell) NumberOfMajorTickMarks() int {
-	_r := objc.Send[int](objref.IDOf(lic), objc.RegisterName("numberOfMajorTickMarks"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(lic), objc.RegisterName("numberOfMajorTickMarks"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ActionCellProvider = (*LevelIndicatorCell)(nil)

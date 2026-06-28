@@ -49,144 +49,253 @@ func collectionViewFlowLayoutAdopt(id objc.ID) *CollectionViewFlowLayout {
 
 // NewCollectionViewFlowLayout creates a new CollectionViewFlowLayout.
 func NewCollectionViewFlowLayout() *CollectionViewFlowLayout {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewFlowLayout")), objc.RegisterName("new"))
-	return collectionViewFlowLayoutAdopt(_id)
+	var _mainthread0 *CollectionViewFlowLayout
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewFlowLayout {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewFlowLayout")), objc.RegisterName("new"))
+			return collectionViewFlowLayoutAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithMinimumLineSpacing sets the minimum spacing (in points) to use between rows or columns.
 func (cvfl *CollectionViewFlowLayout) WithMinimumLineSpacing(minimumLineSpacing float64) *CollectionViewFlowLayout {
-	objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setMinimumLineSpacing:"), minimumLineSpacing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setMinimumLineSpacing:"), minimumLineSpacing)
+	})
 	return cvfl
 }
 
 // WithMinimumInteritemSpacing sets the minimum spacing (in points) to use between items in the same row or column.
 func (cvfl *CollectionViewFlowLayout) WithMinimumInteritemSpacing(minimumInteritemSpacing float64) *CollectionViewFlowLayout {
-	objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setMinimumInteritemSpacing:"), minimumInteritemSpacing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setMinimumInteritemSpacing:"), minimumInteritemSpacing)
+	})
 	return cvfl
 }
 
 // WithItemSize sets the default size to use for items.
 func (cvfl *CollectionViewFlowLayout) WithItemSize(itemSize corefoundation.CGSize) *CollectionViewFlowLayout {
-	objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setItemSize:"), itemSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setItemSize:"), itemSize)
+	})
 	return cvfl
 }
 
 // WithEstimatedItemSize sets the estimated size of items in the collection view.
 func (cvfl *CollectionViewFlowLayout) WithEstimatedItemSize(estimatedItemSize corefoundation.CGSize) *CollectionViewFlowLayout {
-	objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setEstimatedItemSize:"), estimatedItemSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setEstimatedItemSize:"), estimatedItemSize)
+	})
 	return cvfl
 }
 
 // WithScrollDirection sets the scroll direction of the layout.
 func (cvfl *CollectionViewFlowLayout) WithScrollDirection(scrollDirection CollectionViewScrollDirection) *CollectionViewFlowLayout {
-	objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setScrollDirection:"), scrollDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setScrollDirection:"), scrollDirection)
+	})
 	return cvfl
 }
 
 // WithHeaderReferenceSize sets the default size to use for section headers.
 func (cvfl *CollectionViewFlowLayout) WithHeaderReferenceSize(headerReferenceSize corefoundation.CGSize) *CollectionViewFlowLayout {
-	objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setHeaderReferenceSize:"), headerReferenceSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setHeaderReferenceSize:"), headerReferenceSize)
+	})
 	return cvfl
 }
 
 // WithFooterReferenceSize sets the default size to use for section footers.
 func (cvfl *CollectionViewFlowLayout) WithFooterReferenceSize(footerReferenceSize corefoundation.CGSize) *CollectionViewFlowLayout {
-	objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setFooterReferenceSize:"), footerReferenceSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setFooterReferenceSize:"), footerReferenceSize)
+	})
 	return cvfl
 }
 
 // WithSectionInset sets the margins used to lay out content in a section.
 func (cvfl *CollectionViewFlowLayout) WithSectionInset(sectionInset foundation.NSEdgeInsets) *CollectionViewFlowLayout {
-	objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setSectionInset:"), sectionInset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setSectionInset:"), sectionInset)
+	})
 	return cvfl
 }
 
 // WithSectionHeadersPinToVisibleBounds sets the section headers pin to visible bounds.
 func (cvfl *CollectionViewFlowLayout) WithSectionHeadersPinToVisibleBounds(sectionHeadersPinToVisibleBounds bool) *CollectionViewFlowLayout {
-	objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setSectionHeadersPinToVisibleBounds:"), sectionHeadersPinToVisibleBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setSectionHeadersPinToVisibleBounds:"), sectionHeadersPinToVisibleBounds)
+	})
 	return cvfl
 }
 
 // WithSectionFootersPinToVisibleBounds sets the section footers pin to visible bounds.
 func (cvfl *CollectionViewFlowLayout) WithSectionFootersPinToVisibleBounds(sectionFootersPinToVisibleBounds bool) *CollectionViewFlowLayout {
-	objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setSectionFootersPinToVisibleBounds:"), sectionFootersPinToVisibleBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("setSectionFootersPinToVisibleBounds:"), sectionFootersPinToVisibleBounds)
+	})
 	return cvfl
 }
 
 // SectionAtIndexIsCollapsed wraps the corresponding Objective-C method.
 func (cvfl *CollectionViewFlowLayout) SectionAtIndexIsCollapsed(sectionIndex int) bool {
-	_r := objc.Send[bool](objref.IDOf(cvfl), objc.RegisterName("sectionAtIndexIsCollapsed:"), sectionIndex)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cvfl), objc.RegisterName("sectionAtIndexIsCollapsed:"), sectionIndex)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CollapseSectionAtIndex wraps the corresponding Objective-C method.
 func (cvfl *CollectionViewFlowLayout) CollapseSectionAtIndex(sectionIndex int) {
-	objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("collapseSectionAtIndex:"), sectionIndex)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("collapseSectionAtIndex:"), sectionIndex)
+	})
+
 }
 
 // ExpandSectionAtIndex wraps the corresponding Objective-C method.
 func (cvfl *CollectionViewFlowLayout) ExpandSectionAtIndex(sectionIndex int) {
-	objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("expandSectionAtIndex:"), sectionIndex)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvfl), objc.RegisterName("expandSectionAtIndex:"), sectionIndex)
+	})
+
 }
 
 // MinimumLineSpacing returns the minimum line spacing.
 func (cvfl *CollectionViewFlowLayout) MinimumLineSpacing() float64 {
-	_r := objc.Send[float64](objref.IDOf(cvfl), objc.RegisterName("minimumLineSpacing"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(cvfl), objc.RegisterName("minimumLineSpacing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MinimumInteritemSpacing returns the minimum interitem spacing.
 func (cvfl *CollectionViewFlowLayout) MinimumInteritemSpacing() float64 {
-	_r := objc.Send[float64](objref.IDOf(cvfl), objc.RegisterName("minimumInteritemSpacing"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(cvfl), objc.RegisterName("minimumInteritemSpacing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ItemSize returns the item size.
 func (cvfl *CollectionViewFlowLayout) ItemSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvfl), objc.RegisterName("itemSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvfl), objc.RegisterName("itemSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // EstimatedItemSize returns the estimated item size.
 func (cvfl *CollectionViewFlowLayout) EstimatedItemSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvfl), objc.RegisterName("estimatedItemSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvfl), objc.RegisterName("estimatedItemSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ScrollDirection returns the scroll direction.
 func (cvfl *CollectionViewFlowLayout) ScrollDirection() CollectionViewScrollDirection {
-	_r := objc.Send[CollectionViewScrollDirection](objref.IDOf(cvfl), objc.RegisterName("scrollDirection"))
-	return _r
+	var _mainthread0 CollectionViewScrollDirection
+	purego.Main(func() {
+		_mainthread0 = func() CollectionViewScrollDirection {
+			_r := objc.Send[CollectionViewScrollDirection](objref.IDOf(cvfl), objc.RegisterName("scrollDirection"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HeaderReferenceSize returns the header reference size.
 func (cvfl *CollectionViewFlowLayout) HeaderReferenceSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvfl), objc.RegisterName("headerReferenceSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvfl), objc.RegisterName("headerReferenceSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FooterReferenceSize returns the footer reference size.
 func (cvfl *CollectionViewFlowLayout) FooterReferenceSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvfl), objc.RegisterName("footerReferenceSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvfl), objc.RegisterName("footerReferenceSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SectionInset returns the section inset.
 func (cvfl *CollectionViewFlowLayout) SectionInset() foundation.NSEdgeInsets {
-	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(cvfl), objc.RegisterName("sectionInset"))
-	return _r
+	var _mainthread0 foundation.NSEdgeInsets
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSEdgeInsets {
+			_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(cvfl), objc.RegisterName("sectionInset"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SectionHeadersPinToVisibleBounds wraps the corresponding Objective-C method.
 func (cvfl *CollectionViewFlowLayout) SectionHeadersPinToVisibleBounds() bool {
-	_r := objc.Send[bool](objref.IDOf(cvfl), objc.RegisterName("sectionHeadersPinToVisibleBounds"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cvfl), objc.RegisterName("sectionHeadersPinToVisibleBounds"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SectionFootersPinToVisibleBounds wraps the corresponding Objective-C method.
 func (cvfl *CollectionViewFlowLayout) SectionFootersPinToVisibleBounds() bool {
-	_r := objc.Send[bool](objref.IDOf(cvfl), objc.RegisterName("sectionFootersPinToVisibleBounds"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cvfl), objc.RegisterName("sectionFootersPinToVisibleBounds"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ CollectionViewLayoutProvider = (*CollectionViewFlowLayout)(nil)

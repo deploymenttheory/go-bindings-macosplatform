@@ -48,339 +48,485 @@ func browserCellAdopt(id objc.ID) *BrowserCell {
 
 // NewBrowserCellTextCell creates a new BrowserCell.
 func NewBrowserCellTextCell(string_ string) *BrowserCell {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBrowserCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(string_))
-	return browserCellAdopt(_id)
+	var _mainthread0 *BrowserCell
+	purego.Main(func() {
+		_mainthread0 = func() *BrowserCell {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSBrowserCell")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(string_))
+			return browserCellAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewBrowserCellImageCell creates a new BrowserCell.
 func NewBrowserCellImageCell(image *Image) *BrowserCell {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBrowserCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initImageCell:"), objref.IDOf(image))
-	return browserCellAdopt(_id)
+	var _mainthread0 *BrowserCell
+	purego.Main(func() {
+		_mainthread0 = func() *BrowserCell {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSBrowserCell")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initImageCell:"), objref.IDOf(image))
+			return browserCellAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewBrowserCellWithCoder creates a new BrowserCell.
 func NewBrowserCellWithCoder(coder obj.Object) *BrowserCell {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBrowserCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
-	return browserCellAdopt(_id)
+	var _mainthread0 *BrowserCell
+	purego.Main(func() {
+		_mainthread0 = func() *BrowserCell {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSBrowserCell")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+			return browserCellAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithLeaf sets a Boolean that indicates whether the browser cell is a leaf or a branch cell.
 func (bc *BrowserCell) WithLeaf(leaf bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setLeaf:"), leaf)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setLeaf:"), leaf)
+	})
 	return bc
 }
 
 // WithLoaded sets a Boolean that indicates whether the cell is ready to display.
 func (bc *BrowserCell) WithLoaded(loaded bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setLoaded:"), loaded)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setLoaded:"), loaded)
+	})
 	return bc
 }
 
 // WithAlternateImage sets the browser cell’s image for the highlighted state.
 func (bc *BrowserCell) WithAlternateImage(alternateImage *Image) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
+	})
 	return bc
 }
 
 // WithControlView sets the view associated with the cell.
 func (bc *BrowserCell) WithControlView(controlView ViewProvider) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	})
 	return bc
 }
 
 // WithType sets the type of the cell.
 func (bc *BrowserCell) WithType(type_ CellType) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setType:"), type_)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setType:"), type_)
+	})
 	return bc
 }
 
 // WithState sets the cell’s current state.
 func (bc *BrowserCell) WithState(state int) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setState:"), state)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setState:"), state)
+	})
 	return bc
 }
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (bc *BrowserCell) WithTarget(target obj.Object) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return bc
 }
 
 // WithTag sets a tag for identifying the cell.
 func (bc *BrowserCell) WithTag(tag int) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setTag:"), tag)
+	})
 	return bc
 }
 
 // WithTitle sets the cell’s title text.
 func (bc *BrowserCell) WithTitle(title string) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return bc
 }
 
 // WithEnabled sets a Boolean value indicating whether the cell is currently enabled.
 func (bc *BrowserCell) WithEnabled(enabled bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return bc
 }
 
 // WithContinuous sets a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 func (bc *BrowserCell) WithContinuous(continuous bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return bc
 }
 
 // WithEditable sets a Boolean value indicating whether the cell is editable.
 func (bc *BrowserCell) WithEditable(editable bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setEditable:"), editable)
+	})
 	return bc
 }
 
 // WithSelectable sets a Boolean value indicating whether the cell’s text can be selected.
 func (bc *BrowserCell) WithSelectable(selectable bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setSelectable:"), selectable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setSelectable:"), selectable)
+	})
 	return bc
 }
 
 // WithBordered sets a Boolean value indicating whether the cell draws itself outlined with a plain border.
 func (bc *BrowserCell) WithBordered(bordered bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBordered:"), bordered)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBordered:"), bordered)
+	})
 	return bc
 }
 
 // WithBezeled sets a Boolean value indicating whether the cell has a bezeled border.
 func (bc *BrowserCell) WithBezeled(bezeled bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBezeled:"), bezeled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBezeled:"), bezeled)
+	})
 	return bc
 }
 
 // WithScrollable sets a Boolean value indicating whether excess text scrolls past the cell’s bounds.
 func (bc *BrowserCell) WithScrollable(scrollable bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setScrollable:"), scrollable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setScrollable:"), scrollable)
+	})
 	return bc
 }
 
 // WithHighlighted sets a Boolean value indicating whether the cell has a highlighted appearance.
 func (bc *BrowserCell) WithHighlighted(highlighted bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return bc
 }
 
 // WithAlignment sets the alignment of the cell’s text.
 func (bc *BrowserCell) WithAlignment(alignment TextAlignment) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return bc
 }
 
 // WithWraps sets a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 func (bc *BrowserCell) WithWraps(wraps bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setWraps:"), wraps)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setWraps:"), wraps)
+	})
 	return bc
 }
 
 // WithFont sets the font that the cell uses to display text.
 func (bc *BrowserCell) WithFont(font *Font) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return bc
 }
 
 // WithFormatter sets the cell’s formatter object.
 func (bc *BrowserCell) WithFormatter(formatter obj.Object) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return bc
 }
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (bc *BrowserCell) WithObjectValue(objectValue obj.Object) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return bc
 }
 
 // WithStringValue sets the cell’s value as a string.
 func (bc *BrowserCell) WithStringValue(stringValue string) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return bc
 }
 
 // WithIntValue sets the cell’s value as an integer.
 func (bc *BrowserCell) WithIntValue(intValue int) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return bc
 }
 
 // WithFloatValue sets the cell’s value as a single-precision floating-point number.
 func (bc *BrowserCell) WithFloatValue(floatValue float32) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return bc
 }
 
 // WithDoubleValue sets the cell’s value as a double-precision floating-point number.
 func (bc *BrowserCell) WithDoubleValue(doubleValue float64) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return bc
 }
 
 // WithIntegerValue sets the cell’s value as an integer value.
 func (bc *BrowserCell) WithIntegerValue(integerValue int) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return bc
 }
 
 // WithImage sets the image displayed by the cell, if any.
 func (bc *BrowserCell) WithImage(image *Image) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setImage:"), objref.IDOf(image))
+	})
 	return bc
 }
 
 // WithControlSize sets the size of the cell.
 func (bc *BrowserCell) WithControlSize(controlSize ControlSize) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return bc
 }
 
 // WithRepresentedObject sets the object represented by the cell.
 func (bc *BrowserCell) WithRepresentedObject(representedObject obj.Object) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	})
 	return bc
 }
 
 // WithMenu sets the cell’s contextual menu.
 func (bc *BrowserCell) WithMenu(menu *Menu) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return bc
 }
 
 // WithSendsActionOnEndEditing sets a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 func (bc *BrowserCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	})
 	return bc
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (bc *BrowserCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return bc
 }
 
 // WithLineBreakMode sets the line break mode to use when drawing text in the cell.
 func (bc *BrowserCell) WithLineBreakMode(lineBreakMode LineBreakMode) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return bc
 }
 
 // WithAllowsUndo sets a Boolean value indicating whether the cell assumes responsibility for undo operations.
 func (bc *BrowserCell) WithAllowsUndo(allowsUndo bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	})
 	return bc
 }
 
 // WithTruncatesLastVisibleLine sets a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 func (bc *BrowserCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	})
 	return bc
 }
 
 // WithUserInterfaceLayoutDirection sets the layout direction of the user interface.
 func (bc *BrowserCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return bc
 }
 
 // WithUsesSingleLineMode sets a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 func (bc *BrowserCell) WithUsesSingleLineMode(usesSingleLineMode bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return bc
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the cell refuses the first responder status.
 func (bc *BrowserCell) WithRefusesFirstResponder(refusesFirstResponder bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return bc
 }
 
 // WithShowsFirstResponder sets a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 func (bc *BrowserCell) WithShowsFirstResponder(showsFirstResponder bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	})
 	return bc
 }
 
 // WithFocusRingType sets the type of focus ring to use with the associated view.
 func (bc *BrowserCell) WithFocusRingType(focusRingType FocusRingType) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return bc
 }
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (bc *BrowserCell) WithAttributedStringValue(attributedStringValue obj.Object) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return bc
 }
 
 // WithAllowsEditingTextAttributes sets a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 func (bc *BrowserCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	})
 	return bc
 }
 
 // WithImportsGraphics sets a Boolean value indicating whether the cell supports the importation of images into its text.
 func (bc *BrowserCell) WithImportsGraphics(importsGraphics bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	})
 	return bc
 }
 
 // WithAllowsMixedState sets a Boolean value indicating whether the cell supports three states instead of two.
 func (bc *BrowserCell) WithAllowsMixedState(allowsMixedState bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	})
 	return bc
 }
 
 // WithBackgroundStyle sets the cell’s background style.
 func (bc *BrowserCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	})
 	return bc
 }
 
 // WithControlTint sets the cell’s control tint.
 func (bc *BrowserCell) WithControlTint(controlTint ControlTint) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setControlTint:"), controlTint)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setControlTint:"), controlTint)
+	})
 	return bc
 }
 
 // HighlightColorInView returns the highlight color that the receiver wants to display.
 func (bc *BrowserCell) HighlightColorInView(controlView *View) *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("highlightColorInView:"), objref.IDOf(controlView))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("highlightColorInView:"), objref.IDOf(controlView))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Reset unhighlights the receiver and unsets its state.
 func (bc *BrowserCell) Reset() {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("reset"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("reset"))
+	})
+
 }
 
 // Set highlights the receiver and sets its state.
 func (bc *BrowserCell) Set() {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("set"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("set"))
+	})
+
 }
 
 // IsLeaf reports whether the object is leaf.
 func (bc *BrowserCell) IsLeaf() bool {
-	_r := objc.Send[bool](objref.IDOf(bc), objc.RegisterName("isLeaf"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(bc), objc.RegisterName("isLeaf"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsLoaded reports whether the object is loaded.
 func (bc *BrowserCell) IsLoaded() bool {
-	_r := objc.Send[bool](objref.IDOf(bc), objc.RegisterName("isLoaded"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(bc), objc.RegisterName("isLoaded"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AlternateImage returns the alternate image.
 func (bc *BrowserCell) AlternateImage() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("alternateImage"))
-	return ImageFromID(_r)
+	var _mainthread0 *Image
+	purego.Main(func() {
+		_mainthread0 = func() *Image {
+			_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("alternateImage"))
+			return ImageFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ CellProvider = (*BrowserCell)(nil)

@@ -68,6 +68,12 @@ func (cnbwc *CANetworkBrowserWindowController) String() string {
 
 // NewCANetworkBrowserWindowController creates a new CANetworkBrowserWindowController.
 func NewCANetworkBrowserWindowController() *CANetworkBrowserWindowController {
-	_id := objc.Send[objc.ID](objc.ID(_class("CANetworkBrowserWindowController")), objc.RegisterName("new"))
-	return cANetworkBrowserWindowControllerAdopt(_id)
+	var _mainthread0 *CANetworkBrowserWindowController
+	purego.Main(func() {
+		_mainthread0 = func() *CANetworkBrowserWindowController {
+			_id := objc.Send[objc.ID](objc.ID(_class("CANetworkBrowserWindowController")), objc.RegisterName("new"))
+			return cANetworkBrowserWindowControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }

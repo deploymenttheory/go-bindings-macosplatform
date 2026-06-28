@@ -49,175 +49,286 @@ func splitViewControllerAdopt(id objc.ID) *SplitViewController {
 
 // NewSplitViewController creates a new SplitViewController.
 func NewSplitViewController() *SplitViewController {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSSplitViewController")), objc.RegisterName("new"))
-	return splitViewControllerAdopt(_id)
+	var _mainthread0 *SplitViewController
+	purego.Main(func() {
+		_mainthread0 = func() *SplitViewController {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSSplitViewController")), objc.RegisterName("new"))
+			return splitViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithSplitView sets the split view that the split view controller manages.
 func (svc *SplitViewController) WithSplitView(splitView *SplitView) *SplitViewController {
-	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setSplitView:"), objref.IDOf(splitView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setSplitView:"), objref.IDOf(splitView))
+	})
 	return svc
 }
 
 // WithSplitViewItems sets the array of split view items that correspond to the split view controller’s child view controllers.
 func (svc *SplitViewController) WithSplitViewItems(items ...*SplitViewItem) *SplitViewController {
 	_arr := purego.SliceToNSArray(items, func(_v *SplitViewItem) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setSplitViewItems:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setSplitViewItems:"), _arr)
+	})
 	return svc
 }
 
 // WithMinimumThicknessForInlineSidebars sets the minimum thickness for a sidebar before it automatically collapses.
 func (svc *SplitViewController) WithMinimumThicknessForInlineSidebars(minimumThicknessForInlineSidebars float64) *SplitViewController {
-	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setMinimumThicknessForInlineSidebars:"), minimumThicknessForInlineSidebars)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setMinimumThicknessForInlineSidebars:"), minimumThicknessForInlineSidebars)
+	})
 	return svc
 }
 
 // WithRepresentedObject sets the object whose value is presented in the receiver’s primary view.
 func (svc *SplitViewController) WithRepresentedObject(representedObject obj.Object) *SplitViewController {
-	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	})
 	return svc
 }
 
 // WithTitle sets the localized title of the receiver’s primary view.
 func (svc *SplitViewController) WithTitle(title string) *SplitViewController {
-	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return svc
 }
 
 // WithView sets the view controller’s primary view.
 func (svc *SplitViewController) WithView(view ViewProvider) *SplitViewController {
-	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setView:"), objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setView:"), objref.IDOf(view))
+	})
 	return svc
 }
 
 // WithPreferredContentSize sets the desired size of the view controller’s view, in screen units.
 func (svc *SplitViewController) WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *SplitViewController {
-	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setPreferredContentSize:"), preferredContentSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setPreferredContentSize:"), preferredContentSize)
+	})
 	return svc
 }
 
 // WithChildViewControllers sets an array of view controllers that are hierarchical children of the view controller.
 func (svc *SplitViewController) WithChildViewControllers(items ...ViewControllerProvider) *SplitViewController {
 	_arr := purego.SliceToNSArray(items, func(_v ViewControllerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setChildViewControllers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setChildViewControllers:"), _arr)
+	})
 	return svc
 }
 
 // WithSourceItemView sets the source item view.
 func (svc *SplitViewController) WithSourceItemView(sourceItemView ViewProvider) *SplitViewController {
-	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
+	})
 	return svc
 }
 
 // WithPreferredScreenOrigin sets for a view controller that is part of an app extension, the preferred screen origin.
 func (svc *SplitViewController) WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *SplitViewController {
-	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setPreferredScreenOrigin:"), preferredScreenOrigin)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setPreferredScreenOrigin:"), preferredScreenOrigin)
+	})
 	return svc
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (svc *SplitViewController) WithNextResponder(nextResponder ResponderProvider) *SplitViewController {
-	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return svc
 }
 
 // WithMenu sets returns the responder’s menu.
 func (svc *SplitViewController) WithMenu(menu *Menu) *SplitViewController {
-	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return svc
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (svc *SplitViewController) WithUserActivity(userActivity obj.Object) *SplitViewController {
-	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return svc
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (svc *SplitViewController) WithTouchBar(touchBar *TouchBar) *SplitViewController {
-	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return svc
 }
 
 // AddSplitViewItem adds a split view item to the end of the array of split view items.
 func (svc *SplitViewController) AddSplitViewItem(splitViewItem *SplitViewItem) {
-	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("addSplitViewItem:"), objref.IDOf(splitViewItem))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("addSplitViewItem:"), objref.IDOf(splitViewItem))
+	})
+
 }
 
 // InsertSplitViewItemAtIndex adds a split view item to the array of split view items at the specified index position.
 func (svc *SplitViewController) InsertSplitViewItemAtIndex(splitViewItem *SplitViewItem, index int) {
-	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("insertSplitViewItem:atIndex:"), objref.IDOf(splitViewItem), index)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("insertSplitViewItem:atIndex:"), objref.IDOf(splitViewItem), index)
+	})
+
 }
 
 // RemoveSplitViewItem removes a specified split view item from the split view controller.
 func (svc *SplitViewController) RemoveSplitViewItem(splitViewItem *SplitViewItem) {
-	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("removeSplitViewItem:"), objref.IDOf(splitViewItem))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("removeSplitViewItem:"), objref.IDOf(splitViewItem))
+	})
+
 }
 
 // SplitViewItemForViewController returns the corresponding split view item for the specified child view controller of the split view controller.
 func (svc *SplitViewController) SplitViewItemForViewController(viewController *ViewController) *SplitViewItem {
-	_r := objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("splitViewItemForViewController:"), objref.IDOf(viewController))
-	return SplitViewItemFromID(_r)
+	var _mainthread0 *SplitViewItem
+	purego.Main(func() {
+		_mainthread0 = func() *SplitViewItem {
+			_r := objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("splitViewItemForViewController:"), objref.IDOf(viewController))
+			return SplitViewItemFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SplitViewCanCollapseSubview wraps the corresponding Objective-C method.
 func (svc *SplitViewController) SplitViewCanCollapseSubview(splitView *SplitView, subview *View) bool {
-	_r := objc.Send[bool](objref.IDOf(svc), objc.RegisterName("splitView:canCollapseSubview:"), objref.IDOf(splitView), objref.IDOf(subview))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(svc), objc.RegisterName("splitView:canCollapseSubview:"), objref.IDOf(splitView), objref.IDOf(subview))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SplitViewShouldCollapseSubviewForDoubleClickOnDividerAtIndex wraps the corresponding Objective-C method.
 func (svc *SplitViewController) SplitViewShouldCollapseSubviewForDoubleClickOnDividerAtIndex(splitView *SplitView, subview *View, dividerIndex int) bool {
-	_r := objc.Send[bool](objref.IDOf(svc), objc.RegisterName("splitView:shouldCollapseSubview:forDoubleClickOnDividerAtIndex:"), objref.IDOf(splitView), objref.IDOf(subview), dividerIndex)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(svc), objc.RegisterName("splitView:shouldCollapseSubview:forDoubleClickOnDividerAtIndex:"), objref.IDOf(splitView), objref.IDOf(subview), dividerIndex)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SplitViewShouldHideDividerAtIndex wraps the corresponding Objective-C method.
 func (svc *SplitViewController) SplitViewShouldHideDividerAtIndex(splitView *SplitView, dividerIndex int) bool {
-	_r := objc.Send[bool](objref.IDOf(svc), objc.RegisterName("splitView:shouldHideDividerAtIndex:"), objref.IDOf(splitView), dividerIndex)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(svc), objc.RegisterName("splitView:shouldHideDividerAtIndex:"), objref.IDOf(splitView), dividerIndex)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SplitViewEffectiveRectForDrawnRectOfDividerAtIndex wraps the corresponding Objective-C method.
 func (svc *SplitViewController) SplitViewEffectiveRectForDrawnRectOfDividerAtIndex(splitView *SplitView, proposedEffectiveRect corefoundation.CGRect, drawnRect corefoundation.CGRect, dividerIndex int) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(svc), objc.RegisterName("splitView:effectiveRect:forDrawnRect:ofDividerAtIndex:"), objref.IDOf(splitView), proposedEffectiveRect, drawnRect, dividerIndex)
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(svc), objc.RegisterName("splitView:effectiveRect:forDrawnRect:ofDividerAtIndex:"), objref.IDOf(splitView), proposedEffectiveRect, drawnRect, dividerIndex)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SplitViewAdditionalEffectiveRectOfDividerAtIndex wraps the corresponding Objective-C method.
 func (svc *SplitViewController) SplitViewAdditionalEffectiveRectOfDividerAtIndex(splitView *SplitView, dividerIndex int) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(svc), objc.RegisterName("splitView:additionalEffectiveRectOfDividerAtIndex:"), objref.IDOf(splitView), dividerIndex)
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(svc), objc.RegisterName("splitView:additionalEffectiveRectOfDividerAtIndex:"), objref.IDOf(splitView), dividerIndex)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SplitView returns the split view managed by the SplitViewController. This can be used to customize view properties such as the dividerStyle, vertical, and autosaveName. It is not guaranteed to be the same view as the receivers 'view' property. The default created splitView is vertical with a dividerStyle of \c NSSplitViewDividerStyleThin. To provide a custom NSSplitView, set the splitView property anytime before self.viewLoaded is YES.
 func (svc *SplitViewController) SplitView() *SplitView {
-	_r := objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("splitView"))
-	return SplitViewFromID(_r)
+	var _mainthread0 *SplitView
+	purego.Main(func() {
+		_mainthread0 = func() *SplitView {
+			_r := objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("splitView"))
+			return SplitViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SplitViewItems returns the array of SplitViewItems that correspond to the current child view controllers. After a child view controller is added to the receiving splitViewController, a NSSplitViewItem with the default values will be created for it. Once the child is removed, its corresponding splitViewItem will be removed from the splitViewItems array. Setting this will call through to \c -insertSplitViewItem:atIndex and \c -removeSplitViewItem: for items that are new or need removal.
 //
 // SplitViewItems returns the collection as a Go slice.
 func (svc *SplitViewController) SplitViewItems() []*SplitViewItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("splitViewItems"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SplitViewItem { return SplitViewItemFromID(_id) })
+	var _mainthread0 []*SplitViewItem
+	purego.Main(func() {
+		_mainthread0 = func() []*SplitViewItem {
+			_arr := objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("splitViewItems"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SplitViewItem { return SplitViewItemFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // MinimumThicknessForInlineSidebars returns the minimum thickness in the primary axis of split view (width for "vertical", height otherwise) before sidebar items will automatically collapse. If reshown in fullscreen, they will overlay over the other split items. Auto-collapsed sidebars will automatically uncollapse if the thickness is increased back to or past the minimum thickness. Defaults to \c NSSplitViewControllerAutomaticDimension, which will use the effective minimum sizes of the split view item views as described by constraints in the window to determine the minimum size for inline sidebars. Once constraints establishing the minimum size can't be satisfied for all non-collapsed split panes, all sidebars will auto-collapse. When fullscreen, if a sidebar tries to uncollapse in this state, it will overlay.
 func (svc *SplitViewController) MinimumThicknessForInlineSidebars() float64 {
-	_r := objc.Send[float64](objref.IDOf(svc), objc.RegisterName("minimumThicknessForInlineSidebars"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(svc), objc.RegisterName("minimumThicknessForInlineSidebars"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ToggleSidebar collapses or expands the first sidebar in the split view controller using an animation.
 func (svc *SplitViewController) ToggleSidebar(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("toggleSidebar:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("toggleSidebar:"), objref.IDOf(sender))
+	})
+
 }
 
 // ToggleInspector collapses or expands the first inspector in the split view controller using an animation.
 func (svc *SplitViewController) ToggleInspector(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("toggleInspector:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("toggleInspector:"), objref.IDOf(sender))
+	})
+
 }
 
 var _ ViewControllerProvider = (*SplitViewController)(nil)

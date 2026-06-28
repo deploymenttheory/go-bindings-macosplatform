@@ -44,6 +44,14 @@ func buildMethods(
 		if e == nil {
 			continue
 		}
+		// A call is main-thread-bound when its class (or an ancestor) is
+		// @MainActor or the selector itself is, unless it is explicitly
+		// `nonisolated`. The loader has already propagated and stamped these.
+		e.mainThread = (cls.IsMainThreadRequired || method.IsMainThreadRequired) &&
+			!method.IsMainThreadExempt
+		if e.mainThread {
+			e.extraImports["purego"] = pureobjcImportPath
+		}
 		// Re-case recognised initialisms in the exported name (UsbControllers →
 		// USBControllers). Done before the dedup check so collisions are detected
 		// on the final name. The bridge dispatches by selector, so this is a
@@ -190,6 +198,11 @@ type methodEntry struct {
 	rawGoName    string
 	doc          string // Apple/header documentation for the underlying method
 	extraImports map[string]string
+
+	// mainThread is set when the underlying selector is isolated to Swift's
+	// @MainActor (the class, an ancestor, or the method itself), so the emitted
+	// body must run on the main thread. The writers wrap the call in purego.Main.
+	mainThread bool
 
 	blockObjCParams     []string
 	blockGoParamTypes   []string // Go types of the raw completion block's params
@@ -741,12 +754,19 @@ func writePlainMethod(w io.Writer, recv, recvExpr string, me methodEntry) {
 		})
 	}
 
+	retVars, retTypes := mainThreadReturns(me)
+
 	out, err := render.Method(view.Method{
-		DocComment: docLeadKind(me.goName, me.doc, synthFallback(me.goName, plainDocKind(me)), plainDocKind(me)),
-		Recv:       recv,
-		GoName:     me.goName,
-		ParamStr:   strings.Join(paramParts, ", "),
-		RetSig:     plainRetSig(me, recvVar),
+		DocComment: docLeadKind(
+			me.goName,
+			me.doc,
+			synthFallback(me.goName, plainDocKind(me)),
+			plainDocKind(me),
+		),
+		Recv:     recv,
+		GoName:   me.goName,
+		ParamStr: strings.Join(paramParts, ", "),
+		RetSig:   plainRetSig(me, recvVar),
 		Dispatch: view.Dispatch{
 			Guards:  guards,
 			Call:    call,
@@ -756,6 +776,9 @@ func writePlainMethod(w io.Writer, recv, recvExpr string, me methodEntry) {
 			RetZero: zeroValue(me.plainRetKind, me.plainRetType),
 			Outs:    outs,
 		},
+		MainThread: me.mainThread,
+		RetVars:    retVars,
+		RetTypes:   retTypes,
 	})
 	if err != nil {
 		panic(err)
@@ -856,6 +879,30 @@ func plainRetSig(me methodEntry, recvVar string) string {
 	return " (" + strings.Join(parts, ", ") + ")"
 }
 
+// mainThreadReturns lists the captured-return locals for a main-thread-wrapped
+// plain method: a parallel (names, types) pair, one entry per return value in
+// the same order as plainRetSig builds them (value, then out-parameters, then a
+// trailing error). The template declares the locals, assigns them from the body
+// run inside purego.Main, and returns them. A void method yields empty slices.
+func mainThreadReturns(me methodEntry) (names, types []string) {
+	if me.plainRetType != "" {
+		types = append(types, me.plainRetType)
+	}
+	for _, p := range me.plainParams {
+		if p.isOut {
+			types = append(types, p.goType)
+		}
+	}
+	if me.plainHasError {
+		types = append(types, "error")
+	}
+	names = make([]string, len(types))
+	for i := range types {
+		names[i] = fmt.Sprintf("_mainthread%d", i)
+	}
+	return names, types
+}
+
 func writeAsyncMethod(w io.Writer, recv, recvExpr string, me methodEntry) {
 	paramParts := make([]string, 0, 1+len(me.asyncNonBlockParams))
 	paramParts = append(paramParts, "ctx context.Context")
@@ -947,6 +994,7 @@ func writeBoolNSErrorMethod(w io.Writer, recv, recvExpr string, me methodEntry) 
 		GoName:     me.goName,
 		RecvExpr:   recvExpr,
 		Selector:   me.selector,
+		MainThread: me.mainThread,
 	})
 	if err != nil {
 		panic(err)
@@ -968,6 +1016,7 @@ func writeSliceMethod(w io.Writer, recv, recvExpr string, me methodEntry) {
 		ElemGoType:  me.sliceElemGoType,
 		HasError:    me.sliceHasError,
 		ConvClosure: convClosure,
+		MainThread:  me.mainThread,
 	})
 	if err != nil {
 		panic(err)

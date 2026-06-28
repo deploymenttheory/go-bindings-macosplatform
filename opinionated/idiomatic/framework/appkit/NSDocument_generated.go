@@ -74,120 +74,172 @@ func (d *Document) String() string {
 
 // NewDocumentWithTypeError initializes a document of a specified type.
 func NewDocumentWithTypeError(typeName string) (result *Document, err error) {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDocument")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:error:"), purego.NSString(typeName), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
-	}
-	return documentAdopt(_id), nil
+	purego.Main(func() {
+		result, err = func() (*Document, error) {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSDocument")), objc.RegisterName("alloc"))
+			var _nsErr uintptr
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:error:"), purego.NSString(typeName), unsafe.Pointer(&_nsErr))
+			if _nsErr != 0 {
+				return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+			}
+			return documentAdopt(_id), nil
+		}()
+	})
+	return
 }
 
 // NewDocumentWithContentsOfURLOfTypeError initializes a document located by a URL of a specified type.
 func NewDocumentWithContentsOfURLOfTypeError(url string, typeName string) (result *Document, err error) {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDocument")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:ofType:error:"), rt.FileURL(url), purego.NSString(typeName), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
-	}
-	return documentAdopt(_id), nil
+	purego.Main(func() {
+		result, err = func() (*Document, error) {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSDocument")), objc.RegisterName("alloc"))
+			var _nsErr uintptr
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:ofType:error:"), rt.FileURL(url), purego.NSString(typeName), unsafe.Pointer(&_nsErr))
+			if _nsErr != 0 {
+				return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+			}
+			return documentAdopt(_id), nil
+		}()
+	})
+	return
 }
 
 // NewDocumentForURLWithContentsOfURLOfTypeError initializes a document with the specified contents, and places the resulting document’s file at the designated location.
 func NewDocumentForURLWithContentsOfURLOfTypeError(urlOrNil string, contentsURL string, typeName string) (result *Document, err error) {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDocument")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForURL:withContentsOfURL:ofType:error:"), rt.FileURL(urlOrNil), rt.FileURL(contentsURL), purego.NSString(typeName), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
-	}
-	return documentAdopt(_id), nil
+	purego.Main(func() {
+		result, err = func() (*Document, error) {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSDocument")), objc.RegisterName("alloc"))
+			var _nsErr uintptr
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForURL:withContentsOfURL:ofType:error:"), rt.FileURL(urlOrNil), rt.FileURL(contentsURL), purego.NSString(typeName), unsafe.Pointer(&_nsErr))
+			if _nsErr != 0 {
+				return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+			}
+			return documentAdopt(_id), nil
+		}()
+	})
+	return
 }
 
 // NewDocumentWithContentsOfFileOfType creates a new Document.
 func NewDocumentWithContentsOfFileOfType(absolutePath string, typeName string) *Document {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDocument")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfFile:ofType:"), purego.NSString(absolutePath), purego.NSString(typeName))
-	return documentAdopt(_id)
+	var _mainthread0 *Document
+	purego.Main(func() {
+		_mainthread0 = func() *Document {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSDocument")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfFile:ofType:"), purego.NSString(absolutePath), purego.NSString(typeName))
+			return documentAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewDocumentWithContentsOfURLOfType creates a new Document.
 func NewDocumentWithContentsOfURLOfType(url string, typeName string) *Document {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDocument")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:ofType:"), rt.FileURL(url), purego.NSString(typeName))
-	return documentAdopt(_id)
+	var _mainthread0 *Document
+	purego.Main(func() {
+		_mainthread0 = func() *Document {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSDocument")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:ofType:"), rt.FileURL(url), purego.NSString(typeName))
+			return documentAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithFileType sets the name of the document type, as specified in the app’s information property-list file.
 func (d *Document) WithFileType(fileType string) *Document {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setFileType:"), purego.NSString(fileType))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setFileType:"), purego.NSString(fileType))
+	})
 	return d
 }
 
 // WithFileURL sets the location of the document’s on-disk representation.
 func (d *Document) WithFileURL(fileURL string) *Document {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setFileURL:"), rt.FileURL(fileURL))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setFileURL:"), rt.FileURL(fileURL))
+	})
 	return d
 }
 
 // WithFileModificationDate sets the last-known modification date of the document’s on-disk representation.
 func (d *Document) WithFileModificationDate(fileModificationDate obj.Object) *Document {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setFileModificationDate:"), objref.IDOf(fileModificationDate))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setFileModificationDate:"), objref.IDOf(fileModificationDate))
+	})
 	return d
 }
 
 // WithDraft sets a Boolean value that indicates whether the document is a draft that the user has not yet saved.
 func (d *Document) WithDraft(draft bool) *Document {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setDraft:"), draft)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setDraft:"), draft)
+	})
 	return d
 }
 
 // WithAutosavedContentsFileURL sets the location of the most recently autosaved document contents.
 func (d *Document) WithAutosavedContentsFileURL(autosavedContentsFileURL string) *Document {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setAutosavedContentsFileURL:"), rt.FileURL(autosavedContentsFileURL))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setAutosavedContentsFileURL:"), rt.FileURL(autosavedContentsFileURL))
+	})
 	return d
 }
 
 // WithPrintInfo sets the printing information associated with the document.
 func (d *Document) WithPrintInfo(printInfo *PrintInfo) *Document {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setPrintInfo:"), objref.IDOf(printInfo))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setPrintInfo:"), objref.IDOf(printInfo))
+	})
 	return d
 }
 
 // WithUndoManager sets the object that the document uses to support undo/redo operations.
 func (d *Document) WithUndoManager(undoManager obj.Object) *Document {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setUndoManager:"), objref.IDOf(undoManager))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setUndoManager:"), objref.IDOf(undoManager))
+	})
 	return d
 }
 
 // WithHasUndoManager sets a Boolean value that indicates whether the document owns an undo manager object.
 func (d *Document) WithHasUndoManager(hasUndoManager bool) *Document {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setHasUndoManager:"), hasUndoManager)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setHasUndoManager:"), hasUndoManager)
+	})
 	return d
 }
 
 // WithDisplayName sets the name of the document as displayed in the title bars of the document’s windows and in alert dialogs related to the document.
 func (d *Document) WithDisplayName(displayName string) *Document {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setDisplayName:"), purego.NSString(displayName))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setDisplayName:"), purego.NSString(displayName))
+	})
 	return d
 }
 
 // WithUserActivity sets an object that encapsulates a user activity the document supports.
 func (d *Document) WithUserActivity(userActivity obj.Object) *Document {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return d
 }
 
 // WithLastComponentOfFileName sets the name of the document seen by the user in AppleScript.
 func (d *Document) WithLastComponentOfFileName(lastComponentOfFileName string) *Document {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setLastComponentOfFileName:"), purego.NSString(lastComponentOfFileName))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setLastComponentOfFileName:"), purego.NSString(lastComponentOfFileName))
+	})
 	return d
 }
 
 // PerformActivityWithSynchronousWaitingUsing waits for any work scheduled by previous invocations of this method to complete, then invokes the passed-in block.
 func (d *Document) PerformActivityWithSynchronousWaitingUsing(waitSynchronously bool, block func(func())) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("performActivityWithSynchronousWaiting:usingBlock:"), waitSynchronously, objc.NewBlock(func(_ objc.Block, _b0 func()) { block(_b0) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("performActivityWithSynchronousWaiting:usingBlock:"), waitSynchronously, objc.NewBlock(func(_ objc.Block, _b0 func()) { block(_b0) }))
+	})
+
 }
 
 // ContinueActivityUsing continues to perform the task for a user activity object using a different block.
@@ -248,17 +300,27 @@ func (d *Document) PerformAsynchronousFileAccessUsing(block func(func())) {
 
 // RevertDocumentToSaved the action of the File menu item Revert in a document-based app.
 func (d *Document) RevertDocumentToSaved(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("revertDocumentToSaved:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("revertDocumentToSaved:"), objref.IDOf(sender))
+	})
+
 }
 
 // RevertToContentsOfURLOfType discards all unsaved document modifications and replaces the document’s contents by reading a file or file package located by a URL of a specified type.
 func (d *Document) RevertToContentsOfURLOfType(url string, typeName string) error {
-	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(d), objc.RegisterName("revertToContentsOfURL:ofType:error:"), rt.FileURL(url), purego.NSString(typeName), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
-	}
-	return nil
+	var _mainthread0 error
+	purego.Main(func() {
+		_mainthread0 = func() error {
+			var _nsErr uintptr
+			_ = objc.Send[bool](objref.IDOf(d), objc.RegisterName("revertToContentsOfURL:ofType:error:"), rt.FileURL(url), purego.NSString(typeName), unsafe.Pointer(&_nsErr))
+			if _nsErr != 0 {
+				return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+			}
+			return nil
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ReadFromURLOfType sets the contents of this document by reading from a file or file package, of a specified type, located by a URL.
@@ -303,22 +365,38 @@ func (d *Document) WriteToURLOfType(url string, typeName string) error {
 
 // FileWrapperOfTypeError creates and returns a file wrapper that contains the contents of the document, formatted to the specified type.
 func (d *Document) FileWrapperOfTypeError(typeName string) (result obj.Object, err error) {
-	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileWrapperOfType:error:"), purego.NSString(typeName), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
-	}
-	return obj.Wrap(_r), nil
+	var _mainthread0 obj.Object
+	var _mainthread1 error
+	purego.Main(func() {
+		_mainthread0, _mainthread1 = func() (result obj.Object, err error) {
+			var _nsErr uintptr
+			_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileWrapperOfType:error:"), purego.NSString(typeName), unsafe.Pointer(&_nsErr))
+			if _nsErr != 0 {
+				return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+			}
+			return obj.Wrap(_r), nil
+		}()
+	})
+	return _mainthread0, _mainthread1
+
 }
 
 // DataOfTypeError creates and returns a data object that contains the contents of the document, formatted to a specified type.
 func (d *Document) DataOfTypeError(typeName string) (result obj.Object, err error) {
-	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("dataOfType:error:"), purego.NSString(typeName), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
-	}
-	return obj.Wrap(_r), nil
+	var _mainthread0 obj.Object
+	var _mainthread1 error
+	purego.Main(func() {
+		_mainthread0, _mainthread1 = func() (result obj.Object, err error) {
+			var _nsErr uintptr
+			_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("dataOfType:error:"), purego.NSString(typeName), unsafe.Pointer(&_nsErr))
+			if _nsErr != 0 {
+				return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+			}
+			return obj.Wrap(_r), nil
+		}()
+	})
+	return _mainthread0, _mainthread1
+
 }
 
 // UnblockUserInteraction unblocks the main thread during asynchronous saving.
@@ -358,23 +436,39 @@ func (d *Document) FileAttributesToWriteToURLOfTypeForSaveOperationOriginalConte
 
 // SaveDocument the action method invoked in the receiver as first responder when the user chooses the Save menu command.
 func (d *Document) SaveDocument(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("saveDocument:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("saveDocument:"), objref.IDOf(sender))
+	})
+
 }
 
 // SaveDocumentAs the action method invoked in the receiver as first responder when the user chooses the Save As menu command.
 func (d *Document) SaveDocumentAs(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("saveDocumentAs:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("saveDocumentAs:"), objref.IDOf(sender))
+	})
+
 }
 
 // SaveDocumentTo the action method invoked in the receiver as first responder when the user chooses the Save To menu command.
 func (d *Document) SaveDocumentTo(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("saveDocumentTo:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("saveDocumentTo:"), objref.IDOf(sender))
+	})
+
 }
 
 // PrepareSavePanel tells the document to customize the specified Save panel.
 func (d *Document) PrepareSavePanel(savePanel *SavePanel) bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("prepareSavePanel:"), objref.IDOf(savePanel))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("prepareSavePanel:"), objref.IDOf(savePanel))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SaveToURLOfTypeForSaveOperation saves the contents of the document to a file or file package located by a URL, that is formatted to a specified type, for a particular kind of save operation, and invokes the passed-in completion handler.
@@ -398,25 +492,41 @@ func (d *Document) SaveToURLOfTypeForSaveOperation(ctx context.Context, url stri
 
 // CanAsynchronouslyWriteToURLOfTypeForSaveOperation returns whether the receiver can concurrently write to a file or file package located by a URL, that is formatted for a specific type, for a specific kind of save operation.
 func (d *Document) CanAsynchronouslyWriteToURLOfTypeForSaveOperation(url string, typeName string, saveOperation SaveOperationType) bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("canAsynchronouslyWriteToURL:ofType:forSaveOperation:"), rt.FileURL(url), purego.NSString(typeName), saveOperation)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("canAsynchronouslyWriteToURL:ofType:forSaveOperation:"), rt.FileURL(url), purego.NSString(typeName), saveOperation)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CheckAutosavingSafetyAndReturnError returns a Boolean value that indicates whether it is safe to autosave document changes.
 //
 // CheckAutosavingSafetyAndReturnError returns an error if the operation did not succeed.
 func (d *Document) CheckAutosavingSafetyAndReturnError() error {
-	var _nsErr uintptr
-	objc.Send[bool](objref.IDOf(d), objc.RegisterName("checkAutosavingSafetyAndReturnError:"), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
-	}
-	return nil
+	var _mainthread0 error
+	purego.Main(func() {
+		_mainthread0 = func() error {
+			var _nsErr uintptr
+			objc.Send[bool](objref.IDOf(d), objc.RegisterName("checkAutosavingSafetyAndReturnError:"), unsafe.Pointer(&_nsErr))
+			if _nsErr != 0 {
+				return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+			}
+			return nil
+		}()
+	})
+	return _mainthread0
 }
 
 // ScheduleAutosaving schedules periodic autosaving for the purpose of crash protection.
 func (d *Document) ScheduleAutosaving() {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("scheduleAutosaving"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("scheduleAutosaving"))
+	})
+
 }
 
 // AutosaveWithImplicitCancellability autosaves the document’s contents to an appropriate file-system location, as needed.
@@ -440,7 +550,10 @@ func (d *Document) AutosaveWithImplicitCancellability(ctx context.Context, autos
 
 // BrowseDocumentVersions opens the Versions browser in the document’s main window.
 func (d *Document) BrowseDocumentVersions(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("browseDocumentVersions:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("browseDocumentVersions:"), objref.IDOf(sender))
+	})
+
 }
 
 // StopBrowsingVersions dismiss the Versions browser for the current document.
@@ -462,42 +575,68 @@ func (d *Document) StopBrowsingVersions(ctx context.Context) error {
 
 // Close closes all of the document’s windows and removes the document from its document controller.
 func (d *Document) Close() {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("close"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("close"))
+	})
+
 }
 
 // DuplicateDocument creates a copy of the receiving document in response to the user choosing Duplicate from the File menu.
 func (d *Document) DuplicateDocument(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("duplicateDocument:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("duplicateDocument:"), objref.IDOf(sender))
+	})
+
 }
 
 // DuplicateAndReturnError creates a new document whose contents are the same as the receiver and returns an error object if unsuccessful.
 func (d *Document) DuplicateAndReturnError() (result *Document, err error) {
-	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("duplicateAndReturnError:"), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
-	}
-	return DocumentFromID(_r), nil
+	var _mainthread0 *Document
+	var _mainthread1 error
+	purego.Main(func() {
+		_mainthread0, _mainthread1 = func() (result *Document, err error) {
+			var _nsErr uintptr
+			_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("duplicateAndReturnError:"), unsafe.Pointer(&_nsErr))
+			if _nsErr != 0 {
+				return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+			}
+			return DocumentFromID(_r), nil
+		}()
+	})
+	return _mainthread0, _mainthread1
+
 }
 
 // RenameDocument renames the current document in response to the user choosing the Rename menu item.
 func (d *Document) RenameDocument(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("renameDocument:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("renameDocument:"), objref.IDOf(sender))
+	})
+
 }
 
 // MoveDocumentToUbiquityContainer moves the document to the user’s iCloud storage.
 func (d *Document) MoveDocumentToUbiquityContainer(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("moveDocumentToUbiquityContainer:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("moveDocumentToUbiquityContainer:"), objref.IDOf(sender))
+	})
+
 }
 
 // MoveDocument moves the document to a new location in response to the user choosing the Move To… menu item.
 func (d *Document) MoveDocument(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("moveDocument:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("moveDocument:"), objref.IDOf(sender))
+	})
+
 }
 
 // MoveDocumentWithCompletionHandler moves the document to a user-selected location.
 func (d *Document) MoveDocumentWithCompletionHandler(completionHandler func(bool)) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("moveDocumentWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("moveDocumentWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+	})
+
 }
 
 // MoveToURL moves the document’s file to the given URL.
@@ -521,17 +660,26 @@ func (d *Document) MoveToURL(ctx context.Context, url string) error {
 
 // LockDocument locks the document in response to the user choosing the Lock menu item.
 func (d *Document) LockDocument(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("lockDocument:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("lockDocument:"), objref.IDOf(sender))
+	})
+
 }
 
 // UnlockDocument unlocks the document in response to the user choosing the Unlock menu item.
 func (d *Document) UnlockDocument(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("unlockDocument:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("unlockDocument:"), objref.IDOf(sender))
+	})
+
 }
 
 // LockDocumentWithCompletionHandler prevents the user from making further changes to the document.
 func (d *Document) LockDocumentWithCompletionHandler(completionHandler func(bool)) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("lockDocumentWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("lockDocumentWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+	})
+
 }
 
 // Lock prevents the user from making changes to the document’s file.
@@ -555,7 +703,10 @@ func (d *Document) Lock(ctx context.Context) error {
 
 // UnlockDocumentWithCompletionHandler allows the user to make modifications to the document.
 func (d *Document) UnlockDocumentWithCompletionHandler(completionHandler func(bool)) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("unlockDocumentWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("unlockDocumentWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+	})
+
 }
 
 // Unlock allows the user to make modifications to the document’s file.
@@ -579,120 +730,208 @@ func (d *Document) Unlock(ctx context.Context) error {
 
 // RunPageLayout the action method invoked in the receiver as first responder when the user chooses the Page Setup menu command.
 func (d *Document) RunPageLayout(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("runPageLayout:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("runPageLayout:"), objref.IDOf(sender))
+	})
+
 }
 
 // PreparePageLayout adds document-specific content to the Page Layout panel.
 func (d *Document) PreparePageLayout(pageLayout *PageLayout) bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("preparePageLayout:"), objref.IDOf(pageLayout))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("preparePageLayout:"), objref.IDOf(pageLayout))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShouldChangePrintInfo returns a Boolean value that indicates whether the document allows changes to the default printing information.
 func (d *Document) ShouldChangePrintInfo(newPrintInfo *PrintInfo) bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("shouldChangePrintInfo:"), objref.IDOf(newPrintInfo))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("shouldChangePrintInfo:"), objref.IDOf(newPrintInfo))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PrintDocument prints the receiver in response to the user choosing the Print menu command.
 func (d *Document) PrintDocument(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("printDocument:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("printDocument:"), objref.IDOf(sender))
+	})
+
 }
 
 // PrintOperationWithSettingsError creates and returns a print operation for the document’s contents.
 func (d *Document) PrintOperationWithSettingsError(printSettings obj.Object) (result *PrintOperation, err error) {
-	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("printOperationWithSettings:error:"), objref.IDOf(printSettings), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
-	}
-	return PrintOperationFromID(_r), nil
+	var _mainthread0 *PrintOperation
+	var _mainthread1 error
+	purego.Main(func() {
+		_mainthread0, _mainthread1 = func() (result *PrintOperation, err error) {
+			var _nsErr uintptr
+			_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("printOperationWithSettings:error:"), objref.IDOf(printSettings), unsafe.Pointer(&_nsErr))
+			if _nsErr != 0 {
+				return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+			}
+			return PrintOperationFromID(_r), nil
+		}()
+	})
+	return _mainthread0, _mainthread1
+
 }
 
 // SaveDocumentToPDF exports a PDF representation of the document’s current contents.
 func (d *Document) SaveDocumentToPDF(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("saveDocumentToPDF:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("saveDocumentToPDF:"), objref.IDOf(sender))
+	})
+
 }
 
 // ShareDocumentWithSharingServiceCompletionHandler share the document’s file using the specified sharing service.
 func (d *Document) ShareDocumentWithSharingServiceCompletionHandler(sharingService *SharingService, completionHandler func(bool)) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("shareDocumentWithSharingService:completionHandler:"), objref.IDOf(sharingService), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("shareDocumentWithSharingService:completionHandler:"), objref.IDOf(sharingService), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+	})
+
 }
 
 // PrepareSharingServicePicker perform any custom setup associated with a sharing service picker.
 func (d *Document) PrepareSharingServicePicker(sharingServicePicker *SharingServicePicker) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("prepareSharingServicePicker:"), objref.IDOf(sharingServicePicker))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("prepareSharingServicePicker:"), objref.IDOf(sharingServicePicker))
+	})
+
 }
 
 // UpdateChangeCount updates the receiver’s change count according to the given change type.
 func (d *Document) UpdateChangeCount(change DocumentChangeType) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("updateChangeCount:"), change)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("updateChangeCount:"), change)
+	})
+
 }
 
 // ChangeCountTokenForSaveOperation returns an object that encapsulates the current record of document changes at the beginning of a save operation.
 func (d *Document) ChangeCountTokenForSaveOperation(saveOperation SaveOperationType) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("changeCountTokenForSaveOperation:"), saveOperation)
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("changeCountTokenForSaveOperation:"), saveOperation)
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UpdateChangeCountWithTokenForSaveOperation updates the document’s change count settings after a successful save operation.
 func (d *Document) UpdateChangeCountWithTokenForSaveOperation(changeCountToken obj.Object, saveOperation SaveOperationType) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("updateChangeCountWithToken:forSaveOperation:"), objref.IDOf(changeCountToken), saveOperation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("updateChangeCountWithToken:forSaveOperation:"), objref.IDOf(changeCountToken), saveOperation)
+	})
+
 }
 
 // PresentError presents an error alert to the user as a modal panel.
 func (d *Document) PresentError(error_ unsafe.Pointer) bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("presentError:"), error_)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("presentError:"), error_)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // WillNotPresentError confirms that the error object is not to be presented to the user and the error cannot be recovered from, so cleanup can be done.
 func (d *Document) WillNotPresentError(error_ unsafe.Pointer) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("willNotPresentError:"), error_)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("willNotPresentError:"), error_)
+	})
+
 }
 
 // MakeWindowControllers creates the window controller objects that the document uses to display its content.
 func (d *Document) MakeWindowControllers() {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("makeWindowControllers"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("makeWindowControllers"))
+	})
+
 }
 
 // WindowControllerWillLoadNib called before one of the document’s window controllers loads its nib file.
 func (d *Document) WindowControllerWillLoadNib(windowController *WindowController) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("windowControllerWillLoadNib:"), objref.IDOf(windowController))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("windowControllerWillLoadNib:"), objref.IDOf(windowController))
+	})
+
 }
 
 // WindowControllerDidLoadNib called after one of the document’s window controllers loads its nib file.
 func (d *Document) WindowControllerDidLoadNib(windowController *WindowController) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("windowControllerDidLoadNib:"), objref.IDOf(windowController))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("windowControllerDidLoadNib:"), objref.IDOf(windowController))
+	})
+
 }
 
 // SetWindow sets the window outlet of this document to the specified value.
 func (d *Document) SetWindow(window *Window) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setWindow:"), objref.IDOf(window))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setWindow:"), objref.IDOf(window))
+	})
+
 }
 
 // AddWindowController adds the specified window controller to the current document.
 func (d *Document) AddWindowController(windowController *WindowController) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("addWindowController:"), objref.IDOf(windowController))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("addWindowController:"), objref.IDOf(windowController))
+	})
+
 }
 
 // RemoveWindowController removes the specified window controller from the receiver’s array of window controllers.
 func (d *Document) RemoveWindowController(windowController *WindowController) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("removeWindowController:"), objref.IDOf(windowController))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("removeWindowController:"), objref.IDOf(windowController))
+	})
+
 }
 
 // ShowWindows displays all of the document’s windows, bringing them to the front and making them main or key as necessary.
 func (d *Document) ShowWindows() {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("showWindows"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("showWindows"))
+	})
+
 }
 
 // DefaultDraftName returns the default draft name for the document subclass.
 func (d *Document) DefaultDraftName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("defaultDraftName"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("defaultDraftName"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // WritableTypesForSaveOperation returns the names of the types to which this document can be saved for a specified kind of save operation.
@@ -811,20 +1050,41 @@ func (d *Document) FileModificationDate() obj.Object {
 
 // IsDraft reports whether the object is draft.
 func (d *Document) IsDraft() bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isDraft"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isDraft"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsEntireFileLoaded reports whether the object is entire file loaded.
 func (d *Document) IsEntireFileLoaded() bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isEntireFileLoaded"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isEntireFileLoaded"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AutosavingIsImplicitlyCancellable wraps the corresponding Objective-C method.
 func (d *Document) AutosavingIsImplicitlyCancellable() bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("autosavingIsImplicitlyCancellable"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("autosavingIsImplicitlyCancellable"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // KeepBackupFile wraps the corresponding Objective-C method.
@@ -841,8 +1101,15 @@ func (d *Document) BackupFileURL() obj.Object {
 
 // SavePanelShowsFileFormatsControl wraps the corresponding Objective-C method.
 func (d *Document) SavePanelShowsFileFormatsControl() bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("savePanelShowsFileFormatsControl"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("savePanelShowsFileFormatsControl"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FileNameExtensionWasHiddenInLastRunSavePanel wraps the corresponding Objective-C method.
@@ -862,14 +1129,28 @@ func (d *Document) FileTypeFromLastRunSavePanel() string {
 
 // HasUnautosavedChanges reports whether the object has unautosaved changes.
 func (d *Document) HasUnautosavedChanges() bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("hasUnautosavedChanges"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("hasUnautosavedChanges"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsBrowsingVersions reports whether the object is browsing versions.
 func (d *Document) IsBrowsingVersions() bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isBrowsingVersions"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isBrowsingVersions"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AutosavingFileType returns the autosaving file type.
@@ -889,90 +1170,183 @@ func (d *Document) AutosavedContentsFileURL() obj.Object {
 
 // IsLocked reports whether the object is locked.
 func (d *Document) IsLocked() bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isLocked"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isLocked"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PrintInfo returns the print info.
 func (d *Document) PrintInfo() *PrintInfo {
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("printInfo"))
-	return PrintInfoFromID(_r)
+	var _mainthread0 *PrintInfo
+	purego.Main(func() {
+		_mainthread0 = func() *PrintInfo {
+			_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("printInfo"))
+			return PrintInfoFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PDFPrintOperation returns the pdf print operation.
 func (d *Document) PDFPrintOperation() *PrintOperation {
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("PDFPrintOperation"))
-	return PrintOperationFromID(_r)
+	var _mainthread0 *PrintOperation
+	purego.Main(func() {
+		_mainthread0 = func() *PrintOperation {
+			_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("PDFPrintOperation"))
+			return PrintOperationFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsDocumentSharing wraps the corresponding Objective-C method.
 func (d *Document) AllowsDocumentSharing() bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("allowsDocumentSharing"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("allowsDocumentSharing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PreviewRepresentableActivityItems returns the preview representable activity items.
 func (d *Document) PreviewRepresentableActivityItems() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("previewRepresentableActivityItems"))
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("previewRepresentableActivityItems"))
+			return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetPreviewRepresentableActivityItems wraps the corresponding Objective-C method.
 func (d *Document) SetPreviewRepresentableActivityItems(previewRepresentableActivityItems []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setPreviewRepresentableActivityItems:"), purego.SliceToNSArray(previewRepresentableActivityItems, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setPreviewRepresentableActivityItems:"), purego.SliceToNSArray(previewRepresentableActivityItems, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	})
+
 }
 
 // IsDocumentEdited reports whether the object is document edited.
 func (d *Document) IsDocumentEdited() bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isDocumentEdited"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isDocumentEdited"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsInViewingMode reports whether the object is in viewing mode.
 func (d *Document) IsInViewingMode() bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isInViewingMode"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isInViewingMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UndoManager returns the undo manager.
 func (d *Document) UndoManager() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("undoManager"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("undoManager"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasUndoManager reports whether the object has undo manager.
 func (d *Document) HasUndoManager() bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("hasUndoManager"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("hasUndoManager"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // WindowNibName returns the window nib name.
 func (d *Document) WindowNibName() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("windowNibName"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("windowNibName"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // WindowControllers returns the window controllers.
 //
 // WindowControllers returns the collection as a Go slice.
 func (d *Document) WindowControllers() []*WindowController {
-	_arr := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("windowControllers"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WindowController { return WindowControllerFromID(_id) })
+	var _mainthread0 []*WindowController
+	purego.Main(func() {
+		_mainthread0 = func() []*WindowController {
+			_arr := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("windowControllers"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WindowController { return WindowControllerFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // DisplayName returns the display name.
 func (d *Document) DisplayName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("displayName"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("displayName"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // WindowForSheet returns the window for sheet.
 func (d *Document) WindowForSheet() *Window {
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("windowForSheet"))
-	return WindowFromID(_r)
+	var _mainthread0 *Window
+	purego.Main(func() {
+		_mainthread0 = func() *Window {
+			_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("windowForSheet"))
+			return WindowFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PresentedItemURL returns the presented item URL.
@@ -989,137 +1363,279 @@ func (d *Document) ObservedPresentedItemUbiquityAttributes() obj.Object {
 
 // DataRepresentationOfType wraps the corresponding Objective-C method.
 func (d *Document) DataRepresentationOfType(type_ string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("dataRepresentationOfType:"), purego.NSString(type_))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("dataRepresentationOfType:"), purego.NSString(type_))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FileAttributesToWriteToFileOfTypeSaveOperation wraps the corresponding Objective-C method.
 func (d *Document) FileAttributesToWriteToFileOfTypeSaveOperation(fullDocumentPath string, documentTypeName string, saveOperationType SaveOperationType) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileAttributesToWriteToFile:ofType:saveOperation:"), purego.NSString(fullDocumentPath), purego.NSString(documentTypeName), saveOperationType)
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileAttributesToWriteToFile:ofType:saveOperation:"), purego.NSString(fullDocumentPath), purego.NSString(documentTypeName), saveOperationType)
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FileName returns the file name.
 func (d *Document) FileName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileName"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileName"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FileWrapperRepresentationOfType wraps the corresponding Objective-C method.
 func (d *Document) FileWrapperRepresentationOfType(type_ string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileWrapperRepresentationOfType:"), purego.NSString(type_))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileWrapperRepresentationOfType:"), purego.NSString(type_))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LoadDataRepresentationOfType loads data representation of type.
 func (d *Document) LoadDataRepresentationOfType(data obj.Object, type_ string) bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("loadDataRepresentation:ofType:"), objref.IDOf(data), purego.NSString(type_))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("loadDataRepresentation:ofType:"), objref.IDOf(data), purego.NSString(type_))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LoadFileWrapperRepresentationOfType loads file wrapper representation of type.
 func (d *Document) LoadFileWrapperRepresentationOfType(wrapper obj.Object, type_ string) bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("loadFileWrapperRepresentation:ofType:"), objref.IDOf(wrapper), purego.NSString(type_))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("loadFileWrapperRepresentation:ofType:"), objref.IDOf(wrapper), purego.NSString(type_))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PrintShowingPrintPanel wraps the corresponding Objective-C method.
 func (d *Document) PrintShowingPrintPanel(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("printShowingPrintPanel:"), flag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("printShowingPrintPanel:"), flag)
+	})
+
 }
 
 // ReadFromFileOfType reads from file of type.
 func (d *Document) ReadFromFileOfType(fileName string, type_ string) bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("readFromFile:ofType:"), purego.NSString(fileName), purego.NSString(type_))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("readFromFile:ofType:"), purego.NSString(fileName), purego.NSString(type_))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RevertToSavedFromFileOfType wraps the corresponding Objective-C method.
 func (d *Document) RevertToSavedFromFileOfType(fileName string, type_ string) bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("revertToSavedFromFile:ofType:"), purego.NSString(fileName), purego.NSString(type_))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("revertToSavedFromFile:ofType:"), purego.NSString(fileName), purego.NSString(type_))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RevertToSavedFromURLOfType wraps the corresponding Objective-C method.
 func (d *Document) RevertToSavedFromURLOfType(url string, type_ string) bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("revertToSavedFromURL:ofType:"), rt.FileURL(url), purego.NSString(type_))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("revertToSavedFromURL:ofType:"), rt.FileURL(url), purego.NSString(type_))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RunModalPageLayoutWithPrintInfo runs modal page layout with print info.
 func (d *Document) RunModalPageLayoutWithPrintInfo(printInfo *PrintInfo) int {
-	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("runModalPageLayoutWithPrintInfo:"), objref.IDOf(printInfo))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("runModalPageLayoutWithPrintInfo:"), objref.IDOf(printInfo))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetFileName wraps the corresponding Objective-C method.
 func (d *Document) SetFileName(fileName string) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setFileName:"), purego.NSString(fileName))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setFileName:"), purego.NSString(fileName))
+	})
+
 }
 
 // WriteToFileOfType writes to file of type.
 func (d *Document) WriteToFileOfType(fileName string, type_ string) bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToFile:ofType:"), purego.NSString(fileName), purego.NSString(type_))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToFile:ofType:"), purego.NSString(fileName), purego.NSString(type_))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // WriteToFileOfTypeOriginalFileSaveOperation writes to file of type original file save operation.
 func (d *Document) WriteToFileOfTypeOriginalFileSaveOperation(fullDocumentPath string, documentTypeName string, fullOriginalDocumentPath string, saveOperationType SaveOperationType) bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToFile:ofType:originalFile:saveOperation:"), purego.NSString(fullDocumentPath), purego.NSString(documentTypeName), purego.NSString(fullOriginalDocumentPath), saveOperationType)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToFile:ofType:originalFile:saveOperation:"), purego.NSString(fullDocumentPath), purego.NSString(documentTypeName), purego.NSString(fullOriginalDocumentPath), saveOperationType)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // WriteWithBackupToFileOfTypeSaveOperation writes with backup to file of type save operation.
 func (d *Document) WriteWithBackupToFileOfTypeSaveOperation(fullDocumentPath string, documentTypeName string, saveOperationType SaveOperationType) bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeWithBackupToFile:ofType:saveOperation:"), purego.NSString(fullDocumentPath), purego.NSString(documentTypeName), saveOperationType)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeWithBackupToFile:ofType:saveOperation:"), purego.NSString(fullDocumentPath), purego.NSString(documentTypeName), saveOperationType)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShouldRunSavePanelWithAccessoryView wraps the corresponding Objective-C method.
 func (d *Document) ShouldRunSavePanelWithAccessoryView() bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("shouldRunSavePanelWithAccessoryView"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("shouldRunSavePanelWithAccessoryView"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UpdateUserActivityState updates the state of the given user activity.
 func (d *Document) UpdateUserActivityState(activity obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("updateUserActivityState:"), objref.IDOf(activity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("updateUserActivityState:"), objref.IDOf(activity))
+	})
+
 }
 
 // UserActivity returns the user activity.
 func (d *Document) UserActivity() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("userActivity"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("userActivity"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HandleSaveScriptCommand handles the Save AppleScript command by attempting to save the document.
 func (d *Document) HandleSaveScriptCommand(command obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("handleSaveScriptCommand:"), objref.IDOf(command))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("handleSaveScriptCommand:"), objref.IDOf(command))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HandleCloseScriptCommand handles the Close AppleScript command by attempting to close the document.
 func (d *Document) HandleCloseScriptCommand(command obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("handleCloseScriptCommand:"), objref.IDOf(command))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("handleCloseScriptCommand:"), objref.IDOf(command))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HandlePrintScriptCommand handles the Print AppleScript command by attempting to print the document.
 func (d *Document) HandlePrintScriptCommand(command obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("handlePrintScriptCommand:"), objref.IDOf(command))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("handlePrintScriptCommand:"), objref.IDOf(command))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LastComponentOfFileName returns the last component of file name.
 func (d *Document) LastComponentOfFileName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("lastComponentOfFileName"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("lastComponentOfFileName"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RestoreDocumentWindowWithIdentifierState restores a window that was associated with a document, after that document is reopened.
@@ -1149,22 +1665,34 @@ func (d *Document) RestoreDocumentWindowWithIdentifierState(ctx context.Context,
 
 // EncodeRestorableStateWithCoder saves the interface-related state of the document.
 func (d *Document) EncodeRestorableStateWithCoder(coder obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("encodeRestorableStateWithCoder:"), objref.IDOf(coder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("encodeRestorableStateWithCoder:"), objref.IDOf(coder))
+	})
+
 }
 
 // EncodeRestorableStateWithCoderBackgroundQueue saves the interface-related state of the document.
 func (d *Document) EncodeRestorableStateWithCoderBackgroundQueue(coder obj.Object, queue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("encodeRestorableStateWithCoder:backgroundQueue:"), objref.IDOf(coder), objref.IDOf(queue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("encodeRestorableStateWithCoder:backgroundQueue:"), objref.IDOf(coder), objref.IDOf(queue))
+	})
+
 }
 
 // RestoreStateWithCoder restores the interface-related state of the document.
 func (d *Document) RestoreStateWithCoder(coder obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("restoreStateWithCoder:"), objref.IDOf(coder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("restoreStateWithCoder:"), objref.IDOf(coder))
+	})
+
 }
 
 // InvalidateRestorableState marks the document’s interface-related state as dirty.
 func (d *Document) InvalidateRestorableState() {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("invalidateRestorableState"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("invalidateRestorableState"))
+	})
+
 }
 
 // isDocument marks Document — and, by embedding promotion, its

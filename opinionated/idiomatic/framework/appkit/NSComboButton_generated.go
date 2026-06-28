@@ -50,495 +50,681 @@ func comboButtonAdopt(id objc.ID) *ComboButton {
 
 // NewComboButton creates a new ComboButton.
 func NewComboButton() *ComboButton {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSComboButton")), objc.RegisterName("new"))
-	return comboButtonAdopt(_id)
+	var _mainthread0 *ComboButton
+	purego.Main(func() {
+		_mainthread0 = func() *ComboButton {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSComboButton")), objc.RegisterName("new"))
+			return comboButtonAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithTitle sets the localized string that the button displays.
 func (cb *ComboButton) WithTitle(title string) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return cb
 }
 
 // WithImage sets the image that the button displays.
 func (cb *ComboButton) WithImage(image *Image) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setImage:"), objref.IDOf(image))
+	})
 	return cb
 }
 
 // WithImageScaling sets the scaling behavior to apply to the button’s image.
 func (cb *ComboButton) WithImageScaling(imageScaling ImageScaling) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setImageScaling:"), imageScaling)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setImageScaling:"), imageScaling)
+	})
 	return cb
 }
 
 // WithStyle sets the appearance setting that determines how the button presents its menu .
 func (cb *ComboButton) WithStyle(style ComboButtonStyle) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setStyle:"), style)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setStyle:"), style)
+	})
 	return cb
 }
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (cb *ComboButton) WithTarget(target obj.Object) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return cb
 }
 
 // WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
 func (cb *ComboButton) WithTag(tag int) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTag:"), tag)
+	})
 	return cb
 }
 
 // WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 func (cb *ComboButton) WithIgnoresMultiClick(ignoresMultiClick bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	})
 	return cb
 }
 
 // WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 func (cb *ComboButton) WithContinuous(continuous bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return cb
 }
 
 // WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
 func (cb *ComboButton) WithEnabled(enabled bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return cb
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
 func (cb *ComboButton) WithRefusesFirstResponder(refusesFirstResponder bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return cb
 }
 
 // WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
 func (cb *ComboButton) WithHighlighted(highlighted bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return cb
 }
 
 // WithControlSize sets the size of the control.
 func (cb *ComboButton) WithControlSize(controlSize ControlSize) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return cb
 }
 
 // WithFormatter sets the receiver’s formatter.
 func (cb *ComboButton) WithFormatter(formatter obj.Object) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return cb
 }
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (cb *ComboButton) WithObjectValue(objectValue obj.Object) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return cb
 }
 
 // WithStringValue sets the value of the receiver’s cell as an NSString object.
 func (cb *ComboButton) WithStringValue(stringValue string) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return cb
 }
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (cb *ComboButton) WithAttributedStringValue(attributedStringValue obj.Object) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return cb
 }
 
 // WithIntValue sets the value of the receiver’s cell as an integer.
 func (cb *ComboButton) WithIntValue(intValue int) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return cb
 }
 
 // WithIntegerValue sets the value of the receiver’s cell as an integer value.
 func (cb *ComboButton) WithIntegerValue(integerValue int) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return cb
 }
 
 // WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
 func (cb *ComboButton) WithFloatValue(floatValue float32) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return cb
 }
 
 // WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
 func (cb *ComboButton) WithDoubleValue(doubleValue float64) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return cb
 }
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (cb *ComboButton) WithFont(font *Font) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return cb
 }
 
 // WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
 func (cb *ComboButton) WithUsesSingleLineMode(usesSingleLineMode bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return cb
 }
 
 // WithLineBreakMode sets the line break mode to use for text in the control’s cell.
 func (cb *ComboButton) WithLineBreakMode(lineBreakMode LineBreakMode) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return cb
 }
 
 // WithAlignment sets the alignment mode of the text in the receiver’s cell.
 func (cb *ComboButton) WithAlignment(alignment TextAlignment) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return cb
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (cb *ComboButton) WithBaseWritingDirection(baseWritingDirection WritingDirection) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return cb
 }
 
 // WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 func (cb *ComboButton) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	})
 	return cb
 }
 
 // WithCell sets the cell.
 func (cb *ComboButton) WithCell(cell CellProvider) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	})
 	return cb
 }
 
 // WithSubviews sets the subviews.
 func (cb *ComboButton) WithSubviews(items ...ViewProvider) *ComboButton {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return cb
 }
 
 // WithHidden sets the hidden.
 func (cb *ComboButton) WithHidden(hidden bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setHidden:"), hidden)
+	})
 	return cb
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (cb *ComboButton) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return cb
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (cb *ComboButton) WithAutoresizesSubviews(autoresizesSubviews bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return cb
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (cb *ComboButton) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return cb
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (cb *ComboButton) WithFrame(frame corefoundation.CGRect) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFrame:"), frame)
+	})
 	return cb
 }
 
 // WithFrameRotation sets the frame rotation.
 func (cb *ComboButton) WithFrameRotation(frameRotation float64) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return cb
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (cb *ComboButton) WithFrameCenterRotation(frameCenterRotation float64) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return cb
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (cb *ComboButton) WithBoundsRotation(boundsRotation float64) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return cb
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (cb *ComboButton) WithBounds(bounds corefoundation.CGRect) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBounds:"), bounds)
+	})
 	return cb
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (cb *ComboButton) WithCanDrawConcurrently(canDrawConcurrently bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return cb
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (cb *ComboButton) WithNeedsDisplay(needsDisplay bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return cb
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (cb *ComboButton) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return cb
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (cb *ComboButton) WithWantsRestingTouches(wantsRestingTouches bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return cb
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (cb *ComboButton) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return cb
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (cb *ComboButton) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return cb
 }
 
 // WithWantsLayer sets the wants layer.
 func (cb *ComboButton) WithWantsLayer(wantsLayer bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return cb
 }
 
 // WithLayer sets the layer.
 func (cb *ComboButton) WithLayer(layer obj.Object) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return cb
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (cb *ComboButton) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return cb
 }
 
 // WithNeedsLayout sets the needs layout.
 func (cb *ComboButton) WithNeedsLayout(needsLayout bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return cb
 }
 
 // WithAlphaValue sets the alpha value.
 func (cb *ComboButton) WithAlphaValue(alphaValue float64) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return cb
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (cb *ComboButton) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return cb
 }
 
 // WithBackgroundFilters sets the background filters.
 func (cb *ComboButton) WithBackgroundFilters(items ...obj.Object) *ComboButton {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return cb
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (cb *ComboButton) WithCompositingFilter(compositingFilter obj.Object) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return cb
 }
 
 // WithContentFilters sets the content filters.
 func (cb *ComboButton) WithContentFilters(items ...obj.Object) *ComboButton {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return cb
 }
 
 // WithShadow sets the shadow.
 func (cb *ComboButton) WithShadow(shadow *Shadow) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return cb
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (cb *ComboButton) WithClipsToBounds(clipsToBounds bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return cb
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (cb *ComboButton) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return cb
 }
 
 // WithToolTip sets the tool tip.
 func (cb *ComboButton) WithToolTip(toolTip string) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return cb
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (cb *ComboButton) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return cb
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (cb *ComboButton) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return cb
 }
 
 // WithNextKeyView sets the next key view.
 func (cb *ComboButton) WithNextKeyView(nextKeyView ViewProvider) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return cb
 }
 
 // WithFocusRingType sets the focus ring type.
 func (cb *ComboButton) WithFocusRingType(focusRingType FocusRingType) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return cb
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (cb *ComboButton) WithGestureRecognizers(items ...GestureRecognizerProvider) *ComboButton {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return cb
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (cb *ComboButton) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return cb
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (cb *ComboButton) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return cb
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (cb *ComboButton) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return cb
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (cb *ComboButton) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return cb
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (cb *ComboButton) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return cb
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (cb *ComboButton) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return cb
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (cb *ComboButton) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return cb
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (cb *ComboButton) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return cb
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (cb *ComboButton) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return cb
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (cb *ComboButton) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return cb
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (cb *ComboButton) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return cb
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (cb *ComboButton) WithNextResponder(nextResponder ResponderProvider) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return cb
 }
 
 // WithMenu sets returns the responder’s menu.
 func (cb *ComboButton) WithMenu(menu *Menu) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return cb
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (cb *ComboButton) WithUserActivity(userActivity obj.Object) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return cb
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (cb *ComboButton) WithTouchBar(touchBar *TouchBar) *ComboButton {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return cb
 }
 
 // Title returns the title displayed on the control. The default value is an empty string.
 func (cb *ComboButton) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("title"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("title"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Image returns the image displayed on the control. The default value is `nil`.
 func (cb *ComboButton) Image() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("image"))
-	return ImageFromID(_r)
+	var _mainthread0 *Image
+	purego.Main(func() {
+		_mainthread0 = func() *Image {
+			_r := objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("image"))
+			return ImageFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ImageScaling returns the scaling mode applied to fit the button's image within the content area. The default value is `NSImageScaleProportionallyDown`.
 func (cb *ComboButton) ImageScaling() ImageScaling {
-	_r := objc.Send[ImageScaling](objref.IDOf(cb), objc.RegisterName("imageScaling"))
-	return _r
+	var _mainthread0 ImageScaling
+	purego.Main(func() {
+		_mainthread0 = func() ImageScaling {
+			_r := objc.Send[ImageScaling](objref.IDOf(cb), objc.RegisterName("imageScaling"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Style specifies the visual presentation and behavior for NSComboButton's primary action and its menu. The default value is `NSComboButtonStyleSplit`.
 func (cb *ComboButton) Style() ComboButtonStyle {
-	_r := objc.Send[ComboButtonStyle](objref.IDOf(cb), objc.RegisterName("style"))
-	return _r
+	var _mainthread0 ComboButtonStyle
+	purego.Main(func() {
+		_mainthread0 = func() ComboButtonStyle {
+			_r := objc.Send[ComboButtonStyle](objref.IDOf(cb), objc.RegisterName("style"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ControlProvider = (*ComboButton)(nil)

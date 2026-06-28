@@ -68,30 +68,64 @@ func (wfi *WKFrameInfo) String() string {
 
 // NewWKFrameInfo creates a new WKFrameInfo.
 func NewWKFrameInfo() *WKFrameInfo {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKFrameInfo")), objc.RegisterName("new"))
-	return wKFrameInfoAdopt(_id)
+	var _mainthread0 *WKFrameInfo
+	purego.Main(func() {
+		_mainthread0 = func() *WKFrameInfo {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKFrameInfo")), objc.RegisterName("new"))
+			return wKFrameInfoAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // IsMainFrame reports whether the frame is the main frame or a subframe.
 func (wfi *WKFrameInfo) IsMainFrame() bool {
-	_r := objc.Send[bool](objref.IDOf(wfi), objc.RegisterName("isMainFrame"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wfi), objc.RegisterName("isMainFrame"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Request returns the frame's current request.
 func (wfi *WKFrameInfo) Request() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wfi), objc.RegisterName("request"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wfi), objc.RegisterName("request"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SecurityOrigin returns the frame's current security origin.
 func (wfi *WKFrameInfo) SecurityOrigin() *WKSecurityOrigin {
-	_r := objc.Send[objc.ID](objref.IDOf(wfi), objc.RegisterName("securityOrigin"))
-	return WKSecurityOriginFromID(_r)
+	var _mainthread0 *WKSecurityOrigin
+	purego.Main(func() {
+		_mainthread0 = func() *WKSecurityOrigin {
+			_r := objc.Send[objc.ID](objref.IDOf(wfi), objc.RegisterName("securityOrigin"))
+			return WKSecurityOriginFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // WebView returns the web view of the webpage that contains this frame.
 func (wfi *WKFrameInfo) WebView() *WKWebView {
-	_r := objc.Send[objc.ID](objref.IDOf(wfi), objc.RegisterName("webView"))
-	return WKWebViewFromID(_r)
+	var _mainthread0 *WKWebView
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebView {
+			_r := objc.Send[objc.ID](objref.IDOf(wfi), objc.RegisterName("webView"))
+			return WKWebViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }

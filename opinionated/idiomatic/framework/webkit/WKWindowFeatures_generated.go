@@ -68,54 +68,116 @@ func (wwf *WKWindowFeatures) String() string {
 
 // NewWKWindowFeatures creates a new WKWindowFeatures.
 func NewWKWindowFeatures() *WKWindowFeatures {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKWindowFeatures")), objc.RegisterName("new"))
-	return wKWindowFeaturesAdopt(_id)
+	var _mainthread0 *WKWindowFeatures
+	purego.Main(func() {
+		_mainthread0 = func() *WKWindowFeatures {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKWindowFeatures")), objc.RegisterName("new"))
+			return wKWindowFeaturesAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // MenuBarVisibility returns BOOL. Whether the menu bar should be visible. nil if menu bar visibility was not specified.
 func (wwf *WKWindowFeatures) MenuBarVisibility() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("menuBarVisibility"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("menuBarVisibility"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // StatusBarVisibility returns BOOL. Whether the status bar should be visible. nil if status bar visibility was not specified.
 func (wwf *WKWindowFeatures) StatusBarVisibility() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("statusBarVisibility"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("statusBarVisibility"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ToolbarsVisibility returns BOOL. Whether toolbars should be visible. nil if toolbar visibility was not specified.
 func (wwf *WKWindowFeatures) ToolbarsVisibility() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("toolbarsVisibility"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("toolbarsVisibility"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowsResizing returns BOOL. Whether the containing window should be resizable. nil if resizability was not specified.
 func (wwf *WKWindowFeatures) AllowsResizing() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("allowsResizing"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("allowsResizing"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // X returns CGFloat. The x coordinate of the containing window. nil if the x coordinate was not specified.
 func (wwf *WKWindowFeatures) X() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("x"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("x"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Y returns CGFloat. The y coordinate of the containing window. nil if the y coordinate was not specified.
 func (wwf *WKWindowFeatures) Y() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("y"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("y"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Width returns CGFloat. The width coordinate of the containing window. nil if the width was not specified.
 func (wwf *WKWindowFeatures) Width() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("width"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("width"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Height returns CGFloat. The height coordinate of the containing window. nil if the height was not specified.
 func (wwf *WKWindowFeatures) Height() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("height"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wwf), objc.RegisterName("height"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

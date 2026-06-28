@@ -69,93 +69,167 @@ func (cvla *CollectionViewLayoutAttributes) String() string {
 
 // NewCollectionViewLayoutAttributes creates a new CollectionViewLayoutAttributes.
 func NewCollectionViewLayoutAttributes() *CollectionViewLayoutAttributes {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewLayoutAttributes")), objc.RegisterName("new"))
-	return collectionViewLayoutAttributesAdopt(_id)
+	var _mainthread0 *CollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewLayoutAttributes {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewLayoutAttributes")), objc.RegisterName("new"))
+			return collectionViewLayoutAttributesAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithFrame sets the frame rectangle of the element.
 func (cvla *CollectionViewLayoutAttributes) WithFrame(frame corefoundation.CGRect) *CollectionViewLayoutAttributes {
-	objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("setFrame:"), frame)
+	})
 	return cvla
 }
 
 // WithSize sets the size of the element.
 func (cvla *CollectionViewLayoutAttributes) WithSize(size corefoundation.CGSize) *CollectionViewLayoutAttributes {
-	objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("setSize:"), size)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("setSize:"), size)
+	})
 	return cvla
 }
 
 // WithAlpha sets the transparency of the element.
 func (cvla *CollectionViewLayoutAttributes) WithAlpha(alpha float64) *CollectionViewLayoutAttributes {
-	objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("setAlpha:"), alpha)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("setAlpha:"), alpha)
+	})
 	return cvla
 }
 
 // WithZIndex sets the element’s position on the z axis.
 func (cvla *CollectionViewLayoutAttributes) WithZIndex(zIndex int) *CollectionViewLayoutAttributes {
-	objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("setZIndex:"), zIndex)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("setZIndex:"), zIndex)
+	})
 	return cvla
 }
 
 // WithHidden sets a Boolean value indicating whether the element is hidden.
 func (cvla *CollectionViewLayoutAttributes) WithHidden(hidden bool) *CollectionViewLayoutAttributes {
-	objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("setHidden:"), hidden)
+	})
 	return cvla
 }
 
 // WithIndexPath sets the index path of the element.
 func (cvla *CollectionViewLayoutAttributes) WithIndexPath(indexPath obj.Object) *CollectionViewLayoutAttributes {
-	objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("setIndexPath:"), objref.IDOf(indexPath))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("setIndexPath:"), objref.IDOf(indexPath))
+	})
 	return cvla
 }
 
 // Frame returns the frame.
 func (cvla *CollectionViewLayoutAttributes) Frame() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(cvla), objc.RegisterName("frame"))
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(cvla), objc.RegisterName("frame"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Size returns the size.
 func (cvla *CollectionViewLayoutAttributes) Size() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvla), objc.RegisterName("size"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvla), objc.RegisterName("size"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Alpha returns the alpha.
 func (cvla *CollectionViewLayoutAttributes) Alpha() float64 {
-	_r := objc.Send[float64](objref.IDOf(cvla), objc.RegisterName("alpha"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(cvla), objc.RegisterName("alpha"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ZIndex returns the z index.
 func (cvla *CollectionViewLayoutAttributes) ZIndex() int {
-	_r := objc.Send[int](objref.IDOf(cvla), objc.RegisterName("zIndex"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(cvla), objc.RegisterName("zIndex"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsHidden reports whether the object is hidden.
 func (cvla *CollectionViewLayoutAttributes) IsHidden() bool {
-	_r := objc.Send[bool](objref.IDOf(cvla), objc.RegisterName("isHidden"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cvla), objc.RegisterName("isHidden"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IndexPath returns the index path.
 func (cvla *CollectionViewLayoutAttributes) IndexPath() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("indexPath"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("indexPath"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RepresentedElementCategory returns the represented element category.
 func (cvla *CollectionViewLayoutAttributes) RepresentedElementCategory() CollectionElementCategory {
-	_r := objc.Send[CollectionElementCategory](objref.IDOf(cvla), objc.RegisterName("representedElementCategory"))
-	return _r
+	var _mainthread0 CollectionElementCategory
+	purego.Main(func() {
+		_mainthread0 = func() CollectionElementCategory {
+			_r := objc.Send[CollectionElementCategory](objref.IDOf(cvla), objc.RegisterName("representedElementCategory"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RepresentedElementKind returns the represented element kind.
 func (cvla *CollectionViewLayoutAttributes) RepresentedElementKind() string {
-	_r := objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("representedElementKind"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("representedElementKind"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }

@@ -68,62 +68,105 @@ func (wsvc *WidgetSearchViewController) String() string {
 
 // NewWidgetSearchViewController creates a new WidgetSearchViewController.
 func NewWidgetSearchViewController() *WidgetSearchViewController {
-	_id := objc.Send[objc.ID](objc.ID(_class("NCWidgetSearchViewController")), objc.RegisterName("new"))
-	return widgetSearchViewControllerAdopt(_id)
+	var _mainthread0 *WidgetSearchViewController
+	purego.Main(func() {
+		_mainthread0 = func() *WidgetSearchViewController {
+			_id := objc.Send[objc.ID](objc.ID(_class("NCWidgetSearchViewController")), objc.RegisterName("new"))
+			return widgetSearchViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithSearchDescription sets a localized description of the nature of the search.
 func (wsvc *WidgetSearchViewController) WithSearchDescription(searchDescription string) *WidgetSearchViewController {
-	objc.Send[objc.ID](objref.IDOf(wsvc), objc.RegisterName("setSearchDescription:"), purego.NSString(searchDescription))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wsvc), objc.RegisterName("setSearchDescription:"), purego.NSString(searchDescription))
+	})
 	return wsvc
 }
 
 // WithSearchResultsPlaceholderString sets a localized phrase displayed in the results list when no search results are available.
 func (wsvc *WidgetSearchViewController) WithSearchResultsPlaceholderString(searchResultsPlaceholderString string) *WidgetSearchViewController {
-	objc.Send[objc.ID](objref.IDOf(wsvc), objc.RegisterName("setSearchResultsPlaceholderString:"), purego.NSString(searchResultsPlaceholderString))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wsvc), objc.RegisterName("setSearchResultsPlaceholderString:"), purego.NSString(searchResultsPlaceholderString))
+	})
 	return wsvc
 }
 
 // WithSearchResultKeyPath sets a key path for the string property to display for each object in the search results array.
 func (wsvc *WidgetSearchViewController) WithSearchResultKeyPath(searchResultKeyPath string) *WidgetSearchViewController {
-	objc.Send[objc.ID](objref.IDOf(wsvc), objc.RegisterName("setSearchResultKeyPath:"), purego.NSString(searchResultKeyPath))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wsvc), objc.RegisterName("setSearchResultKeyPath:"), purego.NSString(searchResultKeyPath))
+	})
 	return wsvc
 }
 
 // SearchResults returns the search results.
 func (wsvc *WidgetSearchViewController) SearchResults() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wsvc), objc.RegisterName("searchResults"))
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	var _mainthread0 []obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() []obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wsvc), objc.RegisterName("searchResults"))
+			return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetSearchResults wraps the corresponding Objective-C method.
 func (wsvc *WidgetSearchViewController) SetSearchResults(searchResults []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(wsvc), objc.RegisterName("setSearchResults:"), purego.SliceToNSArray(searchResults, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wsvc), objc.RegisterName("setSearchResults:"), purego.SliceToNSArray(searchResults, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	})
+
 }
 
 // SearchDescription returns the search description.
 func (wsvc *WidgetSearchViewController) SearchDescription() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wsvc), objc.RegisterName("searchDescription"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wsvc), objc.RegisterName("searchDescription"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SearchResultsPlaceholderString returns the search results placeholder string.
 func (wsvc *WidgetSearchViewController) SearchResultsPlaceholderString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wsvc), objc.RegisterName("searchResultsPlaceholderString"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wsvc), objc.RegisterName("searchResultsPlaceholderString"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SearchResultKeyPath returns the search result key path.
 func (wsvc *WidgetSearchViewController) SearchResultKeyPath() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wsvc), objc.RegisterName("searchResultKeyPath"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wsvc), objc.RegisterName("searchResultKeyPath"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }

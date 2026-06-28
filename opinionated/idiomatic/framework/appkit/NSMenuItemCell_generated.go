@@ -49,495 +49,721 @@ func menuItemCellAdopt(id objc.ID) *MenuItemCell {
 
 // NewMenuItemCellTextCell creates a new MenuItemCell.
 func NewMenuItemCellTextCell(string_ string) *MenuItemCell {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMenuItemCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(string_))
-	return menuItemCellAdopt(_id)
+	var _mainthread0 *MenuItemCell
+	purego.Main(func() {
+		_mainthread0 = func() *MenuItemCell {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSMenuItemCell")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(string_))
+			return menuItemCellAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewMenuItemCellWithCoder creates a new MenuItemCell.
 func NewMenuItemCellWithCoder(coder obj.Object) *MenuItemCell {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMenuItemCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
-	return menuItemCellAdopt(_id)
+	var _mainthread0 *MenuItemCell
+	purego.Main(func() {
+		_mainthread0 = func() *MenuItemCell {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSMenuItemCell")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+			return menuItemCellAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithMenuItem sets the menu item object associated with the cell.
 func (mic *MenuItemCell) WithMenuItem(menuItem *MenuItem) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setMenuItem:"), objref.IDOf(menuItem))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setMenuItem:"), objref.IDOf(menuItem))
+	})
 	return mic
 }
 
 // WithNeedsSizing sets a Boolean value indicating whether the size of the menu needs to be calculated.
 func (mic *MenuItemCell) WithNeedsSizing(needsSizing bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setNeedsSizing:"), needsSizing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setNeedsSizing:"), needsSizing)
+	})
 	return mic
 }
 
 // WithNeedsDisplay sets a Boolean value indicating whether the menu item needs to be displayed.
 func (mic *MenuItemCell) WithNeedsDisplay(needsDisplay bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return mic
 }
 
 // WithBezelStyle sets the appearance of the button’s border, if it has one.
 func (mic *MenuItemCell) WithBezelStyle(bezelStyle BezelStyle) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setBezelStyle:"), bezelStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setBezelStyle:"), bezelStyle)
+	})
 	return mic
 }
 
 // WithHighlightsBy sets a set of flags that indicate how the button highlights when it receives a mouse-down event (that is, when the button is pressed).
 func (mic *MenuItemCell) WithHighlightsBy(highlightsBy CellStyleMask) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setHighlightsBy:"), highlightsBy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setHighlightsBy:"), highlightsBy)
+	})
 	return mic
 }
 
 // WithShowsStateBy sets the flags that indicate how the button cell shows its alternate state.
 func (mic *MenuItemCell) WithShowsStateBy(showsStateBy CellStyleMask) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setShowsStateBy:"), showsStateBy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setShowsStateBy:"), showsStateBy)
+	})
 	return mic
 }
 
 // WithAttributedTitle sets the title displayed by the button when it’s in its normal state as an attributed string.
 func (mic *MenuItemCell) WithAttributedTitle(attributedTitle obj.Object) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
+	})
 	return mic
 }
 
 // WithAlternateTitle sets the string displayed by the button when it’s in its alternate state.
 func (mic *MenuItemCell) WithAlternateTitle(alternateTitle string) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAlternateTitle:"), purego.NSString(alternateTitle))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAlternateTitle:"), purego.NSString(alternateTitle))
+	})
 	return mic
 }
 
 // WithAttributedAlternateTitle sets the title displayed by the button when it’s in its alternate state, as an attributed string.
 func (mic *MenuItemCell) WithAttributedAlternateTitle(attributedAlternateTitle obj.Object) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAttributedAlternateTitle:"), objref.IDOf(attributedAlternateTitle))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAttributedAlternateTitle:"), objref.IDOf(attributedAlternateTitle))
+	})
 	return mic
 }
 
 // WithAlternateImage sets the image the button displays in its alternate state.
 func (mic *MenuItemCell) WithAlternateImage(alternateImage *Image) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
+	})
 	return mic
 }
 
 // WithImagePosition sets the position of the button’s image relative to its title.
 func (mic *MenuItemCell) WithImagePosition(imagePosition CellImagePosition) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setImagePosition:"), imagePosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setImagePosition:"), imagePosition)
+	})
 	return mic
 }
 
 // WithImageScaling sets the scale factor for the button’s image.
 func (mic *MenuItemCell) WithImageScaling(imageScaling ImageScaling) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setImageScaling:"), imageScaling)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setImageScaling:"), imageScaling)
+	})
 	return mic
 }
 
 // WithKeyEquivalent sets the button’s key-equivalent character.
 func (mic *MenuItemCell) WithKeyEquivalent(keyEquivalent string) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setKeyEquivalent:"), purego.NSString(keyEquivalent))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setKeyEquivalent:"), purego.NSString(keyEquivalent))
+	})
 	return mic
 }
 
 // WithKeyEquivalentModifierMask sets the mask that identifies the modifier keys for the button’s key equivalent.
 func (mic *MenuItemCell) WithKeyEquivalentModifierMask(keyEquivalentModifierMask EventModifierFlags) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setKeyEquivalentModifierMask:"), keyEquivalentModifierMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setKeyEquivalentModifierMask:"), keyEquivalentModifierMask)
+	})
 	return mic
 }
 
 // WithTransparent sets a Boolean value that indicates if the button is transparent.
 func (mic *MenuItemCell) WithTransparent(transparent bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setTransparent:"), transparent)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setTransparent:"), transparent)
+	})
 	return mic
 }
 
 // WithImageDimsWhenDisabled sets a Boolean value that indicates if the button’s image and text appear “dim” when the button is disabled.
 func (mic *MenuItemCell) WithImageDimsWhenDisabled(imageDimsWhenDisabled bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setImageDimsWhenDisabled:"), imageDimsWhenDisabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setImageDimsWhenDisabled:"), imageDimsWhenDisabled)
+	})
 	return mic
 }
 
 // WithShowsBorderOnlyWhileMouseInside sets a Boolean value that indicates if the button displays its border only when the pointer is over it.
 func (mic *MenuItemCell) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setShowsBorderOnlyWhileMouseInside:"), showsBorderOnlyWhileMouseInside)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setShowsBorderOnlyWhileMouseInside:"), showsBorderOnlyWhileMouseInside)
+	})
 	return mic
 }
 
 // WithSound sets the sound that’s played when the user presses the button (that is during a mouse-down event).
 func (mic *MenuItemCell) WithSound(sound *Sound) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setSound:"), objref.IDOf(sound))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setSound:"), objref.IDOf(sound))
+	})
 	return mic
 }
 
 // WithBackgroundColor sets the background color of the button.
 func (mic *MenuItemCell) WithBackgroundColor(backgroundColor *Color) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	})
 	return mic
 }
 
 // WithGradientType sets the gradient of the button’s border.
 func (mic *MenuItemCell) WithGradientType(gradientType GradientType) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setGradientType:"), gradientType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setGradientType:"), gradientType)
+	})
 	return mic
 }
 
 // WithKeyEquivalentFont sets the font used to draw the button’s key equivalent.
 func (mic *MenuItemCell) WithKeyEquivalentFont(keyEquivalentFont *Font) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setKeyEquivalentFont:"), objref.IDOf(keyEquivalentFont))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setKeyEquivalentFont:"), objref.IDOf(keyEquivalentFont))
+	})
 	return mic
 }
 
 // WithControlView sets the view associated with the cell.
 func (mic *MenuItemCell) WithControlView(controlView ViewProvider) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	})
 	return mic
 }
 
 // WithType sets the type of the cell.
 func (mic *MenuItemCell) WithType(type_ CellType) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setType:"), type_)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setType:"), type_)
+	})
 	return mic
 }
 
 // WithState sets the cell’s current state.
 func (mic *MenuItemCell) WithState(state int) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setState:"), state)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setState:"), state)
+	})
 	return mic
 }
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (mic *MenuItemCell) WithTarget(target obj.Object) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return mic
 }
 
 // WithTag sets a tag for identifying the cell.
 func (mic *MenuItemCell) WithTag(tag int) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setTag:"), tag)
+	})
 	return mic
 }
 
 // WithTitle sets the cell’s title text.
 func (mic *MenuItemCell) WithTitle(title string) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return mic
 }
 
 // WithEnabled sets a Boolean value indicating whether the cell is currently enabled.
 func (mic *MenuItemCell) WithEnabled(enabled bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return mic
 }
 
 // WithContinuous sets a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 func (mic *MenuItemCell) WithContinuous(continuous bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return mic
 }
 
 // WithEditable sets a Boolean value indicating whether the cell is editable.
 func (mic *MenuItemCell) WithEditable(editable bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setEditable:"), editable)
+	})
 	return mic
 }
 
 // WithSelectable sets a Boolean value indicating whether the cell’s text can be selected.
 func (mic *MenuItemCell) WithSelectable(selectable bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setSelectable:"), selectable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setSelectable:"), selectable)
+	})
 	return mic
 }
 
 // WithBordered sets a Boolean value indicating whether the cell draws itself outlined with a plain border.
 func (mic *MenuItemCell) WithBordered(bordered bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setBordered:"), bordered)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setBordered:"), bordered)
+	})
 	return mic
 }
 
 // WithBezeled sets a Boolean value indicating whether the cell has a bezeled border.
 func (mic *MenuItemCell) WithBezeled(bezeled bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setBezeled:"), bezeled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setBezeled:"), bezeled)
+	})
 	return mic
 }
 
 // WithScrollable sets a Boolean value indicating whether excess text scrolls past the cell’s bounds.
 func (mic *MenuItemCell) WithScrollable(scrollable bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setScrollable:"), scrollable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setScrollable:"), scrollable)
+	})
 	return mic
 }
 
 // WithHighlighted sets a Boolean value indicating whether the cell has a highlighted appearance.
 func (mic *MenuItemCell) WithHighlighted(highlighted bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return mic
 }
 
 // WithAlignment sets the alignment of the cell’s text.
 func (mic *MenuItemCell) WithAlignment(alignment TextAlignment) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return mic
 }
 
 // WithWraps sets a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 func (mic *MenuItemCell) WithWraps(wraps bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setWraps:"), wraps)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setWraps:"), wraps)
+	})
 	return mic
 }
 
 // WithFont sets the font that the cell uses to display text.
 func (mic *MenuItemCell) WithFont(font *Font) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return mic
 }
 
 // WithFormatter sets the cell’s formatter object.
 func (mic *MenuItemCell) WithFormatter(formatter obj.Object) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return mic
 }
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (mic *MenuItemCell) WithObjectValue(objectValue obj.Object) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return mic
 }
 
 // WithStringValue sets the cell’s value as a string.
 func (mic *MenuItemCell) WithStringValue(stringValue string) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return mic
 }
 
 // WithIntValue sets the cell’s value as an integer.
 func (mic *MenuItemCell) WithIntValue(intValue int) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return mic
 }
 
 // WithFloatValue sets the cell’s value as a single-precision floating-point number.
 func (mic *MenuItemCell) WithFloatValue(floatValue float32) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return mic
 }
 
 // WithDoubleValue sets the cell’s value as a double-precision floating-point number.
 func (mic *MenuItemCell) WithDoubleValue(doubleValue float64) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return mic
 }
 
 // WithIntegerValue sets the cell’s value as an integer value.
 func (mic *MenuItemCell) WithIntegerValue(integerValue int) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return mic
 }
 
 // WithImage sets the image displayed by the cell, if any.
 func (mic *MenuItemCell) WithImage(image *Image) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setImage:"), objref.IDOf(image))
+	})
 	return mic
 }
 
 // WithControlSize sets the size of the cell.
 func (mic *MenuItemCell) WithControlSize(controlSize ControlSize) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return mic
 }
 
 // WithRepresentedObject sets the object represented by the cell.
 func (mic *MenuItemCell) WithRepresentedObject(representedObject obj.Object) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	})
 	return mic
 }
 
 // WithMenu sets the cell’s contextual menu.
 func (mic *MenuItemCell) WithMenu(menu *Menu) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return mic
 }
 
 // WithSendsActionOnEndEditing sets a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 func (mic *MenuItemCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	})
 	return mic
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (mic *MenuItemCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return mic
 }
 
 // WithLineBreakMode sets the line break mode to use when drawing text in the cell.
 func (mic *MenuItemCell) WithLineBreakMode(lineBreakMode LineBreakMode) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return mic
 }
 
 // WithAllowsUndo sets a Boolean value indicating whether the cell assumes responsibility for undo operations.
 func (mic *MenuItemCell) WithAllowsUndo(allowsUndo bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	})
 	return mic
 }
 
 // WithTruncatesLastVisibleLine sets a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 func (mic *MenuItemCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	})
 	return mic
 }
 
 // WithUserInterfaceLayoutDirection sets the layout direction of the user interface.
 func (mic *MenuItemCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return mic
 }
 
 // WithUsesSingleLineMode sets a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 func (mic *MenuItemCell) WithUsesSingleLineMode(usesSingleLineMode bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return mic
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the cell refuses the first responder status.
 func (mic *MenuItemCell) WithRefusesFirstResponder(refusesFirstResponder bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return mic
 }
 
 // WithShowsFirstResponder sets a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 func (mic *MenuItemCell) WithShowsFirstResponder(showsFirstResponder bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	})
 	return mic
 }
 
 // WithFocusRingType sets the type of focus ring to use with the associated view.
 func (mic *MenuItemCell) WithFocusRingType(focusRingType FocusRingType) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return mic
 }
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (mic *MenuItemCell) WithAttributedStringValue(attributedStringValue obj.Object) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return mic
 }
 
 // WithAllowsEditingTextAttributes sets a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 func (mic *MenuItemCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	})
 	return mic
 }
 
 // WithImportsGraphics sets a Boolean value indicating whether the cell supports the importation of images into its text.
 func (mic *MenuItemCell) WithImportsGraphics(importsGraphics bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	})
 	return mic
 }
 
 // WithAllowsMixedState sets a Boolean value indicating whether the cell supports three states instead of two.
 func (mic *MenuItemCell) WithAllowsMixedState(allowsMixedState bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	})
 	return mic
 }
 
 // WithBackgroundStyle sets the cell’s background style.
 func (mic *MenuItemCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	})
 	return mic
 }
 
 // WithControlTint sets the cell’s control tint.
 func (mic *MenuItemCell) WithControlTint(controlTint ControlTint) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setControlTint:"), controlTint)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setControlTint:"), controlTint)
+	})
 	return mic
 }
 
 // CalcSize calculates the minimum required width and height of the receiver’s menu item.
 func (mic *MenuItemCell) CalcSize() {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("calcSize"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("calcSize"))
+	})
+
 }
 
 // StateImageRectForBounds returns the rectangle into which the menu item’s state image should be drawn.
 func (mic *MenuItemCell) StateImageRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(mic), objc.RegisterName("stateImageRectForBounds:"), cellFrame)
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(mic), objc.RegisterName("stateImageRectForBounds:"), cellFrame)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // KeyEquivalentRectForBounds returns the rectangle into which the menu item’s key equivalent should be drawn.
 func (mic *MenuItemCell) KeyEquivalentRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(mic), objc.RegisterName("keyEquivalentRectForBounds:"), cellFrame)
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(mic), objc.RegisterName("keyEquivalentRectForBounds:"), cellFrame)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DrawSeparatorItemWithFrameInView draws a menu item separator.
 func (mic *MenuItemCell) DrawSeparatorItemWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawSeparatorItemWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawSeparatorItemWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+	})
+
 }
 
 // DrawStateImageWithFrameInView draws the state image associated with the menu item.
 func (mic *MenuItemCell) DrawStateImageWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawStateImageWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawStateImageWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+	})
+
 }
 
 // DrawImageWithFrameInView draws the image associated with the menu item.
 func (mic *MenuItemCell) DrawImageWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawImageWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawImageWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+	})
+
 }
 
 // DrawTitleWithFrameInView draws the title associated with the menu item.
 func (mic *MenuItemCell) DrawTitleWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawTitleWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawTitleWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+	})
+
 }
 
 // DrawKeyEquivalentWithFrameInView draws the key equivalent associated with the menu item.
 func (mic *MenuItemCell) DrawKeyEquivalentWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawKeyEquivalentWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawKeyEquivalentWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+	})
+
 }
 
 // DrawBorderAndBackgroundWithFrameInView draws the borders and background associated with the receiver’s menu item (if any).
 func (mic *MenuItemCell) DrawBorderAndBackgroundWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
-	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawBorderAndBackgroundWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawBorderAndBackgroundWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+	})
+
 }
 
 // MenuItem returns the menu item.
 func (mic *MenuItemCell) MenuItem() *MenuItem {
-	_r := objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("menuItem"))
-	return MenuItemFromID(_r)
+	var _mainthread0 *MenuItem
+	purego.Main(func() {
+		_mainthread0 = func() *MenuItem {
+			_r := objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("menuItem"))
+			return MenuItemFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NeedsSizing wraps the corresponding Objective-C method.
 func (mic *MenuItemCell) NeedsSizing() bool {
-	_r := objc.Send[bool](objref.IDOf(mic), objc.RegisterName("needsSizing"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(mic), objc.RegisterName("needsSizing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NeedsDisplay wraps the corresponding Objective-C method.
 func (mic *MenuItemCell) NeedsDisplay() bool {
-	_r := objc.Send[bool](objref.IDOf(mic), objc.RegisterName("needsDisplay"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(mic), objc.RegisterName("needsDisplay"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // StateImageWidth returns the state image width.
 func (mic *MenuItemCell) StateImageWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(mic), objc.RegisterName("stateImageWidth"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(mic), objc.RegisterName("stateImageWidth"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ImageWidth returns the image width.
 func (mic *MenuItemCell) ImageWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(mic), objc.RegisterName("imageWidth"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(mic), objc.RegisterName("imageWidth"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TitleWidth returns the title width.
 func (mic *MenuItemCell) TitleWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(mic), objc.RegisterName("titleWidth"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(mic), objc.RegisterName("titleWidth"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // KeyEquivalentWidth returns the key equivalent width.
 func (mic *MenuItemCell) KeyEquivalentWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(mic), objc.RegisterName("keyEquivalentWidth"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(mic), objc.RegisterName("keyEquivalentWidth"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // isMenuItemCell marks MenuItemCell — and, by embedding promotion, its

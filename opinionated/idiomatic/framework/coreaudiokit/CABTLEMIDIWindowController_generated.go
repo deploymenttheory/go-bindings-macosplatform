@@ -68,6 +68,12 @@ func (cwc *CABTLEMIDIWindowController) String() string {
 
 // NewCABTLEMIDIWindowController creates a new CABTLEMIDIWindowController.
 func NewCABTLEMIDIWindowController() *CABTLEMIDIWindowController {
-	_id := objc.Send[objc.ID](objc.ID(_class("CABTLEMIDIWindowController")), objc.RegisterName("new"))
-	return cABTLEMIDIWindowControllerAdopt(_id)
+	var _mainthread0 *CABTLEMIDIWindowController
+	purego.Main(func() {
+		_mainthread0 = func() *CABTLEMIDIWindowController {
+			_id := objc.Send[objc.ID](objc.ID(_class("CABTLEMIDIWindowController")), objc.RegisterName("new"))
+			return cABTLEMIDIWindowControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }

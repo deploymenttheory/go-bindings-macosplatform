@@ -70,44 +70,63 @@ func (cv *CollaborationView) String() string {
 
 // NewCollaborationViewWithItemProvider creates and initializes a collaboration view.
 func NewCollaborationViewWithItemProvider(itemProvider obj.Object) *CollaborationView {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SWCollaborationView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemProvider:"), objref.IDOf(itemProvider))
-	return collaborationViewAdopt(_id)
+	var _mainthread0 *CollaborationView
+	purego.Main(func() {
+		_mainthread0 = func() *CollaborationView {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SWCollaborationView")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemProvider:"), objref.IDOf(itemProvider))
+			return collaborationViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithActiveParticipantCount sets the number of participants in a collaboration.
 func (cv *CollaborationView) WithActiveParticipantCount(activeParticipantCount int) *CollaborationView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setActiveParticipantCount:"), activeParticipantCount)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setActiveParticipantCount:"), activeParticipantCount)
+	})
 	return cv
 }
 
 // WithHeaderTitle sets the title that the system displays in the header.
 func (cv *CollaborationView) WithHeaderTitle(headerTitle string) *CollaborationView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setHeaderTitle:"), purego.NSString(headerTitle))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setHeaderTitle:"), purego.NSString(headerTitle))
+	})
 	return cv
 }
 
 // WithHeaderSubtitle sets the subtitle that the system displays in the header.
 func (cv *CollaborationView) WithHeaderSubtitle(headerSubtitle string) *CollaborationView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setHeaderSubtitle:"), purego.NSString(headerSubtitle))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setHeaderSubtitle:"), purego.NSString(headerSubtitle))
+	})
 	return cv
 }
 
 // WithHeaderImage sets the image that the system displays in the header.
 func (cv *CollaborationView) WithHeaderImage(headerImage obj.Object) *CollaborationView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setHeaderImage:"), objref.IDOf(headerImage))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setHeaderImage:"), objref.IDOf(headerImage))
+	})
 	return cv
 }
 
 // WithManageButtonTitle sets the manage button title that the system displays in the header.
 func (cv *CollaborationView) WithManageButtonTitle(manageButtonTitle string) *CollaborationView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setManageButtonTitle:"), purego.NSString(manageButtonTitle))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setManageButtonTitle:"), purego.NSString(manageButtonTitle))
+	})
 	return cv
 }
 
 // SetContentView sets the content view.
 func (cv *CollaborationView) SetContentView(detailViewListContentView obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setContentView:"), objref.IDOf(detailViewListContentView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setContentView:"), objref.IDOf(detailViewListContentView))
+	})
+
 }
 
 // DismissPopover dismisses the popover.
@@ -129,50 +148,95 @@ func (cv *CollaborationView) DismissPopover(ctx context.Context) error {
 
 // SetShowManageButton a Boolean value the system uses to show or hide the default manage-participants button in the collaboration popover.
 func (cv *CollaborationView) SetShowManageButton(showManageButton bool) {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setShowManageButton:"), showManageButton)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setShowManageButton:"), showManageButton)
+	})
+
 }
 
 // ActiveParticipantCount returns the active participant count.
 func (cv *CollaborationView) ActiveParticipantCount() int {
-	_r := objc.Send[int](objref.IDOf(cv), objc.RegisterName("activeParticipantCount"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(cv), objc.RegisterName("activeParticipantCount"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HeaderTitle returns the header title.
 func (cv *CollaborationView) HeaderTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("headerTitle"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("headerTitle"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HeaderSubtitle returns the header subtitle.
 func (cv *CollaborationView) HeaderSubtitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("headerSubtitle"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("headerSubtitle"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HeaderImage returns the header image.
 func (cv *CollaborationView) HeaderImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("headerImage"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("headerImage"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MenuFormRepresentation returns the menu form representation.
 func (cv *CollaborationView) MenuFormRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("menuFormRepresentation"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("menuFormRepresentation"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ManageButtonTitle sets the title of the manage participants button in the collaboration popover to the given string, defaults to "Manage Share"
 func (cv *CollaborationView) ManageButtonTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("manageButtonTitle"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("manageButtonTitle"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }

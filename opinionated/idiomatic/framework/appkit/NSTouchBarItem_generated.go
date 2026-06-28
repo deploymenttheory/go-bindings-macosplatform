@@ -70,61 +70,117 @@ func (tbi *TouchBarItem) String() string {
 
 // NewTouchBarItemWithIdentifier creates a new item with the specified identifier.
 func NewTouchBarItemWithIdentifier(identifier obj.Object) *TouchBarItem {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTouchBarItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), objref.IDOf(identifier))
-	return touchBarItemAdopt(_id)
+	var _mainthread0 *TouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *TouchBarItem {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSTouchBarItem")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), objref.IDOf(identifier))
+			return touchBarItemAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewTouchBarItemWithCoder initializes and returns a new item from a storyboard or nib file.
 func NewTouchBarItemWithCoder(coder obj.Object) *TouchBarItem {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTouchBarItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
-	return touchBarItemAdopt(_id)
+	var _mainthread0 *TouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *TouchBarItem {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSTouchBarItem")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+			return touchBarItemAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithVisibilityPriority sets determines which items are shown in a bar when space is limited.
 func (tbi *TouchBarItem) WithVisibilityPriority(visibilityPriority float32) *TouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(tbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	})
 	return tbi
 }
 
 // Identifier returns the identifier.
 func (tbi *TouchBarItem) Identifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(tbi), objc.RegisterName("identifier"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(tbi), objc.RegisterName("identifier"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // VisibilityPriority returns the visibility priority.
 func (tbi *TouchBarItem) VisibilityPriority() float32 {
-	_r := objc.Send[float32](objref.IDOf(tbi), objc.RegisterName("visibilityPriority"))
-	return _r
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_r := objc.Send[float32](objref.IDOf(tbi), objc.RegisterName("visibilityPriority"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // View returns the view.
 func (tbi *TouchBarItem) View() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(tbi), objc.RegisterName("view"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(tbi), objc.RegisterName("view"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ViewController returns the view controller.
 func (tbi *TouchBarItem) ViewController() *ViewController {
-	_r := objc.Send[objc.ID](objref.IDOf(tbi), objc.RegisterName("viewController"))
-	return ViewControllerFromID(_r)
+	var _mainthread0 *ViewController
+	purego.Main(func() {
+		_mainthread0 = func() *ViewController {
+			_r := objc.Send[objc.ID](objref.IDOf(tbi), objc.RegisterName("viewController"))
+			return ViewControllerFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CustomizationLabel returns the user visible string identifying this item during customization. By default this method returns the empty string.
 func (tbi *TouchBarItem) CustomizationLabel() string {
-	_r := objc.Send[objc.ID](objref.IDOf(tbi), objc.RegisterName("customizationLabel"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(tbi), objc.RegisterName("customizationLabel"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsVisible reports whether the object is visible.
 func (tbi *TouchBarItem) IsVisible() bool {
-	_r := objc.Send[bool](objref.IDOf(tbi), objc.RegisterName("isVisible"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tbi), objc.RegisterName("isVisible"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // isTouchBarItem marks TouchBarItem — and, by embedding promotion, its

@@ -49,135 +49,208 @@ func titlebarAccessoryViewControllerAdopt(id objc.ID) *TitlebarAccessoryViewCont
 
 // NewTitlebarAccessoryViewController creates a new TitlebarAccessoryViewController.
 func NewTitlebarAccessoryViewController() *TitlebarAccessoryViewController {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSTitlebarAccessoryViewController")), objc.RegisterName("new"))
-	return titlebarAccessoryViewControllerAdopt(_id)
+	var _mainthread0 *TitlebarAccessoryViewController
+	purego.Main(func() {
+		_mainthread0 = func() *TitlebarAccessoryViewController {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSTitlebarAccessoryViewController")), objc.RegisterName("new"))
+			return titlebarAccessoryViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithLayoutAttribute sets the location of the accessory view, in relation to the window’s title bar.
 func (tavc *TitlebarAccessoryViewController) WithLayoutAttribute(layoutAttribute LayoutAttribute) *TitlebarAccessoryViewController {
-	objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setLayoutAttribute:"), layoutAttribute)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setLayoutAttribute:"), layoutAttribute)
+	})
 	return tavc
 }
 
 // WithFullScreenMinHeight sets the visual minimum height of an accessory view that displays below the title bar when the window is in full screen mode.
 func (tavc *TitlebarAccessoryViewController) WithFullScreenMinHeight(fullScreenMinHeight float64) *TitlebarAccessoryViewController {
-	objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setFullScreenMinHeight:"), fullScreenMinHeight)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setFullScreenMinHeight:"), fullScreenMinHeight)
+	})
 	return tavc
 }
 
 // WithHidden sets the hidden.
 func (tavc *TitlebarAccessoryViewController) WithHidden(hidden bool) *TitlebarAccessoryViewController {
-	objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setHidden:"), hidden)
+	})
 	return tavc
 }
 
 // WithAutomaticallyAdjustsSize sets the automatically adjusts size.
 func (tavc *TitlebarAccessoryViewController) WithAutomaticallyAdjustsSize(automaticallyAdjustsSize bool) *TitlebarAccessoryViewController {
-	objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setAutomaticallyAdjustsSize:"), automaticallyAdjustsSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setAutomaticallyAdjustsSize:"), automaticallyAdjustsSize)
+	})
 	return tavc
 }
 
 // WithPreferredScrollEdgeEffectStyle sets the titlebar accessory’s preferred effect for content scrolling behind it.
 func (tavc *TitlebarAccessoryViewController) WithPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *ScrollEdgeEffectStyle) *TitlebarAccessoryViewController {
-	objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setPreferredScrollEdgeEffectStyle:"), objref.IDOf(preferredScrollEdgeEffectStyle))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setPreferredScrollEdgeEffectStyle:"), objref.IDOf(preferredScrollEdgeEffectStyle))
+	})
 	return tavc
 }
 
 // WithRepresentedObject sets the object whose value is presented in the receiver’s primary view.
 func (tavc *TitlebarAccessoryViewController) WithRepresentedObject(representedObject obj.Object) *TitlebarAccessoryViewController {
-	objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	})
 	return tavc
 }
 
 // WithTitle sets the localized title of the receiver’s primary view.
 func (tavc *TitlebarAccessoryViewController) WithTitle(title string) *TitlebarAccessoryViewController {
-	objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return tavc
 }
 
 // WithView sets the view controller’s primary view.
 func (tavc *TitlebarAccessoryViewController) WithView(view ViewProvider) *TitlebarAccessoryViewController {
-	objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setView:"), objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setView:"), objref.IDOf(view))
+	})
 	return tavc
 }
 
 // WithPreferredContentSize sets the desired size of the view controller’s view, in screen units.
 func (tavc *TitlebarAccessoryViewController) WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *TitlebarAccessoryViewController {
-	objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setPreferredContentSize:"), preferredContentSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setPreferredContentSize:"), preferredContentSize)
+	})
 	return tavc
 }
 
 // WithChildViewControllers sets an array of view controllers that are hierarchical children of the view controller.
 func (tavc *TitlebarAccessoryViewController) WithChildViewControllers(items ...ViewControllerProvider) *TitlebarAccessoryViewController {
 	_arr := purego.SliceToNSArray(items, func(_v ViewControllerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setChildViewControllers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setChildViewControllers:"), _arr)
+	})
 	return tavc
 }
 
 // WithSourceItemView sets the source item view.
 func (tavc *TitlebarAccessoryViewController) WithSourceItemView(sourceItemView ViewProvider) *TitlebarAccessoryViewController {
-	objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
+	})
 	return tavc
 }
 
 // WithPreferredScreenOrigin sets for a view controller that is part of an app extension, the preferred screen origin.
 func (tavc *TitlebarAccessoryViewController) WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *TitlebarAccessoryViewController {
-	objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setPreferredScreenOrigin:"), preferredScreenOrigin)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setPreferredScreenOrigin:"), preferredScreenOrigin)
+	})
 	return tavc
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (tavc *TitlebarAccessoryViewController) WithNextResponder(nextResponder ResponderProvider) *TitlebarAccessoryViewController {
-	objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return tavc
 }
 
 // WithMenu sets returns the responder’s menu.
 func (tavc *TitlebarAccessoryViewController) WithMenu(menu *Menu) *TitlebarAccessoryViewController {
-	objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return tavc
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (tavc *TitlebarAccessoryViewController) WithUserActivity(userActivity obj.Object) *TitlebarAccessoryViewController {
-	objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return tavc
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (tavc *TitlebarAccessoryViewController) WithTouchBar(touchBar *TouchBar) *TitlebarAccessoryViewController {
-	objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return tavc
 }
 
 // LayoutAttribute returns the layout attribute.
 func (tavc *TitlebarAccessoryViewController) LayoutAttribute() LayoutAttribute {
-	_r := objc.Send[LayoutAttribute](objref.IDOf(tavc), objc.RegisterName("layoutAttribute"))
-	return _r
+	var _mainthread0 LayoutAttribute
+	purego.Main(func() {
+		_mainthread0 = func() LayoutAttribute {
+			_r := objc.Send[LayoutAttribute](objref.IDOf(tavc), objc.RegisterName("layoutAttribute"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FullScreenMinHeight returns the full screen min height.
 func (tavc *TitlebarAccessoryViewController) FullScreenMinHeight() float64 {
-	_r := objc.Send[float64](objref.IDOf(tavc), objc.RegisterName("fullScreenMinHeight"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(tavc), objc.RegisterName("fullScreenMinHeight"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsHidden reports whether the object is hidden.
 func (tavc *TitlebarAccessoryViewController) IsHidden() bool {
-	_r := objc.Send[bool](objref.IDOf(tavc), objc.RegisterName("isHidden"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tavc), objc.RegisterName("isHidden"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AutomaticallyAdjustsSize wraps the corresponding Objective-C method.
 func (tavc *TitlebarAccessoryViewController) AutomaticallyAdjustsSize() bool {
-	_r := objc.Send[bool](objref.IDOf(tavc), objc.RegisterName("automaticallyAdjustsSize"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tavc), objc.RegisterName("automaticallyAdjustsSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PreferredScrollEdgeEffectStyle returns the titlebar accessory’s preferred effect for content scrolling behind it. To allow for a soft edge on the bottom edge of a titlebar accessory: titlebarAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
 func (tavc *TitlebarAccessoryViewController) PreferredScrollEdgeEffectStyle() *ScrollEdgeEffectStyle {
-	_r := objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("preferredScrollEdgeEffectStyle"))
-	return ScrollEdgeEffectStyleFromID(_r)
+	var _mainthread0 *ScrollEdgeEffectStyle
+	purego.Main(func() {
+		_mainthread0 = func() *ScrollEdgeEffectStyle {
+			_r := objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("preferredScrollEdgeEffectStyle"))
+			return ScrollEdgeEffectStyleFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ViewControllerProvider = (*TitlebarAccessoryViewController)(nil)

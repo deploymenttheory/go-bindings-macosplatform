@@ -68,15 +68,28 @@ func (ifbp *IKFilterBrowserPanel) String() string {
 
 // NewIKFilterBrowserPanel creates a new IKFilterBrowserPanel.
 func NewIKFilterBrowserPanel() *IKFilterBrowserPanel {
-	_id := objc.Send[objc.ID](objc.ID(_class("IKFilterBrowserPanel")), objc.RegisterName("new"))
-	return iKFilterBrowserPanelAdopt(_id)
+	var _mainthread0 *IKFilterBrowserPanel
+	purego.Main(func() {
+		_mainthread0 = func() *IKFilterBrowserPanel {
+			_id := objc.Send[objc.ID](objc.ID(_class("IKFilterBrowserPanel")), objc.RegisterName("new"))
+			return iKFilterBrowserPanelAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // FilterName returns the name of the filter that is currently selected in the filter browser.
 func (ifbp *IKFilterBrowserPanel) FilterName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(ifbp), objc.RegisterName("filterName"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(ifbp), objc.RegisterName("filterName"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }

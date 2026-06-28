@@ -50,229 +50,339 @@ func videoNodeAdopt(id objc.ID) *VideoNode {
 
 // NewVideoNodeWithAVPlayer initializes a video node using an existing AVPlayer object.
 func NewVideoNodeWithAVPlayer(player obj.Object) *VideoNode {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAVPlayer:"), objref.IDOf(player))
-	return videoNodeAdopt(_id)
+	var _mainthread0 *VideoNode
+	purego.Main(func() {
+		_mainthread0 = func() *VideoNode {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAVPlayer:"), objref.IDOf(player))
+			return videoNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewVideoNodeWithVideoFileNamed initializes a video node using a video file stored in the app bundle.
 func NewVideoNodeWithVideoFileNamed(videoFile string) *VideoNode {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVideoFileNamed:"), purego.NSString(videoFile))
-	return videoNodeAdopt(_id)
+	var _mainthread0 *VideoNode
+	purego.Main(func() {
+		_mainthread0 = func() *VideoNode {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVideoFileNamed:"), purego.NSString(videoFile))
+			return videoNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewVideoNodeWithFileNamed initializes a video node using a video file stored in the app bundle.
 func NewVideoNodeWithFileNamed(videoFile string) *VideoNode {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileNamed:"), purego.NSString(videoFile))
-	return videoNodeAdopt(_id)
+	var _mainthread0 *VideoNode
+	purego.Main(func() {
+		_mainthread0 = func() *VideoNode {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileNamed:"), purego.NSString(videoFile))
+			return videoNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewVideoNodeWithVideoURL initializes a video node using a URL that points to a video file.
 func NewVideoNodeWithVideoURL(url string) *VideoNode {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVideoURL:"), rt.FileURL(url))
-	return videoNodeAdopt(_id)
+	var _mainthread0 *VideoNode
+	purego.Main(func() {
+		_mainthread0 = func() *VideoNode {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVideoURL:"), rt.FileURL(url))
+			return videoNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewVideoNodeWithURL initializes a video node using a URL.
 func NewVideoNodeWithURL(url string) *VideoNode {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
-	return videoNodeAdopt(_id)
+	var _mainthread0 *VideoNode
+	purego.Main(func() {
+		_mainthread0 = func() *VideoNode {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
+			return videoNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewVideoNodeWithCoder tells you when to initialize a video node that was created from an archive.
 func NewVideoNodeWithCoder(aDecoder obj.Object) *VideoNode {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
-	return videoNodeAdopt(_id)
+	var _mainthread0 *VideoNode
+	purego.Main(func() {
+		_mainthread0 = func() *VideoNode {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
+			return videoNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithSize sets the dimensions of the video node, in points.
 func (vn *VideoNode) WithSize(size corefoundation.CGSize) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setSize:"), size)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setSize:"), size)
+	})
 	return vn
 }
 
 // WithAnchorPoint sets the point in the sprite that corresponds to the node’s position.
 func (vn *VideoNode) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAnchorPoint:"), anchorPoint)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAnchorPoint:"), anchorPoint)
+	})
 	return vn
 }
 
 // WithPosition sets the position of the node in its parent’s coordinate system.
 func (vn *VideoNode) WithPosition(position corefoundation.CGPoint) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setPosition:"), position)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setPosition:"), position)
+	})
 	return vn
 }
 
 // WithZPosition sets the height of the node relative to its parent.
 func (vn *VideoNode) WithZPosition(zPosition float64) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setZPosition:"), zPosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setZPosition:"), zPosition)
+	})
 	return vn
 }
 
 // WithZRotation sets the Euler rotation about the z axis (in radians).
 func (vn *VideoNode) WithZRotation(zRotation float64) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setZRotation:"), zRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setZRotation:"), zRotation)
+	})
 	return vn
 }
 
 // WithXScale sets a scaling factor that multiplies the width of a node and its children.
 func (vn *VideoNode) WithXScale(xScale float64) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setXScale:"), xScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setXScale:"), xScale)
+	})
 	return vn
 }
 
 // WithYScale sets a scaling factor that multiplies the height of a node and its children.
 func (vn *VideoNode) WithYScale(yScale float64) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setYScale:"), yScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setYScale:"), yScale)
+	})
 	return vn
 }
 
 // WithSpeed sets a speed modifier applied to all actions executed by a node and its descendants.
 func (vn *VideoNode) WithSpeed(speed float64) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setSpeed:"), speed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setSpeed:"), speed)
+	})
 	return vn
 }
 
 // WithAlpha sets the transparency value applied to the node’s contents.
 func (vn *VideoNode) WithAlpha(alpha float64) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAlpha:"), alpha)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAlpha:"), alpha)
+	})
 	return vn
 }
 
 // WithPaused sets a Boolean value that determines whether actions on the node and its descendants are processed.
 func (vn *VideoNode) WithPaused(paused bool) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setPaused:"), paused)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setPaused:"), paused)
+	})
 	return vn
 }
 
 // WithHidden sets a Boolean value that determines whether a node and its descendants are rendered.
 func (vn *VideoNode) WithHidden(hidden bool) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setHidden:"), hidden)
+	})
 	return vn
 }
 
 // WithUserInteractionEnabled sets a Boolean value that indicates whether the node receives touch events.
 func (vn *VideoNode) WithUserInteractionEnabled(userInteractionEnabled bool) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	})
 	return vn
 }
 
 // WithName sets the node’s assignable name.
 func (vn *VideoNode) WithName(name string) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setName:"), purego.NSString(name))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setName:"), purego.NSString(name))
+	})
 	return vn
 }
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (vn *VideoNode) WithPhysicsBody(physicsBody *PhysicsBody) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	})
 	return vn
 }
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (vn *VideoNode) WithUserData(userData obj.Object) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	})
 	return vn
 }
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (vn *VideoNode) WithReachConstraints(reachConstraints *ReachConstraints) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	})
 	return vn
 }
 
 // WithConstraints sets a list of constraints to apply to the node.
 func (vn *VideoNode) WithConstraints(items ...*Constraint) *VideoNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setConstraints:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setConstraints:"), _arr)
+	})
 	return vn
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
 func (vn *VideoNode) WithAttributeValues(attributeValues obj.Object) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	})
 	return vn
 }
 
 // WithAccessibilityElement sets a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (vn *VideoNode) WithAccessibilityElement(accessibilityElement bool) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	})
 	return vn
 }
 
 // WithAccessibilityRole sets a string value describing the user interface element type; for example, a button.
 func (vn *VideoNode) WithAccessibilityRole(accessibilityRole string) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	})
 	return vn
 }
 
 // WithAccessibilityRoleDescription sets a string value describing the user interface element name and type; for example, the Buy button.
 func (vn *VideoNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	})
 	return vn
 }
 
 // WithAccessibilitySubrole sets a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (vn *VideoNode) WithAccessibilitySubrole(accessibilitySubrole string) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	})
 	return vn
 }
 
 // WithAccessibilityFrame sets the size of this user interface element, in screen points.
 func (vn *VideoNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	})
 	return vn
 }
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (vn *VideoNode) WithAccessibilityParent(accessibilityParent obj.Object) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	})
 	return vn
 }
 
 // WithAccessibilityHelp sets the help description of this user interface element; for example, the text shown in a tooltip.
 func (vn *VideoNode) WithAccessibilityHelp(accessibilityHelp string) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	})
 	return vn
 }
 
 // WithAccessibilityLabel sets a short description of this user interface element.
 func (vn *VideoNode) WithAccessibilityLabel(accessibilityLabel string) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	})
 	return vn
 }
 
 // WithAccessibilityEnabled sets a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (vn *VideoNode) WithAccessibilityEnabled(accessibilityEnabled bool) *VideoNode {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	})
 	return vn
 }
 
 // Play starts video playback.
 func (vn *VideoNode) Play() {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("play"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("play"))
+	})
+
 }
 
 // Pause pauses video playback.
 func (vn *VideoNode) Pause() {
-	objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("pause"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(vn), objc.RegisterName("pause"))
+	})
+
 }
 
 // Size returns the display size of the video (in parent's coordinate space)
 func (vn *VideoNode) Size() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(vn), objc.RegisterName("size"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(vn), objc.RegisterName("size"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AnchorPoint returns the location in the video that maps to its 'position' in the parent's coordinate space. (0.0-1.0)
 func (vn *VideoNode) AnchorPoint() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(vn), objc.RegisterName("anchorPoint"))
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(vn), objc.RegisterName("anchorPoint"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ NodeProvider = (*VideoNode)(nil)

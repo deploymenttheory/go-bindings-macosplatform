@@ -18,6 +18,18 @@ type Method struct {
 	RetSig string
 	// Dispatch is the method body (call + result/error/out-parameter handling).
 	Dispatch Dispatch
+
+	// MainThread is set when the underlying selector is @MainActor-isolated: the
+	// template runs the body on the main thread via purego.Main. The body
+	// sub-template is reused verbatim — it is lifted into an inner closure whose
+	// results are captured into RetVars (declared with RetTypes) and returned.
+	MainThread bool
+	// RetVars are the names of the captured-return locals ("_mainthread0", …),
+	// one per return value; empty for a void method. Parallel to RetTypes.
+	RetVars []string
+	// RetTypes are the Go types of each captured-return local, parallel to
+	// RetVars, used only to declare them before the purego.Main call.
+	RetTypes []string
 }
 
 // AsyncMethod is an Objective-C completion-handler method surfaced as a blocking,
@@ -75,6 +87,9 @@ type SliceMethod struct {
 	// ConvClosure is the per-element conversion closure expression
 	// (func(_id objc.ID) T { return … }).
 	ConvClosure string
+	// MainThread runs the Objective-C call on the main thread (purego.Main) when
+	// the selector is @MainActor-isolated.
+	MainThread bool
 }
 
 // BoolNSErrorMethod is an Objective-C method returning a success flag plus an
@@ -91,4 +106,7 @@ type BoolNSErrorMethod struct {
 	RecvExpr string
 	// Selector is the Objective-C selector being sent.
 	Selector string
+	// MainThread runs the Objective-C call on the main thread (purego.Main) when
+	// the selector is @MainActor-isolated.
+	MainThread bool
 }

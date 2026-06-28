@@ -68,47 +68,88 @@ func (cv *CaptureView) String() string {
 
 // NewCaptureView creates a new CaptureView.
 func NewCaptureView() *CaptureView {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureView")), objc.RegisterName("new"))
-	return captureViewAdopt(_id)
+	var _mainthread0 *CaptureView
+	purego.Main(func() {
+		_mainthread0 = func() *CaptureView {
+			_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureView")), objc.RegisterName("new"))
+			return captureViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithControlsStyle sets the style of the capture controls presented by the view.
 func (cv *CaptureView) WithControlsStyle(controlsStyle CaptureViewControlsStyle) *CaptureView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setControlsStyle:"), controlsStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setControlsStyle:"), controlsStyle)
+	})
 	return cv
 }
 
 // WithVideoGravity sets a string value that defines how the capture view displays video within its bounds.
 func (cv *CaptureView) WithVideoGravity(videoGravity obj.Object) *CaptureView {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setVideoGravity:"), objref.IDOf(videoGravity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setVideoGravity:"), objref.IDOf(videoGravity))
+	})
 	return cv
 }
 
 // SetSessionShowVideoPreviewShowAudioPreview sets the view’s capture session.
 func (cv *CaptureView) SetSessionShowVideoPreviewShowAudioPreview(session obj.Object, showVideoPreview bool, showAudioPreview bool) {
-	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setSession:showVideoPreview:showAudioPreview:"), objref.IDOf(session), showVideoPreview, showAudioPreview)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setSession:showVideoPreview:showAudioPreview:"), objref.IDOf(session), showVideoPreview, showAudioPreview)
+	})
+
 }
 
 // Session returns a capture session represented by this view. Modifying the capture session will impact its visual representation in the view. The default value is a session configured for movie file recordings of audio and video media data. Use -setSession:showVideoPreview:showAudioPreview: to change the value of this property.
 func (cv *CaptureView) Session() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("session"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("session"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FileOutput returns a capture file output used to record media data. The value of this property is the first instance of AVCaptureFileOutput contained in the session's outputs array or nil if no such instance is found. In the latter case the capture view's start recording button will be disabled. However, the controls for choosing input sources may still be enabled.
 func (cv *CaptureView) FileOutput() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("fileOutput"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("fileOutput"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ControlsStyle returns the style of the capture controls pane associated with the view.
 func (cv *CaptureView) ControlsStyle() CaptureViewControlsStyle {
-	_r := objc.Send[CaptureViewControlsStyle](objref.IDOf(cv), objc.RegisterName("controlsStyle"))
-	return _r
+	var _mainthread0 CaptureViewControlsStyle
+	purego.Main(func() {
+		_mainthread0 = func() CaptureViewControlsStyle {
+			_r := objc.Send[CaptureViewControlsStyle](objref.IDOf(cv), objc.RegisterName("controlsStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // VideoGravity returns a string defining how the video is displayed within the views bounds rect. Options are AVLayerVideoGravityResize, AVLayerVideoGravityResizeAspect and AVLayerVideoGravityResizeAspectFill. AVLayerVideoGravityResizeAspect is default.
 func (cv *CaptureView) VideoGravity() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("videoGravity"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("videoGravity"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

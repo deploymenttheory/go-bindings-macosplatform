@@ -69,44 +69,83 @@ func (hm *HelpManager) String() string {
 
 // NewHelpManager creates a new HelpManager.
 func NewHelpManager() *HelpManager {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSHelpManager")), objc.RegisterName("new"))
-	return helpManagerAdopt(_id)
+	var _mainthread0 *HelpManager
+	purego.Main(func() {
+		_mainthread0 = func() *HelpManager {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSHelpManager")), objc.RegisterName("new"))
+			return helpManagerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // SetContextHelpForObject associates help content with an object.
 func (hm *HelpManager) SetContextHelpForObject(attrString obj.Object, object obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(hm), objc.RegisterName("setContextHelp:forObject:"), objref.IDOf(attrString), objref.IDOf(object))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(hm), objc.RegisterName("setContextHelp:forObject:"), objref.IDOf(attrString), objref.IDOf(object))
+	})
+
 }
 
 // RemoveContextHelpForObject removes the association between an object and its context-sensitive help.
 func (hm *HelpManager) RemoveContextHelpForObject(object obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(hm), objc.RegisterName("removeContextHelpForObject:"), objref.IDOf(object))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(hm), objc.RegisterName("removeContextHelpForObject:"), objref.IDOf(object))
+	})
+
 }
 
 // ContextHelpForObject returns context-sensitive help for an object.
 func (hm *HelpManager) ContextHelpForObject(object obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(hm), objc.RegisterName("contextHelpForObject:"), objref.IDOf(object))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(hm), objc.RegisterName("contextHelpForObject:"), objref.IDOf(object))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowContextHelpForObjectLocationHint displays the context-sensitive help for a given object at or near the point on the screen specified by a given point.
 func (hm *HelpManager) ShowContextHelpForObjectLocationHint(object obj.Object, pt corefoundation.CGPoint) bool {
-	_r := objc.Send[bool](objref.IDOf(hm), objc.RegisterName("showContextHelpForObject:locationHint:"), objref.IDOf(object), pt)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(hm), objc.RegisterName("showContextHelpForObject:locationHint:"), objref.IDOf(object), pt)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // OpenHelpAnchorInBook finds and displays the text at the given anchor location in the given book.
 func (hm *HelpManager) OpenHelpAnchorInBook(anchor obj.Object, book obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(hm), objc.RegisterName("openHelpAnchor:inBook:"), objref.IDOf(anchor), objref.IDOf(book))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(hm), objc.RegisterName("openHelpAnchor:inBook:"), objref.IDOf(anchor), objref.IDOf(book))
+	})
+
 }
 
 // FindStringInBook performs a search for the specified string in the specified book.
 func (hm *HelpManager) FindStringInBook(query string, book obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(hm), objc.RegisterName("findString:inBook:"), purego.NSString(query), objref.IDOf(book))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(hm), objc.RegisterName("findString:inBook:"), purego.NSString(query), objref.IDOf(book))
+	})
+
 }
 
 // RegisterBooksInBundle registers one or more help books in the given bundle.
 func (hm *HelpManager) RegisterBooksInBundle(bundle obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(hm), objc.RegisterName("registerBooksInBundle:"), objref.IDOf(bundle))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(hm), objc.RegisterName("registerBooksInBundle:"), objref.IDOf(bundle))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

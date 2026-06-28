@@ -69,30 +69,64 @@ func (cla *CollectionLayoutAnchor) String() string {
 
 // NewCollectionLayoutAnchor creates a new CollectionLayoutAnchor.
 func NewCollectionLayoutAnchor() *CollectionLayoutAnchor {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutAnchor")), objc.RegisterName("new"))
-	return collectionLayoutAnchorAdopt(_id)
+	var _mainthread0 *CollectionLayoutAnchor
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionLayoutAnchor {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutAnchor")), objc.RegisterName("new"))
+			return collectionLayoutAnchorAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // Edges returns the edges.
 func (cla *CollectionLayoutAnchor) Edges() DirectionalRectEdge {
-	_r := objc.Send[DirectionalRectEdge](objref.IDOf(cla), objc.RegisterName("edges"))
-	return _r
+	var _mainthread0 DirectionalRectEdge
+	purego.Main(func() {
+		_mainthread0 = func() DirectionalRectEdge {
+			_r := objc.Send[DirectionalRectEdge](objref.IDOf(cla), objc.RegisterName("edges"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Offset returns the offset.
 func (cla *CollectionLayoutAnchor) Offset() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(cla), objc.RegisterName("offset"))
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(cla), objc.RegisterName("offset"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsAbsoluteOffset reports whether the object is absolute offset.
 func (cla *CollectionLayoutAnchor) IsAbsoluteOffset() bool {
-	_r := objc.Send[bool](objref.IDOf(cla), objc.RegisterName("isAbsoluteOffset"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cla), objc.RegisterName("isAbsoluteOffset"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsFractionalOffset reports whether the object is fractional offset.
 func (cla *CollectionLayoutAnchor) IsFractionalOffset() bool {
-	_r := objc.Send[bool](objref.IDOf(cla), objc.RegisterName("isFractionalOffset"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cla), objc.RegisterName("isFractionalOffset"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

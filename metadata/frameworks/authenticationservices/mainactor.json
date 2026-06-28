@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "framework": "AuthenticationServices",
+  "main_actor_protocols": [
+    "ASAuthorizationControllerDelegate",
+    "ASAuthorizationControllerPresentationContextProviding",
+    "ASAuthorizationProviderExtensionAuthorizationRequestHandler",
+    "ASWebAuthenticationPresentationContextProviding"
+  ]
+}

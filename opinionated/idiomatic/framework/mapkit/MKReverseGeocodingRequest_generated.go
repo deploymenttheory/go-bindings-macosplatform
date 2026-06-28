@@ -110,7 +110,10 @@ func (rgr *ReverseGeocodingRequest) GetMapItems(ctx context.Context) (result obj
 
 // Cancel a method you call to cancel a reverse geocoding request that’s in progress.
 func (rgr *ReverseGeocodingRequest) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("cancel"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("cancel"))
+	})
+
 }
 
 // IsCancelled reports whether the object is cancelled.

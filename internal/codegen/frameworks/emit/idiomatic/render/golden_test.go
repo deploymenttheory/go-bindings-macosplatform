@@ -123,6 +123,63 @@ func TestMethodGolden(t *testing.T) {
 	}
 }
 
+// TestMainThreadGolden locks the @MainActor wrapping across the method, slice,
+// and boolnserror templates: the body is lifted into an inner closure run on the
+// main thread via purego.Main, its results captured and returned. The void case
+// needs no capture; the value+error case captures into pre-declared locals.
+func TestMainThreadGolden(t *testing.T) {
+	t.Run("method_object", func(t *testing.T) {
+		got, err := Method(view.Method{
+			Recv: "(x *NSView) ", GoName: "Window", RetSig: " obj.Object",
+			Dispatch: view.Dispatch{
+				Call:    `objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("window"))`,
+				RetKind: view.RetObject, RetWrap: "obj.Wrap(%s)", RetZero: "nil",
+			},
+			MainThread: true, RetVars: []string{"_mainthread0"}, RetTypes: []string{"obj.Object"},
+		})
+		if err != nil {
+			t.Fatal(err)
+		}
+		checkGolden(t, "method_mainthread_object", got)
+	})
+
+	t.Run("method_void", func(t *testing.T) {
+		got, err := Method(view.Method{
+			Recv: "(x *NSView) ", GoName: "Layout",
+			Dispatch:   view.Dispatch{Call: `objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layout"))`, RetKind: view.RetVoid},
+			MainThread: true,
+		})
+		if err != nil {
+			t.Fatal(err)
+		}
+		checkGolden(t, "method_mainthread_void", got)
+	})
+
+	t.Run("slice", func(t *testing.T) {
+		got, err := SliceMethod(view.SliceMethod{
+			Recv: "(x *NSView) ", GoName: "Subviews", RecvExpr: "objref.IDOf(x)",
+			Selector: "subviews", ElemGoType: "obj.Object",
+			ConvClosure: "func(_id objc.ID) obj.Object { return obj.Wrap(_id) }",
+			MainThread:  true,
+		})
+		if err != nil {
+			t.Fatal(err)
+		}
+		checkGolden(t, "slice_mainthread", got)
+	})
+
+	t.Run("boolnserror", func(t *testing.T) {
+		got, err := BoolNSErrorMethod(view.BoolNSErrorMethod{
+			Recv: "(x *NSDocument) ", GoName: "Save", RecvExpr: "objref.IDOf(x)",
+			Selector: "saveWithError:", MainThread: true,
+		})
+		if err != nil {
+			t.Fatal(err)
+		}
+		checkGolden(t, "boolnserror_mainthread", got)
+	})
+}
+
 // TestAsyncMethodGolden locks both async shapes (error-only and typed result).
 func TestAsyncMethodGolden(t *testing.T) {
 	got, err := AsyncMethod(view.AsyncMethod{

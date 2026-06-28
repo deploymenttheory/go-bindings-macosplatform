@@ -68,18 +68,33 @@ func (zc *ZoomControl) String() string {
 
 // NewZoomControl creates a new ZoomControl.
 func NewZoomControl() *ZoomControl {
-	_id := objc.Send[objc.ID](objc.ID(_class("MKZoomControl")), objc.RegisterName("new"))
-	return zoomControlAdopt(_id)
+	var _mainthread0 *ZoomControl
+	purego.Main(func() {
+		_mainthread0 = func() *ZoomControl {
+			_id := objc.Send[objc.ID](objc.ID(_class("MKZoomControl")), objc.RegisterName("new"))
+			return zoomControlAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithMapView sets the map view associated with this control.
 func (zc *ZoomControl) WithMapView(mapView *MapView) *ZoomControl {
-	objc.Send[objc.ID](objref.IDOf(zc), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(zc), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
+	})
 	return zc
 }
 
 // MapView returns the map view.
 func (zc *ZoomControl) MapView() *MapView {
-	_r := objc.Send[objc.ID](objref.IDOf(zc), objc.RegisterName("mapView"))
-	return MapViewFromID(_r)
+	var _mainthread0 *MapView
+	purego.Main(func() {
+		_mainthread0 = func() *MapView {
+			_r := objc.Send[objc.ID](objref.IDOf(zc), objc.RegisterName("mapView"))
+			return MapViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }

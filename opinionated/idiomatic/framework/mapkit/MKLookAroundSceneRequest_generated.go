@@ -84,7 +84,10 @@ func NewLookAroundSceneRequestWithMapItem(mapItem *MapItem) *LookAroundSceneRequ
 
 // Cancel cancels the pending scene request.
 func (lasr *LookAroundSceneRequest) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(lasr), objc.RegisterName("cancel"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lasr), objc.RegisterName("cancel"))
+	})
+
 }
 
 // MapItem returns the map item.

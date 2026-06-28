@@ -49,141 +49,219 @@ func pageControllerAdopt(id objc.ID) *PageController {
 
 // NewPageController creates a new PageController.
 func NewPageController() *PageController {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSPageController")), objc.RegisterName("new"))
-	return pageControllerAdopt(_id)
+	var _mainthread0 *PageController
+	purego.Main(func() {
+		_mainthread0 = func() *PageController {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSPageController")), objc.RegisterName("new"))
+			return pageControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithTransitionStyle sets the transition style the page controller uses when changing pages.
 func (pc *PageController) WithTransitionStyle(transitionStyle PageControllerTransitionStyle) *PageController {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTransitionStyle:"), transitionStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTransitionStyle:"), transitionStyle)
+	})
 	return pc
 }
 
 // WithSelectedIndex sets the currently selected object in the arranged objects array.
 func (pc *PageController) WithSelectedIndex(selectedIndex int) *PageController {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setSelectedIndex:"), selectedIndex)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setSelectedIndex:"), selectedIndex)
+	})
 	return pc
 }
 
 // WithRepresentedObject sets the object whose value is presented in the receiver’s primary view.
 func (pc *PageController) WithRepresentedObject(representedObject obj.Object) *PageController {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	})
 	return pc
 }
 
 // WithTitle sets the localized title of the receiver’s primary view.
 func (pc *PageController) WithTitle(title string) *PageController {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return pc
 }
 
 // WithView sets the view controller’s primary view.
 func (pc *PageController) WithView(view ViewProvider) *PageController {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setView:"), objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setView:"), objref.IDOf(view))
+	})
 	return pc
 }
 
 // WithPreferredContentSize sets the desired size of the view controller’s view, in screen units.
 func (pc *PageController) WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *PageController {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPreferredContentSize:"), preferredContentSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPreferredContentSize:"), preferredContentSize)
+	})
 	return pc
 }
 
 // WithChildViewControllers sets an array of view controllers that are hierarchical children of the view controller.
 func (pc *PageController) WithChildViewControllers(items ...ViewControllerProvider) *PageController {
 	_arr := purego.SliceToNSArray(items, func(_v ViewControllerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setChildViewControllers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setChildViewControllers:"), _arr)
+	})
 	return pc
 }
 
 // WithSourceItemView sets the source item view.
 func (pc *PageController) WithSourceItemView(sourceItemView ViewProvider) *PageController {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
+	})
 	return pc
 }
 
 // WithPreferredScreenOrigin sets for a view controller that is part of an app extension, the preferred screen origin.
 func (pc *PageController) WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *PageController {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPreferredScreenOrigin:"), preferredScreenOrigin)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPreferredScreenOrigin:"), preferredScreenOrigin)
+	})
 	return pc
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (pc *PageController) WithNextResponder(nextResponder ResponderProvider) *PageController {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return pc
 }
 
 // WithMenu sets returns the responder’s menu.
 func (pc *PageController) WithMenu(menu *Menu) *PageController {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return pc
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (pc *PageController) WithUserActivity(userActivity obj.Object) *PageController {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return pc
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (pc *PageController) WithTouchBar(touchBar *TouchBar) *PageController {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return pc
 }
 
 // NavigateForwardToObject navigates to the specific object.
 func (pc *PageController) NavigateForwardToObject(object obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("navigateForwardToObject:"), objref.IDOf(object))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("navigateForwardToObject:"), objref.IDOf(object))
+	})
+
 }
 
 // CompleteTransition invoked when the page transition is completed.
 func (pc *PageController) CompleteTransition() {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("completeTransition"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("completeTransition"))
+	})
+
 }
 
 // NavigateBack navigates backwards in the page controller’s arranged objects array.
 func (pc *PageController) NavigateBack(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("navigateBack:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("navigateBack:"), objref.IDOf(sender))
+	})
+
 }
 
 // NavigateForward navigates to the next object in the page controller’s arranged objects array, if appropriate.
 func (pc *PageController) NavigateForward(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("navigateForward:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("navigateForward:"), objref.IDOf(sender))
+	})
+
 }
 
 // TakeSelectedIndexFrom navigates to the selected index, which is taken from the sender.
 func (pc *PageController) TakeSelectedIndexFrom(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("takeSelectedIndexFrom:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("takeSelectedIndexFrom:"), objref.IDOf(sender))
+	})
+
 }
 
 // SelectedViewController returns the selected view controller.
 func (pc *PageController) SelectedViewController() *ViewController {
-	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("selectedViewController"))
-	return ViewControllerFromID(_r)
+	var _mainthread0 *ViewController
+	purego.Main(func() {
+		_mainthread0 = func() *ViewController {
+			_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("selectedViewController"))
+			return ViewControllerFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TransitionStyle returns the transition style.
 func (pc *PageController) TransitionStyle() PageControllerTransitionStyle {
-	_r := objc.Send[PageControllerTransitionStyle](objref.IDOf(pc), objc.RegisterName("transitionStyle"))
-	return _r
+	var _mainthread0 PageControllerTransitionStyle
+	purego.Main(func() {
+		_mainthread0 = func() PageControllerTransitionStyle {
+			_r := objc.Send[PageControllerTransitionStyle](objref.IDOf(pc), objc.RegisterName("transitionStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ArrangedObjects returns the arranged objects.
 func (pc *PageController) ArrangedObjects() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("arrangedObjects"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("arrangedObjects"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetArrangedObjects wraps the corresponding Objective-C method.
 func (pc *PageController) SetArrangedObjects(arrangedObjects obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setArrangedObjects:"), objref.IDOf(arrangedObjects))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setArrangedObjects:"), objref.IDOf(arrangedObjects))
+	})
+
 }
 
 // SelectedIndex returns the selected index.
 func (pc *PageController) SelectedIndex() int {
-	_r := objc.Send[int](objref.IDOf(pc), objc.RegisterName("selectedIndex"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(pc), objc.RegisterName("selectedIndex"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ViewControllerProvider = (*PageController)(nil)

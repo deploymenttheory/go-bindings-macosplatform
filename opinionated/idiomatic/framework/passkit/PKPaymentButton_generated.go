@@ -68,19 +68,34 @@ func (pb *PaymentButton) String() string {
 
 // NewPaymentButtonWithPaymentButtonTypePaymentButtonStyle creates a new payment button with the specified type and style.
 func NewPaymentButtonWithPaymentButtonTypePaymentButtonStyle(type_ PaymentButtonType, style PaymentButtonStyle) *PaymentButton {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPaymentButton")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentButtonType:paymentButtonStyle:"), type_, style)
-	return paymentButtonAdopt(_id)
+	var _mainthread0 *PaymentButton
+	purego.Main(func() {
+		_mainthread0 = func() *PaymentButton {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("PKPaymentButton")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentButtonType:paymentButtonStyle:"), type_, style)
+			return paymentButtonAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithCornerRadius sets the radius, in points, for the rounded corners on the button.
 func (pb *PaymentButton) WithCornerRadius(cornerRadius float64) *PaymentButton {
-	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setCornerRadius:"), cornerRadius)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setCornerRadius:"), cornerRadius)
+	})
 	return pb
 }
 
 // CornerRadius returns the corner radius.
 func (pb *PaymentButton) CornerRadius() float64 {
-	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("cornerRadius"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("cornerRadius"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

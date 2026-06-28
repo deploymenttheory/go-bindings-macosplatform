@@ -68,26 +68,47 @@ func (midvc *MapItemDetailViewController) String() string {
 
 // NewMapItemDetailViewControllerWithMapItemDisplaysMap create a map item detail view controller
 func NewMapItemDetailViewControllerWithMapItemDisplaysMap(mapItem *MapItem, displaysMap bool) *MapItemDetailViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMapItem:displaysMap:"), objref.IDOf(mapItem), displaysMap)
-	return mapItemDetailViewControllerAdopt(_id)
+	var _mainthread0 *MapItemDetailViewController
+	purego.Main(func() {
+		_mainthread0 = func() *MapItemDetailViewController {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailViewController")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMapItem:displaysMap:"), objref.IDOf(mapItem), displaysMap)
+			return mapItemDetailViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewMapItemDetailViewControllerWithMapItem create a map item detail view controller.
 func NewMapItemDetailViewControllerWithMapItem(mapItem *MapItem) *MapItemDetailViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMapItem:"), objref.IDOf(mapItem))
-	return mapItemDetailViewControllerAdopt(_id)
+	var _mainthread0 *MapItemDetailViewController
+	purego.Main(func() {
+		_mainthread0 = func() *MapItemDetailViewController {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailViewController")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMapItem:"), objref.IDOf(mapItem))
+			return mapItemDetailViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithMapItem sets the map item to display.
 func (midvc *MapItemDetailViewController) WithMapItem(mapItem *MapItem) *MapItemDetailViewController {
-	objc.Send[objc.ID](objref.IDOf(midvc), objc.RegisterName("setMapItem:"), objref.IDOf(mapItem))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(midvc), objc.RegisterName("setMapItem:"), objref.IDOf(mapItem))
+	})
 	return midvc
 }
 
 // MapItem returns the map item.
 func (midvc *MapItemDetailViewController) MapItem() *MapItem {
-	_r := objc.Send[objc.ID](objref.IDOf(midvc), objc.RegisterName("mapItem"))
-	return MapItemFromID(_r)
+	var _mainthread0 *MapItem
+	purego.Main(func() {
+		_mainthread0 = func() *MapItem {
+			_r := objc.Send[objc.ID](objref.IDOf(midvc), objc.RegisterName("mapItem"))
+			return MapItemFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }

@@ -48,116 +48,173 @@ func clickGestureRecognizerAdopt(id objc.ID) *ClickGestureRecognizer {
 
 // NewClickGestureRecognizer creates a new ClickGestureRecognizer.
 func NewClickGestureRecognizer() *ClickGestureRecognizer {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSClickGestureRecognizer")), objc.RegisterName("new"))
-	return clickGestureRecognizerAdopt(_id)
+	var _mainthread0 *ClickGestureRecognizer
+	purego.Main(func() {
+		_mainthread0 = func() *ClickGestureRecognizer {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSClickGestureRecognizer")), objc.RegisterName("new"))
+			return clickGestureRecognizerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithButtonMask sets a bit mask of the button (or buttons) required to recognize this click.
 func (cgr *ClickGestureRecognizer) WithButtonMask(buttonMask int) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setButtonMask:"), buttonMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setButtonMask:"), buttonMask)
+	})
 	return cgr
 }
 
 // WithNumberOfClicksRequired sets the number of clicks required to match.
 func (cgr *ClickGestureRecognizer) WithNumberOfClicksRequired(numberOfClicksRequired int) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setNumberOfClicksRequired:"), numberOfClicksRequired)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setNumberOfClicksRequired:"), numberOfClicksRequired)
+	})
 	return cgr
 }
 
 // WithNumberOfTouchesRequired sets the number of touches required in an NSTouchBar object for the gesture recognizer to match.
 func (cgr *ClickGestureRecognizer) WithNumberOfTouchesRequired(numberOfTouchesRequired int) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setNumberOfTouchesRequired:"), numberOfTouchesRequired)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setNumberOfTouchesRequired:"), numberOfTouchesRequired)
+	})
 	return cgr
 }
 
 // WithTarget sets the object that implements the action method.
 func (cgr *ClickGestureRecognizer) WithTarget(target obj.Object) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return cgr
 }
 
 // WithState sets the current state of the gesture recognizer.
 func (cgr *ClickGestureRecognizer) WithState(state GestureRecognizerState) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setState:"), state)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setState:"), state)
+	})
 	return cgr
 }
 
 // WithEnabled sets a Boolean value indicating whether the gesture recognizer is able to handle events.
 func (cgr *ClickGestureRecognizer) WithEnabled(enabled bool) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return cgr
 }
 
 // WithPressureConfiguration sets configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
 func (cgr *ClickGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return cgr
 }
 
 // WithDelaysPrimaryMouseButtonEvents sets a Boolean value that indicates whether primary mouse button events are delivered only after gesture recognition fails.
 func (cgr *ClickGestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setDelaysPrimaryMouseButtonEvents:"), delaysPrimaryMouseButtonEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setDelaysPrimaryMouseButtonEvents:"), delaysPrimaryMouseButtonEvents)
+	})
 	return cgr
 }
 
 // WithDelaysSecondaryMouseButtonEvents sets a Boolean value that indicates whether secondary mouse button events are delivered only after gesture recognition fails.
 func (cgr *ClickGestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setDelaysSecondaryMouseButtonEvents:"), delaysSecondaryMouseButtonEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setDelaysSecondaryMouseButtonEvents:"), delaysSecondaryMouseButtonEvents)
+	})
 	return cgr
 }
 
 // WithDelaysOtherMouseButtonEvents sets a Boolean value that indicates whether other mouse button events are delivered only after gesture recognition fails.
 func (cgr *ClickGestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setDelaysOtherMouseButtonEvents:"), delaysOtherMouseButtonEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setDelaysOtherMouseButtonEvents:"), delaysOtherMouseButtonEvents)
+	})
 	return cgr
 }
 
 // WithDelaysKeyEvents sets a Boolean value that indicates whether key events are delivered only after gesture recognition fails.
 func (cgr *ClickGestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setDelaysKeyEvents:"), delaysKeyEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setDelaysKeyEvents:"), delaysKeyEvents)
+	})
 	return cgr
 }
 
 // WithDelaysMagnificationEvents sets a Boolean value that indicates whether magnification events are delivered only after gesture recognition fails.
 func (cgr *ClickGestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setDelaysMagnificationEvents:"), delaysMagnificationEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setDelaysMagnificationEvents:"), delaysMagnificationEvents)
+	})
 	return cgr
 }
 
 // WithDelaysRotationEvents sets a Boolean value that indicates whether rotation events are delivered only after gesture recognition fails.
 func (cgr *ClickGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setDelaysRotationEvents:"), delaysRotationEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setDelaysRotationEvents:"), delaysRotationEvents)
+	})
 	return cgr
 }
 
 // WithName sets the name.
 func (cgr *ClickGestureRecognizer) WithName(name string) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setName:"), purego.NSString(name))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setName:"), purego.NSString(name))
+	})
 	return cgr
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (cgr *ClickGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return cgr
 }
 
 // ButtonMask returns the button mask.
 func (cgr *ClickGestureRecognizer) ButtonMask() int {
-	_r := objc.Send[int](objref.IDOf(cgr), objc.RegisterName("buttonMask"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(cgr), objc.RegisterName("buttonMask"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NumberOfClicksRequired returns the number of clicks required.
 func (cgr *ClickGestureRecognizer) NumberOfClicksRequired() int {
-	_r := objc.Send[int](objref.IDOf(cgr), objc.RegisterName("numberOfClicksRequired"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(cgr), objc.RegisterName("numberOfClicksRequired"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NumberOfTouchesRequired returns the number of touches required.
 func (cgr *ClickGestureRecognizer) NumberOfTouchesRequired() int {
-	_r := objc.Send[int](objref.IDOf(cgr), objc.RegisterName("numberOfTouchesRequired"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(cgr), objc.RegisterName("numberOfTouchesRequired"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ GestureRecognizerProvider = (*ClickGestureRecognizer)(nil)

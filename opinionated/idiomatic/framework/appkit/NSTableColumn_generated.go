@@ -68,198 +68,347 @@ func (tc *TableColumn) String() string {
 
 // NewTableColumnWithIdentifier initializes a newly created table column with a string identifier.
 func NewTableColumnWithIdentifier(identifier obj.Object) *TableColumn {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTableColumn")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), objref.IDOf(identifier))
-	return tableColumnAdopt(_id)
+	var _mainthread0 *TableColumn
+	purego.Main(func() {
+		_mainthread0 = func() *TableColumn {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSTableColumn")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), objref.IDOf(identifier))
+			return tableColumnAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewTableColumnWithCoder creates a new TableColumn.
 func NewTableColumnWithCoder(coder obj.Object) *TableColumn {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTableColumn")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
-	return tableColumnAdopt(_id)
+	var _mainthread0 *TableColumn
+	purego.Main(func() {
+		_mainthread0 = func() *TableColumn {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSTableColumn")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+			return tableColumnAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithIdentifier sets the identifier string for the table column.
 func (tc *TableColumn) WithIdentifier(identifier obj.Object) *TableColumn {
-	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
+	})
 	return tc
 }
 
 // WithTableView sets the table view that contains the table column.
 func (tc *TableColumn) WithTableView(tableView TableViewProvider) *TableColumn {
-	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setTableView:"), objref.IDOf(tableView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setTableView:"), objref.IDOf(tableView))
+	})
 	return tc
 }
 
 // WithWidth sets the table column’s width, in points.
 func (tc *TableColumn) WithWidth(width float64) *TableColumn {
-	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setWidth:"), width)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setWidth:"), width)
+	})
 	return tc
 }
 
 // WithMinWidth sets the table column’s minimum width, in points.
 func (tc *TableColumn) WithMinWidth(minWidth float64) *TableColumn {
-	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setMinWidth:"), minWidth)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setMinWidth:"), minWidth)
+	})
 	return tc
 }
 
 // WithMaxWidth sets the table column’s maximum width, in points.
 func (tc *TableColumn) WithMaxWidth(maxWidth float64) *TableColumn {
-	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setMaxWidth:"), maxWidth)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setMaxWidth:"), maxWidth)
+	})
 	return tc
 }
 
 // WithTitle sets the title of the table column’s header.
 func (tc *TableColumn) WithTitle(title string) *TableColumn {
-	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return tc
 }
 
 // WithHeaderCell sets the cell used to draw the table column’s header.
 func (tc *TableColumn) WithHeaderCell(headerCell *TableHeaderCell) *TableColumn {
-	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setHeaderCell:"), objref.IDOf(headerCell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setHeaderCell:"), objref.IDOf(headerCell))
+	})
 	return tc
 }
 
 // WithEditable sets a Boolean that indicates whether a cell-based table’s column cells are user editable.
 func (tc *TableColumn) WithEditable(editable bool) *TableColumn {
-	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setEditable:"), editable)
+	})
 	return tc
 }
 
 // WithSortDescriptorPrototype sets the table column’s sort descriptor prototype.
 func (tc *TableColumn) WithSortDescriptorPrototype(sortDescriptorPrototype obj.Object) *TableColumn {
-	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setSortDescriptorPrototype:"), objref.IDOf(sortDescriptorPrototype))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setSortDescriptorPrototype:"), objref.IDOf(sortDescriptorPrototype))
+	})
 	return tc
 }
 
 // WithResizingMask sets the table column’s resizing mask.
 func (tc *TableColumn) WithResizingMask(resizingMask TableColumnResizingOptions) *TableColumn {
-	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setResizingMask:"), resizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setResizingMask:"), resizingMask)
+	})
 	return tc
 }
 
 // WithHeaderToolTip sets the string that’s displayed in a help tag over the table column header.
 func (tc *TableColumn) WithHeaderToolTip(headerToolTip string) *TableColumn {
-	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setHeaderToolTip:"), purego.NSString(headerToolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setHeaderToolTip:"), purego.NSString(headerToolTip))
+	})
 	return tc
 }
 
 // WithHidden sets a Boolean that indicates whether the table column is hidden.
 func (tc *TableColumn) WithHidden(hidden bool) *TableColumn {
-	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setHidden:"), hidden)
+	})
 	return tc
 }
 
 // WithDataCell sets the cell prototype used by the table column to draw individual cells.
 func (tc *TableColumn) WithDataCell(dataCell obj.Object) *TableColumn {
-	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setDataCell:"), objref.IDOf(dataCell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setDataCell:"), objref.IDOf(dataCell))
+	})
 	return tc
 }
 
 // SizeToFit resizes the table column to fit the width of its header cell.
 func (tc *TableColumn) SizeToFit() {
-	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("sizeToFit"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("sizeToFit"))
+	})
+
 }
 
 // Identifier returns the identifier.
 func (tc *TableColumn) Identifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("identifier"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("identifier"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TableView returns the table view.
 func (tc *TableColumn) TableView() *TableView {
-	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("tableView"))
-	return TableViewFromID(_r)
+	var _mainthread0 *TableView
+	purego.Main(func() {
+		_mainthread0 = func() *TableView {
+			_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("tableView"))
+			return TableViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Width returns the width.
 func (tc *TableColumn) Width() float64 {
-	_r := objc.Send[float64](objref.IDOf(tc), objc.RegisterName("width"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(tc), objc.RegisterName("width"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MinWidth returns the min width.
 func (tc *TableColumn) MinWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(tc), objc.RegisterName("minWidth"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(tc), objc.RegisterName("minWidth"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MaxWidth returns the max width.
 func (tc *TableColumn) MaxWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(tc), objc.RegisterName("maxWidth"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(tc), objc.RegisterName("maxWidth"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Title returns the title.
 func (tc *TableColumn) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("title"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("title"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HeaderCell returns the header cell.
 func (tc *TableColumn) HeaderCell() *TableHeaderCell {
-	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("headerCell"))
-	return TableHeaderCellFromID(_r)
+	var _mainthread0 *TableHeaderCell
+	purego.Main(func() {
+		_mainthread0 = func() *TableHeaderCell {
+			_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("headerCell"))
+			return TableHeaderCellFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsEditable reports whether the object is editable.
 func (tc *TableColumn) IsEditable() bool {
-	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("isEditable"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("isEditable"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SortDescriptorPrototype returns the sort descriptor prototype.
 func (tc *TableColumn) SortDescriptorPrototype() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("sortDescriptorPrototype"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("sortDescriptorPrototype"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ResizingMask returns the resizing mask.
 func (tc *TableColumn) ResizingMask() TableColumnResizingOptions {
-	_r := objc.Send[TableColumnResizingOptions](objref.IDOf(tc), objc.RegisterName("resizingMask"))
-	return _r
+	var _mainthread0 TableColumnResizingOptions
+	purego.Main(func() {
+		_mainthread0 = func() TableColumnResizingOptions {
+			_r := objc.Send[TableColumnResizingOptions](objref.IDOf(tc), objc.RegisterName("resizingMask"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HeaderToolTip returns the header tool tip.
 func (tc *TableColumn) HeaderToolTip() string {
-	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("headerToolTip"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("headerToolTip"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsHidden reports whether the object is hidden.
 func (tc *TableColumn) IsHidden() bool {
-	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("isHidden"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("isHidden"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetResizable sets whether the user can resize the receiver in its NSTableView.
 func (tc *TableColumn) SetResizable(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setResizable:"), flag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setResizable:"), flag)
+	})
+
 }
 
 // IsResizable reports whether the column is resizable.
 func (tc *TableColumn) IsResizable() bool {
-	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("isResizable"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("isResizable"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DataCellForRow returns the cell object used to display values in the specified row of the table column.
 func (tc *TableColumn) DataCellForRow(row int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("dataCellForRow:"), row)
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("dataCellForRow:"), row)
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DataCell returns the data cell.
 func (tc *TableColumn) DataCell() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("dataCell"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("dataCell"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

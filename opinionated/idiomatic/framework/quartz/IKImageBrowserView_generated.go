@@ -68,6 +68,12 @@ func (iibv *IKImageBrowserView) String() string {
 
 // NewIKImageBrowserView creates a new IKImageBrowserView.
 func NewIKImageBrowserView() *IKImageBrowserView {
-	_id := objc.Send[objc.ID](objc.ID(_class("IKImageBrowserView")), objc.RegisterName("new"))
-	return iKImageBrowserViewAdopt(_id)
+	var _mainthread0 *IKImageBrowserView
+	purego.Main(func() {
+		_mainthread0 = func() *IKImageBrowserView {
+			_id := objc.Send[objc.ID](objc.ID(_class("IKImageBrowserView")), objc.RegisterName("new"))
+			return iKImageBrowserViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }

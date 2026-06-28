@@ -82,7 +82,10 @@ func NewLocalSearchWithPointsOfInterestRequest(request *LocalPointsOfInterestReq
 
 // Cancel cancels an in-progress search operation.
 func (ls *LocalSearch) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("cancel"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("cancel"))
+	})
+
 }
 
 // IsSearching reports whether the object is searching.

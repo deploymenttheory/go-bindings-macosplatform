@@ -68,35 +68,72 @@ func (wd *WKDownload) String() string {
 
 // NewWKDownload creates a new WKDownload.
 func NewWKDownload() *WKDownload {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKDownload")), objc.RegisterName("new"))
-	return wKDownloadAdopt(_id)
+	var _mainthread0 *WKDownload
+	purego.Main(func() {
+		_mainthread0 = func() *WKDownload {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKDownload")), objc.RegisterName("new"))
+			return wKDownloadAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // Cancel cancels the download, and optionally captures data so that you can resume the download later.
 func (wd *WKDownload) Cancel(completionHandler func(obj.Object) int) {
-	objc.Send[objc.ID](objref.IDOf(wd), objc.RegisterName("cancel:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return completionHandler(obj.Wrap(_b0)) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wd), objc.RegisterName("cancel:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return completionHandler(obj.Wrap(_b0)) }))
+	})
+
 }
 
 // OriginalRequest returns the original request.
 func (wd *WKDownload) OriginalRequest() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(wd), objc.RegisterName("originalRequest"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(wd), objc.RegisterName("originalRequest"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // WebView returns the web view.
 func (wd *WKDownload) WebView() *WKWebView {
-	_r := objc.Send[objc.ID](objref.IDOf(wd), objc.RegisterName("webView"))
-	return WKWebViewFromID(_r)
+	var _mainthread0 *WKWebView
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebView {
+			_r := objc.Send[objc.ID](objref.IDOf(wd), objc.RegisterName("webView"))
+			return WKWebViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsUserInitiated reports whether the object is user initiated.
 func (wd *WKDownload) IsUserInitiated() bool {
-	_r := objc.Send[bool](objref.IDOf(wd), objc.RegisterName("isUserInitiated"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wd), objc.RegisterName("isUserInitiated"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // OriginatingFrame returns the originating frame.
 func (wd *WKDownload) OriginatingFrame() *WKFrameInfo {
-	_r := objc.Send[objc.ID](objref.IDOf(wd), objc.RegisterName("originatingFrame"))
-	return WKFrameInfoFromID(_r)
+	var _mainthread0 *WKFrameInfo
+	purego.Main(func() {
+		_mainthread0 = func() *WKFrameInfo {
+			_r := objc.Send[objc.ID](objref.IDOf(wd), objc.RegisterName("originatingFrame"))
+			return WKFrameInfoFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }

@@ -68,59 +68,98 @@ func (wucc *WKUserContentController) String() string {
 
 // NewWKUserContentController creates a new WKUserContentController.
 func NewWKUserContentController() *WKUserContentController {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKUserContentController")), objc.RegisterName("new"))
-	return wKUserContentControllerAdopt(_id)
+	var _mainthread0 *WKUserContentController
+	purego.Main(func() {
+		_mainthread0 = func() *WKUserContentController {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKUserContentController")), objc.RegisterName("new"))
+			return wKUserContentControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // AddUserScript injects the specified script into the webpage’s content.
 func (wucc *WKUserContentController) AddUserScript(userScript *WKUserScript) {
-	objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("addUserScript:"), objref.IDOf(userScript))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("addUserScript:"), objref.IDOf(userScript))
+	})
+
 }
 
 // RemoveAllUserScripts removes all user scripts from the web view.
 func (wucc *WKUserContentController) RemoveAllUserScripts() {
-	objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("removeAllUserScripts"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("removeAllUserScripts"))
+	})
+
 }
 
 // RemoveScriptMessageHandlerForNameContentWorld uninstalls a custom message handler from the specified content world in your JavaScript code.
 func (wucc *WKUserContentController) RemoveScriptMessageHandlerForNameContentWorld(name string, contentWorld *WKContentWorld) {
-	objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("removeScriptMessageHandlerForName:contentWorld:"), purego.NSString(name), objref.IDOf(contentWorld))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("removeScriptMessageHandlerForName:contentWorld:"), purego.NSString(name), objref.IDOf(contentWorld))
+	})
+
 }
 
 // RemoveScriptMessageHandlerForName uninstalls the custom message handler with the specified name from your JavaScript code.
 func (wucc *WKUserContentController) RemoveScriptMessageHandlerForName(name string) {
-	objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("removeScriptMessageHandlerForName:"), purego.NSString(name))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("removeScriptMessageHandlerForName:"), purego.NSString(name))
+	})
+
 }
 
 // RemoveAllScriptMessageHandlersFromContentWorld uninstalls all custom message handlers from the specified content world in your JavaScript code.
 func (wucc *WKUserContentController) RemoveAllScriptMessageHandlersFromContentWorld(contentWorld *WKContentWorld) {
-	objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("removeAllScriptMessageHandlersFromContentWorld:"), objref.IDOf(contentWorld))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("removeAllScriptMessageHandlersFromContentWorld:"), objref.IDOf(contentWorld))
+	})
+
 }
 
 // RemoveAllScriptMessageHandlers uninstalls all custom message handlers associated with the user content controller.
 func (wucc *WKUserContentController) RemoveAllScriptMessageHandlers() {
-	objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("removeAllScriptMessageHandlers"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("removeAllScriptMessageHandlers"))
+	})
+
 }
 
 // AddContentRuleList adds the specified content rule list to the content controller object.
 func (wucc *WKUserContentController) AddContentRuleList(contentRuleList *WKContentRuleList) {
-	objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("addContentRuleList:"), objref.IDOf(contentRuleList))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("addContentRuleList:"), objref.IDOf(contentRuleList))
+	})
+
 }
 
 // RemoveContentRuleList removes the specified rule list from the content controller object.
 func (wucc *WKUserContentController) RemoveContentRuleList(contentRuleList *WKContentRuleList) {
-	objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("removeContentRuleList:"), objref.IDOf(contentRuleList))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("removeContentRuleList:"), objref.IDOf(contentRuleList))
+	})
+
 }
 
 // RemoveAllContentRuleLists removes all rules lists from the content controller.
 func (wucc *WKUserContentController) RemoveAllContentRuleLists() {
-	objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("removeAllContentRuleLists"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("removeAllContentRuleLists"))
+	})
+
 }
 
 // UserScripts returns the user scripts associated with this user content controller.
 //
 // UserScripts returns the collection as a Go slice.
 func (wucc *WKUserContentController) UserScripts() []*WKUserScript {
-	_arr := objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("userScripts"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WKUserScript { return WKUserScriptFromID(_id) })
+	var _mainthread0 []*WKUserScript
+	purego.Main(func() {
+		_mainthread0 = func() []*WKUserScript {
+			_arr := objc.Send[objc.ID](objref.IDOf(wucc), objc.RegisterName("userScripts"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WKUserScript { return WKUserScriptFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }

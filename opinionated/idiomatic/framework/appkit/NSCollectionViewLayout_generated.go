@@ -71,204 +71,402 @@ func (cvl *CollectionViewLayout) String() string {
 
 // NewCollectionViewLayoutialLayoutAttributesForAppearingItemAtIndexPath returns the starting layout information for an item being inserted into the collection view.
 func NewCollectionViewLayoutialLayoutAttributesForAppearingItemAtIndexPath(itemIndexPath obj.Object) *CollectionViewLayout {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewLayout")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initialLayoutAttributesForAppearingItemAtIndexPath:"), objref.IDOf(itemIndexPath))
-	return collectionViewLayoutAdopt(_id)
+	var _mainthread0 *CollectionViewLayout
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewLayout {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewLayout")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initialLayoutAttributesForAppearingItemAtIndexPath:"), objref.IDOf(itemIndexPath))
+			return collectionViewLayoutAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewCollectionViewLayoutialLayoutAttributesForAppearingSupplementaryElementOfKindAtIndexPath returns the starting layout information for a supplementary view being added to the collection view.
 func NewCollectionViewLayoutialLayoutAttributesForAppearingSupplementaryElementOfKindAtIndexPath(elementKind obj.Object, elementIndexPath obj.Object) *CollectionViewLayout {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewLayout")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initialLayoutAttributesForAppearingSupplementaryElementOfKind:atIndexPath:"), objref.IDOf(elementKind), objref.IDOf(elementIndexPath))
-	return collectionViewLayoutAdopt(_id)
+	var _mainthread0 *CollectionViewLayout
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewLayout {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewLayout")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initialLayoutAttributesForAppearingSupplementaryElementOfKind:atIndexPath:"), objref.IDOf(elementKind), objref.IDOf(elementIndexPath))
+			return collectionViewLayoutAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewCollectionViewLayoutialLayoutAttributesForAppearingDecorationElementOfKindAtIndexPath returns the starting layout information for a decoration view being added to the collection view.
 func NewCollectionViewLayoutialLayoutAttributesForAppearingDecorationElementOfKindAtIndexPath(elementKind obj.Object, decorationIndexPath obj.Object) *CollectionViewLayout {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewLayout")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initialLayoutAttributesForAppearingDecorationElementOfKind:atIndexPath:"), objref.IDOf(elementKind), objref.IDOf(decorationIndexPath))
-	return collectionViewLayoutAdopt(_id)
+	var _mainthread0 *CollectionViewLayout
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewLayout {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewLayout")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initialLayoutAttributesForAppearingDecorationElementOfKind:atIndexPath:"), objref.IDOf(elementKind), objref.IDOf(decorationIndexPath))
+			return collectionViewLayoutAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // InvalidateLayout invalidates all layout information and triggers a layout update.
 func (cvl *CollectionViewLayout) InvalidateLayout() {
-	objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("invalidateLayout"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("invalidateLayout"))
+	})
+
 }
 
 // InvalidateLayoutWithContext invalidates specific parts of the layout using the specified context object.
 func (cvl *CollectionViewLayout) InvalidateLayoutWithContext(context_ *CollectionViewLayoutInvalidationContext) {
-	objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("invalidateLayoutWithContext:"), objref.IDOf(context_))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("invalidateLayoutWithContext:"), objref.IDOf(context_))
+	})
+
 }
 
 // RegisterNibForDecorationViewOfKind registers a nib file to use when creating the layout’s decoration views.
 func (cvl *CollectionViewLayout) RegisterNibForDecorationViewOfKind(nib *Nib, elementKind obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("registerNib:forDecorationViewOfKind:"), objref.IDOf(nib), objref.IDOf(elementKind))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("registerNib:forDecorationViewOfKind:"), objref.IDOf(nib), objref.IDOf(elementKind))
+	})
+
 }
 
 // CollectionView returns the collection view.
 func (cvl *CollectionViewLayout) CollectionView() *CollectionView {
-	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("collectionView"))
-	return CollectionViewFromID(_r)
+	var _mainthread0 *CollectionView
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionView {
+			_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("collectionView"))
+			return CollectionViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PrepareLayout prepares the layout object to begin laying out content.
 func (cvl *CollectionViewLayout) PrepareLayout() {
-	objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("prepareLayout"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("prepareLayout"))
+	})
+
 }
 
 // LayoutAttributesForElementsInRect returns the layout attribute objects for all items and views in the specified rectangle.
 func (cvl *CollectionViewLayout) LayoutAttributesForElementsInRect(rect corefoundation.CGRect) []*CollectionViewLayoutAttributes {
-	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("layoutAttributesForElementsInRect:"), rect)
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) *CollectionViewLayoutAttributes { return CollectionViewLayoutAttributesFromID(_id) })
+	var _mainthread0 []*CollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() []*CollectionViewLayoutAttributes {
+			_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("layoutAttributesForElementsInRect:"), rect)
+			return purego.NSArrayToSlice(_r, func(_id objc.ID) *CollectionViewLayoutAttributes { return CollectionViewLayoutAttributesFromID(_id) })
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LayoutAttributesForItemAtIndexPath returns the layout attributes for the item at the specified index path.
 func (cvl *CollectionViewLayout) LayoutAttributesForItemAtIndexPath(indexPath obj.Object) *CollectionViewLayoutAttributes {
-	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("layoutAttributesForItemAtIndexPath:"), objref.IDOf(indexPath))
-	return CollectionViewLayoutAttributesFromID(_r)
+	var _mainthread0 *CollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewLayoutAttributes {
+			_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("layoutAttributesForItemAtIndexPath:"), objref.IDOf(indexPath))
+			return CollectionViewLayoutAttributesFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LayoutAttributesForSupplementaryViewOfKindAtIndexPath returns the layout attributes of the supplementary view at the specified location in your layout.
 func (cvl *CollectionViewLayout) LayoutAttributesForSupplementaryViewOfKindAtIndexPath(elementKind obj.Object, indexPath obj.Object) *CollectionViewLayoutAttributes {
-	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("layoutAttributesForSupplementaryViewOfKind:atIndexPath:"), objref.IDOf(elementKind), objref.IDOf(indexPath))
-	return CollectionViewLayoutAttributesFromID(_r)
+	var _mainthread0 *CollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewLayoutAttributes {
+			_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("layoutAttributesForSupplementaryViewOfKind:atIndexPath:"), objref.IDOf(elementKind), objref.IDOf(indexPath))
+			return CollectionViewLayoutAttributesFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LayoutAttributesForDecorationViewOfKindAtIndexPath returns the layout attributes of the decoration view at the specified location in your layout.
 func (cvl *CollectionViewLayout) LayoutAttributesForDecorationViewOfKindAtIndexPath(elementKind obj.Object, indexPath obj.Object) *CollectionViewLayoutAttributes {
-	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("layoutAttributesForDecorationViewOfKind:atIndexPath:"), objref.IDOf(elementKind), objref.IDOf(indexPath))
-	return CollectionViewLayoutAttributesFromID(_r)
+	var _mainthread0 *CollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewLayoutAttributes {
+			_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("layoutAttributesForDecorationViewOfKind:atIndexPath:"), objref.IDOf(elementKind), objref.IDOf(indexPath))
+			return CollectionViewLayoutAttributesFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LayoutAttributesForDropTargetAtPoint returns layout attributes for the drop target at the specified point.
 func (cvl *CollectionViewLayout) LayoutAttributesForDropTargetAtPoint(pointInCollectionView corefoundation.CGPoint) *CollectionViewLayoutAttributes {
-	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("layoutAttributesForDropTargetAtPoint:"), pointInCollectionView)
-	return CollectionViewLayoutAttributesFromID(_r)
+	var _mainthread0 *CollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewLayoutAttributes {
+			_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("layoutAttributesForDropTargetAtPoint:"), pointInCollectionView)
+			return CollectionViewLayoutAttributesFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LayoutAttributesForInterItemGapBeforeIndexPath returns layout attributes for the inter-item gap at the specified location in your layout.
 func (cvl *CollectionViewLayout) LayoutAttributesForInterItemGapBeforeIndexPath(indexPath obj.Object) *CollectionViewLayoutAttributes {
-	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("layoutAttributesForInterItemGapBeforeIndexPath:"), objref.IDOf(indexPath))
-	return CollectionViewLayoutAttributesFromID(_r)
+	var _mainthread0 *CollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewLayoutAttributes {
+			_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("layoutAttributesForInterItemGapBeforeIndexPath:"), objref.IDOf(indexPath))
+			return CollectionViewLayoutAttributesFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShouldInvalidateLayoutForBoundsChange returns a Boolean indicating whether a bounds change triggers a layout update.
 func (cvl *CollectionViewLayout) ShouldInvalidateLayoutForBoundsChange(newBounds corefoundation.CGRect) bool {
-	_r := objc.Send[bool](objref.IDOf(cvl), objc.RegisterName("shouldInvalidateLayoutForBoundsChange:"), newBounds)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cvl), objc.RegisterName("shouldInvalidateLayoutForBoundsChange:"), newBounds)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // InvalidationContextForBoundsChange returns an invalidation context object that defines the portions of the layout that need to be updated.
 func (cvl *CollectionViewLayout) InvalidationContextForBoundsChange(newBounds corefoundation.CGRect) *CollectionViewLayoutInvalidationContext {
-	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("invalidationContextForBoundsChange:"), newBounds)
-	return CollectionViewLayoutInvalidationContextFromID(_r)
+	var _mainthread0 *CollectionViewLayoutInvalidationContext
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewLayoutInvalidationContext {
+			_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("invalidationContextForBoundsChange:"), newBounds)
+			return CollectionViewLayoutInvalidationContextFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShouldInvalidateLayoutForPreferredLayoutAttributesWithOriginalAttributes returns a Boolean indicating whether changes to a cell’s layout attributes trigger a larger layout update.
 func (cvl *CollectionViewLayout) ShouldInvalidateLayoutForPreferredLayoutAttributesWithOriginalAttributes(preferredAttributes *CollectionViewLayoutAttributes, originalAttributes *CollectionViewLayoutAttributes) bool {
-	_r := objc.Send[bool](objref.IDOf(cvl), objc.RegisterName("shouldInvalidateLayoutForPreferredLayoutAttributes:withOriginalAttributes:"), objref.IDOf(preferredAttributes), objref.IDOf(originalAttributes))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cvl), objc.RegisterName("shouldInvalidateLayoutForPreferredLayoutAttributes:withOriginalAttributes:"), objref.IDOf(preferredAttributes), objref.IDOf(originalAttributes))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // InvalidationContextForPreferredLayoutAttributesWithOriginalAttributes returns an invalidation context object that defines the portions of the layout that need to be updated.
 func (cvl *CollectionViewLayout) InvalidationContextForPreferredLayoutAttributesWithOriginalAttributes(preferredAttributes *CollectionViewLayoutAttributes, originalAttributes *CollectionViewLayoutAttributes) *CollectionViewLayoutInvalidationContext {
-	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("invalidationContextForPreferredLayoutAttributes:withOriginalAttributes:"), objref.IDOf(preferredAttributes), objref.IDOf(originalAttributes))
-	return CollectionViewLayoutInvalidationContextFromID(_r)
+	var _mainthread0 *CollectionViewLayoutInvalidationContext
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewLayoutInvalidationContext {
+			_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("invalidationContextForPreferredLayoutAttributes:withOriginalAttributes:"), objref.IDOf(preferredAttributes), objref.IDOf(originalAttributes))
+			return CollectionViewLayoutInvalidationContextFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TargetContentOffsetForProposedContentOffsetWithScrollingVelocity returns the offset value to use for the collection view’s content at the end of scrolling.
 func (cvl *CollectionViewLayout) TargetContentOffsetForProposedContentOffsetWithScrollingVelocity(proposedContentOffset corefoundation.CGPoint, velocity corefoundation.CGPoint) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(cvl), objc.RegisterName("targetContentOffsetForProposedContentOffset:withScrollingVelocity:"), proposedContentOffset, velocity)
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(cvl), objc.RegisterName("targetContentOffsetForProposedContentOffset:withScrollingVelocity:"), proposedContentOffset, velocity)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TargetContentOffsetForProposedContentOffset returns the offset value to use after an animated layout update or change.
 func (cvl *CollectionViewLayout) TargetContentOffsetForProposedContentOffset(proposedContentOffset corefoundation.CGPoint) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(cvl), objc.RegisterName("targetContentOffsetForProposedContentOffset:"), proposedContentOffset)
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(cvl), objc.RegisterName("targetContentOffsetForProposedContentOffset:"), proposedContentOffset)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CollectionViewContentSize returns the collection view content size.
 func (cvl *CollectionViewLayout) CollectionViewContentSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvl), objc.RegisterName("collectionViewContentSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvl), objc.RegisterName("collectionViewContentSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PrepareForCollectionViewUpdates performs needed tasks before items are inserted, deleted, or moved within the collection view.
 func (cvl *CollectionViewLayout) PrepareForCollectionViewUpdates(updateItems []*CollectionViewUpdateItem) {
-	objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("prepareForCollectionViewUpdates:"), purego.SliceToNSArray(updateItems, func(_v *CollectionViewUpdateItem) objc.ID { return objref.IDOf(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("prepareForCollectionViewUpdates:"), purego.SliceToNSArray(updateItems, func(_v *CollectionViewUpdateItem) objc.ID { return objref.IDOf(_v) }))
+	})
+
 }
 
 // FinalizeCollectionViewUpdates performs needed steps after items are inserted, deleted, or moved within a collection view.
 func (cvl *CollectionViewLayout) FinalizeCollectionViewUpdates() {
-	objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("finalizeCollectionViewUpdates"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("finalizeCollectionViewUpdates"))
+	})
+
 }
 
 // PrepareForAnimatedBoundsChange prepares the layout object for animated changes to the collection view’s bounds or for the insertion or deletion of items.
 func (cvl *CollectionViewLayout) PrepareForAnimatedBoundsChange(oldBounds corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("prepareForAnimatedBoundsChange:"), oldBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("prepareForAnimatedBoundsChange:"), oldBounds)
+	})
+
 }
 
 // FinalizeAnimatedBoundsChange cleans up after any animated changes to the collection view’s bounds or after the insertion or deletion of items.
 func (cvl *CollectionViewLayout) FinalizeAnimatedBoundsChange() {
-	objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("finalizeAnimatedBoundsChange"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("finalizeAnimatedBoundsChange"))
+	})
+
 }
 
 // PrepareForTransitionToLayout prepares the layout object to be uninstalled from the collection view.
 func (cvl *CollectionViewLayout) PrepareForTransitionToLayout(newLayout *CollectionViewLayout) {
-	objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("prepareForTransitionToLayout:"), objref.IDOf(newLayout))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("prepareForTransitionToLayout:"), objref.IDOf(newLayout))
+	})
+
 }
 
 // PrepareForTransitionFromLayout prepares the layout object to be installed in the collection view.
 func (cvl *CollectionViewLayout) PrepareForTransitionFromLayout(oldLayout *CollectionViewLayout) {
-	objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("prepareForTransitionFromLayout:"), objref.IDOf(oldLayout))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("prepareForTransitionFromLayout:"), objref.IDOf(oldLayout))
+	})
+
 }
 
 // FinalizeLayoutTransition performs any final steps related to a layout transition before the transition animations actually occur.
 func (cvl *CollectionViewLayout) FinalizeLayoutTransition() {
-	objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("finalizeLayoutTransition"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("finalizeLayoutTransition"))
+	})
+
 }
 
 // FinalLayoutAttributesForDisappearingItemAtIndexPath returns the ending layout information for an item being removed from the collection view.
 func (cvl *CollectionViewLayout) FinalLayoutAttributesForDisappearingItemAtIndexPath(itemIndexPath obj.Object) *CollectionViewLayoutAttributes {
-	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("finalLayoutAttributesForDisappearingItemAtIndexPath:"), objref.IDOf(itemIndexPath))
-	return CollectionViewLayoutAttributesFromID(_r)
+	var _mainthread0 *CollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewLayoutAttributes {
+			_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("finalLayoutAttributesForDisappearingItemAtIndexPath:"), objref.IDOf(itemIndexPath))
+			return CollectionViewLayoutAttributesFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FinalLayoutAttributesForDisappearingSupplementaryElementOfKindAtIndexPath returns the ending layout information for a supplementary view being removed from the collection view.
 func (cvl *CollectionViewLayout) FinalLayoutAttributesForDisappearingSupplementaryElementOfKindAtIndexPath(elementKind obj.Object, elementIndexPath obj.Object) *CollectionViewLayoutAttributes {
-	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("finalLayoutAttributesForDisappearingSupplementaryElementOfKind:atIndexPath:"), objref.IDOf(elementKind), objref.IDOf(elementIndexPath))
-	return CollectionViewLayoutAttributesFromID(_r)
+	var _mainthread0 *CollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewLayoutAttributes {
+			_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("finalLayoutAttributesForDisappearingSupplementaryElementOfKind:atIndexPath:"), objref.IDOf(elementKind), objref.IDOf(elementIndexPath))
+			return CollectionViewLayoutAttributesFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // FinalLayoutAttributesForDisappearingDecorationElementOfKindAtIndexPath returns the ending layout information for a decoration view being removed from the collection view.
 func (cvl *CollectionViewLayout) FinalLayoutAttributesForDisappearingDecorationElementOfKindAtIndexPath(elementKind obj.Object, decorationIndexPath obj.Object) *CollectionViewLayoutAttributes {
-	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("finalLayoutAttributesForDisappearingDecorationElementOfKind:atIndexPath:"), objref.IDOf(elementKind), objref.IDOf(decorationIndexPath))
-	return CollectionViewLayoutAttributesFromID(_r)
+	var _mainthread0 *CollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionViewLayoutAttributes {
+			_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("finalLayoutAttributesForDisappearingDecorationElementOfKind:atIndexPath:"), objref.IDOf(elementKind), objref.IDOf(decorationIndexPath))
+			return CollectionViewLayoutAttributesFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IndexPathsToDeleteForSupplementaryViewOfKind returns the index paths for any supplementary views that the layout object wants to remove from the collection view.
 func (cvl *CollectionViewLayout) IndexPathsToDeleteForSupplementaryViewOfKind(elementKind obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("indexPathsToDeleteForSupplementaryViewOfKind:"), objref.IDOf(elementKind))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("indexPathsToDeleteForSupplementaryViewOfKind:"), objref.IDOf(elementKind))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IndexPathsToDeleteForDecorationViewOfKind returns index paths for any decoration views that the layout object wants to remove from the collection view.
 func (cvl *CollectionViewLayout) IndexPathsToDeleteForDecorationViewOfKind(elementKind obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("indexPathsToDeleteForDecorationViewOfKind:"), objref.IDOf(elementKind))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("indexPathsToDeleteForDecorationViewOfKind:"), objref.IDOf(elementKind))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IndexPathsToInsertForSupplementaryViewOfKind returns the index paths for any supplementary views that the layout object wants to add to the collection view.
 func (cvl *CollectionViewLayout) IndexPathsToInsertForSupplementaryViewOfKind(elementKind obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("indexPathsToInsertForSupplementaryViewOfKind:"), objref.IDOf(elementKind))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("indexPathsToInsertForSupplementaryViewOfKind:"), objref.IDOf(elementKind))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IndexPathsToInsertForDecorationViewOfKind returns the index paths for any decoration views that the layout object wants to add to the collection view.
 func (cvl *CollectionViewLayout) IndexPathsToInsertForDecorationViewOfKind(elementKind obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("indexPathsToInsertForDecorationViewOfKind:"), objref.IDOf(elementKind))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("indexPathsToInsertForDecorationViewOfKind:"), objref.IDOf(elementKind))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // isCollectionViewLayout marks CollectionViewLayout — and, by embedding promotion, its

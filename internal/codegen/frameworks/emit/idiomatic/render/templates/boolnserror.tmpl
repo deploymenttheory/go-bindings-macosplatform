@@ -1,17 +1,32 @@
 {{/*
     boolnserror.tmpl renders an Objective-C method that returns a success flag
     plus an NSError out-parameter as a Go method that returns only error (nil on
-    success). RecvExpr is the object the call is sent to.
+    success). RecvExpr is the object the call is sent to. When the selector is
+    @MainActor-isolated the call is run on the main thread via purego.Main, the
+    body sub-template reused verbatim inside an inner closure.
 */}}
 {{define "boolnserror"}}{{if .DocComment}}{{.DocComment}}//
 {{end}}// {{.GoName}} returns an error if the operation did not succeed.
 func {{.Recv}}{{.GoName}}() error {
+{{- if .MainThread}}
+var _mainthread0 error
+purego.Main(func() {
+_mainthread0 = func() error {
+{{- template "boolnserror_body" .}}
+}()
+})
+return _mainthread0
+{{- else}}{{template "boolnserror_body" .}}
+{{- end}}
+}
+
+{{end}}
+
+{{define "boolnserror_body"}}
 var _nsErr uintptr
 objc.Send[bool]({{.RecvExpr}}, objc.RegisterName({{.Selector | printf "%q"}}), unsafe.Pointer(&_nsErr))
 if _nsErr != 0 {
 return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 }
 return nil
-}
-
-{{end}}
+{{- end}}

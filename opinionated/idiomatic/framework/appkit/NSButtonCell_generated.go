@@ -49,566 +49,875 @@ func buttonCellAdopt(id objc.ID) *ButtonCell {
 
 // NewButtonCellTextCell creates a new ButtonCell.
 func NewButtonCellTextCell(string_ string) *ButtonCell {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSButtonCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(string_))
-	return buttonCellAdopt(_id)
+	var _mainthread0 *ButtonCell
+	purego.Main(func() {
+		_mainthread0 = func() *ButtonCell {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSButtonCell")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(string_))
+			return buttonCellAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewButtonCellImageCell creates a new ButtonCell.
 func NewButtonCellImageCell(image *Image) *ButtonCell {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSButtonCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initImageCell:"), objref.IDOf(image))
-	return buttonCellAdopt(_id)
+	var _mainthread0 *ButtonCell
+	purego.Main(func() {
+		_mainthread0 = func() *ButtonCell {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSButtonCell")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initImageCell:"), objref.IDOf(image))
+			return buttonCellAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewButtonCellWithCoder creates a new ButtonCell.
 func NewButtonCellWithCoder(coder obj.Object) *ButtonCell {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSButtonCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
-	return buttonCellAdopt(_id)
+	var _mainthread0 *ButtonCell
+	purego.Main(func() {
+		_mainthread0 = func() *ButtonCell {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSButtonCell")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+			return buttonCellAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithBezelStyle sets the appearance of the button’s border, if it has one.
 func (bc *ButtonCell) WithBezelStyle(bezelStyle BezelStyle) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBezelStyle:"), bezelStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBezelStyle:"), bezelStyle)
+	})
 	return bc
 }
 
 // WithHighlightsBy sets a set of flags that indicate how the button highlights when it receives a mouse-down event (that is, when the button is pressed).
 func (bc *ButtonCell) WithHighlightsBy(highlightsBy CellStyleMask) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setHighlightsBy:"), highlightsBy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setHighlightsBy:"), highlightsBy)
+	})
 	return bc
 }
 
 // WithShowsStateBy sets the flags that indicate how the button cell shows its alternate state.
 func (bc *ButtonCell) WithShowsStateBy(showsStateBy CellStyleMask) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setShowsStateBy:"), showsStateBy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setShowsStateBy:"), showsStateBy)
+	})
 	return bc
 }
 
 // WithAttributedTitle sets the title displayed by the button when it’s in its normal state as an attributed string.
 func (bc *ButtonCell) WithAttributedTitle(attributedTitle obj.Object) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
+	})
 	return bc
 }
 
 // WithAlternateTitle sets the string displayed by the button when it’s in its alternate state.
 func (bc *ButtonCell) WithAlternateTitle(alternateTitle string) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAlternateTitle:"), purego.NSString(alternateTitle))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAlternateTitle:"), purego.NSString(alternateTitle))
+	})
 	return bc
 }
 
 // WithAttributedAlternateTitle sets the title displayed by the button when it’s in its alternate state, as an attributed string.
 func (bc *ButtonCell) WithAttributedAlternateTitle(attributedAlternateTitle obj.Object) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAttributedAlternateTitle:"), objref.IDOf(attributedAlternateTitle))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAttributedAlternateTitle:"), objref.IDOf(attributedAlternateTitle))
+	})
 	return bc
 }
 
 // WithAlternateImage sets the image the button displays in its alternate state.
 func (bc *ButtonCell) WithAlternateImage(alternateImage *Image) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
+	})
 	return bc
 }
 
 // WithImagePosition sets the position of the button’s image relative to its title.
 func (bc *ButtonCell) WithImagePosition(imagePosition CellImagePosition) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setImagePosition:"), imagePosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setImagePosition:"), imagePosition)
+	})
 	return bc
 }
 
 // WithImageScaling sets the scale factor for the button’s image.
 func (bc *ButtonCell) WithImageScaling(imageScaling ImageScaling) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setImageScaling:"), imageScaling)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setImageScaling:"), imageScaling)
+	})
 	return bc
 }
 
 // WithKeyEquivalent sets the button’s key-equivalent character.
 func (bc *ButtonCell) WithKeyEquivalent(keyEquivalent string) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setKeyEquivalent:"), purego.NSString(keyEquivalent))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setKeyEquivalent:"), purego.NSString(keyEquivalent))
+	})
 	return bc
 }
 
 // WithKeyEquivalentModifierMask sets the mask that identifies the modifier keys for the button’s key equivalent.
 func (bc *ButtonCell) WithKeyEquivalentModifierMask(keyEquivalentModifierMask EventModifierFlags) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setKeyEquivalentModifierMask:"), keyEquivalentModifierMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setKeyEquivalentModifierMask:"), keyEquivalentModifierMask)
+	})
 	return bc
 }
 
 // WithTransparent sets a Boolean value that indicates if the button is transparent.
 func (bc *ButtonCell) WithTransparent(transparent bool) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setTransparent:"), transparent)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setTransparent:"), transparent)
+	})
 	return bc
 }
 
 // WithImageDimsWhenDisabled sets a Boolean value that indicates if the button’s image and text appear “dim” when the button is disabled.
 func (bc *ButtonCell) WithImageDimsWhenDisabled(imageDimsWhenDisabled bool) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setImageDimsWhenDisabled:"), imageDimsWhenDisabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setImageDimsWhenDisabled:"), imageDimsWhenDisabled)
+	})
 	return bc
 }
 
 // WithShowsBorderOnlyWhileMouseInside sets a Boolean value that indicates if the button displays its border only when the pointer is over it.
 func (bc *ButtonCell) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setShowsBorderOnlyWhileMouseInside:"), showsBorderOnlyWhileMouseInside)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setShowsBorderOnlyWhileMouseInside:"), showsBorderOnlyWhileMouseInside)
+	})
 	return bc
 }
 
 // WithSound sets the sound that’s played when the user presses the button (that is during a mouse-down event).
 func (bc *ButtonCell) WithSound(sound *Sound) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setSound:"), objref.IDOf(sound))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setSound:"), objref.IDOf(sound))
+	})
 	return bc
 }
 
 // WithBackgroundColor sets the background color of the button.
 func (bc *ButtonCell) WithBackgroundColor(backgroundColor *Color) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	})
 	return bc
 }
 
 // WithGradientType sets the gradient of the button’s border.
 func (bc *ButtonCell) WithGradientType(gradientType GradientType) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setGradientType:"), gradientType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setGradientType:"), gradientType)
+	})
 	return bc
 }
 
 // WithKeyEquivalentFont sets the font used to draw the button’s key equivalent.
 func (bc *ButtonCell) WithKeyEquivalentFont(keyEquivalentFont *Font) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setKeyEquivalentFont:"), objref.IDOf(keyEquivalentFont))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setKeyEquivalentFont:"), objref.IDOf(keyEquivalentFont))
+	})
 	return bc
 }
 
 // WithControlView sets the view associated with the cell.
 func (bc *ButtonCell) WithControlView(controlView ViewProvider) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	})
 	return bc
 }
 
 // WithType sets the type of the cell.
 func (bc *ButtonCell) WithType(type_ CellType) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setType:"), type_)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setType:"), type_)
+	})
 	return bc
 }
 
 // WithState sets the cell’s current state.
 func (bc *ButtonCell) WithState(state int) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setState:"), state)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setState:"), state)
+	})
 	return bc
 }
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (bc *ButtonCell) WithTarget(target obj.Object) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return bc
 }
 
 // WithTag sets a tag for identifying the cell.
 func (bc *ButtonCell) WithTag(tag int) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setTag:"), tag)
+	})
 	return bc
 }
 
 // WithTitle sets the cell’s title text.
 func (bc *ButtonCell) WithTitle(title string) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return bc
 }
 
 // WithEnabled sets a Boolean value indicating whether the cell is currently enabled.
 func (bc *ButtonCell) WithEnabled(enabled bool) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return bc
 }
 
 // WithContinuous sets a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 func (bc *ButtonCell) WithContinuous(continuous bool) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return bc
 }
 
 // WithEditable sets a Boolean value indicating whether the cell is editable.
 func (bc *ButtonCell) WithEditable(editable bool) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setEditable:"), editable)
+	})
 	return bc
 }
 
 // WithSelectable sets a Boolean value indicating whether the cell’s text can be selected.
 func (bc *ButtonCell) WithSelectable(selectable bool) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setSelectable:"), selectable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setSelectable:"), selectable)
+	})
 	return bc
 }
 
 // WithBordered sets a Boolean value indicating whether the cell draws itself outlined with a plain border.
 func (bc *ButtonCell) WithBordered(bordered bool) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBordered:"), bordered)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBordered:"), bordered)
+	})
 	return bc
 }
 
 // WithBezeled sets a Boolean value indicating whether the cell has a bezeled border.
 func (bc *ButtonCell) WithBezeled(bezeled bool) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBezeled:"), bezeled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBezeled:"), bezeled)
+	})
 	return bc
 }
 
 // WithScrollable sets a Boolean value indicating whether excess text scrolls past the cell’s bounds.
 func (bc *ButtonCell) WithScrollable(scrollable bool) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setScrollable:"), scrollable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setScrollable:"), scrollable)
+	})
 	return bc
 }
 
 // WithHighlighted sets a Boolean value indicating whether the cell has a highlighted appearance.
 func (bc *ButtonCell) WithHighlighted(highlighted bool) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return bc
 }
 
 // WithAlignment sets the alignment of the cell’s text.
 func (bc *ButtonCell) WithAlignment(alignment TextAlignment) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return bc
 }
 
 // WithWraps sets a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 func (bc *ButtonCell) WithWraps(wraps bool) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setWraps:"), wraps)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setWraps:"), wraps)
+	})
 	return bc
 }
 
 // WithFont sets the font that the cell uses to display text.
 func (bc *ButtonCell) WithFont(font *Font) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return bc
 }
 
 // WithFormatter sets the cell’s formatter object.
 func (bc *ButtonCell) WithFormatter(formatter obj.Object) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return bc
 }
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (bc *ButtonCell) WithObjectValue(objectValue obj.Object) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return bc
 }
 
 // WithStringValue sets the cell’s value as a string.
 func (bc *ButtonCell) WithStringValue(stringValue string) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return bc
 }
 
 // WithIntValue sets the cell’s value as an integer.
 func (bc *ButtonCell) WithIntValue(intValue int) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return bc
 }
 
 // WithFloatValue sets the cell’s value as a single-precision floating-point number.
 func (bc *ButtonCell) WithFloatValue(floatValue float32) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return bc
 }
 
 // WithDoubleValue sets the cell’s value as a double-precision floating-point number.
 func (bc *ButtonCell) WithDoubleValue(doubleValue float64) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return bc
 }
 
 // WithIntegerValue sets the cell’s value as an integer value.
 func (bc *ButtonCell) WithIntegerValue(integerValue int) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return bc
 }
 
 // WithImage sets the image displayed by the cell, if any.
 func (bc *ButtonCell) WithImage(image *Image) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setImage:"), objref.IDOf(image))
+	})
 	return bc
 }
 
 // WithControlSize sets the size of the cell.
 func (bc *ButtonCell) WithControlSize(controlSize ControlSize) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return bc
 }
 
 // WithRepresentedObject sets the object represented by the cell.
 func (bc *ButtonCell) WithRepresentedObject(representedObject obj.Object) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	})
 	return bc
 }
 
 // WithMenu sets the cell’s contextual menu.
 func (bc *ButtonCell) WithMenu(menu *Menu) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return bc
 }
 
 // WithSendsActionOnEndEditing sets a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 func (bc *ButtonCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	})
 	return bc
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (bc *ButtonCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return bc
 }
 
 // WithLineBreakMode sets the line break mode to use when drawing text in the cell.
 func (bc *ButtonCell) WithLineBreakMode(lineBreakMode LineBreakMode) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return bc
 }
 
 // WithAllowsUndo sets a Boolean value indicating whether the cell assumes responsibility for undo operations.
 func (bc *ButtonCell) WithAllowsUndo(allowsUndo bool) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	})
 	return bc
 }
 
 // WithTruncatesLastVisibleLine sets a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 func (bc *ButtonCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	})
 	return bc
 }
 
 // WithUserInterfaceLayoutDirection sets the layout direction of the user interface.
 func (bc *ButtonCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return bc
 }
 
 // WithUsesSingleLineMode sets a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 func (bc *ButtonCell) WithUsesSingleLineMode(usesSingleLineMode bool) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return bc
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the cell refuses the first responder status.
 func (bc *ButtonCell) WithRefusesFirstResponder(refusesFirstResponder bool) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return bc
 }
 
 // WithShowsFirstResponder sets a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 func (bc *ButtonCell) WithShowsFirstResponder(showsFirstResponder bool) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	})
 	return bc
 }
 
 // WithFocusRingType sets the type of focus ring to use with the associated view.
 func (bc *ButtonCell) WithFocusRingType(focusRingType FocusRingType) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return bc
 }
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (bc *ButtonCell) WithAttributedStringValue(attributedStringValue obj.Object) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return bc
 }
 
 // WithAllowsEditingTextAttributes sets a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 func (bc *ButtonCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	})
 	return bc
 }
 
 // WithImportsGraphics sets a Boolean value indicating whether the cell supports the importation of images into its text.
 func (bc *ButtonCell) WithImportsGraphics(importsGraphics bool) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	})
 	return bc
 }
 
 // WithAllowsMixedState sets a Boolean value indicating whether the cell supports three states instead of two.
 func (bc *ButtonCell) WithAllowsMixedState(allowsMixedState bool) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	})
 	return bc
 }
 
 // WithBackgroundStyle sets the cell’s background style.
 func (bc *ButtonCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	})
 	return bc
 }
 
 // WithControlTint sets the cell’s control tint.
 func (bc *ButtonCell) WithControlTint(controlTint ControlTint) *ButtonCell {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setControlTint:"), controlTint)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setControlTint:"), controlTint)
+	})
 	return bc
 }
 
 // SetButtonType sets how the button highlights while pressed and how it shows its state.
 func (bc *ButtonCell) SetButtonType(type_ ButtonType) {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setButtonType:"), type_)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setButtonType:"), type_)
+	})
+
 }
 
 // SetPeriodicDelayInterval sets the message delay and interval for the button.
 func (bc *ButtonCell) SetPeriodicDelayInterval(delay float32, interval float32) {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setPeriodicDelay:interval:"), delay, interval)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setPeriodicDelay:interval:"), delay, interval)
+	})
+
 }
 
 // MouseEntered draws the button’s border.
 func (bc *ButtonCell) MouseEntered(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("mouseEntered:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("mouseEntered:"), objref.IDOf(event))
+	})
+
 }
 
 // MouseExited erases the button’s border.
 func (bc *ButtonCell) MouseExited(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("mouseExited:"), objref.IDOf(event))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("mouseExited:"), objref.IDOf(event))
+	})
+
 }
 
 // DrawBezelWithFrameInView draws the border of the button using the current bezel style.
 func (bc *ButtonCell) DrawBezelWithFrameInView(frame corefoundation.CGRect, controlView *View) {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("drawBezelWithFrame:inView:"), frame, objref.IDOf(controlView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("drawBezelWithFrame:inView:"), frame, objref.IDOf(controlView))
+	})
+
 }
 
 // DrawImageWithFrameInView draws the image associated with the button’s current state.
 func (bc *ButtonCell) DrawImageWithFrameInView(image *Image, frame corefoundation.CGRect, controlView *View) {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("drawImage:withFrame:inView:"), objref.IDOf(image), frame, objref.IDOf(controlView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("drawImage:withFrame:inView:"), objref.IDOf(image), frame, objref.IDOf(controlView))
+	})
+
 }
 
 // DrawTitleWithFrameInView draws the button’s title centered vertically in a specified rectangle.
 func (bc *ButtonCell) DrawTitleWithFrameInView(title obj.Object, frame corefoundation.CGRect, controlView *View) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(bc), objc.RegisterName("drawTitle:withFrame:inView:"), objref.IDOf(title), frame, objref.IDOf(controlView))
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(bc), objc.RegisterName("drawTitle:withFrame:inView:"), objref.IDOf(title), frame, objref.IDOf(controlView))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BezelStyle returns the bezel style.
 func (bc *ButtonCell) BezelStyle() BezelStyle {
-	_r := objc.Send[BezelStyle](objref.IDOf(bc), objc.RegisterName("bezelStyle"))
-	return _r
+	var _mainthread0 BezelStyle
+	purego.Main(func() {
+		_mainthread0 = func() BezelStyle {
+			_r := objc.Send[BezelStyle](objref.IDOf(bc), objc.RegisterName("bezelStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HighlightsBy returns the highlights by.
 func (bc *ButtonCell) HighlightsBy() CellStyleMask {
-	_r := objc.Send[CellStyleMask](objref.IDOf(bc), objc.RegisterName("highlightsBy"))
-	return _r
+	var _mainthread0 CellStyleMask
+	purego.Main(func() {
+		_mainthread0 = func() CellStyleMask {
+			_r := objc.Send[CellStyleMask](objref.IDOf(bc), objc.RegisterName("highlightsBy"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsStateBy returns the shows state by.
 func (bc *ButtonCell) ShowsStateBy() CellStyleMask {
-	_r := objc.Send[CellStyleMask](objref.IDOf(bc), objc.RegisterName("showsStateBy"))
-	return _r
+	var _mainthread0 CellStyleMask
+	purego.Main(func() {
+		_mainthread0 = func() CellStyleMask {
+			_r := objc.Send[CellStyleMask](objref.IDOf(bc), objc.RegisterName("showsStateBy"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AttributedTitle returns the attributed title.
 func (bc *ButtonCell) AttributedTitle() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("attributedTitle"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("attributedTitle"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AlternateTitle returns the alternate title.
 func (bc *ButtonCell) AlternateTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("alternateTitle"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("alternateTitle"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AttributedAlternateTitle returns the attributed alternate title.
 func (bc *ButtonCell) AttributedAlternateTitle() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("attributedAlternateTitle"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("attributedAlternateTitle"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AlternateImage returns the alternate image.
 func (bc *ButtonCell) AlternateImage() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("alternateImage"))
-	return ImageFromID(_r)
+	var _mainthread0 *Image
+	purego.Main(func() {
+		_mainthread0 = func() *Image {
+			_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("alternateImage"))
+			return ImageFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ImagePosition returns the image position.
 func (bc *ButtonCell) ImagePosition() CellImagePosition {
-	_r := objc.Send[CellImagePosition](objref.IDOf(bc), objc.RegisterName("imagePosition"))
-	return _r
+	var _mainthread0 CellImagePosition
+	purego.Main(func() {
+		_mainthread0 = func() CellImagePosition {
+			_r := objc.Send[CellImagePosition](objref.IDOf(bc), objc.RegisterName("imagePosition"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ImageScaling returns the image scaling.
 func (bc *ButtonCell) ImageScaling() ImageScaling {
-	_r := objc.Send[ImageScaling](objref.IDOf(bc), objc.RegisterName("imageScaling"))
-	return _r
+	var _mainthread0 ImageScaling
+	purego.Main(func() {
+		_mainthread0 = func() ImageScaling {
+			_r := objc.Send[ImageScaling](objref.IDOf(bc), objc.RegisterName("imageScaling"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // KeyEquivalentModifierMask returns the key equivalent modifier mask.
 func (bc *ButtonCell) KeyEquivalentModifierMask() EventModifierFlags {
-	_r := objc.Send[EventModifierFlags](objref.IDOf(bc), objc.RegisterName("keyEquivalentModifierMask"))
-	return _r
+	var _mainthread0 EventModifierFlags
+	purego.Main(func() {
+		_mainthread0 = func() EventModifierFlags {
+			_r := objc.Send[EventModifierFlags](objref.IDOf(bc), objc.RegisterName("keyEquivalentModifierMask"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsTransparent reports whether the object is transparent.
 func (bc *ButtonCell) IsTransparent() bool {
-	_r := objc.Send[bool](objref.IDOf(bc), objc.RegisterName("isTransparent"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(bc), objc.RegisterName("isTransparent"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ImageDimsWhenDisabled wraps the corresponding Objective-C method.
 func (bc *ButtonCell) ImageDimsWhenDisabled() bool {
-	_r := objc.Send[bool](objref.IDOf(bc), objc.RegisterName("imageDimsWhenDisabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(bc), objc.RegisterName("imageDimsWhenDisabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsBorderOnlyWhileMouseInside wraps the corresponding Objective-C method.
 func (bc *ButtonCell) ShowsBorderOnlyWhileMouseInside() bool {
-	_r := objc.Send[bool](objref.IDOf(bc), objc.RegisterName("showsBorderOnlyWhileMouseInside"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(bc), objc.RegisterName("showsBorderOnlyWhileMouseInside"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Sound returns the sound.
 func (bc *ButtonCell) Sound() *Sound {
-	_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("sound"))
-	return SoundFromID(_r)
+	var _mainthread0 *Sound
+	purego.Main(func() {
+		_mainthread0 = func() *Sound {
+			_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("sound"))
+			return SoundFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BackgroundColor returns the background color.
 func (bc *ButtonCell) BackgroundColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("backgroundColor"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("backgroundColor"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetAlternateTitleWithMnemonic sets the title the button displays when it’s in its alternate state to the given string with an embedded mnemonic.
 func (bc *ButtonCell) SetAlternateTitleWithMnemonic(stringWithAmpersand string) {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAlternateTitleWithMnemonic:"), purego.NSString(stringWithAmpersand))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAlternateTitleWithMnemonic:"), purego.NSString(stringWithAmpersand))
+	})
+
 }
 
 // SetAlternateMnemonicLocation sets the character in the alternate title that should be the “keyboard mnemonic.”
 func (bc *ButtonCell) SetAlternateMnemonicLocation(location int) {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAlternateMnemonicLocation:"), location)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAlternateMnemonicLocation:"), location)
+	})
+
 }
 
 // AlternateMnemonicLocation returns an unsigned integer indicating the character in the alternate title that’s marked as the “keyboard mnemonic.”
 func (bc *ButtonCell) AlternateMnemonicLocation() int {
-	_r := objc.Send[int](objref.IDOf(bc), objc.RegisterName("alternateMnemonicLocation"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(bc), objc.RegisterName("alternateMnemonicLocation"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AlternateMnemonic returns the character in the alternate title that’s marked as the “keyboard mnemonic.”
 func (bc *ButtonCell) AlternateMnemonic() string {
-	_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("alternateMnemonic"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("alternateMnemonic"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetKeyEquivalentFontSize sets by name and size of the font used to draw the key equivalent.
 func (bc *ButtonCell) SetKeyEquivalentFontSize(fontName string, fontSize float64) {
-	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setKeyEquivalentFont:size:"), purego.NSString(fontName), fontSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setKeyEquivalentFont:size:"), purego.NSString(fontName), fontSize)
+	})
+
 }
 
 // GradientType returns the gradient type.
 func (bc *ButtonCell) GradientType() GradientType {
-	_r := objc.Send[GradientType](objref.IDOf(bc), objc.RegisterName("gradientType"))
-	return _r
+	var _mainthread0 GradientType
+	purego.Main(func() {
+		_mainthread0 = func() GradientType {
+			_r := objc.Send[GradientType](objref.IDOf(bc), objc.RegisterName("gradientType"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // KeyEquivalentFont returns the key equivalent font.
 func (bc *ButtonCell) KeyEquivalentFont() *Font {
-	_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("keyEquivalentFont"))
-	return FontFromID(_r)
+	var _mainthread0 *Font
+	purego.Main(func() {
+		_mainthread0 = func() *Font {
+			_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("keyEquivalentFont"))
+			return FontFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // isButtonCell marks ButtonCell — and, by embedding promotion, its

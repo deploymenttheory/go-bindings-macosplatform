@@ -48,95 +48,158 @@ func colorPickerTouchBarItemAdopt(id objc.ID) *ColorPickerTouchBarItem {
 
 // NewColorPickerTouchBarItem creates a new ColorPickerTouchBarItem.
 func NewColorPickerTouchBarItem() *ColorPickerTouchBarItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSColorPickerTouchBarItem")), objc.RegisterName("new"))
-	return colorPickerTouchBarItemAdopt(_id)
+	var _mainthread0 *ColorPickerTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *ColorPickerTouchBarItem {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSColorPickerTouchBarItem")), objc.RegisterName("new"))
+			return colorPickerTouchBarItemAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithColor sets the picker’s currently selected color.
 func (cptbi *ColorPickerTouchBarItem) WithColor(color *Color) *ColorPickerTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("setColor:"), objref.IDOf(color))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("setColor:"), objref.IDOf(color))
+	})
 	return cptbi
 }
 
 // WithShowsAlpha sets a Boolean value that controls whether the color picker allows picking of colors with alpha values other than 1.0.
 func (cptbi *ColorPickerTouchBarItem) WithShowsAlpha(showsAlpha bool) *ColorPickerTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("setShowsAlpha:"), showsAlpha)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("setShowsAlpha:"), showsAlpha)
+	})
 	return cptbi
 }
 
 // WithAllowedColorSpaces sets controls the color spaces that the color picker can produce.
 func (cptbi *ColorPickerTouchBarItem) WithAllowedColorSpaces(items ...*ColorSpace) *ColorPickerTouchBarItem {
 	_arr := purego.SliceToNSArray(items, func(_v *ColorSpace) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("setAllowedColorSpaces:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("setAllowedColorSpaces:"), _arr)
+	})
 	return cptbi
 }
 
 // WithColorList sets the list of colors displayed in the color picker.
 func (cptbi *ColorPickerTouchBarItem) WithColorList(colorList *ColorList) *ColorPickerTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("setColorList:"), objref.IDOf(colorList))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("setColorList:"), objref.IDOf(colorList))
+	})
 	return cptbi
 }
 
 // WithCustomizationLabel sets the user-visible string identifying this item during touch bar customization.
 func (cptbi *ColorPickerTouchBarItem) WithCustomizationLabel(customizationLabel string) *ColorPickerTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
+	})
 	return cptbi
 }
 
 // WithTarget sets an object that is notified when a user interacts with the color picker.
 func (cptbi *ColorPickerTouchBarItem) WithTarget(target obj.Object) *ColorPickerTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return cptbi
 }
 
 // WithEnabled sets a Boolean value that determines whether the color picker is enabled.
 func (cptbi *ColorPickerTouchBarItem) WithEnabled(enabled bool) *ColorPickerTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return cptbi
 }
 
 // WithVisibilityPriority sets determines which items are shown in a bar when space is limited.
 func (cptbi *ColorPickerTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *ColorPickerTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	})
 	return cptbi
 }
 
 // Color returns the color.
 func (cptbi *ColorPickerTouchBarItem) Color() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("color"))
-	return ColorFromID(_r)
+	var _mainthread0 *Color
+	purego.Main(func() {
+		_mainthread0 = func() *Color {
+			_r := objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("color"))
+			return ColorFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsAlpha reports whether the picker should allow picking a color with non-1.0 alpha. Defaults to `!NSColor.ignoresAlpha`.
 func (cptbi *ColorPickerTouchBarItem) ShowsAlpha() bool {
-	_r := objc.Send[bool](objref.IDOf(cptbi), objc.RegisterName("showsAlpha"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cptbi), objc.RegisterName("showsAlpha"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AllowedColorSpaces returns controls the color spaces that the receiver is able to produce. If a color outside of the allowed spaces are displayed or selected, it will first be converted to the first color space in the array. `nil` signifies any color space is allowed. Empty array is an invalid value and will raise an exception if set. Defaults to `nil`.
 //
 // AllowedColorSpaces returns the collection as a Go slice.
 func (cptbi *ColorPickerTouchBarItem) AllowedColorSpaces() []*ColorSpace {
-	_arr := objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("allowedColorSpaces"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ColorSpace { return ColorSpaceFromID(_id) })
+	var _mainthread0 []*ColorSpace
+	purego.Main(func() {
+		_mainthread0 = func() []*ColorSpace {
+			_arr := objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("allowedColorSpaces"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ColorSpace { return ColorSpaceFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 // ColorList returns the color list displayed in the list color picker. Defaults to the standard system color list. Setting a custom color list will disable the additional tints/shades that appear on long-press.
 func (cptbi *ColorPickerTouchBarItem) ColorList() *ColorList {
-	_r := objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("colorList"))
-	return ColorListFromID(_r)
+	var _mainthread0 *ColorList
+	purego.Main(func() {
+		_mainthread0 = func() *ColorList {
+			_r := objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("colorList"))
+			return ColorListFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Target returns the target.
 func (cptbi *ColorPickerTouchBarItem) Target() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("target"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("target"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsEnabled reports whether enables or disabled the color picker. If it is currently being shown in a popover, it will be dismissed.
 func (cptbi *ColorPickerTouchBarItem) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(cptbi), objc.RegisterName("isEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cptbi), objc.RegisterName("isEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ TouchBarItemProvider = (*ColorPickerTouchBarItem)(nil)

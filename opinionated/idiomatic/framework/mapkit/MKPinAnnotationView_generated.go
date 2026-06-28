@@ -49,164 +49,237 @@ func pinAnnotationViewAdopt(id objc.ID) *PinAnnotationView {
 
 // NewPinAnnotationView creates a new PinAnnotationView.
 func NewPinAnnotationView() *PinAnnotationView {
-	_id := objc.Send[objc.ID](objc.ID(_class("MKPinAnnotationView")), objc.RegisterName("new"))
-	return pinAnnotationViewAdopt(_id)
+	var _mainthread0 *PinAnnotationView
+	purego.Main(func() {
+		_mainthread0 = func() *PinAnnotationView {
+			_id := objc.Send[objc.ID](objc.ID(_class("MKPinAnnotationView")), objc.RegisterName("new"))
+			return pinAnnotationViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithPinTintColor sets the color of the pin head.
 func (pav *PinAnnotationView) WithPinTintColor(pinTintColor obj.Object) *PinAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setPinTintColor:"), objref.IDOf(pinTintColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setPinTintColor:"), objref.IDOf(pinTintColor))
+	})
 	return pav
 }
 
 // WithAnimatesDrop sets a Boolean value indicating whether the annotation view is animated onto the screen.
 func (pav *PinAnnotationView) WithAnimatesDrop(animatesDrop bool) *PinAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setAnimatesDrop:"), animatesDrop)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setAnimatesDrop:"), animatesDrop)
+	})
 	return pav
 }
 
 // WithPinColor sets the color of the pin head.
 func (pav *PinAnnotationView) WithPinColor(pinColor PinAnnotationColor) *PinAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setPinColor:"), pinColor)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setPinColor:"), pinColor)
+	})
 	return pav
 }
 
 // WithImage sets the image the annotation view displays.
 func (pav *PinAnnotationView) WithImage(image obj.Object) *PinAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setImage:"), objref.IDOf(image))
+	})
 	return pav
 }
 
 // WithCenterOffset sets the offset (in points) at which to display the view.
 func (pav *PinAnnotationView) WithCenterOffset(centerOffset corefoundation.CGPoint) *PinAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setCenterOffset:"), centerOffset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setCenterOffset:"), centerOffset)
+	})
 	return pav
 }
 
 // WithAccessoryOffset sets an offset that changes the accessory’s default anchor point.
 func (pav *PinAnnotationView) WithAccessoryOffset(accessoryOffset corefoundation.CGPoint) *PinAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setAccessoryOffset:"), accessoryOffset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setAccessoryOffset:"), accessoryOffset)
+	})
 	return pav
 }
 
 // WithCalloutOffset sets the offset (in points) at which to place the callout.
 func (pav *PinAnnotationView) WithCalloutOffset(calloutOffset corefoundation.CGPoint) *PinAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setCalloutOffset:"), calloutOffset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setCalloutOffset:"), calloutOffset)
+	})
 	return pav
 }
 
 // WithLeftCalloutOffset sets the offset in points from the middle-left of the annotation view.
 func (pav *PinAnnotationView) WithLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) *PinAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setLeftCalloutOffset:"), leftCalloutOffset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setLeftCalloutOffset:"), leftCalloutOffset)
+	})
 	return pav
 }
 
 // WithRightCalloutOffset sets the offset in points from the middle-right of the annotation view.
 func (pav *PinAnnotationView) WithRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) *PinAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setRightCalloutOffset:"), rightCalloutOffset)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setRightCalloutOffset:"), rightCalloutOffset)
+	})
 	return pav
 }
 
 // WithEnabled sets a Boolean value that indicates whether the annotation is in an enabled state.
 func (pav *PinAnnotationView) WithEnabled(enabled bool) *PinAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return pav
 }
 
 // WithHighlighted sets a Boolean value that indicates whether the map view highlights the annotation view.
 func (pav *PinAnnotationView) WithHighlighted(highlighted bool) *PinAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return pav
 }
 
 // WithSelected sets a Boolean value that indicates whether the annotation view is in a selected state.
 func (pav *PinAnnotationView) WithSelected(selected bool) *PinAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setSelected:"), selected)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setSelected:"), selected)
+	})
 	return pav
 }
 
 // WithCanShowCallout sets a Boolean value that indicates whether the annotation view is able to display extra information in a callout.
 func (pav *PinAnnotationView) WithCanShowCallout(canShowCallout bool) *PinAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setCanShowCallout:"), canShowCallout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setCanShowCallout:"), canShowCallout)
+	})
 	return pav
 }
 
 // WithLeftCalloutAccessoryView sets the view to display on the left side of the standard callout.
 func (pav *PinAnnotationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryView obj.Object) *PinAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setLeftCalloutAccessoryView:"), objref.IDOf(leftCalloutAccessoryView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setLeftCalloutAccessoryView:"), objref.IDOf(leftCalloutAccessoryView))
+	})
 	return pav
 }
 
 // WithRightCalloutAccessoryView sets the view to display on the right side of the standard callout.
 func (pav *PinAnnotationView) WithRightCalloutAccessoryView(rightCalloutAccessoryView obj.Object) *PinAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setRightCalloutAccessoryView:"), objref.IDOf(rightCalloutAccessoryView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setRightCalloutAccessoryView:"), objref.IDOf(rightCalloutAccessoryView))
+	})
 	return pav
 }
 
 // WithDetailCalloutAccessoryView sets the detail accessory view to use in the standard callout.
 func (pav *PinAnnotationView) WithDetailCalloutAccessoryView(detailCalloutAccessoryView obj.Object) *PinAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setDetailCalloutAccessoryView:"), objref.IDOf(detailCalloutAccessoryView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setDetailCalloutAccessoryView:"), objref.IDOf(detailCalloutAccessoryView))
+	})
 	return pav
 }
 
 // WithDraggable sets a Boolean value that indicates whether the annotation view is draggable.
 func (pav *PinAnnotationView) WithDraggable(draggable bool) *PinAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setDraggable:"), draggable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setDraggable:"), draggable)
+	})
 	return pav
 }
 
 // WithDragState sets the drag state of the annotation view.
 func (pav *PinAnnotationView) WithDragState(dragState AnnotationViewDragState) *PinAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setDragState:"), dragState)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setDragState:"), dragState)
+	})
 	return pav
 }
 
 // WithClusteringIdentifier sets an identifier that determines whether the annotation view participates in clustering.
 func (pav *PinAnnotationView) WithClusteringIdentifier(clusteringIdentifier string) *PinAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setClusteringIdentifier:"), purego.NSString(clusteringIdentifier))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setClusteringIdentifier:"), purego.NSString(clusteringIdentifier))
+	})
 	return pav
 }
 
 // WithDisplayPriority sets the display priority of the annotation view.
 func (pav *PinAnnotationView) WithDisplayPriority(displayPriority float32) *PinAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setDisplayPriority:"), displayPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setDisplayPriority:"), displayPriority)
+	})
 	return pav
 }
 
 // WithZPriority sets the relative importance of the annotation view when in an unselected state with respect to its ordering along the z-axis.
 func (pav *PinAnnotationView) WithZPriority(zPriority float32) *PinAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setZPriority:"), zPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setZPriority:"), zPriority)
+	})
 	return pav
 }
 
 // WithSelectedZPriority sets the relative importance of the annotation view when in a selected state with respect to its ordering along the z-axis.
 func (pav *PinAnnotationView) WithSelectedZPriority(selectedZPriority float32) *PinAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setSelectedZPriority:"), selectedZPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setSelectedZPriority:"), selectedZPriority)
+	})
 	return pav
 }
 
 // WithCollisionMode sets the collision mode to use when interpreting the collision frame rectangle.
 func (pav *PinAnnotationView) WithCollisionMode(collisionMode AnnotationViewCollisionMode) *PinAnnotationView {
-	objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setCollisionMode:"), collisionMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setCollisionMode:"), collisionMode)
+	})
 	return pav
 }
 
 // PinTintColor returns the pin tint color.
 func (pav *PinAnnotationView) PinTintColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("pinTintColor"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("pinTintColor"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AnimatesDrop wraps the corresponding Objective-C method.
 func (pav *PinAnnotationView) AnimatesDrop() bool {
-	_r := objc.Send[bool](objref.IDOf(pav), objc.RegisterName("animatesDrop"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(pav), objc.RegisterName("animatesDrop"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PinColor returns the pin color.
 func (pav *PinAnnotationView) PinColor() PinAnnotationColor {
-	_r := objc.Send[PinAnnotationColor](objref.IDOf(pav), objc.RegisterName("pinColor"))
-	return _r
+	var _mainthread0 PinAnnotationColor
+	purego.Main(func() {
+		_mainthread0 = func() PinAnnotationColor {
+			_r := objc.Send[PinAnnotationColor](objref.IDOf(pav), objc.RegisterName("pinColor"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ AnnotationViewProvider = (*PinAnnotationView)(nil)

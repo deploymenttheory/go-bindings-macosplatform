@@ -68,13 +68,26 @@ func (qpivc *QCPlugInViewController) String() string {
 
 // NewQCPlugInViewControllerWithPlugInViewNibName creates and initializes a controller for the specified QCPlugIn object and nib file.
 func NewQCPlugInViewControllerWithPlugInViewNibName(plugIn *QCPlugIn, name string) *QCPlugInViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("QCPlugInViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlugIn:viewNibName:"), objref.IDOf(plugIn), purego.NSString(name))
-	return qCPlugInViewControllerAdopt(_id)
+	var _mainthread0 *QCPlugInViewController
+	purego.Main(func() {
+		_mainthread0 = func() *QCPlugInViewController {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("QCPlugInViewController")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlugIn:viewNibName:"), objref.IDOf(plugIn), purego.NSString(name))
+			return qCPlugInViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // PlugIn returns the QCPlugIn object associated with the view controller for the custom patch.
 func (qpivc *QCPlugInViewController) PlugIn() *QCPlugIn {
-	_r := objc.Send[objc.ID](objref.IDOf(qpivc), objc.RegisterName("plugIn"))
-	return QCPlugInFromID(_r)
+	var _mainthread0 *QCPlugIn
+	purego.Main(func() {
+		_mainthread0 = func() *QCPlugIn {
+			_r := objc.Send[objc.ID](objref.IDOf(qpivc), objc.RegisterName("plugIn"))
+			return QCPlugInFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }

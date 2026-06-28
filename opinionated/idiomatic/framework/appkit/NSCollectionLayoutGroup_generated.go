@@ -47,50 +47,82 @@ func collectionLayoutGroupAdopt(id objc.ID) *CollectionLayoutGroup {
 
 // NewCollectionLayoutGroup creates a new CollectionLayoutGroup.
 func NewCollectionLayoutGroup() *CollectionLayoutGroup {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutGroup")), objc.RegisterName("new"))
-	return collectionLayoutGroupAdopt(_id)
+	var _mainthread0 *CollectionLayoutGroup
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionLayoutGroup {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutGroup")), objc.RegisterName("new"))
+			return collectionLayoutGroupAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithSupplementaryItems sets an array of the supplementary items that are anchored to the group.
 func (clg *CollectionLayoutGroup) WithSupplementaryItems(items ...CollectionLayoutSupplementaryItemProvider) *CollectionLayoutGroup {
 	_arr := purego.SliceToNSArray(items, func(_v CollectionLayoutSupplementaryItemProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(clg), objc.RegisterName("setSupplementaryItems:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(clg), objc.RegisterName("setSupplementaryItems:"), _arr)
+	})
 	return clg
 }
 
 // WithInterItemSpacing sets the amount of space between the items in the group.
 func (clg *CollectionLayoutGroup) WithInterItemSpacing(interItemSpacing *CollectionLayoutSpacing) *CollectionLayoutGroup {
-	objc.Send[objc.ID](objref.IDOf(clg), objc.RegisterName("setInterItemSpacing:"), objref.IDOf(interItemSpacing))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(clg), objc.RegisterName("setInterItemSpacing:"), objref.IDOf(interItemSpacing))
+	})
 	return clg
 }
 
 // WithEdgeSpacing sets the amount of space added around the boundaries of the item between other items and this item’s container.
 func (clg *CollectionLayoutGroup) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutGroup {
-	objc.Send[objc.ID](objref.IDOf(clg), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(clg), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
+	})
 	return clg
 }
 
 // VisualDescription returns a string with an ASCII representation of the group.
 func (clg *CollectionLayoutGroup) VisualDescription() string {
-	_r := objc.Send[objc.ID](objref.IDOf(clg), objc.RegisterName("visualDescription"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(clg), objc.RegisterName("visualDescription"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // InterItemSpacing returns the inter item spacing.
 func (clg *CollectionLayoutGroup) InterItemSpacing() *CollectionLayoutSpacing {
-	_r := objc.Send[objc.ID](objref.IDOf(clg), objc.RegisterName("interItemSpacing"))
-	return CollectionLayoutSpacingFromID(_r)
+	var _mainthread0 *CollectionLayoutSpacing
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionLayoutSpacing {
+			_r := objc.Send[objc.ID](objref.IDOf(clg), objc.RegisterName("interItemSpacing"))
+			return CollectionLayoutSpacingFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Subitems returns the subitems.
 //
 // Subitems returns the collection as a Go slice.
 func (clg *CollectionLayoutGroup) Subitems() []*CollectionLayoutItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(clg), objc.RegisterName("subitems"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CollectionLayoutItem { return CollectionLayoutItemFromID(_id) })
+	var _mainthread0 []*CollectionLayoutItem
+	purego.Main(func() {
+		_mainthread0 = func() []*CollectionLayoutItem {
+			_arr := objc.Send[objc.ID](objref.IDOf(clg), objc.RegisterName("subitems"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CollectionLayoutItem { return CollectionLayoutItemFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 var _ CollectionLayoutItemProvider = (*CollectionLayoutGroup)(nil)

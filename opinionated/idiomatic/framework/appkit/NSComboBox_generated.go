@@ -50,769 +50,1109 @@ func comboBoxAdopt(id objc.ID) *ComboBox {
 
 // NewComboBox creates a new ComboBox.
 func NewComboBox() *ComboBox {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSComboBox")), objc.RegisterName("new"))
-	return comboBoxAdopt(_id)
+	var _mainthread0 *ComboBox
+	purego.Main(func() {
+		_mainthread0 = func() *ComboBox {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSComboBox")), objc.RegisterName("new"))
+			return comboBoxAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithHasVerticalScroller sets a Boolean value indicating whether the combo box has a vertical scroller.
 func (cb *ComboBox) WithHasVerticalScroller(hasVerticalScroller bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setHasVerticalScroller:"), hasVerticalScroller)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setHasVerticalScroller:"), hasVerticalScroller)
+	})
 	return cb
 }
 
 // WithIntercellSpacing sets the horizontal and vertical spacing between cells in the pop-up list.
 func (cb *ComboBox) WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setIntercellSpacing:"), intercellSpacing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setIntercellSpacing:"), intercellSpacing)
+	})
 	return cb
 }
 
 // WithItemHeight sets the height of each item in the pop-up list.
 func (cb *ComboBox) WithItemHeight(itemHeight float64) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setItemHeight:"), itemHeight)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setItemHeight:"), itemHeight)
+	})
 	return cb
 }
 
 // WithNumberOfVisibleItems sets the maximum number of visible items to display in the pop-up list at one time.
 func (cb *ComboBox) WithNumberOfVisibleItems(numberOfVisibleItems int) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNumberOfVisibleItems:"), numberOfVisibleItems)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNumberOfVisibleItems:"), numberOfVisibleItems)
+	})
 	return cb
 }
 
 // WithButtonBordered sets a Boolean value indicating whether the combo box displays a border.
 func (cb *ComboBox) WithButtonBordered(buttonBordered bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setButtonBordered:"), buttonBordered)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setButtonBordered:"), buttonBordered)
+	})
 	return cb
 }
 
 // WithUsesDataSource sets a Boolean value indicating whether the combo box retrieves its items from a data source object.
 func (cb *ComboBox) WithUsesDataSource(usesDataSource bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setUsesDataSource:"), usesDataSource)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setUsesDataSource:"), usesDataSource)
+	})
 	return cb
 }
 
 // WithCompletes sets a Boolean value indicating whether the combo box tries to complete what the user types.
 func (cb *ComboBox) WithCompletes(completes bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCompletes:"), completes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCompletes:"), completes)
+	})
 	return cb
 }
 
 // WithPlaceholderString sets the string the text field displays when empty to help the user understand the text field’s purpose.
 func (cb *ComboBox) WithPlaceholderString(placeholderString string) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
+	})
 	return cb
 }
 
 // WithPlaceholderAttributedString sets the attributed string the text field displays when empty to help the user understand the text field’s purpose.
 func (cb *ComboBox) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
+	})
 	return cb
 }
 
 // WithBackgroundColor sets the color of the background the text field’s cell draws behind the text.
 func (cb *ComboBox) WithBackgroundColor(backgroundColor *Color) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	})
 	return cb
 }
 
 // WithDrawsBackground sets a Boolean value that controls whether the text field’s cell draws a background color behind the text.
 func (cb *ComboBox) WithDrawsBackground(drawsBackground bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	})
 	return cb
 }
 
 // WithTextColor sets the color of the text field’s content.
 func (cb *ComboBox) WithTextColor(textColor *Color) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
+	})
 	return cb
 }
 
 // WithBordered sets a Boolean value that controls whether the text field draws a solid black border around its contents.
 func (cb *ComboBox) WithBordered(bordered bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBordered:"), bordered)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBordered:"), bordered)
+	})
 	return cb
 }
 
 // WithBezeled sets a Boolean value that controls whether the text field draws a bezeled background around its contents.
 func (cb *ComboBox) WithBezeled(bezeled bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBezeled:"), bezeled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBezeled:"), bezeled)
+	})
 	return cb
 }
 
 // WithEditable sets a Boolean value that controls whether the user can edit the value in the text field.
 func (cb *ComboBox) WithEditable(editable bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setEditable:"), editable)
+	})
 	return cb
 }
 
 // WithSelectable sets a Boolean value that determines whether the user can select the content of the text field.
 func (cb *ComboBox) WithSelectable(selectable bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setSelectable:"), selectable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setSelectable:"), selectable)
+	})
 	return cb
 }
 
 // WithBezelStyle sets the text field’s bezel style, square or rounded.
 func (cb *ComboBox) WithBezelStyle(bezelStyle TextFieldBezelStyle) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBezelStyle:"), bezelStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBezelStyle:"), bezelStyle)
+	})
 	return cb
 }
 
 // WithPreferredMaxLayoutWidth sets the maximum width of the text field’s intrinsic content size.
 func (cb *ComboBox) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
+	})
 	return cb
 }
 
 // WithMaximumNumberOfLines sets the maximum number of lines a wrapping text field displays before clipping or truncating the text.
 func (cb *ComboBox) WithMaximumNumberOfLines(maximumNumberOfLines int) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setMaximumNumberOfLines:"), maximumNumberOfLines)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setMaximumNumberOfLines:"), maximumNumberOfLines)
+	})
 	return cb
 }
 
 // WithAllowsDefaultTighteningForTruncation sets a Boolean value that controls whether single-line text fields tighten intercharacter spacing before truncating the text.
 func (cb *ComboBox) WithAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAllowsDefaultTighteningForTruncation:"), allowsDefaultTighteningForTruncation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAllowsDefaultTighteningForTruncation:"), allowsDefaultTighteningForTruncation)
+	})
 	return cb
 }
 
 // WithLineBreakStrategy sets the strategy that the system uses to break lines when laying out multiple lines of text.
 func (cb *ComboBox) WithLineBreakStrategy(lineBreakStrategy LineBreakStrategy) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLineBreakStrategy:"), lineBreakStrategy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLineBreakStrategy:"), lineBreakStrategy)
+	})
 	return cb
 }
 
 // WithAllowsWritingTools sets the allows writing tools.
 func (cb *ComboBox) WithAllowsWritingTools(allowsWritingTools bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAllowsWritingTools:"), allowsWritingTools)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAllowsWritingTools:"), allowsWritingTools)
+	})
 	return cb
 }
 
 // WithAllowsWritingToolsAffordance sets the allows writing tools affordance.
 func (cb *ComboBox) WithAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAllowsWritingToolsAffordance:"), allowsWritingToolsAffordance)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAllowsWritingToolsAffordance:"), allowsWritingToolsAffordance)
+	})
 	return cb
 }
 
 // WithPlaceholderStrings sets the placeholder strings.
 func (cb *ComboBox) WithPlaceholderStrings(items ...obj.Object) *ComboBox {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPlaceholderStrings:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPlaceholderStrings:"), _arr)
+	})
 	return cb
 }
 
 // WithPlaceholderAttributedStrings sets the placeholder attributed strings.
 func (cb *ComboBox) WithPlaceholderAttributedStrings(items ...obj.Object) *ComboBox {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPlaceholderAttributedStrings:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPlaceholderAttributedStrings:"), _arr)
+	})
 	return cb
 }
 
 // WithResolvesNaturalAlignmentWithBaseWritingDirection sets specifies the behavior for resolving NSTextAlignmentNatural to the visual alignment.
 func (cb *ComboBox) WithResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setResolvesNaturalAlignmentWithBaseWritingDirection:"), resolvesNaturalAlignmentWithBaseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setResolvesNaturalAlignmentWithBaseWritingDirection:"), resolvesNaturalAlignmentWithBaseWritingDirection)
+	})
 	return cb
 }
 
 // WithAutomaticTextCompletionEnabled sets a Boolean value that indicates whether the text field automatically completes text as the user types.
 func (cb *ComboBox) WithAutomaticTextCompletionEnabled(automaticTextCompletionEnabled bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAutomaticTextCompletionEnabled:"), automaticTextCompletionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAutomaticTextCompletionEnabled:"), automaticTextCompletionEnabled)
+	})
 	return cb
 }
 
 // WithAllowsCharacterPickerTouchBarItem sets a Boolean value that controls whether the Touch Bar displays the character picker item for rich text fields.
 func (cb *ComboBox) WithAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAllowsCharacterPickerTouchBarItem:"), allowsCharacterPickerTouchBarItem)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAllowsCharacterPickerTouchBarItem:"), allowsCharacterPickerTouchBarItem)
+	})
 	return cb
 }
 
 // WithAllowsEditingTextAttributes sets a Boolean value that controls whether the user can change font attributes of the text field’s string.
 func (cb *ComboBox) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	})
 	return cb
 }
 
 // WithImportsGraphics sets a Boolean value that controls whether the user can drag image files into the text field.
 func (cb *ComboBox) WithImportsGraphics(importsGraphics bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	})
 	return cb
 }
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (cb *ComboBox) WithTarget(target obj.Object) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return cb
 }
 
 // WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
 func (cb *ComboBox) WithTag(tag int) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTag:"), tag)
+	})
 	return cb
 }
 
 // WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 func (cb *ComboBox) WithIgnoresMultiClick(ignoresMultiClick bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	})
 	return cb
 }
 
 // WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 func (cb *ComboBox) WithContinuous(continuous bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return cb
 }
 
 // WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
 func (cb *ComboBox) WithEnabled(enabled bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return cb
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
 func (cb *ComboBox) WithRefusesFirstResponder(refusesFirstResponder bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return cb
 }
 
 // WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
 func (cb *ComboBox) WithHighlighted(highlighted bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return cb
 }
 
 // WithControlSize sets the size of the control.
 func (cb *ComboBox) WithControlSize(controlSize ControlSize) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return cb
 }
 
 // WithFormatter sets the receiver’s formatter.
 func (cb *ComboBox) WithFormatter(formatter obj.Object) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return cb
 }
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (cb *ComboBox) WithObjectValue(objectValue obj.Object) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return cb
 }
 
 // WithStringValue sets the value of the receiver’s cell as an NSString object.
 func (cb *ComboBox) WithStringValue(stringValue string) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return cb
 }
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (cb *ComboBox) WithAttributedStringValue(attributedStringValue obj.Object) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return cb
 }
 
 // WithIntValue sets the value of the receiver’s cell as an integer.
 func (cb *ComboBox) WithIntValue(intValue int) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return cb
 }
 
 // WithIntegerValue sets the value of the receiver’s cell as an integer value.
 func (cb *ComboBox) WithIntegerValue(integerValue int) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return cb
 }
 
 // WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
 func (cb *ComboBox) WithFloatValue(floatValue float32) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return cb
 }
 
 // WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
 func (cb *ComboBox) WithDoubleValue(doubleValue float64) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return cb
 }
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (cb *ComboBox) WithFont(font *Font) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return cb
 }
 
 // WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
 func (cb *ComboBox) WithUsesSingleLineMode(usesSingleLineMode bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return cb
 }
 
 // WithLineBreakMode sets the line break mode to use for text in the control’s cell.
 func (cb *ComboBox) WithLineBreakMode(lineBreakMode LineBreakMode) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return cb
 }
 
 // WithAlignment sets the alignment mode of the text in the receiver’s cell.
 func (cb *ComboBox) WithAlignment(alignment TextAlignment) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return cb
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (cb *ComboBox) WithBaseWritingDirection(baseWritingDirection WritingDirection) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return cb
 }
 
 // WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 func (cb *ComboBox) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	})
 	return cb
 }
 
 // WithCell sets the cell.
 func (cb *ComboBox) WithCell(cell CellProvider) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	})
 	return cb
 }
 
 // WithSubviews sets the subviews.
 func (cb *ComboBox) WithSubviews(items ...ViewProvider) *ComboBox {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return cb
 }
 
 // WithHidden sets the hidden.
 func (cb *ComboBox) WithHidden(hidden bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setHidden:"), hidden)
+	})
 	return cb
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (cb *ComboBox) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return cb
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (cb *ComboBox) WithAutoresizesSubviews(autoresizesSubviews bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return cb
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (cb *ComboBox) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return cb
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (cb *ComboBox) WithFrame(frame corefoundation.CGRect) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFrame:"), frame)
+	})
 	return cb
 }
 
 // WithFrameRotation sets the frame rotation.
 func (cb *ComboBox) WithFrameRotation(frameRotation float64) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return cb
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (cb *ComboBox) WithFrameCenterRotation(frameCenterRotation float64) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return cb
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (cb *ComboBox) WithBoundsRotation(boundsRotation float64) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return cb
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (cb *ComboBox) WithBounds(bounds corefoundation.CGRect) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBounds:"), bounds)
+	})
 	return cb
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (cb *ComboBox) WithCanDrawConcurrently(canDrawConcurrently bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return cb
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (cb *ComboBox) WithNeedsDisplay(needsDisplay bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return cb
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (cb *ComboBox) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return cb
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (cb *ComboBox) WithWantsRestingTouches(wantsRestingTouches bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return cb
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (cb *ComboBox) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return cb
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (cb *ComboBox) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return cb
 }
 
 // WithWantsLayer sets the wants layer.
 func (cb *ComboBox) WithWantsLayer(wantsLayer bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return cb
 }
 
 // WithLayer sets the layer.
 func (cb *ComboBox) WithLayer(layer obj.Object) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return cb
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (cb *ComboBox) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return cb
 }
 
 // WithNeedsLayout sets the needs layout.
 func (cb *ComboBox) WithNeedsLayout(needsLayout bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return cb
 }
 
 // WithAlphaValue sets the alpha value.
 func (cb *ComboBox) WithAlphaValue(alphaValue float64) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return cb
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (cb *ComboBox) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return cb
 }
 
 // WithBackgroundFilters sets the background filters.
 func (cb *ComboBox) WithBackgroundFilters(items ...obj.Object) *ComboBox {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return cb
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (cb *ComboBox) WithCompositingFilter(compositingFilter obj.Object) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return cb
 }
 
 // WithContentFilters sets the content filters.
 func (cb *ComboBox) WithContentFilters(items ...obj.Object) *ComboBox {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return cb
 }
 
 // WithShadow sets the shadow.
 func (cb *ComboBox) WithShadow(shadow *Shadow) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return cb
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (cb *ComboBox) WithClipsToBounds(clipsToBounds bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return cb
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (cb *ComboBox) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return cb
 }
 
 // WithToolTip sets the tool tip.
 func (cb *ComboBox) WithToolTip(toolTip string) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return cb
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (cb *ComboBox) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return cb
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (cb *ComboBox) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return cb
 }
 
 // WithNextKeyView sets the next key view.
 func (cb *ComboBox) WithNextKeyView(nextKeyView ViewProvider) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return cb
 }
 
 // WithFocusRingType sets the focus ring type.
 func (cb *ComboBox) WithFocusRingType(focusRingType FocusRingType) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return cb
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (cb *ComboBox) WithGestureRecognizers(items ...GestureRecognizerProvider) *ComboBox {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return cb
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (cb *ComboBox) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return cb
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (cb *ComboBox) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return cb
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (cb *ComboBox) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return cb
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (cb *ComboBox) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return cb
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (cb *ComboBox) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return cb
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (cb *ComboBox) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return cb
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (cb *ComboBox) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return cb
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (cb *ComboBox) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return cb
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (cb *ComboBox) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return cb
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (cb *ComboBox) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return cb
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (cb *ComboBox) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return cb
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (cb *ComboBox) WithNextResponder(nextResponder ResponderProvider) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return cb
 }
 
 // WithMenu sets returns the responder’s menu.
 func (cb *ComboBox) WithMenu(menu *Menu) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return cb
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (cb *ComboBox) WithUserActivity(userActivity obj.Object) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return cb
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (cb *ComboBox) WithTouchBar(touchBar *TouchBar) *ComboBox {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return cb
 }
 
 // ReloadData marks the receiver as needing redisplay, so that it will reload the data for visible pop-up items and draw the new values.
 func (cb *ComboBox) ReloadData() {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("reloadData"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("reloadData"))
+	})
+
 }
 
 // NoteNumberOfItemsChanged informs the receiver that the number of items in its data source has changed.
 func (cb *ComboBox) NoteNumberOfItemsChanged() {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("noteNumberOfItemsChanged"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("noteNumberOfItemsChanged"))
+	})
+
 }
 
 // ScrollItemAtIndexToTop scrolls the receiver’s pop-up list vertically so that the item at the specified index is as close to the top as possible.
 func (cb *ComboBox) ScrollItemAtIndexToTop(index int) {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("scrollItemAtIndexToTop:"), index)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("scrollItemAtIndexToTop:"), index)
+	})
+
 }
 
 // ScrollItemAtIndexToVisible scrolls the receiver’s pop-up list vertically so that the item at the specified index is visible.
 func (cb *ComboBox) ScrollItemAtIndexToVisible(index int) {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("scrollItemAtIndexToVisible:"), index)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("scrollItemAtIndexToVisible:"), index)
+	})
+
 }
 
 // SelectItemAtIndex selects the pop-up list row at the given index.
 func (cb *ComboBox) SelectItemAtIndex(index int) {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("selectItemAtIndex:"), index)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("selectItemAtIndex:"), index)
+	})
+
 }
 
 // DeselectItemAtIndex deselects the pop-up list item at the specified index if it’s selected.
 func (cb *ComboBox) DeselectItemAtIndex(index int) {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("deselectItemAtIndex:"), index)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("deselectItemAtIndex:"), index)
+	})
+
 }
 
 // AddItemWithObjectValue adds an object to the end of the receiver’s internal item list.
 func (cb *ComboBox) AddItemWithObjectValue(object obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("addItemWithObjectValue:"), objref.IDOf(object))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("addItemWithObjectValue:"), objref.IDOf(object))
+	})
+
 }
 
 // AddItemsWithObjectValues adds multiple objects to the end of the receiver’s internal item list.
 func (cb *ComboBox) AddItemsWithObjectValues(objects obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("addItemsWithObjectValues:"), objref.IDOf(objects))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("addItemsWithObjectValues:"), objref.IDOf(objects))
+	})
+
 }
 
 // InsertItemWithObjectValueAtIndex inserts an object at the specified location in the receiver’s internal item list.
 func (cb *ComboBox) InsertItemWithObjectValueAtIndex(object obj.Object, index int) {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("insertItemWithObjectValue:atIndex:"), objref.IDOf(object), index)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("insertItemWithObjectValue:atIndex:"), objref.IDOf(object), index)
+	})
+
 }
 
 // RemoveItemWithObjectValue removes all occurrences of the given object from the receiver’s internal item list.
 func (cb *ComboBox) RemoveItemWithObjectValue(object obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("removeItemWithObjectValue:"), objref.IDOf(object))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("removeItemWithObjectValue:"), objref.IDOf(object))
+	})
+
 }
 
 // RemoveItemAtIndex removes the object at the specified location from the receiver’s internal item list.
 func (cb *ComboBox) RemoveItemAtIndex(index int) {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("removeItemAtIndex:"), index)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("removeItemAtIndex:"), index)
+	})
+
 }
 
 // RemoveAllItems removes all items from the receiver’s internal item list.
 func (cb *ComboBox) RemoveAllItems() {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("removeAllItems"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("removeAllItems"))
+	})
+
 }
 
 // SelectItemWithObjectValue selects the first pop-up list item that corresponds to the given object.
 func (cb *ComboBox) SelectItemWithObjectValue(object obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("selectItemWithObjectValue:"), objref.IDOf(object))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("selectItemWithObjectValue:"), objref.IDOf(object))
+	})
+
 }
 
 // ItemObjectValueAtIndex returns the object located at the given index within the receiver’s internal item list.
 func (cb *ComboBox) ItemObjectValueAtIndex(index int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("itemObjectValueAtIndex:"), index)
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("itemObjectValueAtIndex:"), index)
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IndexOfItemWithObjectValue searches the receiver’s internal item list for the specified object and returns the lowest matching index.
 func (cb *ComboBox) IndexOfItemWithObjectValue(object obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(cb), objc.RegisterName("indexOfItemWithObjectValue:"), objref.IDOf(object))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(cb), objc.RegisterName("indexOfItemWithObjectValue:"), objref.IDOf(object))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasVerticalScroller reports whether the object has vertical scroller.
 func (cb *ComboBox) HasVerticalScroller() bool {
-	_r := objc.Send[bool](objref.IDOf(cb), objc.RegisterName("hasVerticalScroller"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cb), objc.RegisterName("hasVerticalScroller"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IntercellSpacing returns the intercell spacing.
 func (cb *ComboBox) IntercellSpacing() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cb), objc.RegisterName("intercellSpacing"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(cb), objc.RegisterName("intercellSpacing"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ItemHeight returns the item height.
 func (cb *ComboBox) ItemHeight() float64 {
-	_r := objc.Send[float64](objref.IDOf(cb), objc.RegisterName("itemHeight"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(cb), objc.RegisterName("itemHeight"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NumberOfVisibleItems returns the number of visible items.
 func (cb *ComboBox) NumberOfVisibleItems() int {
-	_r := objc.Send[int](objref.IDOf(cb), objc.RegisterName("numberOfVisibleItems"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(cb), objc.RegisterName("numberOfVisibleItems"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsButtonBordered reports whether the object is button bordered.
 func (cb *ComboBox) IsButtonBordered() bool {
-	_r := objc.Send[bool](objref.IDOf(cb), objc.RegisterName("isButtonBordered"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cb), objc.RegisterName("isButtonBordered"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UsesDataSource wraps the corresponding Objective-C method.
 func (cb *ComboBox) UsesDataSource() bool {
-	_r := objc.Send[bool](objref.IDOf(cb), objc.RegisterName("usesDataSource"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cb), objc.RegisterName("usesDataSource"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IndexOfSelectedItem returns the index of selected item.
 func (cb *ComboBox) IndexOfSelectedItem() int {
-	_r := objc.Send[int](objref.IDOf(cb), objc.RegisterName("indexOfSelectedItem"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(cb), objc.RegisterName("indexOfSelectedItem"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // NumberOfItems returns the number of items.
 func (cb *ComboBox) NumberOfItems() int {
-	_r := objc.Send[int](objref.IDOf(cb), objc.RegisterName("numberOfItems"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(cb), objc.RegisterName("numberOfItems"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Completes wraps the corresponding Objective-C method.
 func (cb *ComboBox) Completes() bool {
-	_r := objc.Send[bool](objref.IDOf(cb), objc.RegisterName("completes"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(cb), objc.RegisterName("completes"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ObjectValueOfSelectedItem returns the object value of selected item.
 func (cb *ComboBox) ObjectValueOfSelectedItem() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("objectValueOfSelectedItem"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("objectValueOfSelectedItem"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ObjectValues returns the object values.
 func (cb *ComboBox) ObjectValues() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("objectValues"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("objectValues"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ TextFieldProvider = (*ComboBox)(nil)

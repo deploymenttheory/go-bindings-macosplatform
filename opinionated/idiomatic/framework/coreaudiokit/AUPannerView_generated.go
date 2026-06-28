@@ -68,6 +68,12 @@ func (apv *AUPannerView) String() string {
 
 // NewAUPannerView creates a new AUPannerView.
 func NewAUPannerView() *AUPannerView {
-	_id := objc.Send[objc.ID](objc.ID(_class("AUPannerView")), objc.RegisterName("new"))
-	return aUPannerViewAdopt(_id)
+	var _mainthread0 *AUPannerView
+	purego.Main(func() {
+		_mainthread0 = func() *AUPannerView {
+			_id := objc.Send[objc.ID](objc.ID(_class("AUPannerView")), objc.RegisterName("new"))
+			return aUPannerViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }

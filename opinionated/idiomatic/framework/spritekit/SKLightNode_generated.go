@@ -49,231 +49,341 @@ func lightNodeAdopt(id objc.ID) *LightNode {
 
 // NewLightNode creates a new LightNode.
 func NewLightNode() *LightNode {
-	_id := objc.Send[objc.ID](objc.ID(_class("SKLightNode")), objc.RegisterName("new"))
-	return lightNodeAdopt(_id)
+	var _mainthread0 *LightNode
+	purego.Main(func() {
+		_mainthread0 = func() *LightNode {
+			_id := objc.Send[objc.ID](objc.ID(_class("SKLightNode")), objc.RegisterName("new"))
+			return lightNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithEnabled sets a Boolean value that indicates whether the node is casting light.
 func (ln *LightNode) WithEnabled(enabled bool) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return ln
 }
 
 // WithLightColor sets the diffuse and specular color of the light source.
 func (ln *LightNode) WithLightColor(lightColor obj.Object) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setLightColor:"), objref.IDOf(lightColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setLightColor:"), objref.IDOf(lightColor))
+	})
 	return ln
 }
 
 // WithAmbientColor sets the ambient color of the light.
 func (ln *LightNode) WithAmbientColor(ambientColor obj.Object) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAmbientColor:"), objref.IDOf(ambientColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAmbientColor:"), objref.IDOf(ambientColor))
+	})
 	return ln
 }
 
 // WithShadowColor sets the color of any shadow cast by a sprite.
 func (ln *LightNode) WithShadowColor(shadowColor obj.Object) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+	})
 	return ln
 }
 
 // WithFalloff sets the exponent for the rate of decay of the light source.
 func (ln *LightNode) WithFalloff(falloff float64) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setFalloff:"), falloff)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setFalloff:"), falloff)
+	})
 	return ln
 }
 
 // WithCategoryBitMask sets a mask that defines which categories this light belongs to.
 func (ln *LightNode) WithCategoryBitMask(categoryBitMask uint32) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
+	})
 	return ln
 }
 
 // WithPosition sets the position of the node in its parent’s coordinate system.
 func (ln *LightNode) WithPosition(position corefoundation.CGPoint) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setPosition:"), position)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setPosition:"), position)
+	})
 	return ln
 }
 
 // WithZPosition sets the height of the node relative to its parent.
 func (ln *LightNode) WithZPosition(zPosition float64) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setZPosition:"), zPosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setZPosition:"), zPosition)
+	})
 	return ln
 }
 
 // WithZRotation sets the Euler rotation about the z axis (in radians).
 func (ln *LightNode) WithZRotation(zRotation float64) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setZRotation:"), zRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setZRotation:"), zRotation)
+	})
 	return ln
 }
 
 // WithXScale sets a scaling factor that multiplies the width of a node and its children.
 func (ln *LightNode) WithXScale(xScale float64) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setXScale:"), xScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setXScale:"), xScale)
+	})
 	return ln
 }
 
 // WithYScale sets a scaling factor that multiplies the height of a node and its children.
 func (ln *LightNode) WithYScale(yScale float64) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setYScale:"), yScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setYScale:"), yScale)
+	})
 	return ln
 }
 
 // WithSpeed sets a speed modifier applied to all actions executed by a node and its descendants.
 func (ln *LightNode) WithSpeed(speed float64) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setSpeed:"), speed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setSpeed:"), speed)
+	})
 	return ln
 }
 
 // WithAlpha sets the transparency value applied to the node’s contents.
 func (ln *LightNode) WithAlpha(alpha float64) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAlpha:"), alpha)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAlpha:"), alpha)
+	})
 	return ln
 }
 
 // WithPaused sets a Boolean value that determines whether actions on the node and its descendants are processed.
 func (ln *LightNode) WithPaused(paused bool) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setPaused:"), paused)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setPaused:"), paused)
+	})
 	return ln
 }
 
 // WithHidden sets a Boolean value that determines whether a node and its descendants are rendered.
 func (ln *LightNode) WithHidden(hidden bool) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setHidden:"), hidden)
+	})
 	return ln
 }
 
 // WithUserInteractionEnabled sets a Boolean value that indicates whether the node receives touch events.
 func (ln *LightNode) WithUserInteractionEnabled(userInteractionEnabled bool) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	})
 	return ln
 }
 
 // WithName sets the node’s assignable name.
 func (ln *LightNode) WithName(name string) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setName:"), purego.NSString(name))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setName:"), purego.NSString(name))
+	})
 	return ln
 }
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (ln *LightNode) WithPhysicsBody(physicsBody *PhysicsBody) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	})
 	return ln
 }
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (ln *LightNode) WithUserData(userData obj.Object) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	})
 	return ln
 }
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (ln *LightNode) WithReachConstraints(reachConstraints *ReachConstraints) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	})
 	return ln
 }
 
 // WithConstraints sets a list of constraints to apply to the node.
 func (ln *LightNode) WithConstraints(items ...*Constraint) *LightNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setConstraints:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setConstraints:"), _arr)
+	})
 	return ln
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
 func (ln *LightNode) WithAttributeValues(attributeValues obj.Object) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	})
 	return ln
 }
 
 // WithAccessibilityElement sets a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (ln *LightNode) WithAccessibilityElement(accessibilityElement bool) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	})
 	return ln
 }
 
 // WithAccessibilityRole sets a string value describing the user interface element type; for example, a button.
 func (ln *LightNode) WithAccessibilityRole(accessibilityRole string) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	})
 	return ln
 }
 
 // WithAccessibilityRoleDescription sets a string value describing the user interface element name and type; for example, the Buy button.
 func (ln *LightNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	})
 	return ln
 }
 
 // WithAccessibilitySubrole sets a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (ln *LightNode) WithAccessibilitySubrole(accessibilitySubrole string) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	})
 	return ln
 }
 
 // WithAccessibilityFrame sets the size of this user interface element, in screen points.
 func (ln *LightNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	})
 	return ln
 }
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (ln *LightNode) WithAccessibilityParent(accessibilityParent obj.Object) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	})
 	return ln
 }
 
 // WithAccessibilityHelp sets the help description of this user interface element; for example, the text shown in a tooltip.
 func (ln *LightNode) WithAccessibilityHelp(accessibilityHelp string) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	})
 	return ln
 }
 
 // WithAccessibilityLabel sets a short description of this user interface element.
 func (ln *LightNode) WithAccessibilityLabel(accessibilityLabel string) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	})
 	return ln
 }
 
 // WithAccessibilityEnabled sets a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (ln *LightNode) WithAccessibilityEnabled(accessibilityEnabled bool) *LightNode {
-	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	})
 	return ln
 }
 
 // IsEnabled reports whether enables or disables lighting contribution from this light node. Set to true; sprites using this light will be lit with the ambient color and the light color, with a falloff in intensity according to the falloff property. Set to false; this light does not contribute any lighting. If no lights are active on a sprite it will be drawn normally, as if not lit. The default value is true.
 func (ln *LightNode) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(ln), objc.RegisterName("isEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(ln), objc.RegisterName("isEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LightColor returns diffuse and Specular color of the light source, defaults to opaque white. The alpha component of the color is ignored. If using shaders bind a uniform to this property to use scene based custom lighting.
 func (ln *LightNode) LightColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("lightColor"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("lightColor"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AmbientColor returns ambient color of the light source, defaults to black. If you had only a single light in the scene with an ambient color of opaque white and a light color of black, it would appear as if the scene was rendered without lighting. The alpha component of the color is ignored. The color is not affected by falloff or surface normals.
 func (ln *LightNode) AmbientColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("ambientColor"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("ambientColor"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShadowColor returns color of the shadow casted on occluded objects, defaults to half opacity black. The alpha component of the color is used for blending with the regions that are in shadow.
 func (ln *LightNode) ShadowColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("shadowColor"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("shadowColor"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Falloff returns falloff in intensity of the light over distance, defaults to 1. The falloff does not affect the ambient color nor the shadow color.
 func (ln *LightNode) Falloff() float64 {
-	_r := objc.Send[float64](objref.IDOf(ln), objc.RegisterName("falloff"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(ln), objc.RegisterName("falloff"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CategoryBitMask returns the category of the light, which determines the group(s) a light belongs to. Any node that has its corresponding light and shadow bitmasks set to an overlapping value will be lit, shadow casting or shadowed by this light.
 func (ln *LightNode) CategoryBitMask() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(ln), objc.RegisterName("categoryBitMask"))
-	return _r
+	var _mainthread0 uint32
+	purego.Main(func() {
+		_mainthread0 = func() uint32 {
+			_r := objc.Send[uint32](objref.IDOf(ln), objc.RegisterName("categoryBitMask"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ NodeProvider = (*LightNode)(nil)

@@ -70,30 +70,52 @@ func (cli *CollectionLayoutItem) String() string {
 
 // WithEdgeSpacing sets the amount of space added around the boundaries of the item between other items and this item’s container.
 func (cli *CollectionLayoutItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutItem {
-	objc.Send[objc.ID](objref.IDOf(cli), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cli), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
+	})
 	return cli
 }
 
 // EdgeSpacing returns the edge spacing.
 func (cli *CollectionLayoutItem) EdgeSpacing() *CollectionLayoutEdgeSpacing {
-	_r := objc.Send[objc.ID](objref.IDOf(cli), objc.RegisterName("edgeSpacing"))
-	return CollectionLayoutEdgeSpacingFromID(_r)
+	var _mainthread0 *CollectionLayoutEdgeSpacing
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionLayoutEdgeSpacing {
+			_r := objc.Send[objc.ID](objref.IDOf(cli), objc.RegisterName("edgeSpacing"))
+			return CollectionLayoutEdgeSpacingFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // LayoutSize returns the layout size.
 func (cli *CollectionLayoutItem) LayoutSize() *CollectionLayoutSize {
-	_r := objc.Send[objc.ID](objref.IDOf(cli), objc.RegisterName("layoutSize"))
-	return CollectionLayoutSizeFromID(_r)
+	var _mainthread0 *CollectionLayoutSize
+	purego.Main(func() {
+		_mainthread0 = func() *CollectionLayoutSize {
+			_r := objc.Send[objc.ID](objref.IDOf(cli), objc.RegisterName("layoutSize"))
+			return CollectionLayoutSizeFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SupplementaryItems returns the supplementary items.
 //
 // SupplementaryItems returns the collection as a Go slice.
 func (cli *CollectionLayoutItem) SupplementaryItems() []*CollectionLayoutSupplementaryItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(cli), objc.RegisterName("supplementaryItems"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CollectionLayoutSupplementaryItem {
-		return CollectionLayoutSupplementaryItemFromID(_id)
+	var _mainthread0 []*CollectionLayoutSupplementaryItem
+	purego.Main(func() {
+		_mainthread0 = func() []*CollectionLayoutSupplementaryItem {
+			_arr := objc.Send[objc.ID](objref.IDOf(cli), objc.RegisterName("supplementaryItems"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CollectionLayoutSupplementaryItem {
+				return CollectionLayoutSupplementaryItemFromID(_id)
+			})
+		}()
 	})
+	return _mainthread0
 }
 
 // isCollectionLayoutItem marks CollectionLayoutItem — and, by embedding promotion, its

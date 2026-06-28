@@ -68,37 +68,65 @@ func (bpp *BurnProgressPanel) String() string {
 
 // NewBurnProgressPanel creates a new BurnProgressPanel.
 func NewBurnProgressPanel() *BurnProgressPanel {
-	_id := objc.Send[objc.ID](objc.ID(_class("DRBurnProgressPanel")), objc.RegisterName("new"))
-	return burnProgressPanelAdopt(_id)
+	var _mainthread0 *BurnProgressPanel
+	purego.Main(func() {
+		_mainthread0 = func() *BurnProgressPanel {
+			_id := objc.Send[objc.ID](objc.ID(_class("DRBurnProgressPanel")), objc.RegisterName("new"))
+			return burnProgressPanelAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // BeginProgressSheetForBurnLayoutModalForWindow presents the progress panel as a sheet and begins the burn process. This method returns control to the caller after it has displayed the progress sheet and begun the burn. Once the method has returned the caller can perform other operations while the burn continues.
 func (bpp *BurnProgressPanel) BeginProgressSheetForBurnLayoutModalForWindow(burn obj.Object, layout obj.Object, docWindow obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(bpp), objc.RegisterName("beginProgressSheetForBurn:layout:modalForWindow:"), objref.IDOf(burn), objref.IDOf(layout), objref.IDOf(docWindow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bpp), objc.RegisterName("beginProgressSheetForBurn:layout:modalForWindow:"), objref.IDOf(burn), objref.IDOf(layout), objref.IDOf(docWindow))
+	})
+
 }
 
 // BeginProgressPanelForBurnLayout presents the progress panel on screen and begins the burn process. This method returns control to the caller after it has displayed the progress sheet and begun the burn. Once the method has returned the caller can perform other operations while the burn continues.
 func (bpp *BurnProgressPanel) BeginProgressPanelForBurnLayout(burn obj.Object, layout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(bpp), objc.RegisterName("beginProgressPanelForBurn:layout:"), objref.IDOf(burn), objref.IDOf(layout))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bpp), objc.RegisterName("beginProgressPanelForBurn:layout:"), objref.IDOf(burn), objref.IDOf(layout))
+	})
+
 }
 
 // SetDescription sets the panel text displayed to the user. The panel's description is typically a short text string that gives an indication to the user what operation is being performed. If no description is explicitly set, the progress panel uses a standard text string suitable to the burn.
 func (bpp *BurnProgressPanel) SetDescription(description string) {
-	objc.Send[objc.ID](objref.IDOf(bpp), objc.RegisterName("setDescription:"), purego.NSString(description))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bpp), objc.RegisterName("setDescription:"), purego.NSString(description))
+	})
+
 }
 
 // SetVerboseProgressStatus sets the vebosity of the progress feedback. If verbose is <i>YES</i>, the panel will update status for every change. If verbose is <i>NO</i>, the panel will filter some status messages and only update for major changes. The default for the panel is filter the status messages.
 func (bpp *BurnProgressPanel) SetVerboseProgressStatus(verbose bool) {
-	objc.Send[objc.ID](objref.IDOf(bpp), objc.RegisterName("setVerboseProgressStatus:"), verbose)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bpp), objc.RegisterName("setVerboseProgressStatus:"), verbose)
+	})
+
 }
 
 // VerboseProgressStatus reports whether returns the vebosity of the panel. This method will return <i>YES</i> if the panel will update status for every change and <i>NO</i> if the panel will filter some status messages and only update for major changes.
 func (bpp *BurnProgressPanel) VerboseProgressStatus() bool {
-	_r := objc.Send[bool](objref.IDOf(bpp), objc.RegisterName("verboseProgressStatus"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(bpp), objc.RegisterName("verboseProgressStatus"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // StopBurn invoked when the user clicks the panel's stop button.
 func (bpp *BurnProgressPanel) StopBurn(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(bpp), objc.RegisterName("stopBurn:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(bpp), objc.RegisterName("stopBurn:"), objref.IDOf(sender))
+	})
+
 }

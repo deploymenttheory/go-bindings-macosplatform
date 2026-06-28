@@ -68,68 +68,125 @@ func (pp *PreviewPanel) String() string {
 
 // NewPreviewPanel creates a new PreviewPanel.
 func NewPreviewPanel() *PreviewPanel {
-	_id := objc.Send[objc.ID](objc.ID(_class("QLPreviewPanel")), objc.RegisterName("new"))
-	return previewPanelAdopt(_id)
+	var _mainthread0 *PreviewPanel
+	purego.Main(func() {
+		_mainthread0 = func() *PreviewPanel {
+			_id := objc.Send[objc.ID](objc.ID(_class("QLPreviewPanel")), objc.RegisterName("new"))
+			return previewPanelAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithCurrentPreviewItemIndex sets the index of the current preview item.
 func (pp *PreviewPanel) WithCurrentPreviewItemIndex(currentPreviewItemIndex int) *PreviewPanel {
-	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setCurrentPreviewItemIndex:"), currentPreviewItemIndex)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setCurrentPreviewItemIndex:"), currentPreviewItemIndex)
+	})
 	return pp
 }
 
 // WithDisplayState sets the preview panel’s display state.
 func (pp *PreviewPanel) WithDisplayState(displayState obj.Object) *PreviewPanel {
-	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setDisplayState:"), objref.IDOf(displayState))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setDisplayState:"), objref.IDOf(displayState))
+	})
 	return pp
 }
 
 // UpdateController asks the preview panel to update its current controller.
 func (pp *PreviewPanel) UpdateController() {
-	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("updateController"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("updateController"))
+	})
+
 }
 
 // ReloadData asks the preview panel to reload its data from its data source.
 func (pp *PreviewPanel) ReloadData() {
-	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("reloadData"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("reloadData"))
+	})
+
 }
 
 // RefreshCurrentPreviewItem asks the preview panel to recompute the preview of the current preview item.
 func (pp *PreviewPanel) RefreshCurrentPreviewItem() {
-	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("refreshCurrentPreviewItem"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("refreshCurrentPreviewItem"))
+	})
+
 }
 
 // EnterFullScreenModeWithOptions instructs the panel to enter full screen mode.
 func (pp *PreviewPanel) EnterFullScreenModeWithOptions(screen obj.Object, options obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(pp), objc.RegisterName("enterFullScreenMode:withOptions:"), objref.IDOf(screen), objref.IDOf(options))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(pp), objc.RegisterName("enterFullScreenMode:withOptions:"), objref.IDOf(screen), objref.IDOf(options))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ExitFullScreenModeWithOptions instructs the panel to exit full screen mode.
 func (pp *PreviewPanel) ExitFullScreenModeWithOptions(options obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("exitFullScreenModeWithOptions:"), objref.IDOf(options))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("exitFullScreenModeWithOptions:"), objref.IDOf(options))
+	})
+
 }
 
 // CurrentController returns the current first responder accepting to control the preview panel. You should never change the preview panel’s state (for example, its delegate, datasource, and so on) if you aren’t controlling it.
 func (pp *PreviewPanel) CurrentController() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("currentController"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("currentController"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CurrentPreviewItemIndex returns the index of the current preview item. The value is `NSNotFound` if there’s no current preview item.
 func (pp *PreviewPanel) CurrentPreviewItemIndex() int {
-	_r := objc.Send[int](objref.IDOf(pp), objc.RegisterName("currentPreviewItemIndex"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(pp), objc.RegisterName("currentPreviewItemIndex"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DisplayState returns the preview panel’s display state. This property is an opaque object that Quick Look uses to get and set the current display state of the preview. The display state could be, for example, the currently displayed page, the zoom factor on an image, or the position in a movie. You can use this property to get and save the current display state of the preview before switching to another. This saving allows you to restore a preview later on when the user switches back to it.
 func (pp *PreviewPanel) DisplayState() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("displayState"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("displayState"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsInFullScreenMode reports whether the property that indicates whether the panel is in full screen mode. The value is <doc://com.apple.documentation/documentation/objectivec/yes> if the panel is currently open and in full screen mode; otherwise it’s <doc://com.apple.documentation/documentation/objectivec/no>.
 func (pp *PreviewPanel) IsInFullScreenMode() bool {
-	_r := objc.Send[bool](objref.IDOf(pp), objc.RegisterName("isInFullScreenMode"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(pp), objc.RegisterName("isInFullScreenMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

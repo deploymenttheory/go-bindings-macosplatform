@@ -63,94 +63,174 @@ func (wwemp *WKWebExtensionMatchPattern) IsKind(className string) bool {
 
 // NewWKWebExtensionMatchPatternWithStringError returns a pattern object for the specified pattern string.
 func NewWKWebExtensionMatchPatternWithStringError(string_ string) (result *WKWebExtensionMatchPattern, err error) {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionMatchPattern")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:error:"), purego.NSString(string_), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
-	}
-	return wKWebExtensionMatchPatternAdopt(_id), nil
+	purego.Main(func() {
+		result, err = func() (*WKWebExtensionMatchPattern, error) {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionMatchPattern")), objc.RegisterName("alloc"))
+			var _nsErr uintptr
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:error:"), purego.NSString(string_), unsafe.Pointer(&_nsErr))
+			if _nsErr != 0 {
+				return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+			}
+			return wKWebExtensionMatchPatternAdopt(_id), nil
+		}()
+	})
+	return
 }
 
 // NewWKWebExtensionMatchPatternWithSchemeHostPathError returns a pattern object for the specified scheme, host, and path strings.
 func NewWKWebExtensionMatchPatternWithSchemeHostPathError(scheme string, host string, path string) (result *WKWebExtensionMatchPattern, err error) {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionMatchPattern")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScheme:host:path:error:"), purego.NSString(scheme), purego.NSString(host), purego.NSString(path), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
-	}
-	return wKWebExtensionMatchPatternAdopt(_id), nil
+	purego.Main(func() {
+		result, err = func() (*WKWebExtensionMatchPattern, error) {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionMatchPattern")), objc.RegisterName("alloc"))
+			var _nsErr uintptr
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScheme:host:path:error:"), purego.NSString(scheme), purego.NSString(host), purego.NSString(path), unsafe.Pointer(&_nsErr))
+			if _nsErr != 0 {
+				return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+			}
+			return wKWebExtensionMatchPatternAdopt(_id), nil
+		}()
+	})
+	return
 }
 
 // MatchesURL matches the reciever pattern against the specified URL.
 func (wwemp *WKWebExtensionMatchPattern) MatchesURL(url string) bool {
-	_r := objc.Send[bool](objref.IDOf(wwemp), objc.RegisterName("matchesURL:"), rt.FileURL(url))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwemp), objc.RegisterName("matchesURL:"), rt.FileURL(url))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MatchesURLOptions matches the reciever pattern against the specified URL with options.
 func (wwemp *WKWebExtensionMatchPattern) MatchesURLOptions(url string, options WKWebExtensionMatchPatternOptions) bool {
-	_r := objc.Send[bool](objref.IDOf(wwemp), objc.RegisterName("matchesURL:options:"), rt.FileURL(url), options)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwemp), objc.RegisterName("matchesURL:options:"), rt.FileURL(url), options)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MatchesPattern matches the receiver pattern against the specified pattern.
 func (wwemp *WKWebExtensionMatchPattern) MatchesPattern(pattern *WKWebExtensionMatchPattern) bool {
-	_r := objc.Send[bool](objref.IDOf(wwemp), objc.RegisterName("matchesPattern:"), objref.IDOf(pattern))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwemp), objc.RegisterName("matchesPattern:"), objref.IDOf(pattern))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MatchesPatternOptions matches the receiver pattern against the specified pattern with options.
 func (wwemp *WKWebExtensionMatchPattern) MatchesPatternOptions(pattern *WKWebExtensionMatchPattern, options WKWebExtensionMatchPatternOptions) bool {
-	_r := objc.Send[bool](objref.IDOf(wwemp), objc.RegisterName("matchesPattern:options:"), objref.IDOf(pattern), options)
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwemp), objc.RegisterName("matchesPattern:options:"), objref.IDOf(pattern), options)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // String returns the original pattern string.
 func (wwemp *WKWebExtensionMatchPattern) String() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wwemp), objc.RegisterName("string"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wwemp), objc.RegisterName("string"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Scheme returns the scheme part of the pattern string, unless “matchesAllURLs“ is `YES`.
 func (wwemp *WKWebExtensionMatchPattern) Scheme() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wwemp), objc.RegisterName("scheme"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wwemp), objc.RegisterName("scheme"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Host returns the host part of the pattern string, unless “matchesAllURLs“ is `YES`.
 func (wwemp *WKWebExtensionMatchPattern) Host() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wwemp), objc.RegisterName("host"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wwemp), objc.RegisterName("host"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Path returns the path part of the pattern string, unless “matchesAllURLs“ is `YES`.
 func (wwemp *WKWebExtensionMatchPattern) Path() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wwemp), objc.RegisterName("path"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wwemp), objc.RegisterName("path"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MatchesAllURLs reports whether if the pattern is `<all_urls>`.
 func (wwemp *WKWebExtensionMatchPattern) MatchesAllURLs() bool {
-	_r := objc.Send[bool](objref.IDOf(wwemp), objc.RegisterName("matchesAllURLs"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwemp), objc.RegisterName("matchesAllURLs"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MatchesAllHosts reports whether if the pattern is `<all_urls>` or has `*` as the host.
 func (wwemp *WKWebExtensionMatchPattern) MatchesAllHosts() bool {
-	_r := objc.Send[bool](objref.IDOf(wwemp), objc.RegisterName("matchesAllHosts"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wwemp), objc.RegisterName("matchesAllHosts"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

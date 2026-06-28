@@ -68,30 +68,54 @@ func (wv *WorkflowView) String() string {
 
 // NewWorkflowView creates a new WorkflowView.
 func NewWorkflowView() *WorkflowView {
-	_id := objc.Send[objc.ID](objc.ID(_class("AMWorkflowView")), objc.RegisterName("new"))
-	return workflowViewAdopt(_id)
+	var _mainthread0 *WorkflowView
+	purego.Main(func() {
+		_mainthread0 = func() *WorkflowView {
+			_id := objc.Send[objc.ID](objc.ID(_class("AMWorkflowView")), objc.RegisterName("new"))
+			return workflowViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithEditable sets a Boolean value that indicates whether the workflow view is editable.
 func (wv *WorkflowView) WithEditable(editable bool) *WorkflowView {
-	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setEditable:"), editable)
+	})
 	return wv
 }
 
 // WithWorkflowController sets the view’s workflow controller.
 func (wv *WorkflowView) WithWorkflowController(workflowController *WorkflowController) *WorkflowView {
-	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setWorkflowController:"), objref.IDOf(workflowController))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setWorkflowController:"), objref.IDOf(workflowController))
+	})
 	return wv
 }
 
 // IsEditable reports whether the object is editable.
 func (wv *WorkflowView) IsEditable() bool {
-	_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("isEditable"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("isEditable"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // WorkflowController returns the workflow controller.
 func (wv *WorkflowView) WorkflowController() *WorkflowController {
-	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("workflowController"))
-	return WorkflowControllerFromID(_r)
+	var _mainthread0 *WorkflowController
+	purego.Main(func() {
+		_mainthread0 = func() *WorkflowController {
+			_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("workflowController"))
+			return WorkflowControllerFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }

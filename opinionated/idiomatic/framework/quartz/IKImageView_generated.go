@@ -69,298 +69,528 @@ func (iiv *IKImageView) String() string {
 
 // NewIKImageView creates a new IKImageView.
 func NewIKImageView() *IKImageView {
-	_id := objc.Send[objc.ID](objc.ID(_class("IKImageView")), objc.RegisterName("new"))
-	return iKImageViewAdopt(_id)
+	var _mainthread0 *IKImageView
+	purego.Main(func() {
+		_mainthread0 = func() *IKImageView {
+			_id := objc.Send[objc.ID](objc.ID(_class("IKImageView")), objc.RegisterName("new"))
+			return iKImageViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithDelegate sets specifies the delegate object of the receiver.
 func (iiv *IKImageView) WithDelegate(delegate obj.Object) *IKImageView {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	})
 	return iiv
 }
 
 // WithZoomFactor sets specifies the zoom factor for the image view.
 func (iiv *IKImageView) WithZoomFactor(zoomFactor float64) *IKImageView {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setZoomFactor:"), zoomFactor)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setZoomFactor:"), zoomFactor)
+	})
 	return iiv
 }
 
 // WithRotationAngle sets specifies the rotation angle for the image view.
 func (iiv *IKImageView) WithRotationAngle(rotationAngle float64) *IKImageView {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setRotationAngle:"), rotationAngle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setRotationAngle:"), rotationAngle)
+	})
 	return iiv
 }
 
 // WithCurrentToolMode sets specifies the current tool mode for the image view.
 func (iiv *IKImageView) WithCurrentToolMode(currentToolMode string) *IKImageView {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setCurrentToolMode:"), purego.NSString(currentToolMode))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setCurrentToolMode:"), purego.NSString(currentToolMode))
+	})
 	return iiv
 }
 
 // WithAutoresizes sets specifies the automatic resizing state for the image view.
 func (iiv *IKImageView) WithAutoresizes(autoresizes bool) *IKImageView {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setAutoresizes:"), autoresizes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setAutoresizes:"), autoresizes)
+	})
 	return iiv
 }
 
 // WithHasHorizontalScroller sets specifies the horizontal scroll bar state for the image view.
 func (iiv *IKImageView) WithHasHorizontalScroller(hasHorizontalScroller bool) *IKImageView {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setHasHorizontalScroller:"), hasHorizontalScroller)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setHasHorizontalScroller:"), hasHorizontalScroller)
+	})
 	return iiv
 }
 
 // WithHasVerticalScroller sets specifies the vertical scroll bar state for the image view.
 func (iiv *IKImageView) WithHasVerticalScroller(hasVerticalScroller bool) *IKImageView {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setHasVerticalScroller:"), hasVerticalScroller)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setHasVerticalScroller:"), hasVerticalScroller)
+	})
 	return iiv
 }
 
 // WithAutohidesScrollers sets specifies the automatic-hiding scroll bar state for the image view.
 func (iiv *IKImageView) WithAutohidesScrollers(autohidesScrollers bool) *IKImageView {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setAutohidesScrollers:"), autohidesScrollers)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setAutohidesScrollers:"), autohidesScrollers)
+	})
 	return iiv
 }
 
 // WithSupportsDragAndDrop sets specifies the drag-and-drop support state for the image view.
 func (iiv *IKImageView) WithSupportsDragAndDrop(supportsDragAndDrop bool) *IKImageView {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setSupportsDragAndDrop:"), supportsDragAndDrop)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setSupportsDragAndDrop:"), supportsDragAndDrop)
+	})
 	return iiv
 }
 
 // WithEditable sets specifies the editable state for the image view.
 func (iiv *IKImageView) WithEditable(editable bool) *IKImageView {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setEditable:"), editable)
+	})
 	return iiv
 }
 
 // WithDoubleClickOpensImageEditPanel sets specifies the image-opening state of the editing pane in the image view.
 func (iiv *IKImageView) WithDoubleClickOpensImageEditPanel(doubleClickOpensImageEditPanel bool) *IKImageView {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setDoubleClickOpensImageEditPanel:"), doubleClickOpensImageEditPanel)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setDoubleClickOpensImageEditPanel:"), doubleClickOpensImageEditPanel)
+	})
 	return iiv
 }
 
 // WithImageCorrection sets specifies a Core Image filter for image correction.
 func (iiv *IKImageView) WithImageCorrection(imageCorrection obj.Object) *IKImageView {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setImageCorrection:"), objref.IDOf(imageCorrection))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setImageCorrection:"), objref.IDOf(imageCorrection))
+	})
 	return iiv
 }
 
 // WithBackgroundColor sets specifies the background color for the image view.
 func (iiv *IKImageView) WithBackgroundColor(backgroundColor obj.Object) *IKImageView {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	})
 	return iiv
 }
 
 // SetImageImageProperties sets the image to display in an image view.
 func (iiv *IKImageView) SetImageImageProperties(image obj.Object, metaData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setImage:imageProperties:"), objref.IDOf(image), objref.IDOf(metaData))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setImage:imageProperties:"), objref.IDOf(image), objref.IDOf(metaData))
+	})
+
 }
 
 // SetImageWithURL initializes an image view with the image specified by a URL.
 func (iiv *IKImageView) SetImageWithURL(url string) {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setImageWithURL:"), rt.FileURL(url))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setImageWithURL:"), rt.FileURL(url))
+	})
+
 }
 
 // Image returns the image associated with the view, after any image corrections.
 func (iiv *IKImageView) Image() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("image"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("image"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ImageSize returns the size of the image in the image view.
 func (iiv *IKImageView) ImageSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(iiv), objc.RegisterName("imageSize"))
-	return _r
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_r := objc.Send[corefoundation.CGSize](objref.IDOf(iiv), objc.RegisterName("imageSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ImageProperties returns the metadata for the image in the view.
 func (iiv *IKImageView) ImageProperties() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("imageProperties"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("imageProperties"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetRotationAngleCenterPoint sets the rotation angle at the provided origin.
 func (iiv *IKImageView) SetRotationAngleCenterPoint(rotationAngle float64, centerPoint corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setRotationAngle:centerPoint:"), rotationAngle, centerPoint)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setRotationAngle:centerPoint:"), rotationAngle, centerPoint)
+	})
+
 }
 
 // RotateImageLeft rotates the image left (counter-clockwise).
 func (iiv *IKImageView) RotateImageLeft(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("rotateImageLeft:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("rotateImageLeft:"), objref.IDOf(sender))
+	})
+
 }
 
 // RotateImageRight rotates the image right (clockwise).
 func (iiv *IKImageView) RotateImageRight(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("rotateImageRight:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("rotateImageRight:"), objref.IDOf(sender))
+	})
+
 }
 
 // SetImageZoomFactorCenterPoint sets the zoom factor at the provided origin.
 func (iiv *IKImageView) SetImageZoomFactorCenterPoint(zoomFactor float64, centerPoint corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setImageZoomFactor:centerPoint:"), zoomFactor, centerPoint)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setImageZoomFactor:centerPoint:"), zoomFactor, centerPoint)
+	})
+
 }
 
 // ZoomImageToRect zooms the image so that it fits in the specified rectangle.
 func (iiv *IKImageView) ZoomImageToRect(rect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("zoomImageToRect:"), rect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("zoomImageToRect:"), rect)
+	})
+
 }
 
 // ZoomImageToFit zooms the image so that it fits in the image view.
 func (iiv *IKImageView) ZoomImageToFit(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("zoomImageToFit:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("zoomImageToFit:"), objref.IDOf(sender))
+	})
+
 }
 
 // ZoomImageToActualSize zooms the image so that it is displayed using its true size.
 func (iiv *IKImageView) ZoomImageToActualSize(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("zoomImageToActualSize:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("zoomImageToActualSize:"), objref.IDOf(sender))
+	})
+
 }
 
 // ZoomIn zooms the image in.
 func (iiv *IKImageView) ZoomIn(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("zoomIn:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("zoomIn:"), objref.IDOf(sender))
+	})
+
 }
 
 // ZoomOut zooms the image out.
 func (iiv *IKImageView) ZoomOut(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("zoomOut:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("zoomOut:"), objref.IDOf(sender))
+	})
+
 }
 
 // FlipImageHorizontal flips an image along the horizontal axis.
 func (iiv *IKImageView) FlipImageHorizontal(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("flipImageHorizontal:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("flipImageHorizontal:"), objref.IDOf(sender))
+	})
+
 }
 
 // FlipImageVertical flips an image along the vertical axis.
 func (iiv *IKImageView) FlipImageVertical(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("flipImageVertical:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("flipImageVertical:"), objref.IDOf(sender))
+	})
+
 }
 
 // Crop crops the image using the current selection.
 func (iiv *IKImageView) Crop(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("crop:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("crop:"), objref.IDOf(sender))
+	})
+
 }
 
 // SetOverlayForType sets an overlay type for a Core Animation layer.
 func (iiv *IKImageView) SetOverlayForType(layer obj.Object, layerType string) {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setOverlay:forType:"), objref.IDOf(layer), purego.NSString(layerType))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("setOverlay:forType:"), objref.IDOf(layer), purego.NSString(layerType))
+	})
+
 }
 
 // OverlayForType returns the Core Animation layer associated with a layer type.
 func (iiv *IKImageView) OverlayForType(layerType string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("overlayForType:"), purego.NSString(layerType))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("overlayForType:"), purego.NSString(layerType))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ScrollToPoint scrolls the view to the specified point.
 func (iiv *IKImageView) ScrollToPoint(point corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("scrollToPoint:"), point)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("scrollToPoint:"), point)
+	})
+
 }
 
 // ScrollToRect scrolls the view so that it includes the provided rectangular area.
 func (iiv *IKImageView) ScrollToRect(rect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("scrollToRect:"), rect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("scrollToRect:"), rect)
+	})
+
 }
 
 // ConvertViewPointToImagePoint converts an image view coordinate to an image coordinate.
 func (iiv *IKImageView) ConvertViewPointToImagePoint(viewPoint corefoundation.CGPoint) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(iiv), objc.RegisterName("convertViewPointToImagePoint:"), viewPoint)
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(iiv), objc.RegisterName("convertViewPointToImagePoint:"), viewPoint)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ConvertViewRectToImageRect converts an image view rectangle to an image rectangle.
 func (iiv *IKImageView) ConvertViewRectToImageRect(viewRect corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(iiv), objc.RegisterName("convertViewRectToImageRect:"), viewRect)
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(iiv), objc.RegisterName("convertViewRectToImageRect:"), viewRect)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ConvertImagePointToViewPoint converts an image coordinate to an image view coordinate.
 func (iiv *IKImageView) ConvertImagePointToViewPoint(imagePoint corefoundation.CGPoint) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(iiv), objc.RegisterName("convertImagePointToViewPoint:"), imagePoint)
-	return _r
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_r := objc.Send[corefoundation.CGPoint](objref.IDOf(iiv), objc.RegisterName("convertImagePointToViewPoint:"), imagePoint)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ConvertImageRectToViewRect converts an image rectangle to an image view rectangle.
 func (iiv *IKImageView) ConvertImageRectToViewRect(imageRect corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(iiv), objc.RegisterName("convertImageRectToViewRect:"), imageRect)
-	return _r
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_r := objc.Send[corefoundation.CGRect](objref.IDOf(iiv), objc.RegisterName("convertImageRectToViewRect:"), imageRect)
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Delegate specifies the delegate object of the receiver.
 func (iiv *IKImageView) Delegate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("delegate"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("delegate"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ZoomFactor specifies the zoom factor for the image view.
 func (iiv *IKImageView) ZoomFactor() float64 {
-	_r := objc.Send[float64](objref.IDOf(iiv), objc.RegisterName("zoomFactor"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(iiv), objc.RegisterName("zoomFactor"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RotationAngle specifies the rotation angle for the image view.
 func (iiv *IKImageView) RotationAngle() float64 {
-	_r := objc.Send[float64](objref.IDOf(iiv), objc.RegisterName("rotationAngle"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(iiv), objc.RegisterName("rotationAngle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CurrentToolMode specifies the current tool mode for the image view.
 func (iiv *IKImageView) CurrentToolMode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("currentToolMode"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("currentToolMode"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Autoresizes reports whether specifies the automatic resizing state for the image view.
 func (iiv *IKImageView) Autoresizes() bool {
-	_r := objc.Send[bool](objref.IDOf(iiv), objc.RegisterName("autoresizes"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(iiv), objc.RegisterName("autoresizes"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasHorizontalScroller reports whether specifies the horizontal scroll bar state for the image view.
 func (iiv *IKImageView) HasHorizontalScroller() bool {
-	_r := objc.Send[bool](objref.IDOf(iiv), objc.RegisterName("hasHorizontalScroller"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(iiv), objc.RegisterName("hasHorizontalScroller"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // HasVerticalScroller reports whether specifies the vertical scroll bar state for the image view.
 func (iiv *IKImageView) HasVerticalScroller() bool {
-	_r := objc.Send[bool](objref.IDOf(iiv), objc.RegisterName("hasVerticalScroller"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(iiv), objc.RegisterName("hasVerticalScroller"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AutohidesScrollers reports whether specifies the automatic-hiding scroll bar state for the image view.
 func (iiv *IKImageView) AutohidesScrollers() bool {
-	_r := objc.Send[bool](objref.IDOf(iiv), objc.RegisterName("autohidesScrollers"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(iiv), objc.RegisterName("autohidesScrollers"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SupportsDragAndDrop reports whether specifies the drag-and-drop support state for the image view.
 func (iiv *IKImageView) SupportsDragAndDrop() bool {
-	_r := objc.Send[bool](objref.IDOf(iiv), objc.RegisterName("supportsDragAndDrop"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(iiv), objc.RegisterName("supportsDragAndDrop"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Editable reports whether specifies the editable state for the image view.
 func (iiv *IKImageView) Editable() bool {
-	_r := objc.Send[bool](objref.IDOf(iiv), objc.RegisterName("editable"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(iiv), objc.RegisterName("editable"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DoubleClickOpensImageEditPanel reports whether specifies the image-opening state of the editing pane in the image view.
 func (iiv *IKImageView) DoubleClickOpensImageEditPanel() bool {
-	_r := objc.Send[bool](objref.IDOf(iiv), objc.RegisterName("doubleClickOpensImageEditPanel"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(iiv), objc.RegisterName("doubleClickOpensImageEditPanel"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ImageCorrection specifies a Core Image filter for image correction.
 func (iiv *IKImageView) ImageCorrection() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("imageCorrection"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("imageCorrection"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BackgroundColor specifies the background color for the image view.
 func (iiv *IKImageView) BackgroundColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("backgroundColor"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(iiv), objc.RegisterName("backgroundColor"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }

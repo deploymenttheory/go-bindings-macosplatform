@@ -68,6 +68,12 @@ func (avc *AUViewController) String() string {
 
 // NewAUViewController creates a new AUViewController.
 func NewAUViewController() *AUViewController {
-	_id := objc.Send[objc.ID](objc.ID(_class("AUViewController")), objc.RegisterName("new"))
-	return aUViewControllerAdopt(_id)
+	var _mainthread0 *AUViewController
+	purego.Main(func() {
+		_mainthread0 = func() *AUViewController {
+			_id := objc.Send[objc.ID](objc.ID(_class("AUViewController")), objc.RegisterName("new"))
+			return aUViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }

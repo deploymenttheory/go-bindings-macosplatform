@@ -68,31 +68,55 @@ func (tbmvc *TurnBasedMatchmakerViewController) String() string {
 
 // NewTurnBasedMatchmakerViewControllerWithMatchRequest creates a matchmaker view controller for the local player to start inviting other players to a turn-based game.
 func NewTurnBasedMatchmakerViewControllerWithMatchRequest(request *MatchRequest) *TurnBasedMatchmakerViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("GKTurnBasedMatchmakerViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMatchRequest:"), objref.IDOf(request))
-	return turnBasedMatchmakerViewControllerAdopt(_id)
+	var _mainthread0 *TurnBasedMatchmakerViewController
+	purego.Main(func() {
+		_mainthread0 = func() *TurnBasedMatchmakerViewController {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("GKTurnBasedMatchmakerViewController")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMatchRequest:"), objref.IDOf(request))
+			return turnBasedMatchmakerViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithShowExistingMatches sets a Boolean value that determines whether the view controller shows existing matches.
 func (tbmvc *TurnBasedMatchmakerViewController) WithShowExistingMatches(showExistingMatches bool) *TurnBasedMatchmakerViewController {
-	objc.Send[objc.ID](objref.IDOf(tbmvc), objc.RegisterName("setShowExistingMatches:"), showExistingMatches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tbmvc), objc.RegisterName("setShowExistingMatches:"), showExistingMatches)
+	})
 	return tbmvc
 }
 
 // WithMatchmakingMode sets the mode that a multiplayer game uses to find players.
 func (tbmvc *TurnBasedMatchmakerViewController) WithMatchmakingMode(matchmakingMode MatchmakingMode) *TurnBasedMatchmakerViewController {
-	objc.Send[objc.ID](objref.IDOf(tbmvc), objc.RegisterName("setMatchmakingMode:"), matchmakingMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tbmvc), objc.RegisterName("setMatchmakingMode:"), matchmakingMode)
+	})
 	return tbmvc
 }
 
 // ShowExistingMatches wraps the corresponding Objective-C method.
 func (tbmvc *TurnBasedMatchmakerViewController) ShowExistingMatches() bool {
-	_r := objc.Send[bool](objref.IDOf(tbmvc), objc.RegisterName("showExistingMatches"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(tbmvc), objc.RegisterName("showExistingMatches"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MatchmakingMode returns the matchmaking mode.
 func (tbmvc *TurnBasedMatchmakerViewController) MatchmakingMode() MatchmakingMode {
-	_r := objc.Send[MatchmakingMode](objref.IDOf(tbmvc), objc.RegisterName("matchmakingMode"))
-	return _r
+	var _mainthread0 MatchmakingMode
+	purego.Main(func() {
+		_mainthread0 = func() MatchmakingMode {
+			_r := objc.Send[MatchmakingMode](objref.IDOf(tbmvc), objc.RegisterName("matchmakingMode"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

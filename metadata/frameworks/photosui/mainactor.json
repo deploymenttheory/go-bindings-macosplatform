@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "framework": "PhotosUI",
+  "main_actor_protocols": [
+    "PHContentEditingController",
+    "PHLivePhotoViewDelegate"
+  ]
+}

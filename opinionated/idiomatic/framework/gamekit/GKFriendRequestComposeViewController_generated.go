@@ -68,26 +68,44 @@ func (frcvc *FriendRequestComposeViewController) String() string {
 
 // NewFriendRequestComposeViewController creates a new FriendRequestComposeViewController.
 func NewFriendRequestComposeViewController() *FriendRequestComposeViewController {
-	_id := objc.Send[objc.ID](objc.ID(_class("GKFriendRequestComposeViewController")), objc.RegisterName("new"))
-	return friendRequestComposeViewControllerAdopt(_id)
+	var _mainthread0 *FriendRequestComposeViewController
+	purego.Main(func() {
+		_mainthread0 = func() *FriendRequestComposeViewController {
+			_id := objc.Send[objc.ID](objc.ID(_class("GKFriendRequestComposeViewController")), objc.RegisterName("new"))
+			return friendRequestComposeViewControllerAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // SetMessage sets the text message included in the friend invitation.
 func (frcvc *FriendRequestComposeViewController) SetMessage(message string) {
-	objc.Send[objc.ID](objref.IDOf(frcvc), objc.RegisterName("setMessage:"), purego.NSString(message))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(frcvc), objc.RegisterName("setMessage:"), purego.NSString(message))
+	})
+
 }
 
 // AddRecipientPlayers adds recipients based on their Game Center player identifiers.
 func (frcvc *FriendRequestComposeViewController) AddRecipientPlayers(players []*Player) {
-	objc.Send[objc.ID](objref.IDOf(frcvc), objc.RegisterName("addRecipientPlayers:"), purego.SliceToNSArray(players, func(_v *Player) objc.ID { return objref.IDOf(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(frcvc), objc.RegisterName("addRecipientPlayers:"), purego.SliceToNSArray(players, func(_v *Player) objc.ID { return objref.IDOf(_v) }))
+	})
+
 }
 
 // AddRecipientsWithPlayerIDs adds recipients based on their Game Center player identifiers.
 func (frcvc *FriendRequestComposeViewController) AddRecipientsWithPlayerIDs(playerIDs []string) {
-	objc.Send[objc.ID](objref.IDOf(frcvc), objc.RegisterName("addRecipientsWithPlayerIDs:"), purego.SliceToNSArray(playerIDs, func(_v string) objc.ID { return purego.NSString(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(frcvc), objc.RegisterName("addRecipientsWithPlayerIDs:"), purego.SliceToNSArray(playerIDs, func(_v string) objc.ID { return purego.NSString(_v) }))
+	})
+
 }
 
 // AddRecipientsWithEmailAddresses adds recipients based on their email addresses.
 func (frcvc *FriendRequestComposeViewController) AddRecipientsWithEmailAddresses(emailAddresses []string) {
-	objc.Send[objc.ID](objref.IDOf(frcvc), objc.RegisterName("addRecipientsWithEmailAddresses:"), purego.SliceToNSArray(emailAddresses, func(_v string) objc.ID { return purego.NSString(_v) }))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(frcvc), objc.RegisterName("addRecipientsWithEmailAddresses:"), purego.SliceToNSArray(emailAddresses, func(_v string) objc.ID { return purego.NSString(_v) }))
+	})
+
 }

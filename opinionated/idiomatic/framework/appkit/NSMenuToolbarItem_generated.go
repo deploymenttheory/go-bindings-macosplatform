@@ -49,158 +49,224 @@ func menuToolbarItemAdopt(id objc.ID) *MenuToolbarItem {
 
 // NewMenuToolbarItem creates a new MenuToolbarItem.
 func NewMenuToolbarItem() *MenuToolbarItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSMenuToolbarItem")), objc.RegisterName("new"))
-	return menuToolbarItemAdopt(_id)
+	var _mainthread0 *MenuToolbarItem
+	purego.Main(func() {
+		_mainthread0 = func() *MenuToolbarItem {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSMenuToolbarItem")), objc.RegisterName("new"))
+			return menuToolbarItemAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithMenu sets the menu presented from the toolbar item.
 func (mti *MenuToolbarItem) WithMenu(menu *Menu) *MenuToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return mti
 }
 
 // WithShowsIndicator sets a Boolean value that determines whether the toolbar item displays an indicator of additional functionality.
 func (mti *MenuToolbarItem) WithShowsIndicator(showsIndicator bool) *MenuToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setShowsIndicator:"), showsIndicator)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setShowsIndicator:"), showsIndicator)
+	})
 	return mti
 }
 
 // WithLabel sets the label that appears for this item in the toolbar.
 func (mti *MenuToolbarItem) WithLabel(label string) *MenuToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setLabel:"), purego.NSString(label))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setLabel:"), purego.NSString(label))
+	})
 	return mti
 }
 
 // WithPaletteLabel sets the label that appears when the toolbar item is in the customization palette.
 func (mti *MenuToolbarItem) WithPaletteLabel(paletteLabel string) *MenuToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setPaletteLabel:"), purego.NSString(paletteLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setPaletteLabel:"), purego.NSString(paletteLabel))
+	})
 	return mti
 }
 
 // WithPossibleLabels sets the set of labels that the item might display.
 func (mti *MenuToolbarItem) WithPossibleLabels(possibleLabels obj.Object) *MenuToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setPossibleLabels:"), objref.IDOf(possibleLabels))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setPossibleLabels:"), objref.IDOf(possibleLabels))
+	})
 	return mti
 }
 
 // WithToolTip sets the tooltip to display when someone hovers over the item in the toolbar.
 func (mti *MenuToolbarItem) WithToolTip(toolTip string) *MenuToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return mti
 }
 
 // WithMenuFormRepresentation sets the menu item to use when the toolbar item is in the overflow menu.
 func (mti *MenuToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *MenuToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setMenuFormRepresentation:"), objref.IDOf(menuFormRepresentation))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setMenuFormRepresentation:"), objref.IDOf(menuFormRepresentation))
+	})
 	return mti
 }
 
 // WithTag sets an integer tag you can use to identify the toolbar item.
 func (mti *MenuToolbarItem) WithTag(tag int) *MenuToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setTag:"), tag)
+	})
 	return mti
 }
 
 // WithTarget sets the object that defines the action method the toolbar item calls when clicked.
 func (mti *MenuToolbarItem) WithTarget(target obj.Object) *MenuToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return mti
 }
 
 // WithEnabled sets a Boolean value that indicates whether the item is enabled.
 func (mti *MenuToolbarItem) WithEnabled(enabled bool) *MenuToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return mti
 }
 
 // WithImage sets the image to display for the toolbar item.
 func (mti *MenuToolbarItem) WithImage(image *Image) *MenuToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setImage:"), objref.IDOf(image))
+	})
 	return mti
 }
 
 // WithTitle sets the title of the toolbar item.
 func (mti *MenuToolbarItem) WithTitle(title string) *MenuToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return mti
 }
 
 // WithBordered sets a Boolean value that indicates whether the toolbar item has a bordered style.
 func (mti *MenuToolbarItem) WithBordered(bordered bool) *MenuToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setBordered:"), bordered)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setBordered:"), bordered)
+	})
 	return mti
 }
 
 // WithBackgroundTintColor sets the background tint color.
 func (mti *MenuToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *MenuToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
+	})
 	return mti
 }
 
 // WithStyle sets defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items’ background.
 func (mti *MenuToolbarItem) WithStyle(style ToolbarItemStyle) *MenuToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setStyle:"), style)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setStyle:"), style)
+	})
 	return mti
 }
 
 // WithNavigational sets a Boolean value that indicates whether the item behaves as a navigation item in the toolbar.
 func (mti *MenuToolbarItem) WithNavigational(navigational bool) *MenuToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setNavigational:"), navigational)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setNavigational:"), navigational)
+	})
 	return mti
 }
 
 // WithView sets the custom view you use to draw the toolbar item.
 func (mti *MenuToolbarItem) WithView(view ViewProvider) *MenuToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setView:"), objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setView:"), objref.IDOf(view))
+	})
 	return mti
 }
 
 // WithHidden sets determines whether an item is visible in the toolbar.
 func (mti *MenuToolbarItem) WithHidden(hidden bool) *MenuToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setHidden:"), hidden)
+	})
 	return mti
 }
 
 // WithMinSize sets the toolbar item’s minimum size.
 func (mti *MenuToolbarItem) WithMinSize(minSize corefoundation.CGSize) *MenuToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setMinSize:"), minSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setMinSize:"), minSize)
+	})
 	return mti
 }
 
 // WithMaxSize sets the toolbar item’s maximum size.
 func (mti *MenuToolbarItem) WithMaxSize(maxSize corefoundation.CGSize) *MenuToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setMaxSize:"), maxSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setMaxSize:"), maxSize)
+	})
 	return mti
 }
 
 // WithVisibilityPriority sets the display priority associated with the toolbar item.
 func (mti *MenuToolbarItem) WithVisibilityPriority(visibilityPriority int) *MenuToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	})
 	return mti
 }
 
 // WithBadge sets a badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
 func (mti *MenuToolbarItem) WithBadge(badge *ItemBadge) *MenuToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setBadge:"), objref.IDOf(badge))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setBadge:"), objref.IDOf(badge))
+	})
 	return mti
 }
 
 // WithAutovalidates sets a Boolean value that indicates whether the toolbar automatically validates the item.
 func (mti *MenuToolbarItem) WithAutovalidates(autovalidates bool) *MenuToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setAutovalidates:"), autovalidates)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setAutovalidates:"), autovalidates)
+	})
 	return mti
 }
 
 // Menu returns the menu.
 func (mti *MenuToolbarItem) Menu() *Menu {
-	_r := objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("menu"))
-	return MenuFromID(_r)
+	var _mainthread0 *Menu
+	purego.Main(func() {
+		_mainthread0 = func() *Menu {
+			_r := objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("menu"))
+			return MenuFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsIndicator wraps the corresponding Objective-C method.
 func (mti *MenuToolbarItem) ShowsIndicator() bool {
-	_r := objc.Send[bool](objref.IDOf(mti), objc.RegisterName("showsIndicator"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(mti), objc.RegisterName("showsIndicator"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ToolbarItemProvider = (*MenuToolbarItem)(nil)

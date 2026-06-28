@@ -51,285 +51,433 @@ func fieldNodeAdopt(id objc.ID) *FieldNode {
 
 // NewFieldNode creates a new FieldNode.
 func NewFieldNode() *FieldNode {
-	_id := objc.Send[objc.ID](objc.ID(_class("SKFieldNode")), objc.RegisterName("new"))
-	return fieldNodeAdopt(_id)
+	var _mainthread0 *FieldNode
+	purego.Main(func() {
+		_mainthread0 = func() *FieldNode {
+			_id := objc.Send[objc.ID](objc.ID(_class("SKFieldNode")), objc.RegisterName("new"))
+			return fieldNodeAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithRegion sets the area (relative to the node’s origin) that the field affects.
 func (fn *FieldNode) WithRegion(region *Region) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setRegion:"), objref.IDOf(region))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setRegion:"), objref.IDOf(region))
+	})
 	return fn
 }
 
 // WithStrength sets the strength of the field.
 func (fn *FieldNode) WithStrength(strength float32) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setStrength:"), strength)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setStrength:"), strength)
+	})
 	return fn
 }
 
 // WithFalloff sets the exponent that defines the rate of decay for the strength of the field as the distance increases between the node and the physics body being affected.
 func (fn *FieldNode) WithFalloff(falloff float32) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setFalloff:"), falloff)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setFalloff:"), falloff)
+	})
 	return fn
 }
 
 // WithMinimumRadius sets the minimum value for distance-based effects.
 func (fn *FieldNode) WithMinimumRadius(minimumRadius float32) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setMinimumRadius:"), minimumRadius)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setMinimumRadius:"), minimumRadius)
+	})
 	return fn
 }
 
 // WithEnabled sets a Boolean value that indicates whether the field is active.
 func (fn *FieldNode) WithEnabled(enabled bool) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return fn
 }
 
 // WithExclusive sets a Boolean value that indicates whether the field node should override all other field nodes that might otherwise affect physics bodies.
 func (fn *FieldNode) WithExclusive(exclusive bool) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setExclusive:"), exclusive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setExclusive:"), exclusive)
+	})
 	return fn
 }
 
 // WithCategoryBitMask sets a mask that defines which categories this field belongs to.
 func (fn *FieldNode) WithCategoryBitMask(categoryBitMask uint32) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
+	})
 	return fn
 }
 
 // WithDirection sets the direction of a velocity field node.
 func (fn *FieldNode) WithDirection(direction unsafe.Pointer) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setDirection:"), direction)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setDirection:"), direction)
+	})
 	return fn
 }
 
 // WithSmoothness sets the smoothness of the noise used to generate the forces.
 func (fn *FieldNode) WithSmoothness(smoothness float32) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setSmoothness:"), smoothness)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setSmoothness:"), smoothness)
+	})
 	return fn
 }
 
 // WithAnimationSpeed sets the rate at which a noise or turbulence field node changes.
 func (fn *FieldNode) WithAnimationSpeed(animationSpeed float32) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAnimationSpeed:"), animationSpeed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAnimationSpeed:"), animationSpeed)
+	})
 	return fn
 }
 
 // WithTexture sets a normal texture that specifies the velocities at different points in a velocity field node.
 func (fn *FieldNode) WithTexture(texture TextureProvider) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setTexture:"), objref.IDOf(texture))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setTexture:"), objref.IDOf(texture))
+	})
 	return fn
 }
 
 // WithPosition sets the position of the node in its parent’s coordinate system.
 func (fn *FieldNode) WithPosition(position corefoundation.CGPoint) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setPosition:"), position)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setPosition:"), position)
+	})
 	return fn
 }
 
 // WithZPosition sets the height of the node relative to its parent.
 func (fn *FieldNode) WithZPosition(zPosition float64) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setZPosition:"), zPosition)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setZPosition:"), zPosition)
+	})
 	return fn
 }
 
 // WithZRotation sets the Euler rotation about the z axis (in radians).
 func (fn *FieldNode) WithZRotation(zRotation float64) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setZRotation:"), zRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setZRotation:"), zRotation)
+	})
 	return fn
 }
 
 // WithXScale sets a scaling factor that multiplies the width of a node and its children.
 func (fn *FieldNode) WithXScale(xScale float64) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setXScale:"), xScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setXScale:"), xScale)
+	})
 	return fn
 }
 
 // WithYScale sets a scaling factor that multiplies the height of a node and its children.
 func (fn *FieldNode) WithYScale(yScale float64) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setYScale:"), yScale)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setYScale:"), yScale)
+	})
 	return fn
 }
 
 // WithSpeed sets a speed modifier applied to all actions executed by a node and its descendants.
 func (fn *FieldNode) WithSpeed(speed float64) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setSpeed:"), speed)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setSpeed:"), speed)
+	})
 	return fn
 }
 
 // WithAlpha sets the transparency value applied to the node’s contents.
 func (fn *FieldNode) WithAlpha(alpha float64) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAlpha:"), alpha)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAlpha:"), alpha)
+	})
 	return fn
 }
 
 // WithPaused sets a Boolean value that determines whether actions on the node and its descendants are processed.
 func (fn *FieldNode) WithPaused(paused bool) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setPaused:"), paused)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setPaused:"), paused)
+	})
 	return fn
 }
 
 // WithHidden sets a Boolean value that determines whether a node and its descendants are rendered.
 func (fn *FieldNode) WithHidden(hidden bool) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setHidden:"), hidden)
+	})
 	return fn
 }
 
 // WithUserInteractionEnabled sets a Boolean value that indicates whether the node receives touch events.
 func (fn *FieldNode) WithUserInteractionEnabled(userInteractionEnabled bool) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	})
 	return fn
 }
 
 // WithName sets the node’s assignable name.
 func (fn *FieldNode) WithName(name string) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setName:"), purego.NSString(name))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setName:"), purego.NSString(name))
+	})
 	return fn
 }
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (fn *FieldNode) WithPhysicsBody(physicsBody *PhysicsBody) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	})
 	return fn
 }
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (fn *FieldNode) WithUserData(userData obj.Object) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	})
 	return fn
 }
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (fn *FieldNode) WithReachConstraints(reachConstraints *ReachConstraints) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	})
 	return fn
 }
 
 // WithConstraints sets a list of constraints to apply to the node.
 func (fn *FieldNode) WithConstraints(items ...*Constraint) *FieldNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setConstraints:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setConstraints:"), _arr)
+	})
 	return fn
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
 func (fn *FieldNode) WithAttributeValues(attributeValues obj.Object) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	})
 	return fn
 }
 
 // WithAccessibilityElement sets a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (fn *FieldNode) WithAccessibilityElement(accessibilityElement bool) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	})
 	return fn
 }
 
 // WithAccessibilityRole sets a string value describing the user interface element type; for example, a button.
 func (fn *FieldNode) WithAccessibilityRole(accessibilityRole string) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	})
 	return fn
 }
 
 // WithAccessibilityRoleDescription sets a string value describing the user interface element name and type; for example, the Buy button.
 func (fn *FieldNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	})
 	return fn
 }
 
 // WithAccessibilitySubrole sets a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (fn *FieldNode) WithAccessibilitySubrole(accessibilitySubrole string) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	})
 	return fn
 }
 
 // WithAccessibilityFrame sets the size of this user interface element, in screen points.
 func (fn *FieldNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	})
 	return fn
 }
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (fn *FieldNode) WithAccessibilityParent(accessibilityParent obj.Object) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	})
 	return fn
 }
 
 // WithAccessibilityHelp sets the help description of this user interface element; for example, the text shown in a tooltip.
 func (fn *FieldNode) WithAccessibilityHelp(accessibilityHelp string) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	})
 	return fn
 }
 
 // WithAccessibilityLabel sets a short description of this user interface element.
 func (fn *FieldNode) WithAccessibilityLabel(accessibilityLabel string) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	})
 	return fn
 }
 
 // WithAccessibilityEnabled sets a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (fn *FieldNode) WithAccessibilityEnabled(accessibilityEnabled bool) *FieldNode {
-	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	})
 	return fn
 }
 
 // Region returns the region property is the domain of the field's effect. No force is applied to objects outside the region.
 func (fn *FieldNode) Region() *Region {
-	_r := objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("region"))
-	return RegionFromID(_r)
+	var _mainthread0 *Region
+	purego.Main(func() {
+		_mainthread0 = func() *Region {
+			_r := objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("region"))
+			return RegionFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Strength returns strength scaling value. default 1.0
 func (fn *FieldNode) Strength() float32 {
-	_r := objc.Send[float32](objref.IDOf(fn), objc.RegisterName("strength"))
-	return _r
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_r := objc.Send[float32](objref.IDOf(fn), objc.RegisterName("strength"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Falloff returns the falloff exponent used to calculate field strength at a distance. Falloff starts at the minimum radius. The default exponent is zero, which results in a uniform field with no falloff.
 func (fn *FieldNode) Falloff() float32 {
-	_r := objc.Send[float32](objref.IDOf(fn), objc.RegisterName("falloff"))
-	return _r
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_r := objc.Send[float32](objref.IDOf(fn), objc.RegisterName("falloff"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MinimumRadius returns minimum radius of effect. Default is very small.
 func (fn *FieldNode) MinimumRadius() float32 {
-	_r := objc.Send[float32](objref.IDOf(fn), objc.RegisterName("minimumRadius"))
-	return _r
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_r := objc.Send[float32](objref.IDOf(fn), objc.RegisterName("minimumRadius"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsEnabled reports whether if enabled, a field has an effect. default true
 func (fn *FieldNode) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(fn), objc.RegisterName("isEnabled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(fn), objc.RegisterName("isEnabled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsExclusive reports whether if a field is exclusive, it suppresses any other field in its region of effect. If two or more exclusive fields overlap, it is undefined which one of them will take effect
 func (fn *FieldNode) IsExclusive() bool {
-	_r := objc.Send[bool](objref.IDOf(fn), objc.RegisterName("isExclusive"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(fn), objc.RegisterName("isExclusive"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CategoryBitMask returns logical categories the field belongs to. Default is all categories. These categories correspond to fieldBitMasks, and can be used to enforce that a particular field applies to a particular category of objects.
 func (fn *FieldNode) CategoryBitMask() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(fn), objc.RegisterName("categoryBitMask"))
-	return _r
+	var _mainthread0 uint32
+	purego.Main(func() {
+		_mainthread0 = func() uint32 {
+			_r := objc.Send[uint32](objref.IDOf(fn), objc.RegisterName("categoryBitMask"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Smoothness returns fields without a smoothness component will return 0
 func (fn *FieldNode) Smoothness() float32 {
-	_r := objc.Send[float32](objref.IDOf(fn), objc.RegisterName("smoothness"))
-	return _r
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_r := objc.Send[float32](objref.IDOf(fn), objc.RegisterName("smoothness"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AnimationSpeed returns fields that can be animated can have non zero values. A value of 2 will animated twice as fast as a value of 1.
 func (fn *FieldNode) AnimationSpeed() float32 {
-	_r := objc.Send[float32](objref.IDOf(fn), objc.RegisterName("animationSpeed"))
-	return _r
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_r := objc.Send[float32](objref.IDOf(fn), objc.RegisterName("animationSpeed"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Texture returns fields constructed with a texture can be uppdated by assigning a new texture
 func (fn *FieldNode) Texture() *Texture {
-	_r := objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("texture"))
-	return TextureFromID(_r)
+	var _mainthread0 *Texture
+	purego.Main(func() {
+		_mainthread0 = func() *Texture {
+			_r := objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("texture"))
+			return TextureFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ NodeProvider = (*FieldNode)(nil)

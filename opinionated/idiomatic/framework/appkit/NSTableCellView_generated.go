@@ -50,374 +50,529 @@ func tableCellViewAdopt(id objc.ID) *TableCellView {
 
 // NewTableCellView creates a new TableCellView.
 func NewTableCellView() *TableCellView {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSTableCellView")), objc.RegisterName("new"))
-	return tableCellViewAdopt(_id)
+	var _mainthread0 *TableCellView
+	purego.Main(func() {
+		_mainthread0 = func() *TableCellView {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSTableCellView")), objc.RegisterName("new"))
+			return tableCellViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithObjectValue sets the object that represents the cell data.
 func (tcv *TableCellView) WithObjectValue(objectValue obj.Object) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return tcv
 }
 
 // WithTextField sets text displayed by the cell.
 func (tcv *TableCellView) WithTextField(textField TextFieldProvider) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setTextField:"), objref.IDOf(textField))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setTextField:"), objref.IDOf(textField))
+	})
 	return tcv
 }
 
 // WithImageView sets image displayed by the cell.
 func (tcv *TableCellView) WithImageView(imageView *ImageView) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setImageView:"), objref.IDOf(imageView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setImageView:"), objref.IDOf(imageView))
+	})
 	return tcv
 }
 
 // WithBackgroundStyle sets this property is automatically set by the enclosing row view to let this view know what its background looks like.
 func (tcv *TableCellView) WithBackgroundStyle(backgroundStyle BackgroundStyle) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	})
 	return tcv
 }
 
 // WithRowSizeStyle sets returns the row size style.
 func (tcv *TableCellView) WithRowSizeStyle(rowSizeStyle TableViewRowSizeStyle) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setRowSizeStyle:"), rowSizeStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setRowSizeStyle:"), rowSizeStyle)
+	})
 	return tcv
 }
 
 // WithSubviews sets the subviews.
 func (tcv *TableCellView) WithSubviews(items ...ViewProvider) *TableCellView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return tcv
 }
 
 // WithHidden sets the hidden.
 func (tcv *TableCellView) WithHidden(hidden bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setHidden:"), hidden)
+	})
 	return tcv
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (tcv *TableCellView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return tcv
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (tcv *TableCellView) WithAutoresizesSubviews(autoresizesSubviews bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return tcv
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (tcv *TableCellView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return tcv
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (tcv *TableCellView) WithFrame(frame corefoundation.CGRect) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setFrame:"), frame)
+	})
 	return tcv
 }
 
 // WithFrameRotation sets the frame rotation.
 func (tcv *TableCellView) WithFrameRotation(frameRotation float64) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return tcv
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (tcv *TableCellView) WithFrameCenterRotation(frameCenterRotation float64) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return tcv
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (tcv *TableCellView) WithBoundsRotation(boundsRotation float64) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return tcv
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (tcv *TableCellView) WithBounds(bounds corefoundation.CGRect) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setBounds:"), bounds)
+	})
 	return tcv
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (tcv *TableCellView) WithCanDrawConcurrently(canDrawConcurrently bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return tcv
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (tcv *TableCellView) WithNeedsDisplay(needsDisplay bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return tcv
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (tcv *TableCellView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return tcv
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (tcv *TableCellView) WithWantsRestingTouches(wantsRestingTouches bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return tcv
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (tcv *TableCellView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return tcv
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (tcv *TableCellView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return tcv
 }
 
 // WithWantsLayer sets the wants layer.
 func (tcv *TableCellView) WithWantsLayer(wantsLayer bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return tcv
 }
 
 // WithLayer sets the layer.
 func (tcv *TableCellView) WithLayer(layer obj.Object) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return tcv
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (tcv *TableCellView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return tcv
 }
 
 // WithNeedsLayout sets the needs layout.
 func (tcv *TableCellView) WithNeedsLayout(needsLayout bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return tcv
 }
 
 // WithAlphaValue sets the alpha value.
 func (tcv *TableCellView) WithAlphaValue(alphaValue float64) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return tcv
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (tcv *TableCellView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return tcv
 }
 
 // WithBackgroundFilters sets the background filters.
 func (tcv *TableCellView) WithBackgroundFilters(items ...obj.Object) *TableCellView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return tcv
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (tcv *TableCellView) WithCompositingFilter(compositingFilter obj.Object) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return tcv
 }
 
 // WithContentFilters sets the content filters.
 func (tcv *TableCellView) WithContentFilters(items ...obj.Object) *TableCellView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return tcv
 }
 
 // WithShadow sets the shadow.
 func (tcv *TableCellView) WithShadow(shadow *Shadow) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return tcv
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (tcv *TableCellView) WithClipsToBounds(clipsToBounds bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return tcv
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (tcv *TableCellView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return tcv
 }
 
 // WithToolTip sets the tool tip.
 func (tcv *TableCellView) WithToolTip(toolTip string) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return tcv
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (tcv *TableCellView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return tcv
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (tcv *TableCellView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return tcv
 }
 
 // WithNextKeyView sets the next key view.
 func (tcv *TableCellView) WithNextKeyView(nextKeyView ViewProvider) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return tcv
 }
 
 // WithFocusRingType sets the focus ring type.
 func (tcv *TableCellView) WithFocusRingType(focusRingType FocusRingType) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return tcv
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (tcv *TableCellView) WithGestureRecognizers(items ...GestureRecognizerProvider) *TableCellView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return tcv
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (tcv *TableCellView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return tcv
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (tcv *TableCellView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return tcv
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (tcv *TableCellView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return tcv
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (tcv *TableCellView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return tcv
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (tcv *TableCellView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return tcv
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (tcv *TableCellView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return tcv
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (tcv *TableCellView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return tcv
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (tcv *TableCellView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return tcv
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (tcv *TableCellView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return tcv
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (tcv *TableCellView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return tcv
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (tcv *TableCellView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return tcv
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (tcv *TableCellView) WithNextResponder(nextResponder ResponderProvider) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return tcv
 }
 
 // WithMenu sets returns the responder’s menu.
 func (tcv *TableCellView) WithMenu(menu *Menu) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return tcv
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (tcv *TableCellView) WithUserActivity(userActivity obj.Object) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return tcv
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (tcv *TableCellView) WithTouchBar(touchBar *TouchBar) *TableCellView {
-	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return tcv
 }
 
 // ObjectValue returns the object value.
 func (tcv *TableCellView) ObjectValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("objectValue"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("objectValue"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // TextField returns the text field.
 func (tcv *TableCellView) TextField() *TextField {
-	_r := objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("textField"))
-	return TextFieldFromID(_r)
+	var _mainthread0 *TextField
+	purego.Main(func() {
+		_mainthread0 = func() *TextField {
+			_r := objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("textField"))
+			return TextFieldFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ImageView returns the image view.
 func (tcv *TableCellView) ImageView() *ImageView {
-	_r := objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("imageView"))
-	return ImageViewFromID(_r)
+	var _mainthread0 *ImageView
+	purego.Main(func() {
+		_mainthread0 = func() *ImageView {
+			_r := objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("imageView"))
+			return ImageViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // BackgroundStyle returns the background style.
 func (tcv *TableCellView) BackgroundStyle() BackgroundStyle {
-	_r := objc.Send[BackgroundStyle](objref.IDOf(tcv), objc.RegisterName("backgroundStyle"))
-	return _r
+	var _mainthread0 BackgroundStyle
+	purego.Main(func() {
+		_mainthread0 = func() BackgroundStyle {
+			_r := objc.Send[BackgroundStyle](objref.IDOf(tcv), objc.RegisterName("backgroundStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RowSizeStyle returns the row size style.
 func (tcv *TableCellView) RowSizeStyle() TableViewRowSizeStyle {
-	_r := objc.Send[TableViewRowSizeStyle](objref.IDOf(tcv), objc.RegisterName("rowSizeStyle"))
-	return _r
+	var _mainthread0 TableViewRowSizeStyle
+	purego.Main(func() {
+		_mainthread0 = func() TableViewRowSizeStyle {
+			_r := objc.Send[TableViewRowSizeStyle](objref.IDOf(tcv), objc.RegisterName("rowSizeStyle"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DraggingImageComponents returns the dragging image components.
 //
 // DraggingImageComponents returns the collection as a Go slice.
 func (tcv *TableCellView) DraggingImageComponents() []*DraggingImageComponent {
-	_arr := objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("draggingImageComponents"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DraggingImageComponent { return DraggingImageComponentFromID(_id) })
+	var _mainthread0 []*DraggingImageComponent
+	purego.Main(func() {
+		_mainthread0 = func() []*DraggingImageComponent {
+			_arr := objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("draggingImageComponents"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DraggingImageComponent { return DraggingImageComponentFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }
 
 var _ ViewProvider = (*TableCellView)(nil)

@@ -68,35 +68,68 @@ func (wus *WKUserScript) String() string {
 
 // NewWKUserScriptWithSourceInjectionTimeForMainFrameOnly creates a user script object that contains the specified source code and attributes.
 func NewWKUserScriptWithSourceInjectionTimeForMainFrameOnly(source string, injectionTime WKUserScriptInjectionTime, forMainFrameOnly bool) *WKUserScript {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("WKUserScript")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:injectionTime:forMainFrameOnly:"), purego.NSString(source), injectionTime, forMainFrameOnly)
-	return wKUserScriptAdopt(_id)
+	var _mainthread0 *WKUserScript
+	purego.Main(func() {
+		_mainthread0 = func() *WKUserScript {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("WKUserScript")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:injectionTime:forMainFrameOnly:"), purego.NSString(source), injectionTime, forMainFrameOnly)
+			return wKUserScriptAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // NewWKUserScriptWithSourceInjectionTimeForMainFrameOnlyInContentWorld creates a user script object that is scoped to a particular content world.
 func NewWKUserScriptWithSourceInjectionTimeForMainFrameOnlyInContentWorld(source string, injectionTime WKUserScriptInjectionTime, forMainFrameOnly bool, contentWorld *WKContentWorld) *WKUserScript {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("WKUserScript")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:injectionTime:forMainFrameOnly:inContentWorld:"), purego.NSString(source), injectionTime, forMainFrameOnly, objref.IDOf(contentWorld))
-	return wKUserScriptAdopt(_id)
+	var _mainthread0 *WKUserScript
+	purego.Main(func() {
+		_mainthread0 = func() *WKUserScript {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("WKUserScript")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:injectionTime:forMainFrameOnly:inContentWorld:"), purego.NSString(source), injectionTime, forMainFrameOnly, objref.IDOf(contentWorld))
+			return wKUserScriptAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // Source returns the source.
 func (wus *WKUserScript) Source() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wus), objc.RegisterName("source"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wus), objc.RegisterName("source"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // InjectionTime returns the injection time.
 func (wus *WKUserScript) InjectionTime() WKUserScriptInjectionTime {
-	_r := objc.Send[WKUserScriptInjectionTime](objref.IDOf(wus), objc.RegisterName("injectionTime"))
-	return _r
+	var _mainthread0 WKUserScriptInjectionTime
+	purego.Main(func() {
+		_mainthread0 = func() WKUserScriptInjectionTime {
+			_r := objc.Send[WKUserScriptInjectionTime](objref.IDOf(wus), objc.RegisterName("injectionTime"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsForMainFrameOnly reports whether the object is for main frame only.
 func (wus *WKUserScript) IsForMainFrameOnly() bool {
-	_r := objc.Send[bool](objref.IDOf(wus), objc.RegisterName("isForMainFrameOnly"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(wus), objc.RegisterName("isForMainFrameOnly"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

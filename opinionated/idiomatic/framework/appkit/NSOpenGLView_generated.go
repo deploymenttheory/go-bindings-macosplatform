@@ -50,351 +50,485 @@ func openGLViewAdopt(id objc.ID) *OpenGLView {
 
 // NewOpenGLViewWithFramePixelFormat returns an NSOpenGLView object initialized with the specified frame rectangle and pixel format.
 func NewOpenGLViewWithFramePixelFormat(frameRect corefoundation.CGRect, format *OpenGLPixelFormat) *OpenGLView {
-	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOpenGLView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:pixelFormat:"), frameRect, objref.IDOf(format))
-	return openGLViewAdopt(_id)
+	var _mainthread0 *OpenGLView
+	purego.Main(func() {
+		_mainthread0 = func() *OpenGLView {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("NSOpenGLView")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:pixelFormat:"), frameRect, objref.IDOf(format))
+			return openGLViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithOpenGLContext sets the NSOpenGLContext object associated with the receiver.
 func (ogv *OpenGLView) WithOpenGLContext(openGLContext *OpenGLContext) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setOpenGLContext:"), objref.IDOf(openGLContext))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setOpenGLContext:"), objref.IDOf(openGLContext))
+	})
 	return ogv
 }
 
 // WithPixelFormat sets the NSOpenGLPixelFormat object associated with the receiver.
 func (ogv *OpenGLView) WithPixelFormat(pixelFormat *OpenGLPixelFormat) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setPixelFormat:"), objref.IDOf(pixelFormat))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setPixelFormat:"), objref.IDOf(pixelFormat))
+	})
 	return ogv
 }
 
 // WithSubviews sets the subviews.
 func (ogv *OpenGLView) WithSubviews(items ...ViewProvider) *OpenGLView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return ogv
 }
 
 // WithHidden sets the hidden.
 func (ogv *OpenGLView) WithHidden(hidden bool) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setHidden:"), hidden)
+	})
 	return ogv
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (ogv *OpenGLView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return ogv
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (ogv *OpenGLView) WithAutoresizesSubviews(autoresizesSubviews bool) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return ogv
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (ogv *OpenGLView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return ogv
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (ogv *OpenGLView) WithFrame(frame corefoundation.CGRect) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setFrame:"), frame)
+	})
 	return ogv
 }
 
 // WithFrameRotation sets the frame rotation.
 func (ogv *OpenGLView) WithFrameRotation(frameRotation float64) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return ogv
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (ogv *OpenGLView) WithFrameCenterRotation(frameCenterRotation float64) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return ogv
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (ogv *OpenGLView) WithBoundsRotation(boundsRotation float64) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return ogv
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (ogv *OpenGLView) WithBounds(bounds corefoundation.CGRect) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setBounds:"), bounds)
+	})
 	return ogv
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (ogv *OpenGLView) WithCanDrawConcurrently(canDrawConcurrently bool) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return ogv
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (ogv *OpenGLView) WithNeedsDisplay(needsDisplay bool) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return ogv
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (ogv *OpenGLView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return ogv
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (ogv *OpenGLView) WithWantsRestingTouches(wantsRestingTouches bool) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return ogv
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (ogv *OpenGLView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return ogv
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (ogv *OpenGLView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return ogv
 }
 
 // WithWantsLayer sets the wants layer.
 func (ogv *OpenGLView) WithWantsLayer(wantsLayer bool) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return ogv
 }
 
 // WithLayer sets the layer.
 func (ogv *OpenGLView) WithLayer(layer obj.Object) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return ogv
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (ogv *OpenGLView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return ogv
 }
 
 // WithNeedsLayout sets the needs layout.
 func (ogv *OpenGLView) WithNeedsLayout(needsLayout bool) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return ogv
 }
 
 // WithAlphaValue sets the alpha value.
 func (ogv *OpenGLView) WithAlphaValue(alphaValue float64) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return ogv
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (ogv *OpenGLView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return ogv
 }
 
 // WithBackgroundFilters sets the background filters.
 func (ogv *OpenGLView) WithBackgroundFilters(items ...obj.Object) *OpenGLView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return ogv
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (ogv *OpenGLView) WithCompositingFilter(compositingFilter obj.Object) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return ogv
 }
 
 // WithContentFilters sets the content filters.
 func (ogv *OpenGLView) WithContentFilters(items ...obj.Object) *OpenGLView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return ogv
 }
 
 // WithShadow sets the shadow.
 func (ogv *OpenGLView) WithShadow(shadow *Shadow) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return ogv
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (ogv *OpenGLView) WithClipsToBounds(clipsToBounds bool) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return ogv
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (ogv *OpenGLView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return ogv
 }
 
 // WithToolTip sets the tool tip.
 func (ogv *OpenGLView) WithToolTip(toolTip string) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return ogv
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (ogv *OpenGLView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return ogv
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (ogv *OpenGLView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return ogv
 }
 
 // WithNextKeyView sets the next key view.
 func (ogv *OpenGLView) WithNextKeyView(nextKeyView ViewProvider) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return ogv
 }
 
 // WithFocusRingType sets the focus ring type.
 func (ogv *OpenGLView) WithFocusRingType(focusRingType FocusRingType) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return ogv
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (ogv *OpenGLView) WithGestureRecognizers(items ...GestureRecognizerProvider) *OpenGLView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return ogv
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (ogv *OpenGLView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return ogv
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (ogv *OpenGLView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return ogv
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (ogv *OpenGLView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return ogv
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (ogv *OpenGLView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return ogv
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (ogv *OpenGLView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return ogv
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (ogv *OpenGLView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return ogv
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (ogv *OpenGLView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return ogv
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (ogv *OpenGLView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return ogv
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (ogv *OpenGLView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return ogv
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (ogv *OpenGLView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return ogv
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (ogv *OpenGLView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return ogv
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (ogv *OpenGLView) WithNextResponder(nextResponder ResponderProvider) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return ogv
 }
 
 // WithMenu sets returns the responder’s menu.
 func (ogv *OpenGLView) WithMenu(menu *Menu) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return ogv
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (ogv *OpenGLView) WithUserActivity(userActivity obj.Object) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return ogv
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (ogv *OpenGLView) WithTouchBar(touchBar *TouchBar) *OpenGLView {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return ogv
 }
 
 // ClearGLContext releases the NSOpenGLContext object associated with the view.
 func (ogv *OpenGLView) ClearGLContext() {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("clearGLContext"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("clearGLContext"))
+	})
+
 }
 
 // Update called by Cocoa when the view’s window moves or when the view itself moves or is resized.
 func (ogv *OpenGLView) Update() {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("update"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("update"))
+	})
+
 }
 
 // Reshape called by Cocoa when the view’s visible rectangle or bounds change.
 func (ogv *OpenGLView) Reshape() {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("reshape"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("reshape"))
+	})
+
 }
 
 // PrepareOpenGL used by subclasses to initialize OpenGL state.
 func (ogv *OpenGLView) PrepareOpenGL() {
-	objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("prepareOpenGL"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("prepareOpenGL"))
+	})
+
 }
 
 // OpenGLContext returns the open gl context.
 func (ogv *OpenGLView) OpenGLContext() *OpenGLContext {
-	_r := objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("openGLContext"))
-	return OpenGLContextFromID(_r)
+	var _mainthread0 *OpenGLContext
+	purego.Main(func() {
+		_mainthread0 = func() *OpenGLContext {
+			_r := objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("openGLContext"))
+			return OpenGLContextFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // PixelFormat returns the pixel format.
 func (ogv *OpenGLView) PixelFormat() *OpenGLPixelFormat {
-	_r := objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("pixelFormat"))
-	return OpenGLPixelFormatFromID(_r)
+	var _mainthread0 *OpenGLPixelFormat
+	purego.Main(func() {
+		_mainthread0 = func() *OpenGLPixelFormat {
+			_r := objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("pixelFormat"))
+			return OpenGLPixelFormatFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ViewProvider = (*OpenGLView)(nil)

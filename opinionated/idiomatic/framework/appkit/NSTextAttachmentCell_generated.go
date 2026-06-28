@@ -48,271 +48,365 @@ func textAttachmentCellAdopt(id objc.ID) *TextAttachmentCell {
 
 // NewTextAttachmentCell creates a new TextAttachmentCell.
 func NewTextAttachmentCell() *TextAttachmentCell {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSTextAttachmentCell")), objc.RegisterName("new"))
-	return textAttachmentCellAdopt(_id)
+	var _mainthread0 *TextAttachmentCell
+	purego.Main(func() {
+		_mainthread0 = func() *TextAttachmentCell {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSTextAttachmentCell")), objc.RegisterName("new"))
+			return textAttachmentCellAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithControlView sets the view associated with the cell.
 func (tac *TextAttachmentCell) WithControlView(controlView ViewProvider) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	})
 	return tac
 }
 
 // WithType sets the type of the cell.
 func (tac *TextAttachmentCell) WithType(type_ CellType) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setType:"), type_)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setType:"), type_)
+	})
 	return tac
 }
 
 // WithState sets the cell’s current state.
 func (tac *TextAttachmentCell) WithState(state int) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setState:"), state)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setState:"), state)
+	})
 	return tac
 }
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (tac *TextAttachmentCell) WithTarget(target obj.Object) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	})
 	return tac
 }
 
 // WithTag sets a tag for identifying the cell.
 func (tac *TextAttachmentCell) WithTag(tag int) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setTag:"), tag)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setTag:"), tag)
+	})
 	return tac
 }
 
 // WithTitle sets the cell’s title text.
 func (tac *TextAttachmentCell) WithTitle(title string) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setTitle:"), purego.NSString(title))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setTitle:"), purego.NSString(title))
+	})
 	return tac
 }
 
 // WithEnabled sets a Boolean value indicating whether the cell is currently enabled.
 func (tac *TextAttachmentCell) WithEnabled(enabled bool) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setEnabled:"), enabled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setEnabled:"), enabled)
+	})
 	return tac
 }
 
 // WithContinuous sets a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 func (tac *TextAttachmentCell) WithContinuous(continuous bool) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setContinuous:"), continuous)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setContinuous:"), continuous)
+	})
 	return tac
 }
 
 // WithEditable sets a Boolean value indicating whether the cell is editable.
 func (tac *TextAttachmentCell) WithEditable(editable bool) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setEditable:"), editable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setEditable:"), editable)
+	})
 	return tac
 }
 
 // WithSelectable sets a Boolean value indicating whether the cell’s text can be selected.
 func (tac *TextAttachmentCell) WithSelectable(selectable bool) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setSelectable:"), selectable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setSelectable:"), selectable)
+	})
 	return tac
 }
 
 // WithBordered sets a Boolean value indicating whether the cell draws itself outlined with a plain border.
 func (tac *TextAttachmentCell) WithBordered(bordered bool) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setBordered:"), bordered)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setBordered:"), bordered)
+	})
 	return tac
 }
 
 // WithBezeled sets a Boolean value indicating whether the cell has a bezeled border.
 func (tac *TextAttachmentCell) WithBezeled(bezeled bool) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setBezeled:"), bezeled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setBezeled:"), bezeled)
+	})
 	return tac
 }
 
 // WithScrollable sets a Boolean value indicating whether excess text scrolls past the cell’s bounds.
 func (tac *TextAttachmentCell) WithScrollable(scrollable bool) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setScrollable:"), scrollable)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setScrollable:"), scrollable)
+	})
 	return tac
 }
 
 // WithHighlighted sets a Boolean value indicating whether the cell has a highlighted appearance.
 func (tac *TextAttachmentCell) WithHighlighted(highlighted bool) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setHighlighted:"), highlighted)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setHighlighted:"), highlighted)
+	})
 	return tac
 }
 
 // WithAlignment sets the alignment of the cell’s text.
 func (tac *TextAttachmentCell) WithAlignment(alignment TextAlignment) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setAlignment:"), alignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setAlignment:"), alignment)
+	})
 	return tac
 }
 
 // WithWraps sets a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 func (tac *TextAttachmentCell) WithWraps(wraps bool) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setWraps:"), wraps)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setWraps:"), wraps)
+	})
 	return tac
 }
 
 // WithFont sets the font that the cell uses to display text.
 func (tac *TextAttachmentCell) WithFont(font *Font) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setFont:"), objref.IDOf(font))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setFont:"), objref.IDOf(font))
+	})
 	return tac
 }
 
 // WithFormatter sets the cell’s formatter object.
 func (tac *TextAttachmentCell) WithFormatter(formatter obj.Object) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	})
 	return tac
 }
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (tac *TextAttachmentCell) WithObjectValue(objectValue obj.Object) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	})
 	return tac
 }
 
 // WithStringValue sets the cell’s value as a string.
 func (tac *TextAttachmentCell) WithStringValue(stringValue string) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	})
 	return tac
 }
 
 // WithIntValue sets the cell’s value as an integer.
 func (tac *TextAttachmentCell) WithIntValue(intValue int) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setIntValue:"), intValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setIntValue:"), intValue)
+	})
 	return tac
 }
 
 // WithFloatValue sets the cell’s value as a single-precision floating-point number.
 func (tac *TextAttachmentCell) WithFloatValue(floatValue float32) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setFloatValue:"), floatValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setFloatValue:"), floatValue)
+	})
 	return tac
 }
 
 // WithDoubleValue sets the cell’s value as a double-precision floating-point number.
 func (tac *TextAttachmentCell) WithDoubleValue(doubleValue float64) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return tac
 }
 
 // WithIntegerValue sets the cell’s value as an integer value.
 func (tac *TextAttachmentCell) WithIntegerValue(integerValue int) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setIntegerValue:"), integerValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setIntegerValue:"), integerValue)
+	})
 	return tac
 }
 
 // WithImage sets the image displayed by the cell, if any.
 func (tac *TextAttachmentCell) WithImage(image *Image) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setImage:"), objref.IDOf(image))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setImage:"), objref.IDOf(image))
+	})
 	return tac
 }
 
 // WithControlSize sets the size of the cell.
 func (tac *TextAttachmentCell) WithControlSize(controlSize ControlSize) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return tac
 }
 
 // WithRepresentedObject sets the object represented by the cell.
 func (tac *TextAttachmentCell) WithRepresentedObject(representedObject obj.Object) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	})
 	return tac
 }
 
 // WithMenu sets the cell’s contextual menu.
 func (tac *TextAttachmentCell) WithMenu(menu *Menu) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return tac
 }
 
 // WithSendsActionOnEndEditing sets a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 func (tac *TextAttachmentCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	})
 	return tac
 }
 
 // WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
 func (tac *TextAttachmentCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	})
 	return tac
 }
 
 // WithLineBreakMode sets the line break mode to use when drawing text in the cell.
 func (tac *TextAttachmentCell) WithLineBreakMode(lineBreakMode LineBreakMode) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	})
 	return tac
 }
 
 // WithAllowsUndo sets a Boolean value indicating whether the cell assumes responsibility for undo operations.
 func (tac *TextAttachmentCell) WithAllowsUndo(allowsUndo bool) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	})
 	return tac
 }
 
 // WithTruncatesLastVisibleLine sets a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 func (tac *TextAttachmentCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	})
 	return tac
 }
 
 // WithUserInterfaceLayoutDirection sets the layout direction of the user interface.
 func (tac *TextAttachmentCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return tac
 }
 
 // WithUsesSingleLineMode sets a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 func (tac *TextAttachmentCell) WithUsesSingleLineMode(usesSingleLineMode bool) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	})
 	return tac
 }
 
 // WithRefusesFirstResponder sets a Boolean value indicating whether the cell refuses the first responder status.
 func (tac *TextAttachmentCell) WithRefusesFirstResponder(refusesFirstResponder bool) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	})
 	return tac
 }
 
 // WithShowsFirstResponder sets a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 func (tac *TextAttachmentCell) WithShowsFirstResponder(showsFirstResponder bool) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	})
 	return tac
 }
 
 // WithFocusRingType sets the type of focus ring to use with the associated view.
 func (tac *TextAttachmentCell) WithFocusRingType(focusRingType FocusRingType) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return tac
 }
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (tac *TextAttachmentCell) WithAttributedStringValue(attributedStringValue obj.Object) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	})
 	return tac
 }
 
 // WithAllowsEditingTextAttributes sets a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 func (tac *TextAttachmentCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	})
 	return tac
 }
 
 // WithImportsGraphics sets a Boolean value indicating whether the cell supports the importation of images into its text.
 func (tac *TextAttachmentCell) WithImportsGraphics(importsGraphics bool) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	})
 	return tac
 }
 
 // WithAllowsMixedState sets a Boolean value indicating whether the cell supports three states instead of two.
 func (tac *TextAttachmentCell) WithAllowsMixedState(allowsMixedState bool) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	})
 	return tac
 }
 
 // WithBackgroundStyle sets the cell’s background style.
 func (tac *TextAttachmentCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	})
 	return tac
 }
 
 // WithControlTint sets the cell’s control tint.
 func (tac *TextAttachmentCell) WithControlTint(controlTint ControlTint) *TextAttachmentCell {
-	objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setControlTint:"), controlTint)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setControlTint:"), controlTint)
+	})
 	return tac
 }
 

@@ -68,81 +68,145 @@ func (gc *GridCell) String() string {
 
 // NewGridCell creates a new GridCell.
 func NewGridCell() *GridCell {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSGridCell")), objc.RegisterName("new"))
-	return gridCellAdopt(_id)
+	var _mainthread0 *GridCell
+	purego.Main(func() {
+		_mainthread0 = func() *GridCell {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSGridCell")), objc.RegisterName("new"))
+			return gridCellAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithContentView sets the content view.
 func (gc *GridCell) WithContentView(contentView ViewProvider) *GridCell {
-	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
+	})
 	return gc
 }
 
 // WithXPlacement sets the x placement.
 func (gc *GridCell) WithXPlacement(xPlacement GridCellPlacement) *GridCell {
-	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setXPlacement:"), xPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setXPlacement:"), xPlacement)
+	})
 	return gc
 }
 
 // WithYPlacement sets the y placement.
 func (gc *GridCell) WithYPlacement(yPlacement GridCellPlacement) *GridCell {
-	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setYPlacement:"), yPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setYPlacement:"), yPlacement)
+	})
 	return gc
 }
 
 // WithRowAlignment sets the row alignment.
 func (gc *GridCell) WithRowAlignment(rowAlignment GridRowAlignment) *GridCell {
-	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setRowAlignment:"), rowAlignment)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setRowAlignment:"), rowAlignment)
+	})
 	return gc
 }
 
 // WithCustomPlacementConstraints sets the custom placement constraints.
 func (gc *GridCell) WithCustomPlacementConstraints(items ...*LayoutConstraint) *GridCell {
 	_arr := purego.SliceToNSArray(items, func(_v *LayoutConstraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setCustomPlacementConstraints:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setCustomPlacementConstraints:"), _arr)
+	})
 	return gc
 }
 
 // ContentView returns the content view.
 func (gc *GridCell) ContentView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("contentView"))
-	return ViewFromID(_r)
+	var _mainthread0 *View
+	purego.Main(func() {
+		_mainthread0 = func() *View {
+			_r := objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("contentView"))
+			return ViewFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Row returns the row.
 func (gc *GridCell) Row() *GridRow {
-	_r := objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("row"))
-	return GridRowFromID(_r)
+	var _mainthread0 *GridRow
+	purego.Main(func() {
+		_mainthread0 = func() *GridRow {
+			_r := objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("row"))
+			return GridRowFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Column returns the column.
 func (gc *GridCell) Column() *GridColumn {
-	_r := objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("column"))
-	return GridColumnFromID(_r)
+	var _mainthread0 *GridColumn
+	purego.Main(func() {
+		_mainthread0 = func() *GridColumn {
+			_r := objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("column"))
+			return GridColumnFromID(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // XPlacement returns the x placement.
 func (gc *GridCell) XPlacement() GridCellPlacement {
-	_r := objc.Send[GridCellPlacement](objref.IDOf(gc), objc.RegisterName("xPlacement"))
-	return _r
+	var _mainthread0 GridCellPlacement
+	purego.Main(func() {
+		_mainthread0 = func() GridCellPlacement {
+			_r := objc.Send[GridCellPlacement](objref.IDOf(gc), objc.RegisterName("xPlacement"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // YPlacement returns the y placement.
 func (gc *GridCell) YPlacement() GridCellPlacement {
-	_r := objc.Send[GridCellPlacement](objref.IDOf(gc), objc.RegisterName("yPlacement"))
-	return _r
+	var _mainthread0 GridCellPlacement
+	purego.Main(func() {
+		_mainthread0 = func() GridCellPlacement {
+			_r := objc.Send[GridCellPlacement](objref.IDOf(gc), objc.RegisterName("yPlacement"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // RowAlignment returns the row alignment.
 func (gc *GridCell) RowAlignment() GridRowAlignment {
-	_r := objc.Send[GridRowAlignment](objref.IDOf(gc), objc.RegisterName("rowAlignment"))
-	return _r
+	var _mainthread0 GridRowAlignment
+	purego.Main(func() {
+		_mainthread0 = func() GridRowAlignment {
+			_r := objc.Send[GridRowAlignment](objref.IDOf(gc), objc.RegisterName("rowAlignment"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // CustomPlacementConstraints returns the custom placement constraints.
 //
 // CustomPlacementConstraints returns the collection as a Go slice.
 func (gc *GridCell) CustomPlacementConstraints() []*LayoutConstraint {
-	_arr := objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("customPlacementConstraints"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *LayoutConstraint { return LayoutConstraintFromID(_id) })
+	var _mainthread0 []*LayoutConstraint
+	purego.Main(func() {
+		_mainthread0 = func() []*LayoutConstraint {
+			_arr := objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("customPlacementConstraints"))
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) *LayoutConstraint { return LayoutConstraintFromID(_id) })
+		}()
+	})
+	return _mainthread0
 }

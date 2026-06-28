@@ -68,30 +68,57 @@ func (wso *WKSecurityOrigin) String() string {
 
 // NewWKSecurityOrigin creates a new WKSecurityOrigin.
 func NewWKSecurityOrigin() *WKSecurityOrigin {
-	_id := objc.Send[objc.ID](objc.ID(_class("WKSecurityOrigin")), objc.RegisterName("new"))
-	return wKSecurityOriginAdopt(_id)
+	var _mainthread0 *WKSecurityOrigin
+	purego.Main(func() {
+		_mainthread0 = func() *WKSecurityOrigin {
+			_id := objc.Send[objc.ID](objc.ID(_class("WKSecurityOrigin")), objc.RegisterName("new"))
+			return wKSecurityOriginAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // Protocol returns the security origin's protocol.
 func (wso *WKSecurityOrigin) Protocol() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("protocol"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("protocol"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Host returns the security origin's host.
 func (wso *WKSecurityOrigin) Host() string {
-	_r := objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("host"))
-	if _r == 0 {
-		return ""
-	}
-	return purego.GoString(_r)
+	var _mainthread0 string
+	purego.Main(func() {
+		_mainthread0 = func() string {
+			_r := objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("host"))
+			if _r == 0 {
+				return ""
+			}
+			return purego.GoString(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Port returns the security origin's port.
 func (wso *WKSecurityOrigin) Port() int {
-	_r := objc.Send[int](objref.IDOf(wso), objc.RegisterName("port"))
-	return _r
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(wso), objc.RegisterName("port"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

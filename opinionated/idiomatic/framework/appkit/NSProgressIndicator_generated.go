@@ -50,474 +50,702 @@ func progressIndicatorAdopt(id objc.ID) *ProgressIndicator {
 
 // NewProgressIndicator creates a new ProgressIndicator.
 func NewProgressIndicator() *ProgressIndicator {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSProgressIndicator")), objc.RegisterName("new"))
-	return progressIndicatorAdopt(_id)
+	var _mainthread0 *ProgressIndicator
+	purego.Main(func() {
+		_mainthread0 = func() *ProgressIndicator {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSProgressIndicator")), objc.RegisterName("new"))
+			return progressIndicatorAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithIndeterminate sets a Boolean that indicates whether the progress indicator is indeterminate.
 func (pi *ProgressIndicator) WithIndeterminate(indeterminate bool) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setIndeterminate:"), indeterminate)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setIndeterminate:"), indeterminate)
+	})
 	return pi
 }
 
 // WithControlSize sets the size of the progress indicator.
 func (pi *ProgressIndicator) WithControlSize(controlSize ControlSize) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setControlSize:"), controlSize)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setControlSize:"), controlSize)
+	})
 	return pi
 }
 
 // WithDoubleValue sets the value that indicates the current extent of the progress indicator.
 func (pi *ProgressIndicator) WithDoubleValue(doubleValue float64) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setDoubleValue:"), doubleValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setDoubleValue:"), doubleValue)
+	})
 	return pi
 }
 
 // WithMinValue sets the minimum value for the progress indicator.
 func (pi *ProgressIndicator) WithMinValue(minValue float64) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setMinValue:"), minValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setMinValue:"), minValue)
+	})
 	return pi
 }
 
 // WithMaxValue sets the maximum value for the progress indicator.
 func (pi *ProgressIndicator) WithMaxValue(maxValue float64) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setMaxValue:"), maxValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setMaxValue:"), maxValue)
+	})
 	return pi
 }
 
 // WithObservedProgress sets the progress object to use for updating the progress view.
 func (pi *ProgressIndicator) WithObservedProgress(observedProgress obj.Object) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setObservedProgress:"), objref.IDOf(observedProgress))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setObservedProgress:"), objref.IDOf(observedProgress))
+	})
 	return pi
 }
 
 // WithUsesThreadedAnimation sets a Boolean that indicates whether the progress indicator implements animation in a separate thread.
 func (pi *ProgressIndicator) WithUsesThreadedAnimation(usesThreadedAnimation bool) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setUsesThreadedAnimation:"), usesThreadedAnimation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setUsesThreadedAnimation:"), usesThreadedAnimation)
+	})
 	return pi
 }
 
 // WithStyle sets the style of the progress indicator (bar or spinning).
 func (pi *ProgressIndicator) WithStyle(style ProgressIndicatorStyle) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setStyle:"), style)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setStyle:"), style)
+	})
 	return pi
 }
 
 // WithDisplayedWhenStopped sets a Boolean that indicates whether the progress indicator hides itself when it isn’t animating.
 func (pi *ProgressIndicator) WithDisplayedWhenStopped(displayedWhenStopped bool) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setDisplayedWhenStopped:"), displayedWhenStopped)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setDisplayedWhenStopped:"), displayedWhenStopped)
+	})
 	return pi
 }
 
 // WithBezeled sets a Boolean that indicates whether the progress indicator’s frame has a three-dimensional bezel.
 func (pi *ProgressIndicator) WithBezeled(bezeled bool) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setBezeled:"), bezeled)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setBezeled:"), bezeled)
+	})
 	return pi
 }
 
 // WithControlTint sets the progress indicator’s control tint.
 func (pi *ProgressIndicator) WithControlTint(controlTint ControlTint) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setControlTint:"), controlTint)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setControlTint:"), controlTint)
+	})
 	return pi
 }
 
 // WithSubviews sets the subviews.
 func (pi *ProgressIndicator) WithSubviews(items ...ViewProvider) *ProgressIndicator {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setSubviews:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setSubviews:"), _arr)
+	})
 	return pi
 }
 
 // WithHidden sets the hidden.
 func (pi *ProgressIndicator) WithHidden(hidden bool) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setHidden:"), hidden)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setHidden:"), hidden)
+	})
 	return pi
 }
 
 // WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (pi *ProgressIndicator) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	})
 	return pi
 }
 
 // WithAutoresizesSubviews sets the autoresizes subviews.
 func (pi *ProgressIndicator) WithAutoresizesSubviews(autoresizesSubviews bool) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	})
 	return pi
 }
 
 // WithAutoresizingMask sets the autoresizing mask.
 func (pi *ProgressIndicator) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	})
 	return pi
 }
 
 // WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (pi *ProgressIndicator) WithFrame(frame corefoundation.CGRect) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setFrame:"), frame)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setFrame:"), frame)
+	})
 	return pi
 }
 
 // WithFrameRotation sets the frame rotation.
 func (pi *ProgressIndicator) WithFrameRotation(frameRotation float64) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setFrameRotation:"), frameRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setFrameRotation:"), frameRotation)
+	})
 	return pi
 }
 
 // WithFrameCenterRotation sets the frame center rotation.
 func (pi *ProgressIndicator) WithFrameCenterRotation(frameCenterRotation float64) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	})
 	return pi
 }
 
 // WithBoundsRotation sets the bounds rotation.
 func (pi *ProgressIndicator) WithBoundsRotation(boundsRotation float64) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	})
 	return pi
 }
 
 // WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (pi *ProgressIndicator) WithBounds(bounds corefoundation.CGRect) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setBounds:"), bounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setBounds:"), bounds)
+	})
 	return pi
 }
 
 // WithCanDrawConcurrently sets the can draw concurrently.
 func (pi *ProgressIndicator) WithCanDrawConcurrently(canDrawConcurrently bool) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	})
 	return pi
 }
 
 // WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (pi *ProgressIndicator) WithNeedsDisplay(needsDisplay bool) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	})
 	return pi
 }
 
 // WithAcceptsTouchEvents sets the accepts touch events.
 func (pi *ProgressIndicator) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	})
 	return pi
 }
 
 // WithWantsRestingTouches sets the wants resting touches.
 func (pi *ProgressIndicator) WithWantsRestingTouches(wantsRestingTouches bool) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	})
 	return pi
 }
 
 // WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (pi *ProgressIndicator) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	})
 	return pi
 }
 
 // WithLayerContentsPlacement sets the layer contents placement.
 func (pi *ProgressIndicator) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	})
 	return pi
 }
 
 // WithWantsLayer sets the wants layer.
 func (pi *ProgressIndicator) WithWantsLayer(wantsLayer bool) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	})
 	return pi
 }
 
 // WithLayer sets the layer.
 func (pi *ProgressIndicator) WithLayer(layer obj.Object) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	})
 	return pi
 }
 
 // WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (pi *ProgressIndicator) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	})
 	return pi
 }
 
 // WithNeedsLayout sets the needs layout.
 func (pi *ProgressIndicator) WithNeedsLayout(needsLayout bool) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	})
 	return pi
 }
 
 // WithAlphaValue sets the alpha value.
 func (pi *ProgressIndicator) WithAlphaValue(alphaValue float64) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAlphaValue:"), alphaValue)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAlphaValue:"), alphaValue)
+	})
 	return pi
 }
 
 // WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (pi *ProgressIndicator) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	})
 	return pi
 }
 
 // WithBackgroundFilters sets the background filters.
 func (pi *ProgressIndicator) WithBackgroundFilters(items ...obj.Object) *ProgressIndicator {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setBackgroundFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setBackgroundFilters:"), _arr)
+	})
 	return pi
 }
 
 // WithCompositingFilter sets the compositing filter.
 func (pi *ProgressIndicator) WithCompositingFilter(compositingFilter obj.Object) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	})
 	return pi
 }
 
 // WithContentFilters sets the content filters.
 func (pi *ProgressIndicator) WithContentFilters(items ...obj.Object) *ProgressIndicator {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setContentFilters:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setContentFilters:"), _arr)
+	})
 	return pi
 }
 
 // WithShadow sets the shadow.
 func (pi *ProgressIndicator) WithShadow(shadow *Shadow) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	})
 	return pi
 }
 
 // WithClipsToBounds sets the clips to bounds.
 func (pi *ProgressIndicator) WithClipsToBounds(clipsToBounds bool) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	})
 	return pi
 }
 
 // WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (pi *ProgressIndicator) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	})
 	return pi
 }
 
 // WithToolTip sets the tool tip.
 func (pi *ProgressIndicator) WithToolTip(toolTip string) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	})
 	return pi
 }
 
 // WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (pi *ProgressIndicator) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	})
 	return pi
 }
 
 // WithPreparedContentRect sets the prepared content rect.
 func (pi *ProgressIndicator) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	})
 	return pi
 }
 
 // WithNextKeyView sets the next key view.
 func (pi *ProgressIndicator) WithNextKeyView(nextKeyView ViewProvider) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	})
 	return pi
 }
 
 // WithFocusRingType sets the focus ring type.
 func (pi *ProgressIndicator) WithFocusRingType(focusRingType FocusRingType) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setFocusRingType:"), focusRingType)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setFocusRingType:"), focusRingType)
+	})
 	return pi
 }
 
 // WithGestureRecognizers sets the gesture recognizers.
 func (pi *ProgressIndicator) WithGestureRecognizers(items ...GestureRecognizerProvider) *ProgressIndicator {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setGestureRecognizers:"), _arr)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setGestureRecognizers:"), _arr)
+	})
 	return pi
 }
 
 // WithAllowedTouchTypes sets the allowed touch types.
 func (pi *ProgressIndicator) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	})
 	return pi
 }
 
 // WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (pi *ProgressIndicator) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	})
 	return pi
 }
 
 // WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (pi *ProgressIndicator) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	})
 	return pi
 }
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (pi *ProgressIndicator) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	})
 	return pi
 }
 
 // WithNeedsUpdateConstraints sets the needs update constraints.
 func (pi *ProgressIndicator) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	})
 	return pi
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (pi *ProgressIndicator) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	})
 	return pi
 }
 
 // WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (pi *ProgressIndicator) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	})
 	return pi
 }
 
 // WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (pi *ProgressIndicator) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	})
 	return pi
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (pi *ProgressIndicator) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	})
 	return pi
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (pi *ProgressIndicator) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	})
 	return pi
 }
 
 // WithPressureConfiguration sets the pressure configuration.
 func (pi *ProgressIndicator) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	})
 	return pi
 }
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (pi *ProgressIndicator) WithNextResponder(nextResponder ResponderProvider) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	})
 	return pi
 }
 
 // WithMenu sets returns the responder’s menu.
 func (pi *ProgressIndicator) WithMenu(menu *Menu) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	})
 	return pi
 }
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (pi *ProgressIndicator) WithUserActivity(userActivity obj.Object) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	})
 	return pi
 }
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (pi *ProgressIndicator) WithTouchBar(touchBar *TouchBar) *ProgressIndicator {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	})
 	return pi
 }
 
 // IncrementBy advances the progress bar of a determinate progress indicator by the specified amount.
 func (pi *ProgressIndicator) IncrementBy(delta float64) {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("incrementBy:"), delta)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("incrementBy:"), delta)
+	})
+
 }
 
 // StartAnimation starts the animation of an indeterminate progress indicator.
 func (pi *ProgressIndicator) StartAnimation(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("startAnimation:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("startAnimation:"), objref.IDOf(sender))
+	})
+
 }
 
 // StopAnimation stops the animation of an indeterminate progress indicator.
 func (pi *ProgressIndicator) StopAnimation(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("stopAnimation:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("stopAnimation:"), objref.IDOf(sender))
+	})
+
 }
 
 // SizeToFit this action method resizes the progress indicator to an appropriate size depending on the value of style.
 func (pi *ProgressIndicator) SizeToFit() {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("sizeToFit"))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("sizeToFit"))
+	})
+
 }
 
 // IsIndeterminate reports whether the object is indeterminate.
 func (pi *ProgressIndicator) IsIndeterminate() bool {
-	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isIndeterminate"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isIndeterminate"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ControlSize returns the control size.
 func (pi *ProgressIndicator) ControlSize() ControlSize {
-	_r := objc.Send[ControlSize](objref.IDOf(pi), objc.RegisterName("controlSize"))
-	return _r
+	var _mainthread0 ControlSize
+	purego.Main(func() {
+		_mainthread0 = func() ControlSize {
+			_r := objc.Send[ControlSize](objref.IDOf(pi), objc.RegisterName("controlSize"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // DoubleValue returns the double value.
 func (pi *ProgressIndicator) DoubleValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(pi), objc.RegisterName("doubleValue"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(pi), objc.RegisterName("doubleValue"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MinValue returns the min value.
 func (pi *ProgressIndicator) MinValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(pi), objc.RegisterName("minValue"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(pi), objc.RegisterName("minValue"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // MaxValue returns the max value.
 func (pi *ProgressIndicator) MaxValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(pi), objc.RegisterName("maxValue"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(pi), objc.RegisterName("maxValue"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ObservedProgress returns the observed progress.
 func (pi *ProgressIndicator) ObservedProgress() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("observedProgress"))
-	return obj.Wrap(_r)
+	var _mainthread0 obj.Object
+	purego.Main(func() {
+		_mainthread0 = func() obj.Object {
+			_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("observedProgress"))
+			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
 }
 
 // UsesThreadedAnimation wraps the corresponding Objective-C method.
 func (pi *ProgressIndicator) UsesThreadedAnimation() bool {
-	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("usesThreadedAnimation"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("usesThreadedAnimation"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // Style returns the style.
 func (pi *ProgressIndicator) Style() ProgressIndicatorStyle {
-	_r := objc.Send[ProgressIndicatorStyle](objref.IDOf(pi), objc.RegisterName("style"))
-	return _r
+	var _mainthread0 ProgressIndicatorStyle
+	purego.Main(func() {
+		_mainthread0 = func() ProgressIndicatorStyle {
+			_r := objc.Send[ProgressIndicatorStyle](objref.IDOf(pi), objc.RegisterName("style"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // IsDisplayedWhenStopped reports whether the object is displayed when stopped.
 func (pi *ProgressIndicator) IsDisplayedWhenStopped() bool {
-	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isDisplayedWhenStopped"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isDisplayedWhenStopped"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // AnimationDelay returns the delay, in seconds, between animation steps for an indeterminate progress indicator.
 func (pi *ProgressIndicator) AnimationDelay() float64 {
-	_r := objc.Send[float64](objref.IDOf(pi), objc.RegisterName("animationDelay"))
-	return _r
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_r := objc.Send[float64](objref.IDOf(pi), objc.RegisterName("animationDelay"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // SetAnimationDelay sets the delay, in seconds, between animation steps for an indeterminate progress indicator.
 func (pi *ProgressIndicator) SetAnimationDelay(delay float64) {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAnimationDelay:"), delay)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAnimationDelay:"), delay)
+	})
+
 }
 
 // Animate this action method advances the progress animation of an indeterminate progress animator by one step.
 func (pi *ProgressIndicator) Animate(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("animate:"), objref.IDOf(sender))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("animate:"), objref.IDOf(sender))
+	})
+
 }
 
 // IsBezeled reports whether the object is bezeled.
 func (pi *ProgressIndicator) IsBezeled() bool {
-	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isBezeled"))
-	return _r
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isBezeled"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ControlTint returns the control tint.
 func (pi *ProgressIndicator) ControlTint() ControlTint {
-	_r := objc.Send[ControlTint](objref.IDOf(pi), objc.RegisterName("controlTint"))
-	return _r
+	var _mainthread0 ControlTint
+	purego.Main(func() {
+		_mainthread0 = func() ControlTint {
+			_r := objc.Send[ControlTint](objref.IDOf(pi), objc.RegisterName("controlTint"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 var _ ViewProvider = (*ProgressIndicator)(nil)

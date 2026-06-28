@@ -47,31 +47,45 @@ func customTouchBarItemAdopt(id objc.ID) *CustomTouchBarItem {
 
 // NewCustomTouchBarItem creates a new CustomTouchBarItem.
 func NewCustomTouchBarItem() *CustomTouchBarItem {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSCustomTouchBarItem")), objc.RegisterName("new"))
-	return customTouchBarItemAdopt(_id)
+	var _mainthread0 *CustomTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *CustomTouchBarItem {
+			_id := objc.Send[objc.ID](objc.ID(_class("NSCustomTouchBarItem")), objc.RegisterName("new"))
+			return customTouchBarItemAdopt(_id)
+		}()
+	})
+	return _mainthread0
 }
 
 // WithView sets the view displayed in the bar to represent this item.
 func (ctbi *CustomTouchBarItem) WithView(view ViewProvider) *CustomTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(ctbi), objc.RegisterName("setView:"), objref.IDOf(view))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ctbi), objc.RegisterName("setView:"), objref.IDOf(view))
+	})
 	return ctbi
 }
 
 // WithViewController sets a view controller whose view is displayed in the bar to represent this item.
 func (ctbi *CustomTouchBarItem) WithViewController(viewController ViewControllerProvider) *CustomTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(ctbi), objc.RegisterName("setViewController:"), objref.IDOf(viewController))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ctbi), objc.RegisterName("setViewController:"), objref.IDOf(viewController))
+	})
 	return ctbi
 }
 
 // WithCustomizationLabel sets the user-visible string identifying this item during bar customization.
 func (ctbi *CustomTouchBarItem) WithCustomizationLabel(customizationLabel string) *CustomTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(ctbi), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ctbi), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
+	})
 	return ctbi
 }
 
 // WithVisibilityPriority sets determines which items are shown in a bar when space is limited.
 func (ctbi *CustomTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *CustomTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(ctbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ctbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	})
 	return ctbi
 }
 
