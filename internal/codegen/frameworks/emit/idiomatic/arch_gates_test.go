@@ -19,10 +19,10 @@ func testbedDirs(t *testing.T) []string {
 	t.Helper()
 	root := filepath.Join("..", "..", "..", "..", "..", "opinionated", "idiomatic", "framework")
 	var dirs []string
-	for _, fw := range []string{"virtualization", "foundation", "appkit"} {
-		d := filepath.Join(root, fw)
+	for _, framework := range []string{"virtualization", "foundation", "appkit"} {
+		d := filepath.Join(root, framework)
 		if _, err := os.Stat(d); err != nil {
-			t.Skipf("test-bed %s not present (%v); run `generate idiomatic`", fw, err)
+			t.Skipf("test-bed %s not present (%v); run `generate idiomatic`", framework, err)
 		}
 		dirs = append(dirs, d)
 	}

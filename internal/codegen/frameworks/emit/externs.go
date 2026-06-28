@@ -6,6 +6,8 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/view"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -55,13 +57,14 @@ func EmitExterns(
 
 	ctx := typemap.Context{Framework: framework.Framework}
 
+	views := make([]view.Extern, 0, len(externs))
 	for _, ext := range externs {
 		goType := ext.GoType
 		if goType == "" {
 			goType = mapper.GoType(ext.ObjCType, ctx, imports)
 		}
 		if goType == "" || goType == "unsafe.Pointer" || isUnexportedXPkg(goType) {
-			emitExternRaw(w, ext, dylibVarName)
+			views = append(views, buildExternRawView(ext, dylibVarName))
 			continue
 		}
 
@@ -69,21 +72,40 @@ func EmitExterns(
 		if !isClassPtr {
 			fromIDCall = ""
 		}
-		emitExternTyped(w, ext, goType, dylibVarName, mapper.IsEnumType(goType), fromIDCall)
+		views = append(views, buildExternTypedView(ext, goType, dylibVarName, mapper.IsEnumType(goType), fromIDCall))
 	}
 
+	out, err := render.Externs(views)
+	if err != nil {
+		return nil, err
+	}
+	if _, err := w.Write(out); err != nil {
+		return nil, err
+	}
 	return imports, nil
 }
 
-func emitExternRaw(w io.Writer, ext meta.Extern, dylibVarName string) {
+// externCommentBlock renders an extern's doc + deprecation comment (column 0).
+func externCommentBlock(ext meta.Extern) string {
+	var sb strings.Builder
 	if ext.Doc != "" {
-		fmt.Fprintf(w, "// %s\n", ext.Doc)
+		fmt.Fprintf(&sb, "// %s\n", ext.Doc)
 	}
-	emitDeprecatedComment(w, ext.Availability)
-	fmt.Fprintf(w, "func %s() uintptr {\n", exportedExternName(ext.Name))
-	fmt.Fprintf(w, "\tptr, _ := purego.Dlsym(%s, %q)\n", dylibVarName, ext.Name)
-	fmt.Fprintf(w, "\treturn ptr\n")
-	fmt.Fprintf(w, "}\n\n")
+	sb.WriteString(deprecatedComment(ext.Availability))
+	return sb.String()
+}
+
+// buildExternRawView resolves an extern with no usable typed mapping into a raw
+// uintptr accessor view.
+func buildExternRawView(ext meta.Extern, dylibVarName string) view.Extern {
+	return view.Extern{
+		CommentBlock: externCommentBlock(ext),
+		GoName:       exportedExternName(ext.Name),
+		RetType:      "uintptr",
+		DylibVar:     dylibVarName,
+		Symbol:       ext.Name,
+		Form:         "raw",
+	}
 }
 
 // exportedExternName maps an extern symbol to an exported Go accessor name.
@@ -111,32 +133,31 @@ func isUnexportedXPkg(goType string) bool {
 	return len(after) > 0 && after[0] >= 'a' && after[0] <= 'z'
 }
 
-func emitExternTyped(w io.Writer, ext meta.Extern, goType, dylibVarName string, isEnum bool, fromIDCall string) {
-	if ext.Doc != "" {
-		fmt.Fprintf(w, "// %s\n", ext.Doc)
+// buildExternTypedView resolves an extern with a usable Go type into a typed
+// accessor view, selecting the body Form by the type's nature (ObjC object,
+// char* string, or value type).
+func buildExternTypedView(ext meta.Extern, goType, dylibVarName string, isEnum bool, fromIDCall string) view.Extern {
+	built := view.Extern{
+		CommentBlock: externCommentBlock(ext),
+		GoName:       exportedExternName(ext.Name),
+		RetType:      goType,
+		DylibVar:     dylibVarName,
+		Symbol:       ext.Name,
+		GoType:       goType,
 	}
-	emitDeprecatedComment(w, ext.Availability)
-	fmt.Fprintf(w, "func %s() %s {\n", exportedExternName(ext.Name), goType)
-	fmt.Fprintf(w, "\tptr, _ := purego.Dlsym(%s, %q)\n", dylibVarName, ext.Name)
 	switch {
 	case fromIDCall != "":
-		// ObjC object extern: the symbol holds a pointer-sized ObjC object reference.
-		// Read it as objc.ID, then wrap via the typed FromID constructor.
-		fmt.Fprintf(w, "\tif ptr == 0 { return nil }\n")
-		fmt.Fprintf(w, "\tid := *(*objc.ID)(unsafe.Pointer(ptr))\n")
-		fmt.Fprintf(w, "\tif id == 0 { return nil }\n")
-		fmt.Fprintf(w, "\treturn %s\n", fromIDCall)
+		built.Form = "fromid"
+		built.FromIDCall = fromIDCall
 	case goType == "string":
-		// char* extern — return as Go string.
-		fmt.Fprintf(w, "\tif ptr == 0 { return \"\" }\n")
-		fmt.Fprintf(w, "\treturn unsafe.String((*byte)(unsafe.Pointer(ptr)), strlen(ptr))\n")
+		built.Form = "string"
 	default:
 		zero := zeroValue(goType)
 		if isEnum {
 			zero = "0" // enum types are integers — TypeName{} is invalid
 		}
-		fmt.Fprintf(w, "\tif ptr == 0 { return %s }\n", zero)
-		fmt.Fprintf(w, "\treturn *(*%s)(unsafe.Pointer(ptr))\n", goType)
+		built.Form = "value"
+		built.Zero = zero
 	}
-	fmt.Fprintf(w, "}\n\n")
+	return built
 }

@@ -6,6 +6,8 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/view"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -26,39 +28,44 @@ func EmitProtocols(
 	}
 	sort.Strings(names)
 
+	protocols := make([]view.Protocol, 0, len(names))
 	for _, name := range names {
 		proto := framework.Protocols[name]
 		if proto.Availability.IsUnavailable {
 			continue
 		}
-		if err := emitProtocol(
-			w,
+		protocols = append(protocols, buildProtocolView(
 			name,
 			proto,
 			framework.Framework,
 			mapper,
 			classNameOwner,
 			imports,
-		); err != nil {
-			return nil, err
-		}
+		))
+	}
+	out, err := render.Protocols(protocols)
+	if err != nil {
+		return nil, err
+	}
+	if _, err := w.Write(out); err != nil {
+		return nil, err
 	}
 	return imports, nil
 }
 
-func emitProtocol(
-	w io.Writer,
+func buildProtocolView(
 	name string,
 	proto meta.Protocol,
 	framework string,
 	mapper *typemap.Mapper,
 	classNameOwner map[string]string,
 	imports typemap.ImportSet,
-) error {
+) view.Protocol {
 	goName := naming.ProtocolGoTypeName(name, classNameOwner)
-
-	fmt.Fprintf(w, "// %s wraps the ObjC protocol %s.\n", goName, name)
-	fmt.Fprintf(w, "type %s interface {\n", goName)
+	built := view.Protocol{
+		CommentBlock: fmt.Sprintf("// %s wraps the ObjC protocol %s.\n", goName, name),
+		GoName:       goName,
+	}
 
 	// Embed inherited protocols.
 	for _, parent := range proto.InheritedProtocols {
@@ -66,14 +73,13 @@ func emitProtocol(
 			continue // NSObject protocol is implicit
 		}
 		parentGoName := naming.ProtocolGoTypeName(parent, classNameOwner)
-		// Check if cross-framework
+		// Check if cross-framework.
 		if owner, ok := mapper.ProtocolIndex[parent]; ok && owner != framework {
-			pkg := strings.ToLower(owner)
-			path := mapper.ModulePrefix + "/" + pkg
-			imports[pkg] = path
-			parentGoName = pkg + "." + parentGoName
+			packageName := strings.ToLower(owner)
+			imports[packageName] = mapper.ModulePrefix + "/" + packageName
+			parentGoName = packageName + "." + parentGoName
 		}
-		fmt.Fprintf(w, "\t%s\n", parentGoName)
+		built.Embeds = append(built.Embeds, parentGoName)
 	}
 
 	ctx := typemap.Context{
@@ -81,7 +87,7 @@ func emitProtocol(
 		ClassNameIndex: classNameOwner,
 	}
 
-	// Methods
+	// Methods.
 	seenGoNames := make(map[string]bool)
 	for _, method := range proto.Methods {
 		if method.Availability.IsUnavailable || method.IsOptional {
@@ -93,12 +99,13 @@ func emitProtocol(
 		}
 		seenGoNames[goMethodName] = true
 
-		sig := buildMethodSignature(method, ctx, mapper, imports, false)
-		fmt.Fprintf(w, "\t%s%s\n", goMethodName, sig)
+		built.Methods = append(built.Methods, view.ProtocolMethod{
+			GoName:    goMethodName,
+			Signature: buildMethodSignature(method, ctx, mapper, imports, false),
+		})
 	}
 
-	fmt.Fprintf(w, "}\n\n")
-	return nil
+	return built
 }
 
 // buildMethodSignature builds the Go method signature (params and return) for

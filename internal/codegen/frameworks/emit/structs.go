@@ -6,6 +6,8 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/view"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -48,6 +50,7 @@ func EmitStructs(
 	sort.Strings(names)
 
 	seenGoNames := make(map[string]bool)
+	var structs []view.Struct
 	for _, name := range names {
 		s := framework.Structs[name]
 		if s.Availability.IsUnavailable {
@@ -64,9 +67,14 @@ func EmitStructs(
 			continue
 		}
 		seenGoNames[goName] = true
-		if err := emitStruct(w, name, s, framework.Framework, mapper, imports); err != nil {
-			return nil, err
-		}
+		structs = append(structs, buildStructView(name, s, framework.Framework, mapper, imports))
+	}
+	out, err := render.Structs(structs)
+	if err != nil {
+		return nil, err
+	}
+	if _, err := w.Write(out); err != nil {
+		return nil, err
 	}
 
 	// Emit typedef aliases (e.g. NSRect = CGRect). Struct Go names and other
@@ -76,39 +84,46 @@ func EmitStructs(
 	for name := range reservedTypeNames {
 		seenGoNames[name] = true
 	}
-	if err := emitTypedefAliases(w, framework, mapper, imports, seenGoNames); err != nil {
+	aliases := buildTypedefAliasViews(framework, mapper, imports, seenGoNames)
+	aliasOut, err := render.TypedefAliases(aliases)
+	if err != nil {
+		return nil, err
+	}
+	if _, err := w.Write(aliasOut); err != nil {
 		return nil, err
 	}
 
 	return imports, nil
 }
 
-func emitStruct(
-	w io.Writer,
+// buildStructView resolves one struct into its renderable view: the comment
+// block, whether it is opaque, and the exported fields with their resolved Go
+// types. Cross-framework field types are accumulated into imports as a side
+// effect, exactly as the original emitter did.
+func buildStructView(
 	name string,
 	s meta.Struct,
 	framework string,
 	mapper *typemap.Mapper,
 	imports typemap.ImportSet,
-) error {
-	if s.Doc != "" {
-		fmt.Fprintf(w, "// %s\n", s.Doc)
-	}
-	emitDeprecatedComment(w, s.Availability)
-
+) view.Struct {
 	goName := naming.ExportedTypeName(name)
+
+	var comment strings.Builder
+	if s.Doc != "" {
+		fmt.Fprintf(&comment, "// %s\n", s.Doc)
+	}
+	comment.WriteString(deprecatedComment(s.Availability))
 	if goName != name {
-		fmt.Fprintf(w, "// C struct: %s\n", name)
+		fmt.Fprintf(&comment, "// C struct: %s\n", name)
 	}
 
-	// Opaque struct (zero fields) — emit as unsafe.Pointer alias.
 	if len(s.Fields) == 0 {
-		fmt.Fprintf(w, "// %s is an opaque type.\n", goName)
-		fmt.Fprintf(w, "type %s struct{}\n\n", goName)
-		return nil
+		fmt.Fprintf(&comment, "// %s is an opaque type.\n", goName)
+		return view.Struct{CommentBlock: comment.String(), GoName: goName, IsOpaque: true}
 	}
 
-	fmt.Fprintf(w, "type %s struct {\n", goName)
+	built := view.Struct{CommentBlock: comment.String(), GoName: goName}
 	for i, field := range s.Fields {
 		fieldName := field.Name
 		if fieldName == "" {
@@ -138,17 +153,15 @@ func emitStruct(
 		// (starts with lowercase after the dot), fall back to unsafe.Pointer.
 		if dotIdx := strings.LastIndex(goType, "."); dotIdx >= 0 {
 			rest := goType[dotIdx+1:]
-			// Strip pointer prefix for the check
 			rest = strings.TrimPrefix(rest, "*")
 			if len(rest) > 0 && rest[0] >= 'a' && rest[0] <= 'z' {
 				goType = "unsafe.Pointer"
 			}
 		}
 
-		fmt.Fprintf(w, "\t%s %s\n", fieldName, goType)
+		built.Fields = append(built.Fields, view.StructField{GoName: fieldName, GoType: goType})
 	}
-	fmt.Fprintf(w, "}\n\n")
-	return nil
+	return built
 }
 
 // isUnexportedCrossPackage reports whether a Go type string refers to an
@@ -169,13 +182,12 @@ func isUnexportedCrossPackage(goType string) bool {
 	return len(after) > 0 && after[0] >= 'a' && after[0] <= 'z'
 }
 
-func emitTypedefAliases(
-	w io.Writer,
+func buildTypedefAliasViews(
 	framework *meta.FrameworkMeta,
 	mapper *typemap.Mapper,
 	imports typemap.ImportSet,
 	takenGoNames map[string]bool,
-) error {
+) []view.TypedefAlias {
 	type alias struct {
 		name, target string
 		isPointer    bool // true for "typedef struct Foo *FooRef" patterns
@@ -206,6 +218,7 @@ func emitTypedefAliases(
 	}
 	sort.Slice(aliases, func(i, j int) bool { return aliases[i].name < aliases[j].name })
 
+	var views []view.TypedefAlias
 	emitted := make(map[string]bool)
 	for _, a := range aliases {
 		goAliasName := naming.ExportedTypeName(a.name)
@@ -215,35 +228,24 @@ func emitTypedefAliases(
 		emitted[goAliasName] = true
 
 		ctx := typemap.Context{Framework: framework.Framework}
+		targetType := mapper.GoType(a.target, ctx, imports)
+		if targetType == "" || targetType == "unsafe.Pointer" ||
+			isUnexportedCrossPackage(targetType) {
+			continue
+		}
 		if a.isPointer {
-			targetType := mapper.GoType(a.target, ctx, imports)
-			if targetType == "" || targetType == "unsafe.Pointer" ||
-				isUnexportedCrossPackage(targetType) {
-				continue
-			}
-			fmt.Fprintf(
-				w,
-				"// %s is an opaque pointer to %s (C typedef %s).\n",
-				goAliasName,
-				a.target,
-				a.name,
-			)
-			fmt.Fprintf(w, "type %s = *%s\n\n", goAliasName, targetType)
+			views = append(views, view.TypedefAlias{
+				CommentBlock: fmt.Sprintf("// %s is an opaque pointer to %s (C typedef %s).\n", goAliasName, a.target, a.name),
+				GoName:       goAliasName,
+				RHS:          "*" + targetType,
+			})
 		} else {
-			targetType := mapper.GoType(a.target, ctx, imports)
-			if targetType == "" || targetType == "unsafe.Pointer" ||
-				isUnexportedCrossPackage(targetType) {
-				continue
-			}
-			fmt.Fprintf(
-				w,
-				"// %s is an alias for %s (C typedef %s).\n",
-				goAliasName,
-				a.target,
-				a.name,
-			)
-			fmt.Fprintf(w, "type %s = %s\n\n", goAliasName, targetType)
+			views = append(views, view.TypedefAlias{
+				CommentBlock: fmt.Sprintf("// %s is an alias for %s (C typedef %s).\n", goAliasName, a.target, a.name),
+				GoName:       goAliasName,
+				RHS:          targetType,
+			})
 		}
 	}
-	return nil
+	return views
 }

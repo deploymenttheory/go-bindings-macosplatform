@@ -419,8 +419,8 @@ func buildClassDoc(
 // base's documentation to point the reader at what to construct.
 func directSubclassLinks(className string, fc *frameworkContext, prefix string) string {
 	var subs []string
-	for name, cls := range fc.fw.Classes {
-		if cls.Availability.IsUnavailable || cls.Super != className {
+	for name, class := range fc.framework.Classes {
+		if class.Availability.IsUnavailable || class.Super != className {
 			continue
 		}
 		subs = append(subs, "["+trialTypeName(name, prefix)+"]")
@@ -451,13 +451,13 @@ func buildDocGroups(
 	prefix string,
 ) []docGroup {
 	childrenByBase := map[string][]string{} // base raw name → subclass Go names
-	for className, cls := range fc.fw.Classes {
-		if cls.Availability.IsUnavailable || cls.Super == "" {
+	for className, class := range fc.framework.Classes {
+		if class.Availability.IsUnavailable || class.Super == "" {
 			continue
 		}
-		if _, isBase := abstractBases[cls.Super]; isBase {
-			childrenByBase[cls.Super] = append(
-				childrenByBase[cls.Super],
+		if _, isBase := abstractBases[class.Super]; isBase {
+			childrenByBase[class.Super] = append(
+				childrenByBase[class.Super],
 				trialTypeName(className, prefix),
 			)
 		}
@@ -501,7 +501,7 @@ func emitDocGo(
 		Header:    strings.TrimRight(generatedHeader, "\n"),
 		BuildTag:  strings.TrimRight(buildTag, "\n"),
 		PkgName:   pkgName,
-		Framework: fc.fw.Framework,
+		Framework: fc.framework.Framework,
 		Groups:    buildDocGroups(fc, abstractBases, prefix),
 	})
 	return emit.WriteGoFile(filepath.Join(outDir, "doc.go"), buf.Bytes())

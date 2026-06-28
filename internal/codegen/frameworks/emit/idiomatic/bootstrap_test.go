@@ -13,29 +13,29 @@ import (
 
 func TestFrameworkDylibPath(t *testing.T) {
 	cases := []struct {
-		name string
-		fw   *meta.FrameworkMeta
-		want string
+		name      string
+		framework *meta.FrameworkMeta
+		want      string
 	}{
 		{
-			name: "plain framework",
-			fw:   &meta.FrameworkMeta{Framework: "Virtualization"},
-			want: "/System/Library/Frameworks/Virtualization.framework/Virtualization",
+			name:      "plain framework",
+			framework: &meta.FrameworkMeta{Framework: "Virtualization"},
+			want:      "/System/Library/Frameworks/Virtualization.framework/Virtualization",
 		},
 		{
-			name: "sub-framework uses parent umbrella",
-			fw:   &meta.FrameworkMeta{Framework: "HIToolbox", ParentFramework: "Carbon"},
-			want: "/System/Library/Frameworks/Carbon.framework/Carbon",
+			name:      "sub-framework uses parent umbrella",
+			framework: &meta.FrameworkMeta{Framework: "HIToolbox", ParentFramework: "Carbon"},
+			want:      "/System/Library/Frameworks/Carbon.framework/Carbon",
 		},
 		{
-			name: "link library",
-			fw:   &meta.FrameworkMeta{Framework: "EndpointSecurity", LinkLib: "EndpointSecurity"},
-			want: "/usr/lib/libEndpointSecurity.dylib",
+			name:      "link library",
+			framework: &meta.FrameworkMeta{Framework: "EndpointSecurity", LinkLib: "EndpointSecurity"},
+			want:      "/usr/lib/libEndpointSecurity.dylib",
 		},
 	}
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
-			if got := frameworkDylibPath(c.fw); got != c.want {
+			if got := frameworkDylibPath(c.framework); got != c.want {
 				t.Errorf("frameworkDylibPath = %q, want %q", got, c.want)
 			}
 		})
@@ -44,8 +44,8 @@ func TestFrameworkDylibPath(t *testing.T) {
 
 func TestEmitRuntimeBootstrap(t *testing.T) {
 	dir := t.TempDir()
-	fw := &meta.FrameworkMeta{Framework: "Virtualization"}
-	if err := emitRuntimeBootstrap(dir, "virtualization", fw); err != nil {
+	framework := &meta.FrameworkMeta{Framework: "Virtualization"}
+	if err := emitRuntimeBootstrap(dir, "virtualization", framework); err != nil {
 		t.Fatalf("emitRuntimeBootstrap: %v", err)
 	}
 	path := filepath.Join(dir, "virtualization_runtime_generated.go")

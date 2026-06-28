@@ -45,8 +45,8 @@ func cfuncABIType(sig, argExpr string) string {
 	if strings.HasPrefix(argExpr, "objc.NewBlock(") {
 		return "objc.Block"
 	}
-	for _, p := range []string{"purego.NSString(", "objref.IDOf(", "purego.SliceToNSArray(", "rt.FileURL("} {
-		if strings.HasPrefix(argExpr, p) {
+	for _, prefix := range []string{"purego.NSString(", "objref.IDOf(", "purego.SliceToNSArray(", "rt.FileURL("} {
+		if strings.HasPrefix(argExpr, prefix) {
 			return "objc.ID"
 		}
 	}
@@ -141,13 +141,13 @@ func isCountParamName(name string) bool {
 func emitGenericFunctionWrappers(
 	outDir, pkgName, rawPkgAlias, rawPkgPath string,
 	fc *frameworkContext,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 	trialNames trialNameMap,
 	takenNames map[string]bool,
 ) error {
-	fw := fc.fw
-	ctx := typemap.Context{Framework: fw.Framework}
-	prefix := naming.GoTypeName(strings.ToLower(fw.Framework))
+	framework := fc.framework
+	ctx := typemap.Context{Framework: framework.Framework}
+	prefix := naming.GoTypeName(strings.ToLower(framework.Framework))
 
 	// Imports are accumulated from what each wrapper actually emits: ebipurego is
 	// always used to bind the symbol, parameter/return type imports come from the
@@ -156,7 +156,7 @@ func emitGenericFunctionWrappers(
 	imports := map[string]string{"ebipurego": ebipuregoImportPath}
 
 	var funcs []view.Func
-	for _, fn := range emit.EmittableFunctions(fw, nil) {
+	for _, fn := range emit.EmittableFunctions(framework, nil) {
 		// Classify every parameter and the return. If any cannot yet be expressed
 		// idiomatically (a function pointer, a varargs, an out-parameter), the
 		// whole function is left out and a diagnostic is recorded. Type imports are
@@ -192,7 +192,7 @@ func emitGenericFunctionWrappers(
 			// A pointer out-parameter is lifted into an extra return value: declare a
 			// local (named _outN so it never clashes with the readable return name),
 			// pass its address to the call, and return it after the result.
-			if outGo, isOut := outParamGoType(param.ObjCType, ctx, m, fc, rawPkgAlias, true); isOut {
+			if outGo, isOut := outParamGoType(param.ObjCType, ctx, mapper, fc, rawPkgAlias, true); isOut {
 				local := fmt.Sprintf("_out%d", len(outs))
 				outs = append(outs, view.DispatchOut{
 					GoName: local,
@@ -208,11 +208,11 @@ func emitGenericFunctionWrappers(
 				}
 				continue
 			}
-			sig, argExpr, imps, pok := idiomaticArg(
+			sig, argExpr, imports, pok := idiomaticArg(
 				pName,
 				param.ObjCType,
 				ctx,
-				m,
+				mapper,
 				fc,
 				rawPkgAlias,
 				trialNames,
@@ -221,15 +221,15 @@ func emitGenericFunctionWrappers(
 				ok = false
 				break
 			}
-			maps.Copy(fnImports, imps)
+			maps.Copy(fnImports, imports)
 			sigParts = append(sigParts, pName+" "+sig)
 			abiParts = append(abiParts, cfuncABIType(sig, argExpr))
 			callArgs = append(callArgs, argExpr)
 		}
 		if !ok {
-			m.AppendDiagnostic(
+			mapper.AppendDiagnostic(
 				"%s: idiomatic wrapper for %s left out (a parameter type is not yet expressible)",
-				fw.Framework,
+				framework.Framework,
 				fn.Name,
 			)
 			continue
@@ -237,15 +237,15 @@ func emitGenericFunctionWrappers(
 		retType, kind, wrap, _, rimps, rok := idiomaticRet(
 			fn.Return.ObjCType,
 			ctx,
-			m,
+			mapper,
 			fc,
 			rawPkgAlias,
 			trialNames,
 		)
 		if !rok {
-			m.AppendDiagnostic(
+			mapper.AppendDiagnostic(
 				"%s: idiomatic wrapper for %s left out (the return type is not yet expressible)",
-				fw.Framework,
+				framework.Framework,
 				fn.Name,
 			)
 			continue
@@ -274,7 +274,7 @@ func emitGenericFunctionWrappers(
 		rawCall := fmt.Sprintf("%s(%s)", varName, strings.Join(callArgs, ", "))
 		call := rawCall
 		if genericFuncKind(kind) == view.FuncScalar {
-			if abi := m.GoABIType(fn.Return.ObjCType, retType); abi != retType {
+			if abi := mapper.GoABIType(fn.Return.ObjCType, retType); abi != retType {
 				abiRet = abi
 				call = retType + "(" + rawCall + ")"
 			}
@@ -292,7 +292,7 @@ func emitGenericFunctionWrappers(
 			CommentLine: fmt.Sprintf(
 				"// %s calls the %s framework function %s.\n",
 				goName,
-				fw.Framework,
+				framework.Framework,
 				fn.Name,
 			),
 			ABIParams: abiParts,
@@ -338,7 +338,7 @@ func genericFuncKind(k objKind) view.FuncKind {
 }
 
 // emitClassMethodFunctions writes <pkgname>_classmethods_generated.go: one
-// package-level forwarding function per ObjC class (static) method in fw. These
+// package-level forwarding function per ObjC class (static) method in framework. These
 // are the factory and accessor methods the rest of the idiomatic layer omits —
 // instance methods get receivers and inits become New* constructors, but class
 // methods (e.g. +[VZBridgedNetworkInterface networkInterfaces],
@@ -358,13 +358,13 @@ func genericFuncKind(k objKind) view.FuncKind {
 func emitClassMethodFunctions(
 	outDir, pkgName, rawPkgAlias, rawPkgPath string,
 	fc *frameworkContext,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 	trialNames trialNameMap,
 	handFuncs map[string]bool,
 	takenNames map[string]bool,
 	abstractBases abstractBaseIndex,
 ) error {
-	fw := fc.fw
+	framework := fc.framework
 	// Every wrapper dispatches to a class object (objc.ID(_class(...))), so objc is
 	// always used; every other import is contributed by an emitted method's own
 	// import set. objref is added per method only when an argument actually marshals
@@ -373,20 +373,20 @@ func emitClassMethodFunctions(
 	imports := map[string]string{"objc": objcImportPath}
 
 	var body bytes.Buffer
-	for _, className := range sortedKeys(fw.Classes) {
-		cls := fw.Classes[className]
-		if cls.Availability.IsUnavailable {
+	for _, className := range sortedKeys(framework.Classes) {
+		class := framework.Classes[className]
+		if class.Availability.IsUnavailable {
 			continue
 		}
 		ctx := typemap.Context{
 			ClassName:     className,
-			Framework:     fw.Framework,
-			GenericParams: cls.GenericParams,
+			Framework:     framework.Framework,
+			GenericParams: class.GenericParams,
 		}
-		rawNames := classRawMethodNames(cls, className, fw)
+		rawNames := classRawMethodNames(class, className, framework)
 
 		seenSel := map[string]bool{}
-		for _, method := range cls.Methods {
+		for _, method := range class.Methods {
 			if !method.IsClassMethod || !emit.MethodWillBeEmitted(method) {
 				continue
 			}
@@ -402,10 +402,10 @@ func emitClassMethodFunctions(
 			entry := buildMethod(
 				method,
 				rawName,
-				cls,
+				class,
 				fc,
 				ctx,
-				m,
+				mapper,
 				rawPkgAlias,
 				trialNames,
 				abstractBases,
@@ -428,9 +428,9 @@ func emitClassMethodFunctions(
 			case isFreeFuncName(qualified, takenNames, handFuncs):
 				name = qualified
 			default:
-				m.AppendDiagnostic(
+				mapper.AppendDiagnostic(
 					"%s: idiomatic class-method wrapper for +[%s %s] skipped (names %s/%s already taken)",
-					fw.Framework,
+					framework.Framework,
 					className,
 					method.Selector,
 					fluent,
@@ -465,14 +465,14 @@ func emitClassMethodFunctions(
 // objref — true when any marshaled argument runs through objref.IDOf. The class
 // receiver itself dispatches via objc.ID(_class(...)), so unlike an instance
 // method the receiver contributes no objref use.
-func classFuncUsesObjref(entry methodEntry) bool {
-	for _, p := range entry.plainParams {
-		if strings.Contains(p.rawExpr, "objref.") {
+func classFuncUsesObjref(entry methodModel) bool {
+	for _, param := range entry.plainParams {
+		if strings.Contains(param.rawExpression, "objref.") {
 			return true
 		}
 	}
-	for _, p := range entry.asyncNonBlockParams {
-		if strings.Contains(p.rawExpr, "objref.") {
+	for _, param := range entry.asyncNonBlockParams {
+		if strings.Contains(param.rawExpression, "objref.") {
 			return true
 		}
 	}
@@ -487,21 +487,21 @@ func classFuncUsesObjref(entry methodEntry) bool {
 // instance methods (the latter are unprefixed), so a class-only pool reproduces
 // the raw suffixes exactly.
 func classRawMethodNames(
-	cls meta.Class,
+	class meta.Class,
 	className string,
-	fw *meta.FrameworkMeta,
+	framework *meta.FrameworkMeta,
 ) map[string]string {
 	count := map[string]int{}
-	for _, method := range cls.Methods {
+	for _, method := range class.Methods {
 		if !method.IsClassMethod || !emit.MethodWillBeEmitted(method) {
 			continue
 		}
-		count[emit.ClassMethodGoNameFromMeta(className, method.Selector, fw)]++
+		count[emit.ClassMethodGoNameFromMeta(className, method.Selector, framework)]++
 	}
 	seen := map[string]int{}
 	selSeen := map[string]bool{}
 	out := make(map[string]string, len(count))
-	for _, method := range cls.Methods {
+	for _, method := range class.Methods {
 		if !method.IsClassMethod || !emit.MethodWillBeEmitted(method) {
 			continue
 		}
@@ -509,7 +509,7 @@ func classRawMethodNames(
 			continue
 		}
 		selSeen[method.Selector] = true
-		name := emit.ClassMethodGoNameFromMeta(className, method.Selector, fw)
+		name := emit.ClassMethodGoNameFromMeta(className, method.Selector, framework)
 		seen[name]++
 		if count[name] > 1 && seen[name] > 1 {
 			name = fmt.Sprintf("%s%d", name, seen[name])
@@ -592,13 +592,13 @@ func cfParamKind(objcType string) int {
 func emitCFFunctionWrappers(
 	outDir, pkgName, rawPkgAlias, rawPkgPath string,
 	fc *frameworkContext,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 	trialNames trialNameMap,
 	takenNames map[string]bool,
 ) error {
 	_ = rawPkgPath
-	fw := fc.fw
-	ctx := typemap.Context{Framework: fw.Framework}
+	framework := fc.framework
+	ctx := typemap.Context{Framework: framework.Framework}
 	// Every wrapper binds the symbol (ebipurego) and maps the OSStatus result to a
 	// Go error (purego.NewOSStatus). Reference parameters and out-parameters add
 	// obj/objref/objc/unsafe as they are emitted; other parameters' type imports
@@ -609,7 +609,7 @@ func emitCFFunctionWrappers(
 	}
 	var funcs []view.Func
 
-	for _, fn := range emit.EmittableFunctions(fw, nil) {
+	for _, fn := range emit.EmittableFunctions(framework, nil) {
 		if !isOSStatusType(fn.Return.ObjCType) {
 			continue
 		}
@@ -623,8 +623,8 @@ func emitCFFunctionWrappers(
 		usedNames := map[string]int{}
 		outIdx := 0
 		ok := true
-		for _, p := range fn.Params {
-			pName := safeParamName(naming.ParamName(p.Name))
+		for _, param := range fn.Params {
+			pName := safeParamName(naming.ParamName(param.Name))
 			if pName == "" {
 				pName = fmt.Sprintf("arg%d", len(callArgs))
 			}
@@ -632,7 +632,7 @@ func emitCFFunctionWrappers(
 			if usedNames[pName] > 1 {
 				pName = fmt.Sprintf("%s%d", pName, usedNames[pName])
 			}
-			switch cfParamKind(p.ObjCType) {
+			switch cfParamKind(param.ObjCType) {
 			case cfInputRef:
 				sigParams = append(sigParams, pName+" obj.Object")
 				callArgs = append(callArgs, "objref.IDOf("+pName+")")
@@ -653,11 +653,11 @@ func emitCFFunctionWrappers(
 				outReturns = append(outReturns, "obj.Wrap(objc.ID("+outVar+"))")
 				zeros = append(zeros, "nil")
 			default:
-				sig, argExpr, imps, pok := idiomaticArg(
+				sig, argExpr, imports, pok := idiomaticArg(
 					pName,
-					p.ObjCType,
+					param.ObjCType,
 					ctx,
-					m,
+					mapper,
 					fc,
 					rawPkgAlias,
 					trialNames,
@@ -665,7 +665,7 @@ func emitCFFunctionWrappers(
 				if !pok {
 					ok = false
 				} else {
-					maps.Copy(fnImports, imps)
+					maps.Copy(fnImports, imports)
 					sigParams = append(sigParams, pName+" "+sig)
 					callArgs = append(callArgs, argExpr)
 					abiParts = append(abiParts, cfuncABIType(sig, argExpr))
@@ -676,9 +676,9 @@ func emitCFFunctionWrappers(
 			}
 		}
 		if !ok {
-			m.AppendDiagnostic(
+			mapper.AppendDiagnostic(
 				"%s: idiomatic wrapper for %s left out (a parameter type is not yet expressible)",
-				fw.Framework,
+				framework.Framework,
 				fn.Name,
 			)
 			continue
@@ -713,7 +713,7 @@ func emitCFFunctionWrappers(
 			CommentLine: fmt.Sprintf(
 				"// %s reports an error if the %s framework function %s fails.\n",
 				goName,
-				fw.Framework,
+				framework.Framework,
 				fn.Name,
 			),
 			ABIParams: abiParts,

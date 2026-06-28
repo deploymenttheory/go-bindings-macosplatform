@@ -30,15 +30,15 @@ func EmitAsync(w io.Writer, pkgName, rawImportPath string, framework *macosplatf
 
 	var entries []entry
 	for _, className := range sortedKeys(framework.Classes) {
-		cls := framework.Classes[className]
-		if cls.Availability.IsUnavailable {
+		class := framework.Classes[className]
+		if class.Availability.IsUnavailable {
 			continue
 		}
 		ctx := m.BaseContext(framework.Framework, knownClasses)
 		ctx.ClassName = className
 		localImports := make(typemap.ImportSet)
 
-		for _, method := range cls.Methods {
+		for _, method := range class.Methods {
 			if method.Availability.IsUnavailable {
 				continue
 			}

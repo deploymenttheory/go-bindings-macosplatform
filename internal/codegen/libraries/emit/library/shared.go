@@ -86,8 +86,8 @@ func propertyGoName(name string) string {
 }
 
 // classHasValidateMethod reports whether the class has a validateWithError: method.
-func classHasValidateMethod(cls macosplatformmetadata.Class) bool {
-	for _, m := range cls.Methods {
+func classHasValidateMethod(class macosplatformmetadata.Class) bool {
+	for _, m := range class.Methods {
 		if m.Selector == "validateWithError:" && !m.Availability.IsUnavailable {
 			return true
 		}
@@ -95,14 +95,14 @@ func classHasValidateMethod(cls macosplatformmetadata.Class) bool {
 	return false
 }
 
-// classHasInstanceSetter reports whether cls has a non-class setter for propName.
+// classHasInstanceSetter reports whether class has a non-class setter for propName.
 // The expected selector is setFoo: (first letter uppercased).
-func classHasInstanceSetter(cls macosplatformmetadata.Class, propName string) bool {
+func classHasInstanceSetter(class macosplatformmetadata.Class, propName string) bool {
 	if len(propName) == 0 {
 		return false
 	}
 	setterSel := "set" + strings.ToUpper(propName[:1]) + propName[1:] + ":"
-	for _, m := range cls.Methods {
+	for _, m := range class.Methods {
 		if !m.IsClassMethod && m.Selector == setterSel {
 			return true
 		}
@@ -112,8 +112,8 @@ func classHasInstanceSetter(cls macosplatformmetadata.Class, propName string) bo
 
 // classGetterIsClassMethod reports whether the getter for propName is a class method.
 // getterSel is prop.Getter when set, otherwise prop.Name.
-func classGetterIsClassMethod(cls macosplatformmetadata.Class, getterSel string) bool {
-	for _, m := range cls.Methods {
+func classGetterIsClassMethod(class macosplatformmetadata.Class, getterSel string) bool {
+	for _, m := range class.Methods {
 		if m.IsClassMethod && m.Selector == getterSel {
 			return true
 		}
@@ -267,12 +267,12 @@ func recordOpinionatedImports(goType string, m *typemap.Mapper, usedImports map[
 		if dot < 0 {
 			continue
 		}
-		pkg := part[:dot]
-		if pkg == "raw" || pkg == "cgo" || pkg == "unsafe" {
+		packageName := part[:dot]
+		if packageName == "raw" || packageName == "cgo" || packageName == "unsafe" {
 			continue
 		}
 		if m.ModulePrefix != "" {
-			usedImports[pkg] = m.ModulePrefix + "/" + pkg
+			usedImports[packageName] = m.ModulePrefix + "/" + packageName
 		}
 	}
 }

@@ -26,11 +26,11 @@ func EmitSlices(w io.Writer, pkgName, rawImportPath string, framework *macosplat
 
 	var entries []sliceEntry
 	for _, className := range sortedKeys(framework.Classes) {
-		cls := framework.Classes[className]
-		if cls.Availability.IsUnavailable {
+		class := framework.Classes[className]
+		if class.Availability.IsUnavailable {
 			continue
 		}
-		for _, prop := range cls.Properties {
+		for _, prop := range class.Properties {
 			if prop.Availability.IsUnavailable {
 				continue
 			}
@@ -47,13 +47,13 @@ func EmitSlices(w io.Writer, pkgName, rawImportPath string, framework *macosplat
 			if prop.Getter != "" {
 				getterSel = prop.Getter
 			}
-			if classGetterIsClassMethod(cls, getterSel) {
+			if classGetterIsClassMethod(class, getterSel) {
 				continue
 			}
 			// Only emit slice accessors for properties with a real instance setter.
 			// Getter-only (readonly-in-practice) properties on live objects are less
 			// commonly needed through a typed accessor.
-			if !classHasInstanceSetter(cls, prop.Name) {
+			if !classHasInstanceSetter(class, prop.Name) {
 				continue
 			}
 			entries = append(entries, sliceEntry{

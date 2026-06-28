@@ -19,20 +19,20 @@ import (
 // buildMethods assembles the instance method entries for a class: the special
 // shapes (async, slice getters, BoolNSError) plus a plain pass-through wrapper
 // for every other bridgeable instance method (including property accessors,
-// which Clang synthesises into cls.Methods). Deduplicated by Go method name.
+// which Clang synthesises into class.Methods). Deduplicated by Go method name.
 func buildMethods(
-	cls meta.Class,
+	class meta.Class,
 	fc *frameworkContext,
 	ctx typemap.Context,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 	rawPkgAlias string,
 	trialNames trialNameMap,
 	abstractBases abstractBaseIndex,
-) []methodEntry {
-	rawNames := instanceRawMethodNames(cls)
-	var methods []methodEntry
+) []methodModel {
+	rawNames := instanceRawMethodNames(class)
+	var methods []methodModel
 	seenMethod := map[string]bool{}
-	for _, method := range cls.Methods {
+	for _, method := range class.Methods {
 		if method.IsClassMethod || method.IsInit || !instanceBridgeable(method) {
 			continue
 		}
@@ -40,29 +40,29 @@ func buildMethods(
 		if rawGoName == "" {
 			rawGoName = naming.MethodName(method.Selector)
 		}
-		e := buildMethod(method, rawGoName, cls, fc, ctx, m, rawPkgAlias, trialNames, abstractBases)
-		if e == nil {
+		built := buildMethod(method, rawGoName, class, fc, ctx, mapper, rawPkgAlias, trialNames, abstractBases)
+		if built == nil {
 			continue
 		}
 		// A call is main-thread-bound when its class (or an ancestor) is
 		// @MainActor or the selector itself is, unless it is explicitly
 		// `nonisolated`. The loader has already propagated and stamped these.
-		e.mainThread = (cls.IsMainThreadRequired || method.IsMainThreadRequired) &&
+		built.mainThread = (class.IsMainThreadRequired || method.IsMainThreadRequired) &&
 			!method.IsMainThreadExempt
-		if e.mainThread {
-			e.extraImports["purego"] = pureobjcImportPath
+		if built.mainThread {
+			built.extraImports["purego"] = pureobjcImportPath
 		}
 		// Re-case recognised initialisms in the exported name (UsbControllers →
 		// USBControllers). Done before the dedup check so collisions are detected
 		// on the final name. The bridge dispatches by selector, so this is a
 		// Go-facing rename only.
-		e.goName = applyInitialisms(e.goName)
-		if seenMethod[e.goName] || isReservedMemberName(e.goName) {
+		built.goName = applyInitialisms(built.goName)
+		if seenMethod[built.goName] || isReservedMemberName(built.goName) {
 			continue
 		}
-		e.doc = method.Doc
-		seenMethod[e.goName] = true
-		methods = append(methods, *e)
+		built.doc = method.Doc
+		seenMethod[built.goName] = true
+		methods = append(methods, *built)
 	}
 	stripGetterPrefixes(methods)
 	return methods
@@ -78,10 +78,10 @@ func buildMethods(
 // parameters, so plainDocKind classifies them as actions, not getters, and they
 // keep their name. The wrapper dispatches by Objective-C selector, so this is a
 // Go-facing rename only.
-func stripGetterPrefixes(methods []methodEntry) {
+func stripGetterPrefixes(methods []methodModel) {
 	taken := make(map[string]bool, len(methods))
-	for _, me := range methods {
-		taken[me.goName] = true
+	for _, method := range methods {
+		taken[method.goName] = true
 	}
 	for i := range methods {
 		stripped, ok := strippedGetterName(methods[i])
@@ -98,14 +98,14 @@ func stripGetterPrefixes(methods []methodEntry) {
 // shape plainDocKind treats as a getter. The remainder must still be an exported
 // identifier (begin with an upper-case ASCII letter), otherwise the original name
 // is kept. Plain string operations only — no regular expressions.
-func strippedGetterName(me methodEntry) (string, bool) {
-	if me.kind != kindPlain {
+func strippedGetterName(method methodModel) (string, bool) {
+	if method.kind != kindPlain {
 		return "", false
 	}
-	if k := plainDocKind(me); k != docGetter && k != docBoolGetter {
+	if k := plainDocKind(method); k != docGetter && k != docBoolGetter {
 		return "", false
 	}
-	rest, ok := strings.CutPrefix(me.goName, "Get")
+	rest, ok := strings.CutPrefix(method.goName, "Get")
 	if !ok || rest == "" {
 		return "", false
 	}
@@ -142,9 +142,9 @@ func isSelectorFormatVariadic(selector string) bool {
 // emitter appends to disambiguate colliding names (Foo, Foo2, …). The wrapper
 // must call x.inner.<that name>. Class methods are name-prefixed by the raw
 // emitter and never collide with instance names, so they are excluded here.
-func instanceRawMethodNames(cls meta.Class) map[string]string {
+func instanceRawMethodNames(class meta.Class) map[string]string {
 	count := map[string]int{}
-	for _, method := range cls.Methods {
+	for _, method := range class.Methods {
 		if method.IsClassMethod || !instanceBridgeable(method) {
 			continue
 		}
@@ -153,7 +153,7 @@ func instanceRawMethodNames(cls meta.Class) map[string]string {
 	seen := map[string]int{}
 	selSeen := map[string]bool{}
 	out := make(map[string]string, len(count))
-	for _, method := range cls.Methods {
+	for _, method := range class.Methods {
 		if method.IsClassMethod || !instanceBridgeable(method) {
 			continue
 		}
@@ -177,12 +177,12 @@ type methodKind int
 // the underlying raw call at the Go boundary.
 type plainRetMode int
 
-// plainParam is one parameter of a plain pass-through method: the Go signature
+// plainParamModel is one parameter of a plain pass-through method: the Go signature
 // type the caller supplies, and the expression handed to the raw method.
-type plainParam struct {
-	goName  string
-	goType  string
-	rawExpr string
+type plainParamModel struct {
+	goName        string
+	goType        string
+	rawExpression string
 	// isOut marks a value out-parameter (a pointer the Objective-C call fills
 	// in). Such a parameter is lifted out of the Go signature and surfaced as an
 	// extra return value, the idiomatic Go translation of an out-parameter.
@@ -192,7 +192,7 @@ type plainParam struct {
 	outName string
 }
 
-type methodEntry struct {
+type methodModel struct {
 	kind         methodKind
 	goName       string
 	rawGoName    string
@@ -206,7 +206,7 @@ type methodEntry struct {
 
 	blockObjCParams     []string
 	blockGoParamTypes   []string // Go types of the raw completion block's params
-	asyncNonBlockParams []asyncParam
+	asyncNonBlockParams []asyncParamModel
 	// Typed-result completion: when the block carries exactly one non-error
 	// param, the wrapper returns (R, error) instead of plain error.
 	asyncResultIdx    int          // index into blockGoParamTypes of the result param; -1 = error-only
@@ -214,11 +214,11 @@ type methodEntry struct {
 	asyncResultMode   plainRetMode // plainRetRaw | plainRetString | plainRetTrialWrap
 	asyncResultTrial  string       // trial type name for plainRetTrialWrap
 
-	sliceElemGoType string
-	sliceConvFmt    string // fmt template (one %s) converting an objc.ID element to sliceElemGoType
-	sliceHasError   bool   // raw getter returns (NSArray, error)
+	sliceElemGoType              string
+	sliceElementConversionFormat string // fmt template (one %s) converting an objc.ID element to sliceElemGoType
+	sliceHasError                bool   // raw getter returns (NSArray, error)
 
-	plainParams    []plainParam
+	plainParams    []plainParamModel
 	plainRetType   string // Go value return type ("" = void); error is added separately
 	plainRetMode   plainRetMode
 	plainTrialType string // trial type name for plainRetTrialWrap
@@ -228,12 +228,12 @@ type methodEntry struct {
 	// "objectAtIndex:". The generated body sends it directly to the object.
 	selector string
 	// plainRetKind says how the call's result is converted back to Go (string,
-	// object, scalar, …); plainRetWrap is the expression that wraps an object
-	// result, with one %s placeholder for the result pointer; plainSendType is
+	// object, scalar, …); plainReturnWrapper is the expression that wraps an object
+	// result, with one %s placeholder for the result pointer; plainMessageSendType is
 	// the Go type the underlying call returns before conversion.
-	plainRetKind  objKind
-	plainRetWrap  string
-	plainSendType string
+	plainRetKind         objKind
+	plainReturnWrapper   string
+	plainMessageSendType string
 
 	// preamble is rendered verbatim at the top of the method body, before the
 	// call — used, for example, to build an Objective-C array from a variadic
@@ -247,10 +247,10 @@ type methodEntry struct {
 	indexGuardSize string
 }
 
-type asyncParam struct {
+type asyncParamModel struct {
 	goName          string
 	goType          string
-	rawExpr         string
+	rawExpression   string
 	needsFoundation bool
 }
 
@@ -265,17 +265,17 @@ func buildAsyncMethod(
 	rawGoName string,
 	fc *frameworkContext,
 	ctx typemap.Context,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 	rawPkgAlias string,
 	trialNames trialNameMap,
-) *methodEntry {
+) *methodModel {
 	lastParam := method.Params[len(method.Params)-1]
 	blockParams := parseBlockObjCParams(lastParam.ObjCType)
 	// Resolve the block's Go signature exactly as the raw emitter did, so the
 	// generated closure matches the raw method's parameter type. Degraded
 	// blocks come back as objc.Block and are rejected below.
 	blockImpSet := make(typemap.ImportSet)
-	blockGoType := emit.BlockGoFuncType(lastParam.ObjCType, ctx, m, blockImpSet, m.OwnerIndex)
+	blockGoType := emit.BlockGoFuncType(lastParam.ObjCType, ctx, mapper, blockImpSet, mapper.OwnerIndex)
 	if !strings.HasPrefix(blockGoType, "func(") || !strings.HasSuffix(blockGoType, ")") {
 		return nil
 	}
@@ -358,17 +358,17 @@ func buildAsyncMethod(
 	if resultMode == plainRetRaw {
 		extraImports["obj"] = objImportPath
 	}
-	var nonBlockParams []asyncParam
-	for _, p := range method.Params[:len(method.Params)-1] {
-		pName := safeParamName(naming.ParamName(p.Name))
+	var nonBlockParams []asyncParamModel
+	for _, param := range method.Params[:len(method.Params)-1] {
+		pName := safeParamName(naming.ParamName(param.Name))
 		if pName == "" {
 			pName = fmt.Sprintf("arg%d", len(nonBlockParams))
 		}
-		sig, argExpr, imps, ok := idiomaticArg(
+		sig, argExpr, imports, ok := idiomaticArg(
 			pName,
-			p.ObjCType,
+			param.ObjCType,
 			ctx,
-			m,
+			mapper,
 			fc,
 			rawPkgAlias,
 			trialNames,
@@ -376,14 +376,14 @@ func buildAsyncMethod(
 		if !ok {
 			return nil
 		}
-		maps.Copy(extraImports, imps)
+		maps.Copy(extraImports, imports)
 		nonBlockParams = append(
 			nonBlockParams,
-			asyncParam{goName: pName, goType: sig, rawExpr: argExpr},
+			asyncParamModel{goName: pName, goType: sig, rawExpression: argExpr},
 		)
 	}
 	maps.Copy(extraImports, resultImports)
-	return &methodEntry{
+	return &methodModel{
 		kind:                kindAsync,
 		goName:              asyncGoMethodName(method.Selector),
 		rawGoName:           rawGoName,
@@ -403,26 +403,26 @@ func buildAsyncMethod(
 func buildMethod(
 	method meta.Method,
 	rawGoName string,
-	cls meta.Class,
+	class meta.Class,
 	fc *frameworkContext,
 	ctx typemap.Context,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 	rawPkgAlias string,
 	trialNames trialNameMap,
 	abstractBases abstractBaseIndex,
-) *methodEntry {
+) *methodModel {
 	// Async completion → (ctx) error. Fall through to a plain wrapper when the
 	// block shape can't be expressed idiomatically (non-NSError result params).
 	if isAsyncCompletion(method) {
-		if e := buildAsyncMethod(method, rawGoName, fc, ctx, m, rawPkgAlias, trialNames); e != nil {
-			return e
+		if built := buildAsyncMethod(method, rawGoName, fc, ctx, mapper, rawPkgAlias, trialNames); built != nil {
+			return built
 		}
 	}
 
 	// BoolNSError — only when no explicit non-error params.
 	if method.IsNSError && strings.TrimSpace(method.Return.ObjCType) == "BOOL" &&
 		len(method.Params) == 0 {
-		return &methodEntry{
+		return &methodModel{
 			kind:      kindBoolNSError,
 			goName:    boolNSErrorGoMethodName(method.Selector),
 			rawGoName: rawGoName,
@@ -440,21 +440,21 @@ func buildMethod(
 	// NSArray → slice (no params, getter only). Fall through to a plain wrapper
 	// when the element type can't be resolved.
 	if looksLikeNSArray(method.Return.ObjCType) && len(method.Params) == 0 {
-		if e := buildSliceMethod(method, rawGoName, fc, ctx, m, rawPkgAlias, trialNames); e != nil {
-			return e
+		if built := buildSliceMethod(method, rawGoName, fc, ctx, mapper, rawPkgAlias, trialNames); built != nil {
+			return built
 		}
 	}
 
 	// Everything else: a plain pass-through wrapper so the method is callable on
 	// the idiomatic type without dropping to .Unwrap().
-	e := buildPlainMethod(method, rawGoName, fc, ctx, m, rawPkgAlias, trialNames, abstractBases)
-	if e != nil {
-		if size := indexGuardSizeFor(method, cls); size != "" && len(e.plainParams) == 1 {
-			e.indexGuardSize = size
-			e.extraImports["errkit"] = errkitImportPath
+	built := buildPlainMethod(method, rawGoName, fc, ctx, mapper, rawPkgAlias, trialNames, abstractBases)
+	if built != nil {
+		if size := indexGuardSizeFor(method, class); size != "" && len(built.plainParams) == 1 {
+			built.indexGuardSize = size
+			built.extraImports["errkit"] = errkitImportPath
 		}
 	}
-	return e
+	return built
 }
 
 // indexGuardSizeFor returns the name of the size accessor to bounds-check an
@@ -462,7 +462,7 @@ func buildMethod(
 // single-index accessor or the class does not expose the matching size method.
 // It lets the generated accessor panic on an out-of-range index instead of
 // raising an Objective-C exception that cannot be caught across the boundary.
-func indexGuardSizeFor(method meta.Method, cls meta.Class) string {
+func indexGuardSizeFor(method meta.Method, class meta.Class) string {
 	var sizeMethod, sizeSelector string
 	switch method.Selector {
 	case "objectAtIndex:", "objectAtIndexedSubscript:":
@@ -472,7 +472,7 @@ func indexGuardSizeFor(method meta.Method, cls meta.Class) string {
 	default:
 		return ""
 	}
-	for _, classMethod := range cls.Methods {
+	for _, classMethod := range class.Methods {
 		if classMethod.Selector == sizeSelector && !classMethod.IsClassMethod {
 			return sizeMethod
 		}
@@ -487,10 +487,10 @@ func buildSliceMethod(
 	rawGoName string,
 	fc *frameworkContext,
 	ctx typemap.Context,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 	rawPkgAlias string,
 	trialNames trialNameMap,
-) *methodEntry {
+) *methodModel {
 	elemObjC := extractNSArrayElem(method.Return.ObjCType)
 	if elemObjC == "" {
 		return nil
@@ -508,8 +508,8 @@ func buildSliceMethod(
 		elemGoType, convFmt = "string", "purego.GoString(%s)"
 	default:
 		impSet := make(typemap.ImportSet)
-		goElem := qualifyRaw(m.GoType(elemObjC, ctx, impSet), fc, rawPkgAlias, ctx.GenericParams)
-		if !isObjectPointerType(goElem, m) {
+		goElem := qualifyRaw(mapper.GoType(elemObjC, ctx, impSet), fc, rawPkgAlias, ctx.GenericParams)
+		if !isObjectPointerType(goElem, mapper) {
 			// Only object elements are converted; anything else falls through to a
 			// plain method.
 			return nil
@@ -531,16 +531,16 @@ func buildSliceMethod(
 		extraImports["unsafe"] = "unsafe"
 		extraImports["errkit"] = errkitImportPath
 	}
-	return &methodEntry{
-		kind:            kindSlice,
-		goName:          goName,
-		rawGoName:       rawGoName,
-		doc:             method.Doc,
-		selector:        method.Selector,
-		sliceElemGoType: elemGoType,
-		sliceConvFmt:    convFmt,
-		sliceHasError:   method.IsNSError,
-		extraImports:    extraImports,
+	return &methodModel{
+		kind:                         kindSlice,
+		goName:                       goName,
+		rawGoName:                    rawGoName,
+		doc:                          method.Doc,
+		selector:                     method.Selector,
+		sliceElemGoType:              elemGoType,
+		sliceElementConversionFormat: convFmt,
+		sliceHasError:                method.IsNSError,
+		extraImports:                 extraImports,
 	}
 }
 
@@ -554,32 +554,32 @@ func buildPlainMethod(
 	rawGoName string,
 	fc *frameworkContext,
 	ctx typemap.Context,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 	rawPkgAlias string,
 	trialNames trialNameMap,
 	abstractBases abstractBaseIndex,
-) *methodEntry {
+) *methodModel {
 	_ = abstractBases
 	extraImports := map[string]string{}
-	params := make([]plainParam, 0, len(method.Params))
+	params := make([]plainParamModel, 0, len(method.Params))
 	usedParamNames := map[string]int{}
 	outIndex := 0
 	for i, p := range method.Params {
 		// A value out-parameter is dropped from the signature and surfaced as an
 		// extra return value; the call receives a pointer to a local.
-		if outGo, isOut := outParamGoType(p.ObjCType, ctx, m, fc, rawPkgAlias, false); isOut {
+		if outGo, isOut := outParamGoType(p.ObjCType, ctx, mapper, fc, rawPkgAlias, false); isOut {
 			local := fmt.Sprintf("_out%d", outIndex)
 			outIndex++
 			outName := safeParamName(naming.ParamName(p.Name))
 			if outName == "" {
 				outName = fmt.Sprintf("out%d", outIndex)
 			}
-			params = append(params, plainParam{
-				goName:  local,
-				goType:  outGo,
-				rawExpr: "unsafe.Pointer(&" + local + ")",
-				isOut:   true,
-				outName: outName,
+			params = append(params, plainParamModel{
+				goName:        local,
+				goType:        outGo,
+				rawExpression: "unsafe.Pointer(&" + local + ")",
+				isOut:         true,
+				outName:       outName,
 			})
 			extraImports["unsafe"] = "unsafe"
 			continue
@@ -597,11 +597,11 @@ func buildPlainMethod(
 		if usedParamNames[pName] > 1 {
 			pName = fmt.Sprintf("%s%d", pName, usedParamNames[pName])
 		}
-		sig, argExpr, imps, ok := idiomaticArg(
+		sig, argExpr, imports, ok := idiomaticArg(
 			pName,
 			p.ObjCType,
 			ctx,
-			m,
+			mapper,
 			fc,
 			rawPkgAlias,
 			trialNames,
@@ -611,12 +611,12 @@ func buildPlainMethod(
 			// Objective-C runtime type; skip the whole method rather than leak one.
 			return nil
 		}
-		maps.Copy(extraImports, imps)
-		params = append(params, plainParam{goName: pName, goType: sig, rawExpr: argExpr})
+		maps.Copy(extraImports, imports)
+		params = append(params, plainParamModel{goName: pName, goType: sig, rawExpression: argExpr})
 	}
 
 	retType, retKind, retWrap, sendType, retImps, ok := idiomaticRet(
-		method.Return.ObjCType, ctx, m, fc, rawPkgAlias, trialNames)
+		method.Return.ObjCType, ctx, mapper, fc, rawPkgAlias, trialNames)
 	if !ok {
 		return nil
 	}
@@ -643,41 +643,41 @@ func buildPlainMethod(
 		extraImports["purego"] = pureobjcImportPath
 	}
 
-	return &methodEntry{
-		kind:          kindPlain,
-		goName:        goName,
-		rawGoName:     rawGoName,
-		doc:           method.Doc,
-		selector:      method.Selector,
-		extraImports:  extraImports,
-		plainParams:   params,
-		plainRetType:  retType,
-		plainRetKind:  retKind,
-		plainRetWrap:  retWrap,
-		plainSendType: sendType,
-		plainHasError: method.IsNSError,
+	return &methodModel{
+		kind:                 kindPlain,
+		goName:               goName,
+		rawGoName:            rawGoName,
+		doc:                  method.Doc,
+		selector:             method.Selector,
+		extraImports:         extraImports,
+		plainParams:          params,
+		plainRetType:         retType,
+		plainRetKind:         retKind,
+		plainReturnWrapper:   retWrap,
+		plainMessageSendType: sendType,
+		plainHasError:        method.IsNSError,
 	}
 }
 
-func writeMethod(w io.Writer, typeName string, me methodEntry) {
-	recvVar := uniqueReceiver(typeName, methodParamNames(me))
-	writeMethodAs(w, fmt.Sprintf("(%s *%s) ", recvVar, typeName), "objref.IDOf("+recvVar+")", me)
+func writeMethod(w io.Writer, typeName string, method methodModel) {
+	recvVar := uniqueReceiver(typeName, methodParamNames(method))
+	writeMethodAs(w, fmt.Sprintf("(%s *%s) ", recvVar, typeName), "objref.IDOf("+recvVar+")", method)
 }
 
 // methodParamNames returns the Go signature parameter names of a method entry —
 // the names a receiver variable must not collide with. Out-parameters are
 // excluded (they are return values), slice and bool methods take no parameters,
 // and an async method's leading ctx is included.
-func methodParamNames(me methodEntry) []string {
+func methodParamNames(method methodModel) []string {
 	var names []string
-	switch me.kind {
+	switch method.kind {
 	case kindAsync:
 		names = append(names, "ctx")
-		for _, p := range me.asyncNonBlockParams {
+		for _, p := range method.asyncNonBlockParams {
 			names = append(names, p.goName)
 		}
 	case kindPlain:
-		for _, p := range me.plainParams {
+		for _, p := range method.plainParams {
 			if !p.isOut {
 				names = append(names, p.goName)
 			}
@@ -689,47 +689,47 @@ func methodParamNames(me methodEntry) []string {
 // writeClassFunc renders a class-level (static) method as a package-level
 // function. recvExpr is the Objective-C expression for the class object, e.g.
 // objc.ID(_class("NSString")).
-func writeClassFunc(w io.Writer, recvExpr string, me methodEntry) {
-	writeMethodAs(w, "", recvExpr, me)
+func writeClassFunc(w io.Writer, recvExpr string, method methodModel) {
+	writeMethodAs(w, "", recvExpr, method)
 }
 
 // writeMethodAs renders a method entry as either an instance method (recv
 // "(x *Type) ", recvExpr "objref.IDOf(x)") or a package-level function (recv "",
 // recvExpr the class object). recvExpr is the object the Objective-C call is
 // sent to.
-func writeMethodAs(w io.Writer, recv, recvExpr string, me methodEntry) {
-	switch me.kind {
+func writeMethodAs(w io.Writer, recv, recvExpr string, method methodModel) {
+	switch method.kind {
 	case kindAsync:
-		writeAsyncMethod(w, recv, recvExpr, me)
+		writeAsyncMethod(w, recv, recvExpr, method)
 	case kindBoolNSError:
-		writeBoolNSErrorMethod(w, recv, recvExpr, me)
+		writeBoolNSErrorMethod(w, recv, recvExpr, method)
 	case kindSlice:
-		writeSliceMethod(w, recv, recvExpr, me)
+		writeSliceMethod(w, recv, recvExpr, method)
 	case kindPlain:
-		writePlainMethod(w, recv, recvExpr, me)
+		writePlainMethod(w, recv, recvExpr, method)
 	}
 }
 
 // writePlainMethod renders a Go method (or function) that sends one Objective-C
 // message to recvExpr, converting the arguments and result between Go and
 // Objective-C.
-func writePlainMethod(w io.Writer, recv, recvExpr string, me methodEntry) {
-	paramParts := make([]string, 0, len(me.plainParams))
-	sendArgs := []string{recvExpr, fmt.Sprintf("objc.RegisterName(%q)", me.selector)}
-	for _, p := range me.plainParams {
+func writePlainMethod(w io.Writer, recv, recvExpr string, method methodModel) {
+	paramParts := make([]string, 0, len(method.plainParams))
+	sendArgs := []string{recvExpr, fmt.Sprintf("objc.RegisterName(%q)", method.selector)}
+	for _, p := range method.plainParams {
 		// Out-parameters are not part of the Go signature, but their pointer is
 		// still passed positionally to the Objective-C call.
 		if !p.isOut {
 			paramParts = append(paramParts, p.goName+" "+p.goType)
 		}
-		sendArgs = append(sendArgs, p.rawExpr)
+		sendArgs = append(sendArgs, p.rawExpression)
 	}
-	if me.plainHasError {
+	if method.plainHasError {
 		sendArgs = append(sendArgs, "unsafe.Pointer(&_nsErr)")
 	}
 	// objc.Send[...](...) is an expression (the marshaled call), not a Go
 	// declaration; the body statements around it are rendered by the template.
-	call := fmt.Sprintf("objc.Send[%s](%s)", me.plainSendType, strings.Join(sendArgs, ", "))
+	call := fmt.Sprintf("objc.Send[%s](%s)", method.plainMessageSendType, strings.Join(sendArgs, ", "))
 
 	// recv is "(rv *Type) " for an instance method (empty for a package-level
 	// class function); the receiver variable is the identifier after the opening
@@ -740,13 +740,13 @@ func writePlainMethod(w io.Writer, recv, recvExpr string, me methodEntry) {
 	}
 
 	var guards []string
-	if me.indexGuardSize != "" && len(me.plainParams) == 1 && recvVar != "" {
+	if method.indexGuardSize != "" && len(method.plainParams) == 1 && recvVar != "" {
 		guards = append(guards, fmt.Sprintf("errkit.CheckIndex(%s, %s.%s())",
-			me.plainParams[0].goName, recvVar, me.indexGuardSize))
+			method.plainParams[0].goName, recvVar, method.indexGuardSize))
 	}
 
 	var outs []view.DispatchOut
-	for _, p := range outParams(me) {
+	for _, p := range outParams(method) {
 		outs = append(outs, view.DispatchOut{
 			GoName: p.goName,
 			GoType: p.goType,
@@ -754,29 +754,29 @@ func writePlainMethod(w io.Writer, recv, recvExpr string, me methodEntry) {
 		})
 	}
 
-	retVars, retTypes := mainThreadReturns(me)
+	retVars, retTypes := mainThreadReturns(method)
 
 	out, err := render.Method(view.Method{
 		DocComment: docLeadKind(
-			me.goName,
-			me.doc,
-			synthFallback(me.goName, plainDocKind(me)),
-			plainDocKind(me),
+			method.goName,
+			method.doc,
+			synthFallback(method.goName, plainDocKind(method)),
+			plainDocKind(method),
 		),
 		Recv:     recv,
-		GoName:   me.goName,
+		GoName:   method.goName,
 		ParamStr: strings.Join(paramParts, ", "),
-		RetSig:   plainRetSig(me, recvVar),
+		RetSig:   plainRetSig(method, recvVar),
 		Dispatch: view.Dispatch{
 			Guards:  guards,
 			Call:    call,
-			Error:   me.plainHasError,
-			RetKind: plainRetKindToView(me.plainRetKind),
-			RetWrap: me.plainRetWrap,
-			RetZero: zeroValue(me.plainRetKind, me.plainRetType),
+			Error:   method.plainHasError,
+			RetKind: plainRetKindToView(method.plainRetKind),
+			RetWrap: method.plainReturnWrapper,
+			RetZero: zeroValue(method.plainRetKind, method.plainRetType),
 			Outs:    outs,
 		},
-		MainThread: me.mainThread,
+		MainThread: method.mainThread,
 		RetVars:    retVars,
 		RetTypes:   retTypes,
 	})
@@ -791,11 +791,11 @@ func writePlainMethod(w io.Writer, recv, recvExpr string, me methodEntry) {
 // when its result is a bool), so its doc comment gets a "returns"/"reports
 // whether" lead; everything else is an action method whose Apple prose is
 // already verb-led.
-func plainDocKind(me methodEntry) docKind {
-	if len(me.plainParams) != 0 || me.plainHasError || me.plainRetType == "" {
+func plainDocKind(method methodModel) docKind {
+	if len(method.plainParams) != 0 || method.plainHasError || method.plainRetType == "" {
 		return docMethod
 	}
-	if me.plainRetKind == kindBool {
+	if method.plainRetKind == kindBool {
 		return docBoolGetter
 	}
 	return docGetter
@@ -818,9 +818,9 @@ func plainRetKindToView(k objKind) view.RetKind {
 }
 
 // outParams returns the method's value out-parameters, in declaration order.
-func outParams(me methodEntry) []plainParam {
-	var outs []plainParam
-	for _, p := range me.plainParams {
+func outParams(method methodModel) []plainParamModel {
+	var outs []plainParamModel
+	for _, p := range method.plainParams {
 		if p.isOut {
 			outs = append(outs, p)
 		}
@@ -832,24 +832,24 @@ func outParams(me methodEntry) []plainParam {
 // " (value, error)" | " error" | " value" | "". recvVar is the receiver
 // variable (empty for a package-level function); named returns are chosen so
 // they never collide with it.
-func plainRetSig(me methodEntry, recvVar string) string {
+func plainRetSig(method methodModel, recvVar string) string {
 	type ret struct{ name, typ string }
 	var rets []ret
 	hasOut := false
-	if me.plainRetType != "" {
+	if method.plainRetType != "" {
 		valueName := "result"
-		if me.plainRetKind == kindBool {
+		if method.plainRetKind == kindBool {
 			valueName = "ok"
 		}
-		rets = append(rets, ret{valueName, me.plainRetType})
+		rets = append(rets, ret{valueName, method.plainRetType})
 	}
-	for _, p := range me.plainParams {
+	for _, p := range method.plainParams {
 		if p.isOut {
 			hasOut = true
 			rets = append(rets, ret{p.outName, p.goType})
 		}
 	}
-	if me.plainHasError {
+	if method.plainHasError {
 		rets = append(rets, ret{"err", "error"})
 	}
 	// A single non-out return is unnamed (Effective Go: name only when it
@@ -865,7 +865,7 @@ func plainRetSig(me methodEntry, recvVar string) string {
 	if recvVar != "" {
 		taken[recvVar] = true
 	}
-	for _, p := range me.plainParams {
+	for _, p := range method.plainParams {
 		if !p.isOut {
 			taken[p.goName] = true
 		}
@@ -884,16 +884,16 @@ func plainRetSig(me methodEntry, recvVar string) string {
 // the same order as plainRetSig builds them (value, then out-parameters, then a
 // trailing error). The template declares the locals, assigns them from the body
 // run inside purego.Main, and returns them. A void method yields empty slices.
-func mainThreadReturns(me methodEntry) (names, types []string) {
-	if me.plainRetType != "" {
-		types = append(types, me.plainRetType)
+func mainThreadReturns(method methodModel) (names, types []string) {
+	if method.plainRetType != "" {
+		types = append(types, method.plainRetType)
 	}
-	for _, p := range me.plainParams {
+	for _, p := range method.plainParams {
 		if p.isOut {
 			types = append(types, p.goType)
 		}
 	}
-	if me.plainHasError {
+	if method.plainHasError {
 		types = append(types, "error")
 	}
 	names = make([]string, len(types))
@@ -903,22 +903,22 @@ func mainThreadReturns(me methodEntry) (names, types []string) {
 	return names, types
 }
 
-func writeAsyncMethod(w io.Writer, recv, recvExpr string, me methodEntry) {
-	paramParts := make([]string, 0, 1+len(me.asyncNonBlockParams))
+func writeAsyncMethod(w io.Writer, recv, recvExpr string, method methodModel) {
+	paramParts := make([]string, 0, 1+len(method.asyncNonBlockParams))
 	paramParts = append(paramParts, "ctx context.Context")
-	sendArgs := []string{recvExpr, fmt.Sprintf("objc.RegisterName(%q)", me.selector)}
-	for _, p := range me.asyncNonBlockParams {
+	sendArgs := []string{recvExpr, fmt.Sprintf("objc.RegisterName(%q)", method.selector)}
+	for _, p := range method.asyncNonBlockParams {
 		paramParts = append(paramParts, p.goName+" "+p.goType)
-		sendArgs = append(sendArgs, p.rawExpr)
+		sendArgs = append(sendArgs, p.rawExpression)
 	}
 
 	// Each block parameter arrives as an Objective-C object pointer. The first
 	// error parameter (if any) is converted to a Go error.
-	closureParams := make([]string, len(me.blockGoParamTypes))
+	closureParams := make([]string, len(method.blockGoParamTypes))
 	errIdx := -1
-	for i := range me.blockGoParamTypes {
+	for i := range method.blockGoParamTypes {
 		closureParams[i] = fmt.Sprintf("_p%d objc.ID", i)
-		if errIdx < 0 && isNSErrorType(normaliseObjC(me.blockObjCParams[i])) {
+		if errIdx < 0 && isNSErrorType(normaliseObjC(method.blockObjCParams[i])) {
 			errIdx = i
 		}
 	}
@@ -936,15 +936,15 @@ func writeAsyncMethod(w io.Writer, recv, recvExpr string, me methodEntry) {
 	) + ")"
 
 	// Error-only completion: returns plain error.
-	if me.asyncResultGoType == "" {
+	if method.asyncResultGoType == "" {
 		out, err := render.AsyncMethod(view.AsyncMethod{
 			DocComment: docLead(
-				me.goName,
-				me.doc,
-				synthFallback(me.goName, docMethod),
+				method.goName,
+				method.doc,
+				synthFallback(method.goName, docMethod),
 			),
 			Recv:          recv,
-			GoName:        me.goName,
+			GoName:        method.goName,
 			ParamStr:      strings.Join(paramParts, ", "),
 			HasResult:     false,
 			ClosureParams: closureParams,
@@ -959,23 +959,23 @@ func writeAsyncMethod(w io.Writer, recv, recvExpr string, me methodEntry) {
 	}
 
 	// Result-and-error completion: returns (R, error).
-	ri := me.asyncResultIdx
+	ri := method.asyncResultIdx
 	var resultConvExpr string
-	switch me.asyncResultMode {
+	switch method.asyncResultMode {
 	case plainRetString:
 		resultConvExpr = fmt.Sprintf("purego.GoString(_p%d)", ri)
 	case plainRetTrialWrap:
-		resultConvExpr = fmt.Sprintf("%sFromID(_p%d)", me.asyncResultTrial, ri)
+		resultConvExpr = fmt.Sprintf("%sFromID(_p%d)", method.asyncResultTrial, ri)
 	default:
 		resultConvExpr = fmt.Sprintf("obj.Wrap(_p%d)", ri)
 	}
 	out, err := render.AsyncMethod(view.AsyncMethod{
-		DocComment:     docLead(me.goName, me.doc, synthFallback(me.goName, docMethod)),
+		DocComment:     docLead(method.goName, method.doc, synthFallback(method.goName, docMethod)),
 		Recv:           recv,
-		GoName:         me.goName,
+		GoName:         method.goName,
 		ParamStr:       strings.Join(paramParts, ", "),
 		HasResult:      true,
-		ResultGoType:   me.asyncResultGoType,
+		ResultGoType:   method.asyncResultGoType,
 		ClosureParams:  closureParams,
 		SendCall:       sendCall,
 		ErrConvExpr:    errConvExpr,
@@ -987,14 +987,14 @@ func writeAsyncMethod(w io.Writer, recv, recvExpr string, me methodEntry) {
 	_, _ = w.Write(out)
 }
 
-func writeBoolNSErrorMethod(w io.Writer, recv, recvExpr string, me methodEntry) {
+func writeBoolNSErrorMethod(w io.Writer, recv, recvExpr string, method methodModel) {
 	out, err := render.BoolNSErrorMethod(view.BoolNSErrorMethod{
-		DocComment: docLead(me.goName, me.doc, synthFallback(me.goName, docMethod)),
+		DocComment: docLead(method.goName, method.doc, synthFallback(method.goName, docMethod)),
 		Recv:       recv,
-		GoName:     me.goName,
+		GoName:     method.goName,
 		RecvExpr:   recvExpr,
-		Selector:   me.selector,
-		MainThread: me.mainThread,
+		Selector:   method.selector,
+		MainThread: method.mainThread,
 	})
 	if err != nil {
 		panic(err)
@@ -1002,21 +1002,21 @@ func writeBoolNSErrorMethod(w io.Writer, recv, recvExpr string, me methodEntry) 
 	_, _ = w.Write(out)
 }
 
-func writeSliceMethod(w io.Writer, recv, recvExpr string, me methodEntry) {
+func writeSliceMethod(w io.Writer, recv, recvExpr string, method methodModel) {
 	// The per-element conversion closure is an expression; the template wraps it
 	// with purego.NSArrayToSlice.
-	conv := fmt.Sprintf(me.sliceConvFmt, "_id")
-	convClosure := fmt.Sprintf("func(_id objc.ID) %s { return %s }", me.sliceElemGoType, conv)
+	conv := fmt.Sprintf(method.sliceElementConversionFormat, "_id")
+	convClosure := fmt.Sprintf("func(_id objc.ID) %s { return %s }", method.sliceElemGoType, conv)
 	out, err := render.SliceMethod(view.SliceMethod{
-		DocComment:  docLeadKind(me.goName, me.doc, synthFallback(me.goName, docGetter), docGetter),
+		DocComment:  docLeadKind(method.goName, method.doc, synthFallback(method.goName, docGetter), docGetter),
 		Recv:        recv,
-		GoName:      me.goName,
+		GoName:      method.goName,
 		RecvExpr:    recvExpr,
-		Selector:    me.selector,
-		ElemGoType:  me.sliceElemGoType,
-		HasError:    me.sliceHasError,
+		Selector:    method.selector,
+		ElemGoType:  method.sliceElemGoType,
+		HasError:    method.sliceHasError,
 		ConvClosure: convClosure,
-		MainThread:  me.mainThread,
+		MainThread:  method.mainThread,
 	})
 	if err != nil {
 		panic(err)

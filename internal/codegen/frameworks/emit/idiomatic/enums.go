@@ -27,19 +27,19 @@ func emitEnums(
 	fc *frameworkContext,
 	takenNames map[string]bool,
 ) error {
-	fw := fc.fw
+	framework := fc.framework
 	// Index the framework's exported, available named enums by Go type name,
 	// derived exactly like the raw emitter (naming.GoTypeName on the enum key).
 	enumsByGoType := make(map[string]meta.Enum)
-	for key, e := range fw.Enums {
-		if e.Availability.IsUnavailable || e.IsAnon {
+	for key, enum := range framework.Enums {
+		if enum.Availability.IsUnavailable || enum.IsAnon {
 			continue
 		}
 		goType := naming.GoTypeName(key)
 		if !isExportedGoIdent(goType) {
 			continue
 		}
-		enumsByGoType[goType] = e
+		enumsByGoType[goType] = enum
 	}
 	if len(enumsByGoType) == 0 {
 		return nil
@@ -121,50 +121,50 @@ func emitEnums(
 // the raw emitter's decisions: underlying type via emit.MapEnumGoType +
 // UpgradeEnumTypeIfOverflow, names via naming.GoTypeName, (name,value) dedup for
 // the const block, and value dedup for the String() switch.
-func buildEnumView(goName string, e meta.Enum, prefix string) view.Enum {
-	goType := e.GoType
+func buildEnumView(goName string, enum meta.Enum, prefix string) view.Enum {
+	goType := enum.GoType
 	if goType == "" {
 		goType = "int64"
 	}
 	goType = emit.MapEnumGoType(goType)
-	goType = emit.UpgradeEnumTypeIfOverflow(goType, e.Members)
+	goType = emit.UpgradeEnumTypeIfOverflow(goType, enum.Members)
 
 	type nv struct{ name, value string }
 	seen := map[nv]bool{}
 	var members []view.EnumMember
-	for _, m := range e.Members {
-		if m.Availability.IsUnavailable {
+	for _, member := range enum.Members {
+		if member.Availability.IsUnavailable {
 			continue
 		}
-		constName := deprefixEnumName(naming.GoTypeName(m.Name), prefix)
-		k := nv{constName, m.Value}
+		constName := deprefixEnumName(naming.GoTypeName(member.Name), prefix)
+		k := nv{constName, member.Value}
 		if seen[k] {
 			continue
 		}
 		seen[k] = true
 		members = append(members, view.EnumMember{
 			ConstName:    constName,
-			Value:        m.Value,
-			CommentBlock: renderEnumComment(m.Doc, m.Availability, "\t"),
-			IsZeroVal:    m.Value == "0",
+			Value:        member.Value,
+			CommentBlock: renderEnumComment(member.Doc, member.Availability, "\t"),
+			IsZeroVal:    member.Value == "0",
 		})
 	}
 
 	seenVal := map[string]bool{}
 	var unique []view.EnumMember
-	for _, m := range members {
-		if seenVal[m.Value] {
+	for _, member := range members {
+		if seenVal[member.Value] {
 			continue
 		}
-		seenVal[m.Value] = true
-		unique = append(unique, m)
+		seenVal[member.Value] = true
+		unique = append(unique, member)
 	}
 
 	return view.Enum{
 		GoName:        goName,
 		GoType:        goType,
-		IsBitmask:     e.IsBitmask,
-		CommentBlock:  renderEnumComment(e.Doc, e.Availability, ""),
+		IsBitmask:     enum.IsBitmask,
+		CommentBlock:  renderEnumComment(enum.Doc, enum.Availability, ""),
 		Members:       members,
 		UniqueMembers: unique,
 		DefaultFmt:    goName + "(%d)",

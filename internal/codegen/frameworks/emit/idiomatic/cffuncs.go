@@ -34,7 +34,7 @@ func isCFErrorOutParam(objcType string) bool {
 }
 
 // emitFunctionWrappers writes <pkgname>_functions_generated.go for any functions
-// in fw whose last parameter is a CFErrorRef * out-parameter. Each wrapper:
+// in framework whose last parameter is a CFErrorRef * out-parameter. Each wrapper:
 //   - Omits the error out-parameter from its Go signature
 //   - Passes unsafe.Pointer(&_cfErr) internally to the raw function
 //   - Returns error on failure, reading the CFErrorRef as an NSError
@@ -47,13 +47,13 @@ func isCFErrorOutParam(objcType string) bool {
 func emitFunctionWrappers(
 	outDir, pkgName, rawPkgAlias, rawPkgPath string,
 	fc *frameworkContext,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 	trialNames trialNameMap,
 ) (map[string]bool, error) {
 	_ = rawPkgAlias
 	_ = rawPkgPath
-	fw := fc.fw
-	ctx := typemap.Context{Framework: fw.Framework}
+	framework := fc.framework
+	ctx := typemap.Context{Framework: framework.Framework}
 
 	emittedNames := make(map[string]bool)
 	// Every CFError wrapper binds the symbol (ebipurego), holds the CFErrorRef
@@ -67,7 +67,7 @@ func emitFunctionWrappers(
 	}
 
 	var funcs []view.Func
-	for _, fn := range emit.EmittableFunctions(fw, nil) {
+	for _, fn := range emit.EmittableFunctions(framework, nil) {
 		if len(fn.Params) == 0 || !isCFErrorOutParam(fn.Params[len(fn.Params)-1].ObjCType) {
 			continue
 		}
@@ -77,8 +77,8 @@ func emitFunctionWrappers(
 		fnImports := map[string]string{}
 		ok := true
 		usedNames := make(map[string]int)
-		for _, p := range fn.Params[:len(fn.Params)-1] {
-			pName := safeParamName(naming.ParamName(p.Name))
+		for _, param := range fn.Params[:len(fn.Params)-1] {
+			pName := safeParamName(naming.ParamName(param.Name))
 			if pName == "" {
 				pName = fmt.Sprintf("arg%d", len(sigParts))
 			}
@@ -86,11 +86,11 @@ func emitFunctionWrappers(
 			if usedNames[pName] > 1 {
 				pName = fmt.Sprintf("%s%d", pName, usedNames[pName])
 			}
-			sig, argExpr, imps, pok := idiomaticArg(
+			sig, argExpr, imports, pok := idiomaticArg(
 				pName,
-				p.ObjCType,
+				param.ObjCType,
 				ctx,
-				m,
+				mapper,
 				fc,
 				rawPkgAlias,
 				trialNames,
@@ -99,15 +99,15 @@ func emitFunctionWrappers(
 				ok = false
 				break
 			}
-			maps.Copy(fnImports, imps)
+			maps.Copy(fnImports, imports)
 			sigParts = append(sigParts, pName+" "+sig)
 			abiParts = append(abiParts, cfuncABIType(sig, argExpr))
 			callArgs = append(callArgs, argExpr)
 		}
 		if !ok {
-			m.AppendDiagnostic(
+			mapper.AppendDiagnostic(
 				"%s: idiomatic wrapper for %s left out (a parameter type is not yet expressible)",
-				fw.Framework,
+				framework.Framework,
 				fn.Name,
 			)
 			continue
@@ -129,7 +129,7 @@ func emitFunctionWrappers(
 		)
 
 		retObjC := strings.TrimSpace(fn.Return.ObjCType)
-		goRet := m.GoType(fn.Return.ObjCType, ctx, make(typemap.ImportSet))
+		goRet := mapper.GoType(fn.Return.ObjCType, ctx, make(typemap.ImportSet))
 		retIsBool := retObjC == "bool" || retObjC == "BOOL" || retObjC == "_Bool" ||
 			retObjC == "Boolean" || goRet == "bool"
 
@@ -140,7 +140,7 @@ func emitFunctionWrappers(
 		comment := fmt.Sprintf(
 			"// %s reports an error if the %s framework function %s fails.\n",
 			goName,
-			fw.Framework,
+			framework.Framework,
 			fn.Name,
 		)
 		if retIsBool {

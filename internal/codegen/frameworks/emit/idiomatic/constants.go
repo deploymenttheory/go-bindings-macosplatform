@@ -28,17 +28,17 @@ import (
 // mirrored here) so the generated body always references a real raw accessor.
 func emitConstants(
 	outDir, pkgName, rawPkgAlias, rawPkgPath string,
-	fw *meta.FrameworkMeta,
-	m *typemap.Mapper,
+	framework *meta.FrameworkMeta,
+	mapper *typemap.Mapper,
 	handFuncs, takenNames map[string]bool,
 	trialNames trialNameMap,
 ) error {
-	ctx := typemap.Context{Framework: fw.Framework}
+	ctx := typemap.Context{Framework: framework.Framework}
 	// Mirror EmitExterns' name reservations: an extern is skipped when its C name
 	// collides with a function (raw or exported Go name), or its Go accessor name
 	// duplicates another extern's.
-	funcNames := make(map[string]bool, len(fw.Functions)*2)
-	for _, fn := range fw.Functions {
+	funcNames := make(map[string]bool, len(framework.Functions)*2)
+	for _, fn := range framework.Functions {
 		funcNames[fn.Name] = true
 		if goName := naming.ExportedFunctionName(fn.Name); goName != "" {
 			funcNames[goName] = true
@@ -53,7 +53,7 @@ func emitConstants(
 	// pointer globals.
 	var cfRefs, strItems, strIDs, classItems []view.Constant
 
-	for _, ext := range fw.Externs {
+	for _, ext := range framework.Externs {
 		if ext.Availability.IsUnavailable || seen[ext.Name] || funcNames[ext.Name] {
 			continue
 		}
@@ -70,20 +70,20 @@ func emitConstants(
 		// accessors instead (the *String wrapper and StringFromID are foundation
 		// -local and not imported cross-package), which is exactly what callers
 		// need for an NSAboutPanelOptionKey / NSPasteboardType dictionary key.
-		isFoundationString := pkgName == foundationPkgName && externIsNSString(ext, m, ctx)
+		isFoundationString := pkgName == foundationPkgName && externIsNSString(ext, mapper, ctx)
 		isObjcIDString, typedString := false, false
 		isObjcClass, objcIdiomaticType := false, ""
 		if pkgName != foundationPkgName {
 			rawGoType := ext.GoType
 			if rawGoType == "" {
-				rawGoType = m.GoType(ext.ObjCType, ctx, make(typemap.ImportSet))
+				rawGoType = mapper.GoType(ext.ObjCType, ctx, make(typemap.ImportSet))
 			}
 			switch {
 			case strings.Contains(rawGoType, "NSString") && !strings.Contains(rawGoType, "**"):
 				// Raw emitted a typed *NSString accessor (already dereferenced);
 				// take its objc.ID via .Ptr().
 				isObjcIDString, typedString = true, true
-			case (rawGoType == "" || rawGoType == "unsafe.Pointer") && externNSStringViaTypedef(ext, fw):
+			case (rawGoType == "" || rawGoType == "unsafe.Pointer") && externNSStringViaTypedef(ext, framework):
 				// Raw could not resolve the type (e.g. `API_AVAILABLE const
 				// NSAboutPanelOptionKey`) so it emitted a uintptr symbol-address
 				// accessor; CFConstant dereferences it to the NSString objc.ID.
@@ -206,10 +206,10 @@ const foundationPkgName = "foundation"
 // mapper resolves to *NSString). The Go type is resolved the same way the raw
 // externs emitter does (ext.GoType, else the mapper). Pointer-to-pointer
 // out-parameters (containing "**") are excluded.
-func externIsNSString(ext meta.Extern, m *typemap.Mapper, ctx typemap.Context) bool {
+func externIsNSString(ext meta.Extern, mapper *typemap.Mapper, ctx typemap.Context) bool {
 	goType := ext.GoType
 	if goType == "" {
-		goType = m.GoType(ext.ObjCType, ctx, make(typemap.ImportSet))
+		goType = mapper.GoType(ext.ObjCType, ctx, make(typemap.ImportSet))
 	}
 	if strings.Contains(goType, "**") || !strings.Contains(goType, "*") {
 		return false
@@ -222,18 +222,18 @@ func externIsNSString(ext meta.Extern, m *typemap.Mapper, ctx typemap.Context) b
 // NSAboutPanelOptionKey`, where NSAboutPanelOptionKey is typedef'd to
 // `NSString *`). It is used for externs the mapper could not type, which the raw
 // layer emitted as bare uintptr symbol-address accessors.
-func externNSStringViaTypedef(ext meta.Extern, fw *meta.FrameworkMeta) bool {
+func externNSStringViaTypedef(ext meta.Extern, framework *meta.FrameworkMeta) bool {
 	for _, tok := range strings.Fields(ext.ObjCType) {
-		if resolvesToNSString(strings.TrimSuffix(tok, "*"), fw, map[string]bool{}) {
+		if resolvesToNSString(strings.TrimSuffix(tok, "*"), framework, map[string]bool{}) {
 			return true
 		}
 	}
 	return false
 }
 
-// resolvesToNSString walks fw.Typedefs from name, reporting whether it reaches
+// resolvesToNSString walks framework.Typedefs from name, reporting whether it reaches
 // the NSString class. seen guards against typedef cycles.
-func resolvesToNSString(name string, fw *meta.FrameworkMeta, seen map[string]bool) bool {
+func resolvesToNSString(name string, framework *meta.FrameworkMeta, seen map[string]bool) bool {
 	name = strings.TrimSpace(name)
 	if name == "" || seen[name] {
 		return false
@@ -242,13 +242,13 @@ func resolvesToNSString(name string, fw *meta.FrameworkMeta, seen map[string]boo
 	if name == "NSString" {
 		return true
 	}
-	next, ok := fw.Typedefs[name]
+	next, ok := framework.Typedefs[name]
 	if !ok {
 		return false
 	}
 	next = strings.TrimPrefix(strings.TrimSpace(next), "const ")
 	for _, tok := range strings.Fields(next) {
-		if resolvesToNSString(strings.TrimSuffix(tok, "*"), fw, seen) {
+		if resolvesToNSString(strings.TrimSuffix(tok, "*"), framework, seen) {
 			return true
 		}
 	}

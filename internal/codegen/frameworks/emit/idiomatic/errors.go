@@ -29,19 +29,19 @@ import (
 // allowing errors.Is(err, virtualization.ErrInternalError).
 func emitErrorSentinels(
 	outDir, pkgName string,
-	fw *meta.FrameworkMeta,
+	framework *meta.FrameworkMeta,
 	takenNames map[string]bool,
 ) error {
-	keys := make([]string, 0, len(fw.Enums))
-	for key := range fw.Enums {
+	keys := make([]string, 0, len(framework.Enums))
+	for key := range framework.Enums {
 		keys = append(keys, key)
 	}
 	sort.Strings(keys)
 
 	var sentinels []view.ErrorSentinel
 	for _, key := range keys {
-		e := fw.Enums[key]
-		if e.Availability.IsUnavailable || e.IsAnon {
+		enum := framework.Enums[key]
+		if enum.Availability.IsUnavailable || enum.IsAnon {
 			continue
 		}
 		goType := naming.GoTypeName(key)
@@ -52,7 +52,7 @@ func emitErrorSentinels(
 		memberPrefix := strings.TrimSuffix(goType, "Code")      // VZError
 
 		seenValue := map[string]bool{}
-		for _, mem := range e.Members {
+		for _, mem := range enum.Members {
 			if mem.Availability.IsUnavailable || seenValue[mem.Value] {
 				continue
 			}
@@ -72,7 +72,7 @@ func emitErrorSentinels(
 				CommentBlock: fmt.Sprintf(
 					"// %s matches the %s error %s.\n",
 					sentinel,
-					fw.Framework,
+					framework.Framework,
 					mem.Name,
 				),
 				Domain: domain,

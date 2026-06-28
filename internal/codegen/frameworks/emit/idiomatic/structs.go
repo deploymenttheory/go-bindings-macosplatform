@@ -42,10 +42,10 @@ var goPrimitives = map[string]bool{
 func resolveStructFields(
 	s meta.Struct,
 	ctx typemap.Context,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 ) (names, goTypes []string, ok bool) {
 	for _, f := range s.Fields {
-		gt := m.GoType(f.ObjCType, ctx, make(typemap.ImportSet))
+		gt := mapper.GoType(f.ObjCType, ctx, make(typemap.ImportSet))
 		if gt == "" {
 			return nil, nil, false
 		}
@@ -63,17 +63,17 @@ func resolveStructFields(
 // cross-framework references, so a reference never names a struct that was
 // skipped. An enum-typed field is allowed when the enum is one the same framework
 // emits locally (see ComputeEmittableStructs).
-func ComputeEmittableStructs(frameworks []*meta.FrameworkMeta, m *typemap.Mapper) map[string]bool {
+func ComputeEmittableStructs(frameworks []*meta.FrameworkMeta, mapper *typemap.Mapper) map[string]bool {
 	// Per-framework own-enum names (bare), so an enum-typed field is accepted only
 	// when the enum belongs to the same framework as the struct — the only case the
 	// idiomatic package emits a local definition for (registerLocalStructEnumRefs).
 	ownEnumsByFw := make(map[string]map[string]bool, len(frameworks))
 	resolved := make(map[string][]string) // struct Go name → field Go types
 	structFw := make(map[string]string)   // struct Go name → owning framework
-	for _, fw := range frameworks {
-		ownEnumsByFw[fw.Framework] = buildOwnEnumNames(fw)
-		ctx := typemap.Context{Framework: fw.Framework}
-		for name, s := range fw.Structs {
+	for _, framework := range frameworks {
+		ownEnumsByFw[framework.Framework] = buildOwnEnumNames(framework)
+		ctx := typemap.Context{Framework: framework.Framework}
+		for name, s := range framework.Structs {
 			if s.Availability.IsUnavailable || len(s.Fields) == 0 {
 				continue
 			}
@@ -84,9 +84,9 @@ func ComputeEmittableStructs(frameworks []*meta.FrameworkMeta, m *typemap.Mapper
 			if _, dup := resolved[goName]; dup {
 				continue
 			}
-			if _, goTypes, ok := resolveStructFields(s, ctx, m); ok {
+			if _, goTypes, ok := resolveStructFields(s, ctx, mapper); ok {
 				resolved[goName] = goTypes
-				structFw[goName] = fw.Framework
+				structFw[goName] = framework.Framework
 			}
 		}
 	}
@@ -128,17 +128,17 @@ func ComputeEmittableStructs(frameworks []*meta.FrameworkMeta, m *typemap.Mapper
 // Hv_exit_reason_t) as referenced, so emitEnums — which runs before
 // emitStructTypeAliases — emits a local definition and the struct field names a
 // hermetic local type rather than the raw package's.
-func registerLocalStructEnumRefs(fc *frameworkContext, m *typemap.Mapper) {
-	ctx := typemap.Context{Framework: fc.fw.Framework}
-	for name, s := range fc.fw.Structs {
+func registerLocalStructEnumRefs(fc *frameworkContext, mapper *typemap.Mapper) {
+	ctx := typemap.Context{Framework: fc.framework.Framework}
+	for name, s := range fc.framework.Structs {
 		if s.Availability.IsUnavailable || len(s.Fields) == 0 {
 			continue
 		}
 		goName := naming.ExportedTypeName(name)
-		if !m.EmittableStructs[goName] {
+		if !mapper.EmittableStructs[goName] {
 			continue
 		}
-		_, goTypes, ok := resolveStructFields(s, ctx, m)
+		_, goTypes, ok := resolveStructFields(s, ctx, mapper)
 		if !ok {
 			continue
 		}
@@ -153,20 +153,20 @@ func registerLocalStructEnumRefs(fc *frameworkContext, m *typemap.Mapper) {
 func emitStructTypeAliases(
 	outDir, pkgName, rawPkgAlias, rawPkgPath string,
 	fc *frameworkContext,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 	takenNames map[string]bool,
 ) error {
 	_ = rawPkgAlias
 	_ = rawPkgPath
-	fw := fc.fw
-	ctx := typemap.Context{Framework: fw.Framework}
+	framework := fc.framework
+	ctx := typemap.Context{Framework: framework.Framework}
 
 	type structDef struct {
 		fieldNames, fieldTypes []string
 		doc                    string
 	}
 	defs := make(map[string]structDef)
-	for name, s := range fw.Structs {
+	for name, s := range framework.Structs {
 		if s.Availability.IsUnavailable || len(s.Fields) == 0 {
 			continue
 		}
@@ -177,7 +177,7 @@ func emitStructTypeAliases(
 		if _, dup := defs[goName]; dup {
 			continue
 		}
-		if names, goTypes, ok := resolveStructFields(s, ctx, m); ok {
+		if names, goTypes, ok := resolveStructFields(s, ctx, mapper); ok {
 			defs[goName] = structDef{fieldNames: names, fieldTypes: goTypes, doc: s.Doc}
 		}
 	}
@@ -194,7 +194,7 @@ func emitStructTypeAliases(
 	for _, goName := range names {
 		// Emit only structs in the global emittable set, so this definition and
 		// any cross-framework reference to it agree.
-		if !m.EmittableStructs[goName] || takenNames[goName] {
+		if !mapper.EmittableStructs[goName] || takenNames[goName] {
 			continue
 		}
 		takenNames[goName] = true

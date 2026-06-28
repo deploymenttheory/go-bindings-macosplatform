@@ -16,29 +16,29 @@ import (
 // buildConstructors assembles the constructor entries for a class: one per
 // parameterised init, plus a plain +new constructor when appropriate.
 func buildConstructors(
-	cls meta.Class,
+	class meta.Class,
 	className, goTypeName string,
 	fc *frameworkContext,
 	ctx typemap.Context,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 	rawPkgAlias string,
 	trialNames trialNameMap,
 	abstractBases abstractBaseIndex,
-) []ctorEntry {
+) []constructorModel {
 	result := buildConstructorList(
-		cls,
+		class,
 		className,
 		goTypeName,
 		fc,
 		ctx,
-		m,
+		mapper,
 		rawPkgAlias,
 		trialNames,
 		abstractBases,
 	)
 	// A constructor of a @MainActor class allocates and initialises a UI object,
 	// which must happen on the main thread; the template wraps it in purego.Main.
-	if cls.IsMainThreadRequired {
+	if class.IsMainThreadRequired {
 		for i := range result {
 			result[i].mainThread = true
 			if result[i].extraImports == nil {
@@ -51,39 +51,39 @@ func buildConstructors(
 }
 
 func buildConstructorList(
-	cls meta.Class,
+	class meta.Class,
 	className, goTypeName string,
 	fc *frameworkContext,
 	ctx typemap.Context,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 	rawPkgAlias string,
 	trialNames trialNameMap,
 	abstractBases abstractBaseIndex,
-) []ctorEntry {
-	var ctors []ctorEntry
+) []constructorModel {
+	var ctors []constructorModel
 	hasExplicitParamInit := false
 
-	for _, method := range cls.Methods {
+	for _, method := range class.Methods {
 		if method.Availability.IsUnavailable || method.IsClassMethod || !method.IsInit {
 			continue
 		}
 		if len(method.Params) == 0 {
 			continue // plain init handled below as +new fallback
 		}
-		e := buildParamConstructor(
+		built := buildParamConstructor(
 			method,
 			goTypeName,
-			cls,
+			class,
 			fc,
 			ctx,
-			m,
+			mapper,
 			rawPkgAlias,
 			trialNames,
 			abstractBases,
 		)
-		if e != nil {
-			e.doc = method.Doc
-			ctors = append(ctors, *e)
+		if built != nil {
+			built.doc = method.Doc
+			ctors = append(ctors, *built)
 			hasExplicitParamInit = true
 		}
 	}
@@ -92,26 +92,26 @@ func buildConstructorList(
 	// already covers the no-arg case.
 	if !hasExplicitParamInit {
 		return append(
-			[]ctorEntry{buildNewConstructor(className, goTypeName, rawPkgAlias)},
+			[]constructorModel{buildNewConstructor(className, goTypeName, rawPkgAlias)},
 			ctors...)
 	}
 	// Still provide a plain constructor if there is a class-specific plain init too.
-	for _, method := range cls.Methods {
+	for _, method := range class.Methods {
 		if method.IsInit && len(method.Params) == 0 && !method.Availability.IsUnavailable {
 			return append(
-				[]ctorEntry{buildNewConstructor(className, goTypeName, rawPkgAlias)},
+				[]constructorModel{buildNewConstructor(className, goTypeName, rawPkgAlias)},
 				ctors...)
 		}
 	}
 	return ctors
 }
 
-type ctorEntry struct {
+type constructorModel struct {
 	goName          string
 	doc             string // Apple/header documentation for the underlying init
 	rawInitGoName   string // "" = use +new
 	rawInitSelector string // ObjC selector, e.g. "initWithURL:readOnly:error:"
-	params          []ctorParam
+	params          []constructorParamModel
 	hasNSError      bool
 	needsFoundation bool
 	mainThread      bool // run alloc/init on the main thread (@MainActor class)
@@ -121,16 +121,16 @@ type ctorEntry struct {
 	preamble string
 }
 
-type ctorParam struct {
-	goName   string
-	goType   string
-	rawExpr  string // expression passed to the raw init method
-	isObject bool   // true when the param is an ObjC object (send .Ptr())
+type constructorParamModel struct {
+	goName        string
+	goType        string
+	rawExpression string // expression passed to the raw init method
+	isObject      bool   // true when the param is an ObjC object (send .Ptr())
 }
 
 // buildNewConstructor generates a plain +new constructor: New<Type>() *Type.
-func buildNewConstructor(_, goTypeName, _ string) ctorEntry {
-	return ctorEntry{
+func buildNewConstructor(_, goTypeName, _ string) constructorModel {
+	return constructorModel{
 		goName:        "New" + goTypeName,
 		rawInitGoName: "", // signals +new
 	}
@@ -143,25 +143,25 @@ func buildParamConstructor(
 	_ meta.Class,
 	fc *frameworkContext,
 	ctx typemap.Context,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 	rawPkgAlias string,
 	trialNames trialNameMap,
 	_ abstractBaseIndex,
-) *ctorEntry {
+) *constructorModel {
 	rawInit := naming.MethodName(method.Selector)
 	extraImports := map[string]string{}
 
-	var params []ctorParam
-	for i, p := range method.Params {
-		pName := safeParamName(naming.ParamName(p.Name))
+	var params []constructorParamModel
+	for i, param := range method.Params {
+		pName := safeParamName(naming.ParamName(param.Name))
 		if pName == "" {
 			pName = fmt.Sprintf("arg%d", i)
 		}
-		sig, argExpr, imps, ok := idiomaticArg(
+		sig, argExpr, imports, ok := idiomaticArg(
 			pName,
-			p.ObjCType,
+			param.ObjCType,
 			ctx,
-			m,
+			mapper,
 			fc,
 			rawPkgAlias,
 			trialNames,
@@ -171,11 +171,11 @@ func buildParamConstructor(
 			// runtime type; drop this constructor rather than leak one.
 			return nil
 		}
-		maps.Copy(extraImports, imps)
-		params = append(params, ctorParam{goName: pName, goType: sig, rawExpr: argExpr})
+		maps.Copy(extraImports, imports)
+		params = append(params, constructorParamModel{goName: pName, goType: sig, rawExpression: argExpr})
 	}
 
-	return &ctorEntry{
+	return &constructorModel{
 		goName:          applyInitialisms("New" + goTypeName + strings.TrimPrefix(rawInit, "Init")),
 		rawInitGoName:   rawInit,
 		rawInitSelector: method.Selector,
@@ -188,15 +188,15 @@ func buildParamConstructor(
 func writeConstructor(
 	w io.Writer,
 	goTypeName, rawPkgAlias, className, genericArgs string,
-	c ctorEntry,
+	c constructorModel,
 ) {
 	_ = rawPkgAlias
 	_ = genericArgs
 	adoptFn := adoptHelperName(goTypeName)
 
 	paramParts := make([]string, 0, len(c.params))
-	for _, p := range c.params {
-		paramParts = append(paramParts, p.goName+" "+p.goType)
+	for _, param := range c.params {
+		paramParts = append(paramParts, param.goName+" "+param.goType)
 	}
 
 	retStr := "*" + goTypeName
@@ -222,8 +222,8 @@ func writeConstructor(
 		// alloc + send the init selector directly via objc.Send[objc.ID],
 		// bypassing the raw init method's return type (objc.ID or *T).
 		sendArgs := make([]string, 0, len(c.params))
-		for _, p := range c.params {
-			sendArgs = append(sendArgs, ctorParamSendExpr(p))
+		for _, param := range c.params {
+			sendArgs = append(sendArgs, ctorParamSendExpr(param))
 		}
 		allArgs := append(
 			[]string{"_alloc", fmt.Sprintf("objc.RegisterName(%q)", c.rawInitSelector)},
@@ -257,14 +257,14 @@ type constructorView struct {
 // ctorParamSendExpr returns the expression for passing a constructor parameter
 // to the Objective-C init call. The parameter's value is already converted to an
 // Objective-C-compatible form, so it is passed unchanged.
-func ctorParamSendExpr(p ctorParam) string {
-	return p.rawExpr
+func ctorParamSendExpr(param constructorParamModel) string {
+	return param.rawExpression
 }
 
 // isObjectPointerType reports whether a resolved Go type is a single pointer to
 // an ObjC class (and therefore has a Ptr() method). Pointers to primitives or C
 // structs (e.g. *uint8, *raw.IOUSBHostCIMessage) are not objects.
-func isObjectPointerType(goType string, m *typemap.Mapper) bool {
+func isObjectPointerType(goType string, mapper *typemap.Mapper) bool {
 	if !strings.HasPrefix(goType, "*") {
 		return false
 	}
@@ -278,6 +278,6 @@ func isObjectPointerType(goType string, m *typemap.Mapper) bool {
 	if idx := strings.LastIndexByte(base, '.'); idx >= 0 {
 		base = base[idx+1:]
 	}
-	_, ok := m.OwnerIndex[base]
+	_, ok := mapper.OwnerIndex[base]
 	return ok
 }

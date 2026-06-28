@@ -1,0 +1,19 @@
+{{/*
+    struct.tmpl — raw purego emission of C/ObjC structs and typedef aliases.
+    A struct is an opaque `struct{}` when it has no fields, otherwise a field
+    list; a typedef alias is `type X = RHS`. All comment, naming, and type
+    decisions are made in the gather phase; the template is a pure shape and
+    gofmt canonicalises the result.
+*/}}
+{{define "structs"}}{{range .}}{{template "struct" .}}{{end}}{{end}}
+
+{{define "struct"}}{{.CommentBlock}}type {{.GoName}} struct{{if .IsOpaque}}{}
+{{else}} {
+{{range .Fields}}{{.GoName}} {{.GoType}}
+{{end}}}
+{{end}}
+{{end}}
+
+{{define "typedefs"}}{{range .}}{{.CommentBlock}}type {{.GoName}} = {{.RHS}}
+
+{{end}}{{end}}

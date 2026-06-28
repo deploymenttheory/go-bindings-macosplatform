@@ -22,11 +22,11 @@ import (
 func idiomaticBlockParam(
 	pName, blockType string,
 	ctx typemap.Context,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 	fc *frameworkContext,
 	rawPkgAlias string,
-) (sig, adapter string, imps map[string]string, ok bool) {
-	imps = map[string]string{"objc": objcImportPath}
+) (sig, adapter string, imports map[string]string, ok bool) {
+	imports = map[string]string{"objc": objcImportPath}
 	args := parseBlockObjCParams(blockType)
 
 	var goParams, abiParams, callArgs []string
@@ -39,21 +39,21 @@ func idiomaticBlockParam(
 			goParams = append(goParams, "*bool")
 			abiParams = append(abiParams, v+" unsafe.Pointer")
 			callArgs = append(callArgs, "(*bool)("+v+")")
-			imps["unsafe"] = "unsafe"
+			imports["unsafe"] = "unsafe"
 			continue
 		}
 		gt := qualifyRaw(
-			m.GoType(a, ctx, make(typemap.ImportSet)),
+			mapper.GoType(a, ctx, make(typemap.ImportSet)),
 			fc,
 			rawPkgAlias,
 			ctx.GenericParams,
 		)
 		switch {
-		case gt == "objc.ID" || isObjectGoType(gt, m):
+		case gt == "objc.ID" || isObjectGoType(gt, mapper):
 			goParams = append(goParams, "obj.Object")
 			abiParams = append(abiParams, v+" objc.ID")
 			callArgs = append(callArgs, "obj.Wrap("+v+")")
-			imps["obj"], imps["objref"] = objImportPath, objrefImportPath
+			imports["obj"], imports["objref"] = objImportPath, objrefImportPath
 		case gt == "bool":
 			goParams = append(goParams, "bool")
 			abiParams = append(abiParams, v+" bool")
@@ -64,7 +64,7 @@ func idiomaticBlockParam(
 			abiParams = append(abiParams, v+" "+t)
 			callArgs = append(callArgs, v)
 		default:
-			return "", "", imps, false
+			return "", "", imports, false
 		}
 	}
 
@@ -83,7 +83,7 @@ func idiomaticBlockParam(
 		// An ordering or other integer result (e.g. NSComparisonResult).
 		goRetSig, abiRetSig, retPrefix = " int", " int", "return "
 	default:
-		return "", "", imps, false
+		return "", "", imports, false
 	}
 
 	sig = "func(" + strings.Join(goParams, ", ") + ")" + goRetSig
@@ -93,7 +93,7 @@ func idiomaticBlockParam(
 		adapter += ", " + strings.Join(abiParams, ", ")
 	}
 	adapter += ")" + abiRetSig + " { " + body + " })"
-	return sig, adapter, imps, true
+	return sig, adapter, imports, true
 }
 
 // idiomaticArg decides how one Objective-C method parameter appears in the
@@ -104,94 +104,94 @@ func idiomaticBlockParam(
 func idiomaticArg(
 	pName, objcType string,
 	ctx typemap.Context,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 	fc *frameworkContext,
 	rawPkgAlias string,
 	trialNames trialNameMap,
-) (sig, arg string, imps map[string]string, ok bool) {
-	imps = map[string]string{}
+) (sig, arg string, imports map[string]string, ok bool) {
+	imports = map[string]string{}
 	norm := normaliseObjC(objcType)
 	switch {
 	case isNSStringType(norm):
-		imps["purego"] = pureobjcImportPath
-		return "string", "purego.NSString(" + pName + ")", imps, true
+		imports["purego"] = pureobjcImportPath
+		return "string", "purego.NSString(" + pName + ")", imports, true
 	case isNSURLType(norm):
-		imps["rt"] = rtImportPath
-		return "string", "rt.FileURL(" + pName + ")", imps, true
+		imports["rt"] = rtImportPath
+		return "string", "rt.FileURL(" + pName + ")", imports, true
 	}
 	// A block parameter becomes a Go function.
 	if strings.Contains(objcType, "(^") {
-		sig, adapter, bimps, bok := idiomaticBlockParam(pName, objcType, ctx, m, fc, rawPkgAlias)
+		sig, adapter, bimps, bok := idiomaticBlockParam(pName, objcType, ctx, mapper, fc, rawPkgAlias)
 		if !bok {
-			return "", "", imps, false
+			return "", "", imports, false
 		}
-		maps.Copy(imps, bimps)
-		return sig, adapter, imps, true
+		maps.Copy(imports, bimps)
+		return sig, adapter, imports, true
 	}
 	// An array parameter is accepted as a Go slice and converted to an
 	// Objective-C array.
 	if looksLikeNSArray(objcType) {
 		if elemObjC := extractNSArrayElem(objcType); elemObjC != "" {
-			elemGo, _, toID, eimps := arrayElemConv(elemObjC, ctx, m, fc, rawPkgAlias, trialNames)
-			maps.Copy(imps, eimps)
+			elemGo, _, toID, eimps := arrayElemConv(elemObjC, ctx, mapper, fc, rawPkgAlias, trialNames)
+			maps.Copy(imports, eimps)
 			conv := "func(_v " + elemGo + ") objc.ID { return " + fmt.Sprintf(toID, "_v") + " }"
-			return "[]" + elemGo, "purego.SliceToNSArray(" + pName + ", " + conv + ")", imps, true
+			return "[]" + elemGo, "purego.SliceToNSArray(" + pName + ", " + conv + ")", imports, true
 		}
 	}
 	impSet := make(typemap.ImportSet)
 	goType := qualifyRaw(
-		rawParamGoType(objcType, ctx, m, impSet),
+		rawParamGoType(objcType, ctx, mapper, impSet),
 		fc,
 		rawPkgAlias,
 		ctx.GenericParams,
 	)
 	if goType == "" {
-		return "", "", imps, false
+		return "", "", imports, false
 	}
 	// A CoreFoundation reference that is a pointer is a toll-free-bridged object.
 	// (Some "…Ref" types are really integer handles, e.g. MIDIObjectRef; those
 	// resolve to a number and are handled as scalars below.)
-	if goType == "unsafe.Pointer" && isCFObjectType(objcType, m) {
-		imps["obj"] = objImportPath
-		imps["objref"] = objrefImportPath
-		return "obj.Object", "objref.IDOf(" + pName + ")", imps, true
+	if goType == "unsafe.Pointer" && isCFObjectType(objcType, mapper) {
+		imports["obj"] = objImportPath
+		imports["objref"] = objrefImportPath
+		return "obj.Object", "objref.IDOf(" + pName + ")", imports, true
 	}
 	// A bare host pointer input (e.g. void *addr in hv_vm_map) is passed through
 	// unchanged. cfuncABIType keeps it as unsafe.Pointer, matching the raw binding.
 	// Pointer out-parameters are lifted to return values before idiomaticArg runs,
 	// so an unsafe.Pointer reaching here is a genuine input pointer.
 	if goType == "unsafe.Pointer" {
-		imps["unsafe"] = "unsafe"
-		return "unsafe.Pointer", pName, imps, true
+		imports["unsafe"] = "unsafe"
+		return "unsafe.Pointer", pName, imports, true
 	}
 	if sigEnum, _, isEnum := localizeEnumType(goType, fc, rawPkgAlias); isEnum {
 		// A Go enum type is an integer; pass it to the call unchanged.
-		return sigEnum, pName, imps, true
+		return sigEnum, pName, imports, true
 	}
 	if base, has := trialWrapClass(goType, rawPkgAlias); has {
 		if tt, named := trialNames[base]; named {
-			imps["objref"] = objrefImportPath
-			return "*" + tt, "objref.IDOf(" + pName + ")", imps, true
+			imports["objref"] = objrefImportPath
+			return "*" + tt, "objref.IDOf(" + pName + ")", imports, true
 		}
 	}
-	if isObjectGoType(goType, m) {
-		imps["obj"] = objImportPath
-		imps["objref"] = objrefImportPath
-		return "obj.Object", "objref.IDOf(" + pName + ")", imps, true
+	if isObjectGoType(goType, mapper) {
+		imports["obj"] = objImportPath
+		imports["objref"] = objrefImportPath
+		return "obj.Object", "objref.IDOf(" + pName + ")", imports, true
 	}
 	if sname, ok := localValueStructName(goType, fc, rawPkgAlias); ok {
 		// A value struct is passed to Objective-C by value, unchanged.
-		return sname, pName, imps, true
+		return sname, pName, imports, true
 	}
-	if sname, simps, ok := crossFrameworkValueStruct(goType, m, rawPkgAlias); ok {
+	if sname, simps, ok := crossFrameworkValueStruct(goType, mapper, rawPkgAlias); ok {
 		// A value struct owned by another framework, passed by value.
-		maps.Copy(imps, simps)
-		return sname, pName, imps, true
+		maps.Copy(imports, simps)
+		return sname, pName, imports, true
 	}
 	if isHermeticScalar(goType) {
-		return goSizeType(goType), pName, imps, true
+		return goSizeType(goType), pName, imports, true
 	}
-	return "", "", imps, false
+	return "", "", imports, false
 }
 
 // outParamGoType reports whether objcType is a value out-parameter — a pointer
@@ -207,7 +207,7 @@ func idiomaticArg(
 func outParamGoType(
 	objcType string,
 	ctx typemap.Context,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 	fc *frameworkContext,
 	rawPkgAlias string,
 	allowStructOut bool,
@@ -218,7 +218,7 @@ func outParamGoType(
 		return "", false
 	}
 	resolved := qualifyRaw(
-		rawParamGoType(objcType, ctx, m, make(typemap.ImportSet)),
+		rawParamGoType(objcType, ctx, mapper, make(typemap.ImportSet)),
 		fc,
 		rawPkgAlias,
 		ctx.GenericParams,
@@ -254,7 +254,7 @@ func outParamGoType(
 	if allowStructOut && strings.HasPrefix(base, rawPkgAlias+".") {
 		sname := base[len(rawPkgAlias)+1:]
 		if sname != "" && !strings.ContainsAny(sname, ".*[]") &&
-			fc.ownTypes[sname] && m.EmittableStructs[sname] {
+			fc.ownTypes[sname] && mapper.EmittableStructs[sname] {
 			if strings.Count(objcType, "*") >= 2 {
 				return "*" + sname, true
 			}
@@ -297,86 +297,86 @@ func goSizeType(goType string) string {
 func idiomaticRet(
 	objcType string,
 	ctx typemap.Context,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 	fc *frameworkContext,
 	rawPkgAlias string,
 	trialNames trialNameMap,
-) (retType string, kind objKind, wrap, sendType string, imps map[string]string, ok bool) {
-	imps = map[string]string{}
+) (retType string, kind objKind, wrap, sendType string, imports map[string]string, ok bool) {
+	imports = map[string]string{}
 	ret := strings.TrimSpace(objcType)
 	if ret == "" || ret == "void" {
 		// A void method still needs a type for the call; the result is discarded.
-		return "", kindVoid, "", "objc.ID", imps, true
+		return "", kindVoid, "", "objc.ID", imports, true
 	}
 	if isNSStringType(normaliseObjC(objcType)) {
-		imps["purego"] = pureobjcImportPath
-		return "string", kindString, "", "objc.ID", imps, true
+		imports["purego"] = pureobjcImportPath
+		return "string", kindString, "", "objc.ID", imports, true
 	}
 	// An array return is surfaced as a Go slice.
 	if looksLikeNSArray(objcType) {
 		if elemObjC := extractNSArrayElem(objcType); elemObjC != "" {
-			elemGo, fromID, _, eimps := arrayElemConv(elemObjC, ctx, m, fc, rawPkgAlias, trialNames)
+			elemGo, fromID, _, eimps := arrayElemConv(elemObjC, ctx, mapper, fc, rawPkgAlias, trialNames)
 			// Only the element fromID conversion (obj.Wrap / <T>FromID /
 			// purego.GoString) runs on a return; objref.IDOf belongs to the
 			// parameter (toID) direction, so it is not imported here.
 			delete(eimps, "objref")
-			maps.Copy(imps, eimps)
+			maps.Copy(imports, eimps)
 			conv := "func(_id objc.ID) " + elemGo + " { return " + fmt.Sprintf(fromID, "_id") + " }"
 			wrap := "purego.NSArrayToSlice(%s, " + conv + ")"
-			return "[]" + elemGo, kindArray, wrap, "objc.ID", imps, true
+			return "[]" + elemGo, kindArray, wrap, "objc.ID", imports, true
 		}
 	}
-	if _, isBlock := m.ResolveBlockSignature(ret); isBlock {
-		return "", kindVoid, "", "", imps, false
+	if _, isBlock := mapper.ResolveBlockSignature(ret); isBlock {
+		return "", kindVoid, "", "", imports, false
 	}
 	impSet := make(typemap.ImportSet)
-	goRet := qualifyRaw(m.GoReturnType(objcType, ctx, impSet), fc, rawPkgAlias, ctx.GenericParams)
+	goRet := qualifyRaw(mapper.GoReturnType(objcType, ctx, impSet), fc, rawPkgAlias, ctx.GenericParams)
 	if goRet == "" {
-		return "", kindVoid, "", "", imps, false
+		return "", kindVoid, "", "", imports, false
 	}
 	// A CoreFoundation reference that is a pointer is a toll-free-bridged object;
 	// integer-handle "…Ref" types fall through to the scalar case.
-	if goRet == "unsafe.Pointer" && isCFObjectType(objcType, m) {
-		imps["obj"] = objImportPath
-		return "obj.Object", kindObject, "obj.Wrap(%s)", "objc.ID", imps, true
+	if goRet == "unsafe.Pointer" && isCFObjectType(objcType, mapper) {
+		imports["obj"] = objImportPath
+		return "obj.Object", kindObject, "obj.Wrap(%s)", "objc.ID", imports, true
 	}
 	// An os_object handle returned already retained (OS_OBJECT_RETURNS_RETAINED,
 	// e.g. hv_vm_config_create) is surfaced as obj.Object and ADOPTED — obj.Adopt
 	// takes ownership of the +1 reference without retaining a second time.
 	if goRet == "unsafe.Pointer" && isOSObjectReturn(objcType) {
-		imps["obj"] = objImportPath
-		return "obj.Object", kindObject, "obj.Adopt(%s)", "objc.ID", imps, true
+		imports["obj"] = objImportPath
+		return "obj.Object", kindObject, "obj.Adopt(%s)", "objc.ID", imports, true
 	}
 	if goRet == "bool" {
-		return "bool", kindBool, "", "bool", imps, true
+		return "bool", kindBool, "", "bool", imports, true
 	}
 	if sigEnum, _, isEnum := localizeEnumType(goRet, fc, rawPkgAlias); isEnum {
-		return sigEnum, kindEnum, "", sigEnum, imps, true
+		return sigEnum, kindEnum, "", sigEnum, imports, true
 	}
 	if base, has := trialWrapClass(goRet, rawPkgAlias); has {
 		if tt, named := trialNames[base]; named {
-			imps["objref"] = objrefImportPath
-			return "*" + tt, kindObject, tt + "FromID(%s)", "objc.ID", imps, true
+			imports["objref"] = objrefImportPath
+			return "*" + tt, kindObject, tt + "FromID(%s)", "objc.ID", imports, true
 		}
 	}
-	if isObjectGoType(goRet, m) {
-		imps["obj"] = objImportPath
-		return "obj.Object", kindObject, "obj.Wrap(%s)", "objc.ID", imps, true
+	if isObjectGoType(goRet, mapper) {
+		imports["obj"] = objImportPath
+		return "obj.Object", kindObject, "obj.Wrap(%s)", "objc.ID", imports, true
 	}
 	if sname, ok := localValueStructName(goRet, fc, rawPkgAlias); ok {
 		// A value struct is returned by value, unchanged.
-		return sname, kindScalar, "", sname, imps, true
+		return sname, kindScalar, "", sname, imports, true
 	}
-	if sname, simps, ok := crossFrameworkValueStruct(goRet, m, rawPkgAlias); ok {
+	if sname, simps, ok := crossFrameworkValueStruct(goRet, mapper, rawPkgAlias); ok {
 		// A value struct owned by another framework, returned by value.
-		maps.Copy(imps, simps)
-		return sname, kindScalar, "", sname, imps, true
+		maps.Copy(imports, simps)
+		return sname, kindScalar, "", sname, imports, true
 	}
 	if isHermeticScalar(goRet) {
 		t := goSizeType(goRet)
-		return t, kindScalar, "", t, imps, true
+		return t, kindScalar, "", t, imports, true
 	}
-	return "", kindVoid, "", "", imps, false
+	return "", kindVoid, "", "", imports, false
 }
 
 // localValueStructName reports the local value-struct name for a resolved Go
@@ -391,7 +391,7 @@ func idiomaticRet(
 // value structs.
 func crossFrameworkValueStruct(
 	goType string,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 	rawPkgAlias string,
 ) (string, map[string]string, bool) {
 	// Only a plain "pkg.Name" reference is a by-value struct; a pointer or slice
@@ -409,7 +409,7 @@ func crossFrameworkValueStruct(
 	}
 	// Only reference a struct that the owning package actually emits, so the
 	// reference never dangles.
-	if !m.EmittableStructs[name] {
+	if !mapper.EmittableStructs[name] {
 		return "", nil, false
 	}
 	return goType, map[string]string{pkg: idiomaticFrameworkPrefix + pkg}, true
@@ -438,33 +438,33 @@ func localValueStructName(goType string, fc *frameworkContext, rawPkgAlias strin
 func arrayElemConv(
 	elemObjC string,
 	ctx typemap.Context,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 	fc *frameworkContext,
 	rawPkgAlias string,
 	trialNames trialNameMap,
-) (elemGoType, fromID, toID string, imps map[string]string) {
-	imps = map[string]string{"purego": pureobjcImportPath, "objc": objcImportPath}
+) (elemGoType, fromID, toID string, imports map[string]string) {
+	imports = map[string]string{"purego": pureobjcImportPath, "objc": objcImportPath}
 	if isNSStringType(normaliseObjC(elemObjC)) {
-		return "string", "purego.GoString(%s)", "purego.NSString(%s)", imps
+		return "string", "purego.GoString(%s)", "purego.NSString(%s)", imports
 	}
 	impSet := make(typemap.ImportSet)
-	goElem := qualifyRaw(m.GoType(elemObjC, ctx, impSet), fc, rawPkgAlias, ctx.GenericParams)
+	goElem := qualifyRaw(mapper.GoType(elemObjC, ctx, impSet), fc, rawPkgAlias, ctx.GenericParams)
 	if base, has := trialWrapClass(goElem, rawPkgAlias); has {
 		if tt, named := trialNames[base]; named {
-			imps["objref"] = objrefImportPath
-			return "*" + tt, tt + "FromID(%s)", "objref.IDOf(%s)", imps
+			imports["objref"] = objrefImportPath
+			return "*" + tt, tt + "FromID(%s)", "objref.IDOf(%s)", imports
 		}
 	}
-	imps["obj"] = objImportPath
-	imps["objref"] = objrefImportPath
-	return "obj.Object", "obj.Wrap(%s)", "objref.IDOf(%s)", imps
+	imports["obj"] = objImportPath
+	imports["objref"] = objrefImportPath
+	return "obj.Object", "obj.Wrap(%s)", "objref.IDOf(%s)", imports
 }
 
 // isCFObjectType reports whether an Objective-C type is a CoreFoundation opaque
 // reference (e.g. CFStringRef, CGColorRef, SecKeyRef). These are toll-free
 // bridged to Objective-C objects, so the idiomatic layer surfaces them as
 // obj.Object.
-func isCFObjectType(objcType string, m *typemap.Mapper) bool {
+func isCFObjectType(objcType string, mapper *typemap.Mapper) bool {
 	t := strings.TrimPrefix(normaliseObjC(objcType), "const ")
 	t = strings.TrimSpace(t)
 	if strings.Contains(t, "*") {
@@ -478,8 +478,8 @@ func isCFObjectType(objcType string, m *typemap.Mapper) bool {
 	if typemap.IsCoreFoundationOpaqueRef(name) {
 		return true
 	}
-	if m.CFTypeIndex != nil {
-		if _, ok := m.CFTypeIndex[name]; ok {
+	if mapper.CFTypeIndex != nil {
+		if _, ok := mapper.CFTypeIndex[name]; ok {
 			return true
 		}
 	}
@@ -497,11 +497,11 @@ func isOSObjectReturn(objcType string) bool {
 
 // isObjectGoType reports whether a resolved Go type refers to an Objective-C
 // object: a pointer to a known class, or a bare object handle.
-func isObjectGoType(goType string, m *typemap.Mapper) bool {
+func isObjectGoType(goType string, mapper *typemap.Mapper) bool {
 	if goType == "objc.ID" {
 		return true
 	}
-	return isObjectPointerType(goType, m)
+	return isObjectPointerType(goType, mapper)
 }
 
 // isHermeticScalar reports whether a Go type is a plain value (an integer,
@@ -538,24 +538,24 @@ func trialWrapClass(rawRet, rawPkgAlias string) (string, bool) {
 func rawParamGoType(
 	objcType string,
 	ctx typemap.Context,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 	impSet typemap.ImportSet,
 ) string {
-	if _, isBlock := m.ResolveBlockSignature(objcType); isBlock {
-		return emit.BlockGoFuncType(objcType, ctx, m, impSet, m.OwnerIndex)
+	if _, isBlock := mapper.ResolveBlockSignature(objcType); isBlock {
+		return emit.BlockGoFuncType(objcType, ctx, mapper, impSet, mapper.OwnerIndex)
 	}
-	resolved := m.GoType(objcType, ctx, impSet)
+	resolved := mapper.GoType(objcType, ctx, impSet)
 	if resolved == "" {
 		resolved = "unsafe.Pointer"
 	}
 	return resolved
 }
 
-func isAsyncCompletion(m meta.Method) bool {
-	if strings.TrimSpace(m.Return.ObjCType) != "void" || len(m.Params) == 0 {
+func isAsyncCompletion(method meta.Method) bool {
+	if strings.TrimSpace(method.Return.ObjCType) != "void" || len(method.Params) == 0 {
 		return false
 	}
-	last := m.Params[len(m.Params)-1]
+	last := method.Params[len(method.Params)-1]
 	if !last.IsBlock {
 		return false
 	}
@@ -675,7 +675,7 @@ func qualifyRaw(
 	rawPkgAlias string,
 	genericParams []string,
 ) string {
-	fwPkg := strings.ToLower(fc.fw.Framework)
+	fwPkg := strings.ToLower(fc.framework.Framework)
 
 	var sb strings.Builder
 	for i := 0; i < len(goType); {
@@ -726,9 +726,9 @@ func identInList(word string, list []string) bool {
 
 // enumHasAvailableMember reports whether e has at least one available member,
 // matching the condition under which emitEnums emits a concrete local type.
-func enumHasAvailableMember(e meta.Enum) bool {
-	for _, m := range e.Members {
-		if !m.Availability.IsUnavailable {
+func enumHasAvailableMember(enum meta.Enum) bool {
+	for _, member := range enum.Members {
+		if !member.Availability.IsUnavailable {
 			return true
 		}
 	}
@@ -736,7 +736,7 @@ func enumHasAvailableMember(e meta.Enum) bool {
 }
 
 // localizeEnumType rewrites a raw-qualified scalar enum type (rawPkgAlias.<E>,
-// where <E> is one of fw's own enums) to the local idiomatic spelling <E>,
+// where <E> is one of framework's own enums) to the local idiomatic spelling <E>,
 // recording it as referenced so emitEnums emits its concrete definition. It
 // returns (localType, rawType, true); for anything else it returns the input
 // unchanged with isEnum=false. Only the exact alias.<E> form matches, so

@@ -1,0 +1,14 @@
+{{/*
+    protocol.tmpl — raw purego emission of an ObjC protocol as a Go interface:
+    the embedded parent interfaces, then the required methods. Method signatures
+    are resolved in the gather phase; the template is a pure shape and gofmt
+    canonicalises the result.
+*/}}
+{{define "protocols"}}{{range .}}{{template "protocol" .}}{{end}}{{end}}
+
+{{define "protocol"}}{{.CommentBlock}}type {{.GoName}} interface {
+{{range .Embeds}}{{.}}
+{{end}}{{range .Methods}}{{.GoName}}{{.Signature}}
+{{end}}}
+
+{{end}}

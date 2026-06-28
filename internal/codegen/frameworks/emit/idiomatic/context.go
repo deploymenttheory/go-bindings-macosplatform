@@ -22,8 +22,8 @@ import (
 // local to one EmitFrameworkWrappers call, this accumulation is no longer order-
 // dependent shared state.
 type frameworkContext struct {
-	fw     *meta.FrameworkMeta
-	prefix string // common class-name prefix (e.g. "VZ"); from detectClassPrefix
+	framework *meta.FrameworkMeta
+	prefix    string // common class-name prefix (e.g. "VZ"); from detectClassPrefix
 
 	ownTypes    map[string]bool // exported Go type names the raw package defines
 	ownEnums    map[string]bool // Go type names of the framework's own enums
@@ -41,69 +41,69 @@ type frameworkContext struct {
 // newFrameworkContext computes the per-framework derived data once. The four
 // pure sets mirror the former cache builders exactly; referenced starts empty
 // and is filled as signatures are resolved.
-func newFrameworkContext(fw *meta.FrameworkMeta) *frameworkContext {
-	prefix := detectClassPrefix(fw)
+func newFrameworkContext(framework *meta.FrameworkMeta) *frameworkContext {
+	prefix := detectClassPrefix(framework)
 	classGoNames := make(map[string]bool)
-	for className, cls := range fw.Classes {
-		if cls.Availability.IsUnavailable {
+	for className, class := range framework.Classes {
+		if class.Availability.IsUnavailable {
 			continue
 		}
 		classGoNames[trialTypeName(className, prefix)] = true
 	}
 	return &frameworkContext{
-		fw:           fw,
+		framework:    framework,
 		prefix:       prefix,
-		ownTypes:     buildOwnTypeNames(fw),
-		ownEnums:     buildOwnEnumNames(fw),
-		localStruct:  buildLocalValueStructNames(fw),
+		ownTypes:     buildOwnTypeNames(framework),
+		ownEnums:     buildOwnEnumNames(framework),
+		localStruct:  buildLocalValueStructNames(framework),
 		classGoNames: classGoNames,
 		referenced:   map[string]bool{},
 	}
 }
 
 // buildOwnTypeNames builds the set of Go type names the raw package exports for
-// fw, in both their metadata and exported spellings.
-func buildOwnTypeNames(fw *meta.FrameworkMeta) map[string]bool {
+// framework, in both their metadata and exported spellings.
+func buildOwnTypeNames(framework *meta.FrameworkMeta) map[string]bool {
 	set := make(map[string]bool)
-	for className := range fw.Classes {
+	for className := range framework.Classes {
 		set[className] = true
 	}
-	for enumName := range fw.Enums {
+	for enumName := range framework.Enums {
 		set[enumName] = true
 		set[naming.GoTypeName(enumName)] = true
 	}
 	// Protocols that share a name with a class are emitted with a "Protocol"
 	// suffix (e.g. protocol NSObject → type NSObjectProtocol interface).
-	for protocolName := range fw.Protocols {
+	for protocolName := range framework.Protocols {
 		goName := naming.GoTypeName(protocolName)
 		set[goName] = true
 		set[goName+"Protocol"] = true
 	}
-	for structName := range fw.Structs {
+	for structName := range framework.Structs {
 		set[structName] = true
 		set[naming.ExportedTypeName(structName)] = true
 	}
 	// Struct typedefs (e.g. NSRange → struct _NSRange) are emitted as Go type
 	// aliases in the raw package.
-	for typedefName, target := range fw.Typedefs {
+	for typedefName, target := range framework.Typedefs {
 		if !strings.HasPrefix(target, "struct ") {
 			continue
 		}
 		bare := strings.TrimSpace(strings.TrimSuffix(strings.TrimPrefix(target, "struct "), "*"))
-		if _, ok := fw.Structs[bare]; ok {
+		if _, ok := framework.Structs[bare]; ok {
 			set[naming.ExportedTypeName(typedefName)] = true
 		}
 	}
 	return set
 }
 
-// buildOwnEnumNames is the set of Go type names of fw's own enums, derived
+// buildOwnEnumNames is the set of Go type names of framework's own enums, derived
 // exactly like emitEnums' index (naming.GoTypeName on each exported, available,
 // non-anon enum key with at least one available member).
-func buildOwnEnumNames(fw *meta.FrameworkMeta) map[string]bool {
+func buildOwnEnumNames(framework *meta.FrameworkMeta) map[string]bool {
 	set := make(map[string]bool)
-	for key, e := range fw.Enums {
-		if e.Availability.IsUnavailable || e.IsAnon {
+	for key, enum := range framework.Enums {
+		if enum.Availability.IsUnavailable || enum.IsAnon {
 			continue
 		}
 		goType := naming.GoTypeName(key)
@@ -111,7 +111,7 @@ func buildOwnEnumNames(fw *meta.FrameworkMeta) map[string]bool {
 			continue
 		}
 		// emitEnums only re-emits enums that have at least one available member.
-		if !enumHasAvailableMember(e) {
+		if !enumHasAvailableMember(enum) {
 			continue
 		}
 		set[goType] = true
@@ -122,9 +122,9 @@ func buildOwnEnumNames(fw *meta.FrameworkMeta) map[string]bool {
 // buildLocalValueStructNames returns the set of exported names of value structs
 // the framework re-declares locally — those with at least one field where every
 // field is a plain value (a number or another such struct).
-func buildLocalValueStructNames(fw *meta.FrameworkMeta) map[string]bool {
+func buildLocalValueStructNames(framework *meta.FrameworkMeta) map[string]bool {
 	set := make(map[string]bool)
-	for name, s := range fw.Structs {
+	for name, s := range framework.Structs {
 		if s.Availability.IsUnavailable || len(s.Fields) == 0 {
 			continue
 		}

@@ -202,13 +202,20 @@ func goTypeForStructField(objcType string, mapper *typemap.Mapper, framework str
 // emitDeprecatedComment writes a deprecation comment if the availability
 // indicates the symbol is deprecated.
 func emitDeprecatedComment(w io.Writer, avail meta.Availability) {
-	if avail.MacOSDeprecated != "" {
-		if avail.DeprecationMsg != "" {
-			fmt.Fprintf(w, "// Deprecated: %s\n", avail.DeprecationMsg)
-		} else {
-			fmt.Fprintf(w, "// Deprecated: since macOS %s.\n", avail.MacOSDeprecated)
-		}
+	fmt.Fprint(w, deprecatedComment(avail))
+}
+
+// deprecatedComment returns the deprecation comment line for a deprecated
+// symbol, or "" when the symbol is not deprecated. It is the string form of
+// emitDeprecatedComment, used by the view-building (gather) phase.
+func deprecatedComment(avail meta.Availability) string {
+	if avail.MacOSDeprecated == "" {
+		return ""
 	}
+	if avail.DeprecationMsg != "" {
+		return fmt.Sprintf("// Deprecated: %s\n", avail.DeprecationMsg)
+	}
+	return fmt.Sprintf("// Deprecated: since macOS %s.\n", avail.MacOSDeprecated)
 }
 
 // varSelectorName returns the unexported package-level var name for a selector,

@@ -160,7 +160,7 @@ func generateFramework(m *meta.FrameworkMeta, outBase string, cfg BindingsConfig
 	return nil
 }
 
-// writeFunctionsFile emits <pkg>_functions.go and returns the registration
+// writeFunctionsFile emits <packageName>_functions.go and returns the registration
 // lines runtime.go must run after a successful Dlopen.
 func writeFunctionsFile(
 	outDir, packageName string,
@@ -202,7 +202,7 @@ func writeFunctionsFile(
 	return regLines, nil
 }
 
-// writeEnumsFile emits <pkg>_enums.go.
+// writeEnumsFile emits <packageName>_enums.go.
 func writeEnumsFile(outDir, packageName string, m *meta.FrameworkMeta) error {
 	if len(m.Enums) == 0 {
 		return nil
@@ -232,7 +232,7 @@ func writeEnumsFile(outDir, packageName string, m *meta.FrameworkMeta) error {
 	return writeGoFile(outDir, packageName+"_enums.go", buf.Bytes())
 }
 
-// writeStructsFile emits <pkg>_structs.go.
+// writeStructsFile emits <packageName>_structs.go.
 func writeStructsFile(
 	outDir, packageName string,
 	m *meta.FrameworkMeta,
@@ -260,7 +260,7 @@ func writeStructsFile(
 	return writeGoFile(outDir, packageName+"_structs.go", buf.Bytes())
 }
 
-// writeProtocolsFile emits <pkg>_protocols.go (ObjC frameworks only).
+// writeProtocolsFile emits <packageName>_protocols.go (ObjC frameworks only).
 func writeProtocolsFile(
 	outDir, packageName string,
 	m *meta.FrameworkMeta,
@@ -292,7 +292,7 @@ func writeProtocolsFile(
 	return writeGoFile(outDir, packageName+"_protocols.go", buf.Bytes())
 }
 
-// writeExternsFile emits <pkg>_externs.go.
+// writeExternsFile emits <packageName>_externs.go.
 func writeExternsFile(
 	outDir, packageName string,
 	m *meta.FrameworkMeta,
@@ -667,7 +667,7 @@ func GenerateIdiomatic(cfg IdiomaticConfig) error {
 		}
 	}
 
-	// The per-framework opinionated/idiomatic/<fw> packages are themselves the
+	// The per-framework opinionated/idiomatic/<framework> packages are themselves the
 	// fluent entry points: callers import only the frameworks they use. No
 	// all-frameworks aggregator is emitted — one would transitively import (and,
 	// via each raw package's init, eagerly dlopen) every framework, defeating

@@ -47,11 +47,11 @@ const (
 	idiomaticFrameworkPrefix = "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/"
 )
 
-// EmitFrameworkWrappers generates one *_generated.go file per ObjC class in fw.
+// EmitFrameworkWrappers generates one *_generated.go file per ObjC class in framework.
 func EmitFrameworkWrappers(
 	outDir, pkgName, rawPkgAlias, rawPkgPath string,
-	fw *meta.FrameworkMeta,
-	m *typemap.Mapper,
+	framework *meta.FrameworkMeta,
+	mapper *typemap.Mapper,
 ) error {
 	if err := os.MkdirAll(outDir, 0o755); err != nil {
 		return fmt.Errorf("mkdir %s: %w", outDir, err)
@@ -59,12 +59,12 @@ func EmitFrameworkWrappers(
 
 	// Per-framework derived data lives here for this call only, replacing the
 	// former package-level caches (P6: no shared mutable state).
-	fc := newFrameworkContext(fw)
+	fc := newFrameworkContext(framework)
 	prefix := fc.prefix
 	// Build the set of trial type names so we can use them in params.
-	trialNames := buildTrialNameMap(fw, prefix)
+	trialNames := buildTrialNameMap(framework, prefix)
 	// Build abstract base index for provider interface generation.
-	abstractBases := buildAbstractBaseIndex(fw, prefix)
+	abstractBases := buildAbstractBaseIndex(framework, prefix)
 
 	// Scan hand-authored (non-generated) files in this package so the generator
 	// never emits a method or constructor that a human has already written — the
@@ -86,7 +86,7 @@ func EmitFrameworkWrappers(
 	// Objective-C classes by name, which the constructors and class-level
 	// functions call. Written after the clean step because it is itself a
 	// _generated.go file.
-	if err := emitRuntimeBootstrap(outDir, pkgName, fw); err != nil {
+	if err := emitRuntimeBootstrap(outDir, pkgName, framework); err != nil {
 		return fmt.Errorf("emit runtime bootstrap: %w", err)
 	}
 
@@ -97,16 +97,16 @@ func EmitFrameworkWrappers(
 	// we only disambiguate the file name so both classes land in separate files.
 	fileBaseCounts := map[string]int{}
 
-	for _, className := range sortedKeys(fw.Classes) {
-		cls := fw.Classes[className]
-		if cls.Availability.IsUnavailable {
+	for _, className := range sortedKeys(framework.Classes) {
+		class := framework.Classes[className]
+		if class.Availability.IsUnavailable {
 			continue
 		}
 		goTypeName := trialTypeName(className, prefix)
 
 		var buf bytes.Buffer
 		if err := emitClassFile(&buf, pkgName, rawPkgAlias, rawPkgPath,
-			className, goTypeName, cls, fc, m, trialNames, prefix, abstractBases,
+			className, goTypeName, class, fc, mapper, trialNames, prefix, abstractBases,
 			handFuncs, handMethods[goTypeName]); err != nil {
 			return fmt.Errorf("emit %s: %w", className, err)
 		}
@@ -129,8 +129,8 @@ func EmitFrameworkWrappers(
 		rawPkgAlias,
 		rawPkgPath,
 		abstractBases,
-		fw,
-		m,
+		framework,
+		mapper,
 	); err != nil {
 		return fmt.Errorf("emit providers: %w", err)
 	}
@@ -140,18 +140,18 @@ func EmitFrameworkWrappers(
 		rawPkgAlias,
 		rawPkgPath,
 		fc,
-		m,
+		mapper,
 		trialNames,
 	)
 	if err != nil {
 		return fmt.Errorf("emit function wrappers: %w", err)
 	}
-	takenNames := buildTakenNames(fw, trialNames, abstractBases, cfErrorWrapperNames)
+	takenNames := buildTakenNames(framework, trialNames, abstractBases, cfErrorWrapperNames)
 	// Reserve the de-prefixed names of every enum so a package-level function
 	// (a class method or C function) never claims a name an enum type uses; the
 	// enum keeps the short name and the function is qualified or omitted instead.
-	for key, e := range fw.Enums {
-		if e.Availability.IsUnavailable || e.IsAnon {
+	for key, enum := range framework.Enums {
+		if enum.Availability.IsUnavailable || enum.IsAnon {
 			continue
 		}
 		goType := naming.GoTypeName(key)
@@ -165,7 +165,7 @@ func EmitFrameworkWrappers(
 		rawPkgAlias,
 		rawPkgPath,
 		fc,
-		m,
+		mapper,
 		trialNames,
 		handFuncs,
 		takenNames,
@@ -174,24 +174,24 @@ func EmitFrameworkWrappers(
 		return fmt.Errorf("emit class method functions: %w", err)
 	}
 	if err := emitConstants(
-		outDir, pkgName, rawPkgAlias, rawPkgPath, fw, m, handFuncs, takenNames, trialNames,
+		outDir, pkgName, rawPkgAlias, rawPkgPath, framework, mapper, handFuncs, takenNames, trialNames,
 	); err != nil {
 		return fmt.Errorf("emit constants: %w", err)
 	}
 	if err := emitCFFunctionWrappers(
-		outDir, pkgName, rawPkgAlias, rawPkgPath, fc, m, trialNames, takenNames,
+		outDir, pkgName, rawPkgAlias, rawPkgPath, fc, mapper, trialNames, takenNames,
 	); err != nil {
 		return fmt.Errorf("emit CF function wrappers: %w", err)
 	}
 	if err := emitGenericFunctionWrappers(
-		outDir, pkgName, rawPkgAlias, rawPkgPath, fc, m, trialNames, takenNames,
+		outDir, pkgName, rawPkgAlias, rawPkgPath, fc, mapper, trialNames, takenNames,
 	); err != nil {
 		return fmt.Errorf("emit generic function wrappers: %w", err)
 	}
 	// A locally re-declared value struct may have enum-typed fields; mark those
 	// enums referenced before emitEnums so they get a local definition (keeping the
 	// struct's field types hermetic).
-	registerLocalStructEnumRefs(fc, m)
+	registerLocalStructEnumRefs(fc, mapper)
 	// Re-export raw enum types/constants referenced by the generated package so
 	// callers never need the raw import to name an enum or use its constants.
 	// Runs last: it scans the files written above.
@@ -204,13 +204,13 @@ func EmitFrameworkWrappers(
 	// idiomatic Go type aliases so callers never need the raw import to name them.
 	// Runs after emitEnums so takenNames is complete.
 	if err := emitStructTypeAliases(
-		outDir, pkgName, rawPkgAlias, rawPkgPath, fc, m, takenNames,
+		outDir, pkgName, rawPkgAlias, rawPkgPath, fc, mapper, takenNames,
 	); err != nil {
 		return fmt.Errorf("emit struct type aliases: %w", err)
 	}
 	// Named error values for errors.Is, derived from the framework's error-code
 	// enum and matching error domain.
-	if err := emitErrorSentinels(outDir, pkgName, fw, takenNames); err != nil {
+	if err := emitErrorSentinels(outDir, pkgName, framework, takenNames); err != nil {
 		return fmt.Errorf("emit error sentinels: %w", err)
 	}
 	if err := emitDocGo(outDir, pkgName, fc, abstractBases, prefix); err != nil {
@@ -227,7 +227,7 @@ func EmitFrameworkWrappers(
 // trial type names and their New* constructors, provider interfaces, and the
 // CFError wrapper functions.
 func buildTakenNames(
-	fw *meta.FrameworkMeta,
+	framework *meta.FrameworkMeta,
 	trialNames trialNameMap,
 	abstractBases abstractBaseIndex,
 	cfErrorWrapperNames map[string]bool,

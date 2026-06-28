@@ -6,11 +6,14 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/view"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 )
 
-// EmitEnums writes all enum declarations for the framework to w.
+// EmitEnums writes all enum declarations for the framework to w. It gathers each
+// enum into a resolved view and renders the whole set through the enum template.
 func EmitEnums(w io.Writer, framework *meta.FrameworkMeta) error {
 	names := sortedEnumNames(framework.Enums)
 	if len(names) == 0 {
@@ -21,148 +24,169 @@ func EmitEnums(w io.Writer, framework *meta.FrameworkMeta) error {
 	// pure-duplicate anon enums.
 	namedMemberNames := make(map[string]bool)
 	for _, name := range names {
-		e := framework.Enums[name]
-		if !e.IsAnon {
-			for _, m := range e.Members {
-				namedMemberNames[m.Name] = true
+		enum := framework.Enums[name]
+		if !enum.IsAnon {
+			for _, member := range enum.Members {
+				namedMemberNames[member.Name] = true
 			}
 		}
 	}
 
+	var enums []view.Enum
 	for _, name := range names {
-		e := framework.Enums[name]
-		if e.Availability.IsUnavailable {
+		enum := framework.Enums[name]
+		if enum.Availability.IsUnavailable {
 			continue
 		}
-		if e.IsAnon {
-			if err := emitAnonEnum(w, e, namedMemberNames); err != nil {
-				return err
+		if enum.IsAnon {
+			if built, ok := buildAnonEnumView(enum, namedMemberNames); ok {
+				enums = append(enums, built)
 			}
 		} else {
-			if err := emitNamedEnum(w, name, e); err != nil {
-				return err
-			}
+			enums = append(enums, buildNamedEnumView(name, enum))
 		}
 	}
-	return nil
+	if len(enums) == 0 {
+		return nil
+	}
+
+	out, err := render.Enums(enums)
+	if err != nil {
+		return err
+	}
+	_, err = w.Write(out)
+	return err
 }
 
-func emitNamedEnum(w io.Writer, name string, e meta.Enum) error {
+// buildNamedEnumView resolves a named enum into its renderable view: the Go type
+// name and underlying integer type, the comment block, the deduplicated typed
+// constants, and the members the String method dispatches on.
+func buildNamedEnumView(name string, enum meta.Enum) view.Enum {
 	goName := naming.GoTypeName(name)
-	goType := e.GoType
+	goType := enum.GoType
 	if goType == "" {
 		goType = "int64"
 	}
-
-	// Map ObjC integer types to Go types.
 	goType = mapEnumGoType(goType)
+	goType = upgradeEnumTypeIfOverflow(goType, enum.Members)
 
-	// Upgrade signed integer type to unsigned if any member value overflows.
-	goType = upgradeEnumTypeIfOverflow(goType, e.Members)
-
-	if e.Doc != "" {
-		fmt.Fprintf(w, "// %s\n", e.Doc)
+	built := view.Enum{
+		GoName:       goName,
+		GoType:       goType,
+		CommentBlock: enumCommentBlock(enum),
+		IsBitmask:    enum.IsBitmask,
 	}
-	emitDeprecatedComment(w, e.Availability)
-	fmt.Fprintf(w, "type %s %s\n\n", goName, goType)
 
 	// Deduplicate members by name and value.
 	type memberKey struct{ name, value string }
 	seen := make(map[memberKey]bool)
 	var unique []meta.EnumMember
-	for _, m := range e.Members {
-		k := memberKey{m.Name, m.Value}
-		if !seen[k] {
-			seen[k] = true
-			unique = append(unique, m)
+	for _, member := range enum.Members {
+		key := memberKey{member.Name, member.Value}
+		if !seen[key] {
+			seen[key] = true
+			unique = append(unique, member)
 		}
 	}
+	built.HasConstBlock = len(unique) > 0
 
-	if len(unique) > 0 {
-		fmt.Fprintf(w, "const (\n")
-		for _, m := range unique {
-			if m.Availability.IsUnavailable {
-				continue
-			}
-			constName := naming.GoTypeName(m.Name)
-			if m.Doc != "" {
-				fmt.Fprintf(w, "\t// %s\n", m.Doc)
-			}
-			fmt.Fprintf(w, "\t%s %s = %s\n", constName, goName, m.Value)
+	for _, member := range unique {
+		if member.Availability.IsUnavailable {
+			continue
 		}
-		fmt.Fprintf(w, ")\n\n")
+		built.Members = append(built.Members, view.EnumMember{
+			ConstName:    naming.GoTypeName(member.Name),
+			Value:        member.Value,
+			CommentBlock: memberCommentBlock(member),
+		})
 	}
 
-	// String() method
-	fmt.Fprintf(w, "func (e %s) String() string {\n", goName)
-	if e.IsBitmask {
-		fmt.Fprintf(w, "\tvar parts []string\n")
-		for _, m := range unique {
-			if m.Availability.IsUnavailable || m.Value == "0" {
+	if enum.IsBitmask {
+		for _, member := range unique {
+			if member.Availability.IsUnavailable || member.Value == "0" {
 				continue
 			}
-			constName := naming.GoTypeName(m.Name)
-			fmt.Fprintf(w, "\tif e&%s != 0 { parts = append(parts, %q) }\n", constName, constName)
+			built.StringMembers = append(built.StringMembers, view.EnumMember{ConstName: naming.GoTypeName(member.Name)})
 		}
-		fmt.Fprintf(w, "\tif len(parts) == 0 { return %q }\n", "0")
-		fmt.Fprintf(w, "\treturn strings.Join(parts, \"|\")\n")
-		fmt.Fprintf(w, "}\n\n")
 	} else {
-		fmt.Fprintf(w, "\tswitch e {\n")
 		emittedValues := make(map[string]bool)
-		for _, m := range unique {
-			if m.Availability.IsUnavailable {
+		for _, member := range unique {
+			if member.Availability.IsUnavailable || emittedValues[member.Value] {
 				continue
 			}
-			if emittedValues[m.Value] {
-				continue
-			}
-			emittedValues[m.Value] = true
-			constName := naming.GoTypeName(m.Name)
-			fmt.Fprintf(w, "\tcase %s:\n\t\treturn %q\n", constName, constName)
+			emittedValues[member.Value] = true
+			built.StringMembers = append(built.StringMembers, view.EnumMember{ConstName: naming.GoTypeName(member.Name)})
 		}
-		fmt.Fprintf(w, "\tdefault:\n\t\treturn fmt.Sprintf(\"%s(%%d)\", int64(e))\n", goName)
-		fmt.Fprintf(w, "\t}\n}\n\n")
 	}
-
-	return nil
+	return built
 }
 
-func emitAnonEnum(w io.Writer, e meta.Enum, namedMemberNames map[string]bool) error {
-	// Skip if all members are already covered by a named enum.
+// buildAnonEnumView resolves an anonymous enum into an untyped const block,
+// dropping members already covered by a named enum. It reports false when no
+// members remain to emit.
+func buildAnonEnumView(enum meta.Enum, namedMemberNames map[string]bool) (view.Enum, bool) {
 	allCovered := true
-	for _, m := range e.Members {
-		if !namedMemberNames[m.Name] {
+	for _, member := range enum.Members {
+		if !namedMemberNames[member.Name] {
 			allCovered = false
 			break
 		}
 	}
 	if allCovered {
-		return nil
+		return view.Enum{}, false
 	}
 
-	// Emit as untyped const block.
 	var members []meta.EnumMember
-	for _, m := range e.Members {
-		if !namedMemberNames[m.Name] && !m.Availability.IsUnavailable {
-			members = append(members, m)
+	for _, member := range enum.Members {
+		if !namedMemberNames[member.Name] && !member.Availability.IsUnavailable {
+			members = append(members, member)
 		}
 	}
 	if len(members) == 0 {
-		return nil
+		return view.Enum{}, false
 	}
 
 	sort.Slice(members, func(i, j int) bool {
 		return members[i].Name < members[j].Name
 	})
 
-	fmt.Fprintf(w, "const (\n")
-	for _, m := range members {
-		constName := naming.GoTypeName(m.Name)
-		fmt.Fprintf(w, "\t%s = %s\n", constName, m.Value)
+	built := view.Enum{IsAnon: true}
+	for _, member := range members {
+		built.Members = append(built.Members, view.EnumMember{
+			ConstName: naming.GoTypeName(member.Name),
+			Value:     member.Value,
+		})
 	}
-	fmt.Fprintf(w, ")\n\n")
-	return nil
+	return built, true
+}
+
+// enumCommentBlock renders the doc + deprecation comment for an enum type, or ""
+// when undocumented and not deprecated.
+func enumCommentBlock(enum meta.Enum) string {
+	var sb strings.Builder
+	if enum.Doc != "" {
+		fmt.Fprintf(&sb, "// %s\n", enum.Doc)
+	}
+	if enum.Availability.MacOSDeprecated != "" {
+		if enum.Availability.DeprecationMsg != "" {
+			fmt.Fprintf(&sb, "// Deprecated: %s\n", enum.Availability.DeprecationMsg)
+		} else {
+			fmt.Fprintf(&sb, "// Deprecated: since macOS %s.\n", enum.Availability.MacOSDeprecated)
+		}
+	}
+	return sb.String()
+}
+
+// memberCommentBlock renders a member's doc comment, or "" when undocumented.
+// The leading tab matches the original string-builder's output: gofmt's
+// doc-comment reformatter rewrites a column-0 comment (smart-quoting “…“) but
+// leaves an already-indented comment verbatim, so the tab keeps the output
+// byte-identical.
+func memberCommentBlock(member meta.EnumMember) string {
+	if member.Doc != "" {
+		return "\t// " + member.Doc + "\n"
+	}
+	return ""
 }
 
 // upgradeEnumTypeIfOverflow upgrades a signed int type to unsigned if any

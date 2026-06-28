@@ -12,33 +12,33 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
 )
 
-// buildInheritedSetters walks cls's superclass chain within fw and returns the
+// buildInheritedSetters walks class's superclass chain within framework and returns the
 // With* setters inherited from those base classes, so a subclass wrapper exposes
 // them too (calling through x.inner, which has the underlying setter via raw
 // struct embedding). Setters whose Go name already appears on the subclass
 // (ownWith) or on a nearer ancestor are dropped, so subclass and nearer ancestor
-// win. The walk stops at the first superclass not defined in fw (e.g. a
+// win. The walk stops at the first superclass not defined in framework (e.g. a
 // cross-framework base such as NSObject).
 func buildInheritedSetters(
-	cls meta.Class,
+	class meta.Class,
 	className string,
 	fc *frameworkContext,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 	rawPkgAlias string,
 	trialNames trialNameMap,
 	prefix string,
 	abstractBases abstractBaseIndex,
-	ownWith []withEntry,
-) []withEntry {
-	fw := fc.fw
+	ownWith []withSetterModel,
+) []withSetterModel {
+	framework := fc.framework
 	seen := make(map[string]bool, len(ownWith))
-	for _, we := range ownWith {
-		seen[we.goName] = true
+	for _, setter := range ownWith {
+		seen[setter.goName] = true
 	}
 
-	var inherited []withEntry
-	for super := cls.Super; super != ""; {
-		anc, ok := fw.Classes[super]
+	var inherited []withSetterModel
+	for super := class.Super; super != ""; {
+		anc, ok := framework.Classes[super]
 		if !ok || anc.Availability.IsUnavailable {
 			break
 		}
@@ -47,15 +47,15 @@ func buildInheritedSetters(
 		// ambiguous when an intermediate class redeclares the setter's Go name.
 		ancCtx := typemap.Context{
 			ClassName:     super,
-			Framework:     fw.Framework,
+			Framework:     framework.Framework,
 			GenericParams: anc.GenericParams,
 		}
-		for _, we := range buildWithSetters(anc, "", fc, ancCtx, m, rawPkgAlias, trialNames, prefix, abstractBases) {
-			if seen[we.goName] {
+		for _, setter := range buildWithSetters(anc, "", fc, ancCtx, mapper, rawPkgAlias, trialNames, prefix, abstractBases) {
+			if seen[setter.goName] {
 				continue
 			}
-			seen[we.goName] = true
-			inherited = append(inherited, we)
+			seen[setter.goName] = true
+			inherited = append(inherited, setter)
 		}
 		super = anc.Super
 	}
@@ -65,83 +65,83 @@ func buildInheritedSetters(
 // buildWithSetters assembles the fluent With* setter entries for a class's
 // settable properties, deduplicated by Go method name.
 func buildWithSetters(
-	cls meta.Class,
+	class meta.Class,
 	goTypeName string,
 	fc *frameworkContext,
 	ctx typemap.Context,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 	rawPkgAlias string,
 	trialNames trialNameMap,
 	prefix string,
 	abstractBases abstractBaseIndex,
-) []withEntry {
-	var withMethods []withEntry
+) []withSetterModel {
+	var withMethods []withSetterModel
 	seenWithName := map[string]bool{}
-	for _, prop := range cls.Properties {
+	for _, prop := range class.Properties {
 		if prop.IsReadOnly || prop.Availability.IsUnavailable {
 			continue
 		}
-		we := buildWithSetter(
+		setter := buildWithSetter(
 			prop,
 			goTypeName,
-			cls,
+			class,
 			fc,
 			ctx,
-			m,
+			mapper,
 			rawPkgAlias,
 			trialNames,
 			prefix,
 			abstractBases,
 		)
-		if we == nil || seenWithName[we.goName] || isReservedMemberName(we.goName) {
+		if setter == nil || seenWithName[setter.goName] || isReservedMemberName(setter.goName) {
 			continue
 		}
-		we.doc = prop.Doc
+		setter.doc = prop.Doc
 		// A setter on a @MainActor class mutates UI state and must run on the main
 		// thread; the template wraps the send in purego.Main.
-		if cls.IsMainThreadRequired {
-			we.mainThread = true
-			if we.extraImports == nil {
-				we.extraImports = map[string]string{}
+		if class.IsMainThreadRequired {
+			setter.mainThread = true
+			if setter.extraImports == nil {
+				setter.extraImports = map[string]string{}
 			}
-			we.extraImports["purego"] = pureobjcImportPath
+			setter.extraImports["purego"] = pureobjcImportPath
 		}
-		seenWithName[we.goName] = true
-		withMethods = append(withMethods, *we)
+		seenWithName[setter.goName] = true
+		withMethods = append(withMethods, *setter)
 	}
 	return withMethods
 }
 
-type withEntry struct {
+type withSetterModel struct {
 	goName          string // e.g. "WithVariableStore"
 	doc             string // Apple/header documentation for the underlying property
 	rawSetterGoName string // e.g. "SetVariableStore"
 	setterSelector  string // the Objective-C setter selector, e.g. "setVariableStore:"
-	param           withParam
+	param           setterParamModel
 	isNSArray       bool   // true: variadic slice → NSArray
 	sliceElemType   string // parameter elem type (a provider interface or an object type)
 	mainThread      bool   // run the setter on the main thread (@MainActor class)
 	extraImports    map[string]string
 }
 
-type withParam struct {
-	goName  string // variable name in the generated func
-	goType  string // Go type (string for NSURL/NSString, *raw.T or ProviderIface for objects, uint64 etc.)
-	rawExpr string // expression passed to the raw setter (may differ from param name)
+type setterParamModel struct {
+	goName        string // variable name in the generated func
+	goType        string // Go type (string for NSURL/NSString, *raw.T or ProviderIface for objects, uint64 etc.)
+	rawExpression string // expression passed to the raw setter (may differ from param name)
 }
 
 func buildWithSetter(
 	prop meta.Property,
 	_ string,
-	cls meta.Class,
+	class meta.Class,
 	fc *frameworkContext,
 	ctx typemap.Context,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 	rawPkgAlias string,
 	trialNames trialNameMap,
 	_ string,
 	abstractBases abstractBaseIndex,
-) *withEntry {
+) *withSetterModel {
 	// Derive the raw setter Go method name from the selector.
 	setterSel := prop.Setter
 	if setterSel == "" {
@@ -154,7 +154,7 @@ func buildWithSetter(
 
 	// Verify the setter method actually exists in the raw bindings.
 	setterExists := false
-	for _, method := range cls.Methods {
+	for _, method := range class.Methods {
 		if method.Selector == setterSel && !method.IsClassMethod {
 			setterExists = true
 			break
@@ -183,8 +183,8 @@ func buildWithSetter(
 			return nil
 		}
 		impSet := make(typemap.ImportSet)
-		goElem := qualifyRaw(m.GoType(elemObjC, ctx, impSet), fc, rawPkgAlias, ctx.GenericParams)
-		if !isObjectPointerType(goElem, m) {
+		goElem := qualifyRaw(mapper.GoType(elemObjC, ctx, impSet), fc, rawPkgAlias, ctx.GenericParams)
+		if !isObjectPointerType(goElem, mapper) {
 			return nil
 		}
 		extraImports["objref"] = objrefImportPath
@@ -202,7 +202,7 @@ func buildWithSetter(
 				delete(extraImports, "obj")
 			}
 		}
-		return &withEntry{
+		return &withSetterModel{
 			goName:          goWithName,
 			rawSetterGoName: rawSetterGoName,
 			setterSelector:  setterSel,
@@ -223,31 +223,31 @@ func buildWithSetter(
 	// any concrete subtype can be passed.
 	impSet := make(typemap.ImportSet)
 	goType := qualifyRaw(
-		rawParamGoType(prop.ObjCType, ctx, m, impSet),
+		rawParamGoType(prop.ObjCType, ctx, mapper, impSet),
 		fc,
 		rawPkgAlias,
 		ctx.GenericParams,
 	)
 	rawClass := strings.TrimPrefix(strings.TrimPrefix(goType, "*"), rawPkgAlias+".")
 	if baseGoTypeName, isBase := abstractBases[rawClass]; isBase {
-		return &withEntry{
+		return &withSetterModel{
 			goName:          goWithName,
 			rawSetterGoName: rawSetterGoName,
 			setterSelector:  setterSel,
-			param: withParam{
-				goName:  pName,
-				goType:  providerInterfaceName(baseGoTypeName),
-				rawExpr: "objref.IDOf(" + pName + ")",
+			param: setterParamModel{
+				goName:        pName,
+				goType:        providerInterfaceName(baseGoTypeName),
+				rawExpression: "objref.IDOf(" + pName + ")",
 			},
 			extraImports: extraImports,
 		}
 	}
 
-	sig, argExpr, imps, ok := idiomaticArg(
+	sig, argExpr, imports, ok := idiomaticArg(
 		pName,
 		prop.ObjCType,
 		ctx,
-		m,
+		mapper,
 		fc,
 		rawPkgAlias,
 		trialNames,
@@ -255,43 +255,43 @@ func buildWithSetter(
 	if !ok {
 		return nil
 	}
-	maps.Copy(extraImports, imps)
-	return &withEntry{
+	maps.Copy(extraImports, imports)
+	return &withSetterModel{
 		goName:          goWithName,
 		rawSetterGoName: rawSetterGoName,
 		setterSelector:  setterSel,
-		param:           withParam{goName: pName, goType: sig, rawExpr: argExpr},
+		param:           setterParamModel{goName: pName, goType: sig, rawExpression: argExpr},
 		extraImports:    extraImports,
 	}
 }
 
-func writeWithMethod(w io.Writer, typeName string, we withEntry) {
+func writeWithMethod(w io.Writer, typeName string, setter withSetterModel) {
 	// The setter's single parameter ("items" for a collection, otherwise the
 	// property name) must not collide with the receiver variable.
 	paramName := "items"
-	if !we.isNSArray {
-		paramName = we.param.goName
+	if !setter.isNSArray {
+		paramName = setter.param.goName
 	}
 	view := withSetterView{
 		DocComment: docLeadKind(
-			we.goName,
-			we.doc,
-			synthFallback(we.goName, docSetter),
+			setter.goName,
+			setter.doc,
+			synthFallback(setter.goName, docSetter),
 			docSetter,
 		),
 		TypeName:       typeName,
 		RecvVar:        uniqueReceiver(typeName, []string{paramName}),
-		GoName:         we.goName,
-		SetterSelector: we.setterSelector,
-		IsNSArray:      we.isNSArray,
-		MainThread:     we.mainThread,
+		GoName:         setter.goName,
+		SetterSelector: setter.setterSelector,
+		IsNSArray:      setter.isNSArray,
+		MainThread:     setter.mainThread,
 	}
-	if we.isNSArray {
-		view.SliceElemType = we.sliceElemType
+	if setter.isNSArray {
+		view.SliceElemType = setter.sliceElemType
 	} else {
-		view.ParamName = we.param.goName
-		view.ParamType = we.param.goType
-		view.ParamRawExpr = we.param.rawExpr
+		view.ParamName = setter.param.goName
+		view.ParamType = setter.param.goType
+		view.ParamRawExpr = setter.param.rawExpression
 	}
 
 	renderTemplate(w, "with_setter", view)

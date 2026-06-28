@@ -38,21 +38,21 @@ type providerMethodView struct {
 // class: one for itself when it is an abstract base, and one per abstract base
 // ancestor (returning the embedded raw superclass field).
 func buildProviderMethods(
-	cls meta.Class,
+	class meta.Class,
 	className, goTypeName string,
-	fw *meta.FrameworkMeta,
-	m *typemap.Mapper,
+	framework *meta.FrameworkMeta,
+	mapper *typemap.Mapper,
 	rawPkgAlias string,
 	abstractBases abstractBaseIndex,
 ) ([]providerMethodEntry, typemap.ImportSet) {
 	// A provider interface is satisfied by any wrapper for the right kind of
 	// object simply by being an object (the interface embeds objref.Object), so
 	// no per-wrapper accessor method is emitted.
-	_ = cls
+	_ = class
 	_ = className
 	_ = goTypeName
-	_ = fw
-	_ = m
+	_ = framework
+	_ = mapper
 	_ = rawPkgAlias
 	_ = abstractBases
 	return nil, make(typemap.ImportSet)
@@ -110,8 +110,8 @@ type providersView struct {
 func emitProvidersFile(
 	outDir, pkgName, rawPkgAlias, rawPkgPath string,
 	abstractBases abstractBaseIndex,
-	fw *meta.FrameworkMeta,
-	m *typemap.Mapper,
+	framework *meta.FrameworkMeta,
+	mapper *typemap.Mapper,
 ) error {
 	if len(abstractBases) == 0 {
 		return nil
@@ -124,8 +124,8 @@ func emitProvidersFile(
 	sort.Strings(baseNames)
 
 	_ = rawPkgAlias
-	_ = fw
-	_ = m
+	_ = framework
+	_ = mapper
 	var view providersView
 	for _, baseName := range baseNames {
 		goTypeName := abstractBases[baseName]

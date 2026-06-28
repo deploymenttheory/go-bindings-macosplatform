@@ -36,8 +36,8 @@ func EmitSpecs(w io.Writer, pkgName, rawImportPath string, framework *macosplatf
 
 	var specs []specEntry
 	for _, className := range sortedKeys(framework.Classes) {
-		cls := framework.Classes[className]
-		if cls.Availability.IsUnavailable || !strings.HasSuffix(className, "Configuration") {
+		class := framework.Classes[className]
+		if class.Availability.IsUnavailable || !strings.HasSuffix(className, "Configuration") {
 			continue
 		}
 
@@ -47,14 +47,14 @@ func EmitSpecs(w io.Writer, pkgName, rawImportPath string, framework *macosplatf
 
 		var fields []specField
 		seenFields := make(map[string]bool)
-		for _, prop := range cls.Properties {
+		for _, prop := range class.Properties {
 			if prop.IsReadOnly || prop.Availability.IsUnavailable {
 				continue
 			}
 			// Skip properties that don't have a real instance setter method.
 			// Properties backed by class methods or with no setter are effectively
 			// read-only from an instance perspective even if not flagged readonly.
-			if !classHasInstanceSetter(cls, prop.Name) {
+			if !classHasInstanceSetter(class, prop.Name) {
 				continue
 			}
 			fieldName := propertyGoName(prop.Name)

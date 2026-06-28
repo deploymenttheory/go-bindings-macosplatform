@@ -14,12 +14,12 @@ import (
 // Used to substitute trial types for raw types in method signatures.
 type trialNameMap map[string]string
 
-func buildTrialNameMap(fw *meta.FrameworkMeta, prefix string) trialNameMap {
-	m := make(trialNameMap, len(fw.Classes))
-	for className := range fw.Classes {
-		m[className] = trialTypeName(className, prefix)
+func buildTrialNameMap(framework *meta.FrameworkMeta, prefix string) trialNameMap {
+	names := make(trialNameMap, len(framework.Classes))
+	for className := range framework.Classes {
+		names[className] = trialTypeName(className, prefix)
 	}
-	return m
+	return names
 }
 
 // abstractBaseIndex maps ObjC raw class names (that have at least one direct subclass
@@ -27,15 +27,15 @@ func buildTrialNameMap(fw *meta.FrameworkMeta, prefix string) trialNameMap {
 type abstractBaseIndex map[string]string
 
 // buildAbstractBaseIndex returns a map from ObjC class name to trial Go type name for
-// every class in fw that has at least one direct subclass also in fw.
-func buildAbstractBaseIndex(fw *meta.FrameworkMeta, prefix string) abstractBaseIndex {
+// every class in framework that has at least one direct subclass also in framework.
+func buildAbstractBaseIndex(framework *meta.FrameworkMeta, prefix string) abstractBaseIndex {
 	bases := make(abstractBaseIndex)
-	for _, cls := range fw.Classes {
-		if cls.Availability.IsUnavailable || cls.Super == "" {
+	for _, class := range framework.Classes {
+		if class.Availability.IsUnavailable || class.Super == "" {
 			continue
 		}
-		if superCls, ok := fw.Classes[cls.Super]; ok && !superCls.Availability.IsUnavailable {
-			bases[cls.Super] = trialTypeName(cls.Super, prefix)
+		if superCls, ok := framework.Classes[class.Super]; ok && !superCls.Availability.IsUnavailable {
+			bases[class.Super] = trialTypeName(class.Super, prefix)
 		}
 	}
 	return bases
@@ -85,8 +85,8 @@ func safeReturnName(name string, taken map[string]bool) string {
 	return name
 }
 
-func detectClassPrefix(fw *meta.FrameworkMeta) string {
-	names := sortedKeys(fw.Classes)
+func detectClassPrefix(framework *meta.FrameworkMeta) string {
+	names := sortedKeys(framework.Classes)
 	if len(names) == 0 {
 		return ""
 	}
@@ -171,9 +171,9 @@ func deprefixEnumName(name, prefix string) string {
 	return stripped
 }
 
-func sortedKeys(m map[string]meta.Class) []string {
-	keys := make([]string, 0, len(m))
-	for k := range m {
+func sortedKeys(classes map[string]meta.Class) []string {
+	keys := make([]string, 0, len(classes))
+	for k := range classes {
 		keys = append(keys, k)
 	}
 	sort.Strings(keys)

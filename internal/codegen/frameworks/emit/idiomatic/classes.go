@@ -53,14 +53,14 @@ type classSealView struct {
 // caller. Walking the embed chain rather than the raw super chain means a chain
 // broken by a root or a de-prefix collision stops the promotion here too.
 func classProviderIfaces(
-	cls meta.Class,
+	class meta.Class,
 	goTypeName string,
 	fc *frameworkContext,
 	prefix string,
 	abstractBases abstractBaseIndex,
 ) []string {
 	var ifaces []string
-	cur, curGo := cls, goTypeName
+	cur, curGo := class, goTypeName
 	for {
 		base := sameFrameworkBase(cur, curGo, fc, prefix)
 		if base == "" {
@@ -71,7 +71,7 @@ func classProviderIfaces(
 		if _, isBase := abstractBases[cur.Super]; isBase {
 			ifaces = append(ifaces, providerInterfaceName(base))
 		}
-		sup, ok := fc.fw.Classes[cur.Super]
+		sup, ok := fc.framework.Classes[cur.Super]
 		if !ok {
 			break
 		}
@@ -93,20 +93,20 @@ func classProviderIfaces(
 // emitted-set guards keep a de-prefix clash (two ObjC classes mapping to one Go
 // name) from producing an embed of an undefined or self type.
 func sameFrameworkBase(
-	cls meta.Class,
+	class meta.Class,
 	goTypeName string,
 	fc *frameworkContext,
 	prefix string,
 ) string {
-	switch cls.Super {
+	switch class.Super {
 	case "", "NSObject", "NSProxy":
 		return ""
 	}
-	super, ok := fc.fw.Classes[cls.Super]
+	super, ok := fc.framework.Classes[class.Super]
 	if !ok || super.Availability.IsUnavailable {
 		return ""
 	}
-	baseGo := trialTypeName(cls.Super, prefix)
+	baseGo := trialTypeName(class.Super, prefix)
 	if baseGo == goTypeName || !fc.classGoNames[baseGo] {
 		return ""
 	}
@@ -117,47 +117,47 @@ func emitClassFile(
 	w io.Writer,
 	pkgName, rawPkgAlias, rawPkgPath string,
 	className, goTypeName string,
-	cls meta.Class,
+	class meta.Class,
 	fc *frameworkContext,
-	m *typemap.Mapper,
+	mapper *typemap.Mapper,
 	trialNames trialNameMap,
 	prefix string,
 	abstractBases abstractBaseIndex,
 	handFuncs map[string]bool,
 	handMethods map[string]bool,
 ) error {
-	fw := fc.fw
+	framework := fc.framework
 	ctx := typemap.Context{
 		ClassName:     className,
-		Framework:     fw.Framework,
-		GenericParams: cls.GenericParams,
+		Framework:     framework.Framework,
+		GenericParams: class.GenericParams,
 	}
 
 	ctors := buildConstructors(
-		cls,
+		class,
 		className,
 		goTypeName,
 		fc,
 		ctx,
-		m,
+		mapper,
 		rawPkgAlias,
 		trialNames,
 		abstractBases,
 	)
 	withMethods := buildWithSetters(
-		cls,
+		class,
 		goTypeName,
 		fc,
 		ctx,
-		m,
+		mapper,
 		rawPkgAlias,
 		trialNames,
 		prefix,
 		abstractBases,
 	)
-	methods := buildMethods(cls, fc, ctx, m, rawPkgAlias, trialNames, abstractBases)
+	methods := buildMethods(class, fc, ctx, mapper, rawPkgAlias, trialNames, abstractBases)
 	providerMethods, providerImports := buildProviderMethods(
-		cls, className, goTypeName, fw, m, rawPkgAlias, abstractBases)
+		class, className, goTypeName, framework, mapper, rawPkgAlias, abstractBases)
 
 	// Flatten inherited With* setters onto the subclass wrapper. A wrapper is
 	// otherwise built from only its own class's properties, so anything configured
@@ -172,10 +172,10 @@ func emitClassFile(
 	withMethods = append(
 		withMethods,
 		buildInheritedSetters(
-			cls,
+			class,
 			className,
 			fc,
-			m,
+			mapper,
 			rawPkgAlias,
 			trialNames,
 			prefix,
@@ -192,11 +192,11 @@ func emitClassFile(
 	}
 	methods = slices.DeleteFunc(
 		methods,
-		func(e methodEntry) bool { return objMethodNames[e.goName] },
+		func(e methodModel) bool { return objMethodNames[e.goName] },
 	)
 	withMethods = slices.DeleteFunc(
 		withMethods,
-		func(e withEntry) bool { return objMethodNames[e.goName] },
+		func(e withSetterModel) bool { return objMethodNames[e.goName] },
 	)
 
 	// Drop the plain void Set* accessor for any property already exposed through a
@@ -205,30 +205,30 @@ func emitClassFile(
 	// name. The chainable With* form is kept as the single mutator.
 	if len(withMethods) > 0 {
 		coveredSetters := make(map[string]bool, len(withMethods))
-		for _, we := range withMethods {
-			if we.setterSelector != "" {
-				coveredSetters[we.setterSelector] = true
+		for _, setter := range withMethods {
+			if setter.setterSelector != "" {
+				coveredSetters[setter.setterSelector] = true
 			}
 		}
 		methods = slices.DeleteFunc(
 			methods,
-			func(e methodEntry) bool { return coveredSetters[e.selector] },
+			func(e methodModel) bool { return coveredSetters[e.selector] },
 		)
 	}
 
 	// Drop anything a hand-authored file in this package already declares, so the
 	// human's version wins (no duplicate-method compile error).
 	if len(handFuncs) > 0 {
-		ctors = slices.DeleteFunc(ctors, func(c ctorEntry) bool { return handFuncs[c.goName] })
+		ctors = slices.DeleteFunc(ctors, func(c constructorModel) bool { return handFuncs[c.goName] })
 	}
 	if len(handMethods) > 0 {
 		withMethods = slices.DeleteFunc(
 			withMethods,
-			func(e withEntry) bool { return handMethods[e.goName] },
+			func(e withSetterModel) bool { return handMethods[e.goName] },
 		)
 		methods = slices.DeleteFunc(
 			methods,
-			func(e methodEntry) bool { return handMethods[e.goName] },
+			func(e methodModel) bool { return handMethods[e.goName] },
 		)
 		providerMethods = slices.DeleteFunc(
 			providerMethods,
@@ -258,7 +258,7 @@ func emitClassFile(
 
 	// Ensure a +new constructor exists for provider-only classes (no other content).
 	if !isAbstract && len(ctors) == 0 && len(providerMethods) > 0 {
-		ctors = []ctorEntry{buildNewConstructor(className, goTypeName, rawPkgAlias)}
+		ctors = []constructorModel{buildNewConstructor(className, goTypeName, rawPkgAlias)}
 	}
 
 	// Skip classes that have nothing useful to emit. An abstract base is always
@@ -278,7 +278,7 @@ func emitClassFile(
 	// the obj.Object surface (+ String); a subclass embeds its same-framework base
 	// and promotes that surface. No raw inner, no Unwrap/ID — dispatch goes
 	// straight to the runtime.
-	baseType := sameFrameworkBase(cls, goTypeName, fc, prefix)
+	baseType := sameFrameworkBase(class, goTypeName, fc, prefix)
 	embedsRoot := baseType == ""
 	subLinks := ""
 	if isAbstract {
@@ -292,7 +292,7 @@ func emitClassFile(
 		}
 	}
 	renderTemplate(&body, "class_header", classHeaderView{
-		DocComment:   buildClassDoc(goTypeName, className, isAbstract, subLinks, baseType, cls.Doc),
+		DocComment:   buildClassDoc(goTypeName, className, isAbstract, subLinks, baseType, class.Doc),
 		GoTypeName:   goTypeName,
 		RecvVar:      receiverName(goTypeName),
 		ClassName:    className,
@@ -308,15 +308,15 @@ func emitClassFile(
 			goTypeName,
 			rawPkgAlias,
 			className,
-			genericInstantiation(len(cls.GenericParams)),
+			genericInstantiation(len(class.GenericParams)),
 			c,
 		)
 	}
-	for _, we := range withMethods {
-		writeWithMethod(&body, goTypeName, we)
+	for _, setter := range withMethods {
+		writeWithMethod(&body, goTypeName, setter)
 	}
-	for _, me := range methods {
-		writeMethod(&body, goTypeName, me)
+	for _, method := range methods {
+		writeMethod(&body, goTypeName, method)
 	}
 	provItems := make([]providerMethodItem, len(providerMethods))
 	for i, pm := range providerMethods {
@@ -337,7 +337,7 @@ func emitClassFile(
 		className,
 		goTypeName,
 		rawPkgAlias,
-		genericInstantiation(len(cls.GenericParams)),
+		genericInstantiation(len(class.GenericParams)),
 	)
 
 	// Sealing: a class that is itself a provider base defines the unexported
@@ -346,7 +346,7 @@ func emitClassFile(
 	seal := classSealView{
 		GoTypeName:     goTypeName,
 		RecvVar:        receiverName(goTypeName),
-		ProviderIfaces: classProviderIfaces(cls, goTypeName, fc, prefix, abstractBases),
+		ProviderIfaces: classProviderIfaces(class, goTypeName, fc, prefix, abstractBases),
 	}
 	if _, isBase := abstractBases[className]; isBase {
 		seal.MarkerName = markerMethodName(goTypeName)
@@ -385,9 +385,9 @@ func emitClassFile(
 // not its builder, references them). The raw bindings package is never imported
 // (the hermetic invariant), so it is intentionally absent.
 func classFileImports(
-	ctors []ctorEntry,
-	withMethods []withEntry,
-	methods []methodEntry,
+	ctors []constructorModel,
+	withMethods []withSetterModel,
+	methods []methodModel,
 	providerImports map[string]string,
 	embedsRoot bool,
 ) map[string]string {
@@ -411,11 +411,11 @@ func classFileImports(
 			imports["errkit"] = errkitImportPath
 		}
 	}
-	for _, we := range withMethods {
-		maps.Copy(imports, we.extraImports)
+	for _, setter := range withMethods {
+		maps.Copy(imports, setter.extraImports)
 	}
-	for _, me := range methods {
-		maps.Copy(imports, me.extraImports)
+	for _, method := range methods {
+		maps.Copy(imports, method.extraImports)
 	}
 	maps.Copy(imports, providerImports)
 	return imports

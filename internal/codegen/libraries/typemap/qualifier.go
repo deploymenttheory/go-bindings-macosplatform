@@ -55,14 +55,14 @@ func (q qualifier) appendDiag(format string, args ...any) {
 
 // classType returns the Go pointer type expression for an ObjC class reference,
 // package-qualifying it when the class is owned by a different framework.
-func (q qualifier) classType(cls, typeExpr string) string {
-	owner := q.frameworkOwner[cls]
+func (q qualifier) classType(class, typeExpr string) string {
+	owner := q.frameworkOwner[class]
 	if owner == "" || strings.EqualFold(owner, q.framework) {
 		return "*" + typeExpr
 	}
 	if q.isBlocked(owner) {
 		q.appendDiag("%s: %s.%s replaced with unsafe.Pointer (import cycle %s→%s)",
-			q.framework, strings.ToLower(owner), cls,
+			q.framework, strings.ToLower(owner), class,
 			strings.ToLower(q.framework), strings.ToLower(owner))
 		return "unsafe.Pointer"
 	}
@@ -155,7 +155,7 @@ func (q qualifier) protocolGoName(proto, owner string) string {
 }
 
 // structType returns the Go expression for a struct value type.
-// Same-framework: bare "<Name>". Cross-framework: "<pkg>.<Name>".
+// Same-framework: bare "<Name>". Cross-framework: "<packageName>.<Name>".
 // addPointer prepends "*" for pointer-to-struct contexts.
 func (q qualifier) structType(name, owner string, addPointer bool) string {
 	prefix := ""
@@ -249,8 +249,8 @@ func (q qualifier) frameworkCFType(name, owner string) string {
 
 // --- Mapper thin wrappers ---
 
-func (m *Mapper) qualifiedType(cls, typeExpr string, ctx Context, imports ImportSet) string {
-	return m.buildQualifier(ctx, imports).classType(cls, typeExpr)
+func (m *Mapper) qualifiedType(class, typeExpr string, ctx Context, imports ImportSet) string {
+	return m.buildQualifier(ctx, imports).classType(class, typeExpr)
 }
 
 func (m *Mapper) qualifiedFrameworkCFType(name, owner string, ctx Context, imports ImportSet) string {
@@ -290,17 +290,17 @@ func (m *Mapper) qualifiedBSDType(goName string, addPointer bool, ctx Context, i
 // Intended for use by emitters to annotate generated code.
 func (m *Mapper) BlockedImportNote(qt string, ctx Context) string {
 	n := Normalise(qt)
-	cls := ClassName(n)
-	if cls == "" {
+	class := ClassName(n)
+	if class == "" {
 		return ""
 	}
-	owner := m.OwnerIndex[cls]
+	owner := m.OwnerIndex[class]
 	if owner == "" || strings.EqualFold(owner, ctx.Framework) {
 		return ""
 	}
 	if m.BlockedImports[ctx.Framework][owner] {
 		return fmt.Sprintf("// %s.%s replaced with unsafe.Pointer: import cycle between %s and %s",
-			strings.ToLower(owner), cls, strings.ToLower(ctx.Framework), strings.ToLower(owner))
+			strings.ToLower(owner), class, strings.ToLower(ctx.Framework), strings.ToLower(owner))
 	}
 	return ""
 }

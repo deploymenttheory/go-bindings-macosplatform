@@ -1,0 +1,47 @@
+{{/*
+    enum.tmpl — raw purego emission of ObjC enums. A named enum becomes a
+    `type X <underlying>` declaration, a typed const block, and a String method
+    (switch form, or a flag-combining form for bitmasks). An anonymous enum
+    becomes a bare untyped const block. All naming, dedup, comment, and
+    underlying-type decisions are made in the gather phase (view.Enum); the
+    template is a pure structural shape. gofmt canonicalises the result.
+*/}}
+{{define "enums"}}{{range .}}{{if .IsAnon}}{{template "anon_enum" .}}{{else}}{{template "named_enum" .}}{{end}}{{end}}{{end}}
+
+{{define "named_enum"}}{{.CommentBlock}}type {{.GoName}} {{.GoType}}
+
+{{if .HasConstBlock}}const ({{range .Members}}
+{{.CommentBlock}}{{.ConstName}} {{$.GoName}} = {{.Value}}{{end}}
+)
+
+{{end}}func (e {{.GoName}}) String() string {
+{{- if .IsBitmask}}
+var parts []string
+{{- range .StringMembers}}
+if e&{{.ConstName}} != 0 {
+parts = append(parts, "{{.ConstName}}")
+}
+{{- end}}
+if len(parts) == 0 {
+return "0"
+}
+return strings.Join(parts, "|")
+{{- else}}
+switch e {
+{{- range .StringMembers}}
+case {{.ConstName}}:
+return "{{.ConstName}}"
+{{- end}}
+default:
+return fmt.Sprintf("{{.GoName}}(%d)", int64(e))
+}
+{{- end}}
+}
+
+{{end}}
+
+{{define "anon_enum"}}const ({{range .Members}}
+{{.ConstName}} = {{.Value}}{{end}}
+)
+
+{{end}}

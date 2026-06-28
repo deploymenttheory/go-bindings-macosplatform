@@ -15,13 +15,13 @@ import (
 // generated package must load. A plain library (one with a LinkLib name) lives
 // under /usr/lib; a normal framework lives under /System/Library/Frameworks,
 // using its umbrella (parent) framework's name when it has one.
-func frameworkDylibPath(m *meta.FrameworkMeta) string {
-	if m.LinkLib != "" {
-		return "/usr/lib/lib" + m.LinkLib + ".dylib"
+func frameworkDylibPath(framework *meta.FrameworkMeta) string {
+	if framework.LinkLib != "" {
+		return "/usr/lib/lib" + framework.LinkLib + ".dylib"
 	}
-	parent := m.Framework
-	if m.ParentFramework != "" {
-		parent = m.ParentFramework
+	parent := framework.Framework
+	if framework.ParentFramework != "" {
+		parent = framework.ParentFramework
 	}
 	return fmt.Sprintf("/System/Library/Frameworks/%s.framework/%s", parent, parent)
 }
@@ -30,14 +30,14 @@ func frameworkDylibPath(m *meta.FrameworkMeta) string {
 // package: the code that loads the package's macOS framework and looks up
 // Objective-C classes by name, which the package's constructors and
 // class-level functions rely on.
-func emitRuntimeBootstrap(outDir, pkgName string, fw *meta.FrameworkMeta) error {
+func emitRuntimeBootstrap(outDir, pkgName string, framework *meta.FrameworkMeta) error {
 	var buf bytes.Buffer
 	renderTemplate(&buf, "runtime", struct {
 		PkgName   string
 		DylibPath string
 	}{
 		PkgName:   pkgName,
-		DylibPath: frameworkDylibPath(fw),
+		DylibPath: frameworkDylibPath(framework),
 	})
 	return emit.WriteGoFile(filepath.Join(outDir, pkgName+"_runtime_generated.go"), buf.Bytes())
 }
