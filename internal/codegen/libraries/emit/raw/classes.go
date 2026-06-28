@@ -92,7 +92,9 @@ func EmitClass(w io.Writer, name string, cls macosplatformmetadata.Class, framew
 	if err := writeStructDef(&body, name, cls, isGeneric, superInfo); err != nil {
 		return err
 	}
-	writeConstructors(&body, name, cls, isGeneric, superInfo, framework, allClasses, m, knownClasses, usedImports)
+	if err := writeConstructors(&body, name, cls, isGeneric, superInfo, framework, allClasses, m, knownClasses, usedImports); err != nil {
+		return err
+	}
 	if isGeneric {
 		writeGenericHelper(&body, name, cls, superInfo, framework, allClasses, m, usedImports)
 	}
@@ -475,37 +477,28 @@ func isGenericClass(name string, genericClasses map[string]bool) bool {
 // writeConstructors emits:
 //  1. New<ClassName>(ptr) *<ClassName>  — full constructor with runtime tracking
 //  2. <ClassName>WithPtr(ptr) <ClassName> — value constructor for embedding in subclasses
-func writeConstructors(w io.Writer, name string, cls macosplatformmetadata.Class, isGeneric bool, si superInfo, framework *macosplatformmetadata.FrameworkMeta, allClasses map[string]macosplatformmetadata.Class, m *typemap.Mapper, knownClasses map[string]bool, usedImports typemap.ImportSet) {
+func writeConstructors(w io.Writer, name string, cls macosplatformmetadata.Class, isGeneric bool, si superInfo, framework *macosplatformmetadata.FrameworkMeta, allClasses map[string]macosplatformmetadata.Class, m *typemap.Mapper, knownClasses map[string]bool, usedImports typemap.ImportSet) error {
 	genSuffix := ""
 	if isGeneric {
 		genSuffix = "[cgo.Object]"
 	}
 
 	chain := buildValueChain(name, genSuffix, framework.Framework, framework.Classes, m, usedImports)
+	if err := executeTemplate(w, "class_constructors", classConstructorsModel{
+		Name:       name,
+		GenSuffix:  genSuffix,
+		Chain:      chain,
+		ValueChain: strings.TrimPrefix(chain, "&"), // strip the leading & to get the value
+	}); err != nil {
+		return err
+	}
 
-	// New<ClassName>
-	fmt.Fprintf(w, "func New%s(ptr unsafe.Pointer) *%s%s {\n", name, name, genSuffix)
-	fmt.Fprintf(w, "\tif ptr == nil {\n\t\treturn nil\n\t}\n")
-	fmt.Fprintf(w, "\to := %s\n", chain)
-	fmt.Fprintf(w, "\tcgo.Track(o, o.Ptr)\n")
-	fmt.Fprintf(w, "\treturn o\n")
-	fmt.Fprintf(w, "}\n\n")
-
-	// <ClassName>WithPtr — returns value type (no tracking) for embedding in subclass constructors.
-	valueChain := strings.TrimPrefix(chain, "&") // strip the leading & to get the value
-	fmt.Fprintf(w, "// %sWithPtr wraps an existing ObjC pointer as a value type for use in\n", name)
-	fmt.Fprintf(w, "// subclass struct literals. The returned value is NOT registered with the\n")
-	fmt.Fprintf(w, "// Go garbage collector — the caller is responsible for memory management.\n")
-	fmt.Fprintf(w, "// For owned references use New%s instead.\n", name)
-	fmt.Fprintf(w, "func %sWithPtr(ptr unsafe.Pointer) %s%s {\n", name, name, genSuffix)
-	fmt.Fprintf(w, "\treturn %s\n", valueChain)
-	fmt.Fprintf(w, "}\n\n")
-
-	writeCastHelper(w, name, isGeneric)
 	{
 		ctorCtx := m.BaseContext(framework.Framework, knownClasses)
 		ctorCtx.ClassName = name
-		writeDesignatedInitConstructors(w, name, cls, isGeneric, framework, ctorCtx, m, allClasses, usedImports)
+		if err := writeDesignatedInitConstructors(w, name, cls, isGeneric, framework, ctorCtx, m, allClasses, usedImports); err != nil {
+			return err
+		}
 	}
 
 	// For generic classes: also emit a typed value constructor used by generic subclasses
@@ -517,20 +510,22 @@ func writeConstructors(w io.Writer, name string, cls macosplatformmetadata.Class
 		fmt.Fprintf(w, "\treturn %s\n", tValueChain)
 		fmt.Fprintf(w, "}\n\n")
 	}
+	return nil
 }
 
 // writeDesignatedInitConstructors emits New[ClassName]With[FirstArg] factory functions
 // for every designated initializer that has at least one argument. Each factory allocates
 // a new ObjC object via a per-class alloc bridge function, wraps it, then calls the
 // existing Go instance method for the designated init (which handles CGo + exception).
-func writeDesignatedInitConstructors(w io.Writer, name string, cls macosplatformmetadata.Class, isGeneric bool, framework *macosplatformmetadata.FrameworkMeta, ctx typemap.Context, m *typemap.Mapper, allClasses map[string]macosplatformmetadata.Class, imports typemap.ImportSet) {
+func writeDesignatedInitConstructors(w io.Writer, name string, cls macosplatformmetadata.Class, isGeneric bool, framework *macosplatformmetadata.FrameworkMeta, ctx typemap.Context, m *typemap.Mapper, allClasses map[string]macosplatformmetadata.Class, imports typemap.ImportSet) error {
 	if isGeneric {
-		return // skip: designated init constructors for generic classes need T constraints
+		return nil // skip: designated init constructors for generic classes need T constraints
 	}
 
 	packageName := strings.ToLower(framework.Framework)
 	allocFn := packageName + "_" + name + "_alloc"
 
+	var inits []designatedInitModel
 	seenCtorNames := make(map[string]bool)
 	for _, method := range cls.Methods {
 		if !method.IsDesignatedInit || !method.IsInit || len(method.Params) == 0 {
@@ -586,53 +581,39 @@ func writeDesignatedInitConstructors(w io.Writer, name string, cls macosplatform
 		initReturnsID := initGoRet == "cgo.Object"
 		initReturnsPtr := initReturnsUnsafe || initReturnsID
 
-		fmt.Fprintf(w, "// %s creates a new %s via its designated initializer -[%s].\n", ctorName, name, method.Selector)
-		fmt.Fprintf(w, "func %s(%s) %s {\n", ctorName, strings.Join(goArgs, ", "), returnSig)
-		fmt.Fprintf(w, "\t_raw := unsafe.Pointer(C.%s())\n", allocFn)
 		// Use the value-type wrapper (no finalizer) for the alloc result so that
 		// the finalizer registered inside the Init method is the sole owner.
 		// New<Class>(_raw) would register a second finalizer on the same pointer,
 		// causing a double-Release when the GC runs.
-		fmt.Fprintf(w, "\t_obj := %sWithPtr(_raw)\n", name)
 		callExpr := fmt.Sprintf("_obj.%s(%s)", goMethodName, strings.Join(callNames, ", "))
+		model := designatedInitModel{
+			CtorName:  ctorName,
+			ClassName: name,
+			Selector:  method.Selector,
+			ArgList:   strings.Join(goArgs, ", "),
+			ReturnSig: returnSig,
+			AllocFn:   allocFn,
+			CallExpr:  callExpr,
+		}
 		switch {
 		case initReturnsID && method.IsNSError:
-			// id (cgo.Object) return: extract Ptr() to pass to typed constructor.
-			fmt.Fprintf(w, "\t_idResult, _err := %s\n", callExpr)
-			fmt.Fprintf(w, "\tif _idResult == nil { return nil, _err }\n")
-			fmt.Fprintf(w, "\treturn New%s(_idResult.Ptr()), _err\n", name)
+			model.Kind = 1 // id (cgo.Object) return: extract Ptr() for the typed constructor
 		case initReturnsID:
-			fmt.Fprintf(w, "\t_idResult := %s\n", callExpr)
-			fmt.Fprintf(w, "\tif _idResult == nil { return nil }\n")
-			fmt.Fprintf(w, "\treturn New%s(_idResult.Ptr())\n", name)
+			model.Kind = 2
 		case initReturnsPtr && method.IsNSError:
-			fmt.Fprintf(w, "\t_result, _err := %s\n", callExpr)
-			fmt.Fprintf(w, "\treturn New%s(_result), _err\n", name)
+			model.Kind = 3
 		case initReturnsPtr:
-			fmt.Fprintf(w, "\treturn New%s(%s)\n", name, callExpr)
+			model.Kind = 4
 		default:
-			fmt.Fprintf(w, "\treturn %s\n", callExpr)
+			model.Kind = 0
 		}
-		fmt.Fprintf(w, "}\n\n")
+		inits = append(inits, model)
 	}
-}
 
-// writeCastHelper emits a Cast[ClassName] function that wraps an ObjC id pointer
-// (returned as unsafe.Pointer from id-typed method returns) as the concrete Go type.
-// Callers should verify the dynamic type with cgo.ClassNameOf before relying on it.
-func writeCastHelper(w io.Writer, name string, isGeneric bool) {
-	genSuffix := ""
-	if isGeneric {
-		genSuffix = "[cgo.Object]"
+	if err := executeTemplate(w, "designated_inits", inits); err != nil {
+		return err
 	}
-	fmt.Fprintf(w, "// Cast%s wraps an ObjC id pointer as *%s%s.\n", name, name, genSuffix)
-	fmt.Fprintf(w, "// The caller is responsible for verifying the dynamic type with\n")
-	fmt.Fprintf(w, "// cgo.ClassNameOf before relying on the cast.\n")
-	fmt.Fprintf(w, "func Cast%s(ptr unsafe.Pointer) *%s%s {\n", name, name, genSuffix)
-	// New%s is the non-generic constructor whose return type is already
-	// *<Class>[runtime.Object] for generic classes — no type-param application.
-	fmt.Fprintf(w, "\treturn New%s(ptr)\n", name)
-	fmt.Fprintf(w, "}\n\n")
+	return nil
 }
 
 // classConformsToCoding reports whether the class conforms to NSSecureCoding or NSCoding.

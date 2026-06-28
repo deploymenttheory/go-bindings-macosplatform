@@ -39,3 +39,65 @@ import (
 {{end}}var _ cgo.Object = (*{{.AssertType}})(nil)
 
 {{end}}
+
+{{/*
+    class_constructors — the New<Class> pointer constructor (registers a
+    finalizer via cgo.Track), the <Class>WithPtr value constructor (untracked,
+    for embedding in subclass struct literals), and the Cast<Class> helper.
+*/}}
+{{define "class_constructors"}}func New{{.Name}}(ptr unsafe.Pointer) *{{.Name}}{{.GenSuffix}} {
+if ptr == nil {
+return nil
+}
+o := {{.Chain}}
+cgo.Track(o, o.Ptr)
+return o
+}
+
+// {{.Name}}WithPtr wraps an existing ObjC pointer as a value type for use in
+// subclass struct literals. The returned value is NOT registered with the
+// Go garbage collector — the caller is responsible for memory management.
+// For owned references use New{{.Name}} instead.
+func {{.Name}}WithPtr(ptr unsafe.Pointer) {{.Name}}{{.GenSuffix}} {
+return {{.ValueChain}}
+}
+
+// Cast{{.Name}} wraps an ObjC id pointer as *{{.Name}}{{.GenSuffix}}.
+// The caller is responsible for verifying the dynamic type with
+// cgo.ClassNameOf before relying on the cast.
+func Cast{{.Name}}(ptr unsafe.Pointer) *{{.Name}}{{.GenSuffix}} {
+return New{{.Name}}(ptr)
+}
+
+{{end}}
+
+{{/*
+    designated_inits — New<Class>With<Arg> factory functions built from
+    designated initializers. Each allocates via the class alloc bridge, wraps the
+    result untracked (the init method registers the sole finalizer), calls the Go
+    init method, and converts its result per Kind. The one-line nil guards are
+    intentional — gofmt preserves one-line bodies.
+*/}}
+{{define "designated_inits"}}{{range .}}// {{.CtorName}} creates a new {{.ClassName}} via its designated initializer -[{{.ClassName}} {{.Selector}}].
+func {{.CtorName}}({{.ArgList}}) {{.ReturnSig}} {
+_raw := unsafe.Pointer(C.{{.AllocFn}}())
+_obj := {{.ClassName}}WithPtr(_raw)
+{{- if eq .Kind 1}}
+_idResult, _err := {{.CallExpr}}
+if _idResult == nil { return nil, _err }
+return New{{.ClassName}}(_idResult.Ptr()), _err
+{{- else if eq .Kind 2}}
+_idResult := {{.CallExpr}}
+if _idResult == nil { return nil }
+return New{{.ClassName}}(_idResult.Ptr())
+{{- else if eq .Kind 3}}
+_result, _err := {{.CallExpr}}
+return New{{.ClassName}}(_result), _err
+{{- else if eq .Kind 4}}
+return New{{.ClassName}}({{.CallExpr}})
+{{- else}}
+return {{.CallExpr}}
+{{- end}}
+}
+
+{{end}}{{end}}

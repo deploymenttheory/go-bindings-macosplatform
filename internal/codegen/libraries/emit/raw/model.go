@@ -79,6 +79,39 @@ type classStructModel struct {
 	AssertType string
 }
 
+// classConstructorsModel is template data for a class's core constructors: the
+// tracked New<Class> pointer constructor, the untracked <Class>WithPtr value
+// constructor (for embedding in subclass literals), and the Cast<Class> helper.
+type classConstructorsModel struct {
+	Name string
+	// GenSuffix is "[cgo.Object]" for a generic class, otherwise empty.
+	GenSuffix string
+	// Chain is the value-chain literal that builds the wrapper, e.g.
+	// "&NSMutableArray[cgo.Object]{NSArray[cgo.Object]{NSObject{ptr: ptr}}}".
+	Chain string
+	// ValueChain is Chain without the leading "&" — the value form returned by
+	// <Class>WithPtr.
+	ValueChain string
+}
+
+// designatedInitModel is template data for one New<Class>With<Arg> factory
+// generated from a designated initializer. The factory allocates via the class
+// alloc bridge, wraps the result untracked, calls the Go init method, and
+// converts its result according to Kind.
+type designatedInitModel struct {
+	CtorName  string
+	ClassName string
+	Selector  string
+	ArgList   string // the factory's Go parameter list
+	ReturnSig string // "*Class" or "(*Class, error)"
+	AllocFn   string // the C alloc bridge function name
+	CallExpr  string // "_obj.<Init>(<args>)"
+	// Kind selects the result handling: 0 the init already returns *Class;
+	// 1 id-return + error; 2 id-return; 3 unsafe.Pointer-return + error;
+	// 4 unsafe.Pointer-return.
+	Kind int
+}
+
 // cfWrapperModel is template data for a CoreFoundation opaque pointer wrapper type.
 type cfWrapperModel struct {
 	GoName string // Primary type name, e.g. CFStringRef
