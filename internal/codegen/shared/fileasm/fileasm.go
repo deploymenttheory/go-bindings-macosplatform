@@ -115,3 +115,57 @@ func IsStdlibImport(path string) bool {
 	first, _, _ := strings.Cut(path, "/")
 	return !strings.Contains(first, ".")
 }
+
+// ImportLinesStdlibExternalInternal renders import entries for the alias→path
+// map in three groups — standard library, third-party external, then this
+// module's own (github.com/deploymenttheory/…) packages — each separated by a
+// blank line, paths sorted within a group. An alias is rendered only when it
+// differs from the path's last segment. This is the grouping the raw emitters
+// use (distinct from the two-group goimports grouping).
+func ImportLinesStdlibExternalInternal(imports map[string]string) []string {
+	const moduleRoot = "github.com/deploymenttheory"
+	var stdlib, external, internal []string
+	pathAlias := map[string]string{}
+	for alias, path := range imports {
+		switch {
+		case !strings.Contains(path, "."):
+			stdlib = append(stdlib, path)
+		case strings.HasPrefix(path, moduleRoot):
+			internal = append(internal, path)
+		default:
+			external = append(external, path)
+		}
+		segments := strings.Split(path, "/")
+		if alias != segments[len(segments)-1] {
+			pathAlias[path] = alias
+		}
+	}
+	sort.Strings(stdlib)
+	sort.Strings(external)
+	sort.Strings(internal)
+
+	render := func(path string) string {
+		if alias, ok := pathAlias[path]; ok {
+			return fmt.Sprintf("%s %q", alias, path)
+		}
+		return fmt.Sprintf("%q", path)
+	}
+
+	lines := make([]string, 0, len(stdlib)+len(external)+len(internal)+2)
+	for _, path := range stdlib {
+		lines = append(lines, render(path))
+	}
+	if len(stdlib) > 0 && len(external)+len(internal) > 0 {
+		lines = append(lines, "")
+	}
+	for _, path := range external {
+		lines = append(lines, render(path))
+	}
+	if len(external) > 0 && len(internal) > 0 {
+		lines = append(lines, "")
+	}
+	for _, path := range internal {
+		lines = append(lines, render(path))
+	}
+	return lines
+}

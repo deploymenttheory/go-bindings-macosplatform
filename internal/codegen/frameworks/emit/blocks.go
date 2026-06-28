@@ -2,7 +2,6 @@ package emit
 
 import (
 	"fmt"
-	"io"
 	"strings"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/view"
@@ -265,68 +264,4 @@ func blockAdapterRenderView(adapter blockAdapterModel) view.BlockAdapter {
 	}
 	built.CallExpr = fmt.Sprintf("%s(%s)", adapter.ParamName, strings.Join(callArgs, ", "))
 	return built
-}
-
-// writeBlockAdapter writes the objc.NewBlock construction for one block
-// parameter into the body of a generated wrapper. No output is produced for
-// degraded adapters — the public objc.Block parameter is passed through. indent
-// is the leading whitespace for emitted lines.
-//
-// Retained until the class emitter is templated; the function emitter renders
-// block adapters through block_adapter.tmpl (see blockAdapterRenderView).
-func writeBlockAdapter(w io.Writer, adapter blockAdapterModel, indent string) {
-	if adapter.Degraded {
-		return
-	}
-	blockVar := "__block_" + adapter.ParamName
-
-	// A nil Go closure maps to a nil (zero) block so _Nullable block
-	// parameters keep their semantics.
-	fmt.Fprintf(w, "%svar %s objc.Block\n", indent, blockVar)
-	fmt.Fprintf(w, "%sif %s != nil {\n", indent, adapter.ParamName)
-
-	callbackParams := make([]string, 0, len(adapter.Params)+1)
-	callbackParams = append(callbackParams, "_ objc.Block")
-	for i, component := range adapter.Params {
-		callbackParams = append(
-			callbackParams,
-			fmt.Sprintf("blockParam%d %s", i, component.ABIType),
-		)
-	}
-	retSig := ""
-	if adapter.RetGoType != "" {
-		retSig = " " + adapter.RetGoType
-	}
-	fmt.Fprintf(
-		w,
-		"%s\t%s = objc.NewBlock(func(%s)%s {\n",
-		indent, blockVar, strings.Join(callbackParams, ", "), retSig,
-	)
-
-	inner := indent + "\t\t"
-	callArgs := make([]string, len(adapter.Params))
-	for i, component := range adapter.Params {
-		argName := fmt.Sprintf("blockParam%d", i)
-		if component.NeedsRetain {
-			fmt.Fprintf(w, "%sif %s != 0 {\n", inner, argName)
-			fmt.Fprintf(w, "%s\t%s.Send(objc.RegisterName(\"retain\"))\n", inner, argName)
-			fmt.Fprintf(w, "%s}\n", inner)
-		}
-		if component.ConvertFmt != "" {
-			callArgs[i] = fmt.Sprintf(component.ConvertFmt, argName)
-		} else {
-			callArgs[i] = argName
-		}
-	}
-
-	call := fmt.Sprintf("%s(%s)", adapter.ParamName, strings.Join(callArgs, ", "))
-	if adapter.RetGoType != "" {
-		fmt.Fprintf(w, "%sreturn %s\n", inner, call)
-	} else {
-		fmt.Fprintf(w, "%s%s\n", inner, call)
-	}
-
-	fmt.Fprintf(w, "%s\t})\n", indent)
-	fmt.Fprintf(w, "%s\tdefer %s.Release()\n", indent, blockVar)
-	fmt.Fprintf(w, "%s}\n", indent)
 }

@@ -55,6 +55,30 @@ type structModel struct {
 	Fields       []structFieldModel
 }
 
+// classStructModel is template data for an ObjC class's Go struct: a root class
+// owns the unsafe.Pointer field and a promoted Ptr() accessor, while a non-root
+// class embeds its immediate superclass by value. Both emit a compile-time
+// cgo.Object interface assertion.
+type classStructModel struct {
+	// CommentBlock is the wraps/superclass/protocols/swift-name doc plus the
+	// shared context comments (column 0, trailing newline).
+	CommentBlock string
+	// TypeHeader is the type name with any generic constraint, e.g. "NSArray" or
+	// "NSArray[T cgo.Object]".
+	TypeHeader string
+	// EmbedLine is the struct's single line: "ptr unsafe.Pointer" for a root
+	// class, otherwise the embedded superclass field.
+	EmbedLine string
+	// IsRoot emits the ptr field's promoted Ptr() accessor.
+	IsRoot bool
+	// PtrReceiver is the receiver type for Ptr(), e.g. "NSObject" or
+	// "NSArray[T]" (root only).
+	PtrReceiver string
+	// AssertType is the type in the `var _ cgo.Object = (*…)(nil)` assertion,
+	// e.g. "NSObject" or "NSArray[cgo.Object]".
+	AssertType string
+}
+
 // cfWrapperModel is template data for a CoreFoundation opaque pointer wrapper type.
 type cfWrapperModel struct {
 	GoName string // Primary type name, e.g. CFStringRef

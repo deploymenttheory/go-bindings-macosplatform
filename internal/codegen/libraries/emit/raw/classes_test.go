@@ -2,6 +2,7 @@ package raw
 
 import (
 	"bytes"
+	"go/format"
 	"strings"
 	"testing"
 
@@ -36,14 +37,26 @@ var classKnown = map[string]bool{
 func writeClassBuf(name string, cls macosplatformmetadata.Class, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, all map[string]macosplatformmetadata.Class) (string, error) {
 	var buf bytes.Buffer
 	err := EmitClass(&buf, name, cls, framework, m, classKnown, all, strings.ToLower(framework.Framework))
-	return buf.String(), err
+	return gofmtClassOutput(buf.Bytes()), err
 }
 
 // writeClassBufKnown is like writeClassBuf but allows a custom knownClasses map.
 func writeClassBufKnown(name string, cls macosplatformmetadata.Class, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, all map[string]macosplatformmetadata.Class, known map[string]bool) (string, error) {
 	var buf bytes.Buffer
 	err := EmitClass(&buf, name, cls, framework, m, known, all, strings.ToLower(framework.Framework))
-	return buf.String(), err
+	return gofmtClassOutput(buf.Bytes()), err
+}
+
+// gofmtClassOutput canonicalises EmitClass output the way the real pipeline does
+// (WriteGoFile runs go/format), so assertions see the same bytes that land in
+// the generated files. Falls back to the raw output when it does not parse, so a
+// genuine generation bug still surfaces in the assertion.
+func gofmtClassOutput(src []byte) string {
+	formatted, err := format.Source(src)
+	if err != nil {
+		return string(src)
+	}
+	return string(formatted)
 }
 
 // TestWriteClassRootStructHasPtrField verifies root classes (no super) declare

@@ -8,9 +8,12 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/view"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/shared/fileasm"
 )
 
 const (
@@ -128,13 +131,25 @@ func emitClass(
 	imports := make(typemap.ImportSet)
 
 	// Type declaration.
-	writeClassTypeDecl(&body, className, cls, isGeneric, genericParams, framework, reg, imports)
+	typeDeclOut, err := render.ClassTypeDecl(buildClassTypeDeclView(className, cls, isGeneric, genericParams, framework, reg, imports))
+	if err != nil {
+		return err
+	}
+	body.Write(typeDeclOut)
 
 	// Package-level vars for class ref and selectors.
-	writeClassVars(&body, className, selectors)
+	classVarsOut, err := render.ClassVars(buildClassVarsView(className, selectors))
+	if err != nil {
+		return err
+	}
+	body.Write(classVarsOut)
 
 	// Constructor (XFromID).
-	writeFromIDConstructor(&body, className, isGeneric, genericParams)
+	fromIDOut, err := render.FromIDConstructor(buildFromIDConstructorView(className, isGeneric, genericParams))
+	if err != nil {
+		return err
+	}
+	body.Write(fromIDOut)
 
 	// Methods.
 	goNameCount := make(map[string]int)
@@ -175,11 +190,9 @@ func emitClass(
 			goName = fmt.Sprintf("%s%d", goName, goNameSeen[goName])
 		}
 
-		if err := writeMethod(
-			&body,
+		methodOut, err := render.ClassMethod(buildRawMethodView(
 			goName,
 			className,
-			cls,
 			method,
 			ctx,
 			mapper,
@@ -187,33 +200,20 @@ func emitClass(
 			isGeneric,
 			genericParams,
 			reg,
-		); err != nil {
+		))
+		if err != nil {
 			return err
 		}
+		body.Write(methodOut)
 	}
 
-	// Determine necessary standard imports based on body content.
+	// Collect imports: the cross-framework types discovered during resolution,
+	// always objc and purego, plus unsafe/fmt when the rendered body uses them.
 	bodyStr := body.String()
-	extraImports := []string{
-		objcPkg + " " + objcImport,
-		pureobjcPkg + " " + pureobjcImport,
-	}
-	if strings.Contains(bodyStr, "unsafe.") {
-		extraImports = append(extraImports, "unsafe")
-	}
-	if strings.Contains(bodyStr, "runtime.") {
-		extraImports = append(extraImports, "runtime")
-	}
-
-	// Write header with collected imports.
-	fmt.Fprintf(w, "%s", generatedHeader)
-	fmt.Fprintf(w, "package %s\n\n", packageName)
-
 	allImports := make(typemap.ImportSet)
-	for k, v := range imports {
-		allImports[k] = v
+	for alias, path := range imports {
+		allImports[alias] = path
 	}
-	// Always include objc and purego.
 	allImports[objcPkg] = objcImport
 	allImports[pureobjcPkg] = pureobjcImport
 	if strings.Contains(bodyStr, "unsafe.") {
@@ -223,80 +223,24 @@ func emitClass(
 		allImports["fmt"] = "fmt"
 	}
 
-	_ = extraImports
-
-	writeImportBlock(w, allImports)
-
-	// Write body.
-	fmt.Fprint(w, body.String())
-	return nil
+	// generatedHeader carries both the DO-NOT-EDIT comment and the build tag with
+	// no blank line between them, so it is the whole Header and BuildTag is empty.
+	out := fileasm.Assemble(fileasm.File{
+		Header:      strings.TrimRight(generatedHeader, "\n"),
+		PkgName:     packageName,
+		ImportLines: fileasm.ImportLinesStdlibExternalInternal(allImports),
+		Body:        bodyStr,
+	})
+	_, err = w.Write(out)
+	return err
 }
 
-func writeImportBlock(w io.Writer, imports typemap.ImportSet) {
-	if len(imports) == 0 {
-		return
-	}
-
-	var stdlib, external, internal_ []string
-	for alias, path := range imports {
-		_ = alias
-		switch {
-		case !strings.Contains(path, "."):
-			stdlib = append(stdlib, path)
-		case strings.HasPrefix(path, "github.com/deploymenttheory"):
-			internal_ = append(internal_, path)
-		default:
-			external = append(external, path)
-		}
-	}
-	sort.Strings(stdlib)
-	sort.Strings(external)
-	sort.Strings(internal_)
-
-	// Build reverse alias map.
-	pathAlias := make(map[string]string)
-	for alias, path := range imports {
-		segs := strings.Split(path, "/")
-		defaultAlias := segs[len(segs)-1]
-		if alias != defaultAlias {
-			pathAlias[path] = alias
-		}
-	}
-
-	fmt.Fprint(w, "import (\n")
-	for _, p := range stdlib {
-		if a, ok := pathAlias[p]; ok {
-			fmt.Fprintf(w, "\t%s %q\n", a, p)
-		} else {
-			fmt.Fprintf(w, "\t%q\n", p)
-		}
-	}
-	if len(stdlib) > 0 && len(external)+len(internal_) > 0 {
-		fmt.Fprint(w, "\n")
-	}
-	for _, p := range external {
-		if a, ok := pathAlias[p]; ok {
-			fmt.Fprintf(w, "\t%s %q\n", a, p)
-		} else {
-			fmt.Fprintf(w, "\t%q\n", p)
-		}
-	}
-	if len(external) > 0 && len(internal_) > 0 {
-		fmt.Fprint(w, "\n")
-	}
-	for _, p := range internal_ {
-		if a, ok := pathAlias[p]; ok {
-			fmt.Fprintf(w, "\t%s %q\n", a, p)
-		} else {
-			fmt.Fprintf(w, "\t%q\n", p)
-		}
-	}
-	fmt.Fprint(w, ")\n\n")
-}
-
-// writeClassTypeDecl writes the Go struct type for an ObjC class.
-func writeClassTypeDecl(
-	w io.Writer,
+// buildClassTypeDeclView resolves an ObjC class's Go struct declaration: the doc
+// comment, the (generic) type header, the embedded field (raw ptr or superclass
+// struct), and whether the promoted Ptr/InitPtr accessors are emitted. A
+// cross-framework superclass import is accumulated into imports as a side
+// effect, exactly as the original emitter did.
+func buildClassTypeDeclView(
 	className string,
 	cls meta.Class,
 	isGeneric bool,
@@ -304,16 +248,16 @@ func writeClassTypeDecl(
 	framework string,
 	reg *RegistrySnapshot,
 	imports typemap.ImportSet,
-) {
+) view.ClassTypeDecl {
+	var comment strings.Builder
 	if cls.Doc != "" {
-		fmt.Fprintf(w, "// %s\n", cls.Doc)
-		fmt.Fprintf(w, "//\n")
+		fmt.Fprintf(&comment, "// %s\n//\n", cls.Doc)
 	}
 	// Apple's class documentation URLs follow a deterministic lowercase scheme,
 	// so the link is computable from metadata alone (method URLs are not).
-	fmt.Fprintf(w, "// Apple documentation: https://developer.apple.com/documentation/%s/%s\n",
+	fmt.Fprintf(&comment, "// Apple documentation: https://developer.apple.com/documentation/%s/%s\n",
 		strings.ToLower(framework), strings.ToLower(className))
-	emitDeprecatedComment(w, cls.Availability)
+	comment.WriteString(deprecatedComment(cls.Availability))
 
 	typeHeader := className
 	if isGeneric {
@@ -326,8 +270,6 @@ func writeClassTypeDecl(
 		typeHeader = className + "[" + strings.Join(constraints, ", ") + "]"
 	}
 
-	fmt.Fprintf(w, "type %s struct {\n", typeHeader)
-
 	superOwner := reg.OwnerIndex[cls.Super]
 	superBlocked := cls.Super != "" && superOwner != "" && superOwner != framework &&
 		reg.BlockedImports[framework] != nil && reg.BlockedImports[framework][superOwner]
@@ -336,11 +278,10 @@ func writeClassTypeDecl(
 	superUnavailable := cls.Super != "" && reg.UnavailableClasses != nil &&
 		reg.UnavailableClasses[cls.Super]
 
-	if cls.Super == "" || reg.OwnerIndex[cls.Super] == "" || superBlocked || superUnavailable {
-		// Root class, unknown superclass, or cycle-broken superclass import —
-		// embed ptr directly. Ptr() method is emitted below.
-		fmt.Fprintf(w, "\tptr objc.ID\n")
-	} else {
+	isRoot := cls.Super == "" || reg.OwnerIndex[cls.Super] == "" || superBlocked || superUnavailable
+
+	embedLine := "ptr objc.ID"
+	if !isRoot {
 		// Embed the superclass struct.
 		superType := cls.Super
 		if superOwner != framework {
@@ -370,29 +311,26 @@ func writeClassTypeDecl(
 				superType = superType + "[" + strings.Join(ids, ", ") + "]"
 			}
 		}
-		fmt.Fprintf(w, "\t%s\n", superType)
+		embedLine = superType
 	}
 
-	fmt.Fprintf(w, "}\n\n")
-
-	// Ptr() and InitPtr() for root classes and cycle-broken super classes.
-	// Subclasses in other packages cannot access the unexported ptr field directly,
-	// so they rely on these promoted exported methods for both reading and writing.
-	if cls.Super == "" || reg.OwnerIndex[cls.Super] == "" || superBlocked || superUnavailable {
+	built := view.ClassTypeDecl{
+		CommentBlock:   comment.String(),
+		TypeHeader:     typeHeader,
+		EmbedLine:      embedLine,
+		EmitPtrMethods: isRoot,
+	}
+	if isRoot {
+		// Ptr/InitPtr are promoted accessors: subclasses in other packages cannot
+		// reach the unexported ptr field directly, so they read and write it
+		// through these.
 		typeSuffix := ""
 		if isGeneric {
-			params := make([]string, len(genericParams))
-			copy(params, genericParams)
-			typeSuffix = "[" + strings.Join(params, ", ") + "]"
+			typeSuffix = "[" + strings.Join(genericParams, ", ") + "]"
 		}
-		fmt.Fprintf(w, "func (o *%s%s) Ptr() objc.ID { return o.ptr }\n\n", className, typeSuffix)
-		fmt.Fprintf(
-			w,
-			"func (o *%s%s) InitPtr(id objc.ID) { o.ptr = id }\n\n",
-			className,
-			typeSuffix,
-		)
+		built.PtrReceiver = className + typeSuffix
 	}
+	return built
 }
 
 // writeClassVars writes the package-level selector and class var declarations.
@@ -401,29 +339,32 @@ func writeClassTypeDecl(
 // before the runtime file's init(), so a plain objc.GetClass here would
 // resolve to a nil class for any framework not already loaded into the
 // process.
-func writeClassVars(w io.Writer, className string, selectors []selectorEntry) {
-	if len(selectors) == 0 {
-		fmt.Fprintf(w, "var %s = _objcClass(%q)\n\n", varClassName(className), className)
-		return
+func buildClassVarsView(className string, selectors []selectorEntry) view.ClassVars {
+	built := view.ClassVars{
+		ClassVarName: varClassName(className),
+		ClassName:    className,
 	}
-
-	fmt.Fprintf(w, "var (\n")
-	fmt.Fprintf(w, "\t%s = _objcClass(%q)\n", varClassName(className), className)
 	// Deduplicate selectors for the var block.
 	seen := make(map[string]bool)
-	for _, sel := range selectors {
-		varName := varSelectorName(className, sel.selector)
+	for _, selector := range selectors {
+		varName := varSelectorName(className, selector.selector)
 		if seen[varName] {
 			continue
 		}
 		seen[varName] = true
-		fmt.Fprintf(w, "\t%s = objc.RegisterName(%q)\n", varName, sel.selector)
+		built.Selectors = append(built.Selectors, view.ClassSelectorVar{
+			VarName:  varName,
+			Selector: selector.selector,
+		})
 	}
-	fmt.Fprintf(w, ")\n\n")
+	return built
 }
 
-// writeFromIDConstructor writes the XFromID factory function.
-func writeFromIDConstructor(w io.Writer, className string, isGeneric bool, genericParams []string) {
+// buildFromIDConstructorView resolves a class's XFromID factory: its signature
+// (generic when the class has type parameters) and the type literal allocated
+// for the wrapper.
+func buildFromIDConstructorView(className string, isGeneric bool, genericParams []string) view.FromIDConstructor {
+	signature := fmt.Sprintf("func %sFromID(id objc.ID) *%s", className, className)
 	if isGeneric {
 		// Generic version — use AnyObject constraint (= any) to accept both
 		// raw objc.ID and typed wrapper structs without unsafe.Pointer.
@@ -433,30 +374,21 @@ func writeFromIDConstructor(w io.Writer, className string, isGeneric bool, gener
 			params[i] = gp
 			constraints[i] = gp + " " + pureobjcPkg + ".AnyObject"
 		}
-		paramStr := strings.Join(params, ", ")
-		constraintStr := strings.Join(constraints, ", ")
-		fmt.Fprintf(
-			w,
-			"func %sFromID[%s](id objc.ID) *%s[%s] {\n",
+		signature = fmt.Sprintf(
+			"func %sFromID[%s](id objc.ID) *%s[%s]",
 			className,
-			constraintStr,
+			strings.Join(constraints, ", "),
 			className,
-			paramStr,
+			strings.Join(params, ", "),
 		)
-	} else {
-		fmt.Fprintf(w, "func %sFromID(id objc.ID) *%s {\n", className, className)
 	}
-	fmt.Fprintf(w, "\tif id == 0 {\n\t\treturn nil\n\t}\n")
+
+	allocType := className
 	if isGeneric && len(genericParams) > 0 {
-		paramStr := strings.Join(genericParams, ", ")
-		fmt.Fprintf(w, "\to := &%s[%s]{}\n", className, paramStr)
-	} else {
-		fmt.Fprintf(w, "\to := &%s{}\n", className)
+		allocType = className + "[" + strings.Join(genericParams, ", ") + "]"
 	}
-	fmt.Fprintf(w, "\to.InitPtr(id)\n")
-	fmt.Fprintf(w, "\tpurego.Track(o)\n")
-	fmt.Fprintf(w, "\treturn o\n")
-	fmt.Fprintf(w, "}\n\n")
+
+	return view.FromIDConstructor{Signature: signature, AllocType: allocType}
 }
 
 // isMethodBridgeable reports whether an ObjC method can be bridged via purego.
@@ -493,11 +425,11 @@ type methodCallModel struct {
 	retIsObject   bool
 }
 
-// writeMethod writes a single Go method wrapping an ObjC method via objc.Send.
-func writeMethod(
-	w io.Writer,
+// buildRawMethodView resolves one Go method wrapping an ObjC method via
+// objc.Send: its signature, the block adapters for block parameters, the
+// objc.Send target and argument list, and the return-kind dispatch.
+func buildRawMethodView(
 	goName, className string,
-	cls meta.Class,
 	method meta.Method,
 	ctx typemap.Context,
 	mapper *typemap.Mapper,
@@ -505,8 +437,7 @@ func writeMethod(
 	isGeneric bool,
 	genericParams []string,
 	reg *RegistrySnapshot,
-) error {
-	_ = cls
+) view.RawMethod {
 	selVarName := varSelectorName(className, method.Selector)
 
 	call := buildMethodCallModel(
@@ -530,9 +461,6 @@ func writeMethod(
 		receiver = fmt.Sprintf("(o *%s%s) ", className, typeSuffix)
 	}
 
-	// Build signature.
-	paramStr := strings.Join(call.goParams, ", ")
-
 	var returnSig string
 	switch {
 	case !call.retIsVoid && method.IsNSError:
@@ -543,43 +471,59 @@ func writeMethod(
 		returnSig = " " + call.retGoType
 	}
 
+	var comment strings.Builder
 	if method.Doc != "" {
-		fmt.Fprintf(w, "// %s\n", method.Doc)
+		fmt.Fprintf(&comment, "// %s\n", method.Doc)
 	}
-	emitDeprecatedComment(w, method.Availability)
-	fmt.Fprintf(w, "func %s%s(%s)%s {\n", receiver, goName, paramStr, returnSig)
+	comment.WriteString(deprecatedComment(method.Availability))
 
-	// Handle block parameters — adapt each Go closure into a real block
-	// object via objc.NewBlock (whose callback takes objc.Block first).
-	for _, adapter := range call.blockAdapters {
-		writeBlockAdapter(w, adapter, "\t")
-	}
-
-	// Build the objc.Send call.
 	target := "o.Ptr()"
 	if method.IsClassMethod {
 		target = fmt.Sprintf("objc.ID(%s)", varClassName(className))
 	}
 
-	// Build the full arg list for Send.
 	sendArgStr := ""
 	if len(call.sendArgs) > 0 {
 		sendArgStr = ", " + strings.Join(call.sendArgs, ", ")
 	}
-
 	// NSError handling — append a *objc.ID slot.
 	if method.IsNSError {
 		sendArgStr += ", unsafe.Pointer(&_nsErr)"
-		fmt.Fprintf(w, "\tvar _nsErr uintptr\n")
 	}
 
-	writeMethodSendCall(
-		w, call, method, className, target, selVarName, sendArgStr,
-		isGeneric, genericParams, reg,
-	)
-
-	fmt.Fprintf(w, "}\n\n")
-	return nil
+	built := view.RawMethod{
+		CommentBlock:    comment.String(),
+		Receiver:        receiver,
+		GoName:          goName,
+		ParamStr:        strings.Join(call.goParams, ", "),
+		ReturnSig:       returnSig,
+		HasNSError:      method.IsNSError,
+		Target:          target,
+		SelVar:          selVarName,
+		SendArgStr:      sendArgStr,
+		RetGoType:       call.retGoType,
+		AlreadyRetained: method.Return.IsAlreadyRetained,
+	}
+	for _, adapter := range call.blockAdapters {
+		built.Adapters = append(built.Adapters, blockAdapterRenderView(adapter))
+	}
+	switch {
+	case call.retIsVoid:
+		built.ReturnKind = 0
+	case call.retIsObject:
+		built.ReturnKind = 1
+		built.WrapExpr = buildWrapExpr(call.retGoType, className, isGeneric, genericParams)
+	case call.retGoType == "string":
+		built.ReturnKind = 2
+	case call.retGoType == "bool":
+		built.ReturnKind = 3
+	default:
+		built.ReturnKind = 4
+		if method.IsNSError {
+			built.ZeroVal = zeroValueForReturn(call.retGoType, reg)
+		}
+	}
+	return built
 }
 
 // buildMethodCallModel resolves the parameter list, send arguments, block
@@ -717,95 +661,6 @@ func substituteCallModelGenericParams(call *methodCallModel, genericParams []str
 	}
 	// Recalculate object-ness with the substituted type.
 	call.retIsObject = isObjCObjectType(call.retGoType)
-}
-
-// writeMethodSendCall emits the objc.Send invocation and return handling for
-// one method body, switching on the resolved return kind.
-func writeMethodSendCall(
-	w io.Writer,
-	call methodCallModel,
-	method meta.Method,
-	className, target, selVarName, sendArgStr string,
-	isGeneric bool,
-	genericParams []string,
-	reg *RegistrySnapshot,
-) {
-	switch {
-	case call.retIsVoid:
-		fmt.Fprintf(w, "\t%s.Send(%s%s)\n", target, selVarName, sendArgStr)
-		if method.IsNSError {
-			fmt.Fprintf(w, "\tif _nsErr != 0 {\n")
-			fmt.Fprintf(w, "\t\treturn purego.NSErrorToError(objc.ID(_nsErr))\n")
-			fmt.Fprintf(w, "\t}\n")
-			fmt.Fprintf(w, "\treturn nil\n")
-		}
-
-	case call.retIsObject:
-		fmt.Fprintf(
-			w,
-			"\t_ret := objc.Send[objc.ID](%s, %s%s)\n",
-			target,
-			selVarName,
-			sendArgStr,
-		)
-
-		// Retain unless already retained (NARC methods).
-		if !method.Return.IsAlreadyRetained {
-			fmt.Fprintf(w, "\tif _ret != 0 { _ret.Send(objc.RegisterName(\"retain\")) }\n")
-		}
-
-		wrapExpr := buildWrapExpr(call.retGoType, className, isGeneric, genericParams)
-		if method.IsNSError {
-			fmt.Fprintf(w, "\tif _nsErr != 0 {\n")
-			fmt.Fprintf(w, "\t\treturn nil, purego.NSErrorToError(objc.ID(_nsErr))\n")
-			fmt.Fprintf(w, "\t}\n")
-			fmt.Fprintf(w, "\treturn %s, nil\n", wrapExpr)
-		} else {
-			fmt.Fprintf(w, "\treturn %s\n", wrapExpr)
-		}
-
-	case call.retGoType == "string":
-		fmt.Fprintf(w, "\t_ret := objc.Send[objc.ID](%s, %s%s)\n", target, selVarName, sendArgStr)
-		if method.IsNSError {
-			fmt.Fprintf(w, "\tif _nsErr != 0 {\n")
-			fmt.Fprintf(w, "\t\treturn \"\", purego.NSErrorToError(objc.ID(_nsErr))\n")
-			fmt.Fprintf(w, "\t}\n")
-			fmt.Fprintf(w, "\treturn purego.GoString(_ret), nil\n")
-		} else {
-			fmt.Fprintf(w, "\treturn purego.GoString(_ret)\n")
-		}
-
-	case call.retGoType == "bool":
-		fmt.Fprintf(w, "\t_ret := objc.Send[bool](%s, %s%s)\n", target, selVarName, sendArgStr)
-		if method.IsNSError {
-			fmt.Fprintf(w, "\tif _nsErr != 0 {\n")
-			fmt.Fprintf(w, "\t\treturn false, purego.NSErrorToError(objc.ID(_nsErr))\n")
-			fmt.Fprintf(w, "\t}\n")
-			fmt.Fprintf(w, "\treturn _ret, nil\n")
-		} else {
-			fmt.Fprintf(w, "\treturn _ret\n")
-		}
-
-	default:
-		// Primitive or struct return.
-		fmt.Fprintf(
-			w,
-			"\t_ret := objc.Send[%s](%s, %s%s)\n",
-			call.retGoType,
-			target,
-			selVarName,
-			sendArgStr,
-		)
-		if method.IsNSError {
-			zeroVal := zeroValueForReturn(call.retGoType, reg)
-			fmt.Fprintf(w, "\tif _nsErr != 0 {\n")
-			fmt.Fprintf(w, "\t\treturn %s, purego.NSErrorToError(objc.ID(_nsErr))\n", zeroVal)
-			fmt.Fprintf(w, "\t}\n")
-			fmt.Fprintf(w, "\treturn _ret, nil\n")
-		} else {
-			fmt.Fprintf(w, "\treturn _ret\n")
-		}
-	}
 }
 
 // buildWrapExpr returns the expression to convert an objc.ID to a typed Go pointer.

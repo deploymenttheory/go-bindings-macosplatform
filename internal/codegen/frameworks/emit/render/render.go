@@ -76,3 +76,43 @@ func Functions(functions view.FunctionFile) ([]byte, error) {
 	}
 	return buf.Bytes(), nil
 }
+
+// ClassTypeDecl renders one ObjC class's Go struct declaration (and, for root
+// classes, its promoted Ptr/InitPtr accessors) as a Go source fragment.
+func ClassTypeDecl(decl view.ClassTypeDecl) ([]byte, error) {
+	var buf bytes.Buffer
+	if err := templates.ExecuteTemplate(&buf, "class_type_decl", decl); err != nil {
+		return nil, fmt.Errorf("render class type decl: %w", err)
+	}
+	return buf.Bytes(), nil
+}
+
+// ClassVars renders a class's package-level class-reference and selector
+// variable block as a Go source fragment.
+func ClassVars(vars view.ClassVars) ([]byte, error) {
+	var buf bytes.Buffer
+	if err := templates.ExecuteTemplate(&buf, "class_vars", vars); err != nil {
+		return nil, fmt.Errorf("render class vars: %w", err)
+	}
+	return buf.Bytes(), nil
+}
+
+// FromIDConstructor renders a class's XFromID factory function as a Go source
+// fragment.
+func FromIDConstructor(ctor view.FromIDConstructor) ([]byte, error) {
+	var buf bytes.Buffer
+	if err := templates.ExecuteTemplate(&buf, "from_id_constructor", ctor); err != nil {
+		return nil, fmt.Errorf("render from-id constructor: %w", err)
+	}
+	return buf.Bytes(), nil
+}
+
+// ClassMethod renders one Go method (or class function) wrapping an ObjC method
+// via objc.Send, as a Go source fragment.
+func ClassMethod(method view.RawMethod) ([]byte, error) {
+	var buf bytes.Buffer
+	if err := templates.ExecuteTemplate(&buf, "class_method", method); err != nil {
+		return nil, fmt.Errorf("render class method %s: %w", method.GoName, err)
+	}
+	return buf.Bytes(), nil
+}

@@ -89,7 +89,9 @@ func EmitClass(w io.Writer, name string, cls macosplatformmetadata.Class, framew
 
 	// Phase 1: generate body into a buffer (discovers additional imports as side effect).
 	var body bytes.Buffer
-	writeStructDef(&body, name, cls, isGeneric, superInfo)
+	if err := writeStructDef(&body, name, cls, isGeneric, superInfo); err != nil {
+		return err
+	}
 	writeConstructors(&body, name, cls, isGeneric, superInfo, framework, allClasses, m, knownClasses, usedImports)
 	if isGeneric {
 		writeGenericHelper(&body, name, cls, superInfo, framework, allClasses, m, usedImports)
@@ -383,60 +385,72 @@ func classifySuper(className string, cls macosplatformmetadata.Class, framework 
 // writeStructDef emits the Go struct definition.
 // Root classes use a plain `ptr unsafe.Pointer` field and define Ptr().
 // Non-root classes embed their immediate superclass by value; Ptr() is promoted.
-func writeStructDef(w io.Writer, name string, cls macosplatformmetadata.Class, isGeneric bool, si superInfo) {
-	fmt.Fprintf(w, "// %s wraps the Objective-C %s class.\n", name, name)
+func writeStructDef(w io.Writer, name string, cls macosplatformmetadata.Class, isGeneric bool, si superInfo) error {
+	return executeTemplate(w, "class_struct", buildClassStructModel(name, cls, isGeneric, si))
+}
+
+// buildClassStructModel resolves an ObjC class's Go struct declaration: the doc
+// comment block, the (generic) type header, the embedded field (raw ptr for a
+// root class or the superclass struct otherwise), and the receiver/assertion
+// types used by the promoted Ptr() accessor and the cgo.Object assertion.
+func buildClassStructModel(name string, cls macosplatformmetadata.Class, isGeneric bool, si superInfo) classStructModel {
+	var comment strings.Builder
+	fmt.Fprintf(&comment, "// %s wraps the Objective-C %s class.\n", name, name)
 	if cls.Super != "" {
-		fmt.Fprintf(w, "// Superclass: %s\n", cls.Super)
+		fmt.Fprintf(&comment, "// Superclass: %s\n", cls.Super)
 	}
 	if len(cls.Protocols) > 0 {
-		fmt.Fprintf(w, "// Protocols: %s\n", strings.Join(cls.Protocols, ", "))
+		fmt.Fprintf(&comment, "// Protocols: %s\n", strings.Join(cls.Protocols, ", "))
 	}
 	if cls.SwiftName != "" {
-		fmt.Fprintf(w, "// Swift name: %s\n", cls.SwiftName)
+		fmt.Fprintf(&comment, "// Swift name: %s\n", cls.SwiftName)
 	}
-	writeContextComments(w, cls.Doc, cls.SDKFile, cls.SDKLine, cls.Availability, "")
+	comment.WriteString(renderCommentBlock(cls.Doc, cls.SDKFile, cls.SDKLine, cls.Availability, ""))
 
 	genericDecl := ""
 	if isGeneric {
 		genericDecl = "[T cgo.Object]"
 	}
 
+	assertType := name
+	if isGeneric {
+		assertType = name + "[cgo.Object]"
+	}
+
+	model := classStructModel{
+		CommentBlock: comment.String(),
+		TypeHeader:   name + genericDecl,
+		IsRoot:       si.isRoot,
+		AssertType:   assertType,
+	}
 	if si.isRoot {
 		// Root: owns the ptr field and defines Ptr().
-		fmt.Fprintf(w, "type %s%s struct {\n\tptr unsafe.Pointer\n}\n\n", name, genericDecl)
+		model.EmbedLine = "ptr unsafe.Pointer"
+		model.PtrReceiver = name
 		if isGeneric {
-			fmt.Fprintf(w, "func (o *%s[T]) Ptr() unsafe.Pointer { return o.ptr }\n\n", name)
-			fmt.Fprintf(w, "var _ cgo.Object = (*%s[cgo.Object])(nil)\n\n", name)
-		} else {
-			fmt.Fprintf(w, "func (o *%s) Ptr() unsafe.Pointer { return o.ptr }\n\n", name)
-			fmt.Fprintf(w, "var _ cgo.Object = (*%s)(nil)\n\n", name)
+			model.PtrReceiver = name + "[T]"
 		}
-	} else {
-		// Non-root: embed the immediate superclass by value.
-		// Ptr() is promoted through the embedding chain; no separate definition needed.
-		var embedField string
-		if si.pkg != "" {
-			embedField = si.pkg + "." + si.name
-		} else {
-			embedField = si.name
-		}
-		// For generic superclasses, embed with the same type parameter when the child is
-		// also generic (e.g. NSMutableArray[T] embeds NSArray[T]), or with the concrete
-		// cgo.Object instantiation when the child is not generic.
-		if si.superIsGeneric {
-			if isGeneric {
-				embedField += "[T]"
-			} else {
-				embedField += "[cgo.Object]"
-			}
-		}
-		fmt.Fprintf(w, "type %s%s struct {\n\t%s\n}\n\n", name, genericDecl, embedField)
+		return model
+	}
+
+	// Non-root: embed the immediate superclass by value. Ptr() is promoted
+	// through the embedding chain, so no separate definition is needed.
+	embedField := si.name
+	if si.pkg != "" {
+		embedField = si.pkg + "." + si.name
+	}
+	// For generic superclasses, embed with the same type parameter when the child
+	// is also generic (e.g. NSMutableArray[T] embeds NSArray[T]), or with the
+	// concrete cgo.Object instantiation when the child is not generic.
+	if si.superIsGeneric {
 		if isGeneric {
-			fmt.Fprintf(w, "var _ cgo.Object = (*%s[cgo.Object])(nil)\n\n", name)
+			embedField += "[T]"
 		} else {
-			fmt.Fprintf(w, "var _ cgo.Object = (*%s)(nil)\n\n", name)
+			embedField += "[cgo.Object]"
 		}
 	}
+	model.EmbedLine = embedField
+	return model
 }
 
 // isGenericClass is a lightweight check — generic classes in ObjC are collection types

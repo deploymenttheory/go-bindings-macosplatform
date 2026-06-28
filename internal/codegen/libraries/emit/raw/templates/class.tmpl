@@ -23,3 +23,19 @@ import (
 )
 
 {{end}}
+
+{{/*
+    class_struct — the ObjC class's Go struct. A root class owns the ptr field
+    and a promoted one-line Ptr() accessor (gofmt preserves the one-line body);
+    a non-root class embeds its superclass by value. Both emit a compile-time
+    cgo.Object assertion.
+*/}}
+{{define "class_struct"}}{{.CommentBlock}}type {{.TypeHeader}} struct {
+{{.EmbedLine}}
+}
+
+{{if .IsRoot}}func (o *{{.PtrReceiver}}) Ptr() unsafe.Pointer { return o.ptr }
+
+{{end}}var _ cgo.Object = (*{{.AssertType}})(nil)
+
+{{end}}
