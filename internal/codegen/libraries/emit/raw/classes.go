@@ -96,7 +96,9 @@ func EmitClass(w io.Writer, name string, cls macosplatformmetadata.Class, framew
 		return err
 	}
 	if isGeneric {
-		writeGenericHelper(&body, name, cls, superInfo, framework, allClasses, m, usedImports)
+		if err := writeGenericHelper(&body, name, cls, superInfo, framework, allClasses, m, usedImports); err != nil {
+			return err
+		}
 	}
 	// Collect package-level type names (enums, structs, typedefs) so we can
 	// skip class methods that would generate a function name conflicting with them.
@@ -297,7 +299,9 @@ func EmitClass(w io.Writer, name string, cls macosplatformmetadata.Class, framew
 
 	// NSCoding/NSSecureCoding convenience methods (non-generic classes only).
 	if !isGeneric && (cls.Availability.IsUnavailable == false) {
-		writeCodingMethods(&body, name, framework.Framework, cls)
+		if err := writeCodingMethods(&body, name, framework.Framework, cls); err != nil {
+			return err
+		}
 	}
 
 	// ObjC category methods from foreign ancestor classes.
@@ -505,10 +509,12 @@ func writeConstructors(w io.Writer, name string, cls macosplatformmetadata.Class
 	// in other packages that need NSMutableArray[T] (not NSMutableArray[cgo.Object]).
 	if isGeneric {
 		tChain := buildValueChain(name, "[T]", framework.Framework, framework.Classes, m, usedImports)
-		tValueChain := strings.TrimPrefix(tChain, "&")
-		fmt.Fprintf(w, "func %sTypedWithPtr[T cgo.Object](ptr unsafe.Pointer) %s[T] {\n", name, name)
-		fmt.Fprintf(w, "\treturn %s\n", tValueChain)
-		fmt.Fprintf(w, "}\n\n")
+		if err := executeTemplate(w, "typed_with_ptr", typedWithPtrModel{
+			Name:        name,
+			TValueChain: strings.TrimPrefix(tChain, "&"),
+		}); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -628,53 +634,16 @@ func classConformsToCoding(cls macosplatformmetadata.Class) bool {
 
 // writeCodingMethods emits SerializeToArchive and NewXFromArchive convenience
 // methods for classes that conform to NSSecureCoding or NSCoding.
-func writeCodingMethods(w io.Writer, name, framework string, cls macosplatformmetadata.Class) {
+func writeCodingMethods(w io.Writer, name, framework string, cls macosplatformmetadata.Class) error {
 	if !classConformsToCoding(cls) {
-		return
+		return nil
 	}
-
 	packageName := strings.ToLower(framework)
-	serializeFn := packageName + "_" + name + "_serializeToArchive"
-	deserializeFn := packageName + "_" + name + "_newFromArchive"
-
-	// SerializeToArchive — instance method
-	fmt.Fprintf(w, "// SerializeToArchive encodes the receiver using NSKeyedArchiver and returns\n")
-	fmt.Fprintf(w, "// the resulting binary plist data. Requires NSSecureCoding conformance.\n")
-	fmt.Fprintf(w, "func (o *%s) SerializeToArchive() ([]byte, error) {\n", name)
-	fmt.Fprintf(w, "\tdefer cgo.KeepAlive(o)\n")
-	fmt.Fprintf(w, "\tvar _exc unsafe.Pointer\n")
-	fmt.Fprintf(w, "\tvar _nsErr unsafe.Pointer\n")
-	fmt.Fprintf(w, "\tvar _ptr unsafe.Pointer\n")
-	fmt.Fprintf(w, "\tvar _len C.size_t\n")
-	fmt.Fprintf(w, "\t_ptr = C.%s(o.Ptr(), &_len, &_nsErr, &_exc)\n", serializeFn)
-	fmt.Fprintf(w, "\tcgo.RaiseIfException(_exc)\n")
-	fmt.Fprintf(w, "\tif _nsErr != nil {\n")
-	fmt.Fprintf(w, "\t\treturn nil, cgo.NSErrorToError(_nsErr)\n")
-	fmt.Fprintf(w, "\t}\n")
-	fmt.Fprintf(w, "\tif _ptr == nil {\n")
-	fmt.Fprintf(w, "\t\treturn nil, nil\n")
-	fmt.Fprintf(w, "\t}\n")
-	fmt.Fprintf(w, "\tresult := C.GoBytes(_ptr, C.int(_len))\n")
-	fmt.Fprintf(w, "\tC.free(_ptr)\n")
-	fmt.Fprintf(w, "\treturn result, nil\n")
-	fmt.Fprintf(w, "}\n\n")
-
-	// NewXFromArchive — package-level constructor
-	fmt.Fprintf(w, "// New%sFromArchive decodes a %s from binary plist data produced by\n", name, name)
-	fmt.Fprintf(w, "// SerializeToArchive or NSKeyedArchiver.\n")
-	fmt.Fprintf(w, "func New%sFromArchive(data []byte) (*%s, error) {\n", name, name)
-	fmt.Fprintf(w, "\tif len(data) == 0 {\n")
-	fmt.Fprintf(w, "\t\treturn nil, nil\n")
-	fmt.Fprintf(w, "\t}\n")
-	fmt.Fprintf(w, "\tvar _exc unsafe.Pointer\n")
-	fmt.Fprintf(w, "\tvar _nsErr unsafe.Pointer\n")
-	fmt.Fprintf(w, "\t_ptr := unsafe.Pointer(C.%s(unsafe.Pointer(&data[0]), C.size_t(len(data)), &_nsErr, &_exc))\n", deserializeFn)
-	fmt.Fprintf(w, "\tcgo.RaiseIfException(_exc)\n")
-	fmt.Fprintf(w, "\tif _nsErr != nil {\n")
-	fmt.Fprintf(w, "\t\treturn nil, cgo.NSErrorToError(_nsErr)\n")
-	fmt.Fprintf(w, "\t}\n")
-	fmt.Fprintf(w, "\treturn New%s(_ptr), nil\n", name)
-	fmt.Fprintf(w, "}\n\n")
+	return executeTemplate(w, "coding_methods", codingMethodsModel{
+		Name:          name,
+		SerializeFn:   packageName + "_" + name + "_serializeToArchive",
+		DeserializeFn: packageName + "_" + name + "_newFromArchive",
+	})
 }
 
 // writeForeignAncestorExtensions emits ObjC category methods from the current
@@ -786,14 +755,11 @@ func writeForeignAncestorExtensions(
 //	    runtime.Track(o, o.Ptr)
 //	    return o
 //	}
-func writeGenericHelper(w io.Writer, name string, cls macosplatformmetadata.Class, si superInfo, framework *macosplatformmetadata.FrameworkMeta, allClasses map[string]macosplatformmetadata.Class, m *typemap.Mapper, usedImports typemap.ImportSet) {
-	tChain := buildValueChain(name, "[T]", framework.Framework, framework.Classes, m, usedImports)
-	fmt.Fprintf(w, "func New%sT[T cgo.Object](ptr unsafe.Pointer) *%s[T] {\n", name, name)
-	fmt.Fprintf(w, "\tif ptr == nil {\n\t\treturn nil\n\t}\n")
-	fmt.Fprintf(w, "\to := %s\n", tChain)
-	fmt.Fprintf(w, "\tcgo.Track(o, o.Ptr)\n")
-	fmt.Fprintf(w, "\treturn o\n")
-	fmt.Fprintf(w, "}\n\n")
+func writeGenericHelper(w io.Writer, name string, cls macosplatformmetadata.Class, si superInfo, framework *macosplatformmetadata.FrameworkMeta, allClasses map[string]macosplatformmetadata.Class, m *typemap.Mapper, usedImports typemap.ImportSet) error {
+	return executeTemplate(w, "generic_helper", genericHelperModel{
+		Name:   name,
+		TChain: buildValueChain(name, "[T]", framework.Framework, framework.Classes, m, usedImports),
+	})
 }
 
 // buildValueChain builds the Go struct literal expression (with leading &) needed
@@ -899,173 +865,115 @@ func writeMethod(w io.Writer, em emittedMethod, receiver string, className, fram
 	goArgs := buildGoArgs(method.Params, method.IsNSError, methodCtx, m, imports)
 	goRet := buildGoReturn(method, methodCtx, m, className, imports)
 
-	writeContextComments(w, method.Doc, method.SDKFile, method.SDKLine, method.Availability, "")
+	var preamble strings.Builder
+	preamble.WriteString(renderCommentBlock(method.Doc, method.SDKFile, method.SDKLine, method.Availability, ""))
 	if method.IsDesignatedInit {
-		fmt.Fprintf(w, "// Designated initializer.\n")
+		preamble.WriteString("// Designated initializer.\n")
 	}
 	if method.IsWarnUnused {
-		fmt.Fprintf(w, "// Return value must not be discarded.\n")
+		preamble.WriteString("// Return value must not be discarded.\n")
 	}
 	if method.SwiftName != "" {
-		fmt.Fprintf(w, "// Swift name: %s\n", method.SwiftName)
+		fmt.Fprintf(&preamble, "// Swift name: %s\n", method.SwiftName)
 	}
-	// Emit blocked-import notes so readers understand why certain types are unsafe.Pointer.
+	// Blocked-import notes so readers understand why certain types are unsafe.Pointer.
 	for _, arg := range method.Params {
 		if note := m.BlockedImportNote(arg.ObjCType, methodCtx); note != "" {
-			fmt.Fprintf(w, "%s\n", note)
+			fmt.Fprintf(&preamble, "%s\n", note)
 		}
 	}
 	if note := m.BlockedImportNote(method.Return.ObjCType, methodCtx); note != "" {
-		fmt.Fprintf(w, "%s\n", note)
+		fmt.Fprintf(&preamble, "%s\n", note)
 	}
 	// Annotate out-parameters so callers know which arguments the callee writes back.
 	resolved := buildParamNames(method.Params)
 	for i, arg := range method.Params {
 		if arg.Direction == "out" {
-			fmt.Fprintf(w, "// %s is an out-parameter: pass a pointer the callee will populate.\n", resolved[i])
+			fmt.Fprintf(&preamble, "// %s is an out-parameter: pass a pointer the callee will populate.\n", resolved[i])
 		}
 	}
 
+	retStr := ""
+	if goRet != "" {
+		retStr = " " + goRet
+	}
+	model := classMethodModel{
+		PreambleComment: preamble.String(),
+		IsClassMethod:   method.IsClassMethod,
+		GoArgs:          strings.Join(goArgs, ", "),
+		RetStr:          retStr,
+		Body:            buildMethodBodyModel(method, cFunc, method.IsClassMethod, methodCtx, m, fmClasses, imports),
+	}
 	if method.IsClassMethod {
-		writeClassMethod(w, goName, className, goArgs, goRet, method, cFunc, methodCtx, m, fmClasses, pkgTypeNames, imports)
+		funcName := className + goName
+		model.FuncName = funcName
+		model.BridgeID = naming.MethodBridgeID(methodCtx.Framework, className, method.Selector, method.IsClassMethod)
+		// A class method whose Go name collides with a package-level type is
+		// dropped (the type and func cannot share a name); the preamble comment is
+		// still emitted, matching the original.
+		model.Skip = pkgTypeNames[funcName]
 	} else {
-		writeInstanceMethod(w, goName, receiver, goArgs, goRet, method, cFunc, methodCtx, m, fmClasses, imports)
+		model.Receiver = receiver
+		model.GoName = goName
+		model.BridgeID = naming.MethodBridgeID(methodCtx.Framework, methodCtx.ClassName, method.Selector, method.IsClassMethod)
+	}
+	if err := executeTemplate(w, "class_method", model); err != nil {
+		return err
 	}
 
 	// Emit NSString Go-string convenience overload when enabled.
 	if m.IsNSStringOverloads && nsStringArgIndices(method.Params) != nil {
 		if method.IsClassMethod {
-			writeNSStringClassOverload(w, goName, className, method, methodCtx, m, pkgTypeNames, imports)
+			if err := writeNSStringClassOverload(w, goName, className, method, methodCtx, m, pkgTypeNames, imports); err != nil {
+				return err
+			}
 		} else {
-			writeNSStringInstanceOverload(w, goName, receiver, method, methodCtx, m, imports)
+			if err := writeNSStringInstanceOverload(w, goName, receiver, method, methodCtx, m, imports); err != nil {
+				return err
+			}
 		}
 	}
 
 	return nil
 }
 
-func writeInstanceMethod(w io.Writer, goName, receiver string, goArgs []string, goRet string, method macosplatformmetadata.Method, cFunc string, ctx typemap.Context, m *typemap.Mapper, fmClasses map[string]macosplatformmetadata.Class, imports typemap.ImportSet) {
-	retStr := ""
-	if goRet != "" {
-		retStr = " " + goRet
-	}
-	fmt.Fprintf(w, "// %s\n", naming.MethodBridgeID(ctx.Framework, ctx.ClassName, method.Selector, method.IsClassMethod))
-	fmt.Fprintf(w, "func (o *%s) %s(%s)%s {\n", receiver, goName, strings.Join(goArgs, ", "), retStr)
-	writeMethodBody(w, method, cFunc, false, ctx, m, fmClasses, imports)
-	fmt.Fprintf(w, "}\n\n")
-}
-
-func writeClassMethod(w io.Writer, goName, className string, goArgs []string, goRet string, method macosplatformmetadata.Method, cFunc string, ctx typemap.Context, m *typemap.Mapper, fmClasses map[string]macosplatformmetadata.Class, pkgTypeNames map[string]bool, imports typemap.ImportSet) {
-	funcName := className + goName
-	// Skip if the function name would collide with a package-level type (e.g. an enum).
-	if pkgTypeNames[funcName] {
-		return
-	}
-	retStr := ""
-	if goRet != "" {
-		retStr = " " + goRet
-	}
-	fmt.Fprintf(w, "// %s\n", naming.MethodBridgeID(ctx.Framework, className, method.Selector, method.IsClassMethod))
-	fmt.Fprintf(w, "func %s(%s)%s {\n", funcName, strings.Join(goArgs, ", "), retStr)
-	writeMethodBody(w, method, cFunc, true, ctx, m, fmClasses, imports)
-	fmt.Fprintf(w, "}\n\n")
-}
-
-// writeMethodBody writes the function body: keep-alive defers + CGo call + return conversion.
-func writeMethodBody(w io.Writer, method macosplatformmetadata.Method, cFunc string, isClassMethod bool, ctx typemap.Context, m *typemap.Mapper, fmClasses map[string]macosplatformmetadata.Class, imports typemap.ImportSet) {
+// buildMethodBodyModel resolves the CGo method body: keep-alive defers, argument
+// preambles, the C call, exception/NSError handling, and the return conversion.
+func buildMethodBodyModel(method macosplatformmetadata.Method, cFunc string, isClassMethod bool, ctx typemap.Context, m *typemap.Mapper, fmClasses map[string]macosplatformmetadata.Class, imports typemap.ImportSet) methodBodyModel {
 	var preambles []string
 	var keepAlives []string
 	cgoCallArgs := buildCGOCallArgs(method.Params, isClassMethod, method.IsNSError, true, ctx, m, &preambles, &keepAlives, imports)
 
-	// Keep the receiver and every ObjC-object argument alive across the CGo call
-	// so the GC cannot finalise the Go wrapper while the callee still holds the
-	// raw pointer.
-	if !isClassMethod {
-		fmt.Fprintf(w, "\tdefer cgo.KeepAlive(o)\n")
-	}
-	for _, ka := range keepAlives {
-		fmt.Fprintf(w, "\tdefer cgo.KeepAlive(%s)\n", ka)
-	}
-
-	// String-to-C-string conversions and block trampolines; their defers run at method exit,
-	// keeping C pointers valid through the CGo call.
-	for _, p := range preambles {
-		fmt.Fprintf(w, "\t%s\n", p)
-	}
-
-	fmt.Fprintf(w, "\tvar _exc unsafe.Pointer\n")
-	if method.IsNSError {
-		fmt.Fprintf(w, "\tvar _nsErr unsafe.Pointer\n")
-	}
-
 	retType := primaryReturnType(method, ctx, m, imports)
 	isNullableStr := retType == "string" && method.Return.IsNullable
-
 	isValueStruct := isValueStructReturn(retType, m)
-
 	rawCall := fmt.Sprintf("C.%s(%s)", cFunc, cgoCallArgs)
-	if retType == "cgo.Object" || isObjectReturn(retType) || isNullableStr || isValueStruct {
-		fmt.Fprintf(w, "\t_ptr := unsafe.Pointer(%s)\n", rawCall)
-	} else if retType != "" {
-		fmt.Fprintf(w, "\t_result := %s\n", cgoReturnConvert(rawCall, retType, m))
-	} else {
-		fmt.Fprintf(w, "\t%s\n", rawCall)
-	}
 
-	fmt.Fprintf(w, "\tcgo.RaiseIfException(_exc)\n")
-
-	if method.IsNSError {
-		if retType == "" {
-			fmt.Fprintf(w, "\tif _nsErr != nil {\n\t\treturn cgo.NSErrorToError(_nsErr)\n\t}\n")
-			fmt.Fprintf(w, "\treturn nil\n")
-		} else if retType == "cgo.Object" {
-			fmt.Fprintf(w, "\tif _nsErr != nil {\n\t\treturn nil, cgo.NSErrorToError(_nsErr)\n\t}\n")
-			fmt.Fprintf(w, "\treturn cgo.WrapObject(_ptr), nil\n")
-		} else if isObjectReturn(retType) {
-			structType := extractStructType(retType, isClassMethod)
-			fmt.Fprintf(w, "\tif _nsErr != nil {\n\t\treturn nil, cgo.NSErrorToError(_nsErr)\n\t}\n")
-			writeObjectReturnWithError(w, structType, fmClasses, m)
-		} else if isValueStruct {
-			fmt.Fprintf(w, "\tif _nsErr != nil {\n")
-			fmt.Fprintf(w, "\t\tif _ptr != nil {\n\t\t\tcgo.FreePtr(_ptr)\n\t\t}\n")
-			fmt.Fprintf(w, "\t\treturn %s{}, cgo.NSErrorToError(_nsErr)\n\t}\n", retType)
-			fmt.Fprintf(w, "\tif _ptr == nil {\n\t\treturn %s{}, nil\n\t}\n", retType)
-			fmt.Fprintf(w, "\t_result := *(*%s)(unsafe.Pointer(_ptr))\n", retType)
-			fmt.Fprintf(w, "\tcgo.FreePtr(_ptr)\n")
-			fmt.Fprintf(w, "\treturn _result, nil\n")
-		} else {
-			fmt.Fprintf(w, "\tif _nsErr != nil {\n\t\treturn _result, cgo.NSErrorToError(_nsErr)\n\t}\n")
-			fmt.Fprintf(w, "\treturn _result, nil\n")
-		}
-		return
+	model := methodBodyModel{
+		HasReceiver: !isClassMethod,
+		KeepAlives:  keepAlives,
+		Preambles:   preambles,
+		HasNSError:  method.IsNSError,
+		RawCall:     rawCall,
+		RetType:     retType,
 	}
-
-	if retType == "" {
-		return
+	switch {
+	case retType == "":
+		model.RetKind = 0
+	case retType == "cgo.Object":
+		model.RetKind = 1
+	case isObjectReturn(retType):
+		model.RetKind = 2
+		model.WrapTypedExpr = constructorRef(extractStructType(retType, isClassMethod), fmClasses)
+	case isValueStruct:
+		model.RetKind = 3
+	case isNullableStr:
+		model.RetKind = 4
+	default:
+		model.RetKind = 5
+		model.ResultExpr = cgoReturnConvert(rawCall, retType, m)
 	}
-	if retType == "cgo.Object" {
-		fmt.Fprintf(w, "\treturn cgo.WrapObject(_ptr)\n")
-		return
-	}
-	if isObjectReturn(retType) {
-		structType := extractStructType(retType, isClassMethod)
-		writeObjectReturn(w, structType, fmClasses, m)
-		return
-	}
-	if isValueStruct {
-		fmt.Fprintf(w, "\tif _ptr == nil {\n\t\treturn %s{}\n\t}\n", retType)
-		fmt.Fprintf(w, "\t_result := *(*%s)(unsafe.Pointer(_ptr))\n", retType)
-		fmt.Fprintf(w, "\tcgo.FreePtr(_ptr)\n")
-		fmt.Fprintf(w, "\treturn _result\n")
-		return
-	}
-	if isNullableStr {
-		fmt.Fprintf(w, "\tif _ptr == nil {\n\t\treturn nil\n\t}\n")
-		fmt.Fprintf(w, "\t_s := C.GoString((*C.char)(_ptr))\n")
-		fmt.Fprintf(w, "\treturn &_s\n")
-		return
-	}
-	fmt.Fprintf(w, "\treturn _result\n")
+	return model
 }
 
 // extractStructType strips the leading "*" and substitutes [cgo.Object] for [T]
@@ -1080,12 +988,8 @@ func extractStructType(retType string, isClassMethod bool) string {
 
 // writeObjectReturn emits an object construction return using cgo.WrapTyped.
 // All generated constructors (New*) handle a nil ptr by returning nil, so the
-// nil-check is delegated to WrapTyped rather than emitted inline.
-//
-// Three cases:
-//  1. Cross-framework type ("foundation.NSString"): cgo.WrapTyped(_ptr, pkg.NewTypeName)
-//  2. Same-framework T-generic ("NSArray[T]"): cgo.WrapTyped(_ptr, NewNSArrayT[T])
-//  3. Same-framework non-T ("NSString", "NSArray[cgo.Object]"): cgo.WrapTyped(_ptr, NewNSString)
+// nil-check is delegated to WrapTyped rather than emitted inline. Still used by
+// the protocol-proxy method emitter (proxies.go).
 func writeObjectReturn(w io.Writer, structType string, fmClasses map[string]macosplatformmetadata.Class, m *typemap.Mapper) {
 	fmt.Fprintf(w, "\treturn cgo.WrapTyped(_ptr, %s)\n", constructorRef(structType, fmClasses))
 }
@@ -1899,10 +1803,10 @@ func nsStringConvertArg(argName string, isNS bool, ctx typemap.Context, m *typem
 
 // writeNSStringInstanceOverload emits a "...Go" suffix instance-method overload
 // where all NSString * args are replaced with plain Go string args.
-func writeNSStringInstanceOverload(w io.Writer, goName, receiver string, method macosplatformmetadata.Method, ctx typemap.Context, m *typemap.Mapper, imports typemap.ImportSet) {
+func writeNSStringInstanceOverload(w io.Writer, goName, receiver string, method macosplatformmetadata.Method, ctx typemap.Context, m *typemap.Mapper, imports typemap.ImportSet) error {
 	nsIdxs := nsStringArgIndices(method.Params)
 	if len(nsIdxs) == 0 {
-		return
+		return nil
 	}
 	overloadArgs := nsStringOverloadArgs(method.Params, method.IsNSError, nsIdxs, ctx, m, imports)
 	idxSet := make(map[int]bool, len(nsIdxs))
@@ -1916,30 +1820,27 @@ func writeNSStringInstanceOverload(w io.Writer, goName, receiver string, method 
 	if goRet != "" {
 		retStr = " " + goRet
 	}
-	fmt.Fprintf(w, "func (o *%s) %sGo(%s)%s {\n", receiver, goName, strings.Join(overloadArgs, ", "), retStr)
 
 	var callArgs []string
 	for i := range method.Params {
 		callArgs = append(callArgs, nsStringConvertArg(resolved[i], idxSet[i], ctx, m, imports))
 	}
-	callAll := callArgs
-	if goRet != "" {
-		fmt.Fprintf(w, "\treturn o.%s(%s)\n", goName, strings.Join(callAll, ", "))
-	} else {
-		fmt.Fprintf(w, "\to.%s(%s)\n", goName, strings.Join(callAll, ", "))
-	}
-	fmt.Fprintf(w, "}\n\n")
+	return executeTemplate(w, "nsstring_overload", nsStringOverloadModel{
+		Signature: fmt.Sprintf("func (o *%s) %sGo(%s)%s", receiver, goName, strings.Join(overloadArgs, ", "), retStr),
+		HasReturn: goRet != "",
+		CallExpr:  fmt.Sprintf("o.%s(%s)", goName, strings.Join(callArgs, ", ")),
+	})
 }
 
 // writeNSStringClassOverload emits a "...Go" suffix class-method overload.
-func writeNSStringClassOverload(w io.Writer, goName, className string, method macosplatformmetadata.Method, ctx typemap.Context, m *typemap.Mapper, pkgTypeNames map[string]bool, imports typemap.ImportSet) {
+func writeNSStringClassOverload(w io.Writer, goName, className string, method macosplatformmetadata.Method, ctx typemap.Context, m *typemap.Mapper, pkgTypeNames map[string]bool, imports typemap.ImportSet) error {
 	nsIdxs := nsStringArgIndices(method.Params)
 	if len(nsIdxs) == 0 {
-		return
+		return nil
 	}
 	overloadName := className + goName + "Go"
 	if pkgTypeNames[overloadName] {
-		return
+		return nil
 	}
 	overloadArgs := nsStringOverloadArgs(method.Params, method.IsNSError, nsIdxs, ctx, m, imports)
 	idxSet := make(map[int]bool, len(nsIdxs))
@@ -1953,19 +1854,16 @@ func writeNSStringClassOverload(w io.Writer, goName, className string, method ma
 	if goRet != "" {
 		retStr = " " + goRet
 	}
-	fmt.Fprintf(w, "func %s(%s)%s {\n", overloadName, strings.Join(overloadArgs, ", "), retStr)
 
 	var callArgs []string
 	for i := range method.Params {
 		callArgs = append(callArgs, nsStringConvertArg(resolved[i], idxSet[i], ctx, m, imports))
 	}
-	callAll := callArgs
-	if goRet != "" {
-		fmt.Fprintf(w, "\treturn %s%s(%s)\n", className, goName, strings.Join(callAll, ", "))
-	} else {
-		fmt.Fprintf(w, "\t%s%s(%s)\n", className, goName, strings.Join(callAll, ", "))
-	}
-	fmt.Fprintf(w, "}\n\n")
+	return executeTemplate(w, "nsstring_overload", nsStringOverloadModel{
+		Signature: fmt.Sprintf("func %s(%s)%s", overloadName, strings.Join(overloadArgs, ", "), retStr),
+		HasReturn: goRet != "",
+		CallExpr:  fmt.Sprintf("%s%s(%s)", className, goName, strings.Join(callArgs, ", ")),
+	})
 }
 
 // receiverType returns the Go receiver type expression for instance methods.
@@ -1975,4 +1873,3 @@ func receiverType(className string, isGeneric bool) string {
 	}
 	return className
 }
-

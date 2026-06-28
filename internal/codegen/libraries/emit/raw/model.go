@@ -112,6 +112,98 @@ type designatedInitModel struct {
 	Kind int
 }
 
+// methodBodyModel is template data for a CGo method body: the keep-alive
+// defers, argument preambles, the C call, exception/NSError handling, and the
+// return conversion selected by RetKind.
+type methodBodyModel struct {
+	// HasReceiver emits `defer cgo.KeepAlive(o)` for instance methods.
+	HasReceiver bool
+	// KeepAlives are ObjC-object argument names kept alive across the C call.
+	KeepAlives []string
+	// Preambles are pre-call setup statements (C-string conversions, block
+	// trampolines) whose deferred cleanup runs at method exit.
+	Preambles []string
+	// HasNSError adds the trailing NSError out-parameter handling.
+	HasNSError bool
+	// RetKind selects capture + return handling: 0 void, 1 cgo.Object, 2 typed
+	// object, 3 value struct, 4 nullable string, 5 scalar/other.
+	RetKind int
+	// RawCall is the C bridge call expression, e.g. "C.foo_bar(o.Ptr(), &_exc)".
+	RawCall string
+	// ResultExpr is the converted scalar result captured for RetKind 5.
+	ResultExpr string
+	// RetType is the Go return type, used for the value-struct zero literal and
+	// pointer dereference (RetKind 3).
+	RetType string
+	// WrapTypedExpr is the constructor reference passed to cgo.WrapTyped for a
+	// typed object return (RetKind 2).
+	WrapTypedExpr string
+}
+
+// classMethodModel is template data for one generated instance or class method:
+// the doc/annotation preamble, the bridge-ID comment, the signature, and the
+// resolved CGo body.
+type classMethodModel struct {
+	// PreambleComment is the doc/context comments plus designated-init,
+	// warn-unused, swift-name, blocked-import, and out-parameter notes (column 0).
+	PreambleComment string
+	// BridgeID is the "// <framework>_<Class>_<selector>…" identifier comment.
+	BridgeID string
+	// IsClassMethod selects a package-level function over an instance method.
+	IsClassMethod bool
+	// Receiver is the instance receiver type (instance methods only).
+	Receiver string
+	// GoName is the instance method name (instance methods only).
+	GoName string
+	// FuncName is the package-level function name (class methods only).
+	FuncName string
+	// GoArgs is the rendered parameter list.
+	GoArgs string
+	// RetStr is the return clause, " T" or empty.
+	RetStr string
+	// Body is the resolved method body.
+	Body methodBodyModel
+	// Skip renders only the preamble comment (no function): a class method whose
+	// generated name collides with a package-level type is dropped, but — matching
+	// the original — its doc comment is still emitted.
+	Skip bool
+}
+
+// codingMethodsModel is template data for the NSSecureCoding/NSCoding archive
+// convenience methods (SerializeToArchive + New<Class>FromArchive).
+type codingMethodsModel struct {
+	Name          string
+	SerializeFn   string
+	DeserializeFn string
+}
+
+// genericHelperModel is template data for the New<Class>T[T] typed constructor a
+// generic class exposes so generic subclasses can build it with a preserved type
+// parameter (rather than the cgo.Object instantiation).
+type genericHelperModel struct {
+	Name   string
+	TChain string // the &Class[T]{…} value chain
+}
+
+// typedWithPtrModel is template data for the <Class>TypedWithPtr[T] untracked
+// value constructor used by generic subclasses in other packages.
+type typedWithPtrModel struct {
+	Name        string
+	TValueChain string // the Class[T]{…} value chain (no leading &)
+}
+
+// nsStringOverloadModel is template data for a "…Go" Go-string convenience
+// overload: a thin wrapper that converts its Go-string arguments and forwards to
+// the underlying generated method/function.
+type nsStringOverloadModel struct {
+	// Signature is the full function signature up to the opening brace.
+	Signature string
+	// HasReturn is true when the wrapped call's result is returned.
+	HasReturn bool
+	// CallExpr is the forwarding call into the underlying method/function.
+	CallExpr string
+}
+
 // cfWrapperModel is template data for a CoreFoundation opaque pointer wrapper type.
 type cfWrapperModel struct {
 	GoName string // Primary type name, e.g. CFStringRef
