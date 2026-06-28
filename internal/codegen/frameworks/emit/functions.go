@@ -6,6 +6,8 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/view"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -43,64 +45,13 @@ func EmitFunctions(
 
 	ctx := typemap.Context{Framework: framework.Framework}
 
-	// Emit var declarations for each function binding.
-	// ObjC object params and returns use objc.ID in the var (matching the raw
-	// C ABI via purego), while wrapper functions use the high-level Go types.
-	fmt.Fprintf(w, "var (\n")
+	// Gather the function-pointer var declarations. ObjC object params and
+	// returns use objc.ID in the var (matching the raw C ABI via purego), while
+	// wrapper functions use the high-level Go types.
+	functionFile := view.FunctionFile{}
 	for _, fn := range fns {
-		retType := ""
-		if _, retIsBlock := mapper.ResolveBlockSignature(fn.Return.ObjCType); retIsBlock {
-			retType = "objc.Block"
-		} else if fn.Return.ObjCType != "void" && fn.Return.ObjCType != "" {
-			retType = mapper.GoReturnType(fn.Return.ObjCType, ctx, imports)
-			if retType == "" || isUnexportedXPkg(retType) {
-				retType = "unsafe.Pointer"
-			}
-		}
-
-		var params []string
-		for _, param := range fn.Params {
-			// Block params cross the C ABI as real block objects.
-			if _, isBlock := mapper.ResolveBlockSignature(param.ObjCType); isBlock {
-				params = append(params, "objc.Block")
-				continue
-			}
-			goType := mapper.GoType(param.ObjCType, ctx, imports)
-			if goType == "" || isUnexportedXPkg(goType) {
-				goType = "unsafe.Pointer"
-			}
-			// ObjC objects are passed as raw objc.ID at the C level.
-			if isObjCObjectType(goType) && isObjCClass(goType, ownerIndex) {
-				goType = "objc.ID"
-			}
-			params = append(params, goType)
-		}
-
-		// ObjC object returns are also raw objc.ID at the C level.
-		varRetType := retType
-		if isObjCObjectType(retType) && isObjCClass(retType, ownerIndex) {
-			varRetType = "objc.ID"
-		}
-
-		funcType := "func(" + strings.Join(params, ", ") + ")"
-		if varRetType != "" {
-			funcType += " " + varRetType
-		}
-
-		if fn.Doc != "" {
-			fmt.Fprintf(w, "\t// %s\n", fn.Doc)
-		}
-		emitDeprecatedComment(w, fn.Availability)
-		funcVarName := naming.LowerFirst(fn.Name)
-		if funcVarName == fn.Name {
-			// Already lowercase — prefix with underscore to make it unexported.
-			funcVarName = "_" + funcVarName
-		} else {
-			funcVarName = "_fn" + fn.Name
-		}
-		fmt.Fprintf(w, "\t%s %s\n", funcVarName, funcType)
+		functionFile.Vars = append(functionFile.Vars, buildFunctionVarView(fn, ctx, mapper, imports, ownerIndex))
 	}
-	fmt.Fprintf(w, ")\n\n")
 
 	// Collect registration lines to be embedded in the runtime.go init()
 	// after a successful Dlopen — callers must not generate a separate init().
@@ -120,25 +71,103 @@ func EmitFunctions(
 		})
 	}
 
-	// Emit exported wrapper functions.
+	// Gather the exported wrapper functions.
 	for _, fn := range fns {
-		ctx2 := typemap.Context{Framework: framework.Framework}
-		if err := emitFunction(w, fn, ctx2, mapper, imports, ownerIndex); err != nil {
-			return nil, nil, err
-		}
+		functionFile.Wrappers = append(functionFile.Wrappers, buildFunctionWrapperView(fn, ctx, mapper, imports, ownerIndex))
 	}
 
+	out, err := render.Functions(functionFile)
+	if err != nil {
+		return nil, nil, err
+	}
+	if _, err := w.Write(out); err != nil {
+		return nil, nil, err
+	}
 	return imports, regLines, nil
 }
 
-func emitFunction(
-	w io.Writer,
+// buildFunctionVarView resolves one function-pointer var declaration: the
+// binding variable name, its C-ABI func type (ObjC objects as objc.ID), and the
+// doc/deprecation comment. The doc line carries a leading tab to match the
+// original output inside the var block.
+func buildFunctionVarView(
 	fn meta.Function,
 	ctx typemap.Context,
 	mapper *typemap.Mapper,
 	imports typemap.ImportSet,
 	ownerIndex map[string]string,
-) error {
+) view.FunctionVar {
+	retType := ""
+	if _, retIsBlock := mapper.ResolveBlockSignature(fn.Return.ObjCType); retIsBlock {
+		retType = "objc.Block"
+	} else if fn.Return.ObjCType != "void" && fn.Return.ObjCType != "" {
+		retType = mapper.GoReturnType(fn.Return.ObjCType, ctx, imports)
+		if retType == "" || isUnexportedXPkg(retType) {
+			retType = "unsafe.Pointer"
+		}
+	}
+
+	var params []string
+	for _, param := range fn.Params {
+		// Block params cross the C ABI as real block objects.
+		if _, isBlock := mapper.ResolveBlockSignature(param.ObjCType); isBlock {
+			params = append(params, "objc.Block")
+			continue
+		}
+		goType := mapper.GoType(param.ObjCType, ctx, imports)
+		if goType == "" || isUnexportedXPkg(goType) {
+			goType = "unsafe.Pointer"
+		}
+		// ObjC objects are passed as raw objc.ID at the C level.
+		if isObjCObjectType(goType) && isObjCClass(goType, ownerIndex) {
+			goType = "objc.ID"
+		}
+		params = append(params, goType)
+	}
+
+	// ObjC object returns are also raw objc.ID at the C level.
+	varRetType := retType
+	if isObjCObjectType(retType) && isObjCClass(retType, ownerIndex) {
+		varRetType = "objc.ID"
+	}
+
+	funcType := "func(" + strings.Join(params, ", ") + ")"
+	if varRetType != "" {
+		funcType += " " + varRetType
+	}
+
+	var comment strings.Builder
+	if fn.Doc != "" {
+		fmt.Fprintf(&comment, "\t// %s\n", fn.Doc)
+	}
+	comment.WriteString(deprecatedComment(fn.Availability))
+
+	funcVarName := naming.LowerFirst(fn.Name)
+	if funcVarName == fn.Name {
+		// Already lowercase — prefix with underscore to make it unexported.
+		funcVarName = "_" + funcVarName
+	} else {
+		funcVarName = "_fn" + fn.Name
+	}
+
+	return view.FunctionVar{
+		CommentBlock: comment.String(),
+		VarName:      funcVarName,
+		FuncType:     funcType,
+	}
+}
+
+// buildFunctionWrapperView resolves one exported wrapper function: its
+// signature, the block adapters built for block-typed parameters, and the call
+// into the bound C function pointer with its result converted (returned
+// directly, returned after a retain for object returns, or discarded for void).
+func buildFunctionWrapperView(
+	fn meta.Function,
+	ctx typemap.Context,
+	mapper *typemap.Mapper,
+	imports typemap.ImportSet,
+	ownerIndex map[string]string,
+) view.Function {
 	retType := ""
 	retIsBlock := false
 	if _, retIsBlock = mapper.ResolveBlockSignature(fn.Return.ObjCType); retIsBlock {
@@ -154,7 +183,7 @@ func emitFunction(
 
 	var goParams []string
 	var callArgs []string
-	var adapters []blockAdapterModel
+	var adapters []view.BlockAdapter
 	usedNames := make(map[string]int)
 	for _, param := range fn.Params {
 		paramName := naming.ParamName(param.Name)
@@ -181,7 +210,7 @@ func emitFunction(
 				)
 				callArgs = append(callArgs, paramName)
 			} else {
-				adapters = append(adapters, adapter)
+				adapters = append(adapters, blockAdapterRenderView(adapter))
 				callArgs = append(callArgs, "__block_"+paramName)
 			}
 			continue
@@ -205,40 +234,40 @@ func emitFunction(
 		funcVarName = "_" + fn.Name
 	}
 
-	paramStr := strings.Join(goParams, ", ")
-	callStr := strings.Join(callArgs, ", ")
+	var comment strings.Builder
+	if fn.Doc != "" {
+		fmt.Fprintf(&comment, "// %s\n", fn.Doc)
+	}
+	goName := naming.ExportedFunctionName(fn.Name)
+	if goName != fn.Name {
+		fmt.Fprintf(&comment, "// C function: %s\n", fn.Name)
+	}
+	comment.WriteString(deprecatedComment(fn.Availability))
 
 	retSig := ""
 	if retType != "" {
 		retSig = " " + retType
 	}
 
-	if fn.Doc != "" {
-		fmt.Fprintf(w, "// %s\n", fn.Doc)
+	built := view.Function{
+		CommentBlock: comment.String(),
+		GoName:       goName,
+		ParamStr:     strings.Join(goParams, ", "),
+		RetSig:       retSig,
+		Adapters:     adapters,
+		FuncVarName:  funcVarName,
+		CallStr:      strings.Join(callArgs, ", "),
 	}
-	goName := naming.ExportedFunctionName(fn.Name)
-	if goName != fn.Name {
-		fmt.Fprintf(w, "// C function: %s\n", fn.Name)
+	switch {
+	case retType == "":
+		built.ReturnKind = 0
+	case !retIsBlock && isObjCObjectType(retType) && isObjCClass(retType, ownerIndex):
+		built.ReturnKind = 2
+		built.WrapExpr = buildWrapExprFromType(retType)
+	default:
+		built.ReturnKind = 1
 	}
-	emitDeprecatedComment(w, fn.Availability)
-	fmt.Fprintf(w, "func %s(%s)%s {\n", goName, paramStr, retSig)
-	for _, adapter := range adapters {
-		writeBlockAdapter(w, adapter, "\t")
-	}
-	if retType != "" {
-		if !retIsBlock && isObjCObjectType(retType) && isObjCClass(retType, ownerIndex) {
-			fmt.Fprintf(w, "\t_ret := %s(%s)\n", funcVarName, callStr)
-			fmt.Fprintf(w, "\tif _ret != 0 { _ret.Send(objc.RegisterName(\"retain\")) }\n")
-			wrapExpr := buildWrapExprFromType(retType)
-			fmt.Fprintf(w, "\treturn %s\n", wrapExpr)
-		} else {
-			fmt.Fprintf(w, "\treturn %s(%s)\n", funcVarName, callStr)
-		}
-	} else {
-		fmt.Fprintf(w, "\t%s(%s)\n", funcVarName, callStr)
-	}
-	fmt.Fprintf(w, "}\n\n")
-	return nil
+	return built
 }
 
 // EmittableFunctions returns the free C functions the raw emitter emits for

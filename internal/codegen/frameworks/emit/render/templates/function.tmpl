@@ -1,0 +1,30 @@
+{{/*
+    function.tmpl — raw purego emission of C function bindings: the var block of
+    purego-bound function pointers, then the exported wrapper functions. A
+    wrapper builds objc.Block values for any block parameters, then calls the
+    bound pointer and converts the result. The single-line `if _ret != 0 { … }`
+    is intentional: gofmt preserves one-line bodies, so it must match the
+    original byte-for-byte. gofmt canonicalises the rest.
+*/}}
+{{define "functions"}}var (
+{{range .Vars}}{{.CommentBlock}}{{.VarName}} {{.FuncType}}
+{{end}})
+
+{{range .Wrappers}}{{template "function_wrapper" .}}{{end}}{{end}}
+
+{{define "function_wrapper"}}{{.CommentBlock}}func {{.GoName}}({{.ParamStr}}){{.RetSig}} {
+{{- range .Adapters}}
+{{template "block_adapter" .}}
+{{- end}}
+{{- if eq .ReturnKind 2}}
+_ret := {{.FuncVarName}}({{.CallStr}})
+if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+return {{.WrapExpr}}
+{{- else if eq .ReturnKind 1}}
+return {{.FuncVarName}}({{.CallStr}})
+{{- else}}
+{{.FuncVarName}}({{.CallStr}})
+{{- end}}
+}
+
+{{end}}

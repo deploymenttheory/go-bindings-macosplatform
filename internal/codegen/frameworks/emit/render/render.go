@@ -66,3 +66,13 @@ func Protocols(protocols []view.Protocol) ([]byte, error) {
 	}
 	return buf.Bytes(), nil
 }
+
+// Functions renders the function-pointer var block and the exported wrapper
+// functions for a package as a Go source fragment.
+func Functions(functions view.FunctionFile) ([]byte, error) {
+	var buf bytes.Buffer
+	if err := templates.ExecuteTemplate(&buf, "functions", functions); err != nil {
+		return nil, fmt.Errorf("render functions: %w", err)
+	}
+	return buf.Bytes(), nil
+}

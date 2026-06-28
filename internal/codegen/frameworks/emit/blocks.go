@@ -5,6 +5,7 @@ import (
 	"io"
 	"strings"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/view"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
 )
 
@@ -228,11 +229,51 @@ func isBlockRetEncodable(goType string, mapper *typemap.Mapper, ownerIndex map[s
 	return false
 }
 
+// blockAdapterRenderView resolves a block adapter model into its renderable view:
+// the callback signature, the per-argument retain guards, and the converted call
+// into the public closure. A degraded adapter renders nothing (the public
+// objc.Block parameter passes through). gofmt indents the rendered body, so the
+// view carries no leading whitespace.
+func blockAdapterRenderView(adapter blockAdapterModel) view.BlockAdapter {
+	built := view.BlockAdapter{Degraded: adapter.Degraded, ParamName: adapter.ParamName}
+	if adapter.Degraded {
+		return built
+	}
+	built.BlockVar = "__block_" + adapter.ParamName
+
+	callbackParams := make([]string, 0, len(adapter.Params)+1)
+	callbackParams = append(callbackParams, "_ objc.Block")
+	for i, component := range adapter.Params {
+		callbackParams = append(callbackParams, fmt.Sprintf("blockParam%d %s", i, component.ABIType))
+	}
+	retSig := ""
+	if adapter.RetGoType != "" {
+		retSig = " " + adapter.RetGoType
+	}
+	built.CallbackSig = "func(" + strings.Join(callbackParams, ", ") + ")" + retSig
+	built.HasReturn = adapter.RetGoType != ""
+
+	callArgs := make([]string, len(adapter.Params))
+	for i, component := range adapter.Params {
+		argName := fmt.Sprintf("blockParam%d", i)
+		built.Params = append(built.Params, view.BlockCallbackParam{ArgName: argName, NeedsRetain: component.NeedsRetain})
+		if component.ConvertFmt != "" {
+			callArgs[i] = fmt.Sprintf(component.ConvertFmt, argName)
+		} else {
+			callArgs[i] = argName
+		}
+	}
+	built.CallExpr = fmt.Sprintf("%s(%s)", adapter.ParamName, strings.Join(callArgs, ", "))
+	return built
+}
+
 // writeBlockAdapter writes the objc.NewBlock construction for one block
 // parameter into the body of a generated wrapper. No output is produced for
-// degraded adapters — the public objc.Block parameter is passed through.
-// indent is the leading whitespace for emitted lines (method and function
-// bodies are one tab deep).
+// degraded adapters — the public objc.Block parameter is passed through. indent
+// is the leading whitespace for emitted lines.
+//
+// Retained until the class emitter is templated; the function emitter renders
+// block adapters through block_adapter.tmpl (see blockAdapterRenderView).
 func writeBlockAdapter(w io.Writer, adapter blockAdapterModel, indent string) {
 	if adapter.Degraded {
 		return
