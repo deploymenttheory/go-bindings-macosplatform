@@ -859,28 +859,20 @@ func TestWriteClassMethodPrimReturnEmitted(t *testing.T) {
 }
 
 // --------------------------------------------------------------------------
-// writeObjectReturnWithError — direct unit tests
+// constructorRef — the object-return constructor reference (used by method_body)
 // --------------------------------------------------------------------------
 
-func TestWriteObjectReturnWithErrorSameFramework(t *testing.T) {
-	m := &typemap.Mapper{}
+func TestConstructorRefSameFramework(t *testing.T) {
 	fmClasses := map[string]macosplatformmetadata.Class{}
-	var buf bytes.Buffer
-	writeObjectReturnWithError(&buf, "NSString", fmClasses, m)
-	out := buf.String()
-	if !strings.Contains(out, "cgo.WrapTyped(_ptr, NewNSString)") {
-		t.Errorf("same-fw should use cgo.WrapTyped with NewNSString; got %q", out)
+	if got := constructorRef("NSString", fmClasses); got != "NewNSString" {
+		t.Errorf("same-fw constructorRef = %q, want NewNSString", got)
 	}
 }
 
-func TestWriteObjectReturnWithErrorCrossFramework(t *testing.T) {
-	m := &typemap.Mapper{}
-	var buf bytes.Buffer
-	writeObjectReturnWithError(&buf, "foundation.NSString", nil, m)
-	out := buf.String()
-	// Cross-fw: New<Cls> handles nil internally, no explicit nil check needed
-	if !strings.Contains(out, "foundation.NewNSString") {
-		t.Errorf("cross-fw should use foundation.NewNSString; got %q", out)
+func TestConstructorRefCrossFramework(t *testing.T) {
+	// Cross-fw: New<Cls> handles nil internally, no explicit nil check needed.
+	if got := constructorRef("foundation.NSString", nil); got != "foundation.NewNSString" {
+		t.Errorf("cross-fw constructorRef = %q, want foundation.NewNSString", got)
 	}
 }
 

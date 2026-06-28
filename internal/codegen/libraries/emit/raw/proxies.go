@@ -1,7 +1,6 @@
 package raw
 
 import (
-	"fmt"
 	"io"
 	"sort"
 	"strings"
@@ -21,7 +20,14 @@ import (
 //   - Exports a New<Name> constructor that registers a GC finalizer via cgo.Track
 //   - Implements all non-variadic protocol methods via CGo bridge calls that
 //     cast the receiver to id<Protocol> and dispatch dynamically
-func EmitProtocolProxies(w io.Writer, pkgName, packageName string, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool, allClasses map[string]macosplatformmetadata.Class) error {
+func EmitProtocolProxies(
+	w io.Writer,
+	pkgName, packageName string,
+	framework *macosplatformmetadata.FrameworkMeta,
+	m *typemap.Mapper,
+	knownClasses map[string]bool,
+	allClasses map[string]macosplatformmetadata.Class,
+) error {
 	// Only emit types for protocols that are in ProtocolProxyIndex (i.e. they
 	// actually appear as id<P> return types somewhere in the SDK).
 	names := make([]string, 0, len(framework.Protocols))
@@ -43,7 +49,18 @@ func EmitProtocolProxies(w io.Writer, pkgName, packageName string, framework *ma
 	needsBlocks := false
 	for _, name := range names {
 		p := framework.Protocols[name]
-		model, hasBlks := buildProtocolIDTypeModel(name, p, framework, m, allClasses, ctx, usedImports)
+		model, hasBlks, err := buildProtocolIDTypeModel(
+			name,
+			p,
+			framework,
+			m,
+			allClasses,
+			ctx,
+			usedImports,
+		)
+		if err != nil {
+			return err
+		}
 		proxyTypes = append(proxyTypes, model)
 		if hasBlks {
 			needsBlocks = true
@@ -56,10 +73,16 @@ func EmitProtocolProxies(w io.Writer, pkgName, packageName string, framework *ma
 		"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo",
 	}
 	if pkgName != "foundation" {
-		allImports = append(allImports, "github.com/deploymenttheory/go-bindings-macosplatform/frameworks/foundation")
+		allImports = append(
+			allImports,
+			"github.com/deploymenttheory/go-bindings-macosplatform/frameworks/foundation",
+		)
 	}
 	if needsBlocks {
-		allImports = append(allImports, "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/blocks")
+		allImports = append(
+			allImports,
+			"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/blocks",
+		)
 	}
 	for _, path := range usedImports {
 		allImports = append(allImports, path)
@@ -86,7 +109,15 @@ func EmitProtocolProxies(w io.Writer, pkgName, packageName string, framework *ma
 // buildProtocolIDTypeModel constructs a protocolProxyTypeModel for one protocol.
 // Returns the model plus flags indicating whether methods use context or blocks.
 // Cross-framework imports discovered during method body building are recorded in imports.
-func buildProtocolIDTypeModel(name string, p macosplatformmetadata.Protocol, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, allClasses map[string]macosplatformmetadata.Class, ctx typemap.Context, imports typemap.ImportSet) (model protocolProxyTypeModel, needsBlocks bool) {
+func buildProtocolIDTypeModel(
+	name string,
+	p macosplatformmetadata.Protocol,
+	framework *macosplatformmetadata.FrameworkMeta,
+	m *typemap.Mapper,
+	allClasses map[string]macosplatformmetadata.Class,
+	ctx typemap.Context,
+	imports typemap.ImportSet,
+) (model protocolProxyTypeModel, needsBlocks bool, err error) {
 	goName := naming.ProtocolGoTypeName(name, m.OwnerIndex)
 	idTypeName := goName + "IDProtocol"
 
@@ -134,7 +165,19 @@ func buildProtocolIDTypeModel(name string, p macosplatformmetadata.Protocol, fra
 
 		// Pre-render the method body by writing to a strings.Builder.
 		var bodyBuf strings.Builder
-		writeIDProtocolMethodBody(&bodyBuf, method, cFunc, framework.Framework, idTypeName, idCtx, m, framework.Classes, imports)
+		if err := writeIDProtocolMethodBody(
+			&bodyBuf,
+			method,
+			cFunc,
+			framework.Framework,
+			idTypeName,
+			idCtx,
+			m,
+			framework.Classes,
+			imports,
+		); err != nil {
+			return model, needsBlocks, err
+		}
 		bodyLines := bodyBuf.String()
 
 		if strings.Contains(bodyLines, "blocks.MakeBlock_") {
@@ -158,104 +201,62 @@ func buildProtocolIDTypeModel(name string, p macosplatformmetadata.Protocol, fra
 		AvailComment:    availabilityComment(p.Availability),
 		Methods:         methods,
 	}
-	return model, needsBlocks
+	return model, needsBlocks, nil
 }
 
 // writeIDProtocolMethodBody writes the CGo bridge call body for an id<Protocol>
 // wrapper method. Mirrors writeMethodBody in classes.go but uses "p" as the
 // receiver variable (for *<Proto>IDProtocol receivers).
-func writeIDProtocolMethodBody(w io.Writer, method macosplatformmetadata.Method, cFunc string, framework, idTypeName string, ctx typemap.Context, m *typemap.Mapper, fmClasses map[string]macosplatformmetadata.Class, imports typemap.ImportSet) {
+func writeIDProtocolMethodBody(
+	w io.Writer,
+	method macosplatformmetadata.Method,
+	cFunc string,
+	framework, idTypeName string,
+	ctx typemap.Context,
+	m *typemap.Mapper,
+	fmClasses map[string]macosplatformmetadata.Class,
+	imports typemap.ImportSet,
+) error {
 	var preambles []string
 	var keepAlives []string
-	cgoCallArgs := buildIDProtocolCGOCallArgs(method.Params, method.IsNSError, ctx, m, &preambles, &keepAlives, imports)
-
-	// Keep the receiver and every ObjC-object argument alive across the CGo call.
-	fmt.Fprintf(w, "\tdefer cgo.KeepAlive(p)\n")
-	for _, ka := range keepAlives {
-		fmt.Fprintf(w, "\tdefer cgo.KeepAlive(%s)\n", ka)
-	}
-
-	for _, preamble := range preambles {
-		fmt.Fprintf(w, "\t%s\n", preamble)
-	}
-
-	fmt.Fprintf(w, "\tvar _exc unsafe.Pointer\n")
-	if method.IsNSError {
-		fmt.Fprintf(w, "\tvar _nsErr unsafe.Pointer\n")
-	}
-
-	retType := primaryReturnType(method, ctx, m, imports)
-	isNullableStr := retType == "string" && method.Return.IsNullable
-	isValueStruct := isValueStructReturn(retType, m)
-
-	rawCall := fmt.Sprintf("C.%s(%s)", cFunc, cgoCallArgs)
-	if retType == "cgo.Object" || isObjectReturn(retType) || isNullableStr || isValueStruct {
-		fmt.Fprintf(w, "\t_ptr := unsafe.Pointer(%s)\n", rawCall)
-	} else if retType != "" {
-		fmt.Fprintf(w, "\t_result := %s\n", cgoReturnConvert(rawCall, retType, m))
-	} else {
-		fmt.Fprintf(w, "\t%s\n", rawCall)
-	}
-
-	fmt.Fprintf(w, "\tcgo.RaiseIfException(_exc)\n")
-
-	if method.IsNSError {
-		if retType == "" {
-			fmt.Fprintf(w, "\tif _nsErr != nil {\n\t\treturn cgo.NSErrorToError(_nsErr)\n\t}\n")
-			fmt.Fprintf(w, "\treturn nil\n")
-		} else if retType == "cgo.Object" {
-			fmt.Fprintf(w, "\tif _nsErr != nil {\n\t\treturn nil, cgo.NSErrorToError(_nsErr)\n\t}\n")
-			fmt.Fprintf(w, "\treturn cgo.WrapObject(_ptr), nil\n")
-		} else if isObjectReturn(retType) {
-			structType := extractStructType(retType, false)
-			fmt.Fprintf(w, "\tif _nsErr != nil {\n\t\treturn nil, cgo.NSErrorToError(_nsErr)\n\t}\n")
-			writeObjectReturnWithError(w, structType, fmClasses, m)
-		} else if isValueStruct {
-			fmt.Fprintf(w, "\tif _nsErr != nil {\n")
-			fmt.Fprintf(w, "\t\tif _ptr != nil {\n\t\t\tcgo.FreePtr(_ptr)\n\t\t}\n")
-			fmt.Fprintf(w, "\t\treturn %s{}, cgo.NSErrorToError(_nsErr)\n\t}\n", retType)
-			fmt.Fprintf(w, "\tif _ptr == nil {\n\t\treturn %s{}, nil\n\t}\n", retType)
-			fmt.Fprintf(w, "\t_result := *(*%s)(unsafe.Pointer(_ptr))\n", retType)
-			fmt.Fprintf(w, "\tcgo.FreePtr(_ptr)\n")
-			fmt.Fprintf(w, "\treturn _result, nil\n")
-		} else {
-			fmt.Fprintf(w, "\tif _nsErr != nil {\n\t\treturn _result, cgo.NSErrorToError(_nsErr)\n\t}\n")
-			fmt.Fprintf(w, "\treturn _result, nil\n")
-		}
-		return
-	}
-
-	if retType == "" {
-		return
-	}
-	if retType == "cgo.Object" {
-		fmt.Fprintf(w, "\treturn cgo.WrapObject(_ptr)\n")
-		return
-	}
-	if isObjectReturn(retType) {
-		structType := extractStructType(retType, false)
-		writeObjectReturn(w, structType, fmClasses, m)
-		return
-	}
-	if isValueStruct {
-		fmt.Fprintf(w, "\tif _ptr == nil {\n\t\treturn %s{}\n\t}\n", retType)
-		fmt.Fprintf(w, "\t_result := *(*%s)(unsafe.Pointer(_ptr))\n", retType)
-		fmt.Fprintf(w, "\tcgo.FreePtr(_ptr)\n")
-		fmt.Fprintf(w, "\treturn _result\n")
-		return
-	}
-	if isNullableStr {
-		fmt.Fprintf(w, "\tif _ptr == nil {\n\t\treturn nil\n\t}\n")
-		fmt.Fprintf(w, "\t_s := C.GoString((*C.char)(_ptr))\n")
-		fmt.Fprintf(w, "\treturn &_s\n")
-		return
-	}
-	fmt.Fprintf(w, "\treturn _result\n")
+	cgoCallArgs := buildIDProtocolCGOCallArgs(
+		method.Params,
+		method.IsNSError,
+		ctx,
+		m,
+		&preambles,
+		&keepAlives,
+		imports,
+	)
+	// The proxy body is identical to a class method body but keeps the proxy
+	// receiver "p" alive instead of "o", and is never a class method.
+	model := resolveMethodBodyModel(
+		method,
+		cFunc,
+		cgoCallArgs,
+		preambles,
+		keepAlives,
+		true,
+		"p",
+		false,
+		ctx,
+		m,
+		fmClasses,
+		imports,
+	)
+	return executeTemplate(w, "method_body", model)
 }
 
 // buildIDProtocolCGOCallArgs builds the CGo call argument list for an id<Protocol>
 // wrapper method. Prepends "p.Ptr()" as the receiver (self) argument.
-func buildIDProtocolCGOCallArgs(args []macosplatformmetadata.Param, hasNSError bool, ctx typemap.Context, m *typemap.Mapper, preambles, keepAlives *[]string, imports typemap.ImportSet) string {
+func buildIDProtocolCGOCallArgs(
+	args []macosplatformmetadata.Param,
+	hasNSError bool,
+	ctx typemap.Context,
+	m *typemap.Mapper,
+	preambles, keepAlives *[]string,
+	imports typemap.ImportSet,
+) string {
 	var parts []string
 	parts = append(parts, "p.Ptr()")
 

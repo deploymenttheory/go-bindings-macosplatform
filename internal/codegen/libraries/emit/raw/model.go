@@ -116,8 +116,12 @@ type designatedInitModel struct {
 // defers, argument preambles, the C call, exception/NSError handling, and the
 // return conversion selected by RetKind.
 type methodBodyModel struct {
-	// HasReceiver emits `defer cgo.KeepAlive(o)` for instance methods.
+	// HasReceiver emits `defer cgo.KeepAlive(<ReceiverVar>)` for instance methods
+	// and id<Protocol> proxy methods.
 	HasReceiver bool
+	// ReceiverVar is the receiver variable name kept alive — "o" for class
+	// instance methods, "p" for id<Protocol> proxy methods.
+	ReceiverVar string
 	// KeepAlives are ObjC-object argument names kept alive across the C call.
 	KeepAlives []string
 	// Preambles are pre-call setup statements (C-string conversions, block

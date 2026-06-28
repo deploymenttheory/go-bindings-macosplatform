@@ -203,7 +203,7 @@ return New{{.Name}}(_ptr), nil
 */}}
 {{define "method_body"}}
 {{- if .HasReceiver}}
-defer cgo.KeepAlive(o)
+defer cgo.KeepAlive({{.ReceiverVar}})
 {{- end}}
 {{- range .KeepAlives}}
 defer cgo.KeepAlive({{.}})

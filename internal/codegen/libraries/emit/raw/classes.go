@@ -18,7 +18,14 @@ import (
 // Classes writes one Go source file per ObjC class into outDir.
 // allClasses is the combined class map from all frameworks, used for building
 // cross-framework embedding chains and constructors.
-func EmitClasses(outDir string, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool, allClasses map[string]macosplatformmetadata.Class, packageName string) error {
+func EmitClasses(
+	outDir string,
+	framework *macosplatformmetadata.FrameworkMeta,
+	m *typemap.Mapper,
+	knownClasses map[string]bool,
+	allClasses map[string]macosplatformmetadata.Class,
+	packageName string,
+) error {
 	if err := os.MkdirAll(outDir, 0o755); err != nil {
 		return err
 	}
@@ -56,7 +63,16 @@ func EmitClasses(outDir string, framework *macosplatformmetadata.FrameworkMeta, 
 		if err != nil {
 			return fmt.Errorf("create %s: %w", path, err)
 		}
-		if err := EmitClass(f, name, cls, framework, m, knownClasses, allClasses, packageName); err != nil {
+		if err := EmitClass(
+			f,
+			name,
+			cls,
+			framework,
+			m,
+			knownClasses,
+			allClasses,
+			packageName,
+		); err != nil {
 			f.Close()
 			return fmt.Errorf("write class %s: %w", name, err)
 		}
@@ -71,7 +87,16 @@ func EmitClasses(outDir string, framework *macosplatformmetadata.FrameworkMeta, 
 // for inheritance. Root classes (no superclass or unknown superclass) retain a plain
 // `ptr unsafe.Pointer` field. Non-root classes embed their immediate superclass by
 // value; Go's method promotion gives access to all ancestor methods.
-func EmitClass(w io.Writer, name string, cls macosplatformmetadata.Class, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool, allClasses map[string]macosplatformmetadata.Class, packageName string) error {
+func EmitClass(
+	w io.Writer,
+	name string,
+	cls macosplatformmetadata.Class,
+	framework *macosplatformmetadata.FrameworkMeta,
+	m *typemap.Mapper,
+	knownClasses map[string]bool,
+	allClasses map[string]macosplatformmetadata.Class,
+	packageName string,
+) error {
 	isGeneric := len(cls.GenericParams) > 0
 	receiver := receiverType(name, isGeneric)
 	superInfo := classifySuper(name, cls, framework, m)
@@ -92,11 +117,31 @@ func EmitClass(w io.Writer, name string, cls macosplatformmetadata.Class, framew
 	if err := writeStructDef(&body, name, cls, isGeneric, superInfo); err != nil {
 		return err
 	}
-	if err := writeConstructors(&body, name, cls, isGeneric, superInfo, framework, allClasses, m, knownClasses, usedImports); err != nil {
+	if err := writeConstructors(
+		&body,
+		name,
+		cls,
+		isGeneric,
+		superInfo,
+		framework,
+		allClasses,
+		m,
+		knownClasses,
+		usedImports,
+	); err != nil {
 		return err
 	}
 	if isGeneric {
-		if err := writeGenericHelper(&body, name, cls, superInfo, framework, allClasses, m, usedImports); err != nil {
+		if err := writeGenericHelper(
+			&body,
+			name,
+			cls,
+			superInfo,
+			framework,
+			allClasses,
+			m,
+			usedImports,
+		); err != nil {
 			return err
 		}
 	}
@@ -169,7 +214,8 @@ func EmitClass(w io.Writer, name string, cls macosplatformmetadata.Class, framew
 			if mm.IsClassMethod || shouldSkipBridgeMethod(mm) {
 				continue
 			}
-			if mm.Availability.IsUnavailable || methodRefsUnavailableClass(mm, framework, allClasses) {
+			if mm.Availability.IsUnavailable ||
+				methodRefsUnavailableClass(mm, framework, allClasses) {
 				continue
 			}
 			mk := methodKey(mm.Selector, mm.IsClassMethod)
@@ -183,7 +229,8 @@ func EmitClass(w io.Writer, name string, cls macosplatformmetadata.Class, framew
 			if mm.IsClassMethod || mm.IsInit {
 				continue
 			}
-			if mm.Availability.IsUnavailable || methodRefsUnavailableClass(mm, framework, allClasses) {
+			if mm.Availability.IsUnavailable ||
+				methodRefsUnavailableClass(mm, framework, allClasses) {
 				continue
 			}
 			gn := naming.MethodName(mm.Selector)
@@ -218,7 +265,12 @@ func EmitClass(w io.Writer, name string, cls macosplatformmetadata.Class, framew
 			vk := methodKey(method.Selector, method.IsClassMethod)
 			if !seenVariadicKeys[vk] {
 				seenVariadicKeys[vk] = true
-				fmt.Fprintf(w, "// Class method +[%s %s] — not bridged (ObjC runtime lifecycle; called automatically by the runtime).\n", name, method.Selector)
+				fmt.Fprintf(
+					w,
+					"// Class method +[%s %s] — not bridged (ObjC runtime lifecycle; called automatically by the runtime).\n",
+					name,
+					method.Selector,
+				)
 			}
 			continue
 		}
@@ -230,9 +282,19 @@ func EmitClass(w io.Writer, name string, cls macosplatformmetadata.Class, framew
 				if !seenVariadicKeys[vk] {
 					seenVariadicKeys[vk] = true
 					if method.IsClassMethod {
-						fmt.Fprintf(w, "// Variadic class method +[%s %s] — not bridged (CGo cannot express C variadic arguments).\n", name, method.Selector)
+						fmt.Fprintf(
+							w,
+							"// Variadic class method +[%s %s] — not bridged (CGo cannot express C variadic arguments).\n",
+							name,
+							method.Selector,
+						)
 					} else {
-						fmt.Fprintf(w, "// Variadic method -[%s %s] — not bridged (CGo cannot express C variadic arguments).\n", name, method.Selector)
+						fmt.Fprintf(
+							w,
+							"// Variadic method -[%s %s] — not bridged (CGo cannot express C variadic arguments).\n",
+							name,
+							method.Selector,
+						)
 					}
 				}
 				continue
@@ -261,8 +323,12 @@ func EmitClass(w io.Writer, name string, cls macosplatformmetadata.Class, framew
 				// IBAction overload: emit a comment so the omission is discoverable,
 				// then skip — the zero-arg form (already emitted) is the usable API.
 				baseSel := strings.TrimSuffix(method.Selector, ":")
-				fmt.Fprintf(&body, "// -%s omitted: IBAction form of -%s (adds `id sender` for Interface Builder wiring only; not useful in Go)\n\n",
-					method.Selector, baseSel)
+				fmt.Fprintf(
+					&body,
+					"// -%s omitted: IBAction form of -%s (adds `id sender` for Interface Builder wiring only; not useful in Go)\n\n",
+					method.Selector,
+					baseSel,
+				)
 				continue
 			}
 			gn = resolved
@@ -289,7 +355,19 @@ func EmitClass(w io.Writer, name string, cls macosplatformmetadata.Class, framew
 			cFuncName:   bridgeNames[mk],
 			goName:      gn,
 		}
-		if err := writeMethod(&body, em, receiver, name, framework.Framework, ctx, m, framework.Classes, allClasses, pkgTypeNames, usedImports); err != nil {
+		if err := writeMethod(
+			&body,
+			em,
+			receiver,
+			name,
+			framework.Framework,
+			ctx,
+			m,
+			framework.Classes,
+			allClasses,
+			pkgTypeNames,
+			usedImports,
+		); err != nil {
 			return err
 		}
 		if methodHasBlockArgs(method.Params, m) {
@@ -298,7 +376,7 @@ func EmitClass(w io.Writer, name string, cls macosplatformmetadata.Class, framew
 	}
 
 	// NSCoding/NSSecureCoding convenience methods (non-generic classes only).
-	if !isGeneric && (cls.Availability.IsUnavailable == false) {
+	if !isGeneric && (!cls.Availability.IsUnavailable) {
 		if err := writeCodingMethods(&body, name, framework.Framework, cls); err != nil {
 			return err
 		}
@@ -312,7 +390,19 @@ func EmitClass(w io.Writer, name string, cls macosplatformmetadata.Class, framew
 	// defines on any foreign ancestor must be emitted here as real Go instance
 	// methods — they cannot be added to the foreign type, and subclasses of this
 	// class inherit them via Go embedding promotion without re-declaration.
-	if err := writeForeignAncestorExtensions(&body, name, receiver, framework, ctx, m, allClasses, pkgTypeNames, usedImports, emittedInstanceGoNames, &needsBlocks); err != nil {
+	if err := writeForeignAncestorExtensions(
+		&body,
+		name,
+		receiver,
+		framework,
+		ctx,
+		m,
+		allClasses,
+		pkgTypeNames,
+		usedImports,
+		emittedInstanceGoNames,
+		&needsBlocks,
+	); err != nil {
 		return err
 	}
 
@@ -322,7 +412,10 @@ func EmitClass(w io.Writer, name string, cls macosplatformmetadata.Class, framew
 		"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo",
 	}
 	if needsBlocks {
-		allImports = append(allImports, "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/blocks")
+		allImports = append(
+			allImports,
+			"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/blocks",
+		)
 	}
 	for _, path := range usedImports {
 		allImports = append(allImports, path)
@@ -361,7 +454,12 @@ type superInfo struct {
 
 // classifySuper determines whether the class's superclass is in the same framework,
 // a different framework, or absent (making this class a root).
-func classifySuper(className string, cls macosplatformmetadata.Class, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper) superInfo {
+func classifySuper(
+	className string,
+	cls macosplatformmetadata.Class,
+	framework *macosplatformmetadata.FrameworkMeta,
+	m *typemap.Mapper,
+) superInfo {
 	if cls.Super == "" {
 		return superInfo{isRoot: true}
 	}
@@ -385,13 +483,24 @@ func classifySuper(className string, cls macosplatformmetadata.Class, framework 
 	if m.ModulePrefix != "" {
 		importPath = m.ModulePrefix + "/" + pkg
 	}
-	return superInfo{name: cls.Super, pkg: pkg, importPath: importPath, superIsGeneric: superIsGeneric}
+	return superInfo{
+		name:           cls.Super,
+		pkg:            pkg,
+		importPath:     importPath,
+		superIsGeneric: superIsGeneric,
+	}
 }
 
 // writeStructDef emits the Go struct definition.
 // Root classes use a plain `ptr unsafe.Pointer` field and define Ptr().
 // Non-root classes embed their immediate superclass by value; Ptr() is promoted.
-func writeStructDef(w io.Writer, name string, cls macosplatformmetadata.Class, isGeneric bool, si superInfo) error {
+func writeStructDef(
+	w io.Writer,
+	name string,
+	cls macosplatformmetadata.Class,
+	isGeneric bool,
+	si superInfo,
+) error {
 	return executeTemplate(w, "class_struct", buildClassStructModel(name, cls, isGeneric, si))
 }
 
@@ -399,7 +508,12 @@ func writeStructDef(w io.Writer, name string, cls macosplatformmetadata.Class, i
 // comment block, the (generic) type header, the embedded field (raw ptr for a
 // root class or the superclass struct otherwise), and the receiver/assertion
 // types used by the promoted Ptr() accessor and the cgo.Object assertion.
-func buildClassStructModel(name string, cls macosplatformmetadata.Class, isGeneric bool, si superInfo) classStructModel {
+func buildClassStructModel(
+	name string,
+	cls macosplatformmetadata.Class,
+	isGeneric bool,
+	si superInfo,
+) classStructModel {
 	var comment strings.Builder
 	fmt.Fprintf(&comment, "// %s wraps the Objective-C %s class.\n", name, name)
 	if cls.Super != "" {
@@ -481,13 +595,31 @@ func isGenericClass(name string, genericClasses map[string]bool) bool {
 // writeConstructors emits:
 //  1. New<ClassName>(ptr) *<ClassName>  — full constructor with runtime tracking
 //  2. <ClassName>WithPtr(ptr) <ClassName> — value constructor for embedding in subclasses
-func writeConstructors(w io.Writer, name string, cls macosplatformmetadata.Class, isGeneric bool, si superInfo, framework *macosplatformmetadata.FrameworkMeta, allClasses map[string]macosplatformmetadata.Class, m *typemap.Mapper, knownClasses map[string]bool, usedImports typemap.ImportSet) error {
+func writeConstructors(
+	w io.Writer,
+	name string,
+	cls macosplatformmetadata.Class,
+	isGeneric bool,
+	si superInfo,
+	framework *macosplatformmetadata.FrameworkMeta,
+	allClasses map[string]macosplatformmetadata.Class,
+	m *typemap.Mapper,
+	knownClasses map[string]bool,
+	usedImports typemap.ImportSet,
+) error {
 	genSuffix := ""
 	if isGeneric {
 		genSuffix = "[cgo.Object]"
 	}
 
-	chain := buildValueChain(name, genSuffix, framework.Framework, framework.Classes, m, usedImports)
+	chain := buildValueChain(
+		name,
+		genSuffix,
+		framework.Framework,
+		framework.Classes,
+		m,
+		usedImports,
+	)
 	if err := executeTemplate(w, "class_constructors", classConstructorsModel{
 		Name:       name,
 		GenSuffix:  genSuffix,
@@ -500,7 +632,17 @@ func writeConstructors(w io.Writer, name string, cls macosplatformmetadata.Class
 	{
 		ctorCtx := m.BaseContext(framework.Framework, knownClasses)
 		ctorCtx.ClassName = name
-		if err := writeDesignatedInitConstructors(w, name, cls, isGeneric, framework, ctorCtx, m, allClasses, usedImports); err != nil {
+		if err := writeDesignatedInitConstructors(
+			w,
+			name,
+			cls,
+			isGeneric,
+			framework,
+			ctorCtx,
+			m,
+			allClasses,
+			usedImports,
+		); err != nil {
 			return err
 		}
 	}
@@ -508,7 +650,14 @@ func writeConstructors(w io.Writer, name string, cls macosplatformmetadata.Class
 	// For generic classes: also emit a typed value constructor used by generic subclasses
 	// in other packages that need NSMutableArray[T] (not NSMutableArray[cgo.Object]).
 	if isGeneric {
-		tChain := buildValueChain(name, "[T]", framework.Framework, framework.Classes, m, usedImports)
+		tChain := buildValueChain(
+			name,
+			"[T]",
+			framework.Framework,
+			framework.Classes,
+			m,
+			usedImports,
+		)
 		if err := executeTemplate(w, "typed_with_ptr", typedWithPtrModel{
 			Name:        name,
 			TValueChain: strings.TrimPrefix(tChain, "&"),
@@ -523,7 +672,17 @@ func writeConstructors(w io.Writer, name string, cls macosplatformmetadata.Class
 // for every designated initializer that has at least one argument. Each factory allocates
 // a new ObjC object via a per-class alloc bridge function, wraps it, then calls the
 // existing Go instance method for the designated init (which handles CGo + exception).
-func writeDesignatedInitConstructors(w io.Writer, name string, cls macosplatformmetadata.Class, isGeneric bool, framework *macosplatformmetadata.FrameworkMeta, ctx typemap.Context, m *typemap.Mapper, allClasses map[string]macosplatformmetadata.Class, imports typemap.ImportSet) error {
+func writeDesignatedInitConstructors(
+	w io.Writer,
+	name string,
+	cls macosplatformmetadata.Class,
+	isGeneric bool,
+	framework *macosplatformmetadata.FrameworkMeta,
+	ctx typemap.Context,
+	m *typemap.Mapper,
+	allClasses map[string]macosplatformmetadata.Class,
+	imports typemap.ImportSet,
+) error {
 	if isGeneric {
 		return nil // skip: designated init constructors for generic classes need T constraints
 	}
@@ -634,7 +793,11 @@ func classConformsToCoding(cls macosplatformmetadata.Class) bool {
 
 // writeCodingMethods emits SerializeToArchive and NewXFromArchive convenience
 // methods for classes that conform to NSSecureCoding or NSCoding.
-func writeCodingMethods(w io.Writer, name, framework string, cls macosplatformmetadata.Class) error {
+func writeCodingMethods(
+	w io.Writer,
+	name, framework string,
+	cls macosplatformmetadata.Class,
+) error {
 	if !classConformsToCoding(cls) {
 		return nil
 	}
@@ -688,7 +851,10 @@ func writeForeignAncestorExtensions(
 	// (the nearest ancestor wins, matching ObjC dispatch semantics).
 	seenSelectors := make(map[string]bool)
 	for ancestor := directParent; ancestor != ""; ancestor = objcclasshierarchy.ObjCClassSuperclassIndex[ancestor] {
-		if strings.EqualFold(objcclasshierarchy.ObjCClassFrameworkIndex[ancestor], framework.Framework) {
+		if strings.EqualFold(
+			objcclasshierarchy.ObjCClassFrameworkIndex[ancestor],
+			framework.Framework,
+		) {
 			break // reached a same-framework ancestor — it handles its own extensions
 		}
 		extensionMethods, ok := framework.ForeignExtensions[ancestor]
@@ -732,7 +898,19 @@ func writeForeignAncestorExtensions(
 				cFuncName:   bridgeNames[mk],
 				goName:      goName,
 			}
-			if err := writeMethod(w, em, receiver, className, framework.Framework, methodCtx, m, framework.Classes, allClasses, pkgTypeNames, usedImports); err != nil {
+			if err := writeMethod(
+				w,
+				em,
+				receiver,
+				className,
+				framework.Framework,
+				methodCtx,
+				m,
+				framework.Classes,
+				allClasses,
+				pkgTypeNames,
+				usedImports,
+			); err != nil {
 				return err
 			}
 			if methodHasBlockArgs(method.Params, m) {
@@ -755,10 +933,26 @@ func writeForeignAncestorExtensions(
 //	    runtime.Track(o, o.Ptr)
 //	    return o
 //	}
-func writeGenericHelper(w io.Writer, name string, cls macosplatformmetadata.Class, si superInfo, framework *macosplatformmetadata.FrameworkMeta, allClasses map[string]macosplatformmetadata.Class, m *typemap.Mapper, usedImports typemap.ImportSet) error {
+func writeGenericHelper(
+	w io.Writer,
+	name string,
+	cls macosplatformmetadata.Class,
+	si superInfo,
+	framework *macosplatformmetadata.FrameworkMeta,
+	allClasses map[string]macosplatformmetadata.Class,
+	m *typemap.Mapper,
+	usedImports typemap.ImportSet,
+) error {
 	return executeTemplate(w, "generic_helper", genericHelperModel{
-		Name:   name,
-		TChain: buildValueChain(name, "[T]", framework.Framework, framework.Classes, m, usedImports),
+		Name: name,
+		TChain: buildValueChain(
+			name,
+			"[T]",
+			framework.Framework,
+			framework.Classes,
+			m,
+			usedImports,
+		),
 	})
 }
 
@@ -774,11 +968,21 @@ func writeGenericHelper(w io.Writer, name string, cls macosplatformmetadata.Clas
 // fmClasses due to SDK header sharing but are canonically owned by another framework).
 // Any cross-framework package identifiers discovered are recorded into usedImports.
 // fmClasses is the current framework's class map. m may be nil.
-func buildValueChain(className, genSuffix, currentFW string, fmClasses map[string]macosplatformmetadata.Class, m *typemap.Mapper, usedImports typemap.ImportSet) string {
+func buildValueChain(
+	className, genSuffix, currentFW string,
+	fmClasses map[string]macosplatformmetadata.Class,
+	m *typemap.Mapper,
+	usedImports typemap.ImportSet,
+) string {
 	return "&" + buildValueChainInner(className, genSuffix, currentFW, fmClasses, m, usedImports)
 }
 
-func buildValueChainInner(className, genSuffix, currentFW string, fmClasses map[string]macosplatformmetadata.Class, m *typemap.Mapper, usedImports typemap.ImportSet) string {
+func buildValueChainInner(
+	className, genSuffix, currentFW string,
+	fmClasses map[string]macosplatformmetadata.Class,
+	m *typemap.Mapper,
+	usedImports typemap.ImportSet,
+) string {
 	cls, inFW := fmClasses[className]
 	if !inFW {
 		return className + genSuffix + "{/* unknown chain */}"
@@ -812,7 +1016,14 @@ func buildValueChainInner(className, genSuffix, currentFW string, fmClasses map[
 				superGenSuffix = "[cgo.Object]" // non-generic child of generic super
 			}
 		}
-		innerChain := buildValueChainInner(cls.Super, superGenSuffix, currentFW, fmClasses, m, usedImports)
+		innerChain := buildValueChainInner(
+			cls.Super,
+			superGenSuffix,
+			currentFW,
+			fmClasses,
+			m,
+			usedImports,
+		)
 		fieldName := cls.Super // Go embedding field name = type name (no generic brackets)
 		return className + genSuffix + "{" + fieldName + ": " + innerChain + "}"
 	}
@@ -852,7 +1063,18 @@ type emittedMethod struct {
 // Only the class's OWN methods are emitted; inherited methods are promoted by Go embedding.
 // pkgTypeNames is the set of package-level type names (enums, structs, typedefs);
 // class methods whose generated function name collides with a type are silently skipped.
-func writeMethod(w io.Writer, em emittedMethod, receiver string, className, framework string, ctx typemap.Context, m *typemap.Mapper, fmClasses map[string]macosplatformmetadata.Class, allClasses map[string]macosplatformmetadata.Class, pkgTypeNames map[string]bool, imports typemap.ImportSet) error {
+func writeMethod(
+	w io.Writer,
+	em emittedMethod,
+	receiver string,
+	className, framework string,
+	ctx typemap.Context,
+	m *typemap.Mapper,
+	fmClasses map[string]macosplatformmetadata.Class,
+	allClasses map[string]macosplatformmetadata.Class,
+	pkgTypeNames map[string]bool,
+	imports typemap.ImportSet,
+) error {
 	method := em.method
 
 	methodCtx := ctx
@@ -866,7 +1088,9 @@ func writeMethod(w io.Writer, em emittedMethod, receiver string, className, fram
 	goRet := buildGoReturn(method, methodCtx, m, className, imports)
 
 	var preamble strings.Builder
-	preamble.WriteString(renderCommentBlock(method.Doc, method.SDKFile, method.SDKLine, method.Availability, ""))
+	preamble.WriteString(
+		renderCommentBlock(method.Doc, method.SDKFile, method.SDKLine, method.Availability, ""),
+	)
 	if method.IsDesignatedInit {
 		preamble.WriteString("// Designated initializer.\n")
 	}
@@ -889,7 +1113,11 @@ func writeMethod(w io.Writer, em emittedMethod, receiver string, className, fram
 	resolved := buildParamNames(method.Params)
 	for i, arg := range method.Params {
 		if arg.Direction == "out" {
-			fmt.Fprintf(&preamble, "// %s is an out-parameter: pass a pointer the callee will populate.\n", resolved[i])
+			fmt.Fprintf(
+				&preamble,
+				"// %s is an out-parameter: pass a pointer the callee will populate.\n",
+				resolved[i],
+			)
 		}
 	}
 
@@ -902,12 +1130,25 @@ func writeMethod(w io.Writer, em emittedMethod, receiver string, className, fram
 		IsClassMethod:   method.IsClassMethod,
 		GoArgs:          strings.Join(goArgs, ", "),
 		RetStr:          retStr,
-		Body:            buildMethodBodyModel(method, cFunc, method.IsClassMethod, methodCtx, m, fmClasses, imports),
+		Body: buildMethodBodyModel(
+			method,
+			cFunc,
+			method.IsClassMethod,
+			methodCtx,
+			m,
+			fmClasses,
+			imports,
+		),
 	}
 	if method.IsClassMethod {
 		funcName := className + goName
 		model.FuncName = funcName
-		model.BridgeID = naming.MethodBridgeID(methodCtx.Framework, className, method.Selector, method.IsClassMethod)
+		model.BridgeID = naming.MethodBridgeID(
+			methodCtx.Framework,
+			className,
+			method.Selector,
+			method.IsClassMethod,
+		)
 		// A class method whose Go name collides with a package-level type is
 		// dropped (the type and func cannot share a name); the preamble comment is
 		// still emitted, matching the original.
@@ -915,7 +1156,12 @@ func writeMethod(w io.Writer, em emittedMethod, receiver string, className, fram
 	} else {
 		model.Receiver = receiver
 		model.GoName = goName
-		model.BridgeID = naming.MethodBridgeID(methodCtx.Framework, methodCtx.ClassName, method.Selector, method.IsClassMethod)
+		model.BridgeID = naming.MethodBridgeID(
+			methodCtx.Framework,
+			methodCtx.ClassName,
+			method.Selector,
+			method.IsClassMethod,
+		)
 	}
 	if err := executeTemplate(w, "class_method", model); err != nil {
 		return err
@@ -924,11 +1170,28 @@ func writeMethod(w io.Writer, em emittedMethod, receiver string, className, fram
 	// Emit NSString Go-string convenience overload when enabled.
 	if m.IsNSStringOverloads && nsStringArgIndices(method.Params) != nil {
 		if method.IsClassMethod {
-			if err := writeNSStringClassOverload(w, goName, className, method, methodCtx, m, pkgTypeNames, imports); err != nil {
+			if err := writeNSStringClassOverload(
+				w,
+				goName,
+				className,
+				method,
+				methodCtx,
+				m,
+				pkgTypeNames,
+				imports,
+			); err != nil {
 				return err
 			}
 		} else {
-			if err := writeNSStringInstanceOverload(w, goName, receiver, method, methodCtx, m, imports); err != nil {
+			if err := writeNSStringInstanceOverload(
+				w,
+				goName,
+				receiver,
+				method,
+				methodCtx,
+				m,
+				imports,
+			); err != nil {
 				return err
 			}
 		}
@@ -937,20 +1200,69 @@ func writeMethod(w io.Writer, em emittedMethod, receiver string, className, fram
 	return nil
 }
 
-// buildMethodBodyModel resolves the CGo method body: keep-alive defers, argument
-// preambles, the C call, exception/NSError handling, and the return conversion.
-func buildMethodBodyModel(method macosplatformmetadata.Method, cFunc string, isClassMethod bool, ctx typemap.Context, m *typemap.Mapper, fmClasses map[string]macosplatformmetadata.Class, imports typemap.ImportSet) methodBodyModel {
+// buildMethodBodyModel resolves the CGo body of a class instance/class method.
+func buildMethodBodyModel(
+	method macosplatformmetadata.Method,
+	cFunc string,
+	isClassMethod bool,
+	ctx typemap.Context,
+	m *typemap.Mapper,
+	fmClasses map[string]macosplatformmetadata.Class,
+	imports typemap.ImportSet,
+) methodBodyModel {
 	var preambles []string
 	var keepAlives []string
-	cgoCallArgs := buildCGOCallArgs(method.Params, isClassMethod, method.IsNSError, true, ctx, m, &preambles, &keepAlives, imports)
+	cgoCallArgs := buildCGOCallArgs(
+		method.Params,
+		isClassMethod,
+		method.IsNSError,
+		true,
+		ctx,
+		m,
+		&preambles,
+		&keepAlives,
+		imports,
+	)
+	return resolveMethodBodyModel(
+		method,
+		cFunc,
+		cgoCallArgs,
+		preambles,
+		keepAlives,
+		!isClassMethod,
+		"o",
+		isClassMethod,
+		ctx,
+		m,
+		fmClasses,
+		imports,
+	)
+}
 
+// resolveMethodBodyModel builds the method-body model from an already-marshaled
+// CGo call: keep-alive defers, argument preambles, the C call, exception/NSError
+// handling, and the return conversion. Shared by class methods (receiver "o")
+// and id<Protocol> proxy methods (receiver "p").
+func resolveMethodBodyModel(
+	method macosplatformmetadata.Method,
+	cFunc, cgoCallArgs string,
+	preambles, keepAlives []string,
+	hasReceiver bool,
+	receiverVar string,
+	isClassMethod bool,
+	ctx typemap.Context,
+	m *typemap.Mapper,
+	fmClasses map[string]macosplatformmetadata.Class,
+	imports typemap.ImportSet,
+) methodBodyModel {
 	retType := primaryReturnType(method, ctx, m, imports)
 	isNullableStr := retType == "string" && method.Return.IsNullable
 	isValueStruct := isValueStructReturn(retType, m)
 	rawCall := fmt.Sprintf("C.%s(%s)", cFunc, cgoCallArgs)
 
 	model := methodBodyModel{
-		HasReceiver: !isClassMethod,
+		HasReceiver: hasReceiver,
+		ReceiverVar: receiverVar,
 		KeepAlives:  keepAlives,
 		Preambles:   preambles,
 		HasNSError:  method.IsNSError,
@@ -986,22 +1298,13 @@ func extractStructType(retType string, isClassMethod bool) string {
 	return s
 }
 
-// writeObjectReturn emits an object construction return using cgo.WrapTyped.
-// All generated constructors (New*) handle a nil ptr by returning nil, so the
-// nil-check is delegated to WrapTyped rather than emitted inline. Still used by
-// the protocol-proxy method emitter (proxies.go).
-func writeObjectReturn(w io.Writer, structType string, fmClasses map[string]macosplatformmetadata.Class, m *typemap.Mapper) {
-	fmt.Fprintf(w, "\treturn cgo.WrapTyped(_ptr, %s)\n", constructorRef(structType, fmClasses))
-}
-
-// writeObjectReturnWithError emits the object + error return using cgo.WrapTyped.
-func writeObjectReturnWithError(w io.Writer, structType string, fmClasses map[string]macosplatformmetadata.Class, m *typemap.Mapper) {
-	fmt.Fprintf(w, "\treturn cgo.WrapTyped(_ptr, %s), nil\n", constructorRef(structType, fmClasses))
-}
-
 // objectConstructExpr returns the Go expression that wraps _ptr in a typed Go object.
 // structType has no leading "*" (e.g. "NSString", "NSArray[T]", "foundation.NSString").
-func objectConstructExpr(structType, ptrVar string, fmClasses map[string]macosplatformmetadata.Class, m *typemap.Mapper) string {
+func objectConstructExpr(
+	structType, ptrVar string,
+	fmClasses map[string]macosplatformmetadata.Class,
+	m *typemap.Mapper,
+) string {
 	// Cross-framework: "foundation.NSString" → foundation.NewNSString(_ptr)
 	if isCrossFrameworkType(structType) {
 		return crossFrameworkCtor(structType, ptrVar)
@@ -1100,7 +1403,10 @@ func blockNeedsWrapper(blockObjCType string, ctx typemap.Context, m *typemap.Map
 		if len(typemap.IDProtocols(a)) > 0 {
 			return true
 		}
-		if cls := typemap.ClassName(a); cls != "" && (ctx.ClassNameIndex[cls] || m.StructIndex[cls] != "") {
+		if cls := typemap.ClassName(
+			a,
+		); cls != "" &&
+			(ctx.ClassNameIndex[cls] || m.StructIndex[cls] != "") {
 			return true
 		}
 		// Framework-specific opaque CF types (CGColorRef, CMSampleBufferRef, etc.)
@@ -1112,7 +1418,10 @@ func blockNeedsWrapper(blockObjCType string, ctx typemap.Context, m *typemap.Map
 		// (e.g. ar_anchor_t → NSObject<OS_ar_anchor> * → *foundation.NSObject).
 		if !strings.ContainsAny(n, " *<>^()") {
 			if target, ok := m.TypedefIndex[n]; ok {
-				if targetCls := typemap.ClassName(strings.TrimSpace(typemap.Normalise(target))); targetCls != "" && ctx.ClassNameIndex[targetCls] {
+				if targetCls := typemap.ClassName(
+					strings.TrimSpace(typemap.Normalise(target)),
+				); targetCls != "" &&
+					ctx.ClassNameIndex[targetCls] {
 					return true
 				}
 			}
@@ -1211,7 +1520,12 @@ func blockArgCtor(goType, pName string) string {
 // are wrapped via their Go constructors; BOOL * args become *bool in-out parameters;
 // other args pass through unchanged.
 // When the block has a non-void return type, the wrapper emits a return statement.
-func buildBlockWrapper(blockObjCType, userArgName string, ctx typemap.Context, m *typemap.Mapper, imports typemap.ImportSet) string {
+func buildBlockWrapper(
+	blockObjCType, userArgName string,
+	ctx typemap.Context,
+	m *typemap.Mapper,
+	imports typemap.ImportSet,
+) string {
 	retType, args, ok := typemap.ParseBlock(blockObjCType)
 	if !ok {
 		return userArgName
@@ -1241,8 +1555,16 @@ func buildBlockWrapper(blockObjCType, userArgName string, ctx typemap.Context, m
 			sName := fmt.Sprintf("_s%d", idx-1)
 			innerParams = append(innerParams, pName+" unsafe.Pointer")
 			calls = append(calls, "&"+sName)
-			preambles = append(preambles,
-				fmt.Sprintf("var %s bool; if %s != nil { %s = *(*bool)(%s) }", sName, pName, sName, pName))
+			preambles = append(
+				preambles,
+				fmt.Sprintf(
+					"var %s bool; if %s != nil { %s = *(*bool)(%s) }",
+					sName,
+					pName,
+					sName,
+					pName,
+				),
+			)
 			postambles = append(postambles,
 				fmt.Sprintf("if %s != nil { *(*bool)(%s) = %s }", pName, pName, sName))
 			continue
@@ -1294,7 +1616,10 @@ func buildBlockWrapper(blockObjCType, userArgName string, ctx typemap.Context, m
 					// Lowercase typedef that resolves to a known ObjC class pointer
 					// (e.g. ar_anchor_t → NSObject<OS_ar_anchor> * → *foundation.NSObject).
 					if target, ok := m.TypedefIndex[n]; ok {
-						if targetCls := typemap.ClassName(strings.TrimSpace(typemap.Normalise(target))); targetCls != "" && argCtx.ClassNameIndex[targetCls] {
+						if targetCls := typemap.ClassName(
+							strings.TrimSpace(typemap.Normalise(target)),
+						); targetCls != "" &&
+							argCtx.ClassNameIndex[targetCls] {
 							goType = m.GoType(a, argCtx, imports)
 						}
 					}
@@ -1311,7 +1636,8 @@ func buildBlockWrapper(blockObjCType, userArgName string, ctx typemap.Context, m
 	// closure and converts the result back to unsafe.Pointer for the MakeBlock_* trampoline.
 	retIsID := typemap.IsID(strings.TrimSpace(typemap.Normalise(retType)))
 	retIsIDProtocol := len(typemap.IDProtocols(strings.TrimSpace(typemap.Normalise(retType)))) > 0
-	if retIsID || retIsIDProtocol || (typemap.ClassName(retType) != "" && ctx.ClassNameIndex[typemap.ClassName(retType)]) {
+	if retIsID || retIsIDProtocol ||
+		(typemap.ClassName(retType) != "" && ctx.ClassNameIndex[typemap.ClassName(retType)]) {
 		argCtx := ctx
 		argCtx.IsReturn = false
 		var typed string
@@ -1345,8 +1671,11 @@ func buildBlockWrapper(blockObjCType, userArgName string, ctx typemap.Context, m
 					sb.WriteString(" if _r == nil { return nil }; return _r.Ptr() }")
 					return sb.String()
 				}
-				return fmt.Sprintf("func(%s) unsafe.Pointer { _r := %s; if _r == nil { return nil }; return _r.Ptr() }",
-					strings.Join(innerParams, ", "), userCall)
+				return fmt.Sprintf(
+					"func(%s) unsafe.Pointer { _r := %s; if _r == nil { return nil }; return _r.Ptr() }",
+					strings.Join(innerParams, ", "),
+					userCall,
+				)
 			}
 			if hasBoolPtr {
 				var sb strings.Builder
@@ -1361,8 +1690,11 @@ func buildBlockWrapper(blockObjCType, userArgName string, ctx typemap.Context, m
 				sb.WriteString(" if _r == nil { return nil }; return unsafe.Pointer(_r.Ptr()) }")
 				return sb.String()
 			}
-			return fmt.Sprintf("func(%s) unsafe.Pointer { _r := %s; if _r == nil { return nil }; return unsafe.Pointer(_r.Ptr()) }",
-				strings.Join(innerParams, ", "), userCall)
+			return fmt.Sprintf(
+				"func(%s) unsafe.Pointer { _r := %s; if _r == nil { return nil }; return unsafe.Pointer(_r.Ptr()) }",
+				strings.Join(innerParams, ", "),
+				userCall,
+			)
 		}
 	}
 
@@ -1395,9 +1727,20 @@ func buildBlockWrapper(blockObjCType, userArgName string, ctx typemap.Context, m
 	}
 
 	if innerRet != "" {
-		return fmt.Sprintf("func(%s) %s { return %s(%s) }", strings.Join(innerParams, ", "), innerRet, userArgName, strings.Join(calls, ", "))
+		return fmt.Sprintf(
+			"func(%s) %s { return %s(%s) }",
+			strings.Join(innerParams, ", "),
+			innerRet,
+			userArgName,
+			strings.Join(calls, ", "),
+		)
 	}
-	return fmt.Sprintf("func(%s) { %s(%s) }", strings.Join(innerParams, ", "), userArgName, strings.Join(calls, ", "))
+	return fmt.Sprintf(
+		"func(%s) { %s(%s) }",
+		strings.Join(innerParams, ", "),
+		userArgName,
+		strings.Join(calls, ", "),
+	)
 }
 
 // methodHasBlockArgs returns true if any argument is a block type (inline or
@@ -1407,7 +1750,8 @@ func methodHasBlockArgs(args []macosplatformmetadata.Param, m *typemap.Mapper) b
 		if arg.IsBlock {
 			return true
 		}
-		if target, ok := m.TypedefIndex[typemap.Normalise(arg.ObjCType)]; ok && typemap.IsBlock(target) {
+		if target, ok := m.TypedefIndex[typemap.Normalise(arg.ObjCType)]; ok &&
+			typemap.IsBlock(target) {
 			return true
 		}
 	}
@@ -1419,7 +1763,14 @@ func methodHasBlockArgs(args []macosplatformmetadata.Param, m *typemap.Mapper) b
 // When withException is true, &_exc is appended as the final argument
 // to match the void **outException out-parameter on every generated bridge function.
 // Block args are wrapped in blocks.MakeBlock_* trampolines and freed via defer.
-func buildCGOCallArgs(args []macosplatformmetadata.Param, isClassMethod, hasNSError, withException bool, ctx typemap.Context, m *typemap.Mapper, preambles, keepAlives *[]string, imports typemap.ImportSet) string {
+func buildCGOCallArgs(
+	args []macosplatformmetadata.Param,
+	isClassMethod, hasNSError, withException bool,
+	ctx typemap.Context,
+	m *typemap.Mapper,
+	preambles, keepAlives *[]string,
+	imports typemap.ImportSet,
+) string {
 	var parts []string
 
 	if !isClassMethod {
@@ -1477,7 +1828,11 @@ func buildCGOCallArgs(args []macosplatformmetadata.Param, isClassMethod, hasNSEr
 // ObjC-object arguments whose wrappers must survive the CGo call are appended
 // to keepAlives so the caller can emit defer cgo.KeepAlive for each ObjC-object
 // instead of emitting individual defer cgo.KeepAlive statements.
-func goCGoArgExpr(goType, argName string, m *typemap.Mapper, preambles, keepAlives *[]string) string {
+func goCGoArgExpr(
+	goType, argName string,
+	m *typemap.Mapper,
+	preambles, keepAlives *[]string,
+) string {
 	switch goType {
 	case "unsafe.Pointer":
 		return argName
@@ -1668,7 +2023,12 @@ func cgoReturnConvert(callExpr, goType string, m *typemap.Mapper) string {
 }
 
 // primaryReturnType resolves the non-error return type for a method.
-func primaryReturnType(method macosplatformmetadata.Method, ctx typemap.Context, m *typemap.Mapper, imports typemap.ImportSet) string {
+func primaryReturnType(
+	method macosplatformmetadata.Method,
+	ctx typemap.Context,
+	m *typemap.Mapper,
+	imports typemap.ImportSet,
+) string {
 	ret := method.Return
 	if ret.IsGeneric && len(ctx.GenericParams) > 0 {
 		// Generic element return (e.g. firstObject → ObjectType *).
@@ -1759,7 +2119,14 @@ func nsStringArgIndices(args []macosplatformmetadata.Param) []int {
 
 // nsStringOverloadArgs returns Go argument strings for the overload:
 // NSString * args become plain string, all others keep their resolved type.
-func nsStringOverloadArgs(args []macosplatformmetadata.Param, hasNSError bool, nsIdxs []int, ctx typemap.Context, m *typemap.Mapper, imports typemap.ImportSet) []string {
+func nsStringOverloadArgs(
+	args []macosplatformmetadata.Param,
+	hasNSError bool,
+	nsIdxs []int,
+	ctx typemap.Context,
+	m *typemap.Mapper,
+	imports typemap.ImportSet,
+) []string {
 	// Build a set for O(1) lookup.
 	idxSet := make(map[int]bool, len(nsIdxs))
 	for _, i := range nsIdxs {
@@ -1784,7 +2151,13 @@ func nsStringOverloadArgs(args []macosplatformmetadata.Param, hasNSError bool, n
 // nsStringConvertArg returns the call-site expression for a single arg in the
 // primary method call from a Go-string overload.
 // NSString args are wrapped via runtime.GoStringToNSString + the NSString constructor.
-func nsStringConvertArg(argName string, isNS bool, ctx typemap.Context, m *typemap.Mapper, imports typemap.ImportSet) string {
+func nsStringConvertArg(
+	argName string,
+	isNS bool,
+	ctx typemap.Context,
+	m *typemap.Mapper,
+	imports typemap.ImportSet,
+) string {
 	if !isNS {
 		return argName
 	}
@@ -1803,7 +2176,14 @@ func nsStringConvertArg(argName string, isNS bool, ctx typemap.Context, m *typem
 
 // writeNSStringInstanceOverload emits a "...Go" suffix instance-method overload
 // where all NSString * args are replaced with plain Go string args.
-func writeNSStringInstanceOverload(w io.Writer, goName, receiver string, method macosplatformmetadata.Method, ctx typemap.Context, m *typemap.Mapper, imports typemap.ImportSet) error {
+func writeNSStringInstanceOverload(
+	w io.Writer,
+	goName, receiver string,
+	method macosplatformmetadata.Method,
+	ctx typemap.Context,
+	m *typemap.Mapper,
+	imports typemap.ImportSet,
+) error {
 	nsIdxs := nsStringArgIndices(method.Params)
 	if len(nsIdxs) == 0 {
 		return nil
@@ -1826,14 +2206,28 @@ func writeNSStringInstanceOverload(w io.Writer, goName, receiver string, method 
 		callArgs = append(callArgs, nsStringConvertArg(resolved[i], idxSet[i], ctx, m, imports))
 	}
 	return executeTemplate(w, "nsstring_overload", nsStringOverloadModel{
-		Signature: fmt.Sprintf("func (o *%s) %sGo(%s)%s", receiver, goName, strings.Join(overloadArgs, ", "), retStr),
+		Signature: fmt.Sprintf(
+			"func (o *%s) %sGo(%s)%s",
+			receiver,
+			goName,
+			strings.Join(overloadArgs, ", "),
+			retStr,
+		),
 		HasReturn: goRet != "",
 		CallExpr:  fmt.Sprintf("o.%s(%s)", goName, strings.Join(callArgs, ", ")),
 	})
 }
 
 // writeNSStringClassOverload emits a "...Go" suffix class-method overload.
-func writeNSStringClassOverload(w io.Writer, goName, className string, method macosplatformmetadata.Method, ctx typemap.Context, m *typemap.Mapper, pkgTypeNames map[string]bool, imports typemap.ImportSet) error {
+func writeNSStringClassOverload(
+	w io.Writer,
+	goName, className string,
+	method macosplatformmetadata.Method,
+	ctx typemap.Context,
+	m *typemap.Mapper,
+	pkgTypeNames map[string]bool,
+	imports typemap.ImportSet,
+) error {
 	nsIdxs := nsStringArgIndices(method.Params)
 	if len(nsIdxs) == 0 {
 		return nil
@@ -1860,7 +2254,12 @@ func writeNSStringClassOverload(w io.Writer, goName, className string, method ma
 		callArgs = append(callArgs, nsStringConvertArg(resolved[i], idxSet[i], ctx, m, imports))
 	}
 	return executeTemplate(w, "nsstring_overload", nsStringOverloadModel{
-		Signature: fmt.Sprintf("func %s(%s)%s", overloadName, strings.Join(overloadArgs, ", "), retStr),
+		Signature: fmt.Sprintf(
+			"func %s(%s)%s",
+			overloadName,
+			strings.Join(overloadArgs, ", "),
+			retStr,
+		),
 		HasReturn: goRet != "",
 		CallExpr:  fmt.Sprintf("%s%s(%s)", className, goName, strings.Join(callArgs, ", ")),
 	})
