@@ -1,6 +1,6 @@
 //go:build darwin
 
-package idiomatic
+package idiofw
 
 import (
 	"bytes"
@@ -10,9 +10,9 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/idiomatic/render"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/idiomatic/view"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/view"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -156,7 +156,7 @@ func emitGenericFunctionWrappers(
 	imports := map[string]string{"ebipurego": ebipuregoImportPath}
 
 	var funcs []view.Func
-	for _, fn := range emit.EmittableFunctions(framework, nil) {
+	for _, fn := range rawfw.EmittableFunctions(framework, nil) {
 		// Classify every parameter and the return. If any cannot yet be expressed
 		// idiomatically (a function pointer, a varargs, an out-parameter), the
 		// whole function is left out and a diagnostic is recorded. Type imports are
@@ -315,7 +315,7 @@ func emitGenericFunctionWrappers(
 	}
 
 	fname := pkgName + "_cfunctions_generated.go"
-	return emit.WriteGoFile(
+	return rawfw.WriteGoFile(
 		filepath.Join(outDir, fname),
 		assembleFile(pkgName, imports, body),
 	)
@@ -387,7 +387,7 @@ func emitClassMethodFunctions(
 
 		seenSel := map[string]bool{}
 		for _, method := range class.Methods {
-			if !method.IsClassMethod || !emit.MethodWillBeEmitted(method) {
+			if !method.IsClassMethod || !rawfw.MethodWillBeEmitted(method) {
 				continue
 			}
 			if seenSel[method.Selector] {
@@ -458,7 +458,7 @@ func emitClassMethodFunctions(
 
 	fname := pkgName + "_classmethods_generated.go"
 	file := assembleFile(pkgName, imports, body.Bytes())
-	return emit.WriteGoFile(filepath.Join(outDir, fname), file)
+	return rawfw.WriteGoFile(filepath.Join(outDir, fname), file)
 }
 
 // classFuncUsesObjref reports whether a class-method wrapper's body references
@@ -481,7 +481,7 @@ func classFuncUsesObjref(entry methodModel) bool {
 
 // classRawMethodNames computes, per class-method selector, the exact Go
 // package-level function name the raw emitter produced — the className-prefixed
-// name from emit.ClassMethodGoNameFromMeta plus the numeric suffix the raw
+// name from rawfw.ClassMethodGoNameFromMeta plus the numeric suffix the raw
 // emitter appends to disambiguate colliding names. Mirrors instanceRawMethodNames
 // for the class-method namespace, which the raw emitter keeps separate from
 // instance methods (the latter are unprefixed), so a class-only pool reproduces
@@ -493,23 +493,23 @@ func classRawMethodNames(
 ) map[string]string {
 	count := map[string]int{}
 	for _, method := range class.Methods {
-		if !method.IsClassMethod || !emit.MethodWillBeEmitted(method) {
+		if !method.IsClassMethod || !rawfw.MethodWillBeEmitted(method) {
 			continue
 		}
-		count[emit.ClassMethodGoNameFromMeta(className, method.Selector, framework)]++
+		count[rawfw.ClassMethodGoNameFromMeta(className, method.Selector, framework)]++
 	}
 	seen := map[string]int{}
 	selSeen := map[string]bool{}
 	out := make(map[string]string, len(count))
 	for _, method := range class.Methods {
-		if !method.IsClassMethod || !emit.MethodWillBeEmitted(method) {
+		if !method.IsClassMethod || !rawfw.MethodWillBeEmitted(method) {
 			continue
 		}
 		if selSeen[method.Selector] {
 			continue
 		}
 		selSeen[method.Selector] = true
-		name := emit.ClassMethodGoNameFromMeta(className, method.Selector, framework)
+		name := rawfw.ClassMethodGoNameFromMeta(className, method.Selector, framework)
 		seen[name]++
 		if count[name] > 1 && seen[name] > 1 {
 			name = fmt.Sprintf("%s%d", name, seen[name])
@@ -609,7 +609,7 @@ func emitCFFunctionWrappers(
 	}
 	var funcs []view.Func
 
-	for _, fn := range emit.EmittableFunctions(framework, nil) {
+	for _, fn := range rawfw.EmittableFunctions(framework, nil) {
 		if !isOSStatusType(fn.Return.ObjCType) {
 			continue
 		}
@@ -737,7 +737,7 @@ func emitCFFunctionWrappers(
 	}
 
 	fname := pkgName + "_cffunctions_generated.go"
-	return emit.WriteGoFile(
+	return rawfw.WriteGoFile(
 		filepath.Join(outDir, fname),
 		assembleFile(pkgName, imports, body),
 	)

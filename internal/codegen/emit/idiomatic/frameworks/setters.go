@@ -1,8 +1,9 @@
 //go:build darwin
 
-package idiomatic
+package idiofw
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"io"
 	"maps"
 	"strings"
@@ -294,7 +295,7 @@ func writeWithMethod(w io.Writer, typeName string, setter withSetterModel) {
 		view.ParamRawExpr = setter.param.rawExpression
 	}
 
-	renderTemplate(w, "with_setter", view)
+	render.Must(w, "with_setter", view)
 }
 
 // withSetterView is the template data for with_setter.tmpl.

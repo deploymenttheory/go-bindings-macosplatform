@@ -1,4 +1,4 @@
-package raw
+package rawlib
 
 import (
 	"bytes"
@@ -77,8 +77,8 @@ func TestIsVAListFalse(t *testing.T) {
 
 func TestHasVAListArgTrue(t *testing.T) {
 	fn := macosplatformmetadata.Function{
-		Name:  "logFormat",
-		Params:  []macosplatformmetadata.Param{{Name: "args", ObjCType: "va_list"}},
+		Name:   "logFormat",
+		Params: []macosplatformmetadata.Param{{Name: "args", ObjCType: "va_list"}},
 	}
 	if !hasVAListArg(fn) {
 		t.Error("function with va_list arg: hasVAListArg should be true")
@@ -87,7 +87,7 @@ func TestHasVAListArgTrue(t *testing.T) {
 
 func TestHasVAListArgFalse(t *testing.T) {
 	fn := macosplatformmetadata.Function{
-		Name: "getCount",
+		Name:   "getCount",
 		Params: []macosplatformmetadata.Param{{Name: "n", ObjCType: "NSUInteger"}},
 	}
 	if hasVAListArg(fn) {
@@ -239,7 +239,7 @@ func TestBuildObjCCallSingleKeyword(t *testing.T) {
 	ctx := bridgeCtx("Foundation")
 	method := macosplatformmetadata.Method{
 		Selector: "objectAtIndex:",
-		Params:     []macosplatformmetadata.Param{{Name: "index", ObjCType: "NSUInteger"}},
+		Params:   []macosplatformmetadata.Param{{Name: "index", ObjCType: "NSUInteger"}},
 	}
 	call := buildObjCCall("self", method, ctx, m)
 	if !strings.Contains(call, "objectAtIndex:") {
@@ -254,8 +254,8 @@ func TestBuildObjCCallNSErrorInjected(t *testing.T) {
 	m := bridgeTestMapper()
 	ctx := bridgeCtx("Foundation")
 	method := macosplatformmetadata.Method{
-		Selector:   "performWithError:",
-		Params:       []macosplatformmetadata.Param{},
+		Selector:  "performWithError:",
+		Params:    []macosplatformmetadata.Param{},
 		IsNSError: true,
 	}
 	call := buildObjCCall("self", method, ctx, m)
@@ -649,7 +649,6 @@ func TestFreeFuncParamListSkipsVAList(t *testing.T) {
 	}
 }
 
-
 // --------------------------------------------------------------------------
 // writeMethodImpl — additional paths via BridgeImpl
 // --------------------------------------------------------------------------
@@ -662,9 +661,9 @@ func TestBridgeImplNSErrorVoidMethod(t *testing.T) {
 			"NSObject": {
 				Methods: []macosplatformmetadata.Method{
 					{
-						Selector:   "performWithError:",
+						Selector:  "performWithError:",
 						IsNSError: true,
-						Return:     macosplatformmetadata.ReturnType{ObjCType: "void"},
+						Return:    macosplatformmetadata.ReturnType{ObjCType: "void"},
 					},
 				},
 			},
@@ -710,9 +709,9 @@ func TestBridgeImplPrimitiveReturnWithNSError(t *testing.T) {
 			"NSObject": {
 				Methods: []macosplatformmetadata.Method{
 					{
-						Selector:   "countWithError:",
+						Selector:  "countWithError:",
 						IsNSError: true,
-						Return:     macosplatformmetadata.ReturnType{ObjCType: "NSUInteger"},
+						Return:    macosplatformmetadata.ReturnType{ObjCType: "NSUInteger"},
 					},
 				},
 			},
@@ -747,11 +746,11 @@ func TestBridgeHeaderAllocHelper(t *testing.T) {
 			"NSFoo": {
 				Methods: []macosplatformmetadata.Method{
 					{
-						Selector:          "initWithName:",
-						IsInit:            true,
-						IsDesignatedInit:  true,
-						Params:              []macosplatformmetadata.Param{{Name: "name", ObjCType: "NSString *"}},
-						Return:            macosplatformmetadata.ReturnType{IsInstancetype: true},
+						Selector:         "initWithName:",
+						IsInit:           true,
+						IsDesignatedInit: true,
+						Params:           []macosplatformmetadata.Param{{Name: "name", ObjCType: "NSString *"}},
+						Return:           macosplatformmetadata.ReturnType{IsInstancetype: true},
 					},
 				},
 			},
@@ -814,15 +813,15 @@ func TestBridgeImplProtocolMethodImpl(t *testing.T) {
 
 func bridgeStructMapper() *typemap.Mapper {
 	return &typemap.Mapper{
-		GenericClasses:        map[string]bool{},
-		OwnerIndex:        map[string]string{},
-		ModulePrefix:          "github.com/example/fw",
-		BlockedImports:        map[string]map[string]bool{},
-		TypedefIndex:         map[string]string{},
-		StructIndex:          map[string]string{"MTLViewport": "Metal"},
-		ProtocolIndex:        map[string]string{},
-		ProtocolProxyIndex:  map[string]string{},
-		CFTypeIndex: map[string]string{},
+		GenericClasses:     map[string]bool{},
+		OwnerIndex:         map[string]string{},
+		ModulePrefix:       "github.com/example/fw",
+		BlockedImports:     map[string]map[string]bool{},
+		TypedefIndex:       map[string]string{},
+		StructIndex:        map[string]string{"MTLViewport": "Metal"},
+		ProtocolIndex:      map[string]string{},
+		ProtocolProxyIndex: map[string]string{},
+		CFTypeIndex:        map[string]string{},
 	}
 }
 
@@ -1061,7 +1060,7 @@ func TestBridgeImplFunctionVoidReturn(t *testing.T) {
 			{
 				Name:   "NSMakeRange",
 				Return: macosplatformmetadata.ReturnType{ObjCType: "void"},
-				Params:   []macosplatformmetadata.Param{{Name: "loc", ObjCType: "NSUInteger"}},
+				Params: []macosplatformmetadata.Param{{Name: "loc", ObjCType: "NSUInteger"}},
 			},
 		},
 		Classes:   map[string]macosplatformmetadata.Class{},
@@ -1086,7 +1085,7 @@ func TestBridgeImplFunctionScalarReturn(t *testing.T) {
 			{
 				Name:   "NSStringLength",
 				Return: macosplatformmetadata.ReturnType{ObjCType: "NSUInteger"},
-				Params:   []macosplatformmetadata.Param{{Name: "s", ObjCType: "NSString *"}},
+				Params: []macosplatformmetadata.Param{{Name: "s", ObjCType: "NSString *"}},
 			},
 		},
 		Classes:   map[string]macosplatformmetadata.Class{},
@@ -1186,9 +1185,9 @@ func TestBridgeImplProtocolMethodNSError(t *testing.T) {
 			"VZFoo": {
 				Methods: []macosplatformmetadata.Method{
 					{
-						Selector:   "performAction:error:",
+						Selector:  "performAction:error:",
 						IsNSError: true,
-						Return:     macosplatformmetadata.ReturnType{ObjCType: "void"},
+						Return:    macosplatformmetadata.ReturnType{ObjCType: "void"},
 					},
 				},
 			},
@@ -1431,7 +1430,7 @@ func TestBridgeImplFunctionWithBlockTypedef(t *testing.T) {
 			{
 				Name:   "NSExecBlock",
 				Return: macosplatformmetadata.ReturnType{ObjCType: "void"},
-				Params:   []macosplatformmetadata.Param{{Name: "block", ObjCType: "dispatch_block_t"}},
+				Params: []macosplatformmetadata.Param{{Name: "block", ObjCType: "dispatch_block_t"}},
 			},
 		},
 	}
@@ -1480,7 +1479,7 @@ func TestBridgeImplMethodWithBlockArg(t *testing.T) {
 					{
 						Selector: "doWithBlock:",
 						Return:   macosplatformmetadata.ReturnType{ObjCType: "void"},
-						Params:     []macosplatformmetadata.Param{{Name: "handler", ObjCType: "void (^)(void)", IsBlock: true}},
+						Params:   []macosplatformmetadata.Param{{Name: "handler", ObjCType: "void (^)(void)", IsBlock: true}},
 					},
 				},
 			},
@@ -1509,9 +1508,9 @@ func TestBridgeImplProtocolMethodScalarWithNSError(t *testing.T) {
 			"VZCounter": {
 				Methods: []macosplatformmetadata.Method{
 					{
-						Selector:   "countWithError:",
+						Selector:  "countWithError:",
 						IsNSError: true,
-						Return:     macosplatformmetadata.ReturnType{ObjCType: "NSUInteger"},
+						Return:    macosplatformmetadata.ReturnType{ObjCType: "NSUInteger"},
 					},
 				},
 			},
@@ -1538,9 +1537,9 @@ func TestBridgeImplProtocolMethodObjectReturnWithNSError(t *testing.T) {
 			"VZProvider": {
 				Methods: []macosplatformmetadata.Method{
 					{
-						Selector:   "currentObjectWithError:",
+						Selector:  "currentObjectWithError:",
 						IsNSError: true,
-						Return:     macosplatformmetadata.ReturnType{ObjCType: "NSObject *"},
+						Return:    macosplatformmetadata.ReturnType{ObjCType: "NSObject *"},
 					},
 				},
 			},

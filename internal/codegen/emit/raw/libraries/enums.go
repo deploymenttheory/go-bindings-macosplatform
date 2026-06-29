@@ -1,7 +1,9 @@
-package raw
+package rawlib
 
 import (
 	"fmt"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/view"
 	"io"
 	"sort"
 	"strings"
@@ -38,27 +40,27 @@ func writeEnum(w io.Writer, name string, e macosplatformmetadata.Enum) error {
 	if e.IsAnon {
 		return writeAnonEnum(w, e)
 	}
-	return executeTemplate(w, "named_enum", buildEnumModel(name, e))
+	return render.Execute(w, "named_enum", buildEnumModel(name, e))
 }
 
-// buildEnumModel populates an enumModel from raw metadata.
+// buildEnumModel populates an view.EnumModel from raw metadata.
 // All string-formatting decisions (comment rendering, name conversion, dedup)
 // live here so the template itself stays a pure structural description of the output.
-func buildEnumModel(name string, e macosplatformmetadata.Enum) enumModel {
+func buildEnumModel(name string, e macosplatformmetadata.Enum) view.EnumModel {
 	goName := naming.GoTypeName(name)
 
 	// Deduplicate members for the String() switch: skip constants whose Go name
 	// or formatted value has already appeared (ObjC allows aliased values).
 	seenNames := make(map[string]bool)
 	seenValues := make(map[string]bool)
-	var uniqueMembers []enumMemberModel
+	var uniqueMembers []view.EnumMemberModel
 
-	members := make([]enumMemberModel, 0, len(e.Members))
+	members := make([]view.EnumMemberModel, 0, len(e.Members))
 	for _, m := range e.Members {
 		constName := naming.GoTypeName(m.Name)
 		val := formatValue(m.Value)
 
-		mm := enumMemberModel{
+		mm := view.EnumMemberModel{
 			ConstName:    constName,
 			Value:        val,
 			ObjCName:     m.Name,
@@ -79,7 +81,7 @@ func buildEnumModel(name string, e macosplatformmetadata.Enum) enumModel {
 		firstConst = members[0].ConstName
 	}
 
-	return enumModel{
+	return view.EnumModel{
 		GoName:        goName,
 		GoType:        e.GoType,
 		IsBitmask:     e.IsBitmask,
@@ -97,14 +99,14 @@ func writeAnonEnum(w io.Writer, e macosplatformmetadata.Enum) error {
 	if len(e.Members) == 0 {
 		return nil
 	}
-	members := make([]enumMemberModel, len(e.Members))
+	members := make([]view.EnumMemberModel, len(e.Members))
 	for i, m := range e.Members {
-		members[i] = enumMemberModel{
+		members[i] = view.EnumMemberModel{
 			ConstName: naming.GoTypeName(m.Name),
 			Value:     formatValue(m.Value),
 		}
 	}
-	return executeTemplate(w, "anon_enum", members)
+	return render.Execute(w, "anon_enum", members)
 }
 
 // anonEnumsCoveredByNamed identifies "_anon_*" enum entries whose member names

@@ -1,13 +1,14 @@
 //go:build darwin
 
-package idiomatic
+package idiofw
 
 import (
 	"bytes"
 	"fmt"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"path/filepath"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 )
 
@@ -32,12 +33,12 @@ func frameworkDylibPath(framework *meta.FrameworkMeta) string {
 // class-level functions rely on.
 func emitRuntimeBootstrap(outDir, pkgName string, framework *meta.FrameworkMeta) error {
 	var buf bytes.Buffer
-	renderTemplate(&buf, "runtime", struct {
+	render.Must(&buf, "runtime", struct {
 		PkgName   string
 		DylibPath string
 	}{
 		PkgName:   pkgName,
 		DylibPath: frameworkDylibPath(framework),
 	})
-	return emit.WriteGoFile(filepath.Join(outDir, pkgName+"_runtime_generated.go"), buf.Bytes())
+	return rawfw.WriteGoFile(filepath.Join(outDir, pkgName+"_runtime_generated.go"), buf.Bytes())
 }

@@ -1,4 +1,4 @@
-package raw
+package rawlib
 
 import (
 	"bytes"
@@ -89,7 +89,7 @@ func TestWriteClassEmbedsSameFwSuper(t *testing.T) {
 	}
 	cls := macosplatformmetadata.Class{Super: "NSObject"}
 	all := map[string]macosplatformmetadata.Class{
-		"NSObject":    {},
+		"NSObject":     {},
 		"NSMySubclass": cls,
 	}
 	out, err := writeClassBuf("NSMySubclass", cls, framework, m, all)
@@ -278,11 +278,11 @@ func TestWriteClassBridgesFormatStringVariadic(t *testing.T) {
 	cls := macosplatformmetadata.Class{
 		Methods: []macosplatformmetadata.Method{
 			{
-				Selector:   "stringWithFormat:",
-				IsVariadic: true,
+				Selector:      "stringWithFormat:",
+				IsVariadic:    true,
 				IsClassMethod: true,
-				Params:       []macosplatformmetadata.Param{{Name: "format", ObjCType: "NSString * _Nonnull"}},
-				Return:     macosplatformmetadata.ReturnType{ObjCType: "NSString *"},
+				Params:        []macosplatformmetadata.Param{{Name: "format", ObjCType: "NSString * _Nonnull"}},
+				Return:        macosplatformmetadata.ReturnType{ObjCType: "NSString *"},
 			},
 		},
 	}
@@ -359,9 +359,9 @@ func TestWriteClassNSErrorMethodReturnsTwoValues(t *testing.T) {
 	cls := macosplatformmetadata.Class{
 		Methods: []macosplatformmetadata.Method{
 			{
-				Selector:   "performWithError:",
+				Selector:  "performWithError:",
 				IsNSError: true,
-				Return:     macosplatformmetadata.ReturnType{ObjCType: "BOOL"},
+				Return:    macosplatformmetadata.ReturnType{ObjCType: "BOOL"},
 			},
 		},
 	}
@@ -519,7 +519,7 @@ func TestNSStringOverloadDisabledByDefault(t *testing.T) {
 		Methods: []macosplatformmetadata.Method{
 			{
 				Selector: "setTitle:",
-				Params:     []macosplatformmetadata.Param{{Name: "title", ObjCType: "NSString *"}},
+				Params:   []macosplatformmetadata.Param{{Name: "title", ObjCType: "NSString *"}},
 				Return:   macosplatformmetadata.ReturnType{ObjCType: "void"},
 			},
 		},
@@ -821,11 +821,11 @@ func TestWriteClassDesignatedInitConstructor(t *testing.T) {
 	cls := macosplatformmetadata.Class{
 		Methods: []macosplatformmetadata.Method{
 			{
-				Selector:        "initWithName:",
-				IsInit:          true,
+				Selector:         "initWithName:",
+				IsInit:           true,
 				IsDesignatedInit: true,
-				Params:            []macosplatformmetadata.Param{{Name: "name", ObjCType: "NSString *"}},
-				Return:          macosplatformmetadata.ReturnType{IsInstancetype: true},
+				Params:           []macosplatformmetadata.Param{{Name: "name", ObjCType: "NSString *"}},
+				Return:           macosplatformmetadata.ReturnType{IsInstancetype: true},
 			},
 		},
 	}
@@ -850,11 +850,11 @@ func TestWriteClassDesignatedInitGenericSkipped(t *testing.T) {
 		GenericParams: []string{"ObjectType"},
 		Methods: []macosplatformmetadata.Method{
 			{
-				Selector:        "initWithObjects:",
-				IsInit:          true,
+				Selector:         "initWithObjects:",
+				IsInit:           true,
 				IsDesignatedInit: true,
-				Params:            []macosplatformmetadata.Param{{Name: "objs", ObjCType: "id"}},
-				Return:          macosplatformmetadata.ReturnType{IsInstancetype: true},
+				Params:           []macosplatformmetadata.Param{{Name: "objs", ObjCType: "id"}},
+				Return:           macosplatformmetadata.ReturnType{IsInstancetype: true},
 			},
 		},
 	}
@@ -886,7 +886,7 @@ func TestWriteClassNSStringClassOverload(t *testing.T) {
 			{
 				Selector:      "stringWithString:",
 				IsClassMethod: true,
-				Params:          []macosplatformmetadata.Param{{Name: "aString", ObjCType: "NSString *"}},
+				Params:        []macosplatformmetadata.Param{{Name: "aString", ObjCType: "NSString *"}},
 				Return:        macosplatformmetadata.ReturnType{ObjCType: "instancetype"},
 			},
 		},
@@ -905,15 +905,15 @@ func TestWriteClassNSStringClassOverload(t *testing.T) {
 
 func goCGoMapper() *typemap.Mapper {
 	return &typemap.Mapper{
-		GenericClasses:        map[string]bool{},
-		OwnerIndex:        map[string]string{},
-		ModulePrefix:          "github.com/example/fw",
-		BlockedImports:        map[string]map[string]bool{},
-		TypedefIndex:         map[string]string{},
-		StructIndex:          map[string]string{"CGRect": "CoreGraphics"},
-		ProtocolIndex:        map[string]string{},
-		ProtocolProxyIndex:  map[string]string{},
-		CFTypeIndex: map[string]string{},
+		GenericClasses:     map[string]bool{},
+		OwnerIndex:         map[string]string{},
+		ModulePrefix:       "github.com/example/fw",
+		BlockedImports:     map[string]map[string]bool{},
+		TypedefIndex:       map[string]string{},
+		StructIndex:        map[string]string{"CGRect": "CoreGraphics"},
+		ProtocolIndex:      map[string]string{},
+		ProtocolProxyIndex: map[string]string{},
+		CFTypeIndex:        map[string]string{},
 	}
 }
 
@@ -1137,9 +1137,9 @@ func TestWriteClassNSErrorIDReturn(t *testing.T) {
 	cls := macosplatformmetadata.Class{
 		Methods: []macosplatformmetadata.Method{
 			{
-				Selector:   "targetWithError:",
+				Selector:  "targetWithError:",
 				IsNSError: true,
-				Return:     macosplatformmetadata.ReturnType{ObjCType: "id"},
+				Return:    macosplatformmetadata.ReturnType{ObjCType: "id"},
 			},
 		},
 	}
@@ -1162,9 +1162,9 @@ func TestWriteClassNSErrorValueStructReturn(t *testing.T) {
 	cls := macosplatformmetadata.Class{
 		Methods: []macosplatformmetadata.Method{
 			{
-				Selector:   "frameWithError:",
+				Selector:  "frameWithError:",
 				IsNSError: true,
-				Return:     macosplatformmetadata.ReturnType{ObjCType: "CGRect"},
+				Return:    macosplatformmetadata.ReturnType{ObjCType: "CGRect"},
 			},
 		},
 	}

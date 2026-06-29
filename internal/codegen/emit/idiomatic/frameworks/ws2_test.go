@@ -1,4 +1,4 @@
-package idiomatic
+package idiofw
 
 import (
 	"os"
@@ -12,7 +12,7 @@ import (
 // a checkout that has not been regenerated).
 func vzFile(t *testing.T, name string) string {
 	t.Helper()
-	// from internal/codegen/frameworks/emit/idiomatic up to the repo root.
+	// from internal/codegen/emit/idiomatic/frameworks up to the repo root.
 	path := filepath.Join("..", "..", "..", "..", "..",
 		"opinionated", "idiomatic", "framework", "virtualization", name)
 	data, err := os.ReadFile(path)

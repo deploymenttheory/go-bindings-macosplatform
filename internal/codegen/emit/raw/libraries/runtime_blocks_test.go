@@ -1,4 +1,4 @@
-package raw
+package rawlib
 
 import (
 	"bytes"
@@ -12,11 +12,11 @@ import (
 func blockTestMapper() *typemap.Mapper {
 	return &typemap.Mapper{
 		GenericClasses: map[string]bool{},
-		OwnerIndex: map[string]string{},
+		OwnerIndex:     map[string]string{},
 		ModulePrefix:   "github.com/example/fw",
 		BlockedImports: map[string]map[string]bool{},
-		TypedefIndex:  map[string]string{},
-		StructIndex:   map[string]string{},
+		TypedefIndex:   map[string]string{},
+		StructIndex:    map[string]string{},
 	}
 }
 
@@ -174,7 +174,7 @@ func TestCollectBlockSignaturesFromClass(t *testing.T) {
 					Methods: []macosplatformmetadata.Method{
 						{
 							Selector: "doWith:",
-							Params:     []macosplatformmetadata.Param{{Name: "handler", ObjCType: "void (^)(NSError *)", IsBlock: true}},
+							Params:   []macosplatformmetadata.Param{{Name: "handler", ObjCType: "void (^)(NSError *)", IsBlock: true}},
 							Return:   macosplatformmetadata.ReturnType{ObjCType: "void"},
 						},
 					},
@@ -199,7 +199,7 @@ func TestCollectBlockSignaturesFromProtocol(t *testing.T) {
 					Methods: []macosplatformmetadata.Method{
 						{
 							Selector: "foo:handler:",
-							Params:     []macosplatformmetadata.Param{{Name: "handler", ObjCType: "void (^)(void)", IsBlock: true}},
+							Params:   []macosplatformmetadata.Param{{Name: "handler", ObjCType: "void (^)(void)", IsBlock: true}},
 							Return:   macosplatformmetadata.ReturnType{ObjCType: "void"},
 						},
 					},
@@ -253,7 +253,7 @@ func TestCollectBlockSignaturesFromTypedef(t *testing.T) {
 				"NSFoo": {Methods: []macosplatformmetadata.Method{
 					{
 						Selector: "doThing:",
-						Params:     []macosplatformmetadata.Param{{Name: "handler", ObjCType: "myHandler_t"}},
+						Params:   []macosplatformmetadata.Param{{Name: "handler", ObjCType: "myHandler_t"}},
 						Return:   macosplatformmetadata.ReturnType{ObjCType: "void"},
 					},
 				}},
@@ -469,7 +469,7 @@ func TestCollectBlockSignaturesFromForeignExtensions(t *testing.T) {
 			"NSObject": {
 				{
 					Selector: "doWithBlock:",
-					Params:     []macosplatformmetadata.Param{{Name: "h", ObjCType: "void (^)(NSError *)", IsBlock: true}},
+					Params:   []macosplatformmetadata.Param{{Name: "h", ObjCType: "void (^)(NSError *)", IsBlock: true}},
 					Return:   macosplatformmetadata.ReturnType{ObjCType: "void"},
 				},
 			},

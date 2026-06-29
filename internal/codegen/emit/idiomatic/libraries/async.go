@@ -1,4 +1,4 @@
-package library
+package idiolib
 
 import (
 	"bytes"
@@ -130,7 +130,9 @@ func EmitAsync(w io.Writer, pkgName, rawImportPath string, framework *macosplatf
 	}
 
 	// The emitted blocking wrappers take ctx for cancellation (select on ctx.Done()).
-	writeOpinionatedHeader(w, pkgName, rawImportPath, map[string]string{"context": "context"}, usedImports, false)
+	if err := writeOpinionatedHeader(w, pkgName, rawImportPath, map[string]string{"context": "context"}, usedImports, false); err != nil {
+		return err
+	}
 	_, err := w.Write(body.Bytes())
 	return err
 }

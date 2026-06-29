@@ -14,7 +14,7 @@
 //     extracting NSError from unsafe.Pointer via ObjC metadata.
 //   - NSArray-returning getter methods as typed Go slices ([]T).
 //   - BoolNSError pairs simplified to plain error returns.
-package idiomatic
+package idiofw
 
 import (
 	"bytes"
@@ -23,7 +23,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -119,7 +119,7 @@ func EmitFrameworkWrappers(
 			fname = fmt.Sprintf("%s_case%d_generated.go", className, n)
 		}
 		fileBaseCounts[strings.ToLower(className)]++
-		if err := emit.WriteGoFile(filepath.Join(outDir, fname), buf.Bytes()); err != nil {
+		if err := rawfw.WriteGoFile(filepath.Join(outDir, fname), buf.Bytes()); err != nil {
 			return err
 		}
 	}

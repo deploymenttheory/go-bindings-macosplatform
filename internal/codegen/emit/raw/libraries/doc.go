@@ -1,5 +1,5 @@
-// Package emit contains the per-construct emitters that convert [meta]
-// structures into Go source files and CGo bridge files.
+// Package rawlib contains the per-construct emitters that convert [meta]
+// structures into the raw CGo library Go source files and bridge files.
 //
 // Each top-level function writes one logical output unit:
 //
@@ -27,4 +27,4 @@
 // resolution: they populate a usedImports map during body generation, then
 // write the file header (with import block) followed by the body in a single
 // pass.
-package emit
+package rawlib

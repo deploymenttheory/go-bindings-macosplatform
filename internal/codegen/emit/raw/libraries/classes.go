@@ -1,8 +1,10 @@
-package raw
+package rawlib
 
 import (
 	"bytes"
 	"fmt"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/view"
 	"io"
 	"os"
 	"path/filepath"
@@ -430,13 +432,13 @@ func EmitClass(
 		}
 	}
 
-	hdr := classFileHeaderModel{
+	hdr := view.ClassFileHeaderModel{
 		Framework:    framework.Framework,
 		PkgName:      packageName,
 		BridgeHeader: strings.ToLower(framework.Framework) + "_bridge.h",
 		Imports:      deduped,
 	}
-	if err := executeTemplate(w, "class_file_header", hdr); err != nil {
+	if err := render.Execute(w, "class_file_header", hdr); err != nil {
 		return err
 	}
 	_, err := w.Write(body.Bytes())
@@ -501,7 +503,7 @@ func writeStructDef(
 	isGeneric bool,
 	si superInfo,
 ) error {
-	return executeTemplate(w, "class_struct", buildClassStructModel(name, cls, isGeneric, si))
+	return render.Execute(w, "class_struct", buildClassStructModel(name, cls, isGeneric, si))
 }
 
 // buildClassStructModel resolves an ObjC class's Go struct declaration: the doc
@@ -513,7 +515,7 @@ func buildClassStructModel(
 	cls macosplatformmetadata.Class,
 	isGeneric bool,
 	si superInfo,
-) classStructModel {
+) view.ClassStructModel {
 	var comment strings.Builder
 	fmt.Fprintf(&comment, "// %s wraps the Objective-C %s class.\n", name, name)
 	if cls.Super != "" {
@@ -537,7 +539,7 @@ func buildClassStructModel(
 		assertType = name + "[cgo.Object]"
 	}
 
-	model := classStructModel{
+	model := view.ClassStructModel{
 		CommentBlock: comment.String(),
 		TypeHeader:   name + genericDecl,
 		IsRoot:       si.isRoot,
@@ -620,7 +622,7 @@ func writeConstructors(
 		m,
 		usedImports,
 	)
-	if err := executeTemplate(w, "class_constructors", classConstructorsModel{
+	if err := render.Execute(w, "class_constructors", view.ClassConstructorsModel{
 		Name:       name,
 		GenSuffix:  genSuffix,
 		Chain:      chain,
@@ -658,7 +660,7 @@ func writeConstructors(
 			m,
 			usedImports,
 		)
-		if err := executeTemplate(w, "typed_with_ptr", typedWithPtrModel{
+		if err := render.Execute(w, "typed_with_ptr", view.TypedWithPtrModel{
 			Name:        name,
 			TValueChain: strings.TrimPrefix(tChain, "&"),
 		}); err != nil {
@@ -690,7 +692,7 @@ func writeDesignatedInitConstructors(
 	packageName := strings.ToLower(framework.Framework)
 	allocFn := packageName + "_" + name + "_alloc"
 
-	var inits []designatedInitModel
+	var inits []view.DesignatedInitModel
 	seenCtorNames := make(map[string]bool)
 	for _, method := range cls.Methods {
 		if !method.IsDesignatedInit || !method.IsInit || len(method.Params) == 0 {
@@ -751,7 +753,7 @@ func writeDesignatedInitConstructors(
 		// New<Class>(_raw) would register a second finalizer on the same pointer,
 		// causing a double-Release when the GC runs.
 		callExpr := fmt.Sprintf("_obj.%s(%s)", goMethodName, strings.Join(callNames, ", "))
-		model := designatedInitModel{
+		model := view.DesignatedInitModel{
 			CtorName:  ctorName,
 			ClassName: name,
 			Selector:  method.Selector,
@@ -775,7 +777,7 @@ func writeDesignatedInitConstructors(
 		inits = append(inits, model)
 	}
 
-	if err := executeTemplate(w, "designated_inits", inits); err != nil {
+	if err := render.Execute(w, "designated_inits", inits); err != nil {
 		return err
 	}
 	return nil
@@ -802,7 +804,7 @@ func writeCodingMethods(
 		return nil
 	}
 	packageName := strings.ToLower(framework)
-	return executeTemplate(w, "coding_methods", codingMethodsModel{
+	return render.Execute(w, "coding_methods", view.CodingMethodsModel{
 		Name:          name,
 		SerializeFn:   packageName + "_" + name + "_serializeToArchive",
 		DeserializeFn: packageName + "_" + name + "_newFromArchive",
@@ -943,7 +945,7 @@ func writeGenericHelper(
 	m *typemap.Mapper,
 	usedImports typemap.ImportSet,
 ) error {
-	return executeTemplate(w, "generic_helper", genericHelperModel{
+	return render.Execute(w, "generic_helper", view.GenericHelperModel{
 		Name: name,
 		TChain: buildValueChain(
 			name,
@@ -1125,7 +1127,7 @@ func writeMethod(
 	if goRet != "" {
 		retStr = " " + goRet
 	}
-	model := classMethodModel{
+	model := view.ClassMethodModel{
 		PreambleComment: preamble.String(),
 		IsClassMethod:   method.IsClassMethod,
 		GoArgs:          strings.Join(goArgs, ", "),
@@ -1163,7 +1165,7 @@ func writeMethod(
 			method.IsClassMethod,
 		)
 	}
-	if err := executeTemplate(w, "class_method", model); err != nil {
+	if err := render.Execute(w, "class_method", model); err != nil {
 		return err
 	}
 
@@ -1209,7 +1211,7 @@ func buildMethodBodyModel(
 	m *typemap.Mapper,
 	fmClasses map[string]macosplatformmetadata.Class,
 	imports typemap.ImportSet,
-) methodBodyModel {
+) view.MethodBodyModel {
 	var preambles []string
 	var keepAlives []string
 	cgoCallArgs := buildCGOCallArgs(
@@ -1254,13 +1256,13 @@ func resolveMethodBodyModel(
 	m *typemap.Mapper,
 	fmClasses map[string]macosplatformmetadata.Class,
 	imports typemap.ImportSet,
-) methodBodyModel {
+) view.MethodBodyModel {
 	retType := primaryReturnType(method, ctx, m, imports)
 	isNullableStr := retType == "string" && method.Return.IsNullable
 	isValueStruct := isValueStructReturn(retType, m)
 	rawCall := fmt.Sprintf("C.%s(%s)", cFunc, cgoCallArgs)
 
-	model := methodBodyModel{
+	model := view.MethodBodyModel{
 		HasReceiver: hasReceiver,
 		ReceiverVar: receiverVar,
 		KeepAlives:  keepAlives,
@@ -2205,7 +2207,7 @@ func writeNSStringInstanceOverload(
 	for i := range method.Params {
 		callArgs = append(callArgs, nsStringConvertArg(resolved[i], idxSet[i], ctx, m, imports))
 	}
-	return executeTemplate(w, "nsstring_overload", nsStringOverloadModel{
+	return render.Execute(w, "nsstring_overload", view.NsStringOverloadModel{
 		Signature: fmt.Sprintf(
 			"func (o *%s) %sGo(%s)%s",
 			receiver,
@@ -2253,7 +2255,7 @@ func writeNSStringClassOverload(
 	for i := range method.Params {
 		callArgs = append(callArgs, nsStringConvertArg(resolved[i], idxSet[i], ctx, m, imports))
 	}
-	return executeTemplate(w, "nsstring_overload", nsStringOverloadModel{
+	return render.Execute(w, "nsstring_overload", view.NsStringOverloadModel{
 		Signature: fmt.Sprintf(
 			"func %s(%s)%s",
 			overloadName,

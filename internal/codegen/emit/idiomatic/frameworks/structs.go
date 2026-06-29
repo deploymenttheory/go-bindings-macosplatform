@@ -1,14 +1,14 @@
 //go:build darwin
 
-package idiomatic
+package idiofw
 
 import (
 	"path/filepath"
 	"sort"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/idiomatic/render"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/idiomatic/view"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/view"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -225,5 +225,5 @@ func emitStructTypeAliases(
 	}
 	fname := pkgName + "_type_aliases_generated.go"
 	file := assembleFile(pkgName, nil, body)
-	return emit.WriteGoFile(filepath.Join(outDir, fname), file)
+	return rawfw.WriteGoFile(filepath.Join(outDir, fname), file)
 }

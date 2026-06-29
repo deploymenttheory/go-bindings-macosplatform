@@ -1,6 +1,8 @@
-package raw
+package rawlib
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/view"
 	"io"
 	"sort"
 	"strings"
@@ -45,7 +47,7 @@ func EmitProtocolProxies(
 	ctx := m.BaseContext(framework.Framework, knownClasses)
 
 	// Phase 1: build proxy type models, collecting imports as side effect.
-	var proxyTypes []protocolProxyTypeModel
+	var proxyTypes []view.ProtocolProxyTypeModel
 	needsBlocks := false
 	for _, name := range names {
 		p := framework.Protocols[name]
@@ -98,7 +100,7 @@ func EmitProtocolProxies(
 		}
 	}
 
-	return executeTemplate(w, "protocol_proxies_file", protocolProxiesFileModel{
+	return render.Execute(w, "protocol_proxies_file", view.ProtocolProxiesFileModel{
 		PkgName:      pkgName,
 		BridgeHeader: packageName + "_bridge.h",
 		Imports:      deduped,
@@ -106,7 +108,7 @@ func EmitProtocolProxies(
 	})
 }
 
-// buildProtocolIDTypeModel constructs a protocolProxyTypeModel for one protocol.
+// buildProtocolIDTypeModel constructs a view.ProtocolProxyTypeModel for one protocol.
 // Returns the model plus flags indicating whether methods use context or blocks.
 // Cross-framework imports discovered during method body building are recorded in imports.
 func buildProtocolIDTypeModel(
@@ -117,7 +119,7 @@ func buildProtocolIDTypeModel(
 	allClasses map[string]macosplatformmetadata.Class,
 	ctx typemap.Context,
 	imports typemap.ImportSet,
-) (model protocolProxyTypeModel, needsBlocks bool, err error) {
+) (model view.ProtocolProxyTypeModel, needsBlocks bool, err error) {
 	goName := naming.ProtocolGoTypeName(name, m.OwnerIndex)
 	idTypeName := goName + "IDProtocol"
 
@@ -131,7 +133,7 @@ func buildProtocolIDTypeModel(
 
 	bridgeNames := buildClassBridgeNames(framework.Framework, idTypeName, p.Methods)
 
-	var methods []protocolProxyMethodModel
+	var methods []view.ProtocolProxyMethodModel
 	seenMethods := map[string]bool{}
 	for _, method := range p.Methods {
 		if shouldSkipBridgeMethod(method) {
@@ -184,7 +186,7 @@ func buildProtocolIDTypeModel(
 			needsBlocks = true
 		}
 
-		methods = append(methods, protocolProxyMethodModel{
+		methods = append(methods, view.ProtocolProxyMethodModel{
 			GoName:       goMethodName,
 			Params:       strings.Join(args, ", "),
 			Ret:          ret,
@@ -193,7 +195,7 @@ func buildProtocolIDTypeModel(
 		})
 	}
 
-	model = protocolProxyTypeModel{
+	model = view.ProtocolProxyTypeModel{
 		IDTypeName:      idTypeName,
 		ProtoName:       name,
 		NSObjectEmbed:   nsObjectEmbed,
@@ -244,7 +246,7 @@ func writeIDProtocolMethodBody(
 		fmClasses,
 		imports,
 	)
-	return executeTemplate(w, "method_body", model)
+	return render.Execute(w, "method_body", model)
 }
 
 // buildIDProtocolCGOCallArgs builds the CGo call argument list for an id<Protocol>

@@ -1,14 +1,15 @@
 //go:build darwin
 
-package idiomatic
+package idiofw
 
 import (
 	"bytes"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"path/filepath"
 	"sort"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 )
 
 // cleanDoc rewrites Apple's HeaderDoc/Doxygen documentation into plain prose.
@@ -497,12 +498,12 @@ func emitDocGo(
 	prefix string,
 ) error {
 	var buf bytes.Buffer
-	renderTemplate(&buf, "docfile", docFileView{
+	render.Must(&buf, "docfile", docFileView{
 		Header:    strings.TrimRight(generatedHeader, "\n"),
 		BuildTag:  strings.TrimRight(buildTag, "\n"),
 		PkgName:   pkgName,
 		Framework: fc.framework.Framework,
 		Groups:    buildDocGroups(fc, abstractBases, prefix),
 	})
-	return emit.WriteGoFile(filepath.Join(outDir, "doc.go"), buf.Bytes())
+	return rawfw.WriteGoFile(filepath.Join(outDir, "doc.go"), buf.Bytes())
 }

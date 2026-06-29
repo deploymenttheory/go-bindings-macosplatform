@@ -1,4 +1,4 @@
-package raw
+package rawlib
 
 import (
 	"bytes"
@@ -181,7 +181,7 @@ func TestBuildValueChainRoot(t *testing.T) {
 
 func TestBuildValueChainSameFW(t *testing.T) {
 	m := &typemap.Mapper{
-		OwnerIndex: map[string]string{"NSObject": "Foundation"},
+		OwnerIndex:     map[string]string{"NSObject": "Foundation"},
 		GenericClasses: map[string]bool{},
 	}
 	fmClasses := map[string]macosplatformmetadata.Class{
@@ -197,7 +197,7 @@ func TestBuildValueChainSameFW(t *testing.T) {
 
 func TestBuildValueChainCrossFW(t *testing.T) {
 	m := &typemap.Mapper{
-		OwnerIndex: map[string]string{"NSObject": "Foundation"},
+		OwnerIndex:     map[string]string{"NSObject": "Foundation"},
 		GenericClasses: map[string]bool{},
 		ModulePrefix:   "github.com/example/fw",
 		BlockedImports: map[string]map[string]bool{},
@@ -216,7 +216,7 @@ func TestBuildValueChainCrossFW(t *testing.T) {
 
 func TestBuildValueChainBlockedCrossFW(t *testing.T) {
 	m := &typemap.Mapper{
-		OwnerIndex: map[string]string{"NSObject": "Foundation"},
+		OwnerIndex:     map[string]string{"NSObject": "Foundation"},
 		GenericClasses: map[string]bool{},
 		ModulePrefix:   "github.com/example/fw",
 		BlockedImports: map[string]map[string]bool{
@@ -278,7 +278,7 @@ func TestClassesCreatesFiles(t *testing.T) {
 	dir := t.TempDir()
 	m := &typemap.Mapper{
 		GenericClasses: map[string]bool{},
-		OwnerIndex: map[string]string{"NSObject": "Foundation"},
+		OwnerIndex:     map[string]string{"NSObject": "Foundation"},
 		ModulePrefix:   "github.com/example/fw",
 		BlockedImports: map[string]map[string]bool{},
 	}
@@ -436,9 +436,9 @@ func TestClassesNSErrorObjectReturn(t *testing.T) {
 				Super: "NSObject",
 				Methods: []macosplatformmetadata.Method{
 					{
-						Selector:   "stringWithContentsOfFile:encoding:error:",
+						Selector:  "stringWithContentsOfFile:encoding:error:",
 						IsNSError: true,
-						Return:     macosplatformmetadata.ReturnType{ObjCType: "NSString *"},
+						Return:    macosplatformmetadata.ReturnType{ObjCType: "NSString *"},
 						Params: []macosplatformmetadata.Param{
 							{Name: "path", ObjCType: "NSString *"},
 							{Name: "enc", ObjCType: "NSUInteger"},
@@ -592,9 +592,9 @@ func TestGoCGoArgExprEnumType(t *testing.T) {
 func TestGoCGoArgExprEnumTypeSmall(t *testing.T) {
 	m := &typemap.Mapper{
 		EnumGoTypeIndex: map[string]string{
-			"TinySignedEnum":   "int8",
-			"SmallSignedEnum":  "int16",
-			"TinyUnsignedEnum": "uint8",
+			"TinySignedEnum":    "int8",
+			"SmallSignedEnum":   "int16",
+			"TinyUnsignedEnum":  "uint8",
 			"SmallUnsignedEnum": "uint16",
 		},
 	}
@@ -796,7 +796,7 @@ func TestPrimaryReturnTypeNoClassName(t *testing.T) {
 func TestWriteClassMethodStaticEmitted(t *testing.T) {
 	m := &typemap.Mapper{
 		GenericClasses: map[string]bool{},
-		OwnerIndex: map[string]string{"NSObject": "Foundation"},
+		OwnerIndex:     map[string]string{"NSObject": "Foundation"},
 		ModulePrefix:   "github.com/example/fw",
 		BlockedImports: map[string]map[string]bool{},
 	}
@@ -829,7 +829,7 @@ func TestWriteClassMethodStaticEmitted(t *testing.T) {
 func TestWriteClassMethodPrimReturnEmitted(t *testing.T) {
 	m := &typemap.Mapper{
 		GenericClasses: map[string]bool{},
-		OwnerIndex: map[string]string{"NSObject": "Foundation"},
+		OwnerIndex:     map[string]string{"NSObject": "Foundation"},
 		ModulePrefix:   "github.com/example/fw",
 		BlockedImports: map[string]map[string]bool{},
 	}

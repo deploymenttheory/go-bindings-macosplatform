@@ -1,10 +1,11 @@
 //go:build darwin
 
-package idiomatic
+package idiofw
 
 import (
 	"bytes"
 	"fmt"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"io"
 	"maps"
 	"slices"
@@ -291,7 +292,7 @@ func emitClassFile(
 			break
 		}
 	}
-	renderTemplate(&body, "class_header", classHeaderView{
+	render.Must(&body, "class_header", classHeaderView{
 		DocComment:   buildClassDoc(goTypeName, className, isAbstract, subLinks, baseType, class.Doc),
 		GoTypeName:   goTypeName,
 		RecvVar:      receiverName(goTypeName),
@@ -326,7 +327,7 @@ func emitClassFile(
 			BodyExpr:   pm.bodyExpr,
 		}
 	}
-	renderTemplate(
+	render.Must(
 		&body,
 		"provider_method",
 		providerMethodView{GoTypeName: goTypeName, Items: provItems},
@@ -355,7 +356,7 @@ func emitClassFile(
 			seal.ProviderIfaces...)
 	}
 	if seal.MarkerName != "" || len(seal.ProviderIfaces) > 0 {
-		renderTemplate(&body, "class_seal", seal)
+		render.Must(&body, "class_seal", seal)
 	}
 
 	imports := classFileImports(ctors, withMethods, methods, providerImports, embedsRoot)

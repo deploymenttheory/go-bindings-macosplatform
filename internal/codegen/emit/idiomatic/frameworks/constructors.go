@@ -1,9 +1,10 @@
 //go:build darwin
 
-package idiomatic
+package idiofw
 
 import (
 	"fmt"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"io"
 	"maps"
 	"strings"
@@ -235,7 +236,7 @@ func writeConstructor(
 		view.SendAllArgs = strings.Join(allArgs, ", ")
 	}
 
-	renderTemplate(w, "constructor", view)
+	render.Must(w, "constructor", view)
 }
 
 // constructorView is the template data for constructor.tmpl.

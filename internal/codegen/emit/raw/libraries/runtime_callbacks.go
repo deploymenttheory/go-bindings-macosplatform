@@ -1,7 +1,9 @@
-package raw
+package rawlib
 
 import (
 	"fmt"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/view"
 	"io"
 	"sort"
 	"strings"
@@ -236,7 +238,7 @@ func (sig MethodSigModel) goCallbackFuncType() string {
 
 // EmitRuntimeCallbacksGo writes callbacks_generated.go for the bindings/runtime/callbacks package.
 func EmitRuntimeCallbacksGo(w io.Writer, sigs []MethodSigModel, pkg string) error {
-	return executeTemplate(w, "method_trampolines_go_file", methodTrampolinesGoFileModel{
+	return render.Execute(w, "method_trampolines_go_file", view.MethodTrampolinesGoFileModel{
 		PkgName: pkg,
 		Sigs:    buildMethodTrampolineSigModels(sigs),
 	})
@@ -244,27 +246,27 @@ func EmitRuntimeCallbacksGo(w io.Writer, sigs []MethodSigModel, pkg string) erro
 
 // EmitRuntimeCallbacksTrampolineHeader writes method_trampolines_generated.h.
 func EmitRuntimeCallbacksTrampolineHeader(w io.Writer, sigs []MethodSigModel) error {
-	return executeTemplate(w, "method_trampolines_h_file", methodTrampolinesHFileModel{
+	return render.Execute(w, "method_trampolines_h_file", view.MethodTrampolinesHFileModel{
 		Sigs: buildMethodTrampolineSigModels(sigs),
 	})
 }
 
 // EmitRuntimeCallbacksTrampolineImpl writes method_trampolines_generated.m.
 func EmitRuntimeCallbacksTrampolineImpl(w io.Writer, sigs []MethodSigModel) error {
-	return executeTemplate(w, "method_trampolines_m_file", methodTrampolinesMFileModel{
+	return render.Execute(w, "method_trampolines_m_file", view.MethodTrampolinesMFileModel{
 		Sigs: buildMethodTrampolineSigModels(sigs),
 	})
 }
 
-func buildMethodTrampolineSigModels(sigs []MethodSigModel) []methodTrampolineSigModel {
-	models := make([]methodTrampolineSigModel, len(sigs))
+func buildMethodTrampolineSigModels(sigs []MethodSigModel) []view.MethodTrampolineSigModel {
+	models := make([]view.MethodTrampolineSigModel, len(sigs))
 	for i, sig := range sigs {
 		models[i] = buildMethodTrampolineSigModel(sig)
 	}
 	return models
 }
 
-func buildMethodTrampolineSigModel(sig MethodSigModel) methodTrampolineSigModel {
+func buildMethodTrampolineSigModel(sig MethodSigModel) view.MethodTrampolineSigModel {
 	// GoParams: "key C.uint64_t, self unsafe.Pointer" + per-arg CGo params.
 	var goParamParts []string
 	goParamParts = append(goParamParts, "key C.uint64_t, self unsafe.Pointer")
@@ -339,7 +341,7 @@ func buildMethodTrampolineSigModel(sig MethodSigModel) methodTrampolineSigModel 
 		impBody = fmt.Sprintf("    uint64_t key = goBridge_Callback_Lookup((void*)self, _cmd);\n    if (!key) { return (%s)%s; }\n    return goCallIMP_%s(%s);", sig.CReturnType, zeroVal, sig.Name, impCallArgs)
 	}
 
-	return methodTrampolineSigModel{
+	return view.MethodTrampolineSigModel{
 		Name:        sig.Name,
 		ObjCEnc:     sig.ObjCEnc,
 		GoParams:    strings.Join(goParamParts, ", "),

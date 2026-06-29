@@ -1,15 +1,15 @@
-package library
+package idiolib
 
 import "testing"
 
 func TestSnakeToPascal(t *testing.T) {
 	cases := map[string]string{
-		"send_message":  "SendMessage",
-		"message_size":  "MessageSize",
-		"create":        "Create",
-		"__os_log":      "OsLog",
-		"":              "",
-		"xpc_object_t":  "XpcObjectT",
+		"send_message": "SendMessage",
+		"message_size": "MessageSize",
+		"create":       "Create",
+		"__os_log":     "OsLog",
+		"":             "",
+		"xpc_object_t": "XpcObjectT",
 	}
 	for in, want := range cases {
 		if got := snakeToPascal(in); got != want {
@@ -47,15 +47,15 @@ func TestMethodGoName(t *testing.T) {
 
 func TestQualifyRawTokens(t *testing.T) {
 	cases := map[string]string{
-		"int32":             "int32",
-		"uint64":            "uint64",
-		"unsafe.Pointer":    "unsafe.Pointer",
-		"Es_message_t":      "raw.Es_message_t",
-		"*Es_message_t":     "*raw.Es_message_t",
-		"[]RusageInfo":      "[]raw.RusageInfo",
-		"bsd.Timespec":      "bsd.Timespec",
-		"*bsd.Timespec":     "*bsd.Timespec",
-		"string":            "string",
+		"int32":          "int32",
+		"uint64":         "uint64",
+		"unsafe.Pointer": "unsafe.Pointer",
+		"Es_message_t":   "raw.Es_message_t",
+		"*Es_message_t":  "*raw.Es_message_t",
+		"[]RusageInfo":   "[]raw.RusageInfo",
+		"bsd.Timespec":   "bsd.Timespec",
+		"*bsd.Timespec":  "*bsd.Timespec",
+		"string":         "string",
 	}
 	for in, want := range cases {
 		if got := qualifyRawTokens(in); got != want {

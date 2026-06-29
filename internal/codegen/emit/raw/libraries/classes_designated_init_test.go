@@ -1,4 +1,4 @@
-package raw
+package rawlib
 
 import (
 	"bytes"
@@ -24,7 +24,7 @@ func TestWriteDesignatedInitCtorIDReturn(t *testing.T) {
 				Selector:         "initWith:",
 				IsDesignatedInit: true,
 				IsInit:           true,
-				Params:             []macosplatformmetadata.Param{{Name: "obj", ObjCType: "NSUInteger"}},
+				Params:           []macosplatformmetadata.Param{{Name: "obj", ObjCType: "NSUInteger"}},
 				Return:           macosplatformmetadata.ReturnType{ObjCType: "id"}, // → "cgo.Object" → initReturnsID
 			},
 		},
@@ -58,8 +58,8 @@ func TestWriteDesignatedInitCtorIDReturnWithNSError(t *testing.T) {
 				Selector:         "initWithError:",
 				IsDesignatedInit: true,
 				IsInit:           true,
-				IsNSError:       true,
-				Params:             []macosplatformmetadata.Param{{Name: "obj", ObjCType: "NSUInteger"}},
+				IsNSError:        true,
+				Params:           []macosplatformmetadata.Param{{Name: "obj", ObjCType: "NSUInteger"}},
 				Return:           macosplatformmetadata.ReturnType{ObjCType: "id"}, // → "cgo.Object" → initReturnsID
 			},
 		},
@@ -93,7 +93,7 @@ func TestWriteDesignatedInitCtorUnsafeReturn(t *testing.T) {
 				Selector:         "initWithPtr:",
 				IsDesignatedInit: true,
 				IsInit:           true,
-				Params:             []macosplatformmetadata.Param{{Name: "raw", ObjCType: "NSUInteger"}},
+				Params:           []macosplatformmetadata.Param{{Name: "raw", ObjCType: "NSUInteger"}},
 				Return:           macosplatformmetadata.ReturnType{ObjCType: "void *"}, // → "unsafe.Pointer" → initReturnsPtr
 			},
 		},
@@ -121,8 +121,8 @@ func TestWriteDesignatedInitCtorUnsafeReturnWithNSError(t *testing.T) {
 				Selector:         "initWithPtrAndError:",
 				IsDesignatedInit: true,
 				IsInit:           true,
-				IsNSError:       true,
-				Params:             []macosplatformmetadata.Param{{Name: "raw", ObjCType: "NSUInteger"}},
+				IsNSError:        true,
+				Params:           []macosplatformmetadata.Param{{Name: "raw", ObjCType: "NSUInteger"}},
 				Return:           macosplatformmetadata.ReturnType{ObjCType: "void *"}, // → "unsafe.Pointer" → initReturnsPtr
 			},
 		},
@@ -153,7 +153,7 @@ func TestWriteDesignatedInitCtorEmptySuffix(t *testing.T) {
 				Selector:         "init:", // MethodName → "Init" → ctorSuffix = ""
 				IsDesignatedInit: true,
 				IsInit:           true,
-				Params:             []macosplatformmetadata.Param{{Name: "v", ObjCType: "NSUInteger"}},
+				Params:           []macosplatformmetadata.Param{{Name: "v", ObjCType: "NSUInteger"}},
 				Return:           macosplatformmetadata.ReturnType{IsInstancetype: true},
 			},
 		},
@@ -182,14 +182,14 @@ func TestWriteDesignatedInitCtorDuplicateSkipped(t *testing.T) {
 				Selector:         "initWithFoo:",
 				IsDesignatedInit: true,
 				IsInit:           true,
-				Params:             []macosplatformmetadata.Param{{Name: "foo", ObjCType: "NSUInteger"}},
+				Params:           []macosplatformmetadata.Param{{Name: "foo", ObjCType: "NSUInteger"}},
 				Return:           macosplatformmetadata.ReturnType{IsInstancetype: true},
 			},
 			{
 				Selector:         "initWithFoo:", // duplicate selector → same ctorName
 				IsDesignatedInit: true,
 				IsInit:           true,
-				Params:             []macosplatformmetadata.Param{{Name: "foo", ObjCType: "NSUInteger"}},
+				Params:           []macosplatformmetadata.Param{{Name: "foo", ObjCType: "NSUInteger"}},
 				Return:           macosplatformmetadata.ReturnType{IsInstancetype: true},
 			},
 		},
@@ -316,7 +316,7 @@ func TestWriteNSStringClassOverloadVoidReturnPath(t *testing.T) {
 			{
 				Selector:      "logString:",
 				IsClassMethod: true,
-				Params:          []macosplatformmetadata.Param{{Name: "msg", ObjCType: "NSString *"}},
+				Params:        []macosplatformmetadata.Param{{Name: "msg", ObjCType: "NSString *"}},
 				Return:        macosplatformmetadata.ReturnType{ObjCType: "void"},
 			},
 		},
@@ -353,7 +353,7 @@ func TestWriteNSStringInstanceOverloadVoidReturnPath(t *testing.T) {
 		Methods: []macosplatformmetadata.Method{
 			{
 				Selector: "setName:",
-				Params:     []macosplatformmetadata.Param{{Name: "name", ObjCType: "NSString *"}},
+				Params:   []macosplatformmetadata.Param{{Name: "name", ObjCType: "NSString *"}},
 				Return:   macosplatformmetadata.ReturnType{ObjCType: "void"},
 			},
 		},
@@ -437,7 +437,7 @@ func TestCollectBlockSigsNilTypedefs(t *testing.T) {
 				Methods: []macosplatformmetadata.Method{
 					{
 						Selector: "doThing:",
-						Params:     []macosplatformmetadata.Param{{Name: "handler", ObjCType: "NSHandler", IsBlock: false}},
+						Params:   []macosplatformmetadata.Param{{Name: "handler", ObjCType: "NSHandler", IsBlock: false}},
 						Return:   macosplatformmetadata.ReturnType{ObjCType: "void"},
 					},
 				},
@@ -464,7 +464,7 @@ func TestCollectBlockSigsInvalidBlockSig(t *testing.T) {
 				Methods: []macosplatformmetadata.Method{
 					{
 						Selector: "doThing:",
-						Params:     []macosplatformmetadata.Param{{Name: "handler", ObjCType: "notABlockType", IsBlock: true}},
+						Params:   []macosplatformmetadata.Param{{Name: "handler", ObjCType: "notABlockType", IsBlock: true}},
 						Return:   macosplatformmetadata.ReturnType{ObjCType: "void"},
 					},
 				},
@@ -501,8 +501,8 @@ func TestBlockNeedsWrapperCFType(t *testing.T) {
 // `cls != "" && ctx.ClassNameIndex[cls]` on return type path (RETURN class, not arg).
 func TestBlockNeedsWrapperReturnKnownClassPtr(t *testing.T) {
 	m := &typemap.Mapper{
-		TypedefIndex:         map[string]string{},
-		CFTypeIndex: map[string]string{},
+		TypedefIndex: map[string]string{},
+		CFTypeIndex:  map[string]string{},
 	}
 	ctx := typemap.Context{
 		ClassNameIndex: map[string]bool{"NSString": true},
@@ -559,7 +559,7 @@ func TestBridgeImplProtocolMethodAlreadyRetained(t *testing.T) {
 					{
 						Selector: "createFoo",
 						Return: macosplatformmetadata.ReturnType{
-							ObjCType:        "NSObject *",
+							ObjCType:          "NSObject *",
 							IsAlreadyRetained: true, // → no [_result retain]
 						},
 					},
@@ -597,7 +597,7 @@ func TestHasByValueUnknownTypeArgFiltered(t *testing.T) {
 		Functions: []macosplatformmetadata.Function{
 			{
 				Name:   "NSProcessFloat",
-				Params:   []macosplatformmetadata.Param{{Name: "v", ObjCType: "vFloat"}},
+				Params: []macosplatformmetadata.Param{{Name: "v", ObjCType: "vFloat"}},
 				Return: macosplatformmetadata.ReturnType{ObjCType: "void"}, // void return is fine
 			},
 		},

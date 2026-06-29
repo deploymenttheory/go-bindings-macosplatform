@@ -1,4 +1,4 @@
-package raw
+package rawlib
 
 import (
 	"bytes"
@@ -385,8 +385,8 @@ func TestWriteFunctionValueStructReturn(t *testing.T) {
 func TestWriteFunctionWarnUnused(t *testing.T) {
 	m := testMapper()
 	fn := macosplatformmetadata.Function{
-		Name:       "NSAllocate",
-		Return:     macosplatformmetadata.ReturnType{ObjCType: "void *"},
+		Name:         "NSAllocate",
+		Return:       macosplatformmetadata.ReturnType{ObjCType: "void *"},
 		IsWarnUnused: true,
 	}
 	ctx := m.BaseContext("Foundation", map[string]bool{})

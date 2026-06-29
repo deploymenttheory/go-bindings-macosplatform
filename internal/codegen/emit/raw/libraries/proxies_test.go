@@ -1,4 +1,4 @@
-package raw
+package rawlib
 
 import (
 	"bytes"
@@ -17,9 +17,9 @@ func proxyTestMapper() *typemap.Mapper {
 		},
 		ModulePrefix:   "github.com/example/fw",
 		BlockedImports: map[string]map[string]bool{},
-		TypedefIndex:  map[string]string{},
-		StructIndex:   map[string]string{},
-		ProtocolIndex: map[string]string{},
+		TypedefIndex:   map[string]string{},
+		StructIndex:    map[string]string{},
+		ProtocolIndex:  map[string]string{},
 		ProtocolProxyIndex: map[string]string{
 			"VZFoo": "Virtualization",
 		},
@@ -97,13 +97,13 @@ func TestProtocolProxiesFileHeader(t *testing.T) {
 // TestProtocolProxiesFoundationPackage verifies self-foundation omits the foundation import.
 func TestProtocolProxiesFoundationPackage(t *testing.T) {
 	m := &typemap.Mapper{
-		GenericClasses:       map[string]bool{},
-		OwnerIndex:       map[string]string{"NSObject": "Foundation"},
-		ModulePrefix:         "github.com/example/fw",
-		BlockedImports:       map[string]map[string]bool{},
-		TypedefIndex:        map[string]string{},
-		StructIndex:         map[string]string{},
-		ProtocolIndex:       map[string]string{},
+		GenericClasses:     map[string]bool{},
+		OwnerIndex:         map[string]string{"NSObject": "Foundation"},
+		ModulePrefix:       "github.com/example/fw",
+		BlockedImports:     map[string]map[string]bool{},
+		TypedefIndex:       map[string]string{},
+		StructIndex:        map[string]string{},
+		ProtocolIndex:      map[string]string{},
 		ProtocolProxyIndex: map[string]string{"NSFooProto": "Foundation"},
 	}
 	framework := &macosplatformmetadata.FrameworkMeta{
@@ -390,9 +390,9 @@ func TestWriteIDProtocolMethodBodyNSErrorIDReturn(t *testing.T) {
 			"VZFoo": {
 				Methods: []macosplatformmetadata.Method{
 					{
-						Selector:   "targetWithError:",
+						Selector:  "targetWithError:",
 						IsNSError: true,
-						Return:     macosplatformmetadata.ReturnType{ObjCType: "id"},
+						Return:    macosplatformmetadata.ReturnType{ObjCType: "id"},
 					},
 				},
 			},
@@ -422,9 +422,9 @@ func TestWriteIDProtocolMethodBodyNSErrorValueStructReturn(t *testing.T) {
 			"VZFoo": {
 				Methods: []macosplatformmetadata.Method{
 					{
-						Selector:   "frameWithError:",
+						Selector:  "frameWithError:",
 						IsNSError: true,
-						Return:     macosplatformmetadata.ReturnType{ObjCType: "CGRect"},
+						Return:    macosplatformmetadata.ReturnType{ObjCType: "CGRect"},
 					},
 				},
 			},
@@ -450,10 +450,10 @@ func TestWriteIDProtocolMethodBodyNSErrorReturn(t *testing.T) {
 			"VZLoader": {
 				Methods: []macosplatformmetadata.Method{
 					{
-						Selector:   "loadItem:error:",
+						Selector:  "loadItem:error:",
 						IsNSError: true,
-						Params:       []macosplatformmetadata.Param{{Name: "url", ObjCType: "NSURL *"}},
-						Return:     macosplatformmetadata.ReturnType{ObjCType: "NSUInteger"},
+						Params:    []macosplatformmetadata.Param{{Name: "url", ObjCType: "NSURL *"}},
+						Return:    macosplatformmetadata.ReturnType{ObjCType: "NSUInteger"},
 					},
 				},
 			},

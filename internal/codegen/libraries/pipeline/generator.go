@@ -10,8 +10,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/emit/library"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/emit/raw"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/libraries"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/typemap"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
 	swiftemit "github.com/deploymenttheory/go-bindings-macosplatform/internal/swift/emit"
@@ -121,7 +121,7 @@ func GenerateBindings(cfg BindingsConfig) error {
 			return fmt.Errorf("mkdir bsd package dir: %w", err)
 		}
 		if err := writeFile(filepath.Join(bsdDir, "bsd.go"), func(buf *bytes.Buffer) error {
-			return raw.EmitBSDPackage(buf)
+			return rawlib.EmitBSDPackage(buf)
 		}); err != nil {
 			return fmt.Errorf("generate bsd package: %w", err)
 		}
@@ -140,12 +140,12 @@ func GenerateBindings(cfg BindingsConfig) error {
 	{
 		frameworks := make([]*macosplatformmetadata.FrameworkMeta, 0, len(reg.Frameworks))
 		frameworks = append(frameworks, reg.Frameworks...)
-		sigs := raw.CollectBlockSignaturesFromFrameworks(frameworks, m)
+		sigs := rawlib.CollectBlockSignaturesFromFrameworks(frameworks, m)
 
 		if err := writeFile(
 			filepath.Join(blocksDir, "blocks_generated.go"),
 			func(buf *bytes.Buffer) error {
-				return raw.EmitRuntimeBlocksGo(buf, sigs, "blocks")
+				return rawlib.EmitRuntimeBlocksGo(buf, sigs, "blocks")
 			},
 		); err != nil {
 			return fmt.Errorf("generate blocks_generated.go: %w", err)
@@ -153,7 +153,7 @@ func GenerateBindings(cfg BindingsConfig) error {
 		if err := writeFile(
 			filepath.Join(blocksDir, "block_trampolines_generated.h"),
 			func(buf *bytes.Buffer) error {
-				return raw.EmitRuntimeBlocksTrampolineHeader(buf, sigs)
+				return rawlib.EmitRuntimeBlocksTrampolineHeader(buf, sigs)
 			},
 		); err != nil {
 			return fmt.Errorf("generate block_trampolines_generated.h: %w", err)
@@ -161,7 +161,7 @@ func GenerateBindings(cfg BindingsConfig) error {
 		if err := writeFile(
 			filepath.Join(blocksDir, "block_trampolines_generated.m"),
 			func(buf *bytes.Buffer) error {
-				return raw.EmitRuntimeBlocksTrampolineImpl(buf, sigs)
+				return rawlib.EmitRuntimeBlocksTrampolineImpl(buf, sigs)
 			},
 		); err != nil {
 			return fmt.Errorf("generate block_trampolines_generated.m: %w", err)
@@ -172,12 +172,12 @@ func GenerateBindings(cfg BindingsConfig) error {
 	{
 		frameworks := make([]*macosplatformmetadata.FrameworkMeta, 0, len(reg.Frameworks))
 		frameworks = append(frameworks, reg.Frameworks...)
-		sigs := raw.CollectMethodSigsFromFrameworks(frameworks, m)
+		sigs := rawlib.CollectMethodSigsFromFrameworks(frameworks, m)
 
 		if err := writeFile(
 			filepath.Join(callbacksDir, "callbacks_generated.go"),
 			func(buf *bytes.Buffer) error {
-				return raw.EmitRuntimeCallbacksGo(buf, sigs, "callbacks")
+				return rawlib.EmitRuntimeCallbacksGo(buf, sigs, "callbacks")
 			},
 		); err != nil {
 			return fmt.Errorf("generate callbacks_generated.go: %w", err)
@@ -185,7 +185,7 @@ func GenerateBindings(cfg BindingsConfig) error {
 		if err := writeFile(
 			filepath.Join(callbacksDir, "method_trampolines_generated.h"),
 			func(buf *bytes.Buffer) error {
-				return raw.EmitRuntimeCallbacksTrampolineHeader(buf, sigs)
+				return rawlib.EmitRuntimeCallbacksTrampolineHeader(buf, sigs)
 			},
 		); err != nil {
 			return fmt.Errorf("generate method_trampolines_generated.h: %w", err)
@@ -193,7 +193,7 @@ func GenerateBindings(cfg BindingsConfig) error {
 		if err := writeFile(
 			filepath.Join(callbacksDir, "method_trampolines_generated.m"),
 			func(buf *bytes.Buffer) error {
-				return raw.EmitRuntimeCallbacksTrampolineImpl(buf, sigs)
+				return rawlib.EmitRuntimeCallbacksTrampolineImpl(buf, sigs)
 			},
 		); err != nil {
 			return fmt.Errorf("generate method_trampolines_generated.m: %w", err)
@@ -571,9 +571,9 @@ func emitFramework(
 		if err := writeFile(
 			filepath.Join(outDir, packageName+"_enums.go"),
 			func(buf *bytes.Buffer) error {
-				needsFmt, needsStrings := raw.EnumsNeedImports(framework)
+				needsFmt, needsStrings := rawlib.EnumsNeedImports(framework)
 				writeGoHeaderEnums(buf, pkgName, needsFmt, needsStrings)
-				return raw.EmitEnums(buf, framework)
+				return rawlib.EmitEnums(buf, framework)
 			},
 		); err != nil {
 			return err
@@ -586,7 +586,7 @@ func emitFramework(
 			filepath.Join(outDir, packageName+"_structs.go"),
 			func(buf *bytes.Buffer) error {
 				var body bytes.Buffer
-				crossImports, err := raw.EmitStructs(&body, framework, m, reg.ClassNameIndex)
+				crossImports, err := rawlib.EmitStructs(&body, framework, m, reg.ClassNameIndex)
 				if err != nil {
 					return err
 				}
@@ -606,7 +606,7 @@ func emitFramework(
 		if err := writeFile(
 			filepath.Join(outDir, packageName+"_externs.go"),
 			func(buf *bytes.Buffer) error {
-				return raw.EmitExterns(buf, pkgName, framework, m, reg.ClassNameIndex)
+				return rawlib.EmitExterns(buf, pkgName, framework, m, reg.ClassNameIndex)
 			},
 		); err != nil {
 			return err
@@ -618,7 +618,7 @@ func emitFramework(
 		if err := writeFile(
 			filepath.Join(outDir, packageName+"_protocols.go"),
 			func(buf *bytes.Buffer) error {
-				return raw.EmitProtocols(
+				return rawlib.EmitProtocols(
 					buf,
 					pkgName,
 					framework,
@@ -638,7 +638,7 @@ func emitFramework(
 		if err := writeFile(
 			filepath.Join(outDir, packageName+"_proxies.go"),
 			func(buf *bytes.Buffer) error {
-				return raw.EmitProtocolProxies(
+				return rawlib.EmitProtocolProxies(
 					buf,
 					pkgName,
 					packageName,
@@ -658,7 +658,7 @@ func emitFramework(
 		if err := writeFile(
 			filepath.Join(outDir, packageName+"_class_interfaces.go"),
 			func(buf *bytes.Buffer) error {
-				return raw.EmitClassInterfaces(
+				return rawlib.EmitClassInterfaces(
 					buf,
 					pkgName,
 					framework,
@@ -678,7 +678,7 @@ func emitFramework(
 			filepath.Join(outDir, packageName+"_block_types.go"),
 			func(buf *bytes.Buffer) error {
 				writeGoHeader(buf, pkgName, false)
-				return raw.EmitBlocks(buf, framework, m, reg.ClassNameIndex)
+				return rawlib.EmitBlocks(buf, framework, m, reg.ClassNameIndex)
 			},
 		); err != nil {
 			return err
@@ -690,7 +690,7 @@ func emitFramework(
 		if err := writeFile(
 			filepath.Join(outDir, packageName+"_functions.go"),
 			func(buf *bytes.Buffer) error {
-				return raw.EmitFunctions(
+				return rawlib.EmitFunctions(
 					buf,
 					pkgName,
 					packageName,
@@ -705,12 +705,12 @@ func emitFramework(
 	}
 
 	// bridge/{framework}_bridge.h and bridge/{framework}_bridge.m
-	if err := raw.EmitBridge(outDir, framework, m, reg.ClassNameIndex); err != nil {
+	if err := rawlib.EmitBridge(outDir, framework, m, reg.ClassNameIndex); err != nil {
 		return fmt.Errorf("bridge %s: %w", framework.Framework, err)
 	}
 
 	// One .go file per class.
-	if err := raw.EmitClasses(
+	if err := rawlib.EmitClasses(
 		outDir,
 		framework,
 		m,
@@ -726,7 +726,7 @@ func emitFramework(
 		if err := writeFile(
 			filepath.Join(outDir, "foundation_variadic.go"),
 			func(buf *bytes.Buffer) error {
-				return raw.EmitFoundationVariadicWrappers(buf, pkgName)
+				return rawlib.EmitFoundationVariadicWrappers(buf, pkgName)
 			},
 		); err != nil {
 			return err
@@ -734,7 +734,7 @@ func emitFramework(
 	}
 
 	superIndex := reg.SuperclassIndex()
-	if err := raw.EmitSubclassFactories(
+	if err := rawlib.EmitSubclassFactories(
 		outDir,
 		framework,
 		m,
@@ -743,10 +743,10 @@ func emitFramework(
 	); err != nil {
 		return fmt.Errorf("subclass factories %s: %w", framework.Framework, err)
 	}
-	if err := raw.EmitProtocolImpls(outDir, framework, m); err != nil {
+	if err := rawlib.EmitProtocolImpls(outDir, framework, m); err != nil {
 		return fmt.Errorf("protocol impls %s: %w", framework.Framework, err)
 	}
-	if err := raw.EmitGeneratedBridgesImpl(outDir, packageName); err != nil {
+	if err := rawlib.EmitGeneratedBridgesImpl(outDir, packageName); err != nil {
 		return fmt.Errorf("generated bridges impl %s: %w", framework.Framework, err)
 	}
 
@@ -789,7 +789,7 @@ func emitOpinionated(
 	if err := writeFile(
 		filepath.Join(opDir, packageName+"_async_generated.go"),
 		func(buf *bytes.Buffer) error {
-			return library.EmitAsync(
+			return idiolib.EmitAsync(
 				buf,
 				packageName,
 				rawImportPath,
@@ -804,7 +804,7 @@ func emitOpinionated(
 	if err := writeFile(
 		filepath.Join(opDir, packageName+"_slices_generated.go"),
 		func(buf *bytes.Buffer) error {
-			return library.EmitSlices(
+			return idiolib.EmitSlices(
 				buf,
 				packageName,
 				rawImportPath,
@@ -819,7 +819,7 @@ func emitOpinionated(
 	if err := writeFile(
 		filepath.Join(opDir, packageName+"_specs_generated.go"),
 		func(buf *bytes.Buffer) error {
-			return library.EmitSpecs(
+			return idiolib.EmitSpecs(
 				buf,
 				packageName,
 				rawImportPath,

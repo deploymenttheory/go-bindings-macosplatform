@@ -1,6 +1,8 @@
-package raw
+package rawlib
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/view"
 	"io"
 	"sort"
 	"strings"
@@ -32,7 +34,7 @@ func EmitClassInterfaces(w io.Writer, pkgName string, framework *macosplatformme
 	sort.Strings(names)
 
 	// Phase 1: build models, collecting cross-framework imports as a side effect.
-	var interfaces []classInterfaceModel
+	var interfaces []view.ClassInterfaceModel
 	for _, name := range names {
 		cls := framework.Classes[name]
 		if cls.Availability.IsUnavailable {
@@ -93,7 +95,7 @@ func EmitClassInterfaces(w io.Writer, pkgName string, framework *macosplatformme
 		}
 	}
 
-	return executeTemplate(w, "interfaces_file", classInterfacesFileModel{
+	return render.Execute(w, "interfaces_file", view.ClassInterfacesFileModel{
 		PkgName:    pkgName,
 		Imports:    deduped,
 		UsesUnsafe: usesUnsafe,
@@ -102,9 +104,9 @@ func EmitClassInterfaces(w io.Writer, pkgName string, framework *macosplatformme
 	})
 }
 
-// buildClassInterfaceModel constructs a classInterfaceModel for a single ObjC class.
+// buildClassInterfaceModel constructs a view.ClassInterfaceModel for a single ObjC class.
 // Cross-framework embed imports are recorded in usedImports as a side effect.
-func buildClassInterfaceModel(name string, cls macosplatformmetadata.Class, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, ctx typemap.Context, allClasses map[string]macosplatformmetadata.Class, usedImports typemap.ImportSet) classInterfaceModel {
+func buildClassInterfaceModel(name string, cls macosplatformmetadata.Class, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, ctx typemap.Context, allClasses map[string]macosplatformmetadata.Class, usedImports typemap.ImportSet) view.ClassInterfaceModel {
 	si := classifySuper(name, cls, framework, m)
 
 	iCtx := ctx
@@ -201,7 +203,7 @@ func buildClassInterfaceModel(name string, cls macosplatformmetadata.Class, fram
 
 	// Build the method list using the same per-kind disambiguation logic as
 	// EmitClass so that interface method names always match the concrete type.
-	var methods []interfaceMethodModel
+	var methods []view.InterfaceMethodModel
 	seenMethodKeys := make(map[string]bool)
 	for _, method := range cls.Methods {
 		if shouldSkipBridgeMethod(method) {
@@ -251,14 +253,14 @@ func buildClassInterfaceModel(name string, cls macosplatformmetadata.Class, fram
 		args := buildGoArgs(method.Params, method.IsNSError, iCtx, m, usedImports)
 		ret := buildGoReturn(method, iCtx, m, name, usedImports)
 
-		methods = append(methods, interfaceMethodModel{
+		methods = append(methods, view.InterfaceMethodModel{
 			GoName: gn,
 			Params: strings.Join(args, ", "),
 			Ret:    ret,
 		})
 	}
 
-	return classInterfaceModel{
+	return view.ClassInterfaceModel{
 		GoName:      name,
 		EmbedLine:   embedLine,
 		Methods:     methods,

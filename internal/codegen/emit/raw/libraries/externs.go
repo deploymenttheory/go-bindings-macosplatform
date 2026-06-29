@@ -1,6 +1,8 @@
-package raw
+package rawlib
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/view"
 	"io"
 	"sort"
 	"strings"
@@ -15,13 +17,13 @@ func EmitExterns(w io.Writer, pkgName string, framework *macosplatformmetadata.F
 	if len(framework.Externs) == 0 {
 		return nil
 	}
-	return executeTemplate(w, "externs_file", buildExternsModel(pkgName, framework, m, knownClasses))
+	return render.Execute(w, "externs_file", buildExternsModel(pkgName, framework, m, knownClasses))
 }
 
 // buildExternsModel resolves types and collects imports, then returns a model
 // ready for template execution. All sorting, deduplication, and import decisions
 // are made here; the template itself is a pure structural description.
-func buildExternsModel(pkgName string, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool) externsFileModel {
+func buildExternsModel(pkgName string, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool) view.ExternsFileModel {
 	usedImports := make(typemap.ImportSet)
 	ctx := m.BaseContext(framework.Framework, knownClasses)
 
@@ -31,7 +33,7 @@ func buildExternsModel(pkgName string, framework *macosplatformmetadata.Framewor
 	sort.Slice(externs, func(i, j int) bool { return externs[i].Name < externs[j].Name })
 
 	seen := make(map[string]bool)
-	items := make([]externItemModel, 0, len(externs))
+	items := make([]view.ExternItemModel, 0, len(externs))
 	for _, e := range externs {
 		goName := naming.GoTypeName(e.Name)
 		if seen[goName] {
@@ -46,7 +48,7 @@ func buildExternsModel(pkgName string, framework *macosplatformmetadata.Framewor
 		if goType == "" {
 			goType = "unsafe.Pointer"
 		}
-		items = append(items, externItemModel{
+		items = append(items, view.ExternItemModel{
 			GoName:       goName,
 			GoType:       goType,
 			CommentBlock: renderCommentBlock(e.Doc, e.SDKFile, e.SDKLine, e.Availability, "\t"),
@@ -54,11 +56,11 @@ func buildExternsModel(pkgName string, framework *macosplatformmetadata.Framewor
 	}
 
 	imports := buildExternsImports(items, usedImports)
-	return externsFileModel{PkgName: pkgName, Imports: imports, Items: items}
+	return view.ExternsFileModel{PkgName: pkgName, Imports: imports, Items: items}
 }
 
 // buildExternsImports collects and deduplicates the imports needed by an externs file.
-func buildExternsImports(items []externItemModel, usedImports typemap.ImportSet) []string {
+func buildExternsImports(items []view.ExternItemModel, usedImports typemap.ImportSet) []string {
 	set := make(map[string]bool)
 	for _, it := range items {
 		if strings.Contains(it.GoType, "unsafe.Pointer") {

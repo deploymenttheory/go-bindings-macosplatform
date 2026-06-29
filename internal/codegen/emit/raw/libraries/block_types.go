@@ -1,7 +1,9 @@
-package raw
+package rawlib
 
 import (
 	"fmt"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/view"
 	"io"
 	"sort"
 	"strings"
@@ -34,14 +36,14 @@ func EmitBlocks(w io.Writer, framework *macosplatformmetadata.FrameworkMeta, m *
 		if err != nil {
 			return err
 		}
-		if err := executeTemplate(w, "block_type_item", model); err != nil {
+		if err := render.Execute(w, "block_type_item", model); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func buildBlockTypeModel(name string, bt macosplatformmetadata.BlockType, ctx typemap.Context, m *typemap.Mapper) (blockTypeModel, error) {
+func buildBlockTypeModel(name string, bt macosplatformmetadata.BlockType, ctx typemap.Context, m *typemap.Mapper) (view.BlockTypeModel, error) {
 	imports := make(typemap.ImportSet)
 	var goArgs []string
 	for i, arg := range bt.Params {
@@ -70,7 +72,7 @@ func buildBlockTypeModel(name string, bt macosplatformmetadata.BlockType, ctx ty
 		sb.WriteString(retType)
 	}
 
-	return blockTypeModel{
+	return view.BlockTypeModel{
 		GoName:    name,
 		Framework: ctx.Framework,
 		Sig:       sb.String(),

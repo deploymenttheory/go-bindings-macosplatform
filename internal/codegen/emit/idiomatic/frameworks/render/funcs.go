@@ -3,7 +3,7 @@ package render
 import (
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/idiomatic/view"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/view"
 )
 
 // join concatenates parts with sep. A thin wrapper over strings.Join so

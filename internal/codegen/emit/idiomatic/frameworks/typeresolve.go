@@ -1,6 +1,6 @@
 //go:build darwin
 
-package idiomatic
+package idiofw
 
 import (
 	"fmt"
@@ -8,7 +8,7 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
 )
@@ -542,7 +542,7 @@ func rawParamGoType(
 	impSet typemap.ImportSet,
 ) string {
 	if _, isBlock := mapper.ResolveBlockSignature(objcType); isBlock {
-		return emit.BlockGoFuncType(objcType, ctx, mapper, impSet, mapper.OwnerIndex)
+		return rawfw.BlockGoFuncType(objcType, ctx, mapper, impSet, mapper.OwnerIndex)
 	}
 	resolved := mapper.GoType(objcType, ctx, impSet)
 	if resolved == "" {

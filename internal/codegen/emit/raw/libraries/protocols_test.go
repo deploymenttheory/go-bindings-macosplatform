@@ -1,4 +1,4 @@
-package raw
+package rawlib
 
 import (
 	"bytes"
@@ -14,11 +14,11 @@ func newProtoFM(framework string, protocols map[string]macosplatformmetadata.Pro
 		classes = map[string]macosplatformmetadata.Class{}
 	}
 	return &macosplatformmetadata.FrameworkMeta{
-		Framework: framework,
-		Protocols: protocols,
-		Classes:   classes,
-		Enums:     map[string]macosplatformmetadata.Enum{},
-		Structs:   map[string]macosplatformmetadata.Struct{},
+		Framework:  framework,
+		Protocols:  protocols,
+		Classes:    classes,
+		Enums:      map[string]macosplatformmetadata.Enum{},
+		Structs:    map[string]macosplatformmetadata.Struct{},
 		BlockTypes: map[string]macosplatformmetadata.BlockType{},
 	}
 }
@@ -69,7 +69,7 @@ func TestProtocolBasicInterface(t *testing.T) {
 			Methods: []macosplatformmetadata.Method{
 				{
 					Selector: "copyWithZone:",
-					Params:     []macosplatformmetadata.Param{{Name: "zone", ObjCType: "void *"}},
+					Params:   []macosplatformmetadata.Param{{Name: "zone", ObjCType: "void *"}},
 					Return:   macosplatformmetadata.ReturnType{ObjCType: "id"},
 				},
 			},
@@ -135,7 +135,7 @@ func TestProtocolWithParentEmbed(t *testing.T) {
 		},
 		"NSCopying": {
 			InheritedProtocols: []string{"NSObject"},
-			Methods:    []macosplatformmetadata.Method{},
+			Methods:            []macosplatformmetadata.Method{},
 		},
 	}, nil)
 	out := runProtocols(t, framework)
@@ -152,7 +152,7 @@ func TestProtocolParentInOtherFrameworkNotEmbedded(t *testing.T) {
 		"NSChildProtocol": {
 			// "NSObject" is listed as a parent but is not in THIS framework's Protocols map.
 			InheritedProtocols: []string{"NSObject"},
-			Methods:    []macosplatformmetadata.Method{},
+			Methods:            []macosplatformmetadata.Method{},
 		},
 	}, nil)
 	out := runProtocols(t, framework)
@@ -177,7 +177,7 @@ func TestProtocolParentCrossFrameworkEmbed(t *testing.T) {
 	framework := newProtoFM("AppKit", map[string]macosplatformmetadata.Protocol{
 		"NSChildProtocol": {
 			InheritedProtocols: []string{"NSCopying"},
-			Methods:    []macosplatformmetadata.Method{},
+			Methods:            []macosplatformmetadata.Method{},
 		},
 	}, nil)
 	knownProtocols := map[string]string{"NSCopying": "Foundation"}
@@ -200,7 +200,7 @@ func TestProtocolParentCrossFrameworkBlocked(t *testing.T) {
 	framework := newProtoFM("AppKit", map[string]macosplatformmetadata.Protocol{
 		"NSChildProtocol": {
 			InheritedProtocols: []string{"NSCopying"},
-			Methods:    []macosplatformmetadata.Method{},
+			Methods:            []macosplatformmetadata.Method{},
 		},
 	}, nil)
 	knownProtocols := map[string]string{"NSCopying": "Foundation"}
@@ -254,7 +254,7 @@ func TestProtocolMethodNSError(t *testing.T) {
 		"NSWritable": {
 			Methods: []macosplatformmetadata.Method{
 				{
-					Selector:   "writeToURL:error:",
+					Selector:  "writeToURL:error:",
 					IsNSError: true,
 					Params: []macosplatformmetadata.Param{
 						{Name: "url", ObjCType: "void *"},

@@ -1,7 +1,9 @@
-package raw
+package rawlib
 
 import (
 	"fmt"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/view"
 	"io"
 	"sort"
 	"strings"
@@ -24,7 +26,7 @@ func EmitStructs(w io.Writer, framework *macosplatformmetadata.FrameworkMeta, m 
 			continue
 		}
 		model := buildStructModel(name, framework.Structs[name], framework.Framework, m, knownClasses, usedImports)
-		if err := executeTemplate(w, "struct", model); err != nil {
+		if err := render.Execute(w, "struct", model); err != nil {
 			return nil, err
 		}
 	}
@@ -36,12 +38,12 @@ func EmitStructs(w io.Writer, framework *macosplatformmetadata.FrameworkMeta, m 
 		primaryName := typedefNames[0]
 		goPrimary := naming.GoTypeName(primaryName)
 
-		if err := executeTemplate(w, "cf_wrapper", cfWrapperModel{GoName: goPrimary}); err != nil {
+		if err := render.Execute(w, "cf_wrapper", view.CfWrapperModel{GoName: goPrimary}); err != nil {
 			return nil, err
 		}
 		for _, alias := range typedefNames[1:] {
-			model := cfAliasModel{GoAlias: naming.GoTypeName(alias), GoPrimary: goPrimary}
-			if err := executeTemplate(w, "cf_alias", model); err != nil {
+			model := view.CfAliasModel{GoAlias: naming.GoTypeName(alias), GoPrimary: goPrimary}
+			if err := render.Execute(w, "cf_alias", model); err != nil {
 				return nil, err
 			}
 		}
@@ -68,7 +70,7 @@ func EmitStructs(w io.Writer, framework *macosplatformmetadata.FrameworkMeta, m 
 		if goAlias == goTarget {
 			continue
 		}
-		if err := executeTemplate(w, "struct_typedef", structTypedefModel{GoAlias: goAlias, GoTarget: goTarget}); err != nil {
+		if err := render.Execute(w, "struct_typedef", view.StructTypedefModel{GoAlias: goAlias, GoTarget: goTarget}); err != nil {
 			return nil, err
 		}
 	}
@@ -76,10 +78,10 @@ func EmitStructs(w io.Writer, framework *macosplatformmetadata.FrameworkMeta, m 
 	return usedImports, nil
 }
 
-func buildStructModel(name string, s macosplatformmetadata.Struct, framework string, m *typemap.Mapper, knownClasses map[string]bool, usedImports typemap.ImportSet) structModel {
+func buildStructModel(name string, s macosplatformmetadata.Struct, framework string, m *typemap.Mapper, knownClasses map[string]bool, usedImports typemap.ImportSet) view.StructModel {
 	ctx := m.BaseContext(framework, knownClasses)
 
-	fields := make([]structFieldModel, 0, len(s.Fields))
+	fields := make([]view.StructFieldModel, 0, len(s.Fields))
 	for i, f := range s.Fields {
 		fieldName := f.Name
 		if fieldName == "" {
@@ -94,9 +96,9 @@ func buildStructModel(name string, s macosplatformmetadata.Struct, framework str
 		if goType == "" {
 			goType = "unsafe.Pointer"
 		}
-		fields = append(fields, structFieldModel{Name: fieldName, GoType: goType})
+		fields = append(fields, view.StructFieldModel{Name: fieldName, GoType: goType})
 	}
-	return structModel{
+	return view.StructModel{
 		GoName:       naming.GoTypeName(name),
 		CommentBlock: renderCommentBlock(s.Doc, s.SDKFile, s.SDKLine, s.Availability, ""),
 		Fields:       fields,

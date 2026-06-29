@@ -1,4 +1,4 @@
-package raw
+package rawlib
 
 import (
 	"fmt"
@@ -83,7 +83,6 @@ func buildParamNames(args []macosplatformmetadata.Param) []string {
 	}
 	return names
 }
-
 
 // buildGoArgs converts method arguments to a Go parameter list.
 // If hasNSError is true the trailing NSError** arg has already been removed

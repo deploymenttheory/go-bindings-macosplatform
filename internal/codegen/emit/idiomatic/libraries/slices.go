@@ -1,4 +1,4 @@
-package library
+package idiolib
 
 import (
 	"bytes"
@@ -128,7 +128,9 @@ func EmitSlices(w io.Writer, pkgName, rawImportPath string, framework *macosplat
 	if needsFoundation {
 		extraImports["foundation"] = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	}
-	writeOpinionatedHeader(w, pkgName, rawImportPath, extraImports, nil, needsObjc)
+	if err := writeOpinionatedHeader(w, pkgName, rawImportPath, extraImports, nil, needsObjc); err != nil {
+		return err
+	}
 	_, err := w.Write(body.Bytes())
 	return err
 }

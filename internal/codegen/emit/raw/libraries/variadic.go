@@ -1,6 +1,11 @@
-package raw
+package rawlib
 
-import "io"
+import (
+	"io"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/view"
+)
 
 // EmitFoundationVariadicWrappers writes convenience variadic constructors for the
 // most commonly used Foundation collection classes (NSArray, NSMutableArray,
@@ -14,5 +19,5 @@ import "io"
 //
 // The generated file is written only for the Foundation framework.
 func EmitFoundationVariadicWrappers(w io.Writer, pkgName string) error {
-	return executeTemplate(w, "variadic_wrappers_file", variadicWrappersFileModel{PkgName: pkgName})
+	return render.Execute(w, "variadic_wrappers_file", view.VariadicWrappersFileModel{PkgName: pkgName})
 }

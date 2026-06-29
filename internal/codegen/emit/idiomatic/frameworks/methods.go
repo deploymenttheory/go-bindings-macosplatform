@@ -1,6 +1,6 @@
 //go:build darwin
 
-package idiomatic
+package idiofw
 
 import (
 	"fmt"
@@ -8,9 +8,9 @@ import (
 	"maps"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/idiomatic/render"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/idiomatic/view"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/view"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -275,7 +275,7 @@ func buildAsyncMethod(
 	// generated closure matches the raw method's parameter type. Degraded
 	// blocks come back as objc.Block and are rejected below.
 	blockImpSet := make(typemap.ImportSet)
-	blockGoType := emit.BlockGoFuncType(lastParam.ObjCType, ctx, mapper, blockImpSet, mapper.OwnerIndex)
+	blockGoType := rawfw.BlockGoFuncType(lastParam.ObjCType, ctx, mapper, blockImpSet, mapper.OwnerIndex)
 	if !strings.HasPrefix(blockGoType, "func(") || !strings.HasSuffix(blockGoType, ")") {
 		return nil
 	}

@@ -1,6 +1,6 @@
 //go:build darwin
 
-package idiomatic
+package idiofw
 
 import (
 	"fmt"
@@ -8,9 +8,9 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/idiomatic/render"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/idiomatic/view"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/view"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 )
@@ -114,11 +114,11 @@ func emitEnums(
 		imports["strings"] = "strings"
 	}
 
-	return emit.WriteGoFile(filepath.Join(outDir, enumsFile), assembleFile(pkgName, imports, body))
+	return rawfw.WriteGoFile(filepath.Join(outDir, enumsFile), assembleFile(pkgName, imports, body))
 }
 
 // buildEnumView populates the template view-model from raw metadata, matching
-// the raw emitter's decisions: underlying type via emit.MapEnumGoType +
+// the raw emitter's decisions: underlying type via rawfw.MapEnumGoType +
 // UpgradeEnumTypeIfOverflow, names via naming.GoTypeName, (name,value) dedup for
 // the const block, and value dedup for the String() switch.
 func buildEnumView(goName string, enum meta.Enum, prefix string) view.Enum {
@@ -126,8 +126,8 @@ func buildEnumView(goName string, enum meta.Enum, prefix string) view.Enum {
 	if goType == "" {
 		goType = "int64"
 	}
-	goType = emit.MapEnumGoType(goType)
-	goType = emit.UpgradeEnumTypeIfOverflow(goType, enum.Members)
+	goType = rawfw.MapEnumGoType(goType)
+	goType = rawfw.UpgradeEnumTypeIfOverflow(goType, enum.Members)
 
 	type nv struct{ name, value string }
 	seen := map[nv]bool{}

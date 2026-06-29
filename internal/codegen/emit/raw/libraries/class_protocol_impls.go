@@ -1,8 +1,10 @@
-package raw
+package rawlib
 
 import (
 	"bytes"
 	"fmt"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/view"
 	"os"
 	"path/filepath"
 	"sort"
@@ -98,13 +100,13 @@ func collectProtocolMethods(proto macosplatformmetadata.Protocol, m *typemap.Map
 
 // emitProtocolImplGo writes the Go factory for a protocol implementation object.
 func emitProtocolImplGo(w *bytes.Buffer, packageName, framework, protoName string, methods []overrideMethod, m *typemap.Mapper) error {
-	return executeTemplate(w, "protocol_impl_go_file", buildProtocolImplGoFileModel(packageName, framework, protoName, methods, m))
+	return render.Execute(w, "protocol_impl_go_file", buildProtocolImplGoFileModel(packageName, framework, protoName, methods, m))
 }
 
 // emitProtocolImplHeader writes the .h file for a protocol callback.
 func emitProtocolImplHeader(w *bytes.Buffer, protoName string, methods []overrideMethod) {
 	goClassName := "goBridge_Proto_" + protoName
-	_ = executeTemplate(w, "protocol_impl_h_file", protocolImplHFileModel{
+	_ = render.Execute(w, "protocol_impl_h_file", view.ProtocolImplHFileModel{
 		GoClassName: goClassName,
 		IMPSigs:     uniqueIMPSigsFor(methods),
 	})
@@ -113,7 +115,7 @@ func emitProtocolImplHeader(w *bytes.Buffer, protoName string, methods []overrid
 // emitProtocolImplImpl writes the .m file for a protocol callback.
 func emitProtocolImplImpl(w *bytes.Buffer, framework, protoName string, methods []overrideMethod) {
 	goClassName := "goBridge_Proto_" + protoName
-	_ = executeTemplate(w, "protocol_impl_m_file", protocolImplMFileModel{
+	_ = render.Execute(w, "protocol_impl_m_file", view.ProtocolImplMFileModel{
 		Framework:   framework,
 		ProtoName:   protoName,
 		GoClassName: goClassName,
@@ -122,7 +124,7 @@ func emitProtocolImplImpl(w *bytes.Buffer, framework, protoName string, methods 
 	})
 }
 
-func buildProtocolImplGoFileModel(packageName, framework, protoName string, methods []overrideMethod, m *typemap.Mapper) protocolImplGoFileModel {
+func buildProtocolImplGoFileModel(packageName, framework, protoName string, methods []overrideMethod, m *typemap.Mapper) view.ProtocolImplGoFileModel {
 	goClassName := "goBridge_Proto_" + protoName
 	callbacksStructName := protoName + "Callbacks"
 	factoryName := "New" + protoName + "ProtocolCallback"
@@ -195,7 +197,7 @@ func buildProtocolImplGoFileModel(packageName, framework, protoName string, meth
 		fmt.Fprintf(&returnBody, "\treturn wrapped")
 	}
 
-	return protocolImplGoFileModel{
+	return view.ProtocolImplGoFileModel{
 		PackageName:         packageName,
 		GoClassName:         goClassName,
 		ProtoName:           protoName,

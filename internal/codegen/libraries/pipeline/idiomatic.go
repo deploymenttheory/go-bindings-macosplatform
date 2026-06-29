@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/emit/library"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/libraries"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/typemap"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
 )
@@ -26,7 +26,7 @@ type IdiomaticConfig struct {
 // It mirrors the frameworks idiomatic pipeline but targets the CGo libraries,
 // wrapping the already-clean raw bindings with handle-method/free-function
 // wrappers and reusing the spec/slice/async scaffolding for any class-bearing
-// library.
+// idiolib.
 func GenerateIdiomaticLibraries(cfg IdiomaticConfig) error {
 	reg := cfg.Registry
 	m := buildMapper(reg, false)
@@ -71,16 +71,16 @@ func emitIdiomaticLibrary(outDir, pkgName, rawImportPath string, framework *maco
 		fn     func(*bytes.Buffer) error
 	}{
 		{"cfunctions", func(b *bytes.Buffer) error {
-			return library.EmitCFunctions(b, pkgName, rawImportPath, framework, m, knownClasses)
+			return idiolib.EmitCFunctions(b, pkgName, rawImportPath, framework, m, knownClasses)
 		}},
 		{"specs", func(b *bytes.Buffer) error {
-			return library.EmitSpecs(b, pkgName, rawImportPath, framework, m, knownClasses)
+			return idiolib.EmitSpecs(b, pkgName, rawImportPath, framework, m, knownClasses)
 		}},
 		{"slices", func(b *bytes.Buffer) error {
-			return library.EmitSlices(b, pkgName, rawImportPath, framework, m, knownClasses)
+			return idiolib.EmitSlices(b, pkgName, rawImportPath, framework, m, knownClasses)
 		}},
 		{"async", func(b *bytes.Buffer) error {
-			return library.EmitAsync(b, pkgName, rawImportPath, framework, m, knownClasses)
+			return idiolib.EmitAsync(b, pkgName, rawImportPath, framework, m, knownClasses)
 		}},
 	}
 

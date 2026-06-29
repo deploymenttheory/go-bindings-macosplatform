@@ -1,4 +1,4 @@
-package raw
+package rawlib
 
 import (
 	"testing"
@@ -11,7 +11,7 @@ import (
 func testMapper() *typemap.Mapper {
 	return &typemap.Mapper{
 		GenericClasses: map[string]bool{},
-		OwnerIndex: map[string]string{},
+		OwnerIndex:     map[string]string{},
 		ModulePrefix:   "github.com/example/fw",
 	}
 }
@@ -233,9 +233,9 @@ func TestBuildGoReturnNSError(t *testing.T) {
 	m := testMapper()
 	ctx := testCtx("Foundation")
 	method := macosplatformmetadata.Method{
-		Selector:   "readWithError:",
+		Selector:  "readWithError:",
 		IsNSError: true,
-		Return:     macosplatformmetadata.ReturnType{ObjCType: "NSUInteger"},
+		Return:    macosplatformmetadata.ReturnType{ObjCType: "NSUInteger"},
 	}
 	got := buildGoReturn(method, ctx, m, "", nil)
 	// uint64 + error → "(uint64, error)"
@@ -249,9 +249,9 @@ func TestBuildGoReturnNSErrorOnly(t *testing.T) {
 	m := testMapper()
 	ctx := testCtx("Foundation")
 	method := macosplatformmetadata.Method{
-		Selector:   "doThingWithError:",
+		Selector:  "doThingWithError:",
 		IsNSError: true,
-		Return:     macosplatformmetadata.ReturnType{ObjCType: ""},
+		Return:    macosplatformmetadata.ReturnType{ObjCType: ""},
 	}
 	// void + NSError → bare "error"
 	got := buildGoReturn(method, ctx, m, "", nil)

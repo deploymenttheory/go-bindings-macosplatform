@@ -1,15 +1,16 @@
 //go:build darwin
 
-package idiomatic
+package idiofw
 
 import (
 	"bytes"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"io"
 	"path/filepath"
 	"sort"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
 )
@@ -83,7 +84,7 @@ func emitDictionaryAugment(w io.Writer, className, goTypeName, _, _ string) {
 	if className != "NSMutableDictionary" {
 		return
 	}
-	renderTemplate(w, "dict_augment", struct {
+	render.Must(w, "dict_augment", struct {
 		GoTypeName string
 		RecvVar    string
 	}{GoTypeName: goTypeName, RecvVar: receiverName(goTypeName)})
@@ -140,7 +141,7 @@ func emitProvidersFile(
 		return nil
 	}
 	var body bytes.Buffer
-	if err := executeTemplate(&body, "providers", view); err != nil {
+	if err := render.Execute(&body, "providers", view); err != nil {
 		return err
 	}
 
@@ -151,5 +152,5 @@ func emitProvidersFile(
 
 	fname := pkgName + "_providers_generated.go"
 	file := assembleFile(pkgName, imports, body.Bytes())
-	return emit.WriteGoFile(filepath.Join(outDir, fname), file)
+	return rawfw.WriteGoFile(filepath.Join(outDir, fname), file)
 }

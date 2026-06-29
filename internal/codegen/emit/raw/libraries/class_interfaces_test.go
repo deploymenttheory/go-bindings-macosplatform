@@ -1,4 +1,4 @@
-package raw
+package rawlib
 
 import (
 	"bytes"
@@ -20,8 +20,8 @@ func ifaceTestMapper() *typemap.Mapper {
 		},
 		ModulePrefix:   "github.com/example/fw",
 		BlockedImports: map[string]map[string]bool{},
-		TypedefIndex:  map[string]string{},
-		StructIndex:   map[string]string{},
+		TypedefIndex:   map[string]string{},
+		StructIndex:    map[string]string{},
 	}
 }
 
@@ -145,7 +145,7 @@ func TestClassInterfacesSameFwSuperEmbeds(t *testing.T) {
 	framework := &macosplatformmetadata.FrameworkMeta{
 		Framework: "Foundation",
 		Classes: map[string]macosplatformmetadata.Class{
-			"NSObject": {},
+			"NSObject":  {},
 			"NSMyClass": {Super: "NSObject"},
 		},
 	}
@@ -298,8 +298,8 @@ func TestClassInterfacesCrossFwSuperEmbeds(t *testing.T) {
 		},
 		ModulePrefix:   "github.com/example/fw",
 		BlockedImports: map[string]map[string]bool{},
-		TypedefIndex:  map[string]string{},
-		StructIndex:   map[string]string{},
+		TypedefIndex:   map[string]string{},
+		StructIndex:    map[string]string{},
 	}
 	// NSView's super (NSObject) is in Foundation — cross-fw.
 	framework := &macosplatformmetadata.FrameworkMeta{

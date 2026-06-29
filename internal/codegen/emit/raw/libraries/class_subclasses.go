@@ -1,8 +1,10 @@
-package raw
+package rawlib
 
 import (
 	"bytes"
 	"fmt"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/view"
 	"os"
 	"path/filepath"
 	"sort"
@@ -141,13 +143,13 @@ func collectOverridableMethods(cls macosplatformmetadata.Class, m *typemap.Mappe
 
 // emitSubclassGo writes the Go factory file for NSFoo → goBridgeSub_NSFoo.
 func emitSubclassGo(w *bytes.Buffer, packageName, framework, className string, methods []overrideMethod, m *typemap.Mapper) error {
-	return executeTemplate(w, "subclass_go_file", buildSubclassGoFileModel(packageName, framework, className, methods))
+	return render.Execute(w, "subclass_go_file", buildSubclassGoFileModel(packageName, framework, className, methods))
 }
 
 // emitSubclassHeader writes the .h file declaring the C bridge functions.
 func emitSubclassHeader(w *bytes.Buffer, className string, methods []overrideMethod) {
 	goClassName := "goBridge_Sub_" + className
-	_ = executeTemplate(w, "subclass_h_file", subclassHFileModel{
+	_ = render.Execute(w, "subclass_h_file", view.SubclassHFileModel{
 		GoClassName: goClassName,
 		IMPSigs:     uniqueIMPSigsFor(methods),
 	})
@@ -156,7 +158,7 @@ func emitSubclassHeader(w *bytes.Buffer, className string, methods []overrideMet
 // emitSubclassImpl writes the .m file that creates the per-instance subclass.
 func emitSubclassImpl(w *bytes.Buffer, framework, className string, methods []overrideMethod) {
 	goClassName := "goBridge_Sub_" + className
-	_ = executeTemplate(w, "subclass_m_file", subclassMFileModel{
+	_ = render.Execute(w, "subclass_m_file", view.SubclassMFileModel{
 		Framework:   framework,
 		ClassName:   className,
 		GoClassName: goClassName,
@@ -165,7 +167,7 @@ func emitSubclassImpl(w *bytes.Buffer, framework, className string, methods []ov
 	})
 }
 
-func buildSubclassGoFileModel(packageName, framework, className string, methods []overrideMethod) subclassGoFileModel {
+func buildSubclassGoFileModel(packageName, framework, className string, methods []overrideMethod) view.SubclassGoFileModel {
 	goClassName := "goBridge_Sub_" + className
 	impSigs := uniqueIMPSigsFor(methods)
 
@@ -200,7 +202,7 @@ func buildSubclassGoFileModel(packageName, framework, className string, methods 
 		fmt.Fprintf(&bindMethodBody, "\t\t}\n")
 	}
 
-	return subclassGoFileModel{
+	return view.SubclassGoFileModel{
 		ClassName:       className,
 		GoClassName:     goClassName,
 		PackageName:     packageName,

@@ -3,7 +3,7 @@ package render
 import (
 	"testing"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/idiomatic/view"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/view"
 )
 
 // TestStructs locks the rendered form of value structs: a documented struct, an

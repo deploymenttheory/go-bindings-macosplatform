@@ -1,4 +1,4 @@
-package library
+package idiolib
 
 import (
 	"bytes"
@@ -7,7 +7,9 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/emit/raw"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/libraries/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/libraries/view"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/typemap"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
@@ -60,7 +62,7 @@ func EmitCFunctions(w io.Writer, pkgName, rawImportPath string, framework *macos
 		rawGoName string
 	}
 	var eligible []efn
-	for _, fn := range raw.EmittableFunctions(framework) {
+	for _, fn := range rawlib.EmittableFunctions(framework) {
 		rawGoName := naming.GoTypeName(fn.Name)
 		if !isExportedName(rawGoName) || fnHasBlockArg(fn, m) {
 			continue
@@ -116,11 +118,15 @@ func EmitCFunctions(w io.Writer, pkgName, rawImportPath string, framework *macos
 				seenByGo[recvGo] = map[string]bool{}
 			}
 			name := dedup(methodGoName(e.fn.Name, recvBase, prefix), seenByGo[recvGo])
-			writeWrapperFunc(buf, "(h "+recvGo+") ", name, e.rawGoName,
-				append([]string{"h.ptr"}, callArgs...), sig, retKind, retType)
+			if err := writeWrapperFunc(buf, "(h "+recvGo+") ", name, e.rawGoName,
+				append([]string{"h.ptr"}, callArgs...), sig, retKind, retType); err != nil {
+				return err
+			}
 		} else {
 			name := dedup(freeFuncGoName(e.fn.Name, prefix), freeSeen)
-			writeWrapperFunc(&freeFns, "", name, e.rawGoName, callArgs, sig, retKind, retType)
+			if err := writeWrapperFunc(&freeFns, "", name, e.rawGoName, callArgs, sig, retKind, retType); err != nil {
+				return err
+			}
 		}
 	}
 
@@ -135,15 +141,16 @@ func EmitCFunctions(w io.Writer, pkgName, rawImportPath string, framework *macos
 	}
 	sort.Strings(goNames)
 	for _, goName := range goNames {
-		base := goToBase[goName]
-		fmt.Fprintf(&body, "// %s wraps the C handle %s.\n", goName, base)
-		fmt.Fprintf(&body, "type %s struct{ ptr unsafe.Pointer }\n\n", goName)
-		fmt.Fprintf(&body, "// Wrap%s adopts an existing %s handle.\n", goName, base)
-		fmt.Fprintf(&body, "func Wrap%s(p unsafe.Pointer) %s { return %s{ptr: p} }\n\n", goName, goName, goName)
-		fmt.Fprintf(&body, "// Ptr returns the underlying %s handle.\n", base)
-		fmt.Fprintf(&body, "func (h %s) Ptr() unsafe.Pointer { return h.ptr }\n\n", goName)
+		methods := ""
 		if buf := methodsByGo[goName]; buf != nil {
-			body.Write(buf.Bytes())
+			methods = buf.String()
+		}
+		if err := render.Execute(&body, "handle_wrapper", view.HandleWrapperModel{
+			GoName:  goName,
+			Base:    goToBase[goName],
+			Methods: methods,
+		}); err != nil {
+			return err
 		}
 	}
 	body.Write(freeFns.Bytes())
@@ -158,29 +165,24 @@ func EmitCFunctions(w io.Writer, pkgName, rawImportPath string, framework *macos
 	if bytes.Contains(body.Bytes(), []byte("fmt.")) {
 		extraImports["fmt"] = "fmt"
 	}
-	writeOpinionatedHeader(w, pkgName, rawImportPath, extraImports, usedImports, false)
+	if err := writeOpinionatedHeader(w, pkgName, rawImportPath, extraImports, usedImports, false); err != nil {
+		return err
+	}
 	_, err := w.Write(body.Bytes())
 	return err
 }
 
-// writeWrapperFunc emits one idiomatic function or method forwarding to the raw
+// writeWrapperFunc renders one idiomatic function or method forwarding to the raw
 // binding. recvPrefix is "" for a free function or "(h T) " for a method.
-func writeWrapperFunc(w io.Writer, recvPrefix, goName, rawGoName string, callArgs, sig []string, retKind int, retType string) {
-	call := fmt.Sprintf("raw.%s(%s)", rawGoName, strings.Join(callArgs, ", "))
-	params := strings.Join(sig, ", ")
-	switch retKind {
-	case retVoid:
-		fmt.Fprintf(w, "func %s%s(%s) {\n\t%s\n}\n\n", recvPrefix, goName, params, call)
-	case retError:
-		fmt.Fprintf(w, "func %s%s(%s) error {\n", recvPrefix, goName, params)
-		fmt.Fprintf(w, "\tif _rc := %s; _rc != 0 {\n", call)
-		fmt.Fprintf(w, "\t\treturn fmt.Errorf(%q+\": status %%d\", _rc)\n", goName)
-		fmt.Fprintf(w, "\t}\n\treturn nil\n}\n\n")
-	case retHandle:
-		fmt.Fprintf(w, "func %s%s(%s) %s {\n\treturn Wrap%s(%s)\n}\n\n", recvPrefix, goName, params, retType, retType, call)
-	default: // retPlain
-		fmt.Fprintf(w, "func %s%s(%s) %s {\n\treturn %s\n}\n\n", recvPrefix, goName, params, retType, call)
-	}
+func writeWrapperFunc(w io.Writer, recvPrefix, goName, rawGoName string, callArgs, sig []string, retKind int, retType string) error {
+	return render.Execute(w, "wrapper_func", view.WrapperFuncModel{
+		RecvPrefix: recvPrefix,
+		GoName:     goName,
+		Params:     strings.Join(sig, ", "),
+		Call:       fmt.Sprintf("raw.%s(%s)", rawGoName, strings.Join(callArgs, ", ")),
+		RetKind:    retKind,
+		RetType:    retType,
+	})
 }
 
 // buildIdiomaticParams maps the (non-receiver) parameters to idiomatic Go types
@@ -351,7 +353,7 @@ func freeFuncGoName(cName, prefix string) string {
 // underscore) across the library's emittable function names.
 func detectSymbolPrefix(framework *macosplatformmetadata.FrameworkMeta) string {
 	counts := map[string]int{}
-	for _, fn := range raw.EmittableFunctions(framework) {
+	for _, fn := range rawlib.EmittableFunctions(framework) {
 		if i := strings.IndexByte(fn.Name, '_'); i > 0 {
 			counts[fn.Name[:i]]++
 		}

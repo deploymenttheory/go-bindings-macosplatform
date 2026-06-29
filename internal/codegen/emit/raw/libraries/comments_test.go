@@ -1,4 +1,4 @@
-package raw
+package rawlib
 
 import (
 	"bytes"
@@ -436,9 +436,9 @@ func TestWriteMethodBodyVoidNSError(t *testing.T) {
 	cls := macosplatformmetadata.Class{
 		Methods: []macosplatformmetadata.Method{
 			{
-				Selector:   "doThingWithError:",
+				Selector:  "doThingWithError:",
 				IsNSError: true,
-				Return:     macosplatformmetadata.ReturnType{ObjCType: "void"},
+				Return:    macosplatformmetadata.ReturnType{ObjCType: "void"},
 			},
 		},
 	}
@@ -681,9 +681,9 @@ func TestBridgeImplInstancetypeNSError(t *testing.T) {
 			"NSObject": {
 				Methods: []macosplatformmetadata.Method{
 					{
-						Selector:   "initWithError:",
+						Selector:  "initWithError:",
 						IsNSError: true,
-						Return:     macosplatformmetadata.ReturnType{ObjCType: "instancetype", IsInstancetype: true},
+						Return:    macosplatformmetadata.ReturnType{ObjCType: "instancetype", IsInstancetype: true},
 					},
 				},
 			},
@@ -794,12 +794,12 @@ func TestBuildValueChainGenericParentNonGenericChild(t *testing.T) {
 	// Non-generic child of a generic same-fw super → embeds NSArray[cgo.Object].
 	m := &typemap.Mapper{
 		GenericClasses: map[string]bool{"NSArray": true},
-		OwnerIndex: map[string]string{"NSArray": "Foundation"},
+		OwnerIndex:     map[string]string{"NSArray": "Foundation"},
 		ModulePrefix:   "github.com/example/fw",
 		BlockedImports: map[string]map[string]bool{},
 	}
 	fmClasses := map[string]macosplatformmetadata.Class{
-		"NSArray":    {GenericParams: []string{"ObjectType"}},
+		"NSArray":        {GenericParams: []string{"ObjectType"}},
 		"NSSpecialArray": {Super: "NSArray"},
 	}
 	result := buildValueChainInner("NSSpecialArray", "", "Foundation", fmClasses, m, nil)
@@ -815,7 +815,7 @@ func TestBuildValueChainGenericParentGenericChild(t *testing.T) {
 	// Generic child of generic same-fw super with genSuffix=[T] → propagates [T].
 	m := &typemap.Mapper{
 		GenericClasses: map[string]bool{"NSArray": true},
-		OwnerIndex: map[string]string{"NSArray": "Foundation"},
+		OwnerIndex:     map[string]string{"NSArray": "Foundation"},
 		ModulePrefix:   "github.com/example/fw",
 		BlockedImports: map[string]map[string]bool{},
 	}
@@ -833,7 +833,7 @@ func TestBuildValueChainCrossFWGenericTypedWithPtr(t *testing.T) {
 	// Cross-fw generic parent with genSuffix=[T] → uses TypedWithPtr constructor.
 	m := &typemap.Mapper{
 		GenericClasses: map[string]bool{"NSArray": true},
-		OwnerIndex: map[string]string{"NSArray": "Foundation"},
+		OwnerIndex:     map[string]string{"NSArray": "Foundation"},
 		ModulePrefix:   "github.com/example/fw",
 		BlockedImports: map[string]map[string]bool{},
 	}

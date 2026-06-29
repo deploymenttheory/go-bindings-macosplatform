@@ -1,4 +1,4 @@
-package library
+package idiolib
 
 import (
 	"bytes"
@@ -17,11 +17,11 @@ func libTestMapper() *typemap.Mapper {
 			"NSObject": "Foundation",
 			"NSString": "Foundation",
 		},
-		ModulePrefix:         "github.com/example/fw",
-		BlockedImports:       map[string]map[string]bool{},
-		TypedefIndex:        map[string]string{},
-		StructIndex:         map[string]string{},
-		ProtocolIndex:       map[string]string{},
+		ModulePrefix:       "github.com/example/fw",
+		BlockedImports:     map[string]map[string]bool{},
+		TypedefIndex:       map[string]string{},
+		StructIndex:        map[string]string{},
+		ProtocolIndex:      map[string]string{},
 		ProtocolProxyIndex: map[string]string{},
 	}
 }
@@ -301,7 +301,9 @@ func TestLibraryAddRawPrefixCrossFramework(t *testing.T) {
 
 func TestWriteOpinionatedHeader(t *testing.T) {
 	var buf bytes.Buffer
-	writeOpinionatedHeader(&buf, "virtualization", "github.com/example/fw/virtualization", nil, nil, false)
+	if err := writeOpinionatedHeader(&buf, "virtualization", "github.com/example/fw/virtualization", nil, nil, false); err != nil {
+		t.Fatal(err)
+	}
 	out := buf.String()
 	if !strings.Contains(out, "package virtualization") {
 		t.Errorf("expected package declaration; got:\n%s", out)
@@ -316,7 +318,9 @@ func TestWriteOpinionatedHeader(t *testing.T) {
 
 func TestWriteOpinionatedHeaderNeedsObjc(t *testing.T) {
 	var buf bytes.Buffer
-	writeOpinionatedHeader(&buf, "virtualization", "github.com/example/fw/virtualization", nil, nil, true)
+	if err := writeOpinionatedHeader(&buf, "virtualization", "github.com/example/fw/virtualization", nil, nil, true); err != nil {
+		t.Fatal(err)
+	}
 	out := buf.String()
 	if !strings.Contains(out, "cgo") {
 		t.Errorf("expected objc import when needsObjc=true; got:\n%s", out)
@@ -328,7 +332,9 @@ func TestWriteOpinionatedHeaderWithExtraImport(t *testing.T) {
 	extraImports := map[string]string{
 		"foundation": "github.com/example/fw/bindings/frameworks/foundation",
 	}
-	writeOpinionatedHeader(&buf, "mylib", "github.com/example/fw/mylib", extraImports, nil, false)
+	if err := writeOpinionatedHeader(&buf, "mylib", "github.com/example/fw/mylib", extraImports, nil, false); err != nil {
+		t.Fatal(err)
+	}
 	out := buf.String()
 	if !strings.Contains(out, "foundation") {
 		t.Errorf("expected foundation import; got:\n%s", out)
@@ -388,7 +394,7 @@ func TestAsyncUnavailableClassSkipped(t *testing.T) {
 			Methods: []macosplatformmetadata.Method{
 				{
 					Selector: "loadWithCompletionHandler:",
-					Params:     []macosplatformmetadata.Param{{Name: "handler", ObjCType: "void (^)(NSError *)", IsBlock: true}},
+					Params:   []macosplatformmetadata.Param{{Name: "handler", ObjCType: "void (^)(NSError *)", IsBlock: true}},
 					Return:   macosplatformmetadata.ReturnType{ObjCType: "void"},
 				},
 			},
@@ -411,7 +417,7 @@ func TestAsyncClassMethod(t *testing.T) {
 				{
 					Selector:      "loadWithCompletionHandler:",
 					IsClassMethod: true,
-					Params:          []macosplatformmetadata.Param{{Name: "handler", ObjCType: "void (^)(NSError *)", IsBlock: true}},
+					Params:        []macosplatformmetadata.Param{{Name: "handler", ObjCType: "void (^)(NSError *)", IsBlock: true}},
 					Return:        macosplatformmetadata.ReturnType{ObjCType: "void"},
 				},
 			},
@@ -802,13 +808,13 @@ func TestSpecsBoolField(t *testing.T) {
 // TestSpecsValueStructField verifies a value struct property generates != zero-value check.
 func TestSpecsValueStructField(t *testing.T) {
 	m := &typemap.Mapper{
-		GenericClasses:       map[string]bool{},
-		OwnerIndex:       map[string]string{},
-		ModulePrefix:         "github.com/example/fw",
-		BlockedImports:       map[string]map[string]bool{},
-		TypedefIndex:        map[string]string{},
-		StructIndex:         map[string]string{"CGRect": "CoreGraphics"},
-		ProtocolIndex:       map[string]string{},
+		GenericClasses:     map[string]bool{},
+		OwnerIndex:         map[string]string{},
+		ModulePrefix:       "github.com/example/fw",
+		BlockedImports:     map[string]map[string]bool{},
+		TypedefIndex:       map[string]string{},
+		StructIndex:        map[string]string{"CGRect": "CoreGraphics"},
+		ProtocolIndex:      map[string]string{},
 		ProtocolProxyIndex: map[string]string{},
 	}
 	framework := &macosplatformmetadata.FrameworkMeta{
@@ -849,7 +855,7 @@ func TestSpecsSliceField(t *testing.T) {
 	framework := &macosplatformmetadata.FrameworkMeta{
 		Framework: "Virtualization",
 		Classes: map[string]macosplatformmetadata.Class{
-			"VZStorage":           {},
+			"VZStorage": {},
 			"VZFooConfiguration": {
 				Methods: []macosplatformmetadata.Method{
 					{Selector: "setStorages:", Params: []macosplatformmetadata.Param{{Name: "v", ObjCType: "NSArray<VZStorage *> *"}}, Return: macosplatformmetadata.ReturnType{ObjCType: "void"}},

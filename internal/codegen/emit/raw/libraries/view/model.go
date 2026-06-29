@@ -1,9 +1,9 @@
-package raw
+package view
 
 // ─── Enums ────────────────────────────────────────────────────────────────────
 
-// enumMemberModel is template data for a single enum constant.
-type enumMemberModel struct {
+// EnumMemberModel is template data for a single enum constant.
+type EnumMemberModel struct {
 	ConstName    string // Go identifier for the constant (e.g. NSOrderedAscending)
 	Value        string // Raw value expression (e.g. "-1", "0x1")
 	ObjCName     string // Original ObjC name; used as the string in String() and Parse()
@@ -11,55 +11,55 @@ type enumMemberModel struct {
 	IsZeroVal    bool   // Bitmask enums: this member represents the zero-value case
 }
 
-// enumModel is template data for a named ObjC enum.
-type enumModel struct {
+// EnumModel is template data for a named ObjC enum.
+type EnumModel struct {
 	GoName        string            // Go type name (e.g. NSComparisonResult)
 	GoType        string            // Underlying Go type (e.g. int64, uint64)
 	IsBitmask     bool              // Bitmask enums use | combination, not switch
 	HasMembers    bool              // Whether helper methods (String, Parse, etc.) should be emitted
 	CommentBlock  string            // Pre-rendered type-level comment lines (may be empty)
-	Members       []enumMemberModel // All members for the const block
-	UniqueMembers []enumMemberModel // Deduped members for the String() switch (non-bitmask only)
+	Members       []EnumMemberModel // All members for the const block
+	UniqueMembers []EnumMemberModel // Deduped members for the String() switch (non-bitmask only)
 	FirstConst    string            // First constant name; seeds result in ParseX (non-bitmask only)
 	DefaultFmt    string            // Format string for String() default case, e.g. "NSFoo(%d)"
 }
 
 // ─── Externs ──────────────────────────────────────────────────────────────────
 
-// externItemModel is template data for one extern var declaration.
-type externItemModel struct {
+// ExternItemModel is template data for one extern var declaration.
+type ExternItemModel struct {
 	GoName       string // Go identifier
 	GoType       string // Go type string
 	CommentBlock string // Pre-rendered comment lines with "\t" prefix (may be empty)
 }
 
-// externsFileModel is template data for a complete _externs.go file.
-type externsFileModel struct {
+// ExternsFileModel is template data for a complete _externs.go file.
+type ExternsFileModel struct {
 	PkgName string
 	Imports []string
-	Items   []externItemModel
+	Items   []ExternItemModel
 }
 
 // ─── Structs ──────────────────────────────────────────────────────────────────
 
-// structFieldModel is template data for one field in a C struct.
-type structFieldModel struct {
+// StructFieldModel is template data for one field in a C struct.
+type StructFieldModel struct {
 	Name   string
 	GoType string
 }
 
-// structModel is template data for a regular C struct type definition.
-type structModel struct {
+// StructModel is template data for a regular C struct type definition.
+type StructModel struct {
 	GoName       string
 	CommentBlock string
-	Fields       []structFieldModel
+	Fields       []StructFieldModel
 }
 
-// classStructModel is template data for an ObjC class's Go struct: a root class
+// ClassStructModel is template data for an ObjC class's Go struct: a root class
 // owns the unsafe.Pointer field and a promoted Ptr() accessor, while a non-root
 // class embeds its immediate superclass by value. Both emit a compile-time
 // cgo.Object interface assertion.
-type classStructModel struct {
+type ClassStructModel struct {
 	// CommentBlock is the wraps/superclass/protocols/swift-name doc plus the
 	// shared context comments (column 0, trailing newline).
 	CommentBlock string
@@ -79,10 +79,10 @@ type classStructModel struct {
 	AssertType string
 }
 
-// classConstructorsModel is template data for a class's core constructors: the
+// ClassConstructorsModel is template data for a class's core constructors: the
 // tracked New<Class> pointer constructor, the untracked <Class>WithPtr value
 // constructor (for embedding in subclass literals), and the Cast<Class> helper.
-type classConstructorsModel struct {
+type ClassConstructorsModel struct {
 	Name string
 	// GenSuffix is "[cgo.Object]" for a generic class, otherwise empty.
 	GenSuffix string
@@ -94,11 +94,11 @@ type classConstructorsModel struct {
 	ValueChain string
 }
 
-// designatedInitModel is template data for one New<Class>With<Arg> factory
+// DesignatedInitModel is template data for one New<Class>With<Arg> factory
 // generated from a designated initializer. The factory allocates via the class
 // alloc bridge, wraps the result untracked, calls the Go init method, and
 // converts its result according to Kind.
-type designatedInitModel struct {
+type DesignatedInitModel struct {
 	CtorName  string
 	ClassName string
 	Selector  string
@@ -112,10 +112,10 @@ type designatedInitModel struct {
 	Kind int
 }
 
-// methodBodyModel is template data for a CGo method body: the keep-alive
+// MethodBodyModel is template data for a CGo method body: the keep-alive
 // defers, argument preambles, the C call, exception/NSError handling, and the
 // return conversion selected by RetKind.
-type methodBodyModel struct {
+type MethodBodyModel struct {
 	// HasReceiver emits `defer cgo.KeepAlive(<ReceiverVar>)` for instance methods
 	// and id<Protocol> proxy methods.
 	HasReceiver bool
@@ -144,10 +144,10 @@ type methodBodyModel struct {
 	WrapTypedExpr string
 }
 
-// classMethodModel is template data for one generated instance or class method:
+// ClassMethodModel is template data for one generated instance or class method:
 // the doc/annotation preamble, the bridge-ID comment, the signature, and the
 // resolved CGo body.
-type classMethodModel struct {
+type ClassMethodModel struct {
 	// PreambleComment is the doc/context comments plus designated-init,
 	// warn-unused, swift-name, blocked-import, and out-parameter notes (column 0).
 	PreambleComment string
@@ -166,40 +166,40 @@ type classMethodModel struct {
 	// RetStr is the return clause, " T" or empty.
 	RetStr string
 	// Body is the resolved method body.
-	Body methodBodyModel
+	Body MethodBodyModel
 	// Skip renders only the preamble comment (no function): a class method whose
 	// generated name collides with a package-level type is dropped, but — matching
 	// the original — its doc comment is still emitted.
 	Skip bool
 }
 
-// codingMethodsModel is template data for the NSSecureCoding/NSCoding archive
+// CodingMethodsModel is template data for the NSSecureCoding/NSCoding archive
 // convenience methods (SerializeToArchive + New<Class>FromArchive).
-type codingMethodsModel struct {
+type CodingMethodsModel struct {
 	Name          string
 	SerializeFn   string
 	DeserializeFn string
 }
 
-// genericHelperModel is template data for the New<Class>T[T] typed constructor a
+// GenericHelperModel is template data for the New<Class>T[T] typed constructor a
 // generic class exposes so generic subclasses can build it with a preserved type
 // parameter (rather than the cgo.Object instantiation).
-type genericHelperModel struct {
+type GenericHelperModel struct {
 	Name   string
 	TChain string // the &Class[T]{…} value chain
 }
 
-// typedWithPtrModel is template data for the <Class>TypedWithPtr[T] untracked
+// TypedWithPtrModel is template data for the <Class>TypedWithPtr[T] untracked
 // value constructor used by generic subclasses in other packages.
-type typedWithPtrModel struct {
+type TypedWithPtrModel struct {
 	Name        string
 	TValueChain string // the Class[T]{…} value chain (no leading &)
 }
 
-// nsStringOverloadModel is template data for a "…Go" Go-string convenience
+// NsStringOverloadModel is template data for a "…Go" Go-string convenience
 // overload: a thin wrapper that converts its Go-string arguments and forwards to
 // the underlying generated method/function.
-type nsStringOverloadModel struct {
+type NsStringOverloadModel struct {
 	// Signature is the full function signature up to the opening brace.
 	Signature string
 	// HasReturn is true when the wrapped call's result is returned.
@@ -208,53 +208,53 @@ type nsStringOverloadModel struct {
 	CallExpr string
 }
 
-// cfWrapperModel is template data for a CoreFoundation opaque pointer wrapper type.
-type cfWrapperModel struct {
+// CfWrapperModel is template data for a CoreFoundation opaque pointer wrapper type.
+type CfWrapperModel struct {
 	GoName string // Primary type name, e.g. CFStringRef
 }
 
-// cfAliasModel is template data for a CF typedef alias pointing to a primary wrapper.
-type cfAliasModel struct {
+// CfAliasModel is template data for a CF typedef alias pointing to a primary wrapper.
+type CfAliasModel struct {
 	GoAlias   string // e.g. CFMutableStringRef
 	GoPrimary string // e.g. CFStringRef
 }
 
-// structTypedefModel is template data for a non-CF struct typedef alias.
-type structTypedefModel struct {
+// StructTypedefModel is template data for a non-CF struct typedef alias.
+type StructTypedefModel struct {
 	GoAlias  string
 	GoTarget string
 }
 
 // ─── Protocols ────────────────────────────────────────────────────────────────
 
-// protocolMethodModel is template data for one method in a protocol interface.
-type protocolMethodModel struct {
+// ProtocolMethodModel is template data for one method in a protocol interface.
+type ProtocolMethodModel struct {
 	GoName string // Go method name
 	Params string // Full parameter list string of mapped ObjC args
 	Ret    string // Return type string, empty for void
 }
 
-// protocolModel is template data for one ObjC @protocol → Go interface.
-type protocolModel struct {
+// ProtocolModel is template data for one ObjC @protocol → Go interface.
+type ProtocolModel struct {
 	GoName        string
 	ObjCName      string
 	AvailComment  string   // e.g. "Introduced: macOS 10.9" — empty when not set
 	Embeds        []string // Embedded interface identifiers (same-fw and cross-fw)
 	EmbedComments []string // Comment lines for blocked cross-fw embeds
-	Methods       []protocolMethodModel
+	Methods       []ProtocolMethodModel
 }
 
-// protocolsFileModel is template data for a complete _protocols.go file.
-type protocolsFileModel struct {
+// ProtocolsFileModel is template data for a complete _protocols.go file.
+type ProtocolsFileModel struct {
 	PkgName   string
 	Imports   []string
-	Protocols []protocolModel
+	Protocols []ProtocolModel
 }
 
 // ─── Functions ────────────────────────────────────────────────────────────────
 
-// functionModel is template data for one C function → Go wrapper.
-type functionModel struct {
+// FunctionModel is template data for one C function → Go wrapper.
+type FunctionModel struct {
 	CommentBlock string
 	BridgeID     string // e.g. "Foundation/NSStringFromClass"
 	IsWarnUnused bool
@@ -269,19 +269,19 @@ type functionModel struct {
 	CallBody string
 }
 
-// functionsFileModel is template data for a complete _functions.go file.
-type functionsFileModel struct {
+// FunctionsFileModel is template data for a complete _functions.go file.
+type FunctionsFileModel struct {
 	PkgName   string
 	FwLower   string
 	Imports   []string
-	Functions []functionModel
+	Functions []FunctionModel
 }
 
 // ─── Classes ──────────────────────────────────────────────────────────────────
 
-// classFileHeaderModel is template data for the generated header section of a class file:
+// ClassFileHeaderModel is template data for the generated header section of a class file:
 // the generated-code comment, build tag, package declaration, CGo include, and import block.
-type classFileHeaderModel struct {
+type ClassFileHeaderModel struct {
 	Framework    string   // e.g. "Foundation"
 	PkgName      string   // e.g. "foundation"
 	BridgeHeader string   // e.g. "foundation_bridge.h"
@@ -290,39 +290,39 @@ type classFileHeaderModel struct {
 
 // ─── Bridge ───────────────────────────────────────────────────────────────────
 
-// bridgeDeclModel is template data for one C function declaration in a bridge header.
-type bridgeDeclModel struct {
+// BridgeDeclModel is template data for one C function declaration in a bridge header.
+type BridgeDeclModel struct {
 	Entitlements []string // // Requires entitlement: ... lines
 	BridgeID     string   // e.g. "Foundation.NSString/stringWithCString:encoding:"
 	Decl         string   // complete C declaration, without trailing semicolon
 }
 
-// bridgeAllocModel is template data for one alloc helper (declaration and implementation).
-type bridgeAllocModel struct {
+// BridgeAllocModel is template data for one alloc helper (declaration and implementation).
+type BridgeAllocModel struct {
 	ClassName string // ObjC class name, e.g. "NSWindow"
 	FuncName  string // C function name, e.g. "foundation_NSWindow_alloc"
 }
 
-// bridgeProtoDeclModel is template data for a protocol proxy bridge declaration.
-type bridgeProtoDeclModel struct {
+// BridgeProtoDeclModel is template data for a protocol proxy bridge declaration.
+type BridgeProtoDeclModel struct {
 	BridgeID string
 	RetType  string
 	FuncName string
 	Params   string
 }
 
-// bridgeHeaderModel is template data for a complete _bridge.h file.
-type bridgeHeaderModel struct {
-	MethodDecls   []bridgeDeclModel
-	AllocHelpers  []bridgeAllocModel
+// BridgeHeaderModel is template data for a complete _bridge.h file.
+type BridgeHeaderModel struct {
+	MethodDecls   []BridgeDeclModel
+	AllocHelpers  []BridgeAllocModel
 	CodingDecls   string // pre-rendered NSCoding declarations block
-	FunctionDecls []bridgeDeclModel
-	ForeignDecls  []bridgeDeclModel
-	ProtoDecls    []bridgeProtoDeclModel
+	FunctionDecls []BridgeDeclModel
+	ForeignDecls  []BridgeDeclModel
+	ProtoDecls    []BridgeProtoDeclModel
 }
 
-// bridgeImplMethodModel is template data for one ObjC bridge function implementation.
-type bridgeImplMethodModel struct {
+// BridgeImplMethodModel is template data for one ObjC bridge function implementation.
+type BridgeImplMethodModel struct {
 	Entitlements      []string
 	BridgeID          string
 	RetType           string // C return type, e.g. "void *" or "bool"
@@ -337,14 +337,14 @@ type bridgeImplMethodModel struct {
 	CatchReturn string // zero-value return for @catch, e.g. "return nil;" or ""
 }
 
-// bridgeAllocImplModel is template data for one alloc helper implementation.
-type bridgeAllocImplModel struct {
+// BridgeAllocImplModel is template data for one alloc helper implementation.
+type BridgeAllocImplModel struct {
 	ClassName string
 	FuncName  string
 }
 
-// bridgeImplModel is template data for a complete _bridge.m file.
-type bridgeImplModel struct {
+// BridgeImplModel is template data for a complete _bridge.m file.
+type BridgeImplModel struct {
 	Framework       string
 	ParentFramework string
 	// UmbrellaHeader is the C library umbrella include path relative to the
@@ -352,24 +352,24 @@ type bridgeImplModel struct {
 	// replaces the framework-style <Name/Name.h> import.
 	UmbrellaHeader string
 	HeaderName     string
-	Methods        []bridgeImplMethodModel
-	AllocImpls     []bridgeAllocImplModel
+	Methods        []BridgeImplMethodModel
+	AllocImpls     []BridgeAllocImplModel
 	CodingImpls    string // pre-rendered NSCoding implementation block
-	Functions      []bridgeImplMethodModel
-	ForeignMethods []bridgeImplMethodModel
-	ProtoMethods   []bridgeImplMethodModel
+	Functions      []BridgeImplMethodModel
+	ForeignMethods []BridgeImplMethodModel
+	ProtoMethods   []BridgeImplMethodModel
 }
 
-// bridgeShimModel is template data for the package-root _bridge_impl.m shim file.
+// BridgeShimModel is template data for the package-root _bridge_impl.m shim file.
 // This file includes the real bridge implementation so CGo can find the symbols.
-type bridgeShimModel struct {
+type BridgeShimModel struct {
 	Stem string // e.g. "foundation_bridge" (produces bridge/foundation_bridge.m include)
 }
 
 // ─── Blocks ───────────────────────────────────────────────────────────────────
 
-// blockTypeModel is template data for one ObjC block typedef → Go named func type alias.
-type blockTypeModel struct {
+// BlockTypeModel is template data for one ObjC block typedef → Go named func type alias.
+type BlockTypeModel struct {
 	GoName    string // Go type alias name, e.g. CompletionBlock
 	Framework string // Framework name for the doc comment, e.g. Foundation
 	Sig       string // Complete Go func signature, e.g. func(result uint64, ok bool)
@@ -377,43 +377,43 @@ type blockTypeModel struct {
 
 // ─── Interfaces ───────────────────────────────────────────────────────────────
 
-// interfaceMethodModel is template data for one method in a [ClassName]able interface.
-type interfaceMethodModel struct {
+// InterfaceMethodModel is template data for one method in a [ClassName]able interface.
+type InterfaceMethodModel struct {
 	GoName string // Go method name
 	Params string // Full parameter list of mapped ObjC args
 	Ret    string // Return type string, empty for void
 }
 
-// classInterfaceModel is template data for one [ClassName]able Go interface.
-type classInterfaceModel struct {
+// ClassInterfaceModel is template data for one [ClassName]able Go interface.
+type ClassInterfaceModel struct {
 	GoName      string // ObjC class name; the interface is GoName+"able"
 	EmbedLine   string // Embedded type: "cgo.Object", "pkg.Superabled", or "Superable"
-	Methods     []interfaceMethodModel
+	Methods     []InterfaceMethodModel
 	HasNSCoding bool
 }
 
-// classInterfacesFileModel is template data for a complete _interfaces.go file.
-type classInterfacesFileModel struct {
+// ClassInterfacesFileModel is template data for a complete _interfaces.go file.
+type ClassInterfacesFileModel struct {
 	PkgName    string
 	Imports    []string // sorted, deduplicated import paths
 	UsesUnsafe bool     // true when any method references unsafe.Pointer
 	UsesObjc   bool     // true when any method or embed references cgo.*
-	Interfaces []classInterfaceModel
+	Interfaces []ClassInterfaceModel
 }
 
 // ─── Variadic Wrappers ────────────────────────────────────────────────────────
 
-// variadicWrappersFileModel is template data for the Foundation variadic wrappers file.
-type variadicWrappersFileModel struct {
+// VariadicWrappersFileModel is template data for the Foundation variadic wrappers file.
+type VariadicWrappersFileModel struct {
 	PkgName string // Go package name, e.g. "foundation"
 }
 
 // ─── Block Trampolines ────────────────────────────────────────────────────────
 
-// blockTrampolineSigModel holds all pre-rendered strings for one block signature.
+// BlockTrampolineSigModel holds all pre-rendered strings for one block signature.
 // It is used by the block_trampolines_go_file, block_trampolines_h_file, and
 // block_trampolines_m_file templates.
-type blockTrampolineSigModel struct {
+type BlockTrampolineSigModel struct {
 	Name string // canonical name: "bool", "void_ptr"
 	// Go file fields
 	GoParams    string // CGo param list: "key C.uint64_t, arg0 unsafe.Pointer"
@@ -427,28 +427,28 @@ type blockTrampolineSigModel struct {
 	CTrampolineCall   string // "goCallBlock_bool(block->goKey);" or "return (bool)...;"
 }
 
-// blockTrampolinesGoFileModel is template data for blocks_generated.go.
-type blockTrampolinesGoFileModel struct {
+// BlockTrampolinesGoFileModel is template data for blocks_generated.go.
+type BlockTrampolinesGoFileModel struct {
 	PkgName string
-	Sigs    []blockTrampolineSigModel
+	Sigs    []BlockTrampolineSigModel
 }
 
-// blockTrampolinesHFileModel is template data for block_trampolines_generated.h.
-type blockTrampolinesHFileModel struct {
-	Sigs []blockTrampolineSigModel
+// BlockTrampolinesHFileModel is template data for block_trampolines_generated.h.
+type BlockTrampolinesHFileModel struct {
+	Sigs []BlockTrampolineSigModel
 }
 
-// blockTrampolinesMFileModel is template data for block_trampolines_generated.m.
-type blockTrampolinesMFileModel struct {
-	Sigs []blockTrampolineSigModel
+// BlockTrampolinesMFileModel is template data for block_trampolines_generated.m.
+type BlockTrampolinesMFileModel struct {
+	Sigs []BlockTrampolineSigModel
 }
 
 // ─── Method Trampolines ───────────────────────────────────────────────────────
 
-// methodTrampolineSigModel holds all pre-rendered strings for one method IMP signature.
+// MethodTrampolineSigModel holds all pre-rendered strings for one method IMP signature.
 // It is used by the method_trampolines_go_file, method_trampolines_h_file, and
 // method_trampolines_m_file templates.
-type methodTrampolineSigModel struct {
+type MethodTrampolineSigModel struct {
 	Name    string // canonical name: "bool", "void_ptr"
 	ObjCEnc string // ObjC type encoding: "v@:", "B@:@"
 	// Go file fields
@@ -462,26 +462,26 @@ type methodTrampolineSigModel struct {
 	IMPBody string // pre-rendered function body lines (without braces)
 }
 
-// methodTrampolinesGoFileModel is template data for callbacks_generated.go.
-type methodTrampolinesGoFileModel struct {
+// MethodTrampolinesGoFileModel is template data for callbacks_generated.go.
+type MethodTrampolinesGoFileModel struct {
 	PkgName string
-	Sigs    []methodTrampolineSigModel
+	Sigs    []MethodTrampolineSigModel
 }
 
-// methodTrampolinesHFileModel is template data for method_trampolines_generated.h.
-type methodTrampolinesHFileModel struct {
-	Sigs []methodTrampolineSigModel
+// MethodTrampolinesHFileModel is template data for method_trampolines_generated.h.
+type MethodTrampolinesHFileModel struct {
+	Sigs []MethodTrampolineSigModel
 }
 
-// methodTrampolinesMFileModel is template data for method_trampolines_generated.m.
-type methodTrampolinesMFileModel struct {
-	Sigs []methodTrampolineSigModel
+// MethodTrampolinesMFileModel is template data for method_trampolines_generated.m.
+type MethodTrampolinesMFileModel struct {
+	Sigs []MethodTrampolineSigModel
 }
 
 // ─── Subclass Factories ───────────────────────────────────────────────────────
 
-// subclassGoFileModel is template data for a *_subclass_generated.go file.
-type subclassGoFileModel struct {
+// SubclassGoFileModel is template data for a *_subclass_generated.go file.
+type SubclassGoFileModel struct {
 	ClassName       string   // e.g. "NSCharacterSet"
 	GoClassName     string   // e.g. "GoOrinSubNSCharacterSet"
 	PackageName     string   // e.g. "foundation"
@@ -491,14 +491,14 @@ type subclassGoFileModel struct {
 	BindMethodBody  string   // pre-rendered per-method BindMethod if-blocks (inside "if overrides != nil")
 }
 
-// subclassHFileModel is template data for a *_subclass_generated.h file.
-type subclassHFileModel struct {
+// SubclassHFileModel is template data for a *_subclass_generated.h file.
+type SubclassHFileModel struct {
 	GoClassName string
 	IMPSigs     []string
 }
 
-// subclassMFileModel is template data for a *_subclass_generated.m file.
-type subclassMFileModel struct {
+// SubclassMFileModel is template data for a *_subclass_generated.m file.
+type SubclassMFileModel struct {
 	Framework   string // e.g. "Foundation"
 	ClassName   string // e.g. "NSCharacterSet"
 	GoClassName string // e.g. "GoOrinSubNSCharacterSet"
@@ -508,8 +508,8 @@ type subclassMFileModel struct {
 
 // ─── Protocol Impls ───────────────────────────────────────────────────────────
 
-// protocolImplGoFileModel is template data for a *_protocol_callback.go file.
-type protocolImplGoFileModel struct {
+// ProtocolImplGoFileModel is template data for a *_protocol_callback.go file.
+type ProtocolImplGoFileModel struct {
 	PackageName         string   // e.g. "foundation"
 	GoClassName         string   // e.g. "goBridgeProto_NSCacheDelegate"
 	ProtoName           string   // e.g. "NSCacheDelegate"
@@ -525,14 +525,14 @@ type protocolImplGoFileModel struct {
 	ReturnBody          string   // pre-rendered return statement(s) (tab-indented)
 }
 
-// protocolImplHFileModel is template data for a *_impl_generated.h file.
-type protocolImplHFileModel struct {
+// ProtocolImplHFileModel is template data for a *_impl_generated.h file.
+type ProtocolImplHFileModel struct {
 	GoClassName string
 	IMPSigs     []string
 }
 
-// protocolImplMFileModel is template data for a *_impl_generated.m file.
-type protocolImplMFileModel struct {
+// ProtocolImplMFileModel is template data for a *_impl_generated.m file.
+type ProtocolImplMFileModel struct {
 	Framework   string
 	ProtoName   string
 	GoClassName string
@@ -542,16 +542,16 @@ type protocolImplMFileModel struct {
 
 // ─── Protocol Proxies ─────────────────────────────────────────────────────────
 
-// protocolProxiesFileModel is template data for a complete _protocol_proxies.go file.
-type protocolProxiesFileModel struct {
+// ProtocolProxiesFileModel is template data for a complete _protocol_proxies.go file.
+type ProtocolProxiesFileModel struct {
 	PkgName      string
 	BridgeHeader string   // e.g. "foundation_bridge.h"
 	Imports      []string // sorted, deduplicated import paths
-	ProxyTypes   []protocolProxyTypeModel
+	ProxyTypes   []ProtocolProxyTypeModel
 }
 
-// protocolProxyMethodModel is template data for one method on a protocol proxy type.
-type protocolProxyMethodModel struct {
+// ProtocolProxyMethodModel is template data for one method on a protocol proxy type.
+type ProtocolProxyMethodModel struct {
 	GoName       string // Go method name
 	Params       string // full parameter list of mapped ObjC args
 	Ret          string // return type string, empty for void
@@ -559,12 +559,12 @@ type protocolProxyMethodModel struct {
 	BodyLines    string // pre-rendered method body lines (tab-indented)
 }
 
-// protocolProxyTypeModel is template data for one id<Protocol> wrapper type.
-type protocolProxyTypeModel struct {
+// ProtocolProxyTypeModel is template data for one id<Protocol> wrapper type.
+type ProtocolProxyTypeModel struct {
 	IDTypeName      string // e.g. "NSCacheDelegateIDProtocol"
 	ProtoName       string // e.g. "NSCacheDelegate"
 	NSObjectEmbed   string // "NSObject" or "foundation.NSObject"
 	NSObjectWithPtr string // "NSObjectWithPtr" or "foundation.NSObjectWithPtr"
 	AvailComment    string // availability comment, empty if none
-	Methods         []protocolProxyMethodModel
+	Methods         []ProtocolProxyMethodModel
 }

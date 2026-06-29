@@ -1,6 +1,6 @@
 //go:build darwin
 
-package idiomatic
+package idiofw
 
 import (
 	"fmt"
@@ -9,9 +9,9 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/idiomatic/render"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/idiomatic/view"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/view"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
 )
@@ -67,7 +67,7 @@ func emitFunctionWrappers(
 	}
 
 	var funcs []view.Func
-	for _, fn := range emit.EmittableFunctions(framework, nil) {
+	for _, fn := range rawfw.EmittableFunctions(framework, nil) {
 		if len(fn.Params) == 0 || !isCFErrorOutParam(fn.Params[len(fn.Params)-1].ObjCType) {
 			continue
 		}
@@ -195,7 +195,7 @@ func emitFunctionWrappers(
 	}
 	fname := pkgName + "_functions_generated.go"
 	file := assembleFile(pkgName, imports, body)
-	if err := emit.WriteGoFile(filepath.Join(outDir, fname), file); err != nil {
+	if err := rawfw.WriteGoFile(filepath.Join(outDir, fname), file); err != nil {
 		return nil, err
 	}
 	return emittedNames, nil

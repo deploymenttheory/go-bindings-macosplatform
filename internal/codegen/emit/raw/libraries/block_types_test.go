@@ -1,4 +1,4 @@
-package raw
+package rawlib
 
 import (
 	"bytes"
@@ -36,7 +36,7 @@ func TestBlocksEmpty(t *testing.T) {
 func TestBlockNoArgs(t *testing.T) {
 	framework := newBlockFM("Foundation", map[string]macosplatformmetadata.BlockType{
 		"MyBlock": {
-			Params:   nil,
+			Params: nil,
 			Return: macosplatformmetadata.ReturnType{},
 		},
 	})
@@ -102,7 +102,7 @@ func TestBlockWithArgs(t *testing.T) {
 func TestBlockWithReturn(t *testing.T) {
 	framework := newBlockFM("Foundation", map[string]macosplatformmetadata.BlockType{
 		"PredicateBlock": {
-			Params:   nil,
+			Params: nil,
 			Return: macosplatformmetadata.ReturnType{ObjCType: "BOOL"},
 		},
 	})

@@ -1,7 +1,9 @@
-package raw
+package rawlib
 
 import (
 	"fmt"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/view"
 	"io"
 	"sort"
 	"strings"
@@ -15,18 +17,18 @@ import (
 // for all ObjC protocols in the framework.
 func EmitProtocols(w io.Writer, pkgName string, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool, knownProtocols map[string]string, allClasses map[string]macosplatformmetadata.Class) error {
 	model := buildProtocolsModel(pkgName, framework, m, knownClasses, knownProtocols, allClasses)
-	return executeTemplate(w, "protocols_file", model)
+	return render.Execute(w, "protocols_file", model)
 }
 
 // buildProtocolsModel constructs the complete file model for the _protocols.go template.
 // Import collection is a side effect of type-mapping method signatures, so it must
 // run before the template is executed.
-func buildProtocolsModel(pkgName string, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool, knownProtocols map[string]string, allClasses map[string]macosplatformmetadata.Class) protocolsFileModel {
+func buildProtocolsModel(pkgName string, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool, knownProtocols map[string]string, allClasses map[string]macosplatformmetadata.Class) view.ProtocolsFileModel {
 	usedImports := make(typemap.ImportSet)
 	ctx := m.BaseContext(framework.Framework, knownClasses)
 
 	names := sortedStringKeys(framework.Protocols)
-	protocols := make([]protocolModel, 0, len(names))
+	protocols := make([]view.ProtocolModel, 0, len(names))
 
 	for _, name := range names {
 		p := framework.Protocols[name]
@@ -38,11 +40,11 @@ func buildProtocolsModel(pkgName string, framework *macosplatformmetadata.Framew
 	}
 
 	imports := buildProtocolsImports(usedImports)
-	return protocolsFileModel{PkgName: pkgName, Imports: imports, Protocols: protocols}
+	return view.ProtocolsFileModel{PkgName: pkgName, Imports: imports, Protocols: protocols}
 }
 
 // buildProtocolModel builds the model for a single ObjC @protocol → Go interface.
-func buildProtocolModel(name string, p macosplatformmetadata.Protocol, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool, knownProtocols map[string]string, allClasses map[string]macosplatformmetadata.Class, ctx typemap.Context, usedImports typemap.ImportSet) protocolModel {
+func buildProtocolModel(name string, p macosplatformmetadata.Protocol, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool, knownProtocols map[string]string, allClasses map[string]macosplatformmetadata.Class, ctx typemap.Context, usedImports typemap.ImportSet) view.ProtocolModel {
 	goName := naming.ProtocolGoTypeName(name, m.OwnerIndex)
 
 	// Resolve embedded parent protocols.
@@ -77,7 +79,7 @@ func buildProtocolModel(name string, p macosplatformmetadata.Protocol, framework
 
 	// Build method signatures.
 	seenMethods := make(map[string]bool)
-	methods := make([]protocolMethodModel, 0, len(p.Methods))
+	methods := make([]view.ProtocolMethodModel, 0, len(p.Methods))
 
 	for _, method := range p.Methods {
 		if shouldSkipBridgeMethod(method) {
@@ -94,14 +96,14 @@ func buildProtocolModel(name string, p macosplatformmetadata.Protocol, framework
 
 		args := buildGoArgs(method.Params, method.IsNSError, ctx, m, usedImports)
 		ret := buildGoReturn(method, ctx, m, "", usedImports)
-		methods = append(methods, protocolMethodModel{
+		methods = append(methods, view.ProtocolMethodModel{
 			GoName: goMethodName,
 			Params: strings.Join(args, ", "),
 			Ret:    ret,
 		})
 	}
 
-	return protocolModel{
+	return view.ProtocolModel{
 		GoName:        goName,
 		ObjCName:      name,
 		AvailComment:  availabilityComment(p.Availability),

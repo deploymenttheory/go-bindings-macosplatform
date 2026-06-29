@@ -1,4 +1,4 @@
-package idiomatic
+package idiofw
 
 import (
 	"go/ast"

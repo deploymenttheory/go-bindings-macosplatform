@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"text/template"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit/view"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks/view"
 )
 
 //go:embed templates/*.tmpl

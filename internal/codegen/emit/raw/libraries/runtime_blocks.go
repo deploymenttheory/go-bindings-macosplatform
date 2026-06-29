@@ -1,7 +1,9 @@
-package raw
+package rawlib
 
 import (
 	"fmt"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/view"
 	"io"
 	"sort"
 	"strings"
@@ -14,11 +16,11 @@ import (
 // Two ObjC block types that differ only in ObjC object types (e.g. id vs NSString *)
 // produce the same BlockSignatureModel because they share the same C/Go representation.
 type BlockSignatureModel struct {
-	Name      string       // canonical C-safe name: "void_ptr_ptr", "int64_ptr_ptr"
-	IsVoidRet bool         // true when block returns void
-	RetC      string       // C return type: "int64_t", "bool", "" for void
-	RetCGo    string       // CGo type in //export: "C.int64_t", "C.bool", "" for void
-	RetGo     string       // Go return type: "int64", "bool", "" for void
+	Name      string // canonical C-safe name: "void_ptr_ptr", "int64_ptr_ptr"
+	IsVoidRet bool   // true when block returns void
+	RetC      string // C return type: "int64_t", "bool", "" for void
+	RetCGo    string // CGo type in //export: "C.int64_t", "C.bool", "" for void
+	RetGo     string // Go return type: "int64", "bool", "" for void
 	Args      []BlockSigArg
 }
 
@@ -244,7 +246,7 @@ func CollectBlockSignaturesFromFrameworks(frameworks []*macosplatformmetadata.Fr
 // EmitRuntimeBlocksGo writes the generated runtime/blocks_generated.go file.
 // This file contains //export goCallBlock_* callbacks and MakeBlock_* factories.
 func EmitRuntimeBlocksGo(w io.Writer, sigs []BlockSignatureModel, pkg string) error {
-	return executeTemplate(w, "block_trampolines_go_file", blockTrampolinesGoFileModel{
+	return render.Execute(w, "block_trampolines_go_file", view.BlockTrampolinesGoFileModel{
 		PkgName: pkg,
 		Sigs:    buildBlockTrampolineSigModels(sigs),
 	})
@@ -252,27 +254,27 @@ func EmitRuntimeBlocksGo(w io.Writer, sigs []BlockSignatureModel, pkg string) er
 
 // EmitRuntimeBlocksTrampolineHeader writes runtime/block_trampolines_generated.h.
 func EmitRuntimeBlocksTrampolineHeader(w io.Writer, sigs []BlockSignatureModel) error {
-	return executeTemplate(w, "block_trampolines_h_file", blockTrampolinesHFileModel{
+	return render.Execute(w, "block_trampolines_h_file", view.BlockTrampolinesHFileModel{
 		Sigs: buildBlockTrampolineSigModels(sigs),
 	})
 }
 
 // EmitRuntimeBlocksTrampolineImpl writes runtime/block_trampolines_generated.m.
 func EmitRuntimeBlocksTrampolineImpl(w io.Writer, sigs []BlockSignatureModel) error {
-	return executeTemplate(w, "block_trampolines_m_file", blockTrampolinesMFileModel{
+	return render.Execute(w, "block_trampolines_m_file", view.BlockTrampolinesMFileModel{
 		Sigs: buildBlockTrampolineSigModels(sigs),
 	})
 }
 
-func buildBlockTrampolineSigModels(sigs []BlockSignatureModel) []blockTrampolineSigModel {
-	models := make([]blockTrampolineSigModel, len(sigs))
+func buildBlockTrampolineSigModels(sigs []BlockSignatureModel) []view.BlockTrampolineSigModel {
+	models := make([]view.BlockTrampolineSigModel, len(sigs))
 	for i, sig := range sigs {
 		models[i] = buildBlockTrampolineSigModel(sig)
 	}
 	return models
 }
 
-func buildBlockTrampolineSigModel(sig BlockSignatureModel) blockTrampolineSigModel {
+func buildBlockTrampolineSigModel(sig BlockSignatureModel) view.BlockTrampolineSigModel {
 	// GoParams: CGo parameter list for the exported function.
 	var goParamParts []string
 	goParamParts = append(goParamParts, "key C.uint64_t")
@@ -356,7 +358,7 @@ func buildBlockTrampolineSigModel(sig BlockSignatureModel) blockTrampolineSigMod
 		cTrampolineCall = fmt.Sprintf("return (%s)%s;", cRetType, callStr)
 	}
 
-	return blockTrampolineSigModel{
+	return view.BlockTrampolineSigModel{
 		Name:              sig.Name,
 		GoParams:          strings.Join(goParamParts, ", "),
 		RetDecl:           retDecl,

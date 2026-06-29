@@ -1,7 +1,9 @@
-package raw
+package rawlib
 
 import (
 	"fmt"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/view"
 	"io"
 	"os"
 	"path/filepath"
@@ -24,10 +26,10 @@ import (
 // message sends ([object method]) at all. The ObjC methods already exist on
 // macOS, compiled into the framework dylibs, but the only way Go can invoke
 // them is through a plain C function. Each generated bridge function:
-//   1. Accepts CGo-compatible parameters (void* for ObjC objects, scalar types)
-//   2. Casts them back to ObjC types and sends the message
-//   3. Retains the result with [retain] before returning (see memory model below)
-//   4. Returns a C-compatible value
+//  1. Accepts CGo-compatible parameters (void* for ObjC objects, scalar types)
+//  2. Casts them back to ObjC types and sends the message
+//  3. Retains the result with [retain] before returning (see memory model below)
+//  4. Returns a C-compatible value
 //
 // No method logic is reimplemented; the bridge is purely a calling-convention
 // adapter. The alternative — using objc_msgSend directly — is fragile: the
@@ -94,22 +96,22 @@ func EmitBridge(outDir string, framework *macosplatformmetadata.FrameworkMeta, m
 		return fmt.Errorf("create bridge shim: %w", err)
 	}
 	defer shimFile.Close()
-	return executeTemplate(shimFile, "bridge_shim", bridgeShimModel{Stem: stem})
+	return render.Execute(shimFile, "bridge_shim", view.BridgeShimModel{Stem: stem})
 }
 
 // BridgeHeader writes the C bridge header (.h) to w.
 func EmitBridgeHeader(w io.Writer, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool) error {
-	return executeTemplate(w, "bridge_header_file", buildBridgeHeaderModel(framework, m, knownClasses))
+	return render.Execute(w, "bridge_header_file", buildBridgeHeaderModel(framework, m, knownClasses))
 }
 
 // buildBridgeHeaderModel constructs the complete model for a _bridge.h file.
 // All filtering and declaration building happens here; the template is a structural description.
-func buildBridgeHeaderModel(framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool) bridgeHeaderModel {
+func buildBridgeHeaderModel(framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool) view.BridgeHeaderModel {
 	ctx := m.BaseContext(framework.Framework, knownClasses)
 	classNames := sortedStringKeys(framework.Classes)
 
 	// ── Class method declarations ──────────────────────────────────────────────
-	var methodDecls []bridgeDeclModel
+	var methodDecls []view.BridgeDeclModel
 	seenMethodDecl := map[string]bool{}
 	for _, className := range classNames {
 		cls := framework.Classes[className]
@@ -132,7 +134,7 @@ func buildBridgeHeaderModel(framework *macosplatformmetadata.FrameworkMeta, m *t
 				continue
 			}
 			seenMethodDecl[cFunc] = true
-			methodDecls = append(methodDecls, bridgeDeclModel{
+			methodDecls = append(methodDecls, view.BridgeDeclModel{
 				Entitlements: method.Availability.Entitlements,
 				BridgeID:     naming.MethodBridgeID(framework.Framework, className, method.Selector, method.IsClassMethod),
 				Decl:         bridgeFuncDecl(cFunc, method, clsCtx, m),
@@ -141,14 +143,14 @@ func buildBridgeHeaderModel(framework *macosplatformmetadata.FrameworkMeta, m *t
 	}
 
 	// ── Alloc helpers ──────────────────────────────────────────────────────────
-	var allocHelpers []bridgeAllocModel
+	var allocHelpers []view.BridgeAllocModel
 	for _, className := range classNames {
 		cls := framework.Classes[className]
 		if cls.Availability.IsUnavailable {
 			continue
 		}
 		if hasDesignatedInitWithArgs(cls) {
-			allocHelpers = append(allocHelpers, bridgeAllocModel{
+			allocHelpers = append(allocHelpers, view.BridgeAllocModel{
 				ClassName: className,
 				FuncName:  allocBridgeName(framework.Framework, className),
 			})
@@ -166,7 +168,7 @@ func buildBridgeHeaderModel(framework *macosplatformmetadata.FrameworkMeta, m *t
 	}
 
 	// ── Free function declarations ─────────────────────────────────────────────
-	var functionDecls []bridgeDeclModel
+	var functionDecls []view.BridgeDeclModel
 	seenFuncDecl := map[string]bool{}
 	for _, fn := range framework.Functions {
 		if fn.IsInline || fn.IsVariadic || fn.Availability.IsUnavailable ||
@@ -179,7 +181,7 @@ func buildBridgeHeaderModel(framework *macosplatformmetadata.FrameworkMeta, m *t
 			continue
 		}
 		seenFuncDecl[cFunc] = true
-		functionDecls = append(functionDecls, bridgeDeclModel{
+		functionDecls = append(functionDecls, view.BridgeDeclModel{
 			Entitlements: fn.Availability.Entitlements,
 			BridgeID:     naming.FunctionBridgeID(framework.Framework, fn.Name),
 			Decl:         bridgeFuncDeclFromFunction(cFunc, fn, ctx, m),
@@ -187,7 +189,7 @@ func buildBridgeHeaderModel(framework *macosplatformmetadata.FrameworkMeta, m *t
 	}
 
 	// ── Foreign extension declarations ─────────────────────────────────────────
-	var foreignDecls []bridgeDeclModel
+	var foreignDecls []view.BridgeDeclModel
 	for _, className := range sortedStringKeys(framework.ForeignExtensions) {
 		methods := framework.ForeignExtensions[className]
 		clsCtx := ctx
@@ -199,7 +201,7 @@ func buildBridgeHeaderModel(framework *macosplatformmetadata.FrameworkMeta, m *t
 				continue
 			}
 			cFunc := bridgeNames[methodKey(method.Selector, method.IsClassMethod)]
-			foreignDecls = append(foreignDecls, bridgeDeclModel{
+			foreignDecls = append(foreignDecls, view.BridgeDeclModel{
 				Entitlements: method.Availability.Entitlements,
 				BridgeID:     naming.MethodBridgeID(framework.Framework, className, method.Selector, method.IsClassMethod),
 				Decl:         bridgeFuncDecl(cFunc, method, clsCtx, m),
@@ -208,7 +210,7 @@ func buildBridgeHeaderModel(framework *macosplatformmetadata.FrameworkMeta, m *t
 	}
 
 	// ── Protocol proxy declarations ────────────────────────────────────────────
-	var protoDecls []bridgeProtoDeclModel
+	var protoDecls []view.BridgeProtoDeclModel
 	for _, protoName := range sortedStringKeys(framework.Protocols) {
 		proto := framework.Protocols[protoName]
 		if proto.Availability.IsUnavailable {
@@ -226,7 +228,7 @@ func buildBridgeHeaderModel(framework *macosplatformmetadata.FrameworkMeta, m *t
 				continue
 			}
 			seenMethodDecl[cFunc] = true
-			protoDecls = append(protoDecls, bridgeProtoDeclModel{
+			protoDecls = append(protoDecls, view.BridgeProtoDeclModel{
 				BridgeID: naming.MethodBridgeID(framework.Framework, idTypeName, method.Selector, false),
 				RetType:  bridgeReturnCType(method, ctx, m),
 				FuncName: cFunc,
@@ -235,7 +237,7 @@ func buildBridgeHeaderModel(framework *macosplatformmetadata.FrameworkMeta, m *t
 		}
 	}
 
-	return bridgeHeaderModel{
+	return view.BridgeHeaderModel{
 		MethodDecls:   methodDecls,
 		AllocHelpers:  allocHelpers,
 		CodingDecls:   codingBuf.String(),
@@ -266,18 +268,18 @@ func hasVAListArg(fn macosplatformmetadata.Function) bool {
 
 // BridgeImpl writes the ObjC bridge implementation (.m) to w.
 func EmitBridgeImpl(w io.Writer, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool, headerName string) error {
-	return executeTemplate(w, "bridge_impl_file", buildBridgeImplModel(framework, m, knownClasses, headerName))
+	return render.Execute(w, "bridge_impl_file", buildBridgeImplModel(framework, m, knownClasses, headerName))
 }
 
 // buildBridgeImplModel constructs the complete model for a _bridge.m file.
 // For each method, buildBridgeTryBody pre-renders the @try block content so the
 // template shows only the @try/@catch wrapper structure.
-func buildBridgeImplModel(framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool, headerName string) bridgeImplModel {
+func buildBridgeImplModel(framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool, headerName string) view.BridgeImplModel {
 	ctx := m.BaseContext(framework.Framework, knownClasses)
 	classNames := sortedStringKeys(framework.Classes)
 
 	// ── Class method implementations ───────────────────────────────────────────
-	var methods []bridgeImplMethodModel
+	var methods []view.BridgeImplMethodModel
 	seenMethodImpl := map[string]bool{}
 	for _, className := range classNames {
 		cls := framework.Classes[className]
@@ -312,14 +314,14 @@ func buildBridgeImplModel(framework *macosplatformmetadata.FrameworkMeta, m *typ
 	}
 
 	// ── Alloc helpers ──────────────────────────────────────────────────────────
-	var allocImpls []bridgeAllocImplModel
+	var allocImpls []view.BridgeAllocImplModel
 	for _, className := range classNames {
 		cls := framework.Classes[className]
 		if cls.Availability.IsUnavailable {
 			continue
 		}
 		if hasDesignatedInitWithArgs(cls) {
-			allocImpls = append(allocImpls, bridgeAllocImplModel{
+			allocImpls = append(allocImpls, view.BridgeAllocImplModel{
 				ClassName: className,
 				FuncName:  allocBridgeName(framework.Framework, className),
 			})
@@ -337,7 +339,7 @@ func buildBridgeImplModel(framework *macosplatformmetadata.FrameworkMeta, m *typ
 	}
 
 	// ── Free function implementations ─────────────────────────────────────────
-	var functions []bridgeImplMethodModel
+	var functions []view.BridgeImplMethodModel
 	seenFuncImpl := map[string]bool{}
 	for _, fn := range framework.Functions {
 		if fn.IsInline || fn.IsVariadic || fn.Availability.IsUnavailable ||
@@ -354,7 +356,7 @@ func buildBridgeImplModel(framework *macosplatformmetadata.FrameworkMeta, m *typ
 	}
 
 	// ── Foreign extension implementations ──────────────────────────────────────
-	var foreignMethods []bridgeImplMethodModel
+	var foreignMethods []view.BridgeImplMethodModel
 	for _, className := range sortedStringKeys(framework.ForeignExtensions) {
 		methods := framework.ForeignExtensions[className]
 		clsCtx := ctx
@@ -380,7 +382,7 @@ func buildBridgeImplModel(framework *macosplatformmetadata.FrameworkMeta, m *typ
 	}
 
 	// ── Protocol proxy implementations ─────────────────────────────────────────
-	var protoMethods []bridgeImplMethodModel
+	var protoMethods []view.BridgeImplMethodModel
 	seenProtoImpl := map[string]bool{}
 	for _, protoName := range sortedStringKeys(framework.Protocols) {
 		proto := framework.Protocols[protoName]
@@ -407,7 +409,7 @@ func buildBridgeImplModel(framework *macosplatformmetadata.FrameworkMeta, m *typ
 		}
 	}
 
-	return bridgeImplModel{
+	return view.BridgeImplModel{
 		Framework:       framework.Framework,
 		ParentFramework: framework.ParentFramework,
 		UmbrellaHeader:  framework.Header,
@@ -423,7 +425,7 @@ func buildBridgeImplModel(framework *macosplatformmetadata.FrameworkMeta, m *typ
 
 // buildBridgeImplMethod builds the model for one ObjC method bridge implementation.
 // target is the ObjC message receiver expression (class name or `(__bridge X *)self`).
-func buildBridgeImplMethod(framework, className, selector string, isClassMethod bool, cFunc, target string, method macosplatformmetadata.Method, ctx typemap.Context, m *typemap.Mapper) bridgeImplMethodModel {
+func buildBridgeImplMethod(framework, className, selector string, isClassMethod bool, cFunc, target string, method macosplatformmetadata.Method, ctx typemap.Context, m *typemap.Mapper) view.BridgeImplMethodModel {
 	retC := bridgeReturnCType(method, ctx, m)
 	objcCall := buildObjCCall(target, method, ctx, m)
 	// Multi-keyword format-variadic methods (e.g. initWithFormat:options:locale:) cannot
@@ -442,13 +444,13 @@ func buildBridgeImplMethod(framework, className, selector string, isClassMethod 
 			needsFormatPragma = !strings.Contains(strings.ToLower(lastPart), "format")
 		}
 	}
-	return bridgeImplMethodModel{
+	return view.BridgeImplMethodModel{
 		Entitlements:      method.Availability.Entitlements,
 		BridgeID:          naming.MethodBridgeID(framework, className, selector, isClassMethod),
 		RetType:           retC,
 		FuncName:          cFunc,
 		Params:            bridgeParamList(isClassMethod, method.Params, method.IsNSError, ctx, m),
-		IsNSError:        method.IsNSError,
+		IsNSError:         method.IsNSError,
 		NeedsFormatPragma: needsFormatPragma,
 		TryBody:           buildBridgeTryBody(objcCall, method.Return, method.IsNSError, retC, ctx, m),
 		CatchReturn:       bridgeCatchReturn(retC),
@@ -456,7 +458,7 @@ func buildBridgeImplMethod(framework, className, selector string, isClassMethod 
 }
 
 // buildBridgeFuncImplMethod builds the model for one C free-function bridge implementation.
-func buildBridgeFuncImplMethod(fn macosplatformmetadata.Function, cFunc string, ctx typemap.Context, m *typemap.Mapper) bridgeImplMethodModel {
+func buildBridgeFuncImplMethod(fn macosplatformmetadata.Function, cFunc string, ctx typemap.Context, m *typemap.Mapper) view.BridgeImplMethodModel {
 	retC := m.CType(fn.Return.ObjCType, ctx, nil)
 	if fn.Return.ObjCType == "" || fn.Return.ObjCType == "void" {
 		retC = "void"
@@ -464,13 +466,13 @@ func buildBridgeFuncImplMethod(fn macosplatformmetadata.Function, cFunc string, 
 	objcCall := buildFreeFuncCall(fn, ctx, m)
 	// Free functions never have NSError — the exception mechanism is used instead.
 	tryBody := buildBridgeTryBody(objcCall, fn.Return, false, retC, ctx, m)
-	return bridgeImplMethodModel{
+	return view.BridgeImplMethodModel{
 		Entitlements: fn.Availability.Entitlements,
 		BridgeID:     naming.FunctionBridgeID(ctx.Framework, fn.Name),
 		RetType:      retC,
 		FuncName:     cFunc,
 		Params:       freeFuncParamList(fn.Params, ctx, m),
-		IsNSError:   false,
+		IsNSError:    false,
 		TryBody:      tryBody,
 		CatchReturn:  bridgeCatchReturn(retC),
 	}
@@ -847,7 +849,7 @@ func writeBridgeEntitlements(w io.Writer, keys []string) {
 // It delegates to the model-based approach so tests continue to exercise the same code path.
 func writeFunctionImpl(w io.Writer, cFunc string, fn macosplatformmetadata.Function, ctx typemap.Context, m *typemap.Mapper) {
 	model := buildBridgeFuncImplMethod(fn, cFunc, ctx, m)
-	_ = executeTemplate(w, "bridge_impl_method", model)
+	_ = render.Execute(w, "bridge_impl_method", model)
 }
 
 // buildFreeFuncCall builds the C function call expression for a plain C function.

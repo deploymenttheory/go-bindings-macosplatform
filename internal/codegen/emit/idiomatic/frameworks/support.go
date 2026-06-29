@@ -1,6 +1,6 @@
 //go:build darwin
 
-package idiomatic
+package idiofw
 
 import (
 	"embed"
@@ -8,7 +8,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 )
 
 // supportFS embeds the static source of the idiomatic layer's support packages.
@@ -51,7 +51,7 @@ func EmitSupportPackages(rootDir string) error {
 		if err := os.MkdirAll(filepath.Dir(dst), 0o755); err != nil {
 			return fmt.Errorf("mkdir for %s: %w", f.rel, err)
 		}
-		if err := emit.WriteGoFile(dst, content); err != nil {
+		if err := rawfw.WriteGoFile(dst, content); err != nil {
 			return fmt.Errorf("write support %s: %w", f.rel, err)
 		}
 	}

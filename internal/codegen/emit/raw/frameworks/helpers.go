@@ -1,6 +1,6 @@
 // Package emit contains the per-construct emitters for the purego code generator.
 // All emitted files are pure Go — no CGo, no C headers, no .m files.
-package emit
+package rawfw
 
 import (
 	"fmt"

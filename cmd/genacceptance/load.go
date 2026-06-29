@@ -7,7 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 )
@@ -133,13 +133,13 @@ func candidatesFromFramework(framework *meta.FrameworkMeta, modulePrefix string)
 			if !method.IsClassMethod {
 				continue
 			}
-			if !emit.MethodWillBeEmitted(method) {
+			if !rawfw.MethodWillBeEmitted(method) {
 				continue
 			}
 			if len(method.Params) > 0 {
 				continue // only zero-arg methods are auto-testable
 			}
-			goName := emit.ClassMethodGoNameFromMeta(className, method.Selector, framework)
+			goName := rawfw.ClassMethodGoNameFromMeta(className, method.Selector, framework)
 			id := methodID(framework.Framework, className, method.Selector)
 			rec := classifyMetaRecord(id, framework.Framework, method.Selector, goName, pkg, importPath, needsMainThread, method.Return, method.Return.IsNullable, method.IsNSError)
 			if rec != nil {
@@ -150,7 +150,7 @@ func candidatesFromFramework(framework *meta.FrameworkMeta, modulePrefix string)
 
 	// Free functions.
 	for _, fn := range framework.Functions {
-		if !emit.FunctionWillBeEmitted(fn) {
+		if !rawfw.FunctionWillBeEmitted(fn) {
 			continue
 		}
 		if len(fn.Params) > 0 {
@@ -164,7 +164,7 @@ func candidatesFromFramework(framework *meta.FrameworkMeta, modulePrefix string)
 			continue
 		}
 		id := functionID(framework.Framework, fn.Name)
-		rec := classifyMetaRecord(id, framework.Framework, fn.Name, emit.FunctionGoName(fn), pkg, importPath, needsMainThread, fn.Return, false, false)
+		rec := classifyMetaRecord(id, framework.Framework, fn.Name, rawfw.FunctionGoName(fn), pkg, importPath, needsMainThread, fn.Return, false, false)
 		if rec != nil {
 			rec.IsCFunction = true
 			out = append(out, *rec)
@@ -220,7 +220,7 @@ func classifyMetaRecord(
 // map to Go string — neither can be compared to nil. Treating them as RetScalar
 // (emit "_ = result") avoids compile errors and is safe for smoke testing.
 func classifyReturnFromMeta(ret meta.ReturnType) RetKind {
-	if emit.ReturnIsVoid(ret) {
+	if rawfw.ReturnIsVoid(ret) {
 		return RetVoid
 	}
 	// instancetype / generic always produce a real typed pointer in purego.

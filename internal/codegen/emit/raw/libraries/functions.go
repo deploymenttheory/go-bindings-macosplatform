@@ -1,8 +1,10 @@
-package raw
+package rawlib
 
 import (
 	"bytes"
 	"fmt"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/render"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries/view"
 	"io"
 	"sort"
 	"strings"
@@ -15,23 +17,23 @@ import (
 // Functions writes a complete _functions.go file for the framework's plain C functions.
 func EmitFunctions(w io.Writer, pkgName, packageName string, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool) error {
 	model := buildFunctionsModel(pkgName, packageName, framework, m, knownClasses)
-	return executeTemplate(w, "functions_file", model)
+	return render.Execute(w, "functions_file", model)
 }
 
 // buildFunctionsModel filters eligible functions, maps their types and arguments,
 // and collects all imports. The complex return-path dispatch is resolved here
 // (in buildFunctionCallBody) so the template stays a structural description.
-func buildFunctionsModel(pkgName, packageName string, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool) functionsFileModel {
+func buildFunctionsModel(pkgName, packageName string, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool) view.FunctionsFileModel {
 	usedImports := make(typemap.ImportSet)
 	ctx := m.BaseContext(framework.Framework, knownClasses)
 
-	functions := make([]functionModel, 0, len(framework.Functions))
+	functions := make([]view.FunctionModel, 0, len(framework.Functions))
 	for _, fn := range EmittableFunctions(framework) {
 		functions = append(functions, buildFunctionModel(fn, framework.Framework, packageName, ctx, m, usedImports))
 	}
 
 	imports := buildFunctionsImports(functions, usedImports)
-	return functionsFileModel{PkgName: pkgName, FwLower: packageName, Imports: imports, Functions: functions}
+	return view.FunctionsFileModel{PkgName: pkgName, FwLower: packageName, Imports: imports, Functions: functions}
 }
 
 // EmittableFunctions returns the plain C functions that EmitFunctions emits as Go
@@ -75,7 +77,7 @@ func EmittableFunctions(framework *macosplatformmetadata.FrameworkMeta) []macosp
 }
 
 // buildFunctionModel builds the model for a single C function → Go wrapper.
-func buildFunctionModel(fn macosplatformmetadata.Function, framework, _ string, ctx typemap.Context, m *typemap.Mapper, imports typemap.ImportSet) functionModel {
+func buildFunctionModel(fn macosplatformmetadata.Function, framework, _ string, ctx typemap.Context, m *typemap.Mapper, imports typemap.ImportSet) view.FunctionModel {
 	cFunc := strings.ToLower(framework) + "_fn_" + fn.Name
 	goName := naming.GoTypeName(fn.Name)
 
@@ -95,10 +97,10 @@ func buildFunctionModel(fn macosplatformmetadata.Function, framework, _ string, 
 	callExpr := fmt.Sprintf("C.%s(%s)", cFunc, cgoArgs)
 	callBody := buildFunctionCallBody(callExpr, retType, m)
 
-	return functionModel{
+	return view.FunctionModel{
 		CommentBlock: renderCommentBlock(fn.Doc, fn.SDKFile, fn.SDKLine, fn.Availability, ""),
 		BridgeID:     naming.FunctionBridgeID(framework, fn.Name),
-		IsWarnUnused:   fn.IsWarnUnused,
+		IsWarnUnused: fn.IsWarnUnused,
 		GoName:       goName,
 		Params:       params,
 		Ret:          retType,
@@ -151,7 +153,7 @@ func buildFunctionCallBody(callExpr, retType string, m *typemap.Mapper) string {
 // buildFunctionsImports assembles the import list for a _functions.go file.
 // It scans the pre-rendered function bodies AND signatures for tell-tale strings
 // rather than re-running the type mapper a second time.
-func buildFunctionsImports(functions []functionModel, usedImports typemap.ImportSet) []string {
+func buildFunctionsImports(functions []view.FunctionModel, usedImports typemap.ImportSet) []string {
 	// Scan call bodies, preambles, and signatures (return types can reference cgo.Object).
 	var combined bytes.Buffer
 	for _, fn := range functions {
@@ -191,11 +193,11 @@ func writeFunction(w io.Writer, fn macosplatformmetadata.Function, framework str
 	imports := make(typemap.ImportSet)
 	model := buildFunctionModel(fn, framework, packageName, ctx, m, imports)
 	// Emit just the function body — tests don't need the file header.
-	return executeTemplate(w, "functions_file", functionsFileModel{
+	return render.Execute(w, "functions_file", view.FunctionsFileModel{
 		PkgName:   strings.ToLower(framework),
 		FwLower:   packageName,
 		Imports:   []string{"unsafe", "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"},
-		Functions: []functionModel{model},
+		Functions: []view.FunctionModel{model},
 	})
 }
 
