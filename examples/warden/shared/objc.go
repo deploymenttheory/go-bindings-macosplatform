@@ -8,6 +8,14 @@ import (
 	rt "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// ADOPTION: these helpers use the *runtime* (rt), not the idiomatic Foundation
+// wrappers, on purpose. They marshal NSData across the NSXPC boundary — and XPC
+// has no idiomatic form, so its payloads have to be handled as raw object ids
+// (rt.ID) anyway. Converting to/from an idiomatic *foundation.Data here would only
+// add a wrap-then-unwrap round trip. Rule of thumb: use the idiomatic layer for
+// real framework-class calls; stay on the runtime for the plumbing (XPC, dispatch,
+// subclassing) the idiomatic layer doesn't model. See examples/README.md.
+
 // ClassID returns an ObjC class object as an ID for class-method dispatch
 // (e.g. ClassID("NSData") to send +dataWithBytes:length:). Both the app and the
 // extension marshal NSData over XPC, so these helpers live here rather than being

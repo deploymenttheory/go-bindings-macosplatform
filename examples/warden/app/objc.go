@@ -11,6 +11,12 @@ import (
 // mainQueue returns the GCD main queue object (the address of _dispatch_main_q,
 // which is what dispatch_get_main_queue() returns) for APIs that take a
 // dispatch_queue_t, resolved without pulling in the CGo dispatch package.
+//
+// ADOPTION: a dispatch queue is not an ObjC framework class, so there is no
+// idiomatic wrapper for it — it's resolved here at the runtime level via dlopen +
+// dlsym. activation.go bridges this raw id into the idiomatic SystemExtensions API
+// with obj.Wrap. This is the typical shape: idiomatic for the classes, runtime for
+// the low-level primitives they sit on (dispatch, here).
 var cachedMainQueue rt.ID
 
 func mainQueue() rt.ID {

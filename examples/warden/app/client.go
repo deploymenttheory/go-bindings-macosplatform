@@ -10,8 +10,8 @@ import (
 
 	rt "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/shared"
-
-	_ "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	fnd "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
 // Client is a connection to the Warden daemon's XPC service.
@@ -75,10 +75,14 @@ func (c Client) DeleteRule(key, uuid string) {
 // ToggleRule enables/disables the rule (key, uuid) on the daemon. Like DeleteRule
 // this is a one-way send with no acknowledgement.
 func (c Client) ToggleRule(key, uuid string, disabled bool) {
-	n := int64(0)
-	if disabled {
-		n = 1
-	}
-	num := rt.Send[rt.ID](shared.ClassID("NSNumber"), rt.RegisterName("numberWithBool:"), n)
-	c.proxy.CallOneWay("toggleRuleForKey:rule:state:", rt.NSString(key), rt.NSString(uuid), num)
+	// ADOPTION: the NSNumber is built with the idiomatic Foundation wrapper
+	// (fnd.NewNumberWithBool) rather than a hand-sent +numberWithBool:. But the XPC
+	// proxy is a runtime construct that speaks raw object ids, so obj.ID(num)
+	// extracts the underlying objc.ID to pass across. (NSString stays on rt.NSString:
+	// it's a one-shot Go-string→NSData-ish conversion feeding XPC, not a class call
+	// worth wrapping.) Whole-Client lesson: the NSXPC connection has no idiomatic
+	// form, so the transport stays on the runtime while the values it carries come
+	// from the idiomatic layer.
+	num := fnd.NewNumberWithBool(disabled)
+	c.proxy.CallOneWay("toggleRuleForKey:rule:state:", rt.NSString(key), rt.NSString(uuid), obj.ID(num))
 }

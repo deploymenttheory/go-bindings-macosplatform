@@ -1,7 +1,7 @@
 # Keychain example
 
 A runnable proof that the macOS **Security** framework bindings can drive the
-keychain item API as **CRUD across item classes** — using only the idiomatic
+keychain item API as **CRUD across item classes** — using only the custom
 layer ([`opinionated/custom/keychain`](../../opinionated/custom/keychain)), with
 no raw FFI, CFDictionary building, or OSStatus decoding at the call site.
 
@@ -60,3 +60,19 @@ Notes on the non-password classes:
 
 The example writes to your default login keychain and cleans up after itself
 (including on failure). It is `//go:build darwin` only.
+
+## Adopting this
+
+This example uses the **custom** layer — [`opinionated/custom/keychain`](../../opinionated/custom/keychain).
+The keychain item API (`SecItemAdd`/`CopyMatching`/`Update`/`Delete`) is a workflow,
+not a single class: each call builds a `CFDictionary` of `kSec…` attributes and
+decodes an `OSStatus`. The custom layer collapses that into `CreateGenericPassword`,
+`ReadKey`, and friends, so the call site has no raw FFI, dictionary building, or
+status decoding. When a framework's *task* is this involved, look for a custom
+package before reaching for the raw bindings.
+
+For the cross-cutting picture — when to use the idiomatic vs custom vs raw vs
+runtime layers, how to find the binding for any framework, and the signing /
+entitlement prerequisites — see the [examples adoption guide](../README.md). The
+entitlement note above is the concrete case of the "protected APIs need signing"
+rule from that guide.
