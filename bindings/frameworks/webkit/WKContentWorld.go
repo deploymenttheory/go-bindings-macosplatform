@@ -37,36 +37,60 @@ func WKContentWorldFromID(id objc.ID) *WKContentWorld {
 
 // Returns the custom content world with the specified name.
 func WKContentWorldWorldWithName(name *foundation.NSString) *WKContentWorld {
-	_ret := objc.Send[objc.ID](objc.ID(_clsWKContentWorld), _wKContentWorldSelWorldWithName, name.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKContentWorldFromID(_ret)
+	var _mainthread0 *WKContentWorld
+	purego.Main(func() {
+		_mainthread0 = func() *WKContentWorld {
+			_ret := objc.Send[objc.ID](objc.ID(_clsWKContentWorld), _wKContentWorldSelWorldWithName, name.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKContentWorldFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Retrieve the main world that page content itself uses. @discussion When interacting with page content in a WKWebView using the page content world you can disrupt the operation of page content (e.g. by conflicting with variable names in JavaScript set by the web page content itself).
 func WKContentWorldPageWorld() *WKContentWorld {
-	_ret := objc.Send[objc.ID](objc.ID(_clsWKContentWorld), _wKContentWorldSelPageWorld)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKContentWorldFromID(_ret)
+	var _mainthread0 *WKContentWorld
+	purego.Main(func() {
+		_mainthread0 = func() *WKContentWorld {
+			_ret := objc.Send[objc.ID](objc.ID(_clsWKContentWorld), _wKContentWorldSelPageWorld)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKContentWorldFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Retrieve the default world for API client use. @discussion When using a content world different from the page content world you can still manipulate the DOM and built-in DOM APIs but without conflicting with other aspects of the page content (e.g. JavaScript from the web page content itself) Repeated calls will retrieve the same WKContentWorld instance.
 func WKContentWorldDefaultClientWorld() *WKContentWorld {
-	_ret := objc.Send[objc.ID](objc.ID(_clsWKContentWorld), _wKContentWorldSelDefaultClientWorld)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKContentWorldFromID(_ret)
+	var _mainthread0 *WKContentWorld
+	purego.Main(func() {
+		_mainthread0 = func() *WKContentWorld {
+			_ret := objc.Send[objc.ID](objc.ID(_clsWKContentWorld), _wKContentWorldSelDefaultClientWorld)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKContentWorldFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The name of the WKContentWorld @discussion The pageWorld and defaultClientWorld instances will have a nil name. All other instances will have the non-nil name they were accessed by.
 func (o *WKContentWorld) Name() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKContentWorldSelName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKContentWorldSelName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

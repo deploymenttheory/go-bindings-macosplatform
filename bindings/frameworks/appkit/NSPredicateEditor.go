@@ -34,13 +34,21 @@ func NSPredicateEditorFromID(id objc.ID) *NSPredicateEditor {
 }
 
 func (o *NSPredicateEditor) RowTemplates() *foundation.NSArray[*NSPredicateEditorRowTemplate] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateEditorSelRowTemplates)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSPredicateEditorRowTemplate](_ret)
+	var _mainthread0 *foundation.NSArray[*NSPredicateEditorRowTemplate]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSPredicateEditorRowTemplate] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateEditorSelRowTemplates)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSPredicateEditorRowTemplate](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPredicateEditor) SetRowTemplates(rowTemplates *foundation.NSArray[*NSPredicateEditorRowTemplate]) {
-	o.Ptr().Send(_nSPredicateEditorSelSetRowTemplates, rowTemplates.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPredicateEditorSelSetRowTemplates, rowTemplates.Ptr())
+	})
 }

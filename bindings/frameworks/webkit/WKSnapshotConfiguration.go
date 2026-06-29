@@ -40,33 +40,57 @@ func WKSnapshotConfigurationFromID(id objc.ID) *WKSnapshotConfiguration {
 
 // @abstract The rect to snapshot in view coordinates. @discussion This rect should be contained within WKWebView's bounds. If the rect is set to the null rect, the view's bounds will be used. The initial value is the null rect.
 func (o *WKSnapshotConfiguration) Rect() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _wKSnapshotConfigurationSelRect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _wKSnapshotConfigurationSelRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKSnapshotConfiguration) SetRect(rect corefoundation.CGRect) {
-	o.Ptr().Send(_wKSnapshotConfigurationSelSetRect, rect)
+	purego.Main(func() {
+		o.Ptr().Send(_wKSnapshotConfigurationSelSetRect, rect)
+	})
 }
 
 // @abstract Specify a custom width to control the size of image you get back. The height will be computed to maintain the aspect ratio established by rect. @discussion snapshotWidth represents the width in points. If the snapshotWidth is nil, rect's width will be used.
 func (o *WKSnapshotConfiguration) SnapshotWidth() *foundation.NSNumber {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKSnapshotConfigurationSelSnapshotWidth)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSNumberFromID(_ret)
+	var _mainthread0 *foundation.NSNumber
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSNumber {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKSnapshotConfigurationSelSnapshotWidth)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSNumberFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKSnapshotConfiguration) SetSnapshotWidth(snapshotWidth *foundation.NSNumber) {
-	o.Ptr().Send(_wKSnapshotConfigurationSelSetSnapshotWidth, snapshotWidth.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKSnapshotConfigurationSelSetSnapshotWidth, snapshotWidth.Ptr())
+	})
 }
 
 // @abstract A Boolean value that specifies whether the snapshot should be taken after recent changes have been incorporated. The value NO will capture the screen in its current state, which might not include recent changes. @discussion The default value is YES.
 func (o *WKSnapshotConfiguration) AfterScreenUpdates() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKSnapshotConfigurationSelAfterScreenUpdates)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKSnapshotConfigurationSelAfterScreenUpdates)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKSnapshotConfiguration) SetAfterScreenUpdates(afterScreenUpdates bool) {
-	o.Ptr().Send(_wKSnapshotConfigurationSelSetAfterScreenUpdates, afterScreenUpdates)
+	purego.Main(func() {
+		o.Ptr().Send(_wKSnapshotConfigurationSelSetAfterScreenUpdates, afterScreenUpdates)
+	})
 }

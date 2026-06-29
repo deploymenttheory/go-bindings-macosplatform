@@ -38,10 +38,14 @@ func FPUIActionExtensionViewControllerFromID(id objc.ID) *FPUIActionExtensionVie
 
 // Performs any necessary setup or configuration when an authentication error occurs.
 func (o *FPUIActionExtensionViewController) PrepareForError(error_ unsafe.Pointer) {
-	o.Ptr().Send(_fPUIActionExtensionViewControllerSelPrepareForError, error_)
+	purego.Main(func() {
+		o.Ptr().Send(_fPUIActionExtensionViewControllerSelPrepareForError, error_)
+	})
 }
 
 // Performs any necessary setup or configuration for the specified action.
 func (o *FPUIActionExtensionViewController) PrepareForActionWithIdentifierItemIdentifiers(actionIdentifier *foundation.NSString, itemIdentifiers *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_fPUIActionExtensionViewControllerSelPrepareForActionWithIdentifierItemIdentifiers, actionIdentifier.Ptr(), itemIdentifiers.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_fPUIActionExtensionViewControllerSelPrepareForActionWithIdentifierItemIdentifiers, actionIdentifier.Ptr(), itemIdentifiers.Ptr())
+	})
 }

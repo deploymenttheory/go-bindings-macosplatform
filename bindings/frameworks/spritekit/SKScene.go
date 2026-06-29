@@ -65,178 +65,294 @@ func SKSceneFromID(id objc.ID) *SKScene {
 
 // Initializes a new scene object.
 func (o *SKScene) InitWithSize(size corefoundation.CGSize) *SKScene {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKSceneSelInitWithSize, size)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKSceneFromID(_ret)
+	var _mainthread0 *SKScene
+	purego.Main(func() {
+		_mainthread0 = func() *SKScene {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKSceneSelInitWithSize, size)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKSceneFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates and returns a new scene object.
 func SKSceneSceneWithSize(size corefoundation.CGSize) *SKScene {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKScene), _sKSceneSelSceneWithSize, size)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKSceneFromID(_ret)
+	var _mainthread0 *SKScene
+	purego.Main(func() {
+		_mainthread0 = func() *SKScene {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKScene), _sKSceneSelSceneWithSize, size)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKSceneFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Tells you when the scene is presented.
 func (o *SKScene) SceneDidLoad() {
-	o.Ptr().Send(_sKSceneSelSceneDidLoad)
+	purego.Main(func() {
+		o.Ptr().Send(_sKSceneSelSceneDidLoad)
+	})
 }
 
 // Converts a point from view coordinates to scene coordinates.
 func (o *SKScene) ConvertPointFromView(point corefoundation.CGPoint) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sKSceneSelConvertPointFromView, point)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sKSceneSelConvertPointFromView, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Converts a point from scene coordinates to view coordinates.
 func (o *SKScene) ConvertPointToView(point corefoundation.CGPoint) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sKSceneSelConvertPointToView, point)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sKSceneSelConvertPointToView, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Tells your app to perform any app-specific logic to update your scene.
 func (o *SKScene) Update(currentTime float64) {
-	o.Ptr().Send(_sKSceneSelUpdate, currentTime)
+	purego.Main(func() {
+		o.Ptr().Send(_sKSceneSelUpdate, currentTime)
+	})
 }
 
 // Tells your app to peform any necessary logic after scene actions are evaluated.
 func (o *SKScene) DidEvaluateActions() {
-	o.Ptr().Send(_sKSceneSelDidEvaluateActions)
+	purego.Main(func() {
+		o.Ptr().Send(_sKSceneSelDidEvaluateActions)
+	})
 }
 
 // Tells your app to peform any necessary logic after physics simulations are performed.
 func (o *SKScene) DidSimulatePhysics() {
-	o.Ptr().Send(_sKSceneSelDidSimulatePhysics)
+	purego.Main(func() {
+		o.Ptr().Send(_sKSceneSelDidSimulatePhysics)
+	})
 }
 
 // Tells your app to peform any necessary logic after constraints are applied.
 func (o *SKScene) DidApplyConstraints() {
-	o.Ptr().Send(_sKSceneSelDidApplyConstraints)
+	purego.Main(func() {
+		o.Ptr().Send(_sKSceneSelDidApplyConstraints)
+	})
 }
 
 // Tells your app to peform any necessary logic after the scene has finished all of the steps required to process animations.
 func (o *SKScene) DidFinishUpdate() {
-	o.Ptr().Send(_sKSceneSelDidFinishUpdate)
+	purego.Main(func() {
+		o.Ptr().Send(_sKSceneSelDidFinishUpdate)
+	})
 }
 
 // Tells you when the scene is presented by a view.
 func (o *SKScene) DidMoveToView(view *SKView) {
-	o.Ptr().Send(_sKSceneSelDidMoveToView, view.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKSceneSelDidMoveToView, view.Ptr())
+	})
 }
 
 // Tells you when the scene is about to be removed from a view.
 func (o *SKScene) WillMoveFromView(view *SKView) {
-	o.Ptr().Send(_sKSceneSelWillMoveFromView, view.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKSceneSelWillMoveFromView, view.Ptr())
+	})
 }
 
 // Tells you when the scene’s size has changed.
 func (o *SKScene) DidChangeSize(oldSize corefoundation.CGSize) {
-	o.Ptr().Send(_sKSceneSelDidChangeSize, oldSize)
+	purego.Main(func() {
+		o.Ptr().Send(_sKSceneSelDidChangeSize, oldSize)
+	})
 }
 
 func (o *SKScene) Size() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _sKSceneSelSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _sKSceneSelSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKScene) SetSize(size corefoundation.CGSize) {
-	o.Ptr().Send(_sKSceneSelSetSize, size)
+	purego.Main(func() {
+		o.Ptr().Send(_sKSceneSelSetSize, size)
+	})
 }
 
 // Used to determine how to scale the scene to match the SKView it is being displayed in.
 func (o *SKScene) ScaleMode() SKSceneScaleMode {
-	_ret := objc.Send[SKSceneScaleMode](o.Ptr(), _sKSceneSelScaleMode)
-	return _ret
+	var _mainthread0 SKSceneScaleMode
+	purego.Main(func() {
+		_mainthread0 = func() SKSceneScaleMode {
+			_ret := objc.Send[SKSceneScaleMode](o.Ptr(), _sKSceneSelScaleMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKScene) SetScaleMode(scaleMode SKSceneScaleMode) {
-	o.Ptr().Send(_sKSceneSelSetScaleMode, scaleMode)
+	purego.Main(func() {
+		o.Ptr().Send(_sKSceneSelSetScaleMode, scaleMode)
+	})
 }
 
 // The camera that is used to obtain the view scale and translation based on where the camera is in relation to the scene.
 func (o *SKScene) Camera() *SKCameraNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKSceneSelCamera)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKCameraNodeFromID(_ret)
+	var _mainthread0 *SKCameraNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKCameraNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKSceneSelCamera)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKCameraNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKScene) SetCamera(camera *SKCameraNode) {
-	o.Ptr().Send(_sKSceneSelSetCamera, camera.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKSceneSelSetCamera, camera.Ptr())
+	})
 }
 
 // The node that is currently the listener for positional audio coming from SKAudioNodes @see SKAudioNode
 func (o *SKScene) Listener() *SKNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKSceneSelListener)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKNodeFromID(_ret)
+	var _mainthread0 *SKNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKSceneSelListener)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKScene) SetListener(listener *SKNode) {
-	o.Ptr().Send(_sKSceneSelSetListener, listener.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKSceneSelSetListener, listener.Ptr())
+	})
 }
 
 func (o *SKScene) AudioEngine() *avfaudio.AVAudioEngine {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKSceneSelAudioEngine)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return avfaudio.AVAudioEngineFromID(_ret)
+	var _mainthread0 *avfaudio.AVAudioEngine
+	purego.Main(func() {
+		_mainthread0 = func() *avfaudio.AVAudioEngine {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKSceneSelAudioEngine)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return avfaudio.AVAudioEngineFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Background color, defaults to gray
 func (o *SKScene) BackgroundColor() *appkit.NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKSceneSelBackgroundColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSColorFromID(_ret)
+	var _mainthread0 *appkit.NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKSceneSelBackgroundColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKScene) SetBackgroundColor(backgroundColor *appkit.NSColor) {
-	o.Ptr().Send(_sKSceneSelSetBackgroundColor, backgroundColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKSceneSelSetBackgroundColor, backgroundColor.Ptr())
+	})
 }
 
 func (o *SKScene) Delegate() SKSceneDelegate {
-	_ret := objc.Send[SKSceneDelegate](o.Ptr(), _sKSceneSelDelegate)
-	return _ret
+	var _mainthread0 SKSceneDelegate
+	purego.Main(func() {
+		_mainthread0 = func() SKSceneDelegate {
+			_ret := objc.Send[SKSceneDelegate](o.Ptr(), _sKSceneSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKScene) SetDelegate(delegate SKSceneDelegate) {
-	o.Ptr().Send(_sKSceneSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_sKSceneSelSetDelegate, delegate)
+	})
 }
 
 // Used to choose the origin of the scene's coordinate system
 func (o *SKScene) AnchorPoint() corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sKSceneSelAnchorPoint)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sKSceneSelAnchorPoint)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKScene) SetAnchorPoint(anchorPoint corefoundation.CGPoint) {
-	o.Ptr().Send(_sKSceneSelSetAnchorPoint, anchorPoint)
+	purego.Main(func() {
+		o.Ptr().Send(_sKSceneSelSetAnchorPoint, anchorPoint)
+	})
 }
 
 // Physics simulation functionality
 func (o *SKScene) PhysicsWorld() *SKPhysicsWorld {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKSceneSelPhysicsWorld)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKPhysicsWorldFromID(_ret)
+	var _mainthread0 *SKPhysicsWorld
+	purego.Main(func() {
+		_mainthread0 = func() *SKPhysicsWorld {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKSceneSelPhysicsWorld)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKPhysicsWorldFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The SKView this scene is currently presented in, or nil if it is not being presented.
 func (o *SKScene) View() *SKView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKSceneSelView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKViewFromID(_ret)
+	var _mainthread0 *SKView
+	purego.Main(func() {
+		_mainthread0 = func() *SKView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKSceneSelView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

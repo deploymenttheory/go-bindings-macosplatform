@@ -42,57 +42,105 @@ func WKNavigationActionFromID(id objc.ID) *WKNavigationAction {
 
 // @abstract The frame requesting the navigation.
 func (o *WKNavigationAction) SourceFrame() *WKFrameInfo {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKNavigationActionSelSourceFrame)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKFrameInfoFromID(_ret)
+	var _mainthread0 *WKFrameInfo
+	purego.Main(func() {
+		_mainthread0 = func() *WKFrameInfo {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKNavigationActionSelSourceFrame)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKFrameInfoFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The target frame, or nil if this is a new window navigation.
 func (o *WKNavigationAction) TargetFrame() *WKFrameInfo {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKNavigationActionSelTargetFrame)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKFrameInfoFromID(_ret)
+	var _mainthread0 *WKFrameInfo
+	purego.Main(func() {
+		_mainthread0 = func() *WKFrameInfo {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKNavigationActionSelTargetFrame)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKFrameInfoFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The type of action that triggered the navigation. @discussion The value is one of the constants of the enumerated type WKNavigationType.
 func (o *WKNavigationAction) NavigationType() WKNavigationType {
-	_ret := objc.Send[WKNavigationType](o.Ptr(), _wKNavigationActionSelNavigationType)
-	return _ret
+	var _mainthread0 WKNavigationType
+	purego.Main(func() {
+		_mainthread0 = func() WKNavigationType {
+			_ret := objc.Send[WKNavigationType](o.Ptr(), _wKNavigationActionSelNavigationType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The navigation's request.
 func (o *WKNavigationAction) Request() *foundation.NSURLRequest {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKNavigationActionSelRequest)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSURLRequestFromID(_ret)
+	var _mainthread0 *foundation.NSURLRequest
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSURLRequest {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKNavigationActionSelRequest)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSURLRequestFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract A value indicating whether the web content used a download attribute to indicate that this should be downloaded.
 func (o *WKNavigationAction) ShouldPerformDownload() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKNavigationActionSelShouldPerformDownload)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKNavigationActionSelShouldPerformDownload)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Whether or not the navigation is a redirect from a content rule list.
 func (o *WKNavigationAction) IsContentRuleListRedirect() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKNavigationActionSelIsContentRuleListRedirect)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKNavigationActionSelIsContentRuleListRedirect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The modifier keys that were in effect when the navigation was requested.
 func (o *WKNavigationAction) ModifierFlags() appkit.NSEventModifierFlags {
-	_ret := objc.Send[appkit.NSEventModifierFlags](o.Ptr(), _wKNavigationActionSelModifierFlags)
-	return _ret
+	var _mainthread0 appkit.NSEventModifierFlags
+	purego.Main(func() {
+		_mainthread0 = func() appkit.NSEventModifierFlags {
+			_ret := objc.Send[appkit.NSEventModifierFlags](o.Ptr(), _wKNavigationActionSelModifierFlags)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The number of the mouse button causing the navigation to be requested.
 func (o *WKNavigationAction) ButtonNumber() int {
-	_ret := objc.Send[int](o.Ptr(), _wKNavigationActionSelButtonNumber)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _wKNavigationActionSelButtonNumber)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

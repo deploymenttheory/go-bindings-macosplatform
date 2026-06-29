@@ -55,16 +55,24 @@ func SWCollaborationViewFromID(id objc.ID) *SWCollaborationView {
 
 // Sets the content view.
 func (o *SWCollaborationView) SetContentView(detailViewListContentView *appkit.NSView) {
-	o.Ptr().Send(_sWCollaborationViewSelSetContentView, detailViewListContentView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sWCollaborationViewSelSetContentView, detailViewListContentView.Ptr())
+	})
 }
 
 // Creates and initializes a collaboration view.
 func (o *SWCollaborationView) InitWithItemProvider(itemProvider *foundation.NSItemProvider) *SWCollaborationView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationViewSelInitWithItemProvider, itemProvider.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SWCollaborationViewFromID(_ret)
+	var _mainthread0 *SWCollaborationView
+	purego.Main(func() {
+		_mainthread0 = func() *SWCollaborationView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationViewSelInitWithItemProvider, itemProvider.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SWCollaborationViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Dismisses the popover.
@@ -76,104 +84,178 @@ func (o *SWCollaborationView) DismissPopover(completion func()) {
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_sWCollaborationViewSelDismissPopover, __block_completion)
+	purego.Main(func() {
+		o.Ptr().Send(_sWCollaborationViewSelDismissPopover, __block_completion)
+	})
 }
 
 // A Boolean value the system uses to show or hide the default manage-participants button in the collaboration popover.
 func (o *SWCollaborationView) SetShowManageButton(showManageButton bool) {
-	o.Ptr().Send(_sWCollaborationViewSelSetShowManageButton, showManageButton)
+	purego.Main(func() {
+		o.Ptr().Send(_sWCollaborationViewSelSetShowManageButton, showManageButton)
+	})
 }
 
 func (o *SWCollaborationView) CloudSharingDelegate() appkit.NSCloudSharingServiceDelegate {
-	_ret := objc.Send[appkit.NSCloudSharingServiceDelegate](o.Ptr(), _sWCollaborationViewSelCloudSharingDelegate)
-	return _ret
+	var _mainthread0 appkit.NSCloudSharingServiceDelegate
+	purego.Main(func() {
+		_mainthread0 = func() appkit.NSCloudSharingServiceDelegate {
+			_ret := objc.Send[appkit.NSCloudSharingServiceDelegate](o.Ptr(), _sWCollaborationViewSelCloudSharingDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SWCollaborationView) SetCloudSharingDelegate(cloudSharingDelegate appkit.NSCloudSharingServiceDelegate) {
-	o.Ptr().Send(_sWCollaborationViewSelSetCloudSharingDelegate, cloudSharingDelegate)
+	purego.Main(func() {
+		o.Ptr().Send(_sWCollaborationViewSelSetCloudSharingDelegate, cloudSharingDelegate)
+	})
 }
 
 func (o *SWCollaborationView) ActiveParticipantCount() uint {
-	_ret := objc.Send[uint](o.Ptr(), _sWCollaborationViewSelActiveParticipantCount)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _sWCollaborationViewSelActiveParticipantCount)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SWCollaborationView) SetActiveParticipantCount(activeParticipantCount uint) {
-	o.Ptr().Send(_sWCollaborationViewSelSetActiveParticipantCount, activeParticipantCount)
+	purego.Main(func() {
+		o.Ptr().Send(_sWCollaborationViewSelSetActiveParticipantCount, activeParticipantCount)
+	})
 }
 
 func (o *SWCollaborationView) Delegate() SWCollaborationViewDelegate {
-	_ret := objc.Send[SWCollaborationViewDelegate](o.Ptr(), _sWCollaborationViewSelDelegate)
-	return _ret
+	var _mainthread0 SWCollaborationViewDelegate
+	purego.Main(func() {
+		_mainthread0 = func() SWCollaborationViewDelegate {
+			_ret := objc.Send[SWCollaborationViewDelegate](o.Ptr(), _sWCollaborationViewSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SWCollaborationView) SetDelegate(delegate SWCollaborationViewDelegate) {
-	o.Ptr().Send(_sWCollaborationViewSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_sWCollaborationViewSelSetDelegate, delegate)
+	})
 }
 
 func (o *SWCollaborationView) HeaderTitle() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationViewSelHeaderTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationViewSelHeaderTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SWCollaborationView) SetHeaderTitle(headerTitle *foundation.NSString) {
-	o.Ptr().Send(_sWCollaborationViewSelSetHeaderTitle, headerTitle.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sWCollaborationViewSelSetHeaderTitle, headerTitle.Ptr())
+	})
 }
 
 func (o *SWCollaborationView) HeaderSubtitle() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationViewSelHeaderSubtitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationViewSelHeaderSubtitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SWCollaborationView) SetHeaderSubtitle(headerSubtitle *foundation.NSString) {
-	o.Ptr().Send(_sWCollaborationViewSelSetHeaderSubtitle, headerSubtitle.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sWCollaborationViewSelSetHeaderSubtitle, headerSubtitle.Ptr())
+	})
 }
 
 func (o *SWCollaborationView) HeaderImage() *appkit.NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationViewSelHeaderImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSImageFromID(_ret)
+	var _mainthread0 *appkit.NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationViewSelHeaderImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SWCollaborationView) SetHeaderImage(headerImage *appkit.NSImage) {
-	o.Ptr().Send(_sWCollaborationViewSelSetHeaderImage, headerImage.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sWCollaborationViewSelSetHeaderImage, headerImage.Ptr())
+	})
 }
 
 func (o *SWCollaborationView) MenuFormRepresentation() *appkit.NSMenuItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationViewSelMenuFormRepresentation)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSMenuItemFromID(_ret)
+	var _mainthread0 *appkit.NSMenuItem
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSMenuItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationViewSelMenuFormRepresentation)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSMenuItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract If you are using the built in manage share button, this delegate property will be forwarded along to the NSCloudSharingService that button presents. If you have your own and suppress the provided one via setShowManageButton, this does nothing.
 func (o *SWCollaborationView) CloudSharingServiceDelegate() appkit.NSCloudSharingServiceDelegate {
-	_ret := objc.Send[appkit.NSCloudSharingServiceDelegate](o.Ptr(), _sWCollaborationViewSelCloudSharingServiceDelegate)
-	return _ret
+	var _mainthread0 appkit.NSCloudSharingServiceDelegate
+	purego.Main(func() {
+		_mainthread0 = func() appkit.NSCloudSharingServiceDelegate {
+			_ret := objc.Send[appkit.NSCloudSharingServiceDelegate](o.Ptr(), _sWCollaborationViewSelCloudSharingServiceDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SWCollaborationView) SetCloudSharingServiceDelegate(cloudSharingServiceDelegate appkit.NSCloudSharingServiceDelegate) {
-	o.Ptr().Send(_sWCollaborationViewSelSetCloudSharingServiceDelegate, cloudSharingServiceDelegate)
+	purego.Main(func() {
+		o.Ptr().Send(_sWCollaborationViewSelSetCloudSharingServiceDelegate, cloudSharingServiceDelegate)
+	})
 }
 
 // @abstract sets the title of the manage participants button in the collaboration popover to the given string, defaults to "Manage Share"
 func (o *SWCollaborationView) ManageButtonTitle() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationViewSelManageButtonTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationViewSelManageButtonTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SWCollaborationView) SetManageButtonTitle(manageButtonTitle *foundation.NSString) {
-	o.Ptr().Send(_sWCollaborationViewSelSetManageButtonTitle, manageButtonTitle.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sWCollaborationViewSelSetManageButtonTitle, manageButtonTitle.Ptr())
+	})
 }

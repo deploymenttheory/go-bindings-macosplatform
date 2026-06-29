@@ -58,150 +58,258 @@ func QCViewFromID(id objc.ID) *QCView {
 
 // Loads the composition file located at the specified path.
 func (o *QCView) LoadCompositionFromFile(path *foundation.NSString) bool {
-	_ret := objc.Send[bool](o.Ptr(), _qCViewSelLoadCompositionFromFile, path.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _qCViewSelLoadCompositionFromFile, path.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Loads a QCComposition object into the view.
 func (o *QCView) LoadComposition(composition *QCComposition) bool {
-	_ret := objc.Send[bool](o.Ptr(), _qCViewSelLoadComposition, composition.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _qCViewSelLoadComposition, composition.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the composition loaded in the view.
 func (o *QCView) LoadedComposition() *QCComposition {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelLoadedComposition)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return QCCompositionFromID(_ret)
+	var _mainthread0 *QCComposition
+	purego.Main(func() {
+		_mainthread0 = func() *QCComposition {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelLoadedComposition)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return QCCompositionFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Unloads the composition from the view.
 func (o *QCView) UnloadComposition() {
-	o.Ptr().Send(_qCViewSelUnloadComposition)
+	purego.Main(func() {
+		o.Ptr().Send(_qCViewSelUnloadComposition)
+	})
 }
 
 // Sets whether the composition that is in the view starts rendering automatically when the view is put on the screen.
 func (o *QCView) SetAutostartsRendering(flag bool) {
-	o.Ptr().Send(_qCViewSelSetAutostartsRendering, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_qCViewSelSetAutostartsRendering, flag)
+	})
 }
 
 // Checks whether the view is set to start rendering automatically.
 func (o *QCView) AutostartsRendering() bool {
-	_ret := objc.Send[bool](o.Ptr(), _qCViewSelAutostartsRendering)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _qCViewSelAutostartsRendering)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the color used to erase the view.
 func (o *QCView) SetEraseColor(color *appkit.NSColor) {
-	o.Ptr().Send(_qCViewSelSetEraseColor, color.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_qCViewSelSetEraseColor, color.Ptr())
+	})
 }
 
 // Retrieves the current color used to erase the view.
 func (o *QCView) EraseColor() *appkit.NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelEraseColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSColorFromID(_ret)
+	var _mainthread0 *appkit.NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelEraseColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the mask used to filter which types of events are forwarded from the view to the composition during rendering.
 func (o *QCView) SetEventForwardingMask(mask uint) {
-	o.Ptr().Send(_qCViewSelSetEventForwardingMask, mask)
+	purego.Main(func() {
+		o.Ptr().Send(_qCViewSelSetEventForwardingMask, mask)
+	})
 }
 
 // Retrieves the mask used to filter which types of events are forwarded from the view to the composition during rendering.
 func (o *QCView) EventForwardingMask() uint {
-	_ret := objc.Send[uint](o.Ptr(), _qCViewSelEventForwardingMask)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _qCViewSelEventForwardingMask)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the maximum rendering frame rate.
 func (o *QCView) SetMaxRenderingFrameRate(maxFPS float32) {
-	o.Ptr().Send(_qCViewSelSetMaxRenderingFrameRate, maxFPS)
+	purego.Main(func() {
+		o.Ptr().Send(_qCViewSelSetMaxRenderingFrameRate, maxFPS)
+	})
 }
 
 // Returns the maximum frame rate for rendering.
 func (o *QCView) MaxRenderingFrameRate() float32 {
-	_ret := objc.Send[float32](o.Ptr(), _qCViewSelMaxRenderingFrameRate)
-	return _ret
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_ret := objc.Send[float32](o.Ptr(), _qCViewSelMaxRenderingFrameRate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Clears the view using the current erase color.
 func (o *QCView) Erase() {
-	o.Ptr().Send(_qCViewSelErase)
+	purego.Main(func() {
+		o.Ptr().Send(_qCViewSelErase)
+	})
 }
 
 // Starts rendering the composition that is in the view.
 func (o *QCView) StartRendering() bool {
-	_ret := objc.Send[bool](o.Ptr(), _qCViewSelStartRendering)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _qCViewSelStartRendering)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Overrides to perform your custom operations prior to or after rendering a frame of a composition.
 func (o *QCView) RenderAtTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _qCViewSelRenderAtTimeArguments, time_, arguments.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _qCViewSelRenderAtTimeArguments, time_, arguments.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Pauses rendering in the view.
 func (o *QCView) PauseRendering() {
-	o.Ptr().Send(_qCViewSelPauseRendering)
+	purego.Main(func() {
+		o.Ptr().Send(_qCViewSelPauseRendering)
+	})
 }
 
 // Returns whether or not the rendering in the view is paused.
 func (o *QCView) IsPausedRendering() bool {
-	_ret := objc.Send[bool](o.Ptr(), _qCViewSelIsPausedRendering)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _qCViewSelIsPausedRendering)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Resumes rendering a paused composition.
 func (o *QCView) ResumeRendering() {
-	o.Ptr().Send(_qCViewSelResumeRendering)
+	purego.Main(func() {
+		o.Ptr().Send(_qCViewSelResumeRendering)
+	})
 }
 
 // Stops rendering the composition that is in the view.
 func (o *QCView) StopRendering() {
-	o.Ptr().Send(_qCViewSelStopRendering)
+	purego.Main(func() {
+		o.Ptr().Send(_qCViewSelStopRendering)
+	})
 }
 
 // Checks whether a composition is rendering in the view.
 func (o *QCView) IsRendering() bool {
-	_ret := objc.Send[bool](o.Ptr(), _qCViewSelIsRendering)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _qCViewSelIsRendering)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns an NSImage object of the current image in the view.
 func (o *QCView) SnapshotImage() *appkit.NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelSnapshotImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSImageFromID(_ret)
+	var _mainthread0 *appkit.NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelSnapshotImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the current image in the view as an image object of the provided image type.
 func (o *QCView) CreateSnapshotImageOfType(type_ *foundation.NSString) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelCreateSnapshotImageOfType, type_.Ptr())
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelCreateSnapshotImageOfType, type_.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the OpenGL context used by the view.
 func (o *QCView) OpenGLContext() *appkit.NSOpenGLContext {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelOpenGLContext)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSOpenGLContextFromID(_ret)
+	var _mainthread0 *appkit.NSOpenGLContext
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSOpenGLContext {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelOpenGLContext)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSOpenGLContextFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the OpenGL pixel format used by the view.
 func (o *QCView) OpenGLPixelFormat() *appkit.NSOpenGLPixelFormat {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelOpenGLPixelFormat)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSOpenGLPixelFormatFromID(_ret)
+	var _mainthread0 *appkit.NSOpenGLPixelFormat
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSOpenGLPixelFormat {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelOpenGLPixelFormat)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSOpenGLPixelFormatFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

@@ -36,21 +36,35 @@ func MKPitchControlFromID(id objc.ID) *MKPitchControl {
 
 // Creates a pitch control and associates it with the specified map view.
 func MKPitchControlPitchControlWithMapView(mapView *MKMapView) *MKPitchControl {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMKPitchControl), _mKPitchControlSelPitchControlWithMapView, mapView.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKPitchControlFromID(_ret)
+	var _mainthread0 *MKPitchControl
+	purego.Main(func() {
+		_mainthread0 = func() *MKPitchControl {
+			_ret := objc.Send[objc.ID](objc.ID(_clsMKPitchControl), _mKPitchControlSelPitchControlWithMapView, mapView.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKPitchControlFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKPitchControl) MapView() *MKMapView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKPitchControlSelMapView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKMapViewFromID(_ret)
+	var _mainthread0 *MKMapView
+	purego.Main(func() {
+		_mainthread0 = func() *MKMapView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKPitchControlSelMapView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKMapViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKPitchControl) SetMapView(mapView *MKMapView) {
-	o.Ptr().Send(_mKPitchControlSelSetMapView, mapView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKPitchControlSelSetMapView, mapView.Ptr())
+	})
 }

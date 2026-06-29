@@ -46,90 +46,154 @@ func NSBrowserCellFromID(id objc.ID) *NSBrowserCell {
 }
 
 func (o *NSBrowserCell) InitTextCell(string_ *foundation.NSString) *NSBrowserCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserCellSelInitTextCell, string_.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSBrowserCellFromID(_ret)
+	var _mainthread0 *NSBrowserCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSBrowserCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserCellSelInitTextCell, string_.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSBrowserCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowserCell) InitImageCell(image *NSImage) *NSBrowserCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserCellSelInitImageCell, image.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSBrowserCellFromID(_ret)
+	var _mainthread0 *NSBrowserCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSBrowserCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserCellSelInitImageCell, image.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSBrowserCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowserCell) InitWithCoder(coder *foundation.NSCoder) *NSBrowserCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserCellSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSBrowserCellFromID(_ret)
+	var _mainthread0 *NSBrowserCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSBrowserCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserCellSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSBrowserCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the highlight color that the receiver wants to display.
 func (o *NSBrowserCell) HighlightColorInView(controlView *NSView) *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserCellSelHighlightColorInView, controlView.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserCellSelHighlightColorInView, controlView.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Unhighlights the receiver and unsets its state.
 func (o *NSBrowserCell) Reset() {
-	o.Ptr().Send(_nSBrowserCellSelReset)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserCellSelReset)
+	})
 }
 
 // Highlights the receiver and sets its state.
 func (o *NSBrowserCell) Set() {
-	o.Ptr().Send(_nSBrowserCellSelSet)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserCellSelSet)
+	})
 }
 
 func NSBrowserCellBranchImage() *NSImage {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSBrowserCell), _nSBrowserCellSelBranchImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSBrowserCell), _nSBrowserCellSelBranchImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func NSBrowserCellHighlightedBranchImage() *NSImage {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSBrowserCell), _nSBrowserCellSelHighlightedBranchImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSBrowserCell), _nSBrowserCellSelHighlightedBranchImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowserCell) IsLeaf() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSBrowserCellSelIsLeaf)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSBrowserCellSelIsLeaf)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowserCell) SetLeaf(leaf bool) {
-	o.Ptr().Send(_nSBrowserCellSelSetLeaf, leaf)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserCellSelSetLeaf, leaf)
+	})
 }
 
 func (o *NSBrowserCell) IsLoaded() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSBrowserCellSelIsLoaded)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSBrowserCellSelIsLoaded)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowserCell) SetLoaded(loaded bool) {
-	o.Ptr().Send(_nSBrowserCellSelSetLoaded, loaded)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserCellSelSetLoaded, loaded)
+	})
 }
 
 func (o *NSBrowserCell) AlternateImage() *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserCellSelAlternateImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserCellSelAlternateImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowserCell) SetAlternateImage(alternateImage *NSImage) {
-	o.Ptr().Send(_nSBrowserCellSelSetAlternateImage, alternateImage.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserCellSelSetAlternateImage, alternateImage.Ptr())
+	})
 }

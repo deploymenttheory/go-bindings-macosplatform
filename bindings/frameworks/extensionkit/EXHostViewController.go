@@ -42,35 +42,58 @@ func EXHostViewControllerFromID(id objc.ID) *EXHostViewController {
 // Initiates an XPC connection to the app extension’s scene. Call this method from your delegate's “EXHostViewControllerDelegate/hostViewControllerDidActivate:“ method to initiate a scene-specific connection to the app extension. - Returns: An object representing the connection.
 func (o *EXHostViewController) MakeXPCConnectionWithError() (*foundation.NSXPCConnection, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _eXHostViewControllerSelMakeXPCConnectionWithError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return foundation.NSXPCConnectionFromID(_ret), nil
+	var _mainthread0 *foundation.NSXPCConnection
+	var _mainthread1 error
+	purego.Main(func() {
+		_mainthread0, _mainthread1 = func() (*foundation.NSXPCConnection, error) {
+			_ret := objc.Send[objc.ID](o.Ptr(), _eXHostViewControllerSelMakeXPCConnectionWithError, unsafe.Pointer(&_nsErr))
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			if _nsErr != 0 {
+				return nil, purego.NSErrorToError(objc.ID(_nsErr))
+			}
+			return foundation.NSXPCConnectionFromID(_ret), nil
+		}()
+	})
+	return _mainthread0, _mainthread1
 }
 
 // A custom delegate object you use to receive notifications about the activation and deactivation of the app extension.
 func (o *EXHostViewController) Delegate() EXHostViewControllerDelegate {
-	_ret := objc.Send[EXHostViewControllerDelegate](o.Ptr(), _eXHostViewControllerSelDelegate)
-	return _ret
+	var _mainthread0 EXHostViewControllerDelegate
+	purego.Main(func() {
+		_mainthread0 = func() EXHostViewControllerDelegate {
+			_ret := objc.Send[EXHostViewControllerDelegate](o.Ptr(), _eXHostViewControllerSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *EXHostViewController) SetDelegate(delegate EXHostViewControllerDelegate) {
-	o.Ptr().Send(_eXHostViewControllerSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_eXHostViewControllerSelSetDelegate, delegate)
+	})
 }
 
 // The view to display when the view controller has no app extension content to display.
 func (o *EXHostViewController) PlaceholderView() *appkit.NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _eXHostViewControllerSelPlaceholderView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSViewFromID(_ret)
+	var _mainthread0 *appkit.NSView
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _eXHostViewControllerSelPlaceholderView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *EXHostViewController) SetPlaceholderView(placeholderView *appkit.NSView) {
-	o.Ptr().Send(_eXHostViewControllerSelSetPlaceholderView, placeholderView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_eXHostViewControllerSelSetPlaceholderView, placeholderView.Ptr())
+	})
 }

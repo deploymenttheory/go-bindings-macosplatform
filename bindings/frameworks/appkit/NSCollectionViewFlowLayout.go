@@ -56,104 +56,194 @@ func NSCollectionViewFlowLayoutFromID(id objc.ID) *NSCollectionViewFlowLayout {
 }
 
 func (o *NSCollectionViewFlowLayout) SectionAtIndexIsCollapsed(sectionIndex uint) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewFlowLayoutSelSectionAtIndexIsCollapsed, sectionIndex)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewFlowLayoutSelSectionAtIndexIsCollapsed, sectionIndex)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewFlowLayout) CollapseSectionAtIndex(sectionIndex uint) {
-	o.Ptr().Send(_nSCollectionViewFlowLayoutSelCollapseSectionAtIndex, sectionIndex)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewFlowLayoutSelCollapseSectionAtIndex, sectionIndex)
+	})
 }
 
 func (o *NSCollectionViewFlowLayout) ExpandSectionAtIndex(sectionIndex uint) {
-	o.Ptr().Send(_nSCollectionViewFlowLayoutSelExpandSectionAtIndex, sectionIndex)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewFlowLayoutSelExpandSectionAtIndex, sectionIndex)
+	})
 }
 
 func (o *NSCollectionViewFlowLayout) MinimumLineSpacing() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSCollectionViewFlowLayoutSelMinimumLineSpacing)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSCollectionViewFlowLayoutSelMinimumLineSpacing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewFlowLayout) SetMinimumLineSpacing(minimumLineSpacing float64) {
-	o.Ptr().Send(_nSCollectionViewFlowLayoutSelSetMinimumLineSpacing, minimumLineSpacing)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewFlowLayoutSelSetMinimumLineSpacing, minimumLineSpacing)
+	})
 }
 
 func (o *NSCollectionViewFlowLayout) MinimumInteritemSpacing() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSCollectionViewFlowLayoutSelMinimumInteritemSpacing)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSCollectionViewFlowLayoutSelMinimumInteritemSpacing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewFlowLayout) SetMinimumInteritemSpacing(minimumInteritemSpacing float64) {
-	o.Ptr().Send(_nSCollectionViewFlowLayoutSelSetMinimumInteritemSpacing, minimumInteritemSpacing)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewFlowLayoutSelSetMinimumInteritemSpacing, minimumInteritemSpacing)
+	})
 }
 
 func (o *NSCollectionViewFlowLayout) ItemSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCollectionViewFlowLayoutSelItemSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCollectionViewFlowLayoutSelItemSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewFlowLayout) SetItemSize(itemSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSCollectionViewFlowLayoutSelSetItemSize, itemSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewFlowLayoutSelSetItemSize, itemSize)
+	})
 }
 
 func (o *NSCollectionViewFlowLayout) EstimatedItemSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCollectionViewFlowLayoutSelEstimatedItemSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCollectionViewFlowLayoutSelEstimatedItemSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewFlowLayout) SetEstimatedItemSize(estimatedItemSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSCollectionViewFlowLayoutSelSetEstimatedItemSize, estimatedItemSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewFlowLayoutSelSetEstimatedItemSize, estimatedItemSize)
+	})
 }
 
 func (o *NSCollectionViewFlowLayout) ScrollDirection() NSCollectionViewScrollDirection {
-	_ret := objc.Send[NSCollectionViewScrollDirection](o.Ptr(), _nSCollectionViewFlowLayoutSelScrollDirection)
-	return _ret
+	var _mainthread0 NSCollectionViewScrollDirection
+	purego.Main(func() {
+		_mainthread0 = func() NSCollectionViewScrollDirection {
+			_ret := objc.Send[NSCollectionViewScrollDirection](o.Ptr(), _nSCollectionViewFlowLayoutSelScrollDirection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewFlowLayout) SetScrollDirection(scrollDirection NSCollectionViewScrollDirection) {
-	o.Ptr().Send(_nSCollectionViewFlowLayoutSelSetScrollDirection, scrollDirection)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewFlowLayoutSelSetScrollDirection, scrollDirection)
+	})
 }
 
 func (o *NSCollectionViewFlowLayout) HeaderReferenceSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCollectionViewFlowLayoutSelHeaderReferenceSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCollectionViewFlowLayoutSelHeaderReferenceSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewFlowLayout) SetHeaderReferenceSize(headerReferenceSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSCollectionViewFlowLayoutSelSetHeaderReferenceSize, headerReferenceSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewFlowLayoutSelSetHeaderReferenceSize, headerReferenceSize)
+	})
 }
 
 func (o *NSCollectionViewFlowLayout) FooterReferenceSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCollectionViewFlowLayoutSelFooterReferenceSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCollectionViewFlowLayoutSelFooterReferenceSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewFlowLayout) SetFooterReferenceSize(footerReferenceSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSCollectionViewFlowLayoutSelSetFooterReferenceSize, footerReferenceSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewFlowLayoutSelSetFooterReferenceSize, footerReferenceSize)
+	})
 }
 
 func (o *NSCollectionViewFlowLayout) SectionInset() foundation.NSEdgeInsets {
-	_ret := objc.Send[foundation.NSEdgeInsets](o.Ptr(), _nSCollectionViewFlowLayoutSelSectionInset)
-	return _ret
+	var _mainthread0 foundation.NSEdgeInsets
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSEdgeInsets {
+			_ret := objc.Send[foundation.NSEdgeInsets](o.Ptr(), _nSCollectionViewFlowLayoutSelSectionInset)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewFlowLayout) SetSectionInset(sectionInset foundation.NSEdgeInsets) {
-	o.Ptr().Send(_nSCollectionViewFlowLayoutSelSetSectionInset, sectionInset)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewFlowLayoutSelSetSectionInset, sectionInset)
+	})
 }
 
 func (o *NSCollectionViewFlowLayout) SectionHeadersPinToVisibleBounds() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewFlowLayoutSelSectionHeadersPinToVisibleBounds)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewFlowLayoutSelSectionHeadersPinToVisibleBounds)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewFlowLayout) SetSectionHeadersPinToVisibleBounds(sectionHeadersPinToVisibleBounds bool) {
-	o.Ptr().Send(_nSCollectionViewFlowLayoutSelSetSectionHeadersPinToVisibleBounds, sectionHeadersPinToVisibleBounds)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewFlowLayoutSelSetSectionHeadersPinToVisibleBounds, sectionHeadersPinToVisibleBounds)
+	})
 }
 
 func (o *NSCollectionViewFlowLayout) SectionFootersPinToVisibleBounds() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewFlowLayoutSelSectionFootersPinToVisibleBounds)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewFlowLayoutSelSectionFootersPinToVisibleBounds)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewFlowLayout) SetSectionFootersPinToVisibleBounds(sectionFootersPinToVisibleBounds bool) {
-	o.Ptr().Send(_nSCollectionViewFlowLayoutSelSetSectionFootersPinToVisibleBounds, sectionFootersPinToVisibleBounds)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewFlowLayoutSelSetSectionFootersPinToVisibleBounds, sectionFootersPinToVisibleBounds)
+	})
 }

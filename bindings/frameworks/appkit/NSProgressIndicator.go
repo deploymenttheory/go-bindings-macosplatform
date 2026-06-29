@@ -62,145 +62,251 @@ func NSProgressIndicatorFromID(id objc.ID) *NSProgressIndicator {
 
 // Advances the progress bar of a determinate progress indicator by the specified amount.
 func (o *NSProgressIndicator) IncrementBy(delta float64) {
-	o.Ptr().Send(_nSProgressIndicatorSelIncrementBy, delta)
+	purego.Main(func() {
+		o.Ptr().Send(_nSProgressIndicatorSelIncrementBy, delta)
+	})
 }
 
 // Starts the animation of an indeterminate progress indicator.
 func (o *NSProgressIndicator) StartAnimation(sender objc.ID) {
-	o.Ptr().Send(_nSProgressIndicatorSelStartAnimation, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSProgressIndicatorSelStartAnimation, sender)
+	})
 }
 
 // Stops the animation of an indeterminate progress indicator.
 func (o *NSProgressIndicator) StopAnimation(sender objc.ID) {
-	o.Ptr().Send(_nSProgressIndicatorSelStopAnimation, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSProgressIndicatorSelStopAnimation, sender)
+	})
 }
 
 // This action method resizes the progress indicator to an appropriate size depending on the value of style.
 func (o *NSProgressIndicator) SizeToFit() {
-	o.Ptr().Send(_nSProgressIndicatorSelSizeToFit)
+	purego.Main(func() {
+		o.Ptr().Send(_nSProgressIndicatorSelSizeToFit)
+	})
 }
 
 func (o *NSProgressIndicator) IsIndeterminate() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSProgressIndicatorSelIsIndeterminate)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSProgressIndicatorSelIsIndeterminate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSProgressIndicator) SetIndeterminate(indeterminate bool) {
-	o.Ptr().Send(_nSProgressIndicatorSelSetIndeterminate, indeterminate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSProgressIndicatorSelSetIndeterminate, indeterminate)
+	})
 }
 
 func (o *NSProgressIndicator) ControlSize() NSControlSize {
-	_ret := objc.Send[NSControlSize](o.Ptr(), _nSProgressIndicatorSelControlSize)
-	return _ret
+	var _mainthread0 NSControlSize
+	purego.Main(func() {
+		_mainthread0 = func() NSControlSize {
+			_ret := objc.Send[NSControlSize](o.Ptr(), _nSProgressIndicatorSelControlSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSProgressIndicator) SetControlSize(controlSize NSControlSize) {
-	o.Ptr().Send(_nSProgressIndicatorSelSetControlSize, controlSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSProgressIndicatorSelSetControlSize, controlSize)
+	})
 }
 
 func (o *NSProgressIndicator) DoubleValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSProgressIndicatorSelDoubleValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSProgressIndicatorSelDoubleValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSProgressIndicator) SetDoubleValue(doubleValue float64) {
-	o.Ptr().Send(_nSProgressIndicatorSelSetDoubleValue, doubleValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSProgressIndicatorSelSetDoubleValue, doubleValue)
+	})
 }
 
 func (o *NSProgressIndicator) MinValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSProgressIndicatorSelMinValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSProgressIndicatorSelMinValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSProgressIndicator) SetMinValue(minValue float64) {
-	o.Ptr().Send(_nSProgressIndicatorSelSetMinValue, minValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSProgressIndicatorSelSetMinValue, minValue)
+	})
 }
 
 func (o *NSProgressIndicator) MaxValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSProgressIndicatorSelMaxValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSProgressIndicatorSelMaxValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSProgressIndicator) SetMaxValue(maxValue float64) {
-	o.Ptr().Send(_nSProgressIndicatorSelSetMaxValue, maxValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSProgressIndicatorSelSetMaxValue, maxValue)
+	})
 }
 
 func (o *NSProgressIndicator) ObservedProgress() *foundation.NSProgress {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSProgressIndicatorSelObservedProgress)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSProgressFromID(_ret)
+	var _mainthread0 *foundation.NSProgress
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSProgress {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSProgressIndicatorSelObservedProgress)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSProgressFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSProgressIndicator) SetObservedProgress(observedProgress *foundation.NSProgress) {
-	o.Ptr().Send(_nSProgressIndicatorSelSetObservedProgress, observedProgress.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSProgressIndicatorSelSetObservedProgress, observedProgress.Ptr())
+	})
 }
 
 func (o *NSProgressIndicator) UsesThreadedAnimation() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSProgressIndicatorSelUsesThreadedAnimation)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSProgressIndicatorSelUsesThreadedAnimation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSProgressIndicator) SetUsesThreadedAnimation(usesThreadedAnimation bool) {
-	o.Ptr().Send(_nSProgressIndicatorSelSetUsesThreadedAnimation, usesThreadedAnimation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSProgressIndicatorSelSetUsesThreadedAnimation, usesThreadedAnimation)
+	})
 }
 
 func (o *NSProgressIndicator) Style() NSProgressIndicatorStyle {
-	_ret := objc.Send[NSProgressIndicatorStyle](o.Ptr(), _nSProgressIndicatorSelStyle)
-	return _ret
+	var _mainthread0 NSProgressIndicatorStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSProgressIndicatorStyle {
+			_ret := objc.Send[NSProgressIndicatorStyle](o.Ptr(), _nSProgressIndicatorSelStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSProgressIndicator) SetStyle(style NSProgressIndicatorStyle) {
-	o.Ptr().Send(_nSProgressIndicatorSelSetStyle, style)
+	purego.Main(func() {
+		o.Ptr().Send(_nSProgressIndicatorSelSetStyle, style)
+	})
 }
 
 func (o *NSProgressIndicator) IsDisplayedWhenStopped() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSProgressIndicatorSelIsDisplayedWhenStopped)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSProgressIndicatorSelIsDisplayedWhenStopped)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSProgressIndicator) SetDisplayedWhenStopped(displayedWhenStopped bool) {
-	o.Ptr().Send(_nSProgressIndicatorSelSetDisplayedWhenStopped, displayedWhenStopped)
+	purego.Main(func() {
+		o.Ptr().Send(_nSProgressIndicatorSelSetDisplayedWhenStopped, displayedWhenStopped)
+	})
 }
 
 // Returns the delay, in seconds, between animation steps for an indeterminate progress indicator.
 // Deprecated: The animationDelay property does nothing.
 func (o *NSProgressIndicator) AnimationDelay() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSProgressIndicatorSelAnimationDelay)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSProgressIndicatorSelAnimationDelay)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the delay, in seconds, between animation steps for an indeterminate progress indicator.
 // Deprecated: The animationDelay property does nothing.
 func (o *NSProgressIndicator) SetAnimationDelay(delay float64) {
-	o.Ptr().Send(_nSProgressIndicatorSelSetAnimationDelay, delay)
+	purego.Main(func() {
+		o.Ptr().Send(_nSProgressIndicatorSelSetAnimationDelay, delay)
+	})
 }
 
 // This action method advances the progress animation of an indeterminate progress animator by one step.
 // Deprecated: Use -startAnimation and -stopAnimation instead.
 func (o *NSProgressIndicator) Animate(sender objc.ID) {
-	o.Ptr().Send(_nSProgressIndicatorSelAnimate, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSProgressIndicatorSelAnimate, sender)
+	})
 }
 
 // Deprecated: The bezeled property is not respected on 10.15 and later
 func (o *NSProgressIndicator) IsBezeled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSProgressIndicatorSelIsBezeled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSProgressIndicatorSelIsBezeled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: The bezeled property is not respected on 10.15 and later
 func (o *NSProgressIndicator) SetBezeled(bezeled bool) {
-	o.Ptr().Send(_nSProgressIndicatorSelSetBezeled, bezeled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSProgressIndicatorSelSetBezeled, bezeled)
+	})
 }
 
 // Deprecated: The controlTint property is not respected on 10.15 and later
 func (o *NSProgressIndicator) ControlTint() NSControlTint {
-	_ret := objc.Send[NSControlTint](o.Ptr(), _nSProgressIndicatorSelControlTint)
-	return _ret
+	var _mainthread0 NSControlTint
+	purego.Main(func() {
+		_mainthread0 = func() NSControlTint {
+			_ret := objc.Send[NSControlTint](o.Ptr(), _nSProgressIndicatorSelControlTint)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: The controlTint property is not respected on 10.15 and later
 func (o *NSProgressIndicator) SetControlTint(controlTint NSControlTint) {
-	o.Ptr().Send(_nSProgressIndicatorSelSetControlTint, controlTint)
+	purego.Main(func() {
+		o.Ptr().Send(_nSProgressIndicatorSelSetControlTint, controlTint)
+	})
 }

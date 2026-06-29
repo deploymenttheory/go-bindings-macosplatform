@@ -77,25 +77,39 @@ func NSScrubberFromID(id objc.ID) *NSScrubber {
 
 // Initializes and returns a newly allocated scrubber object with the specified frame rectangle.
 func (o *NSScrubber) InitWithFrame(frameRect corefoundation.CGRect) *NSScrubber {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelInitWithFrame, frameRect)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrubberFromID(_ret)
+	var _mainthread0 *NSScrubber
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrubber {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelInitWithFrame, frameRect)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrubberFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes and returns a newly allocated scrubber object from a storyboard or nib file.
 func (o *NSScrubber) InitWithCoder(coder *foundation.NSCoder) *NSScrubber {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrubberFromID(_ret)
+	var _mainthread0 *NSScrubber
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrubber {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrubberFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Reloads the content of the entire scrubber, and deselects the currently selected item.
 func (o *NSScrubber) ReloadData() {
-	o.Ptr().Send(_nSScrubberSelReloadData)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberSelReloadData)
+	})
 }
 
 // Combines multiple scrubber content updates into a single action.
@@ -107,233 +121,385 @@ func (o *NSScrubber) PerformSequentialBatchUpdates(updateBlock func()) {
 		})
 		defer __block_updateBlock.Release()
 	}
-	o.Ptr().Send(_nSScrubberSelPerformSequentialBatchUpdates, __block_updateBlock)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberSelPerformSequentialBatchUpdates, __block_updateBlock)
+	})
 }
 
 // Inserts new items at the specified indexes into the scrubber.
 func (o *NSScrubber) InsertItemsAtIndexes(indexes *foundation.NSIndexSet) {
-	o.Ptr().Send(_nSScrubberSelInsertItemsAtIndexes, indexes.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberSelInsertItemsAtIndexes, indexes.Ptr())
+	})
 }
 
 // Removes the items at the specified indexes from the scrubber.
 func (o *NSScrubber) RemoveItemsAtIndexes(indexes *foundation.NSIndexSet) {
-	o.Ptr().Send(_nSScrubberSelRemoveItemsAtIndexes, indexes.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberSelRemoveItemsAtIndexes, indexes.Ptr())
+	})
 }
 
 // Reloads the items at the specified indexes.
 func (o *NSScrubber) ReloadItemsAtIndexes(indexes *foundation.NSIndexSet) {
-	o.Ptr().Send(_nSScrubberSelReloadItemsAtIndexes, indexes.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberSelReloadItemsAtIndexes, indexes.Ptr())
+	})
 }
 
 // Moves an item from one index to another in the scrubber.
 func (o *NSScrubber) MoveItemAtIndexToIndex(oldIndex int, newIndex int) {
-	o.Ptr().Send(_nSScrubberSelMoveItemAtIndexToIndex, oldIndex, newIndex)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberSelMoveItemAtIndexToIndex, oldIndex, newIndex)
+	})
 }
 
 // Scrolls an item to a specified alignment within the scrubber.
 func (o *NSScrubber) ScrollItemAtIndexToAlignment(index int, alignment NSScrubberAlignment) {
-	o.Ptr().Send(_nSScrubberSelScrollItemAtIndexToAlignment, index, alignment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberSelScrollItemAtIndexToAlignment, index, alignment)
+	})
 }
 
 // Returns the view for the item at the specified index.
 func (o *NSScrubber) ItemViewForItemAtIndex(index int) *NSScrubberItemView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelItemViewForItemAtIndex, index)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrubberItemViewFromID(_ret)
+	var _mainthread0 *NSScrubberItemView
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrubberItemView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelItemViewForItemAtIndex, index)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrubberItemViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Registers a class for the scrubber to use when it creates new items.
 func (o *NSScrubber) RegisterClassForItemIdentifier(itemViewClass objc.Class, itemIdentifier *foundation.NSString) {
-	o.Ptr().Send(_nSScrubberSelRegisterClassForItemIdentifier, itemViewClass, itemIdentifier.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberSelRegisterClassForItemIdentifier, itemViewClass, itemIdentifier.Ptr())
+	})
 }
 
 // Registers a nib file for the scrubber to use when it creates new items in the scrubber.
 func (o *NSScrubber) RegisterNibForItemIdentifier(nib *NSNib, itemIdentifier *foundation.NSString) {
-	o.Ptr().Send(_nSScrubberSelRegisterNibForItemIdentifier, nib.Ptr(), itemIdentifier.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberSelRegisterNibForItemIdentifier, nib.Ptr(), itemIdentifier.Ptr())
+	})
 }
 
 // Creates or returns a reusable item object with the specified identifier.
 func (o *NSScrubber) MakeItemWithIdentifierOwner(itemIdentifier *foundation.NSString, owner objc.ID) *NSScrubberItemView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelMakeItemWithIdentifierOwner, itemIdentifier.Ptr(), owner)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrubberItemViewFromID(_ret)
+	var _mainthread0 *NSScrubberItemView
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrubberItemView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelMakeItemWithIdentifierOwner, itemIdentifier.Ptr(), owner)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrubberItemViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrubber) DataSource() NSScrubberDataSource {
-	_ret := objc.Send[NSScrubberDataSource](o.Ptr(), _nSScrubberSelDataSource)
-	return _ret
+	var _mainthread0 NSScrubberDataSource
+	purego.Main(func() {
+		_mainthread0 = func() NSScrubberDataSource {
+			_ret := objc.Send[NSScrubberDataSource](o.Ptr(), _nSScrubberSelDataSource)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrubber) SetDataSource(dataSource NSScrubberDataSource) {
-	o.Ptr().Send(_nSScrubberSelSetDataSource, dataSource)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberSelSetDataSource, dataSource)
+	})
 }
 
 func (o *NSScrubber) Delegate() NSScrubberDelegate {
-	_ret := objc.Send[NSScrubberDelegate](o.Ptr(), _nSScrubberSelDelegate)
-	return _ret
+	var _mainthread0 NSScrubberDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSScrubberDelegate {
+			_ret := objc.Send[NSScrubberDelegate](o.Ptr(), _nSScrubberSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrubber) SetDelegate(delegate NSScrubberDelegate) {
-	o.Ptr().Send(_nSScrubberSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberSelSetDelegate, delegate)
+	})
 }
 
 func (o *NSScrubber) ScrubberLayout() *NSScrubberLayout {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelScrubberLayout)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrubberLayoutFromID(_ret)
+	var _mainthread0 *NSScrubberLayout
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrubberLayout {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelScrubberLayout)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrubberLayoutFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrubber) SetScrubberLayout(scrubberLayout *NSScrubberLayout) {
-	o.Ptr().Send(_nSScrubberSelSetScrubberLayout, scrubberLayout.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberSelSetScrubberLayout, scrubberLayout.Ptr())
+	})
 }
 
 // Returns the number of items represented by the scrubber control.
 func (o *NSScrubber) NumberOfItems() int {
-	_ret := objc.Send[int](o.Ptr(), _nSScrubberSelNumberOfItems)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSScrubberSelNumberOfItems)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The index of the currently highlighted item within the control. If there is no highlighted item, the value of this property is (-1).
 func (o *NSScrubber) HighlightedIndex() int {
-	_ret := objc.Send[int](o.Ptr(), _nSScrubberSelHighlightedIndex)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSScrubberSelHighlightedIndex)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The index of the selected item within the control. If there is no selected item, the value of this property is (-1). Setting this property through the animator proxy will animate the selection change. Programmatic selection changes do not trigger delegate callbacks.
 func (o *NSScrubber) SelectedIndex() int {
-	_ret := objc.Send[int](o.Ptr(), _nSScrubberSelSelectedIndex)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSScrubberSelSelectedIndex)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The index of the selected item within the control. If there is no selected item, the value of this property is (-1). Setting this property through the animator proxy will animate the selection change. Programmatic selection changes do not trigger delegate callbacks.
 func (o *NSScrubber) SetSelectedIndex(selectedIndex int) {
-	o.Ptr().Send(_nSScrubberSelSetSelectedIndex, selectedIndex)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberSelSetSelectedIndex, selectedIndex)
+	})
 }
 
 // Describes the interaction mode for the scrubber control. See the @c NSScrubberMode enumeration for a list of possible values. The default value is @c NSScrubberModeFixed.
 func (o *NSScrubber) Mode() NSScrubberMode {
-	_ret := objc.Send[NSScrubberMode](o.Ptr(), _nSScrubberSelMode)
-	return _ret
+	var _mainthread0 NSScrubberMode
+	purego.Main(func() {
+		_mainthread0 = func() NSScrubberMode {
+			_ret := objc.Send[NSScrubberMode](o.Ptr(), _nSScrubberSelMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Describes the interaction mode for the scrubber control. See the @c NSScrubberMode enumeration for a list of possible values. The default value is @c NSScrubberModeFixed.
 func (o *NSScrubber) SetMode(mode NSScrubberMode) {
-	o.Ptr().Send(_nSScrubberSelSetMode, mode)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberSelSetMode, mode)
+	})
 }
 
 // If the value of @c itemAlignment is not @c NSScrubberAlignmentNone, the scrubber will ensure that some item rests at the preferred alignment within the control following a scrolling or paging interaction. The default value is @c NSScrubberAlignmentNone.
 func (o *NSScrubber) ItemAlignment() NSScrubberAlignment {
-	_ret := objc.Send[NSScrubberAlignment](o.Ptr(), _nSScrubberSelItemAlignment)
-	return _ret
+	var _mainthread0 NSScrubberAlignment
+	purego.Main(func() {
+		_mainthread0 = func() NSScrubberAlignment {
+			_ret := objc.Send[NSScrubberAlignment](o.Ptr(), _nSScrubberSelItemAlignment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // If the value of @c itemAlignment is not @c NSScrubberAlignmentNone, the scrubber will ensure that some item rests at the preferred alignment within the control following a scrolling or paging interaction. The default value is @c NSScrubberAlignmentNone.
 func (o *NSScrubber) SetItemAlignment(itemAlignment NSScrubberAlignment) {
-	o.Ptr().Send(_nSScrubberSelSetItemAlignment, itemAlignment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberSelSetItemAlignment, itemAlignment)
+	})
 }
 
 // When @c continuous is @c YES, panning over the control in @c NSScrubberModeFixed will immediately select the item under the user's finger, and scrolling in @c NSScrubberModeFree will continuously select items as they pass through the current @c itemAlignment. The default is @c NO.
 func (o *NSScrubber) IsContinuous() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSScrubberSelIsContinuous)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSScrubberSelIsContinuous)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // When @c continuous is @c YES, panning over the control in @c NSScrubberModeFixed will immediately select the item under the user's finger, and scrolling in @c NSScrubberModeFree will continuously select items as they pass through the current @c itemAlignment. The default is @c NO.
 func (o *NSScrubber) SetContinuous(continuous bool) {
-	o.Ptr().Send(_nSScrubberSelSetContinuous, continuous)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberSelSetContinuous, continuous)
+	})
 }
 
 // When @c floatsSelectionViews is @c YES, the selection decorations provided by @c selectionBackgroundStyle and @c selectionOverlayStyle will smoothly float between selected items, rather than animating their entrance/exit in-place. The default is @c NO.
 func (o *NSScrubber) FloatsSelectionViews() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSScrubberSelFloatsSelectionViews)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSScrubberSelFloatsSelectionViews)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // When @c floatsSelectionViews is @c YES, the selection decorations provided by @c selectionBackgroundStyle and @c selectionOverlayStyle will smoothly float between selected items, rather than animating their entrance/exit in-place. The default is @c NO.
 func (o *NSScrubber) SetFloatsSelectionViews(floatsSelectionViews bool) {
-	o.Ptr().Send(_nSScrubberSelSetFloatsSelectionViews, floatsSelectionViews)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberSelSetFloatsSelectionViews, floatsSelectionViews)
+	})
 }
 
 // Specifies a style of decoration to place behind items that are selected and/or highlighted. The default value is @c nil, indicating no built-in background decoration.
 func (o *NSScrubber) SelectionBackgroundStyle() *NSScrubberSelectionStyle {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelSelectionBackgroundStyle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrubberSelectionStyleFromID(_ret)
+	var _mainthread0 *NSScrubberSelectionStyle
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrubberSelectionStyle {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelSelectionBackgroundStyle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrubberSelectionStyleFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies a style of decoration to place behind items that are selected and/or highlighted. The default value is @c nil, indicating no built-in background decoration.
 func (o *NSScrubber) SetSelectionBackgroundStyle(selectionBackgroundStyle *NSScrubberSelectionStyle) {
-	o.Ptr().Send(_nSScrubberSelSetSelectionBackgroundStyle, selectionBackgroundStyle.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberSelSetSelectionBackgroundStyle, selectionBackgroundStyle.Ptr())
+	})
 }
 
 // Specifies a style of decoration to place above items that are selected and/or highlighted. The default value is @c nil, indicating no built-in overlay decoration.
 func (o *NSScrubber) SelectionOverlayStyle() *NSScrubberSelectionStyle {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelSelectionOverlayStyle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrubberSelectionStyleFromID(_ret)
+	var _mainthread0 *NSScrubberSelectionStyle
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrubberSelectionStyle {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelSelectionOverlayStyle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrubberSelectionStyleFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies a style of decoration to place above items that are selected and/or highlighted. The default value is @c nil, indicating no built-in overlay decoration.
 func (o *NSScrubber) SetSelectionOverlayStyle(selectionOverlayStyle *NSScrubberSelectionStyle) {
-	o.Ptr().Send(_nSScrubberSelSetSelectionOverlayStyle, selectionOverlayStyle.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberSelSetSelectionOverlayStyle, selectionOverlayStyle.Ptr())
+	})
 }
 
 // If @c showsArrowButtons is @c YES, the control provides leading and trailing arrow buttons. Tapping an arrow button moves the selection index by one element; pressing and holding repeatedly moves the selection. The default is @c NO.
 func (o *NSScrubber) ShowsArrowButtons() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSScrubberSelShowsArrowButtons)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSScrubberSelShowsArrowButtons)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // If @c showsArrowButtons is @c YES, the control provides leading and trailing arrow buttons. Tapping an arrow button moves the selection index by one element; pressing and holding repeatedly moves the selection. The default is @c NO.
 func (o *NSScrubber) SetShowsArrowButtons(showsArrowButtons bool) {
-	o.Ptr().Send(_nSScrubberSelSetShowsArrowButtons, showsArrowButtons)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberSelSetShowsArrowButtons, showsArrowButtons)
+	})
 }
 
 // If @c showsAdditionalContentIndicators is @c YES, the control will draw a fade effect to indicate that there is additional unscrolled content. The default is @c NO.
 func (o *NSScrubber) ShowsAdditionalContentIndicators() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSScrubberSelShowsAdditionalContentIndicators)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSScrubberSelShowsAdditionalContentIndicators)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // If @c showsAdditionalContentIndicators is @c YES, the control will draw a fade effect to indicate that there is additional unscrolled content. The default is @c NO.
 func (o *NSScrubber) SetShowsAdditionalContentIndicators(showsAdditionalContentIndicators bool) {
-	o.Ptr().Send(_nSScrubberSelSetShowsAdditionalContentIndicators, showsAdditionalContentIndicators)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberSelSetShowsAdditionalContentIndicators, showsAdditionalContentIndicators)
+	})
 }
 
 // If set, @c backgroundColor is displayed behind the scrubber content. The background color is suppressed if the scrubber is assigned a non-nil @c backgroundView. The default value is @c nil.
 func (o *NSScrubber) BackgroundColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelBackgroundColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelBackgroundColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // If set, @c backgroundColor is displayed behind the scrubber content. The background color is suppressed if the scrubber is assigned a non-nil @c backgroundView. The default value is @c nil.
 func (o *NSScrubber) SetBackgroundColor(backgroundColor *NSColor) {
-	o.Ptr().Send(_nSScrubberSelSetBackgroundColor, backgroundColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberSelSetBackgroundColor, backgroundColor.Ptr())
+	})
 }
 
 // If non-nil, the @c backgroundView is displayed below the scrubber content. The view's layout is managed by @c NSScrubber to match the content area. If this property is non-nil, the @c backgroundColor property has no effect. The default value is @c nil.
 func (o *NSScrubber) BackgroundView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelBackgroundView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelBackgroundView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // If non-nil, the @c backgroundView is displayed below the scrubber content. The view's layout is managed by @c NSScrubber to match the content area. If this property is non-nil, the @c backgroundColor property has no effect. The default value is @c nil.
 func (o *NSScrubber) SetBackgroundView(backgroundView *NSView) {
-	o.Ptr().Send(_nSScrubberSelSetBackgroundView, backgroundView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberSelSetBackgroundView, backgroundView.Ptr())
+	})
 }

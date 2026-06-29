@@ -68,186 +68,308 @@ func NSImageViewFromID(id objc.ID) *NSImageView {
 
 // Creates a non-editable image view containing the provided image. The image is scaled proportionally down to fit the view, and is centered within the view.
 func NSImageViewImageViewWithImage(image *NSImage) *NSImageView {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSImageView), _nSImageViewSelImageViewWithImage, image.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageViewFromID(_ret)
+	var _mainthread0 *NSImageView
+	purego.Main(func() {
+		_mainthread0 = func() *NSImageView {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSImageView), _nSImageViewSelImageViewWithImage, image.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSImageView) Image() *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageViewSelImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSImageViewSelImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSImageView) SetImage(image *NSImage) {
-	o.Ptr().Send(_nSImageViewSelSetImage, image.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSImageViewSelSetImage, image.Ptr())
+	})
 }
 
 func (o *NSImageView) IsEditable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSImageViewSelIsEditable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSImageViewSelIsEditable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSImageView) SetEditable(editable bool) {
-	o.Ptr().Send(_nSImageViewSelSetEditable, editable)
+	purego.Main(func() {
+		o.Ptr().Send(_nSImageViewSelSetEditable, editable)
+	})
 }
 
 func (o *NSImageView) ImageAlignment() NSImageAlignment {
-	_ret := objc.Send[NSImageAlignment](o.Ptr(), _nSImageViewSelImageAlignment)
-	return _ret
+	var _mainthread0 NSImageAlignment
+	purego.Main(func() {
+		_mainthread0 = func() NSImageAlignment {
+			_ret := objc.Send[NSImageAlignment](o.Ptr(), _nSImageViewSelImageAlignment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSImageView) SetImageAlignment(imageAlignment NSImageAlignment) {
-	o.Ptr().Send(_nSImageViewSelSetImageAlignment, imageAlignment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSImageViewSelSetImageAlignment, imageAlignment)
+	})
 }
 
 func (o *NSImageView) ImageScaling() NSImageScaling {
-	_ret := objc.Send[NSImageScaling](o.Ptr(), _nSImageViewSelImageScaling)
-	return _ret
+	var _mainthread0 NSImageScaling
+	purego.Main(func() {
+		_mainthread0 = func() NSImageScaling {
+			_ret := objc.Send[NSImageScaling](o.Ptr(), _nSImageViewSelImageScaling)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSImageView) SetImageScaling(imageScaling NSImageScaling) {
-	o.Ptr().Send(_nSImageViewSelSetImageScaling, imageScaling)
+	purego.Main(func() {
+		o.Ptr().Send(_nSImageViewSelSetImageScaling, imageScaling)
+	})
 }
 
 func (o *NSImageView) ImageFrameStyle() NSImageFrameStyle {
-	_ret := objc.Send[NSImageFrameStyle](o.Ptr(), _nSImageViewSelImageFrameStyle)
-	return _ret
+	var _mainthread0 NSImageFrameStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSImageFrameStyle {
+			_ret := objc.Send[NSImageFrameStyle](o.Ptr(), _nSImageViewSelImageFrameStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSImageView) SetImageFrameStyle(imageFrameStyle NSImageFrameStyle) {
-	o.Ptr().Send(_nSImageViewSelSetImageFrameStyle, imageFrameStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSImageViewSelSetImageFrameStyle, imageFrameStyle)
+	})
 }
 
 // Specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images. If a symbol configuration isn't provided, the image view uses a default size, weight, and scale provided by the system. The default value is `nil`.
 func (o *NSImageView) SymbolConfiguration() *NSImageSymbolConfiguration {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageViewSelSymbolConfiguration)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageSymbolConfigurationFromID(_ret)
+	var _mainthread0 *NSImageSymbolConfiguration
+	purego.Main(func() {
+		_mainthread0 = func() *NSImageSymbolConfiguration {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSImageViewSelSymbolConfiguration)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageSymbolConfigurationFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images. If a symbol configuration isn't provided, the image view uses a default size, weight, and scale provided by the system. The default value is `nil`.
 func (o *NSImageView) SetSymbolConfiguration(symbolConfiguration *NSImageSymbolConfiguration) {
-	o.Ptr().Send(_nSImageViewSelSetSymbolConfiguration, symbolConfiguration.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSImageViewSelSetSymbolConfiguration, symbolConfiguration.Ptr())
+	})
 }
 
 // A tint color to be used when rendering template image content. This color may be combined with other effects to produce a theme-appropriate rendition of the template image. A `nil` value indicates the standard set of effects without color modification. The default value is `nil`.
 func (o *NSImageView) ContentTintColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageViewSelContentTintColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSImageViewSelContentTintColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // A tint color to be used when rendering template image content. This color may be combined with other effects to produce a theme-appropriate rendition of the template image. A `nil` value indicates the standard set of effects without color modification. The default value is `nil`.
 func (o *NSImageView) SetContentTintColor(contentTintColor *NSColor) {
-	o.Ptr().Send(_nSImageViewSelSetContentTintColor, contentTintColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSImageViewSelSetContentTintColor, contentTintColor.Ptr())
+	})
 }
 
 func (o *NSImageView) Animates() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSImageViewSelAnimates)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSImageViewSelAnimates)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSImageView) SetAnimates(animates bool) {
-	o.Ptr().Send(_nSImageViewSelSetAnimates, animates)
+	purego.Main(func() {
+		o.Ptr().Send(_nSImageViewSelSetAnimates, animates)
+	})
 }
 
 func (o *NSImageView) AllowsCutCopyPaste() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSImageViewSelAllowsCutCopyPaste)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSImageViewSelAllowsCutCopyPaste)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSImageView) SetAllowsCutCopyPaste(allowsCutCopyPaste bool) {
-	o.Ptr().Send(_nSImageViewSelSetAllowsCutCopyPaste, allowsCutCopyPaste)
+	purego.Main(func() {
+		o.Ptr().Send(_nSImageViewSelSetAllowsCutCopyPaste, allowsCutCopyPaste)
+	})
 }
 
 // Default preferred image dynamic range. Defaults to `NSImageDynamicRangeConstrainedHigh` on macOS 14 and higher, `NSImageDynamicRangeStandard` otherwise. Set to another value to change the default for all subsequently created `NSImageView`s in your app.
 func NSImageViewDefaultPreferredImageDynamicRange() NSImageDynamicRange {
-	_ret := objc.Send[NSImageDynamicRange](objc.ID(_clsNSImageView), _nSImageViewSelDefaultPreferredImageDynamicRange)
-	return _ret
+	var _mainthread0 NSImageDynamicRange
+	purego.Main(func() {
+		_mainthread0 = func() NSImageDynamicRange {
+			_ret := objc.Send[NSImageDynamicRange](objc.ID(_clsNSImageView), _nSImageViewSelDefaultPreferredImageDynamicRange)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Default preferred image dynamic range. Defaults to `NSImageDynamicRangeConstrainedHigh` on macOS 14 and higher, `NSImageDynamicRangeStandard` otherwise. Set to another value to change the default for all subsequently created `NSImageView`s in your app.
 func NSImageViewSetDefaultPreferredImageDynamicRange(defaultPreferredImageDynamicRange NSImageDynamicRange) {
-	objc.ID(_clsNSImageView).Send(_nSImageViewSelSetDefaultPreferredImageDynamicRange, defaultPreferredImageDynamicRange)
+	purego.Main(func() {
+		objc.ID(_clsNSImageView).Send(_nSImageViewSelSetDefaultPreferredImageDynamicRange, defaultPreferredImageDynamicRange)
+	})
 }
 
 // Preferred dynamic range when displaying an image in the receiving image view.
 func (o *NSImageView) PreferredImageDynamicRange() NSImageDynamicRange {
-	_ret := objc.Send[NSImageDynamicRange](o.Ptr(), _nSImageViewSelPreferredImageDynamicRange)
-	return _ret
+	var _mainthread0 NSImageDynamicRange
+	purego.Main(func() {
+		_mainthread0 = func() NSImageDynamicRange {
+			_ret := objc.Send[NSImageDynamicRange](o.Ptr(), _nSImageViewSelPreferredImageDynamicRange)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Preferred dynamic range when displaying an image in the receiving image view.
 func (o *NSImageView) SetPreferredImageDynamicRange(preferredImageDynamicRange NSImageDynamicRange) {
-	o.Ptr().Send(_nSImageViewSelSetPreferredImageDynamicRange, preferredImageDynamicRange)
+	purego.Main(func() {
+		o.Ptr().Send(_nSImageViewSelSetPreferredImageDynamicRange, preferredImageDynamicRange)
+	})
 }
 
 // Resolved dynamic range based on fully resolved image content. Note: this will return `NSImageDynamicRangeUnspecified` if the image view has not or can not resolve the content (either because it has no resolvable image content or has not resolved because the image view hasn't displayed.)
 func (o *NSImageView) ImageDynamicRange() NSImageDynamicRange {
-	_ret := objc.Send[NSImageDynamicRange](o.Ptr(), _nSImageViewSelImageDynamicRange)
-	return _ret
+	var _mainthread0 NSImageDynamicRange
+	purego.Main(func() {
+		_mainthread0 = func() NSImageDynamicRange {
+			_ret := objc.Send[NSImageDynamicRange](o.Ptr(), _nSImageViewSelImageDynamicRange)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Adds a symbol effect to the image view with default options and animation.
 func (o *NSImageView) AddSymbolEffect(symbolEffect *symbols.NSSymbolEffect) {
-	o.Ptr().Send(_nSImageViewSelAddSymbolEffect, symbolEffect.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSImageViewSelAddSymbolEffect, symbolEffect.Ptr())
+	})
 }
 
 // Adds a symbol effect to the image view with the specified options and default animation.
 func (o *NSImageView) AddSymbolEffectOptions(symbolEffect *symbols.NSSymbolEffect, options *symbols.NSSymbolEffectOptions) {
-	o.Ptr().Send(_nSImageViewSelAddSymbolEffectOptions, symbolEffect.Ptr(), options.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSImageViewSelAddSymbolEffectOptions, symbolEffect.Ptr(), options.Ptr())
+	})
 }
 
 // Adds a symbol effect to the image view with the specified options and animation.
 func (o *NSImageView) AddSymbolEffectOptionsAnimated(symbolEffect *symbols.NSSymbolEffect, options *symbols.NSSymbolEffectOptions, animated bool) {
-	o.Ptr().Send(_nSImageViewSelAddSymbolEffectOptionsAnimated, symbolEffect.Ptr(), options.Ptr(), animated)
+	purego.Main(func() {
+		o.Ptr().Send(_nSImageViewSelAddSymbolEffectOptionsAnimated, symbolEffect.Ptr(), options.Ptr(), animated)
+	})
 }
 
 // Removes the symbol effect that matches the specified effect type.
 func (o *NSImageView) RemoveSymbolEffectOfType(symbolEffect *symbols.NSSymbolEffect) {
-	o.Ptr().Send(_nSImageViewSelRemoveSymbolEffectOfType, symbolEffect.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSImageViewSelRemoveSymbolEffectOfType, symbolEffect.Ptr())
+	})
 }
 
 // Removes the symbol effect that matches the specified effect type, using the specified options.
 func (o *NSImageView) RemoveSymbolEffectOfTypeOptions(symbolEffect *symbols.NSSymbolEffect, options *symbols.NSSymbolEffectOptions) {
-	o.Ptr().Send(_nSImageViewSelRemoveSymbolEffectOfTypeOptions, symbolEffect.Ptr(), options.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSImageViewSelRemoveSymbolEffectOfTypeOptions, symbolEffect.Ptr(), options.Ptr())
+	})
 }
 
 // Removes the symbol effect that matches the specified effect type, using the specified options and animation setting.
 func (o *NSImageView) RemoveSymbolEffectOfTypeOptionsAnimated(symbolEffect *symbols.NSSymbolEffect, options *symbols.NSSymbolEffectOptions, animated bool) {
-	o.Ptr().Send(_nSImageViewSelRemoveSymbolEffectOfTypeOptionsAnimated, symbolEffect.Ptr(), options.Ptr(), animated)
+	purego.Main(func() {
+		o.Ptr().Send(_nSImageViewSelRemoveSymbolEffectOfTypeOptionsAnimated, symbolEffect.Ptr(), options.Ptr(), animated)
+	})
 }
 
 // Removes all symbol effects from the image view.
 func (o *NSImageView) RemoveAllSymbolEffects() {
-	o.Ptr().Send(_nSImageViewSelRemoveAllSymbolEffects)
+	purego.Main(func() {
+		o.Ptr().Send(_nSImageViewSelRemoveAllSymbolEffects)
+	})
 }
 
 // Removes all symbol effects from the image view, using the specified options.
 func (o *NSImageView) RemoveAllSymbolEffectsWithOptions(options *symbols.NSSymbolEffectOptions) {
-	o.Ptr().Send(_nSImageViewSelRemoveAllSymbolEffectsWithOptions, options.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSImageViewSelRemoveAllSymbolEffectsWithOptions, options.Ptr())
+	})
 }
 
 // Removes all symbol effects from the image view, using the specified options and animation setting.
 func (o *NSImageView) RemoveAllSymbolEffectsWithOptionsAnimated(options *symbols.NSSymbolEffectOptions, animated bool) {
-	o.Ptr().Send(_nSImageViewSelRemoveAllSymbolEffectsWithOptionsAnimated, options.Ptr(), animated)
+	purego.Main(func() {
+		o.Ptr().Send(_nSImageViewSelRemoveAllSymbolEffectsWithOptionsAnimated, options.Ptr(), animated)
+	})
 }
 
 // Sets a symbol image using the specified content-transition effect.
 func (o *NSImageView) SetSymbolImageWithContentTransition(symbolImage *NSImage, transition *symbols.NSSymbolContentTransition) {
-	o.Ptr().Send(_nSImageViewSelSetSymbolImageWithContentTransition, symbolImage.Ptr(), transition.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSImageViewSelSetSymbolImageWithContentTransition, symbolImage.Ptr(), transition.Ptr())
+	})
 }
 
 // Sets a symbol image using the specified content-transition effect and options.
 func (o *NSImageView) SetSymbolImageWithContentTransitionOptions(symbolImage *NSImage, transition *symbols.NSSymbolContentTransition, options *symbols.NSSymbolEffectOptions) {
-	o.Ptr().Send(_nSImageViewSelSetSymbolImageWithContentTransitionOptions, symbolImage.Ptr(), transition.Ptr(), options.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSImageViewSelSetSymbolImageWithContentTransitionOptions, symbolImage.Ptr(), transition.Ptr(), options.Ptr())
+	})
 }

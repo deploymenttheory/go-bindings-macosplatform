@@ -51,85 +51,143 @@ func SFCertificateViewFromID(id objc.ID) *SFCertificateView {
 
 // Specifies the certificate that’s displayed in the view.
 func (o *SFCertificateView) SetCertificate(certificate unsafe.Pointer) {
-	o.Ptr().Send(_sFCertificateViewSelSetCertificate, certificate)
+	purego.Main(func() {
+		o.Ptr().Send(_sFCertificateViewSelSetCertificate, certificate)
+	})
 }
 
 // Returns the certificate currently displayed in the view.
 func (o *SFCertificateView) Certificate() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sFCertificateViewSelCertificate)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sFCertificateViewSelCertificate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies the policies to use when evaluating this certificate’s status.
 func (o *SFCertificateView) SetPolicies(policies objc.ID) {
-	o.Ptr().Send(_sFCertificateViewSelSetPolicies, policies)
+	purego.Main(func() {
+		o.Ptr().Send(_sFCertificateViewSelSetPolicies, policies)
+	})
 }
 
 // Returns an array of policies used to evaluate the status of the displayed certificate.
 func (o *SFCertificateView) Policies() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sFCertificateViewSelPolicies)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[objc.ID](_ret)
+	var _mainthread0 *foundation.NSArray[objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sFCertificateViewSelPolicies)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies whether the user can edit the certificate’s trust settings.
 func (o *SFCertificateView) SetEditableTrust(editable bool) {
-	o.Ptr().Send(_sFCertificateViewSelSetEditableTrust, editable)
+	purego.Main(func() {
+		o.Ptr().Send(_sFCertificateViewSelSetEditableTrust, editable)
+	})
 }
 
 // Indicates if the view allows the user to edit the certificate’s trust.
 func (o *SFCertificateView) IsEditable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sFCertificateViewSelIsEditable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sFCertificateViewSelIsEditable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies whether the user can see the certificate’s trust settings.
 func (o *SFCertificateView) SetDisplayTrust(display bool) {
-	o.Ptr().Send(_sFCertificateViewSelSetDisplayTrust, display)
+	purego.Main(func() {
+		o.Ptr().Send(_sFCertificateViewSelSetDisplayTrust, display)
+	})
 }
 
 // Indicates if the view currently shows the certificate’s trust settings.
 func (o *SFCertificateView) IsTrustDisplayed() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sFCertificateViewSelIsTrustDisplayed)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sFCertificateViewSelIsTrustDisplayed)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Saves the user’s current trust settings for the displayed certificate.
 func (o *SFCertificateView) SaveTrustSettings() {
-	o.Ptr().Send(_sFCertificateViewSelSaveTrustSettings)
+	purego.Main(func() {
+		o.Ptr().Send(_sFCertificateViewSelSaveTrustSettings)
+	})
 }
 
 // Specifies whether the user can see the certificate details.
 func (o *SFCertificateView) SetDisplayDetails(display bool) {
-	o.Ptr().Send(_sFCertificateViewSelSetDisplayDetails, display)
+	purego.Main(func() {
+		o.Ptr().Send(_sFCertificateViewSelSetDisplayDetails, display)
+	})
 }
 
 // Indicates if the view currently shows the certificate’s details.
 func (o *SFCertificateView) DetailsDisplayed() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sFCertificateViewSelDetailsDisplayed)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sFCertificateViewSelDetailsDisplayed)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets whether the certificate details subview is disclosed.
 func (o *SFCertificateView) SetDetailsDisclosed(disclosed bool) {
-	o.Ptr().Send(_sFCertificateViewSelSetDetailsDisclosed, disclosed)
+	purego.Main(func() {
+		o.Ptr().Send(_sFCertificateViewSelSetDetailsDisclosed, disclosed)
+	})
 }
 
 // Returns whether the view currently shows the certificate’s details.
 func (o *SFCertificateView) DetailsDisclosed() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sFCertificateViewSelDetailsDisclosed)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sFCertificateViewSelDetailsDisclosed)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies whether the trust policy settings subview is disclosed.
 func (o *SFCertificateView) SetPoliciesDisclosed(disclosed bool) {
-	o.Ptr().Send(_sFCertificateViewSelSetPoliciesDisclosed, disclosed)
+	purego.Main(func() {
+		o.Ptr().Send(_sFCertificateViewSelSetPoliciesDisclosed, disclosed)
+	})
 }
 
 // Returns whether the trust policy subview is disclosed.
 func (o *SFCertificateView) PoliciesDisclosed() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sFCertificateViewSelPoliciesDisclosed)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sFCertificateViewSelPoliciesDisclosed)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

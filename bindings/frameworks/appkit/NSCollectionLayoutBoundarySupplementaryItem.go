@@ -42,46 +42,86 @@ func NSCollectionLayoutBoundarySupplementaryItemFromID(id objc.ID) *NSCollection
 
 // Creates a boundary supplementary item of the specified size and element kind, with an alignment relative to a section or layout.
 func NSCollectionLayoutBoundarySupplementaryItemBoundarySupplementaryItemWithLayoutSizeElementKindAlignment(layoutSize *NSCollectionLayoutSize, elementKind *foundation.NSString, alignment NSRectAlignment) *NSCollectionLayoutBoundarySupplementaryItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutBoundarySupplementaryItem), _nSCollectionLayoutBoundarySupplementaryItemSelBoundarySupplementaryItemWithLayoutSizeElementKindAlignment, layoutSize.Ptr(), elementKind.Ptr(), alignment)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutBoundarySupplementaryItemFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutBoundarySupplementaryItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutBoundarySupplementaryItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutBoundarySupplementaryItem), _nSCollectionLayoutBoundarySupplementaryItemSelBoundarySupplementaryItemWithLayoutSizeElementKindAlignment, layoutSize.Ptr(), elementKind.Ptr(), alignment)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutBoundarySupplementaryItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a boundary supplementary item of the specified size and element kind, with an alignment relative to a section or layout at an absolute offset.
 func NSCollectionLayoutBoundarySupplementaryItemBoundarySupplementaryItemWithLayoutSizeElementKindAlignmentAbsoluteOffset(layoutSize *NSCollectionLayoutSize, elementKind *foundation.NSString, alignment NSRectAlignment, absoluteOffset corefoundation.CGPoint) *NSCollectionLayoutBoundarySupplementaryItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutBoundarySupplementaryItem), _nSCollectionLayoutBoundarySupplementaryItemSelBoundarySupplementaryItemWithLayoutSizeElementKindAlignmentAbsoluteOffset, layoutSize.Ptr(), elementKind.Ptr(), alignment, absoluteOffset)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutBoundarySupplementaryItemFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutBoundarySupplementaryItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutBoundarySupplementaryItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutBoundarySupplementaryItem), _nSCollectionLayoutBoundarySupplementaryItemSelBoundarySupplementaryItemWithLayoutSizeElementKindAlignmentAbsoluteOffset, layoutSize.Ptr(), elementKind.Ptr(), alignment, absoluteOffset)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutBoundarySupplementaryItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutBoundarySupplementaryItem) ExtendsBoundary() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionLayoutBoundarySupplementaryItemSelExtendsBoundary)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionLayoutBoundarySupplementaryItemSelExtendsBoundary)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutBoundarySupplementaryItem) SetExtendsBoundary(extendsBoundary bool) {
-	o.Ptr().Send(_nSCollectionLayoutBoundarySupplementaryItemSelSetExtendsBoundary, extendsBoundary)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionLayoutBoundarySupplementaryItemSelSetExtendsBoundary, extendsBoundary)
+	})
 }
 
 func (o *NSCollectionLayoutBoundarySupplementaryItem) PinToVisibleBounds() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionLayoutBoundarySupplementaryItemSelPinToVisibleBounds)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionLayoutBoundarySupplementaryItemSelPinToVisibleBounds)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutBoundarySupplementaryItem) SetPinToVisibleBounds(pinToVisibleBounds bool) {
-	o.Ptr().Send(_nSCollectionLayoutBoundarySupplementaryItemSelSetPinToVisibleBounds, pinToVisibleBounds)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionLayoutBoundarySupplementaryItemSelSetPinToVisibleBounds, pinToVisibleBounds)
+	})
 }
 
 func (o *NSCollectionLayoutBoundarySupplementaryItem) Alignment() NSRectAlignment {
-	_ret := objc.Send[NSRectAlignment](o.Ptr(), _nSCollectionLayoutBoundarySupplementaryItemSelAlignment)
-	return _ret
+	var _mainthread0 NSRectAlignment
+	purego.Main(func() {
+		_mainthread0 = func() NSRectAlignment {
+			_ret := objc.Send[NSRectAlignment](o.Ptr(), _nSCollectionLayoutBoundarySupplementaryItemSelAlignment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutBoundarySupplementaryItem) Offset() corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSCollectionLayoutBoundarySupplementaryItemSelOffset)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSCollectionLayoutBoundarySupplementaryItemSelOffset)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

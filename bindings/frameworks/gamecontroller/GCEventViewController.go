@@ -34,10 +34,18 @@ func GCEventViewControllerFromID(id objc.ID) *GCEventViewController {
 }
 
 func (o *GCEventViewController) ControllerUserInteractionEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _gCEventViewControllerSelControllerUserInteractionEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _gCEventViewControllerSelControllerUserInteractionEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *GCEventViewController) SetControllerUserInteractionEnabled(controllerUserInteractionEnabled bool) {
-	o.Ptr().Send(_gCEventViewControllerSelSetControllerUserInteractionEnabled, controllerUserInteractionEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_gCEventViewControllerSelSetControllerUserInteractionEnabled, controllerUserInteractionEnabled)
+	})
 }

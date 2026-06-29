@@ -65,178 +65,310 @@ func NSTableColumnFromID(id objc.ID) *NSTableColumn {
 
 // Initializes a newly created table column with a string identifier.
 func (o *NSTableColumn) InitWithIdentifier(identifier *foundation.NSString) *NSTableColumn {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelInitWithIdentifier, identifier.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTableColumnFromID(_ret)
+	var _mainthread0 *NSTableColumn
+	purego.Main(func() {
+		_mainthread0 = func() *NSTableColumn {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelInitWithIdentifier, identifier.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTableColumnFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableColumn) InitWithCoder(coder *foundation.NSCoder) *NSTableColumn {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTableColumnFromID(_ret)
+	var _mainthread0 *NSTableColumn
+	purego.Main(func() {
+		_mainthread0 = func() *NSTableColumn {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTableColumnFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Resizes the table column to fit the width of its header cell.
 func (o *NSTableColumn) SizeToFit() {
-	o.Ptr().Send(_nSTableColumnSelSizeToFit)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableColumnSelSizeToFit)
+	})
 }
 
 func (o *NSTableColumn) Identifier() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelIdentifier)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelIdentifier)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableColumn) SetIdentifier(identifier *foundation.NSString) {
-	o.Ptr().Send(_nSTableColumnSelSetIdentifier, identifier.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableColumnSelSetIdentifier, identifier.Ptr())
+	})
 }
 
 func (o *NSTableColumn) TableView() *NSTableView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelTableView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTableViewFromID(_ret)
+	var _mainthread0 *NSTableView
+	purego.Main(func() {
+		_mainthread0 = func() *NSTableView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelTableView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTableViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableColumn) SetTableView(tableView *NSTableView) {
-	o.Ptr().Send(_nSTableColumnSelSetTableView, tableView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableColumnSelSetTableView, tableView.Ptr())
+	})
 }
 
 func (o *NSTableColumn) Width() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSTableColumnSelWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSTableColumnSelWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableColumn) SetWidth(width float64) {
-	o.Ptr().Send(_nSTableColumnSelSetWidth, width)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableColumnSelSetWidth, width)
+	})
 }
 
 func (o *NSTableColumn) MinWidth() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSTableColumnSelMinWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSTableColumnSelMinWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableColumn) SetMinWidth(minWidth float64) {
-	o.Ptr().Send(_nSTableColumnSelSetMinWidth, minWidth)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableColumnSelSetMinWidth, minWidth)
+	})
 }
 
 func (o *NSTableColumn) MaxWidth() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSTableColumnSelMaxWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSTableColumnSelMaxWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableColumn) SetMaxWidth(maxWidth float64) {
-	o.Ptr().Send(_nSTableColumnSelSetMaxWidth, maxWidth)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableColumnSelSetMaxWidth, maxWidth)
+	})
 }
 
 func (o *NSTableColumn) Title() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableColumn) SetTitle(title *foundation.NSString) {
-	o.Ptr().Send(_nSTableColumnSelSetTitle, title.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableColumnSelSetTitle, title.Ptr())
+	})
 }
 
 func (o *NSTableColumn) HeaderCell() *NSTableHeaderCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelHeaderCell)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTableHeaderCellFromID(_ret)
+	var _mainthread0 *NSTableHeaderCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSTableHeaderCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelHeaderCell)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTableHeaderCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableColumn) SetHeaderCell(headerCell *NSTableHeaderCell) {
-	o.Ptr().Send(_nSTableColumnSelSetHeaderCell, headerCell.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableColumnSelSetHeaderCell, headerCell.Ptr())
+	})
 }
 
 func (o *NSTableColumn) IsEditable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableColumnSelIsEditable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableColumnSelIsEditable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableColumn) SetEditable(editable bool) {
-	o.Ptr().Send(_nSTableColumnSelSetEditable, editable)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableColumnSelSetEditable, editable)
+	})
 }
 
 func (o *NSTableColumn) SortDescriptorPrototype() *foundation.NSSortDescriptor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelSortDescriptorPrototype)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSSortDescriptorFromID(_ret)
+	var _mainthread0 *foundation.NSSortDescriptor
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSSortDescriptor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelSortDescriptorPrototype)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSSortDescriptorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableColumn) SetSortDescriptorPrototype(sortDescriptorPrototype *foundation.NSSortDescriptor) {
-	o.Ptr().Send(_nSTableColumnSelSetSortDescriptorPrototype, sortDescriptorPrototype.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableColumnSelSetSortDescriptorPrototype, sortDescriptorPrototype.Ptr())
+	})
 }
 
 func (o *NSTableColumn) ResizingMask() NSTableColumnResizingOptions {
-	_ret := objc.Send[NSTableColumnResizingOptions](o.Ptr(), _nSTableColumnSelResizingMask)
-	return _ret
+	var _mainthread0 NSTableColumnResizingOptions
+	purego.Main(func() {
+		_mainthread0 = func() NSTableColumnResizingOptions {
+			_ret := objc.Send[NSTableColumnResizingOptions](o.Ptr(), _nSTableColumnSelResizingMask)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableColumn) SetResizingMask(resizingMask NSTableColumnResizingOptions) {
-	o.Ptr().Send(_nSTableColumnSelSetResizingMask, resizingMask)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableColumnSelSetResizingMask, resizingMask)
+	})
 }
 
 func (o *NSTableColumn) HeaderToolTip() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelHeaderToolTip)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelHeaderToolTip)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableColumn) SetHeaderToolTip(headerToolTip *foundation.NSString) {
-	o.Ptr().Send(_nSTableColumnSelSetHeaderToolTip, headerToolTip.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableColumnSelSetHeaderToolTip, headerToolTip.Ptr())
+	})
 }
 
 func (o *NSTableColumn) IsHidden() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableColumnSelIsHidden)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableColumnSelIsHidden)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableColumn) SetHidden(hidden bool) {
-	o.Ptr().Send(_nSTableColumnSelSetHidden, hidden)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableColumnSelSetHidden, hidden)
+	})
 }
 
 // Sets whether the user can resize the receiver in its NSTableView.
 // Deprecated: since macOS 10.4.
 func (o *NSTableColumn) SetResizable(flag bool) {
-	o.Ptr().Send(_nSTableColumnSelSetResizable, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableColumnSelSetResizable, flag)
+	})
 }
 
 // Returns whether the column is resizable.
 // Deprecated: since macOS 10.4.
 func (o *NSTableColumn) IsResizable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableColumnSelIsResizable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableColumnSelIsResizable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the cell object used to display values in the specified row of the table column.
 func (o *NSTableColumn) DataCellForRow(row int) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelDataCellForRow, row)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelDataCellForRow, row)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.4.
 func (o *NSTableColumn) DataCell() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelDataCell)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableColumnSelDataCell)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.4.
 func (o *NSTableColumn) SetDataCell(dataCell objc.ID) {
-	o.Ptr().Send(_nSTableColumnSelSetDataCell, dataCell)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableColumnSelSetDataCell, dataCell)
+	})
 }

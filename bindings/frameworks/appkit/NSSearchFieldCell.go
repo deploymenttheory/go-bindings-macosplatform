@@ -56,132 +56,230 @@ func NSSearchFieldCellFromID(id objc.ID) *NSSearchFieldCell {
 }
 
 func (o *NSSearchFieldCell) InitTextCell(string_ *foundation.NSString) *NSSearchFieldCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldCellSelInitTextCell, string_.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSSearchFieldCellFromID(_ret)
+	var _mainthread0 *NSSearchFieldCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSSearchFieldCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldCellSelInitTextCell, string_.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSSearchFieldCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSearchFieldCell) InitWithCoder(coder *foundation.NSCoder) *NSSearchFieldCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldCellSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSSearchFieldCellFromID(_ret)
+	var _mainthread0 *NSSearchFieldCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSSearchFieldCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldCellSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSSearchFieldCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Resets the search button cell to its default attributes.
 func (o *NSSearchFieldCell) ResetSearchButtonCell() {
-	o.Ptr().Send(_nSSearchFieldCellSelResetSearchButtonCell)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSearchFieldCellSelResetSearchButtonCell)
+	})
 }
 
 // Resets the cancel button cell to its default attributes.
 func (o *NSSearchFieldCell) ResetCancelButtonCell() {
-	o.Ptr().Send(_nSSearchFieldCellSelResetCancelButtonCell)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSearchFieldCellSelResetCancelButtonCell)
+	})
 }
 
 // Modifies the bounding rectangle for the search-text field cell.
 func (o *NSSearchFieldCell) SearchTextRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSearchFieldCellSelSearchTextRectForBounds, rect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSearchFieldCellSelSearchTextRectForBounds, rect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Modifies the bounding rectangle for the search button cell.
 func (o *NSSearchFieldCell) SearchButtonRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSearchFieldCellSelSearchButtonRectForBounds, rect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSearchFieldCellSelSearchButtonRectForBounds, rect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Modifies the bounding rectangle for the cancel button cell.
 func (o *NSSearchFieldCell) CancelButtonRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSearchFieldCellSelCancelButtonRectForBounds, rect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSearchFieldCellSelCancelButtonRectForBounds, rect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSearchFieldCell) SearchButtonCell() *NSButtonCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldCellSelSearchButtonCell)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSButtonCellFromID(_ret)
+	var _mainthread0 *NSButtonCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSButtonCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldCellSelSearchButtonCell)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSButtonCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSearchFieldCell) SetSearchButtonCell(searchButtonCell *NSButtonCell) {
-	o.Ptr().Send(_nSSearchFieldCellSelSetSearchButtonCell, searchButtonCell.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSearchFieldCellSelSetSearchButtonCell, searchButtonCell.Ptr())
+	})
 }
 
 func (o *NSSearchFieldCell) CancelButtonCell() *NSButtonCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldCellSelCancelButtonCell)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSButtonCellFromID(_ret)
+	var _mainthread0 *NSButtonCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSButtonCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldCellSelCancelButtonCell)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSButtonCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSearchFieldCell) SetCancelButtonCell(cancelButtonCell *NSButtonCell) {
-	o.Ptr().Send(_nSSearchFieldCellSelSetCancelButtonCell, cancelButtonCell.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSearchFieldCellSelSetCancelButtonCell, cancelButtonCell.Ptr())
+	})
 }
 
 func (o *NSSearchFieldCell) SearchMenuTemplate() *NSMenu {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldCellSelSearchMenuTemplate)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMenuFromID(_ret)
+	var _mainthread0 *NSMenu
+	purego.Main(func() {
+		_mainthread0 = func() *NSMenu {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldCellSelSearchMenuTemplate)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMenuFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSearchFieldCell) SetSearchMenuTemplate(searchMenuTemplate *NSMenu) {
-	o.Ptr().Send(_nSSearchFieldCellSelSetSearchMenuTemplate, searchMenuTemplate.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSearchFieldCellSelSetSearchMenuTemplate, searchMenuTemplate.Ptr())
+	})
 }
 
 func (o *NSSearchFieldCell) SendsWholeSearchString() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSearchFieldCellSelSendsWholeSearchString)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSearchFieldCellSelSendsWholeSearchString)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSearchFieldCell) SetSendsWholeSearchString(sendsWholeSearchString bool) {
-	o.Ptr().Send(_nSSearchFieldCellSelSetSendsWholeSearchString, sendsWholeSearchString)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSearchFieldCellSelSetSendsWholeSearchString, sendsWholeSearchString)
+	})
 }
 
 func (o *NSSearchFieldCell) MaximumRecents() int {
-	_ret := objc.Send[int](o.Ptr(), _nSSearchFieldCellSelMaximumRecents)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSSearchFieldCellSelMaximumRecents)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSearchFieldCell) SetMaximumRecents(maximumRecents int) {
-	o.Ptr().Send(_nSSearchFieldCellSelSetMaximumRecents, maximumRecents)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSearchFieldCellSelSetMaximumRecents, maximumRecents)
+	})
 }
 
 func (o *NSSearchFieldCell) RecentSearches() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldCellSelRecentSearches)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldCellSelRecentSearches)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSearchFieldCell) SetRecentSearches(recentSearches *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSSearchFieldCellSelSetRecentSearches, recentSearches.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSearchFieldCellSelSetRecentSearches, recentSearches.Ptr())
+	})
 }
 
 func (o *NSSearchFieldCell) RecentsAutosaveName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldCellSelRecentsAutosaveName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldCellSelRecentsAutosaveName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSearchFieldCell) SetRecentsAutosaveName(recentsAutosaveName *foundation.NSString) {
-	o.Ptr().Send(_nSSearchFieldCellSelSetRecentsAutosaveName, recentsAutosaveName.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSearchFieldCellSelSetRecentsAutosaveName, recentsAutosaveName.Ptr())
+	})
 }
 
 func (o *NSSearchFieldCell) SendsSearchStringImmediately() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSearchFieldCellSelSendsSearchStringImmediately)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSearchFieldCellSelSendsSearchStringImmediately)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSearchFieldCell) SetSendsSearchStringImmediately(sendsSearchStringImmediately bool) {
-	o.Ptr().Send(_nSSearchFieldCellSelSetSendsSearchStringImmediately, sendsSearchStringImmediately)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSearchFieldCellSelSetSendsSearchStringImmediately, sendsSearchStringImmediately)
+	})
 }

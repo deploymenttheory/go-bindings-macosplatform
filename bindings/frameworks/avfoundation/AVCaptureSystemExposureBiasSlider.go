@@ -50,9 +50,15 @@ func (o *AVCaptureSystemExposureBiasSlider) InitWithDeviceAction(device *AVCaptu
 		})
 		defer __block_action.Release()
 	}
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSystemExposureBiasSliderSelInitWithDeviceAction, device.Ptr(), __block_action)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return AVCaptureSystemExposureBiasSliderFromID(_ret)
+	var _mainthread0 *AVCaptureSystemExposureBiasSlider
+	purego.Main(func() {
+		_mainthread0 = func() *AVCaptureSystemExposureBiasSlider {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSystemExposureBiasSliderSelInitWithDeviceAction, device.Ptr(), __block_action)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return AVCaptureSystemExposureBiasSliderFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

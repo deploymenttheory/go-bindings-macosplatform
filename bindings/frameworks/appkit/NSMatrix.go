@@ -126,490 +126,826 @@ func NSMatrixFromID(id objc.ID) *NSMatrix {
 
 // Initializes a newly allocated matrix with the specified frame.
 func (o *NSMatrix) InitWithFrame(frameRect corefoundation.CGRect) *NSMatrix {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelInitWithFrame, frameRect)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMatrixFromID(_ret)
+	var _mainthread0 *NSMatrix
+	purego.Main(func() {
+		_mainthread0 = func() *NSMatrix {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelInitWithFrame, frameRect)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMatrixFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes and returns a newly allocated matrix of the specified size using the given cell as a prototype.
 func (o *NSMatrix) InitWithFrameModePrototypeNumberOfRowsNumberOfColumns(frameRect corefoundation.CGRect, mode NSMatrixMode, cell *NSCell, rowsHigh int, colsWide int) *NSMatrix {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelInitWithFrameModePrototypeNumberOfRowsNumberOfColumns, frameRect, mode, cell.Ptr(), rowsHigh, colsWide)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMatrixFromID(_ret)
+	var _mainthread0 *NSMatrix
+	purego.Main(func() {
+		_mainthread0 = func() *NSMatrix {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelInitWithFrameModePrototypeNumberOfRowsNumberOfColumns, frameRect, mode, cell.Ptr(), rowsHigh, colsWide)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMatrixFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes and returns a newly allocated matrix of the specified size using cells of the given class.
 func (o *NSMatrix) InitWithFrameModeCellClassNumberOfRowsNumberOfColumns(frameRect corefoundation.CGRect, mode NSMatrixMode, factoryId objc.Class, rowsHigh int, colsWide int) *NSMatrix {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelInitWithFrameModeCellClassNumberOfRowsNumberOfColumns, frameRect, mode, factoryId, rowsHigh, colsWide)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMatrixFromID(_ret)
+	var _mainthread0 *NSMatrix
+	purego.Main(func() {
+		_mainthread0 = func() *NSMatrix {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelInitWithFrameModeCellClassNumberOfRowsNumberOfColumns, frameRect, mode, factoryId, rowsHigh, colsWide)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMatrixFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a new cell at the location specified by the given row and column in the receiver.
 func (o *NSMatrix) MakeCellAtRowColumn(row int, col int) *NSCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelMakeCellAtRowColumn, row, col)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCellFromID(_ret)
+	var _mainthread0 *NSCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelMakeCellAtRowColumn, row, col)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Iterates through the cells in the receiver, sending the specified selector to an object for each cell.
 func (o *NSMatrix) SendActionToForAllCells(selector objc.SEL, object objc.ID, flag bool) {
-	o.Ptr().Send(_nSMatrixSelSendActionToForAllCells, selector, object, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSendActionToForAllCells, selector, object, flag)
+	})
 }
 
 // Sorts the receiver’s cells in ascending order as defined by the comparison method.
 func (o *NSMatrix) SortUsingSelector(comparator objc.SEL) {
-	o.Ptr().Send(_nSMatrixSelSortUsingSelector, comparator)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSortUsingSelector, comparator)
+	})
 }
 
 // Sorts the receiver’s cells in ascending order as defined by the specified comparison function.
 func (o *NSMatrix) SortUsingFunctionContext(compare unsafe.Pointer, context_ unsafe.Pointer) {
-	o.Ptr().Send(_nSMatrixSelSortUsingFunctionContext, compare, context_)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSortUsingFunctionContext, compare, context_)
+	})
 }
 
 // Programmatically selects a range of cells.
 func (o *NSMatrix) SetSelectionFromToAnchorHighlight(startPos int, endPos int, anchorPos int, lit bool) {
-	o.Ptr().Send(_nSMatrixSelSetSelectionFromToAnchorHighlight, startPos, endPos, anchorPos, lit)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSetSelectionFromToAnchorHighlight, startPos, endPos, anchorPos, lit)
+	})
 }
 
 // Deselects the selected cell or cells.
 func (o *NSMatrix) DeselectSelectedCell() {
-	o.Ptr().Send(_nSMatrixSelDeselectSelectedCell)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelDeselectSelectedCell)
+	})
 }
 
 // Deselects all cells in the receiver and, if necessary, redisplays the receiver.
 func (o *NSMatrix) DeselectAllCells() {
-	o.Ptr().Send(_nSMatrixSelDeselectAllCells)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelDeselectAllCells)
+	})
 }
 
 // Selects the cell at the specified row and column within the receiver.
 func (o *NSMatrix) SelectCellAtRowColumn(row int, col int) {
-	o.Ptr().Send(_nSMatrixSelSelectCellAtRowColumn, row, col)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSelectCellAtRowColumn, row, col)
+	})
 }
 
 // Selects and highlights all cells in the receiver.
 func (o *NSMatrix) SelectAll(sender objc.ID) {
-	o.Ptr().Send(_nSMatrixSelSelectAll, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSelectAll, sender)
+	})
 }
 
 // Selects the last cell with the given tag.
 func (o *NSMatrix) SelectCellWithTag(tag int) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelSelectCellWithTag, tag)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelSelectCellWithTag, tag)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies whether the cells in the matrix are scrollable.
 func (o *NSMatrix) SetScrollable(flag bool) {
-	o.Ptr().Send(_nSMatrixSelSetScrollable, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSetScrollable, flag)
+	})
 }
 
 // Sets the state of the cell at specified location.
 func (o *NSMatrix) SetStateAtRowColumn(value int, row int, col int) {
-	o.Ptr().Send(_nSMatrixSelSetStateAtRowColumn, value, row, col)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSetStateAtRowColumn, value, row, col)
+	})
 }
 
 // Obtains the number of rows and columns in the receiver.
 func (o *NSMatrix) GetNumberOfRowsColumns(rowCount *int64, colCount *int64) {
-	o.Ptr().Send(_nSMatrixSelGetNumberOfRowsColumns, rowCount, colCount)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelGetNumberOfRowsColumns, rowCount, colCount)
+	})
 }
 
 // Returns the cell at the specified row and column.
 func (o *NSMatrix) CellAtRowColumn(row int, col int) *NSCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelCellAtRowColumn, row, col)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCellFromID(_ret)
+	var _mainthread0 *NSCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelCellAtRowColumn, row, col)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the frame rectangle of the cell that would be drawn at the specified location.
 func (o *NSMatrix) CellFrameAtRowColumn(row int, col int) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSMatrixSelCellFrameAtRowColumn, row, col)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSMatrixSelCellFrameAtRowColumn, row, col)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Searches the receiver for the specified cell and returns the row and column of the cell
 func (o *NSMatrix) GetRowColumnOfCell(row *int64, col *int64, cell *NSCell) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelGetRowColumnOfCell, row, col, cell.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelGetRowColumnOfCell, row, col, cell.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Indicates whether the specified point lies within one of the cells of the matrix and returns the location of the cell within which the point lies.
 func (o *NSMatrix) GetRowColumnForPoint(row *int64, col *int64, point corefoundation.CGPoint) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelGetRowColumnForPoint, row, col, point)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelGetRowColumnForPoint, row, col, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Changes the number of rows and columns in the receiver.
 func (o *NSMatrix) RenewRowsColumns(newRows int, newCols int) {
-	o.Ptr().Send(_nSMatrixSelRenewRowsColumns, newRows, newCols)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelRenewRowsColumns, newRows, newCols)
+	})
 }
 
 // Replaces the cell at the specified row and column with the new cell.
 func (o *NSMatrix) PutCellAtRowColumn(newCell *NSCell, row int, col int) {
-	o.Ptr().Send(_nSMatrixSelPutCellAtRowColumn, newCell.Ptr(), row, col)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelPutCellAtRowColumn, newCell.Ptr(), row, col)
+	})
 }
 
 // Adds a new row of cells below the last row.
 func (o *NSMatrix) AddRow() {
-	o.Ptr().Send(_nSMatrixSelAddRow)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelAddRow)
+	})
 }
 
 // Adds a new row of cells below the last row, using the specified cells.
 func (o *NSMatrix) AddRowWithCells(newCells *foundation.NSArray[*NSCell]) {
-	o.Ptr().Send(_nSMatrixSelAddRowWithCells, newCells.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelAddRowWithCells, newCells.Ptr())
+	})
 }
 
 // Inserts a new row of cells before the specified row.
 func (o *NSMatrix) InsertRow(row int) {
-	o.Ptr().Send(_nSMatrixSelInsertRow, row)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelInsertRow, row)
+	})
 }
 
 // Inserts a new row of cells before the specified row, using the given cells.
 func (o *NSMatrix) InsertRowWithCells(row int, newCells *foundation.NSArray[*NSCell]) {
-	o.Ptr().Send(_nSMatrixSelInsertRowWithCells, row, newCells.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelInsertRowWithCells, row, newCells.Ptr())
+	})
 }
 
 // Removes the specified row from the receiver.
 func (o *NSMatrix) RemoveRow(row int) {
-	o.Ptr().Send(_nSMatrixSelRemoveRow, row)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelRemoveRow, row)
+	})
 }
 
 // Adds a new column of cells to the right of the last column.
 func (o *NSMatrix) AddColumn() {
-	o.Ptr().Send(_nSMatrixSelAddColumn)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelAddColumn)
+	})
 }
 
 // Adds a new column of cells to the right of the last column, using the given cells.
 func (o *NSMatrix) AddColumnWithCells(newCells *foundation.NSArray[*NSCell]) {
-	o.Ptr().Send(_nSMatrixSelAddColumnWithCells, newCells.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelAddColumnWithCells, newCells.Ptr())
+	})
 }
 
 // Inserts a new column of cells at the specified location.
 func (o *NSMatrix) InsertColumn(column int) {
-	o.Ptr().Send(_nSMatrixSelInsertColumn, column)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelInsertColumn, column)
+	})
 }
 
 // Inserts a new column of cells before the specified column, using the given cells.
 func (o *NSMatrix) InsertColumnWithCells(column int, newCells *foundation.NSArray[*NSCell]) {
-	o.Ptr().Send(_nSMatrixSelInsertColumnWithCells, column, newCells.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelInsertColumnWithCells, column, newCells.Ptr())
+	})
 }
 
 // Removes the specified column at from the receiver.
 func (o *NSMatrix) RemoveColumn(col int) {
-	o.Ptr().Send(_nSMatrixSelRemoveColumn, col)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelRemoveColumn, col)
+	})
 }
 
 // Searches the receiver and returns the last cell matching the specified tag.
 func (o *NSMatrix) CellWithTag(tag int) *NSCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelCellWithTag, tag)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCellFromID(_ret)
+	var _mainthread0 *NSCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelCellWithTag, tag)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Changes the width and the height of the receiver’s frame so it exactly contains the cells.
 func (o *NSMatrix) SizeToCells() {
-	o.Ptr().Send(_nSMatrixSelSizeToCells)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSizeToCells)
+	})
 }
 
 // Specifies whether the receiver’s size information is validated.
 func (o *NSMatrix) SetValidateSize(flag bool) {
-	o.Ptr().Send(_nSMatrixSelSetValidateSize, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSetValidateSize, flag)
+	})
 }
 
 // Displays the cell at the specified row and column.
 func (o *NSMatrix) DrawCellAtRowColumn(row int, col int) {
-	o.Ptr().Send(_nSMatrixSelDrawCellAtRowColumn, row, col)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelDrawCellAtRowColumn, row, col)
+	})
 }
 
 // Highlights or unhighlights the cell at the specified row and column location.
 func (o *NSMatrix) HighlightCellAtRowColumn(flag bool, row int, col int) {
-	o.Ptr().Send(_nSMatrixSelHighlightCellAtRowColumn, flag, row, col)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelHighlightCellAtRowColumn, flag, row, col)
+	})
 }
 
 // Scrolls the receiver so the specified cell is visible.
 func (o *NSMatrix) ScrollCellToVisibleAtRowColumn(row int, col int) {
-	o.Ptr().Send(_nSMatrixSelScrollCellToVisibleAtRowColumn, row, col)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelScrollCellToVisibleAtRowColumn, row, col)
+	})
 }
 
 // If the selected cell has both an action and a target, sends its action to its target.
 func (o *NSMatrix) SendAction() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelSendAction)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelSendAction)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sends the double-click action message to the target of the receiver.
 func (o *NSMatrix) SendDoubleAction() {
-	o.Ptr().Send(_nSMatrixSelSendDoubleAction)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSendDoubleAction)
+	})
 }
 
 // Requests permission to begin editing text.
 func (o *NSMatrix) TextShouldBeginEditing(textObject *NSText) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelTextShouldBeginEditing, textObject.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelTextShouldBeginEditing, textObject.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Requests permission to end editing.
 func (o *NSMatrix) TextShouldEndEditing(textObject *NSText) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelTextShouldEndEditing, textObject.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelTextShouldEndEditing, textObject.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Invoked when there’s a change in the text after the receiver gains first responder status.
 func (o *NSMatrix) TextDidBeginEditing(notification *foundation.NSNotification) {
-	o.Ptr().Send(_nSMatrixSelTextDidBeginEditing, notification.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelTextDidBeginEditing, notification.Ptr())
+	})
 }
 
 // Invoked when text editing ends.
 func (o *NSMatrix) TextDidEndEditing(notification *foundation.NSNotification) {
-	o.Ptr().Send(_nSMatrixSelTextDidEndEditing, notification.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelTextDidEndEditing, notification.Ptr())
+	})
 }
 
 // Invoked when a key-down event or paste operation occurs that changes the receiver’s contents.
 func (o *NSMatrix) TextDidChange(notification *foundation.NSNotification) {
-	o.Ptr().Send(_nSMatrixSelTextDidChange, notification.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelTextDidChange, notification.Ptr())
+	})
 }
 
 // Selects text in the currently selected cell or in the key cell.
 func (o *NSMatrix) SelectText(sender objc.ID) {
-	o.Ptr().Send(_nSMatrixSelSelectText, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSelectText, sender)
+	})
 }
 
 // Selects the text in the cell at the specified location and returns the cell.
 func (o *NSMatrix) SelectTextAtRowColumn(row int, col int) *NSCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelSelectTextAtRowColumn, row, col)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCellFromID(_ret)
+	var _mainthread0 *NSCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelSelectTextAtRowColumn, row, col)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the tooltip for the cell.
 func (o *NSMatrix) SetToolTipForCell(toolTipString *foundation.NSString, cell *NSCell) {
-	o.Ptr().Send(_nSMatrixSelSetToolTipForCell, toolTipString.Ptr(), cell.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSetToolTipForCell, toolTipString.Ptr(), cell.Ptr())
+	})
 }
 
 // Returns the tooltip for the specified cell.
 func (o *NSMatrix) ToolTipForCell(cell *NSCell) *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelToolTipForCell, cell.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelToolTipForCell, cell.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) Prototype() *NSCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelPrototype)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCellFromID(_ret)
+	var _mainthread0 *NSCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelPrototype)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) SetPrototype(prototype *NSCell) {
-	o.Ptr().Send(_nSMatrixSelSetPrototype, prototype.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSetPrototype, prototype.Ptr())
+	})
 }
 
 func (o *NSMatrix) Mode() NSMatrixMode {
-	_ret := objc.Send[NSMatrixMode](o.Ptr(), _nSMatrixSelMode)
-	return _ret
+	var _mainthread0 NSMatrixMode
+	purego.Main(func() {
+		_mainthread0 = func() NSMatrixMode {
+			_ret := objc.Send[NSMatrixMode](o.Ptr(), _nSMatrixSelMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) SetMode(mode NSMatrixMode) {
-	o.Ptr().Send(_nSMatrixSelSetMode, mode)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSetMode, mode)
+	})
 }
 
 func (o *NSMatrix) AllowsEmptySelection() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelAllowsEmptySelection)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelAllowsEmptySelection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) SetAllowsEmptySelection(allowsEmptySelection bool) {
-	o.Ptr().Send(_nSMatrixSelSetAllowsEmptySelection, allowsEmptySelection)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSetAllowsEmptySelection, allowsEmptySelection)
+	})
 }
 
 func (o *NSMatrix) Cells() *foundation.NSArray[*NSCell] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelCells)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSCell](_ret)
+	var _mainthread0 *foundation.NSArray[*NSCell]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSCell] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelCells)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSCell](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) SelectedCells() *foundation.NSArray[*NSCell] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelSelectedCells)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSCell](_ret)
+	var _mainthread0 *foundation.NSArray[*NSCell]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSCell] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelSelectedCells)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSCell](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) SelectedRow() int {
-	_ret := objc.Send[int](o.Ptr(), _nSMatrixSelSelectedRow)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSMatrixSelSelectedRow)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) SelectedColumn() int {
-	_ret := objc.Send[int](o.Ptr(), _nSMatrixSelSelectedColumn)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSMatrixSelSelectedColumn)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) IsSelectionByRect() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelIsSelectionByRect)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelIsSelectionByRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) SetSelectionByRect(selectionByRect bool) {
-	o.Ptr().Send(_nSMatrixSelSetSelectionByRect, selectionByRect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSetSelectionByRect, selectionByRect)
+	})
 }
 
 func (o *NSMatrix) CellSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSMatrixSelCellSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSMatrixSelCellSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) SetCellSize(cellSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSMatrixSelSetCellSize, cellSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSetCellSize, cellSize)
+	})
 }
 
 func (o *NSMatrix) IntercellSpacing() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSMatrixSelIntercellSpacing)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSMatrixSelIntercellSpacing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) SetIntercellSpacing(intercellSpacing corefoundation.CGSize) {
-	o.Ptr().Send(_nSMatrixSelSetIntercellSpacing, intercellSpacing)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSetIntercellSpacing, intercellSpacing)
+	})
 }
 
 func (o *NSMatrix) BackgroundColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelBackgroundColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelBackgroundColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) SetBackgroundColor(backgroundColor *NSColor) {
-	o.Ptr().Send(_nSMatrixSelSetBackgroundColor, backgroundColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSetBackgroundColor, backgroundColor.Ptr())
+	})
 }
 
 func (o *NSMatrix) CellBackgroundColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelCellBackgroundColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelCellBackgroundColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) SetCellBackgroundColor(cellBackgroundColor *NSColor) {
-	o.Ptr().Send(_nSMatrixSelSetCellBackgroundColor, cellBackgroundColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSetCellBackgroundColor, cellBackgroundColor.Ptr())
+	})
 }
 
 func (o *NSMatrix) DrawsCellBackground() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelDrawsCellBackground)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelDrawsCellBackground)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) SetDrawsCellBackground(drawsCellBackground bool) {
-	o.Ptr().Send(_nSMatrixSelSetDrawsCellBackground, drawsCellBackground)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSetDrawsCellBackground, drawsCellBackground)
+	})
 }
 
 func (o *NSMatrix) DrawsBackground() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelDrawsBackground)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelDrawsBackground)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) SetDrawsBackground(drawsBackground bool) {
-	o.Ptr().Send(_nSMatrixSelSetDrawsBackground, drawsBackground)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSetDrawsBackground, drawsBackground)
+	})
 }
 
 func (o *NSMatrix) NumberOfRows() int {
-	_ret := objc.Send[int](o.Ptr(), _nSMatrixSelNumberOfRows)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSMatrixSelNumberOfRows)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) NumberOfColumns() int {
-	_ret := objc.Send[int](o.Ptr(), _nSMatrixSelNumberOfColumns)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSMatrixSelNumberOfColumns)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) DoubleAction() objc.SEL {
-	_ret := objc.Send[objc.SEL](o.Ptr(), _nSMatrixSelDoubleAction)
-	return _ret
+	var _mainthread0 objc.SEL
+	purego.Main(func() {
+		_mainthread0 = func() objc.SEL {
+			_ret := objc.Send[objc.SEL](o.Ptr(), _nSMatrixSelDoubleAction)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) SetDoubleAction(doubleAction objc.SEL) {
-	o.Ptr().Send(_nSMatrixSelSetDoubleAction, doubleAction)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSetDoubleAction, doubleAction)
+	})
 }
 
 func (o *NSMatrix) AutosizesCells() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelAutosizesCells)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelAutosizesCells)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) SetAutosizesCells(autosizesCells bool) {
-	o.Ptr().Send(_nSMatrixSelSetAutosizesCells, autosizesCells)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSetAutosizesCells, autosizesCells)
+	})
 }
 
 func (o *NSMatrix) IsAutoscroll() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelIsAutoscroll)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelIsAutoscroll)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) SetAutoscroll(autoscroll bool) {
-	o.Ptr().Send(_nSMatrixSelSetAutoscroll, autoscroll)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSetAutoscroll, autoscroll)
+	})
 }
 
 func (o *NSMatrix) MouseDownFlags() int {
-	_ret := objc.Send[int](o.Ptr(), _nSMatrixSelMouseDownFlags)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSMatrixSelMouseDownFlags)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) Delegate() NSMatrixDelegate {
-	_ret := objc.Send[NSMatrixDelegate](o.Ptr(), _nSMatrixSelDelegate)
-	return _ret
+	var _mainthread0 NSMatrixDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSMatrixDelegate {
+			_ret := objc.Send[NSMatrixDelegate](o.Ptr(), _nSMatrixSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) SetDelegate(delegate NSMatrixDelegate) {
-	o.Ptr().Send(_nSMatrixSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSetDelegate, delegate)
+	})
 }
 
 func (o *NSMatrix) AutorecalculatesCellSize() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelAutorecalculatesCellSize)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelAutorecalculatesCellSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) SetAutorecalculatesCellSize(autorecalculatesCellSize bool) {
-	o.Ptr().Send(_nSMatrixSelSetAutorecalculatesCellSize, autorecalculatesCellSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSetAutorecalculatesCellSize, autorecalculatesCellSize)
+	})
 }
 
 func (o *NSMatrix) TabKeyTraversesCells() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelTabKeyTraversesCells)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSMatrixSelTabKeyTraversesCells)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) SetTabKeyTraversesCells(tabKeyTraversesCells bool) {
-	o.Ptr().Send(_nSMatrixSelSetTabKeyTraversesCells, tabKeyTraversesCells)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSetTabKeyTraversesCells, tabKeyTraversesCells)
+	})
 }
 
 func (o *NSMatrix) KeyCell() *NSCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelKeyCell)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCellFromID(_ret)
+	var _mainthread0 *NSCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelKeyCell)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMatrix) SetKeyCell(keyCell *NSCell) {
-	o.Ptr().Send(_nSMatrixSelSetKeyCell, keyCell.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSMatrixSelSetKeyCell, keyCell.Ptr())
+	})
 }

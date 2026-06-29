@@ -56,148 +56,242 @@ func NSTabViewControllerFromID(id objc.ID) *NSTabViewController {
 
 // Adds the specified tab to the end of the tab view controller’s list of tabs.
 func (o *NSTabViewController) AddTabViewItem(tabViewItem *NSTabViewItem) {
-	o.Ptr().Send(_nSTabViewControllerSelAddTabViewItem, tabViewItem.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewControllerSelAddTabViewItem, tabViewItem.Ptr())
+	})
 }
 
 // Inserts a tab view into the tab view controller’s list of tabs.
 func (o *NSTabViewController) InsertTabViewItemAtIndex(tabViewItem *NSTabViewItem, index int) {
-	o.Ptr().Send(_nSTabViewControllerSelInsertTabViewItemAtIndex, tabViewItem.Ptr(), index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewControllerSelInsertTabViewItemAtIndex, tabViewItem.Ptr(), index)
+	})
 }
 
 // Removes the specified tab view item from the tab view controller.
 func (o *NSTabViewController) RemoveTabViewItem(tabViewItem *NSTabViewItem) {
-	o.Ptr().Send(_nSTabViewControllerSelRemoveTabViewItem, tabViewItem.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewControllerSelRemoveTabViewItem, tabViewItem.Ptr())
+	})
 }
 
 // Returns the tab view item for the specified child view controller.
 func (o *NSTabViewController) TabViewItemForViewController(viewController *NSViewController) *NSTabViewItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewControllerSelTabViewItemForViewController, viewController.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTabViewItemFromID(_ret)
+	var _mainthread0 *NSTabViewItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSTabViewItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewControllerSelTabViewItemForViewController, viewController.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTabViewItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Informs the tab view controller that the specified tab is about to be selected.
 func (o *NSTabViewController) TabViewWillSelectTabViewItem(tabView *NSTabView, tabViewItem *NSTabViewItem) {
-	o.Ptr().Send(_nSTabViewControllerSelTabViewWillSelectTabViewItem, tabView.Ptr(), tabViewItem.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewControllerSelTabViewWillSelectTabViewItem, tabView.Ptr(), tabViewItem.Ptr())
+	})
 }
 
 // Informs the tab view controller that the specified tab was selected.
 func (o *NSTabViewController) TabViewDidSelectTabViewItem(tabView *NSTabView, tabViewItem *NSTabViewItem) {
-	o.Ptr().Send(_nSTabViewControllerSelTabViewDidSelectTabViewItem, tabView.Ptr(), tabViewItem.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewControllerSelTabViewDidSelectTabViewItem, tabView.Ptr(), tabViewItem.Ptr())
+	})
 }
 
 // Asks the tab view controller if the specified tab should be selected.
 func (o *NSTabViewController) TabViewShouldSelectTabViewItem(tabView *NSTabView, tabViewItem *NSTabViewItem) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTabViewControllerSelTabViewShouldSelectTabViewItem, tabView.Ptr(), tabViewItem.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTabViewControllerSelTabViewShouldSelectTabViewItem, tabView.Ptr(), tabViewItem.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the toolbar item for the specified identifier.
 func (o *NSTabViewController) ToolbarItemForItemIdentifierWillBeInsertedIntoToolbar(toolbar *NSToolbar, itemIdentifier *foundation.NSString, flag bool) *NSToolbarItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewControllerSelToolbarItemForItemIdentifierWillBeInsertedIntoToolbar, toolbar.Ptr(), itemIdentifier.Ptr(), flag)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSToolbarItemFromID(_ret)
+	var _mainthread0 *NSToolbarItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSToolbarItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewControllerSelToolbarItemForItemIdentifierWillBeInsertedIntoToolbar, toolbar.Ptr(), itemIdentifier.Ptr(), flag)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSToolbarItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the array of identifier strings for the default toolbar items.
 func (o *NSTabViewController) ToolbarDefaultItemIdentifiers(toolbar *NSToolbar) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewControllerSelToolbarDefaultItemIdentifiers, toolbar.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewControllerSelToolbarDefaultItemIdentifiers, toolbar.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the array of identifier strings for the allowed toolbar items.
 func (o *NSTabViewController) ToolbarAllowedItemIdentifiers(toolbar *NSToolbar) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewControllerSelToolbarAllowedItemIdentifiers, toolbar.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewControllerSelToolbarAllowedItemIdentifiers, toolbar.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the array of identifier strings for the selectable toolbar items
 func (o *NSTabViewController) ToolbarSelectableItemIdentifiers(toolbar *NSToolbar) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewControllerSelToolbarSelectableItemIdentifiers, toolbar.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewControllerSelToolbarSelectableItemIdentifiers, toolbar.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The style that this NSTabViewController displays its UI as. Defaults to \c NSTabViewControllerTabStyleSegmentedControlOnTop.
 func (o *NSTabViewController) TabStyle() NSTabViewControllerTabStyle {
-	_ret := objc.Send[NSTabViewControllerTabStyle](o.Ptr(), _nSTabViewControllerSelTabStyle)
-	return _ret
+	var _mainthread0 NSTabViewControllerTabStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSTabViewControllerTabStyle {
+			_ret := objc.Send[NSTabViewControllerTabStyle](o.Ptr(), _nSTabViewControllerSelTabStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The style that this NSTabViewController displays its UI as. Defaults to \c NSTabViewControllerTabStyleSegmentedControlOnTop.
 func (o *NSTabViewController) SetTabStyle(tabStyle NSTabViewControllerTabStyle) {
-	o.Ptr().Send(_nSTabViewControllerSelSetTabStyle, tabStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewControllerSelSetTabStyle, tabStyle)
+	})
 }
 
 // Access to the tab view that the controller is controlling. To provide a custom NSTabView, assign the value anytime before \c self.viewLoaded is \c YES. Querying the value will create it on-demand, if needed. Check \c self.viewLoaded before querying the value to avoid prematurely creating the view. Note that the \c -tabView may not be equal to the \c viewController.view. Properties such as the tabStyle can be directly manipulated, but calling methods that add and remove tabViewItems or changing the delegate is not allowed. The NSTabViewController will be made the delegate of the NSTabView. Internally, the NSTabView is always used to switch between displayed childViewControllers, regardless of the style displayed.
 func (o *NSTabViewController) TabView() *NSTabView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewControllerSelTabView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTabViewFromID(_ret)
+	var _mainthread0 *NSTabView
+	purego.Main(func() {
+		_mainthread0 = func() *NSTabView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewControllerSelTabView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTabViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Access to the tab view that the controller is controlling. To provide a custom NSTabView, assign the value anytime before \c self.viewLoaded is \c YES. Querying the value will create it on-demand, if needed. Check \c self.viewLoaded before querying the value to avoid prematurely creating the view. Note that the \c -tabView may not be equal to the \c viewController.view. Properties such as the tabStyle can be directly manipulated, but calling methods that add and remove tabViewItems or changing the delegate is not allowed. The NSTabViewController will be made the delegate of the NSTabView. Internally, the NSTabView is always used to switch between displayed childViewControllers, regardless of the style displayed.
 func (o *NSTabViewController) SetTabView(tabView *NSTabView) {
-	o.Ptr().Send(_nSTabViewControllerSelSetTabView, tabView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewControllerSelSetTabView, tabView.Ptr())
+	})
 }
 
 // This defines how NSTabViewController transitions from one view to another. Transitions go through [self transitionFromViewController:toViewController:options:completionHandler:]. The default value is \c NSViewControllerTransitionCrossfade|NSViewControllerTransitionAllowUserInteraction.
 func (o *NSTabViewController) TransitionOptions() NSViewControllerTransitionOptions {
-	_ret := objc.Send[NSViewControllerTransitionOptions](o.Ptr(), _nSTabViewControllerSelTransitionOptions)
-	return _ret
+	var _mainthread0 NSViewControllerTransitionOptions
+	purego.Main(func() {
+		_mainthread0 = func() NSViewControllerTransitionOptions {
+			_ret := objc.Send[NSViewControllerTransitionOptions](o.Ptr(), _nSTabViewControllerSelTransitionOptions)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // This defines how NSTabViewController transitions from one view to another. Transitions go through [self transitionFromViewController:toViewController:options:completionHandler:]. The default value is \c NSViewControllerTransitionCrossfade|NSViewControllerTransitionAllowUserInteraction.
 func (o *NSTabViewController) SetTransitionOptions(transitionOptions NSViewControllerTransitionOptions) {
-	o.Ptr().Send(_nSTabViewControllerSelSetTransitionOptions, transitionOptions)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewControllerSelSetTransitionOptions, transitionOptions)
+	})
 }
 
 // If YES and the receiving NSTabViewController has a nil title, \c -title will return its selected child ViewController's title. If NO, it will continue to return nil. The default value is \c YES.
 func (o *NSTabViewController) CanPropagateSelectedChildViewControllerTitle() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTabViewControllerSelCanPropagateSelectedChildViewControllerTitle)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTabViewControllerSelCanPropagateSelectedChildViewControllerTitle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // If YES and the receiving NSTabViewController has a nil title, \c -title will return its selected child ViewController's title. If NO, it will continue to return nil. The default value is \c YES.
 func (o *NSTabViewController) SetCanPropagateSelectedChildViewControllerTitle(canPropagateSelectedChildViewControllerTitle bool) {
-	o.Ptr().Send(_nSTabViewControllerSelSetCanPropagateSelectedChildViewControllerTitle, canPropagateSelectedChildViewControllerTitle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewControllerSelSetCanPropagateSelectedChildViewControllerTitle, canPropagateSelectedChildViewControllerTitle)
+	})
 }
 
 // The array of tab view items that correspond to the current child view controllers. After a child view controller is added to the receiving TabViewController, a NSTabViewItem with the default values will be created for it. Once the child is removed, its corresponding tabViewItem will be removed from the tabViewItems array.
 func (o *NSTabViewController) TabViewItems() *foundation.NSArray[*NSTabViewItem] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewControllerSelTabViewItems)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSTabViewItem](_ret)
+	var _mainthread0 *foundation.NSArray[*NSTabViewItem]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSTabViewItem] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewControllerSelTabViewItems)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSTabViewItem](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The array of tab view items that correspond to the current child view controllers. After a child view controller is added to the receiving TabViewController, a NSTabViewItem with the default values will be created for it. Once the child is removed, its corresponding tabViewItem will be removed from the tabViewItems array.
 func (o *NSTabViewController) SetTabViewItems(tabViewItems *foundation.NSArray[*NSTabViewItem]) {
-	o.Ptr().Send(_nSTabViewControllerSelSetTabViewItems, tabViewItems.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewControllerSelSetTabViewItems, tabViewItems.Ptr())
+	})
 }
 
 // Read and write the current selected TabViewItem that is being shown. This value is KVC compliant and can be the target of a binding. For instance, a NSSegmentedControl's selection can be bound to this value with: \code [segmentedControl bind:NSSelectedIndexBinding toObject:tabViewController withKeyPath:@“selectedTabViewItemIndex" options:nil];
 func (o *NSTabViewController) SelectedTabViewItemIndex() int {
-	_ret := objc.Send[int](o.Ptr(), _nSTabViewControllerSelSelectedTabViewItemIndex)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTabViewControllerSelSelectedTabViewItemIndex)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Read and write the current selected TabViewItem that is being shown. This value is KVC compliant and can be the target of a binding. For instance, a NSSegmentedControl's selection can be bound to this value with: \code [segmentedControl bind:NSSelectedIndexBinding toObject:tabViewController withKeyPath:@“selectedTabViewItemIndex" options:nil];
 func (o *NSTabViewController) SetSelectedTabViewItemIndex(selectedTabViewItemIndex int) {
-	o.Ptr().Send(_nSTabViewControllerSelSetSelectedTabViewItemIndex, selectedTabViewItemIndex)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewControllerSelSetSelectedTabViewItemIndex, selectedTabViewItemIndex)
+	})
 }

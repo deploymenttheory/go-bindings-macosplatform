@@ -39,48 +39,90 @@ func WKWebExtensionWindowConfigurationFromID(id objc.ID) *WKWebExtensionWindowCo
 
 // @abstract Indicates the window type for the window.
 func (o *WKWebExtensionWindowConfiguration) WindowType() WKWebExtensionWindowType {
-	_ret := objc.Send[WKWebExtensionWindowType](o.Ptr(), _wKWebExtensionWindowConfigurationSelWindowType)
-	return _ret
+	var _mainthread0 WKWebExtensionWindowType
+	purego.Main(func() {
+		_mainthread0 = func() WKWebExtensionWindowType {
+			_ret := objc.Send[WKWebExtensionWindowType](o.Ptr(), _wKWebExtensionWindowConfigurationSelWindowType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Indicates the window state for the window.
 func (o *WKWebExtensionWindowConfiguration) WindowState() WKWebExtensionWindowState {
-	_ret := objc.Send[WKWebExtensionWindowState](o.Ptr(), _wKWebExtensionWindowConfigurationSelWindowState)
-	return _ret
+	var _mainthread0 WKWebExtensionWindowState
+	purego.Main(func() {
+		_mainthread0 = func() WKWebExtensionWindowState {
+			_ret := objc.Send[WKWebExtensionWindowState](o.Ptr(), _wKWebExtensionWindowConfigurationSelWindowState)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Indicates the frame where the window should be positioned on the main screen. @discussion This frame should override the app's default window position and size. Individual components (e.g., `origin.x`, `size.width`) will be `NaN` if not specified.
 func (o *WKWebExtensionWindowConfiguration) Frame() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _wKWebExtensionWindowConfigurationSelFrame)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _wKWebExtensionWindowConfigurationSelFrame)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Indicates the URLs that the window should initially load as tabs. @discussion If “tabURLs“ and “tabs“ are both empty, the app's default "start page" should appear in a tab. @seealso tabs
 func (o *WKWebExtensionWindowConfiguration) TabURLs() *foundation.NSArray[*foundation.NSURL] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionWindowConfigurationSelTabURLs)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSURL](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSURL]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSURL] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionWindowConfigurationSelTabURLs)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSURL](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Indicates the existing tabs that should be moved to the window. @discussion If “tabs“ and “tabURLs“ are both empty, the app's default "start page" should appear in a tab. @seealso tabURLs
 func (o *WKWebExtensionWindowConfiguration) Tabs() *foundation.NSArray[WKWebExtensionTab] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionWindowConfigurationSelTabs)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[WKWebExtensionTab](_ret)
+	var _mainthread0 *foundation.NSArray[WKWebExtensionTab]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[WKWebExtensionTab] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionWindowConfigurationSelTabs)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[WKWebExtensionTab](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Indicates whether the window should be focused.
 func (o *WKWebExtensionWindowConfiguration) ShouldBeFocused() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionWindowConfigurationSelShouldBeFocused)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionWindowConfigurationSelShouldBeFocused)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Indicates whether the window should be private. @note To ensure proper isolation between private and non-private data, web views associated with private data must use a different “WKUserContentController“. Likewise, to be identified as a private web view and to ensure that cookies and other website data is not shared, private web views must be configured to use a non-persistent “WKWebsiteDataStore“.
 func (o *WKWebExtensionWindowConfiguration) ShouldBePrivate() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionWindowConfigurationSelShouldBePrivate)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionWindowConfigurationSelShouldBePrivate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

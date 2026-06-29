@@ -46,5 +46,7 @@ func SFSafariExtensionManagerGetStateOfSafariExtensionWithIdentifierCompletionHa
 		})
 		defer __block_completionHandler.Release()
 	}
-	objc.ID(_clsSFSafariExtensionManager).Send(_sFSafariExtensionManagerSelGetStateOfSafariExtensionWithIdentifierCompletionHandler, identifier.Ptr(), __block_completionHandler)
+	purego.Main(func() {
+		objc.ID(_clsSFSafariExtensionManager).Send(_sFSafariExtensionManagerSelGetStateOfSafariExtensionWithIdentifierCompletionHandler, identifier.Ptr(), __block_completionHandler)
+	})
 }

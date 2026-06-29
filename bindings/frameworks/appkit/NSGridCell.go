@@ -45,76 +45,134 @@ func NSGridCellFromID(id objc.ID) *NSGridCell {
 }
 
 func (o *NSGridCell) ContentView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridCellSelContentView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGridCellSelContentView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridCell) SetContentView(contentView *NSView) {
-	o.Ptr().Send(_nSGridCellSelSetContentView, contentView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridCellSelSetContentView, contentView.Ptr())
+	})
 }
 
 func NSGridCellEmptyContentView() *NSView {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSGridCell), _nSGridCellSelEmptyContentView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSGridCell), _nSGridCellSelEmptyContentView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridCell) Row() *NSGridRow {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridCellSelRow)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGridRowFromID(_ret)
+	var _mainthread0 *NSGridRow
+	purego.Main(func() {
+		_mainthread0 = func() *NSGridRow {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGridCellSelRow)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGridRowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridCell) Column() *NSGridColumn {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridCellSelColumn)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGridColumnFromID(_ret)
+	var _mainthread0 *NSGridColumn
+	purego.Main(func() {
+		_mainthread0 = func() *NSGridColumn {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGridCellSelColumn)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGridColumnFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridCell) XPlacement() NSGridCellPlacement {
-	_ret := objc.Send[NSGridCellPlacement](o.Ptr(), _nSGridCellSelXPlacement)
-	return _ret
+	var _mainthread0 NSGridCellPlacement
+	purego.Main(func() {
+		_mainthread0 = func() NSGridCellPlacement {
+			_ret := objc.Send[NSGridCellPlacement](o.Ptr(), _nSGridCellSelXPlacement)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridCell) SetXPlacement(xPlacement NSGridCellPlacement) {
-	o.Ptr().Send(_nSGridCellSelSetXPlacement, xPlacement)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridCellSelSetXPlacement, xPlacement)
+	})
 }
 
 func (o *NSGridCell) YPlacement() NSGridCellPlacement {
-	_ret := objc.Send[NSGridCellPlacement](o.Ptr(), _nSGridCellSelYPlacement)
-	return _ret
+	var _mainthread0 NSGridCellPlacement
+	purego.Main(func() {
+		_mainthread0 = func() NSGridCellPlacement {
+			_ret := objc.Send[NSGridCellPlacement](o.Ptr(), _nSGridCellSelYPlacement)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridCell) SetYPlacement(yPlacement NSGridCellPlacement) {
-	o.Ptr().Send(_nSGridCellSelSetYPlacement, yPlacement)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridCellSelSetYPlacement, yPlacement)
+	})
 }
 
 func (o *NSGridCell) RowAlignment() NSGridRowAlignment {
-	_ret := objc.Send[NSGridRowAlignment](o.Ptr(), _nSGridCellSelRowAlignment)
-	return _ret
+	var _mainthread0 NSGridRowAlignment
+	purego.Main(func() {
+		_mainthread0 = func() NSGridRowAlignment {
+			_ret := objc.Send[NSGridRowAlignment](o.Ptr(), _nSGridCellSelRowAlignment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridCell) SetRowAlignment(rowAlignment NSGridRowAlignment) {
-	o.Ptr().Send(_nSGridCellSelSetRowAlignment, rowAlignment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridCellSelSetRowAlignment, rowAlignment)
+	})
 }
 
 func (o *NSGridCell) CustomPlacementConstraints() *foundation.NSArray[*NSLayoutConstraint] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridCellSelCustomPlacementConstraints)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSLayoutConstraint](_ret)
+	var _mainthread0 *foundation.NSArray[*NSLayoutConstraint]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSLayoutConstraint] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGridCellSelCustomPlacementConstraints)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSLayoutConstraint](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridCell) SetCustomPlacementConstraints(customPlacementConstraints *foundation.NSArray[*NSLayoutConstraint]) {
-	o.Ptr().Send(_nSGridCellSelSetCustomPlacementConstraints, customPlacementConstraints.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridCellSelSetCustomPlacementConstraints, customPlacementConstraints.Ptr())
+	})
 }

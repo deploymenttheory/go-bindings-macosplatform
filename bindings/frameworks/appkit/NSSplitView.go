@@ -60,144 +60,248 @@ func NSSplitViewFromID(id objc.ID) *NSSplitView {
 
 // Draws a divider between two of the split view’s subviews.
 func (o *NSSplitView) DrawDividerInRect(rect corefoundation.CGRect) {
-	o.Ptr().Send(_nSSplitViewSelDrawDividerInRect, rect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSplitViewSelDrawDividerInRect, rect)
+	})
 }
 
 // Adjusts the sizes of the split view’s subviews so they (plus the dividers) fill the split view.
 func (o *NSSplitView) AdjustSubviews() {
-	o.Ptr().Send(_nSSplitViewSelAdjustSubviews)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSplitViewSelAdjustSubviews)
+	})
 }
 
 // Returns whether the specified view is in a collapsed state.
 func (o *NSSplitView) IsSubviewCollapsed(subview *NSView) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSplitViewSelIsSubviewCollapsed, subview.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSplitViewSelIsSubviewCollapsed, subview.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the minimum possible position of the divider at the specified index.
 func (o *NSSplitView) MinPossiblePositionOfDividerAtIndex(dividerIndex int) float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSplitViewSelMinPossiblePositionOfDividerAtIndex, dividerIndex)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSplitViewSelMinPossiblePositionOfDividerAtIndex, dividerIndex)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the maximum possible position of the divider at the specified index.
 func (o *NSSplitView) MaxPossiblePositionOfDividerAtIndex(dividerIndex int) float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSplitViewSelMaxPossiblePositionOfDividerAtIndex, dividerIndex)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSplitViewSelMaxPossiblePositionOfDividerAtIndex, dividerIndex)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Updates the location of a divider you specify by index.
 func (o *NSSplitView) SetPositionOfDividerAtIndex(position float64, dividerIndex int) {
-	o.Ptr().Send(_nSSplitViewSelSetPositionOfDividerAtIndex, position, dividerIndex)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSplitViewSelSetPositionOfDividerAtIndex, position, dividerIndex)
+	})
 }
 
 // Returns the priority of the subview’s width or height when resizing.
 func (o *NSSplitView) HoldingPriorityForSubviewAtIndex(subviewIndex int) float32 {
-	_ret := objc.Send[float32](o.Ptr(), _nSSplitViewSelHoldingPriorityForSubviewAtIndex, subviewIndex)
-	return _ret
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_ret := objc.Send[float32](o.Ptr(), _nSSplitViewSelHoldingPriorityForSubviewAtIndex, subviewIndex)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the priority for split view subviews to maintain their width or height.
 func (o *NSSplitView) SetHoldingPriorityForSubviewAtIndex(priority float32, subviewIndex int) {
-	o.Ptr().Send(_nSSplitViewSelSetHoldingPriorityForSubviewAtIndex, priority, subviewIndex)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSplitViewSelSetHoldingPriorityForSubviewAtIndex, priority, subviewIndex)
+	})
 }
 
 func (o *NSSplitView) IsVertical() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSplitViewSelIsVertical)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSplitViewSelIsVertical)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSplitView) SetVertical(vertical bool) {
-	o.Ptr().Send(_nSSplitViewSelSetVertical, vertical)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSplitViewSelSetVertical, vertical)
+	})
 }
 
 func (o *NSSplitView) DividerStyle() NSSplitViewDividerStyle {
-	_ret := objc.Send[NSSplitViewDividerStyle](o.Ptr(), _nSSplitViewSelDividerStyle)
-	return _ret
+	var _mainthread0 NSSplitViewDividerStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSSplitViewDividerStyle {
+			_ret := objc.Send[NSSplitViewDividerStyle](o.Ptr(), _nSSplitViewSelDividerStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSplitView) SetDividerStyle(dividerStyle NSSplitViewDividerStyle) {
-	o.Ptr().Send(_nSSplitViewSelSetDividerStyle, dividerStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSplitViewSelSetDividerStyle, dividerStyle)
+	})
 }
 
 func (o *NSSplitView) AutosaveName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewSelAutosaveName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewSelAutosaveName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSplitView) SetAutosaveName(autosaveName *foundation.NSString) {
-	o.Ptr().Send(_nSSplitViewSelSetAutosaveName, autosaveName.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSplitViewSelSetAutosaveName, autosaveName.Ptr())
+	})
 }
 
 func (o *NSSplitView) Delegate() NSSplitViewDelegate {
-	_ret := objc.Send[NSSplitViewDelegate](o.Ptr(), _nSSplitViewSelDelegate)
-	return _ret
+	var _mainthread0 NSSplitViewDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSSplitViewDelegate {
+			_ret := objc.Send[NSSplitViewDelegate](o.Ptr(), _nSSplitViewSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSplitView) SetDelegate(delegate NSSplitViewDelegate) {
-	o.Ptr().Send(_nSSplitViewSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSplitViewSelSetDelegate, delegate)
+	})
 }
 
 func (o *NSSplitView) DividerColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewSelDividerColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewSelDividerColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSplitView) DividerThickness() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSplitViewSelDividerThickness)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSplitViewSelDividerThickness)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Adds a view as an arranged split pane.
 func (o *NSSplitView) AddArrangedSubview(view *NSView) {
-	o.Ptr().Send(_nSSplitViewSelAddArrangedSubview, view.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSplitViewSelAddArrangedSubview, view.Ptr())
+	})
 }
 
 // Adds a view as an arranged split pane at the specified index.
 func (o *NSSplitView) InsertArrangedSubviewAtIndex(view *NSView, index int) {
-	o.Ptr().Send(_nSSplitViewSelInsertArrangedSubviewAtIndex, view.Ptr(), index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSplitViewSelInsertArrangedSubviewAtIndex, view.Ptr(), index)
+	})
 }
 
 // Removes a view as an arranged split pane.
 func (o *NSSplitView) RemoveArrangedSubview(view *NSView) {
-	o.Ptr().Send(_nSSplitViewSelRemoveArrangedSubview, view.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSplitViewSelRemoveArrangedSubview, view.Ptr())
+	})
 }
 
 // Whether or not all subviews will be added as arranged views. When NO, a subview must be explicitly added as an arrangedSubview if the view should be arranged as a split pane. When YES, \c -arrangedSubviews always be identical to \c -subviews. Defaults to YES. Setting this from YES to NO will leave all existing subviews as \c -arrangedSubviews. Setting this from NO to YES will cause \c -arrangedSubviews to become the value of \c -subviews.
 func (o *NSSplitView) ArrangesAllSubviews() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSplitViewSelArrangesAllSubviews)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSplitViewSelArrangesAllSubviews)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Whether or not all subviews will be added as arranged views. When NO, a subview must be explicitly added as an arrangedSubview if the view should be arranged as a split pane. When YES, \c -arrangedSubviews always be identical to \c -subviews. Defaults to YES. Setting this from YES to NO will leave all existing subviews as \c -arrangedSubviews. Setting this from NO to YES will cause \c -arrangedSubviews to become the value of \c -subviews.
 func (o *NSSplitView) SetArrangesAllSubviews(arrangesAllSubviews bool) {
-	o.Ptr().Send(_nSSplitViewSelSetArrangesAllSubviews, arrangesAllSubviews)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSplitViewSelSetArrangesAllSubviews, arrangesAllSubviews)
+	})
 }
 
 // The list of views that are arranged as split panes in the receiver. They are a subset of \c -subviews, with potential difference in ordering. If \c -arrangesAllSubviews is YES, then \c -arrangedSubviews is identical to \c -subviews.
 func (o *NSSplitView) ArrangedSubviews() *foundation.NSArray[*NSView] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewSelArrangedSubviews)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSView](_ret)
+	var _mainthread0 *foundation.NSArray[*NSView]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSView] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewSelArrangedSubviews)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSView](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the type of splitter.
 // Deprecated: since macOS 10.6.
 func (o *NSSplitView) SetIsPaneSplitter(flag bool) {
-	o.Ptr().Send(_nSSplitViewSelSetIsPaneSplitter, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSplitViewSelSetIsPaneSplitter, flag)
+	})
 }
 
 // The type of pane splitter.
 // Deprecated: since macOS 10.6.
 func (o *NSSplitView) IsPaneSplitter() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSplitViewSelIsPaneSplitter)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSplitViewSelIsPaneSplitter)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

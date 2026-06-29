@@ -42,65 +42,115 @@ func NSTouchBarItemFromID(id objc.ID) *NSTouchBarItem {
 
 // Creates a new item with the specified identifier.
 func (o *NSTouchBarItem) InitWithIdentifier(identifier *foundation.NSString) *NSTouchBarItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarItemSelInitWithIdentifier, identifier.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTouchBarItemFromID(_ret)
+	var _mainthread0 *NSTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSTouchBarItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarItemSelInitWithIdentifier, identifier.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTouchBarItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes and returns a new item from a storyboard or nib file.
 func (o *NSTouchBarItem) InitWithCoder(coder *foundation.NSCoder) *NSTouchBarItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarItemSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTouchBarItemFromID(_ret)
+	var _mainthread0 *NSTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSTouchBarItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarItemSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTouchBarItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTouchBarItem) Identifier() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarItemSelIdentifier)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarItemSelIdentifier)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTouchBarItem) VisibilityPriority() float32 {
-	_ret := objc.Send[float32](o.Ptr(), _nSTouchBarItemSelVisibilityPriority)
-	return _ret
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_ret := objc.Send[float32](o.Ptr(), _nSTouchBarItemSelVisibilityPriority)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTouchBarItem) SetVisibilityPriority(visibilityPriority float32) {
-	o.Ptr().Send(_nSTouchBarItemSelSetVisibilityPriority, visibilityPriority)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTouchBarItemSelSetVisibilityPriority, visibilityPriority)
+	})
 }
 
 func (o *NSTouchBarItem) View() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarItemSelView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarItemSelView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTouchBarItem) ViewController() *NSViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarItemSelViewController)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewControllerFromID(_ret)
+	var _mainthread0 *NSViewController
+	purego.Main(func() {
+		_mainthread0 = func() *NSViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarItemSelViewController)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The user visible string identifying this item during customization. By default this method returns the empty string.
 func (o *NSTouchBarItem) CustomizationLabel() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarItemSelCustomizationLabel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarItemSelCustomizationLabel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTouchBarItem) IsVisible() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTouchBarItemSelIsVisible)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTouchBarItemSelIsVisible)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

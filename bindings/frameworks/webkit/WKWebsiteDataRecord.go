@@ -35,18 +35,30 @@ func WKWebsiteDataRecordFromID(id objc.ID) *WKWebsiteDataRecord {
 
 // @abstract The display name for the data record. This is usually the domain name.
 func (o *WKWebsiteDataRecord) DisplayName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebsiteDataRecordSelDisplayName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebsiteDataRecordSelDisplayName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The various types of website data that exist for this data record.
 func (o *WKWebsiteDataRecord) DataTypes() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebsiteDataRecordSelDataTypes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSSetFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSSet[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSSet[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebsiteDataRecordSelDataTypes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSSetFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }

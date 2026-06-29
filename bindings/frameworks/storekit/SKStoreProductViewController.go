@@ -46,14 +46,24 @@ func (o *SKStoreProductViewController) LoadProductWithParametersCompletionBlock(
 		})
 		defer __block_block.Release()
 	}
-	o.Ptr().Send(_sKStoreProductViewControllerSelLoadProductWithParametersCompletionBlock, parameters.Ptr(), __block_block)
+	purego.Main(func() {
+		o.Ptr().Send(_sKStoreProductViewControllerSelLoadProductWithParametersCompletionBlock, parameters.Ptr(), __block_block)
+	})
 }
 
 func (o *SKStoreProductViewController) Delegate() SKStoreProductViewControllerDelegate {
-	_ret := objc.Send[SKStoreProductViewControllerDelegate](o.Ptr(), _sKStoreProductViewControllerSelDelegate)
-	return _ret
+	var _mainthread0 SKStoreProductViewControllerDelegate
+	purego.Main(func() {
+		_mainthread0 = func() SKStoreProductViewControllerDelegate {
+			_ret := objc.Send[SKStoreProductViewControllerDelegate](o.Ptr(), _sKStoreProductViewControllerSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKStoreProductViewController) SetDelegate(delegate SKStoreProductViewControllerDelegate) {
-	o.Ptr().Send(_sKStoreProductViewControllerSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_sKStoreProductViewControllerSelSetDelegate, delegate)
+	})
 }

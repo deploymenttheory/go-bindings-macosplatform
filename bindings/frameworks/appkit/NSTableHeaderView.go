@@ -40,39 +40,77 @@ func NSTableHeaderViewFromID(id objc.ID) *NSTableHeaderView {
 
 // Returns the rectangle containing the header tile for the column at columnIndex.
 func (o *NSTableHeaderView) HeaderRectOfColumn(column int) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTableHeaderViewSelHeaderRectOfColumn, column)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTableHeaderViewSelHeaderRectOfColumn, column)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the index of the column whose header lies under aPoint in the receiver, or –1 if no such column is found.
 func (o *NSTableHeaderView) ColumnAtPoint(point corefoundation.CGPoint) int {
-	_ret := objc.Send[int](o.Ptr(), _nSTableHeaderViewSelColumnAtPoint, point)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTableHeaderViewSelColumnAtPoint, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableHeaderView) TableView() *NSTableView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableHeaderViewSelTableView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTableViewFromID(_ret)
+	var _mainthread0 *NSTableView
+	purego.Main(func() {
+		_mainthread0 = func() *NSTableView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableHeaderViewSelTableView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTableViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableHeaderView) SetTableView(tableView *NSTableView) {
-	o.Ptr().Send(_nSTableHeaderViewSelSetTableView, tableView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableHeaderViewSelSetTableView, tableView.Ptr())
+	})
 }
 
 func (o *NSTableHeaderView) DraggedColumn() int {
-	_ret := objc.Send[int](o.Ptr(), _nSTableHeaderViewSelDraggedColumn)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTableHeaderViewSelDraggedColumn)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableHeaderView) DraggedDistance() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSTableHeaderViewSelDraggedDistance)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSTableHeaderViewSelDraggedDistance)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableHeaderView) ResizedColumn() int {
-	_ret := objc.Send[int](o.Ptr(), _nSTableHeaderViewSelResizedColumn)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTableHeaderViewSelResizedColumn)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

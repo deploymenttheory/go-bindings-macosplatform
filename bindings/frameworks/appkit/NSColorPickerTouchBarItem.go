@@ -52,116 +52,198 @@ func NSColorPickerTouchBarItemFromID(id objc.ID) *NSColorPickerTouchBarItem {
 
 // Creates a bar item with the standard color picker icon.
 func NSColorPickerTouchBarItemColorPickerWithIdentifier(identifier *foundation.NSString) *NSColorPickerTouchBarItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorPickerTouchBarItem), _nSColorPickerTouchBarItemSelColorPickerWithIdentifier, identifier.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorPickerTouchBarItemFromID(_ret)
+	var _mainthread0 *NSColorPickerTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSColorPickerTouchBarItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSColorPickerTouchBarItem), _nSColorPickerTouchBarItemSelColorPickerWithIdentifier, identifier.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorPickerTouchBarItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a bar item with the standard text color picker icon.
 func NSColorPickerTouchBarItemTextColorPickerWithIdentifier(identifier *foundation.NSString) *NSColorPickerTouchBarItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorPickerTouchBarItem), _nSColorPickerTouchBarItemSelTextColorPickerWithIdentifier, identifier.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorPickerTouchBarItemFromID(_ret)
+	var _mainthread0 *NSColorPickerTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSColorPickerTouchBarItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSColorPickerTouchBarItem), _nSColorPickerTouchBarItemSelTextColorPickerWithIdentifier, identifier.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorPickerTouchBarItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a bar item with the standard stroke color picker icon.
 func NSColorPickerTouchBarItemStrokeColorPickerWithIdentifier(identifier *foundation.NSString) *NSColorPickerTouchBarItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorPickerTouchBarItem), _nSColorPickerTouchBarItemSelStrokeColorPickerWithIdentifier, identifier.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorPickerTouchBarItemFromID(_ret)
+	var _mainthread0 *NSColorPickerTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSColorPickerTouchBarItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSColorPickerTouchBarItem), _nSColorPickerTouchBarItemSelStrokeColorPickerWithIdentifier, identifier.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorPickerTouchBarItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a color picker bar item using the supplied image as its icon.
 func NSColorPickerTouchBarItemColorPickerWithIdentifierButtonImage(identifier *foundation.NSString, image *NSImage) *NSColorPickerTouchBarItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorPickerTouchBarItem), _nSColorPickerTouchBarItemSelColorPickerWithIdentifierButtonImage, identifier.Ptr(), image.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorPickerTouchBarItemFromID(_ret)
+	var _mainthread0 *NSColorPickerTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSColorPickerTouchBarItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSColorPickerTouchBarItem), _nSColorPickerTouchBarItemSelColorPickerWithIdentifierButtonImage, identifier.Ptr(), image.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorPickerTouchBarItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSColorPickerTouchBarItem) Color() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorPickerTouchBarItemSelColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSColorPickerTouchBarItemSelColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSColorPickerTouchBarItem) SetColor(color *NSColor) {
-	o.Ptr().Send(_nSColorPickerTouchBarItemSelSetColor, color.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorPickerTouchBarItemSelSetColor, color.Ptr())
+	})
 }
 
 // Whether or not the picker should allow picking a color with non-1.0 alpha. Defaults to `!NSColor.ignoresAlpha`.
 func (o *NSColorPickerTouchBarItem) ShowsAlpha() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSColorPickerTouchBarItemSelShowsAlpha)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSColorPickerTouchBarItemSelShowsAlpha)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSColorPickerTouchBarItem) SetShowsAlpha(showsAlpha bool) {
-	o.Ptr().Send(_nSColorPickerTouchBarItemSelSetShowsAlpha, showsAlpha)
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorPickerTouchBarItemSelSetShowsAlpha, showsAlpha)
+	})
 }
 
 // Controls the color spaces that the receiver is able to produce. If a color outside of the allowed spaces are displayed or selected, it will first be converted to the first color space in the array. `nil` signifies any color space is allowed. Empty array is an invalid value and will raise an exception if set. Defaults to `nil`.
 func (o *NSColorPickerTouchBarItem) AllowedColorSpaces() *foundation.NSArray[*NSColorSpace] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorPickerTouchBarItemSelAllowedColorSpaces)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSColorSpace](_ret)
+	var _mainthread0 *foundation.NSArray[*NSColorSpace]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSColorSpace] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSColorPickerTouchBarItemSelAllowedColorSpaces)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSColorSpace](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSColorPickerTouchBarItem) SetAllowedColorSpaces(allowedColorSpaces *foundation.NSArray[*NSColorSpace]) {
-	o.Ptr().Send(_nSColorPickerTouchBarItemSelSetAllowedColorSpaces, allowedColorSpaces.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorPickerTouchBarItemSelSetAllowedColorSpaces, allowedColorSpaces.Ptr())
+	})
 }
 
 // The color list displayed in the list color picker. Defaults to the standard system color list. Setting a custom color list will disable the additional tints/shades that appear on long-press.
 func (o *NSColorPickerTouchBarItem) ColorList() *NSColorList {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorPickerTouchBarItemSelColorList)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorListFromID(_ret)
+	var _mainthread0 *NSColorList
+	purego.Main(func() {
+		_mainthread0 = func() *NSColorList {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSColorPickerTouchBarItemSelColorList)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorListFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSColorPickerTouchBarItem) SetColorList(colorList *NSColorList) {
-	o.Ptr().Send(_nSColorPickerTouchBarItemSelSetColorList, colorList.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorPickerTouchBarItemSelSetColorList, colorList.Ptr())
+	})
 }
 
 func (o *NSColorPickerTouchBarItem) SetCustomizationLabel(customizationLabel *foundation.NSString) {
-	o.Ptr().Send(_nSColorPickerTouchBarItemSelSetCustomizationLabel, customizationLabel.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorPickerTouchBarItemSelSetCustomizationLabel, customizationLabel.Ptr())
+	})
 }
 
 func (o *NSColorPickerTouchBarItem) Target() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorPickerTouchBarItemSelTarget)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSColorPickerTouchBarItemSelTarget)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSColorPickerTouchBarItem) SetTarget(target objc.ID) {
-	o.Ptr().Send(_nSColorPickerTouchBarItemSelSetTarget, target)
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorPickerTouchBarItemSelSetTarget, target)
+	})
 }
 
 func (o *NSColorPickerTouchBarItem) Action() objc.SEL {
-	_ret := objc.Send[objc.SEL](o.Ptr(), _nSColorPickerTouchBarItemSelAction)
-	return _ret
+	var _mainthread0 objc.SEL
+	purego.Main(func() {
+		_mainthread0 = func() objc.SEL {
+			_ret := objc.Send[objc.SEL](o.Ptr(), _nSColorPickerTouchBarItemSelAction)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSColorPickerTouchBarItem) SetAction(action objc.SEL) {
-	o.Ptr().Send(_nSColorPickerTouchBarItemSelSetAction, action)
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorPickerTouchBarItemSelSetAction, action)
+	})
 }
 
 // Enables or disabled the color picker. If it is currently being shown in a popover, it will be dismissed.
 func (o *NSColorPickerTouchBarItem) IsEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSColorPickerTouchBarItemSelIsEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSColorPickerTouchBarItemSelIsEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSColorPickerTouchBarItem) SetEnabled(enabled bool) {
-	o.Ptr().Send(_nSColorPickerTouchBarItemSelSetEnabled, enabled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorPickerTouchBarItemSelSetEnabled, enabled)
+	})
 }

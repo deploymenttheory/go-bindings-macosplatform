@@ -59,7 +59,37 @@ return o
 {{- if .HasNSError}}
 var _nsErr uintptr
 {{- end}}
-{{- if eq .ReturnKind 0}}
+{{- if .MainThread}}
+{{- range .RetDecls}}
+var {{.Name}} {{.Type}}
+{{- end}}
+purego.Main(func() {
+{{- if .RetVarList}}
+{{.RetVarList}} = func(){{.ReturnSig}} {
+{{template "raw_dispatch" .}}
+}()
+{{- else}}
+{{template "raw_dispatch" .}}
+{{- end}}
+})
+{{- if .RetVarList}}
+return {{.RetVarList}}
+{{- end}}
+{{- else}}
+{{template "raw_dispatch" .}}
+{{- end}}
+}
+
+{{end}}
+
+{{/*
+    raw_dispatch — the objc.Send call and return conversion for one method,
+    selected by ReturnKind (0 void, 1 object, 2 string, 3 bool, 4 scalar/struct).
+    Rendered directly for a normal method, or inside a purego.Main closure for an
+    @MainActor-isolated one (the closure's inner func returns the tuple captured
+    into the hoisted _mainthread vars).
+*/}}
+{{define "raw_dispatch"}}{{if eq .ReturnKind 0 -}}
 {{.Target}}.Send({{.SelVar}}{{.SendArgStr}})
 {{- if .HasNSError}}
 if _nsErr != 0 {
@@ -67,7 +97,7 @@ return purego.NSErrorToError(objc.ID(_nsErr))
 }
 return nil
 {{- end}}
-{{- else if eq .ReturnKind 1}}
+{{- else if eq .ReturnKind 1 -}}
 _ret := objc.Send[objc.ID]({{.Target}}, {{.SelVar}}{{.SendArgStr}})
 {{- if not .AlreadyRetained}}
 if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
@@ -80,7 +110,7 @@ return {{.WrapExpr}}, nil
 {{- else}}
 return {{.WrapExpr}}
 {{- end}}
-{{- else if eq .ReturnKind 2}}
+{{- else if eq .ReturnKind 2 -}}
 _ret := objc.Send[objc.ID]({{.Target}}, {{.SelVar}}{{.SendArgStr}})
 {{- if .HasNSError}}
 if _nsErr != 0 {
@@ -90,7 +120,7 @@ return purego.GoString(_ret), nil
 {{- else}}
 return purego.GoString(_ret)
 {{- end}}
-{{- else if eq .ReturnKind 3}}
+{{- else if eq .ReturnKind 3 -}}
 _ret := objc.Send[bool]({{.Target}}, {{.SelVar}}{{.SendArgStr}})
 {{- if .HasNSError}}
 if _nsErr != 0 {
@@ -100,7 +130,7 @@ return _ret, nil
 {{- else}}
 return _ret
 {{- end}}
-{{- else}}
+{{- else -}}
 _ret := objc.Send[{{.RetGoType}}]({{.Target}}, {{.SelVar}}{{.SendArgStr}})
 {{- if .HasNSError}}
 if _nsErr != 0 {
@@ -110,7 +140,5 @@ return _ret, nil
 {{- else}}
 return _ret
 {{- end}}
-{{- end}}
-}
-
+{{- end -}}
 {{end}}

@@ -72,229 +72,395 @@ func SKTileMapNodeFromID(id objc.ID) *SKTileMapNode {
 
 // Create a tile map node with the specified tile set and dimensions. The tiles of the map will be empty, equivalent to the nil tile definition/group. @param tileSet the tile set that is used to render the tiles @param columns the number of columns in the map that can hold tiles @param rows the number of rows in the map that can hold tiles @param tileSize the size of each tile in points
 func SKTileMapNodeTileMapNodeWithTileSetColumnsRowsTileSize(tileSet *SKTileSet, columns uint, rows uint, tileSize corefoundation.CGSize) *SKTileMapNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKTileMapNode), _sKTileMapNodeSelTileMapNodeWithTileSetColumnsRowsTileSize, tileSet.Ptr(), columns, rows, tileSize)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKTileMapNodeFromID(_ret)
+	var _mainthread0 *SKTileMapNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKTileMapNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKTileMapNode), _sKTileMapNodeSelTileMapNodeWithTileSetColumnsRowsTileSize, tileSet.Ptr(), columns, rows, tileSize)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKTileMapNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Create a tile map node with the specified tile set and dimensions, and fill it with the specified tile group. @param tileSet the tile set that is used to render the tiles @param columns the number of columns in the map that can hold tiles @param rows the number of rows in the map that can hold tiles @param tileSize the size of each tile in points @param tileGroup the tile group we wish to fill the tile map with
 func SKTileMapNodeTileMapNodeWithTileSetColumnsRowsTileSizeFillWithTileGroup(tileSet *SKTileSet, columns uint, rows uint, tileSize corefoundation.CGSize, tileGroup *SKTileGroup) *SKTileMapNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKTileMapNode), _sKTileMapNodeSelTileMapNodeWithTileSetColumnsRowsTileSizeFillWithTileGroup, tileSet.Ptr(), columns, rows, tileSize, tileGroup.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKTileMapNodeFromID(_ret)
+	var _mainthread0 *SKTileMapNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKTileMapNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKTileMapNode), _sKTileMapNodeSelTileMapNodeWithTileSetColumnsRowsTileSizeFillWithTileGroup, tileSet.Ptr(), columns, rows, tileSize, tileGroup.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKTileMapNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Create a tile map node with the specified tile set and dimensions, and fill it with a specific layout of tile groups that belong to the provided tile set. The tileGroupLayout array should match the dimensions of the tile map (i.e., the number of elements should be equal to columns * rows). Index 0 of the array maps to column 0, row 0 of the tile map. Index 1 is column 1, row 0, and so on, wrapping around to the next row once the index passes the number of columns in the tile map. If the array has fewer elements than the number of tiles in the map, the remaining tiles are initialized with the nil tile group. If the array has more elements than the number of tiles in the map, the extra tile groups are ignored. @param tileSet the tile set that is used to render the tiles @param columns the number of columns in the map that can hold tiles @param rows the number of rows in the map that can hold tiles @param tileSize the size of each tile in points @param tileGroupLayout an array of tile groups that we want to use to fill the tile map
 func SKTileMapNodeTileMapNodeWithTileSetColumnsRowsTileSizeTileGroupLayout(tileSet *SKTileSet, columns uint, rows uint, tileSize corefoundation.CGSize, tileGroupLayout *foundation.NSArray[*SKTileGroup]) *SKTileMapNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKTileMapNode), _sKTileMapNodeSelTileMapNodeWithTileSetColumnsRowsTileSizeTileGroupLayout, tileSet.Ptr(), columns, rows, tileSize, tileGroupLayout.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKTileMapNodeFromID(_ret)
+	var _mainthread0 *SKTileMapNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKTileMapNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKTileMapNode), _sKTileMapNodeSelTileMapNodeWithTileSetColumnsRowsTileSizeTileGroupLayout, tileSet.Ptr(), columns, rows, tileSize, tileGroupLayout.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKTileMapNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initialize a tile map node with the specified tile set and dimensions. The tiles of the map will be empty, equivalent to the nil tile definition/group. @param tileSet the tile set that is used to render the tiles @param columns the number of columns in the map that can hold tiles @param rows the number of rows in the map that can hold tiles @param tileSize the size of each tile in points
 func (o *SKTileMapNode) InitWithTileSetColumnsRowsTileSize(tileSet *SKTileSet, columns uint, rows uint, tileSize corefoundation.CGSize) *SKTileMapNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileMapNodeSelInitWithTileSetColumnsRowsTileSize, tileSet.Ptr(), columns, rows, tileSize)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKTileMapNodeFromID(_ret)
+	var _mainthread0 *SKTileMapNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKTileMapNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKTileMapNodeSelInitWithTileSetColumnsRowsTileSize, tileSet.Ptr(), columns, rows, tileSize)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKTileMapNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initialize a tile map node with the specified tile set and dimensions, and fill it with the specified tile group. @param tileSet the tile set that is used to render the tiles @param columns the number of columns in the map that can hold tiles @param rows the number of rows in the map that can hold tiles @param tileSize the size of each tile in points @param tileGroup the tile group we wish to fill the tile map with
 func (o *SKTileMapNode) InitWithTileSetColumnsRowsTileSizeFillWithTileGroup(tileSet *SKTileSet, columns uint, rows uint, tileSize corefoundation.CGSize, tileGroup *SKTileGroup) *SKTileMapNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileMapNodeSelInitWithTileSetColumnsRowsTileSizeFillWithTileGroup, tileSet.Ptr(), columns, rows, tileSize, tileGroup.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKTileMapNodeFromID(_ret)
+	var _mainthread0 *SKTileMapNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKTileMapNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKTileMapNodeSelInitWithTileSetColumnsRowsTileSizeFillWithTileGroup, tileSet.Ptr(), columns, rows, tileSize, tileGroup.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKTileMapNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initialize a tile map node with the specified tile set and dimensions, and fill it with a specific layout of tile groups that belong to the provided tile set. The tileGroupLayout array should match the dimensions of the tile map (i.e., the number of elements should be equal to columns * rows). Index 0 of the array maps to column 0, row 0 of the tile map. Index 1 is column 1, row 0, and so on, wrapping around to the next row once the index passes the number of columns in the tile map. If the array has fewer elements than the number of tiles in the map, the remaining tiles are initialized with the nil tile group. If the array has more elements than the number of tiles in the map, the extra tile groups are ignored. @param tileSet the tile set that is used to render the tiles @param columns the number of columns in the map that can hold tiles @param rows the number of rows in the map that can hold tiles @param tileSize the size of each tile in points @param tileGroupLayout an array of tile groups that we want to use to fill the tile map
 func (o *SKTileMapNode) InitWithTileSetColumnsRowsTileSizeTileGroupLayout(tileSet *SKTileSet, columns uint, rows uint, tileSize corefoundation.CGSize, tileGroupLayout *foundation.NSArray[*SKTileGroup]) *SKTileMapNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileMapNodeSelInitWithTileSetColumnsRowsTileSizeTileGroupLayout, tileSet.Ptr(), columns, rows, tileSize, tileGroupLayout.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKTileMapNodeFromID(_ret)
+	var _mainthread0 *SKTileMapNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKTileMapNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKTileMapNodeSelInitWithTileSetColumnsRowsTileSizeTileGroupLayout, tileSet.Ptr(), columns, rows, tileSize, tileGroupLayout.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKTileMapNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // When creating a tile map node programmatically, this function performs a fill operation with the specified tile group.
 func (o *SKTileMapNode) FillWithTileGroup(tileGroup *SKTileGroup) {
-	o.Ptr().Send(_sKTileMapNodeSelFillWithTileGroup, tileGroup.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKTileMapNodeSelFillWithTileGroup, tileGroup.Ptr())
+	})
 }
 
 // Look up the tile definition at the specified tile index. @param column the column index of the tile @param row the row index of the tile
 func (o *SKTileMapNode) TileDefinitionAtColumnRow(column uint, row uint) *SKTileDefinition {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileMapNodeSelTileDefinitionAtColumnRow, column, row)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKTileDefinitionFromID(_ret)
+	var _mainthread0 *SKTileDefinition
+	purego.Main(func() {
+		_mainthread0 = func() *SKTileDefinition {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKTileMapNodeSelTileDefinitionAtColumnRow, column, row)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKTileDefinitionFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Look up the tile group at the specified tile index. @param column the column index of the tile @param row the row index of the tile
 func (o *SKTileMapNode) TileGroupAtColumnRow(column uint, row uint) *SKTileGroup {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileMapNodeSelTileGroupAtColumnRow, column, row)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKTileGroupFromID(_ret)
+	var _mainthread0 *SKTileGroup
+	purego.Main(func() {
+		_mainthread0 = func() *SKTileGroup {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKTileMapNodeSelTileGroupAtColumnRow, column, row)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKTileGroupFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Set the tile group at the specified tile index. When automapping is enabled, the appropriate tile definitions will automatically be selected and placed, possibly modifying neighboring tiles. When automapping is disabled, it will simply place the default center tile definition for the group, and will not modify any of the neihboring tiles. @param tileGroup the tile group we want to place in the map @param column the column index of the tile @param row the row index of the tile
 func (o *SKTileMapNode) SetTileGroupForColumnRow(tileGroup *SKTileGroup, column uint, row uint) {
-	o.Ptr().Send(_sKTileMapNodeSelSetTileGroupForColumnRow, tileGroup.Ptr(), column, row)
+	purego.Main(func() {
+		o.Ptr().Send(_sKTileMapNodeSelSetTileGroupForColumnRow, tileGroup.Ptr(), column, row)
+	})
 }
 
 // Set the tile group and tile definition at the specified tile index.
 func (o *SKTileMapNode) SetTileGroupAndTileDefinitionForColumnRow(tileGroup *SKTileGroup, tileDefinition *SKTileDefinition, column uint, row uint) {
-	o.Ptr().Send(_sKTileMapNodeSelSetTileGroupAndTileDefinitionForColumnRow, tileGroup.Ptr(), tileDefinition.Ptr(), column, row)
+	purego.Main(func() {
+		o.Ptr().Send(_sKTileMapNodeSelSetTileGroupAndTileDefinitionForColumnRow, tileGroup.Ptr(), tileDefinition.Ptr(), column, row)
+	})
 }
 
 // Returns the column index of the tile that lies under the specified position. Returns NSUIntegerMax if the position does not fall within the tile map. @param position the position we want to check against the tile map
 func (o *SKTileMapNode) TileColumnIndexFromPosition(position corefoundation.CGPoint) uint {
-	_ret := objc.Send[uint](o.Ptr(), _sKTileMapNodeSelTileColumnIndexFromPosition, position)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _sKTileMapNodeSelTileColumnIndexFromPosition, position)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the tile map node object’s tile row index for the specified position in points.
 func (o *SKTileMapNode) TileRowIndexFromPosition(position corefoundation.CGPoint) uint {
-	_ret := objc.Send[uint](o.Ptr(), _sKTileMapNodeSelTileRowIndexFromPosition, position)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _sKTileMapNodeSelTileRowIndexFromPosition, position)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the position of the center of the tile at the specified column and row. @param column the column index of the tile @param row the row index of the tile
 func (o *SKTileMapNode) CenterOfTileAtColumnRow(column uint, row uint) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sKTileMapNodeSelCenterOfTileAtColumnRow, column, row)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sKTileMapNodeSelCenterOfTileAtColumnRow, column, row)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The number of columns in the tile map.
 func (o *SKTileMapNode) NumberOfColumns() uint {
-	_ret := objc.Send[uint](o.Ptr(), _sKTileMapNodeSelNumberOfColumns)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _sKTileMapNodeSelNumberOfColumns)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKTileMapNode) SetNumberOfColumns(numberOfColumns uint) {
-	o.Ptr().Send(_sKTileMapNodeSelSetNumberOfColumns, numberOfColumns)
+	purego.Main(func() {
+		o.Ptr().Send(_sKTileMapNodeSelSetNumberOfColumns, numberOfColumns)
+	})
 }
 
 // The number of rows in the tile map.
 func (o *SKTileMapNode) NumberOfRows() uint {
-	_ret := objc.Send[uint](o.Ptr(), _sKTileMapNodeSelNumberOfRows)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _sKTileMapNodeSelNumberOfRows)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKTileMapNode) SetNumberOfRows(numberOfRows uint) {
-	o.Ptr().Send(_sKTileMapNodeSelSetNumberOfRows, numberOfRows)
+	purego.Main(func() {
+		o.Ptr().Send(_sKTileMapNodeSelSetNumberOfRows, numberOfRows)
+	})
 }
 
 // The size of each tile in the map.
 func (o *SKTileMapNode) TileSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _sKTileMapNodeSelTileSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _sKTileMapNodeSelTileSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKTileMapNode) SetTileSize(tileSize corefoundation.CGSize) {
-	o.Ptr().Send(_sKTileMapNodeSelSetTileSize, tileSize)
+	purego.Main(func() {
+		o.Ptr().Send(_sKTileMapNodeSelSetTileSize, tileSize)
+	})
 }
 
 // The size of the tile map. This is dependent on the tileSize, the number of columns and rows in the map, and the tile set type.
 func (o *SKTileMapNode) MapSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _sKTileMapNodeSelMapSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _sKTileMapNodeSelMapSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The tile set being used by this tile map.
 func (o *SKTileMapNode) TileSet() *SKTileSet {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileMapNodeSelTileSet)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKTileSetFromID(_ret)
+	var _mainthread0 *SKTileSet
+	purego.Main(func() {
+		_mainthread0 = func() *SKTileSet {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKTileMapNodeSelTileSet)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKTileSetFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKTileMapNode) SetTileSet(tileSet *SKTileSet) {
-	o.Ptr().Send(_sKTileMapNodeSelSetTileSet, tileSet.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKTileMapNodeSelSetTileSet, tileSet.Ptr())
+	})
 }
 
 // Controls the blending between the texture and the tile map color. The valid interval of values is from 0.0 up to and including 1.0. A value above or below that interval is clamped to the minimum (0.0) if below or the maximum (1.0) if above.
 func (o *SKTileMapNode) ColorBlendFactor() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _sKTileMapNodeSelColorBlendFactor)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _sKTileMapNodeSelColorBlendFactor)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKTileMapNode) SetColorBlendFactor(colorBlendFactor float64) {
-	o.Ptr().Send(_sKTileMapNodeSelSetColorBlendFactor, colorBlendFactor)
+	purego.Main(func() {
+		o.Ptr().Send(_sKTileMapNodeSelSetColorBlendFactor, colorBlendFactor)
+	})
 }
 
 // Base color for the tile map (If no texture is present, the color still is drawn).
 func (o *SKTileMapNode) Color() *appkit.NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileMapNodeSelColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSColorFromID(_ret)
+	var _mainthread0 *appkit.NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKTileMapNodeSelColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKTileMapNode) SetColor(color *appkit.NSColor) {
-	o.Ptr().Send(_sKTileMapNodeSelSetColor, color.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKTileMapNodeSelSetColor, color.Ptr())
+	})
 }
 
 // Sets the blend mode to use when composing the tile map with the final framebuffer. @see SKNode.SKBlendMode
 func (o *SKTileMapNode) BlendMode() SKBlendMode {
-	_ret := objc.Send[SKBlendMode](o.Ptr(), _sKTileMapNodeSelBlendMode)
-	return _ret
+	var _mainthread0 SKBlendMode
+	purego.Main(func() {
+		_mainthread0 = func() SKBlendMode {
+			_ret := objc.Send[SKBlendMode](o.Ptr(), _sKTileMapNodeSelBlendMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKTileMapNode) SetBlendMode(blendMode SKBlendMode) {
-	o.Ptr().Send(_sKTileMapNodeSelSetBlendMode, blendMode)
+	purego.Main(func() {
+		o.Ptr().Send(_sKTileMapNodeSelSetBlendMode, blendMode)
+	})
 }
 
 // Used to choose the location in the tile map that maps to its 'position' in the parent's coordinate space. The valid interval for each input is from 0.0 up to and including 1.0.
 func (o *SKTileMapNode) AnchorPoint() corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sKTileMapNodeSelAnchorPoint)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sKTileMapNodeSelAnchorPoint)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKTileMapNode) SetAnchorPoint(anchorPoint corefoundation.CGPoint) {
-	o.Ptr().Send(_sKTileMapNodeSelSetAnchorPoint, anchorPoint)
+	purego.Main(func() {
+		o.Ptr().Send(_sKTileMapNodeSelSetAnchorPoint, anchorPoint)
+	})
 }
 
 // A property that determines whether the tile map is rendered using a custom shader.
 func (o *SKTileMapNode) Shader() *SKShader {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileMapNodeSelShader)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKShaderFromID(_ret)
+	var _mainthread0 *SKShader
+	purego.Main(func() {
+		_mainthread0 = func() *SKShader {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKTileMapNodeSelShader)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKShaderFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKTileMapNode) SetShader(shader *SKShader) {
-	o.Ptr().Send(_sKTileMapNodeSelSetShader, shader.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKTileMapNodeSelSetShader, shader.Ptr())
+	})
 }
 
 // Bitmask to indicate being lit by a set of lights using overlapping lighting categories. A light whose category is set to a value that masks to non-zero using this mask will apply light to this sprite. When used together with a normal texture, complex lighting effects can be used.
 func (o *SKTileMapNode) LightingBitMask() uint32 {
-	_ret := objc.Send[uint32](o.Ptr(), _sKTileMapNodeSelLightingBitMask)
-	return _ret
+	var _mainthread0 uint32
+	purego.Main(func() {
+		_mainthread0 = func() uint32 {
+			_ret := objc.Send[uint32](o.Ptr(), _sKTileMapNodeSelLightingBitMask)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKTileMapNode) SetLightingBitMask(lightingBitMask uint32) {
-	o.Ptr().Send(_sKTileMapNodeSelSetLightingBitMask, lightingBitMask)
+	purego.Main(func() {
+		o.Ptr().Send(_sKTileMapNodeSelSetLightingBitMask, lightingBitMask)
+	})
 }
 
 func (o *SKTileMapNode) EnableAutomapping() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sKTileMapNodeSelEnableAutomapping)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sKTileMapNodeSelEnableAutomapping)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKTileMapNode) SetEnableAutomapping(enableAutomapping bool) {
-	o.Ptr().Send(_sKTileMapNodeSelSetEnableAutomapping, enableAutomapping)
+	purego.Main(func() {
+		o.Ptr().Send(_sKTileMapNodeSelSetEnableAutomapping, enableAutomapping)
+	})
 }

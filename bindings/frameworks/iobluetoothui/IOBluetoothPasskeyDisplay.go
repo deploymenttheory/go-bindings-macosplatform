@@ -56,123 +56,203 @@ func IOBluetoothPasskeyDisplayFromID(id objc.ID) *IOBluetoothPasskeyDisplay {
 }
 
 func IOBluetoothPasskeyDisplaySharedDisplayView() *IOBluetoothPasskeyDisplay {
-	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothPasskeyDisplay), _iOBluetoothPasskeyDisplaySelSharedDisplayView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return IOBluetoothPasskeyDisplayFromID(_ret)
+	var _mainthread0 *IOBluetoothPasskeyDisplay
+	purego.Main(func() {
+		_mainthread0 = func() *IOBluetoothPasskeyDisplay {
+			_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothPasskeyDisplay), _iOBluetoothPasskeyDisplaySelSharedDisplayView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return IOBluetoothPasskeyDisplayFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IOBluetoothPasskeyDisplay) SetPasskeyForDeviceUsingSSP(inString *foundation.NSString, device *iobluetooth.IOBluetoothDevice, isSSP bool) {
-	o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetPasskeyForDeviceUsingSSP, inString.Ptr(), device.Ptr(), isSSP)
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetPasskeyForDeviceUsingSSP, inString.Ptr(), device.Ptr(), isSSP)
+	})
 }
 
 func (o *IOBluetoothPasskeyDisplay) AdvancePasskeyIndicator() {
-	o.Ptr().Send(_iOBluetoothPasskeyDisplaySelAdvancePasskeyIndicator)
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothPasskeyDisplaySelAdvancePasskeyIndicator)
+	})
 }
 
 func (o *IOBluetoothPasskeyDisplay) RetreatPasskeyIndicator() {
-	o.Ptr().Send(_iOBluetoothPasskeyDisplaySelRetreatPasskeyIndicator)
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothPasskeyDisplaySelRetreatPasskeyIndicator)
+	})
 }
 
 func (o *IOBluetoothPasskeyDisplay) ResetPasskeyIndicator() {
-	o.Ptr().Send(_iOBluetoothPasskeyDisplaySelResetPasskeyIndicator)
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothPasskeyDisplaySelResetPasskeyIndicator)
+	})
 }
 
 func (o *IOBluetoothPasskeyDisplay) SetupUIForDevice(device *iobluetooth.IOBluetoothDevice) {
-	o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetupUIForDevice, device.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetupUIForDevice, device.Ptr())
+	})
 }
 
 func (o *IOBluetoothPasskeyDisplay) SetupUIForSSPDevice(device *iobluetooth.IOBluetoothDevice) {
-	o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetupUIForSSPDevice, device.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetupUIForSSPDevice, device.Ptr())
+	})
 }
 
 func (o *IOBluetoothPasskeyDisplay) SetPasskeyString(inString *foundation.NSString) {
-	o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetPasskeyString, inString.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetPasskeyString, inString.Ptr())
+	})
 }
 
 func (o *IOBluetoothPasskeyDisplay) SetPasskeyIndicatorEnabled(inEnabled bool) {
-	o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetPasskeyIndicatorEnabled, inEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetPasskeyIndicatorEnabled, inEnabled)
+	})
 }
 
 func (o *IOBluetoothPasskeyDisplay) ResetAll() {
-	o.Ptr().Send(_iOBluetoothPasskeyDisplaySelResetAll)
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothPasskeyDisplaySelResetAll)
+	})
 }
 
 func (o *IOBluetoothPasskeyDisplay) UsePasskeyNotificaitons() bool {
-	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothPasskeyDisplaySelUsePasskeyNotificaitons)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _iOBluetoothPasskeyDisplaySelUsePasskeyNotificaitons)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IOBluetoothPasskeyDisplay) SetUsePasskeyNotificaitons(usePasskeyNotificaitons bool) {
-	o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetUsePasskeyNotificaitons, usePasskeyNotificaitons)
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetUsePasskeyNotificaitons, usePasskeyNotificaitons)
+	})
 }
 
 func (o *IOBluetoothPasskeyDisplay) IsIncomingRequest() bool {
-	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothPasskeyDisplaySelIsIncomingRequest)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _iOBluetoothPasskeyDisplaySelIsIncomingRequest)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IOBluetoothPasskeyDisplay) SetIsIncomingRequest(isIncomingRequest bool) {
-	o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetIsIncomingRequest, isIncomingRequest)
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetIsIncomingRequest, isIncomingRequest)
+	})
 }
 
 func (o *IOBluetoothPasskeyDisplay) Passkey() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothPasskeyDisplaySelPasskey)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothPasskeyDisplaySelPasskey)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IOBluetoothPasskeyDisplay) SetPasskey(passkey *foundation.NSString) {
-	o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetPasskey, passkey.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetPasskey, passkey.Ptr())
+	})
 }
 
 func (o *IOBluetoothPasskeyDisplay) ReturnImage() *appkit.NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothPasskeyDisplaySelReturnImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSImageFromID(_ret)
+	var _mainthread0 *appkit.NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothPasskeyDisplaySelReturnImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IOBluetoothPasskeyDisplay) SetReturnImage(returnImage *appkit.NSImage) {
-	o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetReturnImage, returnImage.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetReturnImage, returnImage.Ptr())
+	})
 }
 
 func (o *IOBluetoothPasskeyDisplay) ReturnHighlightImage() *appkit.NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothPasskeyDisplaySelReturnHighlightImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSImageFromID(_ret)
+	var _mainthread0 *appkit.NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothPasskeyDisplaySelReturnHighlightImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IOBluetoothPasskeyDisplay) SetReturnHighlightImage(returnHighlightImage *appkit.NSImage) {
-	o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetReturnHighlightImage, returnHighlightImage.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetReturnHighlightImage, returnHighlightImage.Ptr())
+	})
 }
 
 func (o *IOBluetoothPasskeyDisplay) CenteredView() *appkit.NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothPasskeyDisplaySelCenteredView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSViewFromID(_ret)
+	var _mainthread0 *appkit.NSView
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothPasskeyDisplaySelCenteredView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IOBluetoothPasskeyDisplay) SetCenteredView(centeredView *appkit.NSView) {
-	o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetCenteredView, centeredView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetCenteredView, centeredView.Ptr())
+	})
 }
 
 func (o *IOBluetoothPasskeyDisplay) BackgroundImageConstraint() *appkit.NSLayoutConstraint {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothPasskeyDisplaySelBackgroundImageConstraint)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSLayoutConstraintFromID(_ret)
+	var _mainthread0 *appkit.NSLayoutConstraint
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSLayoutConstraint {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothPasskeyDisplaySelBackgroundImageConstraint)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSLayoutConstraintFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IOBluetoothPasskeyDisplay) SetBackgroundImageConstraint(backgroundImageConstraint *appkit.NSLayoutConstraint) {
-	o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetBackgroundImageConstraint, backgroundImageConstraint.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetBackgroundImageConstraint, backgroundImageConstraint.Ptr())
+	})
 }

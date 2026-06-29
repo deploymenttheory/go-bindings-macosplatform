@@ -36,15 +36,27 @@ func IKFilterBrowserPanelFromID(id objc.ID) *IKFilterBrowserPanel {
 
 // Creates a shared instance of the IKFilterBrowserPanel class.
 func IKFilterBrowserPanelFilterBrowserPanelWithStyleMask(styleMask uint) objc.ID {
-	_ret := objc.Send[objc.ID](objc.ID(_clsIKFilterBrowserPanel), _iKFilterBrowserPanelSelFilterBrowserPanelWithStyleMask, styleMask)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](objc.ID(_clsIKFilterBrowserPanel), _iKFilterBrowserPanelSelFilterBrowserPanelWithStyleMask, styleMask)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the name of the filter that is currently selected in the filter browser.
 func (o *IKFilterBrowserPanel) FilterName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterBrowserPanelSelFilterName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterBrowserPanelSelFilterName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

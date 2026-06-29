@@ -54,115 +54,197 @@ func NSSliderTouchBarItemFromID(id objc.ID) *NSSliderTouchBarItem {
 
 // The slider displayed by the bar item. It is automatically created, but can be set to a custom subclass. doubleValue, minValue, maxValue, etc can all be read and set through the slider.
 func (o *NSSliderTouchBarItem) Slider() *NSSlider {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderTouchBarItemSelSlider)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSSliderFromID(_ret)
+	var _mainthread0 *NSSlider
+	purego.Main(func() {
+		_mainthread0 = func() *NSSlider {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderTouchBarItemSelSlider)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSSliderFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSliderTouchBarItem) SetSlider(slider *NSSlider) {
-	o.Ptr().Send(_nSSliderTouchBarItemSelSetSlider, slider.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderTouchBarItemSelSetSlider, slider.Ptr())
+	})
 }
 
 // The double value of the control
 func (o *NSSliderTouchBarItem) DoubleValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSliderTouchBarItemSelDoubleValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSliderTouchBarItemSelDoubleValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSliderTouchBarItem) SetDoubleValue(doubleValue float64) {
-	o.Ptr().Send(_nSSliderTouchBarItemSelSetDoubleValue, doubleValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderTouchBarItemSelSetDoubleValue, doubleValue)
+	})
 }
 
 // The width boundaries of the slider track of this item. The system defines the default minimum. The maximum defaults to MAXFLOAT
 func (o *NSSliderTouchBarItem) MinimumSliderWidth() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSliderTouchBarItemSelMinimumSliderWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSliderTouchBarItemSelMinimumSliderWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSliderTouchBarItem) SetMinimumSliderWidth(minimumSliderWidth float64) {
-	o.Ptr().Send(_nSSliderTouchBarItemSelSetMinimumSliderWidth, minimumSliderWidth)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderTouchBarItemSelSetMinimumSliderWidth, minimumSliderWidth)
+	})
 }
 
 func (o *NSSliderTouchBarItem) MaximumSliderWidth() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSliderTouchBarItemSelMaximumSliderWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSliderTouchBarItemSelMaximumSliderWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSliderTouchBarItem) SetMaximumSliderWidth(maximumSliderWidth float64) {
-	o.Ptr().Send(_nSSliderTouchBarItemSelSetMaximumSliderWidth, maximumSliderWidth)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderTouchBarItemSelSetMaximumSliderWidth, maximumSliderWidth)
+	})
 }
 
 // The text label displayed along with the slider. If set to nil, the label will not have space reserved in the item.
 func (o *NSSliderTouchBarItem) Label() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderTouchBarItemSelLabel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderTouchBarItemSelLabel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSliderTouchBarItem) SetLabel(label *foundation.NSString) {
-	o.Ptr().Send(_nSSliderTouchBarItemSelSetLabel, label.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderTouchBarItemSelSetLabel, label.Ptr())
+	})
 }
 
 // The accessory that appears on the end of the slider with the minimum value
 func (o *NSSliderTouchBarItem) MinimumValueAccessory() *NSSliderAccessory {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderTouchBarItemSelMinimumValueAccessory)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSSliderAccessoryFromID(_ret)
+	var _mainthread0 *NSSliderAccessory
+	purego.Main(func() {
+		_mainthread0 = func() *NSSliderAccessory {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderTouchBarItemSelMinimumValueAccessory)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSSliderAccessoryFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSliderTouchBarItem) SetMinimumValueAccessory(minimumValueAccessory *NSSliderAccessory) {
-	o.Ptr().Send(_nSSliderTouchBarItemSelSetMinimumValueAccessory, minimumValueAccessory.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderTouchBarItemSelSetMinimumValueAccessory, minimumValueAccessory.Ptr())
+	})
 }
 
 // The accessory that appears on the end of the slider with the maximum value
 func (o *NSSliderTouchBarItem) MaximumValueAccessory() *NSSliderAccessory {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderTouchBarItemSelMaximumValueAccessory)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSSliderAccessoryFromID(_ret)
+	var _mainthread0 *NSSliderAccessory
+	purego.Main(func() {
+		_mainthread0 = func() *NSSliderAccessory {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderTouchBarItemSelMaximumValueAccessory)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSSliderAccessoryFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSliderTouchBarItem) SetMaximumValueAccessory(maximumValueAccessory *NSSliderAccessory) {
-	o.Ptr().Send(_nSSliderTouchBarItemSelSetMaximumValueAccessory, maximumValueAccessory.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderTouchBarItemSelSetMaximumValueAccessory, maximumValueAccessory.Ptr())
+	})
 }
 
 // The width of the value accessories. Defaults to `.default`, but can be set to `.wide` or a custom value.
 func (o *NSSliderTouchBarItem) ValueAccessoryWidth() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSliderTouchBarItemSelValueAccessoryWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSliderTouchBarItemSelValueAccessoryWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSliderTouchBarItem) SetValueAccessoryWidth(valueAccessoryWidth float64) {
-	o.Ptr().Send(_nSSliderTouchBarItemSelSetValueAccessoryWidth, valueAccessoryWidth)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderTouchBarItemSelSetValueAccessoryWidth, valueAccessoryWidth)
+	})
 }
 
 // The target of the item, notified when the slider or accessories receive user interaction.
 func (o *NSSliderTouchBarItem) Target() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderTouchBarItemSelTarget)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderTouchBarItemSelTarget)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSliderTouchBarItem) SetTarget(target objc.ID) {
-	o.Ptr().Send(_nSSliderTouchBarItemSelSetTarget, target)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderTouchBarItemSelSetTarget, target)
+	})
 }
 
 // The action of the item, called when the slider or accessories receive user interaction.
 func (o *NSSliderTouchBarItem) Action() objc.SEL {
-	_ret := objc.Send[objc.SEL](o.Ptr(), _nSSliderTouchBarItemSelAction)
-	return _ret
+	var _mainthread0 objc.SEL
+	purego.Main(func() {
+		_mainthread0 = func() objc.SEL {
+			_ret := objc.Send[objc.SEL](o.Ptr(), _nSSliderTouchBarItemSelAction)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSliderTouchBarItem) SetAction(action objc.SEL) {
-	o.Ptr().Send(_nSSliderTouchBarItemSelSetAction, action)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderTouchBarItemSelSetAction, action)
+	})
 }
 
 func (o *NSSliderTouchBarItem) SetCustomizationLabel(customizationLabel *foundation.NSString) {
-	o.Ptr().Send(_nSSliderTouchBarItemSelSetCustomizationLabel, customizationLabel.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderTouchBarItemSelSetCustomizationLabel, customizationLabel.Ptr())
+	})
 }

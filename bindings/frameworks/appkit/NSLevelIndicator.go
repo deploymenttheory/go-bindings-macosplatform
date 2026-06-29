@@ -67,181 +67,321 @@ func NSLevelIndicatorFromID(id objc.ID) *NSLevelIndicator {
 
 // Returns the receiver’s value represented by the tick mark at the specified index (the minimum-value tick mark has an index of 0).
 func (o *NSLevelIndicator) TickMarkValueAtIndex(index int) float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSLevelIndicatorSelTickMarkValueAtIndex, index)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSLevelIndicatorSelTickMarkValueAtIndex, index)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the bounding rectangle of the tick mark identified by the specified index (the minimum-value tick mark is at index 0).
 func (o *NSLevelIndicator) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSLevelIndicatorSelRectOfTickMarkAtIndex, index)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSLevelIndicatorSelRectOfTickMarkAtIndex, index)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSLevelIndicator) LevelIndicatorStyle() NSLevelIndicatorStyle {
-	_ret := objc.Send[NSLevelIndicatorStyle](o.Ptr(), _nSLevelIndicatorSelLevelIndicatorStyle)
-	return _ret
+	var _mainthread0 NSLevelIndicatorStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSLevelIndicatorStyle {
+			_ret := objc.Send[NSLevelIndicatorStyle](o.Ptr(), _nSLevelIndicatorSelLevelIndicatorStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSLevelIndicator) SetLevelIndicatorStyle(levelIndicatorStyle NSLevelIndicatorStyle) {
-	o.Ptr().Send(_nSLevelIndicatorSelSetLevelIndicatorStyle, levelIndicatorStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSLevelIndicatorSelSetLevelIndicatorStyle, levelIndicatorStyle)
+	})
 }
 
 func (o *NSLevelIndicator) IsEditable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSLevelIndicatorSelIsEditable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSLevelIndicatorSelIsEditable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSLevelIndicator) SetEditable(editable bool) {
-	o.Ptr().Send(_nSLevelIndicatorSelSetEditable, editable)
+	purego.Main(func() {
+		o.Ptr().Send(_nSLevelIndicatorSelSetEditable, editable)
+	})
 }
 
 func (o *NSLevelIndicator) MinValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSLevelIndicatorSelMinValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSLevelIndicatorSelMinValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSLevelIndicator) SetMinValue(minValue float64) {
-	o.Ptr().Send(_nSLevelIndicatorSelSetMinValue, minValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSLevelIndicatorSelSetMinValue, minValue)
+	})
 }
 
 func (o *NSLevelIndicator) MaxValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSLevelIndicatorSelMaxValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSLevelIndicatorSelMaxValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSLevelIndicator) SetMaxValue(maxValue float64) {
-	o.Ptr().Send(_nSLevelIndicatorSelSetMaxValue, maxValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSLevelIndicatorSelSetMaxValue, maxValue)
+	})
 }
 
 func (o *NSLevelIndicator) WarningValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSLevelIndicatorSelWarningValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSLevelIndicatorSelWarningValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSLevelIndicator) SetWarningValue(warningValue float64) {
-	o.Ptr().Send(_nSLevelIndicatorSelSetWarningValue, warningValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSLevelIndicatorSelSetWarningValue, warningValue)
+	})
 }
 
 func (o *NSLevelIndicator) CriticalValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSLevelIndicatorSelCriticalValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSLevelIndicatorSelCriticalValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSLevelIndicator) SetCriticalValue(criticalValue float64) {
-	o.Ptr().Send(_nSLevelIndicatorSelSetCriticalValue, criticalValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSLevelIndicatorSelSetCriticalValue, criticalValue)
+	})
 }
 
 func (o *NSLevelIndicator) TickMarkPosition() NSTickMarkPosition {
-	_ret := objc.Send[NSTickMarkPosition](o.Ptr(), _nSLevelIndicatorSelTickMarkPosition)
-	return _ret
+	var _mainthread0 NSTickMarkPosition
+	purego.Main(func() {
+		_mainthread0 = func() NSTickMarkPosition {
+			_ret := objc.Send[NSTickMarkPosition](o.Ptr(), _nSLevelIndicatorSelTickMarkPosition)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSLevelIndicator) SetTickMarkPosition(tickMarkPosition NSTickMarkPosition) {
-	o.Ptr().Send(_nSLevelIndicatorSelSetTickMarkPosition, tickMarkPosition)
+	purego.Main(func() {
+		o.Ptr().Send(_nSLevelIndicatorSelSetTickMarkPosition, tickMarkPosition)
+	})
 }
 
 func (o *NSLevelIndicator) NumberOfTickMarks() int {
-	_ret := objc.Send[int](o.Ptr(), _nSLevelIndicatorSelNumberOfTickMarks)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSLevelIndicatorSelNumberOfTickMarks)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSLevelIndicator) SetNumberOfTickMarks(numberOfTickMarks int) {
-	o.Ptr().Send(_nSLevelIndicatorSelSetNumberOfTickMarks, numberOfTickMarks)
+	purego.Main(func() {
+		o.Ptr().Send(_nSLevelIndicatorSelSetNumberOfTickMarks, numberOfTickMarks)
+	})
 }
 
 func (o *NSLevelIndicator) NumberOfMajorTickMarks() int {
-	_ret := objc.Send[int](o.Ptr(), _nSLevelIndicatorSelNumberOfMajorTickMarks)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSLevelIndicatorSelNumberOfMajorTickMarks)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSLevelIndicator) SetNumberOfMajorTickMarks(numberOfMajorTickMarks int) {
-	o.Ptr().Send(_nSLevelIndicatorSelSetNumberOfMajorTickMarks, numberOfMajorTickMarks)
+	purego.Main(func() {
+		o.Ptr().Send(_nSLevelIndicatorSelSetNumberOfMajorTickMarks, numberOfMajorTickMarks)
+	})
 }
 
 // Sets the fill color used by Continuous and Discrete Capacity indicators when drawing the "normal" state, and by the rating indicator when drawing stars. The default value is a system-defined color which may vary between level indicator styles and OS releases.
 func (o *NSLevelIndicator) FillColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSLevelIndicatorSelFillColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSLevelIndicatorSelFillColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the fill color used by Continuous and Discrete Capacity indicators when drawing the "normal" state, and by the rating indicator when drawing stars. The default value is a system-defined color which may vary between level indicator styles and OS releases.
 func (o *NSLevelIndicator) SetFillColor(fillColor *NSColor) {
-	o.Ptr().Send(_nSLevelIndicatorSelSetFillColor, fillColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSLevelIndicatorSelSetFillColor, fillColor.Ptr())
+	})
 }
 
 // Sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the "warning" threshold. The default value is a system-defined color which may vary between level indicator styles and OS releases.
 func (o *NSLevelIndicator) WarningFillColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSLevelIndicatorSelWarningFillColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSLevelIndicatorSelWarningFillColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the "warning" threshold. The default value is a system-defined color which may vary between level indicator styles and OS releases.
 func (o *NSLevelIndicator) SetWarningFillColor(warningFillColor *NSColor) {
-	o.Ptr().Send(_nSLevelIndicatorSelSetWarningFillColor, warningFillColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSLevelIndicatorSelSetWarningFillColor, warningFillColor.Ptr())
+	})
 }
 
 // Sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the "critical" threshold. The default value is a system-defined color which may vary between level indicator styles and OS releases.
 func (o *NSLevelIndicator) CriticalFillColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSLevelIndicatorSelCriticalFillColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSLevelIndicatorSelCriticalFillColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the "critical" threshold. The default value is a system-defined color which may vary between level indicator styles and OS releases.
 func (o *NSLevelIndicator) SetCriticalFillColor(criticalFillColor *NSColor) {
-	o.Ptr().Send(_nSLevelIndicatorSelSetCriticalFillColor, criticalFillColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSLevelIndicatorSelSetCriticalFillColor, criticalFillColor.Ptr())
+	})
 }
 
 func (o *NSLevelIndicator) DrawsTieredCapacityLevels() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSLevelIndicatorSelDrawsTieredCapacityLevels)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSLevelIndicatorSelDrawsTieredCapacityLevels)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSLevelIndicator) SetDrawsTieredCapacityLevels(drawsTieredCapacityLevels bool) {
-	o.Ptr().Send(_nSLevelIndicatorSelSetDrawsTieredCapacityLevels, drawsTieredCapacityLevels)
+	purego.Main(func() {
+		o.Ptr().Send(_nSLevelIndicatorSelSetDrawsTieredCapacityLevels, drawsTieredCapacityLevels)
+	})
 }
 
 // For a rating-style indicator, sets the conditions under which rating placeholders are displayed. This property currently has no effect for other indicator styles. The default value is `NSLevelIndicatorPlaceholderVisibilityAutomatic`.
 func (o *NSLevelIndicator) PlaceholderVisibility() NSLevelIndicatorPlaceholderVisibility {
-	_ret := objc.Send[NSLevelIndicatorPlaceholderVisibility](o.Ptr(), _nSLevelIndicatorSelPlaceholderVisibility)
-	return _ret
+	var _mainthread0 NSLevelIndicatorPlaceholderVisibility
+	purego.Main(func() {
+		_mainthread0 = func() NSLevelIndicatorPlaceholderVisibility {
+			_ret := objc.Send[NSLevelIndicatorPlaceholderVisibility](o.Ptr(), _nSLevelIndicatorSelPlaceholderVisibility)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // For a rating-style indicator, sets the conditions under which rating placeholders are displayed. This property currently has no effect for other indicator styles. The default value is `NSLevelIndicatorPlaceholderVisibilityAutomatic`.
 func (o *NSLevelIndicator) SetPlaceholderVisibility(placeholderVisibility NSLevelIndicatorPlaceholderVisibility) {
-	o.Ptr().Send(_nSLevelIndicatorSelSetPlaceholderVisibility, placeholderVisibility)
+	purego.Main(func() {
+		o.Ptr().Send(_nSLevelIndicatorSelSetPlaceholderVisibility, placeholderVisibility)
+	})
 }
 
 // Sets the image used by the rating indicator style in place of the default star image. The default value is `nil`.
 func (o *NSLevelIndicator) RatingImage() *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSLevelIndicatorSelRatingImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSLevelIndicatorSelRatingImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the image used by the rating indicator style in place of the default star image. The default value is `nil`.
 func (o *NSLevelIndicator) SetRatingImage(ratingImage *NSImage) {
-	o.Ptr().Send(_nSLevelIndicatorSelSetRatingImage, ratingImage.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSLevelIndicatorSelSetRatingImage, ratingImage.Ptr())
+	})
 }
 
 func (o *NSLevelIndicator) RatingPlaceholderImage() *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSLevelIndicatorSelRatingPlaceholderImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSLevelIndicatorSelRatingPlaceholderImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSLevelIndicator) SetRatingPlaceholderImage(ratingPlaceholderImage *NSImage) {
-	o.Ptr().Send(_nSLevelIndicatorSelSetRatingPlaceholderImage, ratingPlaceholderImage.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSLevelIndicatorSelSetRatingPlaceholderImage, ratingPlaceholderImage.Ptr())
+	})
 }

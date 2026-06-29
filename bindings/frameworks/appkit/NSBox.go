@@ -64,156 +64,276 @@ func NSBoxFromID(id objc.ID) *NSBox {
 
 // Resizes and moves the receiver’s content view so it just encloses its subviews.
 func (o *NSBox) SizeToFit() {
-	o.Ptr().Send(_nSBoxSelSizeToFit)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBoxSelSizeToFit)
+	})
 }
 
 // Places the receiver so its content view lies on the specified frame.
 func (o *NSBox) SetFrameFromContentFrame(contentFrame corefoundation.CGRect) {
-	o.Ptr().Send(_nSBoxSelSetFrameFromContentFrame, contentFrame)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBoxSelSetFrameFromContentFrame, contentFrame)
+	})
 }
 
 func (o *NSBox) BoxType() NSBoxType {
-	_ret := objc.Send[NSBoxType](o.Ptr(), _nSBoxSelBoxType)
-	return _ret
+	var _mainthread0 NSBoxType
+	purego.Main(func() {
+		_mainthread0 = func() NSBoxType {
+			_ret := objc.Send[NSBoxType](o.Ptr(), _nSBoxSelBoxType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBox) SetBoxType(boxType NSBoxType) {
-	o.Ptr().Send(_nSBoxSelSetBoxType, boxType)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBoxSelSetBoxType, boxType)
+	})
 }
 
 func (o *NSBox) TitlePosition() NSTitlePosition {
-	_ret := objc.Send[NSTitlePosition](o.Ptr(), _nSBoxSelTitlePosition)
-	return _ret
+	var _mainthread0 NSTitlePosition
+	purego.Main(func() {
+		_mainthread0 = func() NSTitlePosition {
+			_ret := objc.Send[NSTitlePosition](o.Ptr(), _nSBoxSelTitlePosition)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBox) SetTitlePosition(titlePosition NSTitlePosition) {
-	o.Ptr().Send(_nSBoxSelSetTitlePosition, titlePosition)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBoxSelSetTitlePosition, titlePosition)
+	})
 }
 
 func (o *NSBox) Title() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBoxSelTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBoxSelTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBox) SetTitle(title *foundation.NSString) {
-	o.Ptr().Send(_nSBoxSelSetTitle, title.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSBoxSelSetTitle, title.Ptr())
+	})
 }
 
 func (o *NSBox) TitleFont() *NSFont {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBoxSelTitleFont)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSFontFromID(_ret)
+	var _mainthread0 *NSFont
+	purego.Main(func() {
+		_mainthread0 = func() *NSFont {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBoxSelTitleFont)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSFontFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBox) SetTitleFont(titleFont *NSFont) {
-	o.Ptr().Send(_nSBoxSelSetTitleFont, titleFont.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSBoxSelSetTitleFont, titleFont.Ptr())
+	})
 }
 
 func (o *NSBox) BorderRect() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSBoxSelBorderRect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSBoxSelBorderRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBox) TitleRect() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSBoxSelTitleRect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSBoxSelTitleRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBox) TitleCell() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBoxSelTitleCell)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBoxSelTitleCell)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBox) ContentViewMargins() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSBoxSelContentViewMargins)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSBoxSelContentViewMargins)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBox) SetContentViewMargins(contentViewMargins corefoundation.CGSize) {
-	o.Ptr().Send(_nSBoxSelSetContentViewMargins, contentViewMargins)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBoxSelSetContentViewMargins, contentViewMargins)
+	})
 }
 
 func (o *NSBox) ContentView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBoxSelContentView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBoxSelContentView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBox) SetContentView(contentView *NSView) {
-	o.Ptr().Send(_nSBoxSelSetContentView, contentView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSBoxSelSetContentView, contentView.Ptr())
+	})
 }
 
 func (o *NSBox) IsTransparent() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSBoxSelIsTransparent)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSBoxSelIsTransparent)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBox) SetTransparent(transparent bool) {
-	o.Ptr().Send(_nSBoxSelSetTransparent, transparent)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBoxSelSetTransparent, transparent)
+	})
 }
 
 func (o *NSBox) BorderWidth() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSBoxSelBorderWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSBoxSelBorderWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBox) SetBorderWidth(borderWidth float64) {
-	o.Ptr().Send(_nSBoxSelSetBorderWidth, borderWidth)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBoxSelSetBorderWidth, borderWidth)
+	})
 }
 
 func (o *NSBox) CornerRadius() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSBoxSelCornerRadius)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSBoxSelCornerRadius)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBox) SetCornerRadius(cornerRadius float64) {
-	o.Ptr().Send(_nSBoxSelSetCornerRadius, cornerRadius)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBoxSelSetCornerRadius, cornerRadius)
+	})
 }
 
 func (o *NSBox) BorderColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBoxSelBorderColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBoxSelBorderColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBox) SetBorderColor(borderColor *NSColor) {
-	o.Ptr().Send(_nSBoxSelSetBorderColor, borderColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSBoxSelSetBorderColor, borderColor.Ptr())
+	})
 }
 
 func (o *NSBox) FillColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBoxSelFillColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBoxSelFillColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBox) SetFillColor(fillColor *NSColor) {
-	o.Ptr().Send(_nSBoxSelSetFillColor, fillColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSBoxSelSetFillColor, fillColor.Ptr())
+	})
 }
 
 // Sets the title of the receiver with a character denoted as an access key.
 // Deprecated: since macOS 10.8.
 func (o *NSBox) SetTitleWithMnemonic(stringWithAmpersand *foundation.NSString) {
-	o.Ptr().Send(_nSBoxSelSetTitleWithMnemonic, stringWithAmpersand.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSBoxSelSetTitleWithMnemonic, stringWithAmpersand.Ptr())
+	})
 }
 
 // Deprecated: borderType is only applicable to NSBoxOldStyle, which is deprecated. To replace a borderType of NSNoBorder, use the `transparent` property.
 func (o *NSBox) BorderType() NSBorderType {
-	_ret := objc.Send[NSBorderType](o.Ptr(), _nSBoxSelBorderType)
-	return _ret
+	var _mainthread0 NSBorderType
+	purego.Main(func() {
+		_mainthread0 = func() NSBorderType {
+			_ret := objc.Send[NSBorderType](o.Ptr(), _nSBoxSelBorderType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: borderType is only applicable to NSBoxOldStyle, which is deprecated. To replace a borderType of NSNoBorder, use the `transparent` property.
 func (o *NSBox) SetBorderType(borderType NSBorderType) {
-	o.Ptr().Send(_nSBoxSelSetBorderType, borderType)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBoxSelSetBorderType, borderType)
+	})
 }

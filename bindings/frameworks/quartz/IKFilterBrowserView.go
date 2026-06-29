@@ -36,14 +36,22 @@ func IKFilterBrowserViewFromID(id objc.ID) *IKFilterBrowserView {
 
 // Sets the preview state.
 func (o *IKFilterBrowserView) SetPreviewState(inState bool) {
-	o.Ptr().Send(_iKFilterBrowserViewSelSetPreviewState, inState)
+	purego.Main(func() {
+		o.Ptr().Send(_iKFilterBrowserViewSelSetPreviewState, inState)
+	})
 }
 
 // Returns the name of the filter that is currently selected in the filter browser.
 func (o *IKFilterBrowserView) FilterName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterBrowserViewSelFilterName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterBrowserViewSelFilterName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

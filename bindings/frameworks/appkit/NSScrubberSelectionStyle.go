@@ -38,43 +38,73 @@ func NSScrubberSelectionStyleFromID(id objc.ID) *NSScrubberSelectionStyle {
 
 // Initializes a new scrubber selection style.
 func (o *NSScrubberSelectionStyle) Init() *NSScrubberSelectionStyle {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelectionStyleSelInit)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrubberSelectionStyleFromID(_ret)
+	var _mainthread0 *NSScrubberSelectionStyle
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrubberSelectionStyle {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelectionStyleSelInit)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrubberSelectionStyleFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a scrubber selection style when included from a nib or Storyboard.
 func (o *NSScrubberSelectionStyle) InitWithCoder(coder *foundation.NSCoder) *NSScrubberSelectionStyle {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelectionStyleSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrubberSelectionStyleFromID(_ret)
+	var _mainthread0 *NSScrubberSelectionStyle
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrubberSelectionStyle {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelectionStyleSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrubberSelectionStyleFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Provides an opportunity to create a customized scrubber selection style.
 func (o *NSScrubberSelectionStyle) MakeSelectionView() *NSScrubberSelectionView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelectionStyleSelMakeSelectionView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrubberSelectionViewFromID(_ret)
+	var _mainthread0 *NSScrubberSelectionView
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrubberSelectionView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelectionStyleSelMakeSelectionView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrubberSelectionViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func NSScrubberSelectionStyleOutlineOverlayStyle() *NSScrubberSelectionStyle {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSScrubberSelectionStyle), _nSScrubberSelectionStyleSelOutlineOverlayStyle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrubberSelectionStyleFromID(_ret)
+	var _mainthread0 *NSScrubberSelectionStyle
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrubberSelectionStyle {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSScrubberSelectionStyle), _nSScrubberSelectionStyleSelOutlineOverlayStyle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrubberSelectionStyleFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func NSScrubberSelectionStyleRoundedBackgroundStyle() *NSScrubberSelectionStyle {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSScrubberSelectionStyle), _nSScrubberSelectionStyleSelRoundedBackgroundStyle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrubberSelectionStyleFromID(_ret)
+	var _mainthread0 *NSScrubberSelectionStyle
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrubberSelectionStyle {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSScrubberSelectionStyle), _nSScrubberSelectionStyleSelRoundedBackgroundStyle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrubberSelectionStyleFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

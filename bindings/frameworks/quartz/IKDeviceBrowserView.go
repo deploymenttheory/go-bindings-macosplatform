@@ -47,69 +47,123 @@ func IKDeviceBrowserViewFromID(id objc.ID) *IKDeviceBrowserView {
 
 // @property delegate @abstract delegate of the IKDeviceBrowserView.
 func (o *IKDeviceBrowserView) Delegate() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKDeviceBrowserViewSelDelegate)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKDeviceBrowserViewSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKDeviceBrowserView) SetDelegate(delegate objc.ID) {
-	o.Ptr().Send(_iKDeviceBrowserViewSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_iKDeviceBrowserViewSelSetDelegate, delegate)
+	})
 }
 
 // @property displaysLocalCameras @abstract for device filtering - indicates that the IKDeviceBrowserView should include local cameras.
 func (o *IKDeviceBrowserView) DisplaysLocalCameras() bool {
-	_ret := objc.Send[bool](o.Ptr(), _iKDeviceBrowserViewSelDisplaysLocalCameras)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _iKDeviceBrowserViewSelDisplaysLocalCameras)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKDeviceBrowserView) SetDisplaysLocalCameras(displaysLocalCameras bool) {
-	o.Ptr().Send(_iKDeviceBrowserViewSelSetDisplaysLocalCameras, displaysLocalCameras)
+	purego.Main(func() {
+		o.Ptr().Send(_iKDeviceBrowserViewSelSetDisplaysLocalCameras, displaysLocalCameras)
+	})
 }
 
 // @property displaysNetworkCameras @abstract for device filtering - indicates that the IKDeviceBrowserView should include network/shared cameras.
 func (o *IKDeviceBrowserView) DisplaysNetworkCameras() bool {
-	_ret := objc.Send[bool](o.Ptr(), _iKDeviceBrowserViewSelDisplaysNetworkCameras)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _iKDeviceBrowserViewSelDisplaysNetworkCameras)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKDeviceBrowserView) SetDisplaysNetworkCameras(displaysNetworkCameras bool) {
-	o.Ptr().Send(_iKDeviceBrowserViewSelSetDisplaysNetworkCameras, displaysNetworkCameras)
+	purego.Main(func() {
+		o.Ptr().Send(_iKDeviceBrowserViewSelSetDisplaysNetworkCameras, displaysNetworkCameras)
+	})
 }
 
 // @property displaysLocalScanners @abstract for device filtering - indicates that the IKDeviceBrowserView should include local scanners.
 func (o *IKDeviceBrowserView) DisplaysLocalScanners() bool {
-	_ret := objc.Send[bool](o.Ptr(), _iKDeviceBrowserViewSelDisplaysLocalScanners)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _iKDeviceBrowserViewSelDisplaysLocalScanners)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKDeviceBrowserView) SetDisplaysLocalScanners(displaysLocalScanners bool) {
-	o.Ptr().Send(_iKDeviceBrowserViewSelSetDisplaysLocalScanners, displaysLocalScanners)
+	purego.Main(func() {
+		o.Ptr().Send(_iKDeviceBrowserViewSelSetDisplaysLocalScanners, displaysLocalScanners)
+	})
 }
 
 // @property displaysNetworkScanners @abstract for device filtering - indicates that the IKDeviceBrowserView should include network/shared scanners.
 func (o *IKDeviceBrowserView) DisplaysNetworkScanners() bool {
-	_ret := objc.Send[bool](o.Ptr(), _iKDeviceBrowserViewSelDisplaysNetworkScanners)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _iKDeviceBrowserViewSelDisplaysNetworkScanners)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKDeviceBrowserView) SetDisplaysNetworkScanners(displaysNetworkScanners bool) {
-	o.Ptr().Send(_iKDeviceBrowserViewSelSetDisplaysNetworkScanners, displaysNetworkScanners)
+	purego.Main(func() {
+		o.Ptr().Send(_iKDeviceBrowserViewSelSetDisplaysNetworkScanners, displaysNetworkScanners)
+	})
 }
 
 // @property mode @abstract one of the supported display modes (table, outline, or icon mode).
 func (o *IKDeviceBrowserView) Mode() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKDeviceBrowserViewSelMode)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKDeviceBrowserViewSelMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKDeviceBrowserView) SetMode(mode objc.ID) {
-	o.Ptr().Send(_iKDeviceBrowserViewSelSetMode, mode)
+	purego.Main(func() {
+		o.Ptr().Send(_iKDeviceBrowserViewSelSetMode, mode)
+	})
 }
 
 // @property selectedDevice @abstract user selected device (ICCameraDevice or ICScannerDevice).
 func (o *IKDeviceBrowserView) SelectedDevice() *imagecapturecore.ICDevice {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKDeviceBrowserViewSelSelectedDevice)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return imagecapturecore.ICDeviceFromID(_ret)
+	var _mainthread0 *imagecapturecore.ICDevice
+	purego.Main(func() {
+		_mainthread0 = func() *imagecapturecore.ICDevice {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKDeviceBrowserViewSelSelectedDevice)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return imagecapturecore.ICDeviceFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

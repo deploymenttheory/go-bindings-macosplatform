@@ -38,20 +38,36 @@ func WKPDFConfigurationFromID(id objc.ID) *WKPDFConfiguration {
 
 // @abstract The rect to capture in web page coordinates @discussion If the rect is set to the null rect, the bounds of the currently displayed web page will be used. The initial value is the null rect.
 func (o *WKPDFConfiguration) Rect() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _wKPDFConfigurationSelRect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _wKPDFConfigurationSelRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKPDFConfiguration) SetRect(rect corefoundation.CGRect) {
-	o.Ptr().Send(_wKPDFConfigurationSelSetRect, rect)
+	purego.Main(func() {
+		o.Ptr().Send(_wKPDFConfigurationSelSetRect, rect)
+	})
 }
 
 // @abstract A Boolean value indicating whether the PDF should allow transparent backgrounds. @discussion The default value is `NO`.
 func (o *WKPDFConfiguration) AllowTransparentBackground() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKPDFConfigurationSelAllowTransparentBackground)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKPDFConfigurationSelAllowTransparentBackground)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKPDFConfiguration) SetAllowTransparentBackground(allowTransparentBackground bool) {
-	o.Ptr().Send(_wKPDFConfigurationSelSetAllowTransparentBackground, allowTransparentBackground)
+	purego.Main(func() {
+		o.Ptr().Send(_wKPDFConfigurationSelSetAllowTransparentBackground, allowTransparentBackground)
+	})
 }

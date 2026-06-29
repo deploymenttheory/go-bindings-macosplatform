@@ -34,13 +34,21 @@ func NSPathComponentCellFromID(id objc.ID) *NSPathComponentCell {
 }
 
 func (o *NSPathComponentCell) URL() *foundation.NSURL {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathComponentCellSelURL)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSURLFromID(_ret)
+	var _mainthread0 *foundation.NSURL
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSURL {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPathComponentCellSelURL)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSURLFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPathComponentCell) SetURL(uRL *foundation.NSURL) {
-	o.Ptr().Send(_nSPathComponentCellSelSetURL, uRL.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPathComponentCellSelSetURL, uRL.Ptr())
+	})
 }

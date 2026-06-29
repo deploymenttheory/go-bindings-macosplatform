@@ -47,64 +47,104 @@ func IOBluetoothObjectPushUIControllerFromID(id objc.ID) *IOBluetoothObjectPushU
 
 // Creates and returns a new IOBluetoothObjectPush object
 func (o *IOBluetoothObjectPushUIController) InitObjectPushWithBluetoothDeviceWithFilesDelegate(inDevice *iobluetooth.IOBluetoothDevice, inFiles *foundation.NSArray[objc.ID], inDelegate objc.ID) *IOBluetoothObjectPushUIController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothObjectPushUIControllerSelInitObjectPushWithBluetoothDeviceWithFilesDelegate, inDevice.Ptr(), inFiles.Ptr(), inDelegate)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return IOBluetoothObjectPushUIControllerFromID(_ret)
+	var _mainthread0 *IOBluetoothObjectPushUIController
+	purego.Main(func() {
+		_mainthread0 = func() *IOBluetoothObjectPushUIController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothObjectPushUIControllerSelInitObjectPushWithBluetoothDeviceWithFilesDelegate, inDevice.Ptr(), inFiles.Ptr(), inDelegate)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return IOBluetoothObjectPushUIControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Runs the transfer UI panel in a modal session
 func (o *IOBluetoothObjectPushUIController) RunModal() {
-	o.Ptr().Send(_iOBluetoothObjectPushUIControllerSelRunModal)
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothObjectPushUIControllerSelRunModal)
+	})
 }
 
 // Runs the transfer UI as a panel with no modal session
 func (o *IOBluetoothObjectPushUIController) RunPanel() {
-	o.Ptr().Send(_iOBluetoothObjectPushUIControllerSelRunPanel)
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothObjectPushUIControllerSelRunPanel)
+	})
 }
 
 // Runs the transfer UI as a sheet on the target window.
 func (o *IOBluetoothObjectPushUIController) BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(sheetWindow *appkit.NSWindow, modalDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) int {
-	_ret := objc.Send[int](o.Ptr(), _iOBluetoothObjectPushUIControllerSelBeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo, sheetWindow.Ptr(), modalDelegate, didEndSelector, contextInfo)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _iOBluetoothObjectPushUIControllerSelBeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo, sheetWindow.Ptr(), modalDelegate, didEndSelector, contextInfo)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Stops the transfer UI
 func (o *IOBluetoothObjectPushUIController) Stop() {
-	o.Ptr().Send(_iOBluetoothObjectPushUIControllerSelStop)
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothObjectPushUIControllerSelStop)
+	})
 }
 
 // Sets the title of the panel when not run as a sheet.
 func (o *IOBluetoothObjectPushUIController) SetTitle(windowTitle *foundation.NSString) {
-	o.Ptr().Send(_iOBluetoothObjectPushUIControllerSelSetTitle, windowTitle.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothObjectPushUIControllerSelSetTitle, windowTitle.Ptr())
+	})
 }
 
 // Returns the title of the transfer panel.
 func (o *IOBluetoothObjectPushUIController) GetTitle() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothObjectPushUIControllerSelGetTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothObjectPushUIControllerSelGetTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Manually sets the icon used in the panel.
 func (o *IOBluetoothObjectPushUIController) SetIconImage(image *appkit.NSImage) {
-	o.Ptr().Send(_iOBluetoothObjectPushUIControllerSelSetIconImage, image.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothObjectPushUIControllerSelSetIconImage, image.Ptr())
+	})
 }
 
 // Gets the object representing the remote target device in the transfer.
 func (o *IOBluetoothObjectPushUIController) GetDevice() *iobluetooth.IOBluetoothDevice {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothObjectPushUIControllerSelGetDevice)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return iobluetooth.IOBluetoothDeviceFromID(_ret)
+	var _mainthread0 *iobluetooth.IOBluetoothDevice
+	purego.Main(func() {
+		_mainthread0 = func() *iobluetooth.IOBluetoothDevice {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothObjectPushUIControllerSelGetDevice)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return iobluetooth.IOBluetoothDeviceFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Gets state of the transfer
 func (o *IOBluetoothObjectPushUIController) IsTransferInProgress() bool {
-	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothObjectPushUIControllerSelIsTransferInProgress)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _iOBluetoothObjectPushUIControllerSelIsTransferInProgress)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

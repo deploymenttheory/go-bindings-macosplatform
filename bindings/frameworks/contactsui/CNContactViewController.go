@@ -42,13 +42,21 @@ func CNContactViewControllerDescriptorForRequiredKeys() contacts.CNKeyDescriptor
 }
 
 func (o *CNContactViewController) Contact() *contacts.CNContact {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactViewControllerSelContact)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return contacts.CNContactFromID(_ret)
+	var _mainthread0 *contacts.CNContact
+	purego.Main(func() {
+		_mainthread0 = func() *contacts.CNContact {
+			_ret := objc.Send[objc.ID](o.Ptr(), _cNContactViewControllerSelContact)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return contacts.CNContactFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *CNContactViewController) SetContact(contact *contacts.CNContact) {
-	o.Ptr().Send(_cNContactViewControllerSelSetContact, contact.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_cNContactViewControllerSelSetContact, contact.Ptr())
+	})
 }

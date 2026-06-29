@@ -54,114 +54,200 @@ func NSMenuItemCellFromID(id objc.ID) *NSMenuItemCell {
 }
 
 func (o *NSMenuItemCell) InitTextCell(string_ *foundation.NSString) *NSMenuItemCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemCellSelInitTextCell, string_.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMenuItemCellFromID(_ret)
+	var _mainthread0 *NSMenuItemCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSMenuItemCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemCellSelInitTextCell, string_.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMenuItemCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMenuItemCell) InitWithCoder(coder *foundation.NSCoder) *NSMenuItemCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemCellSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMenuItemCellFromID(_ret)
+	var _mainthread0 *NSMenuItemCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSMenuItemCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemCellSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMenuItemCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Calculates the minimum required width and height of the receiver’s menu item.
 func (o *NSMenuItemCell) CalcSize() {
-	o.Ptr().Send(_nSMenuItemCellSelCalcSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMenuItemCellSelCalcSize)
+	})
 }
 
 // Returns the rectangle into which the menu item’s state image should be drawn.
 func (o *NSMenuItemCell) StateImageRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSMenuItemCellSelStateImageRectForBounds, cellFrame)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSMenuItemCellSelStateImageRectForBounds, cellFrame)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the rectangle into which the menu item’s key equivalent should be drawn.
 func (o *NSMenuItemCell) KeyEquivalentRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSMenuItemCellSelKeyEquivalentRectForBounds, cellFrame)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSMenuItemCellSelKeyEquivalentRectForBounds, cellFrame)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Draws a menu item separator.
 func (o *NSMenuItemCell) DrawSeparatorItemWithFrameInView(cellFrame corefoundation.CGRect, controlView *NSView) {
-	o.Ptr().Send(_nSMenuItemCellSelDrawSeparatorItemWithFrameInView, cellFrame, controlView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSMenuItemCellSelDrawSeparatorItemWithFrameInView, cellFrame, controlView.Ptr())
+	})
 }
 
 // Draws the state image associated with the menu item.
 func (o *NSMenuItemCell) DrawStateImageWithFrameInView(cellFrame corefoundation.CGRect, controlView *NSView) {
-	o.Ptr().Send(_nSMenuItemCellSelDrawStateImageWithFrameInView, cellFrame, controlView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSMenuItemCellSelDrawStateImageWithFrameInView, cellFrame, controlView.Ptr())
+	})
 }
 
 // Draws the image associated with the menu item.
 func (o *NSMenuItemCell) DrawImageWithFrameInView(cellFrame corefoundation.CGRect, controlView *NSView) {
-	o.Ptr().Send(_nSMenuItemCellSelDrawImageWithFrameInView, cellFrame, controlView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSMenuItemCellSelDrawImageWithFrameInView, cellFrame, controlView.Ptr())
+	})
 }
 
 // Draws the title associated with the menu item.
 func (o *NSMenuItemCell) DrawTitleWithFrameInView(cellFrame corefoundation.CGRect, controlView *NSView) {
-	o.Ptr().Send(_nSMenuItemCellSelDrawTitleWithFrameInView, cellFrame, controlView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSMenuItemCellSelDrawTitleWithFrameInView, cellFrame, controlView.Ptr())
+	})
 }
 
 // Draws the key equivalent associated with the menu item.
 func (o *NSMenuItemCell) DrawKeyEquivalentWithFrameInView(cellFrame corefoundation.CGRect, controlView *NSView) {
-	o.Ptr().Send(_nSMenuItemCellSelDrawKeyEquivalentWithFrameInView, cellFrame, controlView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSMenuItemCellSelDrawKeyEquivalentWithFrameInView, cellFrame, controlView.Ptr())
+	})
 }
 
 // Draws the borders and background associated with the receiver’s menu item (if any).
 func (o *NSMenuItemCell) DrawBorderAndBackgroundWithFrameInView(cellFrame corefoundation.CGRect, controlView *NSView) {
-	o.Ptr().Send(_nSMenuItemCellSelDrawBorderAndBackgroundWithFrameInView, cellFrame, controlView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSMenuItemCellSelDrawBorderAndBackgroundWithFrameInView, cellFrame, controlView.Ptr())
+	})
 }
 
 func (o *NSMenuItemCell) MenuItem() *NSMenuItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemCellSelMenuItem)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMenuItemFromID(_ret)
+	var _mainthread0 *NSMenuItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSMenuItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemCellSelMenuItem)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMenuItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMenuItemCell) SetMenuItem(menuItem *NSMenuItem) {
-	o.Ptr().Send(_nSMenuItemCellSelSetMenuItem, menuItem.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSMenuItemCellSelSetMenuItem, menuItem.Ptr())
+	})
 }
 
 func (o *NSMenuItemCell) NeedsSizing() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSMenuItemCellSelNeedsSizing)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSMenuItemCellSelNeedsSizing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMenuItemCell) SetNeedsSizing(needsSizing bool) {
-	o.Ptr().Send(_nSMenuItemCellSelSetNeedsSizing, needsSizing)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMenuItemCellSelSetNeedsSizing, needsSizing)
+	})
 }
 
 func (o *NSMenuItemCell) NeedsDisplay() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSMenuItemCellSelNeedsDisplay)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSMenuItemCellSelNeedsDisplay)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMenuItemCell) SetNeedsDisplay(needsDisplay bool) {
-	o.Ptr().Send(_nSMenuItemCellSelSetNeedsDisplay, needsDisplay)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMenuItemCellSelSetNeedsDisplay, needsDisplay)
+	})
 }
 
 func (o *NSMenuItemCell) StateImageWidth() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSMenuItemCellSelStateImageWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSMenuItemCellSelStateImageWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMenuItemCell) ImageWidth() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSMenuItemCellSelImageWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSMenuItemCellSelImageWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMenuItemCell) TitleWidth() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSMenuItemCellSelTitleWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSMenuItemCellSelTitleWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMenuItemCell) KeyEquivalentWidth() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSMenuItemCellSelKeyEquivalentWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSMenuItemCellSelKeyEquivalentWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

@@ -36,21 +36,35 @@ func MKZoomControlFromID(id objc.ID) *MKZoomControl {
 
 // Creates a zoom control and associates it with the specified map view.
 func MKZoomControlZoomControlWithMapView(mapView *MKMapView) *MKZoomControl {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMKZoomControl), _mKZoomControlSelZoomControlWithMapView, mapView.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKZoomControlFromID(_ret)
+	var _mainthread0 *MKZoomControl
+	purego.Main(func() {
+		_mainthread0 = func() *MKZoomControl {
+			_ret := objc.Send[objc.ID](objc.ID(_clsMKZoomControl), _mKZoomControlSelZoomControlWithMapView, mapView.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKZoomControlFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKZoomControl) MapView() *MKMapView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKZoomControlSelMapView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKMapViewFromID(_ret)
+	var _mainthread0 *MKMapView
+	purego.Main(func() {
+		_mainthread0 = func() *MKMapView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKZoomControlSelMapView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKMapViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKZoomControl) SetMapView(mapView *MKMapView) {
-	o.Ptr().Send(_mKZoomControlSelSetMapView, mapView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKZoomControlSelSetMapView, mapView.Ptr())
+	})
 }

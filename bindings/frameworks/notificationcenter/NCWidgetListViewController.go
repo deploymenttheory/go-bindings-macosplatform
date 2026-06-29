@@ -49,74 +49,134 @@ func NCWidgetListViewControllerFromID(id objc.ID) *NCWidgetListViewController {
 
 // Returns the content view controller associated with the specified row, or a new content view controller if desired.
 func (o *NCWidgetListViewController) ViewControllerAtRowMakeIfNecessary(row uint, makeIfNecesary bool) *appkit.NSViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nCWidgetListViewControllerSelViewControllerAtRowMakeIfNecessary, row, makeIfNecesary)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSViewControllerFromID(_ret)
+	var _mainthread0 *appkit.NSViewController
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nCWidgetListViewControllerSelViewControllerAtRowMakeIfNecessary, row, makeIfNecesary)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the row represented by the specified content view controller.
 func (o *NCWidgetListViewController) RowForViewController(viewController *appkit.NSViewController) uint {
-	_ret := objc.Send[uint](o.Ptr(), _nCWidgetListViewControllerSelRowForViewController, viewController.Ptr())
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _nCWidgetListViewControllerSelRowForViewController, viewController.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use WidgetKit instead. Today View extensions have been deprecated.
 func (o *NCWidgetListViewController) Delegate() NCWidgetListViewDelegate {
-	_ret := objc.Send[NCWidgetListViewDelegate](o.Ptr(), _nCWidgetListViewControllerSelDelegate)
-	return _ret
+	var _mainthread0 NCWidgetListViewDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NCWidgetListViewDelegate {
+			_ret := objc.Send[NCWidgetListViewDelegate](o.Ptr(), _nCWidgetListViewControllerSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use WidgetKit instead. Today View extensions have been deprecated.
 func (o *NCWidgetListViewController) SetDelegate(delegate NCWidgetListViewDelegate) {
-	o.Ptr().Send(_nCWidgetListViewControllerSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nCWidgetListViewControllerSelSetDelegate, delegate)
+	})
 }
 
 func (o *NCWidgetListViewController) Contents() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nCWidgetListViewControllerSelContents)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[objc.ID](_ret)
+	var _mainthread0 *foundation.NSArray[objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nCWidgetListViewControllerSelContents)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NCWidgetListViewController) SetContents(contents *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_nCWidgetListViewControllerSelSetContents, contents.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nCWidgetListViewControllerSelSetContents, contents.Ptr())
+	})
 }
 
 func (o *NCWidgetListViewController) MinimumVisibleRowCount() uint {
-	_ret := objc.Send[uint](o.Ptr(), _nCWidgetListViewControllerSelMinimumVisibleRowCount)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _nCWidgetListViewControllerSelMinimumVisibleRowCount)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NCWidgetListViewController) SetMinimumVisibleRowCount(minimumVisibleRowCount uint) {
-	o.Ptr().Send(_nCWidgetListViewControllerSelSetMinimumVisibleRowCount, minimumVisibleRowCount)
+	purego.Main(func() {
+		o.Ptr().Send(_nCWidgetListViewControllerSelSetMinimumVisibleRowCount, minimumVisibleRowCount)
+	})
 }
 
 func (o *NCWidgetListViewController) HasDividerLines() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nCWidgetListViewControllerSelHasDividerLines)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nCWidgetListViewControllerSelHasDividerLines)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NCWidgetListViewController) SetHasDividerLines(hasDividerLines bool) {
-	o.Ptr().Send(_nCWidgetListViewControllerSelSetHasDividerLines, hasDividerLines)
+	purego.Main(func() {
+		o.Ptr().Send(_nCWidgetListViewControllerSelSetHasDividerLines, hasDividerLines)
+	})
 }
 
 func (o *NCWidgetListViewController) Editing() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nCWidgetListViewControllerSelEditing)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nCWidgetListViewControllerSelEditing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NCWidgetListViewController) SetEditing(editing bool) {
-	o.Ptr().Send(_nCWidgetListViewControllerSelSetEditing, editing)
+	purego.Main(func() {
+		o.Ptr().Send(_nCWidgetListViewControllerSelSetEditing, editing)
+	})
 }
 
 func (o *NCWidgetListViewController) ShowsAddButtonWhenEditing() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nCWidgetListViewControllerSelShowsAddButtonWhenEditing)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nCWidgetListViewControllerSelShowsAddButtonWhenEditing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NCWidgetListViewController) SetShowsAddButtonWhenEditing(showsAddButtonWhenEditing bool) {
-	o.Ptr().Send(_nCWidgetListViewControllerSelSetShowsAddButtonWhenEditing, showsAddButtonWhenEditing)
+	purego.Main(func() {
+		o.Ptr().Send(_nCWidgetListViewControllerSelSetShowsAddButtonWhenEditing, showsAddButtonWhenEditing)
+	})
 }

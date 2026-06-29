@@ -36,30 +36,52 @@ func NSScrubberImageItemViewFromID(id objc.ID) *NSScrubberImageItemView {
 }
 
 func (o *NSScrubberImageItemView) ImageView() *NSImageView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberImageItemViewSelImageView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageViewFromID(_ret)
+	var _mainthread0 *NSImageView
+	purego.Main(func() {
+		_mainthread0 = func() *NSImageView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberImageItemViewSelImageView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrubberImageItemView) Image() *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberImageItemViewSelImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberImageItemViewSelImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrubberImageItemView) SetImage(image *NSImage) {
-	o.Ptr().Send(_nSScrubberImageItemViewSelSetImage, image.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberImageItemViewSelSetImage, image.Ptr())
+	})
 }
 
 func (o *NSScrubberImageItemView) ImageAlignment() NSImageAlignment {
-	_ret := objc.Send[NSImageAlignment](o.Ptr(), _nSScrubberImageItemViewSelImageAlignment)
-	return _ret
+	var _mainthread0 NSImageAlignment
+	purego.Main(func() {
+		_mainthread0 = func() NSImageAlignment {
+			_ret := objc.Send[NSImageAlignment](o.Ptr(), _nSScrubberImageItemViewSelImageAlignment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrubberImageItemView) SetImageAlignment(imageAlignment NSImageAlignment) {
-	o.Ptr().Send(_nSScrubberImageItemViewSelSetImageAlignment, imageAlignment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberImageItemViewSelSetImageAlignment, imageAlignment)
+	})
 }

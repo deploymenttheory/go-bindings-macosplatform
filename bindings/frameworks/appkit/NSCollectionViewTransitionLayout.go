@@ -40,45 +40,79 @@ func NSCollectionViewTransitionLayoutFromID(id objc.ID) *NSCollectionViewTransit
 
 // Initializes and returns the transition layout object.
 func (o *NSCollectionViewTransitionLayout) InitWithCurrentLayoutNextLayout(currentLayout *NSCollectionViewLayout, newLayout *NSCollectionViewLayout) *NSCollectionViewTransitionLayout {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewTransitionLayoutSelInitWithCurrentLayoutNextLayout, currentLayout.Ptr(), newLayout.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewTransitionLayoutFromID(_ret)
+	var _mainthread0 *NSCollectionViewTransitionLayout
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewTransitionLayout {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewTransitionLayoutSelInitWithCurrentLayoutNextLayout, currentLayout.Ptr(), newLayout.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewTransitionLayoutFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the value of a key whose value you use during the animation.
 func (o *NSCollectionViewTransitionLayout) UpdateValueForAnimatedKey(value float64, key *foundation.NSString) {
-	o.Ptr().Send(_nSCollectionViewTransitionLayoutSelUpdateValueForAnimatedKey, value, key.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewTransitionLayoutSelUpdateValueForAnimatedKey, value, key.Ptr())
+	})
 }
 
 // Returns the most recently set value for the specified key.
 func (o *NSCollectionViewTransitionLayout) ValueForAnimatedKey(key *foundation.NSString) float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSCollectionViewTransitionLayoutSelValueForAnimatedKey, key.Ptr())
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSCollectionViewTransitionLayoutSelValueForAnimatedKey, key.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewTransitionLayout) TransitionProgress() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSCollectionViewTransitionLayoutSelTransitionProgress)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSCollectionViewTransitionLayoutSelTransitionProgress)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewTransitionLayout) SetTransitionProgress(transitionProgress float64) {
-	o.Ptr().Send(_nSCollectionViewTransitionLayoutSelSetTransitionProgress, transitionProgress)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewTransitionLayoutSelSetTransitionProgress, transitionProgress)
+	})
 }
 
 func (o *NSCollectionViewTransitionLayout) CurrentLayout() *NSCollectionViewLayout {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewTransitionLayoutSelCurrentLayout)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewLayoutFromID(_ret)
+	var _mainthread0 *NSCollectionViewLayout
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewLayout {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewTransitionLayoutSelCurrentLayout)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewLayoutFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewTransitionLayout) NextLayout() *NSCollectionViewLayout {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewTransitionLayoutSelNextLayout)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewLayoutFromID(_ret)
+	var _mainthread0 *NSCollectionViewLayout
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewLayout {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewTransitionLayoutSelNextLayout)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewLayoutFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

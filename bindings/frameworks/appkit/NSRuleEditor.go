@@ -75,241 +75,413 @@ func NSRuleEditorFromID(id objc.ID) *NSRuleEditor {
 
 // Instructs the receiver to refetch criteria from its delegate.
 func (o *NSRuleEditor) ReloadCriteria() {
-	o.Ptr().Send(_nSRuleEditorSelReloadCriteria)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRuleEditorSelReloadCriteria)
+	})
 }
 
 // Instructs the receiver to regenerate its predicate by invoking the corresponding delegate method.
 func (o *NSRuleEditor) ReloadPredicate() {
-	o.Ptr().Send(_nSRuleEditorSelReloadPredicate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRuleEditorSelReloadPredicate)
+	})
 }
 
 // Returns the predicate for a given row.
 func (o *NSRuleEditor) PredicateForRow(row int) *foundation.NSPredicate {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelPredicateForRow, row)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSPredicateFromID(_ret)
+	var _mainthread0 *foundation.NSPredicate
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSPredicate {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelPredicateForRow, row)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSPredicateFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the immediate subrows of a given row.
 func (o *NSRuleEditor) SubrowIndexesForRow(rowIndex int) *foundation.NSIndexSet {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelSubrowIndexesForRow, rowIndex)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSIndexSetFromID(_ret)
+	var _mainthread0 *foundation.NSIndexSet
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSIndexSet {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelSubrowIndexesForRow, rowIndex)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSIndexSetFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the currently chosen items for a given row.
 func (o *NSRuleEditor) CriteriaForRow(row int) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelCriteriaForRow, row)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[objc.ID](_ret)
+	var _mainthread0 *foundation.NSArray[objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelCriteriaForRow, row)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the chosen values for a given row.
 func (o *NSRuleEditor) DisplayValuesForRow(row int) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelDisplayValuesForRow, row)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[objc.ID](_ret)
+	var _mainthread0 *foundation.NSArray[objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelDisplayValuesForRow, row)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the index of the row containing a given value.
 func (o *NSRuleEditor) RowForDisplayValue(displayValue objc.ID) int {
-	_ret := objc.Send[int](o.Ptr(), _nSRuleEditorSelRowForDisplayValue, displayValue)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSRuleEditorSelRowForDisplayValue, displayValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the type of a given row.
 func (o *NSRuleEditor) RowTypeForRow(rowIndex int) NSRuleEditorRowType {
-	_ret := objc.Send[NSRuleEditorRowType](o.Ptr(), _nSRuleEditorSelRowTypeForRow, rowIndex)
-	return _ret
+	var _mainthread0 NSRuleEditorRowType
+	purego.Main(func() {
+		_mainthread0 = func() NSRuleEditorRowType {
+			_ret := objc.Send[NSRuleEditorRowType](o.Ptr(), _nSRuleEditorSelRowTypeForRow, rowIndex)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the index of the parent of a given row.
 func (o *NSRuleEditor) ParentRowForRow(rowIndex int) int {
-	_ret := objc.Send[int](o.Ptr(), _nSRuleEditorSelParentRowForRow, rowIndex)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSRuleEditorSelParentRowForRow, rowIndex)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Adds a row to the receiver.
 func (o *NSRuleEditor) AddRow(sender objc.ID) {
-	o.Ptr().Send(_nSRuleEditorSelAddRow, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRuleEditorSelAddRow, sender)
+	})
 }
 
 // Adds a new row of a given type at a given location.
 func (o *NSRuleEditor) InsertRowAtIndexWithTypeAsSubrowOfRowAnimate(rowIndex int, rowType NSRuleEditorRowType, parentRow int, shouldAnimate bool) {
-	o.Ptr().Send(_nSRuleEditorSelInsertRowAtIndexWithTypeAsSubrowOfRowAnimate, rowIndex, rowType, parentRow, shouldAnimate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRuleEditorSelInsertRowAtIndexWithTypeAsSubrowOfRowAnimate, rowIndex, rowType, parentRow, shouldAnimate)
+	})
 }
 
 // Modifies the row at a given index to contain the given items and values.
 func (o *NSRuleEditor) SetCriteriaAndDisplayValuesForRowAtIndex(criteria *foundation.NSArray[objc.ID], values *foundation.NSArray[objc.ID], rowIndex int) {
-	o.Ptr().Send(_nSRuleEditorSelSetCriteriaAndDisplayValuesForRowAtIndex, criteria.Ptr(), values.Ptr(), rowIndex)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRuleEditorSelSetCriteriaAndDisplayValuesForRowAtIndex, criteria.Ptr(), values.Ptr(), rowIndex)
+	})
 }
 
 // Removes the row at a given index.
 func (o *NSRuleEditor) RemoveRowAtIndex(rowIndex int) {
-	o.Ptr().Send(_nSRuleEditorSelRemoveRowAtIndex, rowIndex)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRuleEditorSelRemoveRowAtIndex, rowIndex)
+	})
 }
 
 // Removes the rows at given indexes.
 func (o *NSRuleEditor) RemoveRowsAtIndexesIncludeSubrows(rowIndexes *foundation.NSIndexSet, includeSubrows bool) {
-	o.Ptr().Send(_nSRuleEditorSelRemoveRowsAtIndexesIncludeSubrows, rowIndexes.Ptr(), includeSubrows)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRuleEditorSelRemoveRowsAtIndexesIncludeSubrows, rowIndexes.Ptr(), includeSubrows)
+	})
 }
 
 // Sets in the receiver the indexes of rows that are selected.
 func (o *NSRuleEditor) SelectRowIndexesByExtendingSelection(indexes *foundation.NSIndexSet, extend bool) {
-	o.Ptr().Send(_nSRuleEditorSelSelectRowIndexesByExtendingSelection, indexes.Ptr(), extend)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRuleEditorSelSelectRowIndexesByExtendingSelection, indexes.Ptr(), extend)
+	})
 }
 
 func (o *NSRuleEditor) Delegate() NSRuleEditorDelegate {
-	_ret := objc.Send[NSRuleEditorDelegate](o.Ptr(), _nSRuleEditorSelDelegate)
-	return _ret
+	var _mainthread0 NSRuleEditorDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSRuleEditorDelegate {
+			_ret := objc.Send[NSRuleEditorDelegate](o.Ptr(), _nSRuleEditorSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRuleEditor) SetDelegate(delegate NSRuleEditorDelegate) {
-	o.Ptr().Send(_nSRuleEditorSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRuleEditorSelSetDelegate, delegate)
+	})
 }
 
 func (o *NSRuleEditor) FormattingStringsFilename() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelFormattingStringsFilename)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelFormattingStringsFilename)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRuleEditor) SetFormattingStringsFilename(formattingStringsFilename *foundation.NSString) {
-	o.Ptr().Send(_nSRuleEditorSelSetFormattingStringsFilename, formattingStringsFilename.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSRuleEditorSelSetFormattingStringsFilename, formattingStringsFilename.Ptr())
+	})
 }
 
 func (o *NSRuleEditor) FormattingDictionary() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelFormattingDictionary)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelFormattingDictionary)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRuleEditor) SetFormattingDictionary(formattingDictionary *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
-	o.Ptr().Send(_nSRuleEditorSelSetFormattingDictionary, formattingDictionary.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSRuleEditorSelSetFormattingDictionary, formattingDictionary.Ptr())
+	})
 }
 
 func (o *NSRuleEditor) NestingMode() NSRuleEditorNestingMode {
-	_ret := objc.Send[NSRuleEditorNestingMode](o.Ptr(), _nSRuleEditorSelNestingMode)
-	return _ret
+	var _mainthread0 NSRuleEditorNestingMode
+	purego.Main(func() {
+		_mainthread0 = func() NSRuleEditorNestingMode {
+			_ret := objc.Send[NSRuleEditorNestingMode](o.Ptr(), _nSRuleEditorSelNestingMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRuleEditor) SetNestingMode(nestingMode NSRuleEditorNestingMode) {
-	o.Ptr().Send(_nSRuleEditorSelSetNestingMode, nestingMode)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRuleEditorSelSetNestingMode, nestingMode)
+	})
 }
 
 func (o *NSRuleEditor) RowHeight() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSRuleEditorSelRowHeight)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSRuleEditorSelRowHeight)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRuleEditor) SetRowHeight(rowHeight float64) {
-	o.Ptr().Send(_nSRuleEditorSelSetRowHeight, rowHeight)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRuleEditorSelSetRowHeight, rowHeight)
+	})
 }
 
 func (o *NSRuleEditor) IsEditable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSRuleEditorSelIsEditable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSRuleEditorSelIsEditable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRuleEditor) SetEditable(editable bool) {
-	o.Ptr().Send(_nSRuleEditorSelSetEditable, editable)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRuleEditorSelSetEditable, editable)
+	})
 }
 
 func (o *NSRuleEditor) CanRemoveAllRows() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSRuleEditorSelCanRemoveAllRows)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSRuleEditorSelCanRemoveAllRows)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRuleEditor) SetCanRemoveAllRows(canRemoveAllRows bool) {
-	o.Ptr().Send(_nSRuleEditorSelSetCanRemoveAllRows, canRemoveAllRows)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRuleEditorSelSetCanRemoveAllRows, canRemoveAllRows)
+	})
 }
 
 func (o *NSRuleEditor) Predicate() *foundation.NSPredicate {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelPredicate)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSPredicateFromID(_ret)
+	var _mainthread0 *foundation.NSPredicate
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSPredicate {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelPredicate)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSPredicateFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRuleEditor) NumberOfRows() int {
-	_ret := objc.Send[int](o.Ptr(), _nSRuleEditorSelNumberOfRows)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSRuleEditorSelNumberOfRows)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRuleEditor) SelectedRowIndexes() *foundation.NSIndexSet {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelSelectedRowIndexes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSIndexSetFromID(_ret)
+	var _mainthread0 *foundation.NSIndexSet
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSIndexSet {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelSelectedRowIndexes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSIndexSetFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRuleEditor) RowClass() objc.Class {
-	_ret := objc.Send[objc.Class](o.Ptr(), _nSRuleEditorSelRowClass)
-	return _ret
+	var _mainthread0 objc.Class
+	purego.Main(func() {
+		_mainthread0 = func() objc.Class {
+			_ret := objc.Send[objc.Class](o.Ptr(), _nSRuleEditorSelRowClass)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRuleEditor) SetRowClass(rowClass objc.Class) {
-	o.Ptr().Send(_nSRuleEditorSelSetRowClass, rowClass)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRuleEditorSelSetRowClass, rowClass)
+	})
 }
 
 func (o *NSRuleEditor) RowTypeKeyPath() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelRowTypeKeyPath)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelRowTypeKeyPath)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRuleEditor) SetRowTypeKeyPath(rowTypeKeyPath *foundation.NSString) {
-	o.Ptr().Send(_nSRuleEditorSelSetRowTypeKeyPath, rowTypeKeyPath.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSRuleEditorSelSetRowTypeKeyPath, rowTypeKeyPath.Ptr())
+	})
 }
 
 func (o *NSRuleEditor) SubrowsKeyPath() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelSubrowsKeyPath)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelSubrowsKeyPath)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRuleEditor) SetSubrowsKeyPath(subrowsKeyPath *foundation.NSString) {
-	o.Ptr().Send(_nSRuleEditorSelSetSubrowsKeyPath, subrowsKeyPath.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSRuleEditorSelSetSubrowsKeyPath, subrowsKeyPath.Ptr())
+	})
 }
 
 func (o *NSRuleEditor) CriteriaKeyPath() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelCriteriaKeyPath)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelCriteriaKeyPath)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRuleEditor) SetCriteriaKeyPath(criteriaKeyPath *foundation.NSString) {
-	o.Ptr().Send(_nSRuleEditorSelSetCriteriaKeyPath, criteriaKeyPath.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSRuleEditorSelSetCriteriaKeyPath, criteriaKeyPath.Ptr())
+	})
 }
 
 func (o *NSRuleEditor) DisplayValuesKeyPath() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelDisplayValuesKeyPath)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelDisplayValuesKeyPath)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRuleEditor) SetDisplayValuesKeyPath(displayValuesKeyPath *foundation.NSString) {
-	o.Ptr().Send(_nSRuleEditorSelSetDisplayValuesKeyPath, displayValuesKeyPath.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSRuleEditorSelSetDisplayValuesKeyPath, displayValuesKeyPath.Ptr())
+	})
 }

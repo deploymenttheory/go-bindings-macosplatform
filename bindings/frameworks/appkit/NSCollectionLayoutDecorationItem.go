@@ -37,26 +37,46 @@ func NSCollectionLayoutDecorationItemFromID(id objc.ID) *NSCollectionLayoutDecor
 
 // Creates a section background with a string to identify the element kind.
 func NSCollectionLayoutDecorationItemBackgroundDecorationItemWithElementKind(elementKind *foundation.NSString) *NSCollectionLayoutDecorationItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutDecorationItem), _nSCollectionLayoutDecorationItemSelBackgroundDecorationItemWithElementKind, elementKind.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutDecorationItemFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutDecorationItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutDecorationItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutDecorationItem), _nSCollectionLayoutDecorationItemSelBackgroundDecorationItemWithElementKind, elementKind.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutDecorationItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutDecorationItem) ZIndex() int {
-	_ret := objc.Send[int](o.Ptr(), _nSCollectionLayoutDecorationItemSelZIndex)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSCollectionLayoutDecorationItemSelZIndex)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutDecorationItem) SetZIndex(zIndex int) {
-	o.Ptr().Send(_nSCollectionLayoutDecorationItemSelSetZIndex, zIndex)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionLayoutDecorationItemSelSetZIndex, zIndex)
+	})
 }
 
 func (o *NSCollectionLayoutDecorationItem) ElementKind() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutDecorationItemSelElementKind)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutDecorationItemSelElementKind)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

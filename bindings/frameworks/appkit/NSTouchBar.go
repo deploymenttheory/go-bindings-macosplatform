@@ -56,142 +56,244 @@ func NSTouchBarFromID(id objc.ID) *NSTouchBar {
 
 // Creates a Touch Bar object.
 func (o *NSTouchBar) Init() *NSTouchBar {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelInit)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTouchBarFromID(_ret)
+	var _mainthread0 *NSTouchBar
+	purego.Main(func() {
+		_mainthread0 = func() *NSTouchBar {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelInit)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTouchBarFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a Touch Bar object from a coder object provided by a storyboard or NIB file.
 func (o *NSTouchBar) InitWithCoder(coder *foundation.NSCoder) *NSTouchBar {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTouchBarFromID(_ret)
+	var _mainthread0 *NSTouchBar
+	purego.Main(func() {
+		_mainthread0 = func() *NSTouchBar {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTouchBarFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the Touch Bar item that corresponds to a given identifier.
 func (o *NSTouchBar) ItemForIdentifier(identifier *foundation.NSString) *NSTouchBarItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelItemForIdentifier, identifier.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTouchBarItemFromID(_ret)
+	var _mainthread0 *NSTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSTouchBarItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelItemForIdentifier, identifier.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTouchBarItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTouchBar) CustomizationIdentifier() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelCustomizationIdentifier)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelCustomizationIdentifier)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTouchBar) SetCustomizationIdentifier(customizationIdentifier *foundation.NSString) {
-	o.Ptr().Send(_nSTouchBarSelSetCustomizationIdentifier, customizationIdentifier.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTouchBarSelSetCustomizationIdentifier, customizationIdentifier.Ptr())
+	})
 }
 
 func (o *NSTouchBar) CustomizationAllowedItemIdentifiers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelCustomizationAllowedItemIdentifiers)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelCustomizationAllowedItemIdentifiers)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTouchBar) SetCustomizationAllowedItemIdentifiers(customizationAllowedItemIdentifiers *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSTouchBarSelSetCustomizationAllowedItemIdentifiers, customizationAllowedItemIdentifiers.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTouchBarSelSetCustomizationAllowedItemIdentifiers, customizationAllowedItemIdentifiers.Ptr())
+	})
 }
 
 func (o *NSTouchBar) CustomizationRequiredItemIdentifiers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelCustomizationRequiredItemIdentifiers)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelCustomizationRequiredItemIdentifiers)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTouchBar) SetCustomizationRequiredItemIdentifiers(customizationRequiredItemIdentifiers *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSTouchBarSelSetCustomizationRequiredItemIdentifiers, customizationRequiredItemIdentifiers.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTouchBarSelSetCustomizationRequiredItemIdentifiers, customizationRequiredItemIdentifiers.Ptr())
+	})
 }
 
 func (o *NSTouchBar) DefaultItemIdentifiers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelDefaultItemIdentifiers)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelDefaultItemIdentifiers)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTouchBar) SetDefaultItemIdentifiers(defaultItemIdentifiers *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSTouchBarSelSetDefaultItemIdentifiers, defaultItemIdentifiers.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTouchBarSelSetDefaultItemIdentifiers, defaultItemIdentifiers.Ptr())
+	})
 }
 
 func (o *NSTouchBar) ItemIdentifiers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelItemIdentifiers)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelItemIdentifiers)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTouchBar) PrincipalItemIdentifier() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelPrincipalItemIdentifier)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelPrincipalItemIdentifier)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTouchBar) SetPrincipalItemIdentifier(principalItemIdentifier *foundation.NSString) {
-	o.Ptr().Send(_nSTouchBarSelSetPrincipalItemIdentifier, principalItemIdentifier.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTouchBarSelSetPrincipalItemIdentifier, principalItemIdentifier.Ptr())
+	})
 }
 
 func (o *NSTouchBar) EscapeKeyReplacementItemIdentifier() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelEscapeKeyReplacementItemIdentifier)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelEscapeKeyReplacementItemIdentifier)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTouchBar) SetEscapeKeyReplacementItemIdentifier(escapeKeyReplacementItemIdentifier *foundation.NSString) {
-	o.Ptr().Send(_nSTouchBarSelSetEscapeKeyReplacementItemIdentifier, escapeKeyReplacementItemIdentifier.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTouchBarSelSetEscapeKeyReplacementItemIdentifier, escapeKeyReplacementItemIdentifier.Ptr())
+	})
 }
 
 func (o *NSTouchBar) TemplateItems() *foundation.NSSet[*NSTouchBarItem] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelTemplateItems)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSSetFromID[*NSTouchBarItem](_ret)
+	var _mainthread0 *foundation.NSSet[*NSTouchBarItem]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSSet[*NSTouchBarItem] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelTemplateItems)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSSetFromID[*NSTouchBarItem](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTouchBar) SetTemplateItems(templateItems *foundation.NSSet[*NSTouchBarItem]) {
-	o.Ptr().Send(_nSTouchBarSelSetTemplateItems, templateItems.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTouchBarSelSetTemplateItems, templateItems.Ptr())
+	})
 }
 
 func (o *NSTouchBar) Delegate() NSTouchBarDelegate {
-	_ret := objc.Send[NSTouchBarDelegate](o.Ptr(), _nSTouchBarSelDelegate)
-	return _ret
+	var _mainthread0 NSTouchBarDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSTouchBarDelegate {
+			_ret := objc.Send[NSTouchBarDelegate](o.Ptr(), _nSTouchBarSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTouchBar) SetDelegate(delegate NSTouchBarDelegate) {
-	o.Ptr().Send(_nSTouchBarSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTouchBarSelSetDelegate, delegate)
+	})
 }
 
 func (o *NSTouchBar) IsVisible() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTouchBarSelIsVisible)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTouchBarSelIsVisible)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func NSTouchBarIsAutomaticCustomizeTouchBarMenuItemEnabled() bool {
-	_ret := objc.Send[bool](objc.ID(_clsNSTouchBar), _nSTouchBarSelIsAutomaticCustomizeTouchBarMenuItemEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](objc.ID(_clsNSTouchBar), _nSTouchBarSelIsAutomaticCustomizeTouchBarMenuItemEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func NSTouchBarSetAutomaticCustomizeTouchBarMenuItemEnabled(automaticCustomizeTouchBarMenuItemEnabled bool) {
-	objc.ID(_clsNSTouchBar).Send(_nSTouchBarSelSetAutomaticCustomizeTouchBarMenuItemEnabled, automaticCustomizeTouchBarMenuItemEnabled)
+	purego.Main(func() {
+		objc.ID(_clsNSTouchBar).Send(_nSTouchBarSelSetAutomaticCustomizeTouchBarMenuItemEnabled, automaticCustomizeTouchBarMenuItemEnabled)
+	})
 }

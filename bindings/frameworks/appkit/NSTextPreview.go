@@ -41,39 +41,69 @@ func NSTextPreviewFromID(id objc.ID) *NSTextPreview {
 
 // Creates a text preview using the specified image and rectangles that indicate the portions of text to highlight.
 func (o *NSTextPreview) InitWithSnapshotImagePresentationFrameCandidateRects(snapshotImage unsafe.Pointer, presentationFrame corefoundation.CGRect, candidateRects *foundation.NSArray[*foundation.NSValue]) *NSTextPreview {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextPreviewSelInitWithSnapshotImagePresentationFrameCandidateRects, snapshotImage, presentationFrame, candidateRects.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextPreviewFromID(_ret)
+	var _mainthread0 *NSTextPreview
+	purego.Main(func() {
+		_mainthread0 = func() *NSTextPreview {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextPreviewSelInitWithSnapshotImagePresentationFrameCandidateRects, snapshotImage, presentationFrame, candidateRects.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextPreviewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a text preview using the specified image.
 func (o *NSTextPreview) InitWithSnapshotImagePresentationFrame(snapshotImage unsafe.Pointer, presentationFrame corefoundation.CGRect) *NSTextPreview {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextPreviewSelInitWithSnapshotImagePresentationFrame, snapshotImage, presentationFrame)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextPreviewFromID(_ret)
+	var _mainthread0 *NSTextPreview
+	purego.Main(func() {
+		_mainthread0 = func() *NSTextPreview {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextPreviewSelInitWithSnapshotImagePresentationFrame, snapshotImage, presentationFrame)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextPreviewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The image that contains the requested text from your view. You specify this image at initialization time. The system uses it to implement any visual effects involving your view’s text. Create the image with your text on a transparent background.
 func (o *NSTextPreview) PreviewImage() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSTextPreviewSelPreviewImage)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSTextPreviewSelPreviewImage)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The frame rectangle that places the preview image directly over the matching text. You specify this value at initialization time. The system uses it to position the preview image over the text in your view. Make sure the frame rectangle is in your view's coordinate space.
 func (o *NSTextPreview) PresentationFrame() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTextPreviewSelPresentationFrame)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTextPreviewSelPresentationFrame)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Rectangles that define the specific portions of text to highlight. At initialization time, you set this property to an array of <doc://com.apple.documentation/documentation/foundation/nsvalue> objects, each of which contains an <doc://com.apple.documentation/documentation/foundation/nsrect> in the coordinate space of the target view. Each rectangle contains a bounding rectangle for text that is part of the preview. When applying visual effects, the system adds highlights only to the text in the specified rectangles.
 func (o *NSTextPreview) CandidateRects() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextPreviewSelCandidateRects)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSValue]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSValue] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextPreviewSelCandidateRects)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSValue](_ret)
+		}()
+	})
+	return _mainthread0
 }

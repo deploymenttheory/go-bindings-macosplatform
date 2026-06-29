@@ -66,202 +66,340 @@ func NSWindowControllerFromID(id objc.ID) *NSWindowController {
 
 // Returns a window controller initialized with a given window.
 func (o *NSWindowController) InitWithWindow(window *NSWindow) *NSWindowController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelInitWithWindow, window.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowControllerFromID(_ret)
+	var _mainthread0 *NSWindowController
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindowController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelInitWithWindow, window.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindowController) InitWithCoder(coder *foundation.NSCoder) *NSWindowController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowControllerFromID(_ret)
+	var _mainthread0 *NSWindowController
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindowController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a window controller initialized with a nib file.
 func (o *NSWindowController) InitWithWindowNibName(windowNibName *foundation.NSString) *NSWindowController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelInitWithWindowNibName, windowNibName.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowControllerFromID(_ret)
+	var _mainthread0 *NSWindowController
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindowController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelInitWithWindowNibName, windowNibName.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a window controller initialized with a nib file and a specified owner for that nib file.
 func (o *NSWindowController) InitWithWindowNibNameOwner(windowNibName *foundation.NSString, owner objc.ID) *NSWindowController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelInitWithWindowNibNameOwner, windowNibName.Ptr(), owner)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowControllerFromID(_ret)
+	var _mainthread0 *NSWindowController
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindowController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelInitWithWindowNibNameOwner, windowNibName.Ptr(), owner)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a window controller initialized with a nib file at an absolute path and a specified owner.
 func (o *NSWindowController) InitWithWindowNibPathOwner(windowNibPath *foundation.NSString, owner objc.ID) *NSWindowController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelInitWithWindowNibPathOwner, windowNibPath.Ptr(), owner)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowControllerFromID(_ret)
+	var _mainthread0 *NSWindowController
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindowController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelInitWithWindowNibPathOwner, windowNibPath.Ptr(), owner)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the document edited flag for the window controller.
 func (o *NSWindowController) SetDocumentEdited(dirtyFlag bool) {
-	o.Ptr().Send(_nSWindowControllerSelSetDocumentEdited, dirtyFlag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowControllerSelSetDocumentEdited, dirtyFlag)
+	})
 }
 
 // Synchronizes the displayed window title and the represented filename with the information in the associated document.
 func (o *NSWindowController) SynchronizeWindowTitleWithDocumentName() {
-	o.Ptr().Send(_nSWindowControllerSelSynchronizeWindowTitleWithDocumentName)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowControllerSelSynchronizeWindowTitleWithDocumentName)
+	})
 }
 
 // Returns the window title to be used for a given document display name.
 func (o *NSWindowController) WindowTitleForDocumentDisplayName(displayName *foundation.NSString) *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelWindowTitleForDocumentDisplayName, displayName.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelWindowTitleForDocumentDisplayName, displayName.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sent before the window owned by the receiver is loaded.
 func (o *NSWindowController) WindowWillLoad() {
-	o.Ptr().Send(_nSWindowControllerSelWindowWillLoad)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowControllerSelWindowWillLoad)
+	})
 }
 
 // Sent after the window owned by the receiver has been loaded.
 func (o *NSWindowController) WindowDidLoad() {
-	o.Ptr().Send(_nSWindowControllerSelWindowDidLoad)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowControllerSelWindowDidLoad)
+	})
 }
 
 // Loads the receiver’s window from the nib file.
 func (o *NSWindowController) LoadWindow() {
-	o.Ptr().Send(_nSWindowControllerSelLoadWindow)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowControllerSelLoadWindow)
+	})
 }
 
 // Closes the window if it was loaded.
 func (o *NSWindowController) Close() {
-	o.Ptr().Send(_nSWindowControllerSelClose)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowControllerSelClose)
+	})
 }
 
 // Displays the window associated with the receiver.
 func (o *NSWindowController) ShowWindow(sender objc.ID) {
-	o.Ptr().Send(_nSWindowControllerSelShowWindow, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowControllerSelShowWindow, sender)
+	})
 }
 
 func (o *NSWindowController) WindowNibName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelWindowNibName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelWindowNibName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindowController) WindowNibPath() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelWindowNibPath)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelWindowNibPath)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindowController) Owner() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelOwner)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelOwner)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindowController) WindowFrameAutosaveName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelWindowFrameAutosaveName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelWindowFrameAutosaveName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindowController) SetWindowFrameAutosaveName(windowFrameAutosaveName *foundation.NSString) {
-	o.Ptr().Send(_nSWindowControllerSelSetWindowFrameAutosaveName, windowFrameAutosaveName.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowControllerSelSetWindowFrameAutosaveName, windowFrameAutosaveName.Ptr())
+	})
 }
 
 func (o *NSWindowController) ShouldCascadeWindows() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowControllerSelShouldCascadeWindows)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowControllerSelShouldCascadeWindows)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindowController) SetShouldCascadeWindows(shouldCascadeWindows bool) {
-	o.Ptr().Send(_nSWindowControllerSelSetShouldCascadeWindows, shouldCascadeWindows)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowControllerSelSetShouldCascadeWindows, shouldCascadeWindows)
+	})
 }
 
 func (o *NSWindowController) PreviewRepresentableActivityItems() *foundation.NSArray[NSPreviewRepresentableActivityItem] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelPreviewRepresentableActivityItems)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[NSPreviewRepresentableActivityItem](_ret)
+	var _mainthread0 *foundation.NSArray[NSPreviewRepresentableActivityItem]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[NSPreviewRepresentableActivityItem] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelPreviewRepresentableActivityItems)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[NSPreviewRepresentableActivityItem](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindowController) SetPreviewRepresentableActivityItems(previewRepresentableActivityItems *foundation.NSArray[NSPreviewRepresentableActivityItem]) {
-	o.Ptr().Send(_nSWindowControllerSelSetPreviewRepresentableActivityItems, previewRepresentableActivityItems.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowControllerSelSetPreviewRepresentableActivityItems, previewRepresentableActivityItems.Ptr())
+	})
 }
 
 func (o *NSWindowController) Document() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelDocument)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelDocument)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindowController) SetDocument(document objc.ID) {
-	o.Ptr().Send(_nSWindowControllerSelSetDocument, document)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowControllerSelSetDocument, document)
+	})
 }
 
 func (o *NSWindowController) ShouldCloseDocument() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowControllerSelShouldCloseDocument)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowControllerSelShouldCloseDocument)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindowController) SetShouldCloseDocument(shouldCloseDocument bool) {
-	o.Ptr().Send(_nSWindowControllerSelSetShouldCloseDocument, shouldCloseDocument)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowControllerSelSetShouldCloseDocument, shouldCloseDocument)
+	})
 }
 
 func (o *NSWindowController) ContentViewController() *NSViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelContentViewController)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewControllerFromID(_ret)
+	var _mainthread0 *NSViewController
+	purego.Main(func() {
+		_mainthread0 = func() *NSViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelContentViewController)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindowController) SetContentViewController(contentViewController *NSViewController) {
-	o.Ptr().Send(_nSWindowControllerSelSetContentViewController, contentViewController.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowControllerSelSetContentViewController, contentViewController.Ptr())
+	})
 }
 
 func (o *NSWindowController) Window() *NSWindow {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelWindow)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowFromID(_ret)
+	var _mainthread0 *NSWindow
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindow {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelWindow)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindowController) SetWindow(window *NSWindow) {
-	o.Ptr().Send(_nSWindowControllerSelSetWindow, window.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowControllerSelSetWindow, window.Ptr())
+	})
 }
 
 func (o *NSWindowController) IsWindowLoaded() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowControllerSelIsWindowLoaded)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowControllerSelIsWindowLoaded)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindowController) Storyboard() *NSStoryboard {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelStoryboard)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSStoryboardFromID(_ret)
+	var _mainthread0 *NSStoryboard
+	purego.Main(func() {
+		_mainthread0 = func() *NSStoryboard {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelStoryboard)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSStoryboardFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Dismisses the window controller.
 func (o *NSWindowController) DismissController(sender objc.ID) {
-	o.Ptr().Send(_nSWindowControllerSelDismissController, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowControllerSelDismissController, sender)
+	})
 }

@@ -68,12 +68,16 @@ func (o *MKLookAroundSceneRequest) GetSceneWithCompletionHandler(completionHandl
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mKLookAroundSceneRequestSelGetSceneWithCompletionHandler, __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_mKLookAroundSceneRequestSelGetSceneWithCompletionHandler, __block_completionHandler)
+	})
 }
 
 // Cancels the pending scene request.
 func (o *MKLookAroundSceneRequest) Cancel() {
-	o.Ptr().Send(_mKLookAroundSceneRequestSelCancel)
+	purego.Main(func() {
+		o.Ptr().Send(_mKLookAroundSceneRequestSelCancel)
+	})
 }
 
 func (o *MKLookAroundSceneRequest) Coordinate() unsafe.Pointer {

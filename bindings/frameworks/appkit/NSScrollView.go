@@ -120,439 +120,793 @@ func NSScrollViewFromID(id objc.ID) *NSScrollView {
 }
 
 func (o *NSScrollView) InitWithFrame(frameRect corefoundation.CGRect) *NSScrollView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelInitWithFrame, frameRect)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrollViewFromID(_ret)
+	var _mainthread0 *NSScrollView
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrollView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelInitWithFrame, frameRect)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrollViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) InitWithCoder(coder *foundation.NSCoder) *NSScrollView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrollViewFromID(_ret)
+	var _mainthread0 *NSScrollView
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrollView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrollViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the frame size of a scroll view that contains a content view with the specified size.
 func NSScrollViewFrameSizeForContentSizeHorizontalScrollerClassVerticalScrollerClassBorderTypeControlSizeScrollerStyle(cSize corefoundation.CGSize, horizontalScrollerClass objc.Class, verticalScrollerClass objc.Class, type_ NSBorderType, controlSize NSControlSize, scrollerStyle NSScrollerStyle) corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](objc.ID(_clsNSScrollView), _nSScrollViewSelFrameSizeForContentSizeHorizontalScrollerClassVerticalScrollerClassBorderTypeControlSizeScrollerStyle, cSize, horizontalScrollerClass, verticalScrollerClass, type_, controlSize, scrollerStyle)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](objc.ID(_clsNSScrollView), _nSScrollViewSelFrameSizeForContentSizeHorizontalScrollerClassVerticalScrollerClassBorderTypeControlSizeScrollerStyle, cSize, horizontalScrollerClass, verticalScrollerClass, type_, controlSize, scrollerStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the content size calculated from the frame size and the specified specifications.
 func NSScrollViewContentSizeForFrameSizeHorizontalScrollerClassVerticalScrollerClassBorderTypeControlSizeScrollerStyle(fSize corefoundation.CGSize, horizontalScrollerClass objc.Class, verticalScrollerClass objc.Class, type_ NSBorderType, controlSize NSControlSize, scrollerStyle NSScrollerStyle) corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](objc.ID(_clsNSScrollView), _nSScrollViewSelContentSizeForFrameSizeHorizontalScrollerClassVerticalScrollerClassBorderTypeControlSizeScrollerStyle, fSize, horizontalScrollerClass, verticalScrollerClass, type_, controlSize, scrollerStyle)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](objc.ID(_clsNSScrollView), _nSScrollViewSelContentSizeForFrameSizeHorizontalScrollerClassVerticalScrollerClassBorderTypeControlSizeScrollerStyle, fSize, horizontalScrollerClass, verticalScrollerClass, type_, controlSize, scrollerStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the frame size of an scroll view that contains a content view with the specified size.
 // Deprecated: Use +frameSizeForContentSize:horizontalScrollerClass:verticalScrollerClass:borderType:controlSize:scrollerStyle: instead
 func NSScrollViewFrameSizeForContentSizeHasHorizontalScrollerHasVerticalScrollerBorderType(cSize corefoundation.CGSize, hFlag bool, vFlag bool, type_ NSBorderType) corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](objc.ID(_clsNSScrollView), _nSScrollViewSelFrameSizeForContentSizeHasHorizontalScrollerHasVerticalScrollerBorderType, cSize, hFlag, vFlag, type_)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](objc.ID(_clsNSScrollView), _nSScrollViewSelFrameSizeForContentSizeHasHorizontalScrollerHasVerticalScrollerBorderType, cSize, hFlag, vFlag, type_)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the content size calculated from the frame size and the specified specifications.
 // Deprecated: +contentSizeForFrameSize:horizontalScrollerClass:verticalScrollerClass:borderType:controlSize:scrollerStyle: instead
 func NSScrollViewContentSizeForFrameSizeHasHorizontalScrollerHasVerticalScrollerBorderType(fSize corefoundation.CGSize, hFlag bool, vFlag bool, type_ NSBorderType) corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](objc.ID(_clsNSScrollView), _nSScrollViewSelContentSizeForFrameSizeHasHorizontalScrollerHasVerticalScrollerBorderType, fSize, hFlag, vFlag, type_)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](objc.ID(_clsNSScrollView), _nSScrollViewSelContentSizeForFrameSizeHasHorizontalScrollerHasVerticalScrollerBorderType, fSize, hFlag, vFlag, type_)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Lays out the components of the receiver: the content view, the scrollers, and the ruler views.
 func (o *NSScrollView) Tile() {
-	o.Ptr().Send(_nSScrollViewSelTile)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelTile)
+	})
 }
 
 // Flash the overlay scroll bars.
 func (o *NSScrollView) FlashScrollers() {
-	o.Ptr().Send(_nSScrollViewSelFlashScrollers)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelFlashScrollers)
+	})
 }
 
 // Magnifies the content view proportionally such that the given rectangle fits centered in the scroll view.
 func (o *NSScrollView) MagnifyToFitRect(rect corefoundation.CGRect) {
-	o.Ptr().Send(_nSScrollViewSelMagnifyToFitRect, rect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelMagnifyToFitRect, rect)
+	})
 }
 
 // Magnify the content by the given amount and center the result on the given point.
 func (o *NSScrollView) SetMagnificationCenteredAtPoint(magnification float64, point corefoundation.CGPoint) {
-	o.Ptr().Send(_nSScrollViewSelSetMagnificationCenteredAtPoint, magnification, point)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetMagnificationCenteredAtPoint, magnification, point)
+	})
 }
 
 // Adds a floating subview to the document view.
 func (o *NSScrollView) AddFloatingSubviewForAxis(view *NSView, axis NSEventGestureAxis) {
-	o.Ptr().Send(_nSScrollViewSelAddFloatingSubviewForAxis, view.Ptr(), axis)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelAddFloatingSubviewForAxis, view.Ptr(), axis)
+	})
 }
 
 // Deprecated: +contentSizeForFrameSize:horizontalScrollerClass:verticalScrollerClass:borderType:controlSize:scrollerStyle: instead
 func (o *NSScrollView) DocumentVisibleRect() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSScrollViewSelDocumentVisibleRect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSScrollViewSelDocumentVisibleRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: +contentSizeForFrameSize:horizontalScrollerClass:verticalScrollerClass:borderType:controlSize:scrollerStyle: instead
 func (o *NSScrollView) ContentSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSScrollViewSelContentSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSScrollViewSelContentSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: +contentSizeForFrameSize:horizontalScrollerClass:verticalScrollerClass:borderType:controlSize:scrollerStyle: instead
 func (o *NSScrollView) DocumentView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelDocumentView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelDocumentView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: +contentSizeForFrameSize:horizontalScrollerClass:verticalScrollerClass:borderType:controlSize:scrollerStyle: instead
 func (o *NSScrollView) SetDocumentView(documentView *NSView) {
-	o.Ptr().Send(_nSScrollViewSelSetDocumentView, documentView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetDocumentView, documentView.Ptr())
+	})
 }
 
 func (o *NSScrollView) ContentView() *NSClipView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelContentView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSClipViewFromID(_ret)
+	var _mainthread0 *NSClipView
+	purego.Main(func() {
+		_mainthread0 = func() *NSClipView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelContentView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSClipViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetContentView(contentView *NSClipView) {
-	o.Ptr().Send(_nSScrollViewSelSetContentView, contentView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetContentView, contentView.Ptr())
+	})
 }
 
 func (o *NSScrollView) DocumentCursor() *NSCursor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelDocumentCursor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCursorFromID(_ret)
+	var _mainthread0 *NSCursor
+	purego.Main(func() {
+		_mainthread0 = func() *NSCursor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelDocumentCursor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCursorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetDocumentCursor(documentCursor *NSCursor) {
-	o.Ptr().Send(_nSScrollViewSelSetDocumentCursor, documentCursor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetDocumentCursor, documentCursor.Ptr())
+	})
 }
 
 func (o *NSScrollView) BorderType() NSBorderType {
-	_ret := objc.Send[NSBorderType](o.Ptr(), _nSScrollViewSelBorderType)
-	return _ret
+	var _mainthread0 NSBorderType
+	purego.Main(func() {
+		_mainthread0 = func() NSBorderType {
+			_ret := objc.Send[NSBorderType](o.Ptr(), _nSScrollViewSelBorderType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetBorderType(borderType NSBorderType) {
-	o.Ptr().Send(_nSScrollViewSelSetBorderType, borderType)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetBorderType, borderType)
+	})
 }
 
 func (o *NSScrollView) BackgroundColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelBackgroundColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelBackgroundColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetBackgroundColor(backgroundColor *NSColor) {
-	o.Ptr().Send(_nSScrollViewSelSetBackgroundColor, backgroundColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetBackgroundColor, backgroundColor.Ptr())
+	})
 }
 
 func (o *NSScrollView) DrawsBackground() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSScrollViewSelDrawsBackground)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSScrollViewSelDrawsBackground)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetDrawsBackground(drawsBackground bool) {
-	o.Ptr().Send(_nSScrollViewSelSetDrawsBackground, drawsBackground)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetDrawsBackground, drawsBackground)
+	})
 }
 
 func (o *NSScrollView) HasVerticalScroller() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSScrollViewSelHasVerticalScroller)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSScrollViewSelHasVerticalScroller)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetHasVerticalScroller(hasVerticalScroller bool) {
-	o.Ptr().Send(_nSScrollViewSelSetHasVerticalScroller, hasVerticalScroller)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetHasVerticalScroller, hasVerticalScroller)
+	})
 }
 
 func (o *NSScrollView) HasHorizontalScroller() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSScrollViewSelHasHorizontalScroller)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSScrollViewSelHasHorizontalScroller)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetHasHorizontalScroller(hasHorizontalScroller bool) {
-	o.Ptr().Send(_nSScrollViewSelSetHasHorizontalScroller, hasHorizontalScroller)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetHasHorizontalScroller, hasHorizontalScroller)
+	})
 }
 
 func (o *NSScrollView) VerticalScroller() *NSScroller {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelVerticalScroller)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrollerFromID(_ret)
+	var _mainthread0 *NSScroller
+	purego.Main(func() {
+		_mainthread0 = func() *NSScroller {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelVerticalScroller)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrollerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetVerticalScroller(verticalScroller *NSScroller) {
-	o.Ptr().Send(_nSScrollViewSelSetVerticalScroller, verticalScroller.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetVerticalScroller, verticalScroller.Ptr())
+	})
 }
 
 func (o *NSScrollView) HorizontalScroller() *NSScroller {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelHorizontalScroller)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrollerFromID(_ret)
+	var _mainthread0 *NSScroller
+	purego.Main(func() {
+		_mainthread0 = func() *NSScroller {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelHorizontalScroller)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrollerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetHorizontalScroller(horizontalScroller *NSScroller) {
-	o.Ptr().Send(_nSScrollViewSelSetHorizontalScroller, horizontalScroller.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetHorizontalScroller, horizontalScroller.Ptr())
+	})
 }
 
 func (o *NSScrollView) AutohidesScrollers() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSScrollViewSelAutohidesScrollers)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSScrollViewSelAutohidesScrollers)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetAutohidesScrollers(autohidesScrollers bool) {
-	o.Ptr().Send(_nSScrollViewSelSetAutohidesScrollers, autohidesScrollers)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetAutohidesScrollers, autohidesScrollers)
+	})
 }
 
 func (o *NSScrollView) HorizontalLineScroll() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSScrollViewSelHorizontalLineScroll)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSScrollViewSelHorizontalLineScroll)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetHorizontalLineScroll(horizontalLineScroll float64) {
-	o.Ptr().Send(_nSScrollViewSelSetHorizontalLineScroll, horizontalLineScroll)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetHorizontalLineScroll, horizontalLineScroll)
+	})
 }
 
 func (o *NSScrollView) VerticalLineScroll() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSScrollViewSelVerticalLineScroll)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSScrollViewSelVerticalLineScroll)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetVerticalLineScroll(verticalLineScroll float64) {
-	o.Ptr().Send(_nSScrollViewSelSetVerticalLineScroll, verticalLineScroll)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetVerticalLineScroll, verticalLineScroll)
+	})
 }
 
 func (o *NSScrollView) LineScroll() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSScrollViewSelLineScroll)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSScrollViewSelLineScroll)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetLineScroll(lineScroll float64) {
-	o.Ptr().Send(_nSScrollViewSelSetLineScroll, lineScroll)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetLineScroll, lineScroll)
+	})
 }
 
 func (o *NSScrollView) HorizontalPageScroll() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSScrollViewSelHorizontalPageScroll)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSScrollViewSelHorizontalPageScroll)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetHorizontalPageScroll(horizontalPageScroll float64) {
-	o.Ptr().Send(_nSScrollViewSelSetHorizontalPageScroll, horizontalPageScroll)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetHorizontalPageScroll, horizontalPageScroll)
+	})
 }
 
 func (o *NSScrollView) VerticalPageScroll() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSScrollViewSelVerticalPageScroll)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSScrollViewSelVerticalPageScroll)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetVerticalPageScroll(verticalPageScroll float64) {
-	o.Ptr().Send(_nSScrollViewSelSetVerticalPageScroll, verticalPageScroll)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetVerticalPageScroll, verticalPageScroll)
+	})
 }
 
 func (o *NSScrollView) PageScroll() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSScrollViewSelPageScroll)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSScrollViewSelPageScroll)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetPageScroll(pageScroll float64) {
-	o.Ptr().Send(_nSScrollViewSelSetPageScroll, pageScroll)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetPageScroll, pageScroll)
+	})
 }
 
 func (o *NSScrollView) ScrollsDynamically() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSScrollViewSelScrollsDynamically)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSScrollViewSelScrollsDynamically)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetScrollsDynamically(scrollsDynamically bool) {
-	o.Ptr().Send(_nSScrollViewSelSetScrollsDynamically, scrollsDynamically)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetScrollsDynamically, scrollsDynamically)
+	})
 }
 
 func (o *NSScrollView) ScrollerStyle() NSScrollerStyle {
-	_ret := objc.Send[NSScrollerStyle](o.Ptr(), _nSScrollViewSelScrollerStyle)
-	return _ret
+	var _mainthread0 NSScrollerStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSScrollerStyle {
+			_ret := objc.Send[NSScrollerStyle](o.Ptr(), _nSScrollViewSelScrollerStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetScrollerStyle(scrollerStyle NSScrollerStyle) {
-	o.Ptr().Send(_nSScrollViewSelSetScrollerStyle, scrollerStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetScrollerStyle, scrollerStyle)
+	})
 }
 
 func (o *NSScrollView) ScrollerKnobStyle() NSScrollerKnobStyle {
-	_ret := objc.Send[NSScrollerKnobStyle](o.Ptr(), _nSScrollViewSelScrollerKnobStyle)
-	return _ret
+	var _mainthread0 NSScrollerKnobStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSScrollerKnobStyle {
+			_ret := objc.Send[NSScrollerKnobStyle](o.Ptr(), _nSScrollViewSelScrollerKnobStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetScrollerKnobStyle(scrollerKnobStyle NSScrollerKnobStyle) {
-	o.Ptr().Send(_nSScrollViewSelSetScrollerKnobStyle, scrollerKnobStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetScrollerKnobStyle, scrollerKnobStyle)
+	})
 }
 
 func (o *NSScrollView) HorizontalScrollElasticity() NSScrollElasticity {
-	_ret := objc.Send[NSScrollElasticity](o.Ptr(), _nSScrollViewSelHorizontalScrollElasticity)
-	return _ret
+	var _mainthread0 NSScrollElasticity
+	purego.Main(func() {
+		_mainthread0 = func() NSScrollElasticity {
+			_ret := objc.Send[NSScrollElasticity](o.Ptr(), _nSScrollViewSelHorizontalScrollElasticity)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetHorizontalScrollElasticity(horizontalScrollElasticity NSScrollElasticity) {
-	o.Ptr().Send(_nSScrollViewSelSetHorizontalScrollElasticity, horizontalScrollElasticity)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetHorizontalScrollElasticity, horizontalScrollElasticity)
+	})
 }
 
 func (o *NSScrollView) VerticalScrollElasticity() NSScrollElasticity {
-	_ret := objc.Send[NSScrollElasticity](o.Ptr(), _nSScrollViewSelVerticalScrollElasticity)
-	return _ret
+	var _mainthread0 NSScrollElasticity
+	purego.Main(func() {
+		_mainthread0 = func() NSScrollElasticity {
+			_ret := objc.Send[NSScrollElasticity](o.Ptr(), _nSScrollViewSelVerticalScrollElasticity)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetVerticalScrollElasticity(verticalScrollElasticity NSScrollElasticity) {
-	o.Ptr().Send(_nSScrollViewSelSetVerticalScrollElasticity, verticalScrollElasticity)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetVerticalScrollElasticity, verticalScrollElasticity)
+	})
 }
 
 func (o *NSScrollView) UsesPredominantAxisScrolling() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSScrollViewSelUsesPredominantAxisScrolling)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSScrollViewSelUsesPredominantAxisScrolling)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetUsesPredominantAxisScrolling(usesPredominantAxisScrolling bool) {
-	o.Ptr().Send(_nSScrollViewSelSetUsesPredominantAxisScrolling, usesPredominantAxisScrolling)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetUsesPredominantAxisScrolling, usesPredominantAxisScrolling)
+	})
 }
 
 func (o *NSScrollView) AllowsMagnification() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSScrollViewSelAllowsMagnification)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSScrollViewSelAllowsMagnification)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetAllowsMagnification(allowsMagnification bool) {
-	o.Ptr().Send(_nSScrollViewSelSetAllowsMagnification, allowsMagnification)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetAllowsMagnification, allowsMagnification)
+	})
 }
 
 func (o *NSScrollView) Magnification() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSScrollViewSelMagnification)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSScrollViewSelMagnification)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetMagnification(magnification float64) {
-	o.Ptr().Send(_nSScrollViewSelSetMagnification, magnification)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetMagnification, magnification)
+	})
 }
 
 func (o *NSScrollView) MaxMagnification() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSScrollViewSelMaxMagnification)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSScrollViewSelMaxMagnification)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetMaxMagnification(maxMagnification float64) {
-	o.Ptr().Send(_nSScrollViewSelSetMaxMagnification, maxMagnification)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetMaxMagnification, maxMagnification)
+	})
 }
 
 func (o *NSScrollView) MinMagnification() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSScrollViewSelMinMagnification)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSScrollViewSelMinMagnification)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetMinMagnification(minMagnification float64) {
-	o.Ptr().Send(_nSScrollViewSelSetMinMagnification, minMagnification)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetMinMagnification, minMagnification)
+	})
 }
 
 func (o *NSScrollView) AutomaticallyAdjustsContentInsets() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSScrollViewSelAutomaticallyAdjustsContentInsets)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSScrollViewSelAutomaticallyAdjustsContentInsets)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets bool) {
-	o.Ptr().Send(_nSScrollViewSelSetAutomaticallyAdjustsContentInsets, automaticallyAdjustsContentInsets)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetAutomaticallyAdjustsContentInsets, automaticallyAdjustsContentInsets)
+	})
 }
 
 func (o *NSScrollView) ContentInsets() foundation.NSEdgeInsets {
-	_ret := objc.Send[foundation.NSEdgeInsets](o.Ptr(), _nSScrollViewSelContentInsets)
-	return _ret
+	var _mainthread0 foundation.NSEdgeInsets
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSEdgeInsets {
+			_ret := objc.Send[foundation.NSEdgeInsets](o.Ptr(), _nSScrollViewSelContentInsets)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetContentInsets(contentInsets foundation.NSEdgeInsets) {
-	o.Ptr().Send(_nSScrollViewSelSetContentInsets, contentInsets)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetContentInsets, contentInsets)
+	})
 }
 
 func (o *NSScrollView) ScrollerInsets() foundation.NSEdgeInsets {
-	_ret := objc.Send[foundation.NSEdgeInsets](o.Ptr(), _nSScrollViewSelScrollerInsets)
-	return _ret
+	var _mainthread0 foundation.NSEdgeInsets
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSEdgeInsets {
+			_ret := objc.Send[foundation.NSEdgeInsets](o.Ptr(), _nSScrollViewSelScrollerInsets)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetScrollerInsets(scrollerInsets foundation.NSEdgeInsets) {
-	o.Ptr().Send(_nSScrollViewSelSetScrollerInsets, scrollerInsets)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetScrollerInsets, scrollerInsets)
+	})
 }
 
 func NSScrollViewRulerViewClass() objc.Class {
-	_ret := objc.Send[objc.Class](objc.ID(_clsNSScrollView), _nSScrollViewSelRulerViewClass)
-	return _ret
+	var _mainthread0 objc.Class
+	purego.Main(func() {
+		_mainthread0 = func() objc.Class {
+			_ret := objc.Send[objc.Class](objc.ID(_clsNSScrollView), _nSScrollViewSelRulerViewClass)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func NSScrollViewSetRulerViewClass(rulerViewClass objc.Class) {
-	objc.ID(_clsNSScrollView).Send(_nSScrollViewSelSetRulerViewClass, rulerViewClass)
+	purego.Main(func() {
+		objc.ID(_clsNSScrollView).Send(_nSScrollViewSelSetRulerViewClass, rulerViewClass)
+	})
 }
 
 func (o *NSScrollView) RulersVisible() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSScrollViewSelRulersVisible)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSScrollViewSelRulersVisible)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetRulersVisible(rulersVisible bool) {
-	o.Ptr().Send(_nSScrollViewSelSetRulersVisible, rulersVisible)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetRulersVisible, rulersVisible)
+	})
 }
 
 func (o *NSScrollView) HasHorizontalRuler() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSScrollViewSelHasHorizontalRuler)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSScrollViewSelHasHorizontalRuler)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetHasHorizontalRuler(hasHorizontalRuler bool) {
-	o.Ptr().Send(_nSScrollViewSelSetHasHorizontalRuler, hasHorizontalRuler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetHasHorizontalRuler, hasHorizontalRuler)
+	})
 }
 
 func (o *NSScrollView) HasVerticalRuler() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSScrollViewSelHasVerticalRuler)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSScrollViewSelHasVerticalRuler)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetHasVerticalRuler(hasVerticalRuler bool) {
-	o.Ptr().Send(_nSScrollViewSelSetHasVerticalRuler, hasVerticalRuler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetHasVerticalRuler, hasVerticalRuler)
+	})
 }
 
 func (o *NSScrollView) HorizontalRulerView() *NSRulerView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelHorizontalRulerView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSRulerViewFromID(_ret)
+	var _mainthread0 *NSRulerView
+	purego.Main(func() {
+		_mainthread0 = func() *NSRulerView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelHorizontalRulerView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSRulerViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetHorizontalRulerView(horizontalRulerView *NSRulerView) {
-	o.Ptr().Send(_nSScrollViewSelSetHorizontalRulerView, horizontalRulerView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetHorizontalRulerView, horizontalRulerView.Ptr())
+	})
 }
 
 func (o *NSScrollView) VerticalRulerView() *NSRulerView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelVerticalRulerView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSRulerViewFromID(_ret)
+	var _mainthread0 *NSRulerView
+	purego.Main(func() {
+		_mainthread0 = func() *NSRulerView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelVerticalRulerView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSRulerViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetVerticalRulerView(verticalRulerView *NSRulerView) {
-	o.Ptr().Send(_nSScrollViewSelSetVerticalRulerView, verticalRulerView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetVerticalRulerView, verticalRulerView.Ptr())
+	})
 }
 
 func (o *NSScrollView) FindBarPosition() NSScrollViewFindBarPosition {
-	_ret := objc.Send[NSScrollViewFindBarPosition](o.Ptr(), _nSScrollViewSelFindBarPosition)
-	return _ret
+	var _mainthread0 NSScrollViewFindBarPosition
+	purego.Main(func() {
+		_mainthread0 = func() NSScrollViewFindBarPosition {
+			_ret := objc.Send[NSScrollViewFindBarPosition](o.Ptr(), _nSScrollViewSelFindBarPosition)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrollView) SetFindBarPosition(findBarPosition NSScrollViewFindBarPosition) {
-	o.Ptr().Send(_nSScrollViewSelSetFindBarPosition, findBarPosition)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollViewSelSetFindBarPosition, findBarPosition)
+	})
 }

@@ -37,28 +37,52 @@ func NSClickGestureRecognizerFromID(id objc.ID) *NSClickGestureRecognizer {
 }
 
 func (o *NSClickGestureRecognizer) ButtonMask() uint {
-	_ret := objc.Send[uint](o.Ptr(), _nSClickGestureRecognizerSelButtonMask)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _nSClickGestureRecognizerSelButtonMask)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSClickGestureRecognizer) SetButtonMask(buttonMask uint) {
-	o.Ptr().Send(_nSClickGestureRecognizerSelSetButtonMask, buttonMask)
+	purego.Main(func() {
+		o.Ptr().Send(_nSClickGestureRecognizerSelSetButtonMask, buttonMask)
+	})
 }
 
 func (o *NSClickGestureRecognizer) NumberOfClicksRequired() int {
-	_ret := objc.Send[int](o.Ptr(), _nSClickGestureRecognizerSelNumberOfClicksRequired)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSClickGestureRecognizerSelNumberOfClicksRequired)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSClickGestureRecognizer) SetNumberOfClicksRequired(numberOfClicksRequired int) {
-	o.Ptr().Send(_nSClickGestureRecognizerSelSetNumberOfClicksRequired, numberOfClicksRequired)
+	purego.Main(func() {
+		o.Ptr().Send(_nSClickGestureRecognizerSelSetNumberOfClicksRequired, numberOfClicksRequired)
+	})
 }
 
 func (o *NSClickGestureRecognizer) NumberOfTouchesRequired() int {
-	_ret := objc.Send[int](o.Ptr(), _nSClickGestureRecognizerSelNumberOfTouchesRequired)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSClickGestureRecognizerSelNumberOfTouchesRequired)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSClickGestureRecognizer) SetNumberOfTouchesRequired(numberOfTouchesRequired int) {
-	o.Ptr().Send(_nSClickGestureRecognizerSelSetNumberOfTouchesRequired, numberOfTouchesRequired)
+	purego.Main(func() {
+		o.Ptr().Send(_nSClickGestureRecognizerSelSetNumberOfTouchesRequired, numberOfTouchesRequired)
+	})
 }

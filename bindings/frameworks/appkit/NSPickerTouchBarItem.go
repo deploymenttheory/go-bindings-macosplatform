@@ -61,153 +61,271 @@ func NSPickerTouchBarItemFromID(id objc.ID) *NSPickerTouchBarItem {
 }
 
 func NSPickerTouchBarItemPickerTouchBarItemWithIdentifierLabelsSelectionModeTargetAction(identifier *foundation.NSString, labels *foundation.NSArray[*foundation.NSString], selectionMode NSPickerTouchBarItemSelectionMode, target objc.ID, action objc.SEL) *NSPickerTouchBarItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSPickerTouchBarItem), _nSPickerTouchBarItemSelPickerTouchBarItemWithIdentifierLabelsSelectionModeTargetAction, identifier.Ptr(), labels.Ptr(), selectionMode, target, action)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSPickerTouchBarItemFromID(_ret)
+	var _mainthread0 *NSPickerTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSPickerTouchBarItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSPickerTouchBarItem), _nSPickerTouchBarItemSelPickerTouchBarItemWithIdentifierLabelsSelectionModeTargetAction, identifier.Ptr(), labels.Ptr(), selectionMode, target, action)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSPickerTouchBarItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func NSPickerTouchBarItemPickerTouchBarItemWithIdentifierImagesSelectionModeTargetAction(identifier *foundation.NSString, images *foundation.NSArray[*NSImage], selectionMode NSPickerTouchBarItemSelectionMode, target objc.ID, action objc.SEL) *NSPickerTouchBarItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSPickerTouchBarItem), _nSPickerTouchBarItemSelPickerTouchBarItemWithIdentifierImagesSelectionModeTargetAction, identifier.Ptr(), images.Ptr(), selectionMode, target, action)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSPickerTouchBarItemFromID(_ret)
+	var _mainthread0 *NSPickerTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSPickerTouchBarItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSPickerTouchBarItem), _nSPickerTouchBarItemSelPickerTouchBarItemWithIdentifierImagesSelectionModeTargetAction, identifier.Ptr(), images.Ptr(), selectionMode, target, action)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSPickerTouchBarItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPickerTouchBarItem) SetImageAtIndex(image *NSImage, index int) {
-	o.Ptr().Send(_nSPickerTouchBarItemSelSetImageAtIndex, image.Ptr(), index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPickerTouchBarItemSelSetImageAtIndex, image.Ptr(), index)
+	})
 }
 
 func (o *NSPickerTouchBarItem) ImageAtIndex(index int) *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPickerTouchBarItemSelImageAtIndex, index)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPickerTouchBarItemSelImageAtIndex, index)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPickerTouchBarItem) SetLabelAtIndex(label *foundation.NSString, index int) {
-	o.Ptr().Send(_nSPickerTouchBarItemSelSetLabelAtIndex, label.Ptr(), index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPickerTouchBarItemSelSetLabelAtIndex, label.Ptr(), index)
+	})
 }
 
 func (o *NSPickerTouchBarItem) LabelAtIndex(index int) *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPickerTouchBarItemSelLabelAtIndex, index)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPickerTouchBarItemSelLabelAtIndex, index)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPickerTouchBarItem) SetEnabledAtIndex(enabled bool, index int) {
-	o.Ptr().Send(_nSPickerTouchBarItemSelSetEnabledAtIndex, enabled, index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPickerTouchBarItemSelSetEnabledAtIndex, enabled, index)
+	})
 }
 
 func (o *NSPickerTouchBarItem) IsEnabledAtIndex(index int) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSPickerTouchBarItemSelIsEnabledAtIndex, index)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSPickerTouchBarItemSelIsEnabledAtIndex, index)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPickerTouchBarItem) ControlRepresentation() NSPickerTouchBarItemControlRepresentation {
-	_ret := objc.Send[NSPickerTouchBarItemControlRepresentation](o.Ptr(), _nSPickerTouchBarItemSelControlRepresentation)
-	return _ret
+	var _mainthread0 NSPickerTouchBarItemControlRepresentation
+	purego.Main(func() {
+		_mainthread0 = func() NSPickerTouchBarItemControlRepresentation {
+			_ret := objc.Send[NSPickerTouchBarItemControlRepresentation](o.Ptr(), _nSPickerTouchBarItemSelControlRepresentation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPickerTouchBarItem) SetControlRepresentation(controlRepresentation NSPickerTouchBarItemControlRepresentation) {
-	o.Ptr().Send(_nSPickerTouchBarItemSelSetControlRepresentation, controlRepresentation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPickerTouchBarItemSelSetControlRepresentation, controlRepresentation)
+	})
 }
 
 func (o *NSPickerTouchBarItem) CollapsedRepresentationLabel() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPickerTouchBarItemSelCollapsedRepresentationLabel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPickerTouchBarItemSelCollapsedRepresentationLabel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPickerTouchBarItem) SetCollapsedRepresentationLabel(collapsedRepresentationLabel *foundation.NSString) {
-	o.Ptr().Send(_nSPickerTouchBarItemSelSetCollapsedRepresentationLabel, collapsedRepresentationLabel.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPickerTouchBarItemSelSetCollapsedRepresentationLabel, collapsedRepresentationLabel.Ptr())
+	})
 }
 
 func (o *NSPickerTouchBarItem) CollapsedRepresentationImage() *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPickerTouchBarItemSelCollapsedRepresentationImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPickerTouchBarItemSelCollapsedRepresentationImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPickerTouchBarItem) SetCollapsedRepresentationImage(collapsedRepresentationImage *NSImage) {
-	o.Ptr().Send(_nSPickerTouchBarItemSelSetCollapsedRepresentationImage, collapsedRepresentationImage.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPickerTouchBarItemSelSetCollapsedRepresentationImage, collapsedRepresentationImage.Ptr())
+	})
 }
 
 func (o *NSPickerTouchBarItem) SelectedIndex() int {
-	_ret := objc.Send[int](o.Ptr(), _nSPickerTouchBarItemSelSelectedIndex)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSPickerTouchBarItemSelSelectedIndex)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPickerTouchBarItem) SetSelectedIndex(selectedIndex int) {
-	o.Ptr().Send(_nSPickerTouchBarItemSelSetSelectedIndex, selectedIndex)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPickerTouchBarItemSelSetSelectedIndex, selectedIndex)
+	})
 }
 
 func (o *NSPickerTouchBarItem) SelectionColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPickerTouchBarItemSelSelectionColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPickerTouchBarItemSelSelectionColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPickerTouchBarItem) SetSelectionColor(selectionColor *NSColor) {
-	o.Ptr().Send(_nSPickerTouchBarItemSelSetSelectionColor, selectionColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPickerTouchBarItemSelSetSelectionColor, selectionColor.Ptr())
+	})
 }
 
 func (o *NSPickerTouchBarItem) SelectionMode() NSPickerTouchBarItemSelectionMode {
-	_ret := objc.Send[NSPickerTouchBarItemSelectionMode](o.Ptr(), _nSPickerTouchBarItemSelSelectionMode)
-	return _ret
+	var _mainthread0 NSPickerTouchBarItemSelectionMode
+	purego.Main(func() {
+		_mainthread0 = func() NSPickerTouchBarItemSelectionMode {
+			_ret := objc.Send[NSPickerTouchBarItemSelectionMode](o.Ptr(), _nSPickerTouchBarItemSelSelectionMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPickerTouchBarItem) SetSelectionMode(selectionMode NSPickerTouchBarItemSelectionMode) {
-	o.Ptr().Send(_nSPickerTouchBarItemSelSetSelectionMode, selectionMode)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPickerTouchBarItemSelSetSelectionMode, selectionMode)
+	})
 }
 
 func (o *NSPickerTouchBarItem) NumberOfOptions() int {
-	_ret := objc.Send[int](o.Ptr(), _nSPickerTouchBarItemSelNumberOfOptions)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSPickerTouchBarItemSelNumberOfOptions)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPickerTouchBarItem) SetNumberOfOptions(numberOfOptions int) {
-	o.Ptr().Send(_nSPickerTouchBarItemSelSetNumberOfOptions, numberOfOptions)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPickerTouchBarItemSelSetNumberOfOptions, numberOfOptions)
+	})
 }
 
 func (o *NSPickerTouchBarItem) Target() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPickerTouchBarItemSelTarget)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPickerTouchBarItemSelTarget)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPickerTouchBarItem) SetTarget(target objc.ID) {
-	o.Ptr().Send(_nSPickerTouchBarItemSelSetTarget, target)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPickerTouchBarItemSelSetTarget, target)
+	})
 }
 
 func (o *NSPickerTouchBarItem) Action() objc.SEL {
-	_ret := objc.Send[objc.SEL](o.Ptr(), _nSPickerTouchBarItemSelAction)
-	return _ret
+	var _mainthread0 objc.SEL
+	purego.Main(func() {
+		_mainthread0 = func() objc.SEL {
+			_ret := objc.Send[objc.SEL](o.Ptr(), _nSPickerTouchBarItemSelAction)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPickerTouchBarItem) SetAction(action objc.SEL) {
-	o.Ptr().Send(_nSPickerTouchBarItemSelSetAction, action)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPickerTouchBarItemSelSetAction, action)
+	})
 }
 
 func (o *NSPickerTouchBarItem) IsEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSPickerTouchBarItemSelIsEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSPickerTouchBarItemSelIsEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPickerTouchBarItem) SetEnabled(enabled bool) {
-	o.Ptr().Send(_nSPickerTouchBarItemSelSetEnabled, enabled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPickerTouchBarItemSelSetEnabled, enabled)
+	})
 }
 
 func (o *NSPickerTouchBarItem) SetCustomizationLabel(customizationLabel *foundation.NSString) {
-	o.Ptr().Send(_nSPickerTouchBarItemSelSetCustomizationLabel, customizationLabel.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPickerTouchBarItemSelSetCustomizationLabel, customizationLabel.Ptr())
+	})
 }

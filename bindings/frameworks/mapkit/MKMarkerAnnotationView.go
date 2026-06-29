@@ -49,88 +49,152 @@ func MKMarkerAnnotationViewFromID(id objc.ID) *MKMarkerAnnotationView {
 }
 
 func (o *MKMarkerAnnotationView) TitleVisibility() MKFeatureVisibility {
-	_ret := objc.Send[MKFeatureVisibility](o.Ptr(), _mKMarkerAnnotationViewSelTitleVisibility)
-	return _ret
+	var _mainthread0 MKFeatureVisibility
+	purego.Main(func() {
+		_mainthread0 = func() MKFeatureVisibility {
+			_ret := objc.Send[MKFeatureVisibility](o.Ptr(), _mKMarkerAnnotationViewSelTitleVisibility)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMarkerAnnotationView) SetTitleVisibility(titleVisibility MKFeatureVisibility) {
-	o.Ptr().Send(_mKMarkerAnnotationViewSelSetTitleVisibility, titleVisibility)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMarkerAnnotationViewSelSetTitleVisibility, titleVisibility)
+	})
 }
 
 func (o *MKMarkerAnnotationView) SubtitleVisibility() MKFeatureVisibility {
-	_ret := objc.Send[MKFeatureVisibility](o.Ptr(), _mKMarkerAnnotationViewSelSubtitleVisibility)
-	return _ret
+	var _mainthread0 MKFeatureVisibility
+	purego.Main(func() {
+		_mainthread0 = func() MKFeatureVisibility {
+			_ret := objc.Send[MKFeatureVisibility](o.Ptr(), _mKMarkerAnnotationViewSelSubtitleVisibility)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMarkerAnnotationView) SetSubtitleVisibility(subtitleVisibility MKFeatureVisibility) {
-	o.Ptr().Send(_mKMarkerAnnotationViewSelSetSubtitleVisibility, subtitleVisibility)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMarkerAnnotationViewSelSetSubtitleVisibility, subtitleVisibility)
+	})
 }
 
 func (o *MKMarkerAnnotationView) MarkerTintColor() *appkit.NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKMarkerAnnotationViewSelMarkerTintColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSColorFromID(_ret)
+	var _mainthread0 *appkit.NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKMarkerAnnotationViewSelMarkerTintColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMarkerAnnotationView) SetMarkerTintColor(markerTintColor *appkit.NSColor) {
-	o.Ptr().Send(_mKMarkerAnnotationViewSelSetMarkerTintColor, markerTintColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKMarkerAnnotationViewSelSetMarkerTintColor, markerTintColor.Ptr())
+	})
 }
 
 func (o *MKMarkerAnnotationView) GlyphTintColor() *appkit.NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKMarkerAnnotationViewSelGlyphTintColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSColorFromID(_ret)
+	var _mainthread0 *appkit.NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKMarkerAnnotationViewSelGlyphTintColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMarkerAnnotationView) SetGlyphTintColor(glyphTintColor *appkit.NSColor) {
-	o.Ptr().Send(_mKMarkerAnnotationViewSelSetGlyphTintColor, glyphTintColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKMarkerAnnotationViewSelSetGlyphTintColor, glyphTintColor.Ptr())
+	})
 }
 
 func (o *MKMarkerAnnotationView) GlyphText() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKMarkerAnnotationViewSelGlyphText)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKMarkerAnnotationViewSelGlyphText)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMarkerAnnotationView) SetGlyphText(glyphText *foundation.NSString) {
-	o.Ptr().Send(_mKMarkerAnnotationViewSelSetGlyphText, glyphText.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKMarkerAnnotationViewSelSetGlyphText, glyphText.Ptr())
+	})
 }
 
 func (o *MKMarkerAnnotationView) GlyphImage() *appkit.NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKMarkerAnnotationViewSelGlyphImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSImageFromID(_ret)
+	var _mainthread0 *appkit.NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKMarkerAnnotationViewSelGlyphImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMarkerAnnotationView) SetGlyphImage(glyphImage *appkit.NSImage) {
-	o.Ptr().Send(_mKMarkerAnnotationViewSelSetGlyphImage, glyphImage.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKMarkerAnnotationViewSelSetGlyphImage, glyphImage.Ptr())
+	})
 }
 
 func (o *MKMarkerAnnotationView) SelectedGlyphImage() *appkit.NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKMarkerAnnotationViewSelSelectedGlyphImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSImageFromID(_ret)
+	var _mainthread0 *appkit.NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKMarkerAnnotationViewSelSelectedGlyphImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMarkerAnnotationView) SetSelectedGlyphImage(selectedGlyphImage *appkit.NSImage) {
-	o.Ptr().Send(_mKMarkerAnnotationViewSelSetSelectedGlyphImage, selectedGlyphImage.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKMarkerAnnotationViewSelSetSelectedGlyphImage, selectedGlyphImage.Ptr())
+	})
 }
 
 func (o *MKMarkerAnnotationView) AnimatesWhenAdded() bool {
-	_ret := objc.Send[bool](o.Ptr(), _mKMarkerAnnotationViewSelAnimatesWhenAdded)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _mKMarkerAnnotationViewSelAnimatesWhenAdded)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMarkerAnnotationView) SetAnimatesWhenAdded(animatesWhenAdded bool) {
-	o.Ptr().Send(_mKMarkerAnnotationViewSelSetAnimatesWhenAdded, animatesWhenAdded)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMarkerAnnotationViewSelSetAnimatesWhenAdded, animatesWhenAdded)
+	})
 }

@@ -53,111 +53,203 @@ func NSSearchFieldFromID(id objc.ID) *NSSearchField {
 }
 
 func (o *NSSearchField) SearchTextBounds() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSearchFieldSelSearchTextBounds)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSearchFieldSelSearchTextBounds)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSearchField) SearchButtonBounds() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSearchFieldSelSearchButtonBounds)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSearchFieldSelSearchButtonBounds)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSearchField) CancelButtonBounds() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSearchFieldSelCancelButtonBounds)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSearchFieldSelCancelButtonBounds)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSearchField) RecentSearches() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldSelRecentSearches)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldSelRecentSearches)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSearchField) SetRecentSearches(recentSearches *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSSearchFieldSelSetRecentSearches, recentSearches.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSearchFieldSelSetRecentSearches, recentSearches.Ptr())
+	})
 }
 
 func (o *NSSearchField) RecentsAutosaveName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldSelRecentsAutosaveName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldSelRecentsAutosaveName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSearchField) SetRecentsAutosaveName(recentsAutosaveName *foundation.NSString) {
-	o.Ptr().Send(_nSSearchFieldSelSetRecentsAutosaveName, recentsAutosaveName.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSearchFieldSelSetRecentsAutosaveName, recentsAutosaveName.Ptr())
+	})
 }
 
 func (o *NSSearchField) SearchMenuTemplate() *NSMenu {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldSelSearchMenuTemplate)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMenuFromID(_ret)
+	var _mainthread0 *NSMenu
+	purego.Main(func() {
+		_mainthread0 = func() *NSMenu {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldSelSearchMenuTemplate)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMenuFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSearchField) SetSearchMenuTemplate(searchMenuTemplate *NSMenu) {
-	o.Ptr().Send(_nSSearchFieldSelSetSearchMenuTemplate, searchMenuTemplate.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSearchFieldSelSetSearchMenuTemplate, searchMenuTemplate.Ptr())
+	})
 }
 
 func (o *NSSearchField) SendsWholeSearchString() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSearchFieldSelSendsWholeSearchString)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSearchFieldSelSendsWholeSearchString)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSearchField) SetSendsWholeSearchString(sendsWholeSearchString bool) {
-	o.Ptr().Send(_nSSearchFieldSelSetSendsWholeSearchString, sendsWholeSearchString)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSearchFieldSelSetSendsWholeSearchString, sendsWholeSearchString)
+	})
 }
 
 func (o *NSSearchField) MaximumRecents() int {
-	_ret := objc.Send[int](o.Ptr(), _nSSearchFieldSelMaximumRecents)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSSearchFieldSelMaximumRecents)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSearchField) SetMaximumRecents(maximumRecents int) {
-	o.Ptr().Send(_nSSearchFieldSelSetMaximumRecents, maximumRecents)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSearchFieldSelSetMaximumRecents, maximumRecents)
+	})
 }
 
 func (o *NSSearchField) SendsSearchStringImmediately() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSearchFieldSelSendsSearchStringImmediately)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSearchFieldSelSendsSearchStringImmediately)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSearchField) SetSendsSearchStringImmediately(sendsSearchStringImmediately bool) {
-	o.Ptr().Send(_nSSearchFieldSelSetSendsSearchStringImmediately, sendsSearchStringImmediately)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSearchFieldSelSetSendsSearchStringImmediately, sendsSearchStringImmediately)
+	})
 }
 
 // The rectangle for the search text within the bounds of the field.
 // Deprecated: since macOS 12.0.
 func (o *NSSearchField) RectForSearchTextWhenCentered(isCentered bool) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSearchFieldSelRectForSearchTextWhenCentered, isCentered)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSearchFieldSelRectForSearchTextWhenCentered, isCentered)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The rectangle for the search button within the bounds of the search field.
 // Deprecated: since macOS 12.0.
 func (o *NSSearchField) RectForSearchButtonWhenCentered(isCentered bool) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSearchFieldSelRectForSearchButtonWhenCentered, isCentered)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSearchFieldSelRectForSearchButtonWhenCentered, isCentered)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The rectangle for the cancel button within the bounds of the search field.
 // Deprecated: since macOS 12.0.
 func (o *NSSearchField) RectForCancelButtonWhenCentered(isCentered bool) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSearchFieldSelRectForCancelButtonWhenCentered, isCentered)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSearchFieldSelRectForCancelButtonWhenCentered, isCentered)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: The placeholder centering UI design is no longer available. Setting this property is no-op.
 func (o *NSSearchField) CentersPlaceholder() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSearchFieldSelCentersPlaceholder)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSearchFieldSelCentersPlaceholder)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: The placeholder centering UI design is no longer available. Setting this property is no-op.
 func (o *NSSearchField) SetCentersPlaceholder(centersPlaceholder bool) {
-	o.Ptr().Send(_nSSearchFieldSelSetCentersPlaceholder, centersPlaceholder)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSearchFieldSelSetCentersPlaceholder, centersPlaceholder)
+	})
 }

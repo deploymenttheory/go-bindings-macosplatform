@@ -40,26 +40,46 @@ func SFKeychainSavePanelFromID(id objc.ID) *SFKeychainSavePanel {
 
 // Returns a shared keychain save panel object.
 func SFKeychainSavePanelSharedKeychainSavePanel() *SFKeychainSavePanel {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSFKeychainSavePanel), _sFKeychainSavePanelSelSharedKeychainSavePanel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SFKeychainSavePanelFromID(_ret)
+	var _mainthread0 *SFKeychainSavePanel
+	purego.Main(func() {
+		_mainthread0 = func() *SFKeychainSavePanel {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSFKeychainSavePanel), _sFKeychainSavePanelSelSharedKeychainSavePanel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SFKeychainSavePanelFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies the password for the keychain that will be created.
 func (o *SFKeychainSavePanel) SetPassword(password *foundation.NSString) {
-	o.Ptr().Send(_sFKeychainSavePanelSelSetPassword, password.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sFKeychainSavePanelSelSetPassword, password.Ptr())
+	})
 }
 
 // Returns the keychain created by the keychain save panel.
 func (o *SFKeychainSavePanel) Keychain() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sFKeychainSavePanelSelKeychain)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sFKeychainSavePanelSelKeychain)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the last error encountered by the keychain save panel.
 func (o *SFKeychainSavePanel) Error() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sFKeychainSavePanelSelError)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sFKeychainSavePanelSelError)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

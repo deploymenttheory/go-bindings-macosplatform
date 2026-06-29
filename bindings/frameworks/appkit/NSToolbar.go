@@ -79,272 +79,454 @@ func NSToolbarFromID(id objc.ID) *NSToolbar {
 
 // Creates a newly allocated toolbar with the specified identifier.
 func (o *NSToolbar) InitWithIdentifier(identifier *foundation.NSString) *NSToolbar {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelInitWithIdentifier, identifier.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSToolbarFromID(_ret)
+	var _mainthread0 *NSToolbar
+	purego.Main(func() {
+		_mainthread0 = func() *NSToolbar {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelInitWithIdentifier, identifier.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSToolbarFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a new toolbar with an empty identifier string.
 func (o *NSToolbar) Init() *NSToolbar {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelInit)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSToolbarFromID(_ret)
+	var _mainthread0 *NSToolbar
+	purego.Main(func() {
+		_mainthread0 = func() *NSToolbar {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelInit)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSToolbarFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Inserts an item into the toolbar at the specified index.
 func (o *NSToolbar) InsertItemWithItemIdentifierAtIndex(itemIdentifier *foundation.NSString, index int) {
-	o.Ptr().Send(_nSToolbarSelInsertItemWithItemIdentifierAtIndex, itemIdentifier.Ptr(), index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarSelInsertItemWithItemIdentifierAtIndex, itemIdentifier.Ptr(), index)
+	})
 }
 
 // Removes the item at the specified index in the toolbar.
 func (o *NSToolbar) RemoveItemAtIndex(index int) {
-	o.Ptr().Send(_nSToolbarSelRemoveItemAtIndex, index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarSelRemoveItemAtIndex, index)
+	})
 }
 
 // Removes the item with matching itemIdentifier in the receiving toolbar. If multiple items share the same identifier (as is the case with space items) all matching items will be removed. To remove only a single space item, use -removeItemAtIndex: instead.
 func (o *NSToolbar) RemoveItemWithItemIdentifier(itemIdentifier *foundation.NSString) {
-	o.Ptr().Send(_nSToolbarSelRemoveItemWithItemIdentifier, itemIdentifier.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarSelRemoveItemWithItemIdentifier, itemIdentifier.Ptr())
+	})
 }
 
 // Displays the toolbar’s customization palette and handles any user-initiated customizations.
 func (o *NSToolbar) RunCustomizationPalette(sender objc.ID) {
-	o.Ptr().Send(_nSToolbarSelRunCustomizationPalette, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarSelRunCustomizationPalette, sender)
+	})
 }
 
 // Validates the toolbar’s visible items during a window update.
 func (o *NSToolbar) ValidateVisibleItems() {
-	o.Ptr().Send(_nSToolbarSelValidateVisibleItems)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarSelValidateVisibleItems)
+	})
 }
 
 // Customizable toolbars must have a delegate, and must implement the required `NSToolbarDelegate` methods.
 func (o *NSToolbar) Delegate() NSToolbarDelegate {
-	_ret := objc.Send[NSToolbarDelegate](o.Ptr(), _nSToolbarSelDelegate)
-	return _ret
+	var _mainthread0 NSToolbarDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSToolbarDelegate {
+			_ret := objc.Send[NSToolbarDelegate](o.Ptr(), _nSToolbarSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbar) SetDelegate(delegate NSToolbarDelegate) {
-	o.Ptr().Send(_nSToolbarSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarSelSetDelegate, delegate)
+	})
 }
 
 // Toggles the visibility of the toolbar. This property may be modified by the user in toolbars with `allowsUserCustomization` enabled. This property is key value observable on macOS 14.0 and higher.
 func (o *NSToolbar) IsVisible() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSToolbarSelIsVisible)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSToolbarSelIsVisible)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbar) SetVisible(visible bool) {
-	o.Ptr().Send(_nSToolbarSelSetVisible, visible)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarSelSetVisible, visible)
+	})
 }
 
 // Whether or not the customization palette is currently running. On macOS 15.0 and above this property is key value observable.
 func (o *NSToolbar) CustomizationPaletteIsRunning() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSToolbarSelCustomizationPaletteIsRunning)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSToolbarSelCustomizationPaletteIsRunning)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The current display mode of items in the toolbar. In toolbars with `allowsDisplayModeCustomization` enabled this is a user modifiable property. This property is key value observable.
 func (o *NSToolbar) DisplayMode() NSToolbarDisplayMode {
-	_ret := objc.Send[NSToolbarDisplayMode](o.Ptr(), _nSToolbarSelDisplayMode)
-	return _ret
+	var _mainthread0 NSToolbarDisplayMode
+	purego.Main(func() {
+		_mainthread0 = func() NSToolbarDisplayMode {
+			_ret := objc.Send[NSToolbarDisplayMode](o.Ptr(), _nSToolbarSelDisplayMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbar) SetDisplayMode(displayMode NSToolbarDisplayMode) {
-	o.Ptr().Send(_nSToolbarSelSetDisplayMode, displayMode)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarSelSetDisplayMode, displayMode)
+	})
 }
 
 // Sets the toolbar's selected item by identifier. Use this to force an item identifier to be selected. Toolbar manages selection of image items automatically. This method can be used to select identifiers of custom view items, or to force a selection change. See `-toolbarSelectableItemIdentifiers:` delegate method for more details. This property is key value observable.
 func (o *NSToolbar) SelectedItemIdentifier() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelSelectedItemIdentifier)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelSelectedItemIdentifier)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbar) SetSelectedItemIdentifier(selectedItemIdentifier *foundation.NSString) {
-	o.Ptr().Send(_nSToolbarSelSetSelectedItemIdentifier, selectedItemIdentifier.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarSelSetSelectedItemIdentifier, selectedItemIdentifier.Ptr())
+	})
 }
 
 // This flag controls whether or not users can configure the toolbar by dragging items around, and whether or not the customization palette can be used. The default value is NO, but can be changed at any time. For instance, a developer may not want users to be able to edit the toolbar while some event is being processed.
 func (o *NSToolbar) AllowsUserCustomization() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSToolbarSelAllowsUserCustomization)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSToolbarSelAllowsUserCustomization)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbar) SetAllowsUserCustomization(allowsUserCustomization bool) {
-	o.Ptr().Send(_nSToolbarSelSetAllowsUserCustomization, allowsUserCustomization)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarSelSetAllowsUserCustomization, allowsUserCustomization)
+	})
 }
 
 // Whether or not the user is allowed to change display modes at run time. This functionality is independent of customizing the order of the items themselves. Only disable when the functionality or legibility of your toolbar could not be improved by another display mode. The user's selection will be persisted using the toolbar's `identifier` when `autosavesConfiguration` is enabled. The default is YES for apps linked on macOS 15.0 and above.
 func (o *NSToolbar) AllowsDisplayModeCustomization() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSToolbarSelAllowsDisplayModeCustomization)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSToolbarSelAllowsDisplayModeCustomization)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbar) SetAllowsDisplayModeCustomization(allowsDisplayModeCustomization bool) {
-	o.Ptr().Send(_nSToolbarSelSetAllowsDisplayModeCustomization, allowsDisplayModeCustomization)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarSelSetAllowsDisplayModeCustomization, allowsDisplayModeCustomization)
+	})
 }
 
 // All toolbars with the same name will share the same display attributes, and item order. If a toolbar autosaves its configuration, the item identifier will be used as the autosave name.
 func (o *NSToolbar) Identifier() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelIdentifier)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelIdentifier)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Allows you to access all current items in the toolbar.
 func (o *NSToolbar) Items() *foundation.NSArray[*NSToolbarItem] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelItems)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSToolbarItem](_ret)
+	var _mainthread0 *foundation.NSArray[*NSToolbarItem]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSToolbarItem] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelItems)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSToolbarItem](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Allows you to access the current visible items (non clipped).
 func (o *NSToolbar) VisibleItems() *foundation.NSArray[*NSToolbarItem] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelVisibleItems)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSToolbarItem](_ret)
+	var _mainthread0 *foundation.NSArray[*NSToolbarItem]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSToolbarItem] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelVisibleItems)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSToolbarItem](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // An array of itemIdentifiers that represent the current items in the toolbar. Setting this property will set the current items in the toolbar by diffing against items that already exist. Use this with great caution if `allowsUserCustomization` is enabled as it will override any customizations the user has made. This property is key value observable.
 func (o *NSToolbar) ItemIdentifiers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelItemIdentifiers)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelItemIdentifiers)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbar) SetItemIdentifiers(itemIdentifiers *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSToolbarSelSetItemIdentifiers, itemIdentifiers.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarSelSetItemIdentifiers, itemIdentifiers.Ptr())
+	})
 }
 
 // Items with centered identifiers will be centered together in the Toolbar relative to the window assuming space allows. The order of items is initially defined by the default set of identifiers, but may be customized by the user. Centered items may not be moved outside of the center set of items by the user. This property is archived.
 func (o *NSToolbar) CenteredItemIdentifiers() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelCenteredItemIdentifiers)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSSetFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSSet[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSSet[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelCenteredItemIdentifiers)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSSetFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbar) SetCenteredItemIdentifiers(centeredItemIdentifiers *foundation.NSSet[*foundation.NSString]) {
-	o.Ptr().Send(_nSToolbarSelSetCenteredItemIdentifiers, centeredItemIdentifiers.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarSelSetCenteredItemIdentifiers, centeredItemIdentifiers.Ptr())
+	})
 }
 
 // If `autosavesConfiguration` is YES, the toolbar will automatically write changes the user makes to user defaults. Customizable toolbars will want to set this flag to YES. Setting this to NO means changes in configuration are not written automatically, however you can use the `configurationDictionary` method to do it yourself. Default is NO.
 func (o *NSToolbar) AutosavesConfiguration() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSToolbarSelAutosavesConfiguration)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSToolbarSelAutosavesConfiguration)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbar) SetAutosavesConfiguration(autosavesConfiguration bool) {
-	o.Ptr().Send(_nSToolbarSelSetAutosavesConfiguration, autosavesConfiguration)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarSelSetAutosavesConfiguration, autosavesConfiguration)
+	})
 }
 
 // When YES, the receiver can dynamically create toolbar items for Action extensions in the toolbar configuration panel. To be included, an extension needs to declare NSExtensionServiceAllowsToolbarItem=YES in its Info.plist. The default value is NO.
 func (o *NSToolbar) AllowsExtensionItems() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSToolbarSelAllowsExtensionItems)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSToolbarSelAllowsExtensionItems)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbar) SetAllowsExtensionItems(allowsExtensionItems bool) {
-	o.Ptr().Send(_nSToolbarSelSetAllowsExtensionItems, allowsExtensionItems)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarSelSetAllowsExtensionItems, allowsExtensionItems)
+	})
 }
 
 // Specifies the new configuration details for the toolbar.
 // Deprecated: Use -setItemIdentifiers: and -setDisplayMode: instead.
 func (o *NSToolbar) SetConfigurationFromDictionary(configDict *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSToolbarSelSetConfigurationFromDictionary, configDict.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarSelSetConfigurationFromDictionary, configDict.Ptr())
+	})
 }
 
 // Deprecated: NSToolbarSizeMode is no longer recommended and will be ignored in the future
 func (o *NSToolbar) SizeMode() NSToolbarSizeMode {
-	_ret := objc.Send[NSToolbarSizeMode](o.Ptr(), _nSToolbarSelSizeMode)
-	return _ret
+	var _mainthread0 NSToolbarSizeMode
+	purego.Main(func() {
+		_mainthread0 = func() NSToolbarSizeMode {
+			_ret := objc.Send[NSToolbarSizeMode](o.Ptr(), _nSToolbarSelSizeMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: NSToolbarSizeMode is no longer recommended and will be ignored in the future
 func (o *NSToolbar) SetSizeMode(sizeMode NSToolbarSizeMode) {
-	o.Ptr().Send(_nSToolbarSelSetSizeMode, sizeMode)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarSelSetSizeMode, sizeMode)
+	})
 }
 
 // Deprecated: Use the centeredItemIdentifiers property instead
 func (o *NSToolbar) CenteredItemIdentifier() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelCenteredItemIdentifier)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelCenteredItemIdentifier)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use the centeredItemIdentifiers property instead
 func (o *NSToolbar) SetCenteredItemIdentifier(centeredItemIdentifier *foundation.NSString) {
-	o.Ptr().Send(_nSToolbarSelSetCenteredItemIdentifier, centeredItemIdentifier.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarSelSetCenteredItemIdentifier, centeredItemIdentifier.Ptr())
+	})
 }
 
 // Deprecated: Use NSTitlebarAccessoryViewController with NSWindow instead
 func (o *NSToolbar) FullScreenAccessoryView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelFullScreenAccessoryView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelFullScreenAccessoryView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use NSTitlebarAccessoryViewController with NSWindow instead
 func (o *NSToolbar) SetFullScreenAccessoryView(fullScreenAccessoryView *NSView) {
-	o.Ptr().Send(_nSToolbarSelSetFullScreenAccessoryView, fullScreenAccessoryView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarSelSetFullScreenAccessoryView, fullScreenAccessoryView.Ptr())
+	})
 }
 
 // Deprecated: Use NSTitlebarAccessoryViewController and its fullScreenMinHeight property with NSWindow instead.
 func (o *NSToolbar) FullScreenAccessoryViewMinHeight() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSToolbarSelFullScreenAccessoryViewMinHeight)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSToolbarSelFullScreenAccessoryViewMinHeight)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use NSTitlebarAccessoryViewController and its fullScreenMinHeight property with NSWindow instead.
 func (o *NSToolbar) SetFullScreenAccessoryViewMinHeight(fullScreenAccessoryViewMinHeight float64) {
-	o.Ptr().Send(_nSToolbarSelSetFullScreenAccessoryViewMinHeight, fullScreenAccessoryViewMinHeight)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarSelSetFullScreenAccessoryViewMinHeight, fullScreenAccessoryViewMinHeight)
+	})
 }
 
 // Deprecated: Use NSTitlebarAccessoryViewController with NSWindow instead. The max height of a titlebar accessory is implied by its view's height.
 func (o *NSToolbar) FullScreenAccessoryViewMaxHeight() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSToolbarSelFullScreenAccessoryViewMaxHeight)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSToolbarSelFullScreenAccessoryViewMaxHeight)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use NSTitlebarAccessoryViewController with NSWindow instead. The max height of a titlebar accessory is implied by its view's height.
 func (o *NSToolbar) SetFullScreenAccessoryViewMaxHeight(fullScreenAccessoryViewMaxHeight float64) {
-	o.Ptr().Send(_nSToolbarSelSetFullScreenAccessoryViewMaxHeight, fullScreenAccessoryViewMaxHeight)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarSelSetFullScreenAccessoryViewMaxHeight, fullScreenAccessoryViewMaxHeight)
+	})
 }
 
 // Deprecated: No longer supported
 func (o *NSToolbar) ShowsBaselineSeparator() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSToolbarSelShowsBaselineSeparator)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSToolbarSelShowsBaselineSeparator)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: No longer supported
 func (o *NSToolbar) SetShowsBaselineSeparator(showsBaselineSeparator bool) {
-	o.Ptr().Send(_nSToolbarSelSetShowsBaselineSeparator, showsBaselineSeparator)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarSelSetShowsBaselineSeparator, showsBaselineSeparator)
+	})
 }
 
 // Deprecated: Use -itemIdentifiers and -displayMode instead.
 func (o *NSToolbar) ConfigurationDictionary() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelConfigurationDictionary)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
+	var _mainthread0 *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelConfigurationDictionary)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }

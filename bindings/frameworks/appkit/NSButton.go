@@ -100,410 +100,674 @@ func NSButtonFromID(id objc.ID) *NSButton {
 
 // Creates a standard push button with a title and image.
 func NSButtonButtonWithTitleImageTargetAction(title *foundation.NSString, image *NSImage, target objc.ID, action objc.SEL) *NSButton {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSButton), _nSButtonSelButtonWithTitleImageTargetAction, title.Ptr(), image.Ptr(), target, action)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSButtonFromID(_ret)
+	var _mainthread0 *NSButton
+	purego.Main(func() {
+		_mainthread0 = func() *NSButton {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSButton), _nSButtonSelButtonWithTitleImageTargetAction, title.Ptr(), image.Ptr(), target, action)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a standard push button with the title you specify.
 func NSButtonButtonWithTitleTargetAction(title *foundation.NSString, target objc.ID, action objc.SEL) *NSButton {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSButton), _nSButtonSelButtonWithTitleTargetAction, title.Ptr(), target, action)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSButtonFromID(_ret)
+	var _mainthread0 *NSButton
+	purego.Main(func() {
+		_mainthread0 = func() *NSButton {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSButton), _nSButtonSelButtonWithTitleTargetAction, title.Ptr(), target, action)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a standard push button with the image you specify.
 func NSButtonButtonWithImageTargetAction(image *NSImage, target objc.ID, action objc.SEL) *NSButton {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSButton), _nSButtonSelButtonWithImageTargetAction, image.Ptr(), target, action)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSButtonFromID(_ret)
+	var _mainthread0 *NSButton
+	purego.Main(func() {
+		_mainthread0 = func() *NSButton {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSButton), _nSButtonSelButtonWithImageTargetAction, image.Ptr(), target, action)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a standard checkbox with the title you specify.
 func NSButtonCheckboxWithTitleTargetAction(title *foundation.NSString, target objc.ID, action objc.SEL) *NSButton {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSButton), _nSButtonSelCheckboxWithTitleTargetAction, title.Ptr(), target, action)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSButtonFromID(_ret)
+	var _mainthread0 *NSButton
+	purego.Main(func() {
+		_mainthread0 = func() *NSButton {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSButton), _nSButtonSelCheckboxWithTitleTargetAction, title.Ptr(), target, action)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a standard radio button with the title you specify.
 func NSButtonRadioButtonWithTitleTargetAction(title *foundation.NSString, target objc.ID, action objc.SEL) *NSButton {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSButton), _nSButtonSelRadioButtonWithTitleTargetAction, title.Ptr(), target, action)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSButtonFromID(_ret)
+	var _mainthread0 *NSButton
+	purego.Main(func() {
+		_mainthread0 = func() *NSButton {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSButton), _nSButtonSelRadioButtonWithTitleTargetAction, title.Ptr(), target, action)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the button’s type, which affects its user interface and behavior when clicked.
 func (o *NSButton) SetButtonType(type_ NSButtonType) {
-	o.Ptr().Send(_nSButtonSelSetButtonType, type_)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetButtonType, type_)
+	})
 }
 
 // Sets the message delay and interval periods for a continuous button.
 func (o *NSButton) SetPeriodicDelayInterval(delay float32, interval float32) {
-	o.Ptr().Send(_nSButtonSelSetPeriodicDelayInterval, delay, interval)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetPeriodicDelayInterval, delay, interval)
+	})
 }
 
 // Returns by reference the delay and interval periods for a continuous button.
 func (o *NSButton) GetPeriodicDelayInterval(delay *float32, interval *float32) {
-	o.Ptr().Send(_nSButtonSelGetPeriodicDelayInterval, delay, interval)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelGetPeriodicDelayInterval, delay, interval)
+	})
 }
 
 // Sets the button to its next state.
 func (o *NSButton) SetNextState() {
-	o.Ptr().Send(_nSButtonSelSetNextState)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetNextState)
+	})
 }
 
 // Highlights (or unhighlights) the button.
 func (o *NSButton) Highlight(flag bool) {
-	o.Ptr().Send(_nSButtonSelHighlight, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelHighlight, flag)
+	})
 }
 
 // Sets the priority compression options for this button.
 func (o *NSButton) CompressWithPrioritizedCompressionOptions(prioritizedOptions *foundation.NSArray[*NSUserInterfaceCompressionOptions]) {
-	o.Ptr().Send(_nSButtonSelCompressWithPrioritizedCompressionOptions, prioritizedOptions.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelCompressWithPrioritizedCompressionOptions, prioritizedOptions.Ptr())
+	})
 }
 
 // Returns the minimum size of the button by using the compression options.
 func (o *NSButton) MinimumSizeWithPrioritizedCompressionOptions(prioritizedOptions *foundation.NSArray[*NSUserInterfaceCompressionOptions]) corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSButtonSelMinimumSizeWithPrioritizedCompressionOptions, prioritizedOptions.Ptr())
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSButtonSelMinimumSizeWithPrioritizedCompressionOptions, prioritizedOptions.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The title displayed on the button when it’s in an off state, or an empty string if the button does not display a title. By default, a button's title is "Button".
 func (o *NSButton) Title() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The title displayed on the button when it’s in an off state, or an empty string if the button does not display a title. By default, a button's title is "Button".
 func (o *NSButton) SetTitle(title *foundation.NSString) {
-	o.Ptr().Send(_nSButtonSelSetTitle, title.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetTitle, title.Ptr())
+	})
 }
 
 // The button's title, expressed as an attributed string.
 func (o *NSButton) AttributedTitle() *foundation.NSAttributedString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelAttributedTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSAttributedStringFromID(_ret)
+	var _mainthread0 *foundation.NSAttributedString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSAttributedString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelAttributedTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSAttributedStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The button's title, expressed as an attributed string.
 func (o *NSButton) SetAttributedTitle(attributedTitle *foundation.NSAttributedString) {
-	o.Ptr().Send(_nSButtonSelSetAttributedTitle, attributedTitle.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetAttributedTitle, attributedTitle.Ptr())
+	})
 }
 
 // The title that the button displays when the button is in an on state, or an empty string if there is no such title. Note that some button types do not display an alternate title.
 func (o *NSButton) AlternateTitle() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelAlternateTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelAlternateTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The title that the button displays when the button is in an on state, or an empty string if there is no such title. Note that some button types do not display an alternate title.
 func (o *NSButton) SetAlternateTitle(alternateTitle *foundation.NSString) {
-	o.Ptr().Send(_nSButtonSelSetAlternateTitle, alternateTitle.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetAlternateTitle, alternateTitle.Ptr())
+	})
 }
 
 // The alternate title, expressed as an attributed string.
 func (o *NSButton) AttributedAlternateTitle() *foundation.NSAttributedString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelAttributedAlternateTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSAttributedStringFromID(_ret)
+	var _mainthread0 *foundation.NSAttributedString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSAttributedString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelAttributedAlternateTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSAttributedStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The alternate title, expressed as an attributed string.
 func (o *NSButton) SetAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) {
-	o.Ptr().Send(_nSButtonSelSetAttributedAlternateTitle, attributedAlternateTitle.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetAttributedAlternateTitle, attributedAlternateTitle.Ptr())
+	})
 }
 
 // Indicates whether the button's action has a destructive effect on user data.  AppKit may guard a destructive-actioned button against accidental presses, and may give the button a special appearance in certain contexts to caution against unintentional use.  Defaults to NO.
 func (o *NSButton) HasDestructiveAction() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSButtonSelHasDestructiveAction)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSButtonSelHasDestructiveAction)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Indicates whether the button's action has a destructive effect on user data.  AppKit may guard a destructive-actioned button against accidental presses, and may give the button a special appearance in certain contexts to caution against unintentional use.  Defaults to NO.
 func (o *NSButton) SetHasDestructiveAction(hasDestructiveAction bool) {
-	o.Ptr().Send(_nSButtonSelSetHasDestructiveAction, hasDestructiveAction)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetHasDestructiveAction, hasDestructiveAction)
+	})
 }
 
 // The sound that plays when the user clicks the button, or nil if the button should not play a sound. The default value is nil.
 func (o *NSButton) Sound() *NSSound {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelSound)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSSoundFromID(_ret)
+	var _mainthread0 *NSSound
+	purego.Main(func() {
+		_mainthread0 = func() *NSSound {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelSound)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSSoundFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The sound that plays when the user clicks the button, or nil if the button should not play a sound. The default value is nil.
 func (o *NSButton) SetSound(sound *NSSound) {
-	o.Ptr().Send(_nSButtonSelSetSound, sound.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetSound, sound.Ptr())
+	})
 }
 
 // Sends action on deep-press or extended hover while dragging. Defaults to NO.
 func (o *NSButton) IsSpringLoaded() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSButtonSelIsSpringLoaded)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSButtonSelIsSpringLoaded)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sends action on deep-press or extended hover while dragging. Defaults to NO.
 func (o *NSButton) SetSpringLoaded(springLoaded bool) {
-	o.Ptr().Send(_nSButtonSelSetSpringLoaded, springLoaded)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetSpringLoaded, springLoaded)
+	})
 }
 
 // Configures the maximum allowed level for an NSMultiLevelAcceleratorButton, allowed values range from [1,5]. Defaults to 2.
 func (o *NSButton) MaxAcceleratorLevel() int {
-	_ret := objc.Send[int](o.Ptr(), _nSButtonSelMaxAcceleratorLevel)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSButtonSelMaxAcceleratorLevel)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Configures the maximum allowed level for an NSMultiLevelAcceleratorButton, allowed values range from [1,5]. Defaults to 2.
 func (o *NSButton) SetMaxAcceleratorLevel(maxAcceleratorLevel int) {
-	o.Ptr().Send(_nSButtonSelSetMaxAcceleratorLevel, maxAcceleratorLevel)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetMaxAcceleratorLevel, maxAcceleratorLevel)
+	})
 }
 
 // The bezel style of the button, which provides a set of bezel artwork, layout metrics, and content styling from a set of system-provided styles. See the NSBezelStyle enumeration for a list of available styles. The bezel style is not used if the `bordered` property is set to `NO`.
 func (o *NSButton) BezelStyle() NSBezelStyle {
-	_ret := objc.Send[NSBezelStyle](o.Ptr(), _nSButtonSelBezelStyle)
-	return _ret
+	var _mainthread0 NSBezelStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSBezelStyle {
+			_ret := objc.Send[NSBezelStyle](o.Ptr(), _nSButtonSelBezelStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The bezel style of the button, which provides a set of bezel artwork, layout metrics, and content styling from a set of system-provided styles. See the NSBezelStyle enumeration for a list of available styles. The bezel style is not used if the `bordered` property is set to `NO`.
 func (o *NSButton) SetBezelStyle(bezelStyle NSBezelStyle) {
-	o.Ptr().Send(_nSButtonSelSetBezelStyle, bezelStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetBezelStyle, bezelStyle)
+	})
 }
 
 // A Boolean value that determines whether the button draws a border.
 func (o *NSButton) IsBordered() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSButtonSelIsBordered)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSButtonSelIsBordered)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // A Boolean value that determines whether the button draws a border.
 func (o *NSButton) SetBordered(bordered bool) {
-	o.Ptr().Send(_nSButtonSelSetBordered, bordered)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetBordered, bordered)
+	})
 }
 
 // A Boolean value that indicates whether the button is transparent. A transparent button never draws itself, but it receives mouse events, sends its action, and tracks the mouse properly.
 func (o *NSButton) IsTransparent() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSButtonSelIsTransparent)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSButtonSelIsTransparent)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // A Boolean value that indicates whether the button is transparent. A transparent button never draws itself, but it receives mouse events, sends its action, and tracks the mouse properly.
 func (o *NSButton) SetTransparent(transparent bool) {
-	o.Ptr().Send(_nSButtonSelSetTransparent, transparent)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetTransparent, transparent)
+	})
 }
 
 func (o *NSButton) ShowsBorderOnlyWhileMouseInside() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSButtonSelShowsBorderOnlyWhileMouseInside)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSButtonSelShowsBorderOnlyWhileMouseInside)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButton) SetShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) {
-	o.Ptr().Send(_nSButtonSelSetShowsBorderOnlyWhileMouseInside, showsBorderOnlyWhileMouseInside)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetShowsBorderOnlyWhileMouseInside, showsBorderOnlyWhileMouseInside)
+	})
 }
 
 // Applies a custom color to the button's bezel, in appearances that support it. A nil value indicates an unmodified button appearance. The default value is nil.
 func (o *NSButton) BezelColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelBezelColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelBezelColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Applies a custom color to the button's bezel, in appearances that support it. A nil value indicates an unmodified button appearance. The default value is nil.
 func (o *NSButton) SetBezelColor(bezelColor *NSColor) {
-	o.Ptr().Send(_nSButtonSelSetBezelColor, bezelColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetBezelColor, bezelColor.Ptr())
+	})
 }
 
 // Applies a tint color to template image and text content, in combination with other theme-appropriate effects. Only applicable to borderless buttons. A nil value indicates the standard set of effects without color modification. The default value is nil. Non-template images and attributed string values are not affected by the contentTintColor.
 func (o *NSButton) ContentTintColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelContentTintColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelContentTintColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Applies a tint color to template image and text content, in combination with other theme-appropriate effects. Only applicable to borderless buttons. A nil value indicates the standard set of effects without color modification. The default value is nil. Non-template images and attributed string values are not affected by the contentTintColor.
 func (o *NSButton) SetContentTintColor(contentTintColor *NSColor) {
-	o.Ptr().Send(_nSButtonSelSetContentTintColor, contentTintColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetContentTintColor, contentTintColor.Ptr())
+	})
 }
 
 // The tint prominence of the button. Use tint prominence to gently suggest a hierarchy when multiple buttons perform similar actions. A button with primary tint prominence suggests the most preferred option, while secondary prominence indicates a reasonable alternative. See “NSTintProminence“ for a list of possible values.
 func (o *NSButton) TintProminence() NSTintProminence {
-	_ret := objc.Send[NSTintProminence](o.Ptr(), _nSButtonSelTintProminence)
-	return _ret
+	var _mainthread0 NSTintProminence
+	purego.Main(func() {
+		_mainthread0 = func() NSTintProminence {
+			_ret := objc.Send[NSTintProminence](o.Ptr(), _nSButtonSelTintProminence)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The tint prominence of the button. Use tint prominence to gently suggest a hierarchy when multiple buttons perform similar actions. A button with primary tint prominence suggests the most preferred option, while secondary prominence indicates a reasonable alternative. See “NSTintProminence“ for a list of possible values.
 func (o *NSButton) SetTintProminence(tintProminence NSTintProminence) {
-	o.Ptr().Send(_nSButtonSelSetTintProminence, tintProminence)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetTintProminence, tintProminence)
+	})
 }
 
 // The image that appears on the button when it’s in an off state, or nil if there is no such image.
 func (o *NSButton) Image() *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The image that appears on the button when it’s in an off state, or nil if there is no such image.
 func (o *NSButton) SetImage(image *NSImage) {
-	o.Ptr().Send(_nSButtonSelSetImage, image.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetImage, image.Ptr())
+	})
 }
 
 // An alternate image that appears on the button when the button is in an on state, or nil if there is no such image. Note that some button types do not display an alternate image.
 func (o *NSButton) AlternateImage() *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelAlternateImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelAlternateImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // An alternate image that appears on the button when the button is in an on state, or nil if there is no such image. Note that some button types do not display an alternate image.
 func (o *NSButton) SetAlternateImage(alternateImage *NSImage) {
-	o.Ptr().Send(_nSButtonSelSetAlternateImage, alternateImage.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetAlternateImage, alternateImage.Ptr())
+	})
 }
 
 // The position of the button's image relative to its title. See the NSCellImagePosition enumeration for possible values.
 func (o *NSButton) ImagePosition() NSCellImagePosition {
-	_ret := objc.Send[NSCellImagePosition](o.Ptr(), _nSButtonSelImagePosition)
-	return _ret
+	var _mainthread0 NSCellImagePosition
+	purego.Main(func() {
+		_mainthread0 = func() NSCellImagePosition {
+			_ret := objc.Send[NSCellImagePosition](o.Ptr(), _nSButtonSelImagePosition)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The position of the button's image relative to its title. See the NSCellImagePosition enumeration for possible values.
 func (o *NSButton) SetImagePosition(imagePosition NSCellImagePosition) {
-	o.Ptr().Send(_nSButtonSelSetImagePosition, imagePosition)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetImagePosition, imagePosition)
+	})
 }
 
 // The scaling mode applied to make the button's image fit within its bounds.
 func (o *NSButton) ImageScaling() NSImageScaling {
-	_ret := objc.Send[NSImageScaling](o.Ptr(), _nSButtonSelImageScaling)
-	return _ret
+	var _mainthread0 NSImageScaling
+	purego.Main(func() {
+		_mainthread0 = func() NSImageScaling {
+			_ret := objc.Send[NSImageScaling](o.Ptr(), _nSButtonSelImageScaling)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The scaling mode applied to make the button's image fit within its bounds.
 func (o *NSButton) SetImageScaling(imageScaling NSImageScaling) {
-	o.Ptr().Send(_nSButtonSelSetImageScaling, imageScaling)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetImageScaling, imageScaling)
+	})
 }
 
 // A Boolean value that determines how the button's image and title are positioned together within the button bezel. If false, the image is positioned according to the imagePosition property at the edge of the button bezel, and the title is positioned within the remaining space. If true, the button’s image is positioned directly adjacent to the title based on the imagePosition property, and the image and title are positioned within the button bezel as a single unit.
 func (o *NSButton) ImageHugsTitle() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSButtonSelImageHugsTitle)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSButtonSelImageHugsTitle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // A Boolean value that determines how the button's image and title are positioned together within the button bezel. If false, the image is positioned according to the imagePosition property at the edge of the button bezel, and the title is positioned within the remaining space. If true, the button’s image is positioned directly adjacent to the title based on the imagePosition property, and the image and title are positioned within the button bezel as a single unit.
 func (o *NSButton) SetImageHugsTitle(imageHugsTitle bool) {
-	o.Ptr().Send(_nSButtonSelSetImageHugsTitle, imageHugsTitle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetImageHugsTitle, imageHugsTitle)
+	})
 }
 
 // Specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images. If a symbol configuration isn't provided, the symbol is matched to the button's `font` property. The default value is nil.
 func (o *NSButton) SymbolConfiguration() *NSImageSymbolConfiguration {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelSymbolConfiguration)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageSymbolConfigurationFromID(_ret)
+	var _mainthread0 *NSImageSymbolConfiguration
+	purego.Main(func() {
+		_mainthread0 = func() *NSImageSymbolConfiguration {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelSymbolConfiguration)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageSymbolConfigurationFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images. If a symbol configuration isn't provided, the symbol is matched to the button's `font` property. The default value is nil.
 func (o *NSButton) SetSymbolConfiguration(symbolConfiguration *NSImageSymbolConfiguration) {
-	o.Ptr().Send(_nSButtonSelSetSymbolConfiguration, symbolConfiguration.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetSymbolConfiguration, symbolConfiguration.Ptr())
+	})
 }
 
 // The button's state. Buttons support the off and on states, and an additional mixed state depending on the value of the `allowsMixedState` property.
 func (o *NSButton) State() int {
-	_ret := objc.Send[int](o.Ptr(), _nSButtonSelState)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSButtonSelState)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The button's state. Buttons support the off and on states, and an additional mixed state depending on the value of the `allowsMixedState` property.
 func (o *NSButton) SetState(state int) {
-	o.Ptr().Send(_nSButtonSelSetState, state)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetState, state)
+	})
 }
 
 // A Boolean value that indicates whether the button allows a mixed state. If NO, the button has two states (on and off), and if YES, the button has three states (on, off, and mixed). The mixed state is commonly used with checkboxes and radio buttons to indicate a value which is partially on.
 func (o *NSButton) AllowsMixedState() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSButtonSelAllowsMixedState)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSButtonSelAllowsMixedState)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // A Boolean value that indicates whether the button allows a mixed state. If NO, the button has two states (on and off), and if YES, the button has three states (on, off, and mixed). The mixed state is commonly used with checkboxes and radio buttons to indicate a value which is partially on.
 func (o *NSButton) SetAllowsMixedState(allowsMixedState bool) {
-	o.Ptr().Send(_nSButtonSelSetAllowsMixedState, allowsMixedState)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetAllowsMixedState, allowsMixedState)
+	})
 }
 
 // This property contains the button's key equivalent, or the empty string if no equivalent has been defined. Buttons don’t have a default key equivalent. Setting the key equivalent to the Return character causes it to act as the default button for its window.
 func (o *NSButton) KeyEquivalent() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelKeyEquivalent)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelKeyEquivalent)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // This property contains the button's key equivalent, or the empty string if no equivalent has been defined. Buttons don’t have a default key equivalent. Setting the key equivalent to the Return character causes it to act as the default button for its window.
 func (o *NSButton) SetKeyEquivalent(keyEquivalent *foundation.NSString) {
-	o.Ptr().Send(_nSButtonSelSetKeyEquivalent, keyEquivalent.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetKeyEquivalent, keyEquivalent.Ptr())
+	})
 }
 
 // A bitmask specifying the modifier keys that are applied to the button's key equivalent. Mask bits are defined by the NSEventModifierFlags option set. The only mask bits relevant in button key-equivalent modifier masks are NSEventModifierFlagControl, NSEventModifierFlagOption, and NSEventModifierFlagCommand.
 func (o *NSButton) KeyEquivalentModifierMask() NSEventModifierFlags {
-	_ret := objc.Send[NSEventModifierFlags](o.Ptr(), _nSButtonSelKeyEquivalentModifierMask)
-	return _ret
+	var _mainthread0 NSEventModifierFlags
+	purego.Main(func() {
+		_mainthread0 = func() NSEventModifierFlags {
+			_ret := objc.Send[NSEventModifierFlags](o.Ptr(), _nSButtonSelKeyEquivalentModifierMask)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // A bitmask specifying the modifier keys that are applied to the button's key equivalent. Mask bits are defined by the NSEventModifierFlags option set. The only mask bits relevant in button key-equivalent modifier masks are NSEventModifierFlagControl, NSEventModifierFlagOption, and NSEventModifierFlagCommand.
 func (o *NSButton) SetKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) {
-	o.Ptr().Send(_nSButtonSelSetKeyEquivalentModifierMask, keyEquivalentModifierMask)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetKeyEquivalentModifierMask, keyEquivalentModifierMask)
+	})
 }
 
 func (o *NSButton) ActiveCompressionOptions() *NSUserInterfaceCompressionOptions {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelActiveCompressionOptions)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSUserInterfaceCompressionOptionsFromID(_ret)
+	var _mainthread0 *NSUserInterfaceCompressionOptions
+	purego.Main(func() {
+		_mainthread0 = func() *NSUserInterfaceCompressionOptions {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelActiveCompressionOptions)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSUserInterfaceCompressionOptionsFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButton) BorderShape() NSControlBorderShape {
-	_ret := objc.Send[NSControlBorderShape](o.Ptr(), _nSButtonSelBorderShape)
-	return _ret
+	var _mainthread0 NSControlBorderShape
+	purego.Main(func() {
+		_mainthread0 = func() NSControlBorderShape {
+			_ret := objc.Send[NSControlBorderShape](o.Ptr(), _nSButtonSelBorderShape)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButton) SetBorderShape(borderShape NSControlBorderShape) {
-	o.Ptr().Send(_nSButtonSelSetBorderShape, borderShape)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetBorderShape, borderShape)
+	})
 }
 
 // Sets the title of a button with a character denoting an access key.
 // Deprecated: Mnemonics are not used on macOS. Set the title property directly instead.
 func (o *NSButton) SetTitleWithMnemonic(stringWithAmpersand *foundation.NSString) {
-	o.Ptr().Send(_nSButtonSelSetTitleWithMnemonic, stringWithAmpersand.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonSelSetTitleWithMnemonic, stringWithAmpersand.Ptr())
+	})
 }

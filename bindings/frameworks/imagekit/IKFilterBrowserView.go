@@ -34,14 +34,22 @@ func IKFilterBrowserViewFromID(id objc.ID) *IKFilterBrowserView {
 
 // @method     setPreviewState: @abstract   Use this method to show and hide the Preview @discussion Use this method to show and hide the Preview from the program. @param      inState Boolean for visibility of the preview.
 func (o *IKFilterBrowserView) SetPreviewState(inState bool) {
-	o.Ptr().Send(_iKFilterBrowserViewSelSetPreviewState, inState)
+	purego.Main(func() {
+		o.Ptr().Send(_iKFilterBrowserViewSelSetPreviewState, inState)
+	})
 }
 
 // @method     filterName @abstract   Returns the name of the currently selected filter. @discussion Use this method in response to a IKFilterBrowserFilterSelectedNotification or IKFilterBrowserFilterDoubleClickNotification or afer returning from a modal session.
 func (o *IKFilterBrowserView) FilterName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterBrowserViewSelFilterName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterBrowserViewSelFilterName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

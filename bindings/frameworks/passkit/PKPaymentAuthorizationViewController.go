@@ -62,11 +62,17 @@ func PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworksCapabilitie
 
 // Initializes and returns a payment authorization view controller.
 func (o *PKPaymentAuthorizationViewController) InitWithPaymentRequest(request *PKPaymentRequest) *PKPaymentAuthorizationViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentAuthorizationViewControllerSelInitWithPaymentRequest, request.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return PKPaymentAuthorizationViewControllerFromID(_ret)
+	var _mainthread0 *PKPaymentAuthorizationViewController
+	purego.Main(func() {
+		_mainthread0 = func() *PKPaymentAuthorizationViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentAuthorizationViewControllerSelInitWithPaymentRequest, request.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return PKPaymentAuthorizationViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a Boolean value that indicates whether this device can process disbursement requests.
@@ -89,18 +95,32 @@ func PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworksCapab
 
 // Initializes and returns a new payment authorization view controller with the provided disbursement request.
 func (o *PKPaymentAuthorizationViewController) InitWithDisbursementRequest(request *PKDisbursementRequest) *PKPaymentAuthorizationViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentAuthorizationViewControllerSelInitWithDisbursementRequest, request.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return PKPaymentAuthorizationViewControllerFromID(_ret)
+	var _mainthread0 *PKPaymentAuthorizationViewController
+	purego.Main(func() {
+		_mainthread0 = func() *PKPaymentAuthorizationViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentAuthorizationViewControllerSelInitWithDisbursementRequest, request.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return PKPaymentAuthorizationViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PKPaymentAuthorizationViewController) Delegate() PKPaymentAuthorizationViewControllerDelegate {
-	_ret := objc.Send[PKPaymentAuthorizationViewControllerDelegate](o.Ptr(), _pKPaymentAuthorizationViewControllerSelDelegate)
-	return _ret
+	var _mainthread0 PKPaymentAuthorizationViewControllerDelegate
+	purego.Main(func() {
+		_mainthread0 = func() PKPaymentAuthorizationViewControllerDelegate {
+			_ret := objc.Send[PKPaymentAuthorizationViewControllerDelegate](o.Ptr(), _pKPaymentAuthorizationViewControllerSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PKPaymentAuthorizationViewController) SetDelegate(delegate PKPaymentAuthorizationViewControllerDelegate) {
-	o.Ptr().Send(_pKPaymentAuthorizationViewControllerSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_pKPaymentAuthorizationViewControllerSelSetDelegate, delegate)
+	})
 }

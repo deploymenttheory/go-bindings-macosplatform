@@ -35,21 +35,35 @@ func NSScrubberTextItemViewFromID(id objc.ID) *NSScrubberTextItemView {
 }
 
 func (o *NSScrubberTextItemView) TextField() *NSTextField {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberTextItemViewSelTextField)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextFieldFromID(_ret)
+	var _mainthread0 *NSTextField
+	purego.Main(func() {
+		_mainthread0 = func() *NSTextField {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberTextItemViewSelTextField)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextFieldFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrubberTextItemView) Title() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberTextItemViewSelTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberTextItemViewSelTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrubberTextItemView) SetTitle(title *foundation.NSString) {
-	o.Ptr().Send(_nSScrubberTextItemViewSelSetTitle, title.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberTextItemViewSelSetTitle, title.Ptr())
+	})
 }

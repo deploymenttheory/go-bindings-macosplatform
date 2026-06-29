@@ -1249,13 +1249,21 @@ func (o *NSColor) CGColor() unsafe.Pointer {
 
 // Deprecated: Use `showsAlpha` in `NSColorPanel` and `supportsAlpha` in `NSColorWell` to control alpha behavior for individual controls.
 func NSColorIgnoresAlpha() bool {
-	_ret := objc.Send[bool](objc.ID(_clsNSColor), _nSColorSelIgnoresAlpha)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](objc.ID(_clsNSColor), _nSColorSelIgnoresAlpha)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use `showsAlpha` in `NSColorPanel` and `supportsAlpha` in `NSColorWell` to control alpha behavior for individual controls.
 func NSColorSetIgnoresAlpha(ignoresAlpha bool) {
-	objc.ID(_clsNSColor).Send(_nSColorSelSetIgnoresAlpha, ignoresAlpha)
+	purego.Main(func() {
+		objc.ID(_clsNSColor).Send(_nSColorSelSetIgnoresAlpha, ignoresAlpha)
+	})
 }
 
 // Creates a new color object for the same color, but in the specified color space and specific to the provided device.

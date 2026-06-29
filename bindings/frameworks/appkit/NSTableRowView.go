@@ -62,138 +62,252 @@ func NSTableRowViewFromID(id objc.ID) *NSTableRowView {
 
 // Draws the background of the row in the rectangle.
 func (o *NSTableRowView) DrawBackgroundInRect(dirtyRect corefoundation.CGRect) {
-	o.Ptr().Send(_nSTableRowViewSelDrawBackgroundInRect, dirtyRect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableRowViewSelDrawBackgroundInRect, dirtyRect)
+	})
 }
 
 // Draws the selected row.
 func (o *NSTableRowView) DrawSelectionInRect(dirtyRect corefoundation.CGRect) {
-	o.Ptr().Send(_nSTableRowViewSelDrawSelectionInRect, dirtyRect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableRowViewSelDrawSelectionInRect, dirtyRect)
+	})
 }
 
 // Draws the horizontal separator between table rows.
 func (o *NSTableRowView) DrawSeparatorInRect(dirtyRect corefoundation.CGRect) {
-	o.Ptr().Send(_nSTableRowViewSelDrawSeparatorInRect, dirtyRect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableRowViewSelDrawSeparatorInRect, dirtyRect)
+	})
 }
 
 // Draws the row’s dragging destination feedback when the entire row is a drop target.
 func (o *NSTableRowView) DrawDraggingDestinationFeedbackInRect(dirtyRect corefoundation.CGRect) {
-	o.Ptr().Send(_nSTableRowViewSelDrawDraggingDestinationFeedbackInRect, dirtyRect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableRowViewSelDrawDraggingDestinationFeedbackInRect, dirtyRect)
+	})
 }
 
 // Provides access to the given view at a particular column.
 func (o *NSTableRowView) ViewAtColumn(column int) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableRowViewSelViewAtColumn, column)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableRowViewSelViewAtColumn, column)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableRowView) SelectionHighlightStyle() NSTableViewSelectionHighlightStyle {
-	_ret := objc.Send[NSTableViewSelectionHighlightStyle](o.Ptr(), _nSTableRowViewSelSelectionHighlightStyle)
-	return _ret
+	var _mainthread0 NSTableViewSelectionHighlightStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSTableViewSelectionHighlightStyle {
+			_ret := objc.Send[NSTableViewSelectionHighlightStyle](o.Ptr(), _nSTableRowViewSelSelectionHighlightStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableRowView) SetSelectionHighlightStyle(selectionHighlightStyle NSTableViewSelectionHighlightStyle) {
-	o.Ptr().Send(_nSTableRowViewSelSetSelectionHighlightStyle, selectionHighlightStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableRowViewSelSetSelectionHighlightStyle, selectionHighlightStyle)
+	})
 }
 
 func (o *NSTableRowView) IsEmphasized() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableRowViewSelIsEmphasized)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableRowViewSelIsEmphasized)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableRowView) SetEmphasized(emphasized bool) {
-	o.Ptr().Send(_nSTableRowViewSelSetEmphasized, emphasized)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableRowViewSelSetEmphasized, emphasized)
+	})
 }
 
 func (o *NSTableRowView) IsGroupRowStyle() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableRowViewSelIsGroupRowStyle)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableRowViewSelIsGroupRowStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableRowView) SetGroupRowStyle(groupRowStyle bool) {
-	o.Ptr().Send(_nSTableRowViewSelSetGroupRowStyle, groupRowStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableRowViewSelSetGroupRowStyle, groupRowStyle)
+	})
 }
 
 func (o *NSTableRowView) IsSelected() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableRowViewSelIsSelected)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableRowViewSelIsSelected)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableRowView) SetSelected(selected bool) {
-	o.Ptr().Send(_nSTableRowViewSelSetSelected, selected)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableRowViewSelSetSelected, selected)
+	})
 }
 
 func (o *NSTableRowView) IsPreviousRowSelected() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableRowViewSelIsPreviousRowSelected)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableRowViewSelIsPreviousRowSelected)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableRowView) SetPreviousRowSelected(previousRowSelected bool) {
-	o.Ptr().Send(_nSTableRowViewSelSetPreviousRowSelected, previousRowSelected)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableRowViewSelSetPreviousRowSelected, previousRowSelected)
+	})
 }
 
 func (o *NSTableRowView) IsNextRowSelected() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableRowViewSelIsNextRowSelected)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableRowViewSelIsNextRowSelected)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableRowView) SetNextRowSelected(nextRowSelected bool) {
-	o.Ptr().Send(_nSTableRowViewSelSetNextRowSelected, nextRowSelected)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableRowViewSelSetNextRowSelected, nextRowSelected)
+	})
 }
 
 func (o *NSTableRowView) IsFloating() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableRowViewSelIsFloating)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableRowViewSelIsFloating)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableRowView) SetFloating(floating bool) {
-	o.Ptr().Send(_nSTableRowViewSelSetFloating, floating)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableRowViewSelSetFloating, floating)
+	})
 }
 
 func (o *NSTableRowView) IsTargetForDropOperation() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableRowViewSelIsTargetForDropOperation)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableRowViewSelIsTargetForDropOperation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableRowView) SetTargetForDropOperation(targetForDropOperation bool) {
-	o.Ptr().Send(_nSTableRowViewSelSetTargetForDropOperation, targetForDropOperation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableRowViewSelSetTargetForDropOperation, targetForDropOperation)
+	})
 }
 
 func (o *NSTableRowView) DraggingDestinationFeedbackStyle() NSTableViewDraggingDestinationFeedbackStyle {
-	_ret := objc.Send[NSTableViewDraggingDestinationFeedbackStyle](o.Ptr(), _nSTableRowViewSelDraggingDestinationFeedbackStyle)
-	return _ret
+	var _mainthread0 NSTableViewDraggingDestinationFeedbackStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSTableViewDraggingDestinationFeedbackStyle {
+			_ret := objc.Send[NSTableViewDraggingDestinationFeedbackStyle](o.Ptr(), _nSTableRowViewSelDraggingDestinationFeedbackStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableRowView) SetDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle NSTableViewDraggingDestinationFeedbackStyle) {
-	o.Ptr().Send(_nSTableRowViewSelSetDraggingDestinationFeedbackStyle, draggingDestinationFeedbackStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableRowViewSelSetDraggingDestinationFeedbackStyle, draggingDestinationFeedbackStyle)
+	})
 }
 
 func (o *NSTableRowView) IndentationForDropOperation() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSTableRowViewSelIndentationForDropOperation)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSTableRowViewSelIndentationForDropOperation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableRowView) SetIndentationForDropOperation(indentationForDropOperation float64) {
-	o.Ptr().Send(_nSTableRowViewSelSetIndentationForDropOperation, indentationForDropOperation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableRowViewSelSetIndentationForDropOperation, indentationForDropOperation)
+	})
 }
 
 func (o *NSTableRowView) InteriorBackgroundStyle() NSBackgroundStyle {
-	_ret := objc.Send[NSBackgroundStyle](o.Ptr(), _nSTableRowViewSelInteriorBackgroundStyle)
-	return _ret
+	var _mainthread0 NSBackgroundStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSBackgroundStyle {
+			_ret := objc.Send[NSBackgroundStyle](o.Ptr(), _nSTableRowViewSelInteriorBackgroundStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableRowView) BackgroundColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableRowViewSelBackgroundColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableRowViewSelBackgroundColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableRowView) SetBackgroundColor(backgroundColor *NSColor) {
-	o.Ptr().Send(_nSTableRowViewSelSetBackgroundColor, backgroundColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableRowViewSelSetBackgroundColor, backgroundColor.Ptr())
+	})
 }
 
 func (o *NSTableRowView) NumberOfColumns() int {
-	_ret := objc.Send[int](o.Ptr(), _nSTableRowViewSelNumberOfColumns)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTableRowViewSelNumberOfColumns)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

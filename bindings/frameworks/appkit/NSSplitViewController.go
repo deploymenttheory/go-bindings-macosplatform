@@ -52,108 +52,184 @@ func NSSplitViewControllerFromID(id objc.ID) *NSSplitViewController {
 
 // Adds a split view item to the end of the array of split view items.
 func (o *NSSplitViewController) AddSplitViewItem(splitViewItem *NSSplitViewItem) {
-	o.Ptr().Send(_nSSplitViewControllerSelAddSplitViewItem, splitViewItem.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSplitViewControllerSelAddSplitViewItem, splitViewItem.Ptr())
+	})
 }
 
 // Adds a split view item to the array of split view items at the specified index position.
 func (o *NSSplitViewController) InsertSplitViewItemAtIndex(splitViewItem *NSSplitViewItem, index int) {
-	o.Ptr().Send(_nSSplitViewControllerSelInsertSplitViewItemAtIndex, splitViewItem.Ptr(), index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSplitViewControllerSelInsertSplitViewItemAtIndex, splitViewItem.Ptr(), index)
+	})
 }
 
 // Removes a specified split view item from the split view controller.
 func (o *NSSplitViewController) RemoveSplitViewItem(splitViewItem *NSSplitViewItem) {
-	o.Ptr().Send(_nSSplitViewControllerSelRemoveSplitViewItem, splitViewItem.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSplitViewControllerSelRemoveSplitViewItem, splitViewItem.Ptr())
+	})
 }
 
 // Returns the corresponding split view item for the specified child view controller of the split view controller.
 func (o *NSSplitViewController) SplitViewItemForViewController(viewController *NSViewController) *NSSplitViewItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewControllerSelSplitViewItemForViewController, viewController.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSSplitViewItemFromID(_ret)
+	var _mainthread0 *NSSplitViewItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSSplitViewItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewControllerSelSplitViewItemForViewController, viewController.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSSplitViewItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Validates items with an action of `toggleSidebar:` to reflect the status of the sidebar item contained within the receiver.
 func (o *NSSplitViewController) ValidateUserInterfaceItem(item NSValidatedUserInterfaceItem) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSplitViewControllerSelValidateUserInterfaceItem, item)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSplitViewControllerSelValidateUserInterfaceItem, item)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSplitViewController) SplitViewCanCollapseSubview(splitView *NSSplitView, subview *NSView) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSplitViewControllerSelSplitViewCanCollapseSubview, splitView.Ptr(), subview.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSplitViewControllerSelSplitViewCanCollapseSubview, splitView.Ptr(), subview.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: NSSplitView no longer supports collapsing sections via double-click. This delegate method is never called, and NSSplitViewController's implementation always returns NO.
 func (o *NSSplitViewController) SplitViewShouldCollapseSubviewForDoubleClickOnDividerAtIndex(splitView *NSSplitView, subview *NSView, dividerIndex int) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSplitViewControllerSelSplitViewShouldCollapseSubviewForDoubleClickOnDividerAtIndex, splitView.Ptr(), subview.Ptr(), dividerIndex)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSplitViewControllerSelSplitViewShouldCollapseSubviewForDoubleClickOnDividerAtIndex, splitView.Ptr(), subview.Ptr(), dividerIndex)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: NSSplitView no longer supports collapsing sections via double-click. This delegate method is never called, and NSSplitViewController's implementation always returns NO.
 func (o *NSSplitViewController) SplitViewShouldHideDividerAtIndex(splitView *NSSplitView, dividerIndex int) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSplitViewControllerSelSplitViewShouldHideDividerAtIndex, splitView.Ptr(), dividerIndex)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSplitViewControllerSelSplitViewShouldHideDividerAtIndex, splitView.Ptr(), dividerIndex)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: NSSplitView no longer supports collapsing sections via double-click. This delegate method is never called, and NSSplitViewController's implementation always returns NO.
 func (o *NSSplitViewController) SplitViewEffectiveRectForDrawnRectOfDividerAtIndex(splitView *NSSplitView, proposedEffectiveRect corefoundation.CGRect, drawnRect corefoundation.CGRect, dividerIndex int) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSplitViewControllerSelSplitViewEffectiveRectForDrawnRectOfDividerAtIndex, splitView.Ptr(), proposedEffectiveRect, drawnRect, dividerIndex)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSplitViewControllerSelSplitViewEffectiveRectForDrawnRectOfDividerAtIndex, splitView.Ptr(), proposedEffectiveRect, drawnRect, dividerIndex)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: NSSplitView no longer supports collapsing sections via double-click. This delegate method is never called, and NSSplitViewController's implementation always returns NO.
 func (o *NSSplitViewController) SplitViewAdditionalEffectiveRectOfDividerAtIndex(splitView *NSSplitView, dividerIndex int) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSplitViewControllerSelSplitViewAdditionalEffectiveRectOfDividerAtIndex, splitView.Ptr(), dividerIndex)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSplitViewControllerSelSplitViewAdditionalEffectiveRectOfDividerAtIndex, splitView.Ptr(), dividerIndex)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The split view managed by the SplitViewController. This can be used to customize view properties such as the dividerStyle, vertical, and autosaveName. It is not guaranteed to be the same view as the receivers 'view' property. The default created splitView is vertical with a dividerStyle of \c NSSplitViewDividerStyleThin. To provide a custom NSSplitView, set the splitView property anytime before self.viewLoaded is YES.
 func (o *NSSplitViewController) SplitView() *NSSplitView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewControllerSelSplitView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSSplitViewFromID(_ret)
+	var _mainthread0 *NSSplitView
+	purego.Main(func() {
+		_mainthread0 = func() *NSSplitView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewControllerSelSplitView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSSplitViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The split view managed by the SplitViewController. This can be used to customize view properties such as the dividerStyle, vertical, and autosaveName. It is not guaranteed to be the same view as the receivers 'view' property. The default created splitView is vertical with a dividerStyle of \c NSSplitViewDividerStyleThin. To provide a custom NSSplitView, set the splitView property anytime before self.viewLoaded is YES.
 func (o *NSSplitViewController) SetSplitView(splitView *NSSplitView) {
-	o.Ptr().Send(_nSSplitViewControllerSelSetSplitView, splitView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSplitViewControllerSelSetSplitView, splitView.Ptr())
+	})
 }
 
 // The array of SplitViewItems that correspond to the current child view controllers. After a child view controller is added to the receiving splitViewController, a NSSplitViewItem with the default values will be created for it. Once the child is removed, its corresponding splitViewItem will be removed from the splitViewItems array. Setting this will call through to \c -insertSplitViewItem:atIndex and \c -removeSplitViewItem: for items that are new or need removal.
 func (o *NSSplitViewController) SplitViewItems() *foundation.NSArray[*NSSplitViewItem] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewControllerSelSplitViewItems)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSSplitViewItem](_ret)
+	var _mainthread0 *foundation.NSArray[*NSSplitViewItem]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSSplitViewItem] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewControllerSelSplitViewItems)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSSplitViewItem](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The array of SplitViewItems that correspond to the current child view controllers. After a child view controller is added to the receiving splitViewController, a NSSplitViewItem with the default values will be created for it. Once the child is removed, its corresponding splitViewItem will be removed from the splitViewItems array. Setting this will call through to \c -insertSplitViewItem:atIndex and \c -removeSplitViewItem: for items that are new or need removal.
 func (o *NSSplitViewController) SetSplitViewItems(splitViewItems *foundation.NSArray[*NSSplitViewItem]) {
-	o.Ptr().Send(_nSSplitViewControllerSelSetSplitViewItems, splitViewItems.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSplitViewControllerSelSetSplitViewItems, splitViewItems.Ptr())
+	})
 }
 
 // The minimum thickness in the primary axis of split view (width for "vertical", height otherwise) before sidebar items will automatically collapse. If reshown in fullscreen, they will overlay over the other split items. Auto-collapsed sidebars will automatically uncollapse if the thickness is increased back to or past the minimum thickness. Defaults to \c NSSplitViewControllerAutomaticDimension, which will use the effective minimum sizes of the split view item views as described by constraints in the window to determine the minimum size for inline sidebars. Once constraints establishing the minimum size can't be satisfied for all non-collapsed split panes, all sidebars will auto-collapse. When fullscreen, if a sidebar tries to uncollapse in this state, it will overlay.
 func (o *NSSplitViewController) MinimumThicknessForInlineSidebars() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSplitViewControllerSelMinimumThicknessForInlineSidebars)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSplitViewControllerSelMinimumThicknessForInlineSidebars)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The minimum thickness in the primary axis of split view (width for "vertical", height otherwise) before sidebar items will automatically collapse. If reshown in fullscreen, they will overlay over the other split items. Auto-collapsed sidebars will automatically uncollapse if the thickness is increased back to or past the minimum thickness. Defaults to \c NSSplitViewControllerAutomaticDimension, which will use the effective minimum sizes of the split view item views as described by constraints in the window to determine the minimum size for inline sidebars. Once constraints establishing the minimum size can't be satisfied for all non-collapsed split panes, all sidebars will auto-collapse. When fullscreen, if a sidebar tries to uncollapse in this state, it will overlay.
 func (o *NSSplitViewController) SetMinimumThicknessForInlineSidebars(minimumThicknessForInlineSidebars float64) {
-	o.Ptr().Send(_nSSplitViewControllerSelSetMinimumThicknessForInlineSidebars, minimumThicknessForInlineSidebars)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSplitViewControllerSelSetMinimumThicknessForInlineSidebars, minimumThicknessForInlineSidebars)
+	})
 }
 
 // Collapses or expands the first sidebar in the split view controller using an animation.
 func (o *NSSplitViewController) ToggleSidebar(sender objc.ID) {
-	o.Ptr().Send(_nSSplitViewControllerSelToggleSidebar, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSplitViewControllerSelToggleSidebar, sender)
+	})
 }
 
 // Collapses or expands the first inspector in the split view controller using an animation.
 func (o *NSSplitViewController) ToggleInspector(sender objc.ID) {
-	o.Ptr().Send(_nSSplitViewControllerSelToggleInspector, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSplitViewControllerSelToggleInspector, sender)
+	})
 }

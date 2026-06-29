@@ -55,112 +55,198 @@ func NSClipViewFromID(id objc.ID) *NSClipView {
 
 // Handles an NSViewFrameDidChangeNotification, passed in the aNotification argument, by updating a containing NSScrollView based on the new frame.
 func (o *NSClipView) ViewFrameChanged(notification *foundation.NSNotification) {
-	o.Ptr().Send(_nSClipViewSelViewFrameChanged, notification.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSClipViewSelViewFrameChanged, notification.Ptr())
+	})
 }
 
 // Handles an NSViewBoundsDidChangeNotification, passed in the aNotification argument, by updating a containing NSScrollView based on the new bounds.
 func (o *NSClipView) ViewBoundsChanged(notification *foundation.NSNotification) {
-	o.Ptr().Send(_nSClipViewSelViewBoundsChanged, notification.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSClipViewSelViewBoundsChanged, notification.Ptr())
+	})
 }
 
 // Changes the origin of the clip view’s bounds rectangle to newOrigin.
 func (o *NSClipView) ScrollToPoint(newOrigin corefoundation.CGPoint) {
-	o.Ptr().Send(_nSClipViewSelScrollToPoint, newOrigin)
+	purego.Main(func() {
+		o.Ptr().Send(_nSClipViewSelScrollToPoint, newOrigin)
+	})
 }
 
 // Constrains the bounds of the clip view while the user is magnifying and scrolling.
 func (o *NSClipView) ConstrainBoundsRect(proposedBounds corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSClipViewSelConstrainBoundsRect, proposedBounds)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSClipViewSelConstrainBoundsRect, proposedBounds)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSClipView) BackgroundColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSClipViewSelBackgroundColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSClipViewSelBackgroundColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSClipView) SetBackgroundColor(backgroundColor *NSColor) {
-	o.Ptr().Send(_nSClipViewSelSetBackgroundColor, backgroundColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSClipViewSelSetBackgroundColor, backgroundColor.Ptr())
+	})
 }
 
 func (o *NSClipView) DrawsBackground() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSClipViewSelDrawsBackground)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSClipViewSelDrawsBackground)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSClipView) SetDrawsBackground(drawsBackground bool) {
-	o.Ptr().Send(_nSClipViewSelSetDrawsBackground, drawsBackground)
+	purego.Main(func() {
+		o.Ptr().Send(_nSClipViewSelSetDrawsBackground, drawsBackground)
+	})
 }
 
 func (o *NSClipView) DocumentView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSClipViewSelDocumentView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSClipViewSelDocumentView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSClipView) SetDocumentView(documentView *NSView) {
-	o.Ptr().Send(_nSClipViewSelSetDocumentView, documentView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSClipViewSelSetDocumentView, documentView.Ptr())
+	})
 }
 
 func (o *NSClipView) DocumentRect() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSClipViewSelDocumentRect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSClipViewSelDocumentRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSClipView) DocumentCursor() *NSCursor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSClipViewSelDocumentCursor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCursorFromID(_ret)
+	var _mainthread0 *NSCursor
+	purego.Main(func() {
+		_mainthread0 = func() *NSCursor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSClipViewSelDocumentCursor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCursorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSClipView) SetDocumentCursor(documentCursor *NSCursor) {
-	o.Ptr().Send(_nSClipViewSelSetDocumentCursor, documentCursor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSClipViewSelSetDocumentCursor, documentCursor.Ptr())
+	})
 }
 
 func (o *NSClipView) DocumentVisibleRect() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSClipViewSelDocumentVisibleRect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSClipViewSelDocumentVisibleRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSClipView) ContentInsets() foundation.NSEdgeInsets {
-	_ret := objc.Send[foundation.NSEdgeInsets](o.Ptr(), _nSClipViewSelContentInsets)
-	return _ret
+	var _mainthread0 foundation.NSEdgeInsets
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSEdgeInsets {
+			_ret := objc.Send[foundation.NSEdgeInsets](o.Ptr(), _nSClipViewSelContentInsets)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSClipView) SetContentInsets(contentInsets foundation.NSEdgeInsets) {
-	o.Ptr().Send(_nSClipViewSelSetContentInsets, contentInsets)
+	purego.Main(func() {
+		o.Ptr().Send(_nSClipViewSelSetContentInsets, contentInsets)
+	})
 }
 
 func (o *NSClipView) AutomaticallyAdjustsContentInsets() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSClipViewSelAutomaticallyAdjustsContentInsets)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSClipViewSelAutomaticallyAdjustsContentInsets)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSClipView) SetAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets bool) {
-	o.Ptr().Send(_nSClipViewSelSetAutomaticallyAdjustsContentInsets, automaticallyAdjustsContentInsets)
+	purego.Main(func() {
+		o.Ptr().Send(_nSClipViewSelSetAutomaticallyAdjustsContentInsets, automaticallyAdjustsContentInsets)
+	})
 }
 
 // Returns a scroll point adjusted from the proposed new origin, if necessary, to guarantee the view will lie within its document view.
 // Deprecated: Use -constrainBoundsRect: instead.
 func (o *NSClipView) ConstrainScrollPoint(newOrigin corefoundation.CGPoint) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSClipViewSelConstrainScrollPoint, newOrigin)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSClipViewSelConstrainScrollPoint, newOrigin)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Setting this property has no effect.  NSClipView will always minimize the area of the document view that is invalidated.  To force invalidation of the document view, use -[NSView setNeedsDisplayInRect:].
 func (o *NSClipView) CopiesOnScroll() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSClipViewSelCopiesOnScroll)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSClipViewSelCopiesOnScroll)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Setting this property has no effect.  NSClipView will always minimize the area of the document view that is invalidated.  To force invalidation of the document view, use -[NSView setNeedsDisplayInRect:].
 func (o *NSClipView) SetCopiesOnScroll(copiesOnScroll bool) {
-	o.Ptr().Send(_nSClipViewSelSetCopiesOnScroll, copiesOnScroll)
+	purego.Main(func() {
+		o.Ptr().Send(_nSClipViewSelSetCopiesOnScroll, copiesOnScroll)
+	})
 }

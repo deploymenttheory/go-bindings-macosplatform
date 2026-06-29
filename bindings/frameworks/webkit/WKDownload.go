@@ -50,43 +50,77 @@ func (o *WKDownload) Cancel(completionHandler func(*foundation.NSData)) {
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_wKDownloadSelCancel, __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_wKDownloadSelCancel, __block_completionHandler)
+	})
 }
 
 func (o *WKDownload) OriginalRequest() *foundation.NSURLRequest {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKDownloadSelOriginalRequest)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSURLRequestFromID(_ret)
+	var _mainthread0 *foundation.NSURLRequest
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSURLRequest {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKDownloadSelOriginalRequest)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSURLRequestFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKDownload) WebView() *WKWebView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKDownloadSelWebView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKWebViewFromID(_ret)
+	var _mainthread0 *WKWebView
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKDownloadSelWebView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKWebViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKDownload) Delegate() WKDownloadDelegate {
-	_ret := objc.Send[WKDownloadDelegate](o.Ptr(), _wKDownloadSelDelegate)
-	return _ret
+	var _mainthread0 WKDownloadDelegate
+	purego.Main(func() {
+		_mainthread0 = func() WKDownloadDelegate {
+			_ret := objc.Send[WKDownloadDelegate](o.Ptr(), _wKDownloadSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKDownload) SetDelegate(delegate WKDownloadDelegate) {
-	o.Ptr().Send(_wKDownloadSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_wKDownloadSelSetDelegate, delegate)
+	})
 }
 
 func (o *WKDownload) IsUserInitiated() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKDownloadSelIsUserInitiated)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKDownloadSelIsUserInitiated)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKDownload) OriginatingFrame() *WKFrameInfo {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKDownloadSelOriginatingFrame)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKFrameInfoFromID(_ret)
+	var _mainthread0 *WKFrameInfo
+	purego.Main(func() {
+		_mainthread0 = func() *WKFrameInfo {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKDownloadSelOriginatingFrame)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKFrameInfoFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

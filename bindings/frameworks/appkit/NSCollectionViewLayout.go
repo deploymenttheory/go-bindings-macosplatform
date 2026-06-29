@@ -72,269 +72,449 @@ func NSCollectionViewLayoutFromID(id objc.ID) *NSCollectionViewLayout {
 
 // Invalidates all layout information and triggers a layout update.
 func (o *NSCollectionViewLayout) InvalidateLayout() {
-	o.Ptr().Send(_nSCollectionViewLayoutSelInvalidateLayout)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewLayoutSelInvalidateLayout)
+	})
 }
 
 // Invalidates specific parts of the layout using the specified context object.
 func (o *NSCollectionViewLayout) InvalidateLayoutWithContext(context_ *NSCollectionViewLayoutInvalidationContext) {
-	o.Ptr().Send(_nSCollectionViewLayoutSelInvalidateLayoutWithContext, context_.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewLayoutSelInvalidateLayoutWithContext, context_.Ptr())
+	})
 }
 
 // Registers a class to use when creating the layout’s decoration views.
 func (o *NSCollectionViewLayout) RegisterClassForDecorationViewOfKind(viewClass objc.Class, elementKind *foundation.NSString) {
-	o.Ptr().Send(_nSCollectionViewLayoutSelRegisterClassForDecorationViewOfKind, viewClass, elementKind.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewLayoutSelRegisterClassForDecorationViewOfKind, viewClass, elementKind.Ptr())
+	})
 }
 
 // Registers a nib file to use when creating the layout’s decoration views.
 func (o *NSCollectionViewLayout) RegisterNibForDecorationViewOfKind(nib *NSNib, elementKind *foundation.NSString) {
-	o.Ptr().Send(_nSCollectionViewLayoutSelRegisterNibForDecorationViewOfKind, nib.Ptr(), elementKind.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewLayoutSelRegisterNibForDecorationViewOfKind, nib.Ptr(), elementKind.Ptr())
+	})
 }
 
 func (o *NSCollectionViewLayout) CollectionView() *NSCollectionView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelCollectionView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewFromID(_ret)
+	var _mainthread0 *NSCollectionView
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelCollectionView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Prepares the layout object to begin laying out content.
 func (o *NSCollectionViewLayout) PrepareLayout() {
-	o.Ptr().Send(_nSCollectionViewLayoutSelPrepareLayout)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewLayoutSelPrepareLayout)
+	})
 }
 
 // Returns the layout attribute objects for all items and views in the specified rectangle.
 func (o *NSCollectionViewLayout) LayoutAttributesForElementsInRect(rect corefoundation.CGRect) *foundation.NSArray[*NSCollectionViewLayoutAttributes] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelLayoutAttributesForElementsInRect, rect)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSCollectionViewLayoutAttributes](_ret)
+	var _mainthread0 *foundation.NSArray[*NSCollectionViewLayoutAttributes]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSCollectionViewLayoutAttributes] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelLayoutAttributesForElementsInRect, rect)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSCollectionViewLayoutAttributes](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the layout attributes for the item at the specified index path.
 func (o *NSCollectionViewLayout) LayoutAttributesForItemAtIndexPath(indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelLayoutAttributesForItemAtIndexPath, indexPath.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewLayoutAttributesFromID(_ret)
+	var _mainthread0 *NSCollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewLayoutAttributes {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelLayoutAttributesForItemAtIndexPath, indexPath.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewLayoutAttributesFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the layout attributes of the supplementary view at the specified location in your layout.
 func (o *NSCollectionViewLayout) LayoutAttributesForSupplementaryViewOfKindAtIndexPath(elementKind *foundation.NSString, indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelLayoutAttributesForSupplementaryViewOfKindAtIndexPath, elementKind.Ptr(), indexPath.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewLayoutAttributesFromID(_ret)
+	var _mainthread0 *NSCollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewLayoutAttributes {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelLayoutAttributesForSupplementaryViewOfKindAtIndexPath, elementKind.Ptr(), indexPath.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewLayoutAttributesFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the layout attributes of the decoration view at the specified location in your layout.
 func (o *NSCollectionViewLayout) LayoutAttributesForDecorationViewOfKindAtIndexPath(elementKind *foundation.NSString, indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelLayoutAttributesForDecorationViewOfKindAtIndexPath, elementKind.Ptr(), indexPath.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewLayoutAttributesFromID(_ret)
+	var _mainthread0 *NSCollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewLayoutAttributes {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelLayoutAttributesForDecorationViewOfKindAtIndexPath, elementKind.Ptr(), indexPath.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewLayoutAttributesFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns layout attributes for the drop target at the specified point.
 func (o *NSCollectionViewLayout) LayoutAttributesForDropTargetAtPoint(pointInCollectionView corefoundation.CGPoint) *NSCollectionViewLayoutAttributes {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelLayoutAttributesForDropTargetAtPoint, pointInCollectionView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewLayoutAttributesFromID(_ret)
+	var _mainthread0 *NSCollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewLayoutAttributes {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelLayoutAttributesForDropTargetAtPoint, pointInCollectionView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewLayoutAttributesFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns layout attributes for the inter-item gap at the specified location in your layout.
 func (o *NSCollectionViewLayout) LayoutAttributesForInterItemGapBeforeIndexPath(indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelLayoutAttributesForInterItemGapBeforeIndexPath, indexPath.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewLayoutAttributesFromID(_ret)
+	var _mainthread0 *NSCollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewLayoutAttributes {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelLayoutAttributesForInterItemGapBeforeIndexPath, indexPath.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewLayoutAttributesFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a Boolean indicating whether a bounds change triggers a layout update.
 func (o *NSCollectionViewLayout) ShouldInvalidateLayoutForBoundsChange(newBounds corefoundation.CGRect) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewLayoutSelShouldInvalidateLayoutForBoundsChange, newBounds)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewLayoutSelShouldInvalidateLayoutForBoundsChange, newBounds)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns an invalidation context object that defines the portions of the layout that need to be updated.
 func (o *NSCollectionViewLayout) InvalidationContextForBoundsChange(newBounds corefoundation.CGRect) *NSCollectionViewLayoutInvalidationContext {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelInvalidationContextForBoundsChange, newBounds)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewLayoutInvalidationContextFromID(_ret)
+	var _mainthread0 *NSCollectionViewLayoutInvalidationContext
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewLayoutInvalidationContext {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelInvalidationContextForBoundsChange, newBounds)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewLayoutInvalidationContextFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a Boolean indicating whether changes to a cell’s layout attributes trigger a larger layout update.
 func (o *NSCollectionViewLayout) ShouldInvalidateLayoutForPreferredLayoutAttributesWithOriginalAttributes(preferredAttributes *NSCollectionViewLayoutAttributes, originalAttributes *NSCollectionViewLayoutAttributes) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewLayoutSelShouldInvalidateLayoutForPreferredLayoutAttributesWithOriginalAttributes, preferredAttributes.Ptr(), originalAttributes.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewLayoutSelShouldInvalidateLayoutForPreferredLayoutAttributesWithOriginalAttributes, preferredAttributes.Ptr(), originalAttributes.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns an invalidation context object that defines the portions of the layout that need to be updated.
 func (o *NSCollectionViewLayout) InvalidationContextForPreferredLayoutAttributesWithOriginalAttributes(preferredAttributes *NSCollectionViewLayoutAttributes, originalAttributes *NSCollectionViewLayoutAttributes) *NSCollectionViewLayoutInvalidationContext {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelInvalidationContextForPreferredLayoutAttributesWithOriginalAttributes, preferredAttributes.Ptr(), originalAttributes.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewLayoutInvalidationContextFromID(_ret)
+	var _mainthread0 *NSCollectionViewLayoutInvalidationContext
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewLayoutInvalidationContext {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelInvalidationContextForPreferredLayoutAttributesWithOriginalAttributes, preferredAttributes.Ptr(), originalAttributes.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewLayoutInvalidationContextFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the offset value to use for the collection view’s content at the end of scrolling.
 func (o *NSCollectionViewLayout) TargetContentOffsetForProposedContentOffsetWithScrollingVelocity(proposedContentOffset corefoundation.CGPoint, velocity corefoundation.CGPoint) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSCollectionViewLayoutSelTargetContentOffsetForProposedContentOffsetWithScrollingVelocity, proposedContentOffset, velocity)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSCollectionViewLayoutSelTargetContentOffsetForProposedContentOffsetWithScrollingVelocity, proposedContentOffset, velocity)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the offset value to use after an animated layout update or change.
 func (o *NSCollectionViewLayout) TargetContentOffsetForProposedContentOffset(proposedContentOffset corefoundation.CGPoint) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSCollectionViewLayoutSelTargetContentOffsetForProposedContentOffset, proposedContentOffset)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSCollectionViewLayoutSelTargetContentOffsetForProposedContentOffset, proposedContentOffset)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func NSCollectionViewLayoutLayoutAttributesClass() objc.Class {
-	_ret := objc.Send[objc.Class](objc.ID(_clsNSCollectionViewLayout), _nSCollectionViewLayoutSelLayoutAttributesClass)
-	return _ret
+	var _mainthread0 objc.Class
+	purego.Main(func() {
+		_mainthread0 = func() objc.Class {
+			_ret := objc.Send[objc.Class](objc.ID(_clsNSCollectionViewLayout), _nSCollectionViewLayoutSelLayoutAttributesClass)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func NSCollectionViewLayoutInvalidationContextClass() objc.Class {
-	_ret := objc.Send[objc.Class](objc.ID(_clsNSCollectionViewLayout), _nSCollectionViewLayoutSelInvalidationContextClass)
-	return _ret
+	var _mainthread0 objc.Class
+	purego.Main(func() {
+		_mainthread0 = func() objc.Class {
+			_ret := objc.Send[objc.Class](objc.ID(_clsNSCollectionViewLayout), _nSCollectionViewLayoutSelInvalidationContextClass)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewLayout) CollectionViewContentSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCollectionViewLayoutSelCollectionViewContentSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCollectionViewLayoutSelCollectionViewContentSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Performs needed tasks before items are inserted, deleted, or moved within the collection view.
 func (o *NSCollectionViewLayout) PrepareForCollectionViewUpdates(updateItems *foundation.NSArray[*NSCollectionViewUpdateItem]) {
-	o.Ptr().Send(_nSCollectionViewLayoutSelPrepareForCollectionViewUpdates, updateItems.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewLayoutSelPrepareForCollectionViewUpdates, updateItems.Ptr())
+	})
 }
 
 // Performs needed steps after items are inserted, deleted, or moved within a collection view.
 func (o *NSCollectionViewLayout) FinalizeCollectionViewUpdates() {
-	o.Ptr().Send(_nSCollectionViewLayoutSelFinalizeCollectionViewUpdates)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewLayoutSelFinalizeCollectionViewUpdates)
+	})
 }
 
 // Prepares the layout object for animated changes to the collection view’s bounds or for the insertion or deletion of items.
 func (o *NSCollectionViewLayout) PrepareForAnimatedBoundsChange(oldBounds corefoundation.CGRect) {
-	o.Ptr().Send(_nSCollectionViewLayoutSelPrepareForAnimatedBoundsChange, oldBounds)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewLayoutSelPrepareForAnimatedBoundsChange, oldBounds)
+	})
 }
 
 // Cleans up after any animated changes to the collection view’s bounds or after the insertion or deletion of items.
 func (o *NSCollectionViewLayout) FinalizeAnimatedBoundsChange() {
-	o.Ptr().Send(_nSCollectionViewLayoutSelFinalizeAnimatedBoundsChange)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewLayoutSelFinalizeAnimatedBoundsChange)
+	})
 }
 
 // Prepares the layout object to be uninstalled from the collection view.
 func (o *NSCollectionViewLayout) PrepareForTransitionToLayout(newLayout *NSCollectionViewLayout) {
-	o.Ptr().Send(_nSCollectionViewLayoutSelPrepareForTransitionToLayout, newLayout.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewLayoutSelPrepareForTransitionToLayout, newLayout.Ptr())
+	})
 }
 
 // Prepares the layout object to be installed in the collection view.
 func (o *NSCollectionViewLayout) PrepareForTransitionFromLayout(oldLayout *NSCollectionViewLayout) {
-	o.Ptr().Send(_nSCollectionViewLayoutSelPrepareForTransitionFromLayout, oldLayout.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewLayoutSelPrepareForTransitionFromLayout, oldLayout.Ptr())
+	})
 }
 
 // Performs any final steps related to a layout transition before the transition animations actually occur.
 func (o *NSCollectionViewLayout) FinalizeLayoutTransition() {
-	o.Ptr().Send(_nSCollectionViewLayoutSelFinalizeLayoutTransition)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewLayoutSelFinalizeLayoutTransition)
+	})
 }
 
 // Returns the starting layout information for an item being inserted into the collection view.
 func (o *NSCollectionViewLayout) InitialLayoutAttributesForAppearingItemAtIndexPath(itemIndexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelInitialLayoutAttributesForAppearingItemAtIndexPath, itemIndexPath.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewLayoutAttributesFromID(_ret)
+	var _mainthread0 *NSCollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewLayoutAttributes {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelInitialLayoutAttributesForAppearingItemAtIndexPath, itemIndexPath.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewLayoutAttributesFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the ending layout information for an item being removed from the collection view.
 func (o *NSCollectionViewLayout) FinalLayoutAttributesForDisappearingItemAtIndexPath(itemIndexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelFinalLayoutAttributesForDisappearingItemAtIndexPath, itemIndexPath.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewLayoutAttributesFromID(_ret)
+	var _mainthread0 *NSCollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewLayoutAttributes {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelFinalLayoutAttributesForDisappearingItemAtIndexPath, itemIndexPath.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewLayoutAttributesFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the starting layout information for a supplementary view being added to the collection view.
 func (o *NSCollectionViewLayout) InitialLayoutAttributesForAppearingSupplementaryElementOfKindAtIndexPath(elementKind *foundation.NSString, elementIndexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelInitialLayoutAttributesForAppearingSupplementaryElementOfKindAtIndexPath, elementKind.Ptr(), elementIndexPath.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewLayoutAttributesFromID(_ret)
+	var _mainthread0 *NSCollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewLayoutAttributes {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelInitialLayoutAttributesForAppearingSupplementaryElementOfKindAtIndexPath, elementKind.Ptr(), elementIndexPath.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewLayoutAttributesFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the ending layout information for a supplementary view being removed from the collection view.
 func (o *NSCollectionViewLayout) FinalLayoutAttributesForDisappearingSupplementaryElementOfKindAtIndexPath(elementKind *foundation.NSString, elementIndexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelFinalLayoutAttributesForDisappearingSupplementaryElementOfKindAtIndexPath, elementKind.Ptr(), elementIndexPath.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewLayoutAttributesFromID(_ret)
+	var _mainthread0 *NSCollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewLayoutAttributes {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelFinalLayoutAttributesForDisappearingSupplementaryElementOfKindAtIndexPath, elementKind.Ptr(), elementIndexPath.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewLayoutAttributesFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the starting layout information for a decoration view being added to the collection view.
 func (o *NSCollectionViewLayout) InitialLayoutAttributesForAppearingDecorationElementOfKindAtIndexPath(elementKind *foundation.NSString, decorationIndexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelInitialLayoutAttributesForAppearingDecorationElementOfKindAtIndexPath, elementKind.Ptr(), decorationIndexPath.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewLayoutAttributesFromID(_ret)
+	var _mainthread0 *NSCollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewLayoutAttributes {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelInitialLayoutAttributesForAppearingDecorationElementOfKindAtIndexPath, elementKind.Ptr(), decorationIndexPath.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewLayoutAttributesFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the ending layout information for a decoration view being removed from the collection view.
 func (o *NSCollectionViewLayout) FinalLayoutAttributesForDisappearingDecorationElementOfKindAtIndexPath(elementKind *foundation.NSString, decorationIndexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelFinalLayoutAttributesForDisappearingDecorationElementOfKindAtIndexPath, elementKind.Ptr(), decorationIndexPath.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewLayoutAttributesFromID(_ret)
+	var _mainthread0 *NSCollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewLayoutAttributes {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelFinalLayoutAttributesForDisappearingDecorationElementOfKindAtIndexPath, elementKind.Ptr(), decorationIndexPath.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewLayoutAttributesFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the index paths for any supplementary views that the layout object wants to remove from the collection view.
 func (o *NSCollectionViewLayout) IndexPathsToDeleteForSupplementaryViewOfKind(elementKind *foundation.NSString) *foundation.NSSet[*foundation.NSIndexPath] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelIndexPathsToDeleteForSupplementaryViewOfKind, elementKind.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSSetFromID[*foundation.NSIndexPath](_ret)
+	var _mainthread0 *foundation.NSSet[*foundation.NSIndexPath]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSSet[*foundation.NSIndexPath] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelIndexPathsToDeleteForSupplementaryViewOfKind, elementKind.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSSetFromID[*foundation.NSIndexPath](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns index paths for any decoration views that the layout object wants to remove from the collection view.
 func (o *NSCollectionViewLayout) IndexPathsToDeleteForDecorationViewOfKind(elementKind *foundation.NSString) *foundation.NSSet[*foundation.NSIndexPath] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelIndexPathsToDeleteForDecorationViewOfKind, elementKind.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSSetFromID[*foundation.NSIndexPath](_ret)
+	var _mainthread0 *foundation.NSSet[*foundation.NSIndexPath]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSSet[*foundation.NSIndexPath] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelIndexPathsToDeleteForDecorationViewOfKind, elementKind.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSSetFromID[*foundation.NSIndexPath](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the index paths for any supplementary views that the layout object wants to add to the collection view.
 func (o *NSCollectionViewLayout) IndexPathsToInsertForSupplementaryViewOfKind(elementKind *foundation.NSString) *foundation.NSSet[*foundation.NSIndexPath] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelIndexPathsToInsertForSupplementaryViewOfKind, elementKind.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSSetFromID[*foundation.NSIndexPath](_ret)
+	var _mainthread0 *foundation.NSSet[*foundation.NSIndexPath]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSSet[*foundation.NSIndexPath] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelIndexPathsToInsertForSupplementaryViewOfKind, elementKind.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSSetFromID[*foundation.NSIndexPath](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the index paths for any decoration views that the layout object wants to add to the collection view.
 func (o *NSCollectionViewLayout) IndexPathsToInsertForDecorationViewOfKind(elementKind *foundation.NSString) *foundation.NSSet[*foundation.NSIndexPath] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelIndexPathsToInsertForDecorationViewOfKind, elementKind.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSSetFromID[*foundation.NSIndexPath](_ret)
+	var _mainthread0 *foundation.NSSet[*foundation.NSIndexPath]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSSet[*foundation.NSIndexPath] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelIndexPathsToInsertForDecorationViewOfKind, elementKind.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSSetFromID[*foundation.NSIndexPath](_ret)
+		}()
+	})
+	return _mainthread0
 }

@@ -35,19 +35,35 @@ func NSRotationGestureRecognizerFromID(id objc.ID) *NSRotationGestureRecognizer 
 }
 
 func (o *NSRotationGestureRecognizer) Rotation() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSRotationGestureRecognizerSelRotation)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSRotationGestureRecognizerSelRotation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRotationGestureRecognizer) SetRotation(rotation float64) {
-	o.Ptr().Send(_nSRotationGestureRecognizerSelSetRotation, rotation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRotationGestureRecognizerSelSetRotation, rotation)
+	})
 }
 
 func (o *NSRotationGestureRecognizer) RotationInDegrees() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSRotationGestureRecognizerSelRotationInDegrees)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSRotationGestureRecognizerSelRotationInDegrees)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRotationGestureRecognizer) SetRotationInDegrees(rotationInDegrees float64) {
-	o.Ptr().Send(_nSRotationGestureRecognizerSelSetRotationInDegrees, rotationInDegrees)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRotationGestureRecognizerSelSetRotationInDegrees, rotationInDegrees)
+	})
 }

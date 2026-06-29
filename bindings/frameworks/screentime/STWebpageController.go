@@ -49,71 +49,124 @@ func STWebpageControllerFromID(id objc.ID) *STWebpageController {
 // Changes the bundle identifier used to report web usage.
 func (o *STWebpageController) SetBundleIdentifierError(bundleIdentifier *foundation.NSString) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _sTWebpageControllerSelSetBundleIdentifierError, bundleIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return false, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return _ret, nil
+	var _mainthread0 bool
+	var _mainthread1 error
+	purego.Main(func() {
+		_mainthread0, _mainthread1 = func() (bool, error) {
+			_ret := objc.Send[bool](o.Ptr(), _sTWebpageControllerSelSetBundleIdentifierError, bundleIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
+			if _nsErr != 0 {
+				return false, purego.NSErrorToError(objc.ID(_nsErr))
+			}
+			return _ret, nil
+		}()
+	})
+	return _mainthread0, _mainthread1
 }
 
 // A Boolean that indicates whether the webpage controller is not recording web usage. Set to <doc://com.apple.documentation/documentation/objectivec/yes> to stop recording and reporting web-usage data.
 func (o *STWebpageController) SuppressUsageRecording() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sTWebpageControllerSelSuppressUsageRecording)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sTWebpageControllerSelSuppressUsageRecording)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *STWebpageController) SetSuppressUsageRecording(suppressUsageRecording bool) {
-	o.Ptr().Send(_sTWebpageControllerSelSetSuppressUsageRecording, suppressUsageRecording)
+	purego.Main(func() {
+		o.Ptr().Send(_sTWebpageControllerSelSetSuppressUsageRecording, suppressUsageRecording)
+	})
 }
 
 // The URL for the webpage. Set this value to the webpage’s URL when the user navigates to a new URL.
 func (o *STWebpageController) URL() *foundation.NSURL {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sTWebpageControllerSelURL)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSURLFromID(_ret)
+	var _mainthread0 *foundation.NSURL
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSURL {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sTWebpageControllerSelURL)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSURLFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *STWebpageController) SetURL(uRL *foundation.NSURL) {
-	o.Ptr().Send(_sTWebpageControllerSelSetURL, uRL.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sTWebpageControllerSelSetURL, uRL.Ptr())
+	})
 }
 
 // A Boolean that indicates whether there are one or more videos currently playing in the webpage. The default value is <doc://com.apple.documentation/documentation/objectivec/no>. Set this value when the webpage starts or stops playing video. - Important: Set this value to <doc://com.apple.documentation/documentation/objectivec/no> prior to changing “ScreenTime/STWebpageController/URL“ if the new webpage at that URL stops currently playing media and won’t immediately start playing new media.
 func (o *STWebpageController) URLIsPlayingVideo() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sTWebpageControllerSelURLIsPlayingVideo)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sTWebpageControllerSelURLIsPlayingVideo)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *STWebpageController) SetURLIsPlayingVideo(uRLIsPlayingVideo bool) {
-	o.Ptr().Send(_sTWebpageControllerSelSetURLIsPlayingVideo, uRLIsPlayingVideo)
+	purego.Main(func() {
+		o.Ptr().Send(_sTWebpageControllerSelSetURLIsPlayingVideo, uRLIsPlayingVideo)
+	})
 }
 
 // A Boolean that indicates whether the webpage is currently displaying a floating picture in picture window. The default value is <doc://com.apple.documentation/documentation/objectivec/no>. Set this value when the webpage starts or stops displaying a Picture in Picture window. - Important: Set this value to <doc://com.apple.documentation/documentation/objectivec/no> prior to changing “ScreenTime/STWebpageController/URL“ if the new webpage at that URL ends all currently displayed Picture in Picture windows, and won’t immediately display a new one.
 func (o *STWebpageController) URLIsPictureInPicture() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sTWebpageControllerSelURLIsPictureInPicture)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sTWebpageControllerSelURLIsPictureInPicture)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *STWebpageController) SetURLIsPictureInPicture(uRLIsPictureInPicture bool) {
-	o.Ptr().Send(_sTWebpageControllerSelSetURLIsPictureInPicture, uRLIsPictureInPicture)
+	purego.Main(func() {
+		o.Ptr().Send(_sTWebpageControllerSelSetURLIsPictureInPicture, uRLIsPictureInPicture)
+	})
 }
 
 // A Boolean that indicates whether a parent or guardian has blocked the URL. When a parent or guardian blocks the webpage’s URL, the webpage controller displays a blocking UI and then sets this property to <doc://com.apple.documentation/documentation/objectivec/yes>.
 func (o *STWebpageController) URLIsBlocked() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sTWebpageControllerSelURLIsBlocked)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sTWebpageControllerSelURLIsBlocked)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // An optional identifier for the current browsing profile. The default value is `nil`. This identifier represents a profile and allows you to keep your browsing separate for topics like work, personal, or school. Using `nil` will report web history without a profile identifier. Web browsers with a "default" profile may want to use `nil` in order to match any web history reported prior to this API.
 func (o *STWebpageController) ProfileIdentifier() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sTWebpageControllerSelProfileIdentifier)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sTWebpageControllerSelProfileIdentifier)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *STWebpageController) SetProfileIdentifier(profileIdentifier *foundation.NSString) {
-	o.Ptr().Send(_sTWebpageControllerSelSetProfileIdentifier, profileIdentifier.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sTWebpageControllerSelSetProfileIdentifier, profileIdentifier.Ptr())
+	})
 }

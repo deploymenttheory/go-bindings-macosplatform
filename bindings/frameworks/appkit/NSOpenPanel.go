@@ -56,111 +56,201 @@ func NSOpenPanelFromID(id objc.ID) *NSOpenPanel {
 
 // Creates a new Open panel and initializes it with a default configuration.
 func NSOpenPanelOpenPanel() *NSOpenPanel {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSOpenPanel), _nSOpenPanelSelOpenPanel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSOpenPanelFromID(_ret)
+	var _mainthread0 *NSOpenPanel
+	purego.Main(func() {
+		_mainthread0 = func() *NSOpenPanel {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSOpenPanel), _nSOpenPanelSelOpenPanel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSOpenPanelFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSOpenPanel) URLs() *foundation.NSArray[*foundation.NSURL] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenPanelSelURLs)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSURL](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSURL]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSURL] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenPanelSelURLs)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSURL](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSOpenPanel) ResolvesAliases() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSOpenPanelSelResolvesAliases)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSOpenPanelSelResolvesAliases)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSOpenPanel) SetResolvesAliases(resolvesAliases bool) {
-	o.Ptr().Send(_nSOpenPanelSelSetResolvesAliases, resolvesAliases)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOpenPanelSelSetResolvesAliases, resolvesAliases)
+	})
 }
 
 func (o *NSOpenPanel) CanChooseDirectories() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSOpenPanelSelCanChooseDirectories)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSOpenPanelSelCanChooseDirectories)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSOpenPanel) SetCanChooseDirectories(canChooseDirectories bool) {
-	o.Ptr().Send(_nSOpenPanelSelSetCanChooseDirectories, canChooseDirectories)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOpenPanelSelSetCanChooseDirectories, canChooseDirectories)
+	})
 }
 
 func (o *NSOpenPanel) AllowsMultipleSelection() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSOpenPanelSelAllowsMultipleSelection)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSOpenPanelSelAllowsMultipleSelection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSOpenPanel) SetAllowsMultipleSelection(allowsMultipleSelection bool) {
-	o.Ptr().Send(_nSOpenPanelSelSetAllowsMultipleSelection, allowsMultipleSelection)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOpenPanelSelSetAllowsMultipleSelection, allowsMultipleSelection)
+	})
 }
 
 func (o *NSOpenPanel) CanChooseFiles() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSOpenPanelSelCanChooseFiles)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSOpenPanelSelCanChooseFiles)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSOpenPanel) SetCanChooseFiles(canChooseFiles bool) {
-	o.Ptr().Send(_nSOpenPanelSelSetCanChooseFiles, canChooseFiles)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOpenPanelSelSetCanChooseFiles, canChooseFiles)
+	})
 }
 
 func (o *NSOpenPanel) CanResolveUbiquitousConflicts() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSOpenPanelSelCanResolveUbiquitousConflicts)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSOpenPanelSelCanResolveUbiquitousConflicts)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSOpenPanel) SetCanResolveUbiquitousConflicts(canResolveUbiquitousConflicts bool) {
-	o.Ptr().Send(_nSOpenPanelSelSetCanResolveUbiquitousConflicts, canResolveUbiquitousConflicts)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOpenPanelSelSetCanResolveUbiquitousConflicts, canResolveUbiquitousConflicts)
+	})
 }
 
 func (o *NSOpenPanel) CanDownloadUbiquitousContents() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSOpenPanelSelCanDownloadUbiquitousContents)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSOpenPanelSelCanDownloadUbiquitousContents)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSOpenPanel) SetCanDownloadUbiquitousContents(canDownloadUbiquitousContents bool) {
-	o.Ptr().Send(_nSOpenPanelSelSetCanDownloadUbiquitousContents, canDownloadUbiquitousContents)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOpenPanelSelSetCanDownloadUbiquitousContents, canDownloadUbiquitousContents)
+	})
 }
 
 func (o *NSOpenPanel) IsAccessoryViewDisclosed() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSOpenPanelSelIsAccessoryViewDisclosed)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSOpenPanelSelIsAccessoryViewDisclosed)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSOpenPanel) SetAccessoryViewDisclosed(accessoryViewDisclosed bool) {
-	o.Ptr().Send(_nSOpenPanelSelSetAccessoryViewDisclosed, accessoryViewDisclosed)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOpenPanelSelSetAccessoryViewDisclosed, accessoryViewDisclosed)
+	})
 }
 
 // Deprecated: since macOS 10.6.
 func (o *NSOpenPanel) Filenames() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenPanelSelFilenames)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[objc.ID](_ret)
+	var _mainthread0 *foundation.NSArray[objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenPanelSelFilenames)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.6.
 func (o *NSOpenPanel) BeginSheetForDirectoryFileTypesModalForWindowModalDelegateDidEndSelectorContextInfo(path *foundation.NSString, name *foundation.NSString, fileTypes *foundation.NSArray[objc.ID], docWindow *NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_nSOpenPanelSelBeginSheetForDirectoryFileTypesModalForWindowModalDelegateDidEndSelectorContextInfo, path.Ptr(), name.Ptr(), fileTypes.Ptr(), docWindow.Ptr(), delegate, didEndSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOpenPanelSelBeginSheetForDirectoryFileTypesModalForWindowModalDelegateDidEndSelectorContextInfo, path.Ptr(), name.Ptr(), fileTypes.Ptr(), docWindow.Ptr(), delegate, didEndSelector, contextInfo)
+	})
 }
 
 // Deprecated: since macOS 10.6.
 func (o *NSOpenPanel) BeginForDirectoryFileTypesModelessDelegateDidEndSelectorContextInfo(path *foundation.NSString, name *foundation.NSString, fileTypes *foundation.NSArray[objc.ID], delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_nSOpenPanelSelBeginForDirectoryFileTypesModelessDelegateDidEndSelectorContextInfo, path.Ptr(), name.Ptr(), fileTypes.Ptr(), delegate, didEndSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOpenPanelSelBeginForDirectoryFileTypesModelessDelegateDidEndSelectorContextInfo, path.Ptr(), name.Ptr(), fileTypes.Ptr(), delegate, didEndSelector, contextInfo)
+	})
 }
 
 // Deprecated: since macOS 10.6.
 func (o *NSOpenPanel) RunModalForDirectoryFileTypes(path *foundation.NSString, name *foundation.NSString, fileTypes *foundation.NSArray[objc.ID]) int {
-	_ret := objc.Send[int](o.Ptr(), _nSOpenPanelSelRunModalForDirectoryFileTypes, path.Ptr(), name.Ptr(), fileTypes.Ptr())
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSOpenPanelSelRunModalForDirectoryFileTypes, path.Ptr(), name.Ptr(), fileTypes.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.6.
 func (o *NSOpenPanel) RunModalForTypes(fileTypes *foundation.NSArray[objc.ID]) int {
-	_ret := objc.Send[int](o.Ptr(), _nSOpenPanelSelRunModalForTypes, fileTypes.Ptr())
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSOpenPanelSelRunModalForTypes, fileTypes.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

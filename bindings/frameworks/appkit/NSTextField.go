@@ -92,310 +92,548 @@ func NSTextFieldFromID(id objc.ID) *NSTextField {
 
 // Ends editing in the text field and, if it’s selectable, selects the entire text content.
 func (o *NSTextField) SelectText(sender objc.ID) {
-	o.Ptr().Send(_nSTextFieldSelSelectText, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSelectText, sender)
+	})
 }
 
 // Requests permission to begin editing a text object.
 func (o *NSTextField) TextShouldBeginEditing(textObject *NSText) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelTextShouldBeginEditing, textObject.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelTextShouldBeginEditing, textObject.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Performs validation on the text field’s new value.
 func (o *NSTextField) TextShouldEndEditing(textObject *NSText) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelTextShouldEndEditing, textObject.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelTextShouldEndEditing, textObject.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Posts a notification to the default notification center that the text is about to go into edit mode.
 func (o *NSTextField) TextDidBeginEditing(notification *foundation.NSNotification) {
-	o.Ptr().Send(_nSTextFieldSelTextDidBeginEditing, notification.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelTextDidBeginEditing, notification.Ptr())
+	})
 }
 
 // Posts a notification when the text is no longer in edit mode.
 func (o *NSTextField) TextDidEndEditing(notification *foundation.NSNotification) {
-	o.Ptr().Send(_nSTextFieldSelTextDidEndEditing, notification.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelTextDidEndEditing, notification.Ptr())
+	})
 }
 
 // Posts a notification when the text changes, and forwards the message to the text field’s cell if it responds.
 func (o *NSTextField) TextDidChange(notification *foundation.NSNotification) {
-	o.Ptr().Send(_nSTextFieldSelTextDidChange, notification.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelTextDidChange, notification.Ptr())
+	})
 }
 
 func (o *NSTextField) PlaceholderString() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldSelPlaceholderString)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldSelPlaceholderString)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextField) SetPlaceholderString(placeholderString *foundation.NSString) {
-	o.Ptr().Send(_nSTextFieldSelSetPlaceholderString, placeholderString.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetPlaceholderString, placeholderString.Ptr())
+	})
 }
 
 func (o *NSTextField) PlaceholderAttributedString() *foundation.NSAttributedString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldSelPlaceholderAttributedString)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSAttributedStringFromID(_ret)
+	var _mainthread0 *foundation.NSAttributedString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSAttributedString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldSelPlaceholderAttributedString)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSAttributedStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextField) SetPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) {
-	o.Ptr().Send(_nSTextFieldSelSetPlaceholderAttributedString, placeholderAttributedString.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetPlaceholderAttributedString, placeholderAttributedString.Ptr())
+	})
 }
 
 func (o *NSTextField) BackgroundColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldSelBackgroundColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldSelBackgroundColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextField) SetBackgroundColor(backgroundColor *NSColor) {
-	o.Ptr().Send(_nSTextFieldSelSetBackgroundColor, backgroundColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetBackgroundColor, backgroundColor.Ptr())
+	})
 }
 
 func (o *NSTextField) DrawsBackground() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelDrawsBackground)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelDrawsBackground)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextField) SetDrawsBackground(drawsBackground bool) {
-	o.Ptr().Send(_nSTextFieldSelSetDrawsBackground, drawsBackground)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetDrawsBackground, drawsBackground)
+	})
 }
 
 func (o *NSTextField) TextColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldSelTextColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldSelTextColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextField) SetTextColor(textColor *NSColor) {
-	o.Ptr().Send(_nSTextFieldSelSetTextColor, textColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetTextColor, textColor.Ptr())
+	})
 }
 
 func (o *NSTextField) IsBordered() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelIsBordered)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelIsBordered)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextField) SetBordered(bordered bool) {
-	o.Ptr().Send(_nSTextFieldSelSetBordered, bordered)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetBordered, bordered)
+	})
 }
 
 func (o *NSTextField) IsBezeled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelIsBezeled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelIsBezeled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextField) SetBezeled(bezeled bool) {
-	o.Ptr().Send(_nSTextFieldSelSetBezeled, bezeled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetBezeled, bezeled)
+	})
 }
 
 func (o *NSTextField) IsEditable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelIsEditable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelIsEditable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextField) SetEditable(editable bool) {
-	o.Ptr().Send(_nSTextFieldSelSetEditable, editable)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetEditable, editable)
+	})
 }
 
 func (o *NSTextField) IsSelectable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelIsSelectable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelIsSelectable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextField) SetSelectable(selectable bool) {
-	o.Ptr().Send(_nSTextFieldSelSetSelectable, selectable)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetSelectable, selectable)
+	})
 }
 
 func (o *NSTextField) Delegate() NSTextFieldDelegate {
-	_ret := objc.Send[NSTextFieldDelegate](o.Ptr(), _nSTextFieldSelDelegate)
-	return _ret
+	var _mainthread0 NSTextFieldDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSTextFieldDelegate {
+			_ret := objc.Send[NSTextFieldDelegate](o.Ptr(), _nSTextFieldSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextField) SetDelegate(delegate NSTextFieldDelegate) {
-	o.Ptr().Send(_nSTextFieldSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetDelegate, delegate)
+	})
 }
 
 func (o *NSTextField) BezelStyle() NSTextFieldBezelStyle {
-	_ret := objc.Send[NSTextFieldBezelStyle](o.Ptr(), _nSTextFieldSelBezelStyle)
-	return _ret
+	var _mainthread0 NSTextFieldBezelStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSTextFieldBezelStyle {
+			_ret := objc.Send[NSTextFieldBezelStyle](o.Ptr(), _nSTextFieldSelBezelStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextField) SetBezelStyle(bezelStyle NSTextFieldBezelStyle) {
-	o.Ptr().Send(_nSTextFieldSelSetBezelStyle, bezelStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetBezelStyle, bezelStyle)
+	})
 }
 
 func (o *NSTextField) PreferredMaxLayoutWidth() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSTextFieldSelPreferredMaxLayoutWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSTextFieldSelPreferredMaxLayoutWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextField) SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) {
-	o.Ptr().Send(_nSTextFieldSelSetPreferredMaxLayoutWidth, preferredMaxLayoutWidth)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetPreferredMaxLayoutWidth, preferredMaxLayoutWidth)
+	})
 }
 
 func (o *NSTextField) MaximumNumberOfLines() int {
-	_ret := objc.Send[int](o.Ptr(), _nSTextFieldSelMaximumNumberOfLines)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTextFieldSelMaximumNumberOfLines)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextField) SetMaximumNumberOfLines(maximumNumberOfLines int) {
-	o.Ptr().Send(_nSTextFieldSelSetMaximumNumberOfLines, maximumNumberOfLines)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetMaximumNumberOfLines, maximumNumberOfLines)
+	})
 }
 
 func (o *NSTextField) AllowsDefaultTighteningForTruncation() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelAllowsDefaultTighteningForTruncation)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelAllowsDefaultTighteningForTruncation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextField) SetAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) {
-	o.Ptr().Send(_nSTextFieldSelSetAllowsDefaultTighteningForTruncation, allowsDefaultTighteningForTruncation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetAllowsDefaultTighteningForTruncation, allowsDefaultTighteningForTruncation)
+	})
 }
 
 func (o *NSTextField) LineBreakStrategy() NSLineBreakStrategy {
-	_ret := objc.Send[NSLineBreakStrategy](o.Ptr(), _nSTextFieldSelLineBreakStrategy)
-	return _ret
+	var _mainthread0 NSLineBreakStrategy
+	purego.Main(func() {
+		_mainthread0 = func() NSLineBreakStrategy {
+			_ret := objc.Send[NSLineBreakStrategy](o.Ptr(), _nSTextFieldSelLineBreakStrategy)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextField) SetLineBreakStrategy(lineBreakStrategy NSLineBreakStrategy) {
-	o.Ptr().Send(_nSTextFieldSelSetLineBreakStrategy, lineBreakStrategy)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetLineBreakStrategy, lineBreakStrategy)
+	})
 }
 
 func (o *NSTextField) AllowsWritingTools() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelAllowsWritingTools)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelAllowsWritingTools)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextField) SetAllowsWritingTools(allowsWritingTools bool) {
-	o.Ptr().Send(_nSTextFieldSelSetAllowsWritingTools, allowsWritingTools)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetAllowsWritingTools, allowsWritingTools)
+	})
 }
 
 func (o *NSTextField) AllowsWritingToolsAffordance() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelAllowsWritingToolsAffordance)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelAllowsWritingToolsAffordance)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextField) SetAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool) {
-	o.Ptr().Send(_nSTextFieldSelSetAllowsWritingToolsAffordance, allowsWritingToolsAffordance)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetAllowsWritingToolsAffordance, allowsWritingToolsAffordance)
+	})
 }
 
 func (o *NSTextField) PlaceholderStrings() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldSelPlaceholderStrings)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldSelPlaceholderStrings)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextField) SetPlaceholderStrings(placeholderStrings *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSTextFieldSelSetPlaceholderStrings, placeholderStrings.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetPlaceholderStrings, placeholderStrings.Ptr())
+	})
 }
 
 func (o *NSTextField) PlaceholderAttributedStrings() *foundation.NSArray[*foundation.NSAttributedString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldSelPlaceholderAttributedStrings)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSAttributedString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSAttributedString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSAttributedString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldSelPlaceholderAttributedStrings)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSAttributedString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextField) SetPlaceholderAttributedStrings(placeholderAttributedStrings *foundation.NSArray[*foundation.NSAttributedString]) {
-	o.Ptr().Send(_nSTextFieldSelSetPlaceholderAttributedStrings, placeholderAttributedStrings.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetPlaceholderAttributedStrings, placeholderAttributedStrings.Ptr())
+	})
 }
 
 // Specifies the behavior for resolving “NSTextAlignment/natural“ to the visual alignment. When set to `true`, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is `false`.
 func (o *NSTextField) ResolvesNaturalAlignmentWithBaseWritingDirection() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelResolvesNaturalAlignmentWithBaseWritingDirection)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelResolvesNaturalAlignmentWithBaseWritingDirection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies the behavior for resolving “NSTextAlignment/natural“ to the visual alignment. When set to `true`, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is `false`.
 func (o *NSTextField) SetResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) {
-	o.Ptr().Send(_nSTextFieldSelSetResolvesNaturalAlignmentWithBaseWritingDirection, resolvesNaturalAlignmentWithBaseWritingDirection)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetResolvesNaturalAlignmentWithBaseWritingDirection, resolvesNaturalAlignmentWithBaseWritingDirection)
+	})
 }
 
 func (o *NSTextField) IsAutomaticTextCompletionEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelIsAutomaticTextCompletionEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelIsAutomaticTextCompletionEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextField) SetAutomaticTextCompletionEnabled(automaticTextCompletionEnabled bool) {
-	o.Ptr().Send(_nSTextFieldSelSetAutomaticTextCompletionEnabled, automaticTextCompletionEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetAutomaticTextCompletionEnabled, automaticTextCompletionEnabled)
+	})
 }
 
 func (o *NSTextField) AllowsCharacterPickerTouchBarItem() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelAllowsCharacterPickerTouchBarItem)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelAllowsCharacterPickerTouchBarItem)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextField) SetAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool) {
-	o.Ptr().Send(_nSTextFieldSelSetAllowsCharacterPickerTouchBarItem, allowsCharacterPickerTouchBarItem)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetAllowsCharacterPickerTouchBarItem, allowsCharacterPickerTouchBarItem)
+	})
 }
 
 // Initializes a text field for use as a static label that uses the system default font, doesn’t wrap, and doesn’t have selectable text.
 func NSTextFieldLabelWithString(stringValue *foundation.NSString) *NSTextField {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextField), _nSTextFieldSelLabelWithString, stringValue.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextFieldFromID(_ret)
+	var _mainthread0 *NSTextField
+	purego.Main(func() {
+		_mainthread0 = func() *NSTextField {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSTextField), _nSTextFieldSelLabelWithString, stringValue.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextFieldFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a text field for use as a multiline static label with selectable text that uses the system default font.
 func NSTextFieldWrappingLabelWithString(stringValue *foundation.NSString) *NSTextField {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextField), _nSTextFieldSelWrappingLabelWithString, stringValue.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextFieldFromID(_ret)
+	var _mainthread0 *NSTextField
+	purego.Main(func() {
+		_mainthread0 = func() *NSTextField {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSTextField), _nSTextFieldSelWrappingLabelWithString, stringValue.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextFieldFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a text field for use as a static label that displays styled text, doesn’t wrap, and doesn’t have selectable text.
 func NSTextFieldLabelWithAttributedString(attributedStringValue *foundation.NSAttributedString) *NSTextField {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextField), _nSTextFieldSelLabelWithAttributedString, attributedStringValue.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextFieldFromID(_ret)
+	var _mainthread0 *NSTextField
+	purego.Main(func() {
+		_mainthread0 = func() *NSTextField {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSTextField), _nSTextFieldSelLabelWithAttributedString, attributedStringValue.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextFieldFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a single-line editable text field for user input using the system default font and standard visual appearance.
 func NSTextFieldTextFieldWithString(stringValue *foundation.NSString) *NSTextField {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextField), _nSTextFieldSelTextFieldWithString, stringValue.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextFieldFromID(_ret)
+	var _mainthread0 *NSTextField
+	purego.Main(func() {
+		_mainthread0 = func() *NSTextField {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSTextField), _nSTextFieldSelTextFieldWithString, stringValue.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextFieldFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextField) AllowsEditingTextAttributes() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelAllowsEditingTextAttributes)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelAllowsEditingTextAttributes)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextField) SetAllowsEditingTextAttributes(allowsEditingTextAttributes bool) {
-	o.Ptr().Send(_nSTextFieldSelSetAllowsEditingTextAttributes, allowsEditingTextAttributes)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetAllowsEditingTextAttributes, allowsEditingTextAttributes)
+	})
 }
 
 func (o *NSTextField) ImportsGraphics() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelImportsGraphics)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelImportsGraphics)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextField) SetImportsGraphics(importsGraphics bool) {
-	o.Ptr().Send(_nSTextFieldSelSetImportsGraphics, importsGraphics)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetImportsGraphics, importsGraphics)
+	})
 }
 
 // Sets the text field’s string value using the embedded character as the keyboard mnemonic.
 // Deprecated: Use `-setTitle:` instead
 func (o *NSTextField) SetTitleWithMnemonic(stringWithAmpersand *foundation.NSString) {
-	o.Ptr().Send(_nSTextFieldSelSetTitleWithMnemonic, stringWithAmpersand.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldSelSetTitleWithMnemonic, stringWithAmpersand.Ptr())
+	})
 }

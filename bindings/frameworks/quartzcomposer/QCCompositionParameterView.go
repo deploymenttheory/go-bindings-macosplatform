@@ -39,45 +39,83 @@ func QCCompositionParameterViewFromID(id objc.ID) *QCCompositionParameterView {
 }
 
 func (o *QCCompositionParameterView) SetCompositionRenderer(renderer QCCompositionRenderer) {
-	o.Ptr().Send(_qCCompositionParameterViewSelSetCompositionRenderer, renderer)
+	purego.Main(func() {
+		o.Ptr().Send(_qCCompositionParameterViewSelSetCompositionRenderer, renderer)
+	})
 }
 
 func (o *QCCompositionParameterView) CompositionRenderer() QCCompositionRenderer {
-	_ret := objc.Send[QCCompositionRenderer](o.Ptr(), _qCCompositionParameterViewSelCompositionRenderer)
-	return _ret
+	var _mainthread0 QCCompositionRenderer
+	purego.Main(func() {
+		_mainthread0 = func() QCCompositionRenderer {
+			_ret := objc.Send[QCCompositionRenderer](o.Ptr(), _qCCompositionParameterViewSelCompositionRenderer)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QCCompositionParameterView) HasParameters() bool {
-	_ret := objc.Send[bool](o.Ptr(), _qCCompositionParameterViewSelHasParameters)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _qCCompositionParameterViewSelHasParameters)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QCCompositionParameterView) SetBackgroundColor(color *appkit.NSColor) {
-	o.Ptr().Send(_qCCompositionParameterViewSelSetBackgroundColor, color.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_qCCompositionParameterViewSelSetBackgroundColor, color.Ptr())
+	})
 }
 
 func (o *QCCompositionParameterView) BackgroundColor() *appkit.NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionParameterViewSelBackgroundColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSColorFromID(_ret)
+	var _mainthread0 *appkit.NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionParameterViewSelBackgroundColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QCCompositionParameterView) SetDrawsBackground(flag bool) {
-	o.Ptr().Send(_qCCompositionParameterViewSelSetDrawsBackground, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_qCCompositionParameterViewSelSetDrawsBackground, flag)
+	})
 }
 
 func (o *QCCompositionParameterView) DrawsBackground() bool {
-	_ret := objc.Send[bool](o.Ptr(), _qCCompositionParameterViewSelDrawsBackground)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _qCCompositionParameterViewSelDrawsBackground)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QCCompositionParameterView) SetDelegate(delegate objc.ID) {
-	o.Ptr().Send(_qCCompositionParameterViewSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_qCCompositionParameterViewSelSetDelegate, delegate)
+	})
 }
 
 func (o *QCCompositionParameterView) Delegate() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionParameterViewSelDelegate)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionParameterViewSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

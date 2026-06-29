@@ -44,58 +44,98 @@ func NCWidgetSearchViewControllerFromID(id objc.ID) *NCWidgetSearchViewControlle
 }
 
 func (o *NCWidgetSearchViewController) Delegate() NCWidgetSearchViewDelegate {
-	_ret := objc.Send[NCWidgetSearchViewDelegate](o.Ptr(), _nCWidgetSearchViewControllerSelDelegate)
-	return _ret
+	var _mainthread0 NCWidgetSearchViewDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NCWidgetSearchViewDelegate {
+			_ret := objc.Send[NCWidgetSearchViewDelegate](o.Ptr(), _nCWidgetSearchViewControllerSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NCWidgetSearchViewController) SetDelegate(delegate NCWidgetSearchViewDelegate) {
-	o.Ptr().Send(_nCWidgetSearchViewControllerSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nCWidgetSearchViewControllerSelSetDelegate, delegate)
+	})
 }
 
 func (o *NCWidgetSearchViewController) SearchResults() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nCWidgetSearchViewControllerSelSearchResults)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[objc.ID](_ret)
+	var _mainthread0 *foundation.NSArray[objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nCWidgetSearchViewControllerSelSearchResults)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NCWidgetSearchViewController) SetSearchResults(searchResults *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_nCWidgetSearchViewControllerSelSetSearchResults, searchResults.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nCWidgetSearchViewControllerSelSetSearchResults, searchResults.Ptr())
+	})
 }
 
 func (o *NCWidgetSearchViewController) SearchDescription() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nCWidgetSearchViewControllerSelSearchDescription)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nCWidgetSearchViewControllerSelSearchDescription)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NCWidgetSearchViewController) SetSearchDescription(searchDescription *foundation.NSString) {
-	o.Ptr().Send(_nCWidgetSearchViewControllerSelSetSearchDescription, searchDescription.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nCWidgetSearchViewControllerSelSetSearchDescription, searchDescription.Ptr())
+	})
 }
 
 func (o *NCWidgetSearchViewController) SearchResultsPlaceholderString() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nCWidgetSearchViewControllerSelSearchResultsPlaceholderString)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nCWidgetSearchViewControllerSelSearchResultsPlaceholderString)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NCWidgetSearchViewController) SetSearchResultsPlaceholderString(searchResultsPlaceholderString *foundation.NSString) {
-	o.Ptr().Send(_nCWidgetSearchViewControllerSelSetSearchResultsPlaceholderString, searchResultsPlaceholderString.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nCWidgetSearchViewControllerSelSetSearchResultsPlaceholderString, searchResultsPlaceholderString.Ptr())
+	})
 }
 
 func (o *NCWidgetSearchViewController) SearchResultKeyPath() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nCWidgetSearchViewControllerSelSearchResultKeyPath)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nCWidgetSearchViewControllerSelSearchResultKeyPath)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NCWidgetSearchViewController) SetSearchResultKeyPath(searchResultKeyPath *foundation.NSString) {
-	o.Ptr().Send(_nCWidgetSearchViewControllerSelSetSearchResultKeyPath, searchResultKeyPath.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nCWidgetSearchViewControllerSelSetSearchResultKeyPath, searchResultKeyPath.Ptr())
+	})
 }

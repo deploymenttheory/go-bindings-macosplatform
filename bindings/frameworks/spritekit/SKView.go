@@ -74,206 +74,368 @@ func SKViewFromID(id objc.ID) *SKView {
 
 // Presents a scene.
 func (o *SKView) PresentScene(scene *SKScene) {
-	o.Ptr().Send(_sKViewSelPresentScene, scene.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKViewSelPresentScene, scene.Ptr())
+	})
 }
 
 // Transitions from the current scene to a new scene.
 func (o *SKView) PresentSceneTransition(scene *SKScene, transition *SKTransition) {
-	o.Ptr().Send(_sKViewSelPresentSceneTransition, scene.Ptr(), transition.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKViewSelPresentSceneTransition, scene.Ptr(), transition.Ptr())
+	})
 }
 
 // Renders the contents of a node tree and returns the rendered image as a texture.
 func (o *SKView) TextureFromNode(node *SKNode) *SKTexture {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKViewSelTextureFromNode, node.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKTextureFromID(_ret)
+	var _mainthread0 *SKTexture
+	purego.Main(func() {
+		_mainthread0 = func() *SKTexture {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKViewSelTextureFromNode, node.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKTextureFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Renders a portion of a node’s contents and returns the rendered image as a texture.
 func (o *SKView) TextureFromNodeCrop(node *SKNode, crop corefoundation.CGRect) *SKTexture {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKViewSelTextureFromNodeCrop, node.Ptr(), crop)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKTextureFromID(_ret)
+	var _mainthread0 *SKTexture
+	purego.Main(func() {
+		_mainthread0 = func() *SKTexture {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKViewSelTextureFromNodeCrop, node.Ptr(), crop)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKTextureFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Converts a point from view coordinates to scene coordinates.
 func (o *SKView) ConvertPointToScene(point corefoundation.CGPoint, scene *SKScene) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sKViewSelConvertPointToScene, point, scene.Ptr())
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sKViewSelConvertPointToScene, point, scene.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Converts a point from scene coordinates to view coordinates.
 func (o *SKView) ConvertPointFromScene(point corefoundation.CGPoint, scene *SKScene) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sKViewSelConvertPointFromScene, point, scene.Ptr())
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sKViewSelConvertPointFromScene, point, scene.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Pause the entire view
 func (o *SKView) IsPaused() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sKViewSelIsPaused)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sKViewSelIsPaused)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKView) SetPaused(paused bool) {
-	o.Ptr().Send(_sKViewSelSetPaused, paused)
+	purego.Main(func() {
+		o.Ptr().Send(_sKViewSelSetPaused, paused)
+	})
 }
 
 // Toggles display of performance stats in the view. All default to false.
 func (o *SKView) ShowsFPS() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sKViewSelShowsFPS)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sKViewSelShowsFPS)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKView) SetShowsFPS(showsFPS bool) {
-	o.Ptr().Send(_sKViewSelSetShowsFPS, showsFPS)
+	purego.Main(func() {
+		o.Ptr().Send(_sKViewSelSetShowsFPS, showsFPS)
+	})
 }
 
 func (o *SKView) ShowsDrawCount() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sKViewSelShowsDrawCount)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sKViewSelShowsDrawCount)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKView) SetShowsDrawCount(showsDrawCount bool) {
-	o.Ptr().Send(_sKViewSelSetShowsDrawCount, showsDrawCount)
+	purego.Main(func() {
+		o.Ptr().Send(_sKViewSelSetShowsDrawCount, showsDrawCount)
+	})
 }
 
 func (o *SKView) ShowsNodeCount() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sKViewSelShowsNodeCount)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sKViewSelShowsNodeCount)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKView) SetShowsNodeCount(showsNodeCount bool) {
-	o.Ptr().Send(_sKViewSelSetShowsNodeCount, showsNodeCount)
+	purego.Main(func() {
+		o.Ptr().Send(_sKViewSelSetShowsNodeCount, showsNodeCount)
+	})
 }
 
 func (o *SKView) ShowsQuadCount() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sKViewSelShowsQuadCount)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sKViewSelShowsQuadCount)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKView) SetShowsQuadCount(showsQuadCount bool) {
-	o.Ptr().Send(_sKViewSelSetShowsQuadCount, showsQuadCount)
+	purego.Main(func() {
+		o.Ptr().Send(_sKViewSelSetShowsQuadCount, showsQuadCount)
+	})
 }
 
 func (o *SKView) ShowsPhysics() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sKViewSelShowsPhysics)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sKViewSelShowsPhysics)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKView) SetShowsPhysics(showsPhysics bool) {
-	o.Ptr().Send(_sKViewSelSetShowsPhysics, showsPhysics)
+	purego.Main(func() {
+		o.Ptr().Send(_sKViewSelSetShowsPhysics, showsPhysics)
+	})
 }
 
 func (o *SKView) ShowsFields() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sKViewSelShowsFields)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sKViewSelShowsFields)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKView) SetShowsFields(showsFields bool) {
-	o.Ptr().Send(_sKViewSelSetShowsFields, showsFields)
+	purego.Main(func() {
+		o.Ptr().Send(_sKViewSelSetShowsFields, showsFields)
+	})
 }
 
 // Toggles whether the view updates is rendered asynchronously or aligned with Core Animation updates. Defaults to YES.
 func (o *SKView) IsAsynchronous() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sKViewSelIsAsynchronous)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sKViewSelIsAsynchronous)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKView) SetAsynchronous(asynchronous bool) {
-	o.Ptr().Send(_sKViewSelSetAsynchronous, asynchronous)
+	purego.Main(func() {
+		o.Ptr().Send(_sKViewSelSetAsynchronous, asynchronous)
+	})
 }
 
 // Toggles whether the view allows transparent rendering. This allows content under the view to show through if a non-opaque backgroundColor is set on the scene. Defaults to NO.
 func (o *SKView) AllowsTransparency() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sKViewSelAllowsTransparency)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sKViewSelAllowsTransparency)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKView) SetAllowsTransparency(allowsTransparency bool) {
-	o.Ptr().Send(_sKViewSelSetAllowsTransparency, allowsTransparency)
+	purego.Main(func() {
+		o.Ptr().Send(_sKViewSelSetAllowsTransparency, allowsTransparency)
+	})
 }
 
 // Ignores sibling and traversal order to sort the rendered contents of a scene into the most efficient batching possible. This will require zPosition to be used in the scenes to properly guarantee elements are in front or behind each other. This defaults to NO, meaning that sibling order overrides efficiency heuristics in the rendering of the scenes in the view. Setting this to YES for a complex scene may substantially increase performance, but care must be taken as only zPosition determines render order before the efficiency heuristics are used.
 func (o *SKView) IgnoresSiblingOrder() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sKViewSelIgnoresSiblingOrder)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sKViewSelIgnoresSiblingOrder)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKView) SetIgnoresSiblingOrder(ignoresSiblingOrder bool) {
-	o.Ptr().Send(_sKViewSelSetIgnoresSiblingOrder, ignoresSiblingOrder)
+	purego.Main(func() {
+		o.Ptr().Send(_sKViewSelSetIgnoresSiblingOrder, ignoresSiblingOrder)
+	})
 }
 
 func (o *SKView) ShouldCullNonVisibleNodes() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sKViewSelShouldCullNonVisibleNodes)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sKViewSelShouldCullNonVisibleNodes)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKView) SetShouldCullNonVisibleNodes(shouldCullNonVisibleNodes bool) {
-	o.Ptr().Send(_sKViewSelSetShouldCullNonVisibleNodes, shouldCullNonVisibleNodes)
+	purego.Main(func() {
+		o.Ptr().Send(_sKViewSelSetShouldCullNonVisibleNodes, shouldCullNonVisibleNodes)
+	})
 }
 
 func (o *SKView) PreferredFramesPerSecond() int {
-	_ret := objc.Send[int](o.Ptr(), _sKViewSelPreferredFramesPerSecond)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _sKViewSelPreferredFramesPerSecond)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKView) SetPreferredFramesPerSecond(preferredFramesPerSecond int) {
-	o.Ptr().Send(_sKViewSelSetPreferredFramesPerSecond, preferredFramesPerSecond)
+	purego.Main(func() {
+		o.Ptr().Send(_sKViewSelSetPreferredFramesPerSecond, preferredFramesPerSecond)
+	})
 }
 
 func (o *SKView) DisableDepthStencilBuffer() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sKViewSelDisableDepthStencilBuffer)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sKViewSelDisableDepthStencilBuffer)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKView) SetDisableDepthStencilBuffer(disableDepthStencilBuffer bool) {
-	o.Ptr().Send(_sKViewSelSetDisableDepthStencilBuffer, disableDepthStencilBuffer)
+	purego.Main(func() {
+		o.Ptr().Send(_sKViewSelSetDisableDepthStencilBuffer, disableDepthStencilBuffer)
+	})
 }
 
 // Optional view delegate, see SKViewDelegate.
 func (o *SKView) Delegate() *foundation.NSObject {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKViewSelDelegate)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSObjectFromID(_ret)
+	var _mainthread0 *foundation.NSObject
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSObject {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKViewSelDelegate)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSObjectFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKView) SetDelegate(delegate *foundation.NSObject) {
-	o.Ptr().Send(_sKViewSelSetDelegate, delegate.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKViewSelSetDelegate, delegate.Ptr())
+	})
 }
 
 // Deprecated: since macOS 10.12.
 func (o *SKView) FrameInterval() int {
-	_ret := objc.Send[int](o.Ptr(), _sKViewSelFrameInterval)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _sKViewSelFrameInterval)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.12.
 func (o *SKView) SetFrameInterval(frameInterval int) {
-	o.Ptr().Send(_sKViewSelSetFrameInterval, frameInterval)
+	purego.Main(func() {
+		o.Ptr().Send(_sKViewSelSetFrameInterval, frameInterval)
+	})
 }
 
 // Deprecated: since macOS 10.12.
 func (o *SKView) PreferredFrameRate() float32 {
-	_ret := objc.Send[float32](o.Ptr(), _sKViewSelPreferredFrameRate)
-	return _ret
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_ret := objc.Send[float32](o.Ptr(), _sKViewSelPreferredFrameRate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.12.
 func (o *SKView) SetPreferredFrameRate(preferredFrameRate float32) {
-	o.Ptr().Send(_sKViewSelSetPreferredFrameRate, preferredFrameRate)
+	purego.Main(func() {
+		o.Ptr().Send(_sKViewSelSetPreferredFrameRate, preferredFrameRate)
+	})
 }
 
 // The currently presented scene, otherwise nil. If in a transition, the 'incoming' scene is returned.
 func (o *SKView) Scene() *SKScene {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKViewSelScene)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKSceneFromID(_ret)
+	var _mainthread0 *SKScene
+	purego.Main(func() {
+		_mainthread0 = func() *SKScene {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKViewSelScene)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKSceneFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

@@ -44,59 +44,91 @@ func PHPickerViewControllerFromID(id objc.ID) *PHPickerViewController {
 
 // Creates a new picker view controller with the configuration you specify.
 func (o *PHPickerViewController) InitWithConfiguration(configuration *PHPickerConfiguration) *PHPickerViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pHPickerViewControllerSelInitWithConfiguration, configuration.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return PHPickerViewControllerFromID(_ret)
+	var _mainthread0 *PHPickerViewController
+	purego.Main(func() {
+		_mainthread0 = func() *PHPickerViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _pHPickerViewControllerSelInitWithConfiguration, configuration.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return PHPickerViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Customizes your app’s photo picker according to the given configuration.
 func (o *PHPickerViewController) UpdatePickerUsingConfiguration(configuration *PHPickerUpdateConfiguration) {
-	o.Ptr().Send(_pHPickerViewControllerSelUpdatePickerUsingConfiguration, configuration.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_pHPickerViewControllerSelUpdatePickerUsingConfiguration, configuration.Ptr())
+	})
 }
 
 // Deselects assets that are in a selected state.
 func (o *PHPickerViewController) DeselectAssetsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_pHPickerViewControllerSelDeselectAssetsWithIdentifiers, identifiers.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_pHPickerViewControllerSelDeselectAssetsWithIdentifiers, identifiers.Ptr())
+	})
 }
 
 // Reorders assets that are in a selected state.
 func (o *PHPickerViewController) MoveAssetWithIdentifierAfterAssetWithIdentifier(identifier *foundation.NSString, afterIdentifier *foundation.NSString) {
-	o.Ptr().Send(_pHPickerViewControllerSelMoveAssetWithIdentifierAfterAssetWithIdentifier, identifier.Ptr(), afterIdentifier.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_pHPickerViewControllerSelMoveAssetWithIdentifierAfterAssetWithIdentifier, identifier.Ptr(), afterIdentifier.Ptr())
+	})
 }
 
 // Resets the visible photo thumbnails by scrolling the view to the picker’s initial position.
 func (o *PHPickerViewController) ScrollToInitialPosition() {
-	o.Ptr().Send(_pHPickerViewControllerSelScrollToInitialPosition)
+	purego.Main(func() {
+		o.Ptr().Send(_pHPickerViewControllerSelScrollToInitialPosition)
+	})
 }
 
 // Changes the picker’s content scale by making the photo thumbnails larger in the view.
 func (o *PHPickerViewController) ZoomIn() {
-	o.Ptr().Send(_pHPickerViewControllerSelZoomIn)
+	purego.Main(func() {
+		o.Ptr().Send(_pHPickerViewControllerSelZoomIn)
+	})
 }
 
 // Changes the picker’s content scale by making the photo thumbnails smaller in the view.
 func (o *PHPickerViewController) ZoomOut() {
-	o.Ptr().Send(_pHPickerViewControllerSelZoomOut)
+	purego.Main(func() {
+		o.Ptr().Send(_pHPickerViewControllerSelZoomOut)
+	})
 }
 
 // The configuration passed in during initialization.
 func (o *PHPickerViewController) Configuration() *PHPickerConfiguration {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pHPickerViewControllerSelConfiguration)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return PHPickerConfigurationFromID(_ret)
+	var _mainthread0 *PHPickerConfiguration
+	purego.Main(func() {
+		_mainthread0 = func() *PHPickerConfiguration {
+			_ret := objc.Send[objc.ID](o.Ptr(), _pHPickerViewControllerSelConfiguration)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return PHPickerConfigurationFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The delegate to be notified.
 func (o *PHPickerViewController) Delegate() PHPickerViewControllerDelegate {
-	_ret := objc.Send[PHPickerViewControllerDelegate](o.Ptr(), _pHPickerViewControllerSelDelegate)
-	return _ret
+	var _mainthread0 PHPickerViewControllerDelegate
+	purego.Main(func() {
+		_mainthread0 = func() PHPickerViewControllerDelegate {
+			_ret := objc.Send[PHPickerViewControllerDelegate](o.Ptr(), _pHPickerViewControllerSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The delegate to be notified.
 func (o *PHPickerViewController) SetDelegate(delegate PHPickerViewControllerDelegate) {
-	o.Ptr().Send(_pHPickerViewControllerSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_pHPickerViewControllerSelSetDelegate, delegate)
+	})
 }

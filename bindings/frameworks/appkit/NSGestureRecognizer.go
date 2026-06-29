@@ -93,301 +93,511 @@ func NSGestureRecognizerFromID(id objc.ID) *NSGestureRecognizer {
 
 // Initializes the gesture recognizer with the specified target and action information.
 func (o *NSGestureRecognizer) InitWithTargetAction(target objc.ID, action objc.SEL) *NSGestureRecognizer {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGestureRecognizerSelInitWithTargetAction, target, action)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGestureRecognizerFromID(_ret)
+	var _mainthread0 *NSGestureRecognizer
+	purego.Main(func() {
+		_mainthread0 = func() *NSGestureRecognizer {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGestureRecognizerSelInitWithTargetAction, target, action)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGestureRecognizerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGestureRecognizer) InitWithCoder(coder *foundation.NSCoder) *NSGestureRecognizer {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGestureRecognizerSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGestureRecognizerFromID(_ret)
+	var _mainthread0 *NSGestureRecognizer
+	purego.Main(func() {
+		_mainthread0 = func() *NSGestureRecognizer {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGestureRecognizerSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGestureRecognizerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the point computed as the location of the gesture.
 func (o *NSGestureRecognizer) LocationInView(view *NSView) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSGestureRecognizerSelLocationInView, view.Ptr())
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSGestureRecognizerSelLocationInView, view.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGestureRecognizer) Target() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGestureRecognizerSelTarget)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGestureRecognizerSelTarget)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGestureRecognizer) SetTarget(target objc.ID) {
-	o.Ptr().Send(_nSGestureRecognizerSelSetTarget, target)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelSetTarget, target)
+	})
 }
 
 func (o *NSGestureRecognizer) Action() objc.SEL {
-	_ret := objc.Send[objc.SEL](o.Ptr(), _nSGestureRecognizerSelAction)
-	return _ret
+	var _mainthread0 objc.SEL
+	purego.Main(func() {
+		_mainthread0 = func() objc.SEL {
+			_ret := objc.Send[objc.SEL](o.Ptr(), _nSGestureRecognizerSelAction)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGestureRecognizer) SetAction(action objc.SEL) {
-	o.Ptr().Send(_nSGestureRecognizerSelSetAction, action)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelSetAction, action)
+	})
 }
 
 func (o *NSGestureRecognizer) State() NSGestureRecognizerState {
-	_ret := objc.Send[NSGestureRecognizerState](o.Ptr(), _nSGestureRecognizerSelState)
-	return _ret
+	var _mainthread0 NSGestureRecognizerState
+	purego.Main(func() {
+		_mainthread0 = func() NSGestureRecognizerState {
+			_ret := objc.Send[NSGestureRecognizerState](o.Ptr(), _nSGestureRecognizerSelState)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGestureRecognizer) Delegate() NSGestureRecognizerDelegate {
-	_ret := objc.Send[NSGestureRecognizerDelegate](o.Ptr(), _nSGestureRecognizerSelDelegate)
-	return _ret
+	var _mainthread0 NSGestureRecognizerDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSGestureRecognizerDelegate {
+			_ret := objc.Send[NSGestureRecognizerDelegate](o.Ptr(), _nSGestureRecognizerSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGestureRecognizer) SetDelegate(delegate NSGestureRecognizerDelegate) {
-	o.Ptr().Send(_nSGestureRecognizerSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelSetDelegate, delegate)
+	})
 }
 
 func (o *NSGestureRecognizer) IsEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelIsEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelIsEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGestureRecognizer) SetEnabled(enabled bool) {
-	o.Ptr().Send(_nSGestureRecognizerSelSetEnabled, enabled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelSetEnabled, enabled)
+	})
 }
 
 func (o *NSGestureRecognizer) View() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGestureRecognizerSelView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGestureRecognizerSelView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGestureRecognizer) PressureConfiguration() *NSPressureConfiguration {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGestureRecognizerSelPressureConfiguration)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSPressureConfigurationFromID(_ret)
+	var _mainthread0 *NSPressureConfiguration
+	purego.Main(func() {
+		_mainthread0 = func() *NSPressureConfiguration {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGestureRecognizerSelPressureConfiguration)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSPressureConfigurationFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGestureRecognizer) SetPressureConfiguration(pressureConfiguration *NSPressureConfiguration) {
-	o.Ptr().Send(_nSGestureRecognizerSelSetPressureConfiguration, pressureConfiguration.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelSetPressureConfiguration, pressureConfiguration.Ptr())
+	})
 }
 
 func (o *NSGestureRecognizer) DelaysPrimaryMouseButtonEvents() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelDelaysPrimaryMouseButtonEvents)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelDelaysPrimaryMouseButtonEvents)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGestureRecognizer) SetDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) {
-	o.Ptr().Send(_nSGestureRecognizerSelSetDelaysPrimaryMouseButtonEvents, delaysPrimaryMouseButtonEvents)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelSetDelaysPrimaryMouseButtonEvents, delaysPrimaryMouseButtonEvents)
+	})
 }
 
 func (o *NSGestureRecognizer) DelaysSecondaryMouseButtonEvents() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelDelaysSecondaryMouseButtonEvents)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelDelaysSecondaryMouseButtonEvents)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGestureRecognizer) SetDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) {
-	o.Ptr().Send(_nSGestureRecognizerSelSetDelaysSecondaryMouseButtonEvents, delaysSecondaryMouseButtonEvents)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelSetDelaysSecondaryMouseButtonEvents, delaysSecondaryMouseButtonEvents)
+	})
 }
 
 func (o *NSGestureRecognizer) DelaysOtherMouseButtonEvents() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelDelaysOtherMouseButtonEvents)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelDelaysOtherMouseButtonEvents)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGestureRecognizer) SetDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) {
-	o.Ptr().Send(_nSGestureRecognizerSelSetDelaysOtherMouseButtonEvents, delaysOtherMouseButtonEvents)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelSetDelaysOtherMouseButtonEvents, delaysOtherMouseButtonEvents)
+	})
 }
 
 func (o *NSGestureRecognizer) DelaysKeyEvents() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelDelaysKeyEvents)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelDelaysKeyEvents)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGestureRecognizer) SetDelaysKeyEvents(delaysKeyEvents bool) {
-	o.Ptr().Send(_nSGestureRecognizerSelSetDelaysKeyEvents, delaysKeyEvents)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelSetDelaysKeyEvents, delaysKeyEvents)
+	})
 }
 
 func (o *NSGestureRecognizer) DelaysMagnificationEvents() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelDelaysMagnificationEvents)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelDelaysMagnificationEvents)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGestureRecognizer) SetDelaysMagnificationEvents(delaysMagnificationEvents bool) {
-	o.Ptr().Send(_nSGestureRecognizerSelSetDelaysMagnificationEvents, delaysMagnificationEvents)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelSetDelaysMagnificationEvents, delaysMagnificationEvents)
+	})
 }
 
 func (o *NSGestureRecognizer) DelaysRotationEvents() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelDelaysRotationEvents)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelDelaysRotationEvents)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGestureRecognizer) SetDelaysRotationEvents(delaysRotationEvents bool) {
-	o.Ptr().Send(_nSGestureRecognizerSelSetDelaysRotationEvents, delaysRotationEvents)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelSetDelaysRotationEvents, delaysRotationEvents)
+	})
 }
 
 func (o *NSGestureRecognizer) Name() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGestureRecognizerSelName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGestureRecognizerSelName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGestureRecognizer) SetName(name *foundation.NSString) {
-	o.Ptr().Send(_nSGestureRecognizerSelSetName, name.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelSetName, name.Ptr())
+	})
 }
 
 func (o *NSGestureRecognizer) ModifierFlags() NSEventModifierFlags {
-	_ret := objc.Send[NSEventModifierFlags](o.Ptr(), _nSGestureRecognizerSelModifierFlags)
-	return _ret
+	var _mainthread0 NSEventModifierFlags
+	purego.Main(func() {
+		_mainthread0 = func() NSEventModifierFlags {
+			_ret := objc.Send[NSEventModifierFlags](o.Ptr(), _nSGestureRecognizerSelModifierFlags)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGestureRecognizer) AllowedTouchTypes() NSTouchTypeMask {
-	_ret := objc.Send[NSTouchTypeMask](o.Ptr(), _nSGestureRecognizerSelAllowedTouchTypes)
-	return _ret
+	var _mainthread0 NSTouchTypeMask
+	purego.Main(func() {
+		_mainthread0 = func() NSTouchTypeMask {
+			_ret := objc.Send[NSTouchTypeMask](o.Ptr(), _nSGestureRecognizerSelAllowedTouchTypes)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGestureRecognizer) SetAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) {
-	o.Ptr().Send(_nSGestureRecognizerSelSetAllowedTouchTypes, allowedTouchTypes)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelSetAllowedTouchTypes, allowedTouchTypes)
+	})
 }
 
 // Overridden to reset the internal state of the gesture recognizer when an attempt completes.
 func (o *NSGestureRecognizer) Reset() {
-	o.Ptr().Send(_nSGestureRecognizerSelReset)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelReset)
+	})
 }
 
 // Overridden to indicate that the current object can prevent the specified gesture recognizer from recognizing its gesture.
 func (o *NSGestureRecognizer) CanPreventGestureRecognizer(preventedGestureRecognizer *NSGestureRecognizer) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelCanPreventGestureRecognizer, preventedGestureRecognizer.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelCanPreventGestureRecognizer, preventedGestureRecognizer.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Overridden to indicate that the specified gesture recognizer can prevent the current object from recognizing a gesture.
 func (o *NSGestureRecognizer) CanBePreventedByGestureRecognizer(preventingGestureRecognizer *NSGestureRecognizer) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelCanBePreventedByGestureRecognizer, preventingGestureRecognizer.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelCanBePreventedByGestureRecognizer, preventingGestureRecognizer.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Overridden to indicate that the specified gesture recognizer must fail before the current object begins recognizing its gesture.
 func (o *NSGestureRecognizer) ShouldRequireFailureOfGestureRecognizer(otherGestureRecognizer *NSGestureRecognizer) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelShouldRequireFailureOfGestureRecognizer, otherGestureRecognizer.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelShouldRequireFailureOfGestureRecognizer, otherGestureRecognizer.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Overridden to indicate that the current object must fail before the specified gesture recognizer begins recognizing its gesture.
 func (o *NSGestureRecognizer) ShouldBeRequiredToFailByGestureRecognizer(otherGestureRecognizer *NSGestureRecognizer) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelShouldBeRequiredToFailByGestureRecognizer, otherGestureRecognizer.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSGestureRecognizerSelShouldBeRequiredToFailByGestureRecognizer, otherGestureRecognizer.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Informs the gesture recognizer that the user pressed the left mouse button.
 func (o *NSGestureRecognizer) MouseDown(event *NSEvent) {
-	o.Ptr().Send(_nSGestureRecognizerSelMouseDown, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelMouseDown, event.Ptr())
+	})
 }
 
 // Informs the gesture recognizer that the user pressed the right mouse button.
 func (o *NSGestureRecognizer) RightMouseDown(event *NSEvent) {
-	o.Ptr().Send(_nSGestureRecognizerSelRightMouseDown, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelRightMouseDown, event.Ptr())
+	})
 }
 
 // Informs the gesture recognizer that the user pressed a mouse button other than the left or right one.
 func (o *NSGestureRecognizer) OtherMouseDown(event *NSEvent) {
-	o.Ptr().Send(_nSGestureRecognizerSelOtherMouseDown, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelOtherMouseDown, event.Ptr())
+	})
 }
 
 // Informs the gesture recognizer that the user released the left mouse button.
 func (o *NSGestureRecognizer) MouseUp(event *NSEvent) {
-	o.Ptr().Send(_nSGestureRecognizerSelMouseUp, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelMouseUp, event.Ptr())
+	})
 }
 
 // Informs the gesture recognizer that the user released the right mouse button.
 func (o *NSGestureRecognizer) RightMouseUp(event *NSEvent) {
-	o.Ptr().Send(_nSGestureRecognizerSelRightMouseUp, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelRightMouseUp, event.Ptr())
+	})
 }
 
 // Informs the gesture recognizer that the user released a mouse button other than the left or right one.
 func (o *NSGestureRecognizer) OtherMouseUp(event *NSEvent) {
-	o.Ptr().Send(_nSGestureRecognizerSelOtherMouseUp, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelOtherMouseUp, event.Ptr())
+	})
 }
 
 // Informs the gesture recognizer that the user moved the mouse with the left button pressed.
 func (o *NSGestureRecognizer) MouseDragged(event *NSEvent) {
-	o.Ptr().Send(_nSGestureRecognizerSelMouseDragged, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelMouseDragged, event.Ptr())
+	})
 }
 
 // Informs the gesture recognizer that the user moved the mouse with the right button pressed.
 func (o *NSGestureRecognizer) RightMouseDragged(event *NSEvent) {
-	o.Ptr().Send(_nSGestureRecognizerSelRightMouseDragged, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelRightMouseDragged, event.Ptr())
+	})
 }
 
 // Informs the gesture recognizer that the user moved the mouse with a button other than the left or right one pressed.
 func (o *NSGestureRecognizer) OtherMouseDragged(event *NSEvent) {
-	o.Ptr().Send(_nSGestureRecognizerSelOtherMouseDragged, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelOtherMouseDragged, event.Ptr())
+	})
 }
 
 func (o *NSGestureRecognizer) MouseCancelled(event *NSEvent) {
-	o.Ptr().Send(_nSGestureRecognizerSelMouseCancelled, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelMouseCancelled, event.Ptr())
+	})
 }
 
 // Informs the gesture recognizer that the user has pressed a key.
 func (o *NSGestureRecognizer) KeyDown(event *NSEvent) {
-	o.Ptr().Send(_nSGestureRecognizerSelKeyDown, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelKeyDown, event.Ptr())
+	})
 }
 
 // Informs the gesture recognizer that the user released a key.
 func (o *NSGestureRecognizer) KeyUp(event *NSEvent) {
-	o.Ptr().Send(_nSGestureRecognizerSelKeyUp, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelKeyUp, event.Ptr())
+	})
 }
 
 // Informs the current object that the user pressed or released a modifier key (Shift, Control, and so on).
 func (o *NSGestureRecognizer) FlagsChanged(event *NSEvent) {
-	o.Ptr().Send(_nSGestureRecognizerSelFlagsChanged, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelFlagsChanged, event.Ptr())
+	})
 }
 
 // Informs the user that a tablet-point event occurred.
 func (o *NSGestureRecognizer) TabletPoint(event *NSEvent) {
-	o.Ptr().Send(_nSGestureRecognizerSelTabletPoint, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelTabletPoint, event.Ptr())
+	})
 }
 
 // Informs the gesture recognizer that the user is performing a pinch gesture.
 func (o *NSGestureRecognizer) MagnifyWithEvent(event *NSEvent) {
-	o.Ptr().Send(_nSGestureRecognizerSelMagnifyWithEvent, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelMagnifyWithEvent, event.Ptr())
+	})
 }
 
 // Informs the gesture recognizer that the user is performing a rotation gesture.
 func (o *NSGestureRecognizer) RotateWithEvent(event *NSEvent) {
-	o.Ptr().Send(_nSGestureRecognizerSelRotateWithEvent, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelRotateWithEvent, event.Ptr())
+	})
 }
 
 // Informs the current object that a pressure change occurred on a system that supports pressure sensitivity.
 func (o *NSGestureRecognizer) PressureChangeWithEvent(event *NSEvent) {
-	o.Ptr().Send(_nSGestureRecognizerSelPressureChangeWithEvent, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelPressureChangeWithEvent, event.Ptr())
+	})
 }
 
 // Called when one or more fingers first make contact with an NSTouchBar instance on the Touch Bar.
 func (o *NSGestureRecognizer) TouchesBeganWithEvent(event *NSEvent) {
-	o.Ptr().Send(_nSGestureRecognizerSelTouchesBeganWithEvent, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelTouchesBeganWithEvent, event.Ptr())
+	})
 }
 
 // Called when one or more fingers, associated with an in-progress event, move within an NSTouchBar instance on the Touch Bar.
 func (o *NSGestureRecognizer) TouchesMovedWithEvent(event *NSEvent) {
-	o.Ptr().Send(_nSGestureRecognizerSelTouchesMovedWithEvent, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelTouchesMovedWithEvent, event.Ptr())
+	})
 }
 
 // Called when one or more fingers are removed from contact with an NSTouchBar instance on the Touch Bar.
 func (o *NSGestureRecognizer) TouchesEndedWithEvent(event *NSEvent) {
-	o.Ptr().Send(_nSGestureRecognizerSelTouchesEndedWithEvent, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelTouchesEndedWithEvent, event.Ptr())
+	})
 }
 
 // Called when a system event, such as a low-memory warning, cancels an in-progress touch event in an NSTouchBar object.
 func (o *NSGestureRecognizer) TouchesCancelledWithEvent(event *NSEvent) {
-	o.Ptr().Send(_nSGestureRecognizerSelTouchesCancelledWithEvent, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelTouchesCancelledWithEvent, event.Ptr())
+	})
 }
 
 func (o *NSGestureRecognizer) SetState(state NSGestureRecognizerState) {
-	o.Ptr().Send(_nSGestureRecognizerSelSetState, state)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGestureRecognizerSelSetState, state)
+	})
 }

@@ -33,10 +33,18 @@ func NSSharingServicePickerToolbarItemFromID(id objc.ID) *NSSharingServicePicker
 }
 
 func (o *NSSharingServicePickerToolbarItem) Delegate() NSSharingServicePickerToolbarItemDelegate {
-	_ret := objc.Send[NSSharingServicePickerToolbarItemDelegate](o.Ptr(), _nSSharingServicePickerToolbarItemSelDelegate)
-	return _ret
+	var _mainthread0 NSSharingServicePickerToolbarItemDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSSharingServicePickerToolbarItemDelegate {
+			_ret := objc.Send[NSSharingServicePickerToolbarItemDelegate](o.Ptr(), _nSSharingServicePickerToolbarItemSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSharingServicePickerToolbarItem) SetDelegate(delegate NSSharingServicePickerToolbarItemDelegate) {
-	o.Ptr().Send(_nSSharingServicePickerToolbarItemSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSharingServicePickerToolbarItemSelSetDelegate, delegate)
+	})
 }

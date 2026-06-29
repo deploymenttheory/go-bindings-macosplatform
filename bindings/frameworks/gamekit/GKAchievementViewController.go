@@ -34,10 +34,18 @@ func GKAchievementViewControllerFromID(id objc.ID) *GKAchievementViewController 
 }
 
 func (o *GKAchievementViewController) AchievementDelegate() GKAchievementViewControllerDelegate {
-	_ret := objc.Send[GKAchievementViewControllerDelegate](o.Ptr(), _gKAchievementViewControllerSelAchievementDelegate)
-	return _ret
+	var _mainthread0 GKAchievementViewControllerDelegate
+	purego.Main(func() {
+		_mainthread0 = func() GKAchievementViewControllerDelegate {
+			_ret := objc.Send[GKAchievementViewControllerDelegate](o.Ptr(), _gKAchievementViewControllerSelAchievementDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *GKAchievementViewController) SetAchievementDelegate(achievementDelegate GKAchievementViewControllerDelegate) {
-	o.Ptr().Send(_gKAchievementViewControllerSelSetAchievementDelegate, achievementDelegate)
+	purego.Main(func() {
+		o.Ptr().Send(_gKAchievementViewControllerSelSetAchievementDelegate, achievementDelegate)
+	})
 }

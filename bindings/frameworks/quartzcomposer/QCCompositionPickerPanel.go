@@ -33,17 +33,29 @@ func QCCompositionPickerPanelFromID(id objc.ID) *QCCompositionPickerPanel {
 }
 
 func QCCompositionPickerPanelSharedCompositionPickerPanel() *quartz.QCCompositionPickerPanel {
-	_ret := objc.Send[objc.ID](objc.ID(_clsQCCompositionPickerPanel), _qCCompositionPickerPanelSelSharedCompositionPickerPanel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return quartz.QCCompositionPickerPanelFromID(_ret)
+	var _mainthread0 *quartz.QCCompositionPickerPanel
+	purego.Main(func() {
+		_mainthread0 = func() *quartz.QCCompositionPickerPanel {
+			_ret := objc.Send[objc.ID](objc.ID(_clsQCCompositionPickerPanel), _qCCompositionPickerPanelSelSharedCompositionPickerPanel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return quartz.QCCompositionPickerPanelFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QCCompositionPickerPanel) CompositionPickerView() *quartz.QCCompositionPickerView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionPickerPanelSelCompositionPickerView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return quartz.QCCompositionPickerViewFromID(_ret)
+	var _mainthread0 *quartz.QCCompositionPickerView
+	purego.Main(func() {
+		_mainthread0 = func() *quartz.QCCompositionPickerView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionPickerPanelSelCompositionPickerView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return quartz.QCCompositionPickerViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

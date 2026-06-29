@@ -33,13 +33,21 @@ func AUGenericViewControllerFromID(id objc.ID) *AUGenericViewController {
 }
 
 func (o *AUGenericViewController) AuAudioUnit() *audiotoolbox.AUAudioUnit {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aUGenericViewControllerSelAuAudioUnit)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return audiotoolbox.AUAudioUnitFromID(_ret)
+	var _mainthread0 *audiotoolbox.AUAudioUnit
+	purego.Main(func() {
+		_mainthread0 = func() *audiotoolbox.AUAudioUnit {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aUGenericViewControllerSelAuAudioUnit)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return audiotoolbox.AUAudioUnitFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AUGenericViewController) SetAuAudioUnit(auAudioUnit *audiotoolbox.AUAudioUnit) {
-	o.Ptr().Send(_aUGenericViewControllerSelSetAuAudioUnit, auAudioUnit.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aUGenericViewControllerSelSetAuAudioUnit, auAudioUnit.Ptr())
+	})
 }

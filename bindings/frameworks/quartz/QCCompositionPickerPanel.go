@@ -35,18 +35,30 @@ func QCCompositionPickerPanelFromID(id objc.ID) *QCCompositionPickerPanel {
 
 // Returns the shared instance of the composition picker panel.
 func QCCompositionPickerPanelSharedCompositionPickerPanel() *QCCompositionPickerPanel {
-	_ret := objc.Send[objc.ID](objc.ID(_clsQCCompositionPickerPanel), _qCCompositionPickerPanelSelSharedCompositionPickerPanel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return QCCompositionPickerPanelFromID(_ret)
+	var _mainthread0 *QCCompositionPickerPanel
+	purego.Main(func() {
+		_mainthread0 = func() *QCCompositionPickerPanel {
+			_ret := objc.Send[objc.ID](objc.ID(_clsQCCompositionPickerPanel), _qCCompositionPickerPanelSelSharedCompositionPickerPanel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return QCCompositionPickerPanelFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the composition picker view used by the panel so that it can be configured.
 func (o *QCCompositionPickerPanel) CompositionPickerView() *QCCompositionPickerView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionPickerPanelSelCompositionPickerView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return QCCompositionPickerViewFromID(_ret)
+	var _mainthread0 *QCCompositionPickerView
+	purego.Main(func() {
+		_mainthread0 = func() *QCCompositionPickerView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionPickerPanelSelCompositionPickerView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return QCCompositionPickerViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

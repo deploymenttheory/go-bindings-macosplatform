@@ -50,101 +50,171 @@ func NSTextFieldCellFromID(id objc.ID) *NSTextFieldCell {
 
 // Initializes a text field cell that displays the specified string.
 func (o *NSTextFieldCell) InitTextCell(string_ *foundation.NSString) *NSTextFieldCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldCellSelInitTextCell, string_.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextFieldCellFromID(_ret)
+	var _mainthread0 *NSTextFieldCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSTextFieldCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldCellSelInitTextCell, string_.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextFieldCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a text field cell from data in the provided unarchiver.
 func (o *NSTextFieldCell) InitWithCoder(coder *foundation.NSCoder) *NSTextFieldCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldCellSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextFieldCellFromID(_ret)
+	var _mainthread0 *NSTextFieldCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSTextFieldCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldCellSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextFieldCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Directs the cell’s associated field editor to post text change notifications.
 func (o *NSTextFieldCell) SetWantsNotificationForMarkedText(flag bool) {
-	o.Ptr().Send(_nSTextFieldCellSelSetWantsNotificationForMarkedText, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldCellSelSetWantsNotificationForMarkedText, flag)
+	})
 }
 
 func (o *NSTextFieldCell) BackgroundColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldCellSelBackgroundColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldCellSelBackgroundColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextFieldCell) SetBackgroundColor(backgroundColor *NSColor) {
-	o.Ptr().Send(_nSTextFieldCellSelSetBackgroundColor, backgroundColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldCellSelSetBackgroundColor, backgroundColor.Ptr())
+	})
 }
 
 func (o *NSTextFieldCell) DrawsBackground() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextFieldCellSelDrawsBackground)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextFieldCellSelDrawsBackground)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextFieldCell) SetDrawsBackground(drawsBackground bool) {
-	o.Ptr().Send(_nSTextFieldCellSelSetDrawsBackground, drawsBackground)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldCellSelSetDrawsBackground, drawsBackground)
+	})
 }
 
 func (o *NSTextFieldCell) TextColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldCellSelTextColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldCellSelTextColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextFieldCell) SetTextColor(textColor *NSColor) {
-	o.Ptr().Send(_nSTextFieldCellSelSetTextColor, textColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldCellSelSetTextColor, textColor.Ptr())
+	})
 }
 
 func (o *NSTextFieldCell) BezelStyle() NSTextFieldBezelStyle {
-	_ret := objc.Send[NSTextFieldBezelStyle](o.Ptr(), _nSTextFieldCellSelBezelStyle)
-	return _ret
+	var _mainthread0 NSTextFieldBezelStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSTextFieldBezelStyle {
+			_ret := objc.Send[NSTextFieldBezelStyle](o.Ptr(), _nSTextFieldCellSelBezelStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextFieldCell) SetBezelStyle(bezelStyle NSTextFieldBezelStyle) {
-	o.Ptr().Send(_nSTextFieldCellSelSetBezelStyle, bezelStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldCellSelSetBezelStyle, bezelStyle)
+	})
 }
 
 func (o *NSTextFieldCell) PlaceholderString() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldCellSelPlaceholderString)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldCellSelPlaceholderString)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextFieldCell) SetPlaceholderString(placeholderString *foundation.NSString) {
-	o.Ptr().Send(_nSTextFieldCellSelSetPlaceholderString, placeholderString.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldCellSelSetPlaceholderString, placeholderString.Ptr())
+	})
 }
 
 func (o *NSTextFieldCell) PlaceholderAttributedString() *foundation.NSAttributedString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldCellSelPlaceholderAttributedString)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSAttributedStringFromID(_ret)
+	var _mainthread0 *foundation.NSAttributedString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSAttributedString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldCellSelPlaceholderAttributedString)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSAttributedStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextFieldCell) SetPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) {
-	o.Ptr().Send(_nSTextFieldCellSelSetPlaceholderAttributedString, placeholderAttributedString.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldCellSelSetPlaceholderAttributedString, placeholderAttributedString.Ptr())
+	})
 }
 
 func (o *NSTextFieldCell) AllowedInputSourceLocales() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldCellSelAllowedInputSourceLocales)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldCellSelAllowedInputSourceLocales)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextFieldCell) SetAllowedInputSourceLocales(allowedInputSourceLocales *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSTextFieldCellSelSetAllowedInputSourceLocales, allowedInputSourceLocales.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextFieldCellSelSetAllowedInputSourceLocales, allowedInputSourceLocales.Ptr())
+	})
 }

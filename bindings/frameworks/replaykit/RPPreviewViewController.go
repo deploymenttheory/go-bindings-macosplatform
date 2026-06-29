@@ -34,10 +34,18 @@ func RPPreviewViewControllerFromID(id objc.ID) *RPPreviewViewController {
 }
 
 func (o *RPPreviewViewController) PreviewControllerDelegate() RPPreviewViewControllerDelegate {
-	_ret := objc.Send[RPPreviewViewControllerDelegate](o.Ptr(), _rPPreviewViewControllerSelPreviewControllerDelegate)
-	return _ret
+	var _mainthread0 RPPreviewViewControllerDelegate
+	purego.Main(func() {
+		_mainthread0 = func() RPPreviewViewControllerDelegate {
+			_ret := objc.Send[RPPreviewViewControllerDelegate](o.Ptr(), _rPPreviewViewControllerSelPreviewControllerDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *RPPreviewViewController) SetPreviewControllerDelegate(previewControllerDelegate RPPreviewViewControllerDelegate) {
-	o.Ptr().Send(_rPPreviewViewControllerSelSetPreviewControllerDelegate, previewControllerDelegate)
+	purego.Main(func() {
+		o.Ptr().Send(_rPPreviewViewControllerSelSetPreviewControllerDelegate, previewControllerDelegate)
+	})
 }

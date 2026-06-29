@@ -37,27 +37,47 @@ func PKPaymentButtonFromID(id objc.ID) *PKPaymentButton {
 
 // Creates a new payment button with the specified type and style.
 func PKPaymentButtonButtonWithTypeStyle(buttonType PKPaymentButtonType, buttonStyle PKPaymentButtonStyle) *PKPaymentButton {
-	_ret := objc.Send[objc.ID](objc.ID(_clsPKPaymentButton), _pKPaymentButtonSelButtonWithTypeStyle, buttonType, buttonStyle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return PKPaymentButtonFromID(_ret)
+	var _mainthread0 *PKPaymentButton
+	purego.Main(func() {
+		_mainthread0 = func() *PKPaymentButton {
+			_ret := objc.Send[objc.ID](objc.ID(_clsPKPaymentButton), _pKPaymentButtonSelButtonWithTypeStyle, buttonType, buttonStyle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return PKPaymentButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a new payment button with the specified type and style.
 func (o *PKPaymentButton) InitWithPaymentButtonTypePaymentButtonStyle(type_ PKPaymentButtonType, style PKPaymentButtonStyle) *PKPaymentButton {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentButtonSelInitWithPaymentButtonTypePaymentButtonStyle, type_, style)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return PKPaymentButtonFromID(_ret)
+	var _mainthread0 *PKPaymentButton
+	purego.Main(func() {
+		_mainthread0 = func() *PKPaymentButton {
+			_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentButtonSelInitWithPaymentButtonTypePaymentButtonStyle, type_, style)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return PKPaymentButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PKPaymentButton) CornerRadius() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _pKPaymentButtonSelCornerRadius)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _pKPaymentButtonSelCornerRadius)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PKPaymentButton) SetCornerRadius(cornerRadius float64) {
-	o.Ptr().Send(_pKPaymentButtonSelSetCornerRadius, cornerRadius)
+	purego.Main(func() {
+		o.Ptr().Send(_pKPaymentButtonSelSetCornerRadius, cornerRadius)
+	})
 }

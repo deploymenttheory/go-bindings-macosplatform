@@ -36,27 +36,45 @@ func WKBackForwardListItemFromID(id objc.ID) *WKBackForwardListItem {
 
 // @abstract The URL of the webpage represented by this item.
 func (o *WKBackForwardListItem) URL() *foundation.NSURL {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListItemSelURL)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSURLFromID(_ret)
+	var _mainthread0 *foundation.NSURL
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSURL {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListItemSelURL)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSURLFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The title of the webpage represented by this item.
 func (o *WKBackForwardListItem) Title() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListItemSelTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListItemSelTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The URL of the initial request that created this item.
 func (o *WKBackForwardListItem) InitialURL() *foundation.NSURL {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListItemSelInitialURL)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSURLFromID(_ret)
+	var _mainthread0 *foundation.NSURL
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSURL {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListItemSelInitialURL)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSURLFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

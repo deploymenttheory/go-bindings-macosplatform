@@ -41,11 +41,17 @@ func NSPDFPanelFromID(id objc.ID) *NSPDFPanel {
 
 // Returns a new NSPDFPanel object.
 func NSPDFPanelPanel() *NSPDFPanel {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSPDFPanel), _nSPDFPanelSelPanel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSPDFPanelFromID(_ret)
+	var _mainthread0 *NSPDFPanel
+	purego.Main(func() {
+		_mainthread0 = func() *NSPDFPanel {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSPDFPanel), _nSPDFPanelSelPanel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSPDFPanelFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Presents a document-modal PDF panel.
@@ -57,38 +63,64 @@ func (o *NSPDFPanel) BeginSheetWithPDFInfoModalForWindowCompletionHandler(pdfInf
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_nSPDFPanelSelBeginSheetWithPDFInfoModalForWindowCompletionHandler, pdfInfo.Ptr(), docWindow.Ptr(), __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPDFPanelSelBeginSheetWithPDFInfoModalForWindowCompletionHandler, pdfInfo.Ptr(), docWindow.Ptr(), __block_completionHandler)
+	})
 }
 
 func (o *NSPDFPanel) AccessoryController() *NSViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPDFPanelSelAccessoryController)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewControllerFromID(_ret)
+	var _mainthread0 *NSViewController
+	purego.Main(func() {
+		_mainthread0 = func() *NSViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPDFPanelSelAccessoryController)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPDFPanel) SetAccessoryController(accessoryController *NSViewController) {
-	o.Ptr().Send(_nSPDFPanelSelSetAccessoryController, accessoryController.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPDFPanelSelSetAccessoryController, accessoryController.Ptr())
+	})
 }
 
 func (o *NSPDFPanel) Options() NSPDFPanelOptions {
-	_ret := objc.Send[NSPDFPanelOptions](o.Ptr(), _nSPDFPanelSelOptions)
-	return _ret
+	var _mainthread0 NSPDFPanelOptions
+	purego.Main(func() {
+		_mainthread0 = func() NSPDFPanelOptions {
+			_ret := objc.Send[NSPDFPanelOptions](o.Ptr(), _nSPDFPanelSelOptions)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPDFPanel) SetOptions(options NSPDFPanelOptions) {
-	o.Ptr().Send(_nSPDFPanelSelSetOptions, options)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPDFPanelSelSetOptions, options)
+	})
 }
 
 func (o *NSPDFPanel) DefaultFileName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPDFPanelSelDefaultFileName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPDFPanelSelDefaultFileName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPDFPanel) SetDefaultFileName(defaultFileName *foundation.NSString) {
-	o.Ptr().Send(_nSPDFPanelSelSetDefaultFileName, defaultFileName.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPDFPanelSelSetDefaultFileName, defaultFileName.Ptr())
+	})
 }

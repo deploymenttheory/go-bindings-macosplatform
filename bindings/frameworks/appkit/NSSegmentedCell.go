@@ -65,174 +65,296 @@ func NSSegmentedCellFromID(id objc.ID) *NSSegmentedCell {
 
 // Selects the segment with the specified tag.
 func (o *NSSegmentedCell) SelectSegmentWithTag(tag int) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSegmentedCellSelSelectSegmentWithTag, tag)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSegmentedCellSelSelectSegmentWithTag, tag)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Selects the next segment.
 func (o *NSSegmentedCell) MakeNextSegmentKey() {
-	o.Ptr().Send(_nSSegmentedCellSelMakeNextSegmentKey)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedCellSelMakeNextSegmentKey)
+	})
 }
 
 // Selects the previous segment.
 func (o *NSSegmentedCell) MakePreviousSegmentKey() {
-	o.Ptr().Send(_nSSegmentedCellSelMakePreviousSegmentKey)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedCellSelMakePreviousSegmentKey)
+	})
 }
 
 // Sets the width of the specified segment.
 func (o *NSSegmentedCell) SetWidthForSegment(width float64, segment int) {
-	o.Ptr().Send(_nSSegmentedCellSelSetWidthForSegment, width, segment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedCellSelSetWidthForSegment, width, segment)
+	})
 }
 
 // Returns the width of the specified segment.
 func (o *NSSegmentedCell) WidthForSegment(segment int) float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSegmentedCellSelWidthForSegment, segment)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSegmentedCellSelWidthForSegment, segment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the image for the specified segment.
 func (o *NSSegmentedCell) SetImageForSegment(image *NSImage, segment int) {
-	o.Ptr().Send(_nSSegmentedCellSelSetImageForSegment, image.Ptr(), segment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedCellSelSetImageForSegment, image.Ptr(), segment)
+	})
 }
 
 // Returns the image associated with the specified segment.
 func (o *NSSegmentedCell) ImageForSegment(segment int) *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedCellSelImageForSegment, segment)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedCellSelImageForSegment, segment)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the image scaling mode for the specified segment.
 func (o *NSSegmentedCell) SetImageScalingForSegment(scaling NSImageScaling, segment int) {
-	o.Ptr().Send(_nSSegmentedCellSelSetImageScalingForSegment, scaling, segment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedCellSelSetImageScalingForSegment, scaling, segment)
+	})
 }
 
 // Returns the image scaling mode associated with the specified segment.
 func (o *NSSegmentedCell) ImageScalingForSegment(segment int) NSImageScaling {
-	_ret := objc.Send[NSImageScaling](o.Ptr(), _nSSegmentedCellSelImageScalingForSegment, segment)
-	return _ret
+	var _mainthread0 NSImageScaling
+	purego.Main(func() {
+		_mainthread0 = func() NSImageScaling {
+			_ret := objc.Send[NSImageScaling](o.Ptr(), _nSSegmentedCellSelImageScalingForSegment, segment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the label for the specified segment.
 func (o *NSSegmentedCell) SetLabelForSegment(label *foundation.NSString, segment int) {
-	o.Ptr().Send(_nSSegmentedCellSelSetLabelForSegment, label.Ptr(), segment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedCellSelSetLabelForSegment, label.Ptr(), segment)
+	})
 }
 
 // Returns the label of the specified segment.
 func (o *NSSegmentedCell) LabelForSegment(segment int) *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedCellSelLabelForSegment, segment)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedCellSelLabelForSegment, segment)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the selection state of the specified segment.
 func (o *NSSegmentedCell) SetSelectedForSegment(selected bool, segment int) {
-	o.Ptr().Send(_nSSegmentedCellSelSetSelectedForSegment, selected, segment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedCellSelSetSelectedForSegment, selected, segment)
+	})
 }
 
 // Returns a Boolean value indicating whether the specified segment is selected,
 func (o *NSSegmentedCell) IsSelectedForSegment(segment int) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSegmentedCellSelIsSelectedForSegment, segment)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSegmentedCellSelIsSelectedForSegment, segment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the enabled state of the specified segment
 func (o *NSSegmentedCell) SetEnabledForSegment(enabled bool, segment int) {
-	o.Ptr().Send(_nSSegmentedCellSelSetEnabledForSegment, enabled, segment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedCellSelSetEnabledForSegment, enabled, segment)
+	})
 }
 
 // Returns a Boolean value indicating whether the specified segment is enabled.
 func (o *NSSegmentedCell) IsEnabledForSegment(segment int) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSegmentedCellSelIsEnabledForSegment, segment)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSegmentedCellSelIsEnabledForSegment, segment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the menu for the specified segment.
 func (o *NSSegmentedCell) SetMenuForSegment(menu *NSMenu, segment int) {
-	o.Ptr().Send(_nSSegmentedCellSelSetMenuForSegment, menu.Ptr(), segment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedCellSelSetMenuForSegment, menu.Ptr(), segment)
+	})
 }
 
 // Returns the menu for the specified segment.
 func (o *NSSegmentedCell) MenuForSegment(segment int) *NSMenu {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedCellSelMenuForSegment, segment)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMenuFromID(_ret)
+	var _mainthread0 *NSMenu
+	purego.Main(func() {
+		_mainthread0 = func() *NSMenu {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedCellSelMenuForSegment, segment)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMenuFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the tooltip for the specified segment.
 func (o *NSSegmentedCell) SetToolTipForSegment(toolTip *foundation.NSString, segment int) {
-	o.Ptr().Send(_nSSegmentedCellSelSetToolTipForSegment, toolTip.Ptr(), segment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedCellSelSetToolTipForSegment, toolTip.Ptr(), segment)
+	})
 }
 
 // Returns the tooltip of the specified segment.
 func (o *NSSegmentedCell) ToolTipForSegment(segment int) *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedCellSelToolTipForSegment, segment)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedCellSelToolTipForSegment, segment)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the tag for the specified segment.
 func (o *NSSegmentedCell) SetTagForSegment(tag int, segment int) {
-	o.Ptr().Send(_nSSegmentedCellSelSetTagForSegment, tag, segment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedCellSelSetTagForSegment, tag, segment)
+	})
 }
 
 // Returns the tag of the specified segment.
 func (o *NSSegmentedCell) TagForSegment(segment int) int {
-	_ret := objc.Send[int](o.Ptr(), _nSSegmentedCellSelTagForSegment, segment)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSSegmentedCellSelTagForSegment, segment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Draws the image and label of the segment in the specified view.
 func (o *NSSegmentedCell) DrawSegmentInFrameWithView(segment int, frame corefoundation.CGRect, controlView *NSView) {
-	o.Ptr().Send(_nSSegmentedCellSelDrawSegmentInFrameWithView, segment, frame, controlView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedCellSelDrawSegmentInFrameWithView, segment, frame, controlView.Ptr())
+	})
 }
 
 func (o *NSSegmentedCell) SegmentCount() int {
-	_ret := objc.Send[int](o.Ptr(), _nSSegmentedCellSelSegmentCount)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSSegmentedCellSelSegmentCount)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSegmentedCell) SetSegmentCount(segmentCount int) {
-	o.Ptr().Send(_nSSegmentedCellSelSetSegmentCount, segmentCount)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedCellSelSetSegmentCount, segmentCount)
+	})
 }
 
 func (o *NSSegmentedCell) SelectedSegment() int {
-	_ret := objc.Send[int](o.Ptr(), _nSSegmentedCellSelSelectedSegment)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSSegmentedCellSelSelectedSegment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSegmentedCell) SetSelectedSegment(selectedSegment int) {
-	o.Ptr().Send(_nSSegmentedCellSelSetSelectedSegment, selectedSegment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedCellSelSetSelectedSegment, selectedSegment)
+	})
 }
 
 func (o *NSSegmentedCell) TrackingMode() NSSegmentSwitchTracking {
-	_ret := objc.Send[NSSegmentSwitchTracking](o.Ptr(), _nSSegmentedCellSelTrackingMode)
-	return _ret
+	var _mainthread0 NSSegmentSwitchTracking
+	purego.Main(func() {
+		_mainthread0 = func() NSSegmentSwitchTracking {
+			_ret := objc.Send[NSSegmentSwitchTracking](o.Ptr(), _nSSegmentedCellSelTrackingMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSegmentedCell) SetTrackingMode(trackingMode NSSegmentSwitchTracking) {
-	o.Ptr().Send(_nSSegmentedCellSelSetTrackingMode, trackingMode)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedCellSelSetTrackingMode, trackingMode)
+	})
 }
 
 func (o *NSSegmentedCell) SegmentStyle() NSSegmentStyle {
-	_ret := objc.Send[NSSegmentStyle](o.Ptr(), _nSSegmentedCellSelSegmentStyle)
-	return _ret
+	var _mainthread0 NSSegmentStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSSegmentStyle {
+			_ret := objc.Send[NSSegmentStyle](o.Ptr(), _nSSegmentedCellSelSegmentStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSegmentedCell) SetSegmentStyle(segmentStyle NSSegmentStyle) {
-	o.Ptr().Send(_nSSegmentedCellSelSetSegmentStyle, segmentStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedCellSelSetSegmentStyle, segmentStyle)
+	})
 }
 
 // Returns the interior background style for the specified segment.
 func (o *NSSegmentedCell) InteriorBackgroundStyleForSegment(segment int) NSBackgroundStyle {
-	_ret := objc.Send[NSBackgroundStyle](o.Ptr(), _nSSegmentedCellSelInteriorBackgroundStyleForSegment, segment)
-	return _ret
+	var _mainthread0 NSBackgroundStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSBackgroundStyle {
+			_ret := objc.Send[NSBackgroundStyle](o.Ptr(), _nSSegmentedCellSelInteriorBackgroundStyleForSegment, segment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

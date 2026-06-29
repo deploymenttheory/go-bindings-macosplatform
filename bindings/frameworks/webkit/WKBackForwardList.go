@@ -39,54 +39,90 @@ func WKBackForwardListFromID(id objc.ID) *WKBackForwardList {
 
 // Returns the item at the relative offset from the current item.
 func (o *WKBackForwardList) ItemAtIndex(index int) *WKBackForwardListItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListSelItemAtIndex, index)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKBackForwardListItemFromID(_ret)
+	var _mainthread0 *WKBackForwardListItem
+	purego.Main(func() {
+		_mainthread0 = func() *WKBackForwardListItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListSelItemAtIndex, index)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKBackForwardListItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The current item.
 func (o *WKBackForwardList) CurrentItem() *WKBackForwardListItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListSelCurrentItem)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKBackForwardListItemFromID(_ret)
+	var _mainthread0 *WKBackForwardListItem
+	purego.Main(func() {
+		_mainthread0 = func() *WKBackForwardListItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListSelCurrentItem)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKBackForwardListItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The item immediately preceding the current item, or nil if there isn't one.
 func (o *WKBackForwardList) BackItem() *WKBackForwardListItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListSelBackItem)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKBackForwardListItemFromID(_ret)
+	var _mainthread0 *WKBackForwardListItem
+	purego.Main(func() {
+		_mainthread0 = func() *WKBackForwardListItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListSelBackItem)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKBackForwardListItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The item immediately following the current item, or nil if there isn't one.
 func (o *WKBackForwardList) ForwardItem() *WKBackForwardListItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListSelForwardItem)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKBackForwardListItemFromID(_ret)
+	var _mainthread0 *WKBackForwardListItem
+	purego.Main(func() {
+		_mainthread0 = func() *WKBackForwardListItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListSelForwardItem)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKBackForwardListItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The portion of the list preceding the current item. @discussion The items are in the order in which they were originally visited.
 func (o *WKBackForwardList) BackList() *foundation.NSArray[*WKBackForwardListItem] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListSelBackList)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*WKBackForwardListItem](_ret)
+	var _mainthread0 *foundation.NSArray[*WKBackForwardListItem]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*WKBackForwardListItem] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListSelBackList)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*WKBackForwardListItem](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The portion of the list following the current item. @discussion The items are in the order in which they were originally visited.
 func (o *WKBackForwardList) ForwardList() *foundation.NSArray[*WKBackForwardListItem] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListSelForwardList)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*WKBackForwardListItem](_ret)
+	var _mainthread0 *foundation.NSArray[*WKBackForwardListItem]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*WKBackForwardListItem] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListSelForwardList)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*WKBackForwardListItem](_ret)
+		}()
+	})
+	return _mainthread0
 }

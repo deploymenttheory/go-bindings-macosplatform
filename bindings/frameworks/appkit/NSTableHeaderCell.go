@@ -35,11 +35,19 @@ func NSTableHeaderCellFromID(id objc.ID) *NSTableHeaderCell {
 
 // Draws a sorting indicator given a cell frame contained inside a view.
 func (o *NSTableHeaderCell) DrawSortIndicatorWithFrameInViewAscendingPriority(cellFrame corefoundation.CGRect, controlView *NSView, ascending bool, priority int) {
-	o.Ptr().Send(_nSTableHeaderCellSelDrawSortIndicatorWithFrameInViewAscendingPriority, cellFrame, controlView.Ptr(), ascending, priority)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableHeaderCellSelDrawSortIndicatorWithFrameInViewAscendingPriority, cellFrame, controlView.Ptr(), ascending, priority)
+	})
 }
 
 // Returns the location to display the sorting indicator given theRect.
 func (o *NSTableHeaderCell) SortIndicatorRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTableHeaderCellSelSortIndicatorRectForBounds, rect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTableHeaderCellSelSortIndicatorRectForBounds, rect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

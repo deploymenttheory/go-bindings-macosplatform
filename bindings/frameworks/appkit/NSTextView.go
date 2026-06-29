@@ -238,1104 +238,1864 @@ func NSTextViewFromID(id objc.ID) *NSTextView {
 
 // Initializes a text view.
 func (o *NSTextView) InitWithFrameTextContainer(frameRect corefoundation.CGRect, container *NSTextContainer) *NSTextView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelInitWithFrameTextContainer, frameRect, container.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextViewFromID(_ret)
+	var _mainthread0 *NSTextView
+	purego.Main(func() {
+		_mainthread0 = func() *NSTextView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelInitWithFrameTextContainer, frameRect, container.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a text view with data in an unarchiver.
 func (o *NSTextView) InitWithCoder(coder *foundation.NSCoder) *NSTextView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextViewFromID(_ret)
+	var _mainthread0 *NSTextView
+	purego.Main(func() {
+		_mainthread0 = func() *NSTextView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a text view.
 func (o *NSTextView) InitWithFrame(frameRect corefoundation.CGRect) *NSTextView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelInitWithFrame, frameRect)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextViewFromID(_ret)
+	var _mainthread0 *NSTextView
+	purego.Main(func() {
+		_mainthread0 = func() *NSTextView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelInitWithFrame, frameRect)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) InitUsingTextLayoutManager(usingTextLayoutManager bool) *NSTextView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelInitUsingTextLayoutManager, usingTextLayoutManager)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextViewFromID(_ret)
+	var _mainthread0 *NSTextView
+	purego.Main(func() {
+		_mainthread0 = func() *NSTextView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelInitUsingTextLayoutManager, usingTextLayoutManager)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func NSTextViewTextViewUsingTextLayoutManager(usingTextLayoutManager bool) *NSTextView {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextView), _nSTextViewSelTextViewUsingTextLayoutManager, usingTextLayoutManager)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextViewFromID(_ret)
+	var _mainthread0 *NSTextView
+	purego.Main(func() {
+		_mainthread0 = func() *NSTextView {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSTextView), _nSTextViewSelTextViewUsingTextLayoutManager, usingTextLayoutManager)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Replaces the text container for the group of text system objects containing the receiver, keeping the association between the receiver and its layout manager intact.
 func (o *NSTextView) ReplaceTextContainer(newContainer *NSTextContainer) {
-	o.Ptr().Send(_nSTextViewSelReplaceTextContainer, newContainer.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelReplaceTextContainer, newContainer.Ptr())
+	})
 }
 
 // Invalidates the calculated origin of the text container.
 func (o *NSTextView) InvalidateTextContainerOrigin() {
-	o.Ptr().Send(_nSTextViewSelInvalidateTextContainerOrigin)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelInvalidateTextContainerOrigin)
+	})
 }
 
 // Inserts aString into the receiver’s text at the insertion point if there is one, otherwise replacing the selection.
 // Deprecated: Use -insertText:replacementRange: from NSTextInputClient instead. Since the method is designed to be used solely by the input system, the message should never be sent to a text view from applications. Any content modifications should be via either NSTextStorage or NSText methods.
 func (o *NSTextView) InsertText(insertString objc.ID) {
-	o.Ptr().Send(_nSTextViewSelInsertText, insertString)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelInsertText, insertString)
+	})
 }
 
 // Attempts to set the frame size as if by user action.
 func (o *NSTextView) SetConstrainedFrameSize(desiredSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSTextViewSelSetConstrainedFrameSize, desiredSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetConstrainedFrameSize, desiredSize)
+	})
 }
 
 // Sets the alignment of the paragraphs containing characters in the specified range.
 func (o *NSTextView) SetAlignmentRange(alignment NSTextAlignment, range_ foundation.NSRange) {
-	o.Ptr().Send(_nSTextViewSelSetAlignmentRange, alignment, range_)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetAlignmentRange, alignment, range_)
+	})
 }
 
 // Sets the base writing direction of a range of text.
 func (o *NSTextView) SetBaseWritingDirectionRange(writingDirection NSWritingDirection, range_ foundation.NSRange) {
-	o.Ptr().Send(_nSTextViewSelSetBaseWritingDirectionRange, writingDirection, range_)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetBaseWritingDirectionRange, writingDirection, range_)
+	})
 }
 
 // Sets the receiver to use nominal glyph spacing for the glyphs in its selection, or for all glyphs if the receiver is a plain text view.
 func (o *NSTextView) TurnOffKerning(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelTurnOffKerning, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelTurnOffKerning, sender)
+	})
 }
 
 // Decreases the space between glyphs in the receiver’s selection, or for all glyphs if the receiver is a plain text view.
 func (o *NSTextView) TightenKerning(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelTightenKerning, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelTightenKerning, sender)
+	})
 }
 
 // Increases the space between glyphs in the receiver’s selection, or in all text if the receiver is a plain text view.
 func (o *NSTextView) LoosenKerning(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelLoosenKerning, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelLoosenKerning, sender)
+	})
 }
 
 // Set the receiver to use pair kerning data for the glyphs in its selection, or for all glyphs if the receiver is a plain text view.
 func (o *NSTextView) UseStandardKerning(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelUseStandardKerning, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelUseStandardKerning, sender)
+	})
 }
 
 // Sets the receiver to use only required ligatures when setting text, for the glyphs in the selection if the receiver is a rich text view, or for all glyphs if it’s a plain text view.
 func (o *NSTextView) TurnOffLigatures(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelTurnOffLigatures, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelTurnOffLigatures, sender)
+	})
 }
 
 // Sets the receiver to use the standard ligatures available for the fonts and languages used when setting text, for the glyphs in the selection if the receiver is a rich text view, or for all glyphs if it’s a plain text view.
 func (o *NSTextView) UseStandardLigatures(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelUseStandardLigatures, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelUseStandardLigatures, sender)
+	})
 }
 
 // Sets the receiver to use all ligatures available for the fonts and languages used when setting text, for the glyphs in the selection if the receiver is a rich text view, or for all glyphs if it’s a plain text view.
 func (o *NSTextView) UseAllLigatures(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelUseAllLigatures, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelUseAllLigatures, sender)
+	})
 }
 
 // Raises the baseline offset of selected text by 1 point, or of all text if the receiver is a plain text view.
 func (o *NSTextView) RaiseBaseline(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelRaiseBaseline, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelRaiseBaseline, sender)
+	})
 }
 
 // Lowers the baseline offset of selected text by 1 point, or of all text if the receiver is a plain text view.
 func (o *NSTextView) LowerBaseline(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelLowerBaseline, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelLowerBaseline, sender)
+	})
 }
 
 // Toggles the NSCharacterShapeAttributeName attribute at the current selection.
 // Deprecated: Use the traditional shaped characters encoded in the Unicode standard. Access the characters via the character palette.
 func (o *NSTextView) ToggleTraditionalCharacterShape(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelToggleTraditionalCharacterShape, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelToggleTraditionalCharacterShape, sender)
+	})
 }
 
 // Adds the outline attribute to the selected text attributes if absent; removes the attribute if present.
 // Deprecated: Use the traditional shaped characters encoded in the Unicode standard. Access the characters via the character palette.
 func (o *NSTextView) Outline(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelOutline, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelOutline, sender)
+	})
 }
 
 // Performs a find panel action specified by the sender’s tag.
 func (o *NSTextView) PerformFindPanelAction(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelPerformFindPanelAction, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelPerformFindPanelAction, sender)
+	})
 }
 
 // Applies full justification to selected paragraphs (or all text, if the receiver is a plain text object).
 func (o *NSTextView) AlignJustified(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelAlignJustified, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelAlignJustified, sender)
+	})
 }
 
 // Sets the color of the selected text.
 func (o *NSTextView) ChangeColor(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelChangeColor, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelChangeColor, sender)
+	})
 }
 
 // Changes the attributes of the current selection.
 func (o *NSTextView) ChangeAttributes(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelChangeAttributes, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelChangeAttributes, sender)
+	})
 }
 
 // An action method used to set the background color.
 func (o *NSTextView) ChangeDocumentBackgroundColor(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelChangeDocumentBackgroundColor, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelChangeDocumentBackgroundColor, sender)
+	})
 }
 
 // Brings forward a panel allowing the user to manipulate text line heights, interline spacing, and paragraph spacing, in the text view.
 func (o *NSTextView) OrderFrontSpacingPanel(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelOrderFrontSpacingPanel, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelOrderFrontSpacingPanel, sender)
+	})
 }
 
 // Brings forward a panel allowing the user to manipulate links in the text view.
 func (o *NSTextView) OrderFrontLinkPanel(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelOrderFrontLinkPanel, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelOrderFrontLinkPanel, sender)
+	})
 }
 
 // Brings forward a panel allowing the user to manipulate text lists in the text view.
 func (o *NSTextView) OrderFrontListPanel(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelOrderFrontListPanel, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelOrderFrontListPanel, sender)
+	})
 }
 
 // Brings forward a panel allowing the user to manipulate text tables in the text view.
 func (o *NSTextView) OrderFrontTablePanel(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelOrderFrontTablePanel, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelOrderFrontTablePanel, sender)
+	})
 }
 
 // Marks the receiver as requiring display.
 func (o *NSTextView) SetNeedsDisplayInRectAvoidAdditionalLayout(rect corefoundation.CGRect, flag bool) {
-	o.Ptr().Send(_nSTextViewSelSetNeedsDisplayInRectAvoidAdditionalLayout, rect, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetNeedsDisplayInRectAvoidAdditionalLayout, rect, flag)
+	})
 }
 
 // Draws or erases the insertion point.
 func (o *NSTextView) DrawInsertionPointInRectColorTurnedOn(rect corefoundation.CGRect, color *NSColor, flag bool) {
-	o.Ptr().Send(_nSTextViewSelDrawInsertionPointInRectColorTurnedOn, rect, color.Ptr(), flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelDrawInsertionPointInRectColorTurnedOn, rect, color.Ptr(), flag)
+	})
 }
 
 // Draws the background of the text view.
 func (o *NSTextView) DrawViewBackgroundInRect(rect corefoundation.CGRect) {
-	o.Ptr().Send(_nSTextViewSelDrawViewBackgroundInRect, rect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelDrawViewBackgroundInRect, rect)
+	})
 }
 
 // Updates the ruler view in the receiver’s enclosing scroll view to reflect the selection’s paragraph and marker attributes.
 func (o *NSTextView) UpdateRuler() {
-	o.Ptr().Send(_nSTextViewSelUpdateRuler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelUpdateRuler)
+	})
 }
 
 // Updates the Font panel to contain the font attributes of the selection.
 func (o *NSTextView) UpdateFontPanel() {
-	o.Ptr().Send(_nSTextViewSelUpdateFontPanel)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelUpdateFontPanel)
+	})
 }
 
 // Updates the acceptable drag types of all text views associated with the receiver’s layout manager.
 func (o *NSTextView) UpdateDragTypeRegistration() {
-	o.Ptr().Send(_nSTextViewSelUpdateDragTypeRegistration)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelUpdateDragTypeRegistration)
+	})
 }
 
 // Returns an adjusted selected range based on the selection granularity.
 func (o *NSTextView) SelectionRangeForProposedRangeGranularity(proposedCharRange foundation.NSRange, granularity NSSelectionGranularity) foundation.NSRange {
-	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTextViewSelSelectionRangeForProposedRangeGranularity, proposedCharRange, granularity)
-	return _ret
+	var _mainthread0 foundation.NSRange
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSRange {
+			_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTextViewSelSelectionRangeForProposedRangeGranularity, proposedCharRange, granularity)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Causes the text view to act as if the user clicked on some text with the given link as the value of a link attribute associated with the text.
 func (o *NSTextView) ClickedOnLinkAtIndex(link objc.ID, charIndex uint) {
-	o.Ptr().Send(_nSTextViewSelClickedOnLinkAtIndex, link, charIndex)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelClickedOnLinkAtIndex, link, charIndex)
+	})
 }
 
 // Speaks the selected text, or all text if no selection.
 func (o *NSTextView) StartSpeaking(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelStartSpeaking, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelStartSpeaking, sender)
+	})
 }
 
 // Stops the speaking of text.
 func (o *NSTextView) StopSpeaking(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelStopSpeaking, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelStopSpeaking, sender)
+	})
 }
 
 // Changes the receiver’s layout orientation and invalidates the contents.
 func (o *NSTextView) SetLayoutOrientation(orientation NSTextLayoutOrientation) {
-	o.Ptr().Send(_nSTextViewSelSetLayoutOrientation, orientation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetLayoutOrientation, orientation)
+	})
 }
 
 // An action method that sets the layout orientation of the text.
 func (o *NSTextView) ChangeLayoutOrientation(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelChangeLayoutOrientation, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelChangeLayoutOrientation, sender)
+	})
 }
 
 // Returns a character index appropriate for placing a zero-length selection for an insertion point associated with the mouse at the given point.
 func (o *NSTextView) CharacterIndexForInsertionAtPoint(point corefoundation.CGPoint) uint {
-	_ret := objc.Send[uint](o.Ptr(), _nSTextViewSelCharacterIndexForInsertionAtPoint, point)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _nSTextViewSelCharacterIndexForInsertionAtPoint, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Replaces text in the range you specify with the attributed string you provide.
 func (o *NSTextView) PerformValidatedReplacementInRangeWithAttributedString(range_ foundation.NSRange, attributedString *foundation.NSAttributedString) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelPerformValidatedReplacementInRangeWithAttributedString, range_, attributedString.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelPerformValidatedReplacementInRangeWithAttributedString, range_, attributedString.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) TextContainer() *NSTextContainer {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelTextContainer)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextContainerFromID(_ret)
+	var _mainthread0 *NSTextContainer
+	purego.Main(func() {
+		_mainthread0 = func() *NSTextContainer {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelTextContainer)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextContainerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetTextContainer(textContainer *NSTextContainer) {
-	o.Ptr().Send(_nSTextViewSelSetTextContainer, textContainer.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetTextContainer, textContainer.Ptr())
+	})
 }
 
 func (o *NSTextView) TextContainerInset() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSTextViewSelTextContainerInset)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSTextViewSelTextContainerInset)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetTextContainerInset(textContainerInset corefoundation.CGSize) {
-	o.Ptr().Send(_nSTextViewSelSetTextContainerInset, textContainerInset)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetTextContainerInset, textContainerInset)
+	})
 }
 
 func (o *NSTextView) TextContainerOrigin() corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSTextViewSelTextContainerOrigin)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSTextViewSelTextContainerOrigin)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) LayoutManager() *NSLayoutManager {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelLayoutManager)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSLayoutManagerFromID(_ret)
+	var _mainthread0 *NSLayoutManager
+	purego.Main(func() {
+		_mainthread0 = func() *NSLayoutManager {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelLayoutManager)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSLayoutManagerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) TextStorage() *NSTextStorage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelTextStorage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextStorageFromID(_ret)
+	var _mainthread0 *NSTextStorage
+	purego.Main(func() {
+		_mainthread0 = func() *NSTextStorage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelTextStorage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextStorageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) TextLayoutManager() *NSTextLayoutManager {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelTextLayoutManager)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextLayoutManagerFromID(_ret)
+	var _mainthread0 *NSTextLayoutManager
+	purego.Main(func() {
+		_mainthread0 = func() *NSTextLayoutManager {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelTextLayoutManager)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextLayoutManagerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) TextContentStorage() *NSTextContentStorage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelTextContentStorage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextContentStorageFromID(_ret)
+	var _mainthread0 *NSTextContentStorage
+	purego.Main(func() {
+		_mainthread0 = func() *NSTextContentStorage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelTextContentStorage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextContentStorageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) ShouldDrawInsertionPoint() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelShouldDrawInsertionPoint)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelShouldDrawInsertionPoint)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func NSTextViewStronglyReferencesTextStorage() bool {
-	_ret := objc.Send[bool](objc.ID(_clsNSTextView), _nSTextViewSelStronglyReferencesTextStorage)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](objc.ID(_clsNSTextView), _nSTextViewSelStronglyReferencesTextStorage)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) UsesAdaptiveColorMappingForDarkAppearance() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelUsesAdaptiveColorMappingForDarkAppearance)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelUsesAdaptiveColorMappingForDarkAppearance)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetUsesAdaptiveColorMappingForDarkAppearance(usesAdaptiveColorMappingForDarkAppearance bool) {
-	o.Ptr().Send(_nSTextViewSelSetUsesAdaptiveColorMappingForDarkAppearance, usesAdaptiveColorMappingForDarkAppearance)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetUsesAdaptiveColorMappingForDarkAppearance, usesAdaptiveColorMappingForDarkAppearance)
+	})
 }
 
 // Invokes completion in a text view.
 func (o *NSTextView) Complete(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelComplete, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelComplete, sender)
+	})
 }
 
 // Returns an array of potential completions, in the order to be presented, representing possible word completions available from a partial word.
 func (o *NSTextView) CompletionsForPartialWordRangeIndexOfSelectedItem(charRange foundation.NSRange, index *int64) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelCompletionsForPartialWordRangeIndexOfSelectedItem, charRange, index)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelCompletionsForPartialWordRangeIndexOfSelectedItem, charRange, index)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Inserts the selected completion into the text at the appropriate location.
 func (o *NSTextView) InsertCompletionForPartialWordRangeMovementIsFinal(word *foundation.NSString, charRange foundation.NSRange, movement int, flag bool) {
-	o.Ptr().Send(_nSTextViewSelInsertCompletionForPartialWordRangeMovementIsFinal, word.Ptr(), charRange, movement, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelInsertCompletionForPartialWordRangeMovementIsFinal, word.Ptr(), charRange, movement, flag)
+	})
 }
 
 func (o *NSTextView) RangeForUserCompletion() foundation.NSRange {
-	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTextViewSelRangeForUserCompletion)
-	return _ret
+	var _mainthread0 foundation.NSRange
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSRange {
+			_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTextViewSelRangeForUserCompletion)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Writes the current selection to the specified pasteboard using the given type.
 func (o *NSTextView) WriteSelectionToPasteboardType(pboard *NSPasteboard, type_ *foundation.NSString) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelWriteSelectionToPasteboardType, pboard.Ptr(), type_.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelWriteSelectionToPasteboardType, pboard.Ptr(), type_.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Writes the current selection to the specified pasteboard under each given type.
 func (o *NSTextView) WriteSelectionToPasteboardTypes(pboard *NSPasteboard, types *foundation.NSArray[*foundation.NSString]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelWriteSelectionToPasteboardTypes, pboard.Ptr(), types.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelWriteSelectionToPasteboardTypes, pboard.Ptr(), types.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns whatever type on the pasteboard would be most preferred for copying data.
 func (o *NSTextView) PreferredPasteboardTypeFromArrayRestrictedToTypesFromArray(availableTypes *foundation.NSArray[*foundation.NSString], allowedTypes *foundation.NSArray[*foundation.NSString]) *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelPreferredPasteboardTypeFromArrayRestrictedToTypesFromArray, availableTypes.Ptr(), allowedTypes.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelPreferredPasteboardTypeFromArrayRestrictedToTypesFromArray, availableTypes.Ptr(), allowedTypes.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Reads data of the given type from the specified pasteboard.
 func (o *NSTextView) ReadSelectionFromPasteboardType(pboard *NSPasteboard, type_ *foundation.NSString) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelReadSelectionFromPasteboardType, pboard.Ptr(), type_.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelReadSelectionFromPasteboardType, pboard.Ptr(), type_.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Reads the text view’s preferred type of data from the specified pasteboard.
 func (o *NSTextView) ReadSelectionFromPasteboard(pboard *NSPasteboard) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelReadSelectionFromPasteboard, pboard.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelReadSelectionFromPasteboard, pboard.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Registers send and return types for the Services facility.
 func NSTextViewRegisterForServices() {
-	objc.ID(_clsNSTextView).Send(_nSTextViewSelRegisterForServices)
+	purego.Main(func() {
+		objc.ID(_clsNSTextView).Send(_nSTextViewSelRegisterForServices)
+	})
 }
 
 // Inserts the contents of the pasteboard into the receiver’s text as plain text.
 func (o *NSTextView) PasteAsPlainText(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelPasteAsPlainText, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelPasteAsPlainText, sender)
+	})
 }
 
 // This action method inserts the contents of the pasteboard into the receiver’s text as rich text, maintaining its attributes.
 func (o *NSTextView) PasteAsRichText(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelPasteAsRichText, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelPasteAsRichText, sender)
+	})
 }
 
 func (o *NSTextView) WritablePasteboardTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelWritablePasteboardTypes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelWritablePasteboardTypes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) ReadablePasteboardTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelReadablePasteboardTypes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelReadablePasteboardTypes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Begins dragging the current selected text range.
 func (o *NSTextView) DragSelectionWithEventOffsetSlideBack(event *NSEvent, mouseOffset corefoundation.CGSize, slideBack bool) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelDragSelectionWithEventOffsetSlideBack, event.Ptr(), mouseOffset, slideBack)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelDragSelectionWithEventOffsetSlideBack, event.Ptr(), mouseOffset, slideBack)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns an appropriate drag image for the drag initiated by the specified event.
 func (o *NSTextView) DragImageForSelectionWithEventOrigin(event *NSEvent, origin *corefoundation.CGPoint) *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelDragImageForSelectionWithEventOrigin, event.Ptr(), origin)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelDragImageForSelectionWithEventOrigin, event.Ptr(), origin)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the type of drag operation that should be performed if the image were released now.
 func (o *NSTextView) DragOperationForDraggingInfoType(dragInfo NSDraggingInfo, type_ *foundation.NSString) NSDragOperation {
-	_ret := objc.Send[NSDragOperation](o.Ptr(), _nSTextViewSelDragOperationForDraggingInfoType, dragInfo, type_.Ptr())
-	return _ret
+	var _mainthread0 NSDragOperation
+	purego.Main(func() {
+		_mainthread0 = func() NSDragOperation {
+			_ret := objc.Send[NSDragOperation](o.Ptr(), _nSTextViewSelDragOperationForDraggingInfoType, dragInfo, type_.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Releases the drag information still existing after the dragging session has completed.
 func (o *NSTextView) CleanUpAfterDragOperation() {
-	o.Ptr().Send(_nSTextViewSelCleanUpAfterDragOperation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelCleanUpAfterDragOperation)
+	})
 }
 
 func (o *NSTextView) AcceptableDragTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelAcceptableDragTypes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelAcceptableDragTypes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the selection to the characters in an array of ranges in response to user action.
 func (o *NSTextView) SetSelectedRangesAffinityStillSelecting(ranges *foundation.NSArray[*foundation.NSValue], affinity NSSelectionAffinity, stillSelectingFlag bool) {
-	o.Ptr().Send(_nSTextViewSelSetSelectedRangesAffinityStillSelecting, ranges.Ptr(), affinity, stillSelectingFlag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetSelectedRangesAffinityStillSelecting, ranges.Ptr(), affinity, stillSelectingFlag)
+	})
 }
 
 // Sets the selection to a range of characters in response to user action.
 func (o *NSTextView) SetSelectedRangeAffinityStillSelecting(charRange foundation.NSRange, affinity NSSelectionAffinity, stillSelectingFlag bool) {
-	o.Ptr().Send(_nSTextViewSelSetSelectedRangeAffinityStillSelecting, charRange, affinity, stillSelectingFlag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetSelectedRangeAffinityStillSelecting, charRange, affinity, stillSelectingFlag)
+	})
 }
 
 // Updates the insertion point’s location and optionally restarts the blinking cursor timer.
 func (o *NSTextView) UpdateInsertionPointStateAndRestartTimer(restartFlag bool) {
-	o.Ptr().Send(_nSTextViewSelUpdateInsertionPointStateAndRestartTimer, restartFlag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelUpdateInsertionPointStateAndRestartTimer, restartFlag)
+	})
 }
 
 // Toggles whether continuous spell checking is enabled for the receiver.
 func (o *NSTextView) ToggleContinuousSpellChecking(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelToggleContinuousSpellChecking, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelToggleContinuousSpellChecking, sender)
+	})
 }
 
 // Changes the state of grammar checking from enabled to disabled and vice versa.
 func (o *NSTextView) ToggleGrammarChecking(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelToggleGrammarChecking, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelToggleGrammarChecking, sender)
+	})
 }
 
 // Sets the spelling state, which controls the display of the spelling and grammar indicators on the given text range.
 func (o *NSTextView) SetSpellingStateRange(value int, charRange foundation.NSRange) {
-	o.Ptr().Send(_nSTextViewSelSetSpellingStateRange, value, charRange)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetSpellingStateRange, value, charRange)
+	})
 }
 
 // Initiates a series of delegate messages (and general notifications) to determine whether modifications can be made to the characters and attributes of the receiver’s text.
 func (o *NSTextView) ShouldChangeTextInRangesReplacementStrings(affectedRanges *foundation.NSArray[*foundation.NSValue], replacementStrings *foundation.NSArray[*foundation.NSString]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelShouldChangeTextInRangesReplacementStrings, affectedRanges.Ptr(), replacementStrings.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelShouldChangeTextInRangesReplacementStrings, affectedRanges.Ptr(), replacementStrings.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Initiates a series of delegate messages (and general notifications) to determine whether modifications can be made to the characters and attributes of the receiver’s text.
 func (o *NSTextView) ShouldChangeTextInRangeReplacementString(affectedCharRange foundation.NSRange, replacementString *foundation.NSString) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelShouldChangeTextInRangeReplacementString, affectedCharRange, replacementString.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelShouldChangeTextInRangeReplacementString, affectedCharRange, replacementString.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sends out necessary notifications when a text change completes.
 func (o *NSTextView) DidChangeText() {
-	o.Ptr().Send(_nSTextViewSelDidChangeText)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelDidChangeText)
+	})
 }
 
 // Informs the receiver that it should begin coalescing successive typing operations in a new undo grouping.
 func (o *NSTextView) BreakUndoCoalescing() {
-	o.Ptr().Send(_nSTextViewSelBreakUndoCoalescing)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelBreakUndoCoalescing)
+	})
 }
 
 // Causes a temporary highlighting effect to appear around the visible portion (or portions) of the specified range.
 func (o *NSTextView) ShowFindIndicatorForRange(charRange foundation.NSRange) {
-	o.Ptr().Send(_nSTextViewSelShowFindIndicatorForRange, charRange)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelShowFindIndicatorForRange, charRange)
+	})
 }
 
 func (o *NSTextView) SelectedRanges() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelSelectedRanges)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSValue]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSValue] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelSelectedRanges)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSValue](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetSelectedRanges(selectedRanges *foundation.NSArray[*foundation.NSValue]) {
-	o.Ptr().Send(_nSTextViewSelSetSelectedRanges, selectedRanges.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetSelectedRanges, selectedRanges.Ptr())
+	})
 }
 
 func (o *NSTextView) SelectionAffinity() NSSelectionAffinity {
-	_ret := objc.Send[NSSelectionAffinity](o.Ptr(), _nSTextViewSelSelectionAffinity)
-	return _ret
+	var _mainthread0 NSSelectionAffinity
+	purego.Main(func() {
+		_mainthread0 = func() NSSelectionAffinity {
+			_ret := objc.Send[NSSelectionAffinity](o.Ptr(), _nSTextViewSelSelectionAffinity)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SelectionGranularity() NSSelectionGranularity {
-	_ret := objc.Send[NSSelectionGranularity](o.Ptr(), _nSTextViewSelSelectionGranularity)
-	return _ret
+	var _mainthread0 NSSelectionGranularity
+	purego.Main(func() {
+		_mainthread0 = func() NSSelectionGranularity {
+			_ret := objc.Send[NSSelectionGranularity](o.Ptr(), _nSTextViewSelSelectionGranularity)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetSelectionGranularity(selectionGranularity NSSelectionGranularity) {
-	o.Ptr().Send(_nSTextViewSelSetSelectionGranularity, selectionGranularity)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetSelectionGranularity, selectionGranularity)
+	})
 }
 
 func (o *NSTextView) SelectedTextAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelSelectedTextAttributes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
+	var _mainthread0 *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelSelectedTextAttributes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetSelectedTextAttributes(selectedTextAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSTextViewSelSetSelectedTextAttributes, selectedTextAttributes.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetSelectedTextAttributes, selectedTextAttributes.Ptr())
+	})
 }
 
 func (o *NSTextView) InsertionPointColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelInsertionPointColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelInsertionPointColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetInsertionPointColor(insertionPointColor *NSColor) {
-	o.Ptr().Send(_nSTextViewSelSetInsertionPointColor, insertionPointColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetInsertionPointColor, insertionPointColor.Ptr())
+	})
 }
 
 func (o *NSTextView) MarkedTextAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelMarkedTextAttributes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
+	var _mainthread0 *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelMarkedTextAttributes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetMarkedTextAttributes(markedTextAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSTextViewSelSetMarkedTextAttributes, markedTextAttributes.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetMarkedTextAttributes, markedTextAttributes.Ptr())
+	})
 }
 
 func (o *NSTextView) LinkTextAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelLinkTextAttributes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
+	var _mainthread0 *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelLinkTextAttributes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetLinkTextAttributes(linkTextAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSTextViewSelSetLinkTextAttributes, linkTextAttributes.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetLinkTextAttributes, linkTextAttributes.Ptr())
+	})
 }
 
 func (o *NSTextView) DisplaysLinkToolTips() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelDisplaysLinkToolTips)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelDisplaysLinkToolTips)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetDisplaysLinkToolTips(displaysLinkToolTips bool) {
-	o.Ptr().Send(_nSTextViewSelSetDisplaysLinkToolTips, displaysLinkToolTips)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetDisplaysLinkToolTips, displaysLinkToolTips)
+	})
 }
 
 func (o *NSTextView) AcceptsGlyphInfo() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelAcceptsGlyphInfo)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelAcceptsGlyphInfo)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetAcceptsGlyphInfo(acceptsGlyphInfo bool) {
-	o.Ptr().Send(_nSTextViewSelSetAcceptsGlyphInfo, acceptsGlyphInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetAcceptsGlyphInfo, acceptsGlyphInfo)
+	})
 }
 
 func (o *NSTextView) UsesRuler() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelUsesRuler)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelUsesRuler)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetUsesRuler(usesRuler bool) {
-	o.Ptr().Send(_nSTextViewSelSetUsesRuler, usesRuler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetUsesRuler, usesRuler)
+	})
 }
 
 func (o *NSTextView) UsesInspectorBar() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelUsesInspectorBar)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelUsesInspectorBar)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetUsesInspectorBar(usesInspectorBar bool) {
-	o.Ptr().Send(_nSTextViewSelSetUsesInspectorBar, usesInspectorBar)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetUsesInspectorBar, usesInspectorBar)
+	})
 }
 
 func (o *NSTextView) IsContinuousSpellCheckingEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelIsContinuousSpellCheckingEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelIsContinuousSpellCheckingEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetContinuousSpellCheckingEnabled(continuousSpellCheckingEnabled bool) {
-	o.Ptr().Send(_nSTextViewSelSetContinuousSpellCheckingEnabled, continuousSpellCheckingEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetContinuousSpellCheckingEnabled, continuousSpellCheckingEnabled)
+	})
 }
 
 func (o *NSTextView) SpellCheckerDocumentTag() int {
-	_ret := objc.Send[int](o.Ptr(), _nSTextViewSelSpellCheckerDocumentTag)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTextViewSelSpellCheckerDocumentTag)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) IsGrammarCheckingEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelIsGrammarCheckingEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelIsGrammarCheckingEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetGrammarCheckingEnabled(grammarCheckingEnabled bool) {
-	o.Ptr().Send(_nSTextViewSelSetGrammarCheckingEnabled, grammarCheckingEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetGrammarCheckingEnabled, grammarCheckingEnabled)
+	})
 }
 
 func (o *NSTextView) TypingAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelTypingAttributes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
+	var _mainthread0 *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelTypingAttributes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetTypingAttributes(typingAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSTextViewSelSetTypingAttributes, typingAttributes.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetTypingAttributes, typingAttributes.Ptr())
+	})
 }
 
 func (o *NSTextView) RangesForUserTextChange() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelRangesForUserTextChange)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSValue]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSValue] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelRangesForUserTextChange)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSValue](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) RangesForUserCharacterAttributeChange() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelRangesForUserCharacterAttributeChange)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSValue]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSValue] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelRangesForUserCharacterAttributeChange)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSValue](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) RangesForUserParagraphAttributeChange() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelRangesForUserParagraphAttributeChange)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSValue]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSValue] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelRangesForUserParagraphAttributeChange)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSValue](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) RangeForUserTextChange() foundation.NSRange {
-	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTextViewSelRangeForUserTextChange)
-	return _ret
+	var _mainthread0 foundation.NSRange
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSRange {
+			_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTextViewSelRangeForUserTextChange)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) RangeForUserCharacterAttributeChange() foundation.NSRange {
-	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTextViewSelRangeForUserCharacterAttributeChange)
-	return _ret
+	var _mainthread0 foundation.NSRange
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSRange {
+			_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTextViewSelRangeForUserCharacterAttributeChange)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) RangeForUserParagraphAttributeChange() foundation.NSRange {
-	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTextViewSelRangeForUserParagraphAttributeChange)
-	return _ret
+	var _mainthread0 foundation.NSRange
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSRange {
+			_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTextViewSelRangeForUserParagraphAttributeChange)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) AllowsDocumentBackgroundColorChange() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelAllowsDocumentBackgroundColorChange)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelAllowsDocumentBackgroundColorChange)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetAllowsDocumentBackgroundColorChange(allowsDocumentBackgroundColorChange bool) {
-	o.Ptr().Send(_nSTextViewSelSetAllowsDocumentBackgroundColorChange, allowsDocumentBackgroundColorChange)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetAllowsDocumentBackgroundColorChange, allowsDocumentBackgroundColorChange)
+	})
 }
 
 func (o *NSTextView) DefaultParagraphStyle() *NSParagraphStyle {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelDefaultParagraphStyle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSParagraphStyleFromID(_ret)
+	var _mainthread0 *NSParagraphStyle
+	purego.Main(func() {
+		_mainthread0 = func() *NSParagraphStyle {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelDefaultParagraphStyle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSParagraphStyleFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetDefaultParagraphStyle(defaultParagraphStyle *NSParagraphStyle) {
-	o.Ptr().Send(_nSTextViewSelSetDefaultParagraphStyle, defaultParagraphStyle.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetDefaultParagraphStyle, defaultParagraphStyle.Ptr())
+	})
 }
 
 func (o *NSTextView) AllowsUndo() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelAllowsUndo)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelAllowsUndo)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetAllowsUndo(allowsUndo bool) {
-	o.Ptr().Send(_nSTextViewSelSetAllowsUndo, allowsUndo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetAllowsUndo, allowsUndo)
+	})
 }
 
 func (o *NSTextView) IsCoalescingUndo() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelIsCoalescingUndo)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelIsCoalescingUndo)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) AllowsImageEditing() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelAllowsImageEditing)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelAllowsImageEditing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetAllowsImageEditing(allowsImageEditing bool) {
-	o.Ptr().Send(_nSTextViewSelSetAllowsImageEditing, allowsImageEditing)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetAllowsImageEditing, allowsImageEditing)
+	})
 }
 
 func (o *NSTextView) UsesRolloverButtonForSelection() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelUsesRolloverButtonForSelection)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelUsesRolloverButtonForSelection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetUsesRolloverButtonForSelection(usesRolloverButtonForSelection bool) {
-	o.Ptr().Send(_nSTextViewSelSetUsesRolloverButtonForSelection, usesRolloverButtonForSelection)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetUsesRolloverButtonForSelection, usesRolloverButtonForSelection)
+	})
 }
 
 func (o *NSTextView) SetRulerVisible(rulerVisible bool) {
-	o.Ptr().Send(_nSTextViewSelSetRulerVisible, rulerVisible)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetRulerVisible, rulerVisible)
+	})
 }
 
 func (o *NSTextView) AllowedInputSourceLocales() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelAllowedInputSourceLocales)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelAllowedInputSourceLocales)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetAllowedInputSourceLocales(allowedInputSourceLocales *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSTextViewSelSetAllowedInputSourceLocales, allowedInputSourceLocales.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetAllowedInputSourceLocales, allowedInputSourceLocales.Ptr())
+	})
 }
 
 func (o *NSTextView) IsWritingToolsActive() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelIsWritingToolsActive)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelIsWritingToolsActive)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) WritingToolsBehavior() NSWritingToolsBehavior {
-	_ret := objc.Send[NSWritingToolsBehavior](o.Ptr(), _nSTextViewSelWritingToolsBehavior)
-	return _ret
+	var _mainthread0 NSWritingToolsBehavior
+	purego.Main(func() {
+		_mainthread0 = func() NSWritingToolsBehavior {
+			_ret := objc.Send[NSWritingToolsBehavior](o.Ptr(), _nSTextViewSelWritingToolsBehavior)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetWritingToolsBehavior(writingToolsBehavior NSWritingToolsBehavior) {
-	o.Ptr().Send(_nSTextViewSelSetWritingToolsBehavior, writingToolsBehavior)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetWritingToolsBehavior, writingToolsBehavior)
+	})
 }
 
 func (o *NSTextView) AllowedWritingToolsResultOptions() NSWritingToolsResultOptions {
-	_ret := objc.Send[NSWritingToolsResultOptions](o.Ptr(), _nSTextViewSelAllowedWritingToolsResultOptions)
-	return _ret
+	var _mainthread0 NSWritingToolsResultOptions
+	purego.Main(func() {
+		_mainthread0 = func() NSWritingToolsResultOptions {
+			_ret := objc.Send[NSWritingToolsResultOptions](o.Ptr(), _nSTextViewSelAllowedWritingToolsResultOptions)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetAllowedWritingToolsResultOptions(allowedWritingToolsResultOptions NSWritingToolsResultOptions) {
-	o.Ptr().Send(_nSTextViewSelSetAllowedWritingToolsResultOptions, allowedWritingToolsResultOptions)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetAllowedWritingToolsResultOptions, allowedWritingToolsResultOptions)
+	})
 }
 
 // Returns an extended range that includes adjacent whitespace that should be deleted along with the proposed range in order to preserve proper spacing and punctuation.
 func (o *NSTextView) SmartDeleteRangeForProposedRange(proposedCharRange foundation.NSRange) foundation.NSRange {
-	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTextViewSelSmartDeleteRangeForProposedRange, proposedCharRange)
-	return _ret
+	var _mainthread0 foundation.NSRange
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSRange {
+			_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTextViewSelSmartDeleteRangeForProposedRange, proposedCharRange)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Changes the state of smart insert and delete from enabled to disabled and vice versa.
 func (o *NSTextView) ToggleSmartInsertDelete(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelToggleSmartInsertDelete, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelToggleSmartInsertDelete, sender)
+	})
 }
 
 // Determines whether whitespace needs to be added around the string to preserve proper spacing and punctuation when it replaces the characters in the specified range.
 func (o *NSTextView) SmartInsertForStringReplacingRangeBeforeStringAfterString(pasteString *foundation.NSString, charRangeToReplace foundation.NSRange, beforeString *foundation.NSString, afterString *foundation.NSString) {
-	o.Ptr().Send(_nSTextViewSelSmartInsertForStringReplacingRangeBeforeStringAfterString, pasteString.Ptr(), charRangeToReplace, beforeString.Ptr(), afterString.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSmartInsertForStringReplacingRangeBeforeStringAfterString, pasteString.Ptr(), charRangeToReplace, beforeString.Ptr(), afterString.Ptr())
+	})
 }
 
 // Returns any whitespace that needs to be added before the string to preserve proper spacing and punctuation when the string replaces the characters in the specified range.
 func (o *NSTextView) SmartInsertBeforeStringForStringReplacingRange(pasteString *foundation.NSString, charRangeToReplace foundation.NSRange) *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelSmartInsertBeforeStringForStringReplacingRange, pasteString.Ptr(), charRangeToReplace)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelSmartInsertBeforeStringForStringReplacingRange, pasteString.Ptr(), charRangeToReplace)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns any whitespace that needs to be added after the string to preserve proper spacing and punctuation when the string replaces the characters in the specified range.
 func (o *NSTextView) SmartInsertAfterStringForStringReplacingRange(pasteString *foundation.NSString, charRangeToReplace foundation.NSRange) *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelSmartInsertAfterStringForStringReplacingRange, pasteString.Ptr(), charRangeToReplace)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelSmartInsertAfterStringForStringReplacingRange, pasteString.Ptr(), charRangeToReplace)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Changes the state of automatic quotation mark substitution from enabled to disabled and vice versa.
 func (o *NSTextView) ToggleAutomaticQuoteSubstitution(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelToggleAutomaticQuoteSubstitution, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelToggleAutomaticQuoteSubstitution, sender)
+	})
 }
 
 // Changes the state of automatic link detection from enabled to disabled and vice versa.
 func (o *NSTextView) ToggleAutomaticLinkDetection(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelToggleAutomaticLinkDetection, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelToggleAutomaticLinkDetection, sender)
+	})
 }
 
 // Toggles the state of the automatic data detection.
 func (o *NSTextView) ToggleAutomaticDataDetection(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelToggleAutomaticDataDetection, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelToggleAutomaticDataDetection, sender)
+	})
 }
 
 // Toggles the state of the automatic dash substitution.
 func (o *NSTextView) ToggleAutomaticDashSubstitution(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelToggleAutomaticDashSubstitution, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelToggleAutomaticDashSubstitution, sender)
+	})
 }
 
 // Toggles the state of the automatic text replacement.
 func (o *NSTextView) ToggleAutomaticTextReplacement(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelToggleAutomaticTextReplacement, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelToggleAutomaticTextReplacement, sender)
+	})
 }
 
 // Toggles the state of the automatic spelling correction.
 func (o *NSTextView) ToggleAutomaticSpellingCorrection(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelToggleAutomaticSpellingCorrection, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelToggleAutomaticSpellingCorrection, sender)
+	})
 }
 
 // Check and replace the text in the range using the specified checking types and options.
 func (o *NSTextView) CheckTextInRangeTypesOptions(range_ foundation.NSRange, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSTextViewSelCheckTextInRangeTypesOptions, range_, checkingTypes, options.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelCheckTextInRangeTypesOptions, range_, checkingTypes, options.Ptr())
+	})
 }
 
 // Handles the text checking results returned by the text view
 func (o *NSTextView) HandleTextCheckingResultsForRangeTypesOptionsOrthographyWordCount(results *foundation.NSArray[*foundation.NSTextCheckingResult], range_ foundation.NSRange, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID], orthography *foundation.NSOrthography, wordCount int) {
-	o.Ptr().Send(_nSTextViewSelHandleTextCheckingResultsForRangeTypesOptionsOrthographyWordCount, results.Ptr(), range_, checkingTypes, options.Ptr(), orthography.Ptr(), wordCount)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelHandleTextCheckingResultsForRangeTypesOptionsOrthographyWordCount, results.Ptr(), range_, checkingTypes, options.Ptr(), orthography.Ptr(), wordCount)
+	})
 }
 
 // Brings forward a panel allowing the user to specify string substitutions in the text view.
 func (o *NSTextView) OrderFrontSubstitutionsPanel(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelOrderFrontSubstitutionsPanel, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelOrderFrontSubstitutionsPanel, sender)
+	})
 }
 
 // Performs the default text checking on the current selection.
 func (o *NSTextView) CheckTextInSelection(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelCheckTextInSelection, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelCheckTextInSelection, sender)
+	})
 }
 
 // Performs the default text checking on the entire document.
 func (o *NSTextView) CheckTextInDocument(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelCheckTextInDocument, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelCheckTextInDocument, sender)
+	})
 }
 
 func (o *NSTextView) SmartInsertDeleteEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelSmartInsertDeleteEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelSmartInsertDeleteEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetSmartInsertDeleteEnabled(smartInsertDeleteEnabled bool) {
-	o.Ptr().Send(_nSTextViewSelSetSmartInsertDeleteEnabled, smartInsertDeleteEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetSmartInsertDeleteEnabled, smartInsertDeleteEnabled)
+	})
 }
 
 func (o *NSTextView) IsAutomaticQuoteSubstitutionEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelIsAutomaticQuoteSubstitutionEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelIsAutomaticQuoteSubstitutionEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetAutomaticQuoteSubstitutionEnabled(automaticQuoteSubstitutionEnabled bool) {
-	o.Ptr().Send(_nSTextViewSelSetAutomaticQuoteSubstitutionEnabled, automaticQuoteSubstitutionEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetAutomaticQuoteSubstitutionEnabled, automaticQuoteSubstitutionEnabled)
+	})
 }
 
 func (o *NSTextView) IsAutomaticLinkDetectionEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelIsAutomaticLinkDetectionEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelIsAutomaticLinkDetectionEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetAutomaticLinkDetectionEnabled(automaticLinkDetectionEnabled bool) {
-	o.Ptr().Send(_nSTextViewSelSetAutomaticLinkDetectionEnabled, automaticLinkDetectionEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetAutomaticLinkDetectionEnabled, automaticLinkDetectionEnabled)
+	})
 }
 
 func (o *NSTextView) IsAutomaticDataDetectionEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelIsAutomaticDataDetectionEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelIsAutomaticDataDetectionEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetAutomaticDataDetectionEnabled(automaticDataDetectionEnabled bool) {
-	o.Ptr().Send(_nSTextViewSelSetAutomaticDataDetectionEnabled, automaticDataDetectionEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetAutomaticDataDetectionEnabled, automaticDataDetectionEnabled)
+	})
 }
 
 func (o *NSTextView) IsAutomaticDashSubstitutionEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelIsAutomaticDashSubstitutionEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelIsAutomaticDashSubstitutionEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetAutomaticDashSubstitutionEnabled(automaticDashSubstitutionEnabled bool) {
-	o.Ptr().Send(_nSTextViewSelSetAutomaticDashSubstitutionEnabled, automaticDashSubstitutionEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetAutomaticDashSubstitutionEnabled, automaticDashSubstitutionEnabled)
+	})
 }
 
 func (o *NSTextView) IsAutomaticTextReplacementEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelIsAutomaticTextReplacementEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelIsAutomaticTextReplacementEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetAutomaticTextReplacementEnabled(automaticTextReplacementEnabled bool) {
-	o.Ptr().Send(_nSTextViewSelSetAutomaticTextReplacementEnabled, automaticTextReplacementEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetAutomaticTextReplacementEnabled, automaticTextReplacementEnabled)
+	})
 }
 
 func (o *NSTextView) IsAutomaticSpellingCorrectionEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelIsAutomaticSpellingCorrectionEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelIsAutomaticSpellingCorrectionEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetAutomaticSpellingCorrectionEnabled(automaticSpellingCorrectionEnabled bool) {
-	o.Ptr().Send(_nSTextViewSelSetAutomaticSpellingCorrectionEnabled, automaticSpellingCorrectionEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetAutomaticSpellingCorrectionEnabled, automaticSpellingCorrectionEnabled)
+	})
 }
 
 func (o *NSTextView) EnabledTextCheckingTypes() uint64 {
-	_ret := objc.Send[uint64](o.Ptr(), _nSTextViewSelEnabledTextCheckingTypes)
-	return _ret
+	var _mainthread0 uint64
+	purego.Main(func() {
+		_mainthread0 = func() uint64 {
+			_ret := objc.Send[uint64](o.Ptr(), _nSTextViewSelEnabledTextCheckingTypes)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetEnabledTextCheckingTypes(enabledTextCheckingTypes uint64) {
-	o.Ptr().Send(_nSTextViewSelSetEnabledTextCheckingTypes, enabledTextCheckingTypes)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetEnabledTextCheckingTypes, enabledTextCheckingTypes)
+	})
 }
 
 func (o *NSTextView) UsesFindPanel() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelUsesFindPanel)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelUsesFindPanel)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetUsesFindPanel(usesFindPanel bool) {
-	o.Ptr().Send(_nSTextViewSelSetUsesFindPanel, usesFindPanel)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetUsesFindPanel, usesFindPanel)
+	})
 }
 
 func (o *NSTextView) UsesFindBar() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelUsesFindBar)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelUsesFindBar)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetUsesFindBar(usesFindBar bool) {
-	o.Ptr().Send(_nSTextViewSelSetUsesFindBar, usesFindBar)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetUsesFindBar, usesFindBar)
+	})
 }
 
 func (o *NSTextView) IsIncrementalSearchingEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelIsIncrementalSearchingEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelIsIncrementalSearchingEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetIncrementalSearchingEnabled(incrementalSearchingEnabled bool) {
-	o.Ptr().Send(_nSTextViewSelSetIncrementalSearchingEnabled, incrementalSearchingEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetIncrementalSearchingEnabled, incrementalSearchingEnabled)
+	})
 }
 
 func (o *NSTextView) InlinePredictionType() NSTextInputTraitType {
-	_ret := objc.Send[NSTextInputTraitType](o.Ptr(), _nSTextViewSelInlinePredictionType)
-	return _ret
+	var _mainthread0 NSTextInputTraitType
+	purego.Main(func() {
+		_mainthread0 = func() NSTextInputTraitType {
+			_ret := objc.Send[NSTextInputTraitType](o.Ptr(), _nSTextViewSelInlinePredictionType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetInlinePredictionType(inlinePredictionType NSTextInputTraitType) {
-	o.Ptr().Send(_nSTextViewSelSetInlinePredictionType, inlinePredictionType)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetInlinePredictionType, inlinePredictionType)
+	})
 }
 
 func (o *NSTextView) MathExpressionCompletionType() NSTextInputTraitType {
-	_ret := objc.Send[NSTextInputTraitType](o.Ptr(), _nSTextViewSelMathExpressionCompletionType)
-	return _ret
+	var _mainthread0 NSTextInputTraitType
+	purego.Main(func() {
+		_mainthread0 = func() NSTextInputTraitType {
+			_ret := objc.Send[NSTextInputTraitType](o.Ptr(), _nSTextViewSelMathExpressionCompletionType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetMathExpressionCompletionType(mathExpressionCompletionType NSTextInputTraitType) {
-	o.Ptr().Send(_nSTextViewSelSetMathExpressionCompletionType, mathExpressionCompletionType)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetMathExpressionCompletionType, mathExpressionCompletionType)
+	})
 }
 
 // An action message that toggles the visibility state of the Quick Look preview panel.
 func (o *NSTextView) ToggleQuickLookPreviewPanel(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelToggleQuickLookPreviewPanel, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelToggleQuickLookPreviewPanel, sender)
+	})
 }
 
 // Returns an array of URLs for items that can be displayed by QuickLook in the specified ranges.
 func (o *NSTextView) QuickLookPreviewableItemsInRanges(ranges *foundation.NSArray[*foundation.NSValue]) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelQuickLookPreviewableItemsInRanges, ranges.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[objc.ID](_ret)
+	var _mainthread0 *foundation.NSArray[objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelQuickLookPreviewableItemsInRanges, ranges.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Notifies the QuickLook panel that an update may be required.
 func (o *NSTextView) UpdateQuickLookPreviewPanel() {
-	o.Ptr().Send(_nSTextViewSelUpdateQuickLookPreviewPanel)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelUpdateQuickLookPreviewPanel)
+	})
 }
 
 // Creates and displays a new instance of the sharing service picker.
 func (o *NSTextView) OrderFrontSharingServicePicker(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelOrderFrontSharingServicePicker, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelOrderFrontSharingServicePicker, sender)
+	})
 }
 
 func (o *NSTextView) ToggleAutomaticTextCompletion(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelToggleAutomaticTextCompletion, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelToggleAutomaticTextCompletion, sender)
+	})
 }
 
 func (o *NSTextView) UpdateTouchBarItemIdentifiers() {
-	o.Ptr().Send(_nSTextViewSelUpdateTouchBarItemIdentifiers)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelUpdateTouchBarItemIdentifiers)
+	})
 }
 
 func (o *NSTextView) UpdateTextTouchBarItems() {
-	o.Ptr().Send(_nSTextViewSelUpdateTextTouchBarItems)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelUpdateTextTouchBarItems)
+	})
 }
 
 func (o *NSTextView) UpdateCandidates() {
-	o.Ptr().Send(_nSTextViewSelUpdateCandidates)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelUpdateCandidates)
+	})
 }
 
 func (o *NSTextView) IsAutomaticTextCompletionEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelIsAutomaticTextCompletionEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelIsAutomaticTextCompletionEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetAutomaticTextCompletionEnabled(automaticTextCompletionEnabled bool) {
-	o.Ptr().Send(_nSTextViewSelSetAutomaticTextCompletionEnabled, automaticTextCompletionEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetAutomaticTextCompletionEnabled, automaticTextCompletionEnabled)
+	})
 }
 
 func (o *NSTextView) AllowsCharacterPickerTouchBarItem() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelAllowsCharacterPickerTouchBarItem)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextViewSelAllowsCharacterPickerTouchBarItem)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool) {
-	o.Ptr().Send(_nSTextViewSelSetAllowsCharacterPickerTouchBarItem, allowsCharacterPickerTouchBarItem)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetAllowsCharacterPickerTouchBarItem, allowsCharacterPickerTouchBarItem)
+	})
 }
 
 func NSTextViewScrollableTextView() *NSScrollView {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextView), _nSTextViewSelScrollableTextView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrollViewFromID(_ret)
+	var _mainthread0 *NSScrollView
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrollView {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSTextView), _nSTextViewSelScrollableTextView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrollViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func NSTextViewFieldEditor() *NSTextView {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextView), _nSTextViewSelFieldEditor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextViewFromID(_ret)
+	var _mainthread0 *NSTextView
+	purego.Main(func() {
+		_mainthread0 = func() *NSTextView {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSTextView), _nSTextViewSelFieldEditor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func NSTextViewScrollableDocumentContentTextView() *NSScrollView {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextView), _nSTextViewSelScrollableDocumentContentTextView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrollViewFromID(_ret)
+	var _mainthread0 *NSScrollView
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrollView {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSTextView), _nSTextViewSelScrollableDocumentContentTextView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrollViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func NSTextViewScrollablePlainDocumentContentTextView() *NSScrollView {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextView), _nSTextViewSelScrollablePlainDocumentContentTextView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrollViewFromID(_ret)
+	var _mainthread0 *NSScrollView
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrollView {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSTextView), _nSTextViewSelScrollablePlainDocumentContentTextView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrollViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) DrawTextHighlightBackgroundForTextRangeOrigin(textRange *NSTextRange, origin corefoundation.CGPoint) {
-	o.Ptr().Send(_nSTextViewSelDrawTextHighlightBackgroundForTextRangeOrigin, textRange.Ptr(), origin)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelDrawTextHighlightBackgroundForTextRangeOrigin, textRange.Ptr(), origin)
+	})
 }
 
 // An action for toggling NSTextHighlightStyleAttributeName in the receiver’s selected range. The sender should be a menu item with a representedObject of type (NSTextHighlightColorScheme).
 func (o *NSTextView) Highlight(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelHighlight, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelHighlight, sender)
+	})
 }
 
 func (o *NSTextView) TextHighlightAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelTextHighlightAttributes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
+	var _mainthread0 *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewSelTextHighlightAttributes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTextView) SetTextHighlightAttributes(textHighlightAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSTextViewSelSetTextHighlightAttributes, textHighlightAttributes.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelSetTextHighlightAttributes, textHighlightAttributes.Ptr())
+	})
 }
 
 // Changes the base writing direction of a paragraph between left-to-right and right-to-left.
 // Deprecated: Use NSResponder's makeBaseWritingDirectionNatural:, makeBaseWritingDirectionLeftToRight:, and makeBaseWritingDirectionRightToLeft: instead
 func (o *NSTextView) ToggleBaseWritingDirection(sender objc.ID) {
-	o.Ptr().Send(_nSTextViewSelToggleBaseWritingDirection, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextViewSelToggleBaseWritingDirection, sender)
+	})
 }

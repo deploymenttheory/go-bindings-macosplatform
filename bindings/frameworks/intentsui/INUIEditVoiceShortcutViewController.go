@@ -37,18 +37,32 @@ func INUIEditVoiceShortcutViewControllerFromID(id objc.ID) *INUIEditVoiceShortcu
 
 // Creates a view controller with the shortcut to edit or remove.
 func (o *INUIEditVoiceShortcutViewController) InitWithVoiceShortcut(voiceShortcut *intents.INVoiceShortcut) *INUIEditVoiceShortcutViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iNUIEditVoiceShortcutViewControllerSelInitWithVoiceShortcut, voiceShortcut.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return INUIEditVoiceShortcutViewControllerFromID(_ret)
+	var _mainthread0 *INUIEditVoiceShortcutViewController
+	purego.Main(func() {
+		_mainthread0 = func() *INUIEditVoiceShortcutViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iNUIEditVoiceShortcutViewControllerSelInitWithVoiceShortcut, voiceShortcut.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return INUIEditVoiceShortcutViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *INUIEditVoiceShortcutViewController) Delegate() INUIEditVoiceShortcutViewControllerDelegate {
-	_ret := objc.Send[INUIEditVoiceShortcutViewControllerDelegate](o.Ptr(), _iNUIEditVoiceShortcutViewControllerSelDelegate)
-	return _ret
+	var _mainthread0 INUIEditVoiceShortcutViewControllerDelegate
+	purego.Main(func() {
+		_mainthread0 = func() INUIEditVoiceShortcutViewControllerDelegate {
+			_ret := objc.Send[INUIEditVoiceShortcutViewControllerDelegate](o.Ptr(), _iNUIEditVoiceShortcutViewControllerSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *INUIEditVoiceShortcutViewController) SetDelegate(delegate INUIEditVoiceShortcutViewControllerDelegate) {
-	o.Ptr().Send(_iNUIEditVoiceShortcutViewControllerSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_iNUIEditVoiceShortcutViewControllerSelSetDelegate, delegate)
+	})
 }

@@ -58,137 +58,237 @@ func NSPathCellFromID(id objc.ID) *NSPathCell {
 
 // Returns the current rectangle being displayed for a given path component cell, with respect to a given frame in a given view.
 func (o *NSPathCell) RectOfPathComponentCellWithFrameInView(cell *NSPathComponentCell, frame corefoundation.CGRect, view *NSView) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSPathCellSelRectOfPathComponentCellWithFrameInView, cell.Ptr(), frame, view.Ptr())
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSPathCellSelRectOfPathComponentCellWithFrameInView, cell.Ptr(), frame, view.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the cell located at the given point within the given frame of the given view.
 func (o *NSPathCell) PathComponentCellAtPointWithFrameInView(point corefoundation.CGPoint, frame corefoundation.CGRect, view *NSView) *NSPathComponentCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelPathComponentCellAtPointWithFrameInView, point, frame, view.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSPathComponentCellFromID(_ret)
+	var _mainthread0 *NSPathComponentCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSPathComponentCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelPathComponentCellAtPointWithFrameInView, point, frame, view.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSPathComponentCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Displays the cell component over which the mouse is hovering.
 func (o *NSPathCell) MouseEnteredWithFrameInView(event *NSEvent, frame corefoundation.CGRect, view *NSView) {
-	o.Ptr().Send(_nSPathCellSelMouseEnteredWithFrameInView, event.Ptr(), frame, view.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPathCellSelMouseEnteredWithFrameInView, event.Ptr(), frame, view.Ptr())
+	})
 }
 
 // Hides the cell component over which the mouse is hovering.
 func (o *NSPathCell) MouseExitedWithFrameInView(event *NSEvent, frame corefoundation.CGRect, view *NSView) {
-	o.Ptr().Send(_nSPathCellSelMouseExitedWithFrameInView, event.Ptr(), frame, view.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPathCellSelMouseExitedWithFrameInView, event.Ptr(), frame, view.Ptr())
+	})
 }
 
 func (o *NSPathCell) PathStyle() NSPathStyle {
-	_ret := objc.Send[NSPathStyle](o.Ptr(), _nSPathCellSelPathStyle)
-	return _ret
+	var _mainthread0 NSPathStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSPathStyle {
+			_ret := objc.Send[NSPathStyle](o.Ptr(), _nSPathCellSelPathStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPathCell) SetPathStyle(pathStyle NSPathStyle) {
-	o.Ptr().Send(_nSPathCellSelSetPathStyle, pathStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPathCellSelSetPathStyle, pathStyle)
+	})
 }
 
 func (o *NSPathCell) URL() *foundation.NSURL {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelURL)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSURLFromID(_ret)
+	var _mainthread0 *foundation.NSURL
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSURL {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelURL)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSURLFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPathCell) SetURL(uRL *foundation.NSURL) {
-	o.Ptr().Send(_nSPathCellSelSetURL, uRL.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPathCellSelSetURL, uRL.Ptr())
+	})
 }
 
 func (o *NSPathCell) AllowedTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelAllowedTypes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelAllowedTypes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPathCell) SetAllowedTypes(allowedTypes *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSPathCellSelSetAllowedTypes, allowedTypes.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPathCellSelSetAllowedTypes, allowedTypes.Ptr())
+	})
 }
 
 func (o *NSPathCell) Delegate() NSPathCellDelegate {
-	_ret := objc.Send[NSPathCellDelegate](o.Ptr(), _nSPathCellSelDelegate)
-	return _ret
+	var _mainthread0 NSPathCellDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSPathCellDelegate {
+			_ret := objc.Send[NSPathCellDelegate](o.Ptr(), _nSPathCellSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPathCell) SetDelegate(delegate NSPathCellDelegate) {
-	o.Ptr().Send(_nSPathCellSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPathCellSelSetDelegate, delegate)
+	})
 }
 
 func NSPathCellPathComponentCellClass() objc.Class {
-	_ret := objc.Send[objc.Class](objc.ID(_clsNSPathCell), _nSPathCellSelPathComponentCellClass)
-	return _ret
+	var _mainthread0 objc.Class
+	purego.Main(func() {
+		_mainthread0 = func() objc.Class {
+			_ret := objc.Send[objc.Class](objc.ID(_clsNSPathCell), _nSPathCellSelPathComponentCellClass)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPathCell) PathComponentCells() *foundation.NSArray[*NSPathComponentCell] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelPathComponentCells)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSPathComponentCell](_ret)
+	var _mainthread0 *foundation.NSArray[*NSPathComponentCell]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSPathComponentCell] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelPathComponentCells)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSPathComponentCell](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPathCell) SetPathComponentCells(pathComponentCells *foundation.NSArray[*NSPathComponentCell]) {
-	o.Ptr().Send(_nSPathCellSelSetPathComponentCells, pathComponentCells.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPathCellSelSetPathComponentCells, pathComponentCells.Ptr())
+	})
 }
 
 func (o *NSPathCell) ClickedPathComponentCell() *NSPathComponentCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelClickedPathComponentCell)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSPathComponentCellFromID(_ret)
+	var _mainthread0 *NSPathComponentCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSPathComponentCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelClickedPathComponentCell)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSPathComponentCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPathCell) DoubleAction() objc.SEL {
-	_ret := objc.Send[objc.SEL](o.Ptr(), _nSPathCellSelDoubleAction)
-	return _ret
+	var _mainthread0 objc.SEL
+	purego.Main(func() {
+		_mainthread0 = func() objc.SEL {
+			_ret := objc.Send[objc.SEL](o.Ptr(), _nSPathCellSelDoubleAction)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPathCell) SetDoubleAction(doubleAction objc.SEL) {
-	o.Ptr().Send(_nSPathCellSelSetDoubleAction, doubleAction)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPathCellSelSetDoubleAction, doubleAction)
+	})
 }
 
 func (o *NSPathCell) BackgroundColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelBackgroundColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelBackgroundColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPathCell) SetBackgroundColor(backgroundColor *NSColor) {
-	o.Ptr().Send(_nSPathCellSelSetBackgroundColor, backgroundColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPathCellSelSetBackgroundColor, backgroundColor.Ptr())
+	})
 }
 
 func (o *NSPathCell) PlaceholderString() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelPlaceholderString)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelPlaceholderString)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPathCell) SetPlaceholderString(placeholderString *foundation.NSString) {
-	o.Ptr().Send(_nSPathCellSelSetPlaceholderString, placeholderString.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPathCellSelSetPlaceholderString, placeholderString.Ptr())
+	})
 }
 
 func (o *NSPathCell) PlaceholderAttributedString() *foundation.NSAttributedString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelPlaceholderAttributedString)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSAttributedStringFromID(_ret)
+	var _mainthread0 *foundation.NSAttributedString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSAttributedString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelPlaceholderAttributedString)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSAttributedStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPathCell) SetPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) {
-	o.Ptr().Send(_nSPathCellSelSetPlaceholderAttributedString, placeholderAttributedString.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPathCellSelSetPlaceholderAttributedString, placeholderAttributedString.Ptr())
+	})
 }

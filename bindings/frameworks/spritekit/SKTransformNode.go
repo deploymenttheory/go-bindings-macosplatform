@@ -43,46 +43,86 @@ func SKTransformNodeFromID(id objc.ID) *SKTransformNode {
 }
 
 func (o *SKTransformNode) SetEulerAngles(euler unsafe.Pointer) {
-	o.Ptr().Send(_sKTransformNodeSelSetEulerAngles, euler)
+	purego.Main(func() {
+		o.Ptr().Send(_sKTransformNodeSelSetEulerAngles, euler)
+	})
 }
 
 func (o *SKTransformNode) EulerAngles() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sKTransformNodeSelEulerAngles)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sKTransformNodeSelEulerAngles)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKTransformNode) SetRotationMatrix(rotationMatrix unsafe.Pointer) {
-	o.Ptr().Send(_sKTransformNodeSelSetRotationMatrix, rotationMatrix)
+	purego.Main(func() {
+		o.Ptr().Send(_sKTransformNodeSelSetRotationMatrix, rotationMatrix)
+	})
 }
 
 func (o *SKTransformNode) RotationMatrix() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sKTransformNodeSelRotationMatrix)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sKTransformNodeSelRotationMatrix)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKTransformNode) SetQuaternion(quaternion unsafe.Pointer) {
-	o.Ptr().Send(_sKTransformNodeSelSetQuaternion, quaternion)
+	purego.Main(func() {
+		o.Ptr().Send(_sKTransformNodeSelSetQuaternion, quaternion)
+	})
 }
 
 func (o *SKTransformNode) Quaternion() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sKTransformNodeSelQuaternion)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sKTransformNodeSelQuaternion)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKTransformNode) XRotation() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _sKTransformNodeSelXRotation)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _sKTransformNodeSelXRotation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKTransformNode) SetXRotation(xRotation float64) {
-	o.Ptr().Send(_sKTransformNodeSelSetXRotation, xRotation)
+	purego.Main(func() {
+		o.Ptr().Send(_sKTransformNodeSelSetXRotation, xRotation)
+	})
 }
 
 func (o *SKTransformNode) YRotation() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _sKTransformNodeSelYRotation)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _sKTransformNodeSelYRotation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKTransformNode) SetYRotation(yRotation float64) {
-	o.Ptr().Send(_sKTransformNodeSelSetYRotation, yRotation)
+	purego.Main(func() {
+		o.Ptr().Send(_sKTransformNodeSelSetYRotation, yRotation)
+	})
 }

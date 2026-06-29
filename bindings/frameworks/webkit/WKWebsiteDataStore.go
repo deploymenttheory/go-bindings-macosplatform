@@ -51,29 +51,47 @@ func WKWebsiteDataStoreFromID(id objc.ID) *WKWebsiteDataStore {
 
 // Returns the default data store, which stores data persistently to disk.
 func WKWebsiteDataStoreDefaultDataStore() *WKWebsiteDataStore {
-	_ret := objc.Send[objc.ID](objc.ID(_clsWKWebsiteDataStore), _wKWebsiteDataStoreSelDefaultDataStore)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKWebsiteDataStoreFromID(_ret)
+	var _mainthread0 *WKWebsiteDataStore
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebsiteDataStore {
+			_ret := objc.Send[objc.ID](objc.ID(_clsWKWebsiteDataStore), _wKWebsiteDataStoreSelDefaultDataStore)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKWebsiteDataStoreFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a new data store object that stores website data in memory, and doesn’t write that data to disk.
 func WKWebsiteDataStoreNonPersistentDataStore() *WKWebsiteDataStore {
-	_ret := objc.Send[objc.ID](objc.ID(_clsWKWebsiteDataStore), _wKWebsiteDataStoreSelNonPersistentDataStore)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKWebsiteDataStoreFromID(_ret)
+	var _mainthread0 *WKWebsiteDataStore
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebsiteDataStore {
+			_ret := objc.Send[objc.ID](objc.ID(_clsWKWebsiteDataStore), _wKWebsiteDataStoreSelNonPersistentDataStore)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKWebsiteDataStoreFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the set of all the available data types.
 func WKWebsiteDataStoreAllWebsiteDataTypes() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](objc.ID(_clsWKWebsiteDataStore), _wKWebsiteDataStoreSelAllWebsiteDataTypes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSSetFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSSet[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSSet[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](objc.ID(_clsWKWebsiteDataStore), _wKWebsiteDataStoreSelAllWebsiteDataTypes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSSetFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Fetches the specified types of records from the data store.
@@ -88,7 +106,9 @@ func (o *WKWebsiteDataStore) FetchDataRecordsOfTypesCompletionHandler(dataTypes 
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_wKWebsiteDataStoreSelFetchDataRecordsOfTypesCompletionHandler, dataTypes.Ptr(), __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebsiteDataStoreSelFetchDataRecordsOfTypesCompletionHandler, dataTypes.Ptr(), __block_completionHandler)
+	})
 }
 
 // Removes the specified types of website data from one or more data records.
@@ -100,7 +120,9 @@ func (o *WKWebsiteDataStore) RemoveDataOfTypesForDataRecordsCompletionHandler(da
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_wKWebsiteDataStoreSelRemoveDataOfTypesForDataRecordsCompletionHandler, dataTypes.Ptr(), dataRecords.Ptr(), __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebsiteDataStoreSelRemoveDataOfTypesForDataRecordsCompletionHandler, dataTypes.Ptr(), dataRecords.Ptr(), __block_completionHandler)
+	})
 }
 
 // Removes website data that changed after the specified date.
@@ -112,7 +134,9 @@ func (o *WKWebsiteDataStore) RemoveDataOfTypesModifiedSinceCompletionHandler(dat
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_wKWebsiteDataStoreSelRemoveDataOfTypesModifiedSinceCompletionHandler, dataTypes.Ptr(), date.Ptr(), __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebsiteDataStoreSelRemoveDataOfTypesModifiedSinceCompletionHandler, dataTypes.Ptr(), date.Ptr(), __block_completionHandler)
+	})
 }
 
 func (o *WKWebsiteDataStore) FetchDataOfTypesCompletionHandler(dataTypes *foundation.NSSet[*foundation.NSString], completionHandler func(*foundation.NSData, unsafe.Pointer)) {
@@ -126,7 +150,9 @@ func (o *WKWebsiteDataStore) FetchDataOfTypesCompletionHandler(dataTypes *founda
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_wKWebsiteDataStoreSelFetchDataOfTypesCompletionHandler, dataTypes.Ptr(), __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebsiteDataStoreSelFetchDataOfTypesCompletionHandler, dataTypes.Ptr(), __block_completionHandler)
+	})
 }
 
 func (o *WKWebsiteDataStore) RestoreDataCompletionHandler(data *foundation.NSData, completionHandler func(unsafe.Pointer)) {
@@ -137,16 +163,24 @@ func (o *WKWebsiteDataStore) RestoreDataCompletionHandler(data *foundation.NSDat
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_wKWebsiteDataStoreSelRestoreDataCompletionHandler, data.Ptr(), __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebsiteDataStoreSelRestoreDataCompletionHandler, data.Ptr(), __block_completionHandler)
+	})
 }
 
 // Returns the persistent data store with the unique identifier you provide.
 func WKWebsiteDataStoreDataStoreForIdentifier(identifier *foundation.NSUUID) *WKWebsiteDataStore {
-	_ret := objc.Send[objc.ID](objc.ID(_clsWKWebsiteDataStore), _wKWebsiteDataStoreSelDataStoreForIdentifier, identifier.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKWebsiteDataStoreFromID(_ret)
+	var _mainthread0 *WKWebsiteDataStore
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebsiteDataStore {
+			_ret := objc.Send[objc.ID](objc.ID(_clsWKWebsiteDataStore), _wKWebsiteDataStoreSelDataStoreForIdentifier, identifier.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKWebsiteDataStoreFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Removes the data store that matches the identifier you provide.
@@ -158,7 +192,9 @@ func WKWebsiteDataStoreRemoveDataStoreForIdentifierCompletionHandler(identifier 
 		})
 		defer __block_completionHandler.Release()
 	}
-	objc.ID(_clsWKWebsiteDataStore).Send(_wKWebsiteDataStoreSelRemoveDataStoreForIdentifierCompletionHandler, identifier.Ptr(), __block_completionHandler)
+	purego.Main(func() {
+		objc.ID(_clsWKWebsiteDataStore).Send(_wKWebsiteDataStoreSelRemoveDataStoreForIdentifierCompletionHandler, identifier.Ptr(), __block_completionHandler)
+	})
 }
 
 // Fetches an array of identifiers from existing data stores that have identifiers.
@@ -173,41 +209,69 @@ func WKWebsiteDataStoreFetchAllDataStoreIdentifiers(completionHandler func(*foun
 		})
 		defer __block_completionHandler.Release()
 	}
-	objc.ID(_clsWKWebsiteDataStore).Send(_wKWebsiteDataStoreSelFetchAllDataStoreIdentifiers, __block_completionHandler)
+	purego.Main(func() {
+		objc.ID(_clsWKWebsiteDataStore).Send(_wKWebsiteDataStoreSelFetchAllDataStoreIdentifiers, __block_completionHandler)
+	})
 }
 
 // @abstract Whether the data store is persistent or not.
 func (o *WKWebsiteDataStore) IsPersistent() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebsiteDataStoreSelIsPersistent)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebsiteDataStoreSelIsPersistent)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Returns the cookie store representing HTTP cookies in this website data store.
 func (o *WKWebsiteDataStore) HttpCookieStore() *WKHTTPCookieStore {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebsiteDataStoreSelHttpCookieStore)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKHTTPCookieStoreFromID(_ret)
+	var _mainthread0 *WKHTTPCookieStore
+	purego.Main(func() {
+		_mainthread0 = func() *WKHTTPCookieStore {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebsiteDataStoreSelHttpCookieStore)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKHTTPCookieStoreFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Get identifier for a data store. @discussion Returns nil for default and non-persistent data store .
 func (o *WKWebsiteDataStore) Identifier() *foundation.NSUUID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebsiteDataStoreSelIdentifier)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSUUIDFromID(_ret)
+	var _mainthread0 *foundation.NSUUID
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSUUID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebsiteDataStoreSelIdentifier)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSUUIDFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebsiteDataStore) ProxyConfigurations() *foundation.NSArray[*foundation.NSObject] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebsiteDataStoreSelProxyConfigurations)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSObject](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSObject]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSObject] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebsiteDataStoreSelProxyConfigurations)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSObject](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebsiteDataStore) SetProxyConfigurations(proxyConfigurations *foundation.NSArray[*foundation.NSObject]) {
-	o.Ptr().Send(_wKWebsiteDataStoreSelSetProxyConfigurations, proxyConfigurations.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebsiteDataStoreSelSetProxyConfigurations, proxyConfigurations.Ptr())
+	})
 }

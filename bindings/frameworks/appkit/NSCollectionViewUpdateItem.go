@@ -35,22 +35,40 @@ func NSCollectionViewUpdateItemFromID(id objc.ID) *NSCollectionViewUpdateItem {
 }
 
 func (o *NSCollectionViewUpdateItem) IndexPathBeforeUpdate() *foundation.NSIndexPath {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewUpdateItemSelIndexPathBeforeUpdate)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSIndexPathFromID(_ret)
+	var _mainthread0 *foundation.NSIndexPath
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSIndexPath {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewUpdateItemSelIndexPathBeforeUpdate)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSIndexPathFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewUpdateItem) IndexPathAfterUpdate() *foundation.NSIndexPath {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewUpdateItemSelIndexPathAfterUpdate)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSIndexPathFromID(_ret)
+	var _mainthread0 *foundation.NSIndexPath
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSIndexPath {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewUpdateItemSelIndexPathAfterUpdate)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSIndexPathFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewUpdateItem) UpdateAction() NSCollectionUpdateAction {
-	_ret := objc.Send[NSCollectionUpdateAction](o.Ptr(), _nSCollectionViewUpdateItemSelUpdateAction)
-	return _ret
+	var _mainthread0 NSCollectionUpdateAction
+	purego.Main(func() {
+		_mainthread0 = func() NSCollectionUpdateAction {
+			_ret := objc.Send[NSCollectionUpdateAction](o.Ptr(), _nSCollectionViewUpdateItemSelUpdateAction)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

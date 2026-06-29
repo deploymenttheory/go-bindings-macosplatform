@@ -168,750 +168,1264 @@ func WebViewFromID(id objc.ID) *WebView {
 
 // @method canShowMIMEType: @abstract Checks if the WebKit can show content of a certain MIME type. @param MIMEType The MIME type to check. @result YES if the WebKit can show content with MIMEtype.
 func WebViewCanShowMIMEType(mIMEType *foundation.NSString) bool {
-	_ret := objc.Send[bool](objc.ID(_clsWebView), _webViewSelCanShowMIMEType, mIMEType.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](objc.ID(_clsWebView), _webViewSelCanShowMIMEType, mIMEType.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @method canShowMIMETypeAsHTML: @abstract Checks if the MIME type is a type that the WebKit will interpret as HTML. @param MIMEType The MIME type to check. @result YES if the MIMEtype in an HTML type.
 func WebViewCanShowMIMETypeAsHTML(mIMEType *foundation.NSString) bool {
-	_ret := objc.Send[bool](objc.ID(_clsWebView), _webViewSelCanShowMIMETypeAsHTML, mIMEType.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](objc.ID(_clsWebView), _webViewSelCanShowMIMETypeAsHTML, mIMEType.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @method MIMETypesShownAsHTML @result Returns an array of NSStrings that describe the MIME types WebKit will attempt to render as HTML.
 func WebViewMIMETypesShownAsHTML() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[objc.ID](objc.ID(_clsWebView), _webViewSelMIMETypesShownAsHTML)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[objc.ID](_ret)
+	var _mainthread0 *foundation.NSArray[objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[objc.ID] {
+			_ret := objc.Send[objc.ID](objc.ID(_clsWebView), _webViewSelMIMETypesShownAsHTML)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @method setMIMETypesShownAsHTML: @discussion Sets the array of NSString MIME types that WebKit will attempt to render as HTML.  Typically you will retrieve the built-in array using MIMETypesShownAsHTML and add additional MIME types to that array.
 func WebViewSetMIMETypesShownAsHTML(mIMETypes *foundation.NSArray[objc.ID]) {
-	objc.ID(_clsWebView).Send(_webViewSelSetMIMETypesShownAsHTML, mIMETypes.Ptr())
+	purego.Main(func() {
+		objc.ID(_clsWebView).Send(_webViewSelSetMIMETypesShownAsHTML, mIMETypes.Ptr())
+	})
 }
 
 // @method URLFromPasteboard: @abstract Returns a URL from a pasteboard @param pasteboard The pasteboard with a URL @result A URL if the pasteboard has one. Nil if it does not. @discussion This method differs than NSURL's URLFromPasteboard method in that it tries multiple pasteboard types including NSURLPboardType to find a URL on the pasteboard.
 func WebViewURLFromPasteboard(pasteboard *appkit.NSPasteboard) *foundation.NSURL {
-	_ret := objc.Send[objc.ID](objc.ID(_clsWebView), _webViewSelURLFromPasteboard, pasteboard.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSURLFromID(_ret)
+	var _mainthread0 *foundation.NSURL
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSURL {
+			_ret := objc.Send[objc.ID](objc.ID(_clsWebView), _webViewSelURLFromPasteboard, pasteboard.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSURLFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @method URLTitleFromPasteboard: @abstract Returns a URL title from a pasteboard @param pasteboard The pasteboard with a URL title @result A URL title if the pasteboard has one. Nil if it does not. @discussion This method returns a title that refers a URL on the pasteboard. An example of this is the link label which is the text inside the anchor tag.
 func WebViewURLTitleFromPasteboard(pasteboard *appkit.NSPasteboard) *foundation.NSString {
-	_ret := objc.Send[objc.ID](objc.ID(_clsWebView), _webViewSelURLTitleFromPasteboard, pasteboard.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](objc.ID(_clsWebView), _webViewSelURLTitleFromPasteboard, pasteboard.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @method registerURLSchemeAsLocal: @abstract Adds the scheme to the list of schemes to be treated as local. @param scheme The scheme to register
 func WebViewRegisterURLSchemeAsLocal(scheme *foundation.NSString) {
-	objc.ID(_clsWebView).Send(_webViewSelRegisterURLSchemeAsLocal, scheme.Ptr())
+	purego.Main(func() {
+		objc.ID(_clsWebView).Send(_webViewSelRegisterURLSchemeAsLocal, scheme.Ptr())
+	})
 }
 
 // @method initWithFrame:frameName:groupName: @abstract The designated initializer for WebView. @discussion Initialize a WebView with the supplied parameters. This method will create a main WebFrame with the view. Passing a top level frame name is useful if you handle a targetted frame navigation that would normally open a window in some other way that still ends up creating a new WebView. @param frame The frame used to create the view. @param frameName The name to use for the top level frame. May be nil. @param groupName The name of the webView set to which this webView will be added.  May be nil. @result Returns an initialized WebView.
 func (o *WebView) InitWithFrameFrameNameGroupName(frame corefoundation.CGRect, frameName *foundation.NSString, groupName *foundation.NSString) *WebView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelInitWithFrameFrameNameGroupName, frame, frameName.Ptr(), groupName.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WebViewFromID(_ret)
+	var _mainthread0 *WebView
+	purego.Main(func() {
+		_mainthread0 = func() *WebView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelInitWithFrameFrameNameGroupName, frame, frameName.Ptr(), groupName.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WebViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @method close @abstract Closes the receiver, unloading its web page and canceling any pending loads. Once the receiver has closed, it will no longer respond to requests or fire delegate methods. (However, the -close method itself may fire delegate methods.) @discussion A garbage collected application is required to call close when the receiver is no longer needed. The close method will be called automatically when the window or hostWindow closes and shouldCloseWithWindow returns YES. A non-garbage collected application can still call close, providing a convenient way to prevent receiver from doing any more loading and firing any future delegate methods.
 func (o *WebView) Close() {
-	o.Ptr().Send(_webViewSelClose)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelClose)
+	})
 }
 
 // @method setMaintainsBackForwardList: @abstract Enable or disable the use of a backforward list for this webView. @param flag Turns use of the back forward list on or off
 func (o *WebView) SetMaintainsBackForwardList(flag bool) {
-	o.Ptr().Send(_webViewSelSetMaintainsBackForwardList, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetMaintainsBackForwardList, flag)
+	})
 }
 
 // @method goBack @abstract Go back to the previous URL in the backforward list. @result YES if able to go back in the backforward list, NO otherwise.
 func (o *WebView) GoBack() bool {
-	_ret := objc.Send[bool](o.Ptr(), _webViewSelGoBack)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _webViewSelGoBack)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @method goForward @abstract Go forward to the next URL in the backforward list. @result YES if able to go forward in the backforward list, NO otherwise.
 func (o *WebView) GoForward() bool {
-	_ret := objc.Send[bool](o.Ptr(), _webViewSelGoForward)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _webViewSelGoForward)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @method goToBackForwardItem: @abstract Go back or forward to an item in the backforward list. @result YES if able to go to the item, NO otherwise.
 func (o *WebView) GoToBackForwardItem(item *WebHistoryItem) bool {
-	_ret := objc.Send[bool](o.Ptr(), _webViewSelGoToBackForwardItem, item.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _webViewSelGoToBackForwardItem, item.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @method userAgentForURL: @abstract Get the appropriate user-agent string for a particular URL. @param URL The URL. @result The user-agent string for the supplied URL.
 func (o *WebView) UserAgentForURL(uRL *foundation.NSURL) *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelUserAgentForURL, uRL.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelUserAgentForURL, uRL.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @method stringByEvaluatingJavaScriptFromString: @param script The text of the JavaScript. @result The result of the script, converted to a string, or nil for failure.
 func (o *WebView) StringByEvaluatingJavaScriptFromString(script *foundation.NSString) *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelStringByEvaluatingJavaScriptFromString, script.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelStringByEvaluatingJavaScriptFromString, script.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @method searchFor:direction:caseSensitive: @abstract Searches a document view for a string and highlights the string if it is found. Starts the search from the current selection.  Will search across all frames. @param string The string to search for. @param forward YES to search forward, NO to seach backwards. @param caseFlag YES to for case-sensitive search, NO for case-insensitive search. @result YES if found, NO if not found.
 func (o *WebView) SearchForDirectionCaseSensitiveWrap(string_ *foundation.NSString, forward bool, caseFlag bool, wrapFlag bool) bool {
-	_ret := objc.Send[bool](o.Ptr(), _webViewSelSearchForDirectionCaseSensitiveWrap, string_.Ptr(), forward, caseFlag, wrapFlag)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _webViewSelSearchForDirectionCaseSensitiveWrap, string_.Ptr(), forward, caseFlag, wrapFlag)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @method registerViewClass:representationClass:forMIMEType: @discussion Register classes that implement WebDocumentView and WebDocumentRepresentation respectively. A document class may register for a primary MIME type by excluding a subtype, i.e. "video/" will match the document class with all video types.  More specific matching takes precedence over general matching. @param viewClass The WebDocumentView class to use to render data for a given MIME type. @param representationClass The WebDocumentRepresentation class to use to represent data of the given MIME type. @param MIMEType The MIME type to represent with an object of the given class.
 func WebViewRegisterViewClassRepresentationClassForMIMEType(viewClass objc.Class, representationClass objc.Class, mIMEType *foundation.NSString) {
-	objc.ID(_clsWebView).Send(_webViewSelRegisterViewClassRepresentationClassForMIMEType, viewClass, representationClass, mIMEType.Ptr())
+	purego.Main(func() {
+		objc.ID(_clsWebView).Send(_webViewSelRegisterViewClassRepresentationClassForMIMEType, viewClass, representationClass, mIMEType.Ptr())
+	})
 }
 
 // @method elementAtPoint: @param point A point in the coordinates of the WebView @result An element dictionary describing the point
 func (o *WebView) ElementAtPoint(point corefoundation.CGPoint) *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelElementAtPoint, point)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
+	var _mainthread0 *foundation.NSDictionary[objc.ID, objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSDictionary[objc.ID, objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelElementAtPoint, point)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @method writeSelectionWithPasteboardTypes:toPasteboard: @abstract Writes the current selection to the pasteboard @param types The types that WebView will write to the pasteboard @param pasteboard The pasteboard to write to
 func (o *WebView) WriteSelectionWithPasteboardTypesToPasteboard(types *foundation.NSArray[objc.ID], pasteboard *appkit.NSPasteboard) {
-	o.Ptr().Send(_webViewSelWriteSelectionWithPasteboardTypesToPasteboard, types.Ptr(), pasteboard.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelWriteSelectionWithPasteboardTypesToPasteboard, types.Ptr(), pasteboard.Ptr())
+	})
 }
 
 // @method pasteboardTypesForElement: @abstract Returns the pasteboard types that WebView can use for an element @param element The element
 func (o *WebView) PasteboardTypesForElement(element *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelPasteboardTypesForElement, element.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[objc.ID](_ret)
+	var _mainthread0 *foundation.NSArray[objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelPasteboardTypesForElement, element.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @method writeElement:withPasteboardTypes:toPasteboard: @abstract Writes an element to the pasteboard @param element The element to write to the pasteboard @param types The types that WebView will write to the pasteboard @param pasteboard The pasteboard to write to
 func (o *WebView) WriteElementWithPasteboardTypesToPasteboard(element *foundation.NSDictionary[objc.ID, objc.ID], types *foundation.NSArray[objc.ID], pasteboard *appkit.NSPasteboard) {
-	o.Ptr().Send(_webViewSelWriteElementWithPasteboardTypesToPasteboard, element.Ptr(), types.Ptr(), pasteboard.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelWriteElementWithPasteboardTypesToPasteboard, element.Ptr(), types.Ptr(), pasteboard.Ptr())
+	})
 }
 
 // @method moveDragCaretToPoint: @param point A point in the coordinates of the WebView @discussion This method moves the caret that shows where something being dragged will be dropped. It may cause the WebView to scroll to make the new position of the drag caret visible.
 func (o *WebView) MoveDragCaretToPoint(point corefoundation.CGPoint) {
-	o.Ptr().Send(_webViewSelMoveDragCaretToPoint, point)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelMoveDragCaretToPoint, point)
+	})
 }
 
 // @method removeDragCaret @abstract Removes the drag caret from the WebView
 func (o *WebView) RemoveDragCaret() {
-	o.Ptr().Send(_webViewSelRemoveDragCaret)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelRemoveDragCaret)
+	})
 }
 
 // @property shouldCloseWithWindow @abstract Whether the receiver closes when either it's window or hostWindow closes. @discussion Defaults to YES in garbage collected applications, otherwise NO to maintain backwards compatibility.
 func (o *WebView) ShouldCloseWithWindow() bool {
-	_ret := objc.Send[bool](o.Ptr(), _webViewSelShouldCloseWithWindow)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _webViewSelShouldCloseWithWindow)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SetShouldCloseWithWindow(shouldCloseWithWindow bool) {
-	o.Ptr().Send(_webViewSelSetShouldCloseWithWindow, shouldCloseWithWindow)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetShouldCloseWithWindow, shouldCloseWithWindow)
+	})
 }
 
 // @property UIDelegate @abstract The WebView's WebUIDelegate.
 func (o *WebView) UIDelegate() WebUIDelegate {
-	_ret := objc.Send[WebUIDelegate](o.Ptr(), _webViewSelUIDelegate)
-	return _ret
+	var _mainthread0 WebUIDelegate
+	purego.Main(func() {
+		_mainthread0 = func() WebUIDelegate {
+			_ret := objc.Send[WebUIDelegate](o.Ptr(), _webViewSelUIDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SetUIDelegate(uIDelegate WebUIDelegate) {
-	o.Ptr().Send(_webViewSelSetUIDelegate, uIDelegate)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetUIDelegate, uIDelegate)
+	})
 }
 
 // @property resourceLoadDelegate @abstract The WebView's WebResourceLoadDelegate.
 func (o *WebView) ResourceLoadDelegate() WebResourceLoadDelegate {
-	_ret := objc.Send[WebResourceLoadDelegate](o.Ptr(), _webViewSelResourceLoadDelegate)
-	return _ret
+	var _mainthread0 WebResourceLoadDelegate
+	purego.Main(func() {
+		_mainthread0 = func() WebResourceLoadDelegate {
+			_ret := objc.Send[WebResourceLoadDelegate](o.Ptr(), _webViewSelResourceLoadDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SetResourceLoadDelegate(resourceLoadDelegate WebResourceLoadDelegate) {
-	o.Ptr().Send(_webViewSelSetResourceLoadDelegate, resourceLoadDelegate)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetResourceLoadDelegate, resourceLoadDelegate)
+	})
 }
 
 // @property downloadDelegate @abstract The WebView's WebDownloadDelegate.
 func (o *WebView) DownloadDelegate() WebDownloadDelegate {
-	_ret := objc.Send[WebDownloadDelegate](o.Ptr(), _webViewSelDownloadDelegate)
-	return _ret
+	var _mainthread0 WebDownloadDelegate
+	purego.Main(func() {
+		_mainthread0 = func() WebDownloadDelegate {
+			_ret := objc.Send[WebDownloadDelegate](o.Ptr(), _webViewSelDownloadDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SetDownloadDelegate(downloadDelegate WebDownloadDelegate) {
-	o.Ptr().Send(_webViewSelSetDownloadDelegate, downloadDelegate)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetDownloadDelegate, downloadDelegate)
+	})
 }
 
 // @property frameLoadDelegate @abstract The WebView's WebFrameLoadDelegate delegate.
 func (o *WebView) FrameLoadDelegate() WebFrameLoadDelegate {
-	_ret := objc.Send[WebFrameLoadDelegate](o.Ptr(), _webViewSelFrameLoadDelegate)
-	return _ret
+	var _mainthread0 WebFrameLoadDelegate
+	purego.Main(func() {
+		_mainthread0 = func() WebFrameLoadDelegate {
+			_ret := objc.Send[WebFrameLoadDelegate](o.Ptr(), _webViewSelFrameLoadDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SetFrameLoadDelegate(frameLoadDelegate WebFrameLoadDelegate) {
-	o.Ptr().Send(_webViewSelSetFrameLoadDelegate, frameLoadDelegate)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetFrameLoadDelegate, frameLoadDelegate)
+	})
 }
 
 // @property policyDelegate @abstract The WebView's WebPolicyDelegate.
 func (o *WebView) PolicyDelegate() WebPolicyDelegate {
-	_ret := objc.Send[WebPolicyDelegate](o.Ptr(), _webViewSelPolicyDelegate)
-	return _ret
+	var _mainthread0 WebPolicyDelegate
+	purego.Main(func() {
+		_mainthread0 = func() WebPolicyDelegate {
+			_ret := objc.Send[WebPolicyDelegate](o.Ptr(), _webViewSelPolicyDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SetPolicyDelegate(policyDelegate WebPolicyDelegate) {
-	o.Ptr().Send(_webViewSelSetPolicyDelegate, policyDelegate)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetPolicyDelegate, policyDelegate)
+	})
 }
 
 // @property mainFrame @abstract The top level frame. @discussion Note that even documents that are not framesets will have a mainFrame.
 func (o *WebView) MainFrame() *WebFrame {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelMainFrame)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WebFrameFromID(_ret)
+	var _mainthread0 *WebFrame
+	purego.Main(func() {
+		_mainthread0 = func() *WebFrame {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelMainFrame)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WebFrameFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @property selectedFrame @abstract The frame that has the active selection. @discussion Returns the frame that contains the first responder, if any. Otherwise returns the frame that contains a non-zero-length selection, if any. Returns nil if no frame meets these criteria.
 func (o *WebView) SelectedFrame() *WebFrame {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelSelectedFrame)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WebFrameFromID(_ret)
+	var _mainthread0 *WebFrame
+	purego.Main(func() {
+		_mainthread0 = func() *WebFrame {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelSelectedFrame)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WebFrameFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @property backForwardList @abstract The backforward list for this WebView.
 func (o *WebView) BackForwardList() *WebBackForwardList {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelBackForwardList)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WebBackForwardListFromID(_ret)
+	var _mainthread0 *WebBackForwardList
+	purego.Main(func() {
+		_mainthread0 = func() *WebBackForwardList {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelBackForwardList)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WebBackForwardListFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @property textSizeMultiplier @abstract The text size multipler.
 func (o *WebView) TextSizeMultiplier() float32 {
-	_ret := objc.Send[float32](o.Ptr(), _webViewSelTextSizeMultiplier)
-	return _ret
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_ret := objc.Send[float32](o.Ptr(), _webViewSelTextSizeMultiplier)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SetTextSizeMultiplier(textSizeMultiplier float32) {
-	o.Ptr().Send(_webViewSelSetTextSizeMultiplier, textSizeMultiplier)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetTextSizeMultiplier, textSizeMultiplier)
+	})
 }
 
 // @property applicationNameForUserAgent @abstract The name of the application as used in the user-agent string.
 func (o *WebView) ApplicationNameForUserAgent() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelApplicationNameForUserAgent)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelApplicationNameForUserAgent)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SetApplicationNameForUserAgent(applicationNameForUserAgent *foundation.NSString) {
-	o.Ptr().Send(_webViewSelSetApplicationNameForUserAgent, applicationNameForUserAgent.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetApplicationNameForUserAgent, applicationNameForUserAgent.Ptr())
+	})
 }
 
 // @property customUserAgent @abstract The custom user-agent string or nil if no custom user-agent string has been set. @discussion Setting this means that the webView should use this user-agent string instead of constructing a user-agent string for each URL. Setting it to nil causes the webView to construct the user-agent string for each URL for best results rendering web pages
 func (o *WebView) CustomUserAgent() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelCustomUserAgent)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelCustomUserAgent)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SetCustomUserAgent(customUserAgent *foundation.NSString) {
-	o.Ptr().Send(_webViewSelSetCustomUserAgent, customUserAgent.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetCustomUserAgent, customUserAgent.Ptr())
+	})
 }
 
 // @property supportsTextEncoding @abstract If the document view of the current web page can support different text encodings.
 func (o *WebView) SupportsTextEncoding() bool {
-	_ret := objc.Send[bool](o.Ptr(), _webViewSelSupportsTextEncoding)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _webViewSelSupportsTextEncoding)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @property customTextEncodingName @abstract The custom text encoding name or nil if no custom text encoding name has been set. @discussion Make the page display with a different text encoding; stops any load in progress. The text encoding passed in overrides the normal text encoding smarts including what's specified in a web page's header or HTTP response. The text encoding automatically goes back to the default when the top level frame changes to a new location. Setting the text encoding name to nil makes the webView use default encoding rules.
 func (o *WebView) CustomTextEncodingName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelCustomTextEncodingName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelCustomTextEncodingName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SetCustomTextEncodingName(customTextEncodingName *foundation.NSString) {
-	o.Ptr().Send(_webViewSelSetCustomTextEncodingName, customTextEncodingName.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetCustomTextEncodingName, customTextEncodingName.Ptr())
+	})
 }
 
 // @property mediaStyle @abstract The media style for the WebView. @discussion The mediaStyle will override the normal value of the CSS media property. Setting the value to nil will restore the normal value. The value will be nil unless explicitly set.
 func (o *WebView) MediaStyle() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelMediaStyle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelMediaStyle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SetMediaStyle(mediaStyle *foundation.NSString) {
-	o.Ptr().Send(_webViewSelSetMediaStyle, mediaStyle.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetMediaStyle, mediaStyle.Ptr())
+	})
 }
 
 // @property windowScriptObject @abstract A WebScriptObject that represents the window object from the script environment.
 func (o *WebView) WindowScriptObject() *WebScriptObject {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelWindowScriptObject)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WebScriptObjectFromID(_ret)
+	var _mainthread0 *WebScriptObject
+	purego.Main(func() {
+		_mainthread0 = func() *WebScriptObject {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelWindowScriptObject)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WebScriptObjectFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @property preferences @abstract The preferences used by this WebView. @discussion This method will return [WebPreferences standardPreferences] if no other instance of WebPreferences has been set.
 func (o *WebView) Preferences() *WebPreferences {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelPreferences)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WebPreferencesFromID(_ret)
+	var _mainthread0 *WebPreferences
+	purego.Main(func() {
+		_mainthread0 = func() *WebPreferences {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelPreferences)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WebPreferencesFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SetPreferences(preferences *WebPreferences) {
-	o.Ptr().Send(_webViewSelSetPreferences, preferences.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetPreferences, preferences.Ptr())
+	})
 }
 
 // @property preferencesIdentifier @abstract The WebPreferences key prefix. @discussion If the WebPreferences for this WebView are stored in the user defaults database, this string will be used as a key prefix.
 func (o *WebView) PreferencesIdentifier() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelPreferencesIdentifier)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelPreferencesIdentifier)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SetPreferencesIdentifier(preferencesIdentifier *foundation.NSString) {
-	o.Ptr().Send(_webViewSelSetPreferencesIdentifier, preferencesIdentifier.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetPreferencesIdentifier, preferencesIdentifier.Ptr())
+	})
 }
 
 // @property hostWindow @abstract The host window for the web view. @discussion Parts of WebKit (such as plug-ins and JavaScript) depend on a window to function properly. Set a host window so these parts continue to function even when the web view is not in an actual window.
 func (o *WebView) HostWindow() *appkit.NSWindow {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelHostWindow)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSWindowFromID(_ret)
+	var _mainthread0 *appkit.NSWindow
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSWindow {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelHostWindow)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSWindowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SetHostWindow(hostWindow *appkit.NSWindow) {
-	o.Ptr().Send(_webViewSelSetHostWindow, hostWindow.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetHostWindow, hostWindow.Ptr())
+	})
 }
 
 // @property groupName @abstract The group name for this WebView. @discussion JavaScript may access named frames within the same group.
 func (o *WebView) GroupName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelGroupName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelGroupName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SetGroupName(groupName *foundation.NSString) {
-	o.Ptr().Send(_webViewSelSetGroupName, groupName.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetGroupName, groupName.Ptr())
+	})
 }
 
 // @property estimatedProgress @discussion An estimate of the percent complete for a document load.  This value will range from 0 to 1.0 and, once a load completes, will remain at 1.0 until a new load starts, at which point it will be reset to 0.  The value is an estimate based on the total number of bytes expected to be received for a document, including all it's possible subresources.  For more accurate progress indication it is recommended that you implement a WebFrameLoadDelegate and a WebResourceLoadDelegate.
 func (o *WebView) EstimatedProgress() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _webViewSelEstimatedProgress)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _webViewSelEstimatedProgress)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @property loading @abstract Whether there are any pending loads in this WebView.
 func (o *WebView) IsLoading() bool {
-	_ret := objc.Send[bool](o.Ptr(), _webViewSelIsLoading)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _webViewSelIsLoading)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @property pasteboardTypesForSelection @abstract The pasteboard types that the WebView can use for the current selection
 func (o *WebView) PasteboardTypesForSelection() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelPasteboardTypesForSelection)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[objc.ID](_ret)
+	var _mainthread0 *foundation.NSArray[objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelPasteboardTypesForSelection)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @property drawsBackground @abstract Whether the receiver draws a default white background when the loaded page has no background specified.
 func (o *WebView) DrawsBackground() bool {
-	_ret := objc.Send[bool](o.Ptr(), _webViewSelDrawsBackground)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _webViewSelDrawsBackground)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SetDrawsBackground(drawsBackground bool) {
-	o.Ptr().Send(_webViewSelSetDrawsBackground, drawsBackground)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetDrawsBackground, drawsBackground)
+	})
 }
 
 // @property shouldUpdateWhileOffscreen @abstract Whether the WebView is always updated even when it is not in a window that is currently visible. @discussion If set to NO, then whenever the web view is not in a visible window, updates to the web page will not necessarily be rendered in the view. However, when the window is made visible, the view will be updated automatically. Not updating while hidden can improve performance. If set to is YES, hidden web views are always updated. This is the default.
 func (o *WebView) ShouldUpdateWhileOffscreen() bool {
-	_ret := objc.Send[bool](o.Ptr(), _webViewSelShouldUpdateWhileOffscreen)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _webViewSelShouldUpdateWhileOffscreen)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SetShouldUpdateWhileOffscreen(shouldUpdateWhileOffscreen bool) {
-	o.Ptr().Send(_webViewSelSetShouldUpdateWhileOffscreen, shouldUpdateWhileOffscreen)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetShouldUpdateWhileOffscreen, shouldUpdateWhileOffscreen)
+	})
 }
 
 // @property mainFrameURL @abstract The main frame's current URL.
 func (o *WebView) MainFrameURL() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelMainFrameURL)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelMainFrameURL)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SetMainFrameURL(mainFrameURL *foundation.NSString) {
-	o.Ptr().Send(_webViewSelSetMainFrameURL, mainFrameURL.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetMainFrameURL, mainFrameURL.Ptr())
+	})
 }
 
 // @property mainFrameDocument @abstract The main frame's DOMDocument.
 func (o *WebView) MainFrameDocument() *DOMDocument {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelMainFrameDocument)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return DOMDocumentFromID(_ret)
+	var _mainthread0 *DOMDocument
+	purego.Main(func() {
+		_mainthread0 = func() *DOMDocument {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelMainFrameDocument)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return DOMDocumentFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @property mainFrameTitle @abstract The main frame's title if any, otherwise an empty string.
 func (o *WebView) MainFrameTitle() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelMainFrameTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelMainFrameTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @property mainFrameIcon @abstract The site icon for the current page loaded in the mainFrame, or nil.
 func (o *WebView) MainFrameIcon() *appkit.NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelMainFrameIcon)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSImageFromID(_ret)
+	var _mainthread0 *appkit.NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelMainFrameIcon)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) TakeStringURLFrom(sender objc.ID) {
-	o.Ptr().Send(_webViewSelTakeStringURLFrom, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelTakeStringURLFrom, sender)
+	})
 }
 
 func (o *WebView) StopLoading(sender objc.ID) {
-	o.Ptr().Send(_webViewSelStopLoading, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelStopLoading, sender)
+	})
 }
 
 func (o *WebView) Reload(sender objc.ID) {
-	o.Ptr().Send(_webViewSelReload, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelReload, sender)
+	})
 }
 
 func (o *WebView) ReloadFromOrigin(sender objc.ID) {
-	o.Ptr().Send(_webViewSelReloadFromOrigin, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelReloadFromOrigin, sender)
+	})
 }
 
 func (o *WebView) GoBack2(sender objc.ID) {
-	o.Ptr().Send(_webViewSelGoBack, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelGoBack, sender)
+	})
 }
 
 func (o *WebView) GoForward2(sender objc.ID) {
-	o.Ptr().Send(_webViewSelGoForward, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelGoForward, sender)
+	})
 }
 
 func (o *WebView) MakeTextLarger(sender objc.ID) {
-	o.Ptr().Send(_webViewSelMakeTextLarger, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelMakeTextLarger, sender)
+	})
 }
 
 func (o *WebView) MakeTextSmaller(sender objc.ID) {
-	o.Ptr().Send(_webViewSelMakeTextSmaller, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelMakeTextSmaller, sender)
+	})
 }
 
 func (o *WebView) MakeTextStandardSize(sender objc.ID) {
-	o.Ptr().Send(_webViewSelMakeTextStandardSize, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelMakeTextStandardSize, sender)
+	})
 }
 
 func (o *WebView) ToggleContinuousSpellChecking(sender objc.ID) {
-	o.Ptr().Send(_webViewSelToggleContinuousSpellChecking, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelToggleContinuousSpellChecking, sender)
+	})
 }
 
 func (o *WebView) ToggleSmartInsertDelete(sender objc.ID) {
-	o.Ptr().Send(_webViewSelToggleSmartInsertDelete, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelToggleSmartInsertDelete, sender)
+	})
 }
 
 func (o *WebView) CanGoBack() bool {
-	_ret := objc.Send[bool](o.Ptr(), _webViewSelCanGoBack)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _webViewSelCanGoBack)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) CanGoForward() bool {
-	_ret := objc.Send[bool](o.Ptr(), _webViewSelCanGoForward)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _webViewSelCanGoForward)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) CanMakeTextLarger() bool {
-	_ret := objc.Send[bool](o.Ptr(), _webViewSelCanMakeTextLarger)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _webViewSelCanMakeTextLarger)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) CanMakeTextSmaller() bool {
-	_ret := objc.Send[bool](o.Ptr(), _webViewSelCanMakeTextSmaller)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _webViewSelCanMakeTextSmaller)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) CanMakeTextStandardSize() bool {
-	_ret := objc.Send[bool](o.Ptr(), _webViewSelCanMakeTextStandardSize)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _webViewSelCanMakeTextStandardSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) ComputedStyleForElementPseudoElement(element *DOMElement, pseudoElement *foundation.NSString) *DOMCSSStyleDeclaration {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelComputedStyleForElementPseudoElement, element.Ptr(), pseudoElement.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return DOMCSSStyleDeclarationFromID(_ret)
+	var _mainthread0 *DOMCSSStyleDeclaration
+	purego.Main(func() {
+		_mainthread0 = func() *DOMCSSStyleDeclaration {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelComputedStyleForElementPseudoElement, element.Ptr(), pseudoElement.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return DOMCSSStyleDeclarationFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) EditableDOMRangeForPoint(point corefoundation.CGPoint) *DOMRange {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelEditableDOMRangeForPoint, point)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return DOMRangeFromID(_ret)
+	var _mainthread0 *DOMRange
+	purego.Main(func() {
+		_mainthread0 = func() *DOMRange {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelEditableDOMRangeForPoint, point)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return DOMRangeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SetSelectedDOMRangeAffinity(range_ *DOMRange, selectionAffinity appkit.NSSelectionAffinity) {
-	o.Ptr().Send(_webViewSelSetSelectedDOMRangeAffinity, range_.Ptr(), selectionAffinity)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetSelectedDOMRangeAffinity, range_.Ptr(), selectionAffinity)
+	})
 }
 
 func (o *WebView) StyleDeclarationWithText(text *foundation.NSString) *DOMCSSStyleDeclaration {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelStyleDeclarationWithText, text.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return DOMCSSStyleDeclarationFromID(_ret)
+	var _mainthread0 *DOMCSSStyleDeclaration
+	purego.Main(func() {
+		_mainthread0 = func() *DOMCSSStyleDeclaration {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelStyleDeclarationWithText, text.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return DOMCSSStyleDeclarationFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SelectedDOMRange() *DOMRange {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelSelectedDOMRange)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return DOMRangeFromID(_ret)
+	var _mainthread0 *DOMRange
+	purego.Main(func() {
+		_mainthread0 = func() *DOMRange {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelSelectedDOMRange)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return DOMRangeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SelectionAffinity() appkit.NSSelectionAffinity {
-	_ret := objc.Send[appkit.NSSelectionAffinity](o.Ptr(), _webViewSelSelectionAffinity)
-	return _ret
+	var _mainthread0 appkit.NSSelectionAffinity
+	purego.Main(func() {
+		_mainthread0 = func() appkit.NSSelectionAffinity {
+			_ret := objc.Send[appkit.NSSelectionAffinity](o.Ptr(), _webViewSelSelectionAffinity)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) MaintainsInactiveSelection() bool {
-	_ret := objc.Send[bool](o.Ptr(), _webViewSelMaintainsInactiveSelection)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _webViewSelMaintainsInactiveSelection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) IsEditable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _webViewSelIsEditable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _webViewSelIsEditable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SetEditable(editable bool) {
-	o.Ptr().Send(_webViewSelSetEditable, editable)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetEditable, editable)
+	})
 }
 
 func (o *WebView) TypingStyle() *DOMCSSStyleDeclaration {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelTypingStyle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return DOMCSSStyleDeclarationFromID(_ret)
+	var _mainthread0 *DOMCSSStyleDeclaration
+	purego.Main(func() {
+		_mainthread0 = func() *DOMCSSStyleDeclaration {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webViewSelTypingStyle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return DOMCSSStyleDeclarationFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SetTypingStyle(typingStyle *DOMCSSStyleDeclaration) {
-	o.Ptr().Send(_webViewSelSetTypingStyle, typingStyle.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetTypingStyle, typingStyle.Ptr())
+	})
 }
 
 func (o *WebView) SmartInsertDeleteEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _webViewSelSmartInsertDeleteEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _webViewSelSmartInsertDeleteEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SetSmartInsertDeleteEnabled(smartInsertDeleteEnabled bool) {
-	o.Ptr().Send(_webViewSelSetSmartInsertDeleteEnabled, smartInsertDeleteEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetSmartInsertDeleteEnabled, smartInsertDeleteEnabled)
+	})
 }
 
 func (o *WebView) IsContinuousSpellCheckingEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _webViewSelIsContinuousSpellCheckingEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _webViewSelIsContinuousSpellCheckingEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SetContinuousSpellCheckingEnabled(continuousSpellCheckingEnabled bool) {
-	o.Ptr().Send(_webViewSelSetContinuousSpellCheckingEnabled, continuousSpellCheckingEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetContinuousSpellCheckingEnabled, continuousSpellCheckingEnabled)
+	})
 }
 
 func (o *WebView) SpellCheckerDocumentTag() int {
-	_ret := objc.Send[int](o.Ptr(), _webViewSelSpellCheckerDocumentTag)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _webViewSelSpellCheckerDocumentTag)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) EditingDelegate() WebEditingDelegate {
-	_ret := objc.Send[WebEditingDelegate](o.Ptr(), _webViewSelEditingDelegate)
-	return _ret
+	var _mainthread0 WebEditingDelegate
+	purego.Main(func() {
+		_mainthread0 = func() WebEditingDelegate {
+			_ret := objc.Send[WebEditingDelegate](o.Ptr(), _webViewSelEditingDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebView) SetEditingDelegate(editingDelegate WebEditingDelegate) {
-	o.Ptr().Send(_webViewSelSetEditingDelegate, editingDelegate)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSetEditingDelegate, editingDelegate)
+	})
 }
 
 func (o *WebView) ReplaceSelectionWithNode(node *DOMNode) {
-	o.Ptr().Send(_webViewSelReplaceSelectionWithNode, node.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelReplaceSelectionWithNode, node.Ptr())
+	})
 }
 
 func (o *WebView) ReplaceSelectionWithText(text *foundation.NSString) {
-	o.Ptr().Send(_webViewSelReplaceSelectionWithText, text.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelReplaceSelectionWithText, text.Ptr())
+	})
 }
 
 func (o *WebView) ReplaceSelectionWithMarkupString(markupString *foundation.NSString) {
-	o.Ptr().Send(_webViewSelReplaceSelectionWithMarkupString, markupString.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelReplaceSelectionWithMarkupString, markupString.Ptr())
+	})
 }
 
 func (o *WebView) ReplaceSelectionWithArchive(archive *WebArchive) {
-	o.Ptr().Send(_webViewSelReplaceSelectionWithArchive, archive.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelReplaceSelectionWithArchive, archive.Ptr())
+	})
 }
 
 func (o *WebView) DeleteSelection() {
-	o.Ptr().Send(_webViewSelDeleteSelection)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelDeleteSelection)
+	})
 }
 
 func (o *WebView) ApplyStyle(style *DOMCSSStyleDeclaration) {
-	o.Ptr().Send(_webViewSelApplyStyle, style.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelApplyStyle, style.Ptr())
+	})
 }
 
 func (o *WebView) Copy(sender objc.ID) {
-	o.Ptr().Send(_webViewSelCopy, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelCopy, sender)
+	})
 }
 
 func (o *WebView) Cut(sender objc.ID) {
-	o.Ptr().Send(_webViewSelCut, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelCut, sender)
+	})
 }
 
 func (o *WebView) Paste(sender objc.ID) {
-	o.Ptr().Send(_webViewSelPaste, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelPaste, sender)
+	})
 }
 
 func (o *WebView) CopyFont(sender objc.ID) {
-	o.Ptr().Send(_webViewSelCopyFont, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelCopyFont, sender)
+	})
 }
 
 func (o *WebView) PasteFont(sender objc.ID) {
-	o.Ptr().Send(_webViewSelPasteFont, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelPasteFont, sender)
+	})
 }
 
 func (o *WebView) Delete(sender objc.ID) {
-	o.Ptr().Send(_webViewSelDelete, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelDelete, sender)
+	})
 }
 
 func (o *WebView) PasteAsPlainText(sender objc.ID) {
-	o.Ptr().Send(_webViewSelPasteAsPlainText, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelPasteAsPlainText, sender)
+	})
 }
 
 func (o *WebView) PasteAsRichText(sender objc.ID) {
-	o.Ptr().Send(_webViewSelPasteAsRichText, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelPasteAsRichText, sender)
+	})
 }
 
 func (o *WebView) ChangeFont(sender objc.ID) {
-	o.Ptr().Send(_webViewSelChangeFont, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelChangeFont, sender)
+	})
 }
 
 func (o *WebView) ChangeAttributes(sender objc.ID) {
-	o.Ptr().Send(_webViewSelChangeAttributes, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelChangeAttributes, sender)
+	})
 }
 
 func (o *WebView) ChangeDocumentBackgroundColor(sender objc.ID) {
-	o.Ptr().Send(_webViewSelChangeDocumentBackgroundColor, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelChangeDocumentBackgroundColor, sender)
+	})
 }
 
 func (o *WebView) ChangeColor(sender objc.ID) {
-	o.Ptr().Send(_webViewSelChangeColor, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelChangeColor, sender)
+	})
 }
 
 func (o *WebView) AlignCenter(sender objc.ID) {
-	o.Ptr().Send(_webViewSelAlignCenter, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelAlignCenter, sender)
+	})
 }
 
 func (o *WebView) AlignJustified(sender objc.ID) {
-	o.Ptr().Send(_webViewSelAlignJustified, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelAlignJustified, sender)
+	})
 }
 
 func (o *WebView) AlignLeft(sender objc.ID) {
-	o.Ptr().Send(_webViewSelAlignLeft, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelAlignLeft, sender)
+	})
 }
 
 func (o *WebView) AlignRight(sender objc.ID) {
-	o.Ptr().Send(_webViewSelAlignRight, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelAlignRight, sender)
+	})
 }
 
 func (o *WebView) CheckSpelling(sender objc.ID) {
-	o.Ptr().Send(_webViewSelCheckSpelling, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelCheckSpelling, sender)
+	})
 }
 
 func (o *WebView) ShowGuessPanel(sender objc.ID) {
-	o.Ptr().Send(_webViewSelShowGuessPanel, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelShowGuessPanel, sender)
+	})
 }
 
 func (o *WebView) PerformFindPanelAction(sender objc.ID) {
-	o.Ptr().Send(_webViewSelPerformFindPanelAction, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelPerformFindPanelAction, sender)
+	})
 }
 
 func (o *WebView) StartSpeaking(sender objc.ID) {
-	o.Ptr().Send(_webViewSelStartSpeaking, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelStartSpeaking, sender)
+	})
 }
 
 func (o *WebView) StopSpeaking(sender objc.ID) {
-	o.Ptr().Send(_webViewSelStopSpeaking, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelStopSpeaking, sender)
+	})
 }
 
 func (o *WebView) MoveToBeginningOfSentence(sender objc.ID) {
-	o.Ptr().Send(_webViewSelMoveToBeginningOfSentence, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelMoveToBeginningOfSentence, sender)
+	})
 }
 
 func (o *WebView) MoveToBeginningOfSentenceAndModifySelection(sender objc.ID) {
-	o.Ptr().Send(_webViewSelMoveToBeginningOfSentenceAndModifySelection, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelMoveToBeginningOfSentenceAndModifySelection, sender)
+	})
 }
 
 func (o *WebView) MoveToEndOfSentence(sender objc.ID) {
-	o.Ptr().Send(_webViewSelMoveToEndOfSentence, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelMoveToEndOfSentence, sender)
+	})
 }
 
 func (o *WebView) MoveToEndOfSentenceAndModifySelection(sender objc.ID) {
-	o.Ptr().Send(_webViewSelMoveToEndOfSentenceAndModifySelection, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelMoveToEndOfSentenceAndModifySelection, sender)
+	})
 }
 
 func (o *WebView) SelectSentence(sender objc.ID) {
-	o.Ptr().Send(_webViewSelSelectSentence, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelSelectSentence, sender)
+	})
 }
 
 func (o *WebView) OverWrite(sender objc.ID) {
-	o.Ptr().Send(_webViewSelOverWrite, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_webViewSelOverWrite, sender)
+	})
 }

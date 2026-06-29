@@ -33,13 +33,21 @@ func SKCropNodeFromID(id objc.ID) *SKCropNode {
 }
 
 func (o *SKCropNode) MaskNode() *SKNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKCropNodeSelMaskNode)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKNodeFromID(_ret)
+	var _mainthread0 *SKNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKCropNodeSelMaskNode)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKCropNode) SetMaskNode(maskNode *SKNode) {
-	o.Ptr().Send(_sKCropNodeSelSetMaskNode, maskNode.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKCropNodeSelSetMaskNode, maskNode.Ptr())
+	})
 }

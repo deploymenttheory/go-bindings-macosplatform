@@ -38,42 +38,72 @@ func WKScriptMessageFromID(id objc.ID) *WKScriptMessage {
 
 // @abstract The body of the message. @discussion Allowed types are NSNumber, NSString, NSDate, NSArray, NSDictionary, and NSNull.
 func (o *WKScriptMessage) Body() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKScriptMessageSelBody)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKScriptMessageSelBody)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The web view sending the message.
 func (o *WKScriptMessage) WebView() *WKWebView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKScriptMessageSelWebView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKWebViewFromID(_ret)
+	var _mainthread0 *WKWebView
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKScriptMessageSelWebView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKWebViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The frame sending the message.
 func (o *WKScriptMessage) FrameInfo() *WKFrameInfo {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKScriptMessageSelFrameInfo)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKFrameInfoFromID(_ret)
+	var _mainthread0 *WKFrameInfo
+	purego.Main(func() {
+		_mainthread0 = func() *WKFrameInfo {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKScriptMessageSelFrameInfo)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKFrameInfoFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The name of the message handler to which the message is sent.
 func (o *WKScriptMessage) Name() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKScriptMessageSelName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKScriptMessageSelName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The content world from which the message was sent.
 func (o *WKScriptMessage) World() *WKContentWorld {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKScriptMessageSelWorld)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKContentWorldFromID(_ret)
+	var _mainthread0 *WKContentWorld
+	purego.Main(func() {
+		_mainthread0 = func() *WKContentWorld {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKScriptMessageSelWorld)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKContentWorldFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

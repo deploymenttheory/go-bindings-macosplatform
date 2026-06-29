@@ -70,203 +70,347 @@ func WKWebViewConfigurationFromID(id objc.ID) *WKWebViewConfiguration {
 
 // Registers an object to load resources associated with the specified URL scheme.
 func (o *WKWebViewConfiguration) SetURLSchemeHandlerForURLScheme(urlSchemeHandler WKURLSchemeHandler, urlScheme *foundation.NSString) {
-	o.Ptr().Send(_wKWebViewConfigurationSelSetURLSchemeHandlerForURLScheme, urlSchemeHandler, urlScheme.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebViewConfigurationSelSetURLSchemeHandlerForURLScheme, urlSchemeHandler, urlScheme.Ptr())
+	})
 }
 
 // Returns the currently registered handler object for the specified URL scheme.
 func (o *WKWebViewConfiguration) UrlSchemeHandlerForURLScheme(urlScheme *foundation.NSString) WKURLSchemeHandler {
-	_ret := objc.Send[WKURLSchemeHandler](o.Ptr(), _wKWebViewConfigurationSelUrlSchemeHandlerForURLScheme, urlScheme.Ptr())
-	return _ret
+	var _mainthread0 WKURLSchemeHandler
+	purego.Main(func() {
+		_mainthread0 = func() WKURLSchemeHandler {
+			_ret := objc.Send[WKURLSchemeHandler](o.Ptr(), _wKWebViewConfigurationSelUrlSchemeHandlerForURLScheme, urlScheme.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The process pool from which to obtain the view's web content process. @discussion When a web view is initialized, a new web content process will be created for it from the specified pool, or an existing process in that pool will be used.
 // Deprecated: Creating and using multiple instances of WKProcessPool no longer has any effect.
 func (o *WKWebViewConfiguration) ProcessPool() *WKProcessPool {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewConfigurationSelProcessPool)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKProcessPoolFromID(_ret)
+	var _mainthread0 *WKProcessPool
+	purego.Main(func() {
+		_mainthread0 = func() *WKProcessPool {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewConfigurationSelProcessPool)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKProcessPoolFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Creating and using multiple instances of WKProcessPool no longer has any effect.
 func (o *WKWebViewConfiguration) SetProcessPool(processPool *WKProcessPool) {
-	o.Ptr().Send(_wKWebViewConfigurationSelSetProcessPool, processPool.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebViewConfigurationSelSetProcessPool, processPool.Ptr())
+	})
 }
 
 // @abstract The preference settings to be used by the web view.
 // Deprecated: Creating and using multiple instances of WKProcessPool no longer has any effect.
 func (o *WKWebViewConfiguration) Preferences() *WKPreferences {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewConfigurationSelPreferences)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKPreferencesFromID(_ret)
+	var _mainthread0 *WKPreferences
+	purego.Main(func() {
+		_mainthread0 = func() *WKPreferences {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewConfigurationSelPreferences)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKPreferencesFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebViewConfiguration) SetPreferences(preferences *WKPreferences) {
-	o.Ptr().Send(_wKWebViewConfigurationSelSetPreferences, preferences.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebViewConfigurationSelSetPreferences, preferences.Ptr())
+	})
 }
 
 // @abstract The user content controller to associate with the web view.
 func (o *WKWebViewConfiguration) UserContentController() *WKUserContentController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewConfigurationSelUserContentController)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKUserContentControllerFromID(_ret)
+	var _mainthread0 *WKUserContentController
+	purego.Main(func() {
+		_mainthread0 = func() *WKUserContentController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewConfigurationSelUserContentController)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKUserContentControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebViewConfiguration) SetUserContentController(userContentController *WKUserContentController) {
-	o.Ptr().Send(_wKWebViewConfigurationSelSetUserContentController, userContentController.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebViewConfigurationSelSetUserContentController, userContentController.Ptr())
+	})
 }
 
 // @abstract The web extension controller to associate with the web view.
 func (o *WKWebViewConfiguration) WebExtensionController() *WKWebExtensionController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewConfigurationSelWebExtensionController)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKWebExtensionControllerFromID(_ret)
+	var _mainthread0 *WKWebExtensionController
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtensionController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewConfigurationSelWebExtensionController)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKWebExtensionControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebViewConfiguration) SetWebExtensionController(webExtensionController *WKWebExtensionController) {
-	o.Ptr().Send(_wKWebViewConfigurationSelSetWebExtensionController, webExtensionController.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebViewConfigurationSelSetWebExtensionController, webExtensionController.Ptr())
+	})
 }
 
 // @abstract The website data store to be used by the web view.
 func (o *WKWebViewConfiguration) WebsiteDataStore() *WKWebsiteDataStore {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewConfigurationSelWebsiteDataStore)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKWebsiteDataStoreFromID(_ret)
+	var _mainthread0 *WKWebsiteDataStore
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebsiteDataStore {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewConfigurationSelWebsiteDataStore)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKWebsiteDataStoreFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebViewConfiguration) SetWebsiteDataStore(websiteDataStore *WKWebsiteDataStore) {
-	o.Ptr().Send(_wKWebViewConfigurationSelSetWebsiteDataStore, websiteDataStore.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebViewConfigurationSelSetWebsiteDataStore, websiteDataStore.Ptr())
+	})
 }
 
 // @abstract A Boolean value indicating whether the web view suppresses content rendering until it is fully loaded into memory. @discussion The default value is NO.
 func (o *WKWebViewConfiguration) SuppressesIncrementalRendering() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebViewConfigurationSelSuppressesIncrementalRendering)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebViewConfigurationSelSuppressesIncrementalRendering)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebViewConfiguration) SetSuppressesIncrementalRendering(suppressesIncrementalRendering bool) {
-	o.Ptr().Send(_wKWebViewConfigurationSelSetSuppressesIncrementalRendering, suppressesIncrementalRendering)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebViewConfigurationSelSetSuppressesIncrementalRendering, suppressesIncrementalRendering)
+	})
 }
 
 // @abstract The name of the application as used in the user agent string.
 func (o *WKWebViewConfiguration) ApplicationNameForUserAgent() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewConfigurationSelApplicationNameForUserAgent)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewConfigurationSelApplicationNameForUserAgent)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebViewConfiguration) SetApplicationNameForUserAgent(applicationNameForUserAgent *foundation.NSString) {
-	o.Ptr().Send(_wKWebViewConfigurationSelSetApplicationNameForUserAgent, applicationNameForUserAgent.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebViewConfigurationSelSetApplicationNameForUserAgent, applicationNameForUserAgent.Ptr())
+	})
 }
 
 // @abstract A Boolean value indicating whether AirPlay is allowed. @discussion The default value is YES.
 func (o *WKWebViewConfiguration) AllowsAirPlayForMediaPlayback() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebViewConfigurationSelAllowsAirPlayForMediaPlayback)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebViewConfigurationSelAllowsAirPlayForMediaPlayback)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebViewConfiguration) SetAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback bool) {
-	o.Ptr().Send(_wKWebViewConfigurationSelSetAllowsAirPlayForMediaPlayback, allowsAirPlayForMediaPlayback)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebViewConfigurationSelSetAllowsAirPlayForMediaPlayback, allowsAirPlayForMediaPlayback)
+	})
 }
 
 // @abstract A Boolean value indicating whether the System Screen Time blocking view should be shown. @discussion The default value is YES.
 func (o *WKWebViewConfiguration) ShowsSystemScreenTimeBlockingView() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebViewConfigurationSelShowsSystemScreenTimeBlockingView)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebViewConfigurationSelShowsSystemScreenTimeBlockingView)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebViewConfiguration) SetShowsSystemScreenTimeBlockingView(showsSystemScreenTimeBlockingView bool) {
-	o.Ptr().Send(_wKWebViewConfigurationSelSetShowsSystemScreenTimeBlockingView, showsSystemScreenTimeBlockingView)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebViewConfigurationSelSetShowsSystemScreenTimeBlockingView, showsSystemScreenTimeBlockingView)
+	})
 }
 
 // @abstract A Boolean value indicating whether HTTP requests to servers known to support HTTPS should be automatically upgraded to HTTPS requests. @discussion The default value is YES.
 func (o *WKWebViewConfiguration) UpgradeKnownHostsToHTTPS() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebViewConfigurationSelUpgradeKnownHostsToHTTPS)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebViewConfigurationSelUpgradeKnownHostsToHTTPS)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebViewConfiguration) SetUpgradeKnownHostsToHTTPS(upgradeKnownHostsToHTTPS bool) {
-	o.Ptr().Send(_wKWebViewConfigurationSelSetUpgradeKnownHostsToHTTPS, upgradeKnownHostsToHTTPS)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebViewConfigurationSelSetUpgradeKnownHostsToHTTPS, upgradeKnownHostsToHTTPS)
+	})
 }
 
 func (o *WKWebViewConfiguration) MediaTypesRequiringUserActionForPlayback() WKAudiovisualMediaTypes {
-	_ret := objc.Send[WKAudiovisualMediaTypes](o.Ptr(), _wKWebViewConfigurationSelMediaTypesRequiringUserActionForPlayback)
-	return _ret
+	var _mainthread0 WKAudiovisualMediaTypes
+	purego.Main(func() {
+		_mainthread0 = func() WKAudiovisualMediaTypes {
+			_ret := objc.Send[WKAudiovisualMediaTypes](o.Ptr(), _wKWebViewConfigurationSelMediaTypesRequiringUserActionForPlayback)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebViewConfiguration) SetMediaTypesRequiringUserActionForPlayback(mediaTypesRequiringUserActionForPlayback WKAudiovisualMediaTypes) {
-	o.Ptr().Send(_wKWebViewConfigurationSelSetMediaTypesRequiringUserActionForPlayback, mediaTypesRequiringUserActionForPlayback)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebViewConfigurationSelSetMediaTypesRequiringUserActionForPlayback, mediaTypesRequiringUserActionForPlayback)
+	})
 }
 
 // @abstract The set of default webpage preferences to use when loading and rendering content. @discussion These default webpage preferences are additionally passed to the navigation delegate in -webView:decidePolicyForNavigationAction:preferences:decisionHandler:.
 func (o *WKWebViewConfiguration) DefaultWebpagePreferences() *WKWebpagePreferences {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewConfigurationSelDefaultWebpagePreferences)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKWebpagePreferencesFromID(_ret)
+	var _mainthread0 *WKWebpagePreferences
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebpagePreferences {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebViewConfigurationSelDefaultWebpagePreferences)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKWebpagePreferencesFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebViewConfiguration) SetDefaultWebpagePreferences(defaultWebpagePreferences *WKWebpagePreferences) {
-	o.Ptr().Send(_wKWebViewConfigurationSelSetDefaultWebpagePreferences, defaultWebpagePreferences.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebViewConfigurationSelSetDefaultWebpagePreferences, defaultWebpagePreferences.Ptr())
+	})
 }
 
 func (o *WKWebViewConfiguration) LimitsNavigationsToAppBoundDomains() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebViewConfigurationSelLimitsNavigationsToAppBoundDomains)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebViewConfigurationSelLimitsNavigationsToAppBoundDomains)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebViewConfiguration) SetLimitsNavigationsToAppBoundDomains(limitsNavigationsToAppBoundDomains bool) {
-	o.Ptr().Send(_wKWebViewConfigurationSelSetLimitsNavigationsToAppBoundDomains, limitsNavigationsToAppBoundDomains)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebViewConfigurationSelSetLimitsNavigationsToAppBoundDomains, limitsNavigationsToAppBoundDomains)
+	})
 }
 
 // @abstract A Boolean value indicating whether inline predictions are allowed. @discussion The default value is `NO`. If false, inline predictions are disabled regardless of the system setting. If true, they are enabled based on the system setting.
 func (o *WKWebViewConfiguration) AllowsInlinePredictions() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebViewConfigurationSelAllowsInlinePredictions)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebViewConfigurationSelAllowsInlinePredictions)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebViewConfiguration) SetAllowsInlinePredictions(allowsInlinePredictions bool) {
-	o.Ptr().Send(_wKWebViewConfigurationSelSetAllowsInlinePredictions, allowsInlinePredictions)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebViewConfigurationSelSetAllowsInlinePredictions, allowsInlinePredictions)
+	})
 }
 
 // @abstract The directionality of user interface elements. @discussion Possible values are described in WKUserInterfaceDirectionPolicy. The default value is WKUserInterfaceDirectionPolicyContent.
 func (o *WKWebViewConfiguration) UserInterfaceDirectionPolicy() WKUserInterfaceDirectionPolicy {
-	_ret := objc.Send[WKUserInterfaceDirectionPolicy](o.Ptr(), _wKWebViewConfigurationSelUserInterfaceDirectionPolicy)
-	return _ret
+	var _mainthread0 WKUserInterfaceDirectionPolicy
+	purego.Main(func() {
+		_mainthread0 = func() WKUserInterfaceDirectionPolicy {
+			_ret := objc.Send[WKUserInterfaceDirectionPolicy](o.Ptr(), _wKWebViewConfigurationSelUserInterfaceDirectionPolicy)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebViewConfiguration) SetUserInterfaceDirectionPolicy(userInterfaceDirectionPolicy WKUserInterfaceDirectionPolicy) {
-	o.Ptr().Send(_wKWebViewConfigurationSelSetUserInterfaceDirectionPolicy, userInterfaceDirectionPolicy)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebViewConfigurationSelSetUserInterfaceDirectionPolicy, userInterfaceDirectionPolicy)
+	})
 }
 
 // @abstract A Boolean value indicating whether insertion of adaptive image glyphs is allowed. @discussion The default value is `NO`. If `NO`, adaptive image glyphs are inserted as regular images. If `YES`, they are inserted with the full adaptive sizing behavior.
 func (o *WKWebViewConfiguration) SupportsAdaptiveImageGlyph() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebViewConfigurationSelSupportsAdaptiveImageGlyph)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebViewConfigurationSelSupportsAdaptiveImageGlyph)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebViewConfiguration) SetSupportsAdaptiveImageGlyph(supportsAdaptiveImageGlyph bool) {
-	o.Ptr().Send(_wKWebViewConfigurationSelSetSupportsAdaptiveImageGlyph, supportsAdaptiveImageGlyph)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebViewConfigurationSelSetSupportsAdaptiveImageGlyph, supportsAdaptiveImageGlyph)
+	})
 }
 
 // @abstract The preferred behavior of Writing Tools. @discussion The default behavior is equivalent to `NSWritingToolsBehaviorLimited`.
 func (o *WKWebViewConfiguration) WritingToolsBehavior() appkit.NSWritingToolsBehavior {
-	_ret := objc.Send[appkit.NSWritingToolsBehavior](o.Ptr(), _wKWebViewConfigurationSelWritingToolsBehavior)
-	return _ret
+	var _mainthread0 appkit.NSWritingToolsBehavior
+	purego.Main(func() {
+		_mainthread0 = func() appkit.NSWritingToolsBehavior {
+			_ret := objc.Send[appkit.NSWritingToolsBehavior](o.Ptr(), _wKWebViewConfigurationSelWritingToolsBehavior)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebViewConfiguration) SetWritingToolsBehavior(writingToolsBehavior appkit.NSWritingToolsBehavior) {
-	o.Ptr().Send(_wKWebViewConfigurationSelSetWritingToolsBehavior, writingToolsBehavior)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebViewConfigurationSelSetWritingToolsBehavior, writingToolsBehavior)
+	})
 }

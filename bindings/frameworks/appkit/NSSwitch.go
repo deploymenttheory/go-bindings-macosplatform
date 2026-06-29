@@ -33,10 +33,18 @@ func NSSwitchFromID(id objc.ID) *NSSwitch {
 }
 
 func (o *NSSwitch) State() int {
-	_ret := objc.Send[int](o.Ptr(), _nSSwitchSelState)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSSwitchSelState)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSwitch) SetState(state int) {
-	o.Ptr().Send(_nSSwitchSelSetState, state)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSwitchSelSetState, state)
+	})
 }

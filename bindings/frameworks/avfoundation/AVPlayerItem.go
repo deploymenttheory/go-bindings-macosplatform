@@ -148,29 +148,47 @@ func AVPlayerItemFromID(id objc.ID) *AVPlayerItem {
 
 // Returns a new player item with a specified URL.
 func AVPlayerItemPlayerItemWithURL(uRL *foundation.NSURL) *AVPlayerItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerItem), _aVPlayerItemSelPlayerItemWithURL, uRL.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return AVPlayerItemFromID(_ret)
+	var _mainthread0 *AVPlayerItem
+	purego.Main(func() {
+		_mainthread0 = func() *AVPlayerItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerItem), _aVPlayerItemSelPlayerItemWithURL, uRL.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return AVPlayerItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a new player item for a specified asset.
 func AVPlayerItemPlayerItemWithAsset(asset *AVAsset) *AVPlayerItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerItem), _aVPlayerItemSelPlayerItemWithAsset, asset.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return AVPlayerItemFromID(_ret)
+	var _mainthread0 *AVPlayerItem
+	purego.Main(func() {
+		_mainthread0 = func() *AVPlayerItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerItem), _aVPlayerItemSelPlayerItemWithAsset, asset.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return AVPlayerItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a player item with the specified asset and the asset keys to automatically load.
 func AVPlayerItemPlayerItemWithAssetAutomaticallyLoadedAssetKeys(asset *AVAsset, automaticallyLoadedAssetKeys *foundation.NSArray[*foundation.NSString]) *AVPlayerItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerItem), _aVPlayerItemSelPlayerItemWithAssetAutomaticallyLoadedAssetKeys, asset.Ptr(), automaticallyLoadedAssetKeys.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return AVPlayerItemFromID(_ret)
+	var _mainthread0 *AVPlayerItem
+	purego.Main(func() {
+		_mainthread0 = func() *AVPlayerItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerItem), _aVPlayerItemSelPlayerItemWithAssetAutomaticallyLoadedAssetKeys, asset.Ptr(), automaticallyLoadedAssetKeys.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return AVPlayerItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a player item with a specified URL.
@@ -184,20 +202,32 @@ func (o *AVPlayerItem) InitWithURL(uRL *foundation.NSURL) *AVPlayerItem {
 
 // Creates a player item for a specified asset.
 func (o *AVPlayerItem) InitWithAsset(asset *AVAsset) *AVPlayerItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelInitWithAsset, asset.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return AVPlayerItemFromID(_ret)
+	var _mainthread0 *AVPlayerItem
+	purego.Main(func() {
+		_mainthread0 = func() *AVPlayerItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelInitWithAsset, asset.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return AVPlayerItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a player item with the specified asset and the asset keys to automatically load.
 func (o *AVPlayerItem) InitWithAssetAutomaticallyLoadedAssetKeys(asset *AVAsset, automaticallyLoadedAssetKeys *foundation.NSArray[*foundation.NSString]) *AVPlayerItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelInitWithAssetAutomaticallyLoadedAssetKeys, asset.Ptr(), automaticallyLoadedAssetKeys.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return AVPlayerItemFromID(_ret)
+	var _mainthread0 *AVPlayerItem
+	purego.Main(func() {
+		_mainthread0 = func() *AVPlayerItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelInitWithAssetAutomaticallyLoadedAssetKeys, asset.Ptr(), automaticallyLoadedAssetKeys.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return AVPlayerItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The ability of the receiver to be used for playback. The value of this property is an AVPlayerItemStatus that indicates whether the receiver can be used for playback. When the value of this property is AVPlayerItemStatusFailed, the receiver can no longer be used for playback and a new instance needs to be created in its place. When this happens, clients can check the value of the error property to determine the nature of the failure. The value of this property will not be updated after the receiver is removed from an AVPlayer. This property is key value observable.
@@ -214,11 +244,17 @@ func (o *AVPlayerItem) Error() unsafe.Pointer {
 
 // Accessor for underlying AVAsset.
 func (o *AVPlayerItem) Asset() *AVAsset {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelAsset)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return AVAssetFromID(_ret)
+	var _mainthread0 *AVAsset
+	purego.Main(func() {
+		_mainthread0 = func() *AVAsset {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelAsset)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return AVAssetFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Provides array of AVPlayerItem tracks. Observable (can change dynamically during playback). The value of this property will accord with the properties of the underlying media resource when the receiver becomes ready to play. Before the underlying media resource has been sufficiently loaded, its value is an empty NSArray. Use key-value observation to obtain a valid array of tracks as soon as it becomes available.
@@ -245,11 +281,17 @@ func (o *AVPlayerItem) PresentationSize() corefoundation.CGSize {
 // Provides an NSArray of AVMetadataItems representing the timed metadata encountered most recently within the media as it plays. May be nil. Notifications of changes are available via key-value observation. As an optimization for playback, AVPlayerItem may omit the processing of timed metadata when no observer of this property is registered. Therefore, when no such observer is registered, the value of the timedMetadata property may remain nil regardless of the contents of the underlying media. This property must be accessed on the main thread/queue.
 // Deprecated: Use AVPlayerItemMetadataOutput to obtain timed metadata
 func (o *AVPlayerItem) TimedMetadata() *foundation.NSArray[*AVMetadataItem] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelTimedMetadata)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
+	var _mainthread0 *foundation.NSArray[*AVMetadataItem]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*AVMetadataItem] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelTimedMetadata)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*AVMetadataItem](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // An array of property keys defined on AVAsset. The value of each key in the array is automatically loaded while the receiver is being made ready to play. The value of each key in automaticallyLoadedAssetKeys will be automatically be loaded by the underlying AVAsset before the receiver achieves the status AVPlayerItemStatusReadyToPlay; i.e. when the item is ready to play, the value of -[[AVPlayerItem asset] statusOfValueForKey:error:] will be AVKeyValueStatusLoaded. If loading of any of the values fails, the status of the AVPlayerItem will change instead to AVPlayerItemStatusFailed..
@@ -310,7 +352,9 @@ func (o *AVPlayerItem) ConfiguredTimeOffsetFromLive() coremedia.CMTime {
 }
 
 func (o *AVPlayerItem) SetConfiguredTimeOffsetFromLive(configuredTimeOffsetFromLive coremedia.CMTime) {
-	o.Ptr().Send(_aVPlayerItemSelSetConfiguredTimeOffsetFromLive, configuredTimeOffsetFromLive)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSetConfiguredTimeOffsetFromLive, configuredTimeOffsetFromLive)
+	})
 }
 
 // A recommended value for configuredTimeOffsetFromLive, based on observed network conditions. For non-live assets this value is kCMTimeInvalid.
@@ -326,7 +370,9 @@ func (o *AVPlayerItem) AutomaticallyPreservesTimeOffsetFromLive() bool {
 }
 
 func (o *AVPlayerItem) SetAutomaticallyPreservesTimeOffsetFromLive(automaticallyPreservesTimeOffsetFromLive bool) {
-	o.Ptr().Send(_aVPlayerItemSelSetAutomaticallyPreservesTimeOffsetFromLive, automaticallyPreservesTimeOffsetFromLive)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSetAutomaticallyPreservesTimeOffsetFromLive, automaticallyPreservesTimeOffsetFromLive)
+	})
 }
 
 // Returns the current time of the item.
@@ -398,7 +444,9 @@ func (o *AVPlayerItem) ForwardPlaybackEndTime() coremedia.CMTime {
 }
 
 func (o *AVPlayerItem) SetForwardPlaybackEndTime(forwardPlaybackEndTime coremedia.CMTime) {
-	o.Ptr().Send(_aVPlayerItemSelSetForwardPlaybackEndTime, forwardPlaybackEndTime)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSetForwardPlaybackEndTime, forwardPlaybackEndTime)
+	})
 }
 
 // The end time for reverse playback. Specifies the time at which playback should end when the playback rate is negative (see AVPlayer's rate property). The default value is kCMTimeInvalid, which indicates that no end time for reverse playback is specified. In this case, the effective end time for reverse playback is kCMTimeZero. When the end time is reached, the receiver will post AVPlayerItemDidPlayToEndTimeNotification and the AVPlayer will take the action indicated by the value of its actionAtItemEnd property (see AVPlayerActionAtItemEnd in AVPlayer.h). The value of this property has no effect on playback when the rate is positive.
@@ -408,7 +456,9 @@ func (o *AVPlayerItem) ReversePlaybackEndTime() coremedia.CMTime {
 }
 
 func (o *AVPlayerItem) SetReversePlaybackEndTime(reversePlaybackEndTime coremedia.CMTime) {
-	o.Ptr().Send(_aVPlayerItemSelSetReversePlaybackEndTime, reversePlaybackEndTime)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSetReversePlaybackEndTime, reversePlaybackEndTime)
+	})
 }
 
 // This property provides a collection of time ranges that the player item can seek to. The ranges provided might be discontinous. Returns an NSArray of NSValues containing CMTimeRanges.
@@ -437,7 +487,9 @@ func (o *AVPlayerItem) VideoComposition() *AVVideoComposition {
 
 // Indicates the video composition settings to be applied during playback. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue. This property throws an exception if a video composition is set with any of the following values: - renderSize, renderScale, or frameDuration is less than or equal to zero - sourceTrackIDForFrameTiming is less than or equal to zero - uses AVVideoCompositionCoreAnimationTool (works for offline rendering only)
 func (o *AVPlayerItem) SetVideoComposition(videoComposition *AVVideoComposition) {
-	o.Ptr().Send(_aVPlayerItemSelSetVideoComposition, videoComposition.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSetVideoComposition, videoComposition.Ptr())
+	})
 }
 
 // Indicates the custom video compositor instance. This property is nil if there is no video compositor, or if the internal video compositor is in use. This reference can be used to provide extra context to the custom video compositor instance if required. The value of this property can change as a result of setting the `videoComposition` property. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
@@ -453,7 +505,9 @@ func (o *AVPlayerItem) SeekingWaitsForVideoCompositionRendering() bool {
 }
 
 func (o *AVPlayerItem) SetSeekingWaitsForVideoCompositionRendering(seekingWaitsForVideoCompositionRendering bool) {
-	o.Ptr().Send(_aVPlayerItemSelSetSeekingWaitsForVideoCompositionRendering, seekingWaitsForVideoCompositionRendering)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSetSeekingWaitsForVideoCompositionRendering, seekingWaitsForVideoCompositionRendering)
+	})
 }
 
 // An array of AVTextStyleRules representing text styling that can be applied to subtitles and other legible media. The styling information contained in each AVTextStyleRule object in the array is used only when no equivalent styling information is provided by the media resource being played. For example, if the text style rules specify Courier font but the media resource specifies Helvetica font, the text will be drawn using Helvetica font. This property has an effect only for tracks with media subtype kCMSubtitleFormatType_WebVTT.
@@ -466,7 +520,9 @@ func (o *AVPlayerItem) TextStyleRules() *foundation.NSArray[*AVTextStyleRule] {
 }
 
 func (o *AVPlayerItem) SetTextStyleRules(textStyleRules *foundation.NSArray[*AVTextStyleRule]) {
-	o.Ptr().Send(_aVPlayerItemSelSetTextStyleRules, textStyleRules.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSetTextStyleRules, textStyleRules.Ptr())
+	})
 }
 
 // Specifies the video aperture mode to apply during playback. See AVVideoApertureMode constants defined in AVVideoSettings.h. Default is AVVideoApertureModeCleanAperture.
@@ -479,7 +535,9 @@ func (o *AVPlayerItem) VideoApertureMode() *foundation.NSString {
 }
 
 func (o *AVPlayerItem) SetVideoApertureMode(videoApertureMode *foundation.NSString) {
-	o.Ptr().Send(_aVPlayerItemSelSetVideoApertureMode, videoApertureMode.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSetVideoApertureMode, videoApertureMode.Ptr())
+	})
 }
 
 // Controls whether or not to apply the per frame HDR display metadata of the source during playback.
@@ -489,7 +547,9 @@ func (o *AVPlayerItem) AppliesPerFrameHDRDisplayMetadata() bool {
 }
 
 func (o *AVPlayerItem) SetAppliesPerFrameHDRDisplayMetadata(appliesPerFrameHDRDisplayMetadata bool) {
-	o.Ptr().Send(_aVPlayerItemSelSetAppliesPerFrameHDRDisplayMetadata, appliesPerFrameHDRDisplayMetadata)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSetAppliesPerFrameHDRDisplayMetadata, appliesPerFrameHDRDisplayMetadata)
+	})
 }
 
 // Indicates the processing algorithm used to manage audio pitch at varying rates and for scaled audio edits. Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h. The default value for applications linked on or after iOS 15.0 or macOS 12.0 is AVAudioTimePitchAlgorithmTimeDomain. For iOS versions prior to 15.0 the default value is AVAudioTimePitchAlgorithmLowQualityZeroLatency. For macOS versions prior to 12.0 the default value is AVAudioTimePitchAlgorithmSpectral.
@@ -502,19 +562,29 @@ func (o *AVPlayerItem) AudioTimePitchAlgorithm() *foundation.NSString {
 }
 
 func (o *AVPlayerItem) SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) {
-	o.Ptr().Send(_aVPlayerItemSelSetAudioTimePitchAlgorithm, audioTimePitchAlgorithm.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSetAudioTimePitchAlgorithm, audioTimePitchAlgorithm.Ptr())
+	})
 }
 
 // Indicates whether audio spatialization is allowed When audio spatialization is allowed for an AVPlayerItem, the AVPlayer may render multichannel audio if available even if the output device doesn't support multichannel audio on its own, via use of a synthetic channel layout. When audio spatialization is not allowed, the AVPlayer must render audio with a channel layout that best matches the capabilities of the output device. This property is not observable. Defaults to YES.
 // Deprecated: Use allowedAudioSpatializationFormats instead
 func (o *AVPlayerItem) IsAudioSpatializationAllowed() bool {
-	_ret := objc.Send[bool](o.Ptr(), _aVPlayerItemSelIsAudioSpatializationAllowed)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aVPlayerItemSelIsAudioSpatializationAllowed)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use allowedAudioSpatializationFormats instead
 func (o *AVPlayerItem) SetAudioSpatializationAllowed(audioSpatializationAllowed bool) {
-	o.Ptr().Send(_aVPlayerItemSelSetAudioSpatializationAllowed, audioSpatializationAllowed)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSetAudioSpatializationAllowed, audioSpatializationAllowed)
+	})
 }
 
 // Indicates the source audio channel layouts allowed by the receiver for spatialization. Spatialization uses psychoacoustic methods to create a more immersive audio rendering when the content is played on specialized headphones and speaker arrangements. When an AVPlayerItem's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMonoAndStereo the AVPlayer will attempt to spatialize content tagged with a stereo channel layout, two-channel content with no layout specified as well as mono. It is considered incorrect to render a binaural recording with spatialization. A binaural recording is captured using two carefully placed microphones at each ear where the intent, when played on headphones, is to reproduce a naturally occurring spatial effect. Content tagged with a binaural channel layout will ignore this property value. When an AVPlayerItem's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMultichannel the AVPlayer will attempt to spatialize any decodable multichannel layout. Setting this property to AVAudioSpatializationFormatMonoStereoAndMultichannel indicates that the sender allows the AVPlayer to spatialize any decodable mono, stereo or multichannel layout. This property is not observable. The default value for this property with video content is AVAudioSpatializationFormatMonoStereoAndMultichannel. Otherwise, audio only content default value is AVAudioSpatializationFormatMultichannel.
@@ -524,20 +594,30 @@ func (o *AVPlayerItem) AllowedAudioSpatializationFormats() AVAudioSpatialization
 }
 
 func (o *AVPlayerItem) SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AVAudioSpatializationFormats) {
-	o.Ptr().Send(_aVPlayerItemSelSetAllowedAudioSpatializationFormats, allowedAudioSpatializationFormats)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSetAllowedAudioSpatializationFormats, allowedAudioSpatializationFormats)
+	})
 }
 
 // Indicates the audio mix parameters to be applied during playback The inputParameters of the AVAudioMix must have trackIDs that correspond to a track of the receiver's asset. Otherwise they will be ignored. (See AVAudioMix.h for the declaration of AVAudioMixInputParameters and AVPlayerItem's asset property.)
 func (o *AVPlayerItem) AudioMix() *AVAudioMix {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelAudioMix)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return AVAudioMixFromID(_ret)
+	var _mainthread0 *AVAudioMix
+	purego.Main(func() {
+		_mainthread0 = func() *AVAudioMix {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelAudioMix)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return AVAudioMixFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayerItem) SetAudioMix(audioMix *AVAudioMix) {
-	o.Ptr().Send(_aVPlayerItemSelSetAudioMix, audioMix.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSetAudioMix, audioMix.Ptr())
+	})
 }
 
 // This property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
@@ -551,19 +631,37 @@ func (o *AVPlayerItem) LoadedTimeRanges() *foundation.NSArray[*foundation.NSValu
 
 // Indicates whether the item will likely play through without stalling. This property communicates a prediction of playability. Factors considered in this prediction include I/O throughput and media decode performance. It is possible for playbackLikelyToKeepUp to indicate NO while the property playbackBufferFull indicates YES. In this event the playback buffer has reached capacity but there isn't the statistical data to support a prediction that playback is likely to keep up. It is left to the application programmer to decide to continue media playback or not. See playbackBufferFull below.
 func (o *AVPlayerItem) IsPlaybackLikelyToKeepUp() bool {
-	_ret := objc.Send[bool](o.Ptr(), _aVPlayerItemSelIsPlaybackLikelyToKeepUp)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aVPlayerItemSelIsPlaybackLikelyToKeepUp)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Indicates that the internal media buffer is full and that further I/O is suspended. This property reports that the data buffer used for playback has reach capacity. Despite the playback buffer reaching capacity there might not exist sufficient statistical data to support a playbackLikelyToKeepUp prediction of YES. See playbackLikelyToKeepUp above.
 func (o *AVPlayerItem) IsPlaybackBufferFull() bool {
-	_ret := objc.Send[bool](o.Ptr(), _aVPlayerItemSelIsPlaybackBufferFull)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aVPlayerItemSelIsPlaybackBufferFull)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayerItem) IsPlaybackBufferEmpty() bool {
-	_ret := objc.Send[bool](o.Ptr(), _aVPlayerItemSelIsPlaybackBufferEmpty)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aVPlayerItemSelIsPlaybackBufferEmpty)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Indicates whether the player item can use network resources to keep playback state up to date while paused For live streaming content, the player item may need to use extra networking and power resources to keep playback state up to date when paused. For example, when this property is set to YES, the seekableTimeRanges property will be periodically updated to reflect the current state of the live stream. For clients linked on or after macOS 10.11 or iOS 9.0, the default value is NO. To minimize power usage, avoid setting this property to YES when you do not need playback state to stay up to date while paused.
@@ -573,7 +671,9 @@ func (o *AVPlayerItem) CanUseNetworkResourcesForLiveStreamingWhilePaused() bool 
 }
 
 func (o *AVPlayerItem) SetCanUseNetworkResourcesForLiveStreamingWhilePaused(canUseNetworkResourcesForLiveStreamingWhilePaused bool) {
-	o.Ptr().Send(_aVPlayerItemSelSetCanUseNetworkResourcesForLiveStreamingWhilePaused, canUseNetworkResourcesForLiveStreamingWhilePaused)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSetCanUseNetworkResourcesForLiveStreamingWhilePaused, canUseNetworkResourcesForLiveStreamingWhilePaused)
+	})
 }
 
 // Indicates the media duration the caller prefers the player to buffer from the network ahead of the playhead to guard against playback disruption. The value is in seconds. If it is set to 0, the player will choose an appropriate level of buffering for most use cases. Note that setting this property to a low value will increase the chance that playback will stall and re-buffer, while setting it to a high value will increase demand on system resources. Note that the system may buffer less than the value of this property in order to manage resource consumption.
@@ -583,7 +683,9 @@ func (o *AVPlayerItem) PreferredForwardBufferDuration() float64 {
 }
 
 func (o *AVPlayerItem) SetPreferredForwardBufferDuration(preferredForwardBufferDuration float64) {
-	o.Ptr().Send(_aVPlayerItemSelSetPreferredForwardBufferDuration, preferredForwardBufferDuration)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSetPreferredForwardBufferDuration, preferredForwardBufferDuration)
+	})
 }
 
 // Indicates the desired limit of network bandwidth consumption for this item. Set preferredPeakBitRate to non-zero to indicate that the player should attempt to limit item playback to that bit rate, expressed in bits per second. If network bandwidth consumption cannot be lowered to meet the preferredPeakBitRate, it will be reduced as much as possible while continuing to play the item.
@@ -593,7 +695,9 @@ func (o *AVPlayerItem) PreferredPeakBitRate() float64 {
 }
 
 func (o *AVPlayerItem) SetPreferredPeakBitRate(preferredPeakBitRate float64) {
-	o.Ptr().Send(_aVPlayerItemSelSetPreferredPeakBitRate, preferredPeakBitRate)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSetPreferredPeakBitRate, preferredPeakBitRate)
+	})
 }
 
 // Indicates the desired limit of network bandwidth consumption for this item over expensive networks. When preferredPeakBitRateForExpensiveNetworks is set to non-zero, the player will attempt to limit item playback to that bit rate when streaming over an expensive network, such as when using a cellular data plan. (See -[NWPath isExpensive]) If network bandwidth consumption cannot be lowered to meet the preferredPeakBitRateForExpensiveNetworks, it will be reduced as much as possible while continuing to play the item. Note that preferredPeakBitRate still applies unconditionally. If preferredPeakBitRateForExpensiveNetworks is less restrictive (greater) than preferredPeakBitRate, preferredPeakBitRateForExpensiveNetworks has no practical effect.
@@ -603,7 +707,9 @@ func (o *AVPlayerItem) PreferredPeakBitRateForExpensiveNetworks() float64 {
 }
 
 func (o *AVPlayerItem) SetPreferredPeakBitRateForExpensiveNetworks(preferredPeakBitRateForExpensiveNetworks float64) {
-	o.Ptr().Send(_aVPlayerItemSelSetPreferredPeakBitRateForExpensiveNetworks, preferredPeakBitRateForExpensiveNetworks)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSetPreferredPeakBitRateForExpensiveNetworks, preferredPeakBitRateForExpensiveNetworks)
+	})
 }
 
 // Indicates a preferred upper limit on the resolution of the video to be downloaded (or otherwise transferred) and rendered by the player. The default value is CGSizeZero, which indicates that the client enforces no limit on video resolution. Other values indicate a preferred maximum video resolution. It only applies to HTTP Live Streaming asset.
@@ -613,7 +719,9 @@ func (o *AVPlayerItem) PreferredMaximumResolution() corefoundation.CGSize {
 }
 
 func (o *AVPlayerItem) SetPreferredMaximumResolution(preferredMaximumResolution corefoundation.CGSize) {
-	o.Ptr().Send(_aVPlayerItemSelSetPreferredMaximumResolution, preferredMaximumResolution)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSetPreferredMaximumResolution, preferredMaximumResolution)
+	})
 }
 
 // Indicates a preferred upper limit on the resolution of the video to be downloaded that applies only when the download occurs over expensive networks. The default value is CGSizeZero, which indicates that the client enforces no limit on video resolution. Other values indicate a preferred maximum video resolution. This limit applies only when streaming over an expensive network, such as when using a cellular data plan. (See -[NWPath isExpensive]) It only applies to HTTP Live Streaming asset. Note that preferredMaximumResolution still applies unconditionally. If preferredMaximumResolutionForExpensiveNetworks is less restrictive (higher resolution) than preferredMaximumResolution, preferredMaximumResolutionForExpensiveNetworks has no practical effect.
@@ -623,7 +731,9 @@ func (o *AVPlayerItem) PreferredMaximumResolutionForExpensiveNetworks() corefoun
 }
 
 func (o *AVPlayerItem) SetPreferredMaximumResolutionForExpensiveNetworks(preferredMaximumResolutionForExpensiveNetworks corefoundation.CGSize) {
-	o.Ptr().Send(_aVPlayerItemSelSetPreferredMaximumResolutionForExpensiveNetworks, preferredMaximumResolutionForExpensiveNetworks)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSetPreferredMaximumResolutionForExpensiveNetworks, preferredMaximumResolutionForExpensiveNetworks)
+	})
 }
 
 // Directs the player to start playback with the first eligible variant that appears in the stream's master playlist. This property influences AVPlayer's algorithm for selecting which of the eligible variant streams in an HTTP Live Streaming master playlist is selected when playback first begins. In all cases, AVPlayer may switch to other variants during playback. On releases prior to macOS 10.15, iOS 13, tvOS 13 and watchOS 6, AVPlayer starts HLS playback with the first eligible variant in the master playlist. On releases starting with macOS 10.15, iOS 13, tvOS 13 and watchOS 6, AVPlayer starts HLS playback by choosing an initial variant that optimizes the startup experience. On releases starting with macOS 11.0, iOS 14, tvOS 14 and watchOS 7, applications may set this property to YES to request that AVPlayer use the previous behaviour of using the first eligible variant in the master playlist. This would be appropriate, for example, for applications which wish to control initial variant selection by ordering the variants in the master playlist. Note that changing this property may impact stream startup performance and quality. In order to be effective this property must be set before initial variant selection occurs. This property only applies to HTTP Live Streaming assets. The default value of this property is NO.
@@ -633,7 +743,9 @@ func (o *AVPlayerItem) StartsOnFirstEligibleVariant() bool {
 }
 
 func (o *AVPlayerItem) SetStartsOnFirstEligibleVariant(startsOnFirstEligibleVariant bool) {
-	o.Ptr().Send(_aVPlayerItemSelSetStartsOnFirstEligibleVariant, startsOnFirstEligibleVariant)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSetStartsOnFirstEligibleVariant, startsOnFirstEligibleVariant)
+	})
 }
 
 // Indicates preferences for variant switching. Changing variant preferences during playback may result in a variant switch. The default value is AVVariantPreferenceNone.
@@ -643,7 +755,9 @@ func (o *AVPlayerItem) VariantPreferences() AVVariantPreferences {
 }
 
 func (o *AVPlayerItem) SetVariantPreferences(variantPreferences AVVariantPreferences) {
-	o.Ptr().Send(_aVPlayerItemSelSetVariantPreferences, variantPreferences)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSetVariantPreferences, variantPreferences)
+	})
 }
 
 // Selects a media option in a given media selection group and deselects all other options in that group.
@@ -657,61 +771,97 @@ func (o *AVPlayerItem) SelectMediaOptionAutomaticallyInMediaSelectionGroup(media
 }
 
 func (o *AVPlayerItem) CurrentMediaSelection() *AVMediaSelection {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelCurrentMediaSelection)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return AVMediaSelectionFromID(_ret)
+	var _mainthread0 *AVMediaSelection
+	purego.Main(func() {
+		_mainthread0 = func() *AVMediaSelection {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelCurrentMediaSelection)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return AVMediaSelectionFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // When the associated AVPlayer’s appliesMediaSelectionCriteriaAutomatically property is set to YES, configures the player item to prefer a particular language, replacing any previous preference for available languages of the specified group’s custom media selection scheme.
 func (o *AVPlayerItem) SelectMediaPresentationLanguageForMediaSelectionGroup(language *foundation.NSString, mediaSelectionGroup *AVMediaSelectionGroup) {
-	o.Ptr().Send(_aVPlayerItemSelSelectMediaPresentationLanguageForMediaSelectionGroup, language.Ptr(), mediaSelectionGroup.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSelectMediaPresentationLanguageForMediaSelectionGroup, language.Ptr(), mediaSelectionGroup.Ptr())
+	})
 }
 
 // Returns the selected media presentation language for the specified media selection group, if any language has previously been selected via use of -selectMediaPresentationLanguages:forMediaSelectionGroup:.
 func (o *AVPlayerItem) SelectedMediaPresentationLanguageForMediaSelectionGroup(mediaSelectionGroup *AVMediaSelectionGroup) *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelSelectedMediaPresentationLanguageForMediaSelectionGroup, mediaSelectionGroup.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelSelectedMediaPresentationLanguageForMediaSelectionGroup, mediaSelectionGroup.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // When the associated AVPlayer’s appliesMediaSelectionCriteriaAutomatically property is set to YES, configures the player item to prefer a particular presentation setting, replacing any previous preference for settings of the same media presentation selector.
 func (o *AVPlayerItem) SelectMediaPresentationSettingForMediaSelectionGroup(mediaPresentationSetting *AVMediaPresentationSetting, mediaSelectionGroup *AVMediaSelectionGroup) {
-	o.Ptr().Send(_aVPlayerItemSelSelectMediaPresentationSettingForMediaSelectionGroup, mediaPresentationSetting.Ptr(), mediaSelectionGroup.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSelectMediaPresentationSettingForMediaSelectionGroup, mediaPresentationSetting.Ptr(), mediaSelectionGroup.Ptr())
+	})
 }
 
 // Indicates the media presentation settings that have most recently been selected for each AVMediaPresentationSelector of the AVCustomMediaSelectionScheme of the specified AVMediaSelectionGroup.
 func (o *AVPlayerItem) SelectedMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *AVMediaSelectionGroup) *foundation.NSDictionary[*AVMediaPresentationSelector, objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelSelectedMediaPresentationSettingsForMediaSelectionGroup, mediaSelectionGroup.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDictionaryFromID[*AVMediaPresentationSelector, objc.ID](_ret)
+	var _mainthread0 *foundation.NSDictionary[*AVMediaPresentationSelector, objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSDictionary[*AVMediaPresentationSelector, objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelSelectedMediaPresentationSettingsForMediaSelectionGroup, mediaSelectionGroup.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDictionaryFromID[*AVMediaPresentationSelector, objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Indicates the media presentation settings with media characteristics that are possessed by the currently selected AVMediaSelectionOption in the specified AVMediaSelectionGroup.
 func (o *AVPlayerItem) EffectiveMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *AVMediaSelectionGroup) *foundation.NSDictionary[*AVMediaPresentationSelector, objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelEffectiveMediaPresentationSettingsForMediaSelectionGroup, mediaSelectionGroup.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDictionaryFromID[*AVMediaPresentationSelector, objc.ID](_ret)
+	var _mainthread0 *foundation.NSDictionary[*AVMediaPresentationSelector, objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSDictionary[*AVMediaPresentationSelector, objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelEffectiveMediaPresentationSettingsForMediaSelectionGroup, mediaSelectionGroup.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDictionaryFromID[*AVMediaPresentationSelector, objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Indicates the AVCustomMediaSelectionSchemes of AVMediaSelectionGroups of the receiver's asset with which an associated UI implementation should configure its interface for media selection. Recommended usage: if use of a custom media selection scheme is desired, set this property before either replacing an AVPlayer's current item with the receiver or adding the receiver to an AVQueuePlayer's play queue. This will satisfy requirements of UI implementations that commit to a configuration of UI elements as the receiver becomes ready to play.
 func (o *AVPlayerItem) PreferredCustomMediaSelectionSchemes() *foundation.NSArray[*AVCustomMediaSelectionScheme] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelPreferredCustomMediaSelectionSchemes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*AVCustomMediaSelectionScheme](_ret)
+	var _mainthread0 *foundation.NSArray[*AVCustomMediaSelectionScheme]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*AVCustomMediaSelectionScheme] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelPreferredCustomMediaSelectionSchemes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*AVCustomMediaSelectionScheme](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayerItem) SetPreferredCustomMediaSelectionSchemes(preferredCustomMediaSelectionSchemes *foundation.NSArray[*AVCustomMediaSelectionScheme]) {
-	o.Ptr().Send(_aVPlayerItemSelSetPreferredCustomMediaSelectionSchemes, preferredCustomMediaSelectionSchemes.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSetPreferredCustomMediaSelectionSchemes, preferredCustomMediaSelectionSchemes.Ptr())
+	})
 }
 
 // Returns an object that represents a snapshot of the network access log.
@@ -771,30 +921,46 @@ func (o *AVPlayerItem) MediaDataCollectors() *foundation.NSArray[*AVPlayerItemMe
 // Moves the playback cursor. Use this method to seek to a specified time for the item. The time seeked to may differ from the specified time for efficiency. For sample accurate seeking see seekToTime:toleranceBefore:toleranceAfter:. If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled. - Parameter time:
 // Deprecated: Use -seekToTime:completionHandler:, passing nil for the completionHandler if you don't require notification of completion
 func (o *AVPlayerItem) SeekToTime(time_ coremedia.CMTime) {
-	o.Ptr().Send(_aVPlayerItemSelSeekToTime, time_)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSeekToTime, time_)
+	})
 }
 
 // Moves the playback cursor within a specified time bound. Use this method to seek to a specified time for the item. The time seeked to will be within the range [time-toleranceBefore, time+toleranceAfter] and may differ from the specified time for efficiency. Pass kCMTimeZero for both toleranceBefore and toleranceAfter to request sample accurate seeking which may incur additional decoding delay. Messaging this method with beforeTolerance:kCMTimePositiveInfinity and afterTolerance:kCMTimePositiveInfinity is the same as messaging seekToTime: directly. Seeking is constrained by the collection of seekable time ranges. If you seek to a time outside all of the seekable ranges the seek will result in a currentTime within the seekable ranges. If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled. - Parameter time: - Parameter toleranceBefore: - Parameter toleranceAfter:
 // Deprecated: Use -seekToTime:toleranceBefore:toleranceAfter:completionHandler:, passing nil for the completionHandler if you don't require notification of completion
 func (o *AVPlayerItem) SeekToTimeToleranceBeforeToleranceAfter(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime) {
-	o.Ptr().Send(_aVPlayerItemSelSeekToTimeToleranceBeforeToleranceAfter, time_, toleranceBefore, toleranceAfter)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSeekToTimeToleranceBeforeToleranceAfter, time_, toleranceBefore, toleranceAfter)
+	})
 }
 
 // move playhead to a point corresponding to a particular date. For playback content that is associated with a range of dates, move the playhead to point within that range. Will fail if the supplied date is outside the range or if the content is not associated with a range of dates. - Parameter date: The new position for the playhead. - Returns: Returns true if the playhead was moved to the supplied date.
 // Deprecated: Use -seekToDate:completionHandler:, passing nil for the completionHandler if you don't require notification of completion
 func (o *AVPlayerItem) SeekToDate(date *foundation.NSDate) bool {
-	_ret := objc.Send[bool](o.Ptr(), _aVPlayerItemSelSeekToDate, date.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aVPlayerItemSelSeekToDate, date.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Indicates the media selection option that's currently selected from the specified group. May be nil. If the value of the property allowsEmptySelection of the AVMediaSelectionGroup is YES, the currently selected option in the group may be nil. - Parameter mediaSelectionGroup: A media selection group obtained from the receiver's asset. - Returns: An instance of AVMediaSelectionOption that describes the currently selection option in the group.
 // Deprecated: Use currentMediaSelection to obtain an instance of AVMediaSelection, which encompasses the currently selected AVMediaSelectionOption in each of the available AVMediaSelectionGroups
 func (o *AVPlayerItem) SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup *AVMediaSelectionGroup) *AVMediaSelectionOption {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelSelectedMediaOptionInMediaSelectionGroup, mediaSelectionGroup.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return AVMediaSelectionOptionFromID(_ret)
+	var _mainthread0 *AVMediaSelectionOption
+	purego.Main(func() {
+		_mainthread0 = func() *AVMediaSelectionOption {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelSelectedMediaOptionInMediaSelectionGroup, mediaSelectionGroup.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return AVMediaSelectionOptionFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Presents the user the opportunity to authorize the content for playback.
@@ -806,36 +972,64 @@ func (o *AVPlayerItem) RequestContentAuthorizationAsynchronouslyWithTimeoutInter
 		})
 		defer __block_handler.Release()
 	}
-	o.Ptr().Send(_aVPlayerItemSelRequestContentAuthorizationAsynchronouslyWithTimeoutIntervalCompletionHandler, timeoutInterval, __block_handler)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelRequestContentAuthorizationAsynchronouslyWithTimeoutIntervalCompletionHandler, timeoutInterval, __block_handler)
+	})
 }
 
 // Cancels the currently outstanding content authorization request.
 func (o *AVPlayerItem) CancelContentAuthorizationRequest() {
-	o.Ptr().Send(_aVPlayerItemSelCancelContentAuthorizationRequest)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelCancelContentAuthorizationRequest)
+	})
 }
 
 // @property		authorizationRequiredForPlayback @abstract		Indicates whether or not authorization is required to play the content. @discussion This property reports whether or not authorization is required for the receiver's content to be played.  If it does not require authorization, then none of the other methods or properties in the AVPlayerItemProtectedContent category apply (though they will return sensible values where possible). This value is NOT key-value observable.
 func (o *AVPlayerItem) IsAuthorizationRequiredForPlayback() bool {
-	_ret := objc.Send[bool](o.Ptr(), _aVPlayerItemSelIsAuthorizationRequiredForPlayback)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aVPlayerItemSelIsAuthorizationRequiredForPlayback)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @property		applicationAuthorizedForPlayback @abstract		Indicates whether the calling application can be used to play the content. @discussion This property reports whether or not the calling application is authorized to play the content associated with the receiver.  Note that application authorization is independent of content authorization (see contentAuthorizedForPlayback) and that both must be granted in order for an application to be allowed to play protected content. Also, unlike content authorization, application authorization is not dependent on user credentials (i.e. if applicationAuthorizedForPlayback is NO, there are no means to obtain authorization). This value is NOT key-value observable.
 func (o *AVPlayerItem) IsApplicationAuthorizedForPlayback() bool {
-	_ret := objc.Send[bool](o.Ptr(), _aVPlayerItemSelIsApplicationAuthorizedForPlayback)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aVPlayerItemSelIsApplicationAuthorizedForPlayback)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @property		contentAuthorizedForPlayback @abstract		Indicates whether the content has been authorized by the user (e.g. by authorizing the content's associated account in iTunes). @discussion This property reports whether or not the user has provided the necessary credentials to the system in order for the content to be decrypted for playback. Note that content authorization is independent of application authorization (see applicationAuthorizedForPlayback) and that both must be granted in order for an application to be allowed to play protected content. This value is NOT key-value observable.
 func (o *AVPlayerItem) IsContentAuthorizedForPlayback() bool {
-	_ret := objc.Send[bool](o.Ptr(), _aVPlayerItemSelIsContentAuthorizedForPlayback)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aVPlayerItemSelIsContentAuthorizedForPlayback)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @property		contentAuthorizationRequestStatus @abstract		Indicates the status of the most recent call to requestContentAuthorizationAsynchronouslyWithTimeoutInterval:CompletionHandler: @discussion This property reports the authorization status as determined by the most recent call to requestContentAuthorizationAsynchronouslyWithTimeoutInterval:CompletionHandler:. The value will be AVContentAuthorizationUnknown before the first call and between the time a request call is made and just prior to the completion handler being executed (i.e. it is safe to query this property from the completion handler). This value is NOT key-value observable.
 func (o *AVPlayerItem) ContentAuthorizationRequestStatus() AVContentAuthorizationStatus {
-	_ret := objc.Send[AVContentAuthorizationStatus](o.Ptr(), _aVPlayerItemSelContentAuthorizationRequestStatus)
-	return _ret
+	var _mainthread0 AVContentAuthorizationStatus
+	purego.Main(func() {
+		_mainthread0 = func() AVContentAuthorizationStatus {
+			_ret := objc.Send[AVContentAuthorizationStatus](o.Ptr(), _aVPlayerItemSelContentAuthorizationRequestStatus)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Allows interstitials to be played according to a schedule that's specified by server-side directives. The default value is YES. A value of NO prevents automatic scheduling of future server-side interstitial events. Events specified by an AVPlayerInterstitialEventController override server-side events, regardless of the value of this property. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
@@ -846,7 +1040,9 @@ func (o *AVPlayerItem) AutomaticallyHandlesInterstitialEvents() bool {
 
 // Allows interstitials to be played according to a schedule that's specified by server-side directives. The default value is YES. A value of NO prevents automatic scheduling of future server-side interstitial events. Events specified by an AVPlayerInterstitialEventController override server-side events, regardless of the value of this property. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
 func (o *AVPlayerItem) SetAutomaticallyHandlesInterstitialEvents(automaticallyHandlesInterstitialEvents bool) {
-	o.Ptr().Send(_aVPlayerItemSelSetAutomaticallyHandlesInterstitialEvents, automaticallyHandlesInterstitialEvents)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemSelSetAutomaticallyHandlesInterstitialEvents, automaticallyHandlesInterstitialEvents)
+	})
 }
 
 // If the item was created automatically according to a template item for looping, for interstitial playback, or for other purposes, indicates the AVPlayerItem that was used as the template.

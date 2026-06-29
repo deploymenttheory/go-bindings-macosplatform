@@ -48,58 +48,92 @@ func DRSetupPanelFromID(id objc.ID) *DRSetupPanel {
 
 // @method		initWithNibName: @abstract	Initializes the receiver to use the panel from the nibName nib file. @param		nibName		Nib filename. @result		The receiver.
 func (o *DRSetupPanel) InitWithNibName(nibName *foundation.NSString) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _dRSetupPanelSelInitWithNibName, nibName.Ptr())
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _dRSetupPanelSelInitWithNibName, nibName.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @method		runSetupPanel @abstract	Displays the receiver and begins its event loop. @discussion	Invokes NSApplication's @link //apple_ref/occ/instm/NSApplication/runModalForWindow: runModalForWindow: @/link method with self as the argument. @result		Returns @link //apple_ref/c/econst/NSOKButton NSOKButton @/link (if the user clicks the default button) or @link //apple_ref/c/econst/NSCancelButton NSCancelButton @/link (if the user clicks the Cancel button).
 func (o *DRSetupPanel) RunSetupPanel() int {
-	_ret := objc.Send[int](o.Ptr(), _dRSetupPanelSelRunSetupPanel)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _dRSetupPanelSelRunSetupPanel)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @method		beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo: @abstract	Presents a setup panel as a sheet. @param		owner				The window the sheet will be attached to. If owner is not nil, the setup panel slides down as a sheet running as a document modal window. If owner is nil, this is an error. @param		modalDelegate		The modal delegate. The object that implements the didEndSelector. @param		didEndSelector		Selector to invoke when the sheet ends. This selector is optional. If implemented by the modal delegate, this method is invoked after the modal session has ended, but before dismissing the same panel. didEndSelector may dismiss the save panel itself; otherwise it will be dismissed on return from the method. didEndSelector should have the following signature: <pre>@textblock - (void)setupPanelDidEnd:(DRSetupPanel*)panel returnCode:(int)returnCode contextInfo:(void*)contextInfo; @/textblock</pre> @param		contextInfo			Context information to be passed when the selector named by didEndSelector is invoked.
 func (o *DRSetupPanel) BeginSetupSheetForWindowModalDelegateDidEndSelectorContextInfo(owner *appkit.NSWindow, modalDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_dRSetupPanelSelBeginSetupSheetForWindowModalDelegateDidEndSelectorContextInfo, owner.Ptr(), modalDelegate, didEndSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_dRSetupPanelSelBeginSetupSheetForWindowModalDelegateDidEndSelectorContextInfo, owner.Ptr(), modalDelegate, didEndSelector, contextInfo)
+	})
 }
 
 // @method		ok: @abstract	Invoked when the user clicks the panel's default button. @param		sender		The object that invoked this method.
 func (o *DRSetupPanel) Ok(sender objc.ID) {
-	o.Ptr().Send(_dRSetupPanelSelOk, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_dRSetupPanelSelOk, sender)
+	})
 }
 
 // @method		cancel: @abstract	Invoked when the user clicks the panel's cancel button. @param		sender		The object that invoked this method.
 func (o *DRSetupPanel) Cancel(sender objc.ID) {
-	o.Ptr().Send(_dRSetupPanelSelCancel, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_dRSetupPanelSelCancel, sender)
+	})
 }
 
 // @method		eject: @abstract	Invoked when the user clicks the panel's eject button. @param		sender		The object that invoked this method.
 func (o *DRSetupPanel) Eject(sender objc.ID) {
-	o.Ptr().Send(_dRSetupPanelSelEject, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_dRSetupPanelSelEject, sender)
+	})
 }
 
 // @method		open: @abstract	Invoked when the user clicks the panel's open button. @param		sender		The object that invoked this method.
 func (o *DRSetupPanel) Open(sender objc.ID) {
-	o.Ptr().Send(_dRSetupPanelSelOpen, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_dRSetupPanelSelOpen, sender)
+	})
 }
 
 // @method		close: @abstract	Invoked when the user clicks the panel's close button. @param		sender		The object that invoked this method.
 func (o *DRSetupPanel) Close(sender objc.ID) {
-	o.Ptr().Send(_dRSetupPanelSelClose, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_dRSetupPanelSelClose, sender)
+	})
 }
 
 // @method		deviceSelectionChanged: @abstract	Invoked when the user changes the device selected in the device popup. @discussion	If the device currently selected is disconnected from the machine, the device popup will remove the device from itself and select a new device. This will act as if the user changed the device selected. Because of this, device may be nil if no eligible devices are currently connected to the machine. @param		device		The newly selected device, or nil.
 func (o *DRSetupPanel) DeviceSelectionChanged(device *discrecording.DRDevice) {
-	o.Ptr().Send(_dRSetupPanelSelDeviceSelectionChanged, device.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_dRSetupPanelSelDeviceSelectionChanged, device.Ptr())
+	})
 }
 
 // @method		mediaStateChanged: @abstract	Invoked when the media state of the currently selected device changes. This can include media being ejected, inserted, being used by another application, etc. @param		status		The new device status dictionary. @result		<i>YES</i> if the inserted media is valid for use, <i>NO</i> otherwise.
 func (o *DRSetupPanel) MediaStateChanged(status *foundation.NSDictionary[objc.ID, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _dRSetupPanelSelMediaStateChanged, status.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _dRSetupPanelSelMediaStateChanged, status.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @method		setupForDisplay @abstract	This method is called immediately before panel is displayed on the screen. Any setup to be done in preparation for display should be done here.
 func (o *DRSetupPanel) SetupForDisplay() {
-	o.Ptr().Send(_dRSetupPanelSelSetupForDisplay)
+	purego.Main(func() {
+		o.Ptr().Send(_dRSetupPanelSelSetupForDisplay)
+	})
 }

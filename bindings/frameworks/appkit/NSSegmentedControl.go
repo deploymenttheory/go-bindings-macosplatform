@@ -80,251 +80,447 @@ func NSSegmentedControlFromID(id objc.ID) *NSSegmentedControl {
 
 // Selects the segment with the specified tag.
 func (o *NSSegmentedControl) SelectSegmentWithTag(tag int) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSegmentedControlSelSelectSegmentWithTag, tag)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSegmentedControlSelSelectSegmentWithTag, tag)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the width of the specified segment.
 func (o *NSSegmentedControl) SetWidthForSegment(width float64, segment int) {
-	o.Ptr().Send(_nSSegmentedControlSelSetWidthForSegment, width, segment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedControlSelSetWidthForSegment, width, segment)
+	})
 }
 
 // Returns the width of the specified segment.
 func (o *NSSegmentedControl) WidthForSegment(segment int) float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSegmentedControlSelWidthForSegment, segment)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSegmentedControlSelWidthForSegment, segment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the image for the specified segment.
 func (o *NSSegmentedControl) SetImageForSegment(image *NSImage, segment int) {
-	o.Ptr().Send(_nSSegmentedControlSelSetImageForSegment, image.Ptr(), segment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedControlSelSetImageForSegment, image.Ptr(), segment)
+	})
 }
 
 // Returns the image associated with the specified segment.
 func (o *NSSegmentedControl) ImageForSegment(segment int) *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedControlSelImageForSegment, segment)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedControlSelImageForSegment, segment)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the scaling mode used to display the specified segment’s image.
 func (o *NSSegmentedControl) SetImageScalingForSegment(scaling NSImageScaling, segment int) {
-	o.Ptr().Send(_nSSegmentedControlSelSetImageScalingForSegment, scaling, segment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedControlSelSetImageScalingForSegment, scaling, segment)
+	})
 }
 
 // Returns the scaling mode used to display the specified segment’s image.
 func (o *NSSegmentedControl) ImageScalingForSegment(segment int) NSImageScaling {
-	_ret := objc.Send[NSImageScaling](o.Ptr(), _nSSegmentedControlSelImageScalingForSegment, segment)
-	return _ret
+	var _mainthread0 NSImageScaling
+	purego.Main(func() {
+		_mainthread0 = func() NSImageScaling {
+			_ret := objc.Send[NSImageScaling](o.Ptr(), _nSSegmentedControlSelImageScalingForSegment, segment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the label for the specified segment.
 func (o *NSSegmentedControl) SetLabelForSegment(label *foundation.NSString, segment int) {
-	o.Ptr().Send(_nSSegmentedControlSelSetLabelForSegment, label.Ptr(), segment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedControlSelSetLabelForSegment, label.Ptr(), segment)
+	})
 }
 
 // Returns the label of the specified segment.
 func (o *NSSegmentedControl) LabelForSegment(segment int) *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedControlSelLabelForSegment, segment)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedControlSelLabelForSegment, segment)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the menu for the specified segment.
 func (o *NSSegmentedControl) SetMenuForSegment(menu *NSMenu, segment int) {
-	o.Ptr().Send(_nSSegmentedControlSelSetMenuForSegment, menu.Ptr(), segment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedControlSelSetMenuForSegment, menu.Ptr(), segment)
+	})
 }
 
 // Returns the menu for the specified segment.
 func (o *NSSegmentedControl) MenuForSegment(segment int) *NSMenu {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedControlSelMenuForSegment, segment)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMenuFromID(_ret)
+	var _mainthread0 *NSMenu
+	purego.Main(func() {
+		_mainthread0 = func() *NSMenu {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedControlSelMenuForSegment, segment)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMenuFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the selection state of the specified segment.
 func (o *NSSegmentedControl) SetSelectedForSegment(selected bool, segment int) {
-	o.Ptr().Send(_nSSegmentedControlSelSetSelectedForSegment, selected, segment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedControlSelSetSelectedForSegment, selected, segment)
+	})
 }
 
 // Returns a Boolean value indicating whether the specified segment is selected.
 func (o *NSSegmentedControl) IsSelectedForSegment(segment int) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSegmentedControlSelIsSelectedForSegment, segment)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSegmentedControlSelIsSelectedForSegment, segment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the enabled state of the specified segment
 func (o *NSSegmentedControl) SetEnabledForSegment(enabled bool, segment int) {
-	o.Ptr().Send(_nSSegmentedControlSelSetEnabledForSegment, enabled, segment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedControlSelSetEnabledForSegment, enabled, segment)
+	})
 }
 
 // Returns a Boolean value indicating whether the specified segment is enabled.
 func (o *NSSegmentedControl) IsEnabledForSegment(segment int) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSegmentedControlSelIsEnabledForSegment, segment)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSegmentedControlSelIsEnabledForSegment, segment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSegmentedControl) SetToolTipForSegment(toolTip *foundation.NSString, segment int) {
-	o.Ptr().Send(_nSSegmentedControlSelSetToolTipForSegment, toolTip.Ptr(), segment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedControlSelSetToolTipForSegment, toolTip.Ptr(), segment)
+	})
 }
 
 func (o *NSSegmentedControl) ToolTipForSegment(segment int) *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedControlSelToolTipForSegment, segment)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedControlSelToolTipForSegment, segment)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSegmentedControl) SetTagForSegment(tag int, segment int) {
-	o.Ptr().Send(_nSSegmentedControlSelSetTagForSegment, tag, segment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedControlSelSetTagForSegment, tag, segment)
+	})
 }
 
 func (o *NSSegmentedControl) TagForSegment(segment int) int {
-	_ret := objc.Send[int](o.Ptr(), _nSSegmentedControlSelTagForSegment, segment)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSSegmentedControlSelTagForSegment, segment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSegmentedControl) SetShowsMenuIndicatorForSegment(showsMenuIndicator bool, segment int) {
-	o.Ptr().Send(_nSSegmentedControlSelSetShowsMenuIndicatorForSegment, showsMenuIndicator, segment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedControlSelSetShowsMenuIndicatorForSegment, showsMenuIndicator, segment)
+	})
 }
 
 func (o *NSSegmentedControl) ShowsMenuIndicatorForSegment(segment int) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSegmentedControlSelShowsMenuIndicatorForSegment, segment)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSegmentedControlSelShowsMenuIndicatorForSegment, segment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSegmentedControl) SetAlignmentForSegment(alignment NSTextAlignment, segment int) {
-	o.Ptr().Send(_nSSegmentedControlSelSetAlignmentForSegment, alignment, segment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedControlSelSetAlignmentForSegment, alignment, segment)
+	})
 }
 
 func (o *NSSegmentedControl) AlignmentForSegment(segment int) NSTextAlignment {
-	_ret := objc.Send[NSTextAlignment](o.Ptr(), _nSSegmentedControlSelAlignmentForSegment, segment)
-	return _ret
+	var _mainthread0 NSTextAlignment
+	purego.Main(func() {
+		_mainthread0 = func() NSTextAlignment {
+			_ret := objc.Send[NSTextAlignment](o.Ptr(), _nSSegmentedControlSelAlignmentForSegment, segment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSegmentedControl) CompressWithPrioritizedCompressionOptions(prioritizedOptions *foundation.NSArray[*NSUserInterfaceCompressionOptions]) {
-	o.Ptr().Send(_nSSegmentedControlSelCompressWithPrioritizedCompressionOptions, prioritizedOptions.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedControlSelCompressWithPrioritizedCompressionOptions, prioritizedOptions.Ptr())
+	})
 }
 
 func (o *NSSegmentedControl) MinimumSizeWithPrioritizedCompressionOptions(prioritizedOptions *foundation.NSArray[*NSUserInterfaceCompressionOptions]) corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSSegmentedControlSelMinimumSizeWithPrioritizedCompressionOptions, prioritizedOptions.Ptr())
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSSegmentedControlSelMinimumSizeWithPrioritizedCompressionOptions, prioritizedOptions.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSegmentedControl) SegmentCount() int {
-	_ret := objc.Send[int](o.Ptr(), _nSSegmentedControlSelSegmentCount)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSSegmentedControlSelSegmentCount)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSegmentedControl) SetSegmentCount(segmentCount int) {
-	o.Ptr().Send(_nSSegmentedControlSelSetSegmentCount, segmentCount)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedControlSelSetSegmentCount, segmentCount)
+	})
 }
 
 func (o *NSSegmentedControl) SelectedSegment() int {
-	_ret := objc.Send[int](o.Ptr(), _nSSegmentedControlSelSelectedSegment)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSSegmentedControlSelSelectedSegment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSegmentedControl) SetSelectedSegment(selectedSegment int) {
-	o.Ptr().Send(_nSSegmentedControlSelSetSelectedSegment, selectedSegment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedControlSelSetSelectedSegment, selectedSegment)
+	})
 }
 
 func (o *NSSegmentedControl) SegmentStyle() NSSegmentStyle {
-	_ret := objc.Send[NSSegmentStyle](o.Ptr(), _nSSegmentedControlSelSegmentStyle)
-	return _ret
+	var _mainthread0 NSSegmentStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSSegmentStyle {
+			_ret := objc.Send[NSSegmentStyle](o.Ptr(), _nSSegmentedControlSelSegmentStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSegmentedControl) SetSegmentStyle(segmentStyle NSSegmentStyle) {
-	o.Ptr().Send(_nSSegmentedControlSelSetSegmentStyle, segmentStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedControlSelSetSegmentStyle, segmentStyle)
+	})
 }
 
 func (o *NSSegmentedControl) IsSpringLoaded() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSegmentedControlSelIsSpringLoaded)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSegmentedControlSelIsSpringLoaded)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSegmentedControl) SetSpringLoaded(springLoaded bool) {
-	o.Ptr().Send(_nSSegmentedControlSelSetSpringLoaded, springLoaded)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedControlSelSetSpringLoaded, springLoaded)
+	})
 }
 
 func (o *NSSegmentedControl) TrackingMode() NSSegmentSwitchTracking {
-	_ret := objc.Send[NSSegmentSwitchTracking](o.Ptr(), _nSSegmentedControlSelTrackingMode)
-	return _ret
+	var _mainthread0 NSSegmentSwitchTracking
+	purego.Main(func() {
+		_mainthread0 = func() NSSegmentSwitchTracking {
+			_ret := objc.Send[NSSegmentSwitchTracking](o.Ptr(), _nSSegmentedControlSelTrackingMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSegmentedControl) SetTrackingMode(trackingMode NSSegmentSwitchTracking) {
-	o.Ptr().Send(_nSSegmentedControlSelSetTrackingMode, trackingMode)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedControlSelSetTrackingMode, trackingMode)
+	})
 }
 
 func (o *NSSegmentedControl) DoubleValueForSelectedSegment() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSegmentedControlSelDoubleValueForSelectedSegment)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSegmentedControlSelDoubleValueForSelectedSegment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSegmentedControl) SelectedSegmentBezelColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedControlSelSelectedSegmentBezelColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedControlSelSelectedSegmentBezelColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSegmentedControl) SetSelectedSegmentBezelColor(selectedSegmentBezelColor *NSColor) {
-	o.Ptr().Send(_nSSegmentedControlSelSetSelectedSegmentBezelColor, selectedSegmentBezelColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedControlSelSetSelectedSegmentBezelColor, selectedSegmentBezelColor.Ptr())
+	})
 }
 
 func (o *NSSegmentedControl) IndexOfSelectedItem() int {
-	_ret := objc.Send[int](o.Ptr(), _nSSegmentedControlSelIndexOfSelectedItem)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSSegmentedControlSelIndexOfSelectedItem)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSegmentedControl) SegmentDistribution() NSSegmentDistribution {
-	_ret := objc.Send[NSSegmentDistribution](o.Ptr(), _nSSegmentedControlSelSegmentDistribution)
-	return _ret
+	var _mainthread0 NSSegmentDistribution
+	purego.Main(func() {
+		_mainthread0 = func() NSSegmentDistribution {
+			_ret := objc.Send[NSSegmentDistribution](o.Ptr(), _nSSegmentedControlSelSegmentDistribution)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSegmentedControl) SetSegmentDistribution(segmentDistribution NSSegmentDistribution) {
-	o.Ptr().Send(_nSSegmentedControlSelSetSegmentDistribution, segmentDistribution)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedControlSelSetSegmentDistribution, segmentDistribution)
+	})
 }
 
 func (o *NSSegmentedControl) ActiveCompressionOptions() *NSUserInterfaceCompressionOptions {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedControlSelActiveCompressionOptions)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSUserInterfaceCompressionOptionsFromID(_ret)
+	var _mainthread0 *NSUserInterfaceCompressionOptions
+	purego.Main(func() {
+		_mainthread0 = func() *NSUserInterfaceCompressionOptions {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedControlSelActiveCompressionOptions)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSUserInterfaceCompressionOptionsFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSegmentedControl) BorderShape() NSControlBorderShape {
-	_ret := objc.Send[NSControlBorderShape](o.Ptr(), _nSSegmentedControlSelBorderShape)
-	return _ret
+	var _mainthread0 NSControlBorderShape
+	purego.Main(func() {
+		_mainthread0 = func() NSControlBorderShape {
+			_ret := objc.Send[NSControlBorderShape](o.Ptr(), _nSSegmentedControlSelBorderShape)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSegmentedControl) SetBorderShape(borderShape NSControlBorderShape) {
-	o.Ptr().Send(_nSSegmentedControlSelSetBorderShape, borderShape)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSegmentedControlSelSetBorderShape, borderShape)
+	})
 }
 
 // Creates a standard segmented control containing one segment for each of the provided labels.
 func NSSegmentedControlSegmentedControlWithLabelsTrackingModeTargetAction(labels *foundation.NSArray[*foundation.NSString], trackingMode NSSegmentSwitchTracking, target objc.ID, action objc.SEL) *NSSegmentedControl {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSSegmentedControl), _nSSegmentedControlSelSegmentedControlWithLabelsTrackingModeTargetAction, labels.Ptr(), trackingMode, target, action)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSSegmentedControlFromID(_ret)
+	var _mainthread0 *NSSegmentedControl
+	purego.Main(func() {
+		_mainthread0 = func() *NSSegmentedControl {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSSegmentedControl), _nSSegmentedControlSelSegmentedControlWithLabelsTrackingModeTargetAction, labels.Ptr(), trackingMode, target, action)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSSegmentedControlFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a standard segmented control containing one segment for each of the provided images.
 func NSSegmentedControlSegmentedControlWithImagesTrackingModeTargetAction(images *foundation.NSArray[*NSImage], trackingMode NSSegmentSwitchTracking, target objc.ID, action objc.SEL) *NSSegmentedControl {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSSegmentedControl), _nSSegmentedControlSelSegmentedControlWithImagesTrackingModeTargetAction, images.Ptr(), trackingMode, target, action)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSSegmentedControlFromID(_ret)
+	var _mainthread0 *NSSegmentedControl
+	purego.Main(func() {
+		_mainthread0 = func() *NSSegmentedControl {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSSegmentedControl), _nSSegmentedControlSelSegmentedControlWithImagesTrackingModeTargetAction, images.Ptr(), trackingMode, target, action)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSSegmentedControlFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

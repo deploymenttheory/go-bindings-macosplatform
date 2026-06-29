@@ -94,4 +94,21 @@ type RawMethod struct {
 	// ZeroVal is the zero value returned on the error path for a scalar/struct
 	// return (kind 4 with NSError).
 	ZeroVal string
+	// MainThread wraps the objc.Send dispatch in purego.Main so the call runs on
+	// the main thread — set when the class or selector is @MainActor-isolated
+	// (and the selector is not nonisolated). Mirrors the idiomatic layer.
+	MainThread bool
+	// RetDecls are the `var _mainthreadN T` declarations hoisted above the
+	// purego.Main closure so return values can escape it (empty for a void
+	// main-thread method).
+	RetDecls []RawRetVar
+	// RetVarList is the comma-joined `_mainthread0, _mainthread1` list used for
+	// the in-closure assignment and the trailing return (empty for void).
+	RetVarList string
+}
+
+// RawRetVar is one hoisted return variable for a main-thread-wrapped method.
+type RawRetVar struct {
+	Name string
+	Type string
 }

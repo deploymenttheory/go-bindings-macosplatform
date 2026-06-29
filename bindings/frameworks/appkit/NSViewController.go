@@ -90,204 +90,328 @@ func NSViewControllerFromID(id objc.ID) *NSViewController {
 
 // Returns a view controller object initialized to the nib file in the specified bundle.
 func (o *NSViewController) InitWithNibNameBundle(nibNameOrNil *foundation.NSString, nibBundleOrNil *foundation.NSBundle) *NSViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelInitWithNibNameBundle, nibNameOrNil.Ptr(), nibBundleOrNil.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewControllerFromID(_ret)
+	var _mainthread0 *NSViewController
+	purego.Main(func() {
+		_mainthread0 = func() *NSViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelInitWithNibNameBundle, nibNameOrNil.Ptr(), nibBundleOrNil.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSViewController) InitWithCoder(coder *foundation.NSCoder) *NSViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewControllerFromID(_ret)
+	var _mainthread0 *NSViewController
+	purego.Main(func() {
+		_mainthread0 = func() *NSViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Instantiates a view from a nib file and sets the value of the view property.
 func (o *NSViewController) LoadView() {
-	o.Ptr().Send(_nSViewControllerSelLoadView)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelLoadView)
+	})
 }
 
 func (o *NSViewController) LoadViewIfNeeded() {
-	o.Ptr().Send(_nSViewControllerSelLoadViewIfNeeded)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelLoadViewIfNeeded)
+	})
 }
 
 // Attempt to commit any currently edited results of the receiver.
 func (o *NSViewController) CommitEditingWithDelegateDidCommitSelectorContextInfo(delegate objc.ID, didCommitSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_nSViewControllerSelCommitEditingWithDelegateDidCommitSelectorContextInfo, delegate, didCommitSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelCommitEditingWithDelegateDidCommitSelectorContextInfo, delegate, didCommitSelector, contextInfo)
+	})
 }
 
 // Returns whether the receiver was able to commit any pending edits.
 func (o *NSViewController) CommitEditing() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewControllerSelCommitEditing)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewControllerSelCommitEditing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Causes the receiver to discard any changes, restoring the previous values.
 func (o *NSViewController) DiscardEditing() {
-	o.Ptr().Send(_nSViewControllerSelDiscardEditing)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelDiscardEditing)
+	})
 }
 
 // Called after the view controller’s view has been loaded into memory.
 func (o *NSViewController) ViewDidLoad() {
-	o.Ptr().Send(_nSViewControllerSelViewDidLoad)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelViewDidLoad)
+	})
 }
 
 // Called after the view controller’s view has been loaded into memory is about to be added to the view hierarchy in the window.
 func (o *NSViewController) ViewWillAppear() {
-	o.Ptr().Send(_nSViewControllerSelViewWillAppear)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelViewWillAppear)
+	})
 }
 
 // Called when the view controller’s view is fully transitioned onto the screen.
 func (o *NSViewController) ViewDidAppear() {
-	o.Ptr().Send(_nSViewControllerSelViewDidAppear)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelViewDidAppear)
+	})
 }
 
 // Called when the view controller’s view is about to be removed from the view hierarchy in the window.
 func (o *NSViewController) ViewWillDisappear() {
-	o.Ptr().Send(_nSViewControllerSelViewWillDisappear)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelViewWillDisappear)
+	})
 }
 
 // Called after the view controller’s view is removed from the view hierarchy in a window.
 func (o *NSViewController) ViewDidDisappear() {
-	o.Ptr().Send(_nSViewControllerSelViewDidDisappear)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelViewDidDisappear)
+	})
 }
 
 // Called during Auto Layout constraint updating to enable the view controller to mediate the process.
 func (o *NSViewController) UpdateViewConstraints() {
-	o.Ptr().Send(_nSViewControllerSelUpdateViewConstraints)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelUpdateViewConstraints)
+	})
 }
 
 // Called just before the layout method of the view controller’s view is called.
 func (o *NSViewController) ViewWillLayout() {
-	o.Ptr().Send(_nSViewControllerSelViewWillLayout)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelViewWillLayout)
+	})
 }
 
 // Called immediately after the layout method of the view controller’s view is called.
 func (o *NSViewController) ViewDidLayout() {
-	o.Ptr().Send(_nSViewControllerSelViewDidLayout)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelViewDidLayout)
+	})
 }
 
 func (o *NSViewController) NibName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelNibName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelNibName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSViewController) NibBundle() *foundation.NSBundle {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelNibBundle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSBundleFromID(_ret)
+	var _mainthread0 *foundation.NSBundle
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSBundle {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelNibBundle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSBundleFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSViewController) RepresentedObject() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelRepresentedObject)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelRepresentedObject)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSViewController) SetRepresentedObject(representedObject objc.ID) {
-	o.Ptr().Send(_nSViewControllerSelSetRepresentedObject, representedObject)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelSetRepresentedObject, representedObject)
+	})
 }
 
 func (o *NSViewController) Title() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSViewController) SetTitle(title *foundation.NSString) {
-	o.Ptr().Send(_nSViewControllerSelSetTitle, title.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelSetTitle, title.Ptr())
+	})
 }
 
 func (o *NSViewController) View() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSViewController) SetView(view *NSView) {
-	o.Ptr().Send(_nSViewControllerSelSetView, view.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelSetView, view.Ptr())
+	})
 }
 
 func (o *NSViewController) ViewIfLoaded() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelViewIfLoaded)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelViewIfLoaded)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSViewController) IsViewLoaded() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewControllerSelIsViewLoaded)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewControllerSelIsViewLoaded)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSViewController) PreferredContentSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewControllerSelPreferredContentSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewControllerSelPreferredContentSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSViewController) SetPreferredContentSize(preferredContentSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSViewControllerSelSetPreferredContentSize, preferredContentSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelSetPreferredContentSize, preferredContentSize)
+	})
 }
 
 // Presents another view controller using a specified, custom animator for presentation and dismissal.
 func (o *NSViewController) PresentViewControllerAnimator(viewController *NSViewController, animator NSViewControllerPresentationAnimator) {
-	o.Ptr().Send(_nSViewControllerSelPresentViewControllerAnimator, viewController.Ptr(), animator)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelPresentViewControllerAnimator, viewController.Ptr(), animator)
+	})
 }
 
 // Dismisses a presented view controller, using the same animator that presented it.
 func (o *NSViewController) DismissViewController(viewController *NSViewController) {
-	o.Ptr().Send(_nSViewControllerSelDismissViewController, viewController.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelDismissViewController, viewController.Ptr())
+	})
 }
 
 func (o *NSViewController) DismissController(sender objc.ID) {
-	o.Ptr().Send(_nSViewControllerSelDismissController, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelDismissController, sender)
+	})
 }
 
 func (o *NSViewController) PresentedViewControllers() *foundation.NSArray[*NSViewController] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelPresentedViewControllers)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSViewController](_ret)
+	var _mainthread0 *foundation.NSArray[*NSViewController]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSViewController] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelPresentedViewControllers)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSViewController](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSViewController) PresentingViewController() *NSViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelPresentingViewController)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewControllerFromID(_ret)
+	var _mainthread0 *NSViewController
+	purego.Main(func() {
+		_mainthread0 = func() *NSViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelPresentingViewController)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Presents another view controller as a sheet.
 func (o *NSViewController) PresentViewControllerAsSheet(viewController *NSViewController) {
-	o.Ptr().Send(_nSViewControllerSelPresentViewControllerAsSheet, viewController.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelPresentViewControllerAsSheet, viewController.Ptr())
+	})
 }
 
 // Presents another view controller as a modal window, also known as an alert.
 func (o *NSViewController) PresentViewControllerAsModalWindow(viewController *NSViewController) {
-	o.Ptr().Send(_nSViewControllerSelPresentViewControllerAsModalWindow, viewController.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelPresentViewControllerAsModalWindow, viewController.Ptr())
+	})
 }
 
 // Presents another view controller as a popover.
 func (o *NSViewController) PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehavior(viewController *NSViewController, positioningRect corefoundation.CGRect, positioningView *NSView, preferredEdge foundation.NSRectEdge, behavior NSPopoverBehavior) {
-	o.Ptr().Send(_nSViewControllerSelPresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehavior, viewController.Ptr(), positioningRect, positioningView.Ptr(), preferredEdge, behavior)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelPresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehavior, viewController.Ptr(), positioningRect, positioningView.Ptr(), preferredEdge, behavior)
+	})
 }
 
 func (o *NSViewController) PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehaviorHasFullSizeContent(viewController *NSViewController, positioningRect corefoundation.CGRect, positioningView *NSView, preferredEdge foundation.NSRectEdge, behavior NSPopoverBehavior, hasFullSizeContent bool) {
-	o.Ptr().Send(_nSViewControllerSelPresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehaviorHasFullSizeContent, viewController.Ptr(), positioningRect, positioningView.Ptr(), preferredEdge, behavior, hasFullSizeContent)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelPresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehaviorHasFullSizeContent, viewController.Ptr(), positioningRect, positioningView.Ptr(), preferredEdge, behavior, hasFullSizeContent)
+	})
 }
 
 // Performs a transition between two sibling child view controllers of the view controller.
@@ -299,102 +423,170 @@ func (o *NSViewController) TransitionFromViewControllerToViewControllerOptionsCo
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_nSViewControllerSelTransitionFromViewControllerToViewControllerOptionsCompletionHandler, fromViewController.Ptr(), toViewController.Ptr(), options, __block_completion)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelTransitionFromViewControllerToViewControllerOptionsCompletionHandler, fromViewController.Ptr(), toViewController.Ptr(), options, __block_completion)
+	})
 }
 
 // A convenience method for adding a child view controller at the end of the childViewControllers array.
 func (o *NSViewController) AddChildViewController(childViewController *NSViewController) {
-	o.Ptr().Send(_nSViewControllerSelAddChildViewController, childViewController.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelAddChildViewController, childViewController.Ptr())
+	})
 }
 
 // Removes the called view controller from its parent view controller.
 func (o *NSViewController) RemoveFromParentViewController() {
-	o.Ptr().Send(_nSViewControllerSelRemoveFromParentViewController)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelRemoveFromParentViewController)
+	})
 }
 
 // Inserts a specified child view controller into the childViewControllers array at a specified position.
 func (o *NSViewController) InsertChildViewControllerAtIndex(childViewController *NSViewController, index int) {
-	o.Ptr().Send(_nSViewControllerSelInsertChildViewControllerAtIndex, childViewController.Ptr(), index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelInsertChildViewControllerAtIndex, childViewController.Ptr(), index)
+	})
 }
 
 // Removes a specified child controller from the view controller.
 func (o *NSViewController) RemoveChildViewControllerAtIndex(index int) {
-	o.Ptr().Send(_nSViewControllerSelRemoveChildViewControllerAtIndex, index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelRemoveChildViewControllerAtIndex, index)
+	})
 }
 
 // Called when there is a change in value of the preferredContentSize property of a child view controller or a presented view controller.
 func (o *NSViewController) PreferredContentSizeDidChangeForViewController(viewController *NSViewController) {
-	o.Ptr().Send(_nSViewControllerSelPreferredContentSizeDidChangeForViewController, viewController.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelPreferredContentSizeDidChangeForViewController, viewController.Ptr())
+	})
 }
 
 // For a view controller that is part of an app extension, called when its view is about to be resized.
 func (o *NSViewController) ViewWillTransitionToSize(newSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSViewControllerSelViewWillTransitionToSize, newSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelViewWillTransitionToSize, newSize)
+	})
 }
 
 func (o *NSViewController) ParentViewController() *NSViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelParentViewController)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewControllerFromID(_ret)
+	var _mainthread0 *NSViewController
+	purego.Main(func() {
+		_mainthread0 = func() *NSViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelParentViewController)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSViewController) ChildViewControllers() *foundation.NSArray[*NSViewController] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelChildViewControllers)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSViewController](_ret)
+	var _mainthread0 *foundation.NSArray[*NSViewController]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSViewController] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelChildViewControllers)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSViewController](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSViewController) SetChildViewControllers(childViewControllers *foundation.NSArray[*NSViewController]) {
-	o.Ptr().Send(_nSViewControllerSelSetChildViewControllers, childViewControllers.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelSetChildViewControllers, childViewControllers.Ptr())
+	})
 }
 
 func (o *NSViewController) Storyboard() *NSStoryboard {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelStoryboard)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSStoryboardFromID(_ret)
+	var _mainthread0 *NSStoryboard
+	purego.Main(func() {
+		_mainthread0 = func() *NSStoryboard {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelStoryboard)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSStoryboardFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSViewController) ExtensionContext() *foundation.NSExtensionContext {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelExtensionContext)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSExtensionContextFromID(_ret)
+	var _mainthread0 *foundation.NSExtensionContext
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSExtensionContext {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelExtensionContext)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSExtensionContextFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSViewController) SourceItemView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelSourceItemView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelSourceItemView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSViewController) SetSourceItemView(sourceItemView *NSView) {
-	o.Ptr().Send(_nSViewControllerSelSetSourceItemView, sourceItemView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelSetSourceItemView, sourceItemView.Ptr())
+	})
 }
 
 func (o *NSViewController) PreferredScreenOrigin() corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSViewControllerSelPreferredScreenOrigin)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSViewControllerSelPreferredScreenOrigin)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSViewController) SetPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) {
-	o.Ptr().Send(_nSViewControllerSelSetPreferredScreenOrigin, preferredScreenOrigin)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewControllerSelSetPreferredScreenOrigin, preferredScreenOrigin)
+	})
 }
 
 func (o *NSViewController) PreferredMinimumSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewControllerSelPreferredMinimumSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewControllerSelPreferredMinimumSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSViewController) PreferredMaximumSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewControllerSelPreferredMaximumSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewControllerSelPreferredMaximumSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

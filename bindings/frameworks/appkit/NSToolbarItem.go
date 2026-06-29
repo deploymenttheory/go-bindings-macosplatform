@@ -84,295 +84,503 @@ func NSToolbarItemFromID(id objc.ID) *NSToolbarItem {
 
 // Creates a toolbar item with the specified identifier.
 func (o *NSToolbarItem) InitWithItemIdentifier(itemIdentifier *foundation.NSString) *NSToolbarItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelInitWithItemIdentifier, itemIdentifier.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSToolbarItemFromID(_ret)
+	var _mainthread0 *NSToolbarItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSToolbarItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelInitWithItemIdentifier, itemIdentifier.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSToolbarItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Validates the toolbar item’s menu and its ability to perfrom its action.
 func (o *NSToolbarItem) Validate() {
-	o.Ptr().Send(_nSToolbarItemSelValidate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemSelValidate)
+	})
 }
 
 func (o *NSToolbarItem) ItemIdentifier() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelItemIdentifier)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelItemIdentifier)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Use this to determine the toolbar in which an item is currently displayed.
 func (o *NSToolbarItem) Toolbar() *NSToolbar {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelToolbar)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSToolbarFromID(_ret)
+	var _mainthread0 *NSToolbar
+	purego.Main(func() {
+		_mainthread0 = func() *NSToolbar {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelToolbar)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSToolbarFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Use this to set the item's label that appears in the toolbar. The label may also be used for the default `menuFormRepresentation` of the item. Also, developers should make sure the length of the label is appropriate and not too long.
 func (o *NSToolbarItem) Label() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelLabel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelLabel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbarItem) SetLabel(label *foundation.NSString) {
-	o.Ptr().Send(_nSToolbarItemSelSetLabel, label.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemSelSetLabel, label.Ptr())
+	})
 }
 
 // Use this to set the item's label that appears when the item is in the customization palette. All Items must have a palette label, and for most things it is reasonable to set them to the same string as the label used in the toolbar.
 func (o *NSToolbarItem) PaletteLabel() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelPaletteLabel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelPaletteLabel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbarItem) SetPaletteLabel(paletteLabel *foundation.NSString) {
-	o.Ptr().Send(_nSToolbarItemSelSetPaletteLabel, paletteLabel.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemSelSetPaletteLabel, paletteLabel.Ptr())
+	})
 }
 
 // An array of all alternate labels this item may display. The item will use the size of the longest label to prevent resizing when the label is changed.
 func (o *NSToolbarItem) PossibleLabels() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelPossibleLabels)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSSetFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSSet[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSSet[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelPossibleLabels)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSSetFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbarItem) SetPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) {
-	o.Ptr().Send(_nSToolbarItemSelSetPossibleLabels, possibleLabels.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemSelSetPossibleLabels, possibleLabels.Ptr())
+	})
 }
 
 // Use this to set a tooltip to be used when the item is displayed in the toolbar. (forwards to `-view` if it responds)
 func (o *NSToolbarItem) ToolTip() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelToolTip)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelToolTip)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbarItem) SetToolTip(toolTip *foundation.NSString) {
-	o.Ptr().Send(_nSToolbarItemSelSetToolTip, toolTip.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemSelSetToolTip, toolTip.Ptr())
+	})
 }
 
 // The menu form of a toolbar item's purpose is twofold. First, when the window is too small to display an item, it will be clipped but remain accessible from a "clipped items" menu containing the menu item returned here. Second, in text only mode, the menu returned will be used to create the displayed items. Singleton menu items will be clickable, while submenu items will be represented as a pull down. For instance, say you want a button that allows you to switch between modes A, B, and C. You could represent this as a menu by: a menu item "mode" with three submenu items "A", "B", and "C". By default, this method returns a singleton menu item with item label as the title. For standard items, the target, action is set.
 func (o *NSToolbarItem) MenuFormRepresentation() *NSMenuItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelMenuFormRepresentation)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMenuItemFromID(_ret)
+	var _mainthread0 *NSMenuItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSMenuItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelMenuFormRepresentation)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMenuItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbarItem) SetMenuFormRepresentation(menuFormRepresentation *NSMenuItem) {
-	o.Ptr().Send(_nSToolbarItemSelSetMenuFormRepresentation, menuFormRepresentation.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemSelSetMenuFormRepresentation, menuFormRepresentation.Ptr())
+	})
 }
 
 // Tag for your own custom purpose. (forwards to `-view` if it responds)
 func (o *NSToolbarItem) Tag() int {
-	_ret := objc.Send[int](o.Ptr(), _nSToolbarItemSelTag)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSToolbarItemSelTag)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbarItem) SetTag(tag int) {
-	o.Ptr().Send(_nSToolbarItemSelSetTag, tag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemSelSetTag, tag)
+	})
 }
 
 // Set and get the action of an item. (forwards to `-view` if it responds)
 func (o *NSToolbarItem) Target() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelTarget)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelTarget)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbarItem) SetTarget(target objc.ID) {
-	o.Ptr().Send(_nSToolbarItemSelSetTarget, target)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemSelSetTarget, target)
+	})
 }
 
 // Set and get the action of an item. For custom views, this method will call `-setAction:` on the view if it responds. (forwards to `-view` if it responds)
 func (o *NSToolbarItem) Action() objc.SEL {
-	_ret := objc.Send[objc.SEL](o.Ptr(), _nSToolbarItemSelAction)
-	return _ret
+	var _mainthread0 objc.SEL
+	purego.Main(func() {
+		_mainthread0 = func() objc.SEL {
+			_ret := objc.Send[objc.SEL](o.Ptr(), _nSToolbarItemSelAction)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbarItem) SetAction(action objc.SEL) {
-	o.Ptr().Send(_nSToolbarItemSelSetAction, action)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemSelSetAction, action)
+	})
 }
 
 // Set and get the enabled flag of an item. For custom views, this method will call `-setEnabled:` on the view if it responds. (forwards to `-view` if it responds)
 func (o *NSToolbarItem) IsEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSToolbarItemSelIsEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSToolbarItemSelIsEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbarItem) SetEnabled(enabled bool) {
-	o.Ptr().Send(_nSToolbarItemSelSetEnabled, enabled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemSelSetEnabled, enabled)
+	})
 }
 
 func (o *NSToolbarItem) Image() *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbarItem) SetImage(image *NSImage) {
-	o.Ptr().Send(_nSToolbarItemSelSetImage, image.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemSelSetImage, image.Ptr())
+	})
 }
 
 // Set and get the title of an item. For custom views, this method will call `-setTitle:` on the view if it responds. (forwards to `-view` if it responds)
 func (o *NSToolbarItem) Title() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbarItem) SetTitle(title *foundation.NSString) {
-	o.Ptr().Send(_nSToolbarItemSelSetTitle, title.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemSelSetTitle, title.Ptr())
+	})
 }
 
 // When set on an item without a custom view, the button produced will have a bordered style. Defaults to NO.
 func (o *NSToolbarItem) IsBordered() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSToolbarItemSelIsBordered)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSToolbarItemSelIsBordered)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbarItem) SetBordered(bordered bool) {
-	o.Ptr().Send(_nSToolbarItemSelSetBordered, bordered)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemSelSetBordered, bordered)
+	})
 }
 
 func (o *NSToolbarItem) BackgroundTintColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelBackgroundTintColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelBackgroundTintColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbarItem) SetBackgroundTintColor(backgroundTintColor *NSColor) {
-	o.Ptr().Send(_nSToolbarItemSelSetBackgroundTintColor, backgroundTintColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemSelSetBackgroundTintColor, backgroundTintColor.Ptr())
+	})
 }
 
 // Defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items' background.
 func (o *NSToolbarItem) Style() NSToolbarItemStyle {
-	_ret := objc.Send[NSToolbarItemStyle](o.Ptr(), _nSToolbarItemSelStyle)
-	return _ret
+	var _mainthread0 NSToolbarItemStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSToolbarItemStyle {
+			_ret := objc.Send[NSToolbarItemStyle](o.Ptr(), _nSToolbarItemSelStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbarItem) SetStyle(style NSToolbarItemStyle) {
-	o.Ptr().Send(_nSToolbarItemSelSetStyle, style)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemSelSetStyle, style)
+	})
 }
 
 // Whether or not the item behaves as a navigation item (i.e. back/forward) in the toolbar. Navigation items may be specially positioned by the system outside the normal list of items of the toolbar in the order specified by `-toolbarDefaultItemIdentifiers:`. Defaults to NO.
 func (o *NSToolbarItem) IsNavigational() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSToolbarItemSelIsNavigational)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSToolbarItemSelIsNavigational)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbarItem) SetNavigational(navigational bool) {
-	o.Ptr().Send(_nSToolbarItemSelSetNavigational, navigational)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemSelSetNavigational, navigational)
+	})
 }
 
 // Items with automatically generated views will return nil from this getter. Custom views may be provided but not all `NSToolbarItem` subclasses support custom views. Note that, by default, many of the set/get methods will be implemented by calls forwarded to the view you set, if it responds to it.
 func (o *NSToolbarItem) View() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbarItem) SetView(view *NSView) {
-	o.Ptr().Send(_nSToolbarItemSelSetView, view.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemSelSetView, view.Ptr())
+	})
 }
 
 // An item is visible if it is present in the NSToolbar and not in the overflow menu. This property is key value observable.
 func (o *NSToolbarItem) IsVisible() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSToolbarItemSelIsVisible)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSToolbarItemSelIsVisible)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Determines whether an item is visible in the toolbar. The item will still be visible in the customization panel. Because hidden items may be visible during user customization, use the `visible` property to determine if an item is currently displayed. Note that even hidden toolbar items are sync'd to other toolbars with a shared identifier, but its `hidden` state can be unique to each instance. Use this property to show a toolbar item in one toolbar instance but not another.
 func (o *NSToolbarItem) IsHidden() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSToolbarItemSelIsHidden)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSToolbarItemSelIsHidden)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbarItem) SetHidden(hidden bool) {
-	o.Ptr().Send(_nSToolbarItemSelSetHidden, hidden)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemSelSetHidden, hidden)
+	})
 }
 
 // Unless you have already set your own custom view, you should not call these methods. The min size should be small enough to look nice in all display modes. If you do not set a min/max size, the view's size properties will be calculated using constraints. Apps linked before 10.14 will use the view's current size. In general, apps should rely on the automatic measurements and constraints to define min/max sizes rather than setting these properties since this will account for localizations.
 // Deprecated: This property is no longer recommended. Instead, let the system automatically measure the size of the view using constraints.
 func (o *NSToolbarItem) MinSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSToolbarItemSelMinSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSToolbarItemSelMinSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: This property is no longer recommended. Instead, let the system automatically measure the size of the view using constraints.
 func (o *NSToolbarItem) SetMinSize(minSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSToolbarItemSelSetMinSize, minSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemSelSetMinSize, minSize)
+	})
 }
 
 // Deprecated: This property is no longer recommended. Instead, let the system automatically measure the size of the view using constraints.
 func (o *NSToolbarItem) MaxSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSToolbarItemSelMaxSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSToolbarItemSelMaxSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: This property is no longer recommended. Instead, let the system automatically measure the size of the view using constraints.
 func (o *NSToolbarItem) SetMaxSize(maxSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSToolbarItemSelSetMaxSize, maxSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemSelSetMaxSize, maxSize)
+	})
 }
 
 // When a toolbar does not have enough space to fit all its items, it must push some into the overflow menu. Items with the highest `visibilityPriority` level are chosen last for the overflow menu. The default `visibilityPriority` value is `NSToolbarItemVisibilityPriorityStandard`. To suggest that an item always remain visible, give it a value greater than `NSToolbarItemVisibilityPriorityStandard`, but less than `NSToolbarItemVisibilityPriorityUser`. In 10.7, users can no longer modify the toolbar item visibility priority.
 func (o *NSToolbarItem) VisibilityPriority() int {
-	_ret := objc.Send[int](o.Ptr(), _nSToolbarItemSelVisibilityPriority)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSToolbarItemSelVisibilityPriority)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbarItem) SetVisibilityPriority(visibilityPriority int) {
-	o.Ptr().Send(_nSToolbarItemSelSetVisibilityPriority, visibilityPriority)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemSelSetVisibilityPriority, visibilityPriority)
+	})
 }
 
 // A badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
 func (o *NSToolbarItem) Badge() *NSItemBadge {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelBadge)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSItemBadgeFromID(_ret)
+	var _mainthread0 *NSItemBadge
+	purego.Main(func() {
+		_mainthread0 = func() *NSItemBadge {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelBadge)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSItemBadgeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbarItem) SetBadge(badge *NSItemBadge) {
-	o.Ptr().Send(_nSToolbarItemSelSetBadge, badge.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemSelSetBadge, badge.Ptr())
+	})
 }
 
 // This property only affects automatic validation performed by NSToolbar. Explicit validation requests, such as the `-[NSToolbar validateVisibleItems]` method, will invoke the `-validate` method even if `autovalidates` is `NO`. Defaults to YES.
 func (o *NSToolbarItem) Autovalidates() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSToolbarItemSelAutovalidates)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSToolbarItemSelAutovalidates)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbarItem) SetAutovalidates(autovalidates bool) {
-	o.Ptr().Send(_nSToolbarItemSelSetAutovalidates, autovalidates)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemSelSetAutovalidates, autovalidates)
+	})
 }
 
 // Duplicate items outside of spaces are not allowed.
 // Deprecated: Duplicates are no longer supported.
 func (o *NSToolbarItem) AllowsDuplicatesInToolbar() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSToolbarItemSelAllowsDuplicatesInToolbar)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSToolbarItemSelAllowsDuplicatesInToolbar)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

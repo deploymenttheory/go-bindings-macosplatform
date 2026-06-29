@@ -42,53 +42,91 @@ func QCCompositionParameterViewFromID(id objc.ID) *QCCompositionParameterView {
 
 // Sets the composition parameter view for editing the input parameters of the provided renderer object.
 func (o *QCCompositionParameterView) SetCompositionRenderer(renderer objc.ID) {
-	o.Ptr().Send(_qCCompositionParameterViewSelSetCompositionRenderer, renderer)
+	purego.Main(func() {
+		o.Ptr().Send(_qCCompositionParameterViewSelSetCompositionRenderer, renderer)
+	})
 }
 
 // Returns the renderer object associated with the composition parameter view.
 func (o *QCCompositionParameterView) CompositionRenderer() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionParameterViewSelCompositionRenderer)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionParameterViewSelCompositionRenderer)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Checks whether the composition that is currently edited by the composition parameter view has any input parameters.
 func (o *QCCompositionParameterView) HasParameters() bool {
-	_ret := objc.Send[bool](o.Ptr(), _qCCompositionParameterViewSelHasParameters)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _qCCompositionParameterViewSelHasParameters)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the background color of the composition parameter view.
 func (o *QCCompositionParameterView) SetBackgroundColor(color *appkit.NSColor) {
-	o.Ptr().Send(_qCCompositionParameterViewSelSetBackgroundColor, color.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_qCCompositionParameterViewSelSetBackgroundColor, color.Ptr())
+	})
 }
 
 // Retrieves the background color of the composition parameter view.
 func (o *QCCompositionParameterView) BackgroundColor() *appkit.NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionParameterViewSelBackgroundColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSColorFromID(_ret)
+	var _mainthread0 *appkit.NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionParameterViewSelBackgroundColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets whether the composition parameter view draws its background.
 func (o *QCCompositionParameterView) SetDrawsBackground(flag bool) {
-	o.Ptr().Send(_qCCompositionParameterViewSelSetDrawsBackground, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_qCCompositionParameterViewSelSetDrawsBackground, flag)
+	})
 }
 
 // Returns whether the composition parameter view draws its background.
 func (o *QCCompositionParameterView) DrawsBackground() bool {
-	_ret := objc.Send[bool](o.Ptr(), _qCCompositionParameterViewSelDrawsBackground)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _qCCompositionParameterViewSelDrawsBackground)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the composition parameter view delegate.
 func (o *QCCompositionParameterView) SetDelegate(delegate objc.ID) {
-	o.Ptr().Send(_qCCompositionParameterViewSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_qCCompositionParameterViewSelSetDelegate, delegate)
+	})
 }
 
 // Returns the composition parameter view delegate.
 func (o *QCCompositionParameterView) Delegate() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionParameterViewSelDelegate)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionParameterViewSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

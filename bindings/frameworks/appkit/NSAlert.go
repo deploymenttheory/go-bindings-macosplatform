@@ -63,31 +63,51 @@ func NSAlertFromID(id objc.ID) *NSAlert {
 
 // Returns an alert initialized from information in an error object.
 func NSAlertAlertWithError(error_ unsafe.Pointer) *NSAlert {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSAlert), _nSAlertSelAlertWithError, error_)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSAlertFromID(_ret)
+	var _mainthread0 *NSAlert
+	purego.Main(func() {
+		_mainthread0 = func() *NSAlert {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSAlert), _nSAlertSelAlertWithError, error_)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSAlertFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Adds a button with a given title to the alert.
 func (o *NSAlert) AddButtonWithTitle(title *foundation.NSString) *NSButton {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelAddButtonWithTitle, title.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSButtonFromID(_ret)
+	var _mainthread0 *NSButton
+	purego.Main(func() {
+		_mainthread0 = func() *NSButton {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelAddButtonWithTitle, title.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies that the alert must do immediate layout instead of lazily just before display.
 func (o *NSAlert) Layout() {
-	o.Ptr().Send(_nSAlertSelLayout)
+	purego.Main(func() {
+		o.Ptr().Send(_nSAlertSelLayout)
+	})
 }
 
 // Runs the alert as an app-modal dialog and returns the constant that identifies the button clicked.
 func (o *NSAlert) RunModal() int {
-	_ret := objc.Send[int](o.Ptr(), _nSAlertSelRunModal)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSAlertSelRunModal)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Runs the alert modally as a sheet attached to the specified window.
@@ -99,162 +119,262 @@ func (o *NSAlert) BeginSheetModalForWindowCompletionHandler(sheetWindow *NSWindo
 		})
 		defer __block_handler.Release()
 	}
-	o.Ptr().Send(_nSAlertSelBeginSheetModalForWindowCompletionHandler, sheetWindow.Ptr(), __block_handler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSAlertSelBeginSheetModalForWindowCompletionHandler, sheetWindow.Ptr(), __block_handler)
+	})
 }
 
 // The text that is displayed prominently in the alert. - Note: Use this string to get the user’s attention and communicate the reason for displaying the alert.
 func (o *NSAlert) MessageText() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelMessageText)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelMessageText)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The text that is displayed prominently in the alert. - Note: Use this string to get the user’s attention and communicate the reason for displaying the alert.
 func (o *NSAlert) SetMessageText(messageText *foundation.NSString) {
-	o.Ptr().Send(_nSAlertSelSetMessageText, messageText.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSAlertSelSetMessageText, messageText.Ptr())
+	})
 }
 
 // The descriptive text that provides more details about the reason for the alert. - Note: The informative text string is displayed below the message text and is less prominent. Use this string to provide additional context about the reason for the alert or about the actions that the user might take.
 func (o *NSAlert) InformativeText() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelInformativeText)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelInformativeText)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The descriptive text that provides more details about the reason for the alert. - Note: The informative text string is displayed below the message text and is less prominent. Use this string to provide additional context about the reason for the alert or about the actions that the user might take.
 func (o *NSAlert) SetInformativeText(informativeText *foundation.NSString) {
-	o.Ptr().Send(_nSAlertSelSetInformativeText, informativeText.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSAlertSelSetInformativeText, informativeText.Ptr())
+	})
 }
 
 // The custom icon displayed in the alert. By default, the image used in an alert is the app icon. If you set this property’s value, your specified custom image is used in place of the app icon. If you’ve set a custom alert icon, you can clear it by setting this property’s value to `nil`, which restores use of the app icon for the alert. - Note: AppKit may omit the icon from the alert if it’s the app icon and the alert’s context is clear, such as being presented as a sheet on an app window.
 func (o *NSAlert) Icon() *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelIcon)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelIcon)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The custom icon displayed in the alert. By default, the image used in an alert is the app icon. If you set this property’s value, your specified custom image is used in place of the app icon. If you’ve set a custom alert icon, you can clear it by setting this property’s value to `nil`, which restores use of the app icon for the alert. - Note: AppKit may omit the icon from the alert if it’s the app icon and the alert’s context is clear, such as being presented as a sheet on an app window.
 func (o *NSAlert) SetIcon(icon *NSImage) {
-	o.Ptr().Send(_nSAlertSelSetIcon, icon.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSAlertSelSetIcon, icon.Ptr())
+	})
 }
 
 // The array of response buttons for the alert. The buttons are in the order in which they were added, and do not necessarily reflect the order they are arranged visually. The array does not include the default “OK” button that is shown in an alert presented without any buttons added with `-addButtonWithTitle:`.
 func (o *NSAlert) Buttons() *foundation.NSArray[*NSButton] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelButtons)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSButton](_ret)
+	var _mainthread0 *foundation.NSArray[*NSButton]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSButton] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelButtons)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSButton](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Indicates the alert’s severity level. See the `NSAlertStyle` enumeration for the list of alert style constants.
 func (o *NSAlert) AlertStyle() NSAlertStyle {
-	_ret := objc.Send[NSAlertStyle](o.Ptr(), _nSAlertSelAlertStyle)
-	return _ret
+	var _mainthread0 NSAlertStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSAlertStyle {
+			_ret := objc.Send[NSAlertStyle](o.Ptr(), _nSAlertSelAlertStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Indicates the alert’s severity level. See the `NSAlertStyle` enumeration for the list of alert style constants.
 func (o *NSAlert) SetAlertStyle(alertStyle NSAlertStyle) {
-	o.Ptr().Send(_nSAlertSelSetAlertStyle, alertStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSAlertSelSetAlertStyle, alertStyle)
+	})
 }
 
 // Specifies whether the alert has a help button. Set this property’s value to `YES` to specify that the alert has a help button, or `NO` to specify it does not. When a user clicks an alert’s help button, the alert delegate (`delegate`) receives an `alertShowHelp:` message. The delegate is responsible for displaying the help information related to this particular alert. Clicking an alert’s help button can alternately cause the `-openHelpAnchor:inBook:` message to be sent to the app’s help manager with a `nil` book and the anchor specified by the `helpAnchor` property, if any of the following conditions are true: - There is no alert delegate. - The alert delegate does not implement `-alertShowHelp:`. - The alert delegate implements `-alertShowHelp:` but returns `NO`. When this is the case, an exception is raised if no help anchor is set.
 func (o *NSAlert) ShowsHelp() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSAlertSelShowsHelp)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSAlertSelShowsHelp)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies whether the alert has a help button. Set this property’s value to `YES` to specify that the alert has a help button, or `NO` to specify it does not. When a user clicks an alert’s help button, the alert delegate (`delegate`) receives an `alertShowHelp:` message. The delegate is responsible for displaying the help information related to this particular alert. Clicking an alert’s help button can alternately cause the `-openHelpAnchor:inBook:` message to be sent to the app’s help manager with a `nil` book and the anchor specified by the `helpAnchor` property, if any of the following conditions are true: - There is no alert delegate. - The alert delegate does not implement `-alertShowHelp:`. - The alert delegate implements `-alertShowHelp:` but returns `NO`. When this is the case, an exception is raised if no help anchor is set.
 func (o *NSAlert) SetShowsHelp(showsHelp bool) {
-	o.Ptr().Send(_nSAlertSelSetShowsHelp, showsHelp)
+	purego.Main(func() {
+		o.Ptr().Send(_nSAlertSelSetShowsHelp, showsHelp)
+	})
 }
 
 // The alert’s HTML help anchor used when the user clicks the alert’s help button
 func (o *NSAlert) HelpAnchor() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelHelpAnchor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelHelpAnchor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The alert’s HTML help anchor used when the user clicks the alert’s help button
 func (o *NSAlert) SetHelpAnchor(helpAnchor *foundation.NSString) {
-	o.Ptr().Send(_nSAlertSelSetHelpAnchor, helpAnchor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSAlertSelSetHelpAnchor, helpAnchor.Ptr())
+	})
 }
 
 // The delegate of the receiver, currently only allows for custom help behavior of the alert. For apps linked against 10.12, this property has zeroing weak memory semantics. When linked against an older SDK this back to having `retain` semantics, matching legacy behavior.
 func (o *NSAlert) Delegate() NSAlertDelegate {
-	_ret := objc.Send[NSAlertDelegate](o.Ptr(), _nSAlertSelDelegate)
-	return _ret
+	var _mainthread0 NSAlertDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSAlertDelegate {
+			_ret := objc.Send[NSAlertDelegate](o.Ptr(), _nSAlertSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The delegate of the receiver, currently only allows for custom help behavior of the alert. For apps linked against 10.12, this property has zeroing weak memory semantics. When linked against an older SDK this back to having `retain` semantics, matching legacy behavior.
 func (o *NSAlert) SetDelegate(delegate NSAlertDelegate) {
-	o.Ptr().Send(_nSAlertSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSAlertSelSetDelegate, delegate)
+	})
 }
 
 // The accessory view displayed in the alert, placed between the informative text or suppression checkbox (if present) and the response buttons. Before changing the location of the accessory view, first call the `-layout` method.
 func (o *NSAlert) AccessoryView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelAccessoryView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelAccessoryView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The accessory view displayed in the alert, placed between the informative text or suppression checkbox (if present) and the response buttons. Before changing the location of the accessory view, first call the `-layout` method.
 func (o *NSAlert) SetAccessoryView(accessoryView *NSView) {
-	o.Ptr().Send(_nSAlertSelSetAccessoryView, accessoryView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSAlertSelSetAccessoryView, accessoryView.Ptr())
+	})
 }
 
 // Specifies whether the alert includes a suppression checkbox, which can be employed to allow a user to opt out of seeing the alert again. The default value of this property is `NO`, which specifies the absence of a suppression checkbox in the alert. Set the value to `YES` to show a suppression checkbox in the alert. By default, a suppression checkbox has the title, “Do not show this message again.” In macOS 11.0 and later, if the alert displays multiple buttons that prompt the user to make a choice, the title is “Do not ask again.” To customize it, use the checkbox’s title property, as follows: myAlert.suppressionButton.title = @"Do not show this warning again"; To create an alert that responds to the selection state of the suppression checkbox, check `myAlert.suppressionButton.state`.
 func (o *NSAlert) ShowsSuppressionButton() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSAlertSelShowsSuppressionButton)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSAlertSelShowsSuppressionButton)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies whether the alert includes a suppression checkbox, which can be employed to allow a user to opt out of seeing the alert again. The default value of this property is `NO`, which specifies the absence of a suppression checkbox in the alert. Set the value to `YES` to show a suppression checkbox in the alert. By default, a suppression checkbox has the title, “Do not show this message again.” In macOS 11.0 and later, if the alert displays multiple buttons that prompt the user to make a choice, the title is “Do not ask again.” To customize it, use the checkbox’s title property, as follows: myAlert.suppressionButton.title = @"Do not show this warning again"; To create an alert that responds to the selection state of the suppression checkbox, check `myAlert.suppressionButton.state`.
 func (o *NSAlert) SetShowsSuppressionButton(showsSuppressionButton bool) {
-	o.Ptr().Send(_nSAlertSelSetShowsSuppressionButton, showsSuppressionButton)
+	purego.Main(func() {
+		o.Ptr().Send(_nSAlertSelSetShowsSuppressionButton, showsSuppressionButton)
+	})
 }
 
 // The alert’s suppression checkbox. The checkbox may be customized, including the title and the initial state. Additionally, use this method to get the state of the button after the alert is dismissed, which may be stored in user defaults and checked before showing the alert again. In order to show the suppression button in the alert panel, you must set `showsSuppressionButton` to `YES`.
 func (o *NSAlert) SuppressionButton() *NSButton {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelSuppressionButton)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSButtonFromID(_ret)
+	var _mainthread0 *NSButton
+	purego.Main(func() {
+		_mainthread0 = func() *NSButton {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelSuppressionButton)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The app-modal panel or document-modal sheet that corresponds to the alert
 func (o *NSAlert) Window() *NSWindow {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelWindow)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowFromID(_ret)
+	var _mainthread0 *NSWindow
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindow {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelWindow)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates an alert compatible with alerts created using the NSRunAlertPanel function for display as a warning-style alert.
 // Deprecated: Use -init instead
 func NSAlertAlertWithMessageTextDefaultButtonAlternateButtonOtherButtonInformativeTextWithFormat(message *foundation.NSString, defaultButton *foundation.NSString, alternateButton *foundation.NSString, otherButton *foundation.NSString, format *foundation.NSString) *NSAlert {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSAlert), _nSAlertSelAlertWithMessageTextDefaultButtonAlternateButtonOtherButtonInformativeTextWithFormat, message.Ptr(), defaultButton.Ptr(), alternateButton.Ptr(), otherButton.Ptr(), format.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSAlertFromID(_ret)
+	var _mainthread0 *NSAlert
+	purego.Main(func() {
+		_mainthread0 = func() *NSAlert {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSAlert), _nSAlertSelAlertWithMessageTextDefaultButtonAlternateButtonOtherButtonInformativeTextWithFormat, message.Ptr(), defaultButton.Ptr(), alternateButton.Ptr(), otherButton.Ptr(), format.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSAlertFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Runs the alert modally as an alert sheet attached to a specified window.
 // Deprecated: Use -beginSheetModalForWindow:completionHandler: instead
 func (o *NSAlert) BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(window *NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_nSAlertSelBeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo, window.Ptr(), delegate, didEndSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSAlertSelBeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo, window.Ptr(), delegate, didEndSelector, contextInfo)
+	})
 }

@@ -91,26 +91,38 @@ func NSSavePanelFromID(id objc.ID) *NSSavePanel {
 
 // Creates a new Save panel and initializes it with default information.
 func NSSavePanelSavePanel() *NSSavePanel {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSSavePanel), _nSSavePanelSelSavePanel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSSavePanelFromID(_ret)
+	var _mainthread0 *NSSavePanel
+	purego.Main(func() {
+		_mainthread0 = func() *NSSavePanel {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSSavePanel), _nSSavePanelSelSavePanel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSSavePanelFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Validates and reloads the browser columns visible in the panel.
 func (o *NSSavePanel) ValidateVisibleColumns() {
-	o.Ptr().Send(_nSSavePanelSelValidateVisibleColumns)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelValidateVisibleColumns)
+	})
 }
 
 // The action method that the panel calls when the user clicks the OK button.
 func (o *NSSavePanel) Ok(sender objc.ID) {
-	o.Ptr().Send(_nSSavePanelSelOk, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelOk, sender)
+	})
 }
 
 // The action method that the panel calls when the user clicks the Cancel button.
 func (o *NSSavePanel) Cancel(sender objc.ID) {
-	o.Ptr().Send(_nSSavePanelSelCancel, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelCancel, sender)
+	})
 }
 
 // Presents the panel as a sheet modal to the specified window.
@@ -122,7 +134,9 @@ func (o *NSSavePanel) BeginSheetModalForWindowCompletionHandler(window *NSWindow
 		})
 		defer __block_handler.Release()
 	}
-	o.Ptr().Send(_nSSavePanelSelBeginSheetModalForWindowCompletionHandler, window.Ptr(), __block_handler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelBeginSheetModalForWindowCompletionHandler, window.Ptr(), __block_handler)
+	})
 }
 
 // Presents the panel as a modeless window.
@@ -134,323 +148,527 @@ func (o *NSSavePanel) BeginWithCompletionHandler(handler func(int)) {
 		})
 		defer __block_handler.Release()
 	}
-	o.Ptr().Send(_nSSavePanelSelBeginWithCompletionHandler, __block_handler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelBeginWithCompletionHandler, __block_handler)
+	})
 }
 
 // Displays the panel and begins its event loop with the current working (or last-selected) directory as the default starting point.
 func (o *NSSavePanel) RunModal() int {
-	_ret := objc.Send[int](o.Ptr(), _nSSavePanelSelRunModal)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSSavePanelSelRunModal)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // `NSSavePanel`: Returns the URL to save the file at. A file may already exist at `url` if the user choose to overwrite it. `NSOpenPanel`: Returns the single filename selected by the user. Note: if -allowsMultipleSelection is set, you should use the -URLs on NSOpenPanel instead.
 func (o *NSSavePanel) URL() *foundation.NSURL {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelURL)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSURLFromID(_ret)
+	var _mainthread0 *foundation.NSURL
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSURL {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelURL)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSURLFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets and returns the identifier. The panel's current state such as the root directory and the current directory are saved and restored relative to the identifier. - Note: When the identifier is changed, the properties that depend on the identifier are updated from user defaults. Properties that have a null value in user defaults are not changed (and keep their existing value). - Note: Can only be set during the configuration phase.
 func (o *NSSavePanel) Identifier() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelIdentifier)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelIdentifier)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets and returns the identifier. The panel's current state such as the root directory and the current directory are saved and restored relative to the identifier. - Note: When the identifier is changed, the properties that depend on the identifier are updated from user defaults. Properties that have a null value in user defaults are not changed (and keep their existing value). - Note: Can only be set during the configuration phase.
 func (o *NSSavePanel) SetIdentifier(identifier *foundation.NSString) {
-	o.Ptr().Send(_nSSavePanelSelSetIdentifier, identifier.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelSetIdentifier, identifier.Ptr())
+	})
 }
 
 // `NSSavePanel`/`NSOpenPanel`: Sets and returns the directory that is displayed. Set to `nil` to display the default directory. This method will not block to resolve the URL, and the directory will asynchronously be set, if required. - Note: Can only be set during the configuration phase.
 func (o *NSSavePanel) DirectoryURL() *foundation.NSURL {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelDirectoryURL)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSURLFromID(_ret)
+	var _mainthread0 *foundation.NSURL
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSURL {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelDirectoryURL)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSURLFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // `NSSavePanel`/`NSOpenPanel`: Sets and returns the directory that is displayed. Set to `nil` to display the default directory. This method will not block to resolve the URL, and the directory will asynchronously be set, if required. - Note: Can only be set during the configuration phase.
 func (o *NSSavePanel) SetDirectoryURL(directoryURL *foundation.NSURL) {
-	o.Ptr().Send(_nSSavePanelSelSetDirectoryURL, directoryURL.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelSetDirectoryURL, directoryURL.Ptr())
+	})
 }
 
 // `NSSavePanel`: An array of UTTypes specifying the file types the user can save the file as. Set to `@[]` to specify that any file type can be used. If no extension is given by the user, the first preferred extension from the array will be used as the extension for the save panel. If the user specifies a type not in the array, and `allowsOtherFileTypes` is `YES`, they will be presented with another dialog when prompted to save. The default value is the empty array. `NSOpenPanel`: This property determines which files should be enabled in the open panel. Using the deprecated methods to show the open panel (the ones that take a "types:" parameter) will overwrite this value, and should not be used. `allowedContentTypes` can be changed while the panel is running (ie: from an accessory view). This is also known as the "enabled file types". Set to `@[]` to specify that all files should be enabled.
 func (o *NSSavePanel) AllowedContentTypes() *foundation.NSArray[*uniformtypeidentifiers.UTType] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelAllowedContentTypes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*uniformtypeidentifiers.UTType](_ret)
+	var _mainthread0 *foundation.NSArray[*uniformtypeidentifiers.UTType]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*uniformtypeidentifiers.UTType] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelAllowedContentTypes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*uniformtypeidentifiers.UTType](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // `NSSavePanel`: An array of UTTypes specifying the file types the user can save the file as. Set to `@[]` to specify that any file type can be used. If no extension is given by the user, the first preferred extension from the array will be used as the extension for the save panel. If the user specifies a type not in the array, and `allowsOtherFileTypes` is `YES`, they will be presented with another dialog when prompted to save. The default value is the empty array. `NSOpenPanel`: This property determines which files should be enabled in the open panel. Using the deprecated methods to show the open panel (the ones that take a "types:" parameter) will overwrite this value, and should not be used. `allowedContentTypes` can be changed while the panel is running (ie: from an accessory view). This is also known as the "enabled file types". Set to `@[]` to specify that all files should be enabled.
 func (o *NSSavePanel) SetAllowedContentTypes(allowedContentTypes *foundation.NSArray[*uniformtypeidentifiers.UTType]) {
-	o.Ptr().Send(_nSSavePanelSelSetAllowedContentTypes, allowedContentTypes.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelSetAllowedContentTypes, allowedContentTypes.Ptr())
+	})
 }
 
 // `NSSavePanel`: Returns a BOOL value that indicates whether the panel allows the user to save files with an extension that is not in the list of `allowedFileTypes`. `NSOpenPanel`: Not used.
 func (o *NSSavePanel) AllowsOtherFileTypes() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSavePanelSelAllowsOtherFileTypes)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSavePanelSelAllowsOtherFileTypes)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // `NSSavePanel`: Returns a BOOL value that indicates whether the panel allows the user to save files with an extension that is not in the list of `allowedFileTypes`. `NSOpenPanel`: Not used.
 func (o *NSSavePanel) SetAllowsOtherFileTypes(allowsOtherFileTypes bool) {
-	o.Ptr().Send(_nSSavePanelSelSetAllowsOtherFileTypes, allowsOtherFileTypes)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelSetAllowsOtherFileTypes, allowsOtherFileTypes)
+	})
 }
 
 // `NSSavePanel`:The current type. If set to `nil`, resets to the first allowed content type. Returns `nil` if `allowedContentTypes` is empty. `NSOpenPanel`: Not used. - Note: Asserts that `currentContentType` conforms to `UTTypeData` or `UTTypeDirectory`.
 func (o *NSSavePanel) CurrentContentType() *uniformtypeidentifiers.UTType {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelCurrentContentType)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return uniformtypeidentifiers.UTTypeFromID(_ret)
+	var _mainthread0 *uniformtypeidentifiers.UTType
+	purego.Main(func() {
+		_mainthread0 = func() *uniformtypeidentifiers.UTType {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelCurrentContentType)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return uniformtypeidentifiers.UTTypeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // `NSSavePanel`:The current type. If set to `nil`, resets to the first allowed content type. Returns `nil` if `allowedContentTypes` is empty. `NSOpenPanel`: Not used. - Note: Asserts that `currentContentType` conforms to `UTTypeData` or `UTTypeDirectory`.
 func (o *NSSavePanel) SetCurrentContentType(currentContentType *uniformtypeidentifiers.UTType) {
-	o.Ptr().Send(_nSSavePanelSelSetCurrentContentType, currentContentType.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelSetCurrentContentType, currentContentType.Ptr())
+	})
 }
 
 // Sets and returns the accessory view shown in the panel. For applications that link on 10.6 and later, the accessoryView's frame will be observed, and any changes the programmer makes to the frame will automatically be reflected in the panel (including animated changes to the frame height). For applications that link on 26.0 and later and use the Liquid Glass design, the accessoryView's control metrics will be the larger Liquid Glass metrics.
 func (o *NSSavePanel) AccessoryView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelAccessoryView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelAccessoryView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets and returns the accessory view shown in the panel. For applications that link on 10.6 and later, the accessoryView's frame will be observed, and any changes the programmer makes to the frame will automatically be reflected in the panel (including animated changes to the frame height). For applications that link on 26.0 and later and use the Liquid Glass design, the accessoryView's control metrics will be the larger Liquid Glass metrics.
 func (o *NSSavePanel) SetAccessoryView(accessoryView *NSView) {
-	o.Ptr().Send(_nSSavePanelSelSetAccessoryView, accessoryView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelSetAccessoryView, accessoryView.Ptr())
+	})
 }
 
 // `NSSavePanel`: Returns `YES` if the panel is expanded. Defaults to `NO`. Persists in the user defaults. `NSOpenPanel`: Not used.
 func (o *NSSavePanel) IsExpanded() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSavePanelSelIsExpanded)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSavePanelSelIsExpanded)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // `NSSavePanel`/`NSOpenPanel`: Set to `YES` to show the "New Folder" button. Default is `YES`.
 func (o *NSSavePanel) CanCreateDirectories() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSavePanelSelCanCreateDirectories)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSavePanelSelCanCreateDirectories)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // `NSSavePanel`/`NSOpenPanel`: Set to `YES` to show the "New Folder" button. Default is `YES`.
 func (o *NSSavePanel) SetCanCreateDirectories(canCreateDirectories bool) {
-	o.Ptr().Send(_nSSavePanelSelSetCanCreateDirectories, canCreateDirectories)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelSetCanCreateDirectories, canCreateDirectories)
+	})
 }
 
 // `NSSavePanel`: Set to `YES` to show the "Hide Extension" menu item. `NSOpenPanel`: Not used.
 func (o *NSSavePanel) CanSelectHiddenExtension() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSavePanelSelCanSelectHiddenExtension)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSavePanelSelCanSelectHiddenExtension)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // `NSSavePanel`: Set to `YES` to show the "Hide Extension" menu item. `NSOpenPanel`: Not used.
 func (o *NSSavePanel) SetCanSelectHiddenExtension(canSelectHiddenExtension bool) {
-	o.Ptr().Send(_nSSavePanelSelSetCanSelectHiddenExtension, canSelectHiddenExtension)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelSetCanSelectHiddenExtension, canSelectHiddenExtension)
+	})
 }
 
 // `NSSavePanel`: Set to `YES` if the filename extension should be hidden. Otherwise, `NO` if the filename extension should be shown. Default is `YES`. - Note: Can only be set during the configuration phase. `NSOpenPanel`: Not used.
 func (o *NSSavePanel) IsExtensionHidden() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSavePanelSelIsExtensionHidden)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSavePanelSelIsExtensionHidden)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // `NSSavePanel`: Set to `YES` if the filename extension should be hidden. Otherwise, `NO` if the filename extension should be shown. Default is `YES`. - Note: Can only be set during the configuration phase. `NSOpenPanel`: Not used.
 func (o *NSSavePanel) SetExtensionHidden(extensionHidden bool) {
-	o.Ptr().Send(_nSSavePanelSelSetExtensionHidden, extensionHidden)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelSetExtensionHidden, extensionHidden)
+	})
 }
 
 // `NSSavePanel`/`NSOpenPanel`: If set to `YES`, the user can navigate into file packages as if they were directories. Default is `NO`.
 func (o *NSSavePanel) TreatsFilePackagesAsDirectories() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSavePanelSelTreatsFilePackagesAsDirectories)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSavePanelSelTreatsFilePackagesAsDirectories)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // `NSSavePanel`/`NSOpenPanel`: If set to `YES`, the user can navigate into file packages as if they were directories. Default is `NO`.
 func (o *NSSavePanel) SetTreatsFilePackagesAsDirectories(treatsFilePackagesAsDirectories bool) {
-	o.Ptr().Send(_nSSavePanelSelSetTreatsFilePackagesAsDirectories, treatsFilePackagesAsDirectories)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelSetTreatsFilePackagesAsDirectories, treatsFilePackagesAsDirectories)
+	})
 }
 
 // `NSSavePanel`/`NSOpenPanel`: Sets the text shown on the Open or Save button. If set to an empty string, it will show a localized "Open" for the NSOpenPanel and "Save" for the NSSavePanel. The default value will be the correct localized prompt for the open or save panel, as appropriate.
 func (o *NSSavePanel) Prompt() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelPrompt)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelPrompt)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // `NSSavePanel`/`NSOpenPanel`: Sets the text shown on the Open or Save button. If set to an empty string, it will show a localized "Open" for the NSOpenPanel and "Save" for the NSSavePanel. The default value will be the correct localized prompt for the open or save panel, as appropriate.
 func (o *NSSavePanel) SetPrompt(prompt *foundation.NSString) {
-	o.Ptr().Send(_nSSavePanelSelSetPrompt, prompt.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelSetPrompt, prompt.Ptr())
+	})
 }
 
 // `NSSavePanel`: Sets and returns the text shown to the left of the "name field". Default value is a localized "Save As:" string. `NSOpenPanel`: Not used.
 func (o *NSSavePanel) NameFieldLabel() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelNameFieldLabel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelNameFieldLabel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // `NSSavePanel`: Sets and returns the text shown to the left of the "name field". Default value is a localized "Save As:" string. `NSOpenPanel`: Not used.
 func (o *NSSavePanel) SetNameFieldLabel(nameFieldLabel *foundation.NSString) {
-	o.Ptr().Send(_nSSavePanelSelSetNameFieldLabel, nameFieldLabel.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelSetNameFieldLabel, nameFieldLabel.Ptr())
+	})
 }
 
 // `NSSavePanel`: Sets and returns the user-editable file name shown in the name field. - Note: Calling the deprecated methods that take a "name:" parameter will overwrite any values set before the panel is shown. - Note: If `[panel isExtensionHidden]` is set to `YES`, the extension will be hidden. - Note: Can only be set during the configuration phase. `NSOpenPanel`: Not used.
 func (o *NSSavePanel) NameFieldStringValue() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelNameFieldStringValue)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelNameFieldStringValue)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // `NSSavePanel`: Sets and returns the user-editable file name shown in the name field. - Note: Calling the deprecated methods that take a "name:" parameter will overwrite any values set before the panel is shown. - Note: If `[panel isExtensionHidden]` is set to `YES`, the extension will be hidden. - Note: Can only be set during the configuration phase. `NSOpenPanel`: Not used.
 func (o *NSSavePanel) SetNameFieldStringValue(nameFieldStringValue *foundation.NSString) {
-	o.Ptr().Send(_nSSavePanelSelSetNameFieldStringValue, nameFieldStringValue.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelSetNameFieldStringValue, nameFieldStringValue.Ptr())
+	})
 }
 
 // `NSSavePanel`/`NSOpenPanel`: Sets and returns the message shown under title of the panel.
 func (o *NSSavePanel) Message() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelMessage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelMessage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // `NSSavePanel`/`NSOpenPanel`: Sets and returns the message shown under title of the panel.
 func (o *NSSavePanel) SetMessage(message *foundation.NSString) {
-	o.Ptr().Send(_nSSavePanelSelSetMessage, message.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelSetMessage, message.Ptr())
+	})
 }
 
 // `NSSavePanel`/`NSOpenPanel`: If `showsHiddenFiles` is set to `YES`, files that are normally hidden from the user are displayed. This method was published in Mac OS 10.6, but has existed since Mac OS 10.4. This property is KVO compliant. The user may invoke the keyboard shortcut (cmd-shift-.) to show or hide hidden files. Any user interface shown in an an accessory view should be updated by using key value observing (KVO) to watch for changes of this property. Alternatively, the user interface can be directly bound to this property. The default value is `NO`.
 func (o *NSSavePanel) ShowsHiddenFiles() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSavePanelSelShowsHiddenFiles)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSavePanelSelShowsHiddenFiles)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // `NSSavePanel`/`NSOpenPanel`: If `showsHiddenFiles` is set to `YES`, files that are normally hidden from the user are displayed. This method was published in Mac OS 10.6, but has existed since Mac OS 10.4. This property is KVO compliant. The user may invoke the keyboard shortcut (cmd-shift-.) to show or hide hidden files. Any user interface shown in an an accessory view should be updated by using key value observing (KVO) to watch for changes of this property. Alternatively, the user interface can be directly bound to this property. The default value is `NO`.
 func (o *NSSavePanel) SetShowsHiddenFiles(showsHiddenFiles bool) {
-	o.Ptr().Send(_nSSavePanelSelSetShowsHiddenFiles, showsHiddenFiles)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelSetShowsHiddenFiles, showsHiddenFiles)
+	})
 }
 
 // `NSSavePanel`: Shows or hides the "Tags" field in the receiver. By passing `YES`, you become responsible for setting Tag names on the resulting file after saving is complete. Default is `YES`. `NSOpenPanel`: Not used.
 func (o *NSSavePanel) ShowsTagField() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSavePanelSelShowsTagField)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSavePanelSelShowsTagField)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // `NSSavePanel`: Shows or hides the "Tags" field in the receiver. By passing `YES`, you become responsible for setting Tag names on the resulting file after saving is complete. Default is `YES`. `NSOpenPanel`: Not used.
 func (o *NSSavePanel) SetShowsTagField(showsTagField bool) {
-	o.Ptr().Send(_nSSavePanelSelSetShowsTagField, showsTagField)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelSetShowsTagField, showsTagField)
+	})
 }
 
 // `NSSavePanel`: When -showsTagField returns YES, set any initial Tag names to be displayed, if necessary, prior to displaying the receiver. Also, if the user clicks "Save", take the result of -tagNames, and set them on the resulting file after saving is complete. Tag names are NSStrings, arrays of which can be used directly with the NSURLTagNamesKey API for getting and setting tags on files. Passing `nil` or an empty array to -setTagNames: will result in no initial Tag names appearing in the receiver. When -showsTagField returns YES, -tagNames always returns a non-nil array, and when NO, -tagNames always returns `nil`. `NSOpenPanel`: Not used.
 func (o *NSSavePanel) TagNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelTagNames)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelTagNames)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // `NSSavePanel`: When -showsTagField returns YES, set any initial Tag names to be displayed, if necessary, prior to displaying the receiver. Also, if the user clicks "Save", take the result of -tagNames, and set them on the resulting file after saving is complete. Tag names are NSStrings, arrays of which can be used directly with the NSURLTagNamesKey API for getting and setting tags on files. Passing `nil` or an empty array to -setTagNames: will result in no initial Tag names appearing in the receiver. When -showsTagField returns YES, -tagNames always returns a non-nil array, and when NO, -tagNames always returns `nil`. `NSOpenPanel`: Not used.
 func (o *NSSavePanel) SetTagNames(tagNames *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSSavePanelSelSetTagNames, tagNames.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelSetTagNames, tagNames.Ptr())
+	})
 }
 
 // `NSSavePanel`: Whether or not to show a control for selecting the type of the saved file. The control shows the types in `allowedContentTypes`. Default is `NO`. `NSOpenPanel`: Not used. - Note: If `allowedContentTypes` is empty, the control is not displayed.
 func (o *NSSavePanel) ShowsContentTypes() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSavePanelSelShowsContentTypes)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSavePanelSelShowsContentTypes)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // `NSSavePanel`: Whether or not to show a control for selecting the type of the saved file. The control shows the types in `allowedContentTypes`. Default is `NO`. `NSOpenPanel`: Not used. - Note: If `allowedContentTypes` is empty, the control is not displayed.
 func (o *NSSavePanel) SetShowsContentTypes(showsContentTypes bool) {
-	o.Ptr().Send(_nSSavePanelSelSetShowsContentTypes, showsContentTypes)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelSetShowsContentTypes, showsContentTypes)
+	})
 }
 
 // Deprecated: Use -URL instead
 func (o *NSSavePanel) Filename() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelFilename)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelFilename)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use -directoryURL instead
 func (o *NSSavePanel) Directory() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelDirectory)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelDirectory)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use -setDirectoryURL: instead
 func (o *NSSavePanel) SetDirectory(path *foundation.NSString) {
-	o.Ptr().Send(_nSSavePanelSelSetDirectory, path.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelSetDirectory, path.Ptr())
+	})
 }
 
 // Deprecated: Use -allowedContentTypes instead
 func (o *NSSavePanel) RequiredFileType() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelRequiredFileType)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelRequiredFileType)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use -allowedContentTypes: instead
 func (o *NSSavePanel) SetRequiredFileType(type_ *foundation.NSString) {
-	o.Ptr().Send(_nSSavePanelSelSetRequiredFileType, type_.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelSetRequiredFileType, type_.Ptr())
+	})
 }
 
 // Deprecated: Use beginSheetModalForWindow:completionHandler: instead. The following parameters are replaced by properties: 'path' is replaced by 'directoryURL' and 'name' by 'nameFieldStringValue'.
 func (o *NSSavePanel) BeginSheetForDirectoryFileModalForWindowModalDelegateDidEndSelectorContextInfo(path *foundation.NSString, name *foundation.NSString, docWindow *NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_nSSavePanelSelBeginSheetForDirectoryFileModalForWindowModalDelegateDidEndSelectorContextInfo, path.Ptr(), name.Ptr(), docWindow.Ptr(), delegate, didEndSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelBeginSheetForDirectoryFileModalForWindowModalDelegateDidEndSelectorContextInfo, path.Ptr(), name.Ptr(), docWindow.Ptr(), delegate, didEndSelector, contextInfo)
+	})
 }
 
 // Deprecated: Use -runModal instead. The following parameters are replaced by properties: 'path' is replaced by 'directoryURL' and 'name' by 'nameFieldStringValue'.
 func (o *NSSavePanel) RunModalForDirectoryFile(path *foundation.NSString, name *foundation.NSString) int {
-	_ret := objc.Send[int](o.Ptr(), _nSSavePanelSelRunModalForDirectoryFile, path.Ptr(), name.Ptr())
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSSavePanelSelRunModalForDirectoryFile, path.Ptr(), name.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Default implementation does nothing.
 func (o *NSSavePanel) SelectText(sender objc.ID) {
-	o.Ptr().Send(_nSSavePanelSelSelectText, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelSelectText, sender)
+	})
 }
 
 // `NSSavePanel`: An array of NSStrings specifying the file types the user can save the file as. The file type can be a common file extension, or a UTI. A nil value indicates that any file type can be used. If the array is not nil and the array contains no items, an exception will be raised. If no extension is given by the user, the first item in the allowedFileTypes will be used as the extension for the save panel. If the user specifies a type not in the array, and 'allowsOtherFileTypes' is YES, they will be presented with another dialog when prompted to save. The default value is 'nil'. `NSOpenPanel`: On versions less than 10.6, this property is ignored. For applications that link against 10.6 and higher, this property will determine which files should be enabled in the open panel. Using the deprecated methods to show the open panel (the ones that take a "types:" parameter) will overwrite this value, and should not be used. The allowedFileTypes can be changed while the panel is running (ie: from an accessory view). The file type can be a common file extension, or a UTI. This is also known as the "enabled file types". A nil value indicates that all files should be enabled.
 // Deprecated: Use -allowedContentTypes instead
 func (o *NSSavePanel) AllowedFileTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelAllowedFileTypes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelAllowedFileTypes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // `NSSavePanel`: An array of NSStrings specifying the file types the user can save the file as. The file type can be a common file extension, or a UTI. A nil value indicates that any file type can be used. If the array is not nil and the array contains no items, an exception will be raised. If no extension is given by the user, the first item in the allowedFileTypes will be used as the extension for the save panel. If the user specifies a type not in the array, and 'allowsOtherFileTypes' is YES, they will be presented with another dialog when prompted to save. The default value is 'nil'. `NSOpenPanel`: On versions less than 10.6, this property is ignored. For applications that link against 10.6 and higher, this property will determine which files should be enabled in the open panel. Using the deprecated methods to show the open panel (the ones that take a "types:" parameter) will overwrite this value, and should not be used. The allowedFileTypes can be changed while the panel is running (ie: from an accessory view). The file type can be a common file extension, or a UTI. This is also known as the "enabled file types". A nil value indicates that all files should be enabled.
 // Deprecated: Use -allowedContentTypes instead
 func (o *NSSavePanel) SetAllowedFileTypes(allowedFileTypes *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSSavePanelSelSetAllowedFileTypes, allowedFileTypes.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSavePanelSelSetAllowedFileTypes, allowedFileTypes.Ptr())
+	})
 }

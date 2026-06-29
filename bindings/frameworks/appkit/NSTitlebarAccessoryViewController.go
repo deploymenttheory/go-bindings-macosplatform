@@ -41,51 +41,91 @@ func NSTitlebarAccessoryViewControllerFromID(id objc.ID) *NSTitlebarAccessoryVie
 }
 
 func (o *NSTitlebarAccessoryViewController) LayoutAttribute() NSLayoutAttribute {
-	_ret := objc.Send[NSLayoutAttribute](o.Ptr(), _nSTitlebarAccessoryViewControllerSelLayoutAttribute)
-	return _ret
+	var _mainthread0 NSLayoutAttribute
+	purego.Main(func() {
+		_mainthread0 = func() NSLayoutAttribute {
+			_ret := objc.Send[NSLayoutAttribute](o.Ptr(), _nSTitlebarAccessoryViewControllerSelLayoutAttribute)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTitlebarAccessoryViewController) SetLayoutAttribute(layoutAttribute NSLayoutAttribute) {
-	o.Ptr().Send(_nSTitlebarAccessoryViewControllerSelSetLayoutAttribute, layoutAttribute)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTitlebarAccessoryViewControllerSelSetLayoutAttribute, layoutAttribute)
+	})
 }
 
 func (o *NSTitlebarAccessoryViewController) FullScreenMinHeight() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSTitlebarAccessoryViewControllerSelFullScreenMinHeight)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSTitlebarAccessoryViewControllerSelFullScreenMinHeight)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTitlebarAccessoryViewController) SetFullScreenMinHeight(fullScreenMinHeight float64) {
-	o.Ptr().Send(_nSTitlebarAccessoryViewControllerSelSetFullScreenMinHeight, fullScreenMinHeight)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTitlebarAccessoryViewControllerSelSetFullScreenMinHeight, fullScreenMinHeight)
+	})
 }
 
 func (o *NSTitlebarAccessoryViewController) IsHidden() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTitlebarAccessoryViewControllerSelIsHidden)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTitlebarAccessoryViewControllerSelIsHidden)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTitlebarAccessoryViewController) SetHidden(hidden bool) {
-	o.Ptr().Send(_nSTitlebarAccessoryViewControllerSelSetHidden, hidden)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTitlebarAccessoryViewControllerSelSetHidden, hidden)
+	})
 }
 
 func (o *NSTitlebarAccessoryViewController) AutomaticallyAdjustsSize() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTitlebarAccessoryViewControllerSelAutomaticallyAdjustsSize)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTitlebarAccessoryViewControllerSelAutomaticallyAdjustsSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTitlebarAccessoryViewController) SetAutomaticallyAdjustsSize(automaticallyAdjustsSize bool) {
-	o.Ptr().Send(_nSTitlebarAccessoryViewControllerSelSetAutomaticallyAdjustsSize, automaticallyAdjustsSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTitlebarAccessoryViewControllerSelSetAutomaticallyAdjustsSize, automaticallyAdjustsSize)
+	})
 }
 
 // The titlebar accessory’s preferred effect for content scrolling behind it. To allow for a soft edge on the bottom edge of a titlebar accessory: titlebarAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
 func (o *NSTitlebarAccessoryViewController) PreferredScrollEdgeEffectStyle() *NSScrollEdgeEffectStyle {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTitlebarAccessoryViewControllerSelPreferredScrollEdgeEffectStyle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrollEdgeEffectStyleFromID(_ret)
+	var _mainthread0 *NSScrollEdgeEffectStyle
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrollEdgeEffectStyle {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTitlebarAccessoryViewControllerSelPreferredScrollEdgeEffectStyle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrollEdgeEffectStyleFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The titlebar accessory’s preferred effect for content scrolling behind it. To allow for a soft edge on the bottom edge of a titlebar accessory: titlebarAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
 func (o *NSTitlebarAccessoryViewController) SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *NSScrollEdgeEffectStyle) {
-	o.Ptr().Send(_nSTitlebarAccessoryViewControllerSelSetPreferredScrollEdgeEffectStyle, preferredScrollEdgeEffectStyle.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTitlebarAccessoryViewControllerSelSetPreferredScrollEdgeEffectStyle, preferredScrollEdgeEffectStyle.Ptr())
+	})
 }

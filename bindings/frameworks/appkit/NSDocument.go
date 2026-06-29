@@ -212,56 +212,89 @@ func NSDocumentFromID(id objc.ID) *NSDocument {
 
 // Initializes and returns an empty document object.
 func (o *NSDocument) Init() *NSDocument {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelInit)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSDocumentFromID(_ret)
+	var _mainthread0 *NSDocument
+	purego.Main(func() {
+		_mainthread0 = func() *NSDocument {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelInit)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSDocumentFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a document of a specified type.
 func (o *NSDocument) InitWithTypeError(typeName *foundation.NSString) (*NSDocument, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelInitWithTypeError, typeName.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return NSDocumentFromID(_ret), nil
+	var _mainthread0 *NSDocument
+	var _mainthread1 error
+	purego.Main(func() {
+		_mainthread0, _mainthread1 = func() (*NSDocument, error) {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelInitWithTypeError, typeName.Ptr(), unsafe.Pointer(&_nsErr))
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			if _nsErr != 0 {
+				return nil, purego.NSErrorToError(objc.ID(_nsErr))
+			}
+			return NSDocumentFromID(_ret), nil
+		}()
+	})
+	return _mainthread0, _mainthread1
 }
 
 // Returns a Boolean value that indicates whether the receiver reads multiple documents of the given type concurrently.
 func NSDocumentCanConcurrentlyReadDocumentsOfType(typeName *foundation.NSString) bool {
-	_ret := objc.Send[bool](objc.ID(_clsNSDocument), _nSDocumentSelCanConcurrentlyReadDocumentsOfType, typeName.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](objc.ID(_clsNSDocument), _nSDocumentSelCanConcurrentlyReadDocumentsOfType, typeName.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a document located by a URL of a specified type.
 func (o *NSDocument) InitWithContentsOfURLOfTypeError(url *foundation.NSURL, typeName *foundation.NSString) (*NSDocument, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelInitWithContentsOfURLOfTypeError, url.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return NSDocumentFromID(_ret), nil
+	var _mainthread0 *NSDocument
+	var _mainthread1 error
+	purego.Main(func() {
+		_mainthread0, _mainthread1 = func() (*NSDocument, error) {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelInitWithContentsOfURLOfTypeError, url.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			if _nsErr != 0 {
+				return nil, purego.NSErrorToError(objc.ID(_nsErr))
+			}
+			return NSDocumentFromID(_ret), nil
+		}()
+	})
+	return _mainthread0, _mainthread1
 }
 
 // Initializes a document with the specified contents, and places the resulting document’s file at the designated location.
 func (o *NSDocument) InitForURLWithContentsOfURLOfTypeError(urlOrNil *foundation.NSURL, contentsURL *foundation.NSURL, typeName *foundation.NSString) (*NSDocument, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelInitForURLWithContentsOfURLOfTypeError, urlOrNil.Ptr(), contentsURL.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return NSDocumentFromID(_ret), nil
+	var _mainthread0 *NSDocument
+	var _mainthread1 error
+	purego.Main(func() {
+		_mainthread0, _mainthread1 = func() (*NSDocument, error) {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelInitForURLWithContentsOfURLOfTypeError, urlOrNil.Ptr(), contentsURL.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			if _nsErr != 0 {
+				return nil, purego.NSErrorToError(objc.ID(_nsErr))
+			}
+			return NSDocumentFromID(_ret), nil
+		}()
+	})
+	return _mainthread0, _mainthread1
 }
 
 // Waits for any work scheduled by previous invocations of this method to complete, then invokes the passed-in block.
@@ -273,7 +306,9 @@ func (o *NSDocument) PerformActivityWithSynchronousWaitingUsing(waitSynchronousl
 		})
 		defer __block_block.Release()
 	}
-	o.Ptr().Send(_nSDocumentSelPerformActivityWithSynchronousWaitingUsing, waitSynchronously, __block_block)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelPerformActivityWithSynchronousWaitingUsing, waitSynchronously, __block_block)
+	})
 }
 
 // Continues to perform the task for a user activity object using a different block.
@@ -285,7 +320,9 @@ func (o *NSDocument) ContinueActivityUsing(block func()) {
 		})
 		defer __block_block.Release()
 	}
-	o.Ptr().Send(_nSDocumentSelContinueActivityUsing, __block_block)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelContinueActivityUsing, __block_block)
+	})
 }
 
 // Invokes the passed-in block on the main thread.
@@ -326,17 +363,26 @@ func (o *NSDocument) PerformAsynchronousFileAccessUsing(block func(objc.Block)) 
 
 // The action of the File menu item Revert in a document-based app.
 func (o *NSDocument) RevertDocumentToSaved(sender objc.ID) {
-	o.Ptr().Send(_nSDocumentSelRevertDocumentToSaved, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelRevertDocumentToSaved, sender)
+	})
 }
 
 // Discards all unsaved document modifications and replaces the document’s contents by reading a file or file package located by a URL of a specified type.
 func (o *NSDocument) RevertToContentsOfURLOfTypeError(url *foundation.NSURL, typeName *foundation.NSString) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelRevertToContentsOfURLOfTypeError, url.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return false, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return _ret, nil
+	var _mainthread0 bool
+	var _mainthread1 error
+	purego.Main(func() {
+		_mainthread0, _mainthread1 = func() (bool, error) {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelRevertToContentsOfURLOfTypeError, url.Ptr(), typeName.Ptr(), unsafe.Pointer(&_nsErr))
+			if _nsErr != 0 {
+				return false, purego.NSErrorToError(objc.ID(_nsErr))
+			}
+			return _ret, nil
+		}()
+	})
+	return _mainthread0, _mainthread1
 }
 
 // Sets the contents of this document by reading from a file or file package, of a specified type, located by a URL.
@@ -382,27 +428,41 @@ func (o *NSDocument) WriteToURLOfTypeError(url *foundation.NSURL, typeName *foun
 // Creates and returns a file wrapper that contains the contents of the document, formatted to the specified type.
 func (o *NSDocument) FileWrapperOfTypeError(typeName *foundation.NSString) (*foundation.NSFileWrapper, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelFileWrapperOfTypeError, typeName.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return foundation.NSFileWrapperFromID(_ret), nil
+	var _mainthread0 *foundation.NSFileWrapper
+	var _mainthread1 error
+	purego.Main(func() {
+		_mainthread0, _mainthread1 = func() (*foundation.NSFileWrapper, error) {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelFileWrapperOfTypeError, typeName.Ptr(), unsafe.Pointer(&_nsErr))
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			if _nsErr != 0 {
+				return nil, purego.NSErrorToError(objc.ID(_nsErr))
+			}
+			return foundation.NSFileWrapperFromID(_ret), nil
+		}()
+	})
+	return _mainthread0, _mainthread1
 }
 
 // Creates and returns a data object that contains the contents of the document, formatted to a specified type.
 func (o *NSDocument) DataOfTypeError(typeName *foundation.NSString) (*foundation.NSData, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelDataOfTypeError, typeName.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return foundation.NSDataFromID(_ret), nil
+	var _mainthread0 *foundation.NSData
+	var _mainthread1 error
+	purego.Main(func() {
+		_mainthread0, _mainthread1 = func() (*foundation.NSData, error) {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelDataOfTypeError, typeName.Ptr(), unsafe.Pointer(&_nsErr))
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			if _nsErr != 0 {
+				return nil, purego.NSErrorToError(objc.ID(_nsErr))
+			}
+			return foundation.NSDataFromID(_ret), nil
+		}()
+	})
+	return _mainthread0, _mainthread1
 }
 
 // Unblocks the main thread during asynchronous saving.
@@ -445,38 +505,56 @@ func (o *NSDocument) FileAttributesToWriteToURLOfTypeForSaveOperationOriginalCon
 
 // The action method invoked in the receiver as first responder when the user chooses the Save menu command.
 func (o *NSDocument) SaveDocument(sender objc.ID) {
-	o.Ptr().Send(_nSDocumentSelSaveDocument, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelSaveDocument, sender)
+	})
 }
 
 // The action method invoked in the receiver as first responder when the user chooses the Save As menu command.
 func (o *NSDocument) SaveDocumentAs(sender objc.ID) {
-	o.Ptr().Send(_nSDocumentSelSaveDocumentAs, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelSaveDocumentAs, sender)
+	})
 }
 
 // The action method invoked in the receiver as first responder when the user chooses the Save To menu command.
 func (o *NSDocument) SaveDocumentTo(sender objc.ID) {
-	o.Ptr().Send(_nSDocumentSelSaveDocumentTo, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelSaveDocumentTo, sender)
+	})
 }
 
 // Saves the document and delivers the results to the provided delegate object.
 func (o *NSDocument) SaveDocumentWithDelegateDidSaveSelectorContextInfo(delegate objc.ID, didSaveSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_nSDocumentSelSaveDocumentWithDelegateDidSaveSelectorContextInfo, delegate, didSaveSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelSaveDocumentWithDelegateDidSaveSelectorContextInfo, delegate, didSaveSelector, contextInfo)
+	})
 }
 
 // Presents a modal Save panel to the user, then tries to save the document if the user approves the operation.
 func (o *NSDocument) RunModalSavePanelForSaveOperationDelegateDidSaveSelectorContextInfo(saveOperation NSSaveOperationType, delegate objc.ID, didSaveSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_nSDocumentSelRunModalSavePanelForSaveOperationDelegateDidSaveSelectorContextInfo, saveOperation, delegate, didSaveSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelRunModalSavePanelForSaveOperationDelegateDidSaveSelectorContextInfo, saveOperation, delegate, didSaveSelector, contextInfo)
+	})
 }
 
 // Tells the document to customize the specified Save panel.
 func (o *NSDocument) PrepareSavePanel(savePanel *NSSavePanel) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelPrepareSavePanel, savePanel.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelPrepareSavePanel, savePanel.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Saves the contents of the document to a file or file package located by a URL, that is formatted to a specified type, for a particular kind of save operation.
 func (o *NSDocument) SaveToURLOfTypeForSaveOperationDelegateDidSaveSelectorContextInfo(url *foundation.NSURL, typeName *foundation.NSString, saveOperation NSSaveOperationType, delegate objc.ID, didSaveSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_nSDocumentSelSaveToURLOfTypeForSaveOperationDelegateDidSaveSelectorContextInfo, url.Ptr(), typeName.Ptr(), saveOperation, delegate, didSaveSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelSaveToURLOfTypeForSaveOperationDelegateDidSaveSelectorContextInfo, url.Ptr(), typeName.Ptr(), saveOperation, delegate, didSaveSelector, contextInfo)
+	})
 }
 
 // Saves the contents of the document to a file or file package located by a URL, that is formatted to a specified type, for a particular kind of save operation, and invokes the passed-in completion handler.
@@ -488,33 +566,52 @@ func (o *NSDocument) SaveToURLOfTypeForSaveOperationCompletionHandler(url *found
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_nSDocumentSelSaveToURLOfTypeForSaveOperationCompletionHandler, url.Ptr(), typeName.Ptr(), saveOperation, __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelSaveToURLOfTypeForSaveOperationCompletionHandler, url.Ptr(), typeName.Ptr(), saveOperation, __block_completionHandler)
+	})
 }
 
 // Returns whether the receiver can concurrently write to a file or file package located by a URL, that is formatted for a specific type, for a specific kind of save operation.
 func (o *NSDocument) CanAsynchronouslyWriteToURLOfTypeForSaveOperation(url *foundation.NSURL, typeName *foundation.NSString, saveOperation NSSaveOperationType) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelCanAsynchronouslyWriteToURLOfTypeForSaveOperation, url.Ptr(), typeName.Ptr(), saveOperation)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelCanAsynchronouslyWriteToURLOfTypeForSaveOperation, url.Ptr(), typeName.Ptr(), saveOperation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a Boolean value that indicates whether it is safe to autosave document changes.
 func (o *NSDocument) CheckAutosavingSafetyAndReturnError() (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelCheckAutosavingSafetyAndReturnError, unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return false, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return _ret, nil
+	var _mainthread0 bool
+	var _mainthread1 error
+	purego.Main(func() {
+		_mainthread0, _mainthread1 = func() (bool, error) {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelCheckAutosavingSafetyAndReturnError, unsafe.Pointer(&_nsErr))
+			if _nsErr != 0 {
+				return false, purego.NSErrorToError(objc.ID(_nsErr))
+			}
+			return _ret, nil
+		}()
+	})
+	return _mainthread0, _mainthread1
 }
 
 // Schedules periodic autosaving for the purpose of crash protection.
 func (o *NSDocument) ScheduleAutosaving() {
-	o.Ptr().Send(_nSDocumentSelScheduleAutosaving)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelScheduleAutosaving)
+	})
 }
 
 // Autosaves the document’s contents to an appropriate location in the file system.
 func (o *NSDocument) AutosaveDocumentWithDelegateDidAutosaveSelectorContextInfo(delegate objc.ID, didAutosaveSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_nSDocumentSelAutosaveDocumentWithDelegateDidAutosaveSelectorContextInfo, delegate, didAutosaveSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelAutosaveDocumentWithDelegateDidAutosaveSelectorContextInfo, delegate, didAutosaveSelector, contextInfo)
+	})
 }
 
 // Autosaves the document’s contents to an appropriate file-system location, as needed.
@@ -526,12 +623,16 @@ func (o *NSDocument) AutosaveWithImplicitCancellabilityCompletionHandler(autosav
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_nSDocumentSelAutosaveWithImplicitCancellabilityCompletionHandler, autosavingIsImplicitlyCancellable, __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelAutosaveWithImplicitCancellabilityCompletionHandler, autosavingIsImplicitlyCancellable, __block_completionHandler)
+	})
 }
 
 // Opens the Versions browser in the document’s main window.
 func (o *NSDocument) BrowseDocumentVersions(sender objc.ID) {
-	o.Ptr().Send(_nSDocumentSelBrowseDocumentVersions, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelBrowseDocumentVersions, sender)
+	})
 }
 
 // Dismiss the Versions browser for the current document.
@@ -543,55 +644,78 @@ func (o *NSDocument) StopBrowsingVersionsWithCompletionHandler(completionHandler
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_nSDocumentSelStopBrowsingVersionsWithCompletionHandler, __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelStopBrowsingVersionsWithCompletionHandler, __block_completionHandler)
+	})
 }
 
 // Determines whether to close the document, prompting the user as needed to choose a course of action.
 func (o *NSDocument) CanCloseDocumentWithDelegateShouldCloseSelectorContextInfo(delegate objc.ID, shouldCloseSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_nSDocumentSelCanCloseDocumentWithDelegateShouldCloseSelectorContextInfo, delegate, shouldCloseSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelCanCloseDocumentWithDelegateShouldCloseSelectorContextInfo, delegate, shouldCloseSelector, contextInfo)
+	})
 }
 
 // Closes all of the document’s windows and removes the document from its document controller.
 func (o *NSDocument) Close() {
-	o.Ptr().Send(_nSDocumentSelClose)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelClose)
+	})
 }
 
 // Creates a copy of the receiving document in response to the user choosing Duplicate from the File menu.
 func (o *NSDocument) DuplicateDocument(sender objc.ID) {
-	o.Ptr().Send(_nSDocumentSelDuplicateDocument, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelDuplicateDocument, sender)
+	})
 }
 
 // Creates a new document whose contents are the same as the current document.
 func (o *NSDocument) DuplicateDocumentWithDelegateDidDuplicateSelectorContextInfo(delegate objc.ID, didDuplicateSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_nSDocumentSelDuplicateDocumentWithDelegateDidDuplicateSelectorContextInfo, delegate, didDuplicateSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelDuplicateDocumentWithDelegateDidDuplicateSelectorContextInfo, delegate, didDuplicateSelector, contextInfo)
+	})
 }
 
 // Creates a new document whose contents are the same as the receiver and returns an error object if unsuccessful.
 func (o *NSDocument) DuplicateAndReturnError() (*NSDocument, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelDuplicateAndReturnError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return NSDocumentFromID(_ret), nil
+	var _mainthread0 *NSDocument
+	var _mainthread1 error
+	purego.Main(func() {
+		_mainthread0, _mainthread1 = func() (*NSDocument, error) {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelDuplicateAndReturnError, unsafe.Pointer(&_nsErr))
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			if _nsErr != 0 {
+				return nil, purego.NSErrorToError(objc.ID(_nsErr))
+			}
+			return NSDocumentFromID(_ret), nil
+		}()
+	})
+	return _mainthread0, _mainthread1
 }
 
 // Renames the current document in response to the user choosing the Rename menu item.
 func (o *NSDocument) RenameDocument(sender objc.ID) {
-	o.Ptr().Send(_nSDocumentSelRenameDocument, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelRenameDocument, sender)
+	})
 }
 
 // Moves the document to the user’s iCloud storage.
 func (o *NSDocument) MoveDocumentToUbiquityContainer(sender objc.ID) {
-	o.Ptr().Send(_nSDocumentSelMoveDocumentToUbiquityContainer, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelMoveDocumentToUbiquityContainer, sender)
+	})
 }
 
 // Moves the document to a new location in response to the user choosing the Move To… menu item.
 func (o *NSDocument) MoveDocument(sender objc.ID) {
-	o.Ptr().Send(_nSDocumentSelMoveDocument, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelMoveDocument, sender)
+	})
 }
 
 // Moves the document to a user-selected location.
@@ -603,7 +727,9 @@ func (o *NSDocument) MoveDocumentWithCompletionHandler(completionHandler func(bo
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_nSDocumentSelMoveDocumentWithCompletionHandler, __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelMoveDocumentWithCompletionHandler, __block_completionHandler)
+	})
 }
 
 // Moves the document’s file to the given URL.
@@ -615,17 +741,23 @@ func (o *NSDocument) MoveToURLCompletionHandler(url *foundation.NSURL, completio
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_nSDocumentSelMoveToURLCompletionHandler, url.Ptr(), __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelMoveToURLCompletionHandler, url.Ptr(), __block_completionHandler)
+	})
 }
 
 // Locks the document in response to the user choosing the Lock menu item.
 func (o *NSDocument) LockDocument(sender objc.ID) {
-	o.Ptr().Send(_nSDocumentSelLockDocument, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelLockDocument, sender)
+	})
 }
 
 // Unlocks the document in response to the user choosing the Unlock menu item.
 func (o *NSDocument) UnlockDocument(sender objc.ID) {
-	o.Ptr().Send(_nSDocumentSelUnlockDocument, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelUnlockDocument, sender)
+	})
 }
 
 // Prevents the user from making further changes to the document.
@@ -637,7 +769,9 @@ func (o *NSDocument) LockDocumentWithCompletionHandler(completionHandler func(bo
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_nSDocumentSelLockDocumentWithCompletionHandler, __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelLockDocumentWithCompletionHandler, __block_completionHandler)
+	})
 }
 
 // Prevents the user from making changes to the document’s file.
@@ -649,7 +783,9 @@ func (o *NSDocument) LockWithCompletionHandler(completionHandler func(unsafe.Poi
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_nSDocumentSelLockWithCompletionHandler, __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelLockWithCompletionHandler, __block_completionHandler)
+	})
 }
 
 // Allows the user to make modifications to the document.
@@ -661,7 +797,9 @@ func (o *NSDocument) UnlockDocumentWithCompletionHandler(completionHandler func(
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_nSDocumentSelUnlockDocumentWithCompletionHandler, __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelUnlockDocumentWithCompletionHandler, __block_completionHandler)
+	})
 }
 
 // Allows the user to make modifications to the document’s file.
@@ -673,62 +811,95 @@ func (o *NSDocument) UnlockWithCompletionHandler(completionHandler func(unsafe.P
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_nSDocumentSelUnlockWithCompletionHandler, __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelUnlockWithCompletionHandler, __block_completionHandler)
+	})
 }
 
 // The action method invoked in the receiver as first responder when the user chooses the Page Setup menu command.
 func (o *NSDocument) RunPageLayout(sender objc.ID) {
-	o.Ptr().Send(_nSDocumentSelRunPageLayout, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelRunPageLayout, sender)
+	})
 }
 
 // Runs the modal page layout panel with the receiver’s printing information object.
 func (o *NSDocument) RunModalPageLayoutWithPrintInfoDelegateDidRunSelectorContextInfo(printInfo *NSPrintInfo, delegate objc.ID, didRunSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_nSDocumentSelRunModalPageLayoutWithPrintInfoDelegateDidRunSelectorContextInfo, printInfo.Ptr(), delegate, didRunSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelRunModalPageLayoutWithPrintInfoDelegateDidRunSelectorContextInfo, printInfo.Ptr(), delegate, didRunSelector, contextInfo)
+	})
 }
 
 // Adds document-specific content to the Page Layout panel.
 func (o *NSDocument) PreparePageLayout(pageLayout *NSPageLayout) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelPreparePageLayout, pageLayout.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelPreparePageLayout, pageLayout.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a Boolean value that indicates whether the document allows changes to the default printing information.
 func (o *NSDocument) ShouldChangePrintInfo(newPrintInfo *NSPrintInfo) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelShouldChangePrintInfo, newPrintInfo.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelShouldChangePrintInfo, newPrintInfo.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Prints the receiver in response to the user choosing the Print menu command.
 func (o *NSDocument) PrintDocument(sender objc.ID) {
-	o.Ptr().Send(_nSDocumentSelPrintDocument, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelPrintDocument, sender)
+	})
 }
 
 // Prints the document’s contents, optionally displaying a print panel to the user.
 func (o *NSDocument) PrintDocumentWithSettingsShowPrintPanelDelegateDidPrintSelectorContextInfo(printSettings *foundation.NSDictionary[*foundation.NSString, objc.ID], showPrintPanel bool, delegate objc.ID, didPrintSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_nSDocumentSelPrintDocumentWithSettingsShowPrintPanelDelegateDidPrintSelectorContextInfo, printSettings.Ptr(), showPrintPanel, delegate, didPrintSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelPrintDocumentWithSettingsShowPrintPanelDelegateDidPrintSelectorContextInfo, printSettings.Ptr(), showPrintPanel, delegate, didPrintSelector, contextInfo)
+	})
 }
 
 // Creates and returns a print operation for the document’s contents.
 func (o *NSDocument) PrintOperationWithSettingsError(printSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*NSPrintOperation, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelPrintOperationWithSettingsError, printSettings.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return NSPrintOperationFromID(_ret), nil
+	var _mainthread0 *NSPrintOperation
+	var _mainthread1 error
+	purego.Main(func() {
+		_mainthread0, _mainthread1 = func() (*NSPrintOperation, error) {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelPrintOperationWithSettingsError, printSettings.Ptr(), unsafe.Pointer(&_nsErr))
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			if _nsErr != 0 {
+				return nil, purego.NSErrorToError(objc.ID(_nsErr))
+			}
+			return NSPrintOperationFromID(_ret), nil
+		}()
+	})
+	return _mainthread0, _mainthread1
 }
 
 // Runs the specified print operation modally.
 func (o *NSDocument) RunModalPrintOperationDelegateDidRunSelectorContextInfo(printOperation *NSPrintOperation, delegate objc.ID, didRunSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_nSDocumentSelRunModalPrintOperationDelegateDidRunSelectorContextInfo, printOperation.Ptr(), delegate, didRunSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelRunModalPrintOperationDelegateDidRunSelectorContextInfo, printOperation.Ptr(), delegate, didRunSelector, contextInfo)
+	})
 }
 
 // Exports a PDF representation of the document’s current contents.
 func (o *NSDocument) SaveDocumentToPDF(sender objc.ID) {
-	o.Ptr().Send(_nSDocumentSelSaveDocumentToPDF, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelSaveDocumentToPDF, sender)
+	})
 }
 
 // Share the document’s file using the specified sharing service.
@@ -740,109 +911,169 @@ func (o *NSDocument) ShareDocumentWithSharingServiceCompletionHandler(sharingSer
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_nSDocumentSelShareDocumentWithSharingServiceCompletionHandler, sharingService.Ptr(), __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelShareDocumentWithSharingServiceCompletionHandler, sharingService.Ptr(), __block_completionHandler)
+	})
 }
 
 // Perform any custom setup associated with a sharing service picker.
 func (o *NSDocument) PrepareSharingServicePicker(sharingServicePicker *NSSharingServicePicker) {
-	o.Ptr().Send(_nSDocumentSelPrepareSharingServicePicker, sharingServicePicker.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelPrepareSharingServicePicker, sharingServicePicker.Ptr())
+	})
 }
 
 // Updates the receiver’s change count according to the given change type.
 func (o *NSDocument) UpdateChangeCount(change NSDocumentChangeType) {
-	o.Ptr().Send(_nSDocumentSelUpdateChangeCount, change)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelUpdateChangeCount, change)
+	})
 }
 
 // Returns an object that encapsulates the current record of document changes at the beginning of a save operation.
 func (o *NSDocument) ChangeCountTokenForSaveOperation(saveOperation NSSaveOperationType) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelChangeCountTokenForSaveOperation, saveOperation)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelChangeCountTokenForSaveOperation, saveOperation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Updates the document’s change count settings after a successful save operation.
 func (o *NSDocument) UpdateChangeCountWithTokenForSaveOperation(changeCountToken objc.ID, saveOperation NSSaveOperationType) {
-	o.Ptr().Send(_nSDocumentSelUpdateChangeCountWithTokenForSaveOperation, changeCountToken, saveOperation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelUpdateChangeCountWithTokenForSaveOperation, changeCountToken, saveOperation)
+	})
 }
 
 // Presents an error alert to the user as a modal panel.
 func (o *NSDocument) PresentErrorModalForWindowDelegateDidPresentSelectorContextInfo(error_ unsafe.Pointer, window *NSWindow, delegate objc.ID, didPresentSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_nSDocumentSelPresentErrorModalForWindowDelegateDidPresentSelectorContextInfo, error_, window.Ptr(), delegate, didPresentSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelPresentErrorModalForWindowDelegateDidPresentSelectorContextInfo, error_, window.Ptr(), delegate, didPresentSelector, contextInfo)
+	})
 }
 
 // Presents an error alert to the user as a modal panel.
 func (o *NSDocument) PresentError(error_ unsafe.Pointer) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelPresentError, error_)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelPresentError, error_)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Called when the receiver is about to present an error.
 func (o *NSDocument) WillPresentError(error_ unsafe.Pointer) unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSDocumentSelWillPresentError, error_)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSDocumentSelWillPresentError, error_)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Confirms that the error object is not to be presented to the user and the error cannot be recovered from, so cleanup can be done.
 func (o *NSDocument) WillNotPresentError(error_ unsafe.Pointer) {
-	o.Ptr().Send(_nSDocumentSelWillNotPresentError, error_)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelWillNotPresentError, error_)
+	})
 }
 
 // Creates the window controller objects that the document uses to display its content.
 func (o *NSDocument) MakeWindowControllers() {
-	o.Ptr().Send(_nSDocumentSelMakeWindowControllers)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelMakeWindowControllers)
+	})
 }
 
 // Called before one of the document’s window controllers loads its nib file.
 func (o *NSDocument) WindowControllerWillLoadNib(windowController *NSWindowController) {
-	o.Ptr().Send(_nSDocumentSelWindowControllerWillLoadNib, windowController.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelWindowControllerWillLoadNib, windowController.Ptr())
+	})
 }
 
 // Called after one of the document’s window controllers loads its nib file.
 func (o *NSDocument) WindowControllerDidLoadNib(windowController *NSWindowController) {
-	o.Ptr().Send(_nSDocumentSelWindowControllerDidLoadNib, windowController.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelWindowControllerDidLoadNib, windowController.Ptr())
+	})
 }
 
 // Sets the window outlet of this document to the specified value.
 func (o *NSDocument) SetWindow(window *NSWindow) {
-	o.Ptr().Send(_nSDocumentSelSetWindow, window.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelSetWindow, window.Ptr())
+	})
 }
 
 // Adds the specified window controller to the current document.
 func (o *NSDocument) AddWindowController(windowController *NSWindowController) {
-	o.Ptr().Send(_nSDocumentSelAddWindowController, windowController.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelAddWindowController, windowController.Ptr())
+	})
 }
 
 // Removes the specified window controller from the receiver’s array of window controllers.
 func (o *NSDocument) RemoveWindowController(windowController *NSWindowController) {
-	o.Ptr().Send(_nSDocumentSelRemoveWindowController, windowController.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelRemoveWindowController, windowController.Ptr())
+	})
 }
 
 // Displays all of the document’s windows, bringing them to the front and making them main or key as necessary.
 func (o *NSDocument) ShowWindows() {
-	o.Ptr().Send(_nSDocumentSelShowWindows)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelShowWindows)
+	})
 }
 
 // Determines whether the system should close the document and its associated window.
 func (o *NSDocument) ShouldCloseWindowControllerDelegateShouldCloseSelectorContextInfo(windowController *NSWindowController, delegate objc.ID, shouldCloseSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_nSDocumentSelShouldCloseWindowControllerDelegateShouldCloseSelectorContextInfo, windowController.Ptr(), delegate, shouldCloseSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelShouldCloseWindowControllerDelegateShouldCloseSelectorContextInfo, windowController.Ptr(), delegate, shouldCloseSelector, contextInfo)
+	})
 }
 
 func (o *NSDocument) SetDisplayName(displayNameOrNil *foundation.NSString) {
-	o.Ptr().Send(_nSDocumentSelSetDisplayName, displayNameOrNil.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelSetDisplayName, displayNameOrNil.Ptr())
+	})
 }
 
 // Returns the default draft name for the document subclass.
 func (o *NSDocument) DefaultDraftName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelDefaultDraftName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelDefaultDraftName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a Boolean value that indicates whether the document can read and write the data natively.
 func NSDocumentIsNativeType(type_ *foundation.NSString) bool {
-	_ret := objc.Send[bool](objc.ID(_clsNSDocument), _nSDocumentSelIsNativeType, type_.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](objc.ID(_clsNSDocument), _nSDocumentSelIsNativeType, type_.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the names of the types to which this document can be saved for a specified kind of save operation.
@@ -865,8 +1096,14 @@ func (o *NSDocument) FileNameExtensionForTypeSaveOperation(typeName *foundation.
 
 // Validates the specified user interface item that the receiver manages.
 func (o *NSDocument) ValidateUserInterfaceItem(item NSValidatedUserInterfaceItem) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelValidateUserInterfaceItem, item)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelValidateUserInterfaceItem, item)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDocument) RelinquishPresentedItemToReader(reader func(objc.Block)) {
@@ -946,7 +1183,9 @@ func (o *NSDocument) FileType() *foundation.NSString {
 }
 
 func (o *NSDocument) SetFileType(fileType *foundation.NSString) {
-	o.Ptr().Send(_nSDocumentSelSetFileType, fileType.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelSetFileType, fileType.Ptr())
+	})
 }
 
 func (o *NSDocument) FileURL() *foundation.NSURL {
@@ -958,7 +1197,9 @@ func (o *NSDocument) FileURL() *foundation.NSURL {
 }
 
 func (o *NSDocument) SetFileURL(fileURL *foundation.NSURL) {
-	o.Ptr().Send(_nSDocumentSelSetFileURL, fileURL.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelSetFileURL, fileURL.Ptr())
+	})
 }
 
 func (o *NSDocument) FileModificationDate() *foundation.NSDate {
@@ -970,26 +1211,48 @@ func (o *NSDocument) FileModificationDate() *foundation.NSDate {
 }
 
 func (o *NSDocument) SetFileModificationDate(fileModificationDate *foundation.NSDate) {
-	o.Ptr().Send(_nSDocumentSelSetFileModificationDate, fileModificationDate.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelSetFileModificationDate, fileModificationDate.Ptr())
+	})
 }
 
 func (o *NSDocument) IsDraft() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelIsDraft)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelIsDraft)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDocument) SetDraft(draft bool) {
-	o.Ptr().Send(_nSDocumentSelSetDraft, draft)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelSetDraft, draft)
+	})
 }
 
 func (o *NSDocument) IsEntireFileLoaded() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelIsEntireFileLoaded)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelIsEntireFileLoaded)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDocument) AutosavingIsImplicitlyCancellable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelAutosavingIsImplicitlyCancellable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelAutosavingIsImplicitlyCancellable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDocument) KeepBackupFile() bool {
@@ -1006,8 +1269,14 @@ func (o *NSDocument) BackupFileURL() *foundation.NSURL {
 }
 
 func (o *NSDocument) SavePanelShowsFileFormatsControl() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelSavePanelShowsFileFormatsControl)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelSavePanelShowsFileFormatsControl)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDocument) FileNameExtensionWasHiddenInLastRunSavePanel() bool {
@@ -1024,28 +1293,58 @@ func (o *NSDocument) FileTypeFromLastRunSavePanel() *foundation.NSString {
 }
 
 func (o *NSDocument) HasUnautosavedChanges() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelHasUnautosavedChanges)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelHasUnautosavedChanges)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func NSDocumentAutosavesInPlace() bool {
-	_ret := objc.Send[bool](objc.ID(_clsNSDocument), _nSDocumentSelAutosavesInPlace)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](objc.ID(_clsNSDocument), _nSDocumentSelAutosavesInPlace)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func NSDocumentPreservesVersions() bool {
-	_ret := objc.Send[bool](objc.ID(_clsNSDocument), _nSDocumentSelPreservesVersions)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](objc.ID(_clsNSDocument), _nSDocumentSelPreservesVersions)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDocument) IsBrowsingVersions() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelIsBrowsingVersions)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelIsBrowsingVersions)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func NSDocumentAutosavesDrafts() bool {
-	_ret := objc.Send[bool](objc.ID(_clsNSDocument), _nSDocumentSelAutosavesDrafts)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](objc.ID(_clsNSDocument), _nSDocumentSelAutosavesDrafts)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDocument) AutosavingFileType() *foundation.NSString {
@@ -1065,133 +1364,239 @@ func (o *NSDocument) AutosavedContentsFileURL() *foundation.NSURL {
 }
 
 func (o *NSDocument) SetAutosavedContentsFileURL(autosavedContentsFileURL *foundation.NSURL) {
-	o.Ptr().Send(_nSDocumentSelSetAutosavedContentsFileURL, autosavedContentsFileURL.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelSetAutosavedContentsFileURL, autosavedContentsFileURL.Ptr())
+	})
 }
 
 func (o *NSDocument) IsLocked() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelIsLocked)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelIsLocked)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDocument) PrintInfo() *NSPrintInfo {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelPrintInfo)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSPrintInfoFromID(_ret)
+	var _mainthread0 *NSPrintInfo
+	purego.Main(func() {
+		_mainthread0 = func() *NSPrintInfo {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelPrintInfo)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSPrintInfoFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDocument) SetPrintInfo(printInfo *NSPrintInfo) {
-	o.Ptr().Send(_nSDocumentSelSetPrintInfo, printInfo.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelSetPrintInfo, printInfo.Ptr())
+	})
 }
 
 func (o *NSDocument) PDFPrintOperation() *NSPrintOperation {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelPDFPrintOperation)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSPrintOperationFromID(_ret)
+	var _mainthread0 *NSPrintOperation
+	purego.Main(func() {
+		_mainthread0 = func() *NSPrintOperation {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelPDFPrintOperation)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSPrintOperationFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDocument) AllowsDocumentSharing() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelAllowsDocumentSharing)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelAllowsDocumentSharing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDocument) PreviewRepresentableActivityItems() *foundation.NSArray[NSPreviewRepresentableActivityItem] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelPreviewRepresentableActivityItems)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[NSPreviewRepresentableActivityItem](_ret)
+	var _mainthread0 *foundation.NSArray[NSPreviewRepresentableActivityItem]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[NSPreviewRepresentableActivityItem] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelPreviewRepresentableActivityItems)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[NSPreviewRepresentableActivityItem](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDocument) SetPreviewRepresentableActivityItems(previewRepresentableActivityItems *foundation.NSArray[NSPreviewRepresentableActivityItem]) {
-	o.Ptr().Send(_nSDocumentSelSetPreviewRepresentableActivityItems, previewRepresentableActivityItems.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelSetPreviewRepresentableActivityItems, previewRepresentableActivityItems.Ptr())
+	})
 }
 
 func (o *NSDocument) IsDocumentEdited() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelIsDocumentEdited)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelIsDocumentEdited)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDocument) IsInViewingMode() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelIsInViewingMode)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelIsInViewingMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDocument) UndoManager() *foundation.NSUndoManager {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelUndoManager)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSUndoManagerFromID(_ret)
+	var _mainthread0 *foundation.NSUndoManager
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSUndoManager {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelUndoManager)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSUndoManagerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDocument) SetUndoManager(undoManager *foundation.NSUndoManager) {
-	o.Ptr().Send(_nSDocumentSelSetUndoManager, undoManager.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelSetUndoManager, undoManager.Ptr())
+	})
 }
 
 func (o *NSDocument) HasUndoManager() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelHasUndoManager)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelHasUndoManager)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDocument) SetHasUndoManager(hasUndoManager bool) {
-	o.Ptr().Send(_nSDocumentSelSetHasUndoManager, hasUndoManager)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelSetHasUndoManager, hasUndoManager)
+	})
 }
 
 func (o *NSDocument) WindowNibName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelWindowNibName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelWindowNibName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDocument) WindowControllers() *foundation.NSArray[*NSWindowController] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelWindowControllers)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSWindowController](_ret)
+	var _mainthread0 *foundation.NSArray[*NSWindowController]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSWindowController] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelWindowControllers)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSWindowController](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDocument) DisplayName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelDisplayName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelDisplayName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDocument) WindowForSheet() *NSWindow {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelWindowForSheet)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowFromID(_ret)
+	var _mainthread0 *NSWindow
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindow {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelWindowForSheet)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func NSDocumentReadableTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSDocument), _nSDocumentSelReadableTypes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSDocument), _nSDocumentSelReadableTypes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func NSDocumentWritableTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSDocument), _nSDocumentSelWritableTypes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSDocument), _nSDocumentSelWritableTypes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func NSDocumentUsesUbiquitousStorage() bool {
-	_ret := objc.Send[bool](objc.ID(_clsNSDocument), _nSDocumentSelUsesUbiquitousStorage)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](objc.ID(_clsNSDocument), _nSDocumentSelUsesUbiquitousStorage)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDocument) PresentedItemURL() *foundation.NSURL {
@@ -1214,193 +1619,350 @@ func (o *NSDocument) ObservedPresentedItemUbiquityAttributes() *foundation.NSSet
 // Deprecated: Use -saveToURL:ofType:forSaveOperation:completionHandler: instead
 func (o *NSDocument) SaveToURLOfTypeForSaveOperationError(url *foundation.NSURL, typeName *foundation.NSString, saveOperation NSSaveOperationType) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelSaveToURLOfTypeForSaveOperationError, url.Ptr(), typeName.Ptr(), saveOperation, unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return false, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return _ret, nil
+	var _mainthread0 bool
+	var _mainthread1 error
+	purego.Main(func() {
+		_mainthread0, _mainthread1 = func() (bool, error) {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelSaveToURLOfTypeForSaveOperationError, url.Ptr(), typeName.Ptr(), saveOperation, unsafe.Pointer(&_nsErr))
+			if _nsErr != 0 {
+				return false, purego.NSErrorToError(objc.ID(_nsErr))
+			}
+			return _ret, nil
+		}()
+	})
+	return _mainthread0, _mainthread1
 }
 
 // Deprecated: since macOS 10.4.
 func (o *NSDocument) DataRepresentationOfType(type_ *foundation.NSString) *foundation.NSData {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelDataRepresentationOfType, type_.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDataFromID(_ret)
+	var _mainthread0 *foundation.NSData
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSData {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelDataRepresentationOfType, type_.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDataFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.4.
 func (o *NSDocument) FileAttributesToWriteToFileOfTypeSaveOperation(fullDocumentPath *foundation.NSString, documentTypeName *foundation.NSString, saveOperationType NSSaveOperationType) *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelFileAttributesToWriteToFileOfTypeSaveOperation, fullDocumentPath.Ptr(), documentTypeName.Ptr(), saveOperationType)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
+	var _mainthread0 *foundation.NSDictionary[objc.ID, objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSDictionary[objc.ID, objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelFileAttributesToWriteToFileOfTypeSaveOperation, fullDocumentPath.Ptr(), documentTypeName.Ptr(), saveOperationType)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.4.
 func (o *NSDocument) FileName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelFileName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelFileName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.4.
 func (o *NSDocument) FileWrapperRepresentationOfType(type_ *foundation.NSString) *foundation.NSFileWrapper {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelFileWrapperRepresentationOfType, type_.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSFileWrapperFromID(_ret)
+	var _mainthread0 *foundation.NSFileWrapper
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSFileWrapper {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelFileWrapperRepresentationOfType, type_.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSFileWrapperFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.4.
 func (o *NSDocument) InitWithContentsOfFileOfType(absolutePath *foundation.NSString, typeName *foundation.NSString) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelInitWithContentsOfFileOfType, absolutePath.Ptr(), typeName.Ptr())
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelInitWithContentsOfFileOfType, absolutePath.Ptr(), typeName.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.4.
 func (o *NSDocument) InitWithContentsOfURLOfType(url *foundation.NSURL, typeName *foundation.NSString) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelInitWithContentsOfURLOfType, url.Ptr(), typeName.Ptr())
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelInitWithContentsOfURLOfType, url.Ptr(), typeName.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.4.
 func (o *NSDocument) LoadDataRepresentationOfType(data *foundation.NSData, type_ *foundation.NSString) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelLoadDataRepresentationOfType, data.Ptr(), type_.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelLoadDataRepresentationOfType, data.Ptr(), type_.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.4.
 func (o *NSDocument) LoadFileWrapperRepresentationOfType(wrapper *foundation.NSFileWrapper, type_ *foundation.NSString) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelLoadFileWrapperRepresentationOfType, wrapper.Ptr(), type_.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelLoadFileWrapperRepresentationOfType, wrapper.Ptr(), type_.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.4.
 func (o *NSDocument) PrintShowingPrintPanel(flag bool) {
-	o.Ptr().Send(_nSDocumentSelPrintShowingPrintPanel, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelPrintShowingPrintPanel, flag)
+	})
 }
 
 // Deprecated: since macOS 10.4.
 func (o *NSDocument) ReadFromFileOfType(fileName *foundation.NSString, type_ *foundation.NSString) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelReadFromFileOfType, fileName.Ptr(), type_.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelReadFromFileOfType, fileName.Ptr(), type_.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.4.
 func (o *NSDocument) ReadFromURLOfType(url *foundation.NSURL, type_ *foundation.NSString) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelReadFromURLOfType, url.Ptr(), type_.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelReadFromURLOfType, url.Ptr(), type_.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.4.
 func (o *NSDocument) RevertToSavedFromFileOfType(fileName *foundation.NSString, type_ *foundation.NSString) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelRevertToSavedFromFileOfType, fileName.Ptr(), type_.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelRevertToSavedFromFileOfType, fileName.Ptr(), type_.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.4.
 func (o *NSDocument) RevertToSavedFromURLOfType(url *foundation.NSURL, type_ *foundation.NSString) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelRevertToSavedFromURLOfType, url.Ptr(), type_.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelRevertToSavedFromURLOfType, url.Ptr(), type_.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.4.
 func (o *NSDocument) RunModalPageLayoutWithPrintInfo(printInfo *NSPrintInfo) int {
-	_ret := objc.Send[int](o.Ptr(), _nSDocumentSelRunModalPageLayoutWithPrintInfo, printInfo.Ptr())
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSDocumentSelRunModalPageLayoutWithPrintInfo, printInfo.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.4.
 func (o *NSDocument) SaveToFileSaveOperationDelegateDidSaveSelectorContextInfo(fileName *foundation.NSString, saveOperation NSSaveOperationType, delegate objc.ID, didSaveSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_nSDocumentSelSaveToFileSaveOperationDelegateDidSaveSelectorContextInfo, fileName.Ptr(), saveOperation, delegate, didSaveSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelSaveToFileSaveOperationDelegateDidSaveSelectorContextInfo, fileName.Ptr(), saveOperation, delegate, didSaveSelector, contextInfo)
+	})
 }
 
 // Deprecated: since macOS 10.4.
 func (o *NSDocument) SetFileName(fileName *foundation.NSString) {
-	o.Ptr().Send(_nSDocumentSelSetFileName, fileName.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelSetFileName, fileName.Ptr())
+	})
 }
 
 // Deprecated: since macOS 10.4.
 func (o *NSDocument) WriteToFileOfType(fileName *foundation.NSString, type_ *foundation.NSString) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelWriteToFileOfType, fileName.Ptr(), type_.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelWriteToFileOfType, fileName.Ptr(), type_.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.4.
 func (o *NSDocument) WriteToFileOfTypeOriginalFileSaveOperation(fullDocumentPath *foundation.NSString, documentTypeName *foundation.NSString, fullOriginalDocumentPath *foundation.NSString, saveOperationType NSSaveOperationType) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelWriteToFileOfTypeOriginalFileSaveOperation, fullDocumentPath.Ptr(), documentTypeName.Ptr(), fullOriginalDocumentPath.Ptr(), saveOperationType)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelWriteToFileOfTypeOriginalFileSaveOperation, fullDocumentPath.Ptr(), documentTypeName.Ptr(), fullOriginalDocumentPath.Ptr(), saveOperationType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.4.
 func (o *NSDocument) WriteToURLOfType(url *foundation.NSURL, type_ *foundation.NSString) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelWriteToURLOfType, url.Ptr(), type_.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelWriteToURLOfType, url.Ptr(), type_.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.4.
 func (o *NSDocument) WriteWithBackupToFileOfTypeSaveOperation(fullDocumentPath *foundation.NSString, documentTypeName *foundation.NSString, saveOperationType NSSaveOperationType) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelWriteWithBackupToFileOfTypeSaveOperation, fullDocumentPath.Ptr(), documentTypeName.Ptr(), saveOperationType)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelWriteWithBackupToFileOfTypeSaveOperation, fullDocumentPath.Ptr(), documentTypeName.Ptr(), saveOperationType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSDocument) ShouldRunSavePanelWithAccessoryView() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelShouldRunSavePanelWithAccessoryView)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDocumentSelShouldRunSavePanelWithAccessoryView)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Updates the state of the given user activity.
 func (o *NSDocument) UpdateUserActivityState(activity *foundation.NSUserActivity) {
-	o.Ptr().Send(_nSDocumentSelUpdateUserActivityState, activity.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelUpdateUserActivityState, activity.Ptr())
+	})
 }
 
 func (o *NSDocument) UserActivity() *foundation.NSUserActivity {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelUserActivity)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSUserActivityFromID(_ret)
+	var _mainthread0 *foundation.NSUserActivity
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSUserActivity {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelUserActivity)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSUserActivityFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDocument) SetUserActivity(userActivity *foundation.NSUserActivity) {
-	o.Ptr().Send(_nSDocumentSelSetUserActivity, userActivity.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelSetUserActivity, userActivity.Ptr())
+	})
 }
 
 // Handles the Save AppleScript command by attempting to save the document.
 func (o *NSDocument) HandleSaveScriptCommand(command *foundation.NSScriptCommand) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelHandleSaveScriptCommand, command.Ptr())
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelHandleSaveScriptCommand, command.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Handles the Close AppleScript command by attempting to close the document.
 func (o *NSDocument) HandleCloseScriptCommand(command *foundation.NSCloseCommand) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelHandleCloseScriptCommand, command.Ptr())
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelHandleCloseScriptCommand, command.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Handles the Print AppleScript command by attempting to print the document.
 func (o *NSDocument) HandlePrintScriptCommand(command *foundation.NSScriptCommand) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelHandlePrintScriptCommand, command.Ptr())
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelHandlePrintScriptCommand, command.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDocument) LastComponentOfFileName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelLastComponentOfFileName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDocumentSelLastComponentOfFileName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDocument) SetLastComponentOfFileName(lastComponentOfFileName *foundation.NSString) {
-	o.Ptr().Send(_nSDocumentSelSetLastComponentOfFileName, lastComponentOfFileName.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelSetLastComponentOfFileName, lastComponentOfFileName.Ptr())
+	})
 }
 
 // Restores a window that was associated with a document, after that document is reopened.
@@ -1415,42 +1977,64 @@ func (o *NSDocument) RestoreDocumentWindowWithIdentifierStateCompletionHandler(i
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_nSDocumentSelRestoreDocumentWindowWithIdentifierStateCompletionHandler, identifier.Ptr(), state.Ptr(), __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelRestoreDocumentWindowWithIdentifierStateCompletionHandler, identifier.Ptr(), state.Ptr(), __block_completionHandler)
+	})
 }
 
 // Saves the interface-related state of the document.
 func (o *NSDocument) EncodeRestorableStateWithCoder(coder *foundation.NSCoder) {
-	o.Ptr().Send(_nSDocumentSelEncodeRestorableStateWithCoder, coder.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelEncodeRestorableStateWithCoder, coder.Ptr())
+	})
 }
 
 // Saves the interface-related state of the document.
 func (o *NSDocument) EncodeRestorableStateWithCoderBackgroundQueue(coder *foundation.NSCoder, queue *foundation.NSOperationQueue) {
-	o.Ptr().Send(_nSDocumentSelEncodeRestorableStateWithCoderBackgroundQueue, coder.Ptr(), queue.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelEncodeRestorableStateWithCoderBackgroundQueue, coder.Ptr(), queue.Ptr())
+	})
 }
 
 // Restores the interface-related state of the document.
 func (o *NSDocument) RestoreStateWithCoder(coder *foundation.NSCoder) {
-	o.Ptr().Send(_nSDocumentSelRestoreStateWithCoder, coder.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelRestoreStateWithCoder, coder.Ptr())
+	})
 }
 
 // Marks the document’s interface-related state as dirty.
 func (o *NSDocument) InvalidateRestorableState() {
-	o.Ptr().Send(_nSDocumentSelInvalidateRestorableState)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDocumentSelInvalidateRestorableState)
+	})
 }
 
 // Returns the classes that support secure coding.
 func NSDocumentAllowedClassesForRestorableStateKeyPath(keyPath *foundation.NSString) *foundation.NSArray[objc.Class] {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSDocument), _nSDocumentSelAllowedClassesForRestorableStateKeyPath, keyPath.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[objc.Class](_ret)
+	var _mainthread0 *foundation.NSArray[objc.Class]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[objc.Class] {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSDocument), _nSDocumentSelAllowedClassesForRestorableStateKeyPath, keyPath.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[objc.Class](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func NSDocumentRestorableStateKeyPaths() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSDocument), _nSDocumentSelRestorableStateKeyPaths)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSDocument), _nSDocumentSelRestorableStateKeyPaths)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }

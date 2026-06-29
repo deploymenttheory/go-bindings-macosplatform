@@ -70,181 +70,313 @@ func NSComboBoxCellFromID(id objc.ID) *NSComboBoxCell {
 
 // Marks the combo box as needing redisplay, so that it will reload the data for visible pop-up items and draw the new values.
 func (o *NSComboBoxCell) ReloadData() {
-	o.Ptr().Send(_nSComboBoxCellSelReloadData)
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboBoxCellSelReloadData)
+	})
 }
 
 // Informs the combo box that the number of items in its data source has changed.
 func (o *NSComboBoxCell) NoteNumberOfItemsChanged() {
-	o.Ptr().Send(_nSComboBoxCellSelNoteNumberOfItemsChanged)
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboBoxCellSelNoteNumberOfItemsChanged)
+	})
 }
 
 // Scrolls the combo box’s pop-up list vertically so that the item at the given index is as close to the top as possible.
 func (o *NSComboBoxCell) ScrollItemAtIndexToTop(index int) {
-	o.Ptr().Send(_nSComboBoxCellSelScrollItemAtIndexToTop, index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboBoxCellSelScrollItemAtIndexToTop, index)
+	})
 }
 
 // Scrolls the combo box’s pop-up list vertically so that the item at the given index is visible.
 func (o *NSComboBoxCell) ScrollItemAtIndexToVisible(index int) {
-	o.Ptr().Send(_nSComboBoxCellSelScrollItemAtIndexToVisible, index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboBoxCellSelScrollItemAtIndexToVisible, index)
+	})
 }
 
 // Selects the pop-up list row at the given index.
 func (o *NSComboBoxCell) SelectItemAtIndex(index int) {
-	o.Ptr().Send(_nSComboBoxCellSelSelectItemAtIndex, index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboBoxCellSelSelectItemAtIndex, index)
+	})
 }
 
 // Deselects the pop-up list item at the given index if it’s selected.
 func (o *NSComboBoxCell) DeselectItemAtIndex(index int) {
-	o.Ptr().Send(_nSComboBoxCellSelDeselectItemAtIndex, index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboBoxCellSelDeselectItemAtIndex, index)
+	})
 }
 
 // Returns a string from the combo box’s pop-up list that starts with the given substring.
 func (o *NSComboBoxCell) CompletedString(string_ *foundation.NSString) *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSComboBoxCellSelCompletedString, string_.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSComboBoxCellSelCompletedString, string_.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Adds the specified object to the internal item list.
 func (o *NSComboBoxCell) AddItemWithObjectValue(object objc.ID) {
-	o.Ptr().Send(_nSComboBoxCellSelAddItemWithObjectValue, object)
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboBoxCellSelAddItemWithObjectValue, object)
+	})
 }
 
 // Adds multiple objects to the internal item list.
 func (o *NSComboBoxCell) AddItemsWithObjectValues(objects *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_nSComboBoxCellSelAddItemsWithObjectValues, objects.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboBoxCellSelAddItemsWithObjectValues, objects.Ptr())
+	})
 }
 
 // Inserts an object at the specified location in the internal item list.
 func (o *NSComboBoxCell) InsertItemWithObjectValueAtIndex(object objc.ID, index int) {
-	o.Ptr().Send(_nSComboBoxCellSelInsertItemWithObjectValueAtIndex, object, index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboBoxCellSelInsertItemWithObjectValueAtIndex, object, index)
+	})
 }
 
 // Removes all occurrences of the specified object from the combo box’s internal item list.
 func (o *NSComboBoxCell) RemoveItemWithObjectValue(object objc.ID) {
-	o.Ptr().Send(_nSComboBoxCellSelRemoveItemWithObjectValue, object)
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboBoxCellSelRemoveItemWithObjectValue, object)
+	})
 }
 
 // Removes the object at the specified location from the combo box’s internal item list.
 func (o *NSComboBoxCell) RemoveItemAtIndex(index int) {
-	o.Ptr().Send(_nSComboBoxCellSelRemoveItemAtIndex, index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboBoxCellSelRemoveItemAtIndex, index)
+	})
 }
 
 // Removes all items from the combo box’s internal item list.
 func (o *NSComboBoxCell) RemoveAllItems() {
-	o.Ptr().Send(_nSComboBoxCellSelRemoveAllItems)
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboBoxCellSelRemoveAllItems)
+	})
 }
 
 // Selects the first pop-up list item that corresponds to the specified object.
 func (o *NSComboBoxCell) SelectItemWithObjectValue(object objc.ID) {
-	o.Ptr().Send(_nSComboBoxCellSelSelectItemWithObjectValue, object)
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboBoxCellSelSelectItemWithObjectValue, object)
+	})
 }
 
 // Returns the object located at the specified location in the internal item list.
 func (o *NSComboBoxCell) ItemObjectValueAtIndex(index int) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSComboBoxCellSelItemObjectValueAtIndex, index)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSComboBoxCellSelItemObjectValueAtIndex, index)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Searches the combo box’s internal item list for the given object and returns the matching index number.
 func (o *NSComboBoxCell) IndexOfItemWithObjectValue(object objc.ID) int {
-	_ret := objc.Send[int](o.Ptr(), _nSComboBoxCellSelIndexOfItemWithObjectValue, object)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSComboBoxCellSelIndexOfItemWithObjectValue, object)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSComboBoxCell) HasVerticalScroller() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSComboBoxCellSelHasVerticalScroller)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSComboBoxCellSelHasVerticalScroller)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSComboBoxCell) SetHasVerticalScroller(hasVerticalScroller bool) {
-	o.Ptr().Send(_nSComboBoxCellSelSetHasVerticalScroller, hasVerticalScroller)
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboBoxCellSelSetHasVerticalScroller, hasVerticalScroller)
+	})
 }
 
 func (o *NSComboBoxCell) IntercellSpacing() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSComboBoxCellSelIntercellSpacing)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSComboBoxCellSelIntercellSpacing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSComboBoxCell) SetIntercellSpacing(intercellSpacing corefoundation.CGSize) {
-	o.Ptr().Send(_nSComboBoxCellSelSetIntercellSpacing, intercellSpacing)
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboBoxCellSelSetIntercellSpacing, intercellSpacing)
+	})
 }
 
 func (o *NSComboBoxCell) ItemHeight() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSComboBoxCellSelItemHeight)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSComboBoxCellSelItemHeight)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSComboBoxCell) SetItemHeight(itemHeight float64) {
-	o.Ptr().Send(_nSComboBoxCellSelSetItemHeight, itemHeight)
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboBoxCellSelSetItemHeight, itemHeight)
+	})
 }
 
 func (o *NSComboBoxCell) NumberOfVisibleItems() int {
-	_ret := objc.Send[int](o.Ptr(), _nSComboBoxCellSelNumberOfVisibleItems)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSComboBoxCellSelNumberOfVisibleItems)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSComboBoxCell) SetNumberOfVisibleItems(numberOfVisibleItems int) {
-	o.Ptr().Send(_nSComboBoxCellSelSetNumberOfVisibleItems, numberOfVisibleItems)
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboBoxCellSelSetNumberOfVisibleItems, numberOfVisibleItems)
+	})
 }
 
 func (o *NSComboBoxCell) IsButtonBordered() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSComboBoxCellSelIsButtonBordered)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSComboBoxCellSelIsButtonBordered)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSComboBoxCell) SetButtonBordered(buttonBordered bool) {
-	o.Ptr().Send(_nSComboBoxCellSelSetButtonBordered, buttonBordered)
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboBoxCellSelSetButtonBordered, buttonBordered)
+	})
 }
 
 func (o *NSComboBoxCell) UsesDataSource() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSComboBoxCellSelUsesDataSource)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSComboBoxCellSelUsesDataSource)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSComboBoxCell) SetUsesDataSource(usesDataSource bool) {
-	o.Ptr().Send(_nSComboBoxCellSelSetUsesDataSource, usesDataSource)
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboBoxCellSelSetUsesDataSource, usesDataSource)
+	})
 }
 
 func (o *NSComboBoxCell) IndexOfSelectedItem() int {
-	_ret := objc.Send[int](o.Ptr(), _nSComboBoxCellSelIndexOfSelectedItem)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSComboBoxCellSelIndexOfSelectedItem)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSComboBoxCell) NumberOfItems() int {
-	_ret := objc.Send[int](o.Ptr(), _nSComboBoxCellSelNumberOfItems)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSComboBoxCellSelNumberOfItems)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSComboBoxCell) Completes() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSComboBoxCellSelCompletes)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSComboBoxCellSelCompletes)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSComboBoxCell) SetCompletes(completes bool) {
-	o.Ptr().Send(_nSComboBoxCellSelSetCompletes, completes)
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboBoxCellSelSetCompletes, completes)
+	})
 }
 
 func (o *NSComboBoxCell) DataSource() NSComboBoxCellDataSource {
-	_ret := objc.Send[NSComboBoxCellDataSource](o.Ptr(), _nSComboBoxCellSelDataSource)
-	return _ret
+	var _mainthread0 NSComboBoxCellDataSource
+	purego.Main(func() {
+		_mainthread0 = func() NSComboBoxCellDataSource {
+			_ret := objc.Send[NSComboBoxCellDataSource](o.Ptr(), _nSComboBoxCellSelDataSource)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSComboBoxCell) SetDataSource(dataSource NSComboBoxCellDataSource) {
-	o.Ptr().Send(_nSComboBoxCellSelSetDataSource, dataSource)
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboBoxCellSelSetDataSource, dataSource)
+	})
 }
 
 func (o *NSComboBoxCell) ObjectValueOfSelectedItem() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSComboBoxCellSelObjectValueOfSelectedItem)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSComboBoxCellSelObjectValueOfSelectedItem)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSComboBoxCell) ObjectValues() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSComboBoxCellSelObjectValues)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[objc.ID](_ret)
+	var _mainthread0 *foundation.NSArray[objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSComboBoxCellSelObjectValues)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }

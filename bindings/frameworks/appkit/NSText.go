@@ -105,370 +105,618 @@ func NSTextFromID(id objc.ID) *NSText {
 }
 
 func (o *NSText) InitWithFrame(frameRect corefoundation.CGRect) *NSText {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelInitWithFrame, frameRect)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextFromID(_ret)
+	var _mainthread0 *NSText
+	purego.Main(func() {
+		_mainthread0 = func() *NSText {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelInitWithFrame, frameRect)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSText) InitWithCoder(coder *foundation.NSCoder) *NSText {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextFromID(_ret)
+	var _mainthread0 *NSText
+	purego.Main(func() {
+		_mainthread0 = func() *NSText {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Replaces the characters in the given range with those in the given string.
 func (o *NSText) ReplaceCharactersInRangeWithString(range_ foundation.NSRange, string_ *foundation.NSString) {
-	o.Ptr().Send(_nSTextSelReplaceCharactersInRangeWithString, range_, string_.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelReplaceCharactersInRangeWithString, range_, string_.Ptr())
+	})
 }
 
 // Replaces the characters in the given range with RTF text interpreted from the given RTF data.
 func (o *NSText) ReplaceCharactersInRangeWithRTF(range_ foundation.NSRange, rtfData *foundation.NSData) {
-	o.Ptr().Send(_nSTextSelReplaceCharactersInRangeWithRTF, range_, rtfData.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelReplaceCharactersInRangeWithRTF, range_, rtfData.Ptr())
+	})
 }
 
 // Replaces the characters in the given range with RTFD text interpreted from the given RTFD data.
 func (o *NSText) ReplaceCharactersInRangeWithRTFD(range_ foundation.NSRange, rtfdData *foundation.NSData) {
-	o.Ptr().Send(_nSTextSelReplaceCharactersInRangeWithRTFD, range_, rtfdData.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelReplaceCharactersInRangeWithRTFD, range_, rtfdData.Ptr())
+	})
 }
 
 // Returns an NSData object that contains an RTF stream corresponding to the characters and attributes within aRange, omitting any attachment characters and attributes.
 func (o *NSText) RTFFromRange(range_ foundation.NSRange) *foundation.NSData {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelRTFFromRange, range_)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDataFromID(_ret)
+	var _mainthread0 *foundation.NSData
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSData {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelRTFFromRange, range_)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDataFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns an NSData object that contains an RTFD stream corresponding to the characters and attributes within aRange.
 func (o *NSText) RTFDFromRange(range_ foundation.NSRange) *foundation.NSData {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelRTFDFromRange, range_)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDataFromID(_ret)
+	var _mainthread0 *foundation.NSData
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSData {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelRTFDFromRange, range_)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDataFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Writes the receiver’s text as RTF with attachments to a file or directory at path.
 func (o *NSText) WriteRTFDToFileAtomically(path *foundation.NSString, flag bool) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextSelWriteRTFDToFileAtomically, path.Ptr(), flag)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextSelWriteRTFDToFileAtomically, path.Ptr(), flag)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Attempts to read the RTFD file at the specified path.
 func (o *NSText) ReadRTFDFromFile(path *foundation.NSString) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextSelReadRTFDFromFile, path.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextSelReadRTFDFromFile, path.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Scrolls the receiver in its enclosing scroll view so the first characters of aRange are visible.
 func (o *NSText) ScrollRangeToVisible(range_ foundation.NSRange) {
-	o.Ptr().Send(_nSTextSelScrollRangeToVisible, range_)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelScrollRangeToVisible, range_)
+	})
 }
 
 // Sets the text color of characters within the specified range to the specified color.
 func (o *NSText) SetTextColorRange(color *NSColor, range_ foundation.NSRange) {
-	o.Ptr().Send(_nSTextSelSetTextColorRange, color.Ptr(), range_)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSetTextColorRange, color.Ptr(), range_)
+	})
 }
 
 // Sets the font of characters within aRange to aFont.
 func (o *NSText) SetFontRange(font *NSFont, range_ foundation.NSRange) {
-	o.Ptr().Send(_nSTextSelSetFontRange, font.Ptr(), range_)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSetFontRange, font.Ptr(), range_)
+	})
 }
 
 // Resizes the receiver to fit its text.
 func (o *NSText) SizeToFit() {
-	o.Ptr().Send(_nSTextSelSizeToFit)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSizeToFit)
+	})
 }
 
 // This action method copies the selected text onto the general pasteboard, in as many formats as the receiver supports.
 func (o *NSText) Copy(sender objc.ID) {
-	o.Ptr().Send(_nSTextSelCopy, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelCopy, sender)
+	})
 }
 
 // This action method copies the font information for the first character of the selection (or for the insertion point) onto the font pasteboard, as NSFontPboardType.
 func (o *NSText) CopyFont(sender objc.ID) {
-	o.Ptr().Send(_nSTextSelCopyFont, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelCopyFont, sender)
+	})
 }
 
 // This action method copies the paragraph style information for first selected paragraph onto the ruler pasteboard, as NSRulerPboardType, and expands the selection to paragraph boundaries.
 func (o *NSText) CopyRuler(sender objc.ID) {
-	o.Ptr().Send(_nSTextSelCopyRuler, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelCopyRuler, sender)
+	})
 }
 
 // This action method deletes the selected text and places it onto the general pasteboard, in as many formats as the receiver supports.
 func (o *NSText) Cut(sender objc.ID) {
-	o.Ptr().Send(_nSTextSelCut, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelCut, sender)
+	})
 }
 
 // This action method deletes the selected text.
 func (o *NSText) Delete(sender objc.ID) {
-	o.Ptr().Send(_nSTextSelDelete, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelDelete, sender)
+	})
 }
 
 // This action method pastes text from the general pasteboard at the insertion point or over the selection.
 func (o *NSText) Paste(sender objc.ID) {
-	o.Ptr().Send(_nSTextSelPaste, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelPaste, sender)
+	})
 }
 
 // This action method pastes font information from the font pasteboard onto the selected text or insertion point of a rich text object, or over all text of a plain text object.
 func (o *NSText) PasteFont(sender objc.ID) {
-	o.Ptr().Send(_nSTextSelPasteFont, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelPasteFont, sender)
+	})
 }
 
 // This action method pastes paragraph style information from the ruler pasteboard onto the selected paragraphs of a rich text object.
 func (o *NSText) PasteRuler(sender objc.ID) {
-	o.Ptr().Send(_nSTextSelPasteRuler, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelPasteRuler, sender)
+	})
 }
 
 // This action method selects all of the receiver’s text.
 func (o *NSText) SelectAll(sender objc.ID) {
-	o.Ptr().Send(_nSTextSelSelectAll, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSelectAll, sender)
+	})
 }
 
 // This action method changes the font of the selection for a rich text object, or of all text for a plain text object.
 func (o *NSText) ChangeFont(sender objc.ID) {
-	o.Ptr().Send(_nSTextSelChangeFont, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelChangeFont, sender)
+	})
 }
 
 // This action method applies left alignment to selected paragraphs (or all text if the receiver is a plain text object).
 func (o *NSText) AlignLeft(sender objc.ID) {
-	o.Ptr().Send(_nSTextSelAlignLeft, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelAlignLeft, sender)
+	})
 }
 
 // This action method applies right alignment to selected paragraphs (or all text if the receiver is a plain text object).
 func (o *NSText) AlignRight(sender objc.ID) {
-	o.Ptr().Send(_nSTextSelAlignRight, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelAlignRight, sender)
+	})
 }
 
 // This action method applies center alignment to selected paragraphs (or all text if the receiver is a plain text object).
 func (o *NSText) AlignCenter(sender objc.ID) {
-	o.Ptr().Send(_nSTextSelAlignCenter, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelAlignCenter, sender)
+	})
 }
 
 // This action method applies a subscript attribute to selected text (or all text if the receiver is a plain text object), lowering its baseline offset by a predefined amount.
 func (o *NSText) Subscript(sender objc.ID) {
-	o.Ptr().Send(_nSTextSelSubscript, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSubscript, sender)
+	})
 }
 
 // This action method applies a superscript attribute to selected text (or all text if the receiver is a plain text object), raising its baseline offset by a predefined amount.
 func (o *NSText) Superscript(sender objc.ID) {
-	o.Ptr().Send(_nSTextSelSuperscript, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSuperscript, sender)
+	})
 }
 
 // Adds the underline attribute to the selected text attributes if absent; removes the attribute if present.
 func (o *NSText) Underline(sender objc.ID) {
-	o.Ptr().Send(_nSTextSelUnderline, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelUnderline, sender)
+	})
 }
 
 // This action method removes any superscripting or subscripting from selected text (or all text if the receiver is a plain text object).
 func (o *NSText) Unscript(sender objc.ID) {
-	o.Ptr().Send(_nSTextSelUnscript, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelUnscript, sender)
+	})
 }
 
 // This action method opens the Spelling panel, allowing the user to make a correction during spell checking.
 func (o *NSText) ShowGuessPanel(sender objc.ID) {
-	o.Ptr().Send(_nSTextSelShowGuessPanel, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelShowGuessPanel, sender)
+	})
 }
 
 // This action method searches for a misspelled word in the receiver’s text.
 func (o *NSText) CheckSpelling(sender objc.ID) {
-	o.Ptr().Send(_nSTextSelCheckSpelling, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelCheckSpelling, sender)
+	})
 }
 
 // This action method shows or hides the ruler, if the receiver is enclosed in a scroll view.
 func (o *NSText) ToggleRuler(sender objc.ID) {
-	o.Ptr().Send(_nSTextSelToggleRuler, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelToggleRuler, sender)
+	})
 }
 
 func (o *NSText) String() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelString)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelString)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSText) SetString(string_ *foundation.NSString) {
-	o.Ptr().Send(_nSTextSelSetString, string_.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSetString, string_.Ptr())
+	})
 }
 
 func (o *NSText) Delegate() NSTextDelegate {
-	_ret := objc.Send[NSTextDelegate](o.Ptr(), _nSTextSelDelegate)
-	return _ret
+	var _mainthread0 NSTextDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSTextDelegate {
+			_ret := objc.Send[NSTextDelegate](o.Ptr(), _nSTextSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSText) SetDelegate(delegate NSTextDelegate) {
-	o.Ptr().Send(_nSTextSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSetDelegate, delegate)
+	})
 }
 
 func (o *NSText) IsEditable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextSelIsEditable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextSelIsEditable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSText) SetEditable(editable bool) {
-	o.Ptr().Send(_nSTextSelSetEditable, editable)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSetEditable, editable)
+	})
 }
 
 func (o *NSText) IsSelectable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextSelIsSelectable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextSelIsSelectable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSText) SetSelectable(selectable bool) {
-	o.Ptr().Send(_nSTextSelSetSelectable, selectable)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSetSelectable, selectable)
+	})
 }
 
 func (o *NSText) IsRichText() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextSelIsRichText)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextSelIsRichText)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSText) SetRichText(richText bool) {
-	o.Ptr().Send(_nSTextSelSetRichText, richText)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSetRichText, richText)
+	})
 }
 
 func (o *NSText) ImportsGraphics() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextSelImportsGraphics)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextSelImportsGraphics)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSText) SetImportsGraphics(importsGraphics bool) {
-	o.Ptr().Send(_nSTextSelSetImportsGraphics, importsGraphics)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSetImportsGraphics, importsGraphics)
+	})
 }
 
 func (o *NSText) IsFieldEditor() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextSelIsFieldEditor)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextSelIsFieldEditor)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSText) SetFieldEditor(fieldEditor bool) {
-	o.Ptr().Send(_nSTextSelSetFieldEditor, fieldEditor)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSetFieldEditor, fieldEditor)
+	})
 }
 
 func (o *NSText) UsesFontPanel() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextSelUsesFontPanel)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextSelUsesFontPanel)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSText) SetUsesFontPanel(usesFontPanel bool) {
-	o.Ptr().Send(_nSTextSelSetUsesFontPanel, usesFontPanel)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSetUsesFontPanel, usesFontPanel)
+	})
 }
 
 func (o *NSText) DrawsBackground() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextSelDrawsBackground)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextSelDrawsBackground)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSText) SetDrawsBackground(drawsBackground bool) {
-	o.Ptr().Send(_nSTextSelSetDrawsBackground, drawsBackground)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSetDrawsBackground, drawsBackground)
+	})
 }
 
 func (o *NSText) BackgroundColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelBackgroundColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelBackgroundColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSText) SetBackgroundColor(backgroundColor *NSColor) {
-	o.Ptr().Send(_nSTextSelSetBackgroundColor, backgroundColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSetBackgroundColor, backgroundColor.Ptr())
+	})
 }
 
 func (o *NSText) IsRulerVisible() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextSelIsRulerVisible)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextSelIsRulerVisible)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSText) SelectedRange() foundation.NSRange {
-	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTextSelSelectedRange)
-	return _ret
+	var _mainthread0 foundation.NSRange
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSRange {
+			_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTextSelSelectedRange)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSText) SetSelectedRange(selectedRange foundation.NSRange) {
-	o.Ptr().Send(_nSTextSelSetSelectedRange, selectedRange)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSetSelectedRange, selectedRange)
+	})
 }
 
 func (o *NSText) Font() *NSFont {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelFont)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSFontFromID(_ret)
+	var _mainthread0 *NSFont
+	purego.Main(func() {
+		_mainthread0 = func() *NSFont {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelFont)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSFontFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSText) SetFont(font *NSFont) {
-	o.Ptr().Send(_nSTextSelSetFont, font.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSetFont, font.Ptr())
+	})
 }
 
 func (o *NSText) TextColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelTextColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelTextColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSText) SetTextColor(textColor *NSColor) {
-	o.Ptr().Send(_nSTextSelSetTextColor, textColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSetTextColor, textColor.Ptr())
+	})
 }
 
 func (o *NSText) Alignment() NSTextAlignment {
-	_ret := objc.Send[NSTextAlignment](o.Ptr(), _nSTextSelAlignment)
-	return _ret
+	var _mainthread0 NSTextAlignment
+	purego.Main(func() {
+		_mainthread0 = func() NSTextAlignment {
+			_ret := objc.Send[NSTextAlignment](o.Ptr(), _nSTextSelAlignment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSText) SetAlignment(alignment NSTextAlignment) {
-	o.Ptr().Send(_nSTextSelSetAlignment, alignment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSetAlignment, alignment)
+	})
 }
 
 func (o *NSText) BaseWritingDirection() NSWritingDirection {
-	_ret := objc.Send[NSWritingDirection](o.Ptr(), _nSTextSelBaseWritingDirection)
-	return _ret
+	var _mainthread0 NSWritingDirection
+	purego.Main(func() {
+		_mainthread0 = func() NSWritingDirection {
+			_ret := objc.Send[NSWritingDirection](o.Ptr(), _nSTextSelBaseWritingDirection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSText) SetBaseWritingDirection(baseWritingDirection NSWritingDirection) {
-	o.Ptr().Send(_nSTextSelSetBaseWritingDirection, baseWritingDirection)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSetBaseWritingDirection, baseWritingDirection)
+	})
 }
 
 func (o *NSText) MaxSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSTextSelMaxSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSTextSelMaxSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSText) SetMaxSize(maxSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSTextSelSetMaxSize, maxSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSetMaxSize, maxSize)
+	})
 }
 
 func (o *NSText) MinSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSTextSelMinSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSTextSelMinSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSText) SetMinSize(minSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSTextSelSetMinSize, minSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSetMinSize, minSize)
+	})
 }
 
 func (o *NSText) IsHorizontallyResizable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextSelIsHorizontallyResizable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextSelIsHorizontallyResizable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSText) SetHorizontallyResizable(horizontallyResizable bool) {
-	o.Ptr().Send(_nSTextSelSetHorizontallyResizable, horizontallyResizable)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSetHorizontallyResizable, horizontallyResizable)
+	})
 }
 
 func (o *NSText) IsVerticallyResizable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTextSelIsVerticallyResizable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTextSelIsVerticallyResizable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSText) SetVerticallyResizable(verticallyResizable bool) {
-	o.Ptr().Send(_nSTextSelSetVerticallyResizable, verticallyResizable)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextSelSetVerticallyResizable, verticallyResizable)
+	})
 }

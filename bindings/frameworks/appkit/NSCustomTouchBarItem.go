@@ -35,13 +35,19 @@ func NSCustomTouchBarItemFromID(id objc.ID) *NSCustomTouchBarItem {
 }
 
 func (o *NSCustomTouchBarItem) SetView(view *NSView) {
-	o.Ptr().Send(_nSCustomTouchBarItemSelSetView, view.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCustomTouchBarItemSelSetView, view.Ptr())
+	})
 }
 
 func (o *NSCustomTouchBarItem) SetViewController(viewController *NSViewController) {
-	o.Ptr().Send(_nSCustomTouchBarItemSelSetViewController, viewController.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCustomTouchBarItemSelSetViewController, viewController.Ptr())
+	})
 }
 
 func (o *NSCustomTouchBarItem) SetCustomizationLabel(customizationLabel *foundation.NSString) {
-	o.Ptr().Send(_nSCustomTouchBarItemSelSetCustomizationLabel, customizationLabel.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCustomTouchBarItemSelSetCustomizationLabel, customizationLabel.Ptr())
+	})
 }

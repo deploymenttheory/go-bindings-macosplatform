@@ -52,106 +52,190 @@ func NSCollectionViewLayoutAttributesFromID(id objc.ID) *NSCollectionViewLayoutA
 
 // Creates and returns a layout attributes object for the item at the specified index path.
 func NSCollectionViewLayoutAttributesLayoutAttributesForItemWithIndexPath(indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionViewLayoutAttributes), _nSCollectionViewLayoutAttributesSelLayoutAttributesForItemWithIndexPath, indexPath.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewLayoutAttributesFromID(_ret)
+	var _mainthread0 *NSCollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewLayoutAttributes {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionViewLayoutAttributes), _nSCollectionViewLayoutAttributesSelLayoutAttributesForItemWithIndexPath, indexPath.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewLayoutAttributesFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates and returns a layout attributes object for an inter-item gap view at the specified index path.
 func NSCollectionViewLayoutAttributesLayoutAttributesForInterItemGapBeforeIndexPath(indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionViewLayoutAttributes), _nSCollectionViewLayoutAttributesSelLayoutAttributesForInterItemGapBeforeIndexPath, indexPath.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewLayoutAttributesFromID(_ret)
+	var _mainthread0 *NSCollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewLayoutAttributes {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionViewLayoutAttributes), _nSCollectionViewLayoutAttributesSelLayoutAttributesForInterItemGapBeforeIndexPath, indexPath.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewLayoutAttributesFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates and returns a layout attributes object for a supplementary view based on the specified information.
 func NSCollectionViewLayoutAttributesLayoutAttributesForSupplementaryViewOfKindWithIndexPath(elementKind *foundation.NSString, indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionViewLayoutAttributes), _nSCollectionViewLayoutAttributesSelLayoutAttributesForSupplementaryViewOfKindWithIndexPath, elementKind.Ptr(), indexPath.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewLayoutAttributesFromID(_ret)
+	var _mainthread0 *NSCollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewLayoutAttributes {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionViewLayoutAttributes), _nSCollectionViewLayoutAttributesSelLayoutAttributesForSupplementaryViewOfKindWithIndexPath, elementKind.Ptr(), indexPath.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewLayoutAttributesFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates and returns a layout attributes object for a decoration view based on the specified information.
 func NSCollectionViewLayoutAttributesLayoutAttributesForDecorationViewOfKindWithIndexPath(decorationViewKind *foundation.NSString, indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionViewLayoutAttributes), _nSCollectionViewLayoutAttributesSelLayoutAttributesForDecorationViewOfKindWithIndexPath, decorationViewKind.Ptr(), indexPath.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewLayoutAttributesFromID(_ret)
+	var _mainthread0 *NSCollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewLayoutAttributes {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionViewLayoutAttributes), _nSCollectionViewLayoutAttributesSelLayoutAttributesForDecorationViewOfKindWithIndexPath, decorationViewKind.Ptr(), indexPath.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewLayoutAttributesFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewLayoutAttributes) Frame() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSCollectionViewLayoutAttributesSelFrame)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSCollectionViewLayoutAttributesSelFrame)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewLayoutAttributes) SetFrame(frame corefoundation.CGRect) {
-	o.Ptr().Send(_nSCollectionViewLayoutAttributesSelSetFrame, frame)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewLayoutAttributesSelSetFrame, frame)
+	})
 }
 
 func (o *NSCollectionViewLayoutAttributes) Size() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCollectionViewLayoutAttributesSelSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCollectionViewLayoutAttributesSelSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewLayoutAttributes) SetSize(size corefoundation.CGSize) {
-	o.Ptr().Send(_nSCollectionViewLayoutAttributesSelSetSize, size)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewLayoutAttributesSelSetSize, size)
+	})
 }
 
 func (o *NSCollectionViewLayoutAttributes) Alpha() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSCollectionViewLayoutAttributesSelAlpha)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSCollectionViewLayoutAttributesSelAlpha)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewLayoutAttributes) SetAlpha(alpha float64) {
-	o.Ptr().Send(_nSCollectionViewLayoutAttributesSelSetAlpha, alpha)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewLayoutAttributesSelSetAlpha, alpha)
+	})
 }
 
 func (o *NSCollectionViewLayoutAttributes) ZIndex() int {
-	_ret := objc.Send[int](o.Ptr(), _nSCollectionViewLayoutAttributesSelZIndex)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSCollectionViewLayoutAttributesSelZIndex)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewLayoutAttributes) SetZIndex(zIndex int) {
-	o.Ptr().Send(_nSCollectionViewLayoutAttributesSelSetZIndex, zIndex)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewLayoutAttributesSelSetZIndex, zIndex)
+	})
 }
 
 func (o *NSCollectionViewLayoutAttributes) IsHidden() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewLayoutAttributesSelIsHidden)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewLayoutAttributesSelIsHidden)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewLayoutAttributes) SetHidden(hidden bool) {
-	o.Ptr().Send(_nSCollectionViewLayoutAttributesSelSetHidden, hidden)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewLayoutAttributesSelSetHidden, hidden)
+	})
 }
 
 func (o *NSCollectionViewLayoutAttributes) IndexPath() *foundation.NSIndexPath {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutAttributesSelIndexPath)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSIndexPathFromID(_ret)
+	var _mainthread0 *foundation.NSIndexPath
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSIndexPath {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutAttributesSelIndexPath)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSIndexPathFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewLayoutAttributes) SetIndexPath(indexPath *foundation.NSIndexPath) {
-	o.Ptr().Send(_nSCollectionViewLayoutAttributesSelSetIndexPath, indexPath.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewLayoutAttributesSelSetIndexPath, indexPath.Ptr())
+	})
 }
 
 func (o *NSCollectionViewLayoutAttributes) RepresentedElementCategory() NSCollectionElementCategory {
-	_ret := objc.Send[NSCollectionElementCategory](o.Ptr(), _nSCollectionViewLayoutAttributesSelRepresentedElementCategory)
-	return _ret
+	var _mainthread0 NSCollectionElementCategory
+	purego.Main(func() {
+		_mainthread0 = func() NSCollectionElementCategory {
+			_ret := objc.Send[NSCollectionElementCategory](o.Ptr(), _nSCollectionViewLayoutAttributesSelRepresentedElementCategory)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewLayoutAttributes) RepresentedElementKind() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutAttributesSelRepresentedElementKind)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutAttributesSelRepresentedElementKind)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

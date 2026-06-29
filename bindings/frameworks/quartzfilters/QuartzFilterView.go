@@ -31,5 +31,7 @@ func QuartzFilterViewFromID(id objc.ID) *QuartzFilterView {
 }
 
 func (o *QuartzFilterView) SizeToFit() {
-	o.Ptr().Send(_quartzFilterViewSelSizeToFit)
+	purego.Main(func() {
+		o.Ptr().Send(_quartzFilterViewSelSizeToFit)
+	})
 }

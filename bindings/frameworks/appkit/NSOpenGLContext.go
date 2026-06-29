@@ -79,13 +79,17 @@ func (o *NSOpenGLContext) InitWithCGLContextObj(context_ unsafe.Pointer) *NSOpen
 
 // Deprecated: Use NSOpenGLView to provide OpenGL content in a Cocoa app.
 func (o *NSOpenGLContext) SetView(view *NSView) {
-	o.Ptr().Send(_nSOpenGLContextSelSetView, view.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSOpenGLContextSelSetView, view.Ptr())
+	})
 }
 
 // Sets the OpenGL context to full-screen mode.
 // Deprecated: Use a fullscreen NSOpenGLView instead
 func (o *NSOpenGLContext) SetFullScreen() {
-	o.Ptr().Send(_nSOpenGLContextSelSetFullScreen)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOpenGLContextSelSetFullScreen)
+	})
 }
 
 // Instructs the OpenGL context to render into an offscreen buffer with the specified attributes.
@@ -103,7 +107,9 @@ func (o *NSOpenGLContext) ClearDrawable() {
 // Updates the OpenGL context’s drawable object.
 // Deprecated: since macOS 10.7.
 func (o *NSOpenGLContext) Update() {
-	o.Ptr().Send(_nSOpenGLContextSelUpdate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOpenGLContextSelUpdate)
+	})
 }
 
 // Copies the back buffer to the front buffer of the OpenGL context.
@@ -155,11 +161,17 @@ func (o *NSOpenGLContext) PixelFormat() *NSOpenGLPixelFormat {
 
 // Deprecated: since macOS 10.14.
 func (o *NSOpenGLContext) View() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLContextSelView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLContextSelView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func NSOpenGLContextCurrentContext() *NSOpenGLContext {

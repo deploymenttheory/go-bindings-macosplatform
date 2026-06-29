@@ -71,233 +71,397 @@ func SKSpriteNodeFromID(id objc.ID) *SKSpriteNode {
 
 // Initializes a textured sprite using an existing texture object but with a specified size.
 func SKSpriteNodeSpriteNodeWithTextureSize(texture *SKTexture, size corefoundation.CGSize) *SKSpriteNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKSpriteNode), _sKSpriteNodeSelSpriteNodeWithTextureSize, texture.Ptr(), size)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKSpriteNodeFromID(_ret)
+	var _mainthread0 *SKSpriteNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKSpriteNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKSpriteNode), _sKSpriteNodeSelSpriteNodeWithTextureSize, texture.Ptr(), size)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKSpriteNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a textured sprite using an existing texture object.
 func SKSpriteNodeSpriteNodeWithTexture(texture *SKTexture) *SKSpriteNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKSpriteNode), _sKSpriteNodeSelSpriteNodeWithTexture, texture.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKSpriteNodeFromID(_ret)
+	var _mainthread0 *SKSpriteNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKSpriteNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKSpriteNode), _sKSpriteNodeSelSpriteNodeWithTexture, texture.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKSpriteNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a textured sprite with a normal map to simulate 3D lighting.
 func SKSpriteNodeSpriteNodeWithTextureNormalMap(texture *SKTexture, normalMap *SKTexture) *SKSpriteNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKSpriteNode), _sKSpriteNodeSelSpriteNodeWithTextureNormalMap, texture.Ptr(), normalMap.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKSpriteNodeFromID(_ret)
+	var _mainthread0 *SKSpriteNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKSpriteNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKSpriteNode), _sKSpriteNodeSelSpriteNodeWithTextureNormalMap, texture.Ptr(), normalMap.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKSpriteNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a textured sprite using an image file.
 func SKSpriteNodeSpriteNodeWithImageNamed(name *foundation.NSString) *SKSpriteNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKSpriteNode), _sKSpriteNodeSelSpriteNodeWithImageNamed, name.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKSpriteNodeFromID(_ret)
+	var _mainthread0 *SKSpriteNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKSpriteNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKSpriteNode), _sKSpriteNodeSelSpriteNodeWithImageNamed, name.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKSpriteNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a textured sprite using an image file, optionally adding a normal map to simulate 3D lighting.
 func SKSpriteNodeSpriteNodeWithImageNamedNormalMapped(name *foundation.NSString, generateNormalMap bool) *SKSpriteNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKSpriteNode), _sKSpriteNodeSelSpriteNodeWithImageNamedNormalMapped, name.Ptr(), generateNormalMap)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKSpriteNodeFromID(_ret)
+	var _mainthread0 *SKSpriteNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKSpriteNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKSpriteNode), _sKSpriteNodeSelSpriteNodeWithImageNamedNormalMapped, name.Ptr(), generateNormalMap)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKSpriteNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a single-color sprite.
 func SKSpriteNodeSpriteNodeWithColorSize(color *appkit.NSColor, size corefoundation.CGSize) *SKSpriteNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKSpriteNode), _sKSpriteNodeSelSpriteNodeWithColorSize, color.Ptr(), size)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKSpriteNodeFromID(_ret)
+	var _mainthread0 *SKSpriteNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKSpriteNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKSpriteNode), _sKSpriteNodeSelSpriteNodeWithColorSize, color.Ptr(), size)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKSpriteNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a textured sprite in color using an existing texture object.
 func (o *SKSpriteNode) InitWithTextureColorSize(texture *SKTexture, color *appkit.NSColor, size corefoundation.CGSize) *SKSpriteNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelInitWithTextureColorSize, texture.Ptr(), color.Ptr(), size)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKSpriteNodeFromID(_ret)
+	var _mainthread0 *SKSpriteNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKSpriteNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelInitWithTextureColorSize, texture.Ptr(), color.Ptr(), size)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKSpriteNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a textured sprite using an existing texture object.
 func (o *SKSpriteNode) InitWithTexture(texture *SKTexture) *SKSpriteNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelInitWithTexture, texture.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKSpriteNodeFromID(_ret)
+	var _mainthread0 *SKSpriteNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKSpriteNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelInitWithTexture, texture.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKSpriteNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a textured sprite using an image file.
 func (o *SKSpriteNode) InitWithImageNamed(name *foundation.NSString) *SKSpriteNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelInitWithImageNamed, name.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKSpriteNodeFromID(_ret)
+	var _mainthread0 *SKSpriteNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKSpriteNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelInitWithImageNamed, name.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKSpriteNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a single-color sprite node.
 func (o *SKSpriteNode) InitWithColorSize(color *appkit.NSColor, size corefoundation.CGSize) *SKSpriteNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelInitWithColorSize, color.Ptr(), size)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKSpriteNodeFromID(_ret)
+	var _mainthread0 *SKSpriteNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKSpriteNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelInitWithColorSize, color.Ptr(), size)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKSpriteNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Tells you when to initialize a sprite from an archive.
 func (o *SKSpriteNode) InitWithCoder(aDecoder *foundation.NSCoder) *SKSpriteNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKSpriteNodeFromID(_ret)
+	var _mainthread0 *SKSpriteNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKSpriteNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelInitWithCoder, aDecoder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKSpriteNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Scales the sprite node to a specified size.
 func (o *SKSpriteNode) ScaleToSize(size corefoundation.CGSize) {
-	o.Ptr().Send(_sKSpriteNodeSelScaleToSize, size)
+	purego.Main(func() {
+		o.Ptr().Send(_sKSpriteNodeSelScaleToSize, size)
+	})
 }
 
 // Texture to be drawn (is stretched to fill the sprite)
 func (o *SKSpriteNode) Texture() *SKTexture {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelTexture)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKTextureFromID(_ret)
+	var _mainthread0 *SKTexture
+	purego.Main(func() {
+		_mainthread0 = func() *SKTexture {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelTexture)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKTextureFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKSpriteNode) SetTexture(texture *SKTexture) {
-	o.Ptr().Send(_sKSpriteNodeSelSetTexture, texture.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKSpriteNodeSelSetTexture, texture.Ptr())
+	})
 }
 
 // Texture to use for generating normals that lights use to light this sprite. This will only be used if the sprite is lit by at least one light. @see SKLightNode @see lightingBitMask
 func (o *SKSpriteNode) NormalTexture() *SKTexture {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelNormalTexture)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKTextureFromID(_ret)
+	var _mainthread0 *SKTexture
+	purego.Main(func() {
+		_mainthread0 = func() *SKTexture {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelNormalTexture)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKTextureFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKSpriteNode) SetNormalTexture(normalTexture *SKTexture) {
-	o.Ptr().Send(_sKSpriteNodeSelSetNormalTexture, normalTexture.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKSpriteNodeSelSetNormalTexture, normalTexture.Ptr())
+	})
 }
 
 // Bitmask to indicate being lit by a set of lights using overlapping lighting categories. A light whose category is set to a value that masks to non-zero using this mask will apply light to this sprite. When used together with a normal texture, complex lighting effects can be used.
 func (o *SKSpriteNode) LightingBitMask() uint32 {
-	_ret := objc.Send[uint32](o.Ptr(), _sKSpriteNodeSelLightingBitMask)
-	return _ret
+	var _mainthread0 uint32
+	purego.Main(func() {
+		_mainthread0 = func() uint32 {
+			_ret := objc.Send[uint32](o.Ptr(), _sKSpriteNodeSelLightingBitMask)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKSpriteNode) SetLightingBitMask(lightingBitMask uint32) {
-	o.Ptr().Send(_sKSpriteNodeSelSetLightingBitMask, lightingBitMask)
+	purego.Main(func() {
+		o.Ptr().Send(_sKSpriteNodeSelSetLightingBitMask, lightingBitMask)
+	})
 }
 
 func (o *SKSpriteNode) ShadowCastBitMask() uint32 {
-	_ret := objc.Send[uint32](o.Ptr(), _sKSpriteNodeSelShadowCastBitMask)
-	return _ret
+	var _mainthread0 uint32
+	purego.Main(func() {
+		_mainthread0 = func() uint32 {
+			_ret := objc.Send[uint32](o.Ptr(), _sKSpriteNodeSelShadowCastBitMask)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKSpriteNode) SetShadowCastBitMask(shadowCastBitMask uint32) {
-	o.Ptr().Send(_sKSpriteNodeSelSetShadowCastBitMask, shadowCastBitMask)
+	purego.Main(func() {
+		o.Ptr().Send(_sKSpriteNodeSelSetShadowCastBitMask, shadowCastBitMask)
+	})
 }
 
 func (o *SKSpriteNode) ShadowedBitMask() uint32 {
-	_ret := objc.Send[uint32](o.Ptr(), _sKSpriteNodeSelShadowedBitMask)
-	return _ret
+	var _mainthread0 uint32
+	purego.Main(func() {
+		_mainthread0 = func() uint32 {
+			_ret := objc.Send[uint32](o.Ptr(), _sKSpriteNodeSelShadowedBitMask)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKSpriteNode) SetShadowedBitMask(shadowedBitMask uint32) {
-	o.Ptr().Send(_sKSpriteNodeSelSetShadowedBitMask, shadowedBitMask)
+	purego.Main(func() {
+		o.Ptr().Send(_sKSpriteNodeSelSetShadowedBitMask, shadowedBitMask)
+	})
 }
 
 // Controls how the texture is stretched to fill the SKSpriteNode. Stretching is performed via a 9-part algorithm where the upper & lower middle parts are scaled horizontally, the left and right middle parts are scaled vertically, the center is scaled in both directions, and the corners are preserved. The centerRect defines the center region in a (0.0 - 1.0) coordinate space. Defaults to {(0,0) (1,1)} (the entire texture is stretched).
 func (o *SKSpriteNode) CenterRect() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _sKSpriteNodeSelCenterRect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _sKSpriteNodeSelCenterRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKSpriteNode) SetCenterRect(centerRect corefoundation.CGRect) {
-	o.Ptr().Send(_sKSpriteNodeSelSetCenterRect, centerRect)
+	purego.Main(func() {
+		o.Ptr().Send(_sKSpriteNodeSelSetCenterRect, centerRect)
+	})
 }
 
 // Controls the blending between the texture and the sprite's color. The valid interval of values is from 0.0 up to and including 1.0. A value above or below that interval is clamped to the minimum (0.0) if below or the maximum (1.0) if above.
 func (o *SKSpriteNode) ColorBlendFactor() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _sKSpriteNodeSelColorBlendFactor)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _sKSpriteNodeSelColorBlendFactor)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKSpriteNode) SetColorBlendFactor(colorBlendFactor float64) {
-	o.Ptr().Send(_sKSpriteNodeSelSetColorBlendFactor, colorBlendFactor)
+	purego.Main(func() {
+		o.Ptr().Send(_sKSpriteNodeSelSetColorBlendFactor, colorBlendFactor)
+	})
 }
 
 // Base color for the sprite (If no texture is present, the color still is drawn)
 func (o *SKSpriteNode) Color() *appkit.NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSColorFromID(_ret)
+	var _mainthread0 *appkit.NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKSpriteNode) SetColor(color *appkit.NSColor) {
-	o.Ptr().Send(_sKSpriteNodeSelSetColor, color.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKSpriteNodeSelSetColor, color.Ptr())
+	})
 }
 
 // Sets the blend mode to use when composing the sprite with the final framebuffer. @see SKNode.SKBlendMode
 func (o *SKSpriteNode) BlendMode() SKBlendMode {
-	_ret := objc.Send[SKBlendMode](o.Ptr(), _sKSpriteNodeSelBlendMode)
-	return _ret
+	var _mainthread0 SKBlendMode
+	purego.Main(func() {
+		_mainthread0 = func() SKBlendMode {
+			_ret := objc.Send[SKBlendMode](o.Ptr(), _sKSpriteNodeSelBlendMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKSpriteNode) SetBlendMode(blendMode SKBlendMode) {
-	o.Ptr().Send(_sKSpriteNodeSelSetBlendMode, blendMode)
+	purego.Main(func() {
+		o.Ptr().Send(_sKSpriteNodeSelSetBlendMode, blendMode)
+	})
 }
 
 // Used to choose the location in the sprite that maps to its 'position' in the parent's coordinate space. The valid interval for each input is from 0.0 up to and including 1.0.
 func (o *SKSpriteNode) AnchorPoint() corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sKSpriteNodeSelAnchorPoint)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sKSpriteNodeSelAnchorPoint)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKSpriteNode) SetAnchorPoint(anchorPoint corefoundation.CGPoint) {
-	o.Ptr().Send(_sKSpriteNodeSelSetAnchorPoint, anchorPoint)
+	purego.Main(func() {
+		o.Ptr().Send(_sKSpriteNodeSelSetAnchorPoint, anchorPoint)
+	})
 }
 
 // Set the size of the sprite (in parent's coordinate space)
 func (o *SKSpriteNode) Size() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _sKSpriteNodeSelSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _sKSpriteNodeSelSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKSpriteNode) SetSize(size corefoundation.CGSize) {
-	o.Ptr().Send(_sKSpriteNodeSelSetSize, size)
+	purego.Main(func() {
+		o.Ptr().Send(_sKSpriteNodeSelSetSize, size)
+	})
 }
 
 func (o *SKSpriteNode) Shader() *SKShader {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelShader)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKShaderFromID(_ret)
+	var _mainthread0 *SKShader
+	purego.Main(func() {
+		_mainthread0 = func() *SKShader {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKSpriteNodeSelShader)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKShaderFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKSpriteNode) SetShader(shader *SKShader) {
-	o.Ptr().Send(_sKSpriteNodeSelSetShader, shader.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKSpriteNodeSelSetShader, shader.Ptr())
+	})
 }

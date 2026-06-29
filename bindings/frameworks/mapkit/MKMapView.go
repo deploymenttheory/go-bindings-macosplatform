@@ -135,533 +135,905 @@ func MKMapViewFromID(id objc.ID) *MKMapView {
 
 // Changes the currently visible region, and optionally animates the change.
 func (o *MKMapView) SetRegionAnimated(region MKCoordinateRegion, animated bool) {
-	o.Ptr().Send(_mKMapViewSelSetRegionAnimated, region, animated)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetRegionAnimated, region, animated)
+	})
 }
 
 // Changes the center coordinate of the map, and optionally animates the change.
 func (o *MKMapView) SetCenterCoordinateAnimated(coordinate unsafe.Pointer, animated bool) {
-	o.Ptr().Send(_mKMapViewSelSetCenterCoordinateAnimated, coordinate, animated)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetCenterCoordinateAnimated, coordinate, animated)
+	})
 }
 
 // Adjusts the aspect ratio of the specified region to ensure that it fits in the map view’s frame.
 func (o *MKMapView) RegionThatFits(region MKCoordinateRegion) MKCoordinateRegion {
-	_ret := objc.Send[MKCoordinateRegion](o.Ptr(), _mKMapViewSelRegionThatFits, region)
-	return _ret
+	var _mainthread0 MKCoordinateRegion
+	purego.Main(func() {
+		_mainthread0 = func() MKCoordinateRegion {
+			_ret := objc.Send[MKCoordinateRegion](o.Ptr(), _mKMapViewSelRegionThatFits, region)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Changes the currently visible portion of the map, and optionally animates the change.
 func (o *MKMapView) SetVisibleMapRectAnimated(mapRect MKMapRect, animate bool) {
-	o.Ptr().Send(_mKMapViewSelSetVisibleMapRectAnimated, mapRect, animate)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetVisibleMapRectAnimated, mapRect, animate)
+	})
 }
 
 // Returns a centered map rectangle with the same aspect ratio as the map view’s frame.
 func (o *MKMapView) MapRectThatFits(mapRect MKMapRect) MKMapRect {
-	_ret := objc.Send[MKMapRect](o.Ptr(), _mKMapViewSelMapRectThatFits, mapRect)
-	return _ret
+	var _mainthread0 MKMapRect
+	purego.Main(func() {
+		_mainthread0 = func() MKMapRect {
+			_ret := objc.Send[MKMapRect](o.Ptr(), _mKMapViewSelMapRectThatFits, mapRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Changes the currently visible portion of the map, allowing you to specify additional space around the edges.
 func (o *MKMapView) SetVisibleMapRectEdgePaddingAnimated(mapRect MKMapRect, insets foundation.NSEdgeInsets, animate bool) {
-	o.Ptr().Send(_mKMapViewSelSetVisibleMapRectEdgePaddingAnimated, mapRect, insets, animate)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetVisibleMapRectEdgePaddingAnimated, mapRect, insets, animate)
+	})
 }
 
 // Returns a centered, inset map rectangle with the same aspect ratio as the map view’s frame.
 func (o *MKMapView) MapRectThatFitsEdgePadding(mapRect MKMapRect, insets foundation.NSEdgeInsets) MKMapRect {
-	_ret := objc.Send[MKMapRect](o.Ptr(), _mKMapViewSelMapRectThatFitsEdgePadding, mapRect, insets)
-	return _ret
+	var _mainthread0 MKMapRect
+	purego.Main(func() {
+		_mainthread0 = func() MKMapRect {
+			_ret := objc.Send[MKMapRect](o.Ptr(), _mKMapViewSelMapRectThatFitsEdgePadding, mapRect, insets)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Changes the camera to use for determining the map’s viewing parameters, and optionally animates the change.
 func (o *MKMapView) SetCameraAnimated(camera *MKMapCamera, animated bool) {
-	o.Ptr().Send(_mKMapViewSelSetCameraAnimated, camera.Ptr(), animated)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetCameraAnimated, camera.Ptr(), animated)
+	})
 }
 
 // Sets the camera zoom range for the map view, specifying whether to use animation.
 func (o *MKMapView) SetCameraZoomRangeAnimated(cameraZoomRange *MKMapCameraZoomRange, animated bool) {
-	o.Ptr().Send(_mKMapViewSelSetCameraZoomRangeAnimated, cameraZoomRange.Ptr(), animated)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetCameraZoomRangeAnimated, cameraZoomRange.Ptr(), animated)
+	})
 }
 
 // Sets the camera boundary for the map view, specifying whether to use animation.
 func (o *MKMapView) SetCameraBoundaryAnimated(cameraBoundary *MKMapCameraBoundary, animated bool) {
-	o.Ptr().Send(_mKMapViewSelSetCameraBoundaryAnimated, cameraBoundary.Ptr(), animated)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetCameraBoundaryAnimated, cameraBoundary.Ptr(), animated)
+	})
 }
 
 // Converts a map coordinate to a point in the specified view.
 func (o *MKMapView) ConvertCoordinateToPointToView(coordinate unsafe.Pointer, view *appkit.NSView) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _mKMapViewSelConvertCoordinateToPointToView, coordinate, view.Ptr())
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _mKMapViewSelConvertCoordinateToPointToView, coordinate, view.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Converts a point in the specified view’s coordinate system to a map coordinate.
 func (o *MKMapView) ConvertPointToCoordinateFromView(point corefoundation.CGPoint, view *appkit.NSView) unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mKMapViewSelConvertPointToCoordinateFromView, point, view.Ptr())
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mKMapViewSelConvertPointToCoordinateFromView, point, view.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Converts a map region to a rectangle in the specified view.
 func (o *MKMapView) ConvertRegionToRectToView(region MKCoordinateRegion, view *appkit.NSView) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _mKMapViewSelConvertRegionToRectToView, region, view.Ptr())
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _mKMapViewSelConvertRegionToRectToView, region, view.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Converts a rectangle in the specified view’s coordinate system to a map region.
 func (o *MKMapView) ConvertRectToRegionFromView(rect corefoundation.CGRect, view *appkit.NSView) MKCoordinateRegion {
-	_ret := objc.Send[MKCoordinateRegion](o.Ptr(), _mKMapViewSelConvertRectToRegionFromView, rect, view.Ptr())
-	return _ret
+	var _mainthread0 MKCoordinateRegion
+	purego.Main(func() {
+		_mainthread0 = func() MKCoordinateRegion {
+			_ret := objc.Send[MKCoordinateRegion](o.Ptr(), _mKMapViewSelConvertRectToRegionFromView, rect, view.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the mode to use for tracking the user’s location, with optional animation.
 func (o *MKMapView) SetUserTrackingModeAnimated(mode MKUserTrackingMode, animated bool) {
-	o.Ptr().Send(_mKMapViewSelSetUserTrackingModeAnimated, mode, animated)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetUserTrackingModeAnimated, mode, animated)
+	})
 }
 
 // Adds the specified annotation to the map view.
 func (o *MKMapView) AddAnnotation(annotation MKAnnotation) {
-	o.Ptr().Send(_mKMapViewSelAddAnnotation, annotation)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelAddAnnotation, annotation)
+	})
 }
 
 // Adds an array of annotation objects to the map view.
 func (o *MKMapView) AddAnnotations(annotations *foundation.NSArray[MKAnnotation]) {
-	o.Ptr().Send(_mKMapViewSelAddAnnotations, annotations.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelAddAnnotations, annotations.Ptr())
+	})
 }
 
 // Removes the specified annotation object from the map view.
 func (o *MKMapView) RemoveAnnotation(annotation MKAnnotation) {
-	o.Ptr().Send(_mKMapViewSelRemoveAnnotation, annotation)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelRemoveAnnotation, annotation)
+	})
 }
 
 // Removes an array of annotation objects from the map view.
 func (o *MKMapView) RemoveAnnotations(annotations *foundation.NSArray[MKAnnotation]) {
-	o.Ptr().Send(_mKMapViewSelRemoveAnnotations, annotations.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelRemoveAnnotations, annotations.Ptr())
+	})
 }
 
 // Returns the annotation objects within the specified map rectangle.
 func (o *MKMapView) AnnotationsInMapRect(mapRect MKMapRect) *foundation.NSSet[MKAnnotation] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelAnnotationsInMapRect, mapRect)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSSetFromID[MKAnnotation](_ret)
+	var _mainthread0 *foundation.NSSet[MKAnnotation]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSSet[MKAnnotation] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelAnnotationsInMapRect, mapRect)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSSetFromID[MKAnnotation](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the annotation view associated with the specified annotation object, if any.
 func (o *MKMapView) ViewForAnnotation(annotation MKAnnotation) *MKAnnotationView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelViewForAnnotation, annotation)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKAnnotationViewFromID(_ret)
+	var _mainthread0 *MKAnnotationView
+	purego.Main(func() {
+		_mainthread0 = func() *MKAnnotationView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelViewForAnnotation, annotation)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKAnnotationViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a reusable annotation view using its identifier.
 func (o *MKMapView) DequeueReusableAnnotationViewWithIdentifier(identifier *foundation.NSString) *MKAnnotationView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelDequeueReusableAnnotationViewWithIdentifier, identifier.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKAnnotationViewFromID(_ret)
+	var _mainthread0 *MKAnnotationView
+	purego.Main(func() {
+		_mainthread0 = func() *MKAnnotationView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelDequeueReusableAnnotationViewWithIdentifier, identifier.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKAnnotationViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a reusable annotation view using the specified identifier with a specified existing annotation view, if possible.
 func (o *MKMapView) DequeueReusableAnnotationViewWithIdentifierForAnnotation(identifier *foundation.NSString, annotation MKAnnotation) *MKAnnotationView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelDequeueReusableAnnotationViewWithIdentifierForAnnotation, identifier.Ptr(), annotation)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKAnnotationViewFromID(_ret)
+	var _mainthread0 *MKAnnotationView
+	purego.Main(func() {
+		_mainthread0 = func() *MKAnnotationView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelDequeueReusableAnnotationViewWithIdentifierForAnnotation, identifier.Ptr(), annotation)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKAnnotationViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Registers an annotation view class that the map can create automatically.
 func (o *MKMapView) RegisterClassForAnnotationViewWithReuseIdentifier(viewClass objc.Class, identifier *foundation.NSString) {
-	o.Ptr().Send(_mKMapViewSelRegisterClassForAnnotationViewWithReuseIdentifier, viewClass, identifier.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelRegisterClassForAnnotationViewWithReuseIdentifier, viewClass, identifier.Ptr())
+	})
 }
 
 // Selects the specified annotation and displays a callout view for it.
 func (o *MKMapView) SelectAnnotationAnimated(annotation MKAnnotation, animated bool) {
-	o.Ptr().Send(_mKMapViewSelSelectAnnotationAnimated, annotation, animated)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSelectAnnotationAnimated, annotation, animated)
+	})
 }
 
 // Deselects the specified annotation and hides its callout view.
 func (o *MKMapView) DeselectAnnotationAnimated(annotation MKAnnotation, animated bool) {
-	o.Ptr().Send(_mKMapViewSelDeselectAnnotationAnimated, annotation, animated)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelDeselectAnnotationAnimated, annotation, animated)
+	})
 }
 
 // Sets the visible region so that the map displays the specified annotations.
 func (o *MKMapView) ShowAnnotationsAnimated(annotations *foundation.NSArray[MKAnnotation], animated bool) {
-	o.Ptr().Send(_mKMapViewSelShowAnnotationsAnimated, annotations.Ptr(), animated)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelShowAnnotationsAnimated, annotations.Ptr(), animated)
+	})
 }
 
 func (o *MKMapView) Delegate() MKMapViewDelegate {
-	_ret := objc.Send[MKMapViewDelegate](o.Ptr(), _mKMapViewSelDelegate)
-	return _ret
+	var _mainthread0 MKMapViewDelegate
+	purego.Main(func() {
+		_mainthread0 = func() MKMapViewDelegate {
+			_ret := objc.Send[MKMapViewDelegate](o.Ptr(), _mKMapViewSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapView) SetDelegate(delegate MKMapViewDelegate) {
-	o.Ptr().Send(_mKMapViewSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetDelegate, delegate)
+	})
 }
 
 // Deprecated: Use respective MKMapConfiguration
 func (o *MKMapView) MapType() MKMapType {
-	_ret := objc.Send[MKMapType](o.Ptr(), _mKMapViewSelMapType)
-	return _ret
+	var _mainthread0 MKMapType
+	purego.Main(func() {
+		_mainthread0 = func() MKMapType {
+			_ret := objc.Send[MKMapType](o.Ptr(), _mKMapViewSelMapType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use respective MKMapConfiguration
 func (o *MKMapView) SetMapType(mapType MKMapType) {
-	o.Ptr().Send(_mKMapViewSelSetMapType, mapType)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetMapType, mapType)
+	})
 }
 
 func (o *MKMapView) PreferredConfiguration() *MKMapConfiguration {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelPreferredConfiguration)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKMapConfigurationFromID(_ret)
+	var _mainthread0 *MKMapConfiguration
+	purego.Main(func() {
+		_mainthread0 = func() *MKMapConfiguration {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelPreferredConfiguration)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKMapConfigurationFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapView) SetPreferredConfiguration(preferredConfiguration *MKMapConfiguration) {
-	o.Ptr().Send(_mKMapViewSelSetPreferredConfiguration, preferredConfiguration.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetPreferredConfiguration, preferredConfiguration.Ptr())
+	})
 }
 
 func (o *MKMapView) Region() MKCoordinateRegion {
-	_ret := objc.Send[MKCoordinateRegion](o.Ptr(), _mKMapViewSelRegion)
-	return _ret
+	var _mainthread0 MKCoordinateRegion
+	purego.Main(func() {
+		_mainthread0 = func() MKCoordinateRegion {
+			_ret := objc.Send[MKCoordinateRegion](o.Ptr(), _mKMapViewSelRegion)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapView) SetRegion(region MKCoordinateRegion) {
-	o.Ptr().Send(_mKMapViewSelSetRegion, region)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetRegion, region)
+	})
 }
 
 func (o *MKMapView) CenterCoordinate() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mKMapViewSelCenterCoordinate)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mKMapViewSelCenterCoordinate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapView) SetCenterCoordinate(centerCoordinate unsafe.Pointer) {
-	o.Ptr().Send(_mKMapViewSelSetCenterCoordinate, centerCoordinate)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetCenterCoordinate, centerCoordinate)
+	})
 }
 
 func (o *MKMapView) VisibleMapRect() MKMapRect {
-	_ret := objc.Send[MKMapRect](o.Ptr(), _mKMapViewSelVisibleMapRect)
-	return _ret
+	var _mainthread0 MKMapRect
+	purego.Main(func() {
+		_mainthread0 = func() MKMapRect {
+			_ret := objc.Send[MKMapRect](o.Ptr(), _mKMapViewSelVisibleMapRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapView) SetVisibleMapRect(visibleMapRect MKMapRect) {
-	o.Ptr().Send(_mKMapViewSelSetVisibleMapRect, visibleMapRect)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetVisibleMapRect, visibleMapRect)
+	})
 }
 
 func (o *MKMapView) Camera() *MKMapCamera {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelCamera)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKMapCameraFromID(_ret)
+	var _mainthread0 *MKMapCamera
+	purego.Main(func() {
+		_mainthread0 = func() *MKMapCamera {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelCamera)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKMapCameraFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapView) SetCamera(camera *MKMapCamera) {
-	o.Ptr().Send(_mKMapViewSelSetCamera, camera.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetCamera, camera.Ptr())
+	})
 }
 
 func (o *MKMapView) CameraZoomRange() *MKMapCameraZoomRange {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelCameraZoomRange)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKMapCameraZoomRangeFromID(_ret)
+	var _mainthread0 *MKMapCameraZoomRange
+	purego.Main(func() {
+		_mainthread0 = func() *MKMapCameraZoomRange {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelCameraZoomRange)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKMapCameraZoomRangeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapView) SetCameraZoomRange(cameraZoomRange *MKMapCameraZoomRange) {
-	o.Ptr().Send(_mKMapViewSelSetCameraZoomRange, cameraZoomRange.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetCameraZoomRange, cameraZoomRange.Ptr())
+	})
 }
 
 func (o *MKMapView) CameraBoundary() *MKMapCameraBoundary {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelCameraBoundary)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKMapCameraBoundaryFromID(_ret)
+	var _mainthread0 *MKMapCameraBoundary
+	purego.Main(func() {
+		_mainthread0 = func() *MKMapCameraBoundary {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelCameraBoundary)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKMapCameraBoundaryFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapView) SetCameraBoundary(cameraBoundary *MKMapCameraBoundary) {
-	o.Ptr().Send(_mKMapViewSelSetCameraBoundary, cameraBoundary.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetCameraBoundary, cameraBoundary.Ptr())
+	})
 }
 
 func (o *MKMapView) IsZoomEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelIsZoomEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelIsZoomEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapView) SetZoomEnabled(zoomEnabled bool) {
-	o.Ptr().Send(_mKMapViewSelSetZoomEnabled, zoomEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetZoomEnabled, zoomEnabled)
+	})
 }
 
 func (o *MKMapView) IsScrollEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelIsScrollEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelIsScrollEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapView) SetScrollEnabled(scrollEnabled bool) {
-	o.Ptr().Send(_mKMapViewSelSetScrollEnabled, scrollEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetScrollEnabled, scrollEnabled)
+	})
 }
 
 func (o *MKMapView) IsRotateEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelIsRotateEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelIsRotateEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapView) SetRotateEnabled(rotateEnabled bool) {
-	o.Ptr().Send(_mKMapViewSelSetRotateEnabled, rotateEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetRotateEnabled, rotateEnabled)
+	})
 }
 
 func (o *MKMapView) IsPitchEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelIsPitchEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelIsPitchEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapView) SetPitchEnabled(pitchEnabled bool) {
-	o.Ptr().Send(_mKMapViewSelSetPitchEnabled, pitchEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetPitchEnabled, pitchEnabled)
+	})
 }
 
 func (o *MKMapView) ShowsUserTrackingButton() bool {
-	_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelShowsUserTrackingButton)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelShowsUserTrackingButton)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapView) SetShowsUserTrackingButton(showsUserTrackingButton bool) {
-	o.Ptr().Send(_mKMapViewSelSetShowsUserTrackingButton, showsUserTrackingButton)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetShowsUserTrackingButton, showsUserTrackingButton)
+	})
 }
 
 func (o *MKMapView) PitchButtonVisibility() MKFeatureVisibility {
-	_ret := objc.Send[MKFeatureVisibility](o.Ptr(), _mKMapViewSelPitchButtonVisibility)
-	return _ret
+	var _mainthread0 MKFeatureVisibility
+	purego.Main(func() {
+		_mainthread0 = func() MKFeatureVisibility {
+			_ret := objc.Send[MKFeatureVisibility](o.Ptr(), _mKMapViewSelPitchButtonVisibility)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapView) SetPitchButtonVisibility(pitchButtonVisibility MKFeatureVisibility) {
-	o.Ptr().Send(_mKMapViewSelSetPitchButtonVisibility, pitchButtonVisibility)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetPitchButtonVisibility, pitchButtonVisibility)
+	})
 }
 
 func (o *MKMapView) ShowsPitchControl() bool {
-	_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelShowsPitchControl)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelShowsPitchControl)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapView) SetShowsPitchControl(showsPitchControl bool) {
-	o.Ptr().Send(_mKMapViewSelSetShowsPitchControl, showsPitchControl)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetShowsPitchControl, showsPitchControl)
+	})
 }
 
 func (o *MKMapView) ShowsZoomControls() bool {
-	_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelShowsZoomControls)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelShowsZoomControls)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapView) SetShowsZoomControls(showsZoomControls bool) {
-	o.Ptr().Send(_mKMapViewSelSetShowsZoomControls, showsZoomControls)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetShowsZoomControls, showsZoomControls)
+	})
 }
 
 func (o *MKMapView) ShowsCompass() bool {
-	_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelShowsCompass)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelShowsCompass)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapView) SetShowsCompass(showsCompass bool) {
-	o.Ptr().Send(_mKMapViewSelSetShowsCompass, showsCompass)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetShowsCompass, showsCompass)
+	})
 }
 
 func (o *MKMapView) ShowsScale() bool {
-	_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelShowsScale)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelShowsScale)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapView) SetShowsScale(showsScale bool) {
-	o.Ptr().Send(_mKMapViewSelSetShowsScale, showsScale)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetShowsScale, showsScale)
+	})
 }
 
 // Deprecated: Use pointOfInterestFilter on respective MKMapConfiguration
 func (o *MKMapView) PointOfInterestFilter() *MKPointOfInterestFilter {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelPointOfInterestFilter)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKPointOfInterestFilterFromID(_ret)
+	var _mainthread0 *MKPointOfInterestFilter
+	purego.Main(func() {
+		_mainthread0 = func() *MKPointOfInterestFilter {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelPointOfInterestFilter)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKPointOfInterestFilterFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use pointOfInterestFilter on respective MKMapConfiguration
 func (o *MKMapView) SetPointOfInterestFilter(pointOfInterestFilter *MKPointOfInterestFilter) {
-	o.Ptr().Send(_mKMapViewSelSetPointOfInterestFilter, pointOfInterestFilter.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetPointOfInterestFilter, pointOfInterestFilter.Ptr())
+	})
 }
 
 // Deprecated: Use pointOfInterestFilter
 func (o *MKMapView) ShowsPointsOfInterest() bool {
-	_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelShowsPointsOfInterest)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelShowsPointsOfInterest)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use pointOfInterestFilter
 func (o *MKMapView) SetShowsPointsOfInterest(showsPointsOfInterest bool) {
-	o.Ptr().Send(_mKMapViewSelSetShowsPointsOfInterest, showsPointsOfInterest)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetShowsPointsOfInterest, showsPointsOfInterest)
+	})
 }
 
 // Deprecated: None
 func (o *MKMapView) ShowsBuildings() bool {
-	_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelShowsBuildings)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelShowsBuildings)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: None
 func (o *MKMapView) SetShowsBuildings(showsBuildings bool) {
-	o.Ptr().Send(_mKMapViewSelSetShowsBuildings, showsBuildings)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetShowsBuildings, showsBuildings)
+	})
 }
 
 // Deprecated: Use showsTraffic on respective MKMapConfiguration
 func (o *MKMapView) ShowsTraffic() bool {
-	_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelShowsTraffic)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelShowsTraffic)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use showsTraffic on respective MKMapConfiguration
 func (o *MKMapView) SetShowsTraffic(showsTraffic bool) {
-	o.Ptr().Send(_mKMapViewSelSetShowsTraffic, showsTraffic)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetShowsTraffic, showsTraffic)
+	})
 }
 
 // Deprecated: Use showsTraffic on respective MKMapConfiguration
 func (o *MKMapView) ShowsUserLocation() bool {
-	_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelShowsUserLocation)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelShowsUserLocation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapView) SetShowsUserLocation(showsUserLocation bool) {
-	o.Ptr().Send(_mKMapViewSelSetShowsUserLocation, showsUserLocation)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetShowsUserLocation, showsUserLocation)
+	})
 }
 
 func (o *MKMapView) UserLocation() *MKUserLocation {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelUserLocation)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKUserLocationFromID(_ret)
+	var _mainthread0 *MKUserLocation
+	purego.Main(func() {
+		_mainthread0 = func() *MKUserLocation {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelUserLocation)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKUserLocationFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapView) UserTrackingMode() MKUserTrackingMode {
-	_ret := objc.Send[MKUserTrackingMode](o.Ptr(), _mKMapViewSelUserTrackingMode)
-	return _ret
+	var _mainthread0 MKUserTrackingMode
+	purego.Main(func() {
+		_mainthread0 = func() MKUserTrackingMode {
+			_ret := objc.Send[MKUserTrackingMode](o.Ptr(), _mKMapViewSelUserTrackingMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapView) SetUserTrackingMode(userTrackingMode MKUserTrackingMode) {
-	o.Ptr().Send(_mKMapViewSelSetUserTrackingMode, userTrackingMode)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetUserTrackingMode, userTrackingMode)
+	})
 }
 
 func (o *MKMapView) IsUserLocationVisible() bool {
-	_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelIsUserLocationVisible)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _mKMapViewSelIsUserLocationVisible)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapView) Annotations() *foundation.NSArray[MKAnnotation] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelAnnotations)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[MKAnnotation](_ret)
+	var _mainthread0 *foundation.NSArray[MKAnnotation]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[MKAnnotation] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelAnnotations)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[MKAnnotation](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapView) SelectedAnnotations() *foundation.NSArray[MKAnnotation] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelSelectedAnnotations)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[MKAnnotation](_ret)
+	var _mainthread0 *foundation.NSArray[MKAnnotation]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[MKAnnotation] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelSelectedAnnotations)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[MKAnnotation](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapView) SetSelectedAnnotations(selectedAnnotations *foundation.NSArray[MKAnnotation]) {
-	o.Ptr().Send(_mKMapViewSelSetSelectedAnnotations, selectedAnnotations.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelSetSelectedAnnotations, selectedAnnotations.Ptr())
+	})
 }
 
 func (o *MKMapView) AnnotationVisibleRect() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _mKMapViewSelAnnotationVisibleRect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _mKMapViewSelAnnotationVisibleRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Adds the overlay object to the map at the specified level.
 func (o *MKMapView) AddOverlayLevel(overlay MKOverlay, level MKOverlayLevel) {
-	o.Ptr().Send(_mKMapViewSelAddOverlayLevel, overlay, level)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelAddOverlayLevel, overlay, level)
+	})
 }
 
 // Adds an array of overlay objects to the map at the specified level.
 func (o *MKMapView) AddOverlaysLevel(overlays *foundation.NSArray[MKOverlay], level MKOverlayLevel) {
-	o.Ptr().Send(_mKMapViewSelAddOverlaysLevel, overlays.Ptr(), level)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelAddOverlaysLevel, overlays.Ptr(), level)
+	})
 }
 
 // Removes a single overlay object from the map.
 func (o *MKMapView) RemoveOverlay(overlay MKOverlay) {
-	o.Ptr().Send(_mKMapViewSelRemoveOverlay, overlay)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelRemoveOverlay, overlay)
+	})
 }
 
 // Removes one or more overlay objects from the map.
 func (o *MKMapView) RemoveOverlays(overlays *foundation.NSArray[MKOverlay]) {
-	o.Ptr().Send(_mKMapViewSelRemoveOverlays, overlays.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelRemoveOverlays, overlays.Ptr())
+	})
 }
 
 // Inserts an overlay object into the level at the specified index.
 func (o *MKMapView) InsertOverlayAtIndexLevel(overlay MKOverlay, index uint, level MKOverlayLevel) {
-	o.Ptr().Send(_mKMapViewSelInsertOverlayAtIndexLevel, overlay, index, level)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelInsertOverlayAtIndexLevel, overlay, index, level)
+	})
 }
 
 // Inserts one overlay object above another.
 func (o *MKMapView) InsertOverlayAboveOverlay(overlay MKOverlay, sibling MKOverlay) {
-	o.Ptr().Send(_mKMapViewSelInsertOverlayAboveOverlay, overlay, sibling)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelInsertOverlayAboveOverlay, overlay, sibling)
+	})
 }
 
 // Inserts one overlay object below another.
 func (o *MKMapView) InsertOverlayBelowOverlay(overlay MKOverlay, sibling MKOverlay) {
-	o.Ptr().Send(_mKMapViewSelInsertOverlayBelowOverlay, overlay, sibling)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelInsertOverlayBelowOverlay, overlay, sibling)
+	})
 }
 
 // Exchanges the positions of two overlay objects.
 func (o *MKMapView) ExchangeOverlayWithOverlay(overlay1 MKOverlay, overlay2 MKOverlay) {
-	o.Ptr().Send(_mKMapViewSelExchangeOverlayWithOverlay, overlay1, overlay2)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelExchangeOverlayWithOverlay, overlay1, overlay2)
+	})
 }
 
 // Returns overlay objects in the specified level of the map.
 func (o *MKMapView) OverlaysInLevel(level MKOverlayLevel) *foundation.NSArray[MKOverlay] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelOverlaysInLevel, level)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[MKOverlay](_ret)
+	var _mainthread0 *foundation.NSArray[MKOverlay]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[MKOverlay] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelOverlaysInLevel, level)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[MKOverlay](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the renderer object for drawing the contents of the specified overlay object.
 func (o *MKMapView) RendererForOverlay(overlay MKOverlay) *MKOverlayRenderer {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelRendererForOverlay, overlay)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKOverlayRendererFromID(_ret)
+	var _mainthread0 *MKOverlayRenderer
+	purego.Main(func() {
+		_mainthread0 = func() *MKOverlayRenderer {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelRendererForOverlay, overlay)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKOverlayRendererFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Adds a single overlay object to the map.
 func (o *MKMapView) AddOverlay(overlay MKOverlay) {
-	o.Ptr().Send(_mKMapViewSelAddOverlay, overlay)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelAddOverlay, overlay)
+	})
 }
 
 // Adds an array of overlay objects to the map.
 func (o *MKMapView) AddOverlays(overlays *foundation.NSArray[MKOverlay]) {
-	o.Ptr().Send(_mKMapViewSelAddOverlays, overlays.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelAddOverlays, overlays.Ptr())
+	})
 }
 
 // Inserts an overlay object into the list associated with the map.
 func (o *MKMapView) InsertOverlayAtIndex(overlay MKOverlay, index uint) {
-	o.Ptr().Send(_mKMapViewSelInsertOverlayAtIndex, overlay, index)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelInsertOverlayAtIndex, overlay, index)
+	})
 }
 
 // Exchanges the position of two overlay objects at the specified index.
 func (o *MKMapView) ExchangeOverlayAtIndexWithOverlayAtIndex(index1 uint, index2 uint) {
-	o.Ptr().Send(_mKMapViewSelExchangeOverlayAtIndexWithOverlayAtIndex, index1, index2)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapViewSelExchangeOverlayAtIndexWithOverlayAtIndex, index1, index2)
+	})
 }
 
 func (o *MKMapView) Overlays() *foundation.NSArray[MKOverlay] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelOverlays)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[MKOverlay](_ret)
+	var _mainthread0 *foundation.NSArray[MKOverlay]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[MKOverlay] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelOverlays)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[MKOverlay](_ret)
+		}()
+	})
+	return _mainthread0
 }

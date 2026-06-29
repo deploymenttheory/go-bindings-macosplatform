@@ -45,72 +45,124 @@ func NSToolbarItemGroupFromID(id objc.ID) *NSToolbarItemGroup {
 
 // Creates a grouped toolbar item with labels.
 func NSToolbarItemGroupGroupWithItemIdentifierTitlesSelectionModeLabelsTargetAction(itemIdentifier *foundation.NSString, titles *foundation.NSArray[*foundation.NSString], selectionMode NSToolbarItemGroupSelectionMode, labels *foundation.NSArray[*foundation.NSString], target objc.ID, action objc.SEL) *NSToolbarItemGroup {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSToolbarItemGroup), _nSToolbarItemGroupSelGroupWithItemIdentifierTitlesSelectionModeLabelsTargetAction, itemIdentifier.Ptr(), titles.Ptr(), selectionMode, labels.Ptr(), target, action)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSToolbarItemGroupFromID(_ret)
+	var _mainthread0 *NSToolbarItemGroup
+	purego.Main(func() {
+		_mainthread0 = func() *NSToolbarItemGroup {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSToolbarItemGroup), _nSToolbarItemGroupSelGroupWithItemIdentifierTitlesSelectionModeLabelsTargetAction, itemIdentifier.Ptr(), titles.Ptr(), selectionMode, labels.Ptr(), target, action)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSToolbarItemGroupFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a grouped toolbar item with images.
 func NSToolbarItemGroupGroupWithItemIdentifierImagesSelectionModeLabelsTargetAction(itemIdentifier *foundation.NSString, images *foundation.NSArray[*NSImage], selectionMode NSToolbarItemGroupSelectionMode, labels *foundation.NSArray[*foundation.NSString], target objc.ID, action objc.SEL) *NSToolbarItemGroup {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSToolbarItemGroup), _nSToolbarItemGroupSelGroupWithItemIdentifierImagesSelectionModeLabelsTargetAction, itemIdentifier.Ptr(), images.Ptr(), selectionMode, labels.Ptr(), target, action)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSToolbarItemGroupFromID(_ret)
+	var _mainthread0 *NSToolbarItemGroup
+	purego.Main(func() {
+		_mainthread0 = func() *NSToolbarItemGroup {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSToolbarItemGroup), _nSToolbarItemGroupSelGroupWithItemIdentifierImagesSelectionModeLabelsTargetAction, itemIdentifier.Ptr(), images.Ptr(), selectionMode, labels.Ptr(), target, action)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSToolbarItemGroupFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the selected state of a subitem in a grouped toolbar item.
 func (o *NSToolbarItemGroup) SetSelectedAtIndex(selected bool, index int) {
-	o.Ptr().Send(_nSToolbarItemGroupSelSetSelectedAtIndex, selected, index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemGroupSelSetSelectedAtIndex, selected, index)
+	})
 }
 
 // Indicates whether a specified index is currently selected.
 func (o *NSToolbarItemGroup) IsSelectedAtIndex(index int) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSToolbarItemGroupSelIsSelectedAtIndex, index)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSToolbarItemGroupSelIsSelectedAtIndex, index)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Set or get the array of subitems for the toolbar item. By default, a `NSToolbarItemGroup` has an empty array of subitems. You should call this to set the subitems before returning the item to the toolbar. `NSToolbarItemGroups` may not contain other `NSToolbarItemGroups` as subitems.
 func (o *NSToolbarItemGroup) Subitems() *foundation.NSArray[*NSToolbarItem] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemGroupSelSubitems)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSToolbarItem](_ret)
+	var _mainthread0 *foundation.NSArray[*NSToolbarItem]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSToolbarItem] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemGroupSelSubitems)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSToolbarItem](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbarItemGroup) SetSubitems(subitems *foundation.NSArray[*NSToolbarItem]) {
-	o.Ptr().Send(_nSToolbarItemGroupSelSetSubitems, subitems.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemGroupSelSetSubitems, subitems.Ptr())
+	})
 }
 
 // The style in which this item will be represented to the user. Defaults to `NSToolbarItemGroupControlRepresentationAutomatic`.
 func (o *NSToolbarItemGroup) ControlRepresentation() NSToolbarItemGroupControlRepresentation {
-	_ret := objc.Send[NSToolbarItemGroupControlRepresentation](o.Ptr(), _nSToolbarItemGroupSelControlRepresentation)
-	return _ret
+	var _mainthread0 NSToolbarItemGroupControlRepresentation
+	purego.Main(func() {
+		_mainthread0 = func() NSToolbarItemGroupControlRepresentation {
+			_ret := objc.Send[NSToolbarItemGroupControlRepresentation](o.Ptr(), _nSToolbarItemGroupSelControlRepresentation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbarItemGroup) SetControlRepresentation(controlRepresentation NSToolbarItemGroupControlRepresentation) {
-	o.Ptr().Send(_nSToolbarItemGroupSelSetControlRepresentation, controlRepresentation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemGroupSelSetControlRepresentation, controlRepresentation)
+	})
 }
 
 // Get and set how selection is handled by the control. Only applies when using one of the constructors to create the item with a system defined control representation.
 func (o *NSToolbarItemGroup) SelectionMode() NSToolbarItemGroupSelectionMode {
-	_ret := objc.Send[NSToolbarItemGroupSelectionMode](o.Ptr(), _nSToolbarItemGroupSelSelectionMode)
-	return _ret
+	var _mainthread0 NSToolbarItemGroupSelectionMode
+	purego.Main(func() {
+		_mainthread0 = func() NSToolbarItemGroupSelectionMode {
+			_ret := objc.Send[NSToolbarItemGroupSelectionMode](o.Ptr(), _nSToolbarItemGroupSelSelectionMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbarItemGroup) SetSelectionMode(selectionMode NSToolbarItemGroupSelectionMode) {
-	o.Ptr().Send(_nSToolbarItemGroupSelSetSelectionMode, selectionMode)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemGroupSelSetSelectionMode, selectionMode)
+	})
 }
 
 // The most recently selected item of the group, or -1 if nothing is selected.
 func (o *NSToolbarItemGroup) SelectedIndex() int {
-	_ret := objc.Send[int](o.Ptr(), _nSToolbarItemGroupSelSelectedIndex)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSToolbarItemGroupSelSelectedIndex)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSToolbarItemGroup) SetSelectedIndex(selectedIndex int) {
-	o.Ptr().Send(_nSToolbarItemGroupSelSetSelectedIndex, selectedIndex)
+	purego.Main(func() {
+		o.Ptr().Send(_nSToolbarItemGroupSelSetSelectedIndex, selectedIndex)
+	})
 }

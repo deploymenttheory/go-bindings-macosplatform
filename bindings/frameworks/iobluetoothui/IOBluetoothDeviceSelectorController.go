@@ -58,137 +58,223 @@ func IOBluetoothDeviceSelectorControllerFromID(id objc.ID) *IOBluetoothDeviceSel
 
 // @method	deviceSelector @abstract @discussion	Method call to instantiate a new IOBluetoothDeviceSelectorController object. @result Success - a new instance of the device selector Controller Failure	- nil
 func IOBluetoothDeviceSelectorControllerDeviceSelector() *IOBluetoothDeviceSelectorController {
-	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothDeviceSelectorController), _iOBluetoothDeviceSelectorControllerSelDeviceSelector)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return IOBluetoothDeviceSelectorControllerFromID(_ret)
+	var _mainthread0 *IOBluetoothDeviceSelectorController
+	purego.Main(func() {
+		_mainthread0 = func() *IOBluetoothDeviceSelectorController {
+			_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothDeviceSelectorController), _iOBluetoothDeviceSelectorControllerSelDeviceSelector)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return IOBluetoothDeviceSelectorControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Runs the device selector panel in a modal session to allow the user to select a Bluetooth device.
 func (o *IOBluetoothDeviceSelectorController) RunModal() int {
-	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelRunModal)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelRunModal)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Runs the device selector panel as a sheet on the target window.
 func (o *IOBluetoothDeviceSelectorController) BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(sheetWindow *appkit.NSWindow, modalDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) int {
-	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelBeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo, sheetWindow.Ptr(), modalDelegate, didEndSelector, contextInfo)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelBeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo, sheetWindow.Ptr(), modalDelegate, didEndSelector, contextInfo)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the result of the user’s selection.
 func (o *IOBluetoothDeviceSelectorController) GetResults() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelGetResults)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[objc.ID](_ret)
+	var _mainthread0 *foundation.NSArray[objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelGetResults)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the option bits that control the panel’s behavior.
 func (o *IOBluetoothDeviceSelectorController) SetOptions(options uint32) {
-	o.Ptr().Send(_iOBluetoothDeviceSelectorControllerSelSetOptions, options)
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothDeviceSelectorControllerSelSetOptions, options)
+	})
 }
 
 // Returns the option bits that control the panel’s behavior.
 func (o *IOBluetoothDeviceSelectorController) GetOptions() uint32 {
-	_ret := objc.Send[uint32](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelGetOptions)
-	return _ret
+	var _mainthread0 uint32
+	purego.Main(func() {
+		_mainthread0 = func() uint32 {
+			_ret := objc.Send[uint32](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelGetOptions)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the search attributes that control the panel’s search/inquiry behavior.
 func (o *IOBluetoothDeviceSelectorController) SetSearchAttributes(searchAttributes *iobluetooth.IOBluetoothDeviceSearchAttributes) {
-	o.Ptr().Send(_iOBluetoothDeviceSelectorControllerSelSetSearchAttributes, searchAttributes)
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothDeviceSelectorControllerSelSetSearchAttributes, searchAttributes)
+	})
 }
 
 // Returns the search attributes that control the panel’s search/inquiry behavior.
 func (o *IOBluetoothDeviceSelectorController) GetSearchAttributes() *iobluetooth.IOBluetoothDeviceSearchAttributes {
-	_ret := objc.Send[*iobluetooth.IOBluetoothDeviceSearchAttributes](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelGetSearchAttributes)
-	return _ret
+	var _mainthread0 *iobluetooth.IOBluetoothDeviceSearchAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *iobluetooth.IOBluetoothDeviceSearchAttributes {
+			_ret := objc.Send[*iobluetooth.IOBluetoothDeviceSearchAttributes](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelGetSearchAttributes)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Adds a UUID to the list of UUIDs that are used to validate the user’s selection.
 func (o *IOBluetoothDeviceSelectorController) AddAllowedUUID(allowedUUID *iobluetooth.IOBluetoothSDPUUID) {
-	o.Ptr().Send(_iOBluetoothDeviceSelectorControllerSelAddAllowedUUID, allowedUUID.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothDeviceSelectorControllerSelAddAllowedUUID, allowedUUID.Ptr())
+	})
 }
 
 // Adds an array of UUIDs to the list of UUIDs that are used to validate the user’s selection.
 func (o *IOBluetoothDeviceSelectorController) AddAllowedUUIDArray(allowedUUIDArray *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_iOBluetoothDeviceSelectorControllerSelAddAllowedUUIDArray, allowedUUIDArray.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothDeviceSelectorControllerSelAddAllowedUUIDArray, allowedUUIDArray.Ptr())
+	})
 }
 
 // Resets the controller back to the default state where it will accept any device the user selects.
 func (o *IOBluetoothDeviceSelectorController) ClearAllowedUUIDs() {
-	o.Ptr().Send(_iOBluetoothDeviceSelectorControllerSelClearAllowedUUIDs)
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothDeviceSelectorControllerSelClearAllowedUUIDs)
+	})
 }
 
 // Sets the title of the panel when not run as a sheet.
 func (o *IOBluetoothDeviceSelectorController) SetTitle(windowTitle *foundation.NSString) {
-	o.Ptr().Send(_iOBluetoothDeviceSelectorControllerSelSetTitle, windowTitle.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothDeviceSelectorControllerSelSetTitle, windowTitle.Ptr())
+	})
 }
 
 // Returns the title of the device selector panel.
 func (o *IOBluetoothDeviceSelectorController) GetTitle() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelGetTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelGetTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the header text that appears in the device selector panel.
 func (o *IOBluetoothDeviceSelectorController) SetHeader(headerText *foundation.NSString) {
-	o.Ptr().Send(_iOBluetoothDeviceSelectorControllerSelSetHeader, headerText.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothDeviceSelectorControllerSelSetHeader, headerText.Ptr())
+	})
 }
 
 // Returns the header text that appears in the device selector panel.
 func (o *IOBluetoothDeviceSelectorController) GetHeader() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelGetHeader)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelGetHeader)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the description text that appears in the device selector panel.
 func (o *IOBluetoothDeviceSelectorController) SetDescriptionText(descriptionText *foundation.NSString) {
-	o.Ptr().Send(_iOBluetoothDeviceSelectorControllerSelSetDescriptionText, descriptionText.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothDeviceSelectorControllerSelSetDescriptionText, descriptionText.Ptr())
+	})
 }
 
 // Returns the description text that appears in the device selector panel.
 func (o *IOBluetoothDeviceSelectorController) GetDescriptionText() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelGetDescriptionText)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelGetDescriptionText)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the title of the default/select button in the device selector panel.
 func (o *IOBluetoothDeviceSelectorController) SetPrompt(prompt *foundation.NSString) {
-	o.Ptr().Send(_iOBluetoothDeviceSelectorControllerSelSetPrompt, prompt.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothDeviceSelectorControllerSelSetPrompt, prompt.Ptr())
+	})
 }
 
 // Returns the title of the default/select button in the device selector panel.
 func (o *IOBluetoothDeviceSelectorController) GetPrompt() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelGetPrompt)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelGetPrompt)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the title of the default/cancel button in the device selector panel.
 func (o *IOBluetoothDeviceSelectorController) SetCancel(prompt *foundation.NSString) {
-	o.Ptr().Send(_iOBluetoothDeviceSelectorControllerSelSetCancel, prompt.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothDeviceSelectorControllerSelSetCancel, prompt.Ptr())
+	})
 }
 
 // Returns the title of the default/cancel button in the device selector panel.
 func (o *IOBluetoothDeviceSelectorController) GetCancel() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelGetCancel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelectorControllerSelGetCancel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

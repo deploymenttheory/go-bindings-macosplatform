@@ -38,33 +38,63 @@ func NSCollectionLayoutSpacingFromID(id objc.ID) *NSCollectionLayoutSpacing {
 
 // Creates a space equivalent to or greater than the specified number of points, depending on the available space.
 func NSCollectionLayoutSpacingFlexibleSpacing(flexibleSpacing float64) *NSCollectionLayoutSpacing {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutSpacing), _nSCollectionLayoutSpacingSelFlexibleSpacing, flexibleSpacing)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutSpacingFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutSpacing
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutSpacing {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutSpacing), _nSCollectionLayoutSpacingSelFlexibleSpacing, flexibleSpacing)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutSpacingFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a space equivalent to the specified number of points.
 func NSCollectionLayoutSpacingFixedSpacing(fixedSpacing float64) *NSCollectionLayoutSpacing {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutSpacing), _nSCollectionLayoutSpacingSelFixedSpacing, fixedSpacing)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutSpacingFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutSpacing
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutSpacing {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutSpacing), _nSCollectionLayoutSpacingSelFixedSpacing, fixedSpacing)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutSpacingFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutSpacing) Spacing() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSCollectionLayoutSpacingSelSpacing)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSCollectionLayoutSpacingSelSpacing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutSpacing) IsFlexibleSpacing() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionLayoutSpacingSelIsFlexibleSpacing)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionLayoutSpacingSelIsFlexibleSpacing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutSpacing) IsFixedSpacing() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionLayoutSpacingSelIsFixedSpacing)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionLayoutSpacingSelIsFixedSpacing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

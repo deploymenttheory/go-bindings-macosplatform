@@ -33,10 +33,18 @@ func NSSecureTextFieldCellFromID(id objc.ID) *NSSecureTextFieldCell {
 }
 
 func (o *NSSecureTextFieldCell) EchosBullets() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSecureTextFieldCellSelEchosBullets)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSecureTextFieldCellSelEchosBullets)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSecureTextFieldCell) SetEchosBullets(echosBullets bool) {
-	o.Ptr().Send(_nSSecureTextFieldCellSelSetEchosBullets, echosBullets)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSecureTextFieldCellSelSetEchosBullets, echosBullets)
+	})
 }

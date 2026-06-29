@@ -32,13 +32,21 @@ func SFChooseIdentityTableCellViewFromID(id objc.ID) *SFChooseIdentityTableCellV
 }
 
 func (o *SFChooseIdentityTableCellView) IssuerTextField() *appkit.NSTextField {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sFChooseIdentityTableCellViewSelIssuerTextField)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSTextFieldFromID(_ret)
+	var _mainthread0 *appkit.NSTextField
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSTextField {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sFChooseIdentityTableCellViewSelIssuerTextField)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSTextFieldFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SFChooseIdentityTableCellView) SetIssuerTextField(issuerTextField *appkit.NSTextField) {
-	o.Ptr().Send(_sFChooseIdentityTableCellViewSelSetIssuerTextField, issuerTextField.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sFChooseIdentityTableCellViewSelSetIssuerTextField, issuerTextField.Ptr())
+	})
 }

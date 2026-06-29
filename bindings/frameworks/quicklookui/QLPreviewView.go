@@ -46,62 +46,110 @@ func QLPreviewViewFromID(id objc.ID) *QLPreviewView {
 
 // Creates a preview view with the provided frame and style.
 func (o *QLPreviewView) InitWithFrameStyle(frame corefoundation.CGRect, style QLPreviewViewStyle) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qLPreviewViewSelInitWithFrameStyle, frame, style)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qLPreviewViewSelInitWithFrameStyle, frame, style)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a preview view with the provided frame.
 func (o *QLPreviewView) InitWithFrame(frame corefoundation.CGRect) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qLPreviewViewSelInitWithFrame, frame)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qLPreviewViewSelInitWithFrame, frame)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Updates the preview to display the currently previewed item.
 func (o *QLPreviewView) RefreshPreviewItem() {
-	o.Ptr().Send(_qLPreviewViewSelRefreshPreviewItem)
+	purego.Main(func() {
+		o.Ptr().Send(_qLPreviewViewSelRefreshPreviewItem)
+	})
 }
 
 // Closes the view, releasing the current preview item.
 func (o *QLPreviewView) Close() {
-	o.Ptr().Send(_qLPreviewViewSelClose)
+	purego.Main(func() {
+		o.Ptr().Send(_qLPreviewViewSelClose)
+	})
 }
 
 // The item to preview. Quick Look requires Items you wish to conform to the <doc://com.apple.documentation/documentation/quicklook/qlpreviewitem> protocol. When you set this property, the “QuickLookUI/QLPreviewView“ loads the preview asynchronously. Due to this asynchronous behavior, don’t assume that the preview is ready immediately after assigning it to this property.
 func (o *QLPreviewView) PreviewItem() QLPreviewItem {
-	_ret := objc.Send[QLPreviewItem](o.Ptr(), _qLPreviewViewSelPreviewItem)
-	return _ret
+	var _mainthread0 QLPreviewItem
+	purego.Main(func() {
+		_mainthread0 = func() QLPreviewItem {
+			_ret := objc.Send[QLPreviewItem](o.Ptr(), _qLPreviewViewSelPreviewItem)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QLPreviewView) SetPreviewItem(previewItem QLPreviewItem) {
-	o.Ptr().Send(_qLPreviewViewSelSetPreviewItem, previewItem)
+	purego.Main(func() {
+		o.Ptr().Send(_qLPreviewViewSelSetPreviewItem, previewItem)
+	})
 }
 
 // The current display state of the <doc://com.apple.documentation/documentation/quicklookui/qlpreviewview/1504747-previewitem>. This property is an opaque object that Quick Look uses to get and set the current display state of the preview. The display state could be, for example, the currently displayed page, the zoom factor on an image, or the position in a movie. You can use this property to get and save the current display state of the preview before switching to another. This saving allows you to restore a preview later on when the user switches back to it.
 func (o *QLPreviewView) DisplayState() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qLPreviewViewSelDisplayState)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qLPreviewViewSelDisplayState)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QLPreviewView) SetDisplayState(displayState objc.ID) {
-	o.Ptr().Send(_qLPreviewViewSelSetDisplayState, displayState)
+	purego.Main(func() {
+		o.Ptr().Send(_qLPreviewViewSelSetDisplayState, displayState)
+	})
 }
 
 // A Boolean value that determines whether the preview should close when its window closes. The default value of this property is <doc://com.apple.documentation/documentation/objectivec/yes>, which means that the preview automatically closes when its window closes. If you set this property to <doc://com.apple.documentation/documentation/objectivec/no>, close the preview by calling the “QuickLookUI/QLPreviewView/close“ method when finished with it. Once you close a “QuickLookUI/QLPreviewView“, it won’t accept any more preview items.
 func (o *QLPreviewView) ShouldCloseWithWindow() bool {
-	_ret := objc.Send[bool](o.Ptr(), _qLPreviewViewSelShouldCloseWithWindow)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _qLPreviewViewSelShouldCloseWithWindow)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QLPreviewView) SetShouldCloseWithWindow(shouldCloseWithWindow bool) {
-	o.Ptr().Send(_qLPreviewViewSelSetShouldCloseWithWindow, shouldCloseWithWindow)
+	purego.Main(func() {
+		o.Ptr().Send(_qLPreviewViewSelSetShouldCloseWithWindow, shouldCloseWithWindow)
+	})
 }
 
 // A Boolean value that determines whether the preview starts automatically. Set this property to allow previews of movie files to start playback automatically when displayed.
 func (o *QLPreviewView) Autostarts() bool {
-	_ret := objc.Send[bool](o.Ptr(), _qLPreviewViewSelAutostarts)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _qLPreviewViewSelAutostarts)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QLPreviewView) SetAutostarts(autostarts bool) {
-	o.Ptr().Send(_qLPreviewViewSelSetAutostarts, autostarts)
+	purego.Main(func() {
+		o.Ptr().Send(_qLPreviewViewSelSetAutostarts, autostarts)
+	})
 }

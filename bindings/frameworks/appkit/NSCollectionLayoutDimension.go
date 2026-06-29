@@ -42,61 +42,115 @@ func NSCollectionLayoutDimensionFromID(id objc.ID) *NSCollectionLayoutDimension 
 
 // Creates a dimension that is computed as a fraction of the width of the containing group.
 func NSCollectionLayoutDimensionFractionalWidthDimension(fractionalWidth float64) *NSCollectionLayoutDimension {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutDimension), _nSCollectionLayoutDimensionSelFractionalWidthDimension, fractionalWidth)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutDimensionFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutDimension
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutDimension {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutDimension), _nSCollectionLayoutDimensionSelFractionalWidthDimension, fractionalWidth)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutDimensionFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a dimension that is computed as a fraction of the height of the containing group.
 func NSCollectionLayoutDimensionFractionalHeightDimension(fractionalHeight float64) *NSCollectionLayoutDimension {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutDimension), _nSCollectionLayoutDimensionSelFractionalHeightDimension, fractionalHeight)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutDimensionFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutDimension
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutDimension {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutDimension), _nSCollectionLayoutDimensionSelFractionalHeightDimension, fractionalHeight)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutDimensionFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a dimension with an absolute point value.
 func NSCollectionLayoutDimensionAbsoluteDimension(absoluteDimension float64) *NSCollectionLayoutDimension {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutDimension), _nSCollectionLayoutDimensionSelAbsoluteDimension, absoluteDimension)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutDimensionFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutDimension
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutDimension {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutDimension), _nSCollectionLayoutDimensionSelAbsoluteDimension, absoluteDimension)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutDimensionFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a dimension with an estimated point value.
 func NSCollectionLayoutDimensionEstimatedDimension(estimatedDimension float64) *NSCollectionLayoutDimension {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutDimension), _nSCollectionLayoutDimensionSelEstimatedDimension, estimatedDimension)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutDimensionFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutDimension
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutDimension {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutDimension), _nSCollectionLayoutDimensionSelEstimatedDimension, estimatedDimension)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutDimensionFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutDimension) IsFractionalWidth() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionLayoutDimensionSelIsFractionalWidth)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionLayoutDimensionSelIsFractionalWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutDimension) IsFractionalHeight() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionLayoutDimensionSelIsFractionalHeight)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionLayoutDimensionSelIsFractionalHeight)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutDimension) IsAbsolute() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionLayoutDimensionSelIsAbsolute)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionLayoutDimensionSelIsAbsolute)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutDimension) IsEstimated() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionLayoutDimensionSelIsEstimated)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionLayoutDimensionSelIsEstimated)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutDimension) Dimension() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSCollectionLayoutDimensionSelDimension)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSCollectionLayoutDimensionSelDimension)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

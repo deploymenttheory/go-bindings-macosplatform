@@ -36,15 +36,27 @@ func AUPannerViewFromID(id objc.ID) *AUPannerView {
 
 // Creates a panner view for an audio unit.
 func AUPannerViewAUPannerViewWithAudioUnit(au *carboncore.ComponentInstanceRecord) *AUPannerView {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAUPannerView), _aUPannerViewSelAUPannerViewWithAudioUnit, au)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return AUPannerViewFromID(_ret)
+	var _mainthread0 *AUPannerView
+	purego.Main(func() {
+		_mainthread0 = func() *AUPannerView {
+			_ret := objc.Send[objc.ID](objc.ID(_clsAUPannerView), _aUPannerViewSelAUPannerViewWithAudioUnit, au)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return AUPannerViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @property audioUnit @abstract Read-only property for the audio unit associated with the view @result   The audio unit associated with the generic panner view
 func (o *AUPannerView) AudioUnit() *carboncore.ComponentInstanceRecord {
-	_ret := objc.Send[*carboncore.ComponentInstanceRecord](o.Ptr(), _aUPannerViewSelAudioUnit)
-	return _ret
+	var _mainthread0 *carboncore.ComponentInstanceRecord
+	purego.Main(func() {
+		_mainthread0 = func() *carboncore.ComponentInstanceRecord {
+			_ret := objc.Send[*carboncore.ComponentInstanceRecord](o.Ptr(), _aUPannerViewSelAudioUnit)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

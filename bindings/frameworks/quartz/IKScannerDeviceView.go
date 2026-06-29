@@ -61,148 +61,252 @@ func IKScannerDeviceViewFromID(id objc.ID) *IKScannerDeviceView {
 
 // @property delegate @abstract delegate of the IKScannerDeviceView.
 func (o *IKScannerDeviceView) Delegate() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKScannerDeviceViewSelDelegate)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKScannerDeviceViewSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKScannerDeviceView) SetDelegate(delegate objc.ID) {
-	o.Ptr().Send(_iKScannerDeviceViewSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_iKScannerDeviceViewSelSetDelegate, delegate)
+	})
 }
 
 // @property scannerDevice @abstract the scanner device.
 func (o *IKScannerDeviceView) ScannerDevice() *imagecapturecore.ICScannerDevice {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKScannerDeviceViewSelScannerDevice)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return imagecapturecore.ICScannerDeviceFromID(_ret)
+	var _mainthread0 *imagecapturecore.ICScannerDevice
+	purego.Main(func() {
+		_mainthread0 = func() *imagecapturecore.ICScannerDevice {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKScannerDeviceViewSelScannerDevice)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return imagecapturecore.ICScannerDeviceFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKScannerDeviceView) SetScannerDevice(scannerDevice *imagecapturecore.ICScannerDevice) {
-	o.Ptr().Send(_iKScannerDeviceViewSelSetScannerDevice, scannerDevice.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iKScannerDeviceViewSelSetScannerDevice, scannerDevice.Ptr())
+	})
 }
 
 // @property mode @abstract current display mode.
 func (o *IKScannerDeviceView) Mode() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKScannerDeviceViewSelMode)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKScannerDeviceViewSelMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKScannerDeviceView) SetMode(mode objc.ID) {
-	o.Ptr().Send(_iKScannerDeviceViewSelSetMode, mode)
+	purego.Main(func() {
+		o.Ptr().Send(_iKScannerDeviceViewSelSetMode, mode)
+	})
 }
 
 // @property hasDisplayModeSimple @abstract support a simple scanning UI.
 func (o *IKScannerDeviceView) HasDisplayModeSimple() bool {
-	_ret := objc.Send[bool](o.Ptr(), _iKScannerDeviceViewSelHasDisplayModeSimple)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _iKScannerDeviceViewSelHasDisplayModeSimple)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKScannerDeviceView) SetHasDisplayModeSimple(hasDisplayModeSimple bool) {
-	o.Ptr().Send(_iKScannerDeviceViewSelSetHasDisplayModeSimple, hasDisplayModeSimple)
+	purego.Main(func() {
+		o.Ptr().Send(_iKScannerDeviceViewSelSetHasDisplayModeSimple, hasDisplayModeSimple)
+	})
 }
 
 // @property hasDisplayModeAdvanced @abstract support advanced scanning UI.
 func (o *IKScannerDeviceView) HasDisplayModeAdvanced() bool {
-	_ret := objc.Send[bool](o.Ptr(), _iKScannerDeviceViewSelHasDisplayModeAdvanced)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _iKScannerDeviceViewSelHasDisplayModeAdvanced)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKScannerDeviceView) SetHasDisplayModeAdvanced(hasDisplayModeAdvanced bool) {
-	o.Ptr().Send(_iKScannerDeviceViewSelSetHasDisplayModeAdvanced, hasDisplayModeAdvanced)
+	purego.Main(func() {
+		o.Ptr().Send(_iKScannerDeviceViewSelSetHasDisplayModeAdvanced, hasDisplayModeAdvanced)
+	})
 }
 
 // @property transferMode @abstract transfer mode either file based - or - in memory.
 func (o *IKScannerDeviceView) TransferMode() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKScannerDeviceViewSelTransferMode)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKScannerDeviceViewSelTransferMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKScannerDeviceView) SetTransferMode(transferMode objc.ID) {
-	o.Ptr().Send(_iKScannerDeviceViewSelSetTransferMode, transferMode)
+	purego.Main(func() {
+		o.Ptr().Send(_iKScannerDeviceViewSelSetTransferMode, transferMode)
+	})
 }
 
 // @property scanControlLabel @abstract label for the 'Scan' control.
 func (o *IKScannerDeviceView) ScanControlLabel() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKScannerDeviceViewSelScanControlLabel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKScannerDeviceViewSelScanControlLabel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKScannerDeviceView) SetScanControlLabel(scanControlLabel *foundation.NSString) {
-	o.Ptr().Send(_iKScannerDeviceViewSelSetScanControlLabel, scanControlLabel.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iKScannerDeviceViewSelSetScanControlLabel, scanControlLabel.Ptr())
+	})
 }
 
 // @property overviewControlLabel @abstract label for the 'Overview' control.
 func (o *IKScannerDeviceView) OverviewControlLabel() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKScannerDeviceViewSelOverviewControlLabel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKScannerDeviceViewSelOverviewControlLabel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKScannerDeviceView) SetOverviewControlLabel(overviewControlLabel *foundation.NSString) {
-	o.Ptr().Send(_iKScannerDeviceViewSelSetOverviewControlLabel, overviewControlLabel.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iKScannerDeviceViewSelSetOverviewControlLabel, overviewControlLabel.Ptr())
+	})
 }
 
 // @property displaysDownloadsDirectoryControl @abstract show a downloads directory control.
 func (o *IKScannerDeviceView) DisplaysDownloadsDirectoryControl() bool {
-	_ret := objc.Send[bool](o.Ptr(), _iKScannerDeviceViewSelDisplaysDownloadsDirectoryControl)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _iKScannerDeviceViewSelDisplaysDownloadsDirectoryControl)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKScannerDeviceView) SetDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) {
-	o.Ptr().Send(_iKScannerDeviceViewSelSetDisplaysDownloadsDirectoryControl, displaysDownloadsDirectoryControl)
+	purego.Main(func() {
+		o.Ptr().Send(_iKScannerDeviceViewSelSetDisplaysDownloadsDirectoryControl, displaysDownloadsDirectoryControl)
+	})
 }
 
 // @property downloadsDirectory @abstract downloads directory.
 func (o *IKScannerDeviceView) DownloadsDirectory() *foundation.NSURL {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKScannerDeviceViewSelDownloadsDirectory)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSURLFromID(_ret)
+	var _mainthread0 *foundation.NSURL
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSURL {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKScannerDeviceViewSelDownloadsDirectory)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSURLFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKScannerDeviceView) SetDownloadsDirectory(downloadsDirectory *foundation.NSURL) {
-	o.Ptr().Send(_iKScannerDeviceViewSelSetDownloadsDirectory, downloadsDirectory.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iKScannerDeviceViewSelSetDownloadsDirectory, downloadsDirectory.Ptr())
+	})
 }
 
 // @property documentName @abstract document name.
 func (o *IKScannerDeviceView) DocumentName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKScannerDeviceViewSelDocumentName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKScannerDeviceViewSelDocumentName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKScannerDeviceView) SetDocumentName(documentName *foundation.NSString) {
-	o.Ptr().Send(_iKScannerDeviceViewSelSetDocumentName, documentName.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iKScannerDeviceViewSelSetDocumentName, documentName.Ptr())
+	})
 }
 
 // @property displaysPostProcessApplicationControl @abstract show a postprocessing application control.
 func (o *IKScannerDeviceView) DisplaysPostProcessApplicationControl() bool {
-	_ret := objc.Send[bool](o.Ptr(), _iKScannerDeviceViewSelDisplaysPostProcessApplicationControl)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _iKScannerDeviceViewSelDisplaysPostProcessApplicationControl)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKScannerDeviceView) SetDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) {
-	o.Ptr().Send(_iKScannerDeviceViewSelSetDisplaysPostProcessApplicationControl, displaysPostProcessApplicationControl)
+	purego.Main(func() {
+		o.Ptr().Send(_iKScannerDeviceViewSelSetDisplaysPostProcessApplicationControl, displaysPostProcessApplicationControl)
+	})
 }
 
 // @property postProcessApplication @abstract postprocessing application.
 func (o *IKScannerDeviceView) PostProcessApplication() *foundation.NSURL {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKScannerDeviceViewSelPostProcessApplication)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSURLFromID(_ret)
+	var _mainthread0 *foundation.NSURL
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSURL {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKScannerDeviceViewSelPostProcessApplication)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSURLFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKScannerDeviceView) SetPostProcessApplication(postProcessApplication *foundation.NSURL) {
-	o.Ptr().Send(_iKScannerDeviceViewSelSetPostProcessApplication, postProcessApplication.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iKScannerDeviceViewSelSetPostProcessApplication, postProcessApplication.Ptr())
+	})
 }

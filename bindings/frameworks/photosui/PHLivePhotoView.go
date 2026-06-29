@@ -51,90 +51,150 @@ func PHLivePhotoViewFromID(id objc.ID) *PHLivePhotoView {
 
 // Begins playback of Live Photo content in the view.
 func (o *PHLivePhotoView) StartPlaybackWithStyle(playbackStyle PHLivePhotoViewPlaybackStyle) {
-	o.Ptr().Send(_pHLivePhotoViewSelStartPlaybackWithStyle, playbackStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_pHLivePhotoViewSelStartPlaybackWithStyle, playbackStyle)
+	})
 }
 
 // Stops playback of a Live Photo.
 func (o *PHLivePhotoView) StopPlayback() {
-	o.Ptr().Send(_pHLivePhotoViewSelStopPlayback)
+	purego.Main(func() {
+		o.Ptr().Send(_pHLivePhotoViewSelStopPlayback)
+	})
 }
 
 // Stops playback of a Live Photo in an animated manner.
 func (o *PHLivePhotoView) StopPlaybackAnimated(animated bool) {
-	o.Ptr().Send(_pHLivePhotoViewSelStopPlaybackAnimated, animated)
+	purego.Main(func() {
+		o.Ptr().Send(_pHLivePhotoViewSelStopPlaybackAnimated, animated)
+	})
 }
 
 func (o *PHLivePhotoView) Delegate() PHLivePhotoViewDelegate {
-	_ret := objc.Send[PHLivePhotoViewDelegate](o.Ptr(), _pHLivePhotoViewSelDelegate)
-	return _ret
+	var _mainthread0 PHLivePhotoViewDelegate
+	purego.Main(func() {
+		_mainthread0 = func() PHLivePhotoViewDelegate {
+			_ret := objc.Send[PHLivePhotoViewDelegate](o.Ptr(), _pHLivePhotoViewSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PHLivePhotoView) SetDelegate(delegate PHLivePhotoViewDelegate) {
-	o.Ptr().Send(_pHLivePhotoViewSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_pHLivePhotoViewSelSetDelegate, delegate)
+	})
 }
 
 // Live photo displayed in the receiver.
 func (o *PHLivePhotoView) LivePhoto() *photos.PHLivePhoto {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pHLivePhotoViewSelLivePhoto)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return photos.PHLivePhotoFromID(_ret)
+	var _mainthread0 *photos.PHLivePhoto
+	purego.Main(func() {
+		_mainthread0 = func() *photos.PHLivePhoto {
+			_ret := objc.Send[objc.ID](o.Ptr(), _pHLivePhotoViewSelLivePhoto)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return photos.PHLivePhotoFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Live photo displayed in the receiver.
 func (o *PHLivePhotoView) SetLivePhoto(livePhoto *photos.PHLivePhoto) {
-	o.Ptr().Send(_pHLivePhotoViewSelSetLivePhoto, livePhoto.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_pHLivePhotoViewSelSetLivePhoto, livePhoto.Ptr())
+	})
 }
 
 // The mode in which the receiver will display its content. Defaults to PHLivePhotoViewContentModeAspectFit.
 func (o *PHLivePhotoView) ContentMode() PHLivePhotoViewContentMode {
-	_ret := objc.Send[PHLivePhotoViewContentMode](o.Ptr(), _pHLivePhotoViewSelContentMode)
-	return _ret
+	var _mainthread0 PHLivePhotoViewContentMode
+	purego.Main(func() {
+		_mainthread0 = func() PHLivePhotoViewContentMode {
+			_ret := objc.Send[PHLivePhotoViewContentMode](o.Ptr(), _pHLivePhotoViewSelContentMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The mode in which the receiver will display its content. Defaults to PHLivePhotoViewContentModeAspectFit.
 func (o *PHLivePhotoView) SetContentMode(contentMode PHLivePhotoViewContentMode) {
-	o.Ptr().Send(_pHLivePhotoViewSelSetContentMode, contentMode)
+	purego.Main(func() {
+		o.Ptr().Send(_pHLivePhotoViewSelSetContentMode, contentMode)
+	})
 }
 
 // The rectangle, in the unit coordinate space, that defines the portion of the Live Photo contents that should be displayed. In this coordinate system, the point `{0.0,0.0}` refers to the upper left corner of the Live Photo, and `{1.0,1.0}` refers to the bottom right corner.
 func (o *PHLivePhotoView) ContentsRect() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _pHLivePhotoViewSelContentsRect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _pHLivePhotoViewSelContentsRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PHLivePhotoView) SetContentsRect(contentsRect corefoundation.CGRect) {
-	o.Ptr().Send(_pHLivePhotoViewSelSetContentsRect, contentsRect)
+	purego.Main(func() {
+		o.Ptr().Send(_pHLivePhotoViewSelSetContentsRect, contentsRect)
+	})
 }
 
 // The audio volume during playback
 func (o *PHLivePhotoView) AudioVolume() float32 {
-	_ret := objc.Send[float32](o.Ptr(), _pHLivePhotoViewSelAudioVolume)
-	return _ret
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_ret := objc.Send[float32](o.Ptr(), _pHLivePhotoViewSelAudioVolume)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The audio volume during playback
 func (o *PHLivePhotoView) SetAudioVolume(audioVolume float32) {
-	o.Ptr().Send(_pHLivePhotoViewSelSetAudioVolume, audioVolume)
+	purego.Main(func() {
+		o.Ptr().Send(_pHLivePhotoViewSelSetAudioVolume, audioVolume)
+	})
 }
 
 // Indicates whether the audio of the Live Photo is muted.
 func (o *PHLivePhotoView) IsMuted() bool {
-	_ret := objc.Send[bool](o.Ptr(), _pHLivePhotoViewSelIsMuted)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _pHLivePhotoViewSelIsMuted)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Indicates whether the audio of the Live Photo is muted.
 func (o *PHLivePhotoView) SetMuted(muted bool) {
-	o.Ptr().Send(_pHLivePhotoViewSelSetMuted, muted)
+	purego.Main(func() {
+		o.Ptr().Send(_pHLivePhotoViewSelSetMuted, muted)
+	})
 }
 
 // Directly access the livePhotoBadge in cases where it should be added to a different place in the view hierarchy and not the live photo view. This can be useful when the live photo view is added to a scroll view.
 func (o *PHLivePhotoView) LivePhotoBadgeView() *appkit.NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pHLivePhotoViewSelLivePhotoBadgeView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSViewFromID(_ret)
+	var _mainthread0 *appkit.NSView
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _pHLivePhotoViewSelLivePhotoBadgeView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

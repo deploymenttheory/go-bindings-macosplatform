@@ -48,80 +48,148 @@ func NSGridRowFromID(id objc.ID) *NSGridRow {
 }
 
 func (o *NSGridRow) CellAtIndex(index int) *NSGridCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridRowSelCellAtIndex, index)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGridCellFromID(_ret)
+	var _mainthread0 *NSGridCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSGridCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGridRowSelCellAtIndex, index)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGridCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridRow) MergeCellsInRange(range_ foundation.NSRange) {
-	o.Ptr().Send(_nSGridRowSelMergeCellsInRange, range_)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridRowSelMergeCellsInRange, range_)
+	})
 }
 
 func (o *NSGridRow) GridView() *NSGridView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridRowSelGridView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGridViewFromID(_ret)
+	var _mainthread0 *NSGridView
+	purego.Main(func() {
+		_mainthread0 = func() *NSGridView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGridRowSelGridView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGridViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridRow) NumberOfCells() int {
-	_ret := objc.Send[int](o.Ptr(), _nSGridRowSelNumberOfCells)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSGridRowSelNumberOfCells)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridRow) YPlacement() NSGridCellPlacement {
-	_ret := objc.Send[NSGridCellPlacement](o.Ptr(), _nSGridRowSelYPlacement)
-	return _ret
+	var _mainthread0 NSGridCellPlacement
+	purego.Main(func() {
+		_mainthread0 = func() NSGridCellPlacement {
+			_ret := objc.Send[NSGridCellPlacement](o.Ptr(), _nSGridRowSelYPlacement)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridRow) SetYPlacement(yPlacement NSGridCellPlacement) {
-	o.Ptr().Send(_nSGridRowSelSetYPlacement, yPlacement)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridRowSelSetYPlacement, yPlacement)
+	})
 }
 
 func (o *NSGridRow) RowAlignment() NSGridRowAlignment {
-	_ret := objc.Send[NSGridRowAlignment](o.Ptr(), _nSGridRowSelRowAlignment)
-	return _ret
+	var _mainthread0 NSGridRowAlignment
+	purego.Main(func() {
+		_mainthread0 = func() NSGridRowAlignment {
+			_ret := objc.Send[NSGridRowAlignment](o.Ptr(), _nSGridRowSelRowAlignment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridRow) SetRowAlignment(rowAlignment NSGridRowAlignment) {
-	o.Ptr().Send(_nSGridRowSelSetRowAlignment, rowAlignment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridRowSelSetRowAlignment, rowAlignment)
+	})
 }
 
 func (o *NSGridRow) Height() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSGridRowSelHeight)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSGridRowSelHeight)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridRow) SetHeight(height float64) {
-	o.Ptr().Send(_nSGridRowSelSetHeight, height)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridRowSelSetHeight, height)
+	})
 }
 
 func (o *NSGridRow) TopPadding() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSGridRowSelTopPadding)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSGridRowSelTopPadding)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridRow) SetTopPadding(topPadding float64) {
-	o.Ptr().Send(_nSGridRowSelSetTopPadding, topPadding)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridRowSelSetTopPadding, topPadding)
+	})
 }
 
 func (o *NSGridRow) BottomPadding() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSGridRowSelBottomPadding)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSGridRowSelBottomPadding)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridRow) SetBottomPadding(bottomPadding float64) {
-	o.Ptr().Send(_nSGridRowSelSetBottomPadding, bottomPadding)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridRowSelSetBottomPadding, bottomPadding)
+	})
 }
 
 func (o *NSGridRow) IsHidden() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSGridRowSelIsHidden)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSGridRowSelIsHidden)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridRow) SetHidden(hidden bool) {
-	o.Ptr().Send(_nSGridRowSelSetHidden, hidden)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridRowSelSetHidden, hidden)
+	})
 }

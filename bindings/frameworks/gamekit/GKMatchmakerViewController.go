@@ -50,90 +50,154 @@ func GKMatchmakerViewControllerFromID(id objc.ID) *GKMatchmakerViewController {
 
 // Creates a matchmaker view controller for the local player to start inviting other players.
 func (o *GKMatchmakerViewController) InitWithMatchRequest(request *GKMatchRequest) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _gKMatchmakerViewControllerSelInitWithMatchRequest, request.Ptr())
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _gKMatchmakerViewControllerSelInitWithMatchRequest, request.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a matchmaker view controller to present to a player who accepts an invitation.
 func (o *GKMatchmakerViewController) InitWithInvite(invite *GKInvite) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _gKMatchmakerViewControllerSelInitWithInvite, invite.Ptr())
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _gKMatchmakerViewControllerSelInitWithInvite, invite.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Invites additional players to join an existing match.
 func (o *GKMatchmakerViewController) AddPlayersToMatch(match *GKMatch) {
-	o.Ptr().Send(_gKMatchmakerViewControllerSelAddPlayersToMatch, match.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_gKMatchmakerViewControllerSelAddPlayersToMatch, match.Ptr())
+	})
 }
 
 // Updates the connection status of a player in a hosted game.
 func (o *GKMatchmakerViewController) SetHostedPlayerDidConnect(player *GKPlayer, connected bool) {
-	o.Ptr().Send(_gKMatchmakerViewControllerSelSetHostedPlayerDidConnect, player.Ptr(), connected)
+	purego.Main(func() {
+		o.Ptr().Send(_gKMatchmakerViewControllerSelSetHostedPlayerDidConnect, player.Ptr(), connected)
+	})
 }
 
 func (o *GKMatchmakerViewController) MatchmakerDelegate() GKMatchmakerViewControllerDelegate {
-	_ret := objc.Send[GKMatchmakerViewControllerDelegate](o.Ptr(), _gKMatchmakerViewControllerSelMatchmakerDelegate)
-	return _ret
+	var _mainthread0 GKMatchmakerViewControllerDelegate
+	purego.Main(func() {
+		_mainthread0 = func() GKMatchmakerViewControllerDelegate {
+			_ret := objc.Send[GKMatchmakerViewControllerDelegate](o.Ptr(), _gKMatchmakerViewControllerSelMatchmakerDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *GKMatchmakerViewController) SetMatchmakerDelegate(matchmakerDelegate GKMatchmakerViewControllerDelegate) {
-	o.Ptr().Send(_gKMatchmakerViewControllerSelSetMatchmakerDelegate, matchmakerDelegate)
+	purego.Main(func() {
+		o.Ptr().Send(_gKMatchmakerViewControllerSelSetMatchmakerDelegate, matchmakerDelegate)
+	})
 }
 
 func (o *GKMatchmakerViewController) MatchRequest() *GKMatchRequest {
-	_ret := objc.Send[objc.ID](o.Ptr(), _gKMatchmakerViewControllerSelMatchRequest)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return GKMatchRequestFromID(_ret)
+	var _mainthread0 *GKMatchRequest
+	purego.Main(func() {
+		_mainthread0 = func() *GKMatchRequest {
+			_ret := objc.Send[objc.ID](o.Ptr(), _gKMatchmakerViewControllerSelMatchRequest)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return GKMatchRequestFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // set to YES to receive hosted (eg. not peer-to-peer) match results. Will cause the controller to return an array of players instead of a match.
 func (o *GKMatchmakerViewController) IsHosted() bool {
-	_ret := objc.Send[bool](o.Ptr(), _gKMatchmakerViewControllerSelIsHosted)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _gKMatchmakerViewControllerSelIsHosted)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *GKMatchmakerViewController) SetHosted(hosted bool) {
-	o.Ptr().Send(_gKMatchmakerViewControllerSelSetHosted, hosted)
+	purego.Main(func() {
+		o.Ptr().Send(_gKMatchmakerViewControllerSelSetHosted, hosted)
+	})
 }
 
 // this controls which mode of matchmaking to support in the UI (all, nearby only, automatch only, invite only).  Throws an exeption if you can not set to the desired mode (due to restrictions)
 func (o *GKMatchmakerViewController) MatchmakingMode() GKMatchmakingMode {
-	_ret := objc.Send[GKMatchmakingMode](o.Ptr(), _gKMatchmakerViewControllerSelMatchmakingMode)
-	return _ret
+	var _mainthread0 GKMatchmakingMode
+	purego.Main(func() {
+		_mainthread0 = func() GKMatchmakingMode {
+			_ret := objc.Send[GKMatchmakingMode](o.Ptr(), _gKMatchmakerViewControllerSelMatchmakingMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *GKMatchmakerViewController) SetMatchmakingMode(matchmakingMode GKMatchmakingMode) {
-	o.Ptr().Send(_gKMatchmakerViewControllerSelSetMatchmakingMode, matchmakingMode)
+	purego.Main(func() {
+		o.Ptr().Send(_gKMatchmakerViewControllerSelSetMatchmakingMode, matchmakingMode)
+	})
 }
 
 // A BOOL value to allow the GKMatchMakerViewController to return control to the game once the minimum number of players are connected. By default the value is NO, and the multiplayer match can only proceed after all players are connected. If the value is set to YES, then once the number of connected players is greater than or equal to minPlayers of the match request, matchmakerViewController:didFindMatch: will be called and the game can get the match instance, and update the game scene accordingly. The remaining players wil continue to connect.
 func (o *GKMatchmakerViewController) CanStartWithMinimumPlayers() bool {
-	_ret := objc.Send[bool](o.Ptr(), _gKMatchmakerViewControllerSelCanStartWithMinimumPlayers)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _gKMatchmakerViewControllerSelCanStartWithMinimumPlayers)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *GKMatchmakerViewController) SetCanStartWithMinimumPlayers(canStartWithMinimumPlayers bool) {
-	o.Ptr().Send(_gKMatchmakerViewControllerSelSetCanStartWithMinimumPlayers, canStartWithMinimumPlayers)
+	purego.Main(func() {
+		o.Ptr().Send(_gKMatchmakerViewControllerSelSetCanStartWithMinimumPlayers, canStartWithMinimumPlayers)
+	})
 }
 
 // deprecated, set the message on the match request instead
 // Deprecated: No longer supported.
 func (o *GKMatchmakerViewController) DefaultInvitationMessage() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _gKMatchmakerViewControllerSelDefaultInvitationMessage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _gKMatchmakerViewControllerSelDefaultInvitationMessage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: No longer supported.
 func (o *GKMatchmakerViewController) SetDefaultInvitationMessage(defaultInvitationMessage *foundation.NSString) {
-	o.Ptr().Send(_gKMatchmakerViewControllerSelSetDefaultInvitationMessage, defaultInvitationMessage.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_gKMatchmakerViewControllerSelSetDefaultInvitationMessage, defaultInvitationMessage.Ptr())
+	})
 }
 
 // Updates a player’s status on the view to show that the player has connected or disconnected from your server.
 // Deprecated: since macOS 10.10.
 func (o *GKMatchmakerViewController) SetHostedPlayerConnected(playerID *foundation.NSString, connected bool) {
-	o.Ptr().Send(_gKMatchmakerViewControllerSelSetHostedPlayerConnected, playerID.Ptr(), connected)
+	purego.Main(func() {
+		o.Ptr().Send(_gKMatchmakerViewControllerSelSetHostedPlayerConnected, playerID.Ptr(), connected)
+	})
 }

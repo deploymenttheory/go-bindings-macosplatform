@@ -48,92 +48,160 @@ func NSButtonTouchBarItemFromID(id objc.ID) *NSButtonTouchBarItem {
 }
 
 func NSButtonTouchBarItemButtonTouchBarItemWithIdentifierTitleTargetAction(identifier *foundation.NSString, title *foundation.NSString, target objc.ID, action objc.SEL) *NSButtonTouchBarItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSButtonTouchBarItem), _nSButtonTouchBarItemSelButtonTouchBarItemWithIdentifierTitleTargetAction, identifier.Ptr(), title.Ptr(), target, action)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSButtonTouchBarItemFromID(_ret)
+	var _mainthread0 *NSButtonTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSButtonTouchBarItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSButtonTouchBarItem), _nSButtonTouchBarItemSelButtonTouchBarItemWithIdentifierTitleTargetAction, identifier.Ptr(), title.Ptr(), target, action)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSButtonTouchBarItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func NSButtonTouchBarItemButtonTouchBarItemWithIdentifierImageTargetAction(identifier *foundation.NSString, image *NSImage, target objc.ID, action objc.SEL) *NSButtonTouchBarItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSButtonTouchBarItem), _nSButtonTouchBarItemSelButtonTouchBarItemWithIdentifierImageTargetAction, identifier.Ptr(), image.Ptr(), target, action)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSButtonTouchBarItemFromID(_ret)
+	var _mainthread0 *NSButtonTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSButtonTouchBarItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSButtonTouchBarItem), _nSButtonTouchBarItemSelButtonTouchBarItemWithIdentifierImageTargetAction, identifier.Ptr(), image.Ptr(), target, action)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSButtonTouchBarItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func NSButtonTouchBarItemButtonTouchBarItemWithIdentifierTitleImageTargetAction(identifier *foundation.NSString, title *foundation.NSString, image *NSImage, target objc.ID, action objc.SEL) *NSButtonTouchBarItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSButtonTouchBarItem), _nSButtonTouchBarItemSelButtonTouchBarItemWithIdentifierTitleImageTargetAction, identifier.Ptr(), title.Ptr(), image.Ptr(), target, action)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSButtonTouchBarItemFromID(_ret)
+	var _mainthread0 *NSButtonTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSButtonTouchBarItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSButtonTouchBarItem), _nSButtonTouchBarItemSelButtonTouchBarItemWithIdentifierTitleImageTargetAction, identifier.Ptr(), title.Ptr(), image.Ptr(), target, action)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSButtonTouchBarItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonTouchBarItem) Title() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonTouchBarItemSelTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonTouchBarItemSelTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonTouchBarItem) SetTitle(title *foundation.NSString) {
-	o.Ptr().Send(_nSButtonTouchBarItemSelSetTitle, title.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonTouchBarItemSelSetTitle, title.Ptr())
+	})
 }
 
 func (o *NSButtonTouchBarItem) Image() *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonTouchBarItemSelImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonTouchBarItemSelImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonTouchBarItem) SetImage(image *NSImage) {
-	o.Ptr().Send(_nSButtonTouchBarItemSelSetImage, image.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonTouchBarItemSelSetImage, image.Ptr())
+	})
 }
 
 func (o *NSButtonTouchBarItem) BezelColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonTouchBarItemSelBezelColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonTouchBarItemSelBezelColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonTouchBarItem) SetBezelColor(bezelColor *NSColor) {
-	o.Ptr().Send(_nSButtonTouchBarItemSelSetBezelColor, bezelColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonTouchBarItemSelSetBezelColor, bezelColor.Ptr())
+	})
 }
 
 func (o *NSButtonTouchBarItem) Target() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonTouchBarItemSelTarget)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonTouchBarItemSelTarget)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonTouchBarItem) SetTarget(target objc.ID) {
-	o.Ptr().Send(_nSButtonTouchBarItemSelSetTarget, target)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonTouchBarItemSelSetTarget, target)
+	})
 }
 
 func (o *NSButtonTouchBarItem) Action() objc.SEL {
-	_ret := objc.Send[objc.SEL](o.Ptr(), _nSButtonTouchBarItemSelAction)
-	return _ret
+	var _mainthread0 objc.SEL
+	purego.Main(func() {
+		_mainthread0 = func() objc.SEL {
+			_ret := objc.Send[objc.SEL](o.Ptr(), _nSButtonTouchBarItemSelAction)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonTouchBarItem) SetAction(action objc.SEL) {
-	o.Ptr().Send(_nSButtonTouchBarItemSelSetAction, action)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonTouchBarItemSelSetAction, action)
+	})
 }
 
 func (o *NSButtonTouchBarItem) IsEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSButtonTouchBarItemSelIsEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSButtonTouchBarItemSelIsEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonTouchBarItem) SetEnabled(enabled bool) {
-	o.Ptr().Send(_nSButtonTouchBarItemSelSetEnabled, enabled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonTouchBarItemSelSetEnabled, enabled)
+	})
 }
 
 func (o *NSButtonTouchBarItem) SetCustomizationLabel(customizationLabel *foundation.NSString) {
-	o.Ptr().Send(_nSButtonTouchBarItemSelSetCustomizationLabel, customizationLabel.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonTouchBarItemSelSetCustomizationLabel, customizationLabel.Ptr())
+	})
 }

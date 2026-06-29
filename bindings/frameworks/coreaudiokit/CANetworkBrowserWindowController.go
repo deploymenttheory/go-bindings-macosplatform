@@ -35,15 +35,27 @@ func CANetworkBrowserWindowControllerFromID(id objc.ID) *CANetworkBrowserWindowC
 
 // Returns a Boolean value that indicates whether the current machine hardware supports Audio Video Bridging (AVB).
 func CANetworkBrowserWindowControllerIsAVBSupported() bool {
-	_ret := objc.Send[bool](objc.ID(_clsCANetworkBrowserWindowController), _cANetworkBrowserWindowControllerSelIsAVBSupported)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](objc.ID(_clsCANetworkBrowserWindowController), _cANetworkBrowserWindowControllerSelIsAVBSupported)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a new network browser window controller.
 func (o *CANetworkBrowserWindowController) Init() *CANetworkBrowserWindowController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cANetworkBrowserWindowControllerSelInit)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return CANetworkBrowserWindowControllerFromID(_ret)
+	var _mainthread0 *CANetworkBrowserWindowController
+	purego.Main(func() {
+		_mainthread0 = func() *CANetworkBrowserWindowController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _cANetworkBrowserWindowControllerSelInit)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return CANetworkBrowserWindowControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

@@ -68,179 +68,319 @@ func NSOutlineViewFromID(id objc.ID) *NSOutlineView {
 
 // Returns a Boolean value that indicates whether a given item is expandable.
 func (o *NSOutlineView) IsExpandable(item objc.ID) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSOutlineViewSelIsExpandable, item)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSOutlineViewSelIsExpandable, item)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the number of children for the specified parent item.
 func (o *NSOutlineView) NumberOfChildrenOfItem(item objc.ID) int {
-	_ret := objc.Send[int](o.Ptr(), _nSOutlineViewSelNumberOfChildrenOfItem, item)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSOutlineViewSelNumberOfChildrenOfItem, item)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the specified child of an item.
 func (o *NSOutlineView) ChildOfItem(index int, item objc.ID) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSOutlineViewSelChildOfItem, index, item)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSOutlineViewSelChildOfItem, index, item)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Expands a specified item and, optionally, its children.
 func (o *NSOutlineView) ExpandItemExpandChildren(item objc.ID, expandChildren bool) {
-	o.Ptr().Send(_nSOutlineViewSelExpandItemExpandChildren, item, expandChildren)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOutlineViewSelExpandItemExpandChildren, item, expandChildren)
+	})
 }
 
 // Expands a given item.
 func (o *NSOutlineView) ExpandItem(item objc.ID) {
-	o.Ptr().Send(_nSOutlineViewSelExpandItem, item)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOutlineViewSelExpandItem, item)
+	})
 }
 
 // Collapses a given item and, optionally, its children.
 func (o *NSOutlineView) CollapseItemCollapseChildren(item objc.ID, collapseChildren bool) {
-	o.Ptr().Send(_nSOutlineViewSelCollapseItemCollapseChildren, item, collapseChildren)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOutlineViewSelCollapseItemCollapseChildren, item, collapseChildren)
+	})
 }
 
 // Collapses a given item.
 func (o *NSOutlineView) CollapseItem(item objc.ID) {
-	o.Ptr().Send(_nSOutlineViewSelCollapseItem, item)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOutlineViewSelCollapseItem, item)
+	})
 }
 
 // Reloads a given item and, optionally, its children.
 func (o *NSOutlineView) ReloadItemReloadChildren(item objc.ID, reloadChildren bool) {
-	o.Ptr().Send(_nSOutlineViewSelReloadItemReloadChildren, item, reloadChildren)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOutlineViewSelReloadItemReloadChildren, item, reloadChildren)
+	})
 }
 
 // Reloads and redisplays the data for the given item.
 func (o *NSOutlineView) ReloadItem(item objc.ID) {
-	o.Ptr().Send(_nSOutlineViewSelReloadItem, item)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOutlineViewSelReloadItem, item)
+	})
 }
 
 // Returns the parent for a given item.
 func (o *NSOutlineView) ParentForItem(item objc.ID) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSOutlineViewSelParentForItem, item)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSOutlineViewSelParentForItem, item)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the child index of the specified item within its parent.
 func (o *NSOutlineView) ChildIndexForItem(item objc.ID) int {
-	_ret := objc.Send[int](o.Ptr(), _nSOutlineViewSelChildIndexForItem, item)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSOutlineViewSelChildIndexForItem, item)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the item associated with a given row.
 func (o *NSOutlineView) ItemAtRow(row int) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSOutlineViewSelItemAtRow, row)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSOutlineViewSelItemAtRow, row)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the row associated with a given item.
 func (o *NSOutlineView) RowForItem(item objc.ID) int {
-	_ret := objc.Send[int](o.Ptr(), _nSOutlineViewSelRowForItem, item)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSOutlineViewSelRowForItem, item)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the indentation level for a given item.
 func (o *NSOutlineView) LevelForItem(item objc.ID) int {
-	_ret := objc.Send[int](o.Ptr(), _nSOutlineViewSelLevelForItem, item)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSOutlineViewSelLevelForItem, item)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the indentation level for a given row.
 func (o *NSOutlineView) LevelForRow(row int) int {
-	_ret := objc.Send[int](o.Ptr(), _nSOutlineViewSelLevelForRow, row)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSOutlineViewSelLevelForRow, row)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a Boolean value that indicates whether a given item is expanded.
 func (o *NSOutlineView) IsItemExpanded(item objc.ID) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSOutlineViewSelIsItemExpanded, item)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSOutlineViewSelIsItemExpanded, item)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the frame of the outline cell for a given row.
 func (o *NSOutlineView) FrameOfOutlineCellAtRow(row int) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSOutlineViewSelFrameOfOutlineCellAtRow, row)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSOutlineViewSelFrameOfOutlineCellAtRow, row)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Used to “retarget” a proposed drop.
 func (o *NSOutlineView) SetDropItemDropChildIndex(item objc.ID, index int) {
-	o.Ptr().Send(_nSOutlineViewSelSetDropItemDropChildIndex, item, index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOutlineViewSelSetDropItemDropChildIndex, item, index)
+	})
 }
 
 // Returns a Boolean value that indicates whether auto-expanded items should return to their original collapsed state.
 func (o *NSOutlineView) ShouldCollapseAutoExpandedItemsForDeposited(deposited bool) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSOutlineViewSelShouldCollapseAutoExpandedItemsForDeposited, deposited)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSOutlineViewSelShouldCollapseAutoExpandedItemsForDeposited, deposited)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Inserts new items at the given indexes in the given parent with the specified optional animations.
 func (o *NSOutlineView) InsertItemsAtIndexesInParentWithAnimation(indexes *foundation.NSIndexSet, parent objc.ID, animationOptions NSTableViewAnimationOptions) {
-	o.Ptr().Send(_nSOutlineViewSelInsertItemsAtIndexesInParentWithAnimation, indexes.Ptr(), parent, animationOptions)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOutlineViewSelInsertItemsAtIndexesInParentWithAnimation, indexes.Ptr(), parent, animationOptions)
+	})
 }
 
 // Removes items at the given indexes in the given parent with the specified optional animations.
 func (o *NSOutlineView) RemoveItemsAtIndexesInParentWithAnimation(indexes *foundation.NSIndexSet, parent objc.ID, animationOptions NSTableViewAnimationOptions) {
-	o.Ptr().Send(_nSOutlineViewSelRemoveItemsAtIndexesInParentWithAnimation, indexes.Ptr(), parent, animationOptions)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOutlineViewSelRemoveItemsAtIndexesInParentWithAnimation, indexes.Ptr(), parent, animationOptions)
+	})
 }
 
 // Moves an item at a given index in the given parent to a new index in a new parent.
 func (o *NSOutlineView) MoveItemAtIndexInParentToIndexInParent(fromIndex int, oldParent objc.ID, toIndex int, newParent objc.ID) {
-	o.Ptr().Send(_nSOutlineViewSelMoveItemAtIndexInParentToIndexInParent, fromIndex, oldParent, toIndex, newParent)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOutlineViewSelMoveItemAtIndexInParentToIndexInParent, fromIndex, oldParent, toIndex, newParent)
+	})
 }
 
 func (o *NSOutlineView) OutlineTableColumn() *NSTableColumn {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSOutlineViewSelOutlineTableColumn)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTableColumnFromID(_ret)
+	var _mainthread0 *NSTableColumn
+	purego.Main(func() {
+		_mainthread0 = func() *NSTableColumn {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSOutlineViewSelOutlineTableColumn)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTableColumnFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSOutlineView) SetOutlineTableColumn(outlineTableColumn *NSTableColumn) {
-	o.Ptr().Send(_nSOutlineViewSelSetOutlineTableColumn, outlineTableColumn.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSOutlineViewSelSetOutlineTableColumn, outlineTableColumn.Ptr())
+	})
 }
 
 func (o *NSOutlineView) IndentationPerLevel() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSOutlineViewSelIndentationPerLevel)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSOutlineViewSelIndentationPerLevel)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSOutlineView) SetIndentationPerLevel(indentationPerLevel float64) {
-	o.Ptr().Send(_nSOutlineViewSelSetIndentationPerLevel, indentationPerLevel)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOutlineViewSelSetIndentationPerLevel, indentationPerLevel)
+	})
 }
 
 func (o *NSOutlineView) IndentationMarkerFollowsCell() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSOutlineViewSelIndentationMarkerFollowsCell)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSOutlineViewSelIndentationMarkerFollowsCell)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSOutlineView) SetIndentationMarkerFollowsCell(indentationMarkerFollowsCell bool) {
-	o.Ptr().Send(_nSOutlineViewSelSetIndentationMarkerFollowsCell, indentationMarkerFollowsCell)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOutlineViewSelSetIndentationMarkerFollowsCell, indentationMarkerFollowsCell)
+	})
 }
 
 func (o *NSOutlineView) AutoresizesOutlineColumn() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSOutlineViewSelAutoresizesOutlineColumn)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSOutlineViewSelAutoresizesOutlineColumn)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSOutlineView) SetAutoresizesOutlineColumn(autoresizesOutlineColumn bool) {
-	o.Ptr().Send(_nSOutlineViewSelSetAutoresizesOutlineColumn, autoresizesOutlineColumn)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOutlineViewSelSetAutoresizesOutlineColumn, autoresizesOutlineColumn)
+	})
 }
 
 func (o *NSOutlineView) AutosaveExpandedItems() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSOutlineViewSelAutosaveExpandedItems)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSOutlineViewSelAutosaveExpandedItems)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSOutlineView) SetAutosaveExpandedItems(autosaveExpandedItems bool) {
-	o.Ptr().Send(_nSOutlineViewSelSetAutosaveExpandedItems, autosaveExpandedItems)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOutlineViewSelSetAutosaveExpandedItems, autosaveExpandedItems)
+	})
 }
 
 func (o *NSOutlineView) StronglyReferencesItems() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSOutlineViewSelStronglyReferencesItems)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSOutlineViewSelStronglyReferencesItems)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSOutlineView) SetStronglyReferencesItems(stronglyReferencesItems bool) {
-	o.Ptr().Send(_nSOutlineViewSelSetStronglyReferencesItems, stronglyReferencesItems)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOutlineViewSelSetStronglyReferencesItems, stronglyReferencesItems)
+	})
 }

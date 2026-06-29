@@ -38,33 +38,57 @@ func LAAuthenticationViewFromID(id objc.ID) *LAAuthenticationView {
 
 // Creates a new authentication icon that reflects the current authentication state.
 func (o *LAAuthenticationView) InitWithContext(context_ *localauthentication.LAContext) *LAAuthenticationView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _lAAuthenticationViewSelInitWithContext, context_.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return LAAuthenticationViewFromID(_ret)
+	var _mainthread0 *LAAuthenticationView
+	purego.Main(func() {
+		_mainthread0 = func() *LAAuthenticationView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _lAAuthenticationViewSelInitWithContext, context_.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return LAAuthenticationViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a new authentication icon that reflects the current authentication state, using a specified size.
 func (o *LAAuthenticationView) InitWithContextControlSize(context_ *localauthentication.LAContext, controlSize appkit.NSControlSize) *LAAuthenticationView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _lAAuthenticationViewSelInitWithContextControlSize, context_.Ptr(), controlSize)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return LAAuthenticationViewFromID(_ret)
+	var _mainthread0 *LAAuthenticationView
+	purego.Main(func() {
+		_mainthread0 = func() *LAAuthenticationView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _lAAuthenticationViewSelInitWithContextControlSize, context_.Ptr(), controlSize)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return LAAuthenticationViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @brief @c LAContext instance passed to the initializer.
 func (o *LAAuthenticationView) Context() *localauthentication.LAContext {
-	_ret := objc.Send[objc.ID](o.Ptr(), _lAAuthenticationViewSelContext)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return localauthentication.LAContextFromID(_ret)
+	var _mainthread0 *localauthentication.LAContext
+	purego.Main(func() {
+		_mainthread0 = func() *localauthentication.LAContext {
+			_ret := objc.Send[objc.ID](o.Ptr(), _lAAuthenticationViewSelContext)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return localauthentication.LAContextFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @brief @c NSControlSize instance passed to the initializer.
 func (o *LAAuthenticationView) ControlSize() appkit.NSControlSize {
-	_ret := objc.Send[appkit.NSControlSize](o.Ptr(), _lAAuthenticationViewSelControlSize)
-	return _ret
+	var _mainthread0 appkit.NSControlSize
+	purego.Main(func() {
+		_mainthread0 = func() appkit.NSControlSize {
+			_ret := objc.Send[appkit.NSControlSize](o.Ptr(), _lAAuthenticationViewSelControlSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

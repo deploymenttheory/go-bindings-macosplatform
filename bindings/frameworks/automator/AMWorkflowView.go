@@ -36,22 +36,38 @@ func AMWorkflowViewFromID(id objc.ID) *AMWorkflowView {
 }
 
 func (o *AMWorkflowView) IsEditable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _aMWorkflowViewSelIsEditable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aMWorkflowViewSelIsEditable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AMWorkflowView) SetEditable(editable bool) {
-	o.Ptr().Send(_aMWorkflowViewSelSetEditable, editable)
+	purego.Main(func() {
+		o.Ptr().Send(_aMWorkflowViewSelSetEditable, editable)
+	})
 }
 
 func (o *AMWorkflowView) WorkflowController() *AMWorkflowController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aMWorkflowViewSelWorkflowController)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return AMWorkflowControllerFromID(_ret)
+	var _mainthread0 *AMWorkflowController
+	purego.Main(func() {
+		_mainthread0 = func() *AMWorkflowController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aMWorkflowViewSelWorkflowController)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return AMWorkflowControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AMWorkflowView) SetWorkflowController(workflowController *AMWorkflowController) {
-	o.Ptr().Send(_aMWorkflowViewSelSetWorkflowController, workflowController.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aMWorkflowViewSelSetWorkflowController, workflowController.Ptr())
+	})
 }

@@ -45,63 +45,93 @@ func DRBurnSetupPanelFromID(id objc.ID) *DRBurnSetupPanel {
 
 // @method		setupPanel @abstract	Creates and return an instance of a burn setup panel. @result		A pointer to the newly created DRBurnSetupPanel.
 func DRBurnSetupPanelSetupPanel() *DRBurnSetupPanel {
-	_ret := objc.Send[objc.ID](objc.ID(_clsDRBurnSetupPanel), _dRBurnSetupPanelSelSetupPanel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return DRBurnSetupPanelFromID(_ret)
+	var _mainthread0 *DRBurnSetupPanel
+	purego.Main(func() {
+		_mainthread0 = func() *DRBurnSetupPanel {
+			_ret := objc.Send[objc.ID](objc.ID(_clsDRBurnSetupPanel), _dRBurnSetupPanelSelSetupPanel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return DRBurnSetupPanelFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @method		setDefaultButtonTitle: @abstract	Sets the title for the receiver's default button to title. @discussion	Normally, the default button is &ldquo;Burn&rdquo;.
 func (o *DRBurnSetupPanel) SetDefaultButtonTitle(title *foundation.NSString) {
-	o.Ptr().Send(_dRBurnSetupPanelSelSetDefaultButtonTitle, title.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_dRBurnSetupPanelSelSetDefaultButtonTitle, title.Ptr())
+	})
 }
 
 // @method		setCanSelectTestBurn: @abstract	Specifies whether the user can choose to make a test burn. @discussion	This method controls whether a checkbox should be added to the receiver that allows the user to set the burn to be a test burn. By default, the test burn button is not displayed. This method must be called before the panel is displayed. @param		flag	<i>YES</i> to show the test burn checkbox, <i>NO</i> to hide it.
 func (o *DRBurnSetupPanel) SetCanSelectTestBurn(flag bool) {
-	o.Ptr().Send(_dRBurnSetupPanelSelSetCanSelectTestBurn, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_dRBurnSetupPanelSelSetCanSelectTestBurn, flag)
+	})
 }
 
 // @method		setCanSelectAppendableMedia: @abstract	Specifies whether the user can choose to leave the disc appendable. @discussion	This method controls whether the appendable checkbox is enabled. If the data being writen to disc does not lend itself to having more data appended on to it, you can disable the ability of the user to leave the disc open. This method must be called before the panel is displayed. @param		flag	<i>YES</i> to enable the appendable checkbox, <i>NO</i> to disable.
 func (o *DRBurnSetupPanel) SetCanSelectAppendableMedia(flag bool) {
-	o.Ptr().Send(_dRBurnSetupPanelSelSetCanSelectAppendableMedia, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_dRBurnSetupPanelSelSetCanSelectAppendableMedia, flag)
+	})
 }
 
 // @method		burnObject @abstract	Creates and returns a new DRBurn object that's configured to write data to the currently selected device. @discussion	The new DRBurn object is configured based on the settings in the setup panel when the user clicks the OK button. Do not invoke this method within a modal session ( @link //apple_ref/occ/instm/DRSetupPanel/runSetupPanel runSetupPanel @/link or @link //apple_ref/occ/instm/DRSetupPanel/beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo: beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo: @/link ) because the burn object information is only updated just before the modal session ends. @result  	A new DRBurn object.
 func (o *DRBurnSetupPanel) BurnObject() *discrecording.DRBurn {
-	_ret := objc.Send[objc.ID](o.Ptr(), _dRBurnSetupPanelSelBurnObject)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return discrecording.DRBurnFromID(_ret)
+	var _mainthread0 *discrecording.DRBurn
+	purego.Main(func() {
+		_mainthread0 = func() *discrecording.DRBurn {
+			_ret := objc.Send[objc.ID](o.Ptr(), _dRBurnSetupPanelSelBurnObject)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return discrecording.DRBurnFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @method		expand: @abstract	Invoked when the user clicks the panel's expand button.
 func (o *DRBurnSetupPanel) Expand(sender objc.ID) {
-	o.Ptr().Send(_dRBurnSetupPanelSelExpand, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_dRBurnSetupPanelSelExpand, sender)
+	})
 }
 
 // @method		burnSpeed: @abstract	Invoked when the user clicks the panel's burn speed popup button.
 func (o *DRBurnSetupPanel) BurnSpeed(sender objc.ID) {
-	o.Ptr().Send(_dRBurnSetupPanelSelBurnSpeed, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_dRBurnSetupPanelSelBurnSpeed, sender)
+	})
 }
 
 // @method		appendable: @abstract	Invoked when the user clicks the panel's appendable checkbox.
 func (o *DRBurnSetupPanel) Appendable(sender objc.ID) {
-	o.Ptr().Send(_dRBurnSetupPanelSelAppendable, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_dRBurnSetupPanelSelAppendable, sender)
+	})
 }
 
 // @method		completionAction: @abstract	Invoked when the user clicks one of the panel's completion action radio buttons.
 func (o *DRBurnSetupPanel) CompletionAction(sender objc.ID) {
-	o.Ptr().Send(_dRBurnSetupPanelSelCompletionAction, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_dRBurnSetupPanelSelCompletionAction, sender)
+	})
 }
 
 // @method		testBurn: @abstract	Invoked when the user clicks the panel's test burn checkbox.
 func (o *DRBurnSetupPanel) TestBurn(sender objc.ID) {
-	o.Ptr().Send(_dRBurnSetupPanelSelTestBurn, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_dRBurnSetupPanelSelTestBurn, sender)
+	})
 }
 
 // @method		verifyBurn: @abstract	Invoked when the user clicks the panel's verify burn checkbox.
 func (o *DRBurnSetupPanel) VerifyBurn(sender objc.ID) {
-	o.Ptr().Send(_dRBurnSetupPanelSelVerifyBurn, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_dRBurnSetupPanelSelVerifyBurn, sender)
+	})
 }

@@ -41,55 +41,95 @@ func NSCollectionLayoutItemFromID(id objc.ID) *NSCollectionLayoutItem {
 
 // Creates an item of the specified size.
 func NSCollectionLayoutItemItemWithLayoutSize(layoutSize *NSCollectionLayoutSize) *NSCollectionLayoutItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutItem), _nSCollectionLayoutItemSelItemWithLayoutSize, layoutSize.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutItemFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutItem), _nSCollectionLayoutItemSelItemWithLayoutSize, layoutSize.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates an item of the specified size with an array of supplementary items to attach to the item.
 func NSCollectionLayoutItemItemWithLayoutSizeSupplementaryItems(layoutSize *NSCollectionLayoutSize, supplementaryItems *foundation.NSArray[*NSCollectionLayoutSupplementaryItem]) *NSCollectionLayoutItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutItem), _nSCollectionLayoutItemSelItemWithLayoutSizeSupplementaryItems, layoutSize.Ptr(), supplementaryItems.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutItemFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutItem), _nSCollectionLayoutItemSelItemWithLayoutSizeSupplementaryItems, layoutSize.Ptr(), supplementaryItems.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutItem) ContentInsets() NSDirectionalEdgeInsets {
-	_ret := objc.Send[NSDirectionalEdgeInsets](o.Ptr(), _nSCollectionLayoutItemSelContentInsets)
-	return _ret
+	var _mainthread0 NSDirectionalEdgeInsets
+	purego.Main(func() {
+		_mainthread0 = func() NSDirectionalEdgeInsets {
+			_ret := objc.Send[NSDirectionalEdgeInsets](o.Ptr(), _nSCollectionLayoutItemSelContentInsets)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutItem) SetContentInsets(contentInsets NSDirectionalEdgeInsets) {
-	o.Ptr().Send(_nSCollectionLayoutItemSelSetContentInsets, contentInsets)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionLayoutItemSelSetContentInsets, contentInsets)
+	})
 }
 
 func (o *NSCollectionLayoutItem) EdgeSpacing() *NSCollectionLayoutEdgeSpacing {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutItemSelEdgeSpacing)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutEdgeSpacingFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutEdgeSpacing
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutEdgeSpacing {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutItemSelEdgeSpacing)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutEdgeSpacingFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutItem) SetEdgeSpacing(edgeSpacing *NSCollectionLayoutEdgeSpacing) {
-	o.Ptr().Send(_nSCollectionLayoutItemSelSetEdgeSpacing, edgeSpacing.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionLayoutItemSelSetEdgeSpacing, edgeSpacing.Ptr())
+	})
 }
 
 func (o *NSCollectionLayoutItem) LayoutSize() *NSCollectionLayoutSize {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutItemSelLayoutSize)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutSizeFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutSize
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutSize {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutItemSelLayoutSize)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutSizeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutItem) SupplementaryItems() *foundation.NSArray[*NSCollectionLayoutSupplementaryItem] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutItemSelSupplementaryItems)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSCollectionLayoutSupplementaryItem](_ret)
+	var _mainthread0 *foundation.NSArray[*NSCollectionLayoutSupplementaryItem]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSCollectionLayoutSupplementaryItem] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutItemSelSupplementaryItems)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSCollectionLayoutSupplementaryItem](_ret)
+		}()
+	})
+	return _mainthread0
 }

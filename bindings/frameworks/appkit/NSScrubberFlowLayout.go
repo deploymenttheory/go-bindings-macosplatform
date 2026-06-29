@@ -39,27 +39,45 @@ func NSScrubberFlowLayoutFromID(id objc.ID) *NSScrubberFlowLayout {
 
 // Informs the scrubber that it should perform a new layout pass for the items at the specified indexes.
 func (o *NSScrubberFlowLayout) InvalidateLayoutForItemsAtIndexes(invalidItemIndexes *foundation.NSIndexSet) {
-	o.Ptr().Send(_nSScrubberFlowLayoutSelInvalidateLayoutForItemsAtIndexes, invalidItemIndexes.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberFlowLayoutSelInvalidateLayoutForItemsAtIndexes, invalidItemIndexes.Ptr())
+	})
 }
 
 // The amount of horizontal spacing between items in points. The default value is 0.0.
 func (o *NSScrubberFlowLayout) ItemSpacing() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSScrubberFlowLayoutSelItemSpacing)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSScrubberFlowLayoutSelItemSpacing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The amount of horizontal spacing between items in points. The default value is 0.0.
 func (o *NSScrubberFlowLayout) SetItemSpacing(itemSpacing float64) {
-	o.Ptr().Send(_nSScrubberFlowLayoutSelSetItemSpacing, itemSpacing)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberFlowLayoutSelSetItemSpacing, itemSpacing)
+	})
 }
 
 // The frame size for each item, if not provided by the scrubber's delegate. The default value is { 50.0, 30.0 }.
 func (o *NSScrubberFlowLayout) ItemSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSScrubberFlowLayoutSelItemSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSScrubberFlowLayoutSelItemSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The frame size for each item, if not provided by the scrubber's delegate. The default value is { 50.0, 30.0 }.
 func (o *NSScrubberFlowLayout) SetItemSize(itemSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSScrubberFlowLayoutSelSetItemSize, itemSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberFlowLayoutSelSetItemSize, itemSize)
+	})
 }

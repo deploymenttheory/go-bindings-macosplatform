@@ -61,154 +61,266 @@ func IOBluetoothServiceBrowserControllerFromID(id objc.ID) *IOBluetoothServiceBr
 
 // Allocator work Bluetooth Service Browser window controller.
 func IOBluetoothServiceBrowserControllerServiceBrowserController(inOptions uint32) *IOBluetoothServiceBrowserController {
-	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothServiceBrowserController), _iOBluetoothServiceBrowserControllerSelServiceBrowserController, inOptions)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return IOBluetoothServiceBrowserControllerFromID(_ret)
+	var _mainthread0 *IOBluetoothServiceBrowserController
+	purego.Main(func() {
+		_mainthread0 = func() *IOBluetoothServiceBrowserController {
+			_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothServiceBrowserController), _iOBluetoothServiceBrowserControllerSelServiceBrowserController, inOptions)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return IOBluetoothServiceBrowserControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @method	browseDevices:options: @abstract @discussion	***WARNING*** This method has been deprecated in favor of -setOptions:, -runModal and -getResults. @param		outRecord 	Pointer to a (IOBluetoothSDPServiceRecord *) object.  This will get allocated and returned to the client if the user selects a service. @param		inOptions	For future expansion.  Currently no options defined. @result		IOReturn - kIOReturnSuccess  - on successful completion. kCanceledErr - User canceled. @discussion	This method allocates and runs the browser window as a modal window waiting for the user to either select a service, or cancel the browser window.
 func IOBluetoothServiceBrowserControllerBrowseDevicesOptions(outRecord *iobluetooth.IOBluetoothSDPServiceRecord, inOptions uint32) int {
-	_ret := objc.Send[int](objc.ID(_clsIOBluetoothServiceBrowserController), _iOBluetoothServiceBrowserControllerSelBrowseDevicesOptions, outRecord.Ptr(), inOptions)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](objc.ID(_clsIOBluetoothServiceBrowserController), _iOBluetoothServiceBrowserControllerSelBrowseDevicesOptions, outRecord.Ptr(), inOptions)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @method	browseDevicesAsSheetForWindow:options:window: @abstract @discussion	***WARNING*** This method has been deprecated in favor of - beginSheetModalForWindow:modalDelegate:didEndSelector:contextInfo:. @param		outRecord 	Pointer to a (IOBluetoothSDPServiceRecord *) object.  This will get allocated and returned to the client if the user selects a service. @param		inOptions	For future expansion.  Currently no options defined. @param		inWindow	The window to be used as the anchor of the sheet. @result		IOReturn - kIOReturnSuccess  - on successful completion. kCanceledErr - User canceled. @discussion	This method will allocate and run the IOBluetoothServiceBrowserController browser window as a sheet for a window.
 func IOBluetoothServiceBrowserControllerBrowseDevicesAsSheetForWindowOptionsWindow(outRecord *iobluetooth.IOBluetoothSDPServiceRecord, inOptions uint32, inWindow *appkit.NSWindow) int {
-	_ret := objc.Send[int](objc.ID(_clsIOBluetoothServiceBrowserController), _iOBluetoothServiceBrowserControllerSelBrowseDevicesAsSheetForWindowOptionsWindow, outRecord.Ptr(), inOptions, inWindow.Ptr())
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](objc.ID(_clsIOBluetoothServiceBrowserController), _iOBluetoothServiceBrowserControllerSelBrowseDevicesAsSheetForWindowOptionsWindow, outRecord.Ptr(), inOptions, inWindow.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Method call to convert an IOBluetoothServiceBrowserControllerRef into an IOBluetoothServiceBrowserController *.
 func IOBluetoothServiceBrowserControllerWithServiceBrowserControllerRef(serviceBrowserControllerRef unsafe.Pointer) *IOBluetoothServiceBrowserController {
-	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothServiceBrowserController), _iOBluetoothServiceBrowserControllerSelWithServiceBrowserControllerRef, serviceBrowserControllerRef)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return IOBluetoothServiceBrowserControllerFromID(_ret)
+	var _mainthread0 *IOBluetoothServiceBrowserController
+	purego.Main(func() {
+		_mainthread0 = func() *IOBluetoothServiceBrowserController {
+			_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothServiceBrowserController), _iOBluetoothServiceBrowserControllerSelWithServiceBrowserControllerRef, serviceBrowserControllerRef)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return IOBluetoothServiceBrowserControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns an IOBluetoothServiceBrowserControllerRef representation of the target IOBluetoothServiceBrowserController object.
 func (o *IOBluetoothServiceBrowserController) GetServiceBrowserControllerRef() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iOBluetoothServiceBrowserControllerSelGetServiceBrowserControllerRef)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iOBluetoothServiceBrowserControllerSelGetServiceBrowserControllerRef)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Invoke an already created window controller to display, and run the modal dialog.
 func (o *IOBluetoothServiceBrowserController) Discover(outRecord *iobluetooth.IOBluetoothSDPServiceRecord) int {
-	_ret := objc.Send[int](o.Ptr(), _iOBluetoothServiceBrowserControllerSelDiscover, outRecord.Ptr())
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _iOBluetoothServiceBrowserControllerSelDiscover, outRecord.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Invoke an already created window controller to display, and run the modal dialog.
 func (o *IOBluetoothServiceBrowserController) DiscoverAsSheetForWindowWithRecord(sheetWindow *appkit.NSWindow, outRecord *iobluetooth.IOBluetoothSDPServiceRecord) int {
-	_ret := objc.Send[int](o.Ptr(), _iOBluetoothServiceBrowserControllerSelDiscoverAsSheetForWindowWithRecord, sheetWindow.Ptr(), outRecord.Ptr())
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _iOBluetoothServiceBrowserControllerSelDiscoverAsSheetForWindowWithRecord, sheetWindow.Ptr(), outRecord.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Invoke an already created window controller to display, and run the modal dialog.
 func (o *IOBluetoothServiceBrowserController) DiscoverWithDeviceAttributesServiceListServiceRecord(deviceAttributes *iobluetooth.IOBluetoothDeviceSearchAttributes, serviceArray *foundation.NSArray[objc.ID], outRecord *iobluetooth.IOBluetoothSDPServiceRecord) int {
-	_ret := objc.Send[int](o.Ptr(), _iOBluetoothServiceBrowserControllerSelDiscoverWithDeviceAttributesServiceListServiceRecord, deviceAttributes, serviceArray.Ptr(), outRecord.Ptr())
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _iOBluetoothServiceBrowserControllerSelDiscoverWithDeviceAttributesServiceListServiceRecord, deviceAttributes, serviceArray.Ptr(), outRecord.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Modify the options for the window controller.
 func (o *IOBluetoothServiceBrowserController) SetOptions(inOptions uint32) {
-	o.Ptr().Send(_iOBluetoothServiceBrowserControllerSelSetOptions, inOptions)
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothServiceBrowserControllerSelSetOptions, inOptions)
+	})
 }
 
 // Runs the service browser panel in a modal session to allow the user to select a service on a Bluetooth device.
 func (o *IOBluetoothServiceBrowserController) RunModal() int {
-	_ret := objc.Send[int](o.Ptr(), _iOBluetoothServiceBrowserControllerSelRunModal)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _iOBluetoothServiceBrowserControllerSelRunModal)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Runs the service browser panel as a sheet on the target window.
 func (o *IOBluetoothServiceBrowserController) BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(sheetWindow *appkit.NSWindow, modalDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) int {
-	_ret := objc.Send[int](o.Ptr(), _iOBluetoothServiceBrowserControllerSelBeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo, sheetWindow.Ptr(), modalDelegate, didEndSelector, contextInfo)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _iOBluetoothServiceBrowserControllerSelBeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo, sheetWindow.Ptr(), modalDelegate, didEndSelector, contextInfo)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the result of the user’s selection.
 func (o *IOBluetoothServiceBrowserController) GetResults() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothServiceBrowserControllerSelGetResults)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[objc.ID](_ret)
+	var _mainthread0 *foundation.NSArray[objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothServiceBrowserControllerSelGetResults)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the option bits that control the panel’s behavior.
 func (o *IOBluetoothServiceBrowserController) GetOptions() uint32 {
-	_ret := objc.Send[uint32](o.Ptr(), _iOBluetoothServiceBrowserControllerSelGetOptions)
-	return _ret
+	var _mainthread0 uint32
+	purego.Main(func() {
+		_mainthread0 = func() uint32 {
+			_ret := objc.Send[uint32](o.Ptr(), _iOBluetoothServiceBrowserControllerSelGetOptions)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the search attributes that control the panel’s search/inquiry behavior.
 func (o *IOBluetoothServiceBrowserController) SetSearchAttributes(searchAttributes *iobluetooth.IOBluetoothDeviceSearchAttributes) {
-	o.Ptr().Send(_iOBluetoothServiceBrowserControllerSelSetSearchAttributes, searchAttributes)
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothServiceBrowserControllerSelSetSearchAttributes, searchAttributes)
+	})
 }
 
 // Returns the search attributes that control the panel’s search/inquiry behavior.
 func (o *IOBluetoothServiceBrowserController) GetSearchAttributes() *iobluetooth.IOBluetoothDeviceSearchAttributes {
-	_ret := objc.Send[*iobluetooth.IOBluetoothDeviceSearchAttributes](o.Ptr(), _iOBluetoothServiceBrowserControllerSelGetSearchAttributes)
-	return _ret
+	var _mainthread0 *iobluetooth.IOBluetoothDeviceSearchAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *iobluetooth.IOBluetoothDeviceSearchAttributes {
+			_ret := objc.Send[*iobluetooth.IOBluetoothDeviceSearchAttributes](o.Ptr(), _iOBluetoothServiceBrowserControllerSelGetSearchAttributes)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Adds a UUID to the list of UUIDs that are used to validate the user’s selection.
 func (o *IOBluetoothServiceBrowserController) AddAllowedUUID(allowedUUID *iobluetooth.IOBluetoothSDPUUID) {
-	o.Ptr().Send(_iOBluetoothServiceBrowserControllerSelAddAllowedUUID, allowedUUID.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothServiceBrowserControllerSelAddAllowedUUID, allowedUUID.Ptr())
+	})
 }
 
 // Adds an array of UUIDs to the list of UUIDs that are used to validate the user’s selection.
 func (o *IOBluetoothServiceBrowserController) AddAllowedUUIDArray(allowedUUIDArray *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_iOBluetoothServiceBrowserControllerSelAddAllowedUUIDArray, allowedUUIDArray.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothServiceBrowserControllerSelAddAllowedUUIDArray, allowedUUIDArray.Ptr())
+	})
 }
 
 // Resets the controller back to the default state where it will accept any device the user selects.
 func (o *IOBluetoothServiceBrowserController) ClearAllowedUUIDs() {
-	o.Ptr().Send(_iOBluetoothServiceBrowserControllerSelClearAllowedUUIDs)
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothServiceBrowserControllerSelClearAllowedUUIDs)
+	})
 }
 
 // Sets the title of the panel when not run as a sheet.
 func (o *IOBluetoothServiceBrowserController) SetTitle(windowTitle *foundation.NSString) {
-	o.Ptr().Send(_iOBluetoothServiceBrowserControllerSelSetTitle, windowTitle.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothServiceBrowserControllerSelSetTitle, windowTitle.Ptr())
+	})
 }
 
 // Returns the title of the device selector panel.
 func (o *IOBluetoothServiceBrowserController) GetTitle() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothServiceBrowserControllerSelGetTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothServiceBrowserControllerSelGetTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the description text that appears in the device selector panel.
 func (o *IOBluetoothServiceBrowserController) SetDescriptionText(descriptionText *foundation.NSString) {
-	o.Ptr().Send(_iOBluetoothServiceBrowserControllerSelSetDescriptionText, descriptionText.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothServiceBrowserControllerSelSetDescriptionText, descriptionText.Ptr())
+	})
 }
 
 // Returns the description text that appears in the device selector panel.
 func (o *IOBluetoothServiceBrowserController) GetDescriptionText() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothServiceBrowserControllerSelGetDescriptionText)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothServiceBrowserControllerSelGetDescriptionText)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the title of the default/select button in the device selector panel.
 func (o *IOBluetoothServiceBrowserController) SetPrompt(prompt *foundation.NSString) {
-	o.Ptr().Send(_iOBluetoothServiceBrowserControllerSelSetPrompt, prompt.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iOBluetoothServiceBrowserControllerSelSetPrompt, prompt.Ptr())
+	})
 }
 
 // Returns the title of the default/select button in the device selector panel.
 func (o *IOBluetoothServiceBrowserController) GetPrompt() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothServiceBrowserControllerSelGetPrompt)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothServiceBrowserControllerSelGetPrompt)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

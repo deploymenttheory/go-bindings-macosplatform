@@ -47,108 +47,186 @@ func WKWebExtensionActionFromID(id objc.ID) *WKWebExtensionAction {
 }
 
 func (o *WKWebExtensionAction) IconForSize(size corefoundation.CGSize) *appkit.NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionActionSelIconForSize, size)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSImageFromID(_ret)
+	var _mainthread0 *appkit.NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionActionSelIconForSize, size)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Triggers the dismissal process of the popup. @discussion Invoke this method to manage the popup's lifecycle, ensuring the web view is unloaded and resources are released once the popup closes. This method is automatically called upon the dismissal of the action's “UIViewController“ or “NSPopover“.  For custom scenarios where the popup's lifecycle is manually managed, it must be explicitly invoked to ensure proper closure.
 func (o *WKWebExtensionAction) ClosePopup() {
-	o.Ptr().Send(_wKWebExtensionActionSelClosePopup)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionActionSelClosePopup)
+	})
 }
 
 // @abstract The extension context to which this action is related.
 func (o *WKWebExtensionAction) WebExtensionContext() *WKWebExtensionContext {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionActionSelWebExtensionContext)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKWebExtensionContextFromID(_ret)
+	var _mainthread0 *WKWebExtensionContext
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtensionContext {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionActionSelWebExtensionContext)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKWebExtensionContextFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The tab that this action is associated with, or `nil` if it is the default action. @discussion When this property is `nil`, it indicates that the action is the default action and not associated with a specific tab.
 func (o *WKWebExtensionAction) AssociatedTab() WKWebExtensionTab {
-	_ret := objc.Send[WKWebExtensionTab](o.Ptr(), _wKWebExtensionActionSelAssociatedTab)
-	return _ret
+	var _mainthread0 WKWebExtensionTab
+	purego.Main(func() {
+		_mainthread0 = func() WKWebExtensionTab {
+			_ret := objc.Send[WKWebExtensionTab](o.Ptr(), _wKWebExtensionActionSelAssociatedTab)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The localized display label for the action.
 func (o *WKWebExtensionAction) Label() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionActionSelLabel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionActionSelLabel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The badge text for the action. @discussion Provides the text that appears on the badge for the action. An empty string signifies that no badge should be shown.
 func (o *WKWebExtensionAction) BadgeText() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionActionSelBadgeText)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionActionSelBadgeText)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract A Boolean value indicating whether the badge text is unread. @discussion This property is automatically set to `YES` when “badgeText“ changes and is not empty. If “badgeText“ becomes empty or the popup associated with the action is presented, this property is automatically set to `NO`. Additionally, it should be set to `NO` by the app when the badge has been presented to the user. This property is useful for higher-level notification badges when extensions might be hidden behind an action sheet.
 func (o *WKWebExtensionAction) HasUnreadBadgeText() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionActionSelHasUnreadBadgeText)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionActionSelHasUnreadBadgeText)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebExtensionAction) SetHasUnreadBadgeText(hasUnreadBadgeText bool) {
-	o.Ptr().Send(_wKWebExtensionActionSelSetHasUnreadBadgeText, hasUnreadBadgeText)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionActionSelSetHasUnreadBadgeText, hasUnreadBadgeText)
+	})
 }
 
 // @abstract The name shown when inspecting the popup web view. @discussion This is the text that will appear when inspecting the popup web view.
 func (o *WKWebExtensionAction) InspectionName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionActionSelInspectionName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionActionSelInspectionName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebExtensionAction) SetInspectionName(inspectionName *foundation.NSString) {
-	o.Ptr().Send(_wKWebExtensionActionSelSetInspectionName, inspectionName.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionActionSelSetInspectionName, inspectionName.Ptr())
+	})
 }
 
 // @abstract A Boolean value indicating whether the action is enabled.
 func (o *WKWebExtensionAction) IsEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionActionSelIsEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionActionSelIsEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebExtensionAction) MenuItems() *foundation.NSArray[*appkit.NSMenuItem] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionActionSelMenuItems)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*appkit.NSMenuItem](_ret)
+	var _mainthread0 *foundation.NSArray[*appkit.NSMenuItem]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*appkit.NSMenuItem] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionActionSelMenuItems)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*appkit.NSMenuItem](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract A Boolean value indicating whether the action has a popup. @discussion Use this property to check if the action has a popup before attempting to show any popup views.
 func (o *WKWebExtensionAction) PresentsPopup() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionActionSelPresentsPopup)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionActionSelPresentsPopup)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract A popover that presents a web view loaded with the popup page for this action, or `nil` if no popup is specified. @discussion This popover contains a view controller with a web view preloaded with the popup page. It automatically adjusts its size to fit the web view's content size. The “presentsPopup“ property should be checked to determine the availability of a popup before using this property.  Dismissing the popover will close the popup and unload the web view. @seealso presentsPopup
 func (o *WKWebExtensionAction) PopupPopover() *appkit.NSPopover {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionActionSelPopupPopover)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSPopoverFromID(_ret)
+	var _mainthread0 *appkit.NSPopover
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSPopover {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionActionSelPopupPopover)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSPopoverFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract A web view loaded with the popup page for this action, or `nil` if no popup is specified. @discussion The web view will be preloaded with the popup page upon first access or after it has been unloaded. Use the “presentsPopup“ property to determine whether a popup should be displayed before using this property. @seealso presentsPopup
 func (o *WKWebExtensionAction) PopupWebView() *WKWebView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionActionSelPopupWebView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKWebViewFromID(_ret)
+	var _mainthread0 *WKWebView
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionActionSelPopupWebView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKWebViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

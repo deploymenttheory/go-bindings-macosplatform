@@ -81,214 +81,370 @@ func AVPlayerViewFromID(id objc.ID) *AVPlayerView {
 
 // Selects a specified playback speed.
 func (o *AVPlayerView) SelectSpeed(speed *AVPlaybackSpeed) {
-	o.Ptr().Send(_aVPlayerViewSelSelectSpeed, speed.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerViewSelSelectSpeed, speed.Ptr())
+	})
 }
 
 // Scales the video’s view by a specified factor, and centers the result on a specified point.
 func (o *AVPlayerView) SetMagnificationCenteredAtPoint(magnification float64, point corefoundation.CGPoint) {
-	o.Ptr().Send(_aVPlayerViewSelSetMagnificationCenteredAtPoint, magnification, point)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerViewSelSetMagnificationCenteredAtPoint, magnification, point)
+	})
 }
 
 // @property	player @abstract	The player from which to source the media content for the view.
 func (o *AVPlayerView) Player() *avfoundation.AVPlayer {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerViewSelPlayer)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return avfoundation.AVPlayerFromID(_ret)
+	var _mainthread0 *avfoundation.AVPlayer
+	purego.Main(func() {
+		_mainthread0 = func() *avfoundation.AVPlayer {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerViewSelPlayer)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return avfoundation.AVPlayerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayerView) SetPlayer(player *avfoundation.AVPlayer) {
-	o.Ptr().Send(_aVPlayerViewSelSetPlayer, player.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerViewSelSetPlayer, player.Ptr())
+	})
 }
 
 // @property	controlsStyle @abstract	The style of the playback controls pane currently associated with the view. @discussion	After macOS 11, the floating style controls will always be used when presenting in fullscreen and AVPlayerViewControlsStyleNone is not specified.
 func (o *AVPlayerView) ControlsStyle() AVPlayerViewControlsStyle {
-	_ret := objc.Send[AVPlayerViewControlsStyle](o.Ptr(), _aVPlayerViewSelControlsStyle)
-	return _ret
+	var _mainthread0 AVPlayerViewControlsStyle
+	purego.Main(func() {
+		_mainthread0 = func() AVPlayerViewControlsStyle {
+			_ret := objc.Send[AVPlayerViewControlsStyle](o.Ptr(), _aVPlayerViewSelControlsStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayerView) SetControlsStyle(controlsStyle AVPlayerViewControlsStyle) {
-	o.Ptr().Send(_aVPlayerViewSelSetControlsStyle, controlsStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerViewSelSetControlsStyle, controlsStyle)
+	})
 }
 
 // @property	videoGravity @abstract	A string defining how the video is displayed within an AVPlayerLayer bounds rect. @discussion	Options are AVLayerVideoGravityResizeAspect, AVLayerVideoGravityResizeAspectFill and AVLayerVideoGravityResize. AVLayerVideoGravityResizeAspect is default.
 func (o *AVPlayerView) VideoGravity() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerViewSelVideoGravity)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerViewSelVideoGravity)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayerView) SetVideoGravity(videoGravity *foundation.NSString) {
-	o.Ptr().Send(_aVPlayerViewSelSetVideoGravity, videoGravity.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerViewSelSetVideoGravity, videoGravity.Ptr())
+	})
 }
 
 // @property	readyForDisplay @abstract	Boolean indicating that the first video frame has been made ready for display for the current item of the associated AVPlayer.
 func (o *AVPlayerView) IsReadyForDisplay() bool {
-	_ret := objc.Send[bool](o.Ptr(), _aVPlayerViewSelIsReadyForDisplay)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aVPlayerViewSelIsReadyForDisplay)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @property	videoBounds @abstract	The current size and position of the video image as displayed within the receiver's view's bounds.
 func (o *AVPlayerView) VideoBounds() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _aVPlayerViewSelVideoBounds)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _aVPlayerViewSelVideoBounds)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @property	contentOverlayView @abstract	Use the content overlay view to add additional custom views between the video content and the controls.
 func (o *AVPlayerView) ContentOverlayView() *appkit.NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerViewSelContentOverlayView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSViewFromID(_ret)
+	var _mainthread0 *appkit.NSView
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerViewSelContentOverlayView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @property	updatesNowPlayingInfoCenter @abstract	Whether or not the now playing info center should be updated. Default is YES.
 func (o *AVPlayerView) UpdatesNowPlayingInfoCenter() bool {
-	_ret := objc.Send[bool](o.Ptr(), _aVPlayerViewSelUpdatesNowPlayingInfoCenter)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aVPlayerViewSelUpdatesNowPlayingInfoCenter)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayerView) SetUpdatesNowPlayingInfoCenter(updatesNowPlayingInfoCenter bool) {
-	o.Ptr().Send(_aVPlayerViewSelSetUpdatesNowPlayingInfoCenter, updatesNowPlayingInfoCenter)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerViewSelSetUpdatesNowPlayingInfoCenter, updatesNowPlayingInfoCenter)
+	})
 }
 
 // @property	delegate @abstract	The receiver's delegate.
 func (o *AVPlayerView) Delegate() AVPlayerViewDelegate {
-	_ret := objc.Send[AVPlayerViewDelegate](o.Ptr(), _aVPlayerViewSelDelegate)
-	return _ret
+	var _mainthread0 AVPlayerViewDelegate
+	purego.Main(func() {
+		_mainthread0 = func() AVPlayerViewDelegate {
+			_ret := objc.Send[AVPlayerViewDelegate](o.Ptr(), _aVPlayerViewSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayerView) SetDelegate(delegate AVPlayerViewDelegate) {
-	o.Ptr().Send(_aVPlayerViewSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerViewSelSetDelegate, delegate)
+	})
 }
 
 // @property		speeds @abstract		A list of user selectable playback speeds to be shown in the playback speed control. @discussion	By default this property will be set to the systemDefaultSpeeds class property. Setting this property to nil will hide the playback speed selection UI. To set the currently selected playback speed programmatically, either set the defaultRate on the AVPlayer associated with this view controller or use the selectSpeed method on AVPlayerView.
 func (o *AVPlayerView) Speeds() *foundation.NSArray[*AVPlaybackSpeed] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerViewSelSpeeds)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*AVPlaybackSpeed](_ret)
+	var _mainthread0 *foundation.NSArray[*AVPlaybackSpeed]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*AVPlaybackSpeed] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerViewSelSpeeds)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*AVPlaybackSpeed](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayerView) SetSpeeds(speeds *foundation.NSArray[*AVPlaybackSpeed]) {
-	o.Ptr().Send(_aVPlayerViewSelSetSpeeds, speeds.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerViewSelSetSpeeds, speeds.Ptr())
+	})
 }
 
 // @property		selectedSpeed @abstract		The currently selected playback speed. @discussion	Changes to the associated AVPlayer's defaultRate will be reflected in this property and vice versa. If the associated AVPlayer's defaultRate is set to a value that does not match a speed in the speeds list property, the selected speed will be nil.
 func (o *AVPlayerView) SelectedSpeed() *AVPlaybackSpeed {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerViewSelSelectedSpeed)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return AVPlaybackSpeedFromID(_ret)
+	var _mainthread0 *AVPlaybackSpeed
+	purego.Main(func() {
+		_mainthread0 = func() *AVPlaybackSpeed {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerViewSelSelectedSpeed)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return AVPlaybackSpeedFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @property	allowsVideoFrameAnalysis @abstract	When set to YES, the AVPlayerView will try to find objects, text and people while the media is paused. When an object is found, the user will be able to interact with it selecting and right clicking to present a context menu. Default is YES.
 func (o *AVPlayerView) AllowsVideoFrameAnalysis() bool {
-	_ret := objc.Send[bool](o.Ptr(), _aVPlayerViewSelAllowsVideoFrameAnalysis)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aVPlayerViewSelAllowsVideoFrameAnalysis)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayerView) SetAllowsVideoFrameAnalysis(allowsVideoFrameAnalysis bool) {
-	o.Ptr().Send(_aVPlayerViewSelSetAllowsVideoFrameAnalysis, allowsVideoFrameAnalysis)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerViewSelSetAllowsVideoFrameAnalysis, allowsVideoFrameAnalysis)
+	})
 }
 
 // @property	videoFrameAnalysisTypes @abstract	The types of items AVPlayerView looks for in a paused video frame.
 func (o *AVPlayerView) VideoFrameAnalysisTypes() AVVideoFrameAnalysisType {
-	_ret := objc.Send[AVVideoFrameAnalysisType](o.Ptr(), _aVPlayerViewSelVideoFrameAnalysisTypes)
-	return _ret
+	var _mainthread0 AVVideoFrameAnalysisType
+	purego.Main(func() {
+		_mainthread0 = func() AVVideoFrameAnalysisType {
+			_ret := objc.Send[AVVideoFrameAnalysisType](o.Ptr(), _aVPlayerViewSelVideoFrameAnalysisTypes)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayerView) SetVideoFrameAnalysisTypes(videoFrameAnalysisTypes AVVideoFrameAnalysisType) {
-	o.Ptr().Send(_aVPlayerViewSelSetVideoFrameAnalysisTypes, videoFrameAnalysisTypes)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerViewSelSetVideoFrameAnalysisTypes, videoFrameAnalysisTypes)
+	})
 }
 
 // @property	allowsMagnification @abstract	Whether the magnify gesture will change the video's view magnification. @discussion	The default value is NO. This property only effects whether the magnify gesture triggers magnification. A client can still programmatically change magnification even when the value of this is NO. This behavior matches the behavior of NSScrollView.
 func (o *AVPlayerView) AllowsMagnification() bool {
-	_ret := objc.Send[bool](o.Ptr(), _aVPlayerViewSelAllowsMagnification)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aVPlayerViewSelAllowsMagnification)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayerView) SetAllowsMagnification(allowsMagnification bool) {
-	o.Ptr().Send(_aVPlayerViewSelSetAllowsMagnification, allowsMagnification)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerViewSelSetAllowsMagnification, allowsMagnification)
+	})
 }
 
 // @property	magnification @abstract	The factor by which the video's view is currently scaled. @discussion	The default value is 1.0. The value cannot be smaller than 1.0 or larger 64.0. Nearest neighbor interpolation will be used once the content has been zoomed past a certain factor.
 func (o *AVPlayerView) Magnification() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _aVPlayerViewSelMagnification)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _aVPlayerViewSelMagnification)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayerView) SetMagnification(magnification float64) {
-	o.Ptr().Send(_aVPlayerViewSelSetMagnification, magnification)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerViewSelSetMagnification, magnification)
+	})
 }
 
 // Describes how High Dynamic Range (HDR) video content renders. Defaults to “AVDisplayDynamicRangeAutomatic“. - Note: This property will only have effect if the video content supports HDR.
 func (o *AVPlayerView) PreferredDisplayDynamicRange() AVDisplayDynamicRange {
-	_ret := objc.Send[AVDisplayDynamicRange](o.Ptr(), _aVPlayerViewSelPreferredDisplayDynamicRange)
-	return _ret
+	var _mainthread0 AVDisplayDynamicRange
+	purego.Main(func() {
+		_mainthread0 = func() AVDisplayDynamicRange {
+			_ret := objc.Send[AVDisplayDynamicRange](o.Ptr(), _aVPlayerViewSelPreferredDisplayDynamicRange)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayerView) SetPreferredDisplayDynamicRange(preferredDisplayDynamicRange AVDisplayDynamicRange) {
-	o.Ptr().Send(_aVPlayerViewSelSetPreferredDisplayDynamicRange, preferredDisplayDynamicRange)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerViewSelSetPreferredDisplayDynamicRange, preferredDisplayDynamicRange)
+	})
 }
 
 // @property	showsFrameSteppingButtons @abstract	Replace scanning controls in the playback UI with frame stepping buttons. Default is NO.
 func (o *AVPlayerView) ShowsFrameSteppingButtons() bool {
-	_ret := objc.Send[bool](o.Ptr(), _aVPlayerViewSelShowsFrameSteppingButtons)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aVPlayerViewSelShowsFrameSteppingButtons)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayerView) SetShowsFrameSteppingButtons(showsFrameSteppingButtons bool) {
-	o.Ptr().Send(_aVPlayerViewSelSetShowsFrameSteppingButtons, showsFrameSteppingButtons)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerViewSelSetShowsFrameSteppingButtons, showsFrameSteppingButtons)
+	})
 }
 
 // @property	showsSharingServiceButton @abstract	Whether or not the controls pane will show a sharing service button when the current player item can be shared. Default is NO.
 func (o *AVPlayerView) ShowsSharingServiceButton() bool {
-	_ret := objc.Send[bool](o.Ptr(), _aVPlayerViewSelShowsSharingServiceButton)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aVPlayerViewSelShowsSharingServiceButton)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayerView) SetShowsSharingServiceButton(showsSharingServiceButton bool) {
-	o.Ptr().Send(_aVPlayerViewSelSetShowsSharingServiceButton, showsSharingServiceButton)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerViewSelSetShowsSharingServiceButton, showsSharingServiceButton)
+	})
 }
 
 // @property	actionPopUpButtonMenu @abstract	Clients can set this property in order to show an action pop up button. Default is nil.
 func (o *AVPlayerView) ActionPopUpButtonMenu() *appkit.NSMenu {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerViewSelActionPopUpButtonMenu)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSMenuFromID(_ret)
+	var _mainthread0 *appkit.NSMenu
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSMenu {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerViewSelActionPopUpButtonMenu)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSMenuFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayerView) SetActionPopUpButtonMenu(actionPopUpButtonMenu *appkit.NSMenu) {
-	o.Ptr().Send(_aVPlayerViewSelSetActionPopUpButtonMenu, actionPopUpButtonMenu.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerViewSelSetActionPopUpButtonMenu, actionPopUpButtonMenu.Ptr())
+	})
 }
 
 // @property	showsFullScreenToggleButton @abstract	Whether or not the controls pane will show a full screen toggle button. Default is NO.
 func (o *AVPlayerView) ShowsFullScreenToggleButton() bool {
-	_ret := objc.Send[bool](o.Ptr(), _aVPlayerViewSelShowsFullScreenToggleButton)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aVPlayerViewSelShowsFullScreenToggleButton)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayerView) SetShowsFullScreenToggleButton(showsFullScreenToggleButton bool) {
-	o.Ptr().Send(_aVPlayerViewSelSetShowsFullScreenToggleButton, showsFullScreenToggleButton)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerViewSelSetShowsFullScreenToggleButton, showsFullScreenToggleButton)
+	})
 }
 
 // @property    showsTimecodes @abstract    If timecodes are available, allow the AVPlayerView controls to enter timecode mode. Default is NO.
 func (o *AVPlayerView) ShowsTimecodes() bool {
-	_ret := objc.Send[bool](o.Ptr(), _aVPlayerViewSelShowsTimecodes)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aVPlayerViewSelShowsTimecodes)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayerView) SetShowsTimecodes(showsTimecodes bool) {
-	o.Ptr().Send(_aVPlayerViewSelSetShowsTimecodes, showsTimecodes)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerViewSelSetShowsTimecodes, showsTimecodes)
+	})
 }
 
 // Puts the player view into trimming mode.
@@ -300,36 +456,62 @@ func (o *AVPlayerView) BeginTrimmingWithCompletionHandler(handler func(AVPlayerV
 		})
 		defer __block_handler.Release()
 	}
-	o.Ptr().Send(_aVPlayerViewSelBeginTrimmingWithCompletionHandler, __block_handler)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerViewSelBeginTrimmingWithCompletionHandler, __block_handler)
+	})
 }
 
 // @property	canBeginTrimming @abstract	Whether or not the current media can be trimmed.
 func (o *AVPlayerView) CanBeginTrimming() bool {
-	_ret := objc.Send[bool](o.Ptr(), _aVPlayerViewSelCanBeginTrimming)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aVPlayerViewSelCanBeginTrimming)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Displays the chapter number and title in the player view for a brief moment.
 func (o *AVPlayerView) FlashChapterNumberChapterTitle(chapterNumber uint, chapterTitle *foundation.NSString) {
-	o.Ptr().Send(_aVPlayerViewSelFlashChapterNumberChapterTitle, chapterNumber, chapterTitle.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerViewSelFlashChapterNumberChapterTitle, chapterNumber, chapterTitle.Ptr())
+	})
 }
 
 // @property	allowsPictureInPicturePlayback @abstract	Whether or not the receiver allows Picture in Picture playback. Default is NO.
 func (o *AVPlayerView) AllowsPictureInPicturePlayback() bool {
-	_ret := objc.Send[bool](o.Ptr(), _aVPlayerViewSelAllowsPictureInPicturePlayback)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aVPlayerViewSelAllowsPictureInPicturePlayback)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayerView) SetAllowsPictureInPicturePlayback(allowsPictureInPicturePlayback bool) {
-	o.Ptr().Send(_aVPlayerViewSelSetAllowsPictureInPicturePlayback, allowsPictureInPicturePlayback)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerViewSelSetAllowsPictureInPicturePlayback, allowsPictureInPicturePlayback)
+	})
 }
 
 // @property	pictureInPictureDelegate @abstract	A delegate for customizing Picture in Picture playback experience.
 func (o *AVPlayerView) PictureInPictureDelegate() AVPlayerViewPictureInPictureDelegate {
-	_ret := objc.Send[AVPlayerViewPictureInPictureDelegate](o.Ptr(), _aVPlayerViewSelPictureInPictureDelegate)
-	return _ret
+	var _mainthread0 AVPlayerViewPictureInPictureDelegate
+	purego.Main(func() {
+		_mainthread0 = func() AVPlayerViewPictureInPictureDelegate {
+			_ret := objc.Send[AVPlayerViewPictureInPictureDelegate](o.Ptr(), _aVPlayerViewSelPictureInPictureDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayerView) SetPictureInPictureDelegate(pictureInPictureDelegate AVPlayerViewPictureInPictureDelegate) {
-	o.Ptr().Send(_aVPlayerViewSelSetPictureInPictureDelegate, pictureInPictureDelegate)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerViewSelSetPictureInPictureDelegate, pictureInPictureDelegate)
+	})
 }

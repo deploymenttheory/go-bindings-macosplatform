@@ -37,28 +37,52 @@ func NSImageCellFromID(id objc.ID) *NSImageCell {
 }
 
 func (o *NSImageCell) ImageAlignment() NSImageAlignment {
-	_ret := objc.Send[NSImageAlignment](o.Ptr(), _nSImageCellSelImageAlignment)
-	return _ret
+	var _mainthread0 NSImageAlignment
+	purego.Main(func() {
+		_mainthread0 = func() NSImageAlignment {
+			_ret := objc.Send[NSImageAlignment](o.Ptr(), _nSImageCellSelImageAlignment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSImageCell) SetImageAlignment(imageAlignment NSImageAlignment) {
-	o.Ptr().Send(_nSImageCellSelSetImageAlignment, imageAlignment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSImageCellSelSetImageAlignment, imageAlignment)
+	})
 }
 
 func (o *NSImageCell) ImageScaling() NSImageScaling {
-	_ret := objc.Send[NSImageScaling](o.Ptr(), _nSImageCellSelImageScaling)
-	return _ret
+	var _mainthread0 NSImageScaling
+	purego.Main(func() {
+		_mainthread0 = func() NSImageScaling {
+			_ret := objc.Send[NSImageScaling](o.Ptr(), _nSImageCellSelImageScaling)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSImageCell) SetImageScaling(imageScaling NSImageScaling) {
-	o.Ptr().Send(_nSImageCellSelSetImageScaling, imageScaling)
+	purego.Main(func() {
+		o.Ptr().Send(_nSImageCellSelSetImageScaling, imageScaling)
+	})
 }
 
 func (o *NSImageCell) ImageFrameStyle() NSImageFrameStyle {
-	_ret := objc.Send[NSImageFrameStyle](o.Ptr(), _nSImageCellSelImageFrameStyle)
-	return _ret
+	var _mainthread0 NSImageFrameStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSImageFrameStyle {
+			_ret := objc.Send[NSImageFrameStyle](o.Ptr(), _nSImageCellSelImageFrameStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSImageCell) SetImageFrameStyle(imageFrameStyle NSImageFrameStyle) {
-	o.Ptr().Send(_nSImageCellSelSetImageFrameStyle, imageFrameStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSImageCellSelSetImageFrameStyle, imageFrameStyle)
+	})
 }

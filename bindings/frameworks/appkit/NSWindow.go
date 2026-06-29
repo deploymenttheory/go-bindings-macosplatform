@@ -378,395 +378,647 @@ func NSWindowFromID(id objc.ID) *NSWindow {
 
 // Returns the frame rectangle used by a window with a given content rectangle and window style.
 func NSWindowFrameRectForContentRectStyleMask(cRect corefoundation.CGRect, style NSWindowStyleMask) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](objc.ID(_clsNSWindow), _nSWindowSelFrameRectForContentRectStyleMask, cRect, style)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](objc.ID(_clsNSWindow), _nSWindowSelFrameRectForContentRectStyleMask, cRect, style)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the content rectangle used by a window with a given frame rectangle and window style.
 func NSWindowContentRectForFrameRectStyleMask(fRect corefoundation.CGRect, style NSWindowStyleMask) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](objc.ID(_clsNSWindow), _nSWindowSelContentRectForFrameRectStyleMask, fRect, style)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](objc.ID(_clsNSWindow), _nSWindowSelContentRectForFrameRectStyleMask, fRect, style)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the minimum width a window’s frame rectangle must have for it to display a title, with a given window style.
 func NSWindowMinFrameWidthWithTitleStyleMask(title *foundation.NSString, style NSWindowStyleMask) float64 {
-	_ret := objc.Send[float64](objc.ID(_clsNSWindow), _nSWindowSelMinFrameWidthWithTitleStyleMask, title.Ptr(), style)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](objc.ID(_clsNSWindow), _nSWindowSelMinFrameWidthWithTitleStyleMask, title.Ptr(), style)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the window’s frame rectangle with a given content rectangle.
 func (o *NSWindow) FrameRectForContentRect(contentRect corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelFrameRectForContentRect, contentRect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelFrameRectForContentRect, contentRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the window’s content rectangle with a given frame rectangle.
 func (o *NSWindow) ContentRectForFrameRect(frameRect corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelContentRectForFrameRect, frameRect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelContentRectForFrameRect, frameRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes the window with the specified values.
 func (o *NSWindow) InitWithContentRectStyleMaskBackingDefer(contentRect corefoundation.CGRect, style NSWindowStyleMask, backingStoreType NSBackingStoreType, flag bool) *NSWindow {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelInitWithContentRectStyleMaskBackingDefer, contentRect, style, backingStoreType, flag)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowFromID(_ret)
+	var _mainthread0 *NSWindow
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindow {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelInitWithContentRectStyleMaskBackingDefer, contentRect, style, backingStoreType, flag)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes an allocated window with the specified values.
 func (o *NSWindow) InitWithContentRectStyleMaskBackingDeferScreen(contentRect corefoundation.CGRect, style NSWindowStyleMask, backingStoreType NSBackingStoreType, flag bool, screen *NSScreen) *NSWindow {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelInitWithContentRectStyleMaskBackingDeferScreen, contentRect, style, backingStoreType, flag, screen.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowFromID(_ret)
+	var _mainthread0 *NSWindow
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindow {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelInitWithContentRectStyleMaskBackingDeferScreen, contentRect, style, backingStoreType, flag, screen.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Adds the specified title bar accessory view controller to the window.
 func (o *NSWindow) AddTitlebarAccessoryViewController(childViewController *NSTitlebarAccessoryViewController) {
-	o.Ptr().Send(_nSWindowSelAddTitlebarAccessoryViewController, childViewController.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelAddTitlebarAccessoryViewController, childViewController.Ptr())
+	})
 }
 
 // Inserts the view controller into the window’s array of title bar accessory view controllers at the specified index.
 func (o *NSWindow) InsertTitlebarAccessoryViewControllerAtIndex(childViewController *NSTitlebarAccessoryViewController, index int) {
-	o.Ptr().Send(_nSWindowSelInsertTitlebarAccessoryViewControllerAtIndex, childViewController.Ptr(), index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelInsertTitlebarAccessoryViewControllerAtIndex, childViewController.Ptr(), index)
+	})
 }
 
 // Removes the view controller at the specified index from the window’s array of title bar accessory view controllers.
 func (o *NSWindow) RemoveTitlebarAccessoryViewControllerAtIndex(index int) {
-	o.Ptr().Send(_nSWindowSelRemoveTitlebarAccessoryViewControllerAtIndex, index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelRemoveTitlebarAccessoryViewControllerAtIndex, index)
+	})
 }
 
 // Sets a given path as the window’s title, formatting it as a file-system path, and records this path as the window’s associated file.
 func (o *NSWindow) SetTitleWithRepresentedFilename(filename *foundation.NSString) {
-	o.Ptr().Send(_nSWindowSelSetTitleWithRepresentedFilename, filename.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetTitleWithRepresentedFilename, filename.Ptr())
+	})
 }
 
 // Returns the window’s field editor, creating it if requested.
 func (o *NSWindow) FieldEditorForObject(createFlag bool, object objc.ID) *NSText {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelFieldEditorForObject, createFlag, object)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextFromID(_ret)
+	var _mainthread0 *NSText
+	purego.Main(func() {
+		_mainthread0 = func() *NSText {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelFieldEditorForObject, createFlag, object)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Forces the field editor to give up its first responder status and prepares it for its next assignment.
 func (o *NSWindow) EndEditingFor(object objc.ID) {
-	o.Ptr().Send(_nSWindowSelEndEditingFor, object)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelEndEditingFor, object)
+	})
 }
 
 // Modifies and returns a frame rectangle so that its top edge lies on a specific screen.
 func (o *NSWindow) ConstrainFrameRectToScreen(frameRect corefoundation.CGRect, screen *NSScreen) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelConstrainFrameRectToScreen, frameRect, screen.Ptr())
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelConstrainFrameRectToScreen, frameRect, screen.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the origin and size of the window’s frame rectangle according to a given frame rectangle, thereby setting its position and size onscreen.
 func (o *NSWindow) SetFrameDisplay(frameRect corefoundation.CGRect, flag bool) {
-	o.Ptr().Send(_nSWindowSelSetFrameDisplay, frameRect, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetFrameDisplay, frameRect, flag)
+	})
 }
 
 // Sets the size of the window’s content view to a given size, which is expressed in the window’s base coordinate system.
 func (o *NSWindow) SetContentSize(size corefoundation.CGSize) {
-	o.Ptr().Send(_nSWindowSelSetContentSize, size)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetContentSize, size)
+	})
 }
 
 // Positions the bottom-left corner of the window’s frame rectangle at a given point in screen coordinates.
 func (o *NSWindow) SetFrameOrigin(point corefoundation.CGPoint) {
-	o.Ptr().Send(_nSWindowSelSetFrameOrigin, point)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetFrameOrigin, point)
+	})
 }
 
 // Positions the top-left corner of the window’s frame rectangle at a given point in screen coordinates.
 func (o *NSWindow) SetFrameTopLeftPoint(point corefoundation.CGPoint) {
-	o.Ptr().Send(_nSWindowSelSetFrameTopLeftPoint, point)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetFrameTopLeftPoint, point)
+	})
 }
 
 // Positions the window’s top-left to a given point.
 func (o *NSWindow) CascadeTopLeftFromPoint(topLeftPoint corefoundation.CGPoint) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSWindowSelCascadeTopLeftFromPoint, topLeftPoint)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSWindowSelCascadeTopLeftFromPoint, topLeftPoint)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies the duration of a smooth frame-size change.
 func (o *NSWindow) AnimationResizeTime(newFrame corefoundation.CGRect) float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSWindowSelAnimationResizeTime, newFrame)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSWindowSelAnimationResizeTime, newFrame)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the origin and size of the window’s frame rectangle, with optional animation, according to a given frame rectangle, thereby setting its position and size onscreen.
 func (o *NSWindow) SetFrameDisplayAnimate(frameRect corefoundation.CGRect, displayFlag bool, animateFlag bool) {
-	o.Ptr().Send(_nSWindowSelSetFrameDisplayAnimate, frameRect, displayFlag, animateFlag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetFrameDisplayAnimate, frameRect, displayFlag, animateFlag)
+	})
 }
 
 // Passes a display message down the window’s view hierarchy, thus redrawing all views that need displaying.
 func (o *NSWindow) DisplayIfNeeded() {
-	o.Ptr().Send(_nSWindowSelDisplayIfNeeded)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelDisplayIfNeeded)
+	})
 }
 
 // Passes a display message down the window’s view hierarchy, thus redrawing all views within the window.
 func (o *NSWindow) Display() {
-	o.Ptr().Send(_nSWindowSelDisplay)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelDisplay)
+	})
 }
 
 // Updates the window.
 func (o *NSWindow) Update() {
-	o.Ptr().Send(_nSWindowSelUpdate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelUpdate)
+	})
 }
 
 // Attempts to make a given responder the first responder for the window.
 func (o *NSWindow) MakeFirstResponder(responder *NSResponder) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelMakeFirstResponder, responder.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelMakeFirstResponder, responder.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Removes the window from the screen.
 func (o *NSWindow) Close() {
-	o.Ptr().Send(_nSWindowSelClose)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelClose)
+	})
 }
 
 // Removes the window from the screen list and displays the minimized window in the Dock.
 func (o *NSWindow) Miniaturize(sender objc.ID) {
-	o.Ptr().Send(_nSWindowSelMiniaturize, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelMiniaturize, sender)
+	})
 }
 
 // De-minimizes the window.
 func (o *NSWindow) Deminiaturize(sender objc.ID) {
-	o.Ptr().Send(_nSWindowSelDeminiaturize, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelDeminiaturize, sender)
+	})
 }
 
 // Toggles the size and location of the window between its standard state (which the application provides as the best size to display the window’s data) and its user state (a new size and location the user may have set by moving or resizing the window).
 func (o *NSWindow) Zoom(sender objc.ID) {
-	o.Ptr().Send(_nSWindowSelZoom, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelZoom, sender)
+	})
 }
 
 // Specifies the thickness of a given border of the window.
 func (o *NSWindow) SetContentBorderThicknessForEdge(thickness float64, edge foundation.NSRectEdge) {
-	o.Ptr().Send(_nSWindowSelSetContentBorderThicknessForEdge, thickness, edge)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetContentBorderThicknessForEdge, thickness, edge)
+	})
 }
 
 // Indicates the thickness of a given border of the window.
 func (o *NSWindow) ContentBorderThicknessForEdge(edge foundation.NSRectEdge) float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSWindowSelContentBorderThicknessForEdge, edge)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSWindowSelContentBorderThicknessForEdge, edge)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies whether the window calculates the thickness of a given border automatically.
 func (o *NSWindow) SetAutorecalculatesContentBorderThicknessForEdge(flag bool, edge foundation.NSRectEdge) {
-	o.Ptr().Send(_nSWindowSelSetAutorecalculatesContentBorderThicknessForEdge, flag, edge)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetAutorecalculatesContentBorderThicknessForEdge, flag, edge)
+	})
 }
 
 // Indicates whether the window calculates the thickness of a given border automatically.
 func (o *NSWindow) AutorecalculatesContentBorderThicknessForEdge(edge foundation.NSRectEdge) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelAutorecalculatesContentBorderThicknessForEdge, edge)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelAutorecalculatesContentBorderThicknessForEdge, edge)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the window’s location to the center of the screen.
 func (o *NSWindow) Center() {
-	o.Ptr().Send(_nSWindowSelCenter)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelCenter)
+	})
 }
 
 // Moves the window to the front of the screen list, within its level, and makes it the key window; that is, it shows the window.
 func (o *NSWindow) MakeKeyAndOrderFront(sender objc.ID) {
-	o.Ptr().Send(_nSWindowSelMakeKeyAndOrderFront, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelMakeKeyAndOrderFront, sender)
+	})
 }
 
 // Moves the window to the front of its level in the screen list, without changing either the key window or the main window.
 func (o *NSWindow) OrderFront(sender objc.ID) {
-	o.Ptr().Send(_nSWindowSelOrderFront, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelOrderFront, sender)
+	})
 }
 
 // Moves the window to the back of its level in the screen list, without changing either the key window or the main window.
 func (o *NSWindow) OrderBack(sender objc.ID) {
-	o.Ptr().Send(_nSWindowSelOrderBack, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelOrderBack, sender)
+	})
 }
 
 // Removes the window from the screen list, which hides the window.
 func (o *NSWindow) OrderOut(sender objc.ID) {
-	o.Ptr().Send(_nSWindowSelOrderOut, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelOrderOut, sender)
+	})
 }
 
 // Repositions the window’s window device in the window server’s screen list.
 func (o *NSWindow) OrderWindowRelativeTo(place NSWindowOrderingMode, otherWin int) {
-	o.Ptr().Send(_nSWindowSelOrderWindowRelativeTo, place, otherWin)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelOrderWindowRelativeTo, place, otherWin)
+	})
 }
 
 // Moves the window to the front of its level, even if its application isn’t active, without changing either the key window or the main window.
 func (o *NSWindow) OrderFrontRegardless() {
-	o.Ptr().Send(_nSWindowSelOrderFrontRegardless)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelOrderFrontRegardless)
+	})
 }
 
 // Makes the window the key window.
 func (o *NSWindow) MakeKeyWindow() {
-	o.Ptr().Send(_nSWindowSelMakeKeyWindow)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelMakeKeyWindow)
+	})
 }
 
 // Makes the window the main window.
 func (o *NSWindow) MakeMainWindow() {
-	o.Ptr().Send(_nSWindowSelMakeMainWindow)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelMakeMainWindow)
+	})
 }
 
 // Informs the window that it has become the key window.
 func (o *NSWindow) BecomeKeyWindow() {
-	o.Ptr().Send(_nSWindowSelBecomeKeyWindow)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelBecomeKeyWindow)
+	})
 }
 
 // Resigns the window’s key window status.
 func (o *NSWindow) ResignKeyWindow() {
-	o.Ptr().Send(_nSWindowSelResignKeyWindow)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelResignKeyWindow)
+	})
 }
 
 // Informs the window that it has become the main window.
 func (o *NSWindow) BecomeMainWindow() {
-	o.Ptr().Send(_nSWindowSelBecomeMainWindow)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelBecomeMainWindow)
+	})
 }
 
 // Resigns the window’s main window status.
 func (o *NSWindow) ResignMainWindow() {
-	o.Ptr().Send(_nSWindowSelResignMainWindow)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelResignMainWindow)
+	})
 }
 
 // Converts a rectangle to the screen coordinate system from the window’s coordinate system.
 func (o *NSWindow) ConvertRectToScreen(rect corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelConvertRectToScreen, rect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelConvertRectToScreen, rect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Converts a rectangle from the screen coordinate system to the window’s coordinate system.
 func (o *NSWindow) ConvertRectFromScreen(rect corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelConvertRectFromScreen, rect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelConvertRectFromScreen, rect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Converts a point to the screen coordinate system from the window’s coordinate system.
 func (o *NSWindow) ConvertPointToScreen(point corefoundation.CGPoint) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSWindowSelConvertPointToScreen, point)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSWindowSelConvertPointToScreen, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Converts a point from the screen coordinate system to the window’s coordinate system.
 func (o *NSWindow) ConvertPointFromScreen(point corefoundation.CGPoint) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSWindowSelConvertPointFromScreen, point)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSWindowSelConvertPointFromScreen, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Converts a rectangle from the window’s coordinate system to its pixel-aligned backing store coordinate system.
 func (o *NSWindow) ConvertRectToBacking(rect corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelConvertRectToBacking, rect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelConvertRectToBacking, rect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Converts a rectangle from its pixel-aligned backing store coordinate system to the window’s coordinate system.
 func (o *NSWindow) ConvertRectFromBacking(rect corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelConvertRectFromBacking, rect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelConvertRectFromBacking, rect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Converts a point from the window’s coordinate system to its pixel-aligned backing store coordinate system.
 func (o *NSWindow) ConvertPointToBacking(point corefoundation.CGPoint) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSWindowSelConvertPointToBacking, point)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSWindowSelConvertPointToBacking, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Converts a point from its pixel-aligned backing store coordinate system to the window’s coordinate system.
 func (o *NSWindow) ConvertPointFromBacking(point corefoundation.CGPoint) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSWindowSelConvertPointFromBacking, point)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSWindowSelConvertPointFromBacking, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a backing store pixel-aligned rectangle in window coordinates.
 func (o *NSWindow) BackingAlignedRectOptions(rect corefoundation.CGRect, options foundation.NSAlignmentOptions) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelBackingAlignedRectOptions, rect, options)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelBackingAlignedRectOptions, rect, options)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Simulates the user clicking the close button by momentarily highlighting the button and then closing the window.
 func (o *NSWindow) PerformClose(sender objc.ID) {
-	o.Ptr().Send(_nSWindowSelPerformClose, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelPerformClose, sender)
+	})
 }
 
 // Simulates the user clicking the minimize button by momentarily highlighting the button, then minimizing the window.
 func (o *NSWindow) PerformMiniaturize(sender objc.ID) {
-	o.Ptr().Send(_nSWindowSelPerformMiniaturize, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelPerformMiniaturize, sender)
+	})
 }
 
 // This action method simulates the user clicking the zoom box by momentarily highlighting the button and then zooming the window.
 func (o *NSWindow) PerformZoom(sender objc.ID) {
-	o.Ptr().Send(_nSWindowSelPerformZoom, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelPerformZoom, sender)
+	})
 }
 
 // Returns EPS data that draws the region of the window within a given rectangle.
 func (o *NSWindow) DataWithEPSInsideRect(rect corefoundation.CGRect) *foundation.NSData {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDataWithEPSInsideRect, rect)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDataFromID(_ret)
+	var _mainthread0 *foundation.NSData
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSData {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDataWithEPSInsideRect, rect)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDataFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns PDF data that draws the region of the window within a given rectangle.
 func (o *NSWindow) DataWithPDFInsideRect(rect corefoundation.CGRect) *foundation.NSData {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDataWithPDFInsideRect, rect)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDataFromID(_ret)
+	var _mainthread0 *foundation.NSData
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSData {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDataWithPDFInsideRect, rect)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDataFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Runs the Print panel, and if the user chooses an option other than canceling, prints the window (its frame view and all subviews).
 func (o *NSWindow) Print(sender objc.ID) {
-	o.Ptr().Send(_nSWindowSelPrint, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelPrint, sender)
+	})
 }
 
 // Sets a Boolean value that indicates whether the window’s depth limit can change to match the depth of the screen it’s on.
 func (o *NSWindow) SetDynamicDepthLimit(flag bool) {
-	o.Ptr().Send(_nSWindowSelSetDynamicDepthLimit, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetDynamicDepthLimit, flag)
+	})
 }
 
 // Invalidates the window shadow so that it is recomputed based on the current window shape.
 func (o *NSWindow) InvalidateShadow() {
-	o.Ptr().Send(_nSWindowSelInvalidateShadow)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelInvalidateShadow)
+	})
 }
 
 // Takes the window into or out of fullscreen mode,
 func (o *NSWindow) ToggleFullScreen(sender objc.ID) {
-	o.Ptr().Send(_nSWindowSelToggleFullScreen, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelToggleFullScreen, sender)
+	})
 }
 
 // Sets the window’s frame rectangle from a given string representation.
 func (o *NSWindow) SetFrameFromString(string_ *foundation.NSString) {
-	o.Ptr().Send(_nSWindowSelSetFrameFromString, string_.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetFrameFromString, string_.Ptr())
+	})
 }
 
 // Saves the window’s frame rectangle in the user defaults system under a given name.
 func (o *NSWindow) SaveFrameUsingName(name *foundation.NSString) {
-	o.Ptr().Send(_nSWindowSelSaveFrameUsingName, name.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSaveFrameUsingName, name.Ptr())
+	})
 }
 
 // Sets the window’s frame rectangle by reading the rectangle data stored under a given name from the defaults system. Can operate on non-resizable windows.
 func (o *NSWindow) SetFrameUsingNameForce(name *foundation.NSString, force bool) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelSetFrameUsingNameForce, name.Ptr(), force)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelSetFrameUsingNameForce, name.Ptr(), force)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the window’s frame rectangle by reading the rectangle data stored under a given name from the defaults system.
 func (o *NSWindow) SetFrameUsingName(name *foundation.NSString) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelSetFrameUsingName, name.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelSetFrameUsingName, name.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the name AppKit uses to automatically save the window’s frame rectangle data in the defaults system.
 func (o *NSWindow) SetFrameAutosaveName(name *foundation.NSString) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelSetFrameAutosaveName, name.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelSetFrameAutosaveName, name.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Removes the frame data stored under a given name from the application’s user defaults.
 func NSWindowRemoveFrameUsingName(name *foundation.NSString) {
-	objc.ID(_clsNSWindow).Send(_nSWindowSelRemoveFrameUsingName, name.Ptr())
+	purego.Main(func() {
+		objc.ID(_clsNSWindow).Send(_nSWindowSelRemoveFrameUsingName, name.Ptr())
+	})
 }
 
 // Starts a document-modal session and presents—or queues for presentation—a sheet.
@@ -778,7 +1030,9 @@ func (o *NSWindow) BeginSheetCompletionHandler(sheetWindow *NSWindow, handler fu
 		})
 		defer __block_handler.Release()
 	}
-	o.Ptr().Send(_nSWindowSelBeginSheetCompletionHandler, sheetWindow.Ptr(), __block_handler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelBeginSheetCompletionHandler, sheetWindow.Ptr(), __block_handler)
+	})
 }
 
 // Starts a document-modal session and presents the specified critical sheet.
@@ -790,160 +1044,240 @@ func (o *NSWindow) BeginCriticalSheetCompletionHandler(sheetWindow *NSWindow, ha
 		})
 		defer __block_handler.Release()
 	}
-	o.Ptr().Send(_nSWindowSelBeginCriticalSheetCompletionHandler, sheetWindow.Ptr(), __block_handler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelBeginCriticalSheetCompletionHandler, sheetWindow.Ptr(), __block_handler)
+	})
 }
 
 // Ends a document-modal session and dismisses the specified sheet.
 func (o *NSWindow) EndSheet(sheetWindow *NSWindow) {
-	o.Ptr().Send(_nSWindowSelEndSheet, sheetWindow.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelEndSheet, sheetWindow.Ptr())
+	})
 }
 
 // Ends a document-modal session and dismisses the specified sheet.
 func (o *NSWindow) EndSheetReturnCode(sheetWindow *NSWindow, returnCode int) {
-	o.Ptr().Send(_nSWindowSelEndSheetReturnCode, sheetWindow.Ptr(), returnCode)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelEndSheetReturnCode, sheetWindow.Ptr(), returnCode)
+	})
 }
 
 // Returns a new instance of a given standard window button, sized appropriately for a given window style.
 func NSWindowStandardWindowButtonForStyleMask(b NSWindowButton, styleMask NSWindowStyleMask) *NSButton {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSWindow), _nSWindowSelStandardWindowButtonForStyleMask, b, styleMask)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSButtonFromID(_ret)
+	var _mainthread0 *NSButton
+	purego.Main(func() {
+		_mainthread0 = func() *NSButton {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSWindow), _nSWindowSelStandardWindowButtonForStyleMask, b, styleMask)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the window button of a given window button kind in the window’s view hierarchy.
 func (o *NSWindow) StandardWindowButton(b NSWindowButton) *NSButton {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelStandardWindowButton, b)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSButtonFromID(_ret)
+	var _mainthread0 *NSButton
+	purego.Main(func() {
+		_mainthread0 = func() *NSButton {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelStandardWindowButton, b)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Adds a given window as a child window of the window.
 func (o *NSWindow) AddChildWindowOrdered(childWin *NSWindow, place NSWindowOrderingMode) {
-	o.Ptr().Send(_nSWindowSelAddChildWindowOrdered, childWin.Ptr(), place)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelAddChildWindowOrdered, childWin.Ptr(), place)
+	})
 }
 
 // Detaches a given child window from the window.
 func (o *NSWindow) RemoveChildWindow(childWin *NSWindow) {
-	o.Ptr().Send(_nSWindowSelRemoveChildWindow, childWin.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelRemoveChildWindow, childWin.Ptr())
+	})
 }
 
 // A Boolean value that indicates if the window and its screen use a color space that can represent the specified display gamut.
 func (o *NSWindow) CanRepresentDisplayGamut(displayGamut NSDisplayGamut) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelCanRepresentDisplayGamut, displayGamut)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelCanRepresentDisplayGamut, displayGamut)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the window numbers for all visible windows satisfying the specified options.
 func NSWindowWindowNumbersWithOptions(options NSWindowNumberListOptions) *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSWindow), _nSWindowSelWindowNumbersWithOptions, options)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSNumber]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSNumber] {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSWindow), _nSWindowSelWindowNumbersWithOptions, options)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the number of the frontmost window that would be hit by a mouse-down at the specified screen location.
 func NSWindowWindowNumberAtPointBelowWindowWithWindowNumber(point corefoundation.CGPoint, windowNumber int) int {
-	_ret := objc.Send[int](objc.ID(_clsNSWindow), _nSWindowSelWindowNumberAtPointBelowWindowWithWindowNumber, point, windowNumber)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](objc.ID(_clsNSWindow), _nSWindowSelWindowNumberAtPointBelowWindowWithWindowNumber, point, windowNumber)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a titled window that contains the specified content view controller.
 func NSWindowWindowWithContentViewController(contentViewController *NSViewController) *NSWindow {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSWindow), _nSWindowSelWindowWithContentViewController, contentViewController.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowFromID(_ret)
+	var _mainthread0 *NSWindow
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindow {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSWindow), _nSWindowSelWindowWithContentViewController, contentViewController.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Starts a window drag based on the specified mouse-down event.
 func (o *NSWindow) PerformWindowDragWithEvent(event *NSEvent) {
-	o.Ptr().Send(_nSWindowSelPerformWindowDragWithEvent, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelPerformWindowDragWithEvent, event.Ptr())
+	})
 }
 
 // Searches for a candidate next key view and, if it finds one, tries to make it the first responder.
 func (o *NSWindow) SelectNextKeyView(sender objc.ID) {
-	o.Ptr().Send(_nSWindowSelSelectNextKeyView, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSelectNextKeyView, sender)
+	})
 }
 
 // Searches for a candidate previous key view and, if it finds one, tries to make it the first responder.
 func (o *NSWindow) SelectPreviousKeyView(sender objc.ID) {
-	o.Ptr().Send(_nSWindowSelSelectPreviousKeyView, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSelectPreviousKeyView, sender)
+	})
 }
 
 // Gives key view status to the view that follows the given view.
 func (o *NSWindow) SelectKeyViewFollowingView(view *NSView) {
-	o.Ptr().Send(_nSWindowSelSelectKeyViewFollowingView, view.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSelectKeyViewFollowingView, view.Ptr())
+	})
 }
 
 // Gives key view status to the view that precedes the given view.
 func (o *NSWindow) SelectKeyViewPrecedingView(view *NSView) {
-	o.Ptr().Send(_nSWindowSelSelectKeyViewPrecedingView, view.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSelectKeyViewPrecedingView, view.Ptr())
+	})
 }
 
 // Disables the default button cell’s key equivalent, so it doesn’t perform a click when the user presses Return (or Enter).
 func (o *NSWindow) DisableKeyEquivalentForDefaultButtonCell() {
-	o.Ptr().Send(_nSWindowSelDisableKeyEquivalentForDefaultButtonCell)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelDisableKeyEquivalentForDefaultButtonCell)
+	})
 }
 
 // Reenables the default button cell’s key equivalent, so it performs a click when the user presses Return (or Enter).
 func (o *NSWindow) EnableKeyEquivalentForDefaultButtonCell() {
-	o.Ptr().Send(_nSWindowSelEnableKeyEquivalentForDefaultButtonCell)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelEnableKeyEquivalentForDefaultButtonCell)
+	})
 }
 
 // Marks the key view loop as “dirty” and in need of recalculation.
 func (o *NSWindow) RecalculateKeyViewLoop() {
-	o.Ptr().Send(_nSWindowSelRecalculateKeyViewLoop)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelRecalculateKeyViewLoop)
+	})
 }
 
 // Toggles the visibility of the window’s toolbar.
 func (o *NSWindow) ToggleToolbarShown(sender objc.ID) {
-	o.Ptr().Send(_nSWindowSelToggleToolbarShown, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelToggleToolbarShown, sender)
+	})
 }
 
 // Presents the toolbar customization user interface.
 func (o *NSWindow) RunToolbarCustomizationPalette(sender objc.ID) {
-	o.Ptr().Send(_nSWindowSelRunToolbarCustomizationPalette, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelRunToolbarCustomizationPalette, sender)
+	})
 }
 
 // Selects the next tab in the tab group in the trailing direction.
 func (o *NSWindow) SelectNextTab(sender objc.ID) {
-	o.Ptr().Send(_nSWindowSelSelectNextTab, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSelectNextTab, sender)
+	})
 }
 
 // Selects the previous tab in the tab group in the leading direction.
 func (o *NSWindow) SelectPreviousTab(sender objc.ID) {
-	o.Ptr().Send(_nSWindowSelSelectPreviousTab, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSelectPreviousTab, sender)
+	})
 }
 
 // Moves the tab to a new containing window.
 func (o *NSWindow) MoveTabToNewWindow(sender objc.ID) {
-	o.Ptr().Send(_nSWindowSelMoveTabToNewWindow, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelMoveTabToNewWindow, sender)
+	})
 }
 
 // Merges all open windows into a single tabbed window.
 func (o *NSWindow) MergeAllWindows(sender objc.ID) {
-	o.Ptr().Send(_nSWindowSelMergeAllWindows, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelMergeAllWindows, sender)
+	})
 }
 
 // Shows or hides the tab bar.
 func (o *NSWindow) ToggleTabBar(sender objc.ID) {
-	o.Ptr().Send(_nSWindowSelToggleTabBar, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelToggleTabBar, sender)
+	})
 }
 
 // Shows or hides the tab overview.
 func (o *NSWindow) ToggleTabOverview(sender objc.ID) {
-	o.Ptr().Send(_nSWindowSelToggleTabOverview, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelToggleTabOverview, sender)
+	})
 }
 
 // Adds the provided window as a new tab in a tabbed window using the specified ordering instruction.
 func (o *NSWindow) AddTabbedWindowOrdered(window *NSWindow, ordered NSWindowOrderingMode) {
-	o.Ptr().Send(_nSWindowSelAddTabbedWindowOrdered, window.Ptr(), ordered)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelAddTabbedWindowOrdered, window.Ptr(), ordered)
+	})
 }
 
 // Attempts to move window sharing (within a SharePlay session) from this window to another window.
@@ -955,7 +1289,9 @@ func (o *NSWindow) TransferWindowSharingToWindowCompletionHandler(window *NSWind
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_nSWindowSelTransferWindowSharingToWindowCompletionHandler, window.Ptr(), __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelTransferWindowSharingToWindowCompletionHandler, window.Ptr(), __block_completionHandler)
+	})
 }
 
 // @abstract Request sharing of window.  If there is an available ScreenCaptureKit sharing session, an alert will be presented asking the user to confirm the share @param window The window to share @param completionHandler A completion block that is called after the request finishes. @c error The error will be non-nil if the request does not result in a window being shared.  The error will be NSUserCancelledError if there is no ScreenCaptureKit session, or if the user rejects the offer to share.  If sharing fails for some other reason, the error will provide the details.
@@ -967,7 +1303,9 @@ func (o *NSWindow) RequestSharingOfWindowCompletionHandler(window *NSWindow, com
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_nSWindowSelRequestSharingOfWindowCompletionHandler, window.Ptr(), __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelRequestSharingOfWindowCompletionHandler, window.Ptr(), __block_completionHandler)
+	})
 }
 
 // @abstract Request sharing of window to be provided later.  If there is an available ScreenCaptureKit sharing session, an alert will be presented asking the user to confirm the share.  The delegate will be asked to provide the window to share via windowForSharingRequestFromWindow: @param image An image showing a preview of the window to share @param title The title to show in a confirmation dialog @param completionHandler A completion block that is called after the request finishes. @c error The error will be non-nil if the request does not result in a window being shared.  The error will be NSUserCancelledError if there is no ScreenCaptureKit session, or if the user rejects the offer to share.  If sharing fails for some other reason, the error will provide the details.
@@ -979,902 +1317,1626 @@ func (o *NSWindow) RequestSharingOfWindowUsingPreviewTitleCompletionHandler(imag
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_nSWindowSelRequestSharingOfWindowUsingPreviewTitleCompletionHandler, image.Ptr(), title.Ptr(), __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelRequestSharingOfWindowUsingPreviewTitleCompletionHandler, image.Ptr(), title.Ptr(), __block_completionHandler)
+	})
 }
 
 func NSWindowDefaultDepthLimit() NSWindowDepth {
-	_ret := objc.Send[NSWindowDepth](objc.ID(_clsNSWindow), _nSWindowSelDefaultDepthLimit)
-	return _ret
+	var _mainthread0 NSWindowDepth
+	purego.Main(func() {
+		_mainthread0 = func() NSWindowDepth {
+			_ret := objc.Send[NSWindowDepth](objc.ID(_clsNSWindow), _nSWindowSelDefaultDepthLimit)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) Title() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetTitle(title *foundation.NSString) {
-	o.Ptr().Send(_nSWindowSelSetTitle, title.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetTitle, title.Ptr())
+	})
 }
 
 // Secondary text that may be displayed adjacent to or below the primary title depending on the configuration of the window. A value of empty string will remove the subtitle from the window layout.
 func (o *NSWindow) Subtitle() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelSubtitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelSubtitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Secondary text that may be displayed adjacent to or below the primary title depending on the configuration of the window. A value of empty string will remove the subtitle from the window layout.
 func (o *NSWindow) SetSubtitle(subtitle *foundation.NSString) {
-	o.Ptr().Send(_nSWindowSelSetSubtitle, subtitle.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetSubtitle, subtitle.Ptr())
+	})
 }
 
 // See the enum values for how this property works.
 func (o *NSWindow) TitleVisibility() NSWindowTitleVisibility {
-	_ret := objc.Send[NSWindowTitleVisibility](o.Ptr(), _nSWindowSelTitleVisibility)
-	return _ret
+	var _mainthread0 NSWindowTitleVisibility
+	purego.Main(func() {
+		_mainthread0 = func() NSWindowTitleVisibility {
+			_ret := objc.Send[NSWindowTitleVisibility](o.Ptr(), _nSWindowSelTitleVisibility)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // See the enum values for how this property works.
 func (o *NSWindow) SetTitleVisibility(titleVisibility NSWindowTitleVisibility) {
-	o.Ptr().Send(_nSWindowSelSetTitleVisibility, titleVisibility)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetTitleVisibility, titleVisibility)
+	})
 }
 
 // When \c YES, the titlebar doesn't draw its background, allowing all buttons to show through, and "click through" to happen. In general, this is only useful when \c NSFullSizeContentViewWindowMask is set.
 func (o *NSWindow) TitlebarAppearsTransparent() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelTitlebarAppearsTransparent)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelTitlebarAppearsTransparent)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // When \c YES, the titlebar doesn't draw its background, allowing all buttons to show through, and "click through" to happen. In general, this is only useful when \c NSFullSizeContentViewWindowMask is set.
 func (o *NSWindow) SetTitlebarAppearsTransparent(titlebarAppearsTransparent bool) {
-	o.Ptr().Send(_nSWindowSelSetTitlebarAppearsTransparent, titlebarAppearsTransparent)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetTitlebarAppearsTransparent, titlebarAppearsTransparent)
+	})
 }
 
 // Specifies how the titlebar area of the window should appear when the window displays an NSToolbar
 func (o *NSWindow) ToolbarStyle() NSWindowToolbarStyle {
-	_ret := objc.Send[NSWindowToolbarStyle](o.Ptr(), _nSWindowSelToolbarStyle)
-	return _ret
+	var _mainthread0 NSWindowToolbarStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSWindowToolbarStyle {
+			_ret := objc.Send[NSWindowToolbarStyle](o.Ptr(), _nSWindowSelToolbarStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies how the titlebar area of the window should appear when the window displays an NSToolbar
 func (o *NSWindow) SetToolbarStyle(toolbarStyle NSWindowToolbarStyle) {
-	o.Ptr().Send(_nSWindowSelSetToolbarStyle, toolbarStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetToolbarStyle, toolbarStyle)
+	})
 }
 
 // The \c contentLayoutRect will return the area inside the window that is for non-obscured content. Typically, this is the same thing as the `contentView`'s frame. However, for windows with the \c NSFullSizeContentViewWindowMask set, there needs to be a way to determine the portion that is not under the toolbar. The \c contentLayoutRect returns the portion of the layout that is not obscured under the toolbar. \c contentLayoutRect is in window coordinates. It is KVO compliant. */
 func (o *NSWindow) ContentLayoutRect() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelContentLayoutRect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelContentLayoutRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // \c contentLayoutGuide is a corollary to \c contentLayoutRect. It can be used by autolayout constraints to automatically bind to the \c contentLayoutRect.
 func (o *NSWindow) ContentLayoutGuide() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelContentLayoutGuide)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelContentLayoutGuide)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) TitlebarAccessoryViewControllers() *foundation.NSArray[*NSTitlebarAccessoryViewController] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelTitlebarAccessoryViewControllers)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSTitlebarAccessoryViewController](_ret)
+	var _mainthread0 *foundation.NSArray[*NSTitlebarAccessoryViewController]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSTitlebarAccessoryViewController] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelTitlebarAccessoryViewControllers)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSTitlebarAccessoryViewController](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetTitlebarAccessoryViewControllers(titlebarAccessoryViewControllers *foundation.NSArray[*NSTitlebarAccessoryViewController]) {
-	o.Ptr().Send(_nSWindowSelSetTitlebarAccessoryViewControllers, titlebarAccessoryViewControllers.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetTitlebarAccessoryViewControllers, titlebarAccessoryViewControllers.Ptr())
+	})
 }
 
 // If url is not nil and its path is not empty, the window will show a document icon in the titlebar. If the url represents a filename or other resource with a known icon, that icon will be used as the document icon.  Otherwise the default document icon will be used.  The icon can be customized using `-[[NSWindow standardWindowButton:NSWindowDocumentIconButton] setImage:customImage]`.  If url is not nil and its path is not empty, the window will have a pop-up menu which can be shown via command-click on the area containing the document icon and title.  By default, this menu will display the path components of the url.  The presence and contents of this menu can be controlled by the delegate method `-[window:shouldPopUpDocumentPathMenu:]` If the url is nil or has an empty path, the window will not show a document icon and will not have a pop-up menu available via command-click.
 func (o *NSWindow) RepresentedURL() *foundation.NSURL {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelRepresentedURL)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSURLFromID(_ret)
+	var _mainthread0 *foundation.NSURL
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSURL {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelRepresentedURL)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSURLFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // If url is not nil and its path is not empty, the window will show a document icon in the titlebar. If the url represents a filename or other resource with a known icon, that icon will be used as the document icon.  Otherwise the default document icon will be used.  The icon can be customized using `-[[NSWindow standardWindowButton:NSWindowDocumentIconButton] setImage:customImage]`.  If url is not nil and its path is not empty, the window will have a pop-up menu which can be shown via command-click on the area containing the document icon and title.  By default, this menu will display the path components of the url.  The presence and contents of this menu can be controlled by the delegate method `-[window:shouldPopUpDocumentPathMenu:]` If the url is nil or has an empty path, the window will not show a document icon and will not have a pop-up menu available via command-click.
 func (o *NSWindow) SetRepresentedURL(representedURL *foundation.NSURL) {
-	o.Ptr().Send(_nSWindowSelSetRepresentedURL, representedURL.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetRepresentedURL, representedURL.Ptr())
+	})
 }
 
 func (o *NSWindow) RepresentedFilename() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelRepresentedFilename)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelRepresentedFilename)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetRepresentedFilename(representedFilename *foundation.NSString) {
-	o.Ptr().Send(_nSWindowSelSetRepresentedFilename, representedFilename.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetRepresentedFilename, representedFilename.Ptr())
+	})
 }
 
 func (o *NSWindow) IsExcludedFromWindowsMenu() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsExcludedFromWindowsMenu)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsExcludedFromWindowsMenu)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetExcludedFromWindowsMenu(excludedFromWindowsMenu bool) {
-	o.Ptr().Send(_nSWindowSelSetExcludedFromWindowsMenu, excludedFromWindowsMenu)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetExcludedFromWindowsMenu, excludedFromWindowsMenu)
+	})
 }
 
 func (o *NSWindow) ContentView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelContentView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelContentView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetContentView(contentView *NSView) {
-	o.Ptr().Send(_nSWindowSelSetContentView, contentView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetContentView, contentView.Ptr())
+	})
 }
 
 func (o *NSWindow) Delegate() NSWindowDelegate {
-	_ret := objc.Send[NSWindowDelegate](o.Ptr(), _nSWindowSelDelegate)
-	return _ret
+	var _mainthread0 NSWindowDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSWindowDelegate {
+			_ret := objc.Send[NSWindowDelegate](o.Ptr(), _nSWindowSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetDelegate(delegate NSWindowDelegate) {
-	o.Ptr().Send(_nSWindowSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetDelegate, delegate)
+	})
 }
 
 func (o *NSWindow) WindowNumber() int {
-	_ret := objc.Send[int](o.Ptr(), _nSWindowSelWindowNumber)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSWindowSelWindowNumber)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @note The styleMask can only be set on macOS 10.6 and later. Valid \c styleMask settings have the same restrictions as the \c styleMask passed to `-initWithContentRect:styleMask:backing:defer:`.  Some \c styleMask changes will cause the view hierarchy to be rebuilt, since there is a different subclass for the top level view of a borderless window than for the top level view of a titled window.
 func (o *NSWindow) StyleMask() NSWindowStyleMask {
-	_ret := objc.Send[NSWindowStyleMask](o.Ptr(), _nSWindowSelStyleMask)
-	return _ret
+	var _mainthread0 NSWindowStyleMask
+	purego.Main(func() {
+		_mainthread0 = func() NSWindowStyleMask {
+			_ret := objc.Send[NSWindowStyleMask](o.Ptr(), _nSWindowSelStyleMask)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @note The styleMask can only be set on macOS 10.6 and later. Valid \c styleMask settings have the same restrictions as the \c styleMask passed to `-initWithContentRect:styleMask:backing:defer:`.  Some \c styleMask changes will cause the view hierarchy to be rebuilt, since there is a different subclass for the top level view of a borderless window than for the top level view of a titled window.
 func (o *NSWindow) SetStyleMask(styleMask NSWindowStyleMask) {
-	o.Ptr().Send(_nSWindowSelSetStyleMask, styleMask)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetStyleMask, styleMask)
+	})
 }
 
 // @abstract The frame to use when cascading or sizing a new window based on the receiver's position or size. This may be different from `frame` when the receiver is positioned by the system.
 func (o *NSWindow) CascadingReferenceFrame() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelCascadingReferenceFrame)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelCascadingReferenceFrame)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) Frame() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelFrame)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelFrame)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) InLiveResize() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelInLiveResize)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelInLiveResize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) ResizeIncrements() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSWindowSelResizeIncrements)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSWindowSelResizeIncrements)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetResizeIncrements(resizeIncrements corefoundation.CGSize) {
-	o.Ptr().Send(_nSWindowSelSetResizeIncrements, resizeIncrements)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetResizeIncrements, resizeIncrements)
+	})
 }
 
 func (o *NSWindow) AspectRatio() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSWindowSelAspectRatio)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSWindowSelAspectRatio)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetAspectRatio(aspectRatio corefoundation.CGSize) {
-	o.Ptr().Send(_nSWindowSelSetAspectRatio, aspectRatio)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetAspectRatio, aspectRatio)
+	})
 }
 
 func (o *NSWindow) ContentResizeIncrements() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSWindowSelContentResizeIncrements)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSWindowSelContentResizeIncrements)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) {
-	o.Ptr().Send(_nSWindowSelSetContentResizeIncrements, contentResizeIncrements)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetContentResizeIncrements, contentResizeIncrements)
+	})
 }
 
 func (o *NSWindow) ContentAspectRatio() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSWindowSelContentAspectRatio)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSWindowSelContentAspectRatio)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetContentAspectRatio(contentAspectRatio corefoundation.CGSize) {
-	o.Ptr().Send(_nSWindowSelSetContentAspectRatio, contentAspectRatio)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetContentAspectRatio, contentAspectRatio)
+	})
 }
 
 func (o *NSWindow) ViewsNeedDisplay() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelViewsNeedDisplay)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelViewsNeedDisplay)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetViewsNeedDisplay(viewsNeedDisplay bool) {
-	o.Ptr().Send(_nSWindowSelSetViewsNeedDisplay, viewsNeedDisplay)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetViewsNeedDisplay, viewsNeedDisplay)
+	})
 }
 
 func (o *NSWindow) PreservesContentDuringLiveResize() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelPreservesContentDuringLiveResize)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelPreservesContentDuringLiveResize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) {
-	o.Ptr().Send(_nSWindowSelSetPreservesContentDuringLiveResize, preservesContentDuringLiveResize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetPreservesContentDuringLiveResize, preservesContentDuringLiveResize)
+	})
 }
 
 func (o *NSWindow) FirstResponder() *NSResponder {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelFirstResponder)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSResponderFromID(_ret)
+	var _mainthread0 *NSResponder
+	purego.Main(func() {
+		_mainthread0 = func() *NSResponder {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelFirstResponder)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSResponderFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) ResizeFlags() NSEventModifierFlags {
-	_ret := objc.Send[NSEventModifierFlags](o.Ptr(), _nSWindowSelResizeFlags)
-	return _ret
+	var _mainthread0 NSEventModifierFlags
+	purego.Main(func() {
+		_mainthread0 = func() NSEventModifierFlags {
+			_ret := objc.Send[NSEventModifierFlags](o.Ptr(), _nSWindowSelResizeFlags)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) IsReleasedWhenClosed() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsReleasedWhenClosed)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsReleasedWhenClosed)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetReleasedWhenClosed(releasedWhenClosed bool) {
-	o.Ptr().Send(_nSWindowSelSetReleasedWhenClosed, releasedWhenClosed)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetReleasedWhenClosed, releasedWhenClosed)
+	})
 }
 
 func (o *NSWindow) IsZoomed() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsZoomed)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsZoomed)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) IsMiniaturized() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsMiniaturized)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsMiniaturized)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) BackgroundColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelBackgroundColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelBackgroundColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetBackgroundColor(backgroundColor *NSColor) {
-	o.Ptr().Send(_nSWindowSelSetBackgroundColor, backgroundColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetBackgroundColor, backgroundColor.Ptr())
+	})
 }
 
 func (o *NSWindow) IsMovable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsMovable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsMovable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetMovable(movable bool) {
-	o.Ptr().Send(_nSWindowSelSetMovable, movable)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetMovable, movable)
+	})
 }
 
 func (o *NSWindow) IsMovableByWindowBackground() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsMovableByWindowBackground)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsMovableByWindowBackground)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetMovableByWindowBackground(movableByWindowBackground bool) {
-	o.Ptr().Send(_nSWindowSelSetMovableByWindowBackground, movableByWindowBackground)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetMovableByWindowBackground, movableByWindowBackground)
+	})
 }
 
 func (o *NSWindow) HidesOnDeactivate() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelHidesOnDeactivate)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelHidesOnDeactivate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetHidesOnDeactivate(hidesOnDeactivate bool) {
-	o.Ptr().Send(_nSWindowSelSetHidesOnDeactivate, hidesOnDeactivate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetHidesOnDeactivate, hidesOnDeactivate)
+	})
 }
 
 // Indicates whether a window can be hidden during `-[NSApplication hide:]`.  Default is \c YES.
 func (o *NSWindow) CanHide() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelCanHide)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelCanHide)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Indicates whether a window can be hidden during `-[NSApplication hide:]`.  Default is \c YES.
 func (o *NSWindow) SetCanHide(canHide bool) {
-	o.Ptr().Send(_nSWindowSelSetCanHide, canHide)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetCanHide, canHide)
+	})
 }
 
 func (o *NSWindow) MiniwindowImage() *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelMiniwindowImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelMiniwindowImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetMiniwindowImage(miniwindowImage *NSImage) {
-	o.Ptr().Send(_nSWindowSelSetMiniwindowImage, miniwindowImage.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetMiniwindowImage, miniwindowImage.Ptr())
+	})
 }
 
 func (o *NSWindow) MiniwindowTitle() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelMiniwindowTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelMiniwindowTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetMiniwindowTitle(miniwindowTitle *foundation.NSString) {
-	o.Ptr().Send(_nSWindowSelSetMiniwindowTitle, miniwindowTitle.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetMiniwindowTitle, miniwindowTitle.Ptr())
+	})
 }
 
 func (o *NSWindow) DockTile() *NSDockTile {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDockTile)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSDockTileFromID(_ret)
+	var _mainthread0 *NSDockTile
+	purego.Main(func() {
+		_mainthread0 = func() *NSDockTile {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDockTile)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSDockTileFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) IsDocumentEdited() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsDocumentEdited)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsDocumentEdited)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetDocumentEdited(documentEdited bool) {
-	o.Ptr().Send(_nSWindowSelSetDocumentEdited, documentEdited)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetDocumentEdited, documentEdited)
+	})
 }
 
 func (o *NSWindow) IsVisible() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsVisible)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsVisible)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) IsKeyWindow() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsKeyWindow)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsKeyWindow)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) IsMainWindow() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsMainWindow)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsMainWindow)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) CanBecomeKeyWindow() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelCanBecomeKeyWindow)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelCanBecomeKeyWindow)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) CanBecomeMainWindow() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelCanBecomeMainWindow)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelCanBecomeMainWindow)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) WorksWhenModal() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelWorksWhenModal)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelWorksWhenModal)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // A Boolean value that indicates whether or not to prevent application termination when the receiving window is presented modally. The value of this property is `YES` if the window should prevent application termination when modal; otherwise, `NO`. The default value is `YES`. However, note that some window subclasses and some windows created indirectly (like those created by UI frameworks like AppKit and SwiftUI), may have different default values. For example, the Open panel and toolbar customization sheets should not prevent application termination, so those windows have `preventsApplicationTerminationWhenModal` set to `NO`. Some `NSAlert`s, like those that are simply informational, have windows that do not prevent application termination by default. Setting this property overrides the default behavior.
 func (o *NSWindow) PreventsApplicationTerminationWhenModal() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelPreventsApplicationTerminationWhenModal)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelPreventsApplicationTerminationWhenModal)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // A Boolean value that indicates whether or not to prevent application termination when the receiving window is presented modally. The value of this property is `YES` if the window should prevent application termination when modal; otherwise, `NO`. The default value is `YES`. However, note that some window subclasses and some windows created indirectly (like those created by UI frameworks like AppKit and SwiftUI), may have different default values. For example, the Open panel and toolbar customization sheets should not prevent application termination, so those windows have `preventsApplicationTerminationWhenModal` set to `NO`. Some `NSAlert`s, like those that are simply informational, have windows that do not prevent application termination by default. Setting this property overrides the default behavior.
 func (o *NSWindow) SetPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) {
-	o.Ptr().Send(_nSWindowSelSetPreventsApplicationTerminationWhenModal, preventsApplicationTerminationWhenModal)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetPreventsApplicationTerminationWhenModal, preventsApplicationTerminationWhenModal)
+	})
 }
 
 // Returns the scale factor representing the number of backing store pixels corresponding to each linear unit in window space on this \c NSWindow. This method is provided for rare cases when the explicit scale factor is needed. Please use `-convert*ToBacking:` methods whenever possible.
 func (o *NSWindow) BackingScaleFactor() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSWindowSelBackingScaleFactor)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSWindowSelBackingScaleFactor)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Default is \c NO. Set to \c YES to allow a window to display tooltips even when the application is in the background.  Note that, enabling tooltips in an inactive application will cause the app to do work any time the mouse passes over the window.  This can degrade system performance. Returns \c YES if this window displays tooltips even when the application is in the background.  To configure this setting you should call `-setAllowsToolTipsWhenApplicationIsInactive:` instead of overriding `-allowsToolTipsWhenApplicationIsInactive`.
 func (o *NSWindow) AllowsToolTipsWhenApplicationIsInactive() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelAllowsToolTipsWhenApplicationIsInactive)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelAllowsToolTipsWhenApplicationIsInactive)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Default is \c NO. Set to \c YES to allow a window to display tooltips even when the application is in the background.  Note that, enabling tooltips in an inactive application will cause the app to do work any time the mouse passes over the window.  This can degrade system performance. Returns \c YES if this window displays tooltips even when the application is in the background.  To configure this setting you should call `-setAllowsToolTipsWhenApplicationIsInactive:` instead of overriding `-allowsToolTipsWhenApplicationIsInactive`.
 func (o *NSWindow) SetAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) {
-	o.Ptr().Send(_nSWindowSelSetAllowsToolTipsWhenApplicationIsInactive, allowsToolTipsWhenApplicationIsInactive)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetAllowsToolTipsWhenApplicationIsInactive, allowsToolTipsWhenApplicationIsInactive)
+	})
 }
 
 func (o *NSWindow) BackingType() NSBackingStoreType {
-	_ret := objc.Send[NSBackingStoreType](o.Ptr(), _nSWindowSelBackingType)
-	return _ret
+	var _mainthread0 NSBackingStoreType
+	purego.Main(func() {
+		_mainthread0 = func() NSBackingStoreType {
+			_ret := objc.Send[NSBackingStoreType](o.Ptr(), _nSWindowSelBackingType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetBackingType(backingType NSBackingStoreType) {
-	o.Ptr().Send(_nSWindowSelSetBackingType, backingType)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetBackingType, backingType)
+	})
 }
 
 func (o *NSWindow) Level() int {
-	_ret := objc.Send[int](o.Ptr(), _nSWindowSelLevel)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSWindowSelLevel)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetLevel(level int) {
-	o.Ptr().Send(_nSWindowSelSetLevel, level)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetLevel, level)
+	})
 }
 
 func (o *NSWindow) DepthLimit() NSWindowDepth {
-	_ret := objc.Send[NSWindowDepth](o.Ptr(), _nSWindowSelDepthLimit)
-	return _ret
+	var _mainthread0 NSWindowDepth
+	purego.Main(func() {
+		_mainthread0 = func() NSWindowDepth {
+			_ret := objc.Send[NSWindowDepth](o.Ptr(), _nSWindowSelDepthLimit)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetDepthLimit(depthLimit NSWindowDepth) {
-	o.Ptr().Send(_nSWindowSelSetDepthLimit, depthLimit)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetDepthLimit, depthLimit)
+	})
 }
 
 func (o *NSWindow) HasDynamicDepthLimit() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelHasDynamicDepthLimit)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelHasDynamicDepthLimit)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The screen property returns the best screen for the window. If the window only intersects one screen, it returns that screen. If it intersects more than one screen, then it resolves the tie through based on what space it is mostly on. It may return nil if there are no available screens, or it is completely off screen.
 func (o *NSWindow) Screen() *NSScreen {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelScreen)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScreenFromID(_ret)
+	var _mainthread0 *NSScreen
+	purego.Main(func() {
+		_mainthread0 = func() *NSScreen {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelScreen)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScreenFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) DeepestScreen() *NSScreen {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDeepestScreen)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScreenFromID(_ret)
+	var _mainthread0 *NSScreen
+	purego.Main(func() {
+		_mainthread0 = func() *NSScreen {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDeepestScreen)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScreenFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) HasShadow() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelHasShadow)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelHasShadow)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetHasShadow(hasShadow bool) {
-	o.Ptr().Send(_nSWindowSelSetHasShadow, hasShadow)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetHasShadow, hasShadow)
+	})
 }
 
 func (o *NSWindow) AlphaValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSWindowSelAlphaValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSWindowSelAlphaValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetAlphaValue(alphaValue float64) {
-	o.Ptr().Send(_nSWindowSelSetAlphaValue, alphaValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetAlphaValue, alphaValue)
+	})
 }
 
 func (o *NSWindow) IsOpaque() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsOpaque)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsOpaque)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetOpaque(opaque bool) {
-	o.Ptr().Send(_nSWindowSelSetOpaque, opaque)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetOpaque, opaque)
+	})
 }
 
 // `-setSharingType:` specifies whether the window content can be read from another process.  The default sharing type is \c NSWindowSharingReadOnly, which means other processes can read the window content (eg. for window capture) but cannot modify it.  If you set your window sharing type to \c NSWindowSharingNone, so that the content cannot be captured, your window will also not be able to participate in a number of system services, so this setting should be used with caution.
 func (o *NSWindow) SharingType() NSWindowSharingType {
-	_ret := objc.Send[NSWindowSharingType](o.Ptr(), _nSWindowSelSharingType)
-	return _ret
+	var _mainthread0 NSWindowSharingType
+	purego.Main(func() {
+		_mainthread0 = func() NSWindowSharingType {
+			_ret := objc.Send[NSWindowSharingType](o.Ptr(), _nSWindowSelSharingType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // `-setSharingType:` specifies whether the window content can be read from another process.  The default sharing type is \c NSWindowSharingReadOnly, which means other processes can read the window content (eg. for window capture) but cannot modify it.  If you set your window sharing type to \c NSWindowSharingNone, so that the content cannot be captured, your window will also not be able to participate in a number of system services, so this setting should be used with caution.
 func (o *NSWindow) SetSharingType(sharingType NSWindowSharingType) {
-	o.Ptr().Send(_nSWindowSelSetSharingType, sharingType)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetSharingType, sharingType)
+	})
 }
 
 // Controls whether threading of view drawing should be enabled for this window.  Defaults to \c YES.  When this is set to \c YES, AppKit's view system is allowed to perform `-drawRect:` activity for the window's views on threads other than the main thread, for views that have `canDrawConcurrently == YES`.  When this is set to \c NO, the window's views will be drawn serially as on 10.5 and earlier, even though some of the views may have `canDrawConcurrently == YES`.
 func (o *NSWindow) AllowsConcurrentViewDrawing() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelAllowsConcurrentViewDrawing)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelAllowsConcurrentViewDrawing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Controls whether threading of view drawing should be enabled for this window.  Defaults to \c YES.  When this is set to \c YES, AppKit's view system is allowed to perform `-drawRect:` activity for the window's views on threads other than the main thread, for views that have `canDrawConcurrently == YES`.  When this is set to \c NO, the window's views will be drawn serially as on 10.5 and earlier, even though some of the views may have `canDrawConcurrently == YES`.
 func (o *NSWindow) SetAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) {
-	o.Ptr().Send(_nSWindowSelSetAllowsConcurrentViewDrawing, allowsConcurrentViewDrawing)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetAllowsConcurrentViewDrawing, allowsConcurrentViewDrawing)
+	})
 }
 
 func (o *NSWindow) DisplaysWhenScreenProfileChanges() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelDisplaysWhenScreenProfileChanges)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelDisplaysWhenScreenProfileChanges)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) {
-	o.Ptr().Send(_nSWindowSelSetDisplaysWhenScreenProfileChanges, displaysWhenScreenProfileChanges)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetDisplaysWhenScreenProfileChanges, displaysWhenScreenProfileChanges)
+	})
 }
 
 // This API controls whether the receiver is permitted onscreen before the user has logged in.  This property is off by default.  Alert panels and windows presented by input managers are examples of windows which should have this property set.
 func (o *NSWindow) CanBecomeVisibleWithoutLogin() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelCanBecomeVisibleWithoutLogin)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelCanBecomeVisibleWithoutLogin)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // This API controls whether the receiver is permitted onscreen before the user has logged in.  This property is off by default.  Alert panels and windows presented by input managers are examples of windows which should have this property set.
 func (o *NSWindow) SetCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) {
-	o.Ptr().Send(_nSWindowSelSetCanBecomeVisibleWithoutLogin, canBecomeVisibleWithoutLogin)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetCanBecomeVisibleWithoutLogin, canBecomeVisibleWithoutLogin)
+	})
 }
 
 func (o *NSWindow) CollectionBehavior() NSWindowCollectionBehavior {
-	_ret := objc.Send[NSWindowCollectionBehavior](o.Ptr(), _nSWindowSelCollectionBehavior)
-	return _ret
+	var _mainthread0 NSWindowCollectionBehavior
+	purego.Main(func() {
+		_mainthread0 = func() NSWindowCollectionBehavior {
+			_ret := objc.Send[NSWindowCollectionBehavior](o.Ptr(), _nSWindowSelCollectionBehavior)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetCollectionBehavior(collectionBehavior NSWindowCollectionBehavior) {
-	o.Ptr().Send(_nSWindowSelSetCollectionBehavior, collectionBehavior)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetCollectionBehavior, collectionBehavior)
+	})
 }
 
 // Provides for per-window control over automatic orderFront/orderOut animation behaviors added in 10.7.  Can be set to \c NSWindowAnimationBehaviorNone to disable Appkit's automatic animations for a given window, or to one of the other non-Default \c NSWindowAnimationBehavior values to override AppKit's automatic inference of appropriate animation behavior based on the window's apparent type.
 func (o *NSWindow) AnimationBehavior() NSWindowAnimationBehavior {
-	_ret := objc.Send[NSWindowAnimationBehavior](o.Ptr(), _nSWindowSelAnimationBehavior)
-	return _ret
+	var _mainthread0 NSWindowAnimationBehavior
+	purego.Main(func() {
+		_mainthread0 = func() NSWindowAnimationBehavior {
+			_ret := objc.Send[NSWindowAnimationBehavior](o.Ptr(), _nSWindowSelAnimationBehavior)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Provides for per-window control over automatic orderFront/orderOut animation behaviors added in 10.7.  Can be set to \c NSWindowAnimationBehaviorNone to disable Appkit's automatic animations for a given window, or to one of the other non-Default \c NSWindowAnimationBehavior values to override AppKit's automatic inference of appropriate animation behavior based on the window's apparent type.
 func (o *NSWindow) SetAnimationBehavior(animationBehavior NSWindowAnimationBehavior) {
-	o.Ptr().Send(_nSWindowSelSetAnimationBehavior, animationBehavior)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetAnimationBehavior, animationBehavior)
+	})
 }
 
 // Returns \c YES if this window is associated with the active space.  For visible windows, this API indicates whether the window is currently visible on the active space.  For offscreen windows, it indicates whether ordering the window onscreen would make it bring it onto the active space
 func (o *NSWindow) IsOnActiveSpace() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsOnActiveSpace)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsOnActiveSpace)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) StringWithSavedFrame() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelStringWithSavedFrame)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelStringWithSavedFrame)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) FrameAutosaveName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelFrameAutosaveName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelFrameAutosaveName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) MinSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSWindowSelMinSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSWindowSelMinSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetMinSize(minSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSWindowSelSetMinSize, minSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetMinSize, minSize)
+	})
 }
 
 func (o *NSWindow) MaxSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSWindowSelMaxSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSWindowSelMaxSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetMaxSize(maxSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSWindowSelSetMaxSize, maxSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetMaxSize, maxSize)
+	})
 }
 
 func (o *NSWindow) ContentMinSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSWindowSelContentMinSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSWindowSelContentMinSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetContentMinSize(contentMinSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSWindowSelSetContentMinSize, contentMinSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetContentMinSize, contentMinSize)
+	})
 }
 
 func (o *NSWindow) ContentMaxSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSWindowSelContentMaxSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSWindowSelContentMaxSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetContentMaxSize(contentMaxSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSWindowSelSetContentMaxSize, contentMaxSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetContentMaxSize, contentMaxSize)
+	})
 }
 
 func (o *NSWindow) MinFullScreenContentSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSWindowSelMinFullScreenContentSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSWindowSelMinFullScreenContentSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSWindowSelSetMinFullScreenContentSize, minFullScreenContentSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetMinFullScreenContentSize, minFullScreenContentSize)
+	})
 }
 
 func (o *NSWindow) MaxFullScreenContentSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSWindowSelMaxFullScreenContentSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSWindowSelMaxFullScreenContentSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSWindowSelSetMaxFullScreenContentSize, maxFullScreenContentSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetMaxFullScreenContentSize, maxFullScreenContentSize)
+	})
 }
 
 func (o *NSWindow) DeviceDescription() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDeviceDescription)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
+	var _mainthread0 *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDeviceDescription)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) WindowController() *NSWindowController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelWindowController)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowControllerFromID(_ret)
+	var _mainthread0 *NSWindowController
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindowController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelWindowController)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetWindowController(windowController *NSWindowController) {
-	o.Ptr().Send(_nSWindowSelSetWindowController, windowController.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetWindowController, windowController.Ptr())
+	})
 }
 
 // An ordered array of the sheets on the window. This consists of the presented sheets in top-to-bottom order, followed by queued sheets in the order they were queued. This does not include nested/sub-sheets.
 func (o *NSWindow) Sheets() *foundation.NSArray[*NSWindow] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelSheets)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSWindow](_ret)
+	var _mainthread0 *foundation.NSArray[*NSWindow]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSWindow] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelSheets)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSWindow](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the top-most sheet if there is one or more sheets, or nil if there is no sheet.
 func (o *NSWindow) AttachedSheet() *NSWindow {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelAttachedSheet)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowFromID(_ret)
+	var _mainthread0 *NSWindow
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindow {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelAttachedSheet)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) IsSheet() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsSheet)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsSheet)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the window that the sheet is directly attached to. This is based on the logical attachment of the sheet, not visual attachment. This relationship exists starting when the sheet is begun (using \c NSApplication's `-beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo: or NSWindow's -beginSheet:completionHandler:`), and ending once it is ordered out. Returns nil if the window is not a sheet or has no sheet parent.
 func (o *NSWindow) SheetParent() *NSWindow {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelSheetParent)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowFromID(_ret)
+	var _mainthread0 *NSWindow
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindow {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelSheetParent)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) ChildWindows() *foundation.NSArray[*NSWindow] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelChildWindows)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSWindow](_ret)
+	var _mainthread0 *foundation.NSArray[*NSWindow]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSWindow] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelChildWindows)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSWindow](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) ParentWindow() *NSWindow {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelParentWindow)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowFromID(_ret)
+	var _mainthread0 *NSWindow
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindow {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelParentWindow)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetParentWindow(parentWindow *NSWindow) {
-	o.Ptr().Send(_nSWindowSelSetParentWindow, parentWindow.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetParentWindow, parentWindow.Ptr())
+	})
 }
 
 // If set, the receiver will inherit the appearance of that object, as well as use KVO to observe its effectiveAppearance for changes. Typically this is used for child windows that are shown from a parent window or specific view. Defaults to NSApp.
 func (o *NSWindow) AppearanceSource() *foundation.NSObject {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelAppearanceSource)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSObjectFromID(_ret)
+	var _mainthread0 *foundation.NSObject
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSObject {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelAppearanceSource)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSObjectFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // If set, the receiver will inherit the appearance of that object, as well as use KVO to observe its effectiveAppearance for changes. Typically this is used for child windows that are shown from a parent window or specific view. Defaults to NSApp.
 func (o *NSWindow) SetAppearanceSource(appearanceSource *foundation.NSObject) {
-	o.Ptr().Send(_nSWindowSelSetAppearanceSource, appearanceSource.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetAppearanceSource, appearanceSource.Ptr())
+	})
 }
 
 func (o *NSWindow) ColorSpace() *NSColorSpace {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelColorSpace)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorSpaceFromID(_ret)
+	var _mainthread0 *NSColorSpace
+	purego.Main(func() {
+		_mainthread0 = func() *NSColorSpace {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelColorSpace)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorSpaceFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetColorSpace(colorSpace *NSColorSpace) {
-	o.Ptr().Send(_nSWindowSelSetColorSpace, colorSpace.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetColorSpace, colorSpace.Ptr())
+	})
 }
 
 func (o *NSWindow) OcclusionState() NSWindowOcclusionState {
-	_ret := objc.Send[NSWindowOcclusionState](o.Ptr(), _nSWindowSelOcclusionState)
-	return _ret
+	var _mainthread0 NSWindowOcclusionState
+	purego.Main(func() {
+		_mainthread0 = func() NSWindowOcclusionState {
+			_ret := objc.Send[NSWindowOcclusionState](o.Ptr(), _nSWindowSelOcclusionState)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies the style of separator displayed between the window's titlebar and content. The default value is NSTitlebarSeparatorStyleAutomatic. Changing this value will override any preference made by `NSSplitViewItem`.
 func (o *NSWindow) TitlebarSeparatorStyle() NSTitlebarSeparatorStyle {
-	_ret := objc.Send[NSTitlebarSeparatorStyle](o.Ptr(), _nSWindowSelTitlebarSeparatorStyle)
-	return _ret
+	var _mainthread0 NSTitlebarSeparatorStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSTitlebarSeparatorStyle {
+			_ret := objc.Send[NSTitlebarSeparatorStyle](o.Ptr(), _nSWindowSelTitlebarSeparatorStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies the style of separator displayed between the window's titlebar and content. The default value is NSTitlebarSeparatorStyleAutomatic. Changing this value will override any preference made by `NSSplitViewItem`.
 func (o *NSWindow) SetTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) {
-	o.Ptr().Send(_nSWindowSelSetTitlebarSeparatorStyle, titlebarSeparatorStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetTitlebarSeparatorStyle, titlebarSeparatorStyle)
+	})
 }
 
 // The main content view controller for the window. This provides the contentView of the window. Assigning this value will remove the existing contentView and will make the contentViewController.view the main contentView for the window. The default value is nil. The contentViewController only controls the contentView, and not the title of the window. The window title can easily be bound to the contentViewController with the following: [window bind:NSTitleBinding toObject:contentViewController withKeyPath:@"title" options:nil]. Setting the contentViewController will cause the window to resize based on the current size of the contentViewController. Autolayout should be used to restrict the size of the window. The value of the contentViewController is encoded in the NIB. Directly assigning a contentView will clear out the contentViewController.
 func (o *NSWindow) ContentViewController() *NSViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelContentViewController)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewControllerFromID(_ret)
+	var _mainthread0 *NSViewController
+	purego.Main(func() {
+		_mainthread0 = func() *NSViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelContentViewController)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The main content view controller for the window. This provides the contentView of the window. Assigning this value will remove the existing contentView and will make the contentViewController.view the main contentView for the window. The default value is nil. The contentViewController only controls the contentView, and not the title of the window. The window title can easily be bound to the contentViewController with the following: [window bind:NSTitleBinding toObject:contentViewController withKeyPath:@"title" options:nil]. Setting the contentViewController will cause the window to resize based on the current size of the contentViewController. Autolayout should be used to restrict the size of the window. The value of the contentViewController is encoded in the NIB. Directly assigning a contentView will clear out the contentViewController.
 func (o *NSWindow) SetContentViewController(contentViewController *NSViewController) {
-	o.Ptr().Send(_nSWindowSelSetContentViewController, contentViewController.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetContentViewController, contentViewController.Ptr())
+	})
 }
 
 func (o *NSWindow) InitialFirstResponder() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelInitialFirstResponder)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelInitialFirstResponder)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetInitialFirstResponder(initialFirstResponder *NSView) {
-	o.Ptr().Send(_nSWindowSelSetInitialFirstResponder, initialFirstResponder.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetInitialFirstResponder, initialFirstResponder.Ptr())
+	})
 }
 
 func (o *NSWindow) KeyViewSelectionDirection() NSSelectionDirection {
-	_ret := objc.Send[NSSelectionDirection](o.Ptr(), _nSWindowSelKeyViewSelectionDirection)
-	return _ret
+	var _mainthread0 NSSelectionDirection
+	purego.Main(func() {
+		_mainthread0 = func() NSSelectionDirection {
+			_ret := objc.Send[NSSelectionDirection](o.Ptr(), _nSWindowSelKeyViewSelectionDirection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) DefaultButtonCell() *NSButtonCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDefaultButtonCell)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSButtonCellFromID(_ret)
+	var _mainthread0 *NSButtonCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSButtonCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDefaultButtonCell)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSButtonCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetDefaultButtonCell(defaultButtonCell *NSButtonCell) {
-	o.Ptr().Send(_nSWindowSelSetDefaultButtonCell, defaultButtonCell.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetDefaultButtonCell, defaultButtonCell.Ptr())
+	})
 }
 
 func (o *NSWindow) AutorecalculatesKeyViewLoop() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelAutorecalculatesKeyViewLoop)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelAutorecalculatesKeyViewLoop)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) {
-	o.Ptr().Send(_nSWindowSelSetAutorecalculatesKeyViewLoop, autorecalculatesKeyViewLoop)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetAutorecalculatesKeyViewLoop, autorecalculatesKeyViewLoop)
+	})
 }
 
 func (o *NSWindow) Toolbar() *NSToolbar {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelToolbar)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSToolbarFromID(_ret)
+	var _mainthread0 *NSToolbar
+	purego.Main(func() {
+		_mainthread0 = func() *NSToolbar {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelToolbar)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSToolbarFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetToolbar(toolbar *NSToolbar) {
-	o.Ptr().Send(_nSWindowSelSetToolbar, toolbar.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetToolbar, toolbar.Ptr())
+	})
 }
 
 // Deprecated: This property has no effect
 func (o *NSWindow) ShowsToolbarButton() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelShowsToolbarButton)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelShowsToolbarButton)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: This property has no effect
 func (o *NSWindow) SetShowsToolbarButton(showsToolbarButton bool) {
-	o.Ptr().Send(_nSWindowSelSetShowsToolbarButton, showsToolbarButton)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetShowsToolbarButton, showsToolbarButton)
+	})
 }
 
 // Allows automatic window tabbing when the value is \c YES. By default, this will be set to \c YES, but applications can explicitly opt out of all automatic tabbing by setting it to NO, and can still adopted explicit window tabbing, if desired.
 func NSWindowAllowsAutomaticWindowTabbing() bool {
-	_ret := objc.Send[bool](objc.ID(_clsNSWindow), _nSWindowSelAllowsAutomaticWindowTabbing)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](objc.ID(_clsNSWindow), _nSWindowSelAllowsAutomaticWindowTabbing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Allows automatic window tabbing when the value is \c YES. By default, this will be set to \c YES, but applications can explicitly opt out of all automatic tabbing by setting it to NO, and can still adopted explicit window tabbing, if desired.
 func NSWindowSetAllowsAutomaticWindowTabbing(allowsAutomaticWindowTabbing bool) {
-	objc.ID(_clsNSWindow).Send(_nSWindowSelSetAllowsAutomaticWindowTabbing, allowsAutomaticWindowTabbing)
+	purego.Main(func() {
+		objc.ID(_clsNSWindow).Send(_nSWindowSelSetAllowsAutomaticWindowTabbing, allowsAutomaticWindowTabbing)
+	})
 }
 
 // Returns the user's tabbing preference as set in System Preferences. This value should be queried anytime a new window is made to see if the user wants to automatically show it in tabs.
 func NSWindowUserTabbingPreferenceClass() NSWindowUserTabbingPreference {
-	_ret := objc.Send[NSWindowUserTabbingPreference](objc.ID(_clsNSWindow), _nSWindowSelUserTabbingPreference)
-	return _ret
+	var _mainthread0 NSWindowUserTabbingPreference
+	purego.Main(func() {
+		_mainthread0 = func() NSWindowUserTabbingPreference {
+			_ret := objc.Send[NSWindowUserTabbingPreference](objc.ID(_clsNSWindow), _nSWindowSelUserTabbingPreference)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Get and set the tabbing mode for this window. This should be set before a window is shown. The default value is \c NSWindowTabbingModeAutomatic. When the value is \c NSWindowTabbingModeAutomatic, the system will look at the \c userTabbingPreference and automatically tab windows together based on the tabbingIdentifier, when it is appropriate to do so.
 func (o *NSWindow) TabbingMode() NSWindowTabbingMode {
-	_ret := objc.Send[NSWindowTabbingMode](o.Ptr(), _nSWindowSelTabbingMode)
-	return _ret
+	var _mainthread0 NSWindowTabbingMode
+	purego.Main(func() {
+		_mainthread0 = func() NSWindowTabbingMode {
+			_ret := objc.Send[NSWindowTabbingMode](o.Ptr(), _nSWindowSelTabbingMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Get and set the tabbing mode for this window. This should be set before a window is shown. The default value is \c NSWindowTabbingModeAutomatic. When the value is \c NSWindowTabbingModeAutomatic, the system will look at the \c userTabbingPreference and automatically tab windows together based on the tabbingIdentifier, when it is appropriate to do so.
 func (o *NSWindow) SetTabbingMode(tabbingMode NSWindowTabbingMode) {
-	o.Ptr().Send(_nSWindowSelSetTabbingMode, tabbingMode)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetTabbingMode, tabbingMode)
+	})
 }
 
 // Windows with the same \c tabbingIdentifier will have the ability to be tabbed together when a window is being shown. This allows aggregation of similar windows. By default, the \c tabbingIdentifier will be generated based on inherent window properties, such as the window class name, the delegate class name, the window controller class name, and some additional state. Windows can be explicitly made to group together by using the same \c tabbingIdentifier.
 func (o *NSWindow) TabbingIdentifier() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelTabbingIdentifier)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelTabbingIdentifier)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Windows with the same \c tabbingIdentifier will have the ability to be tabbed together when a window is being shown. This allows aggregation of similar windows. By default, the \c tabbingIdentifier will be generated based on inherent window properties, such as the window class name, the delegate class name, the window controller class name, and some additional state. Windows can be explicitly made to group together by using the same \c tabbingIdentifier.
 func (o *NSWindow) SetTabbingIdentifier(tabbingIdentifier *foundation.NSString) {
-	o.Ptr().Send(_nSWindowSelSetTabbingIdentifier, tabbingIdentifier.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetTabbingIdentifier, tabbingIdentifier.Ptr())
+	})
 }
 
 // This is now a cover for `self.tabGroup.windows`, but will return nil if the window is not showing a tab bar.
 func (o *NSWindow) TabbedWindows() *foundation.NSArray[*NSWindow] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelTabbedWindows)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSWindow](_ret)
+	var _mainthread0 *foundation.NSArray[*NSWindow]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSWindow] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelTabbedWindows)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSWindow](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Access the properties for this window when it is a tabbed window environment. See the \c NSWindowTab header and comments for more information.
 func (o *NSWindow) Tab() *NSWindowTab {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelTab)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowTabFromID(_ret)
+	var _mainthread0 *NSWindowTab
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindowTab {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelTab)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowTabFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Represents a tab group of windows. This \c tabGroup is lazily created on demand.
 func (o *NSWindow) TabGroup() *NSWindowTabGroup {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelTabGroup)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowTabGroupFromID(_ret)
+	var _mainthread0 *NSWindowTabGroup
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindowTabGroup {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelTabGroup)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowTabGroupFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Indicates whether the receiver is the subject of an active SharePlay sharing session.
 func (o *NSWindow) HasActiveWindowSharingSession() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelHasActiveWindowSharingSession)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelHasActiveWindowSharingSession)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Retrieve the layout direction of the window titlebar: this includes the standard window buttons (close/minimize/maximize buttons) and the title for this window. In general, this will return "right to left" (RTL) if the primary system language is RTL. The layout direction may be RTL even in applications that do not have a RTL language localization. This value should be utilized if an application uses titlebarAppearsTransparent and places controls underneath the titlebar.
 func (o *NSWindow) WindowTitlebarLayoutDirection() NSUserInterfaceLayoutDirection {
-	_ret := objc.Send[NSUserInterfaceLayoutDirection](o.Ptr(), _nSWindowSelWindowTitlebarLayoutDirection)
-	return _ret
+	var _mainthread0 NSUserInterfaceLayoutDirection
+	purego.Main(func() {
+		_mainthread0 = func() NSUserInterfaceLayoutDirection {
+			_ret := objc.Send[NSUserInterfaceLayoutDirection](o.Ptr(), _nSWindowSelWindowTitlebarLayoutDirection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Tracks events that match the specified mask using the specified tracking handler until the tracking handler explicitly terminates tracking.
@@ -1889,435 +2951,743 @@ func (o *NSWindow) TrackEventsMatchingMaskTimeoutModeHandler(mask NSEventMask, t
 		})
 		defer __block_trackingHandler.Release()
 	}
-	o.Ptr().Send(_nSWindowSelTrackEventsMatchingMaskTimeoutModeHandler, mask, timeout, mode.Ptr(), __block_trackingHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelTrackEventsMatchingMaskTimeoutModeHandler, mask, timeout, mode.Ptr(), __block_trackingHandler)
+	})
 }
 
 // Returns the next event matching a given mask.
 func (o *NSWindow) NextEventMatchingMask(mask NSEventMask) *NSEvent {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelNextEventMatchingMask, mask)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSEventFromID(_ret)
+	var _mainthread0 *NSEvent
+	purego.Main(func() {
+		_mainthread0 = func() *NSEvent {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelNextEventMatchingMask, mask)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSEventFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Forwards the message to the global application object.
 func (o *NSWindow) NextEventMatchingMaskUntilDateInModeDequeue(mask NSEventMask, expiration *foundation.NSDate, mode *foundation.NSString, deqFlag bool) *NSEvent {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelNextEventMatchingMaskUntilDateInModeDequeue, mask, expiration.Ptr(), mode.Ptr(), deqFlag)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSEventFromID(_ret)
+	var _mainthread0 *NSEvent
+	purego.Main(func() {
+		_mainthread0 = func() *NSEvent {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelNextEventMatchingMaskUntilDateInModeDequeue, mask, expiration.Ptr(), mode.Ptr(), deqFlag)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSEventFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Forwards the message to the global application object.
 func (o *NSWindow) DiscardEventsMatchingMaskBeforeEvent(mask NSEventMask, lastEvent *NSEvent) {
-	o.Ptr().Send(_nSWindowSelDiscardEventsMatchingMaskBeforeEvent, mask, lastEvent.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelDiscardEventsMatchingMaskBeforeEvent, mask, lastEvent.Ptr())
+	})
 }
 
 // Forwards the message to the global application object.
 func (o *NSWindow) PostEventAtStart(event *NSEvent, flag bool) {
-	o.Ptr().Send(_nSWindowSelPostEventAtStart, event.Ptr(), flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelPostEventAtStart, event.Ptr(), flag)
+	})
 }
 
 // This action method dispatches mouse and keyboard events the global application object sends to the window.
 func (o *NSWindow) SendEvent(event *NSEvent) {
-	o.Ptr().Send(_nSWindowSelSendEvent, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSendEvent, event.Ptr())
+	})
 }
 
 func (o *NSWindow) CurrentEvent() *NSEvent {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelCurrentEvent)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSEventFromID(_ret)
+	var _mainthread0 *NSEvent
+	purego.Main(func() {
+		_mainthread0 = func() *NSEvent {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelCurrentEvent)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSEventFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) AcceptsMouseMovedEvents() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelAcceptsMouseMovedEvents)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelAcceptsMouseMovedEvents)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) {
-	o.Ptr().Send(_nSWindowSelSetAcceptsMouseMovedEvents, acceptsMouseMovedEvents)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetAcceptsMouseMovedEvents, acceptsMouseMovedEvents)
+	})
 }
 
 func (o *NSWindow) IgnoresMouseEvents() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIgnoresMouseEvents)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIgnoresMouseEvents)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetIgnoresMouseEvents(ignoresMouseEvents bool) {
-	o.Ptr().Send(_nSWindowSelSetIgnoresMouseEvents, ignoresMouseEvents)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetIgnoresMouseEvents, ignoresMouseEvents)
+	})
 }
 
 func (o *NSWindow) MouseLocationOutsideOfEventStream() corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSWindowSelMouseLocationOutsideOfEventStream)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSWindowSelMouseLocationOutsideOfEventStream)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Disables all cursor rectangle management within the window.
 func (o *NSWindow) DisableCursorRects() {
-	o.Ptr().Send(_nSWindowSelDisableCursorRects)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelDisableCursorRects)
+	})
 }
 
 // Reenables cursor rectangle management within the window after a disableCursorRects message.
 func (o *NSWindow) EnableCursorRects() {
-	o.Ptr().Send(_nSWindowSelEnableCursorRects)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelEnableCursorRects)
+	})
 }
 
 // Invalidates all cursor rectangles in the window.
 func (o *NSWindow) DiscardCursorRects() {
-	o.Ptr().Send(_nSWindowSelDiscardCursorRects)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelDiscardCursorRects)
+	})
 }
 
 // Marks as invalid the cursor rectangles of a given view object in the window, so they’ll be set up again when the window becomes key.
 func (o *NSWindow) InvalidateCursorRectsForView(view *NSView) {
-	o.Ptr().Send(_nSWindowSelInvalidateCursorRectsForView, view.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelInvalidateCursorRectsForView, view.Ptr())
+	})
 }
 
 // Clears the window’s cursor rectangles and the cursor rectangles of the NSView objects in its view hierarchy.
 func (o *NSWindow) ResetCursorRects() {
-	o.Ptr().Send(_nSWindowSelResetCursorRects)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelResetCursorRects)
+	})
 }
 
 func (o *NSWindow) AreCursorRectsEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelAreCursorRectsEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelAreCursorRectsEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) BeginDraggingSessionWithItemsEventSource(items *foundation.NSArray[*NSDraggingItem], event *NSEvent, source NSDraggingSource) *NSDraggingSession {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelBeginDraggingSessionWithItemsEventSource, items.Ptr(), event.Ptr(), source)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSDraggingSessionFromID(_ret)
+	var _mainthread0 *NSDraggingSession
+	purego.Main(func() {
+		_mainthread0 = func() *NSDraggingSession {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelBeginDraggingSessionWithItemsEventSource, items.Ptr(), event.Ptr(), source)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSDraggingSessionFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Begins a dragging session.
 // Deprecated: Use -[NSWindow beginDraggingSessionWithItems:event:source:] instead.
 func (o *NSWindow) DragImageAtOffsetEventPasteboardSourceSlideBack(image *NSImage, baseLocation corefoundation.CGPoint, initialOffset corefoundation.CGSize, event *NSEvent, pboard *NSPasteboard, sourceObj objc.ID, slideFlag bool) {
-	o.Ptr().Send(_nSWindowSelDragImageAtOffsetEventPasteboardSourceSlideBack, image.Ptr(), baseLocation, initialOffset, event.Ptr(), pboard.Ptr(), sourceObj, slideFlag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelDragImageAtOffsetEventPasteboardSourceSlideBack, image.Ptr(), baseLocation, initialOffset, event.Ptr(), pboard.Ptr(), sourceObj, slideFlag)
+	})
 }
 
 // Registers a set of pasteboard types that the window accepts as the destination of an image-dragging session.
 // Deprecated: Use -[NSWindow beginDraggingSessionWithItems:event:source:] instead.
 func (o *NSWindow) RegisterForDraggedTypes(newTypes *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSWindowSelRegisterForDraggedTypes, newTypes.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelRegisterForDraggedTypes, newTypes.Ptr())
+	})
 }
 
 // Unregisters the window as a possible destination for dragging operations.
 // Deprecated: Use -[NSWindow beginDraggingSessionWithItems:event:source:] instead.
 func (o *NSWindow) UnregisterDraggedTypes() {
-	o.Ptr().Send(_nSWindowSelUnregisterDraggedTypes)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelUnregisterDraggedTypes)
+	})
 }
 
 // Returns a new display link whose callback will be invoked in-sync with the display the window is on.
 func (o *NSWindow) DisplayLinkWithTargetSelector(target objc.ID, selector objc.SEL) *quartzcore.CADisplayLink {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDisplayLinkWithTargetSelector, target, selector)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return quartzcore.CADisplayLinkFromID(_ret)
+	var _mainthread0 *quartzcore.CADisplayLink
+	purego.Main(func() {
+		_mainthread0 = func() *quartzcore.CADisplayLink {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDisplayLinkWithTargetSelector, target, selector)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return quartzcore.CADisplayLinkFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: This method shouldn’t be used as it doesn’t work in all drawing situations; instead, a subview should be used that implements the desired drawing behavior
 func (o *NSWindow) CacheImageInRect(rect corefoundation.CGRect) {
-	o.Ptr().Send(_nSWindowSelCacheImageInRect, rect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelCacheImageInRect, rect)
+	})
 }
 
 // Deprecated: This method shouldn’t be used as it doesn’t work in all drawing situations; instead, a subview should be used that implements the desired drawing behavior
 func (o *NSWindow) RestoreCachedImage() {
-	o.Ptr().Send(_nSWindowSelRestoreCachedImage)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelRestoreCachedImage)
+	})
 }
 
 // Deprecated: This method shouldn’t be used as it doesn’t work in all drawing situations; instead, a subview should be used that implements the desired drawing behavior
 func (o *NSWindow) DiscardCachedImage() {
-	o.Ptr().Send(_nSWindowSelDiscardCachedImage)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelDiscardCachedImage)
+	})
 }
 
 // Deprecated: This method does not do anything and should not be called.
 func NSWindowMenuChanged(menu *NSMenu) {
-	objc.ID(_clsNSWindow).Send(_nSWindowSelMenuChanged, menu.Ptr())
+	purego.Main(func() {
+		objc.ID(_clsNSWindow).Send(_nSWindowSelMenuChanged, menu.Ptr())
+	})
 }
 
 // Deprecated: This method is unused and should not be called.
 func (o *NSWindow) GState() int {
-	_ret := objc.Send[int](o.Ptr(), _nSWindowSelGState)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSWindowSelGState)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use -convertRectToScreen: or -convertPointToScreen: instead
 func (o *NSWindow) ConvertBaseToScreen(point corefoundation.CGPoint) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSWindowSelConvertBaseToScreen, point)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSWindowSelConvertBaseToScreen, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use -convertRectFromScreen or -convertPointFromScreen: instead
 func (o *NSWindow) ConvertScreenToBase(point corefoundation.CGPoint) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSWindowSelConvertScreenToBase, point)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSWindowSelConvertScreenToBase, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use -convertRectToBacking: and -backingScaleFactor instead
 func (o *NSWindow) UserSpaceScaleFactor() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSWindowSelUserSpaceScaleFactor)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSWindowSelUserSpaceScaleFactor)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: This method does not do anything and should not be called.
 func (o *NSWindow) UseOptimizedDrawing(flag bool) {
-	o.Ptr().Send(_nSWindowSelUseOptimizedDrawing, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelUseOptimizedDrawing, flag)
+	})
 }
 
 // Deprecated: This method does not do anything and should not be called.
 func (o *NSWindow) CanStoreColor() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelCanStoreColor)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelCanStoreColor)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use +[NSAnimationContext runAnimationGroup:completionHandler:] to perform atomic updates across runloop invocations.
 func (o *NSWindow) DisableFlushWindow() {
-	o.Ptr().Send(_nSWindowSelDisableFlushWindow)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelDisableFlushWindow)
+	})
 }
 
 // Deprecated: Use +[NSAnimationContext runAnimationGroup:completionHandler:] to perform atomic updates across runloop invocations.
 func (o *NSWindow) EnableFlushWindow() {
-	o.Ptr().Send(_nSWindowSelEnableFlushWindow)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelEnableFlushWindow)
+	})
 }
 
 // Deprecated: Allow AppKit's automatic deferred display mechanism to take care of flushing any graphics contexts as needed.
 func (o *NSWindow) FlushWindow() {
-	o.Ptr().Send(_nSWindowSelFlushWindow)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelFlushWindow)
+	})
 }
 
 // Deprecated: Allow AppKit's automatic deferred display mechanism to take care of flushing any graphics contexts as needed.
 func (o *NSWindow) FlushWindowIfNeeded() {
-	o.Ptr().Send(_nSWindowSelFlushWindowIfNeeded)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelFlushWindowIfNeeded)
+	})
 }
 
 // Deprecated: This method should not be used.
 func (o *NSWindow) InitWithWindowRef(windowRef unsafe.Pointer) *NSWindow {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelInitWithWindowRef, windowRef)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowFromID(_ret)
+	var _mainthread0 *NSWindow
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindow {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelInitWithWindowRef, windowRef)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Disables the window’s screen updates until the window is flushed.
 // Deprecated: This method does not do anything and should not be called.
 func (o *NSWindow) DisableScreenUpdatesUntilFlush() {
-	o.Ptr().Send(_nSWindowSelDisableScreenUpdatesUntilFlush)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelDisableScreenUpdatesUntilFlush)
+	})
 }
 
 // Deprecated: Use +[NSAnimationContext runAnimationGroup:completionHandler:] to perform atomic updates across runloop invocations.
 func (o *NSWindow) IsFlushWindowDisabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsFlushWindowDisabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsFlushWindowDisabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use +[NSAnimationContext runAnimationGroup:completionHandler:] to temporarily prevent AppKit's automatic deferred display mechanism from drawing.
 func (o *NSWindow) IsAutodisplay() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsAutodisplay)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsAutodisplay)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use +[NSAnimationContext runAnimationGroup:completionHandler:] to temporarily prevent AppKit's automatic deferred display mechanism from drawing.
 func (o *NSWindow) SetAutodisplay(autodisplay bool) {
-	o.Ptr().Send(_nSWindowSelSetAutodisplay, autodisplay)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetAutodisplay, autodisplay)
+	})
 }
 
 // Deprecated: Add instances of NSView to display content in a window.
 func (o *NSWindow) GraphicsContext() *NSGraphicsContext {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelGraphicsContext)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGraphicsContextFromID(_ret)
+	var _mainthread0 *NSGraphicsContext
+	purego.Main(func() {
+		_mainthread0 = func() *NSGraphicsContext {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelGraphicsContext)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGraphicsContextFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: This property does not do anything and should not be used
 func (o *NSWindow) IsOneShot() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsOneShot)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsOneShot)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: This property does not do anything and should not be used
 func (o *NSWindow) SetOneShot(oneShot bool) {
-	o.Ptr().Send(_nSWindowSelSetOneShot, oneShot)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetOneShot, oneShot)
+	})
 }
 
 // Deprecated: This property does not do anything and should not be used
 func (o *NSWindow) PreferredBackingLocation() NSWindowBackingLocation {
-	_ret := objc.Send[NSWindowBackingLocation](o.Ptr(), _nSWindowSelPreferredBackingLocation)
-	return _ret
+	var _mainthread0 NSWindowBackingLocation
+	purego.Main(func() {
+		_mainthread0 = func() NSWindowBackingLocation {
+			_ret := objc.Send[NSWindowBackingLocation](o.Ptr(), _nSWindowSelPreferredBackingLocation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: This property does not do anything and should not be used
 func (o *NSWindow) SetPreferredBackingLocation(preferredBackingLocation NSWindowBackingLocation) {
-	o.Ptr().Send(_nSWindowSelSetPreferredBackingLocation, preferredBackingLocation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetPreferredBackingLocation, preferredBackingLocation)
+	})
 }
 
 // Deprecated: This property does not do anything and should not be used
 func (o *NSWindow) BackingLocation() NSWindowBackingLocation {
-	_ret := objc.Send[NSWindowBackingLocation](o.Ptr(), _nSWindowSelBackingLocation)
-	return _ret
+	var _mainthread0 NSWindowBackingLocation
+	purego.Main(func() {
+		_mainthread0 = func() NSWindowBackingLocation {
+			_ret := objc.Send[NSWindowBackingLocation](o.Ptr(), _nSWindowSelBackingLocation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: This property does not do anything and should not be used.
 func (o *NSWindow) ShowsResizeIndicator() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelShowsResizeIndicator)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelShowsResizeIndicator)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: This property does not do anything and should not be used.
 func (o *NSWindow) SetShowsResizeIndicator(showsResizeIndicator bool) {
-	o.Ptr().Send(_nSWindowSelSetShowsResizeIndicator, showsResizeIndicator)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetShowsResizeIndicator, showsResizeIndicator)
+	})
 }
 
 // Deprecated: This method should not be used.
 func (o *NSWindow) WindowRef() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSWindowSelWindowRef)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSWindowSelWindowRef)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Updates the constraints based on changes to views in the window since the last layout.
 func (o *NSWindow) UpdateConstraintsIfNeeded() {
-	o.Ptr().Send(_nSWindowSelUpdateConstraintsIfNeeded)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelUpdateConstraintsIfNeeded)
+	})
 }
 
 // Updates the layout of views in the window based on the current views and constraints.
 func (o *NSWindow) LayoutIfNeeded() {
-	o.Ptr().Send(_nSWindowSelLayoutIfNeeded)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelLayoutIfNeeded)
+	})
 }
 
 // Returns the part of the window that stays stationary during constraint-based layout.
 func (o *NSWindow) AnchorAttributeForOrientation(orientation NSLayoutConstraintOrientation) NSLayoutAttribute {
-	_ret := objc.Send[NSLayoutAttribute](o.Ptr(), _nSWindowSelAnchorAttributeForOrientation, orientation)
-	return _ret
+	var _mainthread0 NSLayoutAttribute
+	purego.Main(func() {
+		_mainthread0 = func() NSLayoutAttribute {
+			_ret := objc.Send[NSLayoutAttribute](o.Ptr(), _nSWindowSelAnchorAttributeForOrientation, orientation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the part of the window that stays stationary during constraint-based layout.
 func (o *NSWindow) SetAnchorAttributeForOrientation(attr NSLayoutAttribute, orientation NSLayoutConstraintOrientation) {
-	o.Ptr().Send(_nSWindowSelSetAnchorAttributeForOrientation, attr, orientation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetAnchorAttributeForOrientation, attr, orientation)
+	})
 }
 
 // Displays a visual representation of the supplied constraints in the window.
 func (o *NSWindow) VisualizeConstraints(constraints *foundation.NSArray[*NSLayoutConstraint]) {
-	o.Ptr().Send(_nSWindowSelVisualizeConstraints, constraints.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelVisualizeConstraints, constraints.Ptr())
+	})
 }
 
 // Deprecated: Drawers are deprecated; consider using NSSplitViewController
 func (o *NSWindow) Drawers() *foundation.NSArray[*NSDrawer] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDrawers)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSDrawer](_ret)
+	var _mainthread0 *foundation.NSArray[*NSDrawer]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSDrawer] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDrawers)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSDrawer](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the window’s miniaturized state to the value you specify.
 func (o *NSWindow) SetIsMiniaturized(flag bool) {
-	o.Ptr().Send(_nSWindowSelSetIsMiniaturized, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetIsMiniaturized, flag)
+	})
 }
 
 // Sets the window’s visible state to the value you specify.
 func (o *NSWindow) SetIsVisible(flag bool) {
-	o.Ptr().Send(_nSWindowSelSetIsVisible, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetIsVisible, flag)
+	})
 }
 
 // Sets the window’s zoomed state to the value you specify.
 func (o *NSWindow) SetIsZoomed(flag bool) {
-	o.Ptr().Send(_nSWindowSelSetIsZoomed, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetIsZoomed, flag)
+	})
 }
 
 // Handles the AppleScript command to close the window (and its associated document, if any).
 func (o *NSWindow) HandleCloseScriptCommand(command *foundation.NSCloseCommand) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelHandleCloseScriptCommand, command.Ptr())
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelHandleCloseScriptCommand, command.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Handles the AppleScript command to print the contents of the window (or its associated document, if any).
 func (o *NSWindow) HandlePrintScriptCommand(command *foundation.NSScriptCommand) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelHandlePrintScriptCommand, command.Ptr())
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelHandlePrintScriptCommand, command.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Handles the AppleScript command to save the window (and its associated document, if any).
 func (o *NSWindow) HandleSaveScriptCommand(command *foundation.NSScriptCommand) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelHandleSaveScriptCommand, command.Ptr())
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelHandleSaveScriptCommand, command.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) HasCloseBox() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelHasCloseBox)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelHasCloseBox)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) HasTitleBar() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelHasTitleBar)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelHasTitleBar)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) IsFloatingPanel() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsFloatingPanel)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsFloatingPanel)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) IsMiniaturizable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsMiniaturizable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsMiniaturizable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) IsModalPanel() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsModalPanel)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsModalPanel)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) IsResizable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsResizable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsResizable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) IsZoomable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsZoomable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsZoomable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) OrderedIndex() int {
-	_ret := objc.Send[int](o.Ptr(), _nSWindowSelOrderedIndex)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSWindowSelOrderedIndex)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetOrderedIndex(orderedIndex int) {
-	o.Ptr().Send(_nSWindowSelSetOrderedIndex, orderedIndex)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetOrderedIndex, orderedIndex)
+	})
 }
 
 // Disables snapshot restoration.
 func (o *NSWindow) DisableSnapshotRestoration() {
-	o.Ptr().Send(_nSWindowSelDisableSnapshotRestoration)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelDisableSnapshotRestoration)
+	})
 }
 
 // Enables snapshot restoration.
 func (o *NSWindow) EnableSnapshotRestoration() {
-	o.Ptr().Send(_nSWindowSelEnableSnapshotRestoration)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelEnableSnapshotRestoration)
+	})
 }
 
 func (o *NSWindow) IsRestorable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsRestorable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSWindowSelIsRestorable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetRestorable(restorable bool) {
-	o.Ptr().Send(_nSWindowSelSetRestorable, restorable)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetRestorable, restorable)
+	})
 }
 
 func (o *NSWindow) RestorationClass() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSWindowSelRestorationClass)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSWindowSelRestorationClass)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSWindow) SetRestorationClass(restorationClass unsafe.Pointer) {
-	o.Ptr().Send(_nSWindowSelSetRestorationClass, restorationClass)
+	purego.Main(func() {
+		o.Ptr().Send(_nSWindowSelSetRestorationClass, restorationClass)
+	})
 }

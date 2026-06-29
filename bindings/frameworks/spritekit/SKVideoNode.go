@@ -52,133 +52,219 @@ func SKVideoNodeFromID(id objc.ID) *SKVideoNode {
 
 // Creates and initializes a video node using an existing video player object.
 func SKVideoNodeVideoNodeWithAVPlayer(player *avfoundation.AVPlayer) *SKVideoNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKVideoNode), _sKVideoNodeSelVideoNodeWithAVPlayer, player.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKVideoNodeFromID(_ret)
+	var _mainthread0 *SKVideoNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKVideoNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKVideoNode), _sKVideoNodeSelVideoNodeWithAVPlayer, player.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKVideoNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates and initializes a new video node using a video file stored in the app bundle.
 // Deprecated: since macOS 10.11.
 func SKVideoNodeVideoNodeWithVideoFileNamed(videoFile *foundation.NSString) *SKVideoNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKVideoNode), _sKVideoNodeSelVideoNodeWithVideoFileNamed, videoFile.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKVideoNodeFromID(_ret)
+	var _mainthread0 *SKVideoNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKVideoNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKVideoNode), _sKVideoNodeSelVideoNodeWithVideoFileNamed, videoFile.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKVideoNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates and initializes a new video node using a video file stored in the app bundle.
 func SKVideoNodeVideoNodeWithFileNamed(videoFile *foundation.NSString) *SKVideoNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKVideoNode), _sKVideoNodeSelVideoNodeWithFileNamed, videoFile.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKVideoNodeFromID(_ret)
+	var _mainthread0 *SKVideoNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKVideoNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKVideoNode), _sKVideoNodeSelVideoNodeWithFileNamed, videoFile.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKVideoNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates and initializes a video node using a URL that points to a video file.
 // Deprecated: since macOS 10.11.
 func SKVideoNodeVideoNodeWithVideoURL(videoURL *foundation.NSURL) *SKVideoNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKVideoNode), _sKVideoNodeSelVideoNodeWithVideoURL, videoURL.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKVideoNodeFromID(_ret)
+	var _mainthread0 *SKVideoNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKVideoNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKVideoNode), _sKVideoNodeSelVideoNodeWithVideoURL, videoURL.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKVideoNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates and initializes a video node using a URL that points to a video file.
 func SKVideoNodeVideoNodeWithURL(videoURL *foundation.NSURL) *SKVideoNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKVideoNode), _sKVideoNodeSelVideoNodeWithURL, videoURL.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKVideoNodeFromID(_ret)
+	var _mainthread0 *SKVideoNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKVideoNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKVideoNode), _sKVideoNodeSelVideoNodeWithURL, videoURL.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKVideoNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a video node using an existing AVPlayer object.
 func (o *SKVideoNode) InitWithAVPlayer(player *avfoundation.AVPlayer) *SKVideoNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKVideoNodeSelInitWithAVPlayer, player.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKVideoNodeFromID(_ret)
+	var _mainthread0 *SKVideoNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKVideoNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKVideoNodeSelInitWithAVPlayer, player.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKVideoNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a video node using a video file stored in the app bundle.
 // Deprecated: since macOS 10.10.
 func (o *SKVideoNode) InitWithVideoFileNamed(videoFile *foundation.NSString) *SKVideoNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKVideoNodeSelInitWithVideoFileNamed, videoFile.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKVideoNodeFromID(_ret)
+	var _mainthread0 *SKVideoNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKVideoNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKVideoNodeSelInitWithVideoFileNamed, videoFile.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKVideoNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a video node using a video file stored in the app bundle.
 func (o *SKVideoNode) InitWithFileNamed(videoFile *foundation.NSString) *SKVideoNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKVideoNodeSelInitWithFileNamed, videoFile.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKVideoNodeFromID(_ret)
+	var _mainthread0 *SKVideoNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKVideoNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKVideoNodeSelInitWithFileNamed, videoFile.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKVideoNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a video node using a URL that points to a video file.
 // Deprecated: since macOS 10.10.
 func (o *SKVideoNode) InitWithVideoURL(url *foundation.NSURL) *SKVideoNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKVideoNodeSelInitWithVideoURL, url.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKVideoNodeFromID(_ret)
+	var _mainthread0 *SKVideoNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKVideoNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKVideoNodeSelInitWithVideoURL, url.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKVideoNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a video node using a URL.
 func (o *SKVideoNode) InitWithURL(url *foundation.NSURL) *SKVideoNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKVideoNodeSelInitWithURL, url.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKVideoNodeFromID(_ret)
+	var _mainthread0 *SKVideoNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKVideoNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKVideoNodeSelInitWithURL, url.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKVideoNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Tells you when to initialize a video node that was created from an archive.
 func (o *SKVideoNode) InitWithCoder(aDecoder *foundation.NSCoder) *SKVideoNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKVideoNodeSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKVideoNodeFromID(_ret)
+	var _mainthread0 *SKVideoNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKVideoNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKVideoNodeSelInitWithCoder, aDecoder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKVideoNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Starts video playback.
 func (o *SKVideoNode) Play() {
-	o.Ptr().Send(_sKVideoNodeSelPlay)
+	purego.Main(func() {
+		o.Ptr().Send(_sKVideoNodeSelPlay)
+	})
 }
 
 // Pauses video playback.
 func (o *SKVideoNode) Pause() {
-	o.Ptr().Send(_sKVideoNodeSelPause)
+	purego.Main(func() {
+		o.Ptr().Send(_sKVideoNodeSelPause)
+	})
 }
 
 // The display size of the video (in parent's coordinate space)
 func (o *SKVideoNode) Size() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _sKVideoNodeSelSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _sKVideoNodeSelSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKVideoNode) SetSize(size corefoundation.CGSize) {
-	o.Ptr().Send(_sKVideoNodeSelSetSize, size)
+	purego.Main(func() {
+		o.Ptr().Send(_sKVideoNodeSelSetSize, size)
+	})
 }
 
 // The location in the video that maps to its 'position' in the parent's coordinate space. (0.0-1.0)
 func (o *SKVideoNode) AnchorPoint() corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sKVideoNodeSelAnchorPoint)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sKVideoNodeSelAnchorPoint)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKVideoNode) SetAnchorPoint(anchorPoint corefoundation.CGPoint) {
-	o.Ptr().Send(_sKVideoNodeSelSetAnchorPoint, anchorPoint)
+	purego.Main(func() {
+		o.Ptr().Send(_sKVideoNodeSelSetAnchorPoint, anchorPoint)
+	})
 }

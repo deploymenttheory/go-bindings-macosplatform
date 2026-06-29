@@ -47,72 +47,120 @@ func NSPageControllerFromID(id objc.ID) *NSPageController {
 
 // Navigates to the specific object.
 func (o *NSPageController) NavigateForwardToObject(object objc.ID) {
-	o.Ptr().Send(_nSPageControllerSelNavigateForwardToObject, object)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPageControllerSelNavigateForwardToObject, object)
+	})
 }
 
 // Invoked when the page transition is completed.
 func (o *NSPageController) CompleteTransition() {
-	o.Ptr().Send(_nSPageControllerSelCompleteTransition)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPageControllerSelCompleteTransition)
+	})
 }
 
 // Navigates backwards in the page controller’s arranged objects array.
 func (o *NSPageController) NavigateBack(sender objc.ID) {
-	o.Ptr().Send(_nSPageControllerSelNavigateBack, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPageControllerSelNavigateBack, sender)
+	})
 }
 
 // Navigates to the next object in the page controller’s arranged objects array, if appropriate.
 func (o *NSPageController) NavigateForward(sender objc.ID) {
-	o.Ptr().Send(_nSPageControllerSelNavigateForward, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPageControllerSelNavigateForward, sender)
+	})
 }
 
 // Navigates to the selected index, which is taken from the sender.
 func (o *NSPageController) TakeSelectedIndexFrom(sender objc.ID) {
-	o.Ptr().Send(_nSPageControllerSelTakeSelectedIndexFrom, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPageControllerSelTakeSelectedIndexFrom, sender)
+	})
 }
 
 func (o *NSPageController) Delegate() NSPageControllerDelegate {
-	_ret := objc.Send[NSPageControllerDelegate](o.Ptr(), _nSPageControllerSelDelegate)
-	return _ret
+	var _mainthread0 NSPageControllerDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSPageControllerDelegate {
+			_ret := objc.Send[NSPageControllerDelegate](o.Ptr(), _nSPageControllerSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPageController) SetDelegate(delegate NSPageControllerDelegate) {
-	o.Ptr().Send(_nSPageControllerSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPageControllerSelSetDelegate, delegate)
+	})
 }
 
 func (o *NSPageController) SelectedViewController() *NSViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPageControllerSelSelectedViewController)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewControllerFromID(_ret)
+	var _mainthread0 *NSViewController
+	purego.Main(func() {
+		_mainthread0 = func() *NSViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPageControllerSelSelectedViewController)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPageController) TransitionStyle() NSPageControllerTransitionStyle {
-	_ret := objc.Send[NSPageControllerTransitionStyle](o.Ptr(), _nSPageControllerSelTransitionStyle)
-	return _ret
+	var _mainthread0 NSPageControllerTransitionStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSPageControllerTransitionStyle {
+			_ret := objc.Send[NSPageControllerTransitionStyle](o.Ptr(), _nSPageControllerSelTransitionStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPageController) SetTransitionStyle(transitionStyle NSPageControllerTransitionStyle) {
-	o.Ptr().Send(_nSPageControllerSelSetTransitionStyle, transitionStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPageControllerSelSetTransitionStyle, transitionStyle)
+	})
 }
 
 func (o *NSPageController) ArrangedObjects() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPageControllerSelArrangedObjects)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[objc.ID](_ret)
+	var _mainthread0 *foundation.NSArray[objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPageControllerSelArrangedObjects)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPageController) SetArrangedObjects(arrangedObjects *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_nSPageControllerSelSetArrangedObjects, arrangedObjects.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPageControllerSelSetArrangedObjects, arrangedObjects.Ptr())
+	})
 }
 
 func (o *NSPageController) SelectedIndex() int {
-	_ret := objc.Send[int](o.Ptr(), _nSPageControllerSelSelectedIndex)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSPageControllerSelSelectedIndex)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPageController) SetSelectedIndex(selectedIndex int) {
-	o.Ptr().Send(_nSPageControllerSelSetSelectedIndex, selectedIndex)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPageControllerSelSetSelectedIndex, selectedIndex)
+	})
 }

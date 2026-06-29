@@ -38,30 +38,50 @@ func LPLinkViewFromID(id objc.ID) *LPLinkView {
 
 // Initializes a placeholder link view without metadata for a given URL.
 func (o *LPLinkView) InitWithURL(uRL *foundation.NSURL) *LPLinkView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _lPLinkViewSelInitWithURL, uRL.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return LPLinkViewFromID(_ret)
+	var _mainthread0 *LPLinkView
+	purego.Main(func() {
+		_mainthread0 = func() *LPLinkView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _lPLinkViewSelInitWithURL, uRL.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return LPLinkViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a link view with specified metadata.
 func (o *LPLinkView) InitWithMetadata(metadata *LPLinkMetadata) *LPLinkView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _lPLinkViewSelInitWithMetadata, metadata.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return LPLinkViewFromID(_ret)
+	var _mainthread0 *LPLinkView
+	purego.Main(func() {
+		_mainthread0 = func() *LPLinkView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _lPLinkViewSelInitWithMetadata, metadata.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return LPLinkViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *LPLinkView) Metadata() *LPLinkMetadata {
-	_ret := objc.Send[objc.ID](o.Ptr(), _lPLinkViewSelMetadata)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return LPLinkMetadataFromID(_ret)
+	var _mainthread0 *LPLinkMetadata
+	purego.Main(func() {
+		_mainthread0 = func() *LPLinkMetadata {
+			_ret := objc.Send[objc.ID](o.Ptr(), _lPLinkViewSelMetadata)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return LPLinkMetadataFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *LPLinkView) SetMetadata(metadata *LPLinkMetadata) {
-	o.Ptr().Send(_lPLinkViewSelSetMetadata, metadata.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_lPLinkViewSelSetMetadata, metadata.Ptr())
+	})
 }

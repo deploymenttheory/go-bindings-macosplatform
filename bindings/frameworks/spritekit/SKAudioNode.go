@@ -44,69 +44,117 @@ func SKAudioNodeFromID(id objc.ID) *SKAudioNode {
 
 // Initializes an audio node from an AVFoundation audio node.
 func (o *SKAudioNode) InitWithAVAudioNode(node *avfaudio.AVAudioNode) *SKAudioNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKAudioNodeSelInitWithAVAudioNode, node.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKAudioNodeFromID(_ret)
+	var _mainthread0 *SKAudioNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKAudioNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKAudioNodeSelInitWithAVAudioNode, node.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKAudioNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Tells you when to initialize an audio node that has been unarchived.
 func (o *SKAudioNode) InitWithCoder(aDecoder *foundation.NSCoder) *SKAudioNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKAudioNodeSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKAudioNodeFromID(_ret)
+	var _mainthread0 *SKAudioNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKAudioNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKAudioNodeSelInitWithCoder, aDecoder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKAudioNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes an audio node from an audio asset with the specified filename.
 func (o *SKAudioNode) InitWithFileNamed(name *foundation.NSString) *SKAudioNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKAudioNodeSelInitWithFileNamed, name.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKAudioNodeFromID(_ret)
+	var _mainthread0 *SKAudioNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKAudioNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKAudioNodeSelInitWithFileNamed, name.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKAudioNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes an audio node from an audio asset with the specified URL.
 func (o *SKAudioNode) InitWithURL(url *foundation.NSURL) *SKAudioNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKAudioNodeSelInitWithURL, url.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKAudioNodeFromID(_ret)
+	var _mainthread0 *SKAudioNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKAudioNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKAudioNodeSelInitWithURL, url.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKAudioNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets or gets the current AVAudioNode used by this instance.
 func (o *SKAudioNode) AvAudioNode() *avfaudio.AVAudioNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKAudioNodeSelAvAudioNode)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return avfaudio.AVAudioNodeFromID(_ret)
+	var _mainthread0 *avfaudio.AVAudioNode
+	purego.Main(func() {
+		_mainthread0 = func() *avfaudio.AVAudioNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKAudioNodeSelAvAudioNode)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return avfaudio.AVAudioNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKAudioNode) SetAvAudioNode(avAudioNode *avfaudio.AVAudioNode) {
-	o.Ptr().Send(_sKAudioNodeSelSetAvAudioNode, avAudioNode.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKAudioNodeSelSetAvAudioNode, avAudioNode.Ptr())
+	})
 }
 
 // Specifies whether the node is to automatically play sound when added to a scene. If autoplaysLooped is NO, the node and its sound must be explicitly scheduled and played using the scene's engine. If YES, the node will automatically play sound when added to a scene. Defaults to YES. @see SKView.paused
 func (o *SKAudioNode) AutoplayLooped() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sKAudioNodeSelAutoplayLooped)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sKAudioNodeSelAutoplayLooped)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKAudioNode) SetAutoplayLooped(autoplayLooped bool) {
-	o.Ptr().Send(_sKAudioNodeSelSetAutoplayLooped, autoplayLooped)
+	purego.Main(func() {
+		o.Ptr().Send(_sKAudioNodeSelSetAutoplayLooped, autoplayLooped)
+	})
 }
 
 // Marks the audio source as positional so that the audio mix considers relative position and velocity with regards to the scene's current listener node. @see AVAudio3DMixing @see SKScene.listener
 func (o *SKAudioNode) IsPositional() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sKAudioNodeSelIsPositional)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sKAudioNodeSelIsPositional)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKAudioNode) SetPositional(positional bool) {
-	o.Ptr().Send(_sKAudioNodeSelSetPositional, positional)
+	purego.Main(func() {
+		o.Ptr().Send(_sKAudioNodeSelSetPositional, positional)
+	})
 }

@@ -189,279 +189,455 @@ func NSTableViewFromID(id objc.ID) *NSTableView {
 }
 
 func (o *NSTableView) InitWithFrame(frameRect corefoundation.CGRect) *NSTableView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelInitWithFrame, frameRect)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTableViewFromID(_ret)
+	var _mainthread0 *NSTableView
+	purego.Main(func() {
+		_mainthread0 = func() *NSTableView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelInitWithFrame, frameRect)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTableViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) InitWithCoder(coder *foundation.NSCoder) *NSTableView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTableViewFromID(_ret)
+	var _mainthread0 *NSTableView
+	purego.Main(func() {
+		_mainthread0 = func() *NSTableView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTableViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Informs the table view that the rows specified in indexSet have changed height.
 func (o *NSTableView) NoteHeightOfRowsWithIndexesChanged(indexSet *foundation.NSIndexSet) {
-	o.Ptr().Send(_nSTableViewSelNoteHeightOfRowsWithIndexesChanged, indexSet.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelNoteHeightOfRowsWithIndexesChanged, indexSet.Ptr())
+	})
 }
 
 // Adds the specified column as the last column of the table view.
 func (o *NSTableView) AddTableColumn(tableColumn *NSTableColumn) {
-	o.Ptr().Send(_nSTableViewSelAddTableColumn, tableColumn.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelAddTableColumn, tableColumn.Ptr())
+	})
 }
 
 // Removes the specified column from the table view.
 func (o *NSTableView) RemoveTableColumn(tableColumn *NSTableColumn) {
-	o.Ptr().Send(_nSTableViewSelRemoveTableColumn, tableColumn.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelRemoveTableColumn, tableColumn.Ptr())
+	})
 }
 
 // Moves the column and heading at the specified index to the new specified index.
 func (o *NSTableView) MoveColumnToColumn(oldIndex int, newIndex int) {
-	o.Ptr().Send(_nSTableViewSelMoveColumnToColumn, oldIndex, newIndex)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelMoveColumnToColumn, oldIndex, newIndex)
+	})
 }
 
 // Returns the index of the first column in the table view whose identifier is equal to the specified identifier.
 func (o *NSTableView) ColumnWithIdentifier(identifier *foundation.NSString) int {
-	_ret := objc.Send[int](o.Ptr(), _nSTableViewSelColumnWithIdentifier, identifier.Ptr())
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTableViewSelColumnWithIdentifier, identifier.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the NSTableColumn object for the first column whose identifier is equal to the specified object.
 func (o *NSTableView) TableColumnWithIdentifier(identifier *foundation.NSString) *NSTableColumn {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelTableColumnWithIdentifier, identifier.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTableColumnFromID(_ret)
+	var _mainthread0 *NSTableColumn
+	purego.Main(func() {
+		_mainthread0 = func() *NSTableColumn {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelTableColumnWithIdentifier, identifier.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTableColumnFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Properly sizes the table view and its header view and marks it as needing display.
 func (o *NSTableView) Tile() {
-	o.Ptr().Send(_nSTableViewSelTile)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelTile)
+	})
 }
 
 // Resizes the last column so the table view fits exactly within its enclosing clip view.
 func (o *NSTableView) SizeLastColumnToFit() {
-	o.Ptr().Send(_nSTableViewSelSizeLastColumnToFit)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSizeLastColumnToFit)
+	})
 }
 
 // Scrolls the view so the specified row is visible.
 func (o *NSTableView) ScrollRowToVisible(row int) {
-	o.Ptr().Send(_nSTableViewSelScrollRowToVisible, row)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelScrollRowToVisible, row)
+	})
 }
 
 // Scrolls the view so the specified column is visible.
 func (o *NSTableView) ScrollColumnToVisible(column int) {
-	o.Ptr().Send(_nSTableViewSelScrollColumnToVisible, column)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelScrollColumnToVisible, column)
+	})
 }
 
 // Marks the table view as needing redisplay, so it will reload the data for visible cells and draw the new values.
 func (o *NSTableView) ReloadData() {
-	o.Ptr().Send(_nSTableViewSelReloadData)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelReloadData)
+	})
 }
 
 // Informs the table view that the number of records in its data source has changed.
 func (o *NSTableView) NoteNumberOfRowsChanged() {
-	o.Ptr().Send(_nSTableViewSelNoteNumberOfRowsChanged)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelNoteNumberOfRowsChanged)
+	})
 }
 
 // Reloads the data for only the specified rows and columns.
 func (o *NSTableView) ReloadDataForRowIndexesColumnIndexes(rowIndexes *foundation.NSIndexSet, columnIndexes *foundation.NSIndexSet) {
-	o.Ptr().Send(_nSTableViewSelReloadDataForRowIndexesColumnIndexes, rowIndexes.Ptr(), columnIndexes.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelReloadDataForRowIndexesColumnIndexes, rowIndexes.Ptr(), columnIndexes.Ptr())
+	})
 }
 
 // Sets the indicator image of the specified column.
 func (o *NSTableView) SetIndicatorImageInTableColumn(image *NSImage, tableColumn *NSTableColumn) {
-	o.Ptr().Send(_nSTableViewSelSetIndicatorImageInTableColumn, image.Ptr(), tableColumn.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetIndicatorImageInTableColumn, image.Ptr(), tableColumn.Ptr())
+	})
 }
 
 // Returns the indicator image of the specified table column.
 func (o *NSTableView) IndicatorImageInTableColumn(tableColumn *NSTableColumn) *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelIndicatorImageInTableColumn, tableColumn.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelIndicatorImageInTableColumn, tableColumn.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a Boolean value indicating whether the table view allows dragging the rows with the drag initiated at the specified point.
 func (o *NSTableView) CanDragRowsWithIndexesAtPoint(rowIndexes *foundation.NSIndexSet, mouseDownPoint corefoundation.CGPoint) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelCanDragRowsWithIndexesAtPoint, rowIndexes.Ptr(), mouseDownPoint)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelCanDragRowsWithIndexesAtPoint, rowIndexes.Ptr(), mouseDownPoint)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Computes and returns an image to use for dragging.
 func (o *NSTableView) DragImageForRowsWithIndexesTableColumnsEventOffset(dragRows *foundation.NSIndexSet, tableColumns *foundation.NSArray[*NSTableColumn], dragEvent *NSEvent, dragImageOffset *corefoundation.CGPoint) *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelDragImageForRowsWithIndexesTableColumnsEventOffset, dragRows.Ptr(), tableColumns.Ptr(), dragEvent.Ptr(), dragImageOffset)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelDragImageForRowsWithIndexesTableColumnsEventOffset, dragRows.Ptr(), tableColumns.Ptr(), dragEvent.Ptr(), dragImageOffset)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the default operation mask returned by draggingSourceOperationMaskForLocal: to mask.
 func (o *NSTableView) SetDraggingSourceOperationMaskForLocal(mask NSDragOperation, isLocal bool) {
-	o.Ptr().Send(_nSTableViewSelSetDraggingSourceOperationMaskForLocal, mask, isLocal)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetDraggingSourceOperationMaskForLocal, mask, isLocal)
+	})
 }
 
 // Retargets the proposed drop operation.
 func (o *NSTableView) SetDropRowDropOperation(row int, dropOperation NSTableViewDropOperation) {
-	o.Ptr().Send(_nSTableViewSelSetDropRowDropOperation, row, dropOperation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetDropRowDropOperation, row, dropOperation)
+	})
 }
 
 // Selects all rows or all columns, according to whether rows or columns were most recently selected.
 func (o *NSTableView) SelectAll(sender objc.ID) {
-	o.Ptr().Send(_nSTableViewSelSelectAll, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSelectAll, sender)
+	})
 }
 
 // Deselects all selected rows or columns if empty selection is allowed; otherwise does nothing.
 func (o *NSTableView) DeselectAll(sender objc.ID) {
-	o.Ptr().Send(_nSTableViewSelDeselectAll, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelDeselectAll, sender)
+	})
 }
 
 // Sets the column selection using indexes possibly extending the selection.
 func (o *NSTableView) SelectColumnIndexesByExtendingSelection(indexes *foundation.NSIndexSet, extend bool) {
-	o.Ptr().Send(_nSTableViewSelSelectColumnIndexesByExtendingSelection, indexes.Ptr(), extend)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSelectColumnIndexesByExtendingSelection, indexes.Ptr(), extend)
+	})
 }
 
 // Sets the row selection using indexes extending the selection if specified.
 func (o *NSTableView) SelectRowIndexesByExtendingSelection(indexes *foundation.NSIndexSet, extend bool) {
-	o.Ptr().Send(_nSTableViewSelSelectRowIndexesByExtendingSelection, indexes.Ptr(), extend)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSelectRowIndexesByExtendingSelection, indexes.Ptr(), extend)
+	})
 }
 
 // Deselects the column at the specified index if it’s selected.
 func (o *NSTableView) DeselectColumn(column int) {
-	o.Ptr().Send(_nSTableViewSelDeselectColumn, column)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelDeselectColumn, column)
+	})
 }
 
 // Deselects the row at the specified index if it’s selected.
 func (o *NSTableView) DeselectRow(row int) {
-	o.Ptr().Send(_nSTableViewSelDeselectRow, row)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelDeselectRow, row)
+	})
 }
 
 // Returns a Boolean value that indicates whether the column at the specified index is selected.
 func (o *NSTableView) IsColumnSelected(column int) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelIsColumnSelected, column)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelIsColumnSelected, column)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a Boolean value that indicates whether the row at the specified index is selected.
 func (o *NSTableView) IsRowSelected(row int) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelIsRowSelected, row)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelIsRowSelected, row)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the rectangle containing the column at the specified index.
 func (o *NSTableView) RectOfColumn(column int) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTableViewSelRectOfColumn, column)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTableViewSelRectOfColumn, column)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the rectangle containing the row at the specified index.
 func (o *NSTableView) RectOfRow(row int) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTableViewSelRectOfRow, row)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTableViewSelRectOfRow, row)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the indexes of the table view’s columns that intersect the specified rectangle.
 func (o *NSTableView) ColumnIndexesInRect(rect corefoundation.CGRect) *foundation.NSIndexSet {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelColumnIndexesInRect, rect)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSIndexSetFromID(_ret)
+	var _mainthread0 *foundation.NSIndexSet
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSIndexSet {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelColumnIndexesInRect, rect)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSIndexSetFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a range of indexes for the rows that lie wholly or partially within the vertical boundaries of the specified rectangle.
 func (o *NSTableView) RowsInRect(rect corefoundation.CGRect) foundation.NSRange {
-	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTableViewSelRowsInRect, rect)
-	return _ret
+	var _mainthread0 foundation.NSRange
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSRange {
+			_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTableViewSelRowsInRect, rect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the index of the column the specified point lies in.
 func (o *NSTableView) ColumnAtPoint(point corefoundation.CGPoint) int {
-	_ret := objc.Send[int](o.Ptr(), _nSTableViewSelColumnAtPoint, point)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTableViewSelColumnAtPoint, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the index of the row the specified point lies in.
 func (o *NSTableView) RowAtPoint(point corefoundation.CGPoint) int {
-	_ret := objc.Send[int](o.Ptr(), _nSTableViewSelRowAtPoint, point)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTableViewSelRowAtPoint, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a rectangle locating the cell that lies at the intersection of the specified column and row.
 func (o *NSTableView) FrameOfCellAtColumnRow(column int, row int) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTableViewSelFrameOfCellAtColumnRow, column, row)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTableViewSelFrameOfCellAtColumnRow, column, row)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Edits the cell at the specified column and row using the specified event and selection behavior.
 func (o *NSTableView) EditColumnRowWithEventSelect(column int, row int, event *NSEvent, select_ bool) {
-	o.Ptr().Send(_nSTableViewSelEditColumnRowWithEventSelect, column, row, event.Ptr(), select_)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelEditColumnRowWithEventSelect, column, row, event.Ptr(), select_)
+	})
 }
 
 // Draws the cells for the row at rowIndex in the columns that intersect clipRect.
 func (o *NSTableView) DrawRowClipRect(row int, clipRect corefoundation.CGRect) {
-	o.Ptr().Send(_nSTableViewSelDrawRowClipRect, row, clipRect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelDrawRowClipRect, row, clipRect)
+	})
 }
 
 // Highlights the region of the table view in the specified rectangle.
 func (o *NSTableView) HighlightSelectionInClipRect(clipRect corefoundation.CGRect) {
-	o.Ptr().Send(_nSTableViewSelHighlightSelectionInClipRect, clipRect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelHighlightSelectionInClipRect, clipRect)
+	})
 }
 
 // Draws the grid lines within the supplied rectangle.
 func (o *NSTableView) DrawGridInClipRect(clipRect corefoundation.CGRect) {
-	o.Ptr().Send(_nSTableViewSelDrawGridInClipRect, clipRect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelDrawGridInClipRect, clipRect)
+	})
 }
 
 // Draws the background of the table view in the clip rect specified by the rectangle.
 func (o *NSTableView) DrawBackgroundInClipRect(clipRect corefoundation.CGRect) {
-	o.Ptr().Send(_nSTableViewSelDrawBackgroundInClipRect, clipRect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelDrawBackgroundInClipRect, clipRect)
+	})
 }
 
 // Returns a view at the specified row and column indexes, creating one if necessary.
 func (o *NSTableView) ViewAtColumnRowMakeIfNecessary(column int, row int, makeIfNecessary bool) *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelViewAtColumnRowMakeIfNecessary, column, row, makeIfNecessary)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelViewAtColumnRowMakeIfNecessary, column, row, makeIfNecessary)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a row view at the specified index, creating one if necessary.
 func (o *NSTableView) RowViewAtRowMakeIfNecessary(row int, makeIfNecessary bool) *NSTableRowView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelRowViewAtRowMakeIfNecessary, row, makeIfNecessary)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTableRowViewFromID(_ret)
+	var _mainthread0 *NSTableRowView
+	purego.Main(func() {
+		_mainthread0 = func() *NSTableRowView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelRowViewAtRowMakeIfNecessary, row, makeIfNecessary)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTableRowViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the index of the row for the specified view.
 func (o *NSTableView) RowForView(view *NSView) int {
-	_ret := objc.Send[int](o.Ptr(), _nSTableViewSelRowForView, view.Ptr())
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTableViewSelRowForView, view.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the column index for the specified view.
 func (o *NSTableView) ColumnForView(view *NSView) int {
-	_ret := objc.Send[int](o.Ptr(), _nSTableViewSelColumnForView, view.Ptr())
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTableViewSelColumnForView, view.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a new or existing view with the specified identifier.
 func (o *NSTableView) MakeViewWithIdentifierOwner(identifier *foundation.NSString, owner objc.ID) *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelMakeViewWithIdentifierOwner, identifier.Ptr(), owner)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelMakeViewWithIdentifierOwner, identifier.Ptr(), owner)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Allows the enumeration of all the table rows that are known to the table view.
@@ -476,598 +652,1054 @@ func (o *NSTableView) EnumerateAvailableRowViewsUsing(handler func(*NSTableRowVi
 		})
 		defer __block_handler.Release()
 	}
-	o.Ptr().Send(_nSTableViewSelEnumerateAvailableRowViewsUsing, __block_handler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelEnumerateAvailableRowViewsUsing, __block_handler)
+	})
 }
 
 // Begins a group of updates for the table view.
 func (o *NSTableView) BeginUpdates() {
-	o.Ptr().Send(_nSTableViewSelBeginUpdates)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelBeginUpdates)
+	})
 }
 
 // Ends the group of updates for the table view.
 func (o *NSTableView) EndUpdates() {
-	o.Ptr().Send(_nSTableViewSelEndUpdates)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelEndUpdates)
+	})
 }
 
 // Inserts the rows using the specified animation.
 func (o *NSTableView) InsertRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, animationOptions NSTableViewAnimationOptions) {
-	o.Ptr().Send(_nSTableViewSelInsertRowsAtIndexesWithAnimation, indexes.Ptr(), animationOptions)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelInsertRowsAtIndexesWithAnimation, indexes.Ptr(), animationOptions)
+	})
 }
 
 // Removes the rows using the specified animation.
 func (o *NSTableView) RemoveRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, animationOptions NSTableViewAnimationOptions) {
-	o.Ptr().Send(_nSTableViewSelRemoveRowsAtIndexesWithAnimation, indexes.Ptr(), animationOptions)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelRemoveRowsAtIndexesWithAnimation, indexes.Ptr(), animationOptions)
+	})
 }
 
 // Moves the specified row to the new row location using animation.
 func (o *NSTableView) MoveRowAtIndexToIndex(oldIndex int, newIndex int) {
-	o.Ptr().Send(_nSTableViewSelMoveRowAtIndexToIndex, oldIndex, newIndex)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelMoveRowAtIndexToIndex, oldIndex, newIndex)
+	})
 }
 
 // Hides the specified table rows.
 func (o *NSTableView) HideRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, rowAnimation NSTableViewAnimationOptions) {
-	o.Ptr().Send(_nSTableViewSelHideRowsAtIndexesWithAnimation, indexes.Ptr(), rowAnimation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelHideRowsAtIndexesWithAnimation, indexes.Ptr(), rowAnimation)
+	})
 }
 
 // Unhides the specified table rows.
 func (o *NSTableView) UnhideRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, rowAnimation NSTableViewAnimationOptions) {
-	o.Ptr().Send(_nSTableViewSelUnhideRowsAtIndexesWithAnimation, indexes.Ptr(), rowAnimation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelUnhideRowsAtIndexesWithAnimation, indexes.Ptr(), rowAnimation)
+	})
 }
 
 // Registers a NIB for the specified identifier, so that view-based table views can use it to instantiate views.
 func (o *NSTableView) RegisterNibForIdentifier(nib *NSNib, identifier *foundation.NSString) {
-	o.Ptr().Send(_nSTableViewSelRegisterNibForIdentifier, nib.Ptr(), identifier.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelRegisterNibForIdentifier, nib.Ptr(), identifier.Ptr())
+	})
 }
 
 // Invoked when a row view is added to the table.
 func (o *NSTableView) DidAddRowViewForRow(rowView *NSTableRowView, row int) {
-	o.Ptr().Send(_nSTableViewSelDidAddRowViewForRow, rowView.Ptr(), row)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelDidAddRowViewForRow, rowView.Ptr(), row)
+	})
 }
 
 // Invoked when a row view is removed from the table.
 func (o *NSTableView) DidRemoveRowViewForRow(rowView *NSTableRowView, row int) {
-	o.Ptr().Send(_nSTableViewSelDidRemoveRowViewForRow, rowView.Ptr(), row)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelDidRemoveRowViewForRow, rowView.Ptr(), row)
+	})
 }
 
 func (o *NSTableView) DataSource() NSTableViewDataSource {
-	_ret := objc.Send[NSTableViewDataSource](o.Ptr(), _nSTableViewSelDataSource)
-	return _ret
+	var _mainthread0 NSTableViewDataSource
+	purego.Main(func() {
+		_mainthread0 = func() NSTableViewDataSource {
+			_ret := objc.Send[NSTableViewDataSource](o.Ptr(), _nSTableViewSelDataSource)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetDataSource(dataSource NSTableViewDataSource) {
-	o.Ptr().Send(_nSTableViewSelSetDataSource, dataSource)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetDataSource, dataSource)
+	})
 }
 
 func (o *NSTableView) Delegate() NSTableViewDelegate {
-	_ret := objc.Send[NSTableViewDelegate](o.Ptr(), _nSTableViewSelDelegate)
-	return _ret
+	var _mainthread0 NSTableViewDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSTableViewDelegate {
+			_ret := objc.Send[NSTableViewDelegate](o.Ptr(), _nSTableViewSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetDelegate(delegate NSTableViewDelegate) {
-	o.Ptr().Send(_nSTableViewSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetDelegate, delegate)
+	})
 }
 
 func (o *NSTableView) HeaderView() *NSTableHeaderView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelHeaderView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTableHeaderViewFromID(_ret)
+	var _mainthread0 *NSTableHeaderView
+	purego.Main(func() {
+		_mainthread0 = func() *NSTableHeaderView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelHeaderView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTableHeaderViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetHeaderView(headerView *NSTableHeaderView) {
-	o.Ptr().Send(_nSTableViewSelSetHeaderView, headerView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetHeaderView, headerView.Ptr())
+	})
 }
 
 func (o *NSTableView) CornerView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelCornerView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelCornerView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetCornerView(cornerView *NSView) {
-	o.Ptr().Send(_nSTableViewSelSetCornerView, cornerView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetCornerView, cornerView.Ptr())
+	})
 }
 
 func (o *NSTableView) AllowsColumnReordering() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelAllowsColumnReordering)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelAllowsColumnReordering)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetAllowsColumnReordering(allowsColumnReordering bool) {
-	o.Ptr().Send(_nSTableViewSelSetAllowsColumnReordering, allowsColumnReordering)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetAllowsColumnReordering, allowsColumnReordering)
+	})
 }
 
 func (o *NSTableView) AllowsColumnResizing() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelAllowsColumnResizing)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelAllowsColumnResizing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetAllowsColumnResizing(allowsColumnResizing bool) {
-	o.Ptr().Send(_nSTableViewSelSetAllowsColumnResizing, allowsColumnResizing)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetAllowsColumnResizing, allowsColumnResizing)
+	})
 }
 
 func (o *NSTableView) ColumnAutoresizingStyle() NSTableViewColumnAutoresizingStyle {
-	_ret := objc.Send[NSTableViewColumnAutoresizingStyle](o.Ptr(), _nSTableViewSelColumnAutoresizingStyle)
-	return _ret
+	var _mainthread0 NSTableViewColumnAutoresizingStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSTableViewColumnAutoresizingStyle {
+			_ret := objc.Send[NSTableViewColumnAutoresizingStyle](o.Ptr(), _nSTableViewSelColumnAutoresizingStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetColumnAutoresizingStyle(columnAutoresizingStyle NSTableViewColumnAutoresizingStyle) {
-	o.Ptr().Send(_nSTableViewSelSetColumnAutoresizingStyle, columnAutoresizingStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetColumnAutoresizingStyle, columnAutoresizingStyle)
+	})
 }
 
 func (o *NSTableView) GridStyleMask() NSTableViewGridLineStyle {
-	_ret := objc.Send[NSTableViewGridLineStyle](o.Ptr(), _nSTableViewSelGridStyleMask)
-	return _ret
+	var _mainthread0 NSTableViewGridLineStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSTableViewGridLineStyle {
+			_ret := objc.Send[NSTableViewGridLineStyle](o.Ptr(), _nSTableViewSelGridStyleMask)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetGridStyleMask(gridStyleMask NSTableViewGridLineStyle) {
-	o.Ptr().Send(_nSTableViewSelSetGridStyleMask, gridStyleMask)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetGridStyleMask, gridStyleMask)
+	})
 }
 
 func (o *NSTableView) IntercellSpacing() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSTableViewSelIntercellSpacing)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSTableViewSelIntercellSpacing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetIntercellSpacing(intercellSpacing corefoundation.CGSize) {
-	o.Ptr().Send(_nSTableViewSelSetIntercellSpacing, intercellSpacing)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetIntercellSpacing, intercellSpacing)
+	})
 }
 
 func (o *NSTableView) UsesAlternatingRowBackgroundColors() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelUsesAlternatingRowBackgroundColors)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelUsesAlternatingRowBackgroundColors)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetUsesAlternatingRowBackgroundColors(usesAlternatingRowBackgroundColors bool) {
-	o.Ptr().Send(_nSTableViewSelSetUsesAlternatingRowBackgroundColors, usesAlternatingRowBackgroundColors)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetUsesAlternatingRowBackgroundColors, usesAlternatingRowBackgroundColors)
+	})
 }
 
 func (o *NSTableView) BackgroundColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelBackgroundColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelBackgroundColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetBackgroundColor(backgroundColor *NSColor) {
-	o.Ptr().Send(_nSTableViewSelSetBackgroundColor, backgroundColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetBackgroundColor, backgroundColor.Ptr())
+	})
 }
 
 func (o *NSTableView) GridColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelGridColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelGridColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetGridColor(gridColor *NSColor) {
-	o.Ptr().Send(_nSTableViewSelSetGridColor, gridColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetGridColor, gridColor.Ptr())
+	})
 }
 
 func (o *NSTableView) RowSizeStyle() NSTableViewRowSizeStyle {
-	_ret := objc.Send[NSTableViewRowSizeStyle](o.Ptr(), _nSTableViewSelRowSizeStyle)
-	return _ret
+	var _mainthread0 NSTableViewRowSizeStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSTableViewRowSizeStyle {
+			_ret := objc.Send[NSTableViewRowSizeStyle](o.Ptr(), _nSTableViewSelRowSizeStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetRowSizeStyle(rowSizeStyle NSTableViewRowSizeStyle) {
-	o.Ptr().Send(_nSTableViewSelSetRowSizeStyle, rowSizeStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetRowSizeStyle, rowSizeStyle)
+	})
 }
 
 func (o *NSTableView) EffectiveRowSizeStyle() NSTableViewRowSizeStyle {
-	_ret := objc.Send[NSTableViewRowSizeStyle](o.Ptr(), _nSTableViewSelEffectiveRowSizeStyle)
-	return _ret
+	var _mainthread0 NSTableViewRowSizeStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSTableViewRowSizeStyle {
+			_ret := objc.Send[NSTableViewRowSizeStyle](o.Ptr(), _nSTableViewSelEffectiveRowSizeStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) RowHeight() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSTableViewSelRowHeight)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSTableViewSelRowHeight)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetRowHeight(rowHeight float64) {
-	o.Ptr().Send(_nSTableViewSelSetRowHeight, rowHeight)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetRowHeight, rowHeight)
+	})
 }
 
 func (o *NSTableView) TableColumns() *foundation.NSArray[*NSTableColumn] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelTableColumns)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSTableColumn](_ret)
+	var _mainthread0 *foundation.NSArray[*NSTableColumn]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSTableColumn] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelTableColumns)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSTableColumn](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) NumberOfColumns() int {
-	_ret := objc.Send[int](o.Ptr(), _nSTableViewSelNumberOfColumns)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTableViewSelNumberOfColumns)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) NumberOfRows() int {
-	_ret := objc.Send[int](o.Ptr(), _nSTableViewSelNumberOfRows)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTableViewSelNumberOfRows)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) EditedColumn() int {
-	_ret := objc.Send[int](o.Ptr(), _nSTableViewSelEditedColumn)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTableViewSelEditedColumn)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) EditedRow() int {
-	_ret := objc.Send[int](o.Ptr(), _nSTableViewSelEditedRow)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTableViewSelEditedRow)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) ClickedColumn() int {
-	_ret := objc.Send[int](o.Ptr(), _nSTableViewSelClickedColumn)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTableViewSelClickedColumn)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) ClickedRow() int {
-	_ret := objc.Send[int](o.Ptr(), _nSTableViewSelClickedRow)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTableViewSelClickedRow)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) DoubleAction() objc.SEL {
-	_ret := objc.Send[objc.SEL](o.Ptr(), _nSTableViewSelDoubleAction)
-	return _ret
+	var _mainthread0 objc.SEL
+	purego.Main(func() {
+		_mainthread0 = func() objc.SEL {
+			_ret := objc.Send[objc.SEL](o.Ptr(), _nSTableViewSelDoubleAction)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetDoubleAction(doubleAction objc.SEL) {
-	o.Ptr().Send(_nSTableViewSelSetDoubleAction, doubleAction)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetDoubleAction, doubleAction)
+	})
 }
 
 func (o *NSTableView) SortDescriptors() *foundation.NSArray[*foundation.NSSortDescriptor] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelSortDescriptors)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSSortDescriptor](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSSortDescriptor]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSSortDescriptor] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelSortDescriptors)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSSortDescriptor](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor]) {
-	o.Ptr().Send(_nSTableViewSelSetSortDescriptors, sortDescriptors.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetSortDescriptors, sortDescriptors.Ptr())
+	})
 }
 
 func (o *NSTableView) HighlightedTableColumn() *NSTableColumn {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelHighlightedTableColumn)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTableColumnFromID(_ret)
+	var _mainthread0 *NSTableColumn
+	purego.Main(func() {
+		_mainthread0 = func() *NSTableColumn {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelHighlightedTableColumn)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTableColumnFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetHighlightedTableColumn(highlightedTableColumn *NSTableColumn) {
-	o.Ptr().Send(_nSTableViewSelSetHighlightedTableColumn, highlightedTableColumn.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetHighlightedTableColumn, highlightedTableColumn.Ptr())
+	})
 }
 
 func (o *NSTableView) VerticalMotionCanBeginDrag() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelVerticalMotionCanBeginDrag)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelVerticalMotionCanBeginDrag)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetVerticalMotionCanBeginDrag(verticalMotionCanBeginDrag bool) {
-	o.Ptr().Send(_nSTableViewSelSetVerticalMotionCanBeginDrag, verticalMotionCanBeginDrag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetVerticalMotionCanBeginDrag, verticalMotionCanBeginDrag)
+	})
 }
 
 func (o *NSTableView) AllowsMultipleSelection() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelAllowsMultipleSelection)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelAllowsMultipleSelection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetAllowsMultipleSelection(allowsMultipleSelection bool) {
-	o.Ptr().Send(_nSTableViewSelSetAllowsMultipleSelection, allowsMultipleSelection)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetAllowsMultipleSelection, allowsMultipleSelection)
+	})
 }
 
 func (o *NSTableView) AllowsEmptySelection() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelAllowsEmptySelection)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelAllowsEmptySelection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetAllowsEmptySelection(allowsEmptySelection bool) {
-	o.Ptr().Send(_nSTableViewSelSetAllowsEmptySelection, allowsEmptySelection)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetAllowsEmptySelection, allowsEmptySelection)
+	})
 }
 
 func (o *NSTableView) AllowsColumnSelection() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelAllowsColumnSelection)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelAllowsColumnSelection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetAllowsColumnSelection(allowsColumnSelection bool) {
-	o.Ptr().Send(_nSTableViewSelSetAllowsColumnSelection, allowsColumnSelection)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetAllowsColumnSelection, allowsColumnSelection)
+	})
 }
 
 func (o *NSTableView) SelectedColumnIndexes() *foundation.NSIndexSet {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelSelectedColumnIndexes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSIndexSetFromID(_ret)
+	var _mainthread0 *foundation.NSIndexSet
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSIndexSet {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelSelectedColumnIndexes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSIndexSetFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SelectedRowIndexes() *foundation.NSIndexSet {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelSelectedRowIndexes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSIndexSetFromID(_ret)
+	var _mainthread0 *foundation.NSIndexSet
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSIndexSet {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelSelectedRowIndexes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSIndexSetFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SelectedColumn() int {
-	_ret := objc.Send[int](o.Ptr(), _nSTableViewSelSelectedColumn)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTableViewSelSelectedColumn)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SelectedRow() int {
-	_ret := objc.Send[int](o.Ptr(), _nSTableViewSelSelectedRow)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTableViewSelSelectedRow)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) NumberOfSelectedColumns() int {
-	_ret := objc.Send[int](o.Ptr(), _nSTableViewSelNumberOfSelectedColumns)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTableViewSelNumberOfSelectedColumns)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) NumberOfSelectedRows() int {
-	_ret := objc.Send[int](o.Ptr(), _nSTableViewSelNumberOfSelectedRows)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTableViewSelNumberOfSelectedRows)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) AllowsTypeSelect() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelAllowsTypeSelect)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelAllowsTypeSelect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetAllowsTypeSelect(allowsTypeSelect bool) {
-	o.Ptr().Send(_nSTableViewSelSetAllowsTypeSelect, allowsTypeSelect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetAllowsTypeSelect, allowsTypeSelect)
+	})
 }
 
 func (o *NSTableView) Style() NSTableViewStyle {
-	_ret := objc.Send[NSTableViewStyle](o.Ptr(), _nSTableViewSelStyle)
-	return _ret
+	var _mainthread0 NSTableViewStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSTableViewStyle {
+			_ret := objc.Send[NSTableViewStyle](o.Ptr(), _nSTableViewSelStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetStyle(style NSTableViewStyle) {
-	o.Ptr().Send(_nSTableViewSelSetStyle, style)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetStyle, style)
+	})
 }
 
 func (o *NSTableView) EffectiveStyle() NSTableViewStyle {
-	_ret := objc.Send[NSTableViewStyle](o.Ptr(), _nSTableViewSelEffectiveStyle)
-	return _ret
+	var _mainthread0 NSTableViewStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSTableViewStyle {
+			_ret := objc.Send[NSTableViewStyle](o.Ptr(), _nSTableViewSelEffectiveStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SelectionHighlightStyle() NSTableViewSelectionHighlightStyle {
-	_ret := objc.Send[NSTableViewSelectionHighlightStyle](o.Ptr(), _nSTableViewSelSelectionHighlightStyle)
-	return _ret
+	var _mainthread0 NSTableViewSelectionHighlightStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSTableViewSelectionHighlightStyle {
+			_ret := objc.Send[NSTableViewSelectionHighlightStyle](o.Ptr(), _nSTableViewSelSelectionHighlightStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetSelectionHighlightStyle(selectionHighlightStyle NSTableViewSelectionHighlightStyle) {
-	o.Ptr().Send(_nSTableViewSelSetSelectionHighlightStyle, selectionHighlightStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetSelectionHighlightStyle, selectionHighlightStyle)
+	})
 }
 
 func (o *NSTableView) DraggingDestinationFeedbackStyle() NSTableViewDraggingDestinationFeedbackStyle {
-	_ret := objc.Send[NSTableViewDraggingDestinationFeedbackStyle](o.Ptr(), _nSTableViewSelDraggingDestinationFeedbackStyle)
-	return _ret
+	var _mainthread0 NSTableViewDraggingDestinationFeedbackStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSTableViewDraggingDestinationFeedbackStyle {
+			_ret := objc.Send[NSTableViewDraggingDestinationFeedbackStyle](o.Ptr(), _nSTableViewSelDraggingDestinationFeedbackStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle NSTableViewDraggingDestinationFeedbackStyle) {
-	o.Ptr().Send(_nSTableViewSelSetDraggingDestinationFeedbackStyle, draggingDestinationFeedbackStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetDraggingDestinationFeedbackStyle, draggingDestinationFeedbackStyle)
+	})
 }
 
 func (o *NSTableView) AutosaveName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelAutosaveName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelAutosaveName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetAutosaveName(autosaveName *foundation.NSString) {
-	o.Ptr().Send(_nSTableViewSelSetAutosaveName, autosaveName.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetAutosaveName, autosaveName.Ptr())
+	})
 }
 
 func (o *NSTableView) AutosaveTableColumns() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelAutosaveTableColumns)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelAutosaveTableColumns)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetAutosaveTableColumns(autosaveTableColumns bool) {
-	o.Ptr().Send(_nSTableViewSelSetAutosaveTableColumns, autosaveTableColumns)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetAutosaveTableColumns, autosaveTableColumns)
+	})
 }
 
 func (o *NSTableView) FloatsGroupRows() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelFloatsGroupRows)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelFloatsGroupRows)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetFloatsGroupRows(floatsGroupRows bool) {
-	o.Ptr().Send(_nSTableViewSelSetFloatsGroupRows, floatsGroupRows)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetFloatsGroupRows, floatsGroupRows)
+	})
 }
 
 func (o *NSTableView) RowActionsVisible() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelRowActionsVisible)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelRowActionsVisible)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetRowActionsVisible(rowActionsVisible bool) {
-	o.Ptr().Send(_nSTableViewSelSetRowActionsVisible, rowActionsVisible)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetRowActionsVisible, rowActionsVisible)
+	})
 }
 
 func (o *NSTableView) HiddenRowIndexes() *foundation.NSIndexSet {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelHiddenRowIndexes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSIndexSetFromID(_ret)
+	var _mainthread0 *foundation.NSIndexSet
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSIndexSet {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelHiddenRowIndexes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSIndexSetFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) RegisteredNibsByIdentifier() *foundation.NSDictionary[*foundation.NSString, *NSNib] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelRegisteredNibsByIdentifier)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDictionaryFromID[*foundation.NSString, *NSNib](_ret)
+	var _mainthread0 *foundation.NSDictionary[*foundation.NSString, *NSNib]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSDictionary[*foundation.NSString, *NSNib] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelRegisteredNibsByIdentifier)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDictionaryFromID[*foundation.NSString, *NSNib](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) UsesStaticContents() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelUsesStaticContents)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelUsesStaticContents)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetUsesStaticContents(usesStaticContents bool) {
-	o.Ptr().Send(_nSTableViewSelSetUsesStaticContents, usesStaticContents)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetUsesStaticContents, usesStaticContents)
+	})
 }
 
 func (o *NSTableView) UsesAutomaticRowHeights() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelUsesAutomaticRowHeights)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelUsesAutomaticRowHeights)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableView) SetUsesAutomaticRowHeights(usesAutomaticRowHeights bool) {
-	o.Ptr().Send(_nSTableViewSelSetUsesAutomaticRowHeights, usesAutomaticRowHeights)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetUsesAutomaticRowHeights, usesAutomaticRowHeights)
+	})
 }
 
 // Sets whether the table view draws a grid.
 // Deprecated: since macOS 10.3.
 func (o *NSTableView) SetDrawsGrid(flag bool) {
-	o.Ptr().Send(_nSTableViewSelSetDrawsGrid, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetDrawsGrid, flag)
+	})
 }
 
 // Returns a Boolean value that indicates whether the table view draws a grid.
 // Deprecated: since macOS 10.3.
 func (o *NSTableView) DrawsGrid() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelDrawsGrid)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelDrawsGrid)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Selects the column at the specified index, optionally extending any existing selection.
 // Deprecated: since macOS 10.3.
 func (o *NSTableView) SelectColumnByExtendingSelection(column int, extend bool) {
-	o.Ptr().Send(_nSTableViewSelSelectColumnByExtendingSelection, column, extend)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSelectColumnByExtendingSelection, column, extend)
+	})
 }
 
 // Selects a row at the specified index, optionally extending any existing selection.
 // Deprecated: since macOS 10.3.
 func (o *NSTableView) SelectRowByExtendingSelection(row int, extend bool) {
-	o.Ptr().Send(_nSTableViewSelSelectRowByExtendingSelection, row, extend)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSelectRowByExtendingSelection, row, extend)
+	})
 }
 
 // This method has been deprecated.
 // Deprecated: since macOS 10.3.
 func (o *NSTableView) SelectedColumnEnumerator() *foundation.NSEnumerator[objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelSelectedColumnEnumerator)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSEnumeratorFromID[objc.ID](_ret)
+	var _mainthread0 *foundation.NSEnumerator[objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSEnumerator[objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelSelectedColumnEnumerator)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSEnumeratorFromID[objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // This method has been deprecated.
 // Deprecated: since macOS 10.3.
 func (o *NSTableView) SelectedRowEnumerator() *foundation.NSEnumerator[objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelSelectedRowEnumerator)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSEnumeratorFromID[objc.ID](_ret)
+	var _mainthread0 *foundation.NSEnumerator[objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSEnumerator[objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelSelectedRowEnumerator)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSEnumeratorFromID[objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Computes and returns an image to use for dragging.
 // Deprecated: since macOS 10.4.
 func (o *NSTableView) DragImageForRowsEventDragImageOffset(dragRows *foundation.NSArray[objc.ID], dragEvent *NSEvent, dragImageOffset *corefoundation.CGPoint) *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelDragImageForRowsEventDragImageOffset, dragRows.Ptr(), dragEvent.Ptr(), dragImageOffset)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelDragImageForRowsEventDragImageOffset, dragRows.Ptr(), dragEvent.Ptr(), dragImageOffset)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Controls whether the table view proportionally resizes its columns to fit when its superview’s frame changes.
 // Deprecated: since macOS 10.4.
 func (o *NSTableView) SetAutoresizesAllColumnsToFit(flag bool) {
-	o.Ptr().Send(_nSTableViewSelSetAutoresizesAllColumnsToFit, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetAutoresizesAllColumnsToFit, flag)
+	})
 }
 
 // Returns a Boolean value that indicates if the table view proportionally resizes its columns to fit when its superview’s frame changes.
 // Deprecated: since macOS 10.4.
 func (o *NSTableView) AutoresizesAllColumnsToFit() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelAutoresizesAllColumnsToFit)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelAutoresizesAllColumnsToFit)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a range of indexes for the table view’s columns that lie wholly or partially within the horizontal boundaries of the specified rectangle.
 // Deprecated: since macOS 10.5.
 func (o *NSTableView) ColumnsInRect(rect corefoundation.CGRect) foundation.NSRange {
-	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTableViewSelColumnsInRect, rect)
-	return _ret
+	var _mainthread0 foundation.NSRange
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSRange {
+			_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTableViewSelColumnsInRect, rect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the fully prepared cell that the table view will use for drawing or processing of the specified row and column.
 // Deprecated: Use View Based TableView and -viewAtColumn:row:
 func (o *NSTableView) PreparedCellAtColumnRow(column int, row int) *NSCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelPreparedCellAtColumnRow, column, row)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCellFromID(_ret)
+	var _mainthread0 *NSCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewSelPreparedCellAtColumnRow, column, row)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Queries the delegate to determine if the text should begin editing.
 // Deprecated: Use a View Based TableView with an NSTextField
 func (o *NSTableView) TextShouldBeginEditing(textObject *NSText) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelTextShouldBeginEditing, textObject.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelTextShouldBeginEditing, textObject.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Validates the text object for the cell being edited by querying the delegate.queries the delegate using control:textShouldEndEditing:, returning the delegate’s response if it responds to that method.
 // Deprecated: Use a View Based TableView with an NSTextField
 func (o *NSTableView) TextShouldEndEditing(textObject *NSText) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelTextShouldEndEditing, textObject.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelTextShouldEndEditing, textObject.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Posts an NSControlTextDidBeginEditingNotification to the default notification center.
 // Deprecated: Use a View Based TableView with an NSTextField
 func (o *NSTableView) TextDidBeginEditing(notification *foundation.NSNotification) {
-	o.Ptr().Send(_nSTableViewSelTextDidBeginEditing, notification.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelTextDidBeginEditing, notification.Ptr())
+	})
 }
 
 // Updates the data source based on the newly edited value and selects another cell for editing if possible according to the character that ended editing (Return, Tab, Backtab).
 // Deprecated: Use a View Based TableView with an NSTextField
 func (o *NSTableView) TextDidEndEditing(notification *foundation.NSNotification) {
-	o.Ptr().Send(_nSTableViewSelTextDidEndEditing, notification.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelTextDidEndEditing, notification.Ptr())
+	})
 }
 
 // Sends textDidChange: to the edited cell and posts an NSControlTextDidChangeNotification to the default notification center.
 // Deprecated: Use a View Based TableView with an NSTextField
 func (o *NSTableView) TextDidChange(notification *foundation.NSNotification) {
-	o.Ptr().Send(_nSTableViewSelTextDidChange, notification.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelTextDidChange, notification.Ptr())
+	})
 }
 
 // Returns whether the fully prepared cell at the specified row and column can be made the focused cell.
 // Deprecated: Use a View Based TableView; observe the window’s firstResponder for focus change notifications
 func (o *NSTableView) ShouldFocusCellAtColumnRow(cell *NSCell, column int, row int) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelShouldFocusCellAtColumnRow, cell.Ptr(), column, row)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTableViewSelShouldFocusCellAtColumnRow, cell.Ptr(), column, row)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the currently focused column.
 // Deprecated: Use a View Based TableView and observe the window.firstResponder
 func (o *NSTableView) FocusedColumn() int {
-	_ret := objc.Send[int](o.Ptr(), _nSTableViewSelFocusedColumn)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTableViewSelFocusedColumn)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the currently focused column to the specified index.
 // Deprecated: Use a View Based TableView; make a particular view the first responder with [window makeFirstResponder:view] to focus it.
 func (o *NSTableView) SetFocusedColumn(focusedColumn int) {
-	o.Ptr().Send(_nSTableViewSelSetFocusedColumn, focusedColumn)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelSetFocusedColumn, focusedColumn)
+	})
 }
 
 // Performs a click action on the cell at the specified row and column.
 // Deprecated: Use a View Based TableView; directly interact with a particular view as required and call -performClick: on it, if necessary
 func (o *NSTableView) PerformClickOnCellAtColumnRow(column int, row int) {
-	o.Ptr().Send(_nSTableViewSelPerformClickOnCellAtColumnRow, column, row)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableViewSelPerformClickOnCellAtColumnRow, column, row)
+	})
 }
