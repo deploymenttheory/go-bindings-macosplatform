@@ -35,18 +35,30 @@ func NSPanelFromID(id objc.ID) *NSPanel {
 }
 
 func (o *NSPanel) SetFloatingPanel(floatingPanel bool) {
-	o.Ptr().Send(_nSPanelSelSetFloatingPanel, floatingPanel)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPanelSelSetFloatingPanel, floatingPanel)
+	})
 }
 
 func (o *NSPanel) BecomesKeyOnlyIfNeeded() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSPanelSelBecomesKeyOnlyIfNeeded)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSPanelSelBecomesKeyOnlyIfNeeded)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPanel) SetBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) {
-	o.Ptr().Send(_nSPanelSelSetBecomesKeyOnlyIfNeeded, becomesKeyOnlyIfNeeded)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPanelSelSetBecomesKeyOnlyIfNeeded, becomesKeyOnlyIfNeeded)
+	})
 }
 
 func (o *NSPanel) SetWorksWhenModal(worksWhenModal bool) {
-	o.Ptr().Send(_nSPanelSelSetWorksWhenModal, worksWhenModal)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPanelSelSetWorksWhenModal, worksWhenModal)
+	})
 }

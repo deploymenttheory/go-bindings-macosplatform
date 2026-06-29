@@ -33,10 +33,18 @@ func GKChallengesViewControllerFromID(id objc.ID) *GKChallengesViewController {
 }
 
 func (o *GKChallengesViewController) ChallengeDelegate() GKChallengesViewControllerDelegate {
-	_ret := objc.Send[GKChallengesViewControllerDelegate](o.Ptr(), _gKChallengesViewControllerSelChallengeDelegate)
-	return _ret
+	var _mainthread0 GKChallengesViewControllerDelegate
+	purego.Main(func() {
+		_mainthread0 = func() GKChallengesViewControllerDelegate {
+			_ret := objc.Send[GKChallengesViewControllerDelegate](o.Ptr(), _gKChallengesViewControllerSelChallengeDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *GKChallengesViewController) SetChallengeDelegate(challengeDelegate GKChallengesViewControllerDelegate) {
-	o.Ptr().Send(_gKChallengesViewControllerSelSetChallengeDelegate, challengeDelegate)
+	purego.Main(func() {
+		o.Ptr().Send(_gKChallengesViewControllerSelSetChallengeDelegate, challengeDelegate)
+	})
 }

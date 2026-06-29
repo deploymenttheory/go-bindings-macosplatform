@@ -37,27 +37,47 @@ func ASAuthorizationAppleIDButtonFromID(id objc.ID) *ASAuthorizationAppleIDButto
 
 // Creates a new Sign In with Apple authorization button with the given type and style.
 func ASAuthorizationAppleIDButtonButtonWithTypeStyle(type_ ASAuthorizationAppleIDButtonType, style ASAuthorizationAppleIDButtonStyle) *ASAuthorizationAppleIDButton {
-	_ret := objc.Send[objc.ID](objc.ID(_clsASAuthorizationAppleIDButton), _aSAuthorizationAppleIDButtonSelButtonWithTypeStyle, type_, style)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return ASAuthorizationAppleIDButtonFromID(_ret)
+	var _mainthread0 *ASAuthorizationAppleIDButton
+	purego.Main(func() {
+		_mainthread0 = func() *ASAuthorizationAppleIDButton {
+			_ret := objc.Send[objc.ID](objc.ID(_clsASAuthorizationAppleIDButton), _aSAuthorizationAppleIDButtonSelButtonWithTypeStyle, type_, style)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return ASAuthorizationAppleIDButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a new Sign In with Apple authorization button with the given type and style.
 func (o *ASAuthorizationAppleIDButton) InitWithAuthorizationButtonTypeAuthorizationButtonStyle(type_ ASAuthorizationAppleIDButtonType, style ASAuthorizationAppleIDButtonStyle) *ASAuthorizationAppleIDButton {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationAppleIDButtonSelInitWithAuthorizationButtonTypeAuthorizationButtonStyle, type_, style)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return ASAuthorizationAppleIDButtonFromID(_ret)
+	var _mainthread0 *ASAuthorizationAppleIDButton
+	purego.Main(func() {
+		_mainthread0 = func() *ASAuthorizationAppleIDButton {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationAppleIDButtonSelInitWithAuthorizationButtonTypeAuthorizationButtonStyle, type_, style)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return ASAuthorizationAppleIDButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *ASAuthorizationAppleIDButton) CornerRadius() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _aSAuthorizationAppleIDButtonSelCornerRadius)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _aSAuthorizationAppleIDButtonSelCornerRadius)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *ASAuthorizationAppleIDButton) SetCornerRadius(cornerRadius float64) {
-	o.Ptr().Send(_aSAuthorizationAppleIDButtonSelSetCornerRadius, cornerRadius)
+	purego.Main(func() {
+		o.Ptr().Send(_aSAuthorizationAppleIDButtonSelSetCornerRadius, cornerRadius)
+	})
 }

@@ -50,9 +50,15 @@ func (o *AVCaptureSystemZoomSlider) InitWithDeviceAction(device *AVCaptureDevice
 		})
 		defer __block_action.Release()
 	}
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSystemZoomSliderSelInitWithDeviceAction, device.Ptr(), __block_action)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return AVCaptureSystemZoomSliderFromID(_ret)
+	var _mainthread0 *AVCaptureSystemZoomSlider
+	purego.Main(func() {
+		_mainthread0 = func() *AVCaptureSystemZoomSlider {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSystemZoomSliderSelInitWithDeviceAction, device.Ptr(), __block_action)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return AVCaptureSystemZoomSliderFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

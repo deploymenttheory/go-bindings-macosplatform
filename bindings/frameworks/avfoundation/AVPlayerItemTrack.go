@@ -39,21 +39,35 @@ func AVPlayerItemTrackFromID(id objc.ID) *AVPlayerItemTrack {
 
 // @property		assetTrack @abstract		Indicates the AVAssetTrack for which the AVPlayerItemTrack represents presentation state. @discussion	This property is not observable. Clients must serialize their access to the resulting AVAssetTrack and related objects on the associated AVPlayer's notification queue.  By default, this queue is the main queue.
 func (o *AVPlayerItemTrack) AssetTrack() *AVAssetTrack {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemTrackSelAssetTrack)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return AVAssetTrackFromID(_ret)
+	var _mainthread0 *AVAssetTrack
+	purego.Main(func() {
+		_mainthread0 = func() *AVAssetTrack {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemTrackSelAssetTrack)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return AVAssetTrackFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @property		enabled @abstract		Indicates whether the track is enabled for presentation during playback. @discussion	Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
 func (o *AVPlayerItemTrack) IsEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _aVPlayerItemTrackSelIsEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aVPlayerItemTrackSelIsEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayerItemTrack) SetEnabled(enabled bool) {
-	o.Ptr().Send(_aVPlayerItemTrackSelSetEnabled, enabled)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemTrackSelSetEnabled, enabled)
+	})
 }
 
 // @property		currentVideoFrameRate @abstract		If the media type of the assetTrack is AVMediaTypeVideo, indicates the current frame rate of the track as it plays, in units of frames per second. If the item is not playing, or if the media type of the track is not video, the value of this property is 0. @discussion	This property is not observable. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
@@ -73,5 +87,7 @@ func (o *AVPlayerItemTrack) VideoFieldMode() *foundation.NSString {
 
 // @property		videoFieldMode @abstract		If the media type of the assetTrack is AVMediaTypeVideo, specifies the handling of video frames that contain multiple fields. @discussion	A value of nil indicates default processing of video frames. If you want video fields to be deinterlaced, set videoFieldMode to AVPlayerItemTrackVideoFieldModeDeinterlaceFields. You can test whether video being played has multiple fields by examining the underlying AVAssetTrack's format descriptions. See -[AVAssetTrack formatDescriptions] and, for video format descriptions, kCMFormatDescriptionExtension_FieldCount. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
 func (o *AVPlayerItemTrack) SetVideoFieldMode(videoFieldMode *foundation.NSString) {
-	o.Ptr().Send(_aVPlayerItemTrackSelSetVideoFieldMode, videoFieldMode.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerItemTrackSelSetVideoFieldMode, videoFieldMode.Ptr())
+	})
 }

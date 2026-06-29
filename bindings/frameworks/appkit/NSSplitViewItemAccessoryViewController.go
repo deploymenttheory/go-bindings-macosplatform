@@ -36,36 +36,60 @@ func NSSplitViewItemAccessoryViewControllerFromID(id objc.ID) *NSSplitViewItemAc
 
 // When set, this property will collapse the accessory view to 0 height (animatable) but not remove it from the window. Set through the animator object to animate it.
 func (o *NSSplitViewItemAccessoryViewController) IsHidden() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSplitViewItemAccessoryViewControllerSelIsHidden)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSplitViewItemAccessoryViewControllerSelIsHidden)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // When set, this property will collapse the accessory view to 0 height (animatable) but not remove it from the window. Set through the animator object to animate it.
 func (o *NSSplitViewItemAccessoryViewController) SetHidden(hidden bool) {
-	o.Ptr().Send(_nSSplitViewItemAccessoryViewControllerSelSetHidden, hidden)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSplitViewItemAccessoryViewControllerSelSetHidden, hidden)
+	})
 }
 
 // Whether or not standard content insets should be applied to the view. Defaults to YES.
 func (o *NSSplitViewItemAccessoryViewController) AutomaticallyAppliesContentInsets() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSplitViewItemAccessoryViewControllerSelAutomaticallyAppliesContentInsets)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSplitViewItemAccessoryViewControllerSelAutomaticallyAppliesContentInsets)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Whether or not standard content insets should be applied to the view. Defaults to YES.
 func (o *NSSplitViewItemAccessoryViewController) SetAutomaticallyAppliesContentInsets(automaticallyAppliesContentInsets bool) {
-	o.Ptr().Send(_nSSplitViewItemAccessoryViewControllerSelSetAutomaticallyAppliesContentInsets, automaticallyAppliesContentInsets)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSplitViewItemAccessoryViewControllerSelSetAutomaticallyAppliesContentInsets, automaticallyAppliesContentInsets)
+	})
 }
 
 // The split view item accessory’s preferred effect for content scrolling behind it. To allow for a soft edge on the interior edge of a titlebar accessory: splitViewItemAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
 func (o *NSSplitViewItemAccessoryViewController) PreferredScrollEdgeEffectStyle() *NSScrollEdgeEffectStyle {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewItemAccessoryViewControllerSelPreferredScrollEdgeEffectStyle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrollEdgeEffectStyleFromID(_ret)
+	var _mainthread0 *NSScrollEdgeEffectStyle
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrollEdgeEffectStyle {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewItemAccessoryViewControllerSelPreferredScrollEdgeEffectStyle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrollEdgeEffectStyleFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The split view item accessory’s preferred effect for content scrolling behind it. To allow for a soft edge on the interior edge of a titlebar accessory: splitViewItemAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
 func (o *NSSplitViewItemAccessoryViewController) SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *NSScrollEdgeEffectStyle) {
-	o.Ptr().Send(_nSSplitViewItemAccessoryViewControllerSelSetPreferredScrollEdgeEffectStyle, preferredScrollEdgeEffectStyle.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSplitViewItemAccessoryViewControllerSelSetPreferredScrollEdgeEffectStyle, preferredScrollEdgeEffectStyle.Ptr())
+	})
 }

@@ -59,28 +59,42 @@ func (o *NSController) InitWithCoder(coder *foundation.NSCoder) *NSController {
 
 // Invoked to inform the receiver that editor has uncommitted changes that can affect the receiver.
 func (o *NSController) ObjectDidBeginEditing(editor NSEditor) {
-	o.Ptr().Send(_nSControllerSelObjectDidBeginEditing, editor)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControllerSelObjectDidBeginEditing, editor)
+	})
 }
 
 // Invoked to inform the receiver that editor has committed or discarded its changes.
 func (o *NSController) ObjectDidEndEditing(editor NSEditor) {
-	o.Ptr().Send(_nSControllerSelObjectDidEndEditing, editor)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControllerSelObjectDidEndEditing, editor)
+	})
 }
 
 // Discards any pending changes by registered editors.
 func (o *NSController) DiscardEditing() {
-	o.Ptr().Send(_nSControllerSelDiscardEditing)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControllerSelDiscardEditing)
+	})
 }
 
 // Attempts to commit any pending edits.
 func (o *NSController) CommitEditing() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSControllerSelCommitEditing)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSControllerSelCommitEditing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Attempts to commit any pending changes in known editors of the receiver.
 func (o *NSController) CommitEditingWithDelegateDidCommitSelectorContextInfo(delegate objc.ID, didCommitSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_nSControllerSelCommitEditingWithDelegateDidCommitSelectorContextInfo, delegate, didCommitSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControllerSelCommitEditingWithDelegateDidCommitSelectorContextInfo, delegate, didCommitSelector, contextInfo)
+	})
 }
 
 func (o *NSController) IsEditing() bool {

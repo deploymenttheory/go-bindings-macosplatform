@@ -45,61 +45,101 @@ func IKPictureTakerFromID(id objc.ID) *IKPictureTaker {
 
 // Returns a shared IKPictureTaker instance, creating it if necessary.
 func IKPictureTakerPictureTaker() objc.ID {
-	_ret := objc.Send[objc.ID](objc.ID(_clsIKPictureTaker), _iKPictureTakerSelPictureTaker)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](objc.ID(_clsIKPictureTaker), _iKPictureTakerSelPictureTaker)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Opens a modal picture taker dialog.
 func (o *IKPictureTaker) RunModal() int {
-	_ret := objc.Send[int](o.Ptr(), _iKPictureTakerSelRunModal)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _iKPictureTakerSelRunModal)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Opens a picture taker pane.
 func (o *IKPictureTaker) BeginPictureTakerWithDelegateDidEndSelectorContextInfo(delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_iKPictureTakerSelBeginPictureTakerWithDelegateDidEndSelectorContextInfo, delegate, didEndSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_iKPictureTakerSelBeginPictureTakerWithDelegateDidEndSelectorContextInfo, delegate, didEndSelector, contextInfo)
+	})
 }
 
 // Opens a picture taker as a sheet whose parent is the specified window.
 func (o *IKPictureTaker) BeginPictureTakerSheetForWindowWithDelegateDidEndSelectorContextInfo(aWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_iKPictureTakerSelBeginPictureTakerSheetForWindowWithDelegateDidEndSelectorContextInfo, aWindow.Ptr(), delegate, didEndSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_iKPictureTakerSelBeginPictureTakerSheetForWindowWithDelegateDidEndSelectorContextInfo, aWindow.Ptr(), delegate, didEndSelector, contextInfo)
+	})
 }
 
 // Displays the Open Recent popup menu associated with the picture taker.
 func (o *IKPictureTaker) PopUpRecentsMenuForViewWithDelegateDidEndSelectorContextInfo(aView *appkit.NSView, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_iKPictureTakerSelPopUpRecentsMenuForViewWithDelegateDidEndSelectorContextInfo, aView.Ptr(), delegate, didEndSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_iKPictureTakerSelPopUpRecentsMenuForViewWithDelegateDidEndSelectorContextInfo, aView.Ptr(), delegate, didEndSelector, contextInfo)
+	})
 }
 
 // Set the image input for the picture taker.
 func (o *IKPictureTaker) SetInputImage(image *appkit.NSImage) {
-	o.Ptr().Send(_iKPictureTakerSelSetInputImage, image.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iKPictureTakerSelSetInputImage, image.Ptr())
+	})
 }
 
 // Returns the input image associated with the picture taker.
 func (o *IKPictureTaker) InputImage() *appkit.NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKPictureTakerSelInputImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSImageFromID(_ret)
+	var _mainthread0 *appkit.NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKPictureTakerSelInputImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the edited image.
 func (o *IKPictureTaker) OutputImage() *appkit.NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKPictureTakerSelOutputImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSImageFromID(_ret)
+	var _mainthread0 *appkit.NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKPictureTakerSelOutputImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Controls whether the receiver enables video mirroring during snapshots.
 func (o *IKPictureTaker) SetMirroring(b bool) {
-	o.Ptr().Send(_iKPictureTakerSelSetMirroring, b)
+	purego.Main(func() {
+		o.Ptr().Send(_iKPictureTakerSelSetMirroring, b)
+	})
 }
 
 // Returns whether video mirroring is enabled during snapshots.
 func (o *IKPictureTaker) Mirroring() bool {
-	_ret := objc.Send[bool](o.Ptr(), _iKPictureTakerSelMirroring)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _iKPictureTakerSelMirroring)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

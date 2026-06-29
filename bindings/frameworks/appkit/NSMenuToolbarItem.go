@@ -35,22 +35,38 @@ func NSMenuToolbarItemFromID(id objc.ID) *NSMenuToolbarItem {
 }
 
 func (o *NSMenuToolbarItem) Menu() *NSMenu {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuToolbarItemSelMenu)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMenuFromID(_ret)
+	var _mainthread0 *NSMenu
+	purego.Main(func() {
+		_mainthread0 = func() *NSMenu {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuToolbarItemSelMenu)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMenuFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMenuToolbarItem) SetMenu(menu *NSMenu) {
-	o.Ptr().Send(_nSMenuToolbarItemSelSetMenu, menu.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSMenuToolbarItemSelSetMenu, menu.Ptr())
+	})
 }
 
 func (o *NSMenuToolbarItem) ShowsIndicator() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSMenuToolbarItemSelShowsIndicator)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSMenuToolbarItemSelShowsIndicator)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMenuToolbarItem) SetShowsIndicator(showsIndicator bool) {
-	o.Ptr().Send(_nSMenuToolbarItemSelSetShowsIndicator, showsIndicator)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMenuToolbarItemSelSetShowsIndicator, showsIndicator)
+	})
 }

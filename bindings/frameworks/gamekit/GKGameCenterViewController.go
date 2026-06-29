@@ -50,114 +50,190 @@ func GKGameCenterViewControllerFromID(id objc.ID) *GKGameCenterViewController {
 }
 
 func (o *GKGameCenterViewController) GameCenterDelegate() GKGameCenterControllerDelegate {
-	_ret := objc.Send[GKGameCenterControllerDelegate](o.Ptr(), _gKGameCenterViewControllerSelGameCenterDelegate)
-	return _ret
+	var _mainthread0 GKGameCenterControllerDelegate
+	purego.Main(func() {
+		_mainthread0 = func() GKGameCenterControllerDelegate {
+			_ret := objc.Send[GKGameCenterControllerDelegate](o.Ptr(), _gKGameCenterViewControllerSelGameCenterDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *GKGameCenterViewController) SetGameCenterDelegate(gameCenterDelegate GKGameCenterControllerDelegate) {
-	o.Ptr().Send(_gKGameCenterViewControllerSelSetGameCenterDelegate, gameCenterDelegate)
+	purego.Main(func() {
+		o.Ptr().Send(_gKGameCenterViewControllerSelSetGameCenterDelegate, gameCenterDelegate)
+	})
 }
 
 // Creates a view controller that presents the specified Game Center content.
 func (o *GKGameCenterViewController) InitWithState(state GKGameCenterViewControllerState) *GKGameCenterViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelInitWithState, state)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return GKGameCenterViewControllerFromID(_ret)
+	var _mainthread0 *GKGameCenterViewController
+	purego.Main(func() {
+		_mainthread0 = func() *GKGameCenterViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelInitWithState, state)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return GKGameCenterViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a view controller that presents a leaderboard with data from the specified players and time period.
 func (o *GKGameCenterViewController) InitWithLeaderboardIDPlayerScopeTimeScope(leaderboardID *foundation.NSString, playerScope GKLeaderboardPlayerScope, timeScope GKLeaderboardTimeScope) *GKGameCenterViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelInitWithLeaderboardIDPlayerScopeTimeScope, leaderboardID.Ptr(), playerScope, timeScope)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return GKGameCenterViewControllerFromID(_ret)
+	var _mainthread0 *GKGameCenterViewController
+	purego.Main(func() {
+		_mainthread0 = func() *GKGameCenterViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelInitWithLeaderboardIDPlayerScopeTimeScope, leaderboardID.Ptr(), playerScope, timeScope)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return GKGameCenterViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a view controller that presents a leaderboard with data for the specified players.
 func (o *GKGameCenterViewController) InitWithLeaderboardPlayerScope(leaderboard *GKLeaderboard, playerScope GKLeaderboardPlayerScope) *GKGameCenterViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelInitWithLeaderboardPlayerScope, leaderboard.Ptr(), playerScope)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return GKGameCenterViewControllerFromID(_ret)
+	var _mainthread0 *GKGameCenterViewController
+	purego.Main(func() {
+		_mainthread0 = func() *GKGameCenterViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelInitWithLeaderboardPlayerScope, leaderboard.Ptr(), playerScope)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return GKGameCenterViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a view controller that presents a leaderboard set.
 func (o *GKGameCenterViewController) InitWithLeaderboardSetID(leaderboardSetID *foundation.NSString) *GKGameCenterViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelInitWithLeaderboardSetID, leaderboardSetID.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return GKGameCenterViewControllerFromID(_ret)
+	var _mainthread0 *GKGameCenterViewController
+	purego.Main(func() {
+		_mainthread0 = func() *GKGameCenterViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelInitWithLeaderboardSetID, leaderboardSetID.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return GKGameCenterViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a view controller that presents an achievement.
 func (o *GKGameCenterViewController) InitWithAchievementID(achievementID *foundation.NSString) *GKGameCenterViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelInitWithAchievementID, achievementID.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return GKGameCenterViewControllerFromID(_ret)
+	var _mainthread0 *GKGameCenterViewController
+	purego.Main(func() {
+		_mainthread0 = func() *GKGameCenterViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelInitWithAchievementID, achievementID.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return GKGameCenterViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a view controller that presents a player’s Game Center profile.
 func (o *GKGameCenterViewController) InitWithPlayer(player *GKPlayer) *GKGameCenterViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelInitWithPlayer, player.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return GKGameCenterViewControllerFromID(_ret)
+	var _mainthread0 *GKGameCenterViewController
+	purego.Main(func() {
+		_mainthread0 = func() *GKGameCenterViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelInitWithPlayer, player.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return GKGameCenterViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 11.0.
 func (o *GKGameCenterViewController) ViewState() GKGameCenterViewControllerState {
-	_ret := objc.Send[GKGameCenterViewControllerState](o.Ptr(), _gKGameCenterViewControllerSelViewState)
-	return _ret
+	var _mainthread0 GKGameCenterViewControllerState
+	purego.Main(func() {
+		_mainthread0 = func() GKGameCenterViewControllerState {
+			_ret := objc.Send[GKGameCenterViewControllerState](o.Ptr(), _gKGameCenterViewControllerSelViewState)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 11.0.
 func (o *GKGameCenterViewController) SetViewState(viewState GKGameCenterViewControllerState) {
-	o.Ptr().Send(_gKGameCenterViewControllerSelSetViewState, viewState)
+	purego.Main(func() {
+		o.Ptr().Send(_gKGameCenterViewControllerSelSetViewState, viewState)
+	})
 }
 
 // Deprecated: since macOS 11.0.
 func (o *GKGameCenterViewController) LeaderboardTimeScope() GKLeaderboardTimeScope {
-	_ret := objc.Send[GKLeaderboardTimeScope](o.Ptr(), _gKGameCenterViewControllerSelLeaderboardTimeScope)
-	return _ret
+	var _mainthread0 GKLeaderboardTimeScope
+	purego.Main(func() {
+		_mainthread0 = func() GKLeaderboardTimeScope {
+			_ret := objc.Send[GKLeaderboardTimeScope](o.Ptr(), _gKGameCenterViewControllerSelLeaderboardTimeScope)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 11.0.
 func (o *GKGameCenterViewController) SetLeaderboardTimeScope(leaderboardTimeScope GKLeaderboardTimeScope) {
-	o.Ptr().Send(_gKGameCenterViewControllerSelSetLeaderboardTimeScope, leaderboardTimeScope)
+	purego.Main(func() {
+		o.Ptr().Send(_gKGameCenterViewControllerSelSetLeaderboardTimeScope, leaderboardTimeScope)
+	})
 }
 
 // Deprecated: since macOS 11.0.
 func (o *GKGameCenterViewController) LeaderboardIdentifier() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelLeaderboardIdentifier)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelLeaderboardIdentifier)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 11.0.
 func (o *GKGameCenterViewController) SetLeaderboardIdentifier(leaderboardIdentifier *foundation.NSString) {
-	o.Ptr().Send(_gKGameCenterViewControllerSelSetLeaderboardIdentifier, leaderboardIdentifier.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_gKGameCenterViewControllerSelSetLeaderboardIdentifier, leaderboardIdentifier.Ptr())
+	})
 }
 
 // Deprecated: since macOS 10.10.
 func (o *GKGameCenterViewController) LeaderboardCategory() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelLeaderboardCategory)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _gKGameCenterViewControllerSelLeaderboardCategory)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.10.
 func (o *GKGameCenterViewController) SetLeaderboardCategory(leaderboardCategory *foundation.NSString) {
-	o.Ptr().Send(_gKGameCenterViewControllerSelSetLeaderboardCategory, leaderboardCategory.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_gKGameCenterViewControllerSelSetLeaderboardCategory, leaderboardCategory.Ptr())
+	})
 }

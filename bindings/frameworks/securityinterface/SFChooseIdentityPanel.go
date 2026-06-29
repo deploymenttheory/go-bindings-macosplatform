@@ -52,103 +52,167 @@ func SFChooseIdentityPanelFromID(id objc.ID) *SFChooseIdentityPanel {
 
 // Returns a fully initialized, singleton choose identity panel object.
 func SFChooseIdentityPanelSharedChooseIdentityPanel() *SFChooseIdentityPanel {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSFChooseIdentityPanel), _sFChooseIdentityPanelSelSharedChooseIdentityPanel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SFChooseIdentityPanelFromID(_ret)
+	var _mainthread0 *SFChooseIdentityPanel
+	purego.Main(func() {
+		_mainthread0 = func() *SFChooseIdentityPanel {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSFChooseIdentityPanel), _sFChooseIdentityPanelSelSharedChooseIdentityPanel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SFChooseIdentityPanelFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Displays a list of identities in a modal panel.
 func (o *SFChooseIdentityPanel) RunModalForIdentitiesMessage(identities *foundation.NSArray[objc.ID], message *foundation.NSString) int {
-	_ret := objc.Send[int](o.Ptr(), _sFChooseIdentityPanelSelRunModalForIdentitiesMessage, identities.Ptr(), message.Ptr())
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _sFChooseIdentityPanelSelRunModalForIdentitiesMessage, identities.Ptr(), message.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Displays a list of identities in a modal sheet from which the user can select an identity.
 func (o *SFChooseIdentityPanel) BeginSheetForWindowModalDelegateDidEndSelectorContextInfoIdentitiesMessage(docWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer, identities *foundation.NSArray[objc.ID], message *foundation.NSString) {
-	o.Ptr().Send(_sFChooseIdentityPanelSelBeginSheetForWindowModalDelegateDidEndSelectorContextInfoIdentitiesMessage, docWindow.Ptr(), delegate, didEndSelector, contextInfo, identities.Ptr(), message.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sFChooseIdentityPanelSelBeginSheetForWindowModalDelegateDidEndSelectorContextInfoIdentitiesMessage, docWindow.Ptr(), delegate, didEndSelector, contextInfo, identities.Ptr(), message.Ptr())
+	})
 }
 
 // Returns the identity that the user chose in the panel or sheet.
 func (o *SFChooseIdentityPanel) Identity() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sFChooseIdentityPanelSelIdentity)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sFChooseIdentityPanelSelIdentity)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies one or more policies that apply to the displayed certificates.
 func (o *SFChooseIdentityPanel) SetPolicies(policies objc.ID) {
-	o.Ptr().Send(_sFChooseIdentityPanelSelSetPolicies, policies)
+	purego.Main(func() {
+		o.Ptr().Send(_sFChooseIdentityPanelSelSetPolicies, policies)
+	})
 }
 
 // Returns an array of policies used to evaluate the status of the displayed certificates.
 func (o *SFChooseIdentityPanel) Policies() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sFChooseIdentityPanelSelPolicies)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[objc.ID](_ret)
+	var _mainthread0 *foundation.NSArray[objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sFChooseIdentityPanelSelPolicies)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Customizes the title of the default button.
 func (o *SFChooseIdentityPanel) SetDefaultButtonTitle(title *foundation.NSString) {
-	o.Ptr().Send(_sFChooseIdentityPanelSelSetDefaultButtonTitle, title.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sFChooseIdentityPanelSelSetDefaultButtonTitle, title.Ptr())
+	})
 }
 
 // Customizes the title of the alternate button.
 func (o *SFChooseIdentityPanel) SetAlternateButtonTitle(title *foundation.NSString) {
-	o.Ptr().Send(_sFChooseIdentityPanelSelSetAlternateButtonTitle, title.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sFChooseIdentityPanelSelSetAlternateButtonTitle, title.Ptr())
+	})
 }
 
 // Displays a Help button in the sheet or panel.
 func (o *SFChooseIdentityPanel) SetShowsHelp(showsHelp bool) {
-	o.Ptr().Send(_sFChooseIdentityPanelSelSetShowsHelp, showsHelp)
+	purego.Main(func() {
+		o.Ptr().Send(_sFChooseIdentityPanelSelSetShowsHelp, showsHelp)
+	})
 }
 
 // Indicates whether the help button is currently set to be displayed.
 func (o *SFChooseIdentityPanel) ShowsHelp() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sFChooseIdentityPanelSelShowsHelp)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sFChooseIdentityPanelSelShowsHelp)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the help anchor string for the sheet or modal panel.
 func (o *SFChooseIdentityPanel) SetHelpAnchor(anchor *foundation.NSString) {
-	o.Ptr().Send(_sFChooseIdentityPanelSelSetHelpAnchor, anchor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sFChooseIdentityPanelSelSetHelpAnchor, anchor.Ptr())
+	})
 }
 
 // Returns the current help anchor string for the sheet or panel.
 func (o *SFChooseIdentityPanel) HelpAnchor() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sFChooseIdentityPanelSelHelpAnchor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sFChooseIdentityPanelSelHelpAnchor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the optional informative text displayed in the panel.
 func (o *SFChooseIdentityPanel) SetInformativeText(informativeText *foundation.NSString) {
-	o.Ptr().Send(_sFChooseIdentityPanelSelSetInformativeText, informativeText.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sFChooseIdentityPanelSelSetInformativeText, informativeText.Ptr())
+	})
 }
 
 // Returns the informative text currently displayed in the panel.
 func (o *SFChooseIdentityPanel) InformativeText() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sFChooseIdentityPanelSelInformativeText)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sFChooseIdentityPanelSelInformativeText)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets an optional domain in which the identity is to be used.
 func (o *SFChooseIdentityPanel) SetDomain(domainString *foundation.NSString) {
-	o.Ptr().Send(_sFChooseIdentityPanelSelSetDomain, domainString.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sFChooseIdentityPanelSelSetDomain, domainString.Ptr())
+	})
 }
 
 // Returns the domain that will be associated with the chosen identity.
 func (o *SFChooseIdentityPanel) Domain() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sFChooseIdentityPanelSelDomain)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sFChooseIdentityPanelSelDomain)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

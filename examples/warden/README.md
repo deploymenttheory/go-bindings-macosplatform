@@ -9,7 +9,7 @@ Its architecture is modeled on [Objective-See's **LuLu**](https://github.com/obj
 attribution map onto LuLu's targets), but Warden is configuration-driven rather
 than interactive. It demonstrates three capabilities of this SDK:
 
-- **NEFilterDataProvider subclassing in Go** (`bindings/runtime/purego` `NewDelegate`/`RegisterClass`),
+- **NEFilterDataProvider subclassing in Go** (`bindings/runtime/purego` `rt.NewDelegate`),
 - **NSXPCConnection from Go** (`bindings/runtime/purego` `XPCProtocol`/`XPCConn`/`XPCListener`),
 - **idiomatic CGo libraries** (`opinionated/idiomatic/libraries/libproc` for process attribution).
 
@@ -160,3 +160,29 @@ gated on provisioning you control.
 > registered ObjC class is at the edge of what macOS supports; treat the live
 > system-extension load as experimental. The CLI, rules engine, and XPC layer are
 > the parts meant to run today.
+
+## Adopting this
+
+Warden is the worked example of **mixing binding layers on purpose**:
+
+- It calls framework classes through the **idiomatic** wrappers — SystemExtensions
+  (`SharedManager`, `ActivationRequestForExtensionQueue`, `SubmitRequest`),
+  NetworkExtension (`NEFilterNewFlowVerdict` factories), Foundation
+  (`NewNumberWithBool`), and the libproc **idiomatic library** for process paths.
+- It drops to the **runtime** ([`bindings/runtime/purego`](../../bindings/runtime/purego),
+  imported as `rt`) only for what has no typed wrapper: the `NEFilterDataProvider`
+  **subclass** it registers (`rt.NewDelegate`), the **NSXPC** connection between the
+  app and the daemon, and the **dispatch** main queue. The idiomatic layer wraps
+  existing classes — it cannot define a new ObjC subclass or model XPC/dispatch, so
+  those legitimately stay on the runtime.
+
+The two layers meet through the public `obj` package: `obj.Wrap(id)` lifts a raw
+queue pointer into an idiomatic argument, and `obj.ID(wrapper)` extracts the raw id
+to return from an IMP or send over XPC. The `ADOPTION:` comments in
+`app/activation.go`, `app/client.go`, `extension/provider.go`, and `shared/objc.go`
+mark each of these decisions in the code.
+
+For the cross-cutting rules — choosing a layer, finding the binding for any
+framework, the boundary helpers, and signing/entitlement prerequisites — see the
+[examples adoption guide](../README.md). The provisioning section above is this
+app's instance of the "protected APIs need signing" rule.

@@ -40,50 +40,82 @@ func NSGlassEffectViewFromID(id objc.ID) *NSGlassEffectView {
 
 // The view to embed in glass. - Important: `NSGlassEffectView` only guarantees the `contentView` will be placed inside the glass effect; arbitrary subviews aren't guaranteed specific behavior with regard to z-order in relation to the content view or glass effect.
 func (o *NSGlassEffectView) ContentView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGlassEffectViewSelContentView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGlassEffectViewSelContentView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The view to embed in glass. - Important: `NSGlassEffectView` only guarantees the `contentView` will be placed inside the glass effect; arbitrary subviews aren't guaranteed specific behavior with regard to z-order in relation to the content view or glass effect.
 func (o *NSGlassEffectView) SetContentView(contentView *NSView) {
-	o.Ptr().Send(_nSGlassEffectViewSelSetContentView, contentView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGlassEffectViewSelSetContentView, contentView.Ptr())
+	})
 }
 
 // The amount of curvature for all corners of the glass.
 func (o *NSGlassEffectView) CornerRadius() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSGlassEffectViewSelCornerRadius)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSGlassEffectViewSelCornerRadius)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The amount of curvature for all corners of the glass.
 func (o *NSGlassEffectView) SetCornerRadius(cornerRadius float64) {
-	o.Ptr().Send(_nSGlassEffectViewSelSetCornerRadius, cornerRadius)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGlassEffectViewSelSetCornerRadius, cornerRadius)
+	})
 }
 
 // The color the glass effect view uses to tint the background and glass effect toward.
 func (o *NSGlassEffectView) TintColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGlassEffectViewSelTintColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGlassEffectViewSelTintColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The color the glass effect view uses to tint the background and glass effect toward.
 func (o *NSGlassEffectView) SetTintColor(tintColor *NSColor) {
-	o.Ptr().Send(_nSGlassEffectViewSelSetTintColor, tintColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGlassEffectViewSelSetTintColor, tintColor.Ptr())
+	})
 }
 
 // The style of glass this view uses.
 func (o *NSGlassEffectView) Style() NSGlassEffectViewStyle {
-	_ret := objc.Send[NSGlassEffectViewStyle](o.Ptr(), _nSGlassEffectViewSelStyle)
-	return _ret
+	var _mainthread0 NSGlassEffectViewStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSGlassEffectViewStyle {
+			_ret := objc.Send[NSGlassEffectViewStyle](o.Ptr(), _nSGlassEffectViewSelStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The style of glass this view uses.
 func (o *NSGlassEffectView) SetStyle(style NSGlassEffectViewStyle) {
-	o.Ptr().Send(_nSGlassEffectViewSelSetStyle, style)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGlassEffectViewSelSetStyle, style)
+	})
 }

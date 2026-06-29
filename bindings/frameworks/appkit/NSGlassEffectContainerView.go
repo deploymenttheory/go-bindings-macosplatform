@@ -36,25 +36,41 @@ func NSGlassEffectContainerViewFromID(id objc.ID) *NSGlassEffectContainerView {
 
 // The view that contains descendant views to merge together when in proximity to each other. The glass effect container view does the following: 1. Elevates the z-order of descendants of `contentView` to position them above the `contentView`. 2. Merges descendants together if the views are sufficiently similar and within the proximity specified in “spacing“. 3. Processes similar glass effect views as a batch to improve performance.
 func (o *NSGlassEffectContainerView) ContentView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGlassEffectContainerViewSelContentView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGlassEffectContainerViewSelContentView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The view that contains descendant views to merge together when in proximity to each other. The glass effect container view does the following: 1. Elevates the z-order of descendants of `contentView` to position them above the `contentView`. 2. Merges descendants together if the views are sufficiently similar and within the proximity specified in “spacing“. 3. Processes similar glass effect views as a batch to improve performance.
 func (o *NSGlassEffectContainerView) SetContentView(contentView *NSView) {
-	o.Ptr().Send(_nSGlassEffectContainerViewSelSetContentView, contentView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGlassEffectContainerViewSelSetContentView, contentView.Ptr())
+	})
 }
 
 // The proximity at which the glass effect container view begins merging eligible descendent glass effect views. The default value, zero, is sufficient for batch processing eligible glass effect views, while avoiding distortion and merging effects for other views in close proximity.
 func (o *NSGlassEffectContainerView) Spacing() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSGlassEffectContainerViewSelSpacing)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSGlassEffectContainerViewSelSpacing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The proximity at which the glass effect container view begins merging eligible descendent glass effect views. The default value, zero, is sufficient for batch processing eligible glass effect views, while avoiding distortion and merging effects for other views in close proximity.
 func (o *NSGlassEffectContainerView) SetSpacing(spacing float64) {
-	o.Ptr().Send(_nSGlassEffectContainerViewSelSetSpacing, spacing)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGlassEffectContainerViewSelSetSpacing, spacing)
+	})
 }

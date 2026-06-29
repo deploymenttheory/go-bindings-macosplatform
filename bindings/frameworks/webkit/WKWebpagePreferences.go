@@ -43,49 +43,89 @@ func WKWebpagePreferencesFromID(id objc.ID) *WKWebpagePreferences {
 
 // @abstract A WKContentMode indicating the content mode to prefer when loading and rendering a webpage. @discussion The default value is WKContentModeRecommended. The stated preference is ignored on subframe navigation
 func (o *WKWebpagePreferences) PreferredContentMode() WKContentMode {
-	_ret := objc.Send[WKContentMode](o.Ptr(), _wKWebpagePreferencesSelPreferredContentMode)
-	return _ret
+	var _mainthread0 WKContentMode
+	purego.Main(func() {
+		_mainthread0 = func() WKContentMode {
+			_ret := objc.Send[WKContentMode](o.Ptr(), _wKWebpagePreferencesSelPreferredContentMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebpagePreferences) SetPreferredContentMode(preferredContentMode WKContentMode) {
-	o.Ptr().Send(_wKWebpagePreferencesSelSetPreferredContentMode, preferredContentMode)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebpagePreferencesSelSetPreferredContentMode, preferredContentMode)
+	})
 }
 
 func (o *WKWebpagePreferences) AllowsContentJavaScript() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebpagePreferencesSelAllowsContentJavaScript)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebpagePreferencesSelAllowsContentJavaScript)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebpagePreferences) SetAllowsContentJavaScript(allowsContentJavaScript bool) {
-	o.Ptr().Send(_wKWebpagePreferencesSelSetAllowsContentJavaScript, allowsContentJavaScript)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebpagePreferencesSelSetAllowsContentJavaScript, allowsContentJavaScript)
+	})
 }
 
 // @abstract A boolean indicating whether lockdown mode is enabled. @discussion This mode trades off performance and compatibility in favor of security. The default value depends on the system setting.
 func (o *WKWebpagePreferences) IsLockdownModeEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebpagePreferencesSelIsLockdownModeEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebpagePreferencesSelIsLockdownModeEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebpagePreferences) SetLockdownModeEnabled(lockdownModeEnabled bool) {
-	o.Ptr().Send(_wKWebpagePreferencesSelSetLockdownModeEnabled, lockdownModeEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebpagePreferencesSelSetLockdownModeEnabled, lockdownModeEnabled)
+	})
 }
 
 // @abstract A WKWebpagePreferencesUpgradeToHTTPSPolicy indicating the desired mode used when performing a top-level navigation to a webpage. @discussion The default value is WKWebpagePreferencesUpgradeToHTTPSPolicyKeepAsRequested. The stated preference is ignored on subframe navigation, and it may be ignored based on system configuration. The upgradeKnownHostsToHTTPS property on WKWebViewConfiguration supercedes this policy for known hosts.
 func (o *WKWebpagePreferences) PreferredHTTPSNavigationPolicy() WKWebpagePreferencesUpgradeToHTTPSPolicy {
-	_ret := objc.Send[WKWebpagePreferencesUpgradeToHTTPSPolicy](o.Ptr(), _wKWebpagePreferencesSelPreferredHTTPSNavigationPolicy)
-	return _ret
+	var _mainthread0 WKWebpagePreferencesUpgradeToHTTPSPolicy
+	purego.Main(func() {
+		_mainthread0 = func() WKWebpagePreferencesUpgradeToHTTPSPolicy {
+			_ret := objc.Send[WKWebpagePreferencesUpgradeToHTTPSPolicy](o.Ptr(), _wKWebpagePreferencesSelPreferredHTTPSNavigationPolicy)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebpagePreferences) SetPreferredHTTPSNavigationPolicy(preferredHTTPSNavigationPolicy WKWebpagePreferencesUpgradeToHTTPSPolicy) {
-	o.Ptr().Send(_wKWebpagePreferencesSelSetPreferredHTTPSNavigationPolicy, preferredHTTPSNavigationPolicy)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebpagePreferencesSelSetPreferredHTTPSNavigationPolicy, preferredHTTPSNavigationPolicy)
+	})
 }
 
 // @abstract Security restriction mode for this navigation. @discussion Security restriction modes provide different levels of security hardening for high-risk browsing contexts. WKSecurityRestrictionModeMaximizeCompatibility provides additional hardening while maintaining full web compatibility: - JavaScript JIT compilation disabled (interpreter-only execution) - Increased Memory Tagging Extension (MTE) coverage across allocations in the WebContent process Setting a security restriction mode creates separate, isolated WebContent processes for the specified protection level. This preference only applies to main frame navigations and will be ignored for subframe navigations. When set for a main frame, all subframe content and opened windows inherit the same security restrictions. When the system has chosen WKSecurityRestrictionModeLockdown (e.g., in Lockdown Mode), attempts to set a less restrictive mode will fail silently. The default value is WKSecurityRestrictionModeNone.
 func (o *WKWebpagePreferences) SecurityRestrictionMode() WKSecurityRestrictionMode {
-	_ret := objc.Send[WKSecurityRestrictionMode](o.Ptr(), _wKWebpagePreferencesSelSecurityRestrictionMode)
-	return _ret
+	var _mainthread0 WKSecurityRestrictionMode
+	purego.Main(func() {
+		_mainthread0 = func() WKSecurityRestrictionMode {
+			_ret := objc.Send[WKSecurityRestrictionMode](o.Ptr(), _wKWebpagePreferencesSelSecurityRestrictionMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebpagePreferences) SetSecurityRestrictionMode(securityRestrictionMode WKSecurityRestrictionMode) {
-	o.Ptr().Send(_wKWebpagePreferencesSelSetSecurityRestrictionMode, securityRestrictionMode)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebpagePreferencesSelSetSecurityRestrictionMode, securityRestrictionMode)
+	})
 }

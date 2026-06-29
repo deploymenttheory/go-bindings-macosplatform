@@ -59,7 +59,9 @@ func (o *MKMapSnapshotter) StartWithCompletionHandler(completionHandler func(*MK
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mKMapSnapshotterSelStartWithCompletionHandler, __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapSnapshotterSelStartWithCompletionHandler, __block_completionHandler)
+	})
 }
 
 // Submits the request to create a snapshot and executes the resulting block on the specified queue.
@@ -74,12 +76,16 @@ func (o *MKMapSnapshotter) StartWithQueueCompletionHandler(queue *foundation.NSO
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mKMapSnapshotterSelStartWithQueueCompletionHandler, queue.Ptr(), __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapSnapshotterSelStartWithQueueCompletionHandler, queue.Ptr(), __block_completionHandler)
+	})
 }
 
 // Cancels the request to create a snapshot.
 func (o *MKMapSnapshotter) Cancel() {
-	o.Ptr().Send(_mKMapSnapshotterSelCancel)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapSnapshotterSelCancel)
+	})
 }
 
 func (o *MKMapSnapshotter) IsLoading() bool {

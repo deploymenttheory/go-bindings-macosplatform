@@ -43,59 +43,101 @@ func MKPinAnnotationViewFromID(id objc.ID) *MKPinAnnotationView {
 
 // Returns the standard color for red pins.
 func MKPinAnnotationViewRedPinColor() *appkit.NSColor {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMKPinAnnotationView), _mKPinAnnotationViewSelRedPinColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSColorFromID(_ret)
+	var _mainthread0 *appkit.NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSColor {
+			_ret := objc.Send[objc.ID](objc.ID(_clsMKPinAnnotationView), _mKPinAnnotationViewSelRedPinColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the standard color for green pins.
 func MKPinAnnotationViewGreenPinColor() *appkit.NSColor {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMKPinAnnotationView), _mKPinAnnotationViewSelGreenPinColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSColorFromID(_ret)
+	var _mainthread0 *appkit.NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSColor {
+			_ret := objc.Send[objc.ID](objc.ID(_clsMKPinAnnotationView), _mKPinAnnotationViewSelGreenPinColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the standard color for purple pins.
 func MKPinAnnotationViewPurplePinColor() *appkit.NSColor {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMKPinAnnotationView), _mKPinAnnotationViewSelPurplePinColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSColorFromID(_ret)
+	var _mainthread0 *appkit.NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSColor {
+			_ret := objc.Send[objc.ID](objc.ID(_clsMKPinAnnotationView), _mKPinAnnotationViewSelPurplePinColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKPinAnnotationView) PinTintColor() *appkit.NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKPinAnnotationViewSelPinTintColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSColorFromID(_ret)
+	var _mainthread0 *appkit.NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKPinAnnotationViewSelPinTintColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKPinAnnotationView) SetPinTintColor(pinTintColor *appkit.NSColor) {
-	o.Ptr().Send(_mKPinAnnotationViewSelSetPinTintColor, pinTintColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKPinAnnotationViewSelSetPinTintColor, pinTintColor.Ptr())
+	})
 }
 
 func (o *MKPinAnnotationView) AnimatesDrop() bool {
-	_ret := objc.Send[bool](o.Ptr(), _mKPinAnnotationViewSelAnimatesDrop)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _mKPinAnnotationViewSelAnimatesDrop)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKPinAnnotationView) SetAnimatesDrop(animatesDrop bool) {
-	o.Ptr().Send(_mKPinAnnotationViewSelSetAnimatesDrop, animatesDrop)
+	purego.Main(func() {
+		o.Ptr().Send(_mKPinAnnotationViewSelSetAnimatesDrop, animatesDrop)
+	})
 }
 
 // Deprecated: since macOS 10.11.
 func (o *MKPinAnnotationView) PinColor() MKPinAnnotationColor {
-	_ret := objc.Send[MKPinAnnotationColor](o.Ptr(), _mKPinAnnotationViewSelPinColor)
-	return _ret
+	var _mainthread0 MKPinAnnotationColor
+	purego.Main(func() {
+		_mainthread0 = func() MKPinAnnotationColor {
+			_ret := objc.Send[MKPinAnnotationColor](o.Ptr(), _mKPinAnnotationViewSelPinColor)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.11.
 func (o *MKPinAnnotationView) SetPinColor(pinColor MKPinAnnotationColor) {
-	o.Ptr().Send(_mKPinAnnotationViewSelSetPinColor, pinColor)
+	purego.Main(func() {
+		o.Ptr().Send(_mKPinAnnotationViewSelSetPinColor, pinColor)
+	})
 }

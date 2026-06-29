@@ -43,78 +43,130 @@ func NSCollectionLayoutGroupFromID(id objc.ID) *NSCollectionLayoutGroup {
 
 // Creates a group of the specified size, containing an array of equally sized items arranged in a horizontal line up to the number specified by count.
 func NSCollectionLayoutGroupHorizontalGroupWithLayoutSizeSubitemCount(layoutSize *NSCollectionLayoutSize, subitem *NSCollectionLayoutItem, count int) *NSCollectionLayoutGroup {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroup), _nSCollectionLayoutGroupSelHorizontalGroupWithLayoutSizeSubitemCount, layoutSize.Ptr(), subitem.Ptr(), count)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutGroupFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutGroup
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutGroup {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroup), _nSCollectionLayoutGroupSelHorizontalGroupWithLayoutSizeSubitemCount, layoutSize.Ptr(), subitem.Ptr(), count)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutGroupFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a group of the specified size, containing an array of items arranged in a horizontal line.
 func NSCollectionLayoutGroupHorizontalGroupWithLayoutSizeSubitems(layoutSize *NSCollectionLayoutSize, subitems *foundation.NSArray[*NSCollectionLayoutItem]) *NSCollectionLayoutGroup {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroup), _nSCollectionLayoutGroupSelHorizontalGroupWithLayoutSizeSubitems, layoutSize.Ptr(), subitems.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutGroupFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutGroup
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutGroup {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroup), _nSCollectionLayoutGroupSelHorizontalGroupWithLayoutSizeSubitems, layoutSize.Ptr(), subitems.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutGroupFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a group of the specified size, containing an array of equally sized items arranged in a vertical line up to the number specified by count.
 func NSCollectionLayoutGroupVerticalGroupWithLayoutSizeSubitemCount(layoutSize *NSCollectionLayoutSize, subitem *NSCollectionLayoutItem, count int) *NSCollectionLayoutGroup {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroup), _nSCollectionLayoutGroupSelVerticalGroupWithLayoutSizeSubitemCount, layoutSize.Ptr(), subitem.Ptr(), count)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutGroupFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutGroup
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutGroup {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroup), _nSCollectionLayoutGroupSelVerticalGroupWithLayoutSizeSubitemCount, layoutSize.Ptr(), subitem.Ptr(), count)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutGroupFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a group of the specified size, containing an array of items arranged in a vertical line.
 func NSCollectionLayoutGroupVerticalGroupWithLayoutSizeSubitems(layoutSize *NSCollectionLayoutSize, subitems *foundation.NSArray[*NSCollectionLayoutItem]) *NSCollectionLayoutGroup {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroup), _nSCollectionLayoutGroupSelVerticalGroupWithLayoutSizeSubitems, layoutSize.Ptr(), subitems.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutGroupFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutGroup
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutGroup {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroup), _nSCollectionLayoutGroupSelVerticalGroupWithLayoutSizeSubitems, layoutSize.Ptr(), subitems.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutGroupFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a group of the specified size, with an item provider that creates a custom arrangement for those items.
 func NSCollectionLayoutGroupCustomGroupWithLayoutSizeItemProvider(layoutSize *NSCollectionLayoutSize, itemProvider objc.Block) *NSCollectionLayoutGroup {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroup), _nSCollectionLayoutGroupSelCustomGroupWithLayoutSizeItemProvider, layoutSize.Ptr(), itemProvider)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutGroupFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutGroup
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutGroup {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroup), _nSCollectionLayoutGroupSelCustomGroupWithLayoutSizeItemProvider, layoutSize.Ptr(), itemProvider)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutGroupFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a string with an ASCII representation of the group.
 func (o *NSCollectionLayoutGroup) VisualDescription() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutGroupSelVisualDescription)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutGroupSelVisualDescription)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutGroup) SetSupplementaryItems(supplementaryItems *foundation.NSArray[*NSCollectionLayoutSupplementaryItem]) {
-	o.Ptr().Send(_nSCollectionLayoutGroupSelSetSupplementaryItems, supplementaryItems.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionLayoutGroupSelSetSupplementaryItems, supplementaryItems.Ptr())
+	})
 }
 
 func (o *NSCollectionLayoutGroup) InterItemSpacing() *NSCollectionLayoutSpacing {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutGroupSelInterItemSpacing)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutSpacingFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutSpacing
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutSpacing {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutGroupSelInterItemSpacing)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutSpacingFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutGroup) SetInterItemSpacing(interItemSpacing *NSCollectionLayoutSpacing) {
-	o.Ptr().Send(_nSCollectionLayoutGroupSelSetInterItemSpacing, interItemSpacing.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionLayoutGroupSelSetInterItemSpacing, interItemSpacing.Ptr())
+	})
 }
 
 func (o *NSCollectionLayoutGroup) Subitems() *foundation.NSArray[*NSCollectionLayoutItem] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutGroupSelSubitems)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSCollectionLayoutItem](_ret)
+	var _mainthread0 *foundation.NSArray[*NSCollectionLayoutItem]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSCollectionLayoutItem] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutGroupSelSubitems)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSCollectionLayoutItem](_ret)
+		}()
+	})
+	return _mainthread0
 }

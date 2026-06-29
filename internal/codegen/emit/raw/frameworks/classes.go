@@ -194,6 +194,7 @@ func emitClass(
 			goName,
 			className,
 			method,
+			cls.IsMainThreadRequired,
 			ctx,
 			mapper,
 			imports,
@@ -431,6 +432,7 @@ type methodCallModel struct {
 func buildRawMethodView(
 	goName, className string,
 	method meta.Method,
+	classMainThread bool,
 	ctx typemap.Context,
 	mapper *typemap.Mapper,
 	imports typemap.ImportSet,
@@ -521,6 +523,29 @@ func buildRawMethodView(
 		built.ReturnKind = 4
 		if method.IsNSError {
 			built.ZeroVal = zeroValueForReturn(call.retGoType, reg)
+		}
+	}
+
+	// Main-thread wrapping: when the class or the selector is @MainActor-isolated
+	// (and the selector is not nonisolated), the objc.Send dispatch is wrapped in
+	// purego.Main. Hoist a _mainthreadN var per return value so results escape the
+	// closure. Mirrors the idiomatic layer.
+	if (classMainThread || method.IsMainThreadRequired) && !method.IsMainThreadExempt {
+		built.MainThread = true
+		var retTypes []string
+		if !call.retIsVoid {
+			retTypes = append(retTypes, call.retGoType)
+		}
+		if method.IsNSError {
+			retTypes = append(retTypes, "error")
+		}
+		for i, retType := range retTypes {
+			name := fmt.Sprintf("_mainthread%d", i)
+			built.RetDecls = append(built.RetDecls, view.RawRetVar{Name: name, Type: retType})
+			if i > 0 {
+				built.RetVarList += ", "
+			}
+			built.RetVarList += name
 		}
 	}
 	return built

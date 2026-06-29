@@ -35,32 +35,54 @@ func NSSliderAccessoryFromID(id objc.ID) *NSSliderAccessory {
 }
 
 func NSSliderAccessoryAccessoryWithImage(image *NSImage) *NSSliderAccessory {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSSliderAccessory), _nSSliderAccessorySelAccessoryWithImage, image.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSSliderAccessoryFromID(_ret)
+	var _mainthread0 *NSSliderAccessory
+	purego.Main(func() {
+		_mainthread0 = func() *NSSliderAccessory {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSSliderAccessory), _nSSliderAccessorySelAccessoryWithImage, image.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSSliderAccessoryFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The effect on interaction with the accessory. The default value is `automaticBehavior`.
 func (o *NSSliderAccessory) Behavior() *NSSliderAccessoryBehavior {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderAccessorySelBehavior)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSSliderAccessoryBehaviorFromID(_ret)
+	var _mainthread0 *NSSliderAccessoryBehavior
+	purego.Main(func() {
+		_mainthread0 = func() *NSSliderAccessoryBehavior {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderAccessorySelBehavior)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSSliderAccessoryBehaviorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSliderAccessory) SetBehavior(behavior *NSSliderAccessoryBehavior) {
-	o.Ptr().Send(_nSSliderAccessorySelSetBehavior, behavior.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderAccessorySelSetBehavior, behavior.Ptr())
+	})
 }
 
 // Determines whether or not the accessory is interactive and draws with an enabled appearance. Defaults to `true`.
 func (o *NSSliderAccessory) IsEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSliderAccessorySelIsEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSliderAccessorySelIsEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSliderAccessory) SetEnabled(enabled bool) {
-	o.Ptr().Send(_nSSliderAccessorySelSetEnabled, enabled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderAccessorySelSetEnabled, enabled)
+	})
 }

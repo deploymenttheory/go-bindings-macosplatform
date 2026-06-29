@@ -151,122 +151,190 @@ func NSApplicationFromID(id objc.ID) *NSApplication {
 
 // Hides all the receiver’s windows, and the next app in line is activated.
 func (o *NSApplication) Hide(sender objc.ID) {
-	o.Ptr().Send(_nSApplicationSelHide, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelHide, sender)
+	})
 }
 
 func (o *NSApplication) Unhide(sender objc.ID) {
-	o.Ptr().Send(_nSApplicationSelUnhide, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelUnhide, sender)
+	})
 }
 
 // Restores hidden windows without activating their owner (the receiver).
 func (o *NSApplication) UnhideWithoutActivation() {
-	o.Ptr().Send(_nSApplicationSelUnhideWithoutActivation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelUnhideWithoutActivation)
+	})
 }
 
 func (o *NSApplication) WindowWithWindowNumber(windowNum int) *NSWindow {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelWindowWithWindowNumber, windowNum)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowFromID(_ret)
+	var _mainthread0 *NSWindow
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindow {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelWindowWithWindowNumber, windowNum)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deactivates the receiver.
 func (o *NSApplication) Deactivate() {
-	o.Ptr().Send(_nSApplicationSelDeactivate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelDeactivate)
+	})
 }
 
 // Makes the receiver the active app. - Parameter ignoreOtherApps: If `NO`, the app is activated only if no other app is currently active. If `YES`, the app activates regardless.
 // Deprecated: This method will be deprecated in a future release. Use NSApp.activate instead.
 func (o *NSApplication) ActivateIgnoringOtherApps(ignoreOtherApps bool) {
-	o.Ptr().Send(_nSApplicationSelActivateIgnoringOtherApps, ignoreOtherApps)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelActivateIgnoringOtherApps, ignoreOtherApps)
+	})
 }
 
 // Activates the receiver app, if appropriate.
 func (o *NSApplication) Activate() {
-	o.Ptr().Send(_nSApplicationSelActivate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelActivate)
+	})
 }
 
 // Explicitly allows another app to make itself active.
 func (o *NSApplication) YieldActivationToApplication(application *NSRunningApplication) {
-	o.Ptr().Send(_nSApplicationSelYieldActivationToApplication, application.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelYieldActivationToApplication, application.Ptr())
+	})
 }
 
 // Explicitly allows another app to make itself active.
 func (o *NSApplication) YieldActivationToApplicationWithBundleIdentifier(bundleIdentifier *foundation.NSString) {
-	o.Ptr().Send(_nSApplicationSelYieldActivationToApplicationWithBundleIdentifier, bundleIdentifier.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelYieldActivationToApplicationWithBundleIdentifier, bundleIdentifier.Ptr())
+	})
 }
 
 // Hides all apps, except the receiver.
 func (o *NSApplication) HideOtherApplications(sender objc.ID) {
-	o.Ptr().Send(_nSApplicationSelHideOtherApplications, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelHideOtherApplications, sender)
+	})
 }
 
 // Unhides all apps, including the receiver.
 func (o *NSApplication) UnhideAllApplications(sender objc.ID) {
-	o.Ptr().Send(_nSApplicationSelUnhideAllApplications, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelUnhideAllApplications, sender)
+	})
 }
 
 // Activates the app, opens any files specified by the NSOpen user default, and unhighlights the app’s icon.
 func (o *NSApplication) FinishLaunching() {
-	o.Ptr().Send(_nSApplicationSelFinishLaunching)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelFinishLaunching)
+	})
 }
 
 // Starts the main event loop.
 func (o *NSApplication) Run() {
-	o.Ptr().Send(_nSApplicationSelRun)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelRun)
+	})
 }
 
 func (o *NSApplication) RunModalForWindow(window *NSWindow) int {
-	_ret := objc.Send[int](o.Ptr(), _nSApplicationSelRunModalForWindow, window.Ptr())
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSApplicationSelRunModalForWindow, window.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Stops the main event loop.
 func (o *NSApplication) Stop(sender objc.ID) {
-	o.Ptr().Send(_nSApplicationSelStop, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelStop, sender)
+	})
 }
 
 func (o *NSApplication) StopModal() {
-	o.Ptr().Send(_nSApplicationSelStopModal)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelStopModal)
+	})
 }
 
 func (o *NSApplication) StopModalWithCode(returnCode int) {
-	o.Ptr().Send(_nSApplicationSelStopModalWithCode, returnCode)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelStopModalWithCode, returnCode)
+	})
 }
 
 func (o *NSApplication) AbortModal() {
-	o.Ptr().Send(_nSApplicationSelAbortModal)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelAbortModal)
+	})
 }
 
 func (o *NSApplication) BeginModalSessionForWindow(window *NSWindow) unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSApplicationSelBeginModalSessionForWindow, window.Ptr())
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSApplicationSelBeginModalSessionForWindow, window.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) RunModalSession(session unsafe.Pointer) int {
-	_ret := objc.Send[int](o.Ptr(), _nSApplicationSelRunModalSession, session)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSApplicationSelRunModalSession, session)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) EndModalSession(session unsafe.Pointer) {
-	o.Ptr().Send(_nSApplicationSelEndModalSession, session)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelEndModalSession, session)
+	})
 }
 
 // Terminates the receiver.
 func (o *NSApplication) Terminate(sender objc.ID) {
-	o.Ptr().Send(_nSApplicationSelTerminate, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelTerminate, sender)
+	})
 }
 
 // Starts a user attention request.
 func (o *NSApplication) RequestUserAttention(requestType NSRequestUserAttentionType) int {
-	_ret := objc.Send[int](o.Ptr(), _nSApplicationSelRequestUserAttention, requestType)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSApplicationSelRequestUserAttention, requestType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Cancels a previous user attention request.
 func (o *NSApplication) CancelUserAttentionRequest(request int) {
-	o.Ptr().Send(_nSApplicationSelCancelUserAttentionRequest, request)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelCancelUserAttentionRequest, request)
+	})
 }
 
 // Execute a block for each of the app's windows. Set `*stop = YES` if desired, to halt the enumeration early.
@@ -281,506 +349,852 @@ func (o *NSApplication) EnumerateWindowsWithOptionsUsing(options NSWindowListOpt
 		})
 		defer __block_block.Release()
 	}
-	o.Ptr().Send(_nSApplicationSelEnumerateWindowsWithOptionsUsing, options, __block_block)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelEnumerateWindowsWithOptionsUsing, options, __block_block)
+	})
 }
 
 func (o *NSApplication) PreventWindowOrdering() {
-	o.Ptr().Send(_nSApplicationSelPreventWindowOrdering)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelPreventWindowOrdering)
+	})
 }
 
 func (o *NSApplication) SetWindowsNeedUpdate(needUpdate bool) {
-	o.Ptr().Send(_nSApplicationSelSetWindowsNeedUpdate, needUpdate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelSetWindowsNeedUpdate, needUpdate)
+	})
 }
 
 // Sends an message to each onscreen window.
 func (o *NSApplication) UpdateWindows() {
-	o.Ptr().Send(_nSApplicationSelUpdateWindows)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelUpdateWindows)
+	})
 }
 
 // Returns the app’s activation policy.
 func (o *NSApplication) ActivationPolicy() NSApplicationActivationPolicy {
-	_ret := objc.Send[NSApplicationActivationPolicy](o.Ptr(), _nSApplicationSelActivationPolicy)
-	return _ret
+	var _mainthread0 NSApplicationActivationPolicy
+	purego.Main(func() {
+		_mainthread0 = func() NSApplicationActivationPolicy {
+			_ret := objc.Send[NSApplicationActivationPolicy](o.Ptr(), _nSApplicationSelActivationPolicy)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Attempts to modify the app’s activation policy.
 func (o *NSApplication) SetActivationPolicy(activationPolicy NSApplicationActivationPolicy) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelSetActivationPolicy, activationPolicy)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelSetActivationPolicy, activationPolicy)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Logs a given exception by calling NSLog().
 func (o *NSApplication) ReportException(exception *foundation.NSException) {
-	o.Ptr().Send(_nSApplicationSelReportException, exception.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelReportException, exception.Ptr())
+	})
 }
 
 // Creates and executes a new thread based on the specified target and selector.
 func NSApplicationDetachDrawingThreadToTargetWithObject(selector objc.SEL, target objc.ID, argument objc.ID) {
-	objc.ID(_clsNSApplication).Send(_nSApplicationSelDetachDrawingThreadToTargetWithObject, selector, target, argument)
+	purego.Main(func() {
+		objc.ID(_clsNSApplication).Send(_nSApplicationSelDetachDrawingThreadToTargetWithObject, selector, target, argument)
+	})
 }
 
 // Responds to NSTerminateLater once the app knows whether it can terminate.
 func (o *NSApplication) ReplyToApplicationShouldTerminate(shouldTerminate bool) {
-	o.Ptr().Send(_nSApplicationSelReplyToApplicationShouldTerminate, shouldTerminate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelReplyToApplicationShouldTerminate, shouldTerminate)
+	})
 }
 
 // Handles errors that might occur when the user attempts to open or print files.
 func (o *NSApplication) ReplyToOpenOrPrint(reply NSApplicationDelegateReply) {
-	o.Ptr().Send(_nSApplicationSelReplyToOpenOrPrint, reply)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelReplyToOpenOrPrint, reply)
+	})
 }
 
 // Opens the character palette.
 func (o *NSApplication) OrderFrontCharacterPalette(sender objc.ID) {
-	o.Ptr().Send(_nSApplicationSelOrderFrontCharacterPalette, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelOrderFrontCharacterPalette, sender)
+	})
 }
 
 func NSApplicationSharedApplication() *NSApplication {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSApplication), _nSApplicationSelSharedApplication)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSApplicationFromID(_ret)
+	var _mainthread0 *NSApplication
+	purego.Main(func() {
+		_mainthread0 = func() *NSApplication {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSApplication), _nSApplicationSelSharedApplication)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSApplicationFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) Delegate() NSApplicationDelegate {
-	_ret := objc.Send[NSApplicationDelegate](o.Ptr(), _nSApplicationSelDelegate)
-	return _ret
+	var _mainthread0 NSApplicationDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSApplicationDelegate {
+			_ret := objc.Send[NSApplicationDelegate](o.Ptr(), _nSApplicationSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) SetDelegate(delegate NSApplicationDelegate) {
-	o.Ptr().Send(_nSApplicationSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelSetDelegate, delegate)
+	})
 }
 
 func (o *NSApplication) MainWindow() *NSWindow {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelMainWindow)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowFromID(_ret)
+	var _mainthread0 *NSWindow
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindow {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelMainWindow)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) KeyWindow() *NSWindow {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelKeyWindow)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowFromID(_ret)
+	var _mainthread0 *NSWindow
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindow {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelKeyWindow)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) IsActive() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelIsActive)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelIsActive)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) IsHidden() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelIsHidden)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelIsHidden)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) IsRunning() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelIsRunning)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelIsRunning)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // A boolean value indicating whether your application should suppress HDR content based on established policy. Built-in AppKit components such as NSImageView will automatically behave correctly with HDR content. You should use this value in conjunction with notifications (`NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification` and `NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification`) to suppress HDR content in your application when signaled to do so.
 func (o *NSApplication) ApplicationShouldSuppressHighDynamicRangeContent() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelApplicationShouldSuppressHighDynamicRangeContent)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelApplicationShouldSuppressHighDynamicRangeContent)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) ModalWindow() *NSWindow {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelModalWindow)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowFromID(_ret)
+	var _mainthread0 *NSWindow
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindow {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelModalWindow)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) Windows() *foundation.NSArray[*NSWindow] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelWindows)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSWindow](_ret)
+	var _mainthread0 *foundation.NSArray[*NSWindow]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSWindow] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelWindows)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSWindow](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) MainMenu() *NSMenu {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelMainMenu)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMenuFromID(_ret)
+	var _mainthread0 *NSMenu
+	purego.Main(func() {
+		_mainthread0 = func() *NSMenu {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelMainMenu)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMenuFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) SetMainMenu(mainMenu *NSMenu) {
-	o.Ptr().Send(_nSApplicationSelSetMainMenu, mainMenu.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelSetMainMenu, mainMenu.Ptr())
+	})
 }
 
 // Set or get the Help menu for the app.  If a non-nil menu is set as the Help menu, Spotlight for Help will be installed in it; otherwise AppKit will install Spotlight for Help into a menu of its choosing (and that menu is not returned from `-helpMenu`).  If you wish to completely suppress Spotlight for Help, you can set a menu that does not appear in the menu bar.  @c NSApplication retains its Help menu and releases it when a different menu is set.
 func (o *NSApplication) HelpMenu() *NSMenu {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelHelpMenu)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMenuFromID(_ret)
+	var _mainthread0 *NSMenu
+	purego.Main(func() {
+		_mainthread0 = func() *NSMenu {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelHelpMenu)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMenuFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Set or get the Help menu for the app.  If a non-nil menu is set as the Help menu, Spotlight for Help will be installed in it; otherwise AppKit will install Spotlight for Help into a menu of its choosing (and that menu is not returned from `-helpMenu`).  If you wish to completely suppress Spotlight for Help, you can set a menu that does not appear in the menu bar.  @c NSApplication retains its Help menu and releases it when a different menu is set.
 func (o *NSApplication) SetHelpMenu(helpMenu *NSMenu) {
-	o.Ptr().Send(_nSApplicationSelSetHelpMenu, helpMenu.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelSetHelpMenu, helpMenu.Ptr())
+	})
 }
 
 func (o *NSApplication) ApplicationIconImage() *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelApplicationIconImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelApplicationIconImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) SetApplicationIconImage(applicationIconImage *NSImage) {
-	o.Ptr().Send(_nSApplicationSelSetApplicationIconImage, applicationIconImage.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelSetApplicationIconImage, applicationIconImage.Ptr())
+	})
 }
 
 func (o *NSApplication) DockTile() *NSDockTile {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelDockTile)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSDockTileFromID(_ret)
+	var _mainthread0 *NSDockTile
+	purego.Main(func() {
+		_mainthread0 = func() *NSDockTile {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelDockTile)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSDockTileFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Gets or sets the @c presentationOptions that should be in effect for the system when this application is the active application.  Only certain combinations of @c NSApplicationPresentationOptions flags are allowed, as detailed in the AppKit Release Notes and the reference documentation for `-setPresentationOptions:`.  When given an invalid combination of option flags, `-setPresentationOptions:` raises an exception.
 func (o *NSApplication) PresentationOptions() NSApplicationPresentationOptions {
-	_ret := objc.Send[NSApplicationPresentationOptions](o.Ptr(), _nSApplicationSelPresentationOptions)
-	return _ret
+	var _mainthread0 NSApplicationPresentationOptions
+	purego.Main(func() {
+		_mainthread0 = func() NSApplicationPresentationOptions {
+			_ret := objc.Send[NSApplicationPresentationOptions](o.Ptr(), _nSApplicationSelPresentationOptions)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Gets or sets the @c presentationOptions that should be in effect for the system when this application is the active application.  Only certain combinations of @c NSApplicationPresentationOptions flags are allowed, as detailed in the AppKit Release Notes and the reference documentation for `-setPresentationOptions:`.  When given an invalid combination of option flags, `-setPresentationOptions:` raises an exception.
 func (o *NSApplication) SetPresentationOptions(presentationOptions NSApplicationPresentationOptions) {
-	o.Ptr().Send(_nSApplicationSelSetPresentationOptions, presentationOptions)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelSetPresentationOptions, presentationOptions)
+	})
 }
 
 // @return The set of application presentation options that are currently in effect for the system. These are the presentation options that have been put into effect by the currently active application.
 func (o *NSApplication) CurrentSystemPresentationOptions() NSApplicationPresentationOptions {
-	_ret := objc.Send[NSApplicationPresentationOptions](o.Ptr(), _nSApplicationSelCurrentSystemPresentationOptions)
-	return _ret
+	var _mainthread0 NSApplicationPresentationOptions
+	purego.Main(func() {
+		_mainthread0 = func() NSApplicationPresentationOptions {
+			_ret := objc.Send[NSApplicationPresentationOptions](o.Ptr(), _nSApplicationSelCurrentSystemPresentationOptions)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) OcclusionState() NSApplicationOcclusionState {
-	_ret := objc.Send[NSApplicationOcclusionState](o.Ptr(), _nSApplicationSelOcclusionState)
-	return _ret
+	var _mainthread0 NSApplicationOcclusionState
+	purego.Main(func() {
+		_mainthread0 = func() NSApplicationOcclusionState {
+			_ret := objc.Send[NSApplicationOcclusionState](o.Ptr(), _nSApplicationSelOcclusionState)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) IsProtectedDataAvailable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelIsProtectedDataAvailable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelIsProtectedDataAvailable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) Appearance() *NSAppearance {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelAppearance)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSAppearanceFromID(_ret)
+	var _mainthread0 *NSAppearance
+	purego.Main(func() {
+		_mainthread0 = func() *NSAppearance {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelAppearance)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSAppearanceFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) SetAppearance(appearance *NSAppearance) {
-	o.Ptr().Send(_nSApplicationSelSetAppearance, appearance.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelSetAppearance, appearance.Ptr())
+	})
 }
 
 func (o *NSApplication) EffectiveAppearance() *NSAppearance {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelEffectiveAppearance)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSAppearanceFromID(_ret)
+	var _mainthread0 *NSAppearance
+	purego.Main(func() {
+		_mainthread0 = func() *NSAppearance {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelEffectiveAppearance)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSAppearanceFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Dispatches an event to other objects.
 func (o *NSApplication) SendEvent(event *NSEvent) {
-	o.Ptr().Send(_nSApplicationSelSendEvent, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelSendEvent, event.Ptr())
+	})
 }
 
 // Adds a given event to the receiver’s event queue.
 func (o *NSApplication) PostEventAtStart(event *NSEvent, atStart bool) {
-	o.Ptr().Send(_nSApplicationSelPostEventAtStart, event.Ptr(), atStart)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelPostEventAtStart, event.Ptr(), atStart)
+	})
 }
 
 // Returns the next event matching a given mask, or nil if no such event is found before a specified expiration date.
 func (o *NSApplication) NextEventMatchingMaskUntilDateInModeDequeue(mask NSEventMask, expiration *foundation.NSDate, mode *foundation.NSString, deqFlag bool) *NSEvent {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelNextEventMatchingMaskUntilDateInModeDequeue, mask, expiration.Ptr(), mode.Ptr(), deqFlag)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSEventFromID(_ret)
+	var _mainthread0 *NSEvent
+	purego.Main(func() {
+		_mainthread0 = func() *NSEvent {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelNextEventMatchingMaskUntilDateInModeDequeue, mask, expiration.Ptr(), mode.Ptr(), deqFlag)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSEventFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Removes all events matching the given mask and generated before the specified event.
 func (o *NSApplication) DiscardEventsMatchingMaskBeforeEvent(mask NSEventMask, lastEvent *NSEvent) {
-	o.Ptr().Send(_nSApplicationSelDiscardEventsMatchingMaskBeforeEvent, mask, lastEvent.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelDiscardEventsMatchingMaskBeforeEvent, mask, lastEvent.Ptr())
+	})
 }
 
 func (o *NSApplication) CurrentEvent() *NSEvent {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelCurrentEvent)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSEventFromID(_ret)
+	var _mainthread0 *NSEvent
+	purego.Main(func() {
+		_mainthread0 = func() *NSEvent {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelCurrentEvent)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSEventFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sends the given action message to the given target.
 func (o *NSApplication) SendActionToFrom(action objc.SEL, target objc.ID, sender objc.ID) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelSendActionToFrom, action, target, sender)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelSendActionToFrom, action, target, sender)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the object that receives the action message specified by the given selector.
 func (o *NSApplication) TargetForAction(action objc.SEL) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelTargetForAction, action)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelTargetForAction, action)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Searches for an object that can receive the message specified by the given selector.
 func (o *NSApplication) TargetForActionToFrom(action objc.SEL, target objc.ID, sender objc.ID) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelTargetForActionToFrom, action, target, sender)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelTargetForActionToFrom, action, target, sender)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) ArrangeInFront(sender objc.ID) {
-	o.Ptr().Send(_nSApplicationSelArrangeInFront, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelArrangeInFront, sender)
+	})
 }
 
 func (o *NSApplication) RemoveWindowsItem(win *NSWindow) {
-	o.Ptr().Send(_nSApplicationSelRemoveWindowsItem, win.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelRemoveWindowsItem, win.Ptr())
+	})
 }
 
 func (o *NSApplication) AddWindowsItemTitleFilename(win *NSWindow, string_ *foundation.NSString, isFilename bool) {
-	o.Ptr().Send(_nSApplicationSelAddWindowsItemTitleFilename, win.Ptr(), string_.Ptr(), isFilename)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelAddWindowsItemTitleFilename, win.Ptr(), string_.Ptr(), isFilename)
+	})
 }
 
 func (o *NSApplication) ChangeWindowsItemTitleFilename(win *NSWindow, string_ *foundation.NSString, isFilename bool) {
-	o.Ptr().Send(_nSApplicationSelChangeWindowsItemTitleFilename, win.Ptr(), string_.Ptr(), isFilename)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelChangeWindowsItemTitleFilename, win.Ptr(), string_.Ptr(), isFilename)
+	})
 }
 
 func (o *NSApplication) UpdateWindowsItem(win *NSWindow) {
-	o.Ptr().Send(_nSApplicationSelUpdateWindowsItem, win.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelUpdateWindowsItem, win.Ptr())
+	})
 }
 
 func (o *NSApplication) MiniaturizeAll(sender objc.ID) {
-	o.Ptr().Send(_nSApplicationSelMiniaturizeAll, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelMiniaturizeAll, sender)
+	})
 }
 
 func (o *NSApplication) WindowsMenu() *NSMenu {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelWindowsMenu)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMenuFromID(_ret)
+	var _mainthread0 *NSMenu
+	purego.Main(func() {
+		_mainthread0 = func() *NSMenu {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelWindowsMenu)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMenuFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) SetWindowsMenu(windowsMenu *NSMenu) {
-	o.Ptr().Send(_nSApplicationSelSetWindowsMenu, windowsMenu.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelSetWindowsMenu, windowsMenu.Ptr())
+	})
 }
 
 // A Boolean value indicating whether keyboard navigation is enabled in System Settings > Keyboard. - Note: The value of this property is `YES` if keyboard navigation is enabled or `NO` if it’s not. You might use this value to implement your own key loop or to implement in-control tabbing behavior similar to `NSTableView`. Because of the nature of the preference storage, you won’t be notified of changes to this property if you attempt to observe it through key-value observing; however, accessing this property is fairly inexpensive, so you can access it directly rather than caching it. - Note: This property’s value isn’t necessarily reflective of the separate accessibility setting named “Full Keyboard Access” in System Settings > Accessibility > Keyboard.
 func (o *NSApplication) IsFullKeyboardAccessEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelIsFullKeyboardAccessEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelIsFullKeyboardAccessEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) RegisterServicesMenuSendTypesReturnTypes(sendTypes *foundation.NSArray[*foundation.NSString], returnTypes *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSApplicationSelRegisterServicesMenuSendTypesReturnTypes, sendTypes.Ptr(), returnTypes.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelRegisterServicesMenuSendTypesReturnTypes, sendTypes.Ptr(), returnTypes.Ptr())
+	})
 }
 
 func (o *NSApplication) ServicesMenu() *NSMenu {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelServicesMenu)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMenuFromID(_ret)
+	var _mainthread0 *NSMenu
+	purego.Main(func() {
+		_mainthread0 = func() *NSMenu {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelServicesMenu)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMenuFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) SetServicesMenu(servicesMenu *NSMenu) {
-	o.Ptr().Send(_nSApplicationSelSetServicesMenu, servicesMenu.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelSetServicesMenu, servicesMenu.Ptr())
+	})
 }
 
 func (o *NSApplication) ServicesProvider() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelServicesProvider)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelServicesProvider)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) SetServicesProvider(servicesProvider objc.ID) {
-	o.Ptr().Send(_nSApplicationSelSetServicesProvider, servicesProvider)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelSetServicesProvider, servicesProvider)
+	})
 }
 
 func (o *NSApplication) OrderFrontStandardAboutPanel(sender objc.ID) {
-	o.Ptr().Send(_nSApplicationSelOrderFrontStandardAboutPanel, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelOrderFrontStandardAboutPanel, sender)
+	})
 }
 
 func (o *NSApplication) OrderFrontStandardAboutPanelWithOptions(optionsDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSApplicationSelOrderFrontStandardAboutPanelWithOptions, optionsDictionary.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelOrderFrontStandardAboutPanelWithOptions, optionsDictionary.Ptr())
+	})
 }
 
 func (o *NSApplication) UserInterfaceLayoutDirection() NSUserInterfaceLayoutDirection {
-	_ret := objc.Send[NSUserInterfaceLayoutDirection](o.Ptr(), _nSApplicationSelUserInterfaceLayoutDirection)
-	return _ret
+	var _mainthread0 NSUserInterfaceLayoutDirection
+	purego.Main(func() {
+		_mainthread0 = func() NSUserInterfaceLayoutDirection {
+			_ret := objc.Send[NSUserInterfaceLayoutDirection](o.Ptr(), _nSApplicationSelUserInterfaceLayoutDirection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Disables relaunching the app on login.
 func (o *NSApplication) DisableRelaunchOnLogin() {
-	o.Ptr().Send(_nSApplicationSelDisableRelaunchOnLogin)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelDisableRelaunchOnLogin)
+	})
 }
 
 // Enables relaunching the app on login.
 func (o *NSApplication) EnableRelaunchOnLogin() {
-	o.Ptr().Send(_nSApplicationSelEnableRelaunchOnLogin)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelEnableRelaunchOnLogin)
+	})
 }
 
 // Register for notifications sent by Apple Push Notification service (APNs).
 func (o *NSApplication) RegisterForRemoteNotifications() {
-	o.Ptr().Send(_nSApplicationSelRegisterForRemoteNotifications)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelRegisterForRemoteNotifications)
+	})
 }
 
 // Unregister for notifications received from Apple Push Notification service.
 func (o *NSApplication) UnregisterForRemoteNotifications() {
-	o.Ptr().Send(_nSApplicationSelUnregisterForRemoteNotifications)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelUnregisterForRemoteNotifications)
+	})
 }
 
 // Register to receive notifications of the specified types from a provider through the Apple Push Notification service.
 func (o *NSApplication) RegisterForRemoteNotificationTypes(types NSRemoteNotificationType) {
-	o.Ptr().Send(_nSApplicationSelRegisterForRemoteNotificationTypes, types)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelRegisterForRemoteNotificationTypes, types)
+	})
 }
 
 // @return @c YES if the application is currently registered for remote notifications, taking into account any systemwide settings; doesn't relate to connectivity.
 func (o *NSApplication) IsRegisteredForRemoteNotifications() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelIsRegisteredForRemoteNotifications)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelIsRegisteredForRemoteNotifications)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) EnabledRemoteNotificationTypes() NSRemoteNotificationType {
-	_ret := objc.Send[NSRemoteNotificationType](o.Ptr(), _nSApplicationSelEnabledRemoteNotificationTypes)
-	return _ret
+	var _mainthread0 NSRemoteNotificationType
+	purego.Main(func() {
+		_mainthread0 = func() NSRemoteNotificationType {
+			_ret := objc.Send[NSRemoteNotificationType](o.Ptr(), _nSApplicationSelEnabledRemoteNotificationTypes)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // `-runModalForWindow:relativeToWindow:` was deprecated in Mac OS X 10.0. Please use `-[NSWindow beginSheet:completionHandler:]` instead.
 // Deprecated: Use -[NSWindow beginSheet:completionHandler:] instead
 func (o *NSApplication) RunModalForWindowRelativeToWindow(window *NSWindow, docWindow *NSWindow) int {
-	_ret := objc.Send[int](o.Ptr(), _nSApplicationSelRunModalForWindowRelativeToWindow, window.Ptr(), docWindow.Ptr())
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSApplicationSelRunModalForWindowRelativeToWindow, window.Ptr(), docWindow.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // `-beginModalSessionForWindow:relativeToWindow:` was deprecated in Mac OS X 10.0. Please use `-[NSWindow beginSheet:completionHandler:]` instead.
 // Deprecated: Use -[NSWindow beginSheet:completionHandler:] instead
 func (o *NSApplication) BeginModalSessionForWindowRelativeToWindow(window *NSWindow, docWindow *NSWindow) unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSApplicationSelBeginModalSessionForWindowRelativeToWindow, window.Ptr(), docWindow.Ptr())
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSApplicationSelBeginModalSessionForWindowRelativeToWindow, window.Ptr(), docWindow.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // `-application:printFiles:` was deprecated in Mac OS X 10.4. Implement `-application:printFiles:withSettings:showPrintPanels:` in your application delegate instead.
 // Deprecated: since macOS 10.4.
 func (o *NSApplication) ApplicationPrintFiles(sender *NSApplication, filenames *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSApplicationSelApplicationPrintFiles, sender.Ptr(), filenames.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelApplicationPrintFiles, sender.Ptr(), filenames.Ptr())
+	})
 }
 
 // `NSWindow`'s `-beginSheet:completionHandler:` and `-endSheet:returnCode:` should be used instead.  `NSApplication`'s `-beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo:` will continue to work as it previously did, leaking contextInfo and failing when there is already an existing sheet.
 // Deprecated: Use -[NSWindow beginSheet:completionHandler:] instead
 func (o *NSApplication) BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(sheet *NSWindow, docWindow *NSWindow, modalDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_nSApplicationSelBeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo, sheet.Ptr(), docWindow.Ptr(), modalDelegate, didEndSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelBeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo, sheet.Ptr(), docWindow.Ptr(), modalDelegate, didEndSelector, contextInfo)
+	})
 }
 
 // Deprecated: Use -[NSWindow endSheet:] instead
 func (o *NSApplication) EndSheet(sheet *NSWindow) {
-	o.Ptr().Send(_nSApplicationSelEndSheet, sheet.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelEndSheet, sheet.Ptr())
+	})
 }
 
 // Deprecated: Use -[NSWindow endSheet:returnCode:] instead
 func (o *NSApplication) EndSheetReturnCode(sheet *NSWindow, returnCode int) {
-	o.Ptr().Send(_nSApplicationSelEndSheetReturnCode, sheet.Ptr(), returnCode)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelEndSheetReturnCode, sheet.Ptr(), returnCode)
+	})
 }
 
 // Deprecated: Use -enumerateWindowsWithOptions:usingBlock: instead
 func (o *NSApplication) MakeWindowsPerformInOrder(selector objc.SEL, inOrder bool) *NSWindow {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelMakeWindowsPerformInOrder, selector, inOrder)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowFromID(_ret)
+	var _mainthread0 *NSWindow
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindow {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelMakeWindowsPerformInOrder, selector, inOrder)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // This method is deprecated as of macOS 10.12. Beginning in OS X 10.11 it would always return nil. Prior to this it would return an undefined graphics context that was not generally suitable for drawing.
 // Deprecated: This method always returns nil. If you need access to the current drawing context, use [NSGraphicsContext currentContext] inside of a draw operation.
 func (o *NSApplication) Context() *NSGraphicsContext {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelContext)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGraphicsContextFromID(_ret)
+	var _mainthread0 *NSGraphicsContext
+	purego.Main(func() {
+		_mainthread0 = func() *NSGraphicsContext {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelContext)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGraphicsContextFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Places the receiver in context-sensitive help mode.
 func (o *NSApplication) ActivateContextHelpMode(sender objc.ID) {
-	o.Ptr().Send(_nSApplicationSelActivateContextHelpMode, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelActivateContextHelpMode, sender)
+	})
 }
 
 // If your project is properly registered, and the necessary keys have been set in the property list, this method launches Help Viewer and displays the first page of your app’s help book.
 func (o *NSApplication) ShowHelp(sender objc.ID) {
-	o.Ptr().Send(_nSApplicationSelShowHelp, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelShowHelp, sender)
+	})
 }
 
 // Show or hides the interface for customizing the Touch Bar.
 func (o *NSApplication) ToggleTouchBarCustomizationPalette(sender objc.ID) {
-	o.Ptr().Send(_nSApplicationSelToggleTouchBarCustomizationPalette, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelToggleTouchBarCustomizationPalette, sender)
+	})
 }
 
 // Whether or not a menu item to customize the NSTouchBar can be automatically added to the main menu. It will only actually be added when Touch Bar hardware or simulator is present. Defaults to NO. Setting this property to YES is the recommended way to add the customization menu item. But if non-standard placement of the menu item is needed, creating a menu item with an action of `toggleTouchBarCustomizationPalette:` can be used instead.
 func (o *NSApplication) IsAutomaticCustomizeTouchBarMenuItemEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelIsAutomaticCustomizeTouchBarMenuItemEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelIsAutomaticCustomizeTouchBarMenuItemEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) SetAutomaticCustomizeTouchBarMenuItemEnabled(automaticCustomizeTouchBarMenuItemEnabled bool) {
-	o.Ptr().Send(_nSApplicationSelSetAutomaticCustomizeTouchBarMenuItemEnabled, automaticCustomizeTouchBarMenuItemEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelSetAutomaticCustomizeTouchBarMenuItemEnabled, automaticCustomizeTouchBarMenuItemEnabled)
+	})
 }
 
 func (o *NSApplication) OrderFrontColorPanel(sender objc.ID) {
-	o.Ptr().Send(_nSApplicationSelOrderFrontColorPanel, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelOrderFrontColorPanel, sender)
+	})
 }
 
 func (o *NSApplication) RunPageLayout(sender objc.ID) {
-	o.Ptr().Send(_nSApplicationSelRunPageLayout, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelRunPageLayout, sender)
+	})
 }
 
 func (o *NSApplication) OrderedDocuments() *foundation.NSArray[*NSDocument] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelOrderedDocuments)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSDocument](_ret)
+	var _mainthread0 *foundation.NSArray[*NSDocument]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSDocument] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelOrderedDocuments)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSDocument](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) OrderedWindows() *foundation.NSArray[*NSWindow] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelOrderedWindows)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSWindow](_ret)
+	var _mainthread0 *foundation.NSArray[*NSWindow]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSWindow] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelOrderedWindows)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSWindow](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Register an object that provides help data to your app.
 func (o *NSApplication) RegisterUserInterfaceItemSearchHandler(handler NSUserInterfaceItemSearching) {
-	o.Ptr().Send(_nSApplicationSelRegisterUserInterfaceItemSearchHandler, handler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelRegisterUserInterfaceItemSearchHandler, handler)
+	})
 }
 
 // Unregister an object that provides help data to your app.
 func (o *NSApplication) UnregisterUserInterfaceItemSearchHandler(handler NSUserInterfaceItemSearching) {
-	o.Ptr().Send(_nSApplicationSelUnregisterUserInterfaceItemSearchHandler, handler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelUnregisterUserInterfaceItemSearchHandler, handler)
+	})
 }
 
 // Searches for the string in the user interface.
 func (o *NSApplication) SearchStringInUserInterfaceItemStringSearchRangeFoundRange(searchString *foundation.NSString, stringToSearch *foundation.NSString, searchRange foundation.NSRange, foundRange *foundation.NSRange) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelSearchStringInUserInterfaceItemStringSearchRangeFoundRange, searchString.Ptr(), stringToSearch.Ptr(), searchRange, foundRange)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelSearchStringInUserInterfaceItemStringSearchRangeFoundRange, searchString.Ptr(), stringToSearch.Ptr(), searchRange, foundRange)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) RestoreWindowWithIdentifierStateCompletionHandler(identifier *foundation.NSString, state *foundation.NSCoder, completionHandler func(*NSWindow, unsafe.Pointer)) bool {
@@ -794,14 +1208,24 @@ func (o *NSApplication) RestoreWindowWithIdentifierStateCompletionHandler(identi
 		})
 		defer __block_completionHandler.Release()
 	}
-	_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelRestoreWindowWithIdentifierStateCompletionHandler, identifier.Ptr(), state.Ptr(), __block_completionHandler)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelRestoreWindowWithIdentifierStateCompletionHandler, identifier.Ptr(), state.Ptr(), __block_completionHandler)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSApplication) ExtendStateRestoration() {
-	o.Ptr().Send(_nSApplicationSelExtendStateRestoration)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelExtendStateRestoration)
+	})
 }
 
 func (o *NSApplication) CompleteStateRestoration() {
-	o.Ptr().Send(_nSApplicationSelCompleteStateRestoration)
+	purego.Main(func() {
+		o.Ptr().Send(_nSApplicationSelCompleteStateRestoration)
+	})
 }

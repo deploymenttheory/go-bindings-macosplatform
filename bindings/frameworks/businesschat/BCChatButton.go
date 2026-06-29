@@ -36,18 +36,30 @@ func BCChatButtonFromID(id objc.ID) *BCChatButton {
 // Creates and returns a BCChatButton configured for a given style. @param style The visual style of the button. @return BCChatButton instance.
 // Deprecated: since macOS 13.0.
 func (o *BCChatButton) InitWithStyle(style BCChatButtonStyle) *BCChatButton {
-	_ret := objc.Send[objc.ID](o.Ptr(), _bCChatButtonSelInitWithStyle, style)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return BCChatButtonFromID(_ret)
+	var _mainthread0 *BCChatButton
+	purego.Main(func() {
+		_mainthread0 = func() *BCChatButton {
+			_ret := objc.Send[objc.ID](o.Ptr(), _bCChatButtonSelInitWithStyle, style)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return BCChatButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 13.0.
 func (o *BCChatButton) InitWithCoder(coder *foundation.NSCoder) *BCChatButton {
-	_ret := objc.Send[objc.ID](o.Ptr(), _bCChatButtonSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return BCChatButtonFromID(_ret)
+	var _mainthread0 *BCChatButton
+	purego.Main(func() {
+		_mainthread0 = func() *BCChatButton {
+			_ret := objc.Send[objc.ID](o.Ptr(), _bCChatButtonSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return BCChatButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

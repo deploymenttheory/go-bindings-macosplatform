@@ -115,116 +115,206 @@ func WKWebExtensionContextFromID(id objc.ID) *WKWebExtensionContext {
 
 // Returns a web extension context initialized with the specified extension.
 func WKWebExtensionContextContextForExtension(extension *WKWebExtension) *WKWebExtensionContext {
-	_ret := objc.Send[objc.ID](objc.ID(_clsWKWebExtensionContext), _wKWebExtensionContextSelContextForExtension, extension.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKWebExtensionContextFromID(_ret)
+	var _mainthread0 *WKWebExtensionContext
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtensionContext {
+			_ret := objc.Send[objc.ID](objc.ID(_clsWKWebExtensionContext), _wKWebExtensionContextSelContextForExtension, extension.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKWebExtensionContextFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a web extension context initialized with a specified extension.
 func (o *WKWebExtensionContext) InitForExtension(extension *WKWebExtension) *WKWebExtensionContext {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelInitForExtension, extension.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKWebExtensionContextFromID(_ret)
+	var _mainthread0 *WKWebExtensionContext
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtensionContext {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelInitForExtension, extension.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKWebExtensionContextFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Checks the specified permission against the currently granted permissions.
 func (o *WKWebExtensionContext) HasPermission(permission *foundation.NSString) bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasPermission, permission.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasPermission, permission.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Checks the specified permission against the currently granted permissions in a specific tab.
 func (o *WKWebExtensionContext) HasPermissionInTab(permission *foundation.NSString, tab WKWebExtensionTab) bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasPermissionInTab, permission.Ptr(), tab)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasPermissionInTab, permission.Ptr(), tab)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Checks the specified URL against the currently granted permission match patterns.
 func (o *WKWebExtensionContext) HasAccessToURL(url *foundation.NSURL) bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasAccessToURL, url.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasAccessToURL, url.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Checks the specified URL against the currently granted permission match patterns in a specific tab.
 func (o *WKWebExtensionContext) HasAccessToURLInTab(url *foundation.NSURL, tab WKWebExtensionTab) bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasAccessToURLInTab, url.Ptr(), tab)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasAccessToURLInTab, url.Ptr(), tab)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Checks if the extension has script or stylesheet content that can be injected into the specified URL.
 func (o *WKWebExtensionContext) HasInjectedContentForURL(url *foundation.NSURL) bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasInjectedContentForURL, url.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasInjectedContentForURL, url.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Checks the specified permission against the currently denied, granted, and requested permissions.
 func (o *WKWebExtensionContext) PermissionStatusForPermission(permission *foundation.NSString) WKWebExtensionContextPermissionStatus {
-	_ret := objc.Send[WKWebExtensionContextPermissionStatus](o.Ptr(), _wKWebExtensionContextSelPermissionStatusForPermission, permission.Ptr())
-	return _ret
+	var _mainthread0 WKWebExtensionContextPermissionStatus
+	purego.Main(func() {
+		_mainthread0 = func() WKWebExtensionContextPermissionStatus {
+			_ret := objc.Send[WKWebExtensionContextPermissionStatus](o.Ptr(), _wKWebExtensionContextSelPermissionStatusForPermission, permission.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Checks the specified permission against the currently denied, granted, and requested permissions.
 func (o *WKWebExtensionContext) PermissionStatusForPermissionInTab(permission *foundation.NSString, tab WKWebExtensionTab) WKWebExtensionContextPermissionStatus {
-	_ret := objc.Send[WKWebExtensionContextPermissionStatus](o.Ptr(), _wKWebExtensionContextSelPermissionStatusForPermissionInTab, permission.Ptr(), tab)
-	return _ret
+	var _mainthread0 WKWebExtensionContextPermissionStatus
+	purego.Main(func() {
+		_mainthread0 = func() WKWebExtensionContextPermissionStatus {
+			_ret := objc.Send[WKWebExtensionContextPermissionStatus](o.Ptr(), _wKWebExtensionContextSelPermissionStatusForPermissionInTab, permission.Ptr(), tab)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the status of a permission with a distant future expiration date.
 func (o *WKWebExtensionContext) SetPermissionStatusForPermission(status WKWebExtensionContextPermissionStatus, permission *foundation.NSString) {
-	o.Ptr().Send(_wKWebExtensionContextSelSetPermissionStatusForPermission, status, permission.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelSetPermissionStatusForPermission, status, permission.Ptr())
+	})
 }
 
 // Sets the status of a permission with a specific expiration date.
 func (o *WKWebExtensionContext) SetPermissionStatusForPermissionExpirationDate(status WKWebExtensionContextPermissionStatus, permission *foundation.NSString, expirationDate *foundation.NSDate) {
-	o.Ptr().Send(_wKWebExtensionContextSelSetPermissionStatusForPermissionExpirationDate, status, permission.Ptr(), expirationDate.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelSetPermissionStatusForPermissionExpirationDate, status, permission.Ptr(), expirationDate.Ptr())
+	})
 }
 
 // Checks the specified URL against the currently denied, granted, and requested permission match patterns.
 func (o *WKWebExtensionContext) PermissionStatusForURL(url *foundation.NSURL) WKWebExtensionContextPermissionStatus {
-	_ret := objc.Send[WKWebExtensionContextPermissionStatus](o.Ptr(), _wKWebExtensionContextSelPermissionStatusForURL, url.Ptr())
-	return _ret
+	var _mainthread0 WKWebExtensionContextPermissionStatus
+	purego.Main(func() {
+		_mainthread0 = func() WKWebExtensionContextPermissionStatus {
+			_ret := objc.Send[WKWebExtensionContextPermissionStatus](o.Ptr(), _wKWebExtensionContextSelPermissionStatusForURL, url.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Checks the specified URL against the currently denied, granted, and requested permission match patterns.
 func (o *WKWebExtensionContext) PermissionStatusForURLInTab(url *foundation.NSURL, tab WKWebExtensionTab) WKWebExtensionContextPermissionStatus {
-	_ret := objc.Send[WKWebExtensionContextPermissionStatus](o.Ptr(), _wKWebExtensionContextSelPermissionStatusForURLInTab, url.Ptr(), tab)
-	return _ret
+	var _mainthread0 WKWebExtensionContextPermissionStatus
+	purego.Main(func() {
+		_mainthread0 = func() WKWebExtensionContextPermissionStatus {
+			_ret := objc.Send[WKWebExtensionContextPermissionStatus](o.Ptr(), _wKWebExtensionContextSelPermissionStatusForURLInTab, url.Ptr(), tab)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the permission status of a URL with a distant future expiration date.
 func (o *WKWebExtensionContext) SetPermissionStatusForURL(status WKWebExtensionContextPermissionStatus, url *foundation.NSURL) {
-	o.Ptr().Send(_wKWebExtensionContextSelSetPermissionStatusForURL, status, url.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelSetPermissionStatusForURL, status, url.Ptr())
+	})
 }
 
 // Sets the permission status of a URL with a distant future expiration date.
 func (o *WKWebExtensionContext) SetPermissionStatusForURLExpirationDate(status WKWebExtensionContextPermissionStatus, url *foundation.NSURL, expirationDate *foundation.NSDate) {
-	o.Ptr().Send(_wKWebExtensionContextSelSetPermissionStatusForURLExpirationDate, status, url.Ptr(), expirationDate.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelSetPermissionStatusForURLExpirationDate, status, url.Ptr(), expirationDate.Ptr())
+	})
 }
 
 // Checks the specified match pattern against the currently denied, granted, and requested permission match patterns.
 func (o *WKWebExtensionContext) PermissionStatusForMatchPattern(pattern *WKWebExtensionMatchPattern) WKWebExtensionContextPermissionStatus {
-	_ret := objc.Send[WKWebExtensionContextPermissionStatus](o.Ptr(), _wKWebExtensionContextSelPermissionStatusForMatchPattern, pattern.Ptr())
-	return _ret
+	var _mainthread0 WKWebExtensionContextPermissionStatus
+	purego.Main(func() {
+		_mainthread0 = func() WKWebExtensionContextPermissionStatus {
+			_ret := objc.Send[WKWebExtensionContextPermissionStatus](o.Ptr(), _wKWebExtensionContextSelPermissionStatusForMatchPattern, pattern.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Checks the specified match pattern against the currently denied, granted, and requested permission match patterns.
 func (o *WKWebExtensionContext) PermissionStatusForMatchPatternInTab(pattern *WKWebExtensionMatchPattern, tab WKWebExtensionTab) WKWebExtensionContextPermissionStatus {
-	_ret := objc.Send[WKWebExtensionContextPermissionStatus](o.Ptr(), _wKWebExtensionContextSelPermissionStatusForMatchPatternInTab, pattern.Ptr(), tab)
-	return _ret
+	var _mainthread0 WKWebExtensionContextPermissionStatus
+	purego.Main(func() {
+		_mainthread0 = func() WKWebExtensionContextPermissionStatus {
+			_ret := objc.Send[WKWebExtensionContextPermissionStatus](o.Ptr(), _wKWebExtensionContextSelPermissionStatusForMatchPatternInTab, pattern.Ptr(), tab)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the status of a match pattern with a distant future expiration date.
 func (o *WKWebExtensionContext) SetPermissionStatusForMatchPattern(status WKWebExtensionContextPermissionStatus, pattern *WKWebExtensionMatchPattern) {
-	o.Ptr().Send(_wKWebExtensionContextSelSetPermissionStatusForMatchPattern, status, pattern.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelSetPermissionStatusForMatchPattern, status, pattern.Ptr())
+	})
 }
 
 // Sets the status of a match pattern with a specific expiration date.
 func (o *WKWebExtensionContext) SetPermissionStatusForMatchPatternExpirationDate(status WKWebExtensionContextPermissionStatus, pattern *WKWebExtensionMatchPattern, expirationDate *foundation.NSDate) {
-	o.Ptr().Send(_wKWebExtensionContextSelSetPermissionStatusForMatchPatternExpirationDate, status, pattern.Ptr(), expirationDate.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelSetPermissionStatusForMatchPatternExpirationDate, status, pattern.Ptr(), expirationDate.Ptr())
+	})
 }
 
 // Loads the background content if needed for the extension.
@@ -236,388 +326,640 @@ func (o *WKWebExtensionContext) LoadBackgroundContentWithCompletionHandler(compl
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_wKWebExtensionContextSelLoadBackgroundContentWithCompletionHandler, __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelLoadBackgroundContentWithCompletionHandler, __block_completionHandler)
+	})
 }
 
 // Retrieves the extension action for a given tab, or the default action if nil is passed.
 func (o *WKWebExtensionContext) ActionForTab(tab WKWebExtensionTab) *WKWebExtensionAction {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelActionForTab, tab)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKWebExtensionActionFromID(_ret)
+	var _mainthread0 *WKWebExtensionAction
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtensionAction {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelActionForTab, tab)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKWebExtensionActionFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Performs the extension action associated with the specified tab or performs the default action if nil is passed.
 func (o *WKWebExtensionContext) PerformActionForTab(tab WKWebExtensionTab) {
-	o.Ptr().Send(_wKWebExtensionContextSelPerformActionForTab, tab)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelPerformActionForTab, tab)
+	})
 }
 
 // Performs the specified command, triggering events specific to this extension.
 func (o *WKWebExtensionContext) PerformCommand(command *WKWebExtensionCommand) {
-	o.Ptr().Send(_wKWebExtensionContextSelPerformCommand, command.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelPerformCommand, command.Ptr())
+	})
 }
 
 // Performs the command associated with the given event.
 func (o *WKWebExtensionContext) PerformCommandForEvent(event *appkit.NSEvent) bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelPerformCommandForEvent, event.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelPerformCommandForEvent, event.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Retrieves the command associated with the given event without performing it.
 func (o *WKWebExtensionContext) CommandForEvent(event *appkit.NSEvent) *WKWebExtensionCommand {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelCommandForEvent, event.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKWebExtensionCommandFromID(_ret)
+	var _mainthread0 *WKWebExtensionCommand
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtensionCommand {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelCommandForEvent, event.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKWebExtensionCommandFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Retrieves the menu items for a given tab.
 func (o *WKWebExtensionContext) MenuItemsForTab(tab WKWebExtensionTab) *foundation.NSArray[*appkit.NSMenuItem] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelMenuItemsForTab, tab)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*appkit.NSMenuItem](_ret)
+	var _mainthread0 *foundation.NSArray[*appkit.NSMenuItem]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*appkit.NSMenuItem] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelMenuItemsForTab, tab)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*appkit.NSMenuItem](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Should be called by the app when a user gesture is performed in a specific tab.
 func (o *WKWebExtensionContext) UserGesturePerformedInTab(tab WKWebExtensionTab) {
-	o.Ptr().Send(_wKWebExtensionContextSelUserGesturePerformedInTab, tab)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelUserGesturePerformedInTab, tab)
+	})
 }
 
 // Indicates if a user gesture is currently active in the specified tab.
 func (o *WKWebExtensionContext) HasActiveUserGestureInTab(tab WKWebExtensionTab) bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasActiveUserGestureInTab, tab)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasActiveUserGestureInTab, tab)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Called by the app to clear a user gesture in a specific tab.
 func (o *WKWebExtensionContext) ClearUserGestureInTab(tab WKWebExtensionTab) {
-	o.Ptr().Send(_wKWebExtensionContextSelClearUserGestureInTab, tab)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelClearUserGestureInTab, tab)
+	})
 }
 
 // Called by the app when a new window is opened to fire appropriate events with only this extension.
 func (o *WKWebExtensionContext) DidOpenWindow(newWindow WKWebExtensionWindow) {
-	o.Ptr().Send(_wKWebExtensionContextSelDidOpenWindow, newWindow)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelDidOpenWindow, newWindow)
+	})
 }
 
 // Called by the app when a window is closed to fire appropriate events with only this extension.
 func (o *WKWebExtensionContext) DidCloseWindow(closedWindow WKWebExtensionWindow) {
-	o.Ptr().Send(_wKWebExtensionContextSelDidCloseWindow, closedWindow)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelDidCloseWindow, closedWindow)
+	})
 }
 
 // Called by the app when a window gains focus to fire appropriate events with only this extension.
 func (o *WKWebExtensionContext) DidFocusWindow(focusedWindow WKWebExtensionWindow) {
-	o.Ptr().Send(_wKWebExtensionContextSelDidFocusWindow, focusedWindow)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelDidFocusWindow, focusedWindow)
+	})
 }
 
 // Called by the app when a new tab is opened to fire appropriate events with only this extension.
 func (o *WKWebExtensionContext) DidOpenTab(newTab WKWebExtensionTab) {
-	o.Ptr().Send(_wKWebExtensionContextSelDidOpenTab, newTab)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelDidOpenTab, newTab)
+	})
 }
 
 // Called by the app when a tab is closed to fire appropriate events with only this extension.
 func (o *WKWebExtensionContext) DidCloseTabWindowIsClosing(closedTab WKWebExtensionTab, windowIsClosing bool) {
-	o.Ptr().Send(_wKWebExtensionContextSelDidCloseTabWindowIsClosing, closedTab, windowIsClosing)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelDidCloseTabWindowIsClosing, closedTab, windowIsClosing)
+	})
 }
 
 // Called by the app when a tab is activated to notify only this specific extension.
 func (o *WKWebExtensionContext) DidActivateTabPreviousActiveTab(activatedTab WKWebExtensionTab, previousTab WKWebExtensionTab) {
-	o.Ptr().Send(_wKWebExtensionContextSelDidActivateTabPreviousActiveTab, activatedTab, previousTab)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelDidActivateTabPreviousActiveTab, activatedTab, previousTab)
+	})
 }
 
 // Called by the app when tabs are selected to fire appropriate events with only this extension.
 func (o *WKWebExtensionContext) DidSelectTabs(selectedTabs *foundation.NSArray[WKWebExtensionTab]) {
-	o.Ptr().Send(_wKWebExtensionContextSelDidSelectTabs, selectedTabs.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelDidSelectTabs, selectedTabs.Ptr())
+	})
 }
 
 // Called by the app when tabs are deselected to fire appropriate events with only this extension.
 func (o *WKWebExtensionContext) DidDeselectTabs(deselectedTabs *foundation.NSArray[WKWebExtensionTab]) {
-	o.Ptr().Send(_wKWebExtensionContextSelDidDeselectTabs, deselectedTabs.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelDidDeselectTabs, deselectedTabs.Ptr())
+	})
 }
 
 // Called by the app when a tab is moved to fire appropriate events with only this extension.
 func (o *WKWebExtensionContext) DidMoveTabFromIndexInWindow(movedTab WKWebExtensionTab, index uint, oldWindow WKWebExtensionWindow) {
-	o.Ptr().Send(_wKWebExtensionContextSelDidMoveTabFromIndexInWindow, movedTab, index, oldWindow)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelDidMoveTabFromIndexInWindow, movedTab, index, oldWindow)
+	})
 }
 
 // Called by the app when a tab is replaced by another tab to fire appropriate events with only this extension.
 func (o *WKWebExtensionContext) DidReplaceTabWithTab(oldTab WKWebExtensionTab, newTab WKWebExtensionTab) {
-	o.Ptr().Send(_wKWebExtensionContextSelDidReplaceTabWithTab, oldTab, newTab)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelDidReplaceTabWithTab, oldTab, newTab)
+	})
 }
 
 // Called by the app when the properties of a tab are changed to fire appropriate events with only this extension.
 func (o *WKWebExtensionContext) DidChangeTabPropertiesForTab(properties WKWebExtensionTabChangedProperties, changedTab WKWebExtensionTab) {
-	o.Ptr().Send(_wKWebExtensionContextSelDidChangeTabPropertiesForTab, properties, changedTab)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelDidChangeTabPropertiesForTab, properties, changedTab)
+	})
 }
 
 // @abstract The extension this context represents.
 func (o *WKWebExtensionContext) WebExtension() *WKWebExtension {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelWebExtension)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKWebExtensionFromID(_ret)
+	var _mainthread0 *WKWebExtension
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtension {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelWebExtension)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKWebExtensionFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The extension controller this context is loaded in, otherwise `nil` if it isn't loaded.
 func (o *WKWebExtensionContext) WebExtensionController() *WKWebExtensionController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelWebExtensionController)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKWebExtensionControllerFromID(_ret)
+	var _mainthread0 *WKWebExtensionController
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtensionController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelWebExtensionController)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKWebExtensionControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract A Boolean value indicating if this context is loaded in an extension controller.
 func (o *WKWebExtensionContext) IsLoaded() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelIsLoaded)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelIsLoaded)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract All errors that occurred in the extension context. @discussion Provides an array of all parse-time and runtime errors for the extension and extension context, with repeat errors consolidated into a single entry for the original occurrence. If no errors occurred, an empty array is returned.
 func (o *WKWebExtensionContext) Errors() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelErrors)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[objc.ID](_ret)
+	var _mainthread0 *foundation.NSArray[objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelErrors)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The base URL the context uses for loading extension resources or injecting content into webpages. @discussion The default value is a unique URL using the `webkit-extension` scheme. The base URL can be set to any URL, but only the scheme and host will be used. The scheme cannot be a scheme that is already supported by “WKWebView“ (e.g. http, https, etc.) Setting is only allowed when the context is not loaded.
 func (o *WKWebExtensionContext) BaseURL() *foundation.NSURL {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelBaseURL)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSURLFromID(_ret)
+	var _mainthread0 *foundation.NSURL
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSURL {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelBaseURL)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSURLFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebExtensionContext) SetBaseURL(baseURL *foundation.NSURL) {
-	o.Ptr().Send(_wKWebExtensionContextSelSetBaseURL, baseURL.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelSetBaseURL, baseURL.Ptr())
+	})
 }
 
 // @abstract A unique identifier used to distinguish the extension from other extensions and target it for messages. @discussion The default value is a unique value that matches the host in the default base URL. The identifier can be any value that is unique. Setting is only allowed when the context is not loaded. This value is accessible by the extension via `browser.runtime.id` and is used for messaging the extension via `browser.runtime.sendMessage()`.
 func (o *WKWebExtensionContext) UniqueIdentifier() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelUniqueIdentifier)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelUniqueIdentifier)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebExtensionContext) SetUniqueIdentifier(uniqueIdentifier *foundation.NSString) {
-	o.Ptr().Send(_wKWebExtensionContextSelSetUniqueIdentifier, uniqueIdentifier.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelSetUniqueIdentifier, uniqueIdentifier.Ptr())
+	})
 }
 
 // @abstract Determines whether Web Inspector can inspect the “WKWebView“ instances for this context. @discussion A context can control multiple “WKWebView“ instances, from the background content, to the popover. You should set this to `YES` when needed for debugging purposes. The default value is `NO`.
 func (o *WKWebExtensionContext) IsInspectable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelIsInspectable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelIsInspectable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebExtensionContext) SetInspectable(inspectable bool) {
-	o.Ptr().Send(_wKWebExtensionContextSelSetInspectable, inspectable)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelSetInspectable, inspectable)
+	})
 }
 
 // @abstract The name shown when inspecting the background web view. @discussion This is the text that will appear when inspecting the background web view.
 func (o *WKWebExtensionContext) InspectionName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelInspectionName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelInspectionName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebExtensionContext) SetInspectionName(inspectionName *foundation.NSString) {
-	o.Ptr().Send(_wKWebExtensionContextSelSetInspectionName, inspectionName.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelSetInspectionName, inspectionName.Ptr())
+	})
 }
 
 // @abstract Specifies unsupported APIs for this extension, making them `undefined` in JavaScript. @discussion This property allows the app to specify a subset of web extension APIs that it chooses not to support, effectively making these APIs `undefined` within the extension's JavaScript contexts. This enables extensions to employ feature detection techniques for unsupported APIs, allowing them to adapt their behavior based on the APIs actually supported by the app. Setting is only allowed when the context is not loaded. Only certain APIs can be specified here, particularly those within the `browser` namespace and other dynamic functions and properties, anything else will be silently ignored. @note For example, specifying `"browser.windows.create"` and `"browser.storage"` in this set will result in the `browser.windows.create()` function and `browser.storage` property being `undefined`.
 func (o *WKWebExtensionContext) UnsupportedAPIs() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelUnsupportedAPIs)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSSetFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSSet[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSSet[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelUnsupportedAPIs)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSSetFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebExtensionContext) SetUnsupportedAPIs(unsupportedAPIs *foundation.NSSet[*foundation.NSString]) {
-	o.Ptr().Send(_wKWebExtensionContextSelSetUnsupportedAPIs, unsupportedAPIs.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelSetUnsupportedAPIs, unsupportedAPIs.Ptr())
+	})
 }
 
 // @abstract The web view configuration to use for web views that load pages from this extension. @discussion Returns a customized copy of the configuration, originally set in the web extension controller configuration, for this extension. The app must use this configuration when initializing web views intended to navigate to a URL originating from this extension's base URL. The app must also swap web views in tabs when navigating to and from web extension URLs. This property returns `nil` if the context isn't associated with a web extension controller. The returned configuration copy can be customized prior to web view initialization. @note Navigations will fail if a web view using this configuration attempts to navigate to a URL that doesn't originate from this extension's base URL. Similarly, navigations will be canceled if a web view not configured with this configuration attempts to navigate to a URL that does originate from this extension's base URL.
 func (o *WKWebExtensionContext) WebViewConfiguration() *WKWebViewConfiguration {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelWebViewConfiguration)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKWebViewConfigurationFromID(_ret)
+	var _mainthread0 *WKWebViewConfiguration
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebViewConfiguration {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelWebViewConfiguration)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKWebViewConfigurationFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The URL of the extension's options page, if the extension has one. @discussion Provides the URL for the dedicated options page, if provided by the extension; otherwise `nil` if no page is defined. The app should provide access to this page through a user interface element. @note Navigation to the options page is only possible after this extension has been loaded. @seealso webViewConfiguration
 func (o *WKWebExtensionContext) OptionsPageURL() *foundation.NSURL {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelOptionsPageURL)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSURLFromID(_ret)
+	var _mainthread0 *foundation.NSURL
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSURL {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelOptionsPageURL)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSURLFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The URL to use as an alternative to the default new tab page, if the extension has one. @discussion Provides the URL for a new tab page, if provided by the extension; otherwise `nil` if no page is defined. The app should prompt the user for permission to use the extension's new tab page as the default. @note Navigation to the override new tab page is only possible after this extension has been loaded. @seealso webViewConfiguration
 func (o *WKWebExtensionContext) OverrideNewTabPageURL() *foundation.NSURL {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelOverrideNewTabPageURL)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSURLFromID(_ret)
+	var _mainthread0 *foundation.NSURL
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSURL {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelOverrideNewTabPageURL)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSURLFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The currently granted permissions and their expiration dates. @discussion Permissions that don't expire will have a distant future date. This will never include expired entries at time of access. Setting this property will replace all existing entries. Use this property for saving and restoring permission status in bulk. Permissions in this dictionary should be explicitly granted by the user before being added. Any permissions in this collection will not be presented for approval again until they expire. This value should be saved and restored as needed by the app. @seealso setPermissionStatus:forPermission: @seealso setPermissionStatus:forPermission:expirationDate:
 func (o *WKWebExtensionContext) GrantedPermissions() *foundation.NSDictionary[*foundation.NSString, *foundation.NSDate] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelGrantedPermissions)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSDate](_ret)
+	var _mainthread0 *foundation.NSDictionary[*foundation.NSString, *foundation.NSDate]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSDictionary[*foundation.NSString, *foundation.NSDate] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelGrantedPermissions)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSDate](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebExtensionContext) SetGrantedPermissions(grantedPermissions *foundation.NSDictionary[*foundation.NSString, *foundation.NSDate]) {
-	o.Ptr().Send(_wKWebExtensionContextSelSetGrantedPermissions, grantedPermissions.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelSetGrantedPermissions, grantedPermissions.Ptr())
+	})
 }
 
 // @abstract The currently granted permission match patterns and their expiration dates. @discussion Match patterns that don't expire will have a distant future date. This will never include expired entries at time of access. Setting this property will replace all existing entries. Use this property for saving and restoring permission status in bulk. Match patterns in this dictionary should be explicitly granted by the user before being added. Any match pattern in this collection will not be presented for approval again until they expire. This value should be saved and restored as needed by the app. @seealso setPermissionStatus:forMatchPattern: @seealso setPermissionStatus:forMatchPattern:expirationDate:
 func (o *WKWebExtensionContext) GrantedPermissionMatchPatterns() *foundation.NSDictionary[*WKWebExtensionMatchPattern, *foundation.NSDate] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelGrantedPermissionMatchPatterns)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDictionaryFromID[*WKWebExtensionMatchPattern, *foundation.NSDate](_ret)
+	var _mainthread0 *foundation.NSDictionary[*WKWebExtensionMatchPattern, *foundation.NSDate]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSDictionary[*WKWebExtensionMatchPattern, *foundation.NSDate] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelGrantedPermissionMatchPatterns)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDictionaryFromID[*WKWebExtensionMatchPattern, *foundation.NSDate](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebExtensionContext) SetGrantedPermissionMatchPatterns(grantedPermissionMatchPatterns *foundation.NSDictionary[*WKWebExtensionMatchPattern, *foundation.NSDate]) {
-	o.Ptr().Send(_wKWebExtensionContextSelSetGrantedPermissionMatchPatterns, grantedPermissionMatchPatterns.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelSetGrantedPermissionMatchPatterns, grantedPermissionMatchPatterns.Ptr())
+	})
 }
 
 // @abstract The currently denied permissions and their expiration dates. @discussion Permissions that don't expire will have a distant future date. This will never include expired entries at time of access. Setting this property will replace all existing entries. Use this property for saving and restoring permission status in bulk. Permissions in this dictionary should be explicitly denied by the user before being added. Any match pattern in this collection will not be presented for approval again until they expire. This value should be saved and restored as needed by the app. @seealso setPermissionStatus:forPermission: @seealso setPermissionStatus:forPermission:expirationDate:
 func (o *WKWebExtensionContext) DeniedPermissions() *foundation.NSDictionary[*foundation.NSString, *foundation.NSDate] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelDeniedPermissions)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSDate](_ret)
+	var _mainthread0 *foundation.NSDictionary[*foundation.NSString, *foundation.NSDate]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSDictionary[*foundation.NSString, *foundation.NSDate] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelDeniedPermissions)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSDate](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebExtensionContext) SetDeniedPermissions(deniedPermissions *foundation.NSDictionary[*foundation.NSString, *foundation.NSDate]) {
-	o.Ptr().Send(_wKWebExtensionContextSelSetDeniedPermissions, deniedPermissions.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelSetDeniedPermissions, deniedPermissions.Ptr())
+	})
 }
 
 // @abstract The currently denied permission match patterns and their expiration dates. @discussion Match patterns that don't expire will have a distant future date. This will never include expired entries at time of access. Setting this property will replace all existing entries. Use this property for saving and restoring permission status in bulk. Match patterns in this dictionary should be explicitly denied by the user before being added. Any match pattern in this collection will not be presented for approval again until they expire. This value should be saved and restored as needed by the app. @seealso setPermissionStatus:forMatchPattern: @seealso setPermissionStatus:forMatchPattern:expirationDate:
 func (o *WKWebExtensionContext) DeniedPermissionMatchPatterns() *foundation.NSDictionary[*WKWebExtensionMatchPattern, *foundation.NSDate] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelDeniedPermissionMatchPatterns)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDictionaryFromID[*WKWebExtensionMatchPattern, *foundation.NSDate](_ret)
+	var _mainthread0 *foundation.NSDictionary[*WKWebExtensionMatchPattern, *foundation.NSDate]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSDictionary[*WKWebExtensionMatchPattern, *foundation.NSDate] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelDeniedPermissionMatchPatterns)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDictionaryFromID[*WKWebExtensionMatchPattern, *foundation.NSDate](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebExtensionContext) SetDeniedPermissionMatchPatterns(deniedPermissionMatchPatterns *foundation.NSDictionary[*WKWebExtensionMatchPattern, *foundation.NSDate]) {
-	o.Ptr().Send(_wKWebExtensionContextSelSetDeniedPermissionMatchPatterns, deniedPermissionMatchPatterns.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelSetDeniedPermissionMatchPatterns, deniedPermissionMatchPatterns.Ptr())
+	})
 }
 
 // @abstract A Boolean value indicating if the extension has requested optional access to all hosts. @discussion If this property is `YES`, the extension has asked for access to all hosts in a call to `browser.runtime.permissions.request()`, and future permission checks will present discrete hosts for approval as being implicitly requested. This value should be saved and restored as needed by the app.
 func (o *WKWebExtensionContext) HasRequestedOptionalAccessToAllHosts() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasRequestedOptionalAccessToAllHosts)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasRequestedOptionalAccessToAllHosts)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebExtensionContext) SetHasRequestedOptionalAccessToAllHosts(hasRequestedOptionalAccessToAllHosts bool) {
-	o.Ptr().Send(_wKWebExtensionContextSelSetHasRequestedOptionalAccessToAllHosts, hasRequestedOptionalAccessToAllHosts)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelSetHasRequestedOptionalAccessToAllHosts, hasRequestedOptionalAccessToAllHosts)
+	})
 }
 
 // @abstract A Boolean value indicating if the extension has access to private data. @discussion If this property is `YES`, the extension is granted permission to interact with private windows, tabs, and cookies. Access to private data should be explicitly allowed by the user before setting this property. This value should be saved and restored as needed by the app. @note To ensure proper isolation between private and non-private data, web views associated with private data must use a different “WKUserContentController“. Likewise, to be identified as a private web view and to ensure that cookies and other website data is not shared, private web views must be configured to use a non-persistent “WKWebsiteDataStore“.
 func (o *WKWebExtensionContext) HasAccessToPrivateData() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasAccessToPrivateData)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasAccessToPrivateData)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebExtensionContext) SetHasAccessToPrivateData(hasAccessToPrivateData bool) {
-	o.Ptr().Send(_wKWebExtensionContextSelSetHasAccessToPrivateData, hasAccessToPrivateData)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionContextSelSetHasAccessToPrivateData, hasAccessToPrivateData)
+	})
 }
 
 // @abstract The currently granted permissions that have not expired. @seealso grantedPermissions
 func (o *WKWebExtensionContext) CurrentPermissions() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelCurrentPermissions)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSSetFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSSet[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSSet[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelCurrentPermissions)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSSetFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The currently granted permission match patterns that have not expired. @seealso grantedPermissionMatchPatterns
 func (o *WKWebExtensionContext) CurrentPermissionMatchPatterns() *foundation.NSSet[*WKWebExtensionMatchPattern] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelCurrentPermissionMatchPatterns)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSSetFromID[*WKWebExtensionMatchPattern](_ret)
+	var _mainthread0 *foundation.NSSet[*WKWebExtensionMatchPattern]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSSet[*WKWebExtensionMatchPattern] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelCurrentPermissionMatchPatterns)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSSetFromID[*WKWebExtensionMatchPattern](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract A Boolean value indicating if the currently granted permission match patterns set contains the `<all_urls>` pattern. @discussion This does not check for any `*` host patterns. In most cases you should use the broader “hasAccessToAllHosts“. @seealso currentPermissionMatchPatterns @seealso hasAccessToAllHosts
 func (o *WKWebExtensionContext) HasAccessToAllURLs() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasAccessToAllURLs)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasAccessToAllURLs)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract A Boolean value indicating if the currently granted permission match patterns set contains the `<all_urls>` pattern or any `*` host patterns. @seealso currentPermissionMatchPatterns @seealso hasAccessToAllURLs
 func (o *WKWebExtensionContext) HasAccessToAllHosts() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasAccessToAllHosts)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasAccessToAllHosts)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract A Boolean value indicating whether the extension has script or stylesheet content that can be injected into webpages. @discussion If this property is `YES`, the extension has content that can be injected by matching against the extension's requested match patterns. @seealso hasInjectedContentForURL:
 func (o *WKWebExtensionContext) HasInjectedContent() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasInjectedContent)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasInjectedContent)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract A boolean value indicating whether the extension includes rules used for content modification or blocking. @discussion This includes both static rules available in the extension's manifest and dynamic rules applied during a browsing session.
 func (o *WKWebExtensionContext) HasContentModificationRules() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasContentModificationRules)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionContextSelHasContentModificationRules)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The commands associated with the extension. @discussion Provides all commands registered within the extension. Each command represents an action or behavior available for the web extension. @seealso performCommand:
 func (o *WKWebExtensionContext) Commands() *foundation.NSArray[*WKWebExtensionCommand] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelCommands)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*WKWebExtensionCommand](_ret)
+	var _mainthread0 *foundation.NSArray[*WKWebExtensionCommand]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*WKWebExtensionCommand] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelCommands)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*WKWebExtensionCommand](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The open windows that are exposed to this extension. @discussion Provides the windows that are open and visible to the extension, as updated by the “didOpenWindow:“ and “didCloseWindow:“ methods. Initially populated by the windows returned by the extension controller delegate method “webExtensionController:openWindowsForExtensionContext:“. @seealso didOpenWindow: @seealso didCloseWindow:
 func (o *WKWebExtensionContext) OpenWindows() *foundation.NSArray[WKWebExtensionWindow] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelOpenWindows)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[WKWebExtensionWindow](_ret)
+	var _mainthread0 *foundation.NSArray[WKWebExtensionWindow]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[WKWebExtensionWindow] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelOpenWindows)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[WKWebExtensionWindow](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The window that currently has focus for this extension. @discussion Provides the window that currently has focus, as set by the “didFocusWindow:“ method. It will be `nil` if no window has focus or if a window has focus that is not visible to the extension. Initially populated by the window returned by the extension controller delegate method “webExtensionController:focusedWindowForExtensionContext:“. @seealso didFocusWindow:
 func (o *WKWebExtensionContext) FocusedWindow() WKWebExtensionWindow {
-	_ret := objc.Send[WKWebExtensionWindow](o.Ptr(), _wKWebExtensionContextSelFocusedWindow)
-	return _ret
+	var _mainthread0 WKWebExtensionWindow
+	purego.Main(func() {
+		_mainthread0 = func() WKWebExtensionWindow {
+			_ret := objc.Send[WKWebExtensionWindow](o.Ptr(), _wKWebExtensionContextSelFocusedWindow)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract A set of open tabs in all open windows that are exposed to this extension. @discussion Provides a set of tabs in all open windows that are visible to the extension, as updated by the “didOpenTab:“ and “didCloseTab:“ methods. Initially populated by the tabs in the windows returned by the extension controller delegate method “webExtensionController:openWindowsForExtensionContext:“. @seealso didOpenTab: @seealso didCloseTab:
 func (o *WKWebExtensionContext) OpenTabs() *foundation.NSSet[WKWebExtensionTab] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelOpenTabs)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSSetFromID[WKWebExtensionTab](_ret)
+	var _mainthread0 *foundation.NSSet[WKWebExtensionTab]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSSet[WKWebExtensionTab] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionContextSelOpenTabs)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSSetFromID[WKWebExtensionTab](_ret)
+		}()
+	})
+	return _mainthread0
 }

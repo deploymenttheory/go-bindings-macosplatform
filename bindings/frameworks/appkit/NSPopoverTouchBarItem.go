@@ -49,92 +49,152 @@ func NSPopoverTouchBarItemFromID(id objc.ID) *NSPopoverTouchBarItem {
 
 // Replaces the main bar with this item’s popover bar.
 func (o *NSPopoverTouchBarItem) ShowPopover(sender objc.ID) {
-	o.Ptr().Send(_nSPopoverTouchBarItemSelShowPopover, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopoverTouchBarItemSelShowPopover, sender)
+	})
 }
 
 // Restores the previously visible main bar.
 func (o *NSPopoverTouchBarItem) DismissPopover(sender objc.ID) {
-	o.Ptr().Send(_nSPopoverTouchBarItemSelDismissPopover, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopoverTouchBarItemSelDismissPopover, sender)
+	})
 }
 
 // Returns a gesture recognizer, configured to invoke the showPopover: method.
 func (o *NSPopoverTouchBarItem) MakeStandardActivatePopoverGestureRecognizer() *NSGestureRecognizer {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverTouchBarItemSelMakeStandardActivatePopoverGestureRecognizer)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGestureRecognizerFromID(_ret)
+	var _mainthread0 *NSGestureRecognizer
+	purego.Main(func() {
+		_mainthread0 = func() *NSGestureRecognizer {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverTouchBarItemSelMakeStandardActivatePopoverGestureRecognizer)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGestureRecognizerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPopoverTouchBarItem) PopoverTouchBar() *NSTouchBar {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverTouchBarItemSelPopoverTouchBar)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTouchBarFromID(_ret)
+	var _mainthread0 *NSTouchBar
+	purego.Main(func() {
+		_mainthread0 = func() *NSTouchBar {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverTouchBarItemSelPopoverTouchBar)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTouchBarFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPopoverTouchBarItem) SetPopoverTouchBar(popoverTouchBar *NSTouchBar) {
-	o.Ptr().Send(_nSPopoverTouchBarItemSelSetPopoverTouchBar, popoverTouchBar.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopoverTouchBarItemSelSetPopoverTouchBar, popoverTouchBar.Ptr())
+	})
 }
 
 func (o *NSPopoverTouchBarItem) SetCustomizationLabel(customizationLabel *foundation.NSString) {
-	o.Ptr().Send(_nSPopoverTouchBarItemSelSetCustomizationLabel, customizationLabel.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopoverTouchBarItemSelSetCustomizationLabel, customizationLabel.Ptr())
+	})
 }
 
 func (o *NSPopoverTouchBarItem) CollapsedRepresentation() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverTouchBarItemSelCollapsedRepresentation)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverTouchBarItemSelCollapsedRepresentation)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPopoverTouchBarItem) SetCollapsedRepresentation(collapsedRepresentation *NSView) {
-	o.Ptr().Send(_nSPopoverTouchBarItemSelSetCollapsedRepresentation, collapsedRepresentation.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopoverTouchBarItemSelSetCollapsedRepresentation, collapsedRepresentation.Ptr())
+	})
 }
 
 func (o *NSPopoverTouchBarItem) CollapsedRepresentationImage() *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverTouchBarItemSelCollapsedRepresentationImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverTouchBarItemSelCollapsedRepresentationImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPopoverTouchBarItem) SetCollapsedRepresentationImage(collapsedRepresentationImage *NSImage) {
-	o.Ptr().Send(_nSPopoverTouchBarItemSelSetCollapsedRepresentationImage, collapsedRepresentationImage.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopoverTouchBarItemSelSetCollapsedRepresentationImage, collapsedRepresentationImage.Ptr())
+	})
 }
 
 func (o *NSPopoverTouchBarItem) CollapsedRepresentationLabel() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverTouchBarItemSelCollapsedRepresentationLabel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverTouchBarItemSelCollapsedRepresentationLabel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPopoverTouchBarItem) SetCollapsedRepresentationLabel(collapsedRepresentationLabel *foundation.NSString) {
-	o.Ptr().Send(_nSPopoverTouchBarItemSelSetCollapsedRepresentationLabel, collapsedRepresentationLabel.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopoverTouchBarItemSelSetCollapsedRepresentationLabel, collapsedRepresentationLabel.Ptr())
+	})
 }
 
 func (o *NSPopoverTouchBarItem) PressAndHoldTouchBar() *NSTouchBar {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverTouchBarItemSelPressAndHoldTouchBar)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTouchBarFromID(_ret)
+	var _mainthread0 *NSTouchBar
+	purego.Main(func() {
+		_mainthread0 = func() *NSTouchBar {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverTouchBarItemSelPressAndHoldTouchBar)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTouchBarFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPopoverTouchBarItem) SetPressAndHoldTouchBar(pressAndHoldTouchBar *NSTouchBar) {
-	o.Ptr().Send(_nSPopoverTouchBarItemSelSetPressAndHoldTouchBar, pressAndHoldTouchBar.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopoverTouchBarItemSelSetPressAndHoldTouchBar, pressAndHoldTouchBar.Ptr())
+	})
 }
 
 func (o *NSPopoverTouchBarItem) ShowsCloseButton() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSPopoverTouchBarItemSelShowsCloseButton)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSPopoverTouchBarItemSelShowsCloseButton)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPopoverTouchBarItem) SetShowsCloseButton(showsCloseButton bool) {
-	o.Ptr().Send(_nSPopoverTouchBarItemSelSetShowsCloseButton, showsCloseButton)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopoverTouchBarItemSelSetShowsCloseButton, showsCloseButton)
+	})
 }

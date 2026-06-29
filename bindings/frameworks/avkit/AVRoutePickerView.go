@@ -42,47 +42,79 @@ func AVRoutePickerViewFromID(id objc.ID) *AVRoutePickerView {
 
 // Returns the color of the picker button for the specified state.
 func (o *AVRoutePickerView) RoutePickerButtonColorForState(state AVRoutePickerViewButtonState) *appkit.NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVRoutePickerViewSelRoutePickerButtonColorForState, state)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSColorFromID(_ret)
+	var _mainthread0 *appkit.NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVRoutePickerViewSelRoutePickerButtonColorForState, state)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the route picker button color for the specified state.
 func (o *AVRoutePickerView) SetRoutePickerButtonColorForState(color *appkit.NSColor, state AVRoutePickerViewButtonState) {
-	o.Ptr().Send(_aVRoutePickerViewSelSetRoutePickerButtonColorForState, color.Ptr(), state)
+	purego.Main(func() {
+		o.Ptr().Send(_aVRoutePickerViewSelSetRoutePickerButtonColorForState, color.Ptr(), state)
+	})
 }
 
 // @property		delegate @abstract		The route picker view's delegate.
 func (o *AVRoutePickerView) Delegate() AVRoutePickerViewDelegate {
-	_ret := objc.Send[AVRoutePickerViewDelegate](o.Ptr(), _aVRoutePickerViewSelDelegate)
-	return _ret
+	var _mainthread0 AVRoutePickerViewDelegate
+	purego.Main(func() {
+		_mainthread0 = func() AVRoutePickerViewDelegate {
+			_ret := objc.Send[AVRoutePickerViewDelegate](o.Ptr(), _aVRoutePickerViewSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVRoutePickerView) SetDelegate(delegate AVRoutePickerViewDelegate) {
-	o.Ptr().Send(_aVRoutePickerViewSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_aVRoutePickerViewSelSetDelegate, delegate)
+	})
 }
 
 // @property 		player @abstract		The player for which to perform routing operations.
 func (o *AVRoutePickerView) Player() *avfoundation.AVPlayer {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVRoutePickerViewSelPlayer)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return avfoundation.AVPlayerFromID(_ret)
+	var _mainthread0 *avfoundation.AVPlayer
+	purego.Main(func() {
+		_mainthread0 = func() *avfoundation.AVPlayer {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVRoutePickerViewSelPlayer)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return avfoundation.AVPlayerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVRoutePickerView) SetPlayer(player *avfoundation.AVPlayer) {
-	o.Ptr().Send(_aVRoutePickerViewSelSetPlayer, player.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aVRoutePickerViewSelSetPlayer, player.Ptr())
+	})
 }
 
 // @property		routePickerButtonBordered @abstract		Whether or not the picker button has a border. Default is YES.
 func (o *AVRoutePickerView) IsRoutePickerButtonBordered() bool {
-	_ret := objc.Send[bool](o.Ptr(), _aVRoutePickerViewSelIsRoutePickerButtonBordered)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aVRoutePickerViewSelIsRoutePickerButtonBordered)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVRoutePickerView) SetRoutePickerButtonBordered(routePickerButtonBordered bool) {
-	o.Ptr().Send(_aVRoutePickerViewSelSetRoutePickerButtonBordered, routePickerButtonBordered)
+	purego.Main(func() {
+		o.Ptr().Send(_aVRoutePickerViewSelSetRoutePickerButtonBordered, routePickerButtonBordered)
+	})
 }

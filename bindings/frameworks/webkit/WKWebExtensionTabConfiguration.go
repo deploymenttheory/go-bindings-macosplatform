@@ -40,57 +40,111 @@ func WKWebExtensionTabConfigurationFromID(id objc.ID) *WKWebExtensionTabConfigur
 
 // @abstract Indicates the window where the tab should be opened. @discussion If this property is `nil`, no window was specified.
 func (o *WKWebExtensionTabConfiguration) Window() WKWebExtensionWindow {
-	_ret := objc.Send[WKWebExtensionWindow](o.Ptr(), _wKWebExtensionTabConfigurationSelWindow)
-	return _ret
+	var _mainthread0 WKWebExtensionWindow
+	purego.Main(func() {
+		_mainthread0 = func() WKWebExtensionWindow {
+			_ret := objc.Send[WKWebExtensionWindow](o.Ptr(), _wKWebExtensionTabConfigurationSelWindow)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Indicates the position where the tab should be opened within the window.
 func (o *WKWebExtensionTabConfiguration) Index() uint {
-	_ret := objc.Send[uint](o.Ptr(), _wKWebExtensionTabConfigurationSelIndex)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _wKWebExtensionTabConfigurationSelIndex)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Indicates the parent tab with which the tab should be related. @discussion If this property is `nil`, no parent tab was specified.
 func (o *WKWebExtensionTabConfiguration) ParentTab() WKWebExtensionTab {
-	_ret := objc.Send[WKWebExtensionTab](o.Ptr(), _wKWebExtensionTabConfigurationSelParentTab)
-	return _ret
+	var _mainthread0 WKWebExtensionTab
+	purego.Main(func() {
+		_mainthread0 = func() WKWebExtensionTab {
+			_ret := objc.Send[WKWebExtensionTab](o.Ptr(), _wKWebExtensionTabConfigurationSelParentTab)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Indicates the initial URL for the tab. @discussion If this property is `nil`, the app's default "start page" should appear in the tab.
 func (o *WKWebExtensionTabConfiguration) Url() *foundation.NSURL {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionTabConfigurationSelUrl)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSURLFromID(_ret)
+	var _mainthread0 *foundation.NSURL
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSURL {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionTabConfigurationSelUrl)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSURLFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Indicates whether the tab should be the active tab. @discussion If this property is `YES`, the tab should be made active in the window, ensuring it is the frontmost tab. Being active implies the tab is also selected. If this property is `NO`, the tab shouldn't affect the currently active tab.
 func (o *WKWebExtensionTabConfiguration) ShouldBeActive() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionTabConfigurationSelShouldBeActive)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionTabConfigurationSelShouldBeActive)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Indicates whether the tab should be added to the current tab selection. @discussion If this property is `YES`, the tab should be part of the current selection, but not necessarily become the active tab unless “shouldBeActive“ is also `YES`. If this property is `NO`, the tab shouldn't be part of the current selection.
 func (o *WKWebExtensionTabConfiguration) ShouldAddToSelection() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionTabConfigurationSelShouldAddToSelection)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionTabConfigurationSelShouldAddToSelection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Indicates whether the tab should be pinned.
 func (o *WKWebExtensionTabConfiguration) ShouldBePinned() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionTabConfigurationSelShouldBePinned)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionTabConfigurationSelShouldBePinned)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Indicates whether the tab should be muted.
 func (o *WKWebExtensionTabConfiguration) ShouldBeMuted() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionTabConfigurationSelShouldBeMuted)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionTabConfigurationSelShouldBeMuted)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Indicates whether reader mode in the tab should be active.
 func (o *WKWebExtensionTabConfiguration) ShouldReaderModeBeActive() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionTabConfigurationSelShouldReaderModeBeActive)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionTabConfigurationSelShouldReaderModeBeActive)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

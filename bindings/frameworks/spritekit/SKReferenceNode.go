@@ -40,55 +40,89 @@ func SKReferenceNodeFromID(id objc.ID) *SKReferenceNode {
 
 // Initializes a reference node from a URL.
 func (o *SKReferenceNode) InitWithURL(url *foundation.NSURL) *SKReferenceNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKReferenceNodeSelInitWithURL, url.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKReferenceNodeFromID(_ret)
+	var _mainthread0 *SKReferenceNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKReferenceNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKReferenceNodeSelInitWithURL, url.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKReferenceNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a reference node from a file in the app’s main bundle.
 func (o *SKReferenceNode) InitWithFileNamed(fileName *foundation.NSString) *SKReferenceNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKReferenceNodeSelInitWithFileNamed, fileName.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKReferenceNodeFromID(_ret)
+	var _mainthread0 *SKReferenceNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKReferenceNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKReferenceNodeSelInitWithFileNamed, fileName.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKReferenceNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // A method that initializes a reference node from an archive.
 func (o *SKReferenceNode) InitWithCoder(aDecoder *foundation.NSCoder) *SKReferenceNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKReferenceNodeSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKReferenceNodeFromID(_ret)
+	var _mainthread0 *SKReferenceNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKReferenceNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKReferenceNodeSelInitWithCoder, aDecoder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKReferenceNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a reference node from a file in the app’s main bundle.
 func SKReferenceNodeReferenceNodeWithFileNamed(fileName *foundation.NSString) *SKReferenceNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKReferenceNode), _sKReferenceNodeSelReferenceNodeWithFileNamed, fileName.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKReferenceNodeFromID(_ret)
+	var _mainthread0 *SKReferenceNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKReferenceNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKReferenceNode), _sKReferenceNodeSelReferenceNodeWithFileNamed, fileName.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKReferenceNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a reference node from a URL.
 func SKReferenceNodeReferenceNodeWithURL(referenceURL *foundation.NSURL) *SKReferenceNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKReferenceNode), _sKReferenceNodeSelReferenceNodeWithURL, referenceURL.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKReferenceNodeFromID(_ret)
+	var _mainthread0 *SKReferenceNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKReferenceNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKReferenceNode), _sKReferenceNodeSelReferenceNodeWithURL, referenceURL.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKReferenceNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // A method called by SpriteKit after the reference node’s contents are loaded.
 func (o *SKReferenceNode) DidLoadReferenceNode(node *SKNode) {
-	o.Ptr().Send(_sKReferenceNodeSelDidLoadReferenceNode, node.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKReferenceNodeSelDidLoadReferenceNode, node.Ptr())
+	})
 }
 
 // Loads the reference node’s content and adds it as a new child node.
 func (o *SKReferenceNode) ResolveReferenceNode() {
-	o.Ptr().Send(_sKReferenceNodeSelResolveReferenceNode)
+	purego.Main(func() {
+		o.Ptr().Send(_sKReferenceNodeSelResolveReferenceNode)
+	})
 }

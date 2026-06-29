@@ -50,139 +50,239 @@ func WKWebExtensionMatchPatternFromID(id objc.ID) *WKWebExtensionMatchPattern {
 
 // @abstract Registers a custom URL scheme that can be used in match patterns. @discussion This method should be used to register any custom URL schemes used by the app for the extension base URLs, other than `webkit-extension`, or if extensions should have access to other supported URL schemes when using `<all_urls>`. @param urlScheme The custom URL scheme to register.
 func WKWebExtensionMatchPatternRegisterCustomURLScheme(urlScheme *foundation.NSString) {
-	objc.ID(_clsWKWebExtensionMatchPattern).Send(_wKWebExtensionMatchPatternSelRegisterCustomURLScheme, urlScheme.Ptr())
+	purego.Main(func() {
+		objc.ID(_clsWKWebExtensionMatchPattern).Send(_wKWebExtensionMatchPatternSelRegisterCustomURLScheme, urlScheme.Ptr())
+	})
 }
 
 // @abstract Returns a pattern object for `<all_urls>`.
 func WKWebExtensionMatchPatternAllURLsMatchPattern() *WKWebExtensionMatchPattern {
-	_ret := objc.Send[objc.ID](objc.ID(_clsWKWebExtensionMatchPattern), _wKWebExtensionMatchPatternSelAllURLsMatchPattern)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKWebExtensionMatchPatternFromID(_ret)
+	var _mainthread0 *WKWebExtensionMatchPattern
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtensionMatchPattern {
+			_ret := objc.Send[objc.ID](objc.ID(_clsWKWebExtensionMatchPattern), _wKWebExtensionMatchPatternSelAllURLsMatchPattern)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKWebExtensionMatchPatternFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Returns a pattern object that has `*` for scheme, host, and path.
 func WKWebExtensionMatchPatternAllHostsAndSchemesMatchPattern() *WKWebExtensionMatchPattern {
-	_ret := objc.Send[objc.ID](objc.ID(_clsWKWebExtensionMatchPattern), _wKWebExtensionMatchPatternSelAllHostsAndSchemesMatchPattern)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKWebExtensionMatchPatternFromID(_ret)
+	var _mainthread0 *WKWebExtensionMatchPattern
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtensionMatchPattern {
+			_ret := objc.Send[objc.ID](objc.ID(_clsWKWebExtensionMatchPattern), _wKWebExtensionMatchPatternSelAllHostsAndSchemesMatchPattern)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKWebExtensionMatchPatternFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Returns a pattern object for the specified pattern string. @result Returns `nil` if the pattern string is invalid. @seealso initWithString:error:
 func WKWebExtensionMatchPatternMatchPatternWithString(string_ *foundation.NSString) *WKWebExtensionMatchPattern {
-	_ret := objc.Send[objc.ID](objc.ID(_clsWKWebExtensionMatchPattern), _wKWebExtensionMatchPatternSelMatchPatternWithString, string_.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKWebExtensionMatchPatternFromID(_ret)
+	var _mainthread0 *WKWebExtensionMatchPattern
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtensionMatchPattern {
+			_ret := objc.Send[objc.ID](objc.ID(_clsWKWebExtensionMatchPattern), _wKWebExtensionMatchPatternSelMatchPatternWithString, string_.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKWebExtensionMatchPatternFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Returns a pattern object for the specified scheme, host, and path strings. @result A pattern object, or `nil` if any of the strings are invalid. @seealso initWithScheme:host:path:error:
 func WKWebExtensionMatchPatternMatchPatternWithSchemeHostPath(scheme *foundation.NSString, host *foundation.NSString, path *foundation.NSString) *WKWebExtensionMatchPattern {
-	_ret := objc.Send[objc.ID](objc.ID(_clsWKWebExtensionMatchPattern), _wKWebExtensionMatchPatternSelMatchPatternWithSchemeHostPath, scheme.Ptr(), host.Ptr(), path.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKWebExtensionMatchPatternFromID(_ret)
+	var _mainthread0 *WKWebExtensionMatchPattern
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtensionMatchPattern {
+			_ret := objc.Send[objc.ID](objc.ID(_clsWKWebExtensionMatchPattern), _wKWebExtensionMatchPatternSelMatchPatternWithSchemeHostPath, scheme.Ptr(), host.Ptr(), path.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKWebExtensionMatchPatternFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Returns a pattern object for the specified pattern string. @param error Set to \c nil or an error instance if an error occurred. @result A pattern object, or `nil` if the pattern string is invalid and an error will be set. @seealso initWithString:
 func (o *WKWebExtensionMatchPattern) InitWithStringError(string_ *foundation.NSString) (*WKWebExtensionMatchPattern, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionMatchPatternSelInitWithStringError, string_.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return WKWebExtensionMatchPatternFromID(_ret), nil
+	var _mainthread0 *WKWebExtensionMatchPattern
+	var _mainthread1 error
+	purego.Main(func() {
+		_mainthread0, _mainthread1 = func() (*WKWebExtensionMatchPattern, error) {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionMatchPatternSelInitWithStringError, string_.Ptr(), unsafe.Pointer(&_nsErr))
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			if _nsErr != 0 {
+				return nil, purego.NSErrorToError(objc.ID(_nsErr))
+			}
+			return WKWebExtensionMatchPatternFromID(_ret), nil
+		}()
+	})
+	return _mainthread0, _mainthread1
 }
 
 // @abstract Returns a pattern object for the specified scheme, host, and path strings. @param error Set to \c nil or an error instance if an error occurred. @result A pattern object, or `nil` if any of the strings are invalid and an error will be set. @seealso initWithScheme:host:path:
 func (o *WKWebExtensionMatchPattern) InitWithSchemeHostPathError(scheme *foundation.NSString, host *foundation.NSString, path *foundation.NSString) (*WKWebExtensionMatchPattern, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionMatchPatternSelInitWithSchemeHostPathError, scheme.Ptr(), host.Ptr(), path.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return WKWebExtensionMatchPatternFromID(_ret), nil
+	var _mainthread0 *WKWebExtensionMatchPattern
+	var _mainthread1 error
+	purego.Main(func() {
+		_mainthread0, _mainthread1 = func() (*WKWebExtensionMatchPattern, error) {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionMatchPatternSelInitWithSchemeHostPathError, scheme.Ptr(), host.Ptr(), path.Ptr(), unsafe.Pointer(&_nsErr))
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			if _nsErr != 0 {
+				return nil, purego.NSErrorToError(objc.ID(_nsErr))
+			}
+			return WKWebExtensionMatchPatternFromID(_ret), nil
+		}()
+	})
+	return _mainthread0, _mainthread1
 }
 
 // @abstract Matches the reciever pattern against the specified URL. @param url The URL to match the against the reciever pattern. @result A Boolean value indicating if pattern matches the specified URL. @seealso matchesURL:options:
 func (o *WKWebExtensionMatchPattern) MatchesURL(url *foundation.NSURL) bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionMatchPatternSelMatchesURL, url.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionMatchPatternSelMatchesURL, url.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Matches the reciever pattern against the specified URL with options. @param url The URL to match the against the reciever pattern. @param options The options to use while matching. @result A Boolean value indicating if pattern matches the specified URL. @seealso matchesURL:
 func (o *WKWebExtensionMatchPattern) MatchesURLOptions(url *foundation.NSURL, options WKWebExtensionMatchPatternOptions) bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionMatchPatternSelMatchesURLOptions, url.Ptr(), options)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionMatchPatternSelMatchesURLOptions, url.Ptr(), options)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Matches the receiver pattern against the specified pattern. @param pattern The pattern to match against the receiver pattern. @result A Boolean value indicating if receiver pattern matches the specified pattern. @seealso matchesPattern:options:
 func (o *WKWebExtensionMatchPattern) MatchesPattern(pattern *WKWebExtensionMatchPattern) bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionMatchPatternSelMatchesPattern, pattern.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionMatchPatternSelMatchesPattern, pattern.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Matches the receiver pattern against the specified pattern with options. @param pattern The pattern to match against the receiver pattern. @param options The options to use while matching. @result A Boolean value indicating if receiver pattern matches the specified pattern. @seealso matchesPattern:
 func (o *WKWebExtensionMatchPattern) MatchesPatternOptions(pattern *WKWebExtensionMatchPattern, options WKWebExtensionMatchPatternOptions) bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionMatchPatternSelMatchesPatternOptions, pattern.Ptr(), options)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionMatchPatternSelMatchesPatternOptions, pattern.Ptr(), options)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The original pattern string.
 func (o *WKWebExtensionMatchPattern) String() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionMatchPatternSelString)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionMatchPatternSelString)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The scheme part of the pattern string, unless “matchesAllURLs“ is `YES`.
 func (o *WKWebExtensionMatchPattern) Scheme() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionMatchPatternSelScheme)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionMatchPatternSelScheme)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The host part of the pattern string, unless “matchesAllURLs“ is `YES`.
 func (o *WKWebExtensionMatchPattern) Host() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionMatchPatternSelHost)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionMatchPatternSelHost)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The path part of the pattern string, unless “matchesAllURLs“ is `YES`.
 func (o *WKWebExtensionMatchPattern) Path() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionMatchPatternSelPath)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionMatchPatternSelPath)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract If the pattern is `<all_urls>`.
 func (o *WKWebExtensionMatchPattern) MatchesAllURLs() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionMatchPatternSelMatchesAllURLs)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionMatchPatternSelMatchesAllURLs)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract If the pattern is `<all_urls>` or has `*` as the host.
 func (o *WKWebExtensionMatchPattern) MatchesAllHosts() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionMatchPatternSelMatchesAllHosts)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionMatchPatternSelMatchesAllHosts)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

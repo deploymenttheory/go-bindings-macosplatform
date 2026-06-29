@@ -37,29 +37,49 @@ func NSScrubberProportionalLayoutFromID(id objc.ID) *NSScrubberProportionalLayou
 
 // Initializes and returns a newly allocated proportional layout, configured to display the given number of items.
 func (o *NSScrubberProportionalLayout) InitWithNumberOfVisibleItems(numberOfVisibleItems int) *NSScrubberProportionalLayout {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberProportionalLayoutSelInitWithNumberOfVisibleItems, numberOfVisibleItems)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrubberProportionalLayoutFromID(_ret)
+	var _mainthread0 *NSScrubberProportionalLayout
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrubberProportionalLayout {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberProportionalLayoutSelInitWithNumberOfVisibleItems, numberOfVisibleItems)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrubberProportionalLayoutFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes and returns a newly allocated proprotional layout object from a storyboard or nib file.
 func (o *NSScrubberProportionalLayout) InitWithCoder(coder *foundation.NSCoder) *NSScrubberProportionalLayout {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberProportionalLayoutSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrubberProportionalLayoutFromID(_ret)
+	var _mainthread0 *NSScrubberProportionalLayout
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrubberProportionalLayout {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberProportionalLayoutSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrubberProportionalLayoutFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The number of items that should fit within the scrubber's viewport at once.
 func (o *NSScrubberProportionalLayout) NumberOfVisibleItems() int {
-	_ret := objc.Send[int](o.Ptr(), _nSScrubberProportionalLayoutSelNumberOfVisibleItems)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSScrubberProportionalLayoutSelNumberOfVisibleItems)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The number of items that should fit within the scrubber's viewport at once.
 func (o *NSScrubberProportionalLayout) SetNumberOfVisibleItems(numberOfVisibleItems int) {
-	o.Ptr().Send(_nSScrubberProportionalLayoutSelSetNumberOfVisibleItems, numberOfVisibleItems)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberProportionalLayoutSelSetNumberOfVisibleItems, numberOfVisibleItems)
+	})
 }

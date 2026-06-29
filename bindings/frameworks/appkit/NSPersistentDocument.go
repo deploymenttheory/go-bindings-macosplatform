@@ -43,49 +43,83 @@ func NSPersistentDocumentFromID(id objc.ID) *NSPersistentDocument {
 // Configures the receiver’s persistent store coordinator with the appropriate stores for a given URL.
 func (o *NSPersistentDocument) ConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptionsError(url *foundation.NSURL, fileType *foundation.NSString, configuration *foundation.NSString, storeOptions *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _nSPersistentDocumentSelConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptionsError, url.Ptr(), fileType.Ptr(), configuration.Ptr(), storeOptions.Ptr(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return false, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return _ret, nil
+	var _mainthread0 bool
+	var _mainthread1 error
+	purego.Main(func() {
+		_mainthread0, _mainthread1 = func() (bool, error) {
+			_ret := objc.Send[bool](o.Ptr(), _nSPersistentDocumentSelConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptionsError, url.Ptr(), fileType.Ptr(), configuration.Ptr(), storeOptions.Ptr(), unsafe.Pointer(&_nsErr))
+			if _nsErr != 0 {
+				return false, purego.NSErrorToError(objc.ID(_nsErr))
+			}
+			return _ret, nil
+		}()
+	})
+	return _mainthread0, _mainthread1
 }
 
 // Returns the type of persistent store associated with the specified file type.
 func (o *NSPersistentDocument) PersistentStoreTypeForFileType(fileType *foundation.NSString) *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentDocumentSelPersistentStoreTypeForFileType, fileType.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentDocumentSelPersistentStoreTypeForFileType, fileType.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPersistentDocument) ManagedObjectContext() *coredata.NSManagedObjectContext {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentDocumentSelManagedObjectContext)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return coredata.NSManagedObjectContextFromID(_ret)
+	var _mainthread0 *coredata.NSManagedObjectContext
+	purego.Main(func() {
+		_mainthread0 = func() *coredata.NSManagedObjectContext {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentDocumentSelManagedObjectContext)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return coredata.NSManagedObjectContextFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPersistentDocument) SetManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext) {
-	o.Ptr().Send(_nSPersistentDocumentSelSetManagedObjectContext, managedObjectContext.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPersistentDocumentSelSetManagedObjectContext, managedObjectContext.Ptr())
+	})
 }
 
 func (o *NSPersistentDocument) ManagedObjectModel() *coredata.NSManagedObjectModel {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentDocumentSelManagedObjectModel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return coredata.NSManagedObjectModelFromID(_ret)
+	var _mainthread0 *coredata.NSManagedObjectModel
+	purego.Main(func() {
+		_mainthread0 = func() *coredata.NSManagedObjectModel {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentDocumentSelManagedObjectModel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return coredata.NSManagedObjectModelFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Configures the receiver’s persistent store coordinator for a given URL and document type.
 // Deprecated: since macOS 10.5.
 func (o *NSPersistentDocument) ConfigurePersistentStoreCoordinatorForURLOfTypeError(url *foundation.NSURL, fileType *foundation.NSString) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _nSPersistentDocumentSelConfigurePersistentStoreCoordinatorForURLOfTypeError, url.Ptr(), fileType.Ptr(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return false, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return _ret, nil
+	var _mainthread0 bool
+	var _mainthread1 error
+	purego.Main(func() {
+		_mainthread0, _mainthread1 = func() (bool, error) {
+			_ret := objc.Send[bool](o.Ptr(), _nSPersistentDocumentSelConfigurePersistentStoreCoordinatorForURLOfTypeError, url.Ptr(), fileType.Ptr(), unsafe.Pointer(&_nsErr))
+			if _nsErr != 0 {
+				return false, purego.NSErrorToError(objc.ID(_nsErr))
+			}
+			return _ret, nil
+		}()
+	})
+	return _mainthread0, _mainthread1
 }

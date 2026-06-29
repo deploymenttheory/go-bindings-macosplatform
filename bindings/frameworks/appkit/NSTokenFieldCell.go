@@ -42,53 +42,97 @@ func NSTokenFieldCellFromID(id objc.ID) *NSTokenFieldCell {
 }
 
 func (o *NSTokenFieldCell) TokenStyle() NSTokenStyle {
-	_ret := objc.Send[NSTokenStyle](o.Ptr(), _nSTokenFieldCellSelTokenStyle)
-	return _ret
+	var _mainthread0 NSTokenStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSTokenStyle {
+			_ret := objc.Send[NSTokenStyle](o.Ptr(), _nSTokenFieldCellSelTokenStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTokenFieldCell) SetTokenStyle(tokenStyle NSTokenStyle) {
-	o.Ptr().Send(_nSTokenFieldCellSelSetTokenStyle, tokenStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTokenFieldCellSelSetTokenStyle, tokenStyle)
+	})
 }
 
 func (o *NSTokenFieldCell) CompletionDelay() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSTokenFieldCellSelCompletionDelay)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSTokenFieldCellSelCompletionDelay)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTokenFieldCell) SetCompletionDelay(completionDelay float64) {
-	o.Ptr().Send(_nSTokenFieldCellSelSetCompletionDelay, completionDelay)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTokenFieldCellSelSetCompletionDelay, completionDelay)
+	})
 }
 
 func NSTokenFieldCellDefaultCompletionDelay() float64 {
-	_ret := objc.Send[float64](objc.ID(_clsNSTokenFieldCell), _nSTokenFieldCellSelDefaultCompletionDelay)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](objc.ID(_clsNSTokenFieldCell), _nSTokenFieldCellSelDefaultCompletionDelay)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTokenFieldCell) TokenizingCharacterSet() *foundation.NSCharacterSet {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTokenFieldCellSelTokenizingCharacterSet)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSCharacterSetFromID(_ret)
+	var _mainthread0 *foundation.NSCharacterSet
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSCharacterSet {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTokenFieldCellSelTokenizingCharacterSet)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSCharacterSetFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTokenFieldCell) SetTokenizingCharacterSet(tokenizingCharacterSet *foundation.NSCharacterSet) {
-	o.Ptr().Send(_nSTokenFieldCellSelSetTokenizingCharacterSet, tokenizingCharacterSet.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTokenFieldCellSelSetTokenizingCharacterSet, tokenizingCharacterSet.Ptr())
+	})
 }
 
 func NSTokenFieldCellDefaultTokenizingCharacterSet() *foundation.NSCharacterSet {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSTokenFieldCell), _nSTokenFieldCellSelDefaultTokenizingCharacterSet)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSCharacterSetFromID(_ret)
+	var _mainthread0 *foundation.NSCharacterSet
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSCharacterSet {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSTokenFieldCell), _nSTokenFieldCellSelDefaultTokenizingCharacterSet)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSCharacterSetFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTokenFieldCell) Delegate() NSTokenFieldCellDelegate {
-	_ret := objc.Send[NSTokenFieldCellDelegate](o.Ptr(), _nSTokenFieldCellSelDelegate)
-	return _ret
+	var _mainthread0 NSTokenFieldCellDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSTokenFieldCellDelegate {
+			_ret := objc.Send[NSTokenFieldCellDelegate](o.Ptr(), _nSTokenFieldCellSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTokenFieldCell) SetDelegate(delegate NSTokenFieldCellDelegate) {
-	o.Ptr().Send(_nSTokenFieldCellSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTokenFieldCellSelSetDelegate, delegate)
+	})
 }

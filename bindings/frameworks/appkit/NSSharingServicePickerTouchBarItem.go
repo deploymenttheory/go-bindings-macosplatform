@@ -40,43 +40,75 @@ func NSSharingServicePickerTouchBarItemFromID(id objc.ID) *NSSharingServicePicke
 }
 
 func (o *NSSharingServicePickerTouchBarItem) Delegate() NSSharingServicePickerTouchBarItemDelegate {
-	_ret := objc.Send[NSSharingServicePickerTouchBarItemDelegate](o.Ptr(), _nSSharingServicePickerTouchBarItemSelDelegate)
-	return _ret
+	var _mainthread0 NSSharingServicePickerTouchBarItemDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSSharingServicePickerTouchBarItemDelegate {
+			_ret := objc.Send[NSSharingServicePickerTouchBarItemDelegate](o.Ptr(), _nSSharingServicePickerTouchBarItemSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSharingServicePickerTouchBarItem) SetDelegate(delegate NSSharingServicePickerTouchBarItemDelegate) {
-	o.Ptr().Send(_nSSharingServicePickerTouchBarItemSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSharingServicePickerTouchBarItemSelSetDelegate, delegate)
+	})
 }
 
 func (o *NSSharingServicePickerTouchBarItem) IsEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSharingServicePickerTouchBarItemSelIsEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSharingServicePickerTouchBarItemSelIsEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSharingServicePickerTouchBarItem) SetEnabled(enabled bool) {
-	o.Ptr().Send(_nSSharingServicePickerTouchBarItemSelSetEnabled, enabled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSharingServicePickerTouchBarItemSelSetEnabled, enabled)
+	})
 }
 
 func (o *NSSharingServicePickerTouchBarItem) ButtonTitle() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSharingServicePickerTouchBarItemSelButtonTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSharingServicePickerTouchBarItemSelButtonTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSharingServicePickerTouchBarItem) SetButtonTitle(buttonTitle *foundation.NSString) {
-	o.Ptr().Send(_nSSharingServicePickerTouchBarItemSelSetButtonTitle, buttonTitle.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSharingServicePickerTouchBarItemSelSetButtonTitle, buttonTitle.Ptr())
+	})
 }
 
 func (o *NSSharingServicePickerTouchBarItem) ButtonImage() *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSharingServicePickerTouchBarItemSelButtonImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSharingServicePickerTouchBarItemSelButtonImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSharingServicePickerTouchBarItem) SetButtonImage(buttonImage *NSImage) {
-	o.Ptr().Send(_nSSharingServicePickerTouchBarItemSelSetButtonImage, buttonImage.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSharingServicePickerTouchBarItemSelSetButtonImage, buttonImage.Ptr())
+	})
 }

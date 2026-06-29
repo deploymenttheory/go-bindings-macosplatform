@@ -49,81 +49,143 @@ func PDFThumbnailViewFromID(id objc.ID) *PDFThumbnailView {
 }
 
 func (o *PDFThumbnailView) PDFView() *PDFView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pDFThumbnailViewSelPDFView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return PDFViewFromID(_ret)
+	var _mainthread0 *PDFView
+	purego.Main(func() {
+		_mainthread0 = func() *PDFView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _pDFThumbnailViewSelPDFView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return PDFViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFThumbnailView) SetPDFView(pDFView *PDFView) {
-	o.Ptr().Send(_pDFThumbnailViewSelSetPDFView, pDFView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_pDFThumbnailViewSelSetPDFView, pDFView.Ptr())
+	})
 }
 
 func (o *PDFThumbnailView) BackgroundColor() *appkit.NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pDFThumbnailViewSelBackgroundColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSColorFromID(_ret)
+	var _mainthread0 *appkit.NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _pDFThumbnailViewSelBackgroundColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFThumbnailView) SetBackgroundColor(backgroundColor *appkit.NSColor) {
-	o.Ptr().Send(_pDFThumbnailViewSelSetBackgroundColor, backgroundColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_pDFThumbnailViewSelSetBackgroundColor, backgroundColor.Ptr())
+	})
 }
 
 func (o *PDFThumbnailView) SelectedPages() *foundation.NSArray[*PDFPage] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pDFThumbnailViewSelSelectedPages)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*PDFPage](_ret)
+	var _mainthread0 *foundation.NSArray[*PDFPage]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*PDFPage] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _pDFThumbnailViewSelSelectedPages)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*PDFPage](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFThumbnailView) ThumbnailSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _pDFThumbnailViewSelThumbnailSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _pDFThumbnailViewSelThumbnailSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFThumbnailView) SetThumbnailSize(thumbnailSize corefoundation.CGSize) {
-	o.Ptr().Send(_pDFThumbnailViewSelSetThumbnailSize, thumbnailSize)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFThumbnailViewSelSetThumbnailSize, thumbnailSize)
+	})
 }
 
 func (o *PDFThumbnailView) MaximumNumberOfColumns() uint {
-	_ret := objc.Send[uint](o.Ptr(), _pDFThumbnailViewSelMaximumNumberOfColumns)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _pDFThumbnailViewSelMaximumNumberOfColumns)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFThumbnailView) SetMaximumNumberOfColumns(maximumNumberOfColumns uint) {
-	o.Ptr().Send(_pDFThumbnailViewSelSetMaximumNumberOfColumns, maximumNumberOfColumns)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFThumbnailViewSelSetMaximumNumberOfColumns, maximumNumberOfColumns)
+	})
 }
 
 func (o *PDFThumbnailView) LabelFont() *appkit.NSFont {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pDFThumbnailViewSelLabelFont)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSFontFromID(_ret)
+	var _mainthread0 *appkit.NSFont
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSFont {
+			_ret := objc.Send[objc.ID](o.Ptr(), _pDFThumbnailViewSelLabelFont)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSFontFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFThumbnailView) SetLabelFont(labelFont *appkit.NSFont) {
-	o.Ptr().Send(_pDFThumbnailViewSelSetLabelFont, labelFont.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_pDFThumbnailViewSelSetLabelFont, labelFont.Ptr())
+	})
 }
 
 func (o *PDFThumbnailView) AllowsDragging() bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFThumbnailViewSelAllowsDragging)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _pDFThumbnailViewSelAllowsDragging)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFThumbnailView) SetAllowsDragging(allowsDragging bool) {
-	o.Ptr().Send(_pDFThumbnailViewSelSetAllowsDragging, allowsDragging)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFThumbnailViewSelSetAllowsDragging, allowsDragging)
+	})
 }
 
 func (o *PDFThumbnailView) AllowsMultipleSelection() bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFThumbnailViewSelAllowsMultipleSelection)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _pDFThumbnailViewSelAllowsMultipleSelection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFThumbnailView) SetAllowsMultipleSelection(allowsMultipleSelection bool) {
-	o.Ptr().Send(_pDFThumbnailViewSelSetAllowsMultipleSelection, allowsMultipleSelection)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFThumbnailViewSelSetAllowsMultipleSelection, allowsMultipleSelection)
+	})
 }

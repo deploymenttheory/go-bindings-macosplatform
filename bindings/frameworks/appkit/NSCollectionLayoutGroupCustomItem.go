@@ -38,28 +38,52 @@ func NSCollectionLayoutGroupCustomItemFromID(id objc.ID) *NSCollectionLayoutGrou
 
 // Creates a custom item with the specified frame.
 func NSCollectionLayoutGroupCustomItemCustomItemWithFrame(frame corefoundation.CGRect) *NSCollectionLayoutGroupCustomItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroupCustomItem), _nSCollectionLayoutGroupCustomItemSelCustomItemWithFrame, frame)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutGroupCustomItemFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutGroupCustomItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutGroupCustomItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroupCustomItem), _nSCollectionLayoutGroupCustomItemSelCustomItemWithFrame, frame)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutGroupCustomItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a custom item with the specified frame and vertical stacking order in relation to other items in the group.
 func NSCollectionLayoutGroupCustomItemCustomItemWithFrameZIndex(frame corefoundation.CGRect, zIndex int) *NSCollectionLayoutGroupCustomItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroupCustomItem), _nSCollectionLayoutGroupCustomItemSelCustomItemWithFrameZIndex, frame, zIndex)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutGroupCustomItemFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutGroupCustomItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutGroupCustomItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroupCustomItem), _nSCollectionLayoutGroupCustomItemSelCustomItemWithFrameZIndex, frame, zIndex)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutGroupCustomItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutGroupCustomItem) Frame() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSCollectionLayoutGroupCustomItemSelFrame)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSCollectionLayoutGroupCustomItemSelFrame)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutGroupCustomItem) ZIndex() int {
-	_ret := objc.Send[int](o.Ptr(), _nSCollectionLayoutGroupCustomItemSelZIndex)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSCollectionLayoutGroupCustomItemSelZIndex)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

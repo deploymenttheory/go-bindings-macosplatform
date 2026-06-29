@@ -112,222 +112,352 @@ func NSCollectionViewFromID(id objc.ID) *NSCollectionView {
 
 // Reloads all of the data for the collection view.
 func (o *NSCollectionView) ReloadData() {
-	o.Ptr().Send(_nSCollectionViewSelReloadData)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelReloadData)
+	})
 }
 
 // Returns the layout information for the item at the specified index path.
 func (o *NSCollectionView) LayoutAttributesForItemAtIndexPath(indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelLayoutAttributesForItemAtIndexPath, indexPath.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewLayoutAttributesFromID(_ret)
+	var _mainthread0 *NSCollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewLayoutAttributes {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelLayoutAttributesForItemAtIndexPath, indexPath.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewLayoutAttributesFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the layout information for the supplementary view at the specified index path.
 func (o *NSCollectionView) LayoutAttributesForSupplementaryElementOfKindAtIndexPath(kind *foundation.NSString, indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelLayoutAttributesForSupplementaryElementOfKindAtIndexPath, kind.Ptr(), indexPath.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewLayoutAttributesFromID(_ret)
+	var _mainthread0 *NSCollectionViewLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewLayoutAttributes {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelLayoutAttributesForSupplementaryElementOfKindAtIndexPath, kind.Ptr(), indexPath.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewLayoutAttributesFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the frame of the collection view item at the specified index.
 func (o *NSCollectionView) FrameForItemAtIndex(index uint) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSCollectionViewSelFrameForItemAtIndex, index)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSCollectionViewSelFrameForItemAtIndex, index)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the frame of an item based on the number of items in the collection view.
 func (o *NSCollectionView) FrameForItemAtIndexWithNumberOfItems(index uint, numberOfItems uint) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSCollectionViewSelFrameForItemAtIndexWithNumberOfItems, index, numberOfItems)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSCollectionViewSelFrameForItemAtIndexWithNumberOfItems, index, numberOfItems)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the number of items in the specified section.
 func (o *NSCollectionView) NumberOfItemsInSection(section int) int {
-	_ret := objc.Send[int](o.Ptr(), _nSCollectionViewSelNumberOfItemsInSection, section)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSCollectionViewSelNumberOfItemsInSection, section)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Adds the specified items to the current selection and optionally scrolls the items into position.
 func (o *NSCollectionView) SelectItemsAtIndexPathsScrollPosition(indexPaths *foundation.NSSet[*foundation.NSIndexPath], scrollPosition NSCollectionViewScrollPosition) {
-	o.Ptr().Send(_nSCollectionViewSelSelectItemsAtIndexPathsScrollPosition, indexPaths.Ptr(), scrollPosition)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelSelectItemsAtIndexPathsScrollPosition, indexPaths.Ptr(), scrollPosition)
+	})
 }
 
 // Removes the specified items from the current selection.
 func (o *NSCollectionView) DeselectItemsAtIndexPaths(indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
-	o.Ptr().Send(_nSCollectionViewSelDeselectItemsAtIndexPaths, indexPaths.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelDeselectItemsAtIndexPaths, indexPaths.Ptr())
+	})
 }
 
 // Selects all items in the collection view, if doing so is possible.
 func (o *NSCollectionView) SelectAll(sender objc.ID) {
-	o.Ptr().Send(_nSCollectionViewSelSelectAll, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelSelectAll, sender)
+	})
 }
 
 // Deselects all items in the collection view.
 func (o *NSCollectionView) DeselectAll(sender objc.ID) {
-	o.Ptr().Send(_nSCollectionViewSelDeselectAll, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelDeselectAll, sender)
+	})
 }
 
 // Registers a class to use when creating new items in the collection view.
 func (o *NSCollectionView) RegisterClassForItemWithIdentifier(itemClass objc.Class, identifier *foundation.NSString) {
-	o.Ptr().Send(_nSCollectionViewSelRegisterClassForItemWithIdentifier, itemClass, identifier.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelRegisterClassForItemWithIdentifier, itemClass, identifier.Ptr())
+	})
 }
 
 // Registers a nib file to use when creating items in the collection view.
 func (o *NSCollectionView) RegisterNibForItemWithIdentifier(nib *NSNib, identifier *foundation.NSString) {
-	o.Ptr().Send(_nSCollectionViewSelRegisterNibForItemWithIdentifier, nib.Ptr(), identifier.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelRegisterNibForItemWithIdentifier, nib.Ptr(), identifier.Ptr())
+	})
 }
 
 // Registers a class to use when creating new supplementary views in the collection view.
 func (o *NSCollectionView) RegisterClassForSupplementaryViewOfKindWithIdentifier(viewClass objc.Class, kind *foundation.NSString, identifier *foundation.NSString) {
-	o.Ptr().Send(_nSCollectionViewSelRegisterClassForSupplementaryViewOfKindWithIdentifier, viewClass, kind.Ptr(), identifier.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelRegisterClassForSupplementaryViewOfKindWithIdentifier, viewClass, kind.Ptr(), identifier.Ptr())
+	})
 }
 
 // Registers a nib file to use when creating supplementary views in the collection view.
 func (o *NSCollectionView) RegisterNibForSupplementaryViewOfKindWithIdentifier(nib *NSNib, kind *foundation.NSString, identifier *foundation.NSString) {
-	o.Ptr().Send(_nSCollectionViewSelRegisterNibForSupplementaryViewOfKindWithIdentifier, nib.Ptr(), kind.Ptr(), identifier.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelRegisterNibForSupplementaryViewOfKindWithIdentifier, nib.Ptr(), kind.Ptr(), identifier.Ptr())
+	})
 }
 
 // Creates or returns a reusable item object of the specified type.
 func (o *NSCollectionView) MakeItemWithIdentifierForIndexPath(identifier *foundation.NSString, indexPath *foundation.NSIndexPath) *NSCollectionViewItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelMakeItemWithIdentifierForIndexPath, identifier.Ptr(), indexPath.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewItemFromID(_ret)
+	var _mainthread0 *NSCollectionViewItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelMakeItemWithIdentifierForIndexPath, identifier.Ptr(), indexPath.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates or returns a reusable supplementary view of the specified type.
 func (o *NSCollectionView) MakeSupplementaryViewOfKindWithIdentifierForIndexPath(elementKind *foundation.NSString, identifier *foundation.NSString, indexPath *foundation.NSIndexPath) *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelMakeSupplementaryViewOfKindWithIdentifierForIndexPath, elementKind.Ptr(), identifier.Ptr(), indexPath.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelMakeSupplementaryViewOfKindWithIdentifierForIndexPath, elementKind.Ptr(), identifier.Ptr(), indexPath.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the collection view item for the represented object at the specified index.
 func (o *NSCollectionView) ItemAtIndex(index uint) *NSCollectionViewItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelItemAtIndex, index)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewItemFromID(_ret)
+	var _mainthread0 *NSCollectionViewItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelItemAtIndex, index)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the item associated with the specified index path.
 func (o *NSCollectionView) ItemAtIndexPath(indexPath *foundation.NSIndexPath) *NSCollectionViewItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelItemAtIndexPath, indexPath.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewItemFromID(_ret)
+	var _mainthread0 *NSCollectionViewItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelItemAtIndexPath, indexPath.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns an array of the actively managed items in the collection view.
 func (o *NSCollectionView) VisibleItems() *foundation.NSArray[*NSCollectionViewItem] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelVisibleItems)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSCollectionViewItem](_ret)
+	var _mainthread0 *foundation.NSArray[*NSCollectionViewItem]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSCollectionViewItem] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelVisibleItems)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSCollectionViewItem](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the index paths of the currently active items.
 func (o *NSCollectionView) IndexPathsForVisibleItems() *foundation.NSSet[*foundation.NSIndexPath] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelIndexPathsForVisibleItems)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSSetFromID[*foundation.NSIndexPath](_ret)
+	var _mainthread0 *foundation.NSSet[*foundation.NSIndexPath]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSSet[*foundation.NSIndexPath] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelIndexPathsForVisibleItems)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSSetFromID[*foundation.NSIndexPath](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the index path of the specified item.
 func (o *NSCollectionView) IndexPathForItem(item *NSCollectionViewItem) *foundation.NSIndexPath {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelIndexPathForItem, item.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSIndexPathFromID(_ret)
+	var _mainthread0 *foundation.NSIndexPath
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSIndexPath {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelIndexPathForItem, item.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSIndexPathFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the index path of the item at the specified point.
 func (o *NSCollectionView) IndexPathForItemAtPoint(point corefoundation.CGPoint) *foundation.NSIndexPath {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelIndexPathForItemAtPoint, point)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSIndexPathFromID(_ret)
+	var _mainthread0 *foundation.NSIndexPath
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSIndexPath {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelIndexPathForItemAtPoint, point)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSIndexPathFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the supplementary view associated with the specified index path.
 func (o *NSCollectionView) SupplementaryViewForElementKindAtIndexPath(elementKind *foundation.NSString, indexPath *foundation.NSIndexPath) *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelSupplementaryViewForElementKindAtIndexPath, elementKind.Ptr(), indexPath.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelSupplementaryViewForElementKindAtIndexPath, elementKind.Ptr(), indexPath.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns an array of the actively managed supplementary views in the collection view.
 func (o *NSCollectionView) VisibleSupplementaryViewsOfKind(elementKind *foundation.NSString) *foundation.NSArray[*NSView] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelVisibleSupplementaryViewsOfKind, elementKind.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSView](_ret)
+	var _mainthread0 *foundation.NSArray[*NSView]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSView] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelVisibleSupplementaryViewsOfKind, elementKind.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSView](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the index paths of the currently active supplementary views.
 func (o *NSCollectionView) IndexPathsForVisibleSupplementaryElementsOfKind(elementKind *foundation.NSString) *foundation.NSSet[*foundation.NSIndexPath] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelIndexPathsForVisibleSupplementaryElementsOfKind, elementKind.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSSetFromID[*foundation.NSIndexPath](_ret)
+	var _mainthread0 *foundation.NSSet[*foundation.NSIndexPath]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSSet[*foundation.NSIndexPath] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelIndexPathsForVisibleSupplementaryElementsOfKind, elementKind.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSSetFromID[*foundation.NSIndexPath](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Inserts new sections at the specified indexes.
 func (o *NSCollectionView) InsertSections(sections *foundation.NSIndexSet) {
-	o.Ptr().Send(_nSCollectionViewSelInsertSections, sections.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelInsertSections, sections.Ptr())
+	})
 }
 
 // Deletes the specified sections and their contained items.
 func (o *NSCollectionView) DeleteSections(sections *foundation.NSIndexSet) {
-	o.Ptr().Send(_nSCollectionViewSelDeleteSections, sections.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelDeleteSections, sections.Ptr())
+	})
 }
 
 // Reloads the data in the specified sections of the collection view.
 func (o *NSCollectionView) ReloadSections(sections *foundation.NSIndexSet) {
-	o.Ptr().Send(_nSCollectionViewSelReloadSections, sections.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelReloadSections, sections.Ptr())
+	})
 }
 
 // Moves a section from its current location to a new location.
 func (o *NSCollectionView) MoveSectionToSection(section int, newSection int) {
-	o.Ptr().Send(_nSCollectionViewSelMoveSectionToSection, section, newSection)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelMoveSectionToSection, section, newSection)
+	})
 }
 
 // Inserts new items into the collection view at the specified locations.
 func (o *NSCollectionView) InsertItemsAtIndexPaths(indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
-	o.Ptr().Send(_nSCollectionViewSelInsertItemsAtIndexPaths, indexPaths.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelInsertItemsAtIndexPaths, indexPaths.Ptr())
+	})
 }
 
 // Deletes the items at the specified index paths.
 func (o *NSCollectionView) DeleteItemsAtIndexPaths(indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
-	o.Ptr().Send(_nSCollectionViewSelDeleteItemsAtIndexPaths, indexPaths.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelDeleteItemsAtIndexPaths, indexPaths.Ptr())
+	})
 }
 
 // Reloads only the specified items.
 func (o *NSCollectionView) ReloadItemsAtIndexPaths(indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
-	o.Ptr().Send(_nSCollectionViewSelReloadItemsAtIndexPaths, indexPaths.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelReloadItemsAtIndexPaths, indexPaths.Ptr())
+	})
 }
 
 // Moves an item from one location to another in the collection view.
 func (o *NSCollectionView) MoveItemAtIndexPathToIndexPath(indexPath *foundation.NSIndexPath, newIndexPath *foundation.NSIndexPath) {
-	o.Ptr().Send(_nSCollectionViewSelMoveItemAtIndexPathToIndexPath, indexPath.Ptr(), newIndexPath.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelMoveItemAtIndexPathToIndexPath, indexPath.Ptr(), newIndexPath.Ptr())
+	})
 }
 
 // Encapsulates multiple insert, delete, reload, and move operations into a single animated operation.
@@ -346,248 +476,430 @@ func (o *NSCollectionView) PerformBatchUpdatesCompletionHandler(updates func(), 
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_nSCollectionViewSelPerformBatchUpdatesCompletionHandler, __block_updates, __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelPerformBatchUpdatesCompletionHandler, __block_updates, __block_completionHandler)
+	})
 }
 
 // Collapses the section in which the sender resides into a single horizontally scrollable row.
 func (o *NSCollectionView) ToggleSectionCollapse(sender objc.ID) {
-	o.Ptr().Send(_nSCollectionViewSelToggleSectionCollapse, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelToggleSectionCollapse, sender)
+	})
 }
 
 // Scrolls the collection view contents until the specified items are visible.
 func (o *NSCollectionView) ScrollToItemsAtIndexPathsScrollPosition(indexPaths *foundation.NSSet[*foundation.NSIndexPath], scrollPosition NSCollectionViewScrollPosition) {
-	o.Ptr().Send(_nSCollectionViewSelScrollToItemsAtIndexPathsScrollPosition, indexPaths.Ptr(), scrollPosition)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelScrollToItemsAtIndexPathsScrollPosition, indexPaths.Ptr(), scrollPosition)
+	})
 }
 
 // Configures the drag operation mask.
 func (o *NSCollectionView) SetDraggingSourceOperationMaskForLocal(dragOperationMask NSDragOperation, localDestination bool) {
-	o.Ptr().Send(_nSCollectionViewSelSetDraggingSourceOperationMaskForLocal, dragOperationMask, localDestination)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelSetDraggingSourceOperationMaskForLocal, dragOperationMask, localDestination)
+	})
 }
 
 // Returns an image to use for dragging the specified items.
 func (o *NSCollectionView) DraggingImageForItemsAtIndexPathsWithEventOffset(indexPaths *foundation.NSSet[*foundation.NSIndexPath], event *NSEvent, dragImageOffset *corefoundation.CGPoint) *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelDraggingImageForItemsAtIndexPathsWithEventOffset, indexPaths.Ptr(), event.Ptr(), dragImageOffset)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelDraggingImageForItemsAtIndexPathsWithEventOffset, indexPaths.Ptr(), event.Ptr(), dragImageOffset)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // This method computes and returns an image to use for dragging.
 func (o *NSCollectionView) DraggingImageForItemsAtIndexesWithEventOffset(indexes *foundation.NSIndexSet, event *NSEvent, dragImageOffset *corefoundation.CGPoint) *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelDraggingImageForItemsAtIndexesWithEventOffset, indexes.Ptr(), event.Ptr(), dragImageOffset)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelDraggingImageForItemsAtIndexesWithEventOffset, indexes.Ptr(), event.Ptr(), dragImageOffset)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionView) DataSource() NSCollectionViewDataSource {
-	_ret := objc.Send[NSCollectionViewDataSource](o.Ptr(), _nSCollectionViewSelDataSource)
-	return _ret
+	var _mainthread0 NSCollectionViewDataSource
+	purego.Main(func() {
+		_mainthread0 = func() NSCollectionViewDataSource {
+			_ret := objc.Send[NSCollectionViewDataSource](o.Ptr(), _nSCollectionViewSelDataSource)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionView) SetDataSource(dataSource NSCollectionViewDataSource) {
-	o.Ptr().Send(_nSCollectionViewSelSetDataSource, dataSource)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelSetDataSource, dataSource)
+	})
 }
 
 func (o *NSCollectionView) PrefetchDataSource() NSCollectionViewPrefetching {
-	_ret := objc.Send[NSCollectionViewPrefetching](o.Ptr(), _nSCollectionViewSelPrefetchDataSource)
-	return _ret
+	var _mainthread0 NSCollectionViewPrefetching
+	purego.Main(func() {
+		_mainthread0 = func() NSCollectionViewPrefetching {
+			_ret := objc.Send[NSCollectionViewPrefetching](o.Ptr(), _nSCollectionViewSelPrefetchDataSource)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionView) SetPrefetchDataSource(prefetchDataSource NSCollectionViewPrefetching) {
-	o.Ptr().Send(_nSCollectionViewSelSetPrefetchDataSource, prefetchDataSource)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelSetPrefetchDataSource, prefetchDataSource)
+	})
 }
 
 func (o *NSCollectionView) Content() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelContent)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[objc.ID](_ret)
+	var _mainthread0 *foundation.NSArray[objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelContent)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionView) SetContent(content *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_nSCollectionViewSelSetContent, content.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelSetContent, content.Ptr())
+	})
 }
 
 func (o *NSCollectionView) Delegate() NSCollectionViewDelegate {
-	_ret := objc.Send[NSCollectionViewDelegate](o.Ptr(), _nSCollectionViewSelDelegate)
-	return _ret
+	var _mainthread0 NSCollectionViewDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSCollectionViewDelegate {
+			_ret := objc.Send[NSCollectionViewDelegate](o.Ptr(), _nSCollectionViewSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionView) SetDelegate(delegate NSCollectionViewDelegate) {
-	o.Ptr().Send(_nSCollectionViewSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelSetDelegate, delegate)
+	})
 }
 
 func (o *NSCollectionView) BackgroundView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelBackgroundView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelBackgroundView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionView) SetBackgroundView(backgroundView *NSView) {
-	o.Ptr().Send(_nSCollectionViewSelSetBackgroundView, backgroundView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelSetBackgroundView, backgroundView.Ptr())
+	})
 }
 
 func (o *NSCollectionView) BackgroundViewScrollsWithContent() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewSelBackgroundViewScrollsWithContent)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewSelBackgroundViewScrollsWithContent)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionView) SetBackgroundViewScrollsWithContent(backgroundViewScrollsWithContent bool) {
-	o.Ptr().Send(_nSCollectionViewSelSetBackgroundViewScrollsWithContent, backgroundViewScrollsWithContent)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelSetBackgroundViewScrollsWithContent, backgroundViewScrollsWithContent)
+	})
 }
 
 func (o *NSCollectionView) CollectionViewLayout() *NSCollectionViewLayout {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelCollectionViewLayout)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewLayoutFromID(_ret)
+	var _mainthread0 *NSCollectionViewLayout
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewLayout {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelCollectionViewLayout)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewLayoutFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionView) SetCollectionViewLayout(collectionViewLayout *NSCollectionViewLayout) {
-	o.Ptr().Send(_nSCollectionViewSelSetCollectionViewLayout, collectionViewLayout.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelSetCollectionViewLayout, collectionViewLayout.Ptr())
+	})
 }
 
 func (o *NSCollectionView) BackgroundColors() *foundation.NSArray[*NSColor] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelBackgroundColors)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSColor](_ret)
+	var _mainthread0 *foundation.NSArray[*NSColor]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSColor] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelBackgroundColors)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSColor](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionView) SetBackgroundColors(backgroundColors *foundation.NSArray[*NSColor]) {
-	o.Ptr().Send(_nSCollectionViewSelSetBackgroundColors, backgroundColors.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelSetBackgroundColors, backgroundColors.Ptr())
+	})
 }
 
 func (o *NSCollectionView) NumberOfSections() int {
-	_ret := objc.Send[int](o.Ptr(), _nSCollectionViewSelNumberOfSections)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSCollectionViewSelNumberOfSections)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionView) IsFirstResponder() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewSelIsFirstResponder)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewSelIsFirstResponder)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionView) IsSelectable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewSelIsSelectable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewSelIsSelectable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionView) SetSelectable(selectable bool) {
-	o.Ptr().Send(_nSCollectionViewSelSetSelectable, selectable)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelSetSelectable, selectable)
+	})
 }
 
 func (o *NSCollectionView) AllowsEmptySelection() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewSelAllowsEmptySelection)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewSelAllowsEmptySelection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionView) SetAllowsEmptySelection(allowsEmptySelection bool) {
-	o.Ptr().Send(_nSCollectionViewSelSetAllowsEmptySelection, allowsEmptySelection)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelSetAllowsEmptySelection, allowsEmptySelection)
+	})
 }
 
 func (o *NSCollectionView) AllowsMultipleSelection() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewSelAllowsMultipleSelection)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewSelAllowsMultipleSelection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionView) SetAllowsMultipleSelection(allowsMultipleSelection bool) {
-	o.Ptr().Send(_nSCollectionViewSelSetAllowsMultipleSelection, allowsMultipleSelection)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelSetAllowsMultipleSelection, allowsMultipleSelection)
+	})
 }
 
 func (o *NSCollectionView) SelectionIndexes() *foundation.NSIndexSet {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelSelectionIndexes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSIndexSetFromID(_ret)
+	var _mainthread0 *foundation.NSIndexSet
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSIndexSet {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelSelectionIndexes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSIndexSetFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionView) SetSelectionIndexes(selectionIndexes *foundation.NSIndexSet) {
-	o.Ptr().Send(_nSCollectionViewSelSetSelectionIndexes, selectionIndexes.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelSetSelectionIndexes, selectionIndexes.Ptr())
+	})
 }
 
 func (o *NSCollectionView) SelectionIndexPaths() *foundation.NSSet[*foundation.NSIndexPath] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelSelectionIndexPaths)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSSetFromID[*foundation.NSIndexPath](_ret)
+	var _mainthread0 *foundation.NSSet[*foundation.NSIndexPath]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSSet[*foundation.NSIndexPath] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelSelectionIndexPaths)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSSetFromID[*foundation.NSIndexPath](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionView) SetSelectionIndexPaths(selectionIndexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
-	o.Ptr().Send(_nSCollectionViewSelSetSelectionIndexPaths, selectionIndexPaths.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelSetSelectionIndexPaths, selectionIndexPaths.Ptr())
+	})
 }
 
 // Returns the collection view item that is used for the specified object.
 // Deprecated: Use -[NSCollectionViewDataSource collectionView:itemForRepresentedObjectAtIndexPath:] instead
 func (o *NSCollectionView) NewItemForRepresentedObject(object objc.ID) *NSCollectionViewItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelNewItemForRepresentedObject, object)
-	return NSCollectionViewItemFromID(_ret)
+	var _mainthread0 *NSCollectionViewItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelNewItemForRepresentedObject, object)
+			return NSCollectionViewItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use -registerNib:forItemWithIdentifier: or -registerClass:forItemWithIdentifier: instead.
 func (o *NSCollectionView) ItemPrototype() *NSCollectionViewItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelItemPrototype)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewItemFromID(_ret)
+	var _mainthread0 *NSCollectionViewItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelItemPrototype)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use -registerNib:forItemWithIdentifier: or -registerClass:forItemWithIdentifier: instead.
 func (o *NSCollectionView) SetItemPrototype(itemPrototype *NSCollectionViewItem) {
-	o.Ptr().Send(_nSCollectionViewSelSetItemPrototype, itemPrototype.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelSetItemPrototype, itemPrototype.Ptr())
+	})
 }
 
 // Deprecated: Use NSCollectionViewGridLayout as the receiver's collectionViewLayout, setting its maximumNumberOfRows instead
 func (o *NSCollectionView) MaxNumberOfRows() uint {
-	_ret := objc.Send[uint](o.Ptr(), _nSCollectionViewSelMaxNumberOfRows)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _nSCollectionViewSelMaxNumberOfRows)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use NSCollectionViewGridLayout as the receiver's collectionViewLayout, setting its maximumNumberOfRows instead
 func (o *NSCollectionView) SetMaxNumberOfRows(maxNumberOfRows uint) {
-	o.Ptr().Send(_nSCollectionViewSelSetMaxNumberOfRows, maxNumberOfRows)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelSetMaxNumberOfRows, maxNumberOfRows)
+	})
 }
 
 // Deprecated: Use NSCollectionViewGridLayout as the receiver's collectionViewLayout, setting its maximumNumberOfColumns instead
 func (o *NSCollectionView) MaxNumberOfColumns() uint {
-	_ret := objc.Send[uint](o.Ptr(), _nSCollectionViewSelMaxNumberOfColumns)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _nSCollectionViewSelMaxNumberOfColumns)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use NSCollectionViewGridLayout as the receiver's collectionViewLayout, setting its maximumNumberOfColumns instead
 func (o *NSCollectionView) SetMaxNumberOfColumns(maxNumberOfColumns uint) {
-	o.Ptr().Send(_nSCollectionViewSelSetMaxNumberOfColumns, maxNumberOfColumns)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelSetMaxNumberOfColumns, maxNumberOfColumns)
+	})
 }
 
 // Deprecated: Use NSCollectionViewGridLayout as the receiver's collectionViewLayout, setting its minimumItemSize instead
 func (o *NSCollectionView) MinItemSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCollectionViewSelMinItemSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCollectionViewSelMinItemSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use NSCollectionViewGridLayout as the receiver's collectionViewLayout, setting its minimumItemSize instead
 func (o *NSCollectionView) SetMinItemSize(minItemSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSCollectionViewSelSetMinItemSize, minItemSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelSetMinItemSize, minItemSize)
+	})
 }
 
 // Deprecated: Use NSCollectionViewGridLayout as the receiver's collectionViewLayout, setting its maximumItemSize instead
 func (o *NSCollectionView) MaxItemSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCollectionViewSelMaxItemSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCollectionViewSelMaxItemSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use NSCollectionViewGridLayout as the receiver's collectionViewLayout, setting its maximumItemSize instead
 func (o *NSCollectionView) SetMaxItemSize(maxItemSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSCollectionViewSelSetMaxItemSize, maxItemSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewSelSetMaxItemSize, maxItemSize)
+	})
 }

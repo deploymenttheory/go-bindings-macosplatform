@@ -49,87 +49,153 @@ func MKLookAroundViewControllerFromID(id objc.ID) *MKLookAroundViewController {
 
 // Creates a new LookAround view controller with the specified scene.
 func (o *MKLookAroundViewController) InitWithScene(scene *MKLookAroundScene) *MKLookAroundViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundViewControllerSelInitWithScene, scene.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKLookAroundViewControllerFromID(_ret)
+	var _mainthread0 *MKLookAroundViewController
+	purego.Main(func() {
+		_mainthread0 = func() *MKLookAroundViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundViewControllerSelInitWithScene, scene.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKLookAroundViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a new LookAround view controller from the specified nib and bundle.
 func (o *MKLookAroundViewController) InitWithNibNameBundle(nibNameOrNil *foundation.NSString, nibBundleOrNil *foundation.NSBundle) *MKLookAroundViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundViewControllerSelInitWithNibNameBundle, nibNameOrNil.Ptr(), nibBundleOrNil.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKLookAroundViewControllerFromID(_ret)
+	var _mainthread0 *MKLookAroundViewController
+	purego.Main(func() {
+		_mainthread0 = func() *MKLookAroundViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundViewControllerSelInitWithNibNameBundle, nibNameOrNil.Ptr(), nibBundleOrNil.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKLookAroundViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a new LookAround view controller object from a coder object provided by a storyboard or nib file.
 func (o *MKLookAroundViewController) InitWithCoder(coder *foundation.NSCoder) *MKLookAroundViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundViewControllerSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKLookAroundViewControllerFromID(_ret)
+	var _mainthread0 *MKLookAroundViewController
+	purego.Main(func() {
+		_mainthread0 = func() *MKLookAroundViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundViewControllerSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKLookAroundViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKLookAroundViewController) Delegate() MKLookAroundViewControllerDelegate {
-	_ret := objc.Send[MKLookAroundViewControllerDelegate](o.Ptr(), _mKLookAroundViewControllerSelDelegate)
-	return _ret
+	var _mainthread0 MKLookAroundViewControllerDelegate
+	purego.Main(func() {
+		_mainthread0 = func() MKLookAroundViewControllerDelegate {
+			_ret := objc.Send[MKLookAroundViewControllerDelegate](o.Ptr(), _mKLookAroundViewControllerSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKLookAroundViewController) SetDelegate(delegate MKLookAroundViewControllerDelegate) {
-	o.Ptr().Send(_mKLookAroundViewControllerSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_mKLookAroundViewControllerSelSetDelegate, delegate)
+	})
 }
 
 func (o *MKLookAroundViewController) Scene() *MKLookAroundScene {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundViewControllerSelScene)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKLookAroundSceneFromID(_ret)
+	var _mainthread0 *MKLookAroundScene
+	purego.Main(func() {
+		_mainthread0 = func() *MKLookAroundScene {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundViewControllerSelScene)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKLookAroundSceneFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKLookAroundViewController) SetScene(scene *MKLookAroundScene) {
-	o.Ptr().Send(_mKLookAroundViewControllerSelSetScene, scene.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKLookAroundViewControllerSelSetScene, scene.Ptr())
+	})
 }
 
 func (o *MKLookAroundViewController) IsNavigationEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _mKLookAroundViewControllerSelIsNavigationEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _mKLookAroundViewControllerSelIsNavigationEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKLookAroundViewController) SetNavigationEnabled(navigationEnabled bool) {
-	o.Ptr().Send(_mKLookAroundViewControllerSelSetNavigationEnabled, navigationEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_mKLookAroundViewControllerSelSetNavigationEnabled, navigationEnabled)
+	})
 }
 
 func (o *MKLookAroundViewController) ShowsRoadLabels() bool {
-	_ret := objc.Send[bool](o.Ptr(), _mKLookAroundViewControllerSelShowsRoadLabels)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _mKLookAroundViewControllerSelShowsRoadLabels)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKLookAroundViewController) SetShowsRoadLabels(showsRoadLabels bool) {
-	o.Ptr().Send(_mKLookAroundViewControllerSelSetShowsRoadLabels, showsRoadLabels)
+	purego.Main(func() {
+		o.Ptr().Send(_mKLookAroundViewControllerSelSetShowsRoadLabels, showsRoadLabels)
+	})
 }
 
 func (o *MKLookAroundViewController) PointOfInterestFilter() *MKPointOfInterestFilter {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundViewControllerSelPointOfInterestFilter)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKPointOfInterestFilterFromID(_ret)
+	var _mainthread0 *MKPointOfInterestFilter
+	purego.Main(func() {
+		_mainthread0 = func() *MKPointOfInterestFilter {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundViewControllerSelPointOfInterestFilter)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKPointOfInterestFilterFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKLookAroundViewController) SetPointOfInterestFilter(pointOfInterestFilter *MKPointOfInterestFilter) {
-	o.Ptr().Send(_mKLookAroundViewControllerSelSetPointOfInterestFilter, pointOfInterestFilter.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKLookAroundViewControllerSelSetPointOfInterestFilter, pointOfInterestFilter.Ptr())
+	})
 }
 
 func (o *MKLookAroundViewController) BadgePosition() MKLookAroundBadgePosition {
-	_ret := objc.Send[MKLookAroundBadgePosition](o.Ptr(), _mKLookAroundViewControllerSelBadgePosition)
-	return _ret
+	var _mainthread0 MKLookAroundBadgePosition
+	purego.Main(func() {
+		_mainthread0 = func() MKLookAroundBadgePosition {
+			_ret := objc.Send[MKLookAroundBadgePosition](o.Ptr(), _mKLookAroundViewControllerSelBadgePosition)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKLookAroundViewController) SetBadgePosition(badgePosition MKLookAroundBadgePosition) {
-	o.Ptr().Send(_mKLookAroundViewControllerSelSetBadgePosition, badgePosition)
+	purego.Main(func() {
+		o.Ptr().Send(_mKLookAroundViewControllerSelSetBadgePosition, badgePosition)
+	})
 }

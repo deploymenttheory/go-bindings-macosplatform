@@ -44,61 +44,109 @@ func MCBrowserViewControllerFromID(id objc.ID) *MCBrowserViewController {
 
 // Initializes a browser view controller using the provided service type and session.
 func (o *MCBrowserViewController) InitWithServiceTypeSession(serviceType *foundation.NSString, session *MCSession) *MCBrowserViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mCBrowserViewControllerSelInitWithServiceTypeSession, serviceType.Ptr(), session.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MCBrowserViewControllerFromID(_ret)
+	var _mainthread0 *MCBrowserViewController
+	purego.Main(func() {
+		_mainthread0 = func() *MCBrowserViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mCBrowserViewControllerSelInitWithServiceTypeSession, serviceType.Ptr(), session.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MCBrowserViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a browser view controller with the provided browser and session.
 func (o *MCBrowserViewController) InitWithBrowserSession(browser *MCNearbyServiceBrowser, session *MCSession) *MCBrowserViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mCBrowserViewControllerSelInitWithBrowserSession, browser.Ptr(), session.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MCBrowserViewControllerFromID(_ret)
+	var _mainthread0 *MCBrowserViewController
+	purego.Main(func() {
+		_mainthread0 = func() *MCBrowserViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mCBrowserViewControllerSelInitWithBrowserSession, browser.Ptr(), session.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MCBrowserViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MCBrowserViewController) Delegate() MCBrowserViewControllerDelegate {
-	_ret := objc.Send[MCBrowserViewControllerDelegate](o.Ptr(), _mCBrowserViewControllerSelDelegate)
-	return _ret
+	var _mainthread0 MCBrowserViewControllerDelegate
+	purego.Main(func() {
+		_mainthread0 = func() MCBrowserViewControllerDelegate {
+			_ret := objc.Send[MCBrowserViewControllerDelegate](o.Ptr(), _mCBrowserViewControllerSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MCBrowserViewController) SetDelegate(delegate MCBrowserViewControllerDelegate) {
-	o.Ptr().Send(_mCBrowserViewControllerSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_mCBrowserViewControllerSelSetDelegate, delegate)
+	})
 }
 
 func (o *MCBrowserViewController) Browser() *MCNearbyServiceBrowser {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mCBrowserViewControllerSelBrowser)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MCNearbyServiceBrowserFromID(_ret)
+	var _mainthread0 *MCNearbyServiceBrowser
+	purego.Main(func() {
+		_mainthread0 = func() *MCNearbyServiceBrowser {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mCBrowserViewControllerSelBrowser)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MCNearbyServiceBrowserFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MCBrowserViewController) Session() *MCSession {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mCBrowserViewControllerSelSession)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MCSessionFromID(_ret)
+	var _mainthread0 *MCSession
+	purego.Main(func() {
+		_mainthread0 = func() *MCSession {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mCBrowserViewControllerSelSession)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MCSessionFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MCBrowserViewController) MinimumNumberOfPeers() uint {
-	_ret := objc.Send[uint](o.Ptr(), _mCBrowserViewControllerSelMinimumNumberOfPeers)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _mCBrowserViewControllerSelMinimumNumberOfPeers)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MCBrowserViewController) SetMinimumNumberOfPeers(minimumNumberOfPeers uint) {
-	o.Ptr().Send(_mCBrowserViewControllerSelSetMinimumNumberOfPeers, minimumNumberOfPeers)
+	purego.Main(func() {
+		o.Ptr().Send(_mCBrowserViewControllerSelSetMinimumNumberOfPeers, minimumNumberOfPeers)
+	})
 }
 
 func (o *MCBrowserViewController) MaximumNumberOfPeers() uint {
-	_ret := objc.Send[uint](o.Ptr(), _mCBrowserViewControllerSelMaximumNumberOfPeers)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _mCBrowserViewControllerSelMaximumNumberOfPeers)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MCBrowserViewController) SetMaximumNumberOfPeers(maximumNumberOfPeers uint) {
-	o.Ptr().Send(_mCBrowserViewControllerSelSetMaximumNumberOfPeers, maximumNumberOfPeers)
+	purego.Main(func() {
+		o.Ptr().Send(_mCBrowserViewControllerSelSetMaximumNumberOfPeers, maximumNumberOfPeers)
+	})
 }

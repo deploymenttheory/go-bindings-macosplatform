@@ -5,7 +5,7 @@ Type-safe Go bindings for native macOS framework APIs, generated directly from t
 This project provides three things:
 
 - A **code generator** that introspects macOS SDK headers via Clang and produces idiomatic Go packages — ObjC frameworks are bound through [purego](https://github.com/ebitengine/purego) (no CGo, no Xcode needed to build your app), and Apple C libraries are bound through CGo bridges.
-- The **generated bindings** themselves — ready-to-import Go packages covering 250 ObjC frameworks (`bindings/frameworks/`) and 11 Apple C libraries (`bindings/libraries/`) discovered in the macOS SDK.
+- The **generated bindings** themselves — ready-to-import Go packages covering 251 ObjC frameworks (`bindings/frameworks/`) and 11 Apple C libraries (`bindings/libraries/`) discovered in the macOS SDK.
 - An **opinionated idiomatic layer** (`opinionated/idiomatic/`) built on top of the raw bindings — fluent, Go-shaped wrappers where constructors bundle `alloc`+`init`, properties become chainable `With*` setters, async completion handlers become `func(ctx) error`, `NSArray` getters become typed Go slices, and C functions get prefix-stripped Go names. Subclasses **embed their base** (inheriting its methods through Go promotion); an abstract base's setters accept a **sealed provider interface** so only real members of the hierarchy type-check; abstract bases emit no meaningless constructor; multi-value methods use **named returns**; and each package's `doc.go` carries a type index so `go doc` reads like a manual. Calls that Apple isolates to the **main thread** (`@MainActor` — AppKit and everything that inherits from it, like `MKMapView`) are wrapped in `purego.Main` **automatically**, so UI code is correct without the caller remembering to dispatch. The layer is **hermetic** — it never imports the raw bindings, dispatching straight through the runtime.
 
 > **Platform:** macOS only (`darwin`). All generated code carries a `//go:build darwin` constraint.
@@ -149,7 +149,7 @@ Verify Clang is available via `xcrun`:
 xcrun clang --version
 ```
 
-**External dependencies:** `github.com/ebitengine/purego` is the foundational dependency — it provides `dlopen`, `objc_msgSend` dispatch, and block support without CGo. `go.opentelemetry.io/otel` traces every CGo C-library call. The remaining entries in `go.mod` (Sentry, MCP, gRPC, …) serve the in-repo example applications and tooling, not the bindings themselves.
+**External dependencies:** `github.com/ebitengine/purego` is the only runtime dependency — it provides `dlopen`, `objc_msgSend` dispatch, and block support without CGo. The CGo C-library layer has no external runtime dependency (pure CGo over `bindings/runtime/cgo`). The only other entry in `go.mod` is `gopkg.in/yaml.v3`, used by in-repo generator tooling, not the bindings.
 
 ---
 
@@ -301,7 +301,7 @@ if err != nil {
 
 In the idiomatic layer, `BOOL`-returning error methods collapse to a plain `error`, and C functions with `CFErrorRef *` out-parameters return `(result, error)` with the CFError converted via its toll-free NSError bridge.
 
-**ObjC exceptions:** the CGo `bindings/libraries/` packages wrap every call in `@try`/`@catch` and re-raise exceptions as Go panics (recorded on the active OTel span). The purego `bindings/frameworks/` packages do **not** intercept ObjC exceptions — an uncaught `NSException` terminates the process, as it would in an ObjC program.
+**ObjC exceptions:** the CGo `bindings/libraries/` packages wrap every call in `@try`/`@catch` and re-raise exceptions as Go panics. The purego `bindings/frameworks/` packages do **not** intercept ObjC exceptions — an uncaught `NSException` terminates the process, as it would in an ObjC program.
 
 ### Main Thread Dispatch
 
@@ -309,10 +309,10 @@ All AppKit (and generally all UI-related) calls **must run on the macOS main thr
 
 **The idiomatic layer handles this for you.** Apple isolates UI APIs to Swift's `@MainActor`; that isolation is harvested from the Swift symbol graph and propagated down the class hierarchy, so every method, `With*` setter, and constructor of a main-thread-bound class — `NSWindow`, `NSView`, and everything that inherits from them, including `MKMapView`, `PDFView`, `SCNView` in other frameworks — is wrapped in `purego.Main` automatically. When you already hold the main thread the wrapper runs inline (no dispatch), so there is no cost on the hot path and no deadlock. Queue-based frameworks (Virtualization, Core Data) are left untouched, since they require a consistent serial queue rather than the main thread. You still need a running main run loop (`NSApplication.Run`, a CFRunLoop, or `dispatch_main`) for the dispatched work to execute.
 
-The **raw** bindings (`bindings/frameworks/`) do **not** dispatch automatically — there, the caller is responsible. The standard pattern for a UI app is to lock the main goroutine to the main OS thread, hand it to the AppKit run loop, and dispatch UI work from other goroutines via the `mainthread` helper package (pure Go, GCD main queue under the hood):
+The **raw** `bindings/frameworks/` packages do this too: like the idiomatic layer, they now wrap `@MainActor`-isolated calls in `purego.Main` automatically, so individual UI method calls dispatch to the main thread on their own. You remain responsible for the app's main-thread *structure*, though — lock the main goroutine to the main OS thread, hand it to the AppKit run loop (so the main queue is actually serviced), and dispatch your own non-binding main-thread work via the `mainthread` helper package (pure Go, GCD main queue under the hood):
 
 ```go
-import "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/library/mainthread"
+import "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/custom/mainthread"
 
 func init() { runtime.LockOSThread() }
 
@@ -415,7 +415,7 @@ flowchart TD
 
     subgraph Phase3["Phase 3 — Emit raw"]
         PURE["purego frameworks\n(objc.Send, dlopen,\nblock adapters)"]
-        CGO["CGo C libraries\n(.h/.m bridges,\nOTel tracing)"]
+        CGO["CGo C libraries\n(.h/.m bridges,\ncontext-free, uninstrumented)"]
     end
 
     subgraph Phase4["Phase 4 — Emit idiomatic"]
@@ -471,11 +471,14 @@ go-bindings-macosplatform/
 │   ├── macosplatformmetadata/  # Canonical scanned-SDK model + .gometa.json I/O (shared by scanner + both pipelines + QA)
 │   ├── scanner/           # Clang AST dump, metadata extraction, raw header parsing, C library registry
 │   ├── codegen/
-│   │   ├── frameworks/    # purego pipeline: loader, typemap, naming, emitters (frameworks + idiomatic)
-│   │   └── libraries/     # CGo pipeline: loader, typemap, naming, emitters (C libraries)
-│   ├── validate/ metadiff/ diagnostics/ overrides/  # Metadata QA machinery
+│   │   ├── frameworks/    # purego front-end: loader, typemap, naming, pipeline, appledocs, mainactor, overrides
+│   │   ├── libraries/     # CGo front-end: loader, typemap, naming, pipeline, classify
+│   │   ├── shared/        # shared file scaffold (fileasm)
+│   │   └── emit/          # all four emitters (view IR + render templates):
+│   │       │              #   raw/{frameworks,libraries} · idiomatic/{frameworks,libraries}
+│   ├── appledocs/ mainactor/ validate/ metadiff/ diagnostics/ overrides/  # Doc/main-thread sidecars + metadata QA
 │   └── swift/             # Swift-only framework support (.swiftinterface parser + stub emit)
-├── example/ weave/        # In-repo example applications built on the bindings
+├── examples/              # Runnable example apps + an adoption guide (examples/README.md)
 ├── acceptance/            # Acceptance tests (sampled live calls + curated regression anchors)
 ├── docs/                  # Guides, naming standard, overrides format
 └── metadata/              # Committed .gometa.json cache (per framework × arch)
@@ -491,8 +494,8 @@ go-bindings-macosplatform/
 | --- | --- | --- |
 | Bridge | purego (`objc.Send`, `dlopen` at init) | CGo (`.h`/`.m` bridge files, `-fno-objc-arc`) |
 | Build requirements | Pure Go — no Xcode/Clang | CGo — Clang at build time |
-| Method signatures | No `context.Context`; direct values | `ctx context.Context` first arg |
-| Telemetry | None (zero-overhead dispatch) | OTel span per call via `bindings/runtime/tel` |
+| Method signatures | No `context.Context`; direct values | No `context.Context`; direct values |
+| Telemetry | None (zero-overhead dispatch) | None (context-free, uninstrumented dispatch) |
 | ObjC exceptions | Not intercepted | Caught and re-raised as Go panics |
 | Blocks | `purego.NewBlock` adapters from Go closures | Generated trampolines (`bindings/runtime/blocks`) |
 
@@ -513,7 +516,7 @@ The runtime lives under `bindings/runtime/` — public packages imported both by
 
 Each generated package also carries a small `<pkg>_runtime.go`: a `sync.Once`-guarded `dlopen` of the framework dylib, per-symbol function registration with failure tracking, and the public `SymbolAvailable(symbol string) bool` probe.
 
-The CGo library packages use `bindings/runtime/cgo` (retain/release, `RunOnMainThread`, string conversion, exception extraction) and `bindings/runtime/tel` (OTel `Call`/`RaiseIfException`/`NSErrorToError`) instead — any app that wires up an OTel exporter automatically gets a distributed trace of every C-library call.
+The CGo library packages use `bindings/runtime/cgo` instead (retain/release, `RunOnMainThread`, string conversion, exception extraction, `RaiseIfException`, `NSErrorToError`). Their calls are context-free and uninstrumented — the same zero-overhead dispatch as the purego frameworks.
 
 ### Generated Package Structure
 
@@ -538,7 +541,7 @@ bindings/libraries/xpc/
 ├── doc.go
 ├── cgo.go                   # LDFLAGS: -lSystem (or -framework / -l<lib>)
 ├── xpc_enums.go / xpc_structs.go / xpc_externs.go / xpc_protocols.go
-├── xpc_functions.go         # ctx-first wrappers with OTel tracing
+├── xpc_functions.go         # C function wrappers (exception-guarded)
 ├── xpc_bridge_impl.m        # Block trampoline implementations
 └── bridge/
     ├── xpc_bridge.h
@@ -590,7 +593,7 @@ Three mechanisms keep regeneration honest:
 
 ## Framework Coverage
 
-Bindings are committed for 250 ObjC frameworks and 11 Apple C libraries discovered in the macOS 26.5 SDK. For frameworks with a Swift-only API surface (e.g. `SwiftUI`, `SwiftUICore`), the generator emits documentation-only stub packages. Coverage spans:
+Bindings are committed for 251 ObjC frameworks and 11 Apple C libraries discovered in the macOS 26.5 SDK. For frameworks with a Swift-only API surface (e.g. `SwiftUI`, `SwiftUICore`), the generator emits documentation-only stub packages. Coverage spans:
 
 | Category | Examples |
 | --- | --- |
@@ -605,7 +608,7 @@ Bindings are committed for 250 ObjC frameworks and 11 Apple C libraries discover
 | **System & Extensions** | SystemConfiguration, SystemExtensions, ServiceManagement, ExtensionKit |
 | **Media & Capture** | Photos, PhotosUI, ImageCaptureCore, ScreenCaptureKit, ReplayKit |
 | **Virtualization & System** | Virtualization, Hypervisor, vmnet, EndpointSecurity (C), xpc (C), dispatch (C) |
-| **C libraries** | EndpointSecurity, xpc, dispatch, oslog, sandbox, libproc, bsm, Compression, AppleArchive, xar |
+| **C libraries** | EndpointSecurity, xpc, dispatch, oslog, sandbox, libproc, bsm, bsd, Compression, AppleArchive, xar |
 | **Other** | WebKit, PDFKit, MapKit, EventKit, Contacts, StoreKit, CloudKit, and more |
 
 Use `go run ./cmd/generate/ list` to see the exact set available in the SDK installed on your machine.
@@ -640,7 +643,7 @@ Use `go run ./cmd/generate/ list` to see the exact set available in the SDK inst
 
 **Sparse doc comments** — Most Apple SDK headers do not use structured doc comment syntax (`///` or `/*!`). Only declarations immediately preceded by such comments receive a doc annotation.
 
-**Importing only `bindings/…`** — Everything an external module needs is public under `bindings/`: the generated `bindings/frameworks/` and `bindings/libraries/` packages plus the shared runtime under `bindings/runtime/` (`purego`, `cgo`, `tel`, `blocks`, `callbacks`). The generator itself (`internal/codegen/…`), the scanner, and the scanned-metadata model (`internal/macosplatformmetadata`) remain in `internal/` and are not importable from outside this module — only in-repo tooling uses them.
+**Importing only `bindings/…`** — Everything an external module needs is public under `bindings/`: the generated `bindings/frameworks/` and `bindings/libraries/` packages plus the shared runtime under `bindings/runtime/` (`purego`, `cgo`, `blocks`, `callbacks`). The generator itself (`internal/codegen/…`), the scanner, and the scanned-metadata model (`internal/macosplatformmetadata`) remain in `internal/` and are not importable from outside this module — only in-repo tooling uses them.
 
 ---
 

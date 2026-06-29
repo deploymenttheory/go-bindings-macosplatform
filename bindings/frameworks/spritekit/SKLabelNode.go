@@ -64,175 +64,303 @@ func SKLabelNodeFromID(id objc.ID) *SKLabelNode {
 
 // Initializes a new label object with a text string.
 func SKLabelNodeLabelNodeWithText(text *foundation.NSString) *SKLabelNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKLabelNode), _sKLabelNodeSelLabelNodeWithText, text.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKLabelNodeFromID(_ret)
+	var _mainthread0 *SKLabelNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKLabelNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKLabelNode), _sKLabelNodeSelLabelNodeWithText, text.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKLabelNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a new label object with an attributed text string.
 func SKLabelNodeLabelNodeWithAttributedText(attributedText *foundation.NSAttributedString) *SKLabelNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKLabelNode), _sKLabelNodeSelLabelNodeWithAttributedText, attributedText.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKLabelNodeFromID(_ret)
+	var _mainthread0 *SKLabelNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKLabelNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKLabelNode), _sKLabelNodeSelLabelNodeWithAttributedText, attributedText.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKLabelNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a new label object.
 func SKLabelNodeLabelNodeWithFontNamed(fontName *foundation.NSString) *SKLabelNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKLabelNode), _sKLabelNodeSelLabelNodeWithFontNamed, fontName.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKLabelNodeFromID(_ret)
+	var _mainthread0 *SKLabelNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKLabelNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKLabelNode), _sKLabelNodeSelLabelNodeWithFontNamed, fontName.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKLabelNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a new label object with a specified font.
 func (o *SKLabelNode) InitWithFontNamed(fontName *foundation.NSString) *SKLabelNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKLabelNodeSelInitWithFontNamed, fontName.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKLabelNodeFromID(_ret)
+	var _mainthread0 *SKLabelNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKLabelNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKLabelNodeSelInitWithFontNamed, fontName.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKLabelNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKLabelNode) VerticalAlignmentMode() SKLabelVerticalAlignmentMode {
-	_ret := objc.Send[SKLabelVerticalAlignmentMode](o.Ptr(), _sKLabelNodeSelVerticalAlignmentMode)
-	return _ret
+	var _mainthread0 SKLabelVerticalAlignmentMode
+	purego.Main(func() {
+		_mainthread0 = func() SKLabelVerticalAlignmentMode {
+			_ret := objc.Send[SKLabelVerticalAlignmentMode](o.Ptr(), _sKLabelNodeSelVerticalAlignmentMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKLabelNode) SetVerticalAlignmentMode(verticalAlignmentMode SKLabelVerticalAlignmentMode) {
-	o.Ptr().Send(_sKLabelNodeSelSetVerticalAlignmentMode, verticalAlignmentMode)
+	purego.Main(func() {
+		o.Ptr().Send(_sKLabelNodeSelSetVerticalAlignmentMode, verticalAlignmentMode)
+	})
 }
 
 func (o *SKLabelNode) HorizontalAlignmentMode() SKLabelHorizontalAlignmentMode {
-	_ret := objc.Send[SKLabelHorizontalAlignmentMode](o.Ptr(), _sKLabelNodeSelHorizontalAlignmentMode)
-	return _ret
+	var _mainthread0 SKLabelHorizontalAlignmentMode
+	purego.Main(func() {
+		_mainthread0 = func() SKLabelHorizontalAlignmentMode {
+			_ret := objc.Send[SKLabelHorizontalAlignmentMode](o.Ptr(), _sKLabelNodeSelHorizontalAlignmentMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKLabelNode) SetHorizontalAlignmentMode(horizontalAlignmentMode SKLabelHorizontalAlignmentMode) {
-	o.Ptr().Send(_sKLabelNodeSelSetHorizontalAlignmentMode, horizontalAlignmentMode)
+	purego.Main(func() {
+		o.Ptr().Send(_sKLabelNodeSelSetHorizontalAlignmentMode, horizontalAlignmentMode)
+	})
 }
 
 // Determines the number of lines to draw. The default value is 1 (single line). A value of 0 means no limit. If the height of the text reaches the # of lines the text will be truncated using the line break mode.
 func (o *SKLabelNode) NumberOfLines() int {
-	_ret := objc.Send[int](o.Ptr(), _sKLabelNodeSelNumberOfLines)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _sKLabelNodeSelNumberOfLines)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKLabelNode) SetNumberOfLines(numberOfLines int) {
-	o.Ptr().Send(_sKLabelNodeSelSetNumberOfLines, numberOfLines)
+	purego.Main(func() {
+		o.Ptr().Send(_sKLabelNodeSelSetNumberOfLines, numberOfLines)
+	})
 }
 
 // Determines the line break mode for multiple lines. Default is NSLineBreakByTruncatingTail
 func (o *SKLabelNode) LineBreakMode() appkit.NSLineBreakMode {
-	_ret := objc.Send[appkit.NSLineBreakMode](o.Ptr(), _sKLabelNodeSelLineBreakMode)
-	return _ret
+	var _mainthread0 appkit.NSLineBreakMode
+	purego.Main(func() {
+		_mainthread0 = func() appkit.NSLineBreakMode {
+			_ret := objc.Send[appkit.NSLineBreakMode](o.Ptr(), _sKLabelNodeSelLineBreakMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKLabelNode) SetLineBreakMode(lineBreakMode appkit.NSLineBreakMode) {
-	o.Ptr().Send(_sKLabelNodeSelSetLineBreakMode, lineBreakMode)
+	purego.Main(func() {
+		o.Ptr().Send(_sKLabelNodeSelSetLineBreakMode, lineBreakMode)
+	})
 }
 
 // If nonzero, this is used when determining layout width for multiline labels. Default is zero.
 func (o *SKLabelNode) PreferredMaxLayoutWidth() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _sKLabelNodeSelPreferredMaxLayoutWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _sKLabelNodeSelPreferredMaxLayoutWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKLabelNode) SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) {
-	o.Ptr().Send(_sKLabelNodeSelSetPreferredMaxLayoutWidth, preferredMaxLayoutWidth)
+	purego.Main(func() {
+		o.Ptr().Send(_sKLabelNodeSelSetPreferredMaxLayoutWidth, preferredMaxLayoutWidth)
+	})
 }
 
 func (o *SKLabelNode) FontName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKLabelNodeSelFontName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKLabelNodeSelFontName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKLabelNode) SetFontName(fontName *foundation.NSString) {
-	o.Ptr().Send(_sKLabelNodeSelSetFontName, fontName.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKLabelNodeSelSetFontName, fontName.Ptr())
+	})
 }
 
 func (o *SKLabelNode) Text() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKLabelNodeSelText)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKLabelNodeSelText)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKLabelNode) SetText(text *foundation.NSString) {
-	o.Ptr().Send(_sKLabelNodeSelSetText, text.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKLabelNodeSelSetText, text.Ptr())
+	})
 }
 
 func (o *SKLabelNode) AttributedText() *foundation.NSAttributedString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKLabelNodeSelAttributedText)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSAttributedStringFromID(_ret)
+	var _mainthread0 *foundation.NSAttributedString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSAttributedString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKLabelNodeSelAttributedText)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSAttributedStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKLabelNode) SetAttributedText(attributedText *foundation.NSAttributedString) {
-	o.Ptr().Send(_sKLabelNodeSelSetAttributedText, attributedText.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKLabelNodeSelSetAttributedText, attributedText.Ptr())
+	})
 }
 
 func (o *SKLabelNode) FontSize() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _sKLabelNodeSelFontSize)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _sKLabelNodeSelFontSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKLabelNode) SetFontSize(fontSize float64) {
-	o.Ptr().Send(_sKLabelNodeSelSetFontSize, fontSize)
+	purego.Main(func() {
+		o.Ptr().Send(_sKLabelNodeSelSetFontSize, fontSize)
+	})
 }
 
 // Base color that the text is rendered with (if supported by the font)
 func (o *SKLabelNode) FontColor() *appkit.NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKLabelNodeSelFontColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSColorFromID(_ret)
+	var _mainthread0 *appkit.NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKLabelNodeSelFontColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKLabelNode) SetFontColor(fontColor *appkit.NSColor) {
-	o.Ptr().Send(_sKLabelNodeSelSetFontColor, fontColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKLabelNodeSelSetFontColor, fontColor.Ptr())
+	})
 }
 
 // Controls the blending between the rendered text and a color. The valid interval of values is from 0.0 up to and including 1.0. A value above or below that interval is clamped to the minimum (0.0) if below or the maximum (1.0) if above.
 func (o *SKLabelNode) ColorBlendFactor() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _sKLabelNodeSelColorBlendFactor)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _sKLabelNodeSelColorBlendFactor)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKLabelNode) SetColorBlendFactor(colorBlendFactor float64) {
-	o.Ptr().Send(_sKLabelNodeSelSetColorBlendFactor, colorBlendFactor)
+	purego.Main(func() {
+		o.Ptr().Send(_sKLabelNodeSelSetColorBlendFactor, colorBlendFactor)
+	})
 }
 
 // Color to be blended with the text based on the colorBlendFactor
 func (o *SKLabelNode) Color() *appkit.NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKLabelNodeSelColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSColorFromID(_ret)
+	var _mainthread0 *appkit.NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKLabelNodeSelColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKLabelNode) SetColor(color *appkit.NSColor) {
-	o.Ptr().Send(_sKLabelNodeSelSetColor, color.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKLabelNodeSelSetColor, color.Ptr())
+	})
 }
 
 // Sets the blend mode to use when composing the sprite with the final framebuffer. @see SKNode.SKBlendMode
 func (o *SKLabelNode) BlendMode() SKBlendMode {
-	_ret := objc.Send[SKBlendMode](o.Ptr(), _sKLabelNodeSelBlendMode)
-	return _ret
+	var _mainthread0 SKBlendMode
+	purego.Main(func() {
+		_mainthread0 = func() SKBlendMode {
+			_ret := objc.Send[SKBlendMode](o.Ptr(), _sKLabelNodeSelBlendMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKLabelNode) SetBlendMode(blendMode SKBlendMode) {
-	o.Ptr().Send(_sKLabelNodeSelSetBlendMode, blendMode)
+	purego.Main(func() {
+		o.Ptr().Send(_sKLabelNodeSelSetBlendMode, blendMode)
+	})
 }

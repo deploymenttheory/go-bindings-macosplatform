@@ -46,71 +46,115 @@ func SLComposeServiceViewControllerFromID(id objc.ID) *SLComposeServiceViewContr
 
 // Tells the compose view controller that the presentation animation is finished.
 func (o *SLComposeServiceViewController) PresentationAnimationDidFinish() {
-	o.Ptr().Send(_sLComposeServiceViewControllerSelPresentationAnimationDidFinish)
+	purego.Main(func() {
+		o.Ptr().Send(_sLComposeServiceViewControllerSelPresentationAnimationDidFinish)
+	})
 }
 
 // Sent to the compose view after the post animation finishes.
 func (o *SLComposeServiceViewController) DidSelectPost() {
-	o.Ptr().Send(_sLComposeServiceViewControllerSelDidSelectPost)
+	purego.Main(func() {
+		o.Ptr().Send(_sLComposeServiceViewControllerSelDidSelectPost)
+	})
 }
 
 // Sent to the compose view after the cancel animation finishes.
 func (o *SLComposeServiceViewController) DidSelectCancel() {
-	o.Ptr().Send(_sLComposeServiceViewControllerSelDidSelectCancel)
+	purego.Main(func() {
+		o.Ptr().Send(_sLComposeServiceViewControllerSelDidSelectCancel)
+	})
 }
 
 // Starts the animated dismissal of the compose view.
 func (o *SLComposeServiceViewController) Cancel() {
-	o.Ptr().Send(_sLComposeServiceViewControllerSelCancel)
+	purego.Main(func() {
+		o.Ptr().Send(_sLComposeServiceViewControllerSelCancel)
+	})
 }
 
 // A Boolean value that indicates whether the current content and attachments are valid.
 func (o *SLComposeServiceViewController) IsContentValid() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sLComposeServiceViewControllerSelIsContentValid)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sLComposeServiceViewControllerSelIsContentValid)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Performs validation of the current content and updates the state of the Post button, if appropriate.
 func (o *SLComposeServiceViewController) ValidateContent() {
-	o.Ptr().Send(_sLComposeServiceViewControllerSelValidateContent)
+	purego.Main(func() {
+		o.Ptr().Send(_sLComposeServiceViewControllerSelValidateContent)
+	})
 }
 
 func (o *SLComposeServiceViewController) TextView() *appkit.NSTextView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sLComposeServiceViewControllerSelTextView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSTextViewFromID(_ret)
+	var _mainthread0 *appkit.NSTextView
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSTextView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sLComposeServiceViewControllerSelTextView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSTextViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SLComposeServiceViewController) ContentText() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sLComposeServiceViewControllerSelContentText)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sLComposeServiceViewControllerSelContentText)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SLComposeServiceViewController) Placeholder() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sLComposeServiceViewControllerSelPlaceholder)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sLComposeServiceViewControllerSelPlaceholder)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SLComposeServiceViewController) SetPlaceholder(placeholder *foundation.NSString) {
-	o.Ptr().Send(_sLComposeServiceViewControllerSelSetPlaceholder, placeholder.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sLComposeServiceViewControllerSelSetPlaceholder, placeholder.Ptr())
+	})
 }
 
 func (o *SLComposeServiceViewController) CharactersRemaining() *foundation.NSNumber {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sLComposeServiceViewControllerSelCharactersRemaining)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSNumberFromID(_ret)
+	var _mainthread0 *foundation.NSNumber
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSNumber {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sLComposeServiceViewControllerSelCharactersRemaining)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSNumberFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SLComposeServiceViewController) SetCharactersRemaining(charactersRemaining *foundation.NSNumber) {
-	o.Ptr().Send(_sLComposeServiceViewControllerSelSetCharactersRemaining, charactersRemaining.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sLComposeServiceViewControllerSelSetCharactersRemaining, charactersRemaining.Ptr())
+	})
 }

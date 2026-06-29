@@ -44,56 +44,94 @@ func AVCaptureViewFromID(id objc.ID) *AVCaptureView {
 
 // Sets the view’s capture session.
 func (o *AVCaptureView) SetSessionShowVideoPreviewShowAudioPreview(session *avfoundation.AVCaptureSession, showVideoPreview bool, showAudioPreview bool) {
-	o.Ptr().Send(_aVCaptureViewSelSetSessionShowVideoPreviewShowAudioPreview, session.Ptr(), showVideoPreview, showAudioPreview)
+	purego.Main(func() {
+		o.Ptr().Send(_aVCaptureViewSelSetSessionShowVideoPreviewShowAudioPreview, session.Ptr(), showVideoPreview, showAudioPreview)
+	})
 }
 
 // @property	session @abstract	A capture session represented by this view. @discussion	Modifying the capture session will impact its visual representation in the view. The default value is a session configured for movie file recordings of audio and video media data. Use -setSession:showVideoPreview:showAudioPreview: to change the value of this property.
 func (o *AVCaptureView) Session() *avfoundation.AVCaptureSession {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureViewSelSession)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return avfoundation.AVCaptureSessionFromID(_ret)
+	var _mainthread0 *avfoundation.AVCaptureSession
+	purego.Main(func() {
+		_mainthread0 = func() *avfoundation.AVCaptureSession {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureViewSelSession)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return avfoundation.AVCaptureSessionFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @property	fileOutput @abstract	A capture file output used to record media data. @discussion	The value of this property is the first instance of AVCaptureFileOutput contained in the session's outputs array or nil if no such instance is found. In the latter case the capture view's start recording button will be disabled. However, the controls for choosing input sources may still be enabled.
 func (o *AVCaptureView) FileOutput() *avfoundation.AVCaptureFileOutput {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureViewSelFileOutput)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return avfoundation.AVCaptureFileOutputFromID(_ret)
+	var _mainthread0 *avfoundation.AVCaptureFileOutput
+	purego.Main(func() {
+		_mainthread0 = func() *avfoundation.AVCaptureFileOutput {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureViewSelFileOutput)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return avfoundation.AVCaptureFileOutputFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @property	delegate @abstract	The capture view's delegate. @discussion	The start recording button will be disabled if the delegate is not set.
 func (o *AVCaptureView) Delegate() AVCaptureViewDelegate {
-	_ret := objc.Send[AVCaptureViewDelegate](o.Ptr(), _aVCaptureViewSelDelegate)
-	return _ret
+	var _mainthread0 AVCaptureViewDelegate
+	purego.Main(func() {
+		_mainthread0 = func() AVCaptureViewDelegate {
+			_ret := objc.Send[AVCaptureViewDelegate](o.Ptr(), _aVCaptureViewSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVCaptureView) SetDelegate(delegate AVCaptureViewDelegate) {
-	o.Ptr().Send(_aVCaptureViewSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_aVCaptureViewSelSetDelegate, delegate)
+	})
 }
 
 // @property	controlsStyle @abstract	The style of the capture controls pane associated with the view.
 func (o *AVCaptureView) ControlsStyle() AVCaptureViewControlsStyle {
-	_ret := objc.Send[AVCaptureViewControlsStyle](o.Ptr(), _aVCaptureViewSelControlsStyle)
-	return _ret
+	var _mainthread0 AVCaptureViewControlsStyle
+	purego.Main(func() {
+		_mainthread0 = func() AVCaptureViewControlsStyle {
+			_ret := objc.Send[AVCaptureViewControlsStyle](o.Ptr(), _aVCaptureViewSelControlsStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVCaptureView) SetControlsStyle(controlsStyle AVCaptureViewControlsStyle) {
-	o.Ptr().Send(_aVCaptureViewSelSetControlsStyle, controlsStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_aVCaptureViewSelSetControlsStyle, controlsStyle)
+	})
 }
 
 // @property	videoGravity @abstract	A string defining how the video is displayed within the views bounds rect. @discussion	Options are AVLayerVideoGravityResize, AVLayerVideoGravityResizeAspect and AVLayerVideoGravityResizeAspectFill. AVLayerVideoGravityResizeAspect is default.
 func (o *AVCaptureView) VideoGravity() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureViewSelVideoGravity)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureViewSelVideoGravity)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVCaptureView) SetVideoGravity(videoGravity *foundation.NSString) {
-	o.Ptr().Send(_aVCaptureViewSelSetVideoGravity, videoGravity.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aVCaptureViewSelSetVideoGravity, videoGravity.Ptr())
+	})
 }

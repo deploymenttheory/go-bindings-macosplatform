@@ -36,25 +36,43 @@ func NSCollectionLayoutSizeFromID(id objc.ID) *NSCollectionLayoutSize {
 
 // Creates a size with the specified width and height dimensions.
 func NSCollectionLayoutSizeSizeWithWidthDimensionHeightDimension(width *NSCollectionLayoutDimension, height *NSCollectionLayoutDimension) *NSCollectionLayoutSize {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutSize), _nSCollectionLayoutSizeSelSizeWithWidthDimensionHeightDimension, width.Ptr(), height.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutSizeFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutSize
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutSize {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutSize), _nSCollectionLayoutSizeSelSizeWithWidthDimensionHeightDimension, width.Ptr(), height.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutSizeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutSize) WidthDimension() *NSCollectionLayoutDimension {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutSizeSelWidthDimension)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutDimensionFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutDimension
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutDimension {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutSizeSelWidthDimension)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutDimensionFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutSize) HeightDimension() *NSCollectionLayoutDimension {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutSizeSelHeightDimension)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutDimensionFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutDimension
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutDimension {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutSizeSelHeightDimension)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutDimensionFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

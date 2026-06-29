@@ -68,194 +68,346 @@ func NSSliderCellFromID(id objc.ID) *NSSliderCell {
 
 // Returns the rectangle in which the slider knob is drawn.
 func (o *NSSliderCell) KnobRectFlipped(flipped bool) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSliderCellSelKnobRectFlipped, flipped)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSliderCellSelKnobRectFlipped, flipped)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the rectangle in which the bar is drawn.
 func (o *NSSliderCell) BarRectFlipped(flipped bool) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSliderCellSelBarRectFlipped, flipped)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSliderCellSelBarRectFlipped, flipped)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Draws the slider knob in the given rectangle.
 func (o *NSSliderCell) DrawKnob(knobRect corefoundation.CGRect) {
-	o.Ptr().Send(_nSSliderCellSelDrawKnob, knobRect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderCellSelDrawKnob, knobRect)
+	})
 }
 
 // Calculates the rectangle in which the knob should be drawn, then calls drawKnob: to actually draw the knob.
 func (o *NSSliderCell) DrawKnob2() {
-	o.Ptr().Send(_nSSliderCellSelDrawKnob)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderCellSelDrawKnob)
+	})
 }
 
 // Draws the slider’s bar—but not its bezel or knob—inside the specified rectangle.
 func (o *NSSliderCell) DrawBarInsideFlipped(rect corefoundation.CGRect, flipped bool) {
-	o.Ptr().Send(_nSSliderCellSelDrawBarInsideFlipped, rect, flipped)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderCellSelDrawBarInsideFlipped, rect, flipped)
+	})
 }
 
 func NSSliderCellPrefersTrackingUntilMouseUp() bool {
-	_ret := objc.Send[bool](objc.ID(_clsNSSliderCell), _nSSliderCellSelPrefersTrackingUntilMouseUp)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](objc.ID(_clsNSSliderCell), _nSSliderCellSelPrefersTrackingUntilMouseUp)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSliderCell) MinValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSliderCellSelMinValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSliderCellSelMinValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSliderCell) SetMinValue(minValue float64) {
-	o.Ptr().Send(_nSSliderCellSelSetMinValue, minValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderCellSelSetMinValue, minValue)
+	})
 }
 
 func (o *NSSliderCell) MaxValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSliderCellSelMaxValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSliderCellSelMaxValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSliderCell) SetMaxValue(maxValue float64) {
-	o.Ptr().Send(_nSSliderCellSelSetMaxValue, maxValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderCellSelSetMaxValue, maxValue)
+	})
 }
 
 func (o *NSSliderCell) AltIncrementValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSliderCellSelAltIncrementValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSliderCellSelAltIncrementValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSliderCell) SetAltIncrementValue(altIncrementValue float64) {
-	o.Ptr().Send(_nSSliderCellSelSetAltIncrementValue, altIncrementValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderCellSelSetAltIncrementValue, altIncrementValue)
+	})
 }
 
 func (o *NSSliderCell) SliderType() NSSliderType {
-	_ret := objc.Send[NSSliderType](o.Ptr(), _nSSliderCellSelSliderType)
-	return _ret
+	var _mainthread0 NSSliderType
+	purego.Main(func() {
+		_mainthread0 = func() NSSliderType {
+			_ret := objc.Send[NSSliderType](o.Ptr(), _nSSliderCellSelSliderType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSliderCell) SetSliderType(sliderType NSSliderType) {
-	o.Ptr().Send(_nSSliderCellSelSetSliderType, sliderType)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderCellSelSetSliderType, sliderType)
+	})
 }
 
 func (o *NSSliderCell) IsVertical() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSliderCellSelIsVertical)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSliderCellSelIsVertical)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSliderCell) SetVertical(vertical bool) {
-	o.Ptr().Send(_nSSliderCellSelSetVertical, vertical)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderCellSelSetVertical, vertical)
+	})
 }
 
 func (o *NSSliderCell) TrackRect() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSliderCellSelTrackRect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSliderCellSelTrackRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSliderCell) KnobThickness() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSliderCellSelKnobThickness)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSliderCellSelKnobThickness)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the receiver’s value represented by the tick mark at the specified index.
 func (o *NSSliderCell) TickMarkValueAtIndex(index int) float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSliderCellSelTickMarkValueAtIndex, index)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSliderCellSelTickMarkValueAtIndex, index)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the bounding rectangle of the tick mark at the specified index.
 func (o *NSSliderCell) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSliderCellSelRectOfTickMarkAtIndex, index)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSliderCellSelRectOfTickMarkAtIndex, index)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the index of the tick mark closest to the location of the slider represented by the specified point.
 func (o *NSSliderCell) IndexOfTickMarkAtPoint(point corefoundation.CGPoint) int {
-	_ret := objc.Send[int](o.Ptr(), _nSSliderCellSelIndexOfTickMarkAtPoint, point)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSSliderCellSelIndexOfTickMarkAtPoint, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the value of the tick mark closest to the specified value.
 func (o *NSSliderCell) ClosestTickMarkValueToValue(value float64) float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSliderCellSelClosestTickMarkValueToValue, value)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSliderCellSelClosestTickMarkValueToValue, value)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Draws the slider’s tick marks.
 func (o *NSSliderCell) DrawTickMarks() {
-	o.Ptr().Send(_nSSliderCellSelDrawTickMarks)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderCellSelDrawTickMarks)
+	})
 }
 
 func (o *NSSliderCell) NumberOfTickMarks() int {
-	_ret := objc.Send[int](o.Ptr(), _nSSliderCellSelNumberOfTickMarks)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSSliderCellSelNumberOfTickMarks)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSliderCell) SetNumberOfTickMarks(numberOfTickMarks int) {
-	o.Ptr().Send(_nSSliderCellSelSetNumberOfTickMarks, numberOfTickMarks)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderCellSelSetNumberOfTickMarks, numberOfTickMarks)
+	})
 }
 
 func (o *NSSliderCell) TickMarkPosition() NSTickMarkPosition {
-	_ret := objc.Send[NSTickMarkPosition](o.Ptr(), _nSSliderCellSelTickMarkPosition)
-	return _ret
+	var _mainthread0 NSTickMarkPosition
+	purego.Main(func() {
+		_mainthread0 = func() NSTickMarkPosition {
+			_ret := objc.Send[NSTickMarkPosition](o.Ptr(), _nSSliderCellSelTickMarkPosition)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSliderCell) SetTickMarkPosition(tickMarkPosition NSTickMarkPosition) {
-	o.Ptr().Send(_nSSliderCellSelSetTickMarkPosition, tickMarkPosition)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderCellSelSetTickMarkPosition, tickMarkPosition)
+	})
 }
 
 func (o *NSSliderCell) AllowsTickMarkValuesOnly() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSliderCellSelAllowsTickMarkValuesOnly)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSliderCellSelAllowsTickMarkValuesOnly)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSliderCell) SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) {
-	o.Ptr().Send(_nSSliderCellSelSetAllowsTickMarkValuesOnly, allowsTickMarkValuesOnly)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderCellSelSetAllowsTickMarkValuesOnly, allowsTickMarkValuesOnly)
+	})
 }
 
 // Sets the cell used to draw the slider’s title.
 // Deprecated: -setTitleCell: had no effect since 10.0
 func (o *NSSliderCell) SetTitleCell(cell *NSCell) {
-	o.Ptr().Send(_nSSliderCellSelSetTitleCell, cell.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderCellSelSetTitleCell, cell.Ptr())
+	})
 }
 
 // Returns nil.
 // Deprecated: -titleCell has returned nil since 10.0
 func (o *NSSliderCell) TitleCell() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderCellSelTitleCell)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderCellSelTitleCell)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the color used to draw the slider’s title.
 // Deprecated: -setTitleColor: had no effect since 10.0
 func (o *NSSliderCell) SetTitleColor(newColor *NSColor) {
-	o.Ptr().Send(_nSSliderCellSelSetTitleColor, newColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderCellSelSetTitleColor, newColor.Ptr())
+	})
 }
 
 // Returns nil.
 // Deprecated: -titleColor has returned nil since 10.0
 func (o *NSSliderCell) TitleColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderCellSelTitleColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderCellSelTitleColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the font used to draw the slider’s title.
 // Deprecated: -setTitleFont: had no effect since 10.0
 func (o *NSSliderCell) SetTitleFont(fontObj *NSFont) {
-	o.Ptr().Send(_nSSliderCellSelSetTitleFont, fontObj.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderCellSelSetTitleFont, fontObj.Ptr())
+	})
 }
 
 // Returns nil.
 // Deprecated: -titleFont has returned nil since 10.0
 func (o *NSSliderCell) TitleFont() *NSFont {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderCellSelTitleFont)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSFontFromID(_ret)
+	var _mainthread0 *NSFont
+	purego.Main(func() {
+		_mainthread0 = func() *NSFont {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderCellSelTitleFont)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSFontFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The thickness of the slider knob, in pixels.
 // Deprecated: -knobThickness has returned 0 since 10.0
 func (o *NSSliderCell) SetKnobThickness(thickness float64) {
-	o.Ptr().Send(_nSSliderCellSelSetKnobThickness, thickness)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderCellSelSetKnobThickness, thickness)
+	})
 }

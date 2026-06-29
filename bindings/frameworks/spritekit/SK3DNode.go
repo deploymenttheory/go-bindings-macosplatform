@@ -57,124 +57,216 @@ func SK3DNodeFromID(id objc.ID) *SK3DNode {
 
 // Initializes a new 3D node.
 func (o *SK3DNode) InitWithViewportSize(viewportSize corefoundation.CGSize) *SK3DNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sK3DNodeSelInitWithViewportSize, viewportSize)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SK3DNodeFromID(_ret)
+	var _mainthread0 *SK3DNode
+	purego.Main(func() {
+		_mainthread0 = func() *SK3DNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sK3DNodeSelInitWithViewportSize, viewportSize)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SK3DNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Tells you when to initialize a 3D node that has been unarchived.
 func (o *SK3DNode) InitWithCoder(aDecoder *foundation.NSCoder) *SK3DNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sK3DNodeSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SK3DNodeFromID(_ret)
+	var _mainthread0 *SK3DNode
+	purego.Main(func() {
+		_mainthread0 = func() *SK3DNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sK3DNodeSelInitWithCoder, aDecoder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SK3DNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates and initializes a new 3D node.
 func SK3DNodeNodeWithViewportSize(viewportSize corefoundation.CGSize) *SK3DNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSK3DNode), _sK3DNodeSelNodeWithViewportSize, viewportSize)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SK3DNodeFromID(_ret)
+	var _mainthread0 *SK3DNode
+	purego.Main(func() {
+		_mainthread0 = func() *SK3DNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSK3DNode), _sK3DNodeSelNodeWithViewportSize, viewportSize)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SK3DNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Searches the Scene Kit scene for objects corresponding to a point in the rendered image.
 func (o *SK3DNode) HitTestOptions(point corefoundation.CGPoint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*scenekit.SCNHitTestResult] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sK3DNodeSelHitTestOptions, point, options.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*scenekit.SCNHitTestResult](_ret)
+	var _mainthread0 *foundation.NSArray[*scenekit.SCNHitTestResult]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*scenekit.SCNHitTestResult] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sK3DNodeSelHitTestOptions, point, options.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*scenekit.SCNHitTestResult](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Projects a point from the 3D world coordinate system of the SceneKit scene to the 2D viewport coordinate system of the SpriteKit node.
 func (o *SK3DNode) ProjectPoint(point unsafe.Pointer) unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sK3DNodeSelProjectPoint, point)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sK3DNodeSelProjectPoint, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Unprojects a point from the SpriteKit node’s 2D viewport coordinate system to the 3D world coordinate system of the SceneKit scene.
 func (o *SK3DNode) UnprojectPoint(point unsafe.Pointer) unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sK3DNodeSelUnprojectPoint, point)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sK3DNodeSelUnprojectPoint, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The viewport size that the 3D content will be rendered with
 func (o *SK3DNode) ViewportSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _sK3DNodeSelViewportSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _sK3DNodeSelViewportSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SK3DNode) SetViewportSize(viewportSize corefoundation.CGSize) {
-	o.Ptr().Send(_sK3DNodeSelSetViewportSize, viewportSize)
+	purego.Main(func() {
+		o.Ptr().Send(_sK3DNodeSelSetViewportSize, viewportSize)
+	})
 }
 
 // A SceneKit scene
 func (o *SK3DNode) ScnScene() *scenekit.SCNScene {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sK3DNodeSelScnScene)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return scenekit.SCNSceneFromID(_ret)
+	var _mainthread0 *scenekit.SCNScene
+	purego.Main(func() {
+		_mainthread0 = func() *scenekit.SCNScene {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sK3DNodeSelScnScene)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return scenekit.SCNSceneFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SK3DNode) SetScnScene(scnScene *scenekit.SCNScene) {
-	o.Ptr().Send(_sK3DNodeSelSetScnScene, scnScene.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sK3DNodeSelSetScnScene, scnScene.Ptr())
+	})
 }
 
 // @property sceneTime @abstract Specifies the current time to display the scene.
 func (o *SK3DNode) SceneTime() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _sK3DNodeSelSceneTime)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _sK3DNodeSelSceneTime)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SK3DNode) SetSceneTime(sceneTime float64) {
-	o.Ptr().Send(_sK3DNodeSelSetSceneTime, sceneTime)
+	purego.Main(func() {
+		o.Ptr().Send(_sK3DNodeSelSetSceneTime, sceneTime)
+	})
 }
 
 // @property playing @abstract Returns YES if the scene is playing, NO otherwise.
 func (o *SK3DNode) IsPlaying() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sK3DNodeSelIsPlaying)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sK3DNodeSelIsPlaying)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SK3DNode) SetPlaying(playing bool) {
-	o.Ptr().Send(_sK3DNodeSelSetPlaying, playing)
+	purego.Main(func() {
+		o.Ptr().Send(_sK3DNodeSelSetPlaying, playing)
+	})
 }
 
 // @property loops @abstract Indicates whether the receiver restarts playback when it reaches the end of its content. Default: YES. @discussion YES when the receiver restarts playback when it finishes, NO otherwise.
 func (o *SK3DNode) Loops() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sK3DNodeSelLoops)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sK3DNodeSelLoops)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SK3DNode) SetLoops(loops bool) {
-	o.Ptr().Send(_sK3DNodeSelSetLoops, loops)
+	purego.Main(func() {
+		o.Ptr().Send(_sK3DNodeSelSetLoops, loops)
+	})
 }
 
 // @property pointOfView @abstract Specifies the point of view used to render the scene. @discussion A point of view must have either a camera or a spot light attached.
 func (o *SK3DNode) PointOfView() *scenekit.SCNNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sK3DNodeSelPointOfView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return scenekit.SCNNodeFromID(_ret)
+	var _mainthread0 *scenekit.SCNNode
+	purego.Main(func() {
+		_mainthread0 = func() *scenekit.SCNNode {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sK3DNodeSelPointOfView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return scenekit.SCNNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SK3DNode) SetPointOfView(pointOfView *scenekit.SCNNode) {
-	o.Ptr().Send(_sK3DNodeSelSetPointOfView, pointOfView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sK3DNodeSelSetPointOfView, pointOfView.Ptr())
+	})
 }
 
 // @property autoenablesDefaultLighting @abstract Specifies whether the receiver should automatically light up scenes that have no light source. The default is NO. @discussion When enabled, a diffuse light is automatically added and placed while rendering scenes that have no light or only ambient lights.
 func (o *SK3DNode) AutoenablesDefaultLighting() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sK3DNodeSelAutoenablesDefaultLighting)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sK3DNodeSelAutoenablesDefaultLighting)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SK3DNode) SetAutoenablesDefaultLighting(autoenablesDefaultLighting bool) {
-	o.Ptr().Send(_sK3DNodeSelSetAutoenablesDefaultLighting, autoenablesDefaultLighting)
+	purego.Main(func() {
+		o.Ptr().Send(_sK3DNodeSelSetAutoenablesDefaultLighting, autoenablesDefaultLighting)
+	})
 }

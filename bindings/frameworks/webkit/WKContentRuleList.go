@@ -33,9 +33,15 @@ func WKContentRuleListFromID(id objc.ID) *WKContentRuleList {
 }
 
 func (o *WKContentRuleList) Identifier() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKContentRuleListSelIdentifier)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKContentRuleListSelIdentifier)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

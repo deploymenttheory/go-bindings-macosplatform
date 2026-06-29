@@ -45,69 +45,117 @@ func SKLightNodeFromID(id objc.ID) *SKLightNode {
 
 // Enables or disables lighting contribution from this light node. Set to YES; sprites using this light will be lit with the ambient color and the light color, with a falloff in intensity according to the falloff property. Set to NO; this light does not contribute any lighting. If no lights are active on a sprite it will be drawn normally, as if not lit. The default value is YES. @see lightColor @see falloff @see categoryBitMask
 func (o *SKLightNode) IsEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sKLightNodeSelIsEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sKLightNodeSelIsEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKLightNode) SetEnabled(enabled bool) {
-	o.Ptr().Send(_sKLightNodeSelSetEnabled, enabled)
+	purego.Main(func() {
+		o.Ptr().Send(_sKLightNodeSelSetEnabled, enabled)
+	})
 }
 
 // Diffuse and Specular color of the light source, defaults to opaque white. The alpha component of the color is ignored. If using shaders bind a uniform to this property to use scene based custom lighting. @see SKUniform @see falloff
 func (o *SKLightNode) LightColor() *appkit.NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKLightNodeSelLightColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSColorFromID(_ret)
+	var _mainthread0 *appkit.NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKLightNodeSelLightColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKLightNode) SetLightColor(lightColor *appkit.NSColor) {
-	o.Ptr().Send(_sKLightNodeSelSetLightColor, lightColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKLightNodeSelSetLightColor, lightColor.Ptr())
+	})
 }
 
 // Ambient color of the light source, defaults to black. If you had only a single light in the scene with an ambient color of opaque white and a light color of black, it would appear as if the scene was rendered without lighting. The alpha component of the color is ignored. The color is not affected by falloff or surface normals. @see lightColor
 func (o *SKLightNode) AmbientColor() *appkit.NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKLightNodeSelAmbientColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSColorFromID(_ret)
+	var _mainthread0 *appkit.NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKLightNodeSelAmbientColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKLightNode) SetAmbientColor(ambientColor *appkit.NSColor) {
-	o.Ptr().Send(_sKLightNodeSelSetAmbientColor, ambientColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKLightNodeSelSetAmbientColor, ambientColor.Ptr())
+	})
 }
 
 // Color of the shadow casted on occluded objects, defaults to half opacity black. The alpha component of the color is used for blending with the regions that are in shadow. @see SKSpriteNode.shadowCastBitMask @see SKSpriteNode.shadowedBitMask
 func (o *SKLightNode) ShadowColor() *appkit.NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKLightNodeSelShadowColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSColorFromID(_ret)
+	var _mainthread0 *appkit.NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKLightNodeSelShadowColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKLightNode) SetShadowColor(shadowColor *appkit.NSColor) {
-	o.Ptr().Send(_sKLightNodeSelSetShadowColor, shadowColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKLightNodeSelSetShadowColor, shadowColor.Ptr())
+	})
 }
 
 // Falloff in intensity of the light over distance, defaults to 1. The falloff does not affect the ambient color nor the shadow color. @see lightColor
 func (o *SKLightNode) Falloff() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _sKLightNodeSelFalloff)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _sKLightNodeSelFalloff)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKLightNode) SetFalloff(falloff float64) {
-	o.Ptr().Send(_sKLightNodeSelSetFalloff, falloff)
+	purego.Main(func() {
+		o.Ptr().Send(_sKLightNodeSelSetFalloff, falloff)
+	})
 }
 
 // The category of the light, which determines the group(s) a light belongs to. Any node that has its corresponding light and shadow bitmasks set to an overlapping value will be lit, shadow casting or shadowed by this light. @see SKSpriteNode.lightingBitMask @see SKSpriteNode.shadowCastBitMask @see SKSpriteNode.shadowedBitMask
 func (o *SKLightNode) CategoryBitMask() uint32 {
-	_ret := objc.Send[uint32](o.Ptr(), _sKLightNodeSelCategoryBitMask)
-	return _ret
+	var _mainthread0 uint32
+	purego.Main(func() {
+		_mainthread0 = func() uint32 {
+			_ret := objc.Send[uint32](o.Ptr(), _sKLightNodeSelCategoryBitMask)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKLightNode) SetCategoryBitMask(categoryBitMask uint32) {
-	o.Ptr().Send(_sKLightNodeSelSetCategoryBitMask, categoryBitMask)
+	purego.Main(func() {
+		o.Ptr().Send(_sKLightNodeSelSetCategoryBitMask, categoryBitMask)
+	})
 }

@@ -48,82 +48,144 @@ func NSStepperTouchBarItemFromID(id objc.ID) *NSStepperTouchBarItem {
 
 // Creates a NSStepperTouchBarItem with a formatter to display the stepper’s value as text.
 func NSStepperTouchBarItemStepperTouchBarItemWithIdentifierFormatter(identifier *foundation.NSString, formatter *foundation.NSFormatter) *NSStepperTouchBarItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSStepperTouchBarItem), _nSStepperTouchBarItemSelStepperTouchBarItemWithIdentifierFormatter, identifier.Ptr(), formatter.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSStepperTouchBarItemFromID(_ret)
+	var _mainthread0 *NSStepperTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSStepperTouchBarItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSStepperTouchBarItem), _nSStepperTouchBarItemSelStepperTouchBarItemWithIdentifierFormatter, identifier.Ptr(), formatter.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSStepperTouchBarItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a NSStepperTouchBarItem using the result of drawingHandler to display the stepper’s value as an image.
 func NSStepperTouchBarItemStepperTouchBarItemWithIdentifierDrawingHandler(identifier *foundation.NSString, drawingHandler objc.Block) *NSStepperTouchBarItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSStepperTouchBarItem), _nSStepperTouchBarItemSelStepperTouchBarItemWithIdentifierDrawingHandler, identifier.Ptr(), drawingHandler)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSStepperTouchBarItemFromID(_ret)
+	var _mainthread0 *NSStepperTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSStepperTouchBarItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSStepperTouchBarItem), _nSStepperTouchBarItemSelStepperTouchBarItemWithIdentifierDrawingHandler, identifier.Ptr(), drawingHandler)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSStepperTouchBarItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The stepper's maximum value. The default is `59.0`.
 func (o *NSStepperTouchBarItem) MaxValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSStepperTouchBarItemSelMaxValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSStepperTouchBarItemSelMaxValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSStepperTouchBarItem) SetMaxValue(maxValue float64) {
-	o.Ptr().Send(_nSStepperTouchBarItemSelSetMaxValue, maxValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStepperTouchBarItemSelSetMaxValue, maxValue)
+	})
 }
 
 // The stepper's minimum value. The default is `0.0`.
 func (o *NSStepperTouchBarItem) MinValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSStepperTouchBarItemSelMinValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSStepperTouchBarItemSelMinValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSStepperTouchBarItem) SetMinValue(minValue float64) {
-	o.Ptr().Send(_nSStepperTouchBarItemSelSetMinValue, minValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStepperTouchBarItemSelSetMinValue, minValue)
+	})
 }
 
 // The stepper's increment value. The default value is `1.0`.
 func (o *NSStepperTouchBarItem) Increment() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSStepperTouchBarItemSelIncrement)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSStepperTouchBarItemSelIncrement)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSStepperTouchBarItem) SetIncrement(increment float64) {
-	o.Ptr().Send(_nSStepperTouchBarItemSelSetIncrement, increment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStepperTouchBarItemSelSetIncrement, increment)
+	})
 }
 
 // The current value of the stepper.
 func (o *NSStepperTouchBarItem) Value() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSStepperTouchBarItemSelValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSStepperTouchBarItemSelValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSStepperTouchBarItem) SetValue(value float64) {
-	o.Ptr().Send(_nSStepperTouchBarItemSelSetValue, value)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStepperTouchBarItemSelSetValue, value)
+	})
 }
 
 // The target object that receives action messages from the stepper.
 func (o *NSStepperTouchBarItem) Target() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSStepperTouchBarItemSelTarget)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSStepperTouchBarItemSelTarget)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSStepperTouchBarItem) SetTarget(target objc.ID) {
-	o.Ptr().Send(_nSStepperTouchBarItemSelSetTarget, target)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStepperTouchBarItemSelSetTarget, target)
+	})
 }
 
 // The action-message selector associated with the stepper.
 func (o *NSStepperTouchBarItem) Action() objc.SEL {
-	_ret := objc.Send[objc.SEL](o.Ptr(), _nSStepperTouchBarItemSelAction)
-	return _ret
+	var _mainthread0 objc.SEL
+	purego.Main(func() {
+		_mainthread0 = func() objc.SEL {
+			_ret := objc.Send[objc.SEL](o.Ptr(), _nSStepperTouchBarItemSelAction)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSStepperTouchBarItem) SetAction(action objc.SEL) {
-	o.Ptr().Send(_nSStepperTouchBarItemSelSetAction, action)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStepperTouchBarItemSelSetAction, action)
+	})
 }
 
 func (o *NSStepperTouchBarItem) SetCustomizationLabel(customizationLabel *foundation.NSString) {
-	o.Ptr().Send(_nSStepperTouchBarItemSelSetCustomizationLabel, customizationLabel.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSStepperTouchBarItemSelSetCustomizationLabel, customizationLabel.Ptr())
+	})
 }

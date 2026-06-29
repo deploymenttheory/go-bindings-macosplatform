@@ -66,173 +66,297 @@ func NSRulerViewFromID(id objc.ID) *NSRulerView {
 
 // Registers a new unit of measurement with the NSRulerView class, making it available to all instances of NSRulerView.
 func NSRulerViewRegisterUnitWithNameAbbreviationUnitToPointsConversionFactorStepUpCycleStepDownCycle(unitName *foundation.NSString, abbreviation *foundation.NSString, conversionFactor float64, stepUpCycle *foundation.NSArray[*foundation.NSNumber], stepDownCycle *foundation.NSArray[*foundation.NSNumber]) {
-	objc.ID(_clsNSRulerView).Send(_nSRulerViewSelRegisterUnitWithNameAbbreviationUnitToPointsConversionFactorStepUpCycleStepDownCycle, unitName.Ptr(), abbreviation.Ptr(), conversionFactor, stepUpCycle.Ptr(), stepDownCycle.Ptr())
+	purego.Main(func() {
+		objc.ID(_clsNSRulerView).Send(_nSRulerViewSelRegisterUnitWithNameAbbreviationUnitToPointsConversionFactorStepUpCycleStepDownCycle, unitName.Ptr(), abbreviation.Ptr(), conversionFactor, stepUpCycle.Ptr(), stepDownCycle.Ptr())
+	})
 }
 
 func (o *NSRulerView) InitWithCoder(coder *foundation.NSCoder) *NSRulerView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerViewSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSRulerViewFromID(_ret)
+	var _mainthread0 *NSRulerView
+	purego.Main(func() {
+		_mainthread0 = func() *NSRulerView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerViewSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSRulerViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a newly allocated NSRulerView to have orientation (NSHorizontalRuler or NSVerticalRuler) within aScrollView.
 func (o *NSRulerView) InitWithScrollViewOrientation(scrollView *NSScrollView, orientation NSRulerOrientation) *NSRulerView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerViewSelInitWithScrollViewOrientation, scrollView.Ptr(), orientation)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSRulerViewFromID(_ret)
+	var _mainthread0 *NSRulerView
+	purego.Main(func() {
+		_mainthread0 = func() *NSRulerView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerViewSelInitWithScrollViewOrientation, scrollView.Ptr(), orientation)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSRulerViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Adds aMarker to the receiver, without consulting the client view for approval.
 func (o *NSRulerView) AddMarker(marker *NSRulerMarker) {
-	o.Ptr().Send(_nSRulerViewSelAddMarker, marker.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSRulerViewSelAddMarker, marker.Ptr())
+	})
 }
 
 // Removes aMarker from the receiver, without consulting the client view for approval.
 func (o *NSRulerView) RemoveMarker(marker *NSRulerMarker) {
-	o.Ptr().Send(_nSRulerViewSelRemoveMarker, marker.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSRulerViewSelRemoveMarker, marker.Ptr())
+	})
 }
 
 // Tracks the mouse to add aMarker based on the initial mouse-down or mouse-dragged event theEvent.
 func (o *NSRulerView) TrackMarkerWithMouseEvent(marker *NSRulerMarker, event *NSEvent) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSRulerViewSelTrackMarkerWithMouseEvent, marker.Ptr(), event.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSRulerViewSelTrackMarkerWithMouseEvent, marker.Ptr(), event.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Draws temporary lines in the ruler area.
 func (o *NSRulerView) MoveRulerlineFromLocationToLocation(oldLocation float64, newLocation float64) {
-	o.Ptr().Send(_nSRulerViewSelMoveRulerlineFromLocationToLocation, oldLocation, newLocation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRulerViewSelMoveRulerlineFromLocationToLocation, oldLocation, newLocation)
+	})
 }
 
 // Forces recalculation of the hash mark spacing for the next time the receiver is displayed.
 func (o *NSRulerView) InvalidateHashMarks() {
-	o.Ptr().Send(_nSRulerViewSelInvalidateHashMarks)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRulerViewSelInvalidateHashMarks)
+	})
 }
 
 // Draws the receiver’s hash marks and labels in aRect, which is expressed in the receiver’s coordinate system.
 func (o *NSRulerView) DrawHashMarksAndLabelsInRect(rect corefoundation.CGRect) {
-	o.Ptr().Send(_nSRulerViewSelDrawHashMarksAndLabelsInRect, rect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRulerViewSelDrawHashMarksAndLabelsInRect, rect)
+	})
 }
 
 // Draws the receiver’s markers in aRect, which is expressed in the receiver’s coordinate system.
 func (o *NSRulerView) DrawMarkersInRect(rect corefoundation.CGRect) {
-	o.Ptr().Send(_nSRulerViewSelDrawMarkersInRect, rect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRulerViewSelDrawMarkersInRect, rect)
+	})
 }
 
 func (o *NSRulerView) ScrollView() *NSScrollView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerViewSelScrollView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrollViewFromID(_ret)
+	var _mainthread0 *NSScrollView
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrollView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerViewSelScrollView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrollViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRulerView) SetScrollView(scrollView *NSScrollView) {
-	o.Ptr().Send(_nSRulerViewSelSetScrollView, scrollView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSRulerViewSelSetScrollView, scrollView.Ptr())
+	})
 }
 
 func (o *NSRulerView) Orientation() NSRulerOrientation {
-	_ret := objc.Send[NSRulerOrientation](o.Ptr(), _nSRulerViewSelOrientation)
-	return _ret
+	var _mainthread0 NSRulerOrientation
+	purego.Main(func() {
+		_mainthread0 = func() NSRulerOrientation {
+			_ret := objc.Send[NSRulerOrientation](o.Ptr(), _nSRulerViewSelOrientation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRulerView) SetOrientation(orientation NSRulerOrientation) {
-	o.Ptr().Send(_nSRulerViewSelSetOrientation, orientation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRulerViewSelSetOrientation, orientation)
+	})
 }
 
 func (o *NSRulerView) BaselineLocation() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSRulerViewSelBaselineLocation)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSRulerViewSelBaselineLocation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRulerView) RequiredThickness() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSRulerViewSelRequiredThickness)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSRulerViewSelRequiredThickness)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRulerView) RuleThickness() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSRulerViewSelRuleThickness)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSRulerViewSelRuleThickness)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRulerView) SetRuleThickness(ruleThickness float64) {
-	o.Ptr().Send(_nSRulerViewSelSetRuleThickness, ruleThickness)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRulerViewSelSetRuleThickness, ruleThickness)
+	})
 }
 
 func (o *NSRulerView) ReservedThicknessForMarkers() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSRulerViewSelReservedThicknessForMarkers)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSRulerViewSelReservedThicknessForMarkers)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRulerView) SetReservedThicknessForMarkers(reservedThicknessForMarkers float64) {
-	o.Ptr().Send(_nSRulerViewSelSetReservedThicknessForMarkers, reservedThicknessForMarkers)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRulerViewSelSetReservedThicknessForMarkers, reservedThicknessForMarkers)
+	})
 }
 
 func (o *NSRulerView) ReservedThicknessForAccessoryView() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSRulerViewSelReservedThicknessForAccessoryView)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSRulerViewSelReservedThicknessForAccessoryView)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRulerView) SetReservedThicknessForAccessoryView(reservedThicknessForAccessoryView float64) {
-	o.Ptr().Send(_nSRulerViewSelSetReservedThicknessForAccessoryView, reservedThicknessForAccessoryView)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRulerViewSelSetReservedThicknessForAccessoryView, reservedThicknessForAccessoryView)
+	})
 }
 
 func (o *NSRulerView) MeasurementUnits() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerViewSelMeasurementUnits)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerViewSelMeasurementUnits)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRulerView) SetMeasurementUnits(measurementUnits *foundation.NSString) {
-	o.Ptr().Send(_nSRulerViewSelSetMeasurementUnits, measurementUnits.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSRulerViewSelSetMeasurementUnits, measurementUnits.Ptr())
+	})
 }
 
 func (o *NSRulerView) OriginOffset() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSRulerViewSelOriginOffset)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSRulerViewSelOriginOffset)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRulerView) SetOriginOffset(originOffset float64) {
-	o.Ptr().Send(_nSRulerViewSelSetOriginOffset, originOffset)
+	purego.Main(func() {
+		o.Ptr().Send(_nSRulerViewSelSetOriginOffset, originOffset)
+	})
 }
 
 func (o *NSRulerView) ClientView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerViewSelClientView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerViewSelClientView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRulerView) SetClientView(clientView *NSView) {
-	o.Ptr().Send(_nSRulerViewSelSetClientView, clientView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSRulerViewSelSetClientView, clientView.Ptr())
+	})
 }
 
 func (o *NSRulerView) Markers() *foundation.NSArray[*NSRulerMarker] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerViewSelMarkers)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSRulerMarker](_ret)
+	var _mainthread0 *foundation.NSArray[*NSRulerMarker]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSRulerMarker] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerViewSelMarkers)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSRulerMarker](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRulerView) SetMarkers(markers *foundation.NSArray[*NSRulerMarker]) {
-	o.Ptr().Send(_nSRulerViewSelSetMarkers, markers.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSRulerViewSelSetMarkers, markers.Ptr())
+	})
 }
 
 func (o *NSRulerView) AccessoryView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerViewSelAccessoryView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerViewSelAccessoryView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSRulerView) SetAccessoryView(accessoryView *NSView) {
-	o.Ptr().Send(_nSRulerViewSelSetAccessoryView, accessoryView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSRulerViewSelSetAccessoryView, accessoryView.Ptr())
+	})
 }

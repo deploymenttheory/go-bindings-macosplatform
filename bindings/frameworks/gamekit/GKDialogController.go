@@ -38,32 +38,54 @@ func GKDialogControllerFromID(id objc.ID) *GKDialogController {
 
 // Presents the dashboard in the window.
 func (o *GKDialogController) PresentViewController(viewController *appkit.NSViewController) bool {
-	_ret := objc.Send[bool](o.Ptr(), _gKDialogControllerSelPresentViewController, viewController.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _gKDialogControllerSelPresentViewController, viewController.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Dismisses the dashboard.
 func (o *GKDialogController) Dismiss(sender objc.ID) {
-	o.Ptr().Send(_gKDialogControllerSelDismiss, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_gKDialogControllerSelDismiss, sender)
+	})
 }
 
 func (o *GKDialogController) ParentWindow() *appkit.NSWindow {
-	_ret := objc.Send[objc.ID](o.Ptr(), _gKDialogControllerSelParentWindow)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSWindowFromID(_ret)
+	var _mainthread0 *appkit.NSWindow
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSWindow {
+			_ret := objc.Send[objc.ID](o.Ptr(), _gKDialogControllerSelParentWindow)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSWindowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *GKDialogController) SetParentWindow(parentWindow *appkit.NSWindow) {
-	o.Ptr().Send(_gKDialogControllerSelSetParentWindow, parentWindow.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_gKDialogControllerSelSetParentWindow, parentWindow.Ptr())
+	})
 }
 
 // Retrieves the shared instance of the dialog controller.
 func GKDialogControllerSharedDialogController() *GKDialogController {
-	_ret := objc.Send[objc.ID](objc.ID(_clsGKDialogController), _gKDialogControllerSelSharedDialogController)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return GKDialogControllerFromID(_ret)
+	var _mainthread0 *GKDialogController
+	purego.Main(func() {
+		_mainthread0 = func() *GKDialogController {
+			_ret := objc.Send[objc.ID](objc.ID(_clsGKDialogController), _gKDialogControllerSelSharedDialogController)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return GKDialogControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

@@ -73,236 +73,408 @@ func NSSliderFromID(id objc.ID) *NSSlider {
 }
 
 func (o *NSSlider) SliderType() NSSliderType {
-	_ret := objc.Send[NSSliderType](o.Ptr(), _nSSliderSelSliderType)
-	return _ret
+	var _mainthread0 NSSliderType
+	purego.Main(func() {
+		_mainthread0 = func() NSSliderType {
+			_ret := objc.Send[NSSliderType](o.Ptr(), _nSSliderSelSliderType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSlider) SetSliderType(sliderType NSSliderType) {
-	o.Ptr().Send(_nSSliderSelSetSliderType, sliderType)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderSelSetSliderType, sliderType)
+	})
 }
 
 func (o *NSSlider) MinValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSliderSelMinValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSliderSelMinValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSlider) SetMinValue(minValue float64) {
-	o.Ptr().Send(_nSSliderSelSetMinValue, minValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderSelSetMinValue, minValue)
+	})
 }
 
 func (o *NSSlider) MaxValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSliderSelMaxValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSliderSelMaxValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSlider) SetMaxValue(maxValue float64) {
-	o.Ptr().Send(_nSSliderSelSetMaxValue, maxValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderSelSetMaxValue, maxValue)
+	})
 }
 
 // The value this slider will be filled from. This slider will be filled from its `neutralValue` to its current value. If `neutralValue` has not been explicitly set before, access to `neutralValue` will return `minValue`.
 func (o *NSSlider) NeutralValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSliderSelNeutralValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSliderSelNeutralValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The value this slider will be filled from. This slider will be filled from its `neutralValue` to its current value. If `neutralValue` has not been explicitly set before, access to `neutralValue` will return `minValue`.
 func (o *NSSlider) SetNeutralValue(neutralValue float64) {
-	o.Ptr().Send(_nSSliderSelSetNeutralValue, neutralValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderSelSetNeutralValue, neutralValue)
+	})
 }
 
 func (o *NSSlider) AltIncrementValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSliderSelAltIncrementValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSliderSelAltIncrementValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSlider) SetAltIncrementValue(altIncrementValue float64) {
-	o.Ptr().Send(_nSSliderSelSetAltIncrementValue, altIncrementValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderSelSetAltIncrementValue, altIncrementValue)
+	})
 }
 
 func (o *NSSlider) KnobThickness() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSliderSelKnobThickness)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSliderSelKnobThickness)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSlider) IsVertical() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSliderSelIsVertical)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSliderSelIsVertical)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSlider) SetVertical(vertical bool) {
-	o.Ptr().Send(_nSSliderSelSetVertical, vertical)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderSelSetVertical, vertical)
+	})
 }
 
 func (o *NSSlider) TrackFillColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderSelTrackFillColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderSelTrackFillColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSlider) SetTrackFillColor(trackFillColor *NSColor) {
-	o.Ptr().Send(_nSSliderSelSetTrackFillColor, trackFillColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderSelSetTrackFillColor, trackFillColor.Ptr())
+	})
 }
 
 // The tint prominence of the slider. The automatic behavior for a regular slider tints its track fill, while a slider with tick marks is untinted. Setting the tint prominence will override this default behavior and choose an explicit track fill tint behavior. See “NSTintProminence“ for a list of possible values.
 func (o *NSSlider) TintProminence() NSTintProminence {
-	_ret := objc.Send[NSTintProminence](o.Ptr(), _nSSliderSelTintProminence)
-	return _ret
+	var _mainthread0 NSTintProminence
+	purego.Main(func() {
+		_mainthread0 = func() NSTintProminence {
+			_ret := objc.Send[NSTintProminence](o.Ptr(), _nSSliderSelTintProminence)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The tint prominence of the slider. The automatic behavior for a regular slider tints its track fill, while a slider with tick marks is untinted. Setting the tint prominence will override this default behavior and choose an explicit track fill tint behavior. See “NSTintProminence“ for a list of possible values.
 func (o *NSSlider) SetTintProminence(tintProminence NSTintProminence) {
-	o.Ptr().Send(_nSSliderSelSetTintProminence, tintProminence)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderSelSetTintProminence, tintProminence)
+	})
 }
 
 // Returns the slider’s value represented by the tick mark at the specified index.
 func (o *NSSlider) TickMarkValueAtIndex(index int) float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSliderSelTickMarkValueAtIndex, index)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSliderSelTickMarkValueAtIndex, index)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the bounding rectangle of the tick mark at the given index.
 func (o *NSSlider) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSliderSelRectOfTickMarkAtIndex, index)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSSliderSelRectOfTickMarkAtIndex, index)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the index of the tick mark closest to the location of the slider represented by the given point.
 func (o *NSSlider) IndexOfTickMarkAtPoint(point corefoundation.CGPoint) int {
-	_ret := objc.Send[int](o.Ptr(), _nSSliderSelIndexOfTickMarkAtPoint, point)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSSliderSelIndexOfTickMarkAtPoint, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the value of the tick mark closest to the specified value.
 func (o *NSSlider) ClosestTickMarkValueToValue(value float64) float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSliderSelClosestTickMarkValueToValue, value)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSliderSelClosestTickMarkValueToValue, value)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSlider) NumberOfTickMarks() int {
-	_ret := objc.Send[int](o.Ptr(), _nSSliderSelNumberOfTickMarks)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSSliderSelNumberOfTickMarks)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSlider) SetNumberOfTickMarks(numberOfTickMarks int) {
-	o.Ptr().Send(_nSSliderSelSetNumberOfTickMarks, numberOfTickMarks)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderSelSetNumberOfTickMarks, numberOfTickMarks)
+	})
 }
 
 func (o *NSSlider) TickMarkPosition() NSTickMarkPosition {
-	_ret := objc.Send[NSTickMarkPosition](o.Ptr(), _nSSliderSelTickMarkPosition)
-	return _ret
+	var _mainthread0 NSTickMarkPosition
+	purego.Main(func() {
+		_mainthread0 = func() NSTickMarkPosition {
+			_ret := objc.Send[NSTickMarkPosition](o.Ptr(), _nSSliderSelTickMarkPosition)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSlider) SetTickMarkPosition(tickMarkPosition NSTickMarkPosition) {
-	o.Ptr().Send(_nSSliderSelSetTickMarkPosition, tickMarkPosition)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderSelSetTickMarkPosition, tickMarkPosition)
+	})
 }
 
 func (o *NSSlider) AllowsTickMarkValuesOnly() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSliderSelAllowsTickMarkValuesOnly)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSliderSelAllowsTickMarkValuesOnly)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSSlider) SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) {
-	o.Ptr().Send(_nSSliderSelSetAllowsTickMarkValuesOnly, allowsTickMarkValuesOnly)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderSelSetAllowsTickMarkValuesOnly, allowsTickMarkValuesOnly)
+	})
 }
 
 // Creates a continuous horizontal slider whose values range from 0.0 to 1.0.
 func NSSliderSliderWithTargetAction(target objc.ID, action objc.SEL) *NSSlider {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSSlider), _nSSliderSelSliderWithTargetAction, target, action)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSSliderFromID(_ret)
+	var _mainthread0 *NSSlider
+	purego.Main(func() {
+		_mainthread0 = func() *NSSlider {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSSlider), _nSSliderSelSliderWithTargetAction, target, action)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSSliderFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a continuous horizontal slider that represents values over the specified range.
 func NSSliderSliderWithValueMinValueMaxValueTargetAction(value float64, minValue float64, maxValue float64, target objc.ID, action objc.SEL) *NSSlider {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSSlider), _nSSliderSelSliderWithValueMinValueMaxValueTargetAction, value, minValue, maxValue, target, action)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSSliderFromID(_ret)
+	var _mainthread0 *NSSlider
+	purego.Main(func() {
+		_mainthread0 = func() *NSSlider {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSSlider), _nSSliderSelSliderWithValueMinValueMaxValueTargetAction, value, minValue, maxValue, target, action)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSSliderFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the cell used to draw the slider’s title.
 // Deprecated: -setTitleCell: had no effect since 10.0
 func (o *NSSlider) SetTitleCell(cell *NSCell) {
-	o.Ptr().Send(_nSSliderSelSetTitleCell, cell.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderSelSetTitleCell, cell.Ptr())
+	})
 }
 
 // This method has been deprecated. Returns nil.
 // Deprecated: -titleCell has returned nil since 10.0
 func (o *NSSlider) TitleCell() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderSelTitleCell)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderSelTitleCell)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the color used to draw the slider’s title.
 // Deprecated: -setTitleColor: had no effect since 10.0
 func (o *NSSlider) SetTitleColor(newColor *NSColor) {
-	o.Ptr().Send(_nSSliderSelSetTitleColor, newColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderSelSetTitleColor, newColor.Ptr())
+	})
 }
 
 // This method has been deprecated. Returns nil.
 // Deprecated: -titleColor has returned nil since 10.0
 func (o *NSSlider) TitleColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderSelTitleColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderSelTitleColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the font used to draw the slider’s title.
 // Deprecated: -setTitleFont: had no effect since 10.0
 func (o *NSSlider) SetTitleFont(fontObj *NSFont) {
-	o.Ptr().Send(_nSSliderSelSetTitleFont, fontObj.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderSelSetTitleFont, fontObj.Ptr())
+	})
 }
 
 // This method has been deprecated. Returns nil.
 // Deprecated: -titleFont has returned nil since 10.0
 func (o *NSSlider) TitleFont() *NSFont {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderSelTitleFont)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSFontFromID(_ret)
+	var _mainthread0 *NSFont
+	purego.Main(func() {
+		_mainthread0 = func() *NSFont {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderSelTitleFont)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSFontFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the slider’s title.
 // Deprecated: -title has returned nil since 10.0
 func (o *NSSlider) Title() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderSelTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderSelTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the title the slider displays in the bar behind its knob.
 // Deprecated: -setTitle: had no effect since 10.0
 func (o *NSSlider) SetTitle(string_ *foundation.NSString) {
-	o.Ptr().Send(_nSSliderSelSetTitle, string_.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderSelSetTitle, string_.Ptr())
+	})
 }
 
 // Deprecated: -knobThickness has returned 0 since 10.0
 func (o *NSSlider) SetKnobThickness(thickness float64) {
-	o.Ptr().Send(_nSSliderSelSetKnobThickness, thickness)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderSelSetKnobThickness, thickness)
+	})
 }
 
 // Sets the image the slider displays in the bar behind its knob.
 // Deprecated: -setImage: had no effect since 10.0
 func (o *NSSlider) SetImage(backgroundImage *NSImage) {
-	o.Ptr().Send(_nSSliderSelSetImage, backgroundImage.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSliderSelSetImage, backgroundImage.Ptr())
+	})
 }
 
 // Returns nil.
 // Deprecated: -image has returned nil since 10.0
 func (o *NSSlider) Image() *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderSelImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderSelImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

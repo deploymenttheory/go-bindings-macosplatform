@@ -33,6 +33,12 @@ func WKFindResultFromID(id objc.ID) *WKFindResult {
 }
 
 func (o *WKFindResult) MatchFound() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKFindResultSelMatchFound)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKFindResultSelMatchFound)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

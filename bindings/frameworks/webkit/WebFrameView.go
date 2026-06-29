@@ -41,54 +41,94 @@ func WebFrameViewFromID(id objc.ID) *WebFrameView {
 
 // Returns a print operation object to print this frame.
 func (o *WebFrameView) PrintOperationWithPrintInfo(printInfo *appkit.NSPrintInfo) *appkit.NSPrintOperation {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webFrameViewSelPrintOperationWithPrintInfo, printInfo.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSPrintOperationFromID(_ret)
+	var _mainthread0 *appkit.NSPrintOperation
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSPrintOperation {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webFrameViewSelPrintOperationWithPrintInfo, printInfo.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSPrintOperationFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Prints the receiver.
 func (o *WebFrameView) PrintDocumentView() {
-	o.Ptr().Send(_webFrameViewSelPrintDocumentView)
+	purego.Main(func() {
+		o.Ptr().Send(_webFrameViewSelPrintDocumentView)
+	})
 }
 
 // @property webFrame @abstract The WebFrame associated with this WebFrameView
 func (o *WebFrameView) WebFrame() *WebFrame {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webFrameViewSelWebFrame)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WebFrameFromID(_ret)
+	var _mainthread0 *WebFrame
+	purego.Main(func() {
+		_mainthread0 = func() *WebFrame {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webFrameViewSelWebFrame)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WebFrameFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @property documentView @abstract The WebFrameView's document subview @discussion The subview that renders the WebFrameView's contents
 func (o *WebFrameView) DocumentView() *appkit.NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webFrameViewSelDocumentView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSViewFromID(_ret)
+	var _mainthread0 *appkit.NSView
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _webFrameViewSelDocumentView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @property allowsScrolling @abstract Whether the WebFrameView allows its document to be scrolled
 func (o *WebFrameView) AllowsScrolling() bool {
-	_ret := objc.Send[bool](o.Ptr(), _webFrameViewSelAllowsScrolling)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _webFrameViewSelAllowsScrolling)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WebFrameView) SetAllowsScrolling(allowsScrolling bool) {
-	o.Ptr().Send(_webFrameViewSelSetAllowsScrolling, allowsScrolling)
+	purego.Main(func() {
+		o.Ptr().Send(_webFrameViewSelSetAllowsScrolling, allowsScrolling)
+	})
 }
 
 // @property canPrintHeadersAndFooters @abstract Whether this frame can print headers and footers
 func (o *WebFrameView) CanPrintHeadersAndFooters() bool {
-	_ret := objc.Send[bool](o.Ptr(), _webFrameViewSelCanPrintHeadersAndFooters)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _webFrameViewSelCanPrintHeadersAndFooters)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @property documentViewShouldHandlePrint @abstract Called by the host application before it initializes and runs a print operation. @discussion If NO is returned, the host application will abort its print operation and call -printDocumentView on the WebFrameView.  The document view is then expected to run its own print operation.  If YES is returned, the host application's print operation will continue as normal.
 func (o *WebFrameView) DocumentViewShouldHandlePrint() bool {
-	_ret := objc.Send[bool](o.Ptr(), _webFrameViewSelDocumentViewShouldHandlePrint)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _webFrameViewSelDocumentViewShouldHandlePrint)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

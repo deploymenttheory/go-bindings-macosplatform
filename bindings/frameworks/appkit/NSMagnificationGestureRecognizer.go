@@ -33,10 +33,18 @@ func NSMagnificationGestureRecognizerFromID(id objc.ID) *NSMagnificationGestureR
 }
 
 func (o *NSMagnificationGestureRecognizer) Magnification() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSMagnificationGestureRecognizerSelMagnification)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSMagnificationGestureRecognizerSelMagnification)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSMagnificationGestureRecognizer) SetMagnification(magnification float64) {
-	o.Ptr().Send(_nSMagnificationGestureRecognizerSelSetMagnification, magnification)
+	purego.Main(func() {
+		o.Ptr().Send(_nSMagnificationGestureRecognizerSelSetMagnification, magnification)
+	})
 }

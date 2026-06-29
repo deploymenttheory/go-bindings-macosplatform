@@ -62,144 +62,246 @@ func SCNViewFromID(id objc.ID) *SCNView {
 
 // Initializes and returns a newly allocated SceneKit view object with the specified frame rectangle and options.
 func (o *SCNView) InitWithFrameOptions(frame corefoundation.CGRect, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SCNView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sCNViewSelInitWithFrameOptions, frame, options.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SCNViewFromID(_ret)
+	var _mainthread0 *SCNView
+	purego.Main(func() {
+		_mainthread0 = func() *SCNView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sCNViewSelInitWithFrameOptions, frame, options.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SCNViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Renders the view’s scene into a new image object.
 func (o *SCNView) Snapshot() *appkit.NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sCNViewSelSnapshot)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSImageFromID(_ret)
+	var _mainthread0 *appkit.NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sCNViewSelSnapshot)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Resumes playback of the view’s scene.
 func (o *SCNView) Play(sender objc.ID) {
-	o.Ptr().Send(_sCNViewSelPlay, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_sCNViewSelPlay, sender)
+	})
 }
 
 // Pauses playback of the view’s scene.
 func (o *SCNView) Pause(sender objc.ID) {
-	o.Ptr().Send(_sCNViewSelPause, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_sCNViewSelPause, sender)
+	})
 }
 
 // Stops playback of the view’s scene and resets the scene time to its start time.
 func (o *SCNView) Stop(sender objc.ID) {
-	o.Ptr().Send(_sCNViewSelStop, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_sCNViewSelStop, sender)
+	})
 }
 
 // @property scene @abstract Specifies the scene of the receiver
 func (o *SCNView) Scene() *SCNScene {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sCNViewSelScene)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SCNSceneFromID(_ret)
+	var _mainthread0 *SCNScene
+	purego.Main(func() {
+		_mainthread0 = func() *SCNScene {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sCNViewSelScene)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SCNSceneFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SCNView) SetScene(scene *SCNScene) {
-	o.Ptr().Send(_sCNViewSelSetScene, scene.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sCNViewSelSetScene, scene.Ptr())
+	})
 }
 
 // @property rendersContinuously @abstract When set to YES, the view continously redraw at the display link frame rate. When set to NO the view will only redraw when something change or animates in the receiver's scene. Defaults to NO.
 func (o *SCNView) RendersContinuously() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sCNViewSelRendersContinuously)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sCNViewSelRendersContinuously)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SCNView) SetRendersContinuously(rendersContinuously bool) {
-	o.Ptr().Send(_sCNViewSelSetRendersContinuously, rendersContinuously)
+	purego.Main(func() {
+		o.Ptr().Send(_sCNViewSelSetRendersContinuously, rendersContinuously)
+	})
 }
 
 // @property backgroundColor @abstract Specifies the background color of the receiver. Defaults to opaque white.
 func (o *SCNView) BackgroundColor() *appkit.NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sCNViewSelBackgroundColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSColorFromID(_ret)
+	var _mainthread0 *appkit.NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sCNViewSelBackgroundColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SCNView) SetBackgroundColor(backgroundColor *appkit.NSColor) {
-	o.Ptr().Send(_sCNViewSelSetBackgroundColor, backgroundColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sCNViewSelSetBackgroundColor, backgroundColor.Ptr())
+	})
 }
 
 // @property allowsCameraControl @abstract A Boolean value that determines whether the user can manipulate the point of view used to render the scene. @discussion  When set to YES, the user can manipulate the current point of view with the mouse or the trackpad. The scene graph and existing cameras won't be modified by this action. The default value of this property is NO. Note that the primary purpose of this property is to aid in debugging your application. You may want to implement your own camera controller suitable for your application. The built-in camera controller let you: - drag the mouse to rotate the camera around the scene - drag+cmd to rotate the camera in local space - drag+shift to rotate using sticky axis - use the scroll wheel or alt+drag the mouse to translate the camera on its local X,Y plan - alt+scroll wheel to move the camera forward/backward - rotate gesture (trackpad only) to roll the camera (rotation around the Z axis) - pinch gesture (trackpad only) move the camera forward/backward - alt + pinch gesture (trackpad only) to zoom-in / zoom-out (change the field of view of the camera)
 func (o *SCNView) AllowsCameraControl() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sCNViewSelAllowsCameraControl)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sCNViewSelAllowsCameraControl)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SCNView) SetAllowsCameraControl(allowsCameraControl bool) {
-	o.Ptr().Send(_sCNViewSelSetAllowsCameraControl, allowsCameraControl)
+	purego.Main(func() {
+		o.Ptr().Send(_sCNViewSelSetAllowsCameraControl, allowsCameraControl)
+	})
 }
 
 // @property cameraControlConfiguration @abstract An object describing the current configuration of the event handler which pilot the default camera controller. @discussion This object will be used to configure the event handler when allowCameraControl is set to YES.
 func (o *SCNView) CameraControlConfiguration() SCNCameraControlConfiguration {
-	_ret := objc.Send[SCNCameraControlConfiguration](o.Ptr(), _sCNViewSelCameraControlConfiguration)
-	return _ret
+	var _mainthread0 SCNCameraControlConfiguration
+	purego.Main(func() {
+		_mainthread0 = func() SCNCameraControlConfiguration {
+			_ret := objc.Send[SCNCameraControlConfiguration](o.Ptr(), _sCNViewSelCameraControlConfiguration)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @property defaultCameraController @abstract Returns the default SCNCameraController used to drive the current point of view when allowCameraController is set to YES.
 func (o *SCNView) DefaultCameraController() *SCNCameraController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sCNViewSelDefaultCameraController)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SCNCameraControllerFromID(_ret)
+	var _mainthread0 *SCNCameraController
+	purego.Main(func() {
+		_mainthread0 = func() *SCNCameraController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sCNViewSelDefaultCameraController)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SCNCameraControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @property preferredFramesPerSecond @abstract The rate you want the view to redraw its contents. @discussion When your application sets its preferred frame rate, the view chooses a frame rate as close to that as possible based on the capabilities of the screen the view is displayed on. The actual frame rate chosen is usually a factor of the maximum refresh rate of the screen to provide a consistent frame rate. For example, if the maximum refresh rate of the screen is 60 frames per second, that is also the highest frame rate the view sets as the actual frame rate. However, if you ask for a lower frame rate, it might choose 30, 20, 15 or some other factor to be the actual frame rate. Your application should choose a frame rate that it can consistently maintain. The default value is 0 which means the display link will fire at the native cadence of the display hardware.
 func (o *SCNView) PreferredFramesPerSecond() int {
-	_ret := objc.Send[int](o.Ptr(), _sCNViewSelPreferredFramesPerSecond)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _sCNViewSelPreferredFramesPerSecond)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SCNView) SetPreferredFramesPerSecond(preferredFramesPerSecond int) {
-	o.Ptr().Send(_sCNViewSelSetPreferredFramesPerSecond, preferredFramesPerSecond)
+	purego.Main(func() {
+		o.Ptr().Send(_sCNViewSelSetPreferredFramesPerSecond, preferredFramesPerSecond)
+	})
 }
 
 // @property drawableResizesAsynchronously @abstract Specifies whether the drawable is resized asynchonously during a live resize operation. Defaults to YES. @discussion If set to YES, the actual viewport size during a live resize can be retrieved using currentViewport (see SCNSceneRenderer.h)
 func (o *SCNView) DrawableResizesAsynchronously() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sCNViewSelDrawableResizesAsynchronously)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sCNViewSelDrawableResizesAsynchronously)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SCNView) SetDrawableResizesAsynchronously(drawableResizesAsynchronously bool) {
-	o.Ptr().Send(_sCNViewSelSetDrawableResizesAsynchronously, drawableResizesAsynchronously)
+	purego.Main(func() {
+		o.Ptr().Send(_sCNViewSelSetDrawableResizesAsynchronously, drawableResizesAsynchronously)
+	})
 }
 
 // @property openGLContext @abstract Specifies the OpenGL context associated with the receiver. @discussion This property returns nil and has no effect if the current API is Metal.
 func (o *SCNView) OpenGLContext() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sCNViewSelOpenGLContext)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sCNViewSelOpenGLContext)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SCNView) SetOpenGLContext(openGLContext unsafe.Pointer) {
-	o.Ptr().Send(_sCNViewSelSetOpenGLContext, openGLContext)
+	purego.Main(func() {
+		o.Ptr().Send(_sCNViewSelSetOpenGLContext, openGLContext)
+	})
 }
 
 // @property antialiasingMode @abstract Defaults to SCNAntialiasingModeMultisampling4X on macOS and SCNAntialiasingModeNone on iOS.
 func (o *SCNView) AntialiasingMode() SCNAntialiasingMode {
-	_ret := objc.Send[SCNAntialiasingMode](o.Ptr(), _sCNViewSelAntialiasingMode)
-	return _ret
+	var _mainthread0 SCNAntialiasingMode
+	purego.Main(func() {
+		_mainthread0 = func() SCNAntialiasingMode {
+			_ret := objc.Send[SCNAntialiasingMode](o.Ptr(), _sCNViewSelAntialiasingMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SCNView) SetAntialiasingMode(antialiasingMode SCNAntialiasingMode) {
-	o.Ptr().Send(_sCNViewSelSetAntialiasingMode, antialiasingMode)
+	purego.Main(func() {
+		o.Ptr().Send(_sCNViewSelSetAntialiasingMode, antialiasingMode)
+	})
 }
 
 // @property pixelFormat @abstract Specifies the pixel format of the receiver. @discussion This property returns nil and has no effect if the current API is Metal.
 func (o *SCNView) PixelFormat() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sCNViewSelPixelFormat)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sCNViewSelPixelFormat)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SCNView) SetPixelFormat(pixelFormat unsafe.Pointer) {
-	o.Ptr().Send(_sCNViewSelSetPixelFormat, pixelFormat)
+	purego.Main(func() {
+		o.Ptr().Send(_sCNViewSelSetPixelFormat, pixelFormat)
+	})
 }

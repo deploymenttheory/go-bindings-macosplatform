@@ -136,469 +136,853 @@ func PDFViewFromID(id objc.ID) *PDFView {
 }
 
 func (o *PDFView) GoToFirstPage(sender objc.ID) {
-	o.Ptr().Send(_pDFViewSelGoToFirstPage, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelGoToFirstPage, sender)
+	})
 }
 
 func (o *PDFView) GoToLastPage(sender objc.ID) {
-	o.Ptr().Send(_pDFViewSelGoToLastPage, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelGoToLastPage, sender)
+	})
 }
 
 func (o *PDFView) GoToNextPage(sender objc.ID) {
-	o.Ptr().Send(_pDFViewSelGoToNextPage, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelGoToNextPage, sender)
+	})
 }
 
 func (o *PDFView) GoToPreviousPage(sender objc.ID) {
-	o.Ptr().Send(_pDFViewSelGoToPreviousPage, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelGoToPreviousPage, sender)
+	})
 }
 
 func (o *PDFView) GoBack(sender objc.ID) {
-	o.Ptr().Send(_pDFViewSelGoBack, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelGoBack, sender)
+	})
 }
 
 func (o *PDFView) GoForward(sender objc.ID) {
-	o.Ptr().Send(_pDFViewSelGoForward, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelGoForward, sender)
+	})
 }
 
 func (o *PDFView) GoToPage(page *PDFPage) {
-	o.Ptr().Send(_pDFViewSelGoToPage, page.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelGoToPage, page.Ptr())
+	})
 }
 
 func (o *PDFView) GoToDestination(destination *PDFDestination) {
-	o.Ptr().Send(_pDFViewSelGoToDestination, destination.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelGoToDestination, destination.Ptr())
+	})
 }
 
 func (o *PDFView) GoToSelection(selection *PDFSelection) {
-	o.Ptr().Send(_pDFViewSelGoToSelection, selection.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelGoToSelection, selection.Ptr())
+	})
 }
 
 func (o *PDFView) GoToRectOnPage(rect corefoundation.CGRect, page *PDFPage) {
-	o.Ptr().Send(_pDFViewSelGoToRectOnPage, rect, page.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelGoToRectOnPage, rect, page.Ptr())
+	})
 }
 
 func (o *PDFView) ZoomIn(sender objc.ID) {
-	o.Ptr().Send(_pDFViewSelZoomIn, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelZoomIn, sender)
+	})
 }
 
 func (o *PDFView) ZoomOut(sender objc.ID) {
-	o.Ptr().Send(_pDFViewSelZoomOut, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelZoomOut, sender)
+	})
 }
 
 func (o *PDFView) AreaOfInterestForMouse(event *appkit.NSEvent) PDFAreaOfInterest {
-	_ret := objc.Send[PDFAreaOfInterest](o.Ptr(), _pDFViewSelAreaOfInterestForMouse, event.Ptr())
-	return _ret
+	var _mainthread0 PDFAreaOfInterest
+	purego.Main(func() {
+		_mainthread0 = func() PDFAreaOfInterest {
+			_ret := objc.Send[PDFAreaOfInterest](o.Ptr(), _pDFViewSelAreaOfInterestForMouse, event.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) AreaOfInterestForPoint(cursorLocation corefoundation.CGPoint) PDFAreaOfInterest {
-	_ret := objc.Send[PDFAreaOfInterest](o.Ptr(), _pDFViewSelAreaOfInterestForPoint, cursorLocation)
-	return _ret
+	var _mainthread0 PDFAreaOfInterest
+	purego.Main(func() {
+		_mainthread0 = func() PDFAreaOfInterest {
+			_ret := objc.Send[PDFAreaOfInterest](o.Ptr(), _pDFViewSelAreaOfInterestForPoint, cursorLocation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetCursorForAreaOfInterest(area PDFAreaOfInterest) {
-	o.Ptr().Send(_pDFViewSelSetCursorForAreaOfInterest, area)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetCursorForAreaOfInterest, area)
+	})
 }
 
 func (o *PDFView) PerformAction(action *PDFAction) {
-	o.Ptr().Send(_pDFViewSelPerformAction, action.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelPerformAction, action.Ptr())
+	})
 }
 
 func (o *PDFView) SetCurrentSelectionAnimate(selection *PDFSelection, animate bool) {
-	o.Ptr().Send(_pDFViewSelSetCurrentSelectionAnimate, selection.Ptr(), animate)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetCurrentSelectionAnimate, selection.Ptr(), animate)
+	})
 }
 
 func (o *PDFView) ClearSelection() {
-	o.Ptr().Send(_pDFViewSelClearSelection)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelClearSelection)
+	})
 }
 
 func (o *PDFView) SelectAll(sender objc.ID) {
-	o.Ptr().Send(_pDFViewSelSelectAll, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSelectAll, sender)
+	})
 }
 
 func (o *PDFView) ScrollSelectionToVisible(sender objc.ID) {
-	o.Ptr().Send(_pDFViewSelScrollSelectionToVisible, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelScrollSelectionToVisible, sender)
+	})
 }
 
 func (o *PDFView) DrawPageToContext(page *PDFPage, context_ unsafe.Pointer) {
-	o.Ptr().Send(_pDFViewSelDrawPageToContext, page.Ptr(), context_)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelDrawPageToContext, page.Ptr(), context_)
+	})
 }
 
 func (o *PDFView) DrawPagePostToContext(page *PDFPage, context_ unsafe.Pointer) {
-	o.Ptr().Send(_pDFViewSelDrawPagePostToContext, page.Ptr(), context_)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelDrawPagePostToContext, page.Ptr(), context_)
+	})
 }
 
 func (o *PDFView) Copy(sender objc.ID) {
-	o.Ptr().Send(_pDFViewSelCopy, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelCopy, sender)
+	})
 }
 
 func (o *PDFView) PrintWithInfoAutoRotate(printInfo *appkit.NSPrintInfo, doRotate bool) {
-	o.Ptr().Send(_pDFViewSelPrintWithInfoAutoRotate, printInfo.Ptr(), doRotate)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelPrintWithInfoAutoRotate, printInfo.Ptr(), doRotate)
+	})
 }
 
 func (o *PDFView) PrintWithInfoAutoRotatePageScaling(printInfo *appkit.NSPrintInfo, doRotate bool, scale PDFPrintScalingMode) {
-	o.Ptr().Send(_pDFViewSelPrintWithInfoAutoRotatePageScaling, printInfo.Ptr(), doRotate, scale)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelPrintWithInfoAutoRotatePageScaling, printInfo.Ptr(), doRotate, scale)
+	})
 }
 
 func (o *PDFView) PageForPointNearest(point corefoundation.CGPoint, nearest bool) *PDFPage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pDFViewSelPageForPointNearest, point, nearest)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return PDFPageFromID(_ret)
+	var _mainthread0 *PDFPage
+	purego.Main(func() {
+		_mainthread0 = func() *PDFPage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _pDFViewSelPageForPointNearest, point, nearest)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return PDFPageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) ConvertPointToPage(point corefoundation.CGPoint, page *PDFPage) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _pDFViewSelConvertPointToPage, point, page.Ptr())
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _pDFViewSelConvertPointToPage, point, page.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) ConvertRectToPage(rect corefoundation.CGRect, page *PDFPage) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _pDFViewSelConvertRectToPage, rect, page.Ptr())
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _pDFViewSelConvertRectToPage, rect, page.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) ConvertPointFromPage(point corefoundation.CGPoint, page *PDFPage) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _pDFViewSelConvertPointFromPage, point, page.Ptr())
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _pDFViewSelConvertPointFromPage, point, page.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) ConvertRectFromPage(rect corefoundation.CGRect, page *PDFPage) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _pDFViewSelConvertRectFromPage, rect, page.Ptr())
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _pDFViewSelConvertRectFromPage, rect, page.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) LayoutDocumentView() {
-	o.Ptr().Send(_pDFViewSelLayoutDocumentView)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelLayoutDocumentView)
+	})
 }
 
 func (o *PDFView) AnnotationsChangedOnPage(page *PDFPage) {
-	o.Ptr().Send(_pDFViewSelAnnotationsChangedOnPage, page.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelAnnotationsChangedOnPage, page.Ptr())
+	})
 }
 
 func (o *PDFView) RowSizeForPage(page *PDFPage) corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _pDFViewSelRowSizeForPage, page.Ptr())
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _pDFViewSelRowSizeForPage, page.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) Document() *PDFDocument {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pDFViewSelDocument)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return PDFDocumentFromID(_ret)
+	var _mainthread0 *PDFDocument
+	purego.Main(func() {
+		_mainthread0 = func() *PDFDocument {
+			_ret := objc.Send[objc.ID](o.Ptr(), _pDFViewSelDocument)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return PDFDocumentFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetDocument(document *PDFDocument) {
-	o.Ptr().Send(_pDFViewSelSetDocument, document.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetDocument, document.Ptr())
+	})
 }
 
 func (o *PDFView) CanGoToFirstPage() bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFViewSelCanGoToFirstPage)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _pDFViewSelCanGoToFirstPage)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) CanGoToLastPage() bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFViewSelCanGoToLastPage)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _pDFViewSelCanGoToLastPage)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) CanGoToNextPage() bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFViewSelCanGoToNextPage)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _pDFViewSelCanGoToNextPage)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) CanGoToPreviousPage() bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFViewSelCanGoToPreviousPage)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _pDFViewSelCanGoToPreviousPage)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) CanGoBack() bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFViewSelCanGoBack)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _pDFViewSelCanGoBack)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) CanGoForward() bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFViewSelCanGoForward)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _pDFViewSelCanGoForward)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) CurrentPage() *PDFPage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pDFViewSelCurrentPage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return PDFPageFromID(_ret)
+	var _mainthread0 *PDFPage
+	purego.Main(func() {
+		_mainthread0 = func() *PDFPage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _pDFViewSelCurrentPage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return PDFPageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) CurrentDestination() *PDFDestination {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pDFViewSelCurrentDestination)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return PDFDestinationFromID(_ret)
+	var _mainthread0 *PDFDestination
+	purego.Main(func() {
+		_mainthread0 = func() *PDFDestination {
+			_ret := objc.Send[objc.ID](o.Ptr(), _pDFViewSelCurrentDestination)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return PDFDestinationFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) DisplayMode() PDFDisplayMode {
-	_ret := objc.Send[PDFDisplayMode](o.Ptr(), _pDFViewSelDisplayMode)
-	return _ret
+	var _mainthread0 PDFDisplayMode
+	purego.Main(func() {
+		_mainthread0 = func() PDFDisplayMode {
+			_ret := objc.Send[PDFDisplayMode](o.Ptr(), _pDFViewSelDisplayMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetDisplayMode(displayMode PDFDisplayMode) {
-	o.Ptr().Send(_pDFViewSelSetDisplayMode, displayMode)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetDisplayMode, displayMode)
+	})
 }
 
 func (o *PDFView) DisplayDirection() PDFDisplayDirection {
-	_ret := objc.Send[PDFDisplayDirection](o.Ptr(), _pDFViewSelDisplayDirection)
-	return _ret
+	var _mainthread0 PDFDisplayDirection
+	purego.Main(func() {
+		_mainthread0 = func() PDFDisplayDirection {
+			_ret := objc.Send[PDFDisplayDirection](o.Ptr(), _pDFViewSelDisplayDirection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetDisplayDirection(displayDirection PDFDisplayDirection) {
-	o.Ptr().Send(_pDFViewSelSetDisplayDirection, displayDirection)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetDisplayDirection, displayDirection)
+	})
 }
 
 func (o *PDFView) DisplaysPageBreaks() bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFViewSelDisplaysPageBreaks)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _pDFViewSelDisplaysPageBreaks)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetDisplaysPageBreaks(displaysPageBreaks bool) {
-	o.Ptr().Send(_pDFViewSelSetDisplaysPageBreaks, displaysPageBreaks)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetDisplaysPageBreaks, displaysPageBreaks)
+	})
 }
 
 func (o *PDFView) PageBreakMargins() foundation.NSEdgeInsets {
-	_ret := objc.Send[foundation.NSEdgeInsets](o.Ptr(), _pDFViewSelPageBreakMargins)
-	return _ret
+	var _mainthread0 foundation.NSEdgeInsets
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSEdgeInsets {
+			_ret := objc.Send[foundation.NSEdgeInsets](o.Ptr(), _pDFViewSelPageBreakMargins)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetPageBreakMargins(pageBreakMargins foundation.NSEdgeInsets) {
-	o.Ptr().Send(_pDFViewSelSetPageBreakMargins, pageBreakMargins)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetPageBreakMargins, pageBreakMargins)
+	})
 }
 
 func (o *PDFView) DisplayBox() PDFDisplayBox {
-	_ret := objc.Send[PDFDisplayBox](o.Ptr(), _pDFViewSelDisplayBox)
-	return _ret
+	var _mainthread0 PDFDisplayBox
+	purego.Main(func() {
+		_mainthread0 = func() PDFDisplayBox {
+			_ret := objc.Send[PDFDisplayBox](o.Ptr(), _pDFViewSelDisplayBox)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetDisplayBox(displayBox PDFDisplayBox) {
-	o.Ptr().Send(_pDFViewSelSetDisplayBox, displayBox)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetDisplayBox, displayBox)
+	})
 }
 
 func (o *PDFView) DisplaysAsBook() bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFViewSelDisplaysAsBook)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _pDFViewSelDisplaysAsBook)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetDisplaysAsBook(displaysAsBook bool) {
-	o.Ptr().Send(_pDFViewSelSetDisplaysAsBook, displaysAsBook)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetDisplaysAsBook, displaysAsBook)
+	})
 }
 
 func (o *PDFView) DisplaysRTL() bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFViewSelDisplaysRTL)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _pDFViewSelDisplaysRTL)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetDisplaysRTL(displaysRTL bool) {
-	o.Ptr().Send(_pDFViewSelSetDisplaysRTL, displaysRTL)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetDisplaysRTL, displaysRTL)
+	})
 }
 
 func (o *PDFView) BackgroundColor() *appkit.NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pDFViewSelBackgroundColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSColorFromID(_ret)
+	var _mainthread0 *appkit.NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _pDFViewSelBackgroundColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetBackgroundColor(backgroundColor *appkit.NSColor) {
-	o.Ptr().Send(_pDFViewSelSetBackgroundColor, backgroundColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetBackgroundColor, backgroundColor.Ptr())
+	})
 }
 
 func (o *PDFView) InterpolationQuality() PDFInterpolationQuality {
-	_ret := objc.Send[PDFInterpolationQuality](o.Ptr(), _pDFViewSelInterpolationQuality)
-	return _ret
+	var _mainthread0 PDFInterpolationQuality
+	purego.Main(func() {
+		_mainthread0 = func() PDFInterpolationQuality {
+			_ret := objc.Send[PDFInterpolationQuality](o.Ptr(), _pDFViewSelInterpolationQuality)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetInterpolationQuality(interpolationQuality PDFInterpolationQuality) {
-	o.Ptr().Send(_pDFViewSelSetInterpolationQuality, interpolationQuality)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetInterpolationQuality, interpolationQuality)
+	})
 }
 
 func (o *PDFView) PageShadowsEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFViewSelPageShadowsEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _pDFViewSelPageShadowsEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) EnablePageShadows(pageShadowsEnabled bool) {
-	o.Ptr().Send(_pDFViewSelEnablePageShadows, pageShadowsEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelEnablePageShadows, pageShadowsEnabled)
+	})
 }
 
 func (o *PDFView) Delegate() PDFViewDelegate {
-	_ret := objc.Send[PDFViewDelegate](o.Ptr(), _pDFViewSelDelegate)
-	return _ret
+	var _mainthread0 PDFViewDelegate
+	purego.Main(func() {
+		_mainthread0 = func() PDFViewDelegate {
+			_ret := objc.Send[PDFViewDelegate](o.Ptr(), _pDFViewSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetDelegate(delegate PDFViewDelegate) {
-	o.Ptr().Send(_pDFViewSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetDelegate, delegate)
+	})
 }
 
 func (o *PDFView) PageOverlayViewProvider() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _pDFViewSelPageOverlayViewProvider)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _pDFViewSelPageOverlayViewProvider)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetPageOverlayViewProvider(pageOverlayViewProvider unsafe.Pointer) {
-	o.Ptr().Send(_pDFViewSelSetPageOverlayViewProvider, pageOverlayViewProvider)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetPageOverlayViewProvider, pageOverlayViewProvider)
+	})
 }
 
 func (o *PDFView) ScaleFactor() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _pDFViewSelScaleFactor)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _pDFViewSelScaleFactor)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetScaleFactor(scaleFactor float64) {
-	o.Ptr().Send(_pDFViewSelSetScaleFactor, scaleFactor)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetScaleFactor, scaleFactor)
+	})
 }
 
 func (o *PDFView) MinScaleFactor() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _pDFViewSelMinScaleFactor)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _pDFViewSelMinScaleFactor)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetMinScaleFactor(minScaleFactor float64) {
-	o.Ptr().Send(_pDFViewSelSetMinScaleFactor, minScaleFactor)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetMinScaleFactor, minScaleFactor)
+	})
 }
 
 func (o *PDFView) MaxScaleFactor() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _pDFViewSelMaxScaleFactor)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _pDFViewSelMaxScaleFactor)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetMaxScaleFactor(maxScaleFactor float64) {
-	o.Ptr().Send(_pDFViewSelSetMaxScaleFactor, maxScaleFactor)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetMaxScaleFactor, maxScaleFactor)
+	})
 }
 
 func (o *PDFView) AutoScales() bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFViewSelAutoScales)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _pDFViewSelAutoScales)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetAutoScales(autoScales bool) {
-	o.Ptr().Send(_pDFViewSelSetAutoScales, autoScales)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetAutoScales, autoScales)
+	})
 }
 
 func (o *PDFView) ScaleFactorForSizeToFit() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _pDFViewSelScaleFactorForSizeToFit)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _pDFViewSelScaleFactorForSizeToFit)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) CanZoomIn() bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFViewSelCanZoomIn)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _pDFViewSelCanZoomIn)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) CanZoomOut() bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFViewSelCanZoomOut)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _pDFViewSelCanZoomOut)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) CurrentSelection() *PDFSelection {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pDFViewSelCurrentSelection)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return PDFSelectionFromID(_ret)
+	var _mainthread0 *PDFSelection
+	purego.Main(func() {
+		_mainthread0 = func() *PDFSelection {
+			_ret := objc.Send[objc.ID](o.Ptr(), _pDFViewSelCurrentSelection)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return PDFSelectionFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetCurrentSelection(currentSelection *PDFSelection) {
-	o.Ptr().Send(_pDFViewSelSetCurrentSelection, currentSelection.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetCurrentSelection, currentSelection.Ptr())
+	})
 }
 
 func (o *PDFView) HighlightedSelections() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _pDFViewSelHighlightedSelections)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _pDFViewSelHighlightedSelections)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetHighlightedSelections(highlightedSelections unsafe.Pointer) {
-	o.Ptr().Send(_pDFViewSelSetHighlightedSelections, highlightedSelections)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetHighlightedSelections, highlightedSelections)
+	})
 }
 
 func (o *PDFView) DocumentView() *appkit.NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pDFViewSelDocumentView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSViewFromID(_ret)
+	var _mainthread0 *appkit.NSView
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _pDFViewSelDocumentView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) AcceptsDraggedFiles() bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFViewSelAcceptsDraggedFiles)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _pDFViewSelAcceptsDraggedFiles)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetAcceptsDraggedFiles(acceptsDraggedFiles bool) {
-	o.Ptr().Send(_pDFViewSelSetAcceptsDraggedFiles, acceptsDraggedFiles)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetAcceptsDraggedFiles, acceptsDraggedFiles)
+	})
 }
 
 func (o *PDFView) VisiblePages() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _pDFViewSelVisiblePages)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _pDFViewSelVisiblePages)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) EnableDataDetectors() bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFViewSelEnableDataDetectors)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _pDFViewSelEnableDataDetectors)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetEnableDataDetectors(enableDataDetectors bool) {
-	o.Ptr().Send(_pDFViewSelSetEnableDataDetectors, enableDataDetectors)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetEnableDataDetectors, enableDataDetectors)
+	})
 }
 
 func (o *PDFView) IsInMarkupMode() bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFViewSelIsInMarkupMode)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _pDFViewSelIsInMarkupMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetInMarkupMode(inMarkupMode bool) {
-	o.Ptr().Send(_pDFViewSelSetInMarkupMode, inMarkupMode)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetInMarkupMode, inMarkupMode)
+	})
 }
 
 // Unlocks with the password from the specified sender.
 func (o *PDFView) TakePasswordFrom(sender objc.ID) {
-	o.Ptr().Send(_pDFViewSelTakePasswordFrom, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelTakePasswordFrom, sender)
+	})
 }
 
 func (o *PDFView) DrawPage(page *PDFPage) {
-	o.Ptr().Send(_pDFViewSelDrawPage, page.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelDrawPage, page.Ptr())
+	})
 }
 
 func (o *PDFView) DrawPagePost(page *PDFPage) {
-	o.Ptr().Send(_pDFViewSelDrawPagePost, page.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelDrawPagePost, page.Ptr())
+	})
 }
 
 func (o *PDFView) TakeBackgroundColorFrom(sender objc.ID) {
-	o.Ptr().Send(_pDFViewSelTakeBackgroundColorFrom, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelTakeBackgroundColorFrom, sender)
+	})
 }
 
 func (o *PDFView) ShouldAntiAlias() bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFViewSelShouldAntiAlias)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _pDFViewSelShouldAntiAlias)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetShouldAntiAlias(shouldAntiAlias bool) {
-	o.Ptr().Send(_pDFViewSelSetShouldAntiAlias, shouldAntiAlias)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetShouldAntiAlias, shouldAntiAlias)
+	})
 }
 
 func (o *PDFView) GreekingThreshold() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _pDFViewSelGreekingThreshold)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _pDFViewSelGreekingThreshold)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetGreekingThreshold(greekingThreshold float64) {
-	o.Ptr().Send(_pDFViewSelSetGreekingThreshold, greekingThreshold)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetGreekingThreshold, greekingThreshold)
+	})
 }
 
 func (o *PDFView) AllowsDragging() bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFViewSelAllowsDragging)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _pDFViewSelAllowsDragging)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *PDFView) SetAllowsDragging(allowsDragging bool) {
-	o.Ptr().Send(_pDFViewSelSetAllowsDragging, allowsDragging)
+	purego.Main(func() {
+		o.Ptr().Send(_pDFViewSelSetAllowsDragging, allowsDragging)
+	})
 }

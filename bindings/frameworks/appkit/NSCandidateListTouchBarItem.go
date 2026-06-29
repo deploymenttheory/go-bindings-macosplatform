@@ -50,84 +50,150 @@ func NSCandidateListTouchBarItemFromID[CandidateType purego.AnyObject](id objc.I
 
 // Updates the candidate list visibility configuration based on the client’s insertion point state.
 func (o *NSCandidateListTouchBarItem[CandidateType]) UpdateWithInsertionPointVisibility(isVisible bool) {
-	o.Ptr().Send(_nSCandidateListTouchBarItemSelUpdateWithInsertionPointVisibility, isVisible)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCandidateListTouchBarItemSelUpdateWithInsertionPointVisibility, isVisible)
+	})
 }
 
 // Sets an array of candidate objects to be displayed in the candidate list bar item.
 func (o *NSCandidateListTouchBarItem[CandidateType]) SetCandidatesForSelectedRangeInString(candidates *foundation.NSArray[CandidateType], selectedRange foundation.NSRange, originalString *foundation.NSString) {
-	o.Ptr().Send(_nSCandidateListTouchBarItemSelSetCandidatesForSelectedRangeInString, candidates.Ptr(), selectedRange, originalString.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCandidateListTouchBarItemSelSetCandidatesForSelectedRangeInString, candidates.Ptr(), selectedRange, originalString.Ptr())
+	})
 }
 
 func (o *NSCandidateListTouchBarItem[CandidateType]) Client() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCandidateListTouchBarItemSelClient)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCandidateListTouchBarItemSelClient)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCandidateListTouchBarItem[CandidateType]) SetClient(client *NSView) {
-	o.Ptr().Send(_nSCandidateListTouchBarItemSelSetClient, client.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCandidateListTouchBarItemSelSetClient, client.Ptr())
+	})
 }
 
 func (o *NSCandidateListTouchBarItem[CandidateType]) Delegate() NSCandidateListTouchBarItemDelegate {
-	_ret := objc.Send[NSCandidateListTouchBarItemDelegate](o.Ptr(), _nSCandidateListTouchBarItemSelDelegate)
-	return _ret
+	var _mainthread0 NSCandidateListTouchBarItemDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSCandidateListTouchBarItemDelegate {
+			_ret := objc.Send[NSCandidateListTouchBarItemDelegate](o.Ptr(), _nSCandidateListTouchBarItemSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCandidateListTouchBarItem[CandidateType]) SetDelegate(delegate NSCandidateListTouchBarItemDelegate) {
-	o.Ptr().Send(_nSCandidateListTouchBarItemSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCandidateListTouchBarItemSelSetDelegate, delegate)
+	})
 }
 
 func (o *NSCandidateListTouchBarItem[CandidateType]) IsCollapsed() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCandidateListTouchBarItemSelIsCollapsed)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCandidateListTouchBarItemSelIsCollapsed)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCandidateListTouchBarItem[CandidateType]) SetCollapsed(collapsed bool) {
-	o.Ptr().Send(_nSCandidateListTouchBarItemSelSetCollapsed, collapsed)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCandidateListTouchBarItemSelSetCollapsed, collapsed)
+	})
 }
 
 func (o *NSCandidateListTouchBarItem[CandidateType]) AllowsCollapsing() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCandidateListTouchBarItemSelAllowsCollapsing)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCandidateListTouchBarItemSelAllowsCollapsing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCandidateListTouchBarItem[CandidateType]) SetAllowsCollapsing(allowsCollapsing bool) {
-	o.Ptr().Send(_nSCandidateListTouchBarItemSelSetAllowsCollapsing, allowsCollapsing)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCandidateListTouchBarItemSelSetAllowsCollapsing, allowsCollapsing)
+	})
 }
 
 func (o *NSCandidateListTouchBarItem[CandidateType]) IsCandidateListVisible() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCandidateListTouchBarItemSelIsCandidateListVisible)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCandidateListTouchBarItemSelIsCandidateListVisible)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCandidateListTouchBarItem[CandidateType]) AllowsTextInputContextCandidates() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCandidateListTouchBarItemSelAllowsTextInputContextCandidates)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCandidateListTouchBarItemSelAllowsTextInputContextCandidates)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCandidateListTouchBarItem[CandidateType]) SetAllowsTextInputContextCandidates(allowsTextInputContextCandidates bool) {
-	o.Ptr().Send(_nSCandidateListTouchBarItemSelSetAllowsTextInputContextCandidates, allowsTextInputContextCandidates)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCandidateListTouchBarItemSelSetAllowsTextInputContextCandidates, allowsTextInputContextCandidates)
+	})
 }
 
 func (o *NSCandidateListTouchBarItem[CandidateType]) AttributedStringForCandidate() objc.Block {
-	_ret := objc.Send[objc.Block](o.Ptr(), _nSCandidateListTouchBarItemSelAttributedStringForCandidate)
-	return _ret
+	var _mainthread0 objc.Block
+	purego.Main(func() {
+		_mainthread0 = func() objc.Block {
+			_ret := objc.Send[objc.Block](o.Ptr(), _nSCandidateListTouchBarItemSelAttributedStringForCandidate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCandidateListTouchBarItem[CandidateType]) SetAttributedStringForCandidate(attributedStringForCandidate objc.Block) {
-	o.Ptr().Send(_nSCandidateListTouchBarItemSelSetAttributedStringForCandidate, attributedStringForCandidate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCandidateListTouchBarItemSelSetAttributedStringForCandidate, attributedStringForCandidate)
+	})
 }
 
 func (o *NSCandidateListTouchBarItem[CandidateType]) Candidates() *foundation.NSArray[CandidateType] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCandidateListTouchBarItemSelCandidates)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[CandidateType](_ret)
+	var _mainthread0 *foundation.NSArray[CandidateType]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[CandidateType] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCandidateListTouchBarItemSelCandidates)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[CandidateType](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCandidateListTouchBarItem[CandidateType]) SetCustomizationLabel(customizationLabel *foundation.NSString) {
-	o.Ptr().Send(_nSCandidateListTouchBarItemSelSetCustomizationLabel, customizationLabel.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCandidateListTouchBarItemSelSetCustomizationLabel, customizationLabel.Ptr())
+	})
 }

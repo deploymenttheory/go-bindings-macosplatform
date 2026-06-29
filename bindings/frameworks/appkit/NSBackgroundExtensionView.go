@@ -36,25 +36,41 @@ func NSBackgroundExtensionViewFromID(id objc.ID) *NSBackgroundExtensionView {
 
 // The content view to extend to fill the `NSBackgroundExtensionView`. The content view will be added as a subview of the extension view and placed within the safe area by default. See `automaticallyPlacesContentView` to customize the layout.
 func (o *NSBackgroundExtensionView) ContentView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBackgroundExtensionViewSelContentView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBackgroundExtensionViewSelContentView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The content view to extend to fill the `NSBackgroundExtensionView`. The content view will be added as a subview of the extension view and placed within the safe area by default. See `automaticallyPlacesContentView` to customize the layout.
 func (o *NSBackgroundExtensionView) SetContentView(contentView *NSView) {
-	o.Ptr().Send(_nSBackgroundExtensionViewSelSetContentView, contentView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSBackgroundExtensionViewSelSetContentView, contentView.Ptr())
+	})
 }
 
 // Controls the automatic safe area placement of the `contentView` within the container. When `NO`, the frame of the content view must be explicitly set or constraints added. The extension effect will be used to fill the container view around the content. Defaults to `YES`.
 func (o *NSBackgroundExtensionView) AutomaticallyPlacesContentView() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSBackgroundExtensionViewSelAutomaticallyPlacesContentView)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSBackgroundExtensionViewSelAutomaticallyPlacesContentView)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Controls the automatic safe area placement of the `contentView` within the container. When `NO`, the frame of the content view must be explicitly set or constraints added. The extension effect will be used to fill the container view around the content. Defaults to `YES`.
 func (o *NSBackgroundExtensionView) SetAutomaticallyPlacesContentView(automaticallyPlacesContentView bool) {
-	o.Ptr().Send(_nSBackgroundExtensionViewSelSetAutomaticallyPlacesContentView, automaticallyPlacesContentView)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBackgroundExtensionViewSelSetAutomaticallyPlacesContentView, automaticallyPlacesContentView)
+	})
 }

@@ -61,151 +61,263 @@ func NSScrollerFromID(id objc.ID) *NSScroller {
 
 // Returns the width for scrollers of the receiving class for a given control size and scroller style.
 func NSScrollerScrollerWidthForControlSizeScrollerStyle(controlSize NSControlSize, scrollerStyle NSScrollerStyle) float64 {
-	_ret := objc.Send[float64](objc.ID(_clsNSScroller), _nSScrollerSelScrollerWidthForControlSizeScrollerStyle, controlSize, scrollerStyle)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](objc.ID(_clsNSScroller), _nSScrollerSelScrollerWidthForControlSizeScrollerStyle, controlSize, scrollerStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the rectangle occupied by aPart, which for this method is interpreted literally rather than as an indicator of scrolling direction.
 func (o *NSScroller) RectForPart(partCode NSScrollerPart) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSScrollerSelRectForPart, partCode)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSScrollerSelRectForPart, partCode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Checks to see if there is enough room in the receiver to display the knob and buttons.
 func (o *NSScroller) CheckSpaceForParts() {
-	o.Ptr().Send(_nSScrollerSelCheckSpaceForParts)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollerSelCheckSpaceForParts)
+	})
 }
 
 // Draws the knob.
 func (o *NSScroller) DrawKnob() {
-	o.Ptr().Send(_nSScrollerSelDrawKnob)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollerSelDrawKnob)
+	})
 }
 
 // Draws the portion of the scroller’s track, possibly including the line increment and decrement arrow buttons, that falls in the given rectangle.
 func (o *NSScroller) DrawKnobSlotInRectHighlight(slotRect corefoundation.CGRect, flag bool) {
-	o.Ptr().Send(_nSScrollerSelDrawKnobSlotInRectHighlight, slotRect, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollerSelDrawKnobSlotInRectHighlight, slotRect, flag)
+	})
 }
 
 // Returns the part that would be hit by a mouse-down event at aPoint (expressed in the window’s coordinate system).
 func (o *NSScroller) TestPart(point corefoundation.CGPoint) NSScrollerPart {
-	_ret := objc.Send[NSScrollerPart](o.Ptr(), _nSScrollerSelTestPart, point)
-	return _ret
+	var _mainthread0 NSScrollerPart
+	purego.Main(func() {
+		_mainthread0 = func() NSScrollerPart {
+			_ret := objc.Send[NSScrollerPart](o.Ptr(), _nSScrollerSelTestPart, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Tracks the knob and sends action messages to the receiver’s target.
 func (o *NSScroller) TrackKnob(event *NSEvent) {
-	o.Ptr().Send(_nSScrollerSelTrackKnob, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollerSelTrackKnob, event.Ptr())
+	})
 }
 
 func (o *NSScroller) SetKnobProportion(proportion float64) {
-	o.Ptr().Send(_nSScrollerSelSetKnobProportion, proportion)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollerSelSetKnobProportion, proportion)
+	})
 }
 
 func NSScrollerIsCompatibleWithOverlayScrollers() bool {
-	_ret := objc.Send[bool](objc.ID(_clsNSScroller), _nSScrollerSelIsCompatibleWithOverlayScrollers)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](objc.ID(_clsNSScroller), _nSScrollerSelIsCompatibleWithOverlayScrollers)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func NSScrollerPreferredScrollerStyle() NSScrollerStyle {
-	_ret := objc.Send[NSScrollerStyle](objc.ID(_clsNSScroller), _nSScrollerSelPreferredScrollerStyle)
-	return _ret
+	var _mainthread0 NSScrollerStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSScrollerStyle {
+			_ret := objc.Send[NSScrollerStyle](objc.ID(_clsNSScroller), _nSScrollerSelPreferredScrollerStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScroller) ScrollerStyle() NSScrollerStyle {
-	_ret := objc.Send[NSScrollerStyle](o.Ptr(), _nSScrollerSelScrollerStyle)
-	return _ret
+	var _mainthread0 NSScrollerStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSScrollerStyle {
+			_ret := objc.Send[NSScrollerStyle](o.Ptr(), _nSScrollerSelScrollerStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScroller) SetScrollerStyle(scrollerStyle NSScrollerStyle) {
-	o.Ptr().Send(_nSScrollerSelSetScrollerStyle, scrollerStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollerSelSetScrollerStyle, scrollerStyle)
+	})
 }
 
 func (o *NSScroller) KnobStyle() NSScrollerKnobStyle {
-	_ret := objc.Send[NSScrollerKnobStyle](o.Ptr(), _nSScrollerSelKnobStyle)
-	return _ret
+	var _mainthread0 NSScrollerKnobStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSScrollerKnobStyle {
+			_ret := objc.Send[NSScrollerKnobStyle](o.Ptr(), _nSScrollerSelKnobStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScroller) SetKnobStyle(knobStyle NSScrollerKnobStyle) {
-	o.Ptr().Send(_nSScrollerSelSetKnobStyle, knobStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollerSelSetKnobStyle, knobStyle)
+	})
 }
 
 func (o *NSScroller) UsableParts() NSUsableScrollerParts {
-	_ret := objc.Send[NSUsableScrollerParts](o.Ptr(), _nSScrollerSelUsableParts)
-	return _ret
+	var _mainthread0 NSUsableScrollerParts
+	purego.Main(func() {
+		_mainthread0 = func() NSUsableScrollerParts {
+			_ret := objc.Send[NSUsableScrollerParts](o.Ptr(), _nSScrollerSelUsableParts)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScroller) HitPart() NSScrollerPart {
-	_ret := objc.Send[NSScrollerPart](o.Ptr(), _nSScrollerSelHitPart)
-	return _ret
+	var _mainthread0 NSScrollerPart
+	purego.Main(func() {
+		_mainthread0 = func() NSScrollerPart {
+			_ret := objc.Send[NSScrollerPart](o.Ptr(), _nSScrollerSelHitPart)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScroller) KnobProportion() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSScrollerSelKnobProportion)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSScrollerSelKnobProportion)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the width of the scroller based on controlSize and assuming a scroller style of NSScrollerStyleLegacy.
 // Deprecated: Use +scrollerWidthForControlSize:scrollerStyle: instead
 func NSScrollerScrollerWidthForControlSize(controlSize NSControlSize) float64 {
-	_ret := objc.Send[float64](objc.ID(_clsNSScroller), _nSScrollerSelScrollerWidthForControlSize, controlSize)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](objc.ID(_clsNSScroller), _nSScrollerSelScrollerWidthForControlSize, controlSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the width for scrollers of the receiving class, assuming a control size NSRegularControlSize, and a scroller style of NSScrollerStyleLegacy.
 // Deprecated: Use +scrollerWidthForControlSize:scrollerStyle: instead
 func NSScrollerScrollerWidth() float64 {
-	_ret := objc.Send[float64](objc.ID(_clsNSScroller), _nSScrollerSelScrollerWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](objc.ID(_clsNSScroller), _nSScrollerSelScrollerWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the position of the knob to aFloat, which is a value from 0.0 (indicating the top or left end) to 1.0 (the bottom or right end).
 // Deprecated: since macOS 10.5.
 func (o *NSScroller) SetFloatValueKnobProportion(value float32, proportion float64) {
-	o.Ptr().Send(_nSScrollerSelSetFloatValueKnobProportion, value, proportion)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollerSelSetFloatValueKnobProportion, value, proportion)
+	})
 }
 
 // Highlights or unhighlights the scroll button the user clicked.
 // Deprecated: Has had no effect since 10.7
 func (o *NSScroller) Highlight(flag bool) {
-	o.Ptr().Send(_nSScrollerSelHighlight, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollerSelHighlight, flag)
+	})
 }
 
 // Tracks the scroll buttons and sends action messages to the receiver’s target.
 // Deprecated: Not invoked since 10.7
 func (o *NSScroller) TrackScrollButtons(event *NSEvent) {
-	o.Ptr().Send(_nSScrollerSelTrackScrollButtons, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollerSelTrackScrollButtons, event.Ptr())
+	})
 }
 
 // Caches images for the scroll buttons and knob.
 // Deprecated: Not invoked on any macOS version
 func (o *NSScroller) DrawParts() {
-	o.Ptr().Send(_nSScrollerSelDrawParts)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollerSelDrawParts)
+	})
 }
 
 // Draws the scroll button indicated by arrow, which is either NSScrollerIncrementArrow (the down or right scroll button) or NSScrollerDecrementArrow (up or left).
 // Deprecated: Scrollers don't have arrows as of 10.7
 func (o *NSScroller) DrawArrowHighlight(whichArrow NSScrollerArrow, flag bool) {
-	o.Ptr().Send(_nSScrollerSelDrawArrowHighlight, whichArrow, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollerSelDrawArrowHighlight, whichArrow, flag)
+	})
 }
 
 // Deprecated: Has had no effect since 10.7
 func (o *NSScroller) ArrowsPosition() NSScrollArrowPosition {
-	_ret := objc.Send[NSScrollArrowPosition](o.Ptr(), _nSScrollerSelArrowsPosition)
-	return _ret
+	var _mainthread0 NSScrollArrowPosition
+	purego.Main(func() {
+		_mainthread0 = func() NSScrollArrowPosition {
+			_ret := objc.Send[NSScrollArrowPosition](o.Ptr(), _nSScrollerSelArrowsPosition)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Has had no effect since 10.7
 func (o *NSScroller) SetArrowsPosition(arrowsPosition NSScrollArrowPosition) {
-	o.Ptr().Send(_nSScrollerSelSetArrowsPosition, arrowsPosition)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollerSelSetArrowsPosition, arrowsPosition)
+	})
 }
 
 // Deprecated: Has had no effect since 10.7
 func (o *NSScroller) ControlTint() NSControlTint {
-	_ret := objc.Send[NSControlTint](o.Ptr(), _nSScrollerSelControlTint)
-	return _ret
+	var _mainthread0 NSControlTint
+	purego.Main(func() {
+		_mainthread0 = func() NSControlTint {
+			_ret := objc.Send[NSControlTint](o.Ptr(), _nSScrollerSelControlTint)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Has had no effect since 10.7
 func (o *NSScroller) SetControlTint(controlTint NSControlTint) {
-	o.Ptr().Send(_nSScrollerSelSetControlTint, controlTint)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrollerSelSetControlTint, controlTint)
+	})
 }

@@ -38,41 +38,71 @@ func NSCollectionLayoutEdgeSpacingFromID(id objc.ID) *NSCollectionLayoutEdgeSpac
 
 // Creates an edge spacing object with the specified leading, top, trailing, and bottom spacing.
 func NSCollectionLayoutEdgeSpacingSpacingForLeadingTopTrailingBottom(leading *NSCollectionLayoutSpacing, top *NSCollectionLayoutSpacing, trailing *NSCollectionLayoutSpacing, bottom *NSCollectionLayoutSpacing) *NSCollectionLayoutEdgeSpacing {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutEdgeSpacing), _nSCollectionLayoutEdgeSpacingSelSpacingForLeadingTopTrailingBottom, leading.Ptr(), top.Ptr(), trailing.Ptr(), bottom.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutEdgeSpacingFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutEdgeSpacing
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutEdgeSpacing {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutEdgeSpacing), _nSCollectionLayoutEdgeSpacingSelSpacingForLeadingTopTrailingBottom, leading.Ptr(), top.Ptr(), trailing.Ptr(), bottom.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutEdgeSpacingFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutEdgeSpacing) Leading() *NSCollectionLayoutSpacing {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutEdgeSpacingSelLeading)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutSpacingFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutSpacing
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutSpacing {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutEdgeSpacingSelLeading)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutSpacingFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutEdgeSpacing) Top() *NSCollectionLayoutSpacing {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutEdgeSpacingSelTop)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutSpacingFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutSpacing
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutSpacing {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutEdgeSpacingSelTop)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutSpacingFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutEdgeSpacing) Trailing() *NSCollectionLayoutSpacing {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutEdgeSpacingSelTrailing)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutSpacingFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutSpacing
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutSpacing {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutEdgeSpacingSelTrailing)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutSpacingFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutEdgeSpacing) Bottom() *NSCollectionLayoutSpacing {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutEdgeSpacingSelBottom)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutSpacingFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutSpacing
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutSpacing {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutEdgeSpacingSelBottom)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutSpacingFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

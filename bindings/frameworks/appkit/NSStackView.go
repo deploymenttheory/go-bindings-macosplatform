@@ -69,209 +69,349 @@ func NSStackViewFromID(id objc.ID) *NSStackView {
 
 // Creates and returns a stack view with a specified array of views.
 func NSStackViewStackViewWithViews(views *foundation.NSArray[*NSView]) *NSStackView {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSStackView), _nSStackViewSelStackViewWithViews, views.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSStackViewFromID(_ret)
+	var _mainthread0 *NSStackView
+	purego.Main(func() {
+		_mainthread0 = func() *NSStackView {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSStackView), _nSStackViewSelStackViewWithViews, views.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSStackViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies the custom spacing, in points, between a specified view and the view that follows it in the stack view.
 func (o *NSStackView) SetCustomSpacingAfterView(spacing float64, view *NSView) {
-	o.Ptr().Send(_nSStackViewSelSetCustomSpacingAfterView, spacing, view.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSStackViewSelSetCustomSpacingAfterView, spacing, view.Ptr())
+	})
 }
 
 // Returns the custom spacing, in points, between a specified view in the stack view and the view that follows it.
 func (o *NSStackView) CustomSpacingAfterView(view *NSView) float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSStackViewSelCustomSpacingAfterView, view.Ptr())
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSStackViewSelCustomSpacingAfterView, view.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Adds the specified view to the end of the arranged subviews list.
 func (o *NSStackView) AddArrangedSubview(view *NSView) {
-	o.Ptr().Send(_nSStackViewSelAddArrangedSubview, view.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSStackViewSelAddArrangedSubview, view.Ptr())
+	})
 }
 
 // Adds the provided view to the array of arranged subviews at the specified index.
 func (o *NSStackView) InsertArrangedSubviewAtIndex(view *NSView, index int) {
-	o.Ptr().Send(_nSStackViewSelInsertArrangedSubviewAtIndex, view.Ptr(), index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStackViewSelInsertArrangedSubviewAtIndex, view.Ptr(), index)
+	})
 }
 
 // Removes the provided view from the stack’s array of arranged subviews.
 func (o *NSStackView) RemoveArrangedSubview(view *NSView) {
-	o.Ptr().Send(_nSStackViewSelRemoveArrangedSubview, view.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSStackViewSelRemoveArrangedSubview, view.Ptr())
+	})
 }
 
 // Sets the Auto Layout priority for a view to remain attached to the stack view when Auto Layout reduces the stack view’s size.
 func (o *NSStackView) SetVisibilityPriorityForView(priority float32, view *NSView) {
-	o.Ptr().Send(_nSStackViewSelSetVisibilityPriorityForView, priority, view.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSStackViewSelSetVisibilityPriorityForView, priority, view.Ptr())
+	})
 }
 
 // Returns the visibility priority for a specified view in the stack view.
 func (o *NSStackView) VisibilityPriorityForView(view *NSView) float32 {
-	_ret := objc.Send[float32](o.Ptr(), _nSStackViewSelVisibilityPriorityForView, view.Ptr())
-	return _ret
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_ret := objc.Send[float32](o.Ptr(), _nSStackViewSelVisibilityPriorityForView, view.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the Auto Layout priority for resisting clipping of views in the stack view when Auto Layout attempts to reduce the stack view’s size.
 func (o *NSStackView) ClippingResistancePriorityForOrientation(orientation NSLayoutConstraintOrientation) float32 {
-	_ret := objc.Send[float32](o.Ptr(), _nSStackViewSelClippingResistancePriorityForOrientation, orientation)
-	return _ret
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_ret := objc.Send[float32](o.Ptr(), _nSStackViewSelClippingResistancePriorityForOrientation, orientation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the Auto Layout priority for resisting clipping of views in the stack view when Auto Layout attempts to reduce the stack view’s size.
 func (o *NSStackView) SetClippingResistancePriorityForOrientation(clippingResistancePriority float32, orientation NSLayoutConstraintOrientation) {
-	o.Ptr().Send(_nSStackViewSelSetClippingResistancePriorityForOrientation, clippingResistancePriority, orientation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStackViewSelSetClippingResistancePriorityForOrientation, clippingResistancePriority, orientation)
+	})
 }
 
 // Returns the Auto Layout priority for the stack view to minimize its size to fit its contained views as closely as possible, for a specified user interface axis.
 func (o *NSStackView) HuggingPriorityForOrientation(orientation NSLayoutConstraintOrientation) float32 {
-	_ret := objc.Send[float32](o.Ptr(), _nSStackViewSelHuggingPriorityForOrientation, orientation)
-	return _ret
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_ret := objc.Send[float32](o.Ptr(), _nSStackViewSelHuggingPriorityForOrientation, orientation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the Auto Layout priority for the stack view to minimize its size, for a specified user interface axis.
 func (o *NSStackView) SetHuggingPriorityForOrientation(huggingPriority float32, orientation NSLayoutConstraintOrientation) {
-	o.Ptr().Send(_nSStackViewSelSetHuggingPriorityForOrientation, huggingPriority, orientation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStackViewSelSetHuggingPriorityForOrientation, huggingPriority, orientation)
+	})
 }
 
 func (o *NSStackView) Delegate() NSStackViewDelegate {
-	_ret := objc.Send[NSStackViewDelegate](o.Ptr(), _nSStackViewSelDelegate)
-	return _ret
+	var _mainthread0 NSStackViewDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSStackViewDelegate {
+			_ret := objc.Send[NSStackViewDelegate](o.Ptr(), _nSStackViewSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSStackView) SetDelegate(delegate NSStackViewDelegate) {
-	o.Ptr().Send(_nSStackViewSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStackViewSelSetDelegate, delegate)
+	})
 }
 
 // Orientation of the StackView, defaults to NSUserInterfaceLayoutOrientationHorizontal
 func (o *NSStackView) Orientation() NSUserInterfaceLayoutOrientation {
-	_ret := objc.Send[NSUserInterfaceLayoutOrientation](o.Ptr(), _nSStackViewSelOrientation)
-	return _ret
+	var _mainthread0 NSUserInterfaceLayoutOrientation
+	purego.Main(func() {
+		_mainthread0 = func() NSUserInterfaceLayoutOrientation {
+			_ret := objc.Send[NSUserInterfaceLayoutOrientation](o.Ptr(), _nSStackViewSelOrientation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Orientation of the StackView, defaults to NSUserInterfaceLayoutOrientationHorizontal
 func (o *NSStackView) SetOrientation(orientation NSUserInterfaceLayoutOrientation) {
-	o.Ptr().Send(_nSStackViewSelSetOrientation, orientation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStackViewSelSetOrientation, orientation)
+	})
 }
 
 // Describes how subviews are aligned within the StackView, defaults to `NSLayoutAttributeCenterY` for horizontal stacks, `NSLayoutAttributeCenterX` for vertical stacks. Setting `NSLayoutAttributeNotAnAttribute` will cause the internal alignment constraints to not be created, and could result in an ambiguous layout. Setting an inapplicable attribute for the set orientation will result in the alignment being ignored (similar to its handling with NSLayoutAttributeNotAnAttribute). The alignment constraints are established at a priority of `NSLayoutPriorityDefaultLow` and are overridable for individual views using external constraints.
 func (o *NSStackView) Alignment() NSLayoutAttribute {
-	_ret := objc.Send[NSLayoutAttribute](o.Ptr(), _nSStackViewSelAlignment)
-	return _ret
+	var _mainthread0 NSLayoutAttribute
+	purego.Main(func() {
+		_mainthread0 = func() NSLayoutAttribute {
+			_ret := objc.Send[NSLayoutAttribute](o.Ptr(), _nSStackViewSelAlignment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Describes how subviews are aligned within the StackView, defaults to `NSLayoutAttributeCenterY` for horizontal stacks, `NSLayoutAttributeCenterX` for vertical stacks. Setting `NSLayoutAttributeNotAnAttribute` will cause the internal alignment constraints to not be created, and could result in an ambiguous layout. Setting an inapplicable attribute for the set orientation will result in the alignment being ignored (similar to its handling with NSLayoutAttributeNotAnAttribute). The alignment constraints are established at a priority of `NSLayoutPriorityDefaultLow` and are overridable for individual views using external constraints.
 func (o *NSStackView) SetAlignment(alignment NSLayoutAttribute) {
-	o.Ptr().Send(_nSStackViewSelSetAlignment, alignment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStackViewSelSetAlignment, alignment)
+	})
 }
 
 // Default padding inside the StackView, around all of the subviews.
 func (o *NSStackView) EdgeInsets() foundation.NSEdgeInsets {
-	_ret := objc.Send[foundation.NSEdgeInsets](o.Ptr(), _nSStackViewSelEdgeInsets)
-	return _ret
+	var _mainthread0 foundation.NSEdgeInsets
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSEdgeInsets {
+			_ret := objc.Send[foundation.NSEdgeInsets](o.Ptr(), _nSStackViewSelEdgeInsets)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Default padding inside the StackView, around all of the subviews.
 func (o *NSStackView) SetEdgeInsets(edgeInsets foundation.NSEdgeInsets) {
-	o.Ptr().Send(_nSStackViewSelSetEdgeInsets, edgeInsets)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStackViewSelSetEdgeInsets, edgeInsets)
+	})
 }
 
 // The spacing and sizing distribution of stacked views along the primary axis. The default value is `gravityAreas`.
 func (o *NSStackView) Distribution() NSStackViewDistribution {
-	_ret := objc.Send[NSStackViewDistribution](o.Ptr(), _nSStackViewSelDistribution)
-	return _ret
+	var _mainthread0 NSStackViewDistribution
+	purego.Main(func() {
+		_mainthread0 = func() NSStackViewDistribution {
+			_ret := objc.Send[NSStackViewDistribution](o.Ptr(), _nSStackViewSelDistribution)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The spacing and sizing distribution of stacked views along the primary axis. The default value is `gravityAreas`.
 func (o *NSStackView) SetDistribution(distribution NSStackViewDistribution) {
-	o.Ptr().Send(_nSStackViewSelSetDistribution, distribution)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStackViewSelSetDistribution, distribution)
+	})
 }
 
 // Default (minimum) spacing between each view
 func (o *NSStackView) Spacing() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSStackViewSelSpacing)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSStackViewSelSpacing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Default (minimum) spacing between each view
 func (o *NSStackView) SetSpacing(spacing float64) {
-	o.Ptr().Send(_nSStackViewSelSetSpacing, spacing)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStackViewSelSetSpacing, spacing)
+	})
 }
 
 // If YES, when a stacked view's `hidden` property is set to YES, the view will be detached from the stack and reattached when set to NO. Similarly, if the view has a lowered visibility priority and is detached from the stack view, it will be set as `hidden` rather than removed from the view hierarchy. Defaults to YES for apps linked on the 10.11 SDK or later.
 func (o *NSStackView) DetachesHiddenViews() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSStackViewSelDetachesHiddenViews)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSStackViewSelDetachesHiddenViews)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // If YES, when a stacked view's `hidden` property is set to YES, the view will be detached from the stack and reattached when set to NO. Similarly, if the view has a lowered visibility priority and is detached from the stack view, it will be set as `hidden` rather than removed from the view hierarchy. Defaults to YES for apps linked on the 10.11 SDK or later.
 func (o *NSStackView) SetDetachesHiddenViews(detachesHiddenViews bool) {
-	o.Ptr().Send(_nSStackViewSelSetDetachesHiddenViews, detachesHiddenViews)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStackViewSelSetDetachesHiddenViews, detachesHiddenViews)
+	})
 }
 
 // The list of views that are arranged in a stack by the receiver. They are a subset of \c -subviews, with potential difference in ordering.
 func (o *NSStackView) ArrangedSubviews() *foundation.NSArray[*NSView] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSStackViewSelArrangedSubviews)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSView](_ret)
+	var _mainthread0 *foundation.NSArray[*NSView]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSView] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSStackViewSelArrangedSubviews)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSView](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The arrangedSubviews that are currently detached/hidden.
 func (o *NSStackView) DetachedViews() *foundation.NSArray[*NSView] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSStackViewSelDetachedViews)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSView](_ret)
+	var _mainthread0 *foundation.NSArray[*NSView]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSView] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSStackViewSelDetachedViews)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSView](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Adds a view to the end of the stack view gravity area.
 func (o *NSStackView) AddViewInGravity(view *NSView, gravity NSStackViewGravity) {
-	o.Ptr().Send(_nSStackViewSelAddViewInGravity, view.Ptr(), gravity)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStackViewSelAddViewInGravity, view.Ptr(), gravity)
+	})
 }
 
 // Adds a view to a stack view gravity area at a specified index position.
 func (o *NSStackView) InsertViewAtIndexInGravity(view *NSView, index uint, gravity NSStackViewGravity) {
-	o.Ptr().Send(_nSStackViewSelInsertViewAtIndexInGravity, view.Ptr(), index, gravity)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStackViewSelInsertViewAtIndexInGravity, view.Ptr(), index, gravity)
+	})
 }
 
 // Removes a specified view from the stack view.
 func (o *NSStackView) RemoveView(view *NSView) {
-	o.Ptr().Send(_nSStackViewSelRemoveView, view.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSStackViewSelRemoveView, view.Ptr())
+	})
 }
 
 // Returns the array of views in the specified gravity area in the stack view.
 func (o *NSStackView) ViewsInGravity(gravity NSStackViewGravity) *foundation.NSArray[*NSView] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSStackViewSelViewsInGravity, gravity)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSView](_ret)
+	var _mainthread0 *foundation.NSArray[*NSView]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSView] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSStackViewSelViewsInGravity, gravity)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSView](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies an array of views for a specified gravity area in the stack view, replacing any previous views in that area.
 func (o *NSStackView) SetViewsInGravity(views *foundation.NSArray[*NSView], gravity NSStackViewGravity) {
-	o.Ptr().Send(_nSStackViewSelSetViewsInGravity, views.Ptr(), gravity)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStackViewSelSetViewsInGravity, views.Ptr(), gravity)
+	})
 }
 
 func (o *NSStackView) Views() *foundation.NSArray[*NSView] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSStackViewSelViews)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSView](_ret)
+	var _mainthread0 *foundation.NSArray[*NSView]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSView] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSStackViewSelViews)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSView](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Set -distribution to NSStackViewDistributionEqualSpacing instead.
 func (o *NSStackView) HasEqualSpacing() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSStackViewSelHasEqualSpacing)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSStackViewSelHasEqualSpacing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Set -distribution to NSStackViewDistributionEqualSpacing instead.
 func (o *NSStackView) SetHasEqualSpacing(hasEqualSpacing bool) {
-	o.Ptr().Send(_nSStackViewSelSetHasEqualSpacing, hasEqualSpacing)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStackViewSelSetHasEqualSpacing, hasEqualSpacing)
+	})
 }

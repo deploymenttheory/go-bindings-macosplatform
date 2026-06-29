@@ -54,116 +54,200 @@ func NSColorPanelFromID(id objc.ID) *NSColorPanel {
 
 // Drags a color into a destination view from the specified source view.
 func NSColorPanelDragColorWithEventFromView(color *NSColor, event *NSEvent, sourceView *NSView) bool {
-	_ret := objc.Send[bool](objc.ID(_clsNSColorPanel), _nSColorPanelSelDragColorWithEventFromView, color.Ptr(), event.Ptr(), sourceView.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](objc.ID(_clsNSColorPanel), _nSColorPanelSelDragColorWithEventFromView, color.Ptr(), event.Ptr(), sourceView.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Determines which color selection modes are available in an application’s NSColorPanel.
 func NSColorPanelSetPickerMask(mask NSColorPanelOptions) {
-	objc.ID(_clsNSColorPanel).Send(_nSColorPanelSelSetPickerMask, mask)
+	purego.Main(func() {
+		objc.ID(_clsNSColorPanel).Send(_nSColorPanelSelSetPickerMask, mask)
+	})
 }
 
 // Specifies the color panel’s initial picker.
 func NSColorPanelSetPickerMode(mode NSColorPanelMode) {
-	objc.ID(_clsNSColorPanel).Send(_nSColorPanelSelSetPickerMode, mode)
+	purego.Main(func() {
+		objc.ID(_clsNSColorPanel).Send(_nSColorPanelSelSetPickerMode, mode)
+	})
 }
 
 // Sets the color panel’s action message.
 func (o *NSColorPanel) SetAction(selector objc.SEL) {
-	o.Ptr().Send(_nSColorPanelSelSetAction, selector)
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorPanelSelSetAction, selector)
+	})
 }
 
 // Sets the target of the receiver.
 func (o *NSColorPanel) SetTarget(target objc.ID) {
-	o.Ptr().Send(_nSColorPanelSelSetTarget, target)
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorPanelSelSetTarget, target)
+	})
 }
 
 // Adds the list of NSColor objects specified to all the color pickers in the receiver that display color lists by invoking attachColorList: on all color pickers in the application.
 func (o *NSColorPanel) AttachColorList(colorList *NSColorList) {
-	o.Ptr().Send(_nSColorPanelSelAttachColorList, colorList.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorPanelSelAttachColorList, colorList.Ptr())
+	})
 }
 
 // Removes the list of colors from all the color pickers in the receiver that display color lists by invoking detachColorList: on all color pickers in the application.
 func (o *NSColorPanel) DetachColorList(colorList *NSColorList) {
-	o.Ptr().Send(_nSColorPanelSelDetachColorList, colorList.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorPanelSelDetachColorList, colorList.Ptr())
+	})
 }
 
 func NSColorPanelSharedColorPanel() *NSColorPanel {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorPanel), _nSColorPanelSelSharedColorPanel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorPanelFromID(_ret)
+	var _mainthread0 *NSColorPanel
+	purego.Main(func() {
+		_mainthread0 = func() *NSColorPanel {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSColorPanel), _nSColorPanelSelSharedColorPanel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorPanelFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func NSColorPanelSharedColorPanelExists() bool {
-	_ret := objc.Send[bool](objc.ID(_clsNSColorPanel), _nSColorPanelSelSharedColorPanelExists)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](objc.ID(_clsNSColorPanel), _nSColorPanelSelSharedColorPanelExists)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSColorPanel) AccessoryView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorPanelSelAccessoryView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSColorPanelSelAccessoryView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSColorPanel) SetAccessoryView(accessoryView *NSView) {
-	o.Ptr().Send(_nSColorPanelSelSetAccessoryView, accessoryView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorPanelSelSetAccessoryView, accessoryView.Ptr())
+	})
 }
 
 func (o *NSColorPanel) IsContinuous() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSColorPanelSelIsContinuous)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSColorPanelSelIsContinuous)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSColorPanel) SetContinuous(continuous bool) {
-	o.Ptr().Send(_nSColorPanelSelSetContinuous, continuous)
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorPanelSelSetContinuous, continuous)
+	})
 }
 
 func (o *NSColorPanel) ShowsAlpha() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSColorPanelSelShowsAlpha)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSColorPanelSelShowsAlpha)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSColorPanel) SetShowsAlpha(showsAlpha bool) {
-	o.Ptr().Send(_nSColorPanelSelSetShowsAlpha, showsAlpha)
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorPanelSelSetShowsAlpha, showsAlpha)
+	})
 }
 
 func (o *NSColorPanel) Mode() NSColorPanelMode {
-	_ret := objc.Send[NSColorPanelMode](o.Ptr(), _nSColorPanelSelMode)
-	return _ret
+	var _mainthread0 NSColorPanelMode
+	purego.Main(func() {
+		_mainthread0 = func() NSColorPanelMode {
+			_ret := objc.Send[NSColorPanelMode](o.Ptr(), _nSColorPanelSelMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSColorPanel) SetMode(mode NSColorPanelMode) {
-	o.Ptr().Send(_nSColorPanelSelSetMode, mode)
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorPanelSelSetMode, mode)
+	})
 }
 
 func (o *NSColorPanel) Color() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorPanelSelColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSColorPanelSelColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSColorPanel) SetColor(color *NSColor) {
-	o.Ptr().Send(_nSColorPanelSelSetColor, color.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorPanelSelSetColor, color.Ptr())
+	})
 }
 
 func (o *NSColorPanel) Alpha() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSColorPanelSelAlpha)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSColorPanelSelAlpha)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The maximum linear exposure that can be set on a color picked in the color panel. Defaults to 1 and ignores any value less than 1. If set to a value >= 2, the color picked by the panel may have a linear exposure applied to it.
 func (o *NSColorPanel) MaximumLinearExposure() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSColorPanelSelMaximumLinearExposure)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSColorPanelSelMaximumLinearExposure)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The maximum linear exposure that can be set on a color picked in the color panel. Defaults to 1 and ignores any value less than 1. If set to a value >= 2, the color picked by the panel may have a linear exposure applied to it.
 func (o *NSColorPanel) SetMaximumLinearExposure(maximumLinearExposure float64) {
-	o.Ptr().Send(_nSColorPanelSelSetMaximumLinearExposure, maximumLinearExposure)
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorPanelSelSetMaximumLinearExposure, maximumLinearExposure)
+	})
 }

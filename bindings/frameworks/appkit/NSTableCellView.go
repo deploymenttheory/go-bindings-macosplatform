@@ -43,60 +43,106 @@ func NSTableCellViewFromID(id objc.ID) *NSTableCellView {
 }
 
 func (o *NSTableCellView) ObjectValue() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableCellViewSelObjectValue)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableCellViewSelObjectValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableCellView) SetObjectValue(objectValue objc.ID) {
-	o.Ptr().Send(_nSTableCellViewSelSetObjectValue, objectValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableCellViewSelSetObjectValue, objectValue)
+	})
 }
 
 func (o *NSTableCellView) TextField() *NSTextField {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableCellViewSelTextField)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextFieldFromID(_ret)
+	var _mainthread0 *NSTextField
+	purego.Main(func() {
+		_mainthread0 = func() *NSTextField {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableCellViewSelTextField)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextFieldFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableCellView) SetTextField(textField *NSTextField) {
-	o.Ptr().Send(_nSTableCellViewSelSetTextField, textField.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableCellViewSelSetTextField, textField.Ptr())
+	})
 }
 
 func (o *NSTableCellView) ImageView() *NSImageView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableCellViewSelImageView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageViewFromID(_ret)
+	var _mainthread0 *NSImageView
+	purego.Main(func() {
+		_mainthread0 = func() *NSImageView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableCellViewSelImageView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableCellView) SetImageView(imageView *NSImageView) {
-	o.Ptr().Send(_nSTableCellViewSelSetImageView, imageView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableCellViewSelSetImageView, imageView.Ptr())
+	})
 }
 
 func (o *NSTableCellView) BackgroundStyle() NSBackgroundStyle {
-	_ret := objc.Send[NSBackgroundStyle](o.Ptr(), _nSTableCellViewSelBackgroundStyle)
-	return _ret
+	var _mainthread0 NSBackgroundStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSBackgroundStyle {
+			_ret := objc.Send[NSBackgroundStyle](o.Ptr(), _nSTableCellViewSelBackgroundStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableCellView) SetBackgroundStyle(backgroundStyle NSBackgroundStyle) {
-	o.Ptr().Send(_nSTableCellViewSelSetBackgroundStyle, backgroundStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableCellViewSelSetBackgroundStyle, backgroundStyle)
+	})
 }
 
 func (o *NSTableCellView) RowSizeStyle() NSTableViewRowSizeStyle {
-	_ret := objc.Send[NSTableViewRowSizeStyle](o.Ptr(), _nSTableCellViewSelRowSizeStyle)
-	return _ret
+	var _mainthread0 NSTableViewRowSizeStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSTableViewRowSizeStyle {
+			_ret := objc.Send[NSTableViewRowSizeStyle](o.Ptr(), _nSTableCellViewSelRowSizeStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTableCellView) SetRowSizeStyle(rowSizeStyle NSTableViewRowSizeStyle) {
-	o.Ptr().Send(_nSTableCellViewSelSetRowSizeStyle, rowSizeStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTableCellViewSelSetRowSizeStyle, rowSizeStyle)
+	})
 }
 
 func (o *NSTableCellView) DraggingImageComponents() *foundation.NSArray[*NSDraggingImageComponent] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableCellViewSelDraggingImageComponents)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSDraggingImageComponent](_ret)
+	var _mainthread0 *foundation.NSArray[*NSDraggingImageComponent]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSDraggingImageComponent] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTableCellViewSelDraggingImageComponents)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSDraggingImageComponent](_ret)
+		}()
+	})
+	return _mainthread0
 }

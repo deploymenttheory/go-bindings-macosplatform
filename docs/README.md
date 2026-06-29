@@ -1,70 +1,25 @@
-# Project Title
+# Documentation
 
-Simple overview of your project and its use or purpose.
+Guides and reference material for working on and with this macOS bindings code
+generator. Start with the top-level [`README.md`](../README.md) for the project
+overview and [`CLAUDE.md`](../CLAUDE.md) for the architecture and the generator
+commands; the documents here go deeper on specific areas.
 
->Make use of the [Markdow Syntax Guide](markdown-syntax-guide.md).
+| Document | What it covers |
+|---|---|
+| [`developer_guide.md`](developer_guide.md) | A practical walkthrough for **building native macOS apps** with the bindings (app lifecycle, windows, menus, VM management, blocks). |
+| [`extraction_workflow.md`](extraction_workflow.md) | How SDK headers become Go packages: the Clang AST → `.gometa.json` → Go-source three-phase pipeline. |
+| [`naming.md`](naming.md) | The naming standard (the contract for generator code and generated identifiers). |
+| [`metadata_overrides.md`](metadata_overrides.md) | Declarative per-framework corrections (`overrides.json`) applied at load time. |
+| [`handling_variadics.md`](handling_variadics.md) | How ObjC variadic methods are bridged (and why most can't be). |
+| [`opinionated_library.md`](opinionated_library.md) | The `opinionated/library/` ergonomic helpers: why they exist, what they contain, and raw-vs-opinionated comparisons. |
+| [`appledocs.md`](appledocs.md) | Harvesting Apple's developer documentation into `appledocs.json` sidecars and merging it into the generated docs. |
+| [`markdown-syntax-guide.md`](markdown-syntax-guide.md) | Markdown reference. |
 
-## Description
+See also the runnable [`examples/`](../examples) and their
+[adoption guide](../examples/README.md) for how to use the bindings in your own
+project.
 
-Describe your project.
-
-## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-Describe any prerequisites or dependencies.
-
-### Installation
-
-* How/where to download your program
-* Any modifications needed to be made to files/folders
-
-  ```bash
-  iex "&amp; { $(irm https://aka.ms/install-powershell.ps1) } -UseMSI"
-  ```
-
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-
-## FAQ and Known Issues
-
-Any advise for common problems or issues.
-  ```bash
-  command to run if program contains helper info
-  ```
-
-## Contributors
-
-Contributors names and contact info
-
-* You, Yourself and the Universe
-* [@your_twitter](<https://twitter.com/your_username>)
-
-## Contribution
-
-If you would like to become an active contributor to this repository or project, please follow the instructions provided in [`CONTRIBUTING.md`](../CONTRIBUTING.md).
-
-<!-- CONTACT -->
-## Contact
-
-Your Name - [@your_twitter](<https://twitter.com/your_username>) - email@example.com
-
-Project Link: [https://github.com/your_username/repo_name](<https://github.com/your_username/repo_name>)
-
-
-<!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See [`LICENSE`](`../../LICENSE`).
-
-## References
-
-* [Emoji Cheat Sheet](<https://github.com/ikatyang/emoji-cheat-sheet>)
-* [License Helper](<https://choosealicense.com/>)
+Distributed under the MIT License. See [`LICENSE`](../LICENSE).

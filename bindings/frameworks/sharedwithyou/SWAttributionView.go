@@ -49,86 +49,148 @@ func SWAttributionViewFromID(id objc.ID) *SWAttributionView {
 
 // @abstract The SWHighlight to use for displaying this attribution. When this property is set to a new highlight, the contents of the view will be reloaded.
 func (o *SWAttributionView) Highlight() *SWHighlight {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sWAttributionViewSelHighlight)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SWHighlightFromID(_ret)
+	var _mainthread0 *SWHighlight
+	purego.Main(func() {
+		_mainthread0 = func() *SWHighlight {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sWAttributionViewSelHighlight)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SWHighlightFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SWAttributionView) SetHighlight(highlight *SWHighlight) {
-	o.Ptr().Send(_sWAttributionViewSelSetHighlight, highlight.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sWAttributionViewSelSetHighlight, highlight.Ptr())
+	})
 }
 
 // @abstract The context for the content being displayed with this view. Set this prior to adding this view to your view hierarchy.
 func (o *SWAttributionView) DisplayContext() SWAttributionViewDisplayContext {
-	_ret := objc.Send[SWAttributionViewDisplayContext](o.Ptr(), _sWAttributionViewSelDisplayContext)
-	return _ret
+	var _mainthread0 SWAttributionViewDisplayContext
+	purego.Main(func() {
+		_mainthread0 = func() SWAttributionViewDisplayContext {
+			_ret := objc.Send[SWAttributionViewDisplayContext](o.Ptr(), _sWAttributionViewSelDisplayContext)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SWAttributionView) SetDisplayContext(displayContext SWAttributionViewDisplayContext) {
-	o.Ptr().Send(_sWAttributionViewSelSetDisplayContext, displayContext)
+	purego.Main(func() {
+		o.Ptr().Send(_sWAttributionViewSelSetDisplayContext, displayContext)
+	})
 }
 
 // @abstract The horizontal alignment of the view. You should specify a value, in case the internal default ever changes. @discussion This value specifies the horizontal anchor for the view's contents. This only has an effect when the width of the contents are less than the available width.
 func (o *SWAttributionView) HorizontalAlignment() SWAttributionViewHorizontalAlignment {
-	_ret := objc.Send[SWAttributionViewHorizontalAlignment](o.Ptr(), _sWAttributionViewSelHorizontalAlignment)
-	return _ret
+	var _mainthread0 SWAttributionViewHorizontalAlignment
+	purego.Main(func() {
+		_mainthread0 = func() SWAttributionViewHorizontalAlignment {
+			_ret := objc.Send[SWAttributionViewHorizontalAlignment](o.Ptr(), _sWAttributionViewSelHorizontalAlignment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SWAttributionView) SetHorizontalAlignment(horizontalAlignment SWAttributionViewHorizontalAlignment) {
-	o.Ptr().Send(_sWAttributionViewSelSetHorizontalAlignment, horizontalAlignment)
+	purego.Main(func() {
+		o.Ptr().Send(_sWAttributionViewSelSetHorizontalAlignment, horizontalAlignment)
+	})
 }
 
 // @abstract The background style of the inner view containing names and avatars. @discussion If you do not specify a background style, one will be chosen automatically. In general, .color looks best on monochrome backgrounds, while .material looks better on colored backgrounds.
 func (o *SWAttributionView) BackgroundStyle() SWAttributionViewBackgroundStyle {
-	_ret := objc.Send[SWAttributionViewBackgroundStyle](o.Ptr(), _sWAttributionViewSelBackgroundStyle)
-	return _ret
+	var _mainthread0 SWAttributionViewBackgroundStyle
+	purego.Main(func() {
+		_mainthread0 = func() SWAttributionViewBackgroundStyle {
+			_ret := objc.Send[SWAttributionViewBackgroundStyle](o.Ptr(), _sWAttributionViewSelBackgroundStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SWAttributionView) SetBackgroundStyle(backgroundStyle SWAttributionViewBackgroundStyle) {
-	o.Ptr().Send(_sWAttributionViewSelSetBackgroundStyle, backgroundStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_sWAttributionViewSelSetBackgroundStyle, backgroundStyle)
+	})
 }
 
 // @abstract For use when embedding this view in a SwiftUI view representable. @discussion When using this view in SwiftUI, this view will constrain its contents to this width. If you are not using SwiftUI this property should not be necessary, as SWAttributionView otherwise derives the maximum width from the frame or constraints you set.
 func (o *SWAttributionView) PreferredMaxLayoutWidth() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _sWAttributionViewSelPreferredMaxLayoutWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _sWAttributionViewSelPreferredMaxLayoutWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SWAttributionView) SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) {
-	o.Ptr().Send(_sWAttributionViewSelSetPreferredMaxLayoutWidth, preferredMaxLayoutWidth)
+	purego.Main(func() {
+		o.Ptr().Send(_sWAttributionViewSelSetPreferredMaxLayoutWidth, preferredMaxLayoutWidth)
+	})
 }
 
 func (o *SWAttributionView) HighlightMenu() *appkit.NSMenu {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sWAttributionViewSelHighlightMenu)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSMenuFromID(_ret)
+	var _mainthread0 *appkit.NSMenu
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSMenu {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sWAttributionViewSelHighlightMenu)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSMenuFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract A custom localized string to be used as the title for the "Hide" menu item title. A nil value will result in the default title. @discussion SWAttributionView manages a context menu which includes the option for the user to hide the content for the SWHighlight represented by this view. Set a title to be used as the title for that context menu. An app that displays articles, for example, might set @"Hide Article", localized to the current language. The string should include the word "Hide", localized correctly with the custom content type.
 func (o *SWAttributionView) MenuTitleForHideAction() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sWAttributionViewSelMenuTitleForHideAction)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sWAttributionViewSelMenuTitleForHideAction)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SWAttributionView) SetMenuTitleForHideAction(menuTitleForHideAction *foundation.NSString) {
-	o.Ptr().Send(_sWAttributionViewSelSetMenuTitleForHideAction, menuTitleForHideAction.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sWAttributionViewSelSetMenuTitleForHideAction, menuTitleForHideAction.Ptr())
+	})
 }
 
 func (o *SWAttributionView) SupplementalMenu() *appkit.NSMenuItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sWAttributionViewSelSupplementalMenu)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSMenuItemFromID(_ret)
+	var _mainthread0 *appkit.NSMenuItem
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSMenuItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sWAttributionViewSelSupplementalMenu)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSMenuItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SWAttributionView) SetSupplementalMenu(supplementalMenu *appkit.NSMenuItem) {
-	o.Ptr().Send(_sWAttributionViewSelSetSupplementalMenu, supplementalMenu.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sWAttributionViewSelSetSupplementalMenu, supplementalMenu.Ptr())
+	})
 }

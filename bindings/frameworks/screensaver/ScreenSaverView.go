@@ -46,74 +46,130 @@ func ScreenSaverViewFromID(id objc.ID) *ScreenSaverView {
 
 // Returns the type of backing store you want for your screen saver’s window.
 func ScreenSaverViewBackingStoreType() appkit.NSBackingStoreType {
-	_ret := objc.Send[appkit.NSBackingStoreType](objc.ID(_clsScreenSaverView), _screenSaverViewSelBackingStoreType)
-	return _ret
+	var _mainthread0 appkit.NSBackingStoreType
+	purego.Main(func() {
+		_mainthread0 = func() appkit.NSBackingStoreType {
+			_ret := objc.Send[appkit.NSBackingStoreType](objc.ID(_clsScreenSaverView), _screenSaverViewSelBackingStoreType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Indicates whether to perform a gradual screen fade when the system starts and stops your screen saver’s animation.
 func ScreenSaverViewPerformGammaFade() bool {
-	_ret := objc.Send[bool](objc.ID(_clsScreenSaverView), _screenSaverViewSelPerformGammaFade)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](objc.ID(_clsScreenSaverView), _screenSaverViewSelPerformGammaFade)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a newly allocated screen saver view with the specified frame rectangle and preview information.
 func (o *ScreenSaverView) InitWithFrameIsPreview(frame corefoundation.CGRect, isPreview bool) *ScreenSaverView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _screenSaverViewSelInitWithFrameIsPreview, frame, isPreview)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return ScreenSaverViewFromID(_ret)
+	var _mainthread0 *ScreenSaverView
+	purego.Main(func() {
+		_mainthread0 = func() *ScreenSaverView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _screenSaverViewSelInitWithFrameIsPreview, frame, isPreview)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return ScreenSaverViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Activates the periodic timer that animates the screen saver.
 func (o *ScreenSaverView) StartAnimation() {
-	o.Ptr().Send(_screenSaverViewSelStartAnimation)
+	purego.Main(func() {
+		o.Ptr().Send(_screenSaverViewSelStartAnimation)
+	})
 }
 
 // Deactivates the timer that advances the animation.
 func (o *ScreenSaverView) StopAnimation() {
-	o.Ptr().Send(_screenSaverViewSelStopAnimation)
+	purego.Main(func() {
+		o.Ptr().Send(_screenSaverViewSelStopAnimation)
+	})
 }
 
 // Advances the screen saver’s animation by a single frame.
 func (o *ScreenSaverView) AnimateOneFrame() {
-	o.Ptr().Send(_screenSaverViewSelAnimateOneFrame)
+	purego.Main(func() {
+		o.Ptr().Send(_screenSaverViewSelAnimateOneFrame)
+	})
 }
 
 // The time interval between animation frames. If your screen saver has particular requirements for time between animation frames, call this method to set the animation rate to a reasonable value.
 func (o *ScreenSaverView) AnimationTimeInterval() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _screenSaverViewSelAnimationTimeInterval)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _screenSaverViewSelAnimationTimeInterval)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The time interval between animation frames. If your screen saver has particular requirements for time between animation frames, call this method to set the animation rate to a reasonable value.
 func (o *ScreenSaverView) SetAnimationTimeInterval(animationTimeInterval float64) {
-	o.Ptr().Send(_screenSaverViewSelSetAnimationTimeInterval, animationTimeInterval)
+	purego.Main(func() {
+		o.Ptr().Send(_screenSaverViewSelSetAnimationTimeInterval, animationTimeInterval)
+	})
 }
 
 // A Boolean value that indicates whether the screen saver is animating. ## Overview The value of this property is <doc://com.apple.documentation/documentation/objectivec/yes> when the screen saver is animating, and <doc://com.apple.documentation/documentation/objectivec/no> when it isn’t. ## See also - “ScreenSaver/ScreenSaverView/stopAnimation“ - “ScreenSaver/ScreenSaverView/startAnimation“
 func (o *ScreenSaverView) IsAnimating() bool {
-	_ret := objc.Send[bool](o.Ptr(), _screenSaverViewSelIsAnimating)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _screenSaverViewSelIsAnimating)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // A Boolean value that indicates whether the screen saver has an associated configuration sheet. If you provide a configuration sheet in your bundle, override this method and return <doc://com.apple.documentation/documentation/objectivec/yes>. ## See also - “ScreenSaver/ScreenSaverView/configureSheet“
 func (o *ScreenSaverView) HasConfigureSheet() bool {
-	_ret := objc.Send[bool](o.Ptr(), _screenSaverViewSelHasConfigureSheet)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _screenSaverViewSelHasConfigureSheet)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The window that contains the controls to configure the screen saver. The system runs this window as a sheet, so include buttons that allow the user to end the modal session in which the sheet runs. When the user dismisses the sheet, the controller in charge of the sheet must end the document modal session by calling the <doc://com.apple.documentation/documentation/appkit/nsapplication> method <doc://com.apple.documentation/documentation/appkit/nsapplication/1428503-endsheet> with the sheet’s window as the argument. ## See also - “ScreenSaver/ScreenSaverView/hasConfigureSheet“
 func (o *ScreenSaverView) ConfigureSheet() *appkit.NSWindow {
-	_ret := objc.Send[objc.ID](o.Ptr(), _screenSaverViewSelConfigureSheet)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSWindowFromID(_ret)
+	var _mainthread0 *appkit.NSWindow
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSWindow {
+			_ret := objc.Send[objc.ID](o.Ptr(), _screenSaverViewSelConfigureSheet)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSWindowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // A Boolean value that indicates whether the screen saver view is set to a size suitable for previewing its content. ## Overview The system sets the value of this property to <doc://com.apple.documentation/documentation/objectivec/yes> when it creates a smaller preview of your screen saver. When the value is <doc://com.apple.documentation/documentation/objectivec/no>, your view matches the size of the screen. Use this property to adjust the content you present. For example, you might change the drawing parameters or data you display in your view.
 func (o *ScreenSaverView) IsPreview() bool {
-	_ret := objc.Send[bool](o.Ptr(), _screenSaverViewSelIsPreview)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _screenSaverViewSelIsPreview)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

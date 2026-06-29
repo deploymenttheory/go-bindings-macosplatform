@@ -8,10 +8,12 @@ import (
 	rt "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/rules"
 	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/shared"
-
-	// Side-effect import: loads NetworkExtension.framework so its classes
-	// (NEFilterDataProvider, NEFilterNewFlowVerdict, NEProvider, …) resolve.
-	_ "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	// The idiomatic NetworkExtension package supplies the typed verdict factories
+	// and, by being imported, loads NetworkExtension.framework so its classes
+	// (NEFilterDataProvider, NEFilterNewFlowVerdict, NEProvider, …) resolve for the
+	// low-level flow inspection done via the runtime below.
+	ne "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
 // ProviderClassName is the ObjC class the network extension's Info.plist names as
@@ -63,6 +65,16 @@ func RegisterProvider(eng *rules.Engine, defaultAllow bool) error {
 		}
 	}
 
+	// ADOPTION: this is the case the idiomatic layer cannot serve. The system
+	// instantiates *our* class and calls its methods, so we must define a new ObjC
+	// subclass of NEFilterDataProvider whose methods are backed by the Go closures
+	// above — that's rt.NewDelegate, a pure-runtime operation. The idiomatic layer
+	// wraps existing classes; it has no way to register a subclass. Inside the
+	// handlers it's the reverse: the verdicts (allowVerdict/dropVerdict, below) are
+	// built with the idiomatic NetworkExtension wrappers, and only the low-level flow
+	// inspection (audit-token bytes, endpoint fields) stays on rt.Send. So one
+	// function spans both layers: runtime for the subclass shell, idiomatic for the
+	// framework objects it produces. See examples/README.md.
 	_, err := rt.NewDelegate(
 		ProviderClassName,
 		rt.GetClass("NEFilterDataProvider"),
@@ -104,11 +116,13 @@ func flowPID(flow rt.ID) int32 {
 	return int32(tok[5])
 }
 
-// allowVerdict / dropVerdict build the corresponding NEFilterNewFlowVerdict.
+// allowVerdict / dropVerdict build the corresponding NEFilterNewFlowVerdict via
+// the idiomatic factories, returning its raw object id for the -handleNewFlow:
+// implementation to hand back to the system.
 func allowVerdict() rt.ID {
-	return rt.Send[rt.ID](shared.ClassID("NEFilterNewFlowVerdict"), rt.RegisterName("allowVerdict"))
+	return obj.ID(ne.NEFilterNewFlowVerdictAllowVerdict())
 }
 
 func dropVerdict() rt.ID {
-	return rt.Send[rt.ID](shared.ClassID("NEFilterNewFlowVerdict"), rt.RegisterName("dropVerdict"))
+	return obj.ID(ne.NEFilterNewFlowVerdictDropVerdict())
 }

@@ -64,12 +64,16 @@ func (o *MKGeocodingRequest) GetMapItemsWithCompletionHandler(completionHandler 
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mKGeocodingRequestSelGetMapItemsWithCompletionHandler, __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_mKGeocodingRequestSelGetMapItemsWithCompletionHandler, __block_completionHandler)
+	})
 }
 
 // A function you call to cancel a geocoding request that’s in progress.
 func (o *MKGeocodingRequest) Cancel() {
-	o.Ptr().Send(_mKGeocodingRequestSelCancel)
+	purego.Main(func() {
+		o.Ptr().Send(_mKGeocodingRequestSelCancel)
+	})
 }
 
 func (o *MKGeocodingRequest) IsCancelled() bool {

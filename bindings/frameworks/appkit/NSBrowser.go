@@ -152,643 +152,1135 @@ func NSBrowserFromID(id objc.ID) *NSBrowser {
 
 // Loads column 0; unloads previously loaded columns.
 func (o *NSBrowser) LoadColumnZero() {
-	o.Ptr().Send(_nSBrowserSelLoadColumnZero)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelLoadColumnZero)
+	})
 }
 
 // Returns the item at the specified index path.
 func (o *NSBrowser) ItemAtIndexPath(indexPath *foundation.NSIndexPath) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelItemAtIndexPath, indexPath.Ptr())
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelItemAtIndexPath, indexPath.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the item located at the specified row and column.
 func (o *NSBrowser) ItemAtRowInColumn(row int, column int) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelItemAtRowInColumn, row, column)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelItemAtRowInColumn, row, column)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the index path of the item whose children are displayed in the given column.
 func (o *NSBrowser) IndexPathForColumn(column int) *foundation.NSIndexPath {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelIndexPathForColumn, column)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSIndexPathFromID(_ret)
+	var _mainthread0 *foundation.NSIndexPath
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSIndexPath {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelIndexPathForColumn, column)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSIndexPathFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns whether the specified item is a leaf item.
 func (o *NSBrowser) IsLeafItem(item objc.ID) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelIsLeafItem, item)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelIsLeafItem, item)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Updates the rows in the column with the specified column index with indexes in the specified set.
 func (o *NSBrowser) ReloadDataForRowIndexesInColumn(rowIndexes *foundation.NSIndexSet, column int) {
-	o.Ptr().Send(_nSBrowserSelReloadDataForRowIndexesInColumn, rowIndexes.Ptr(), column)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelReloadDataForRowIndexesInColumn, rowIndexes.Ptr(), column)
+	})
 }
 
 // Returns the item that contains the children located in the specified column.
 func (o *NSBrowser) ParentForItemsInColumn(column int) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelParentForItemsInColumn, column)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelParentForItemsInColumn, column)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Scrolls the specified row to be visible within the specified column.
 func (o *NSBrowser) ScrollRowToVisibleInColumn(row int, column int) {
-	o.Ptr().Send(_nSBrowserSelScrollRowToVisibleInColumn, row, column)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelScrollRowToVisibleInColumn, row, column)
+	})
 }
 
 // Sets the title of the given column.
 func (o *NSBrowser) SetTitleOfColumn(string_ *foundation.NSString, column int) {
-	o.Ptr().Send(_nSBrowserSelSetTitleOfColumn, string_.Ptr(), column)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetTitleOfColumn, string_.Ptr(), column)
+	})
 }
 
 // Returns the title displayed for the given column.
 func (o *NSBrowser) TitleOfColumn(column int) *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelTitleOfColumn, column)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelTitleOfColumn, column)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the path to be displayed by the browser.
 func (o *NSBrowser) SetPath(path *foundation.NSString) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelSetPath, path.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelSetPath, path.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a string representing the browser’s current path.
 func (o *NSBrowser) Path() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelPath)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelPath)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a string representing the path from the first column up to, but not including, the column at the given index.
 func (o *NSBrowser) PathToColumn(column int) *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelPathToColumn, column)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelPathToColumn, column)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the last (lowest) cell selected in the given column.
 func (o *NSBrowser) SelectedCellInColumn(column int) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelSelectedCellInColumn, column)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelSelectedCellInColumn, column)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Selects the cell at the specified row and column index.
 func (o *NSBrowser) SelectRowInColumn(row int, column int) {
-	o.Ptr().Send(_nSBrowserSelSelectRowInColumn, row, column)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSelectRowInColumn, row, column)
+	})
 }
 
 // Returns the row index of the selected cell in the specified column.
 func (o *NSBrowser) SelectedRowInColumn(column int) int {
-	_ret := objc.Send[int](o.Ptr(), _nSBrowserSelSelectedRowInColumn, column)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSBrowserSelSelectedRowInColumn, column)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies the selected rows in a given column of the browser.
 func (o *NSBrowser) SelectRowIndexesInColumn(indexes *foundation.NSIndexSet, column int) {
-	o.Ptr().Send(_nSBrowserSelSelectRowIndexesInColumn, indexes.Ptr(), column)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSelectRowIndexesInColumn, indexes.Ptr(), column)
+	})
 }
 
 // Provides the indexes of the selected rows in a given column of the browser.
 func (o *NSBrowser) SelectedRowIndexesInColumn(column int) *foundation.NSIndexSet {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelSelectedRowIndexesInColumn, column)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSIndexSetFromID(_ret)
+	var _mainthread0 *foundation.NSIndexSet
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSIndexSet {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelSelectedRowIndexesInColumn, column)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSIndexSetFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Reloads the given column.
 func (o *NSBrowser) ReloadColumn(column int) {
-	o.Ptr().Send(_nSBrowserSelReloadColumn, column)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelReloadColumn, column)
+	})
 }
 
 // Validates the browser’s visible columns.
 func (o *NSBrowser) ValidateVisibleColumns() {
-	o.Ptr().Send(_nSBrowserSelValidateVisibleColumns)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelValidateVisibleColumns)
+	})
 }
 
 // Scrolls columns right by the specified number of columns.
 func (o *NSBrowser) ScrollColumnsRightBy(shiftAmount int) {
-	o.Ptr().Send(_nSBrowserSelScrollColumnsRightBy, shiftAmount)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelScrollColumnsRightBy, shiftAmount)
+	})
 }
 
 // Scrolls columns left by the specified number of columns.
 func (o *NSBrowser) ScrollColumnsLeftBy(shiftAmount int) {
-	o.Ptr().Send(_nSBrowserSelScrollColumnsLeftBy, shiftAmount)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelScrollColumnsLeftBy, shiftAmount)
+	})
 }
 
 // Scrolls to make the specified column visible.
 func (o *NSBrowser) ScrollColumnToVisible(column int) {
-	o.Ptr().Send(_nSBrowserSelScrollColumnToVisible, column)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelScrollColumnToVisible, column)
+	})
 }
 
 // Adds a column to the right of the last column.
 func (o *NSBrowser) AddColumn() {
-	o.Ptr().Send(_nSBrowserSelAddColumn)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelAddColumn)
+	})
 }
 
 // Loads, if necessary, and returns the cell at the specified row and column location.
 func (o *NSBrowser) LoadedCellAtRowColumn(row int, col int) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelLoadedCellAtRowColumn, row, col)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelLoadedCellAtRowColumn, row, col)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Selects all cells in the last column of the browser.
 func (o *NSBrowser) SelectAll(sender objc.ID) {
-	o.Ptr().Send(_nSBrowserSelSelectAll, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSelectAll, sender)
+	})
 }
 
 // Adjusts the various subviews of the browser—scrollers, columns, titles, and so on—without redrawing.
 func (o *NSBrowser) Tile() {
-	o.Ptr().Send(_nSBrowserSelTile)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelTile)
+	})
 }
 
 // Responds to (single) mouse clicks in a column of the browser.
 func (o *NSBrowser) DoClick(sender objc.ID) {
-	o.Ptr().Send(_nSBrowserSelDoClick, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelDoClick, sender)
+	})
 }
 
 // Responds to double clicks in a column of the browser.
 func (o *NSBrowser) DoDoubleClick(sender objc.ID) {
-	o.Ptr().Send(_nSBrowserSelDoDoubleClick, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelDoDoubleClick, sender)
+	})
 }
 
 // Sends the action message to the target.
 func (o *NSBrowser) SendAction() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelSendAction)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelSendAction)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the bounds of the title frame for the specified column.
 func (o *NSBrowser) TitleFrameOfColumn(column int) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSBrowserSelTitleFrameOfColumn, column)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSBrowserSelTitleFrameOfColumn, column)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Draws the title for the specified column within the given rectangle.
 func (o *NSBrowser) DrawTitleOfColumnInRect(column int, rect corefoundation.CGRect) {
-	o.Ptr().Send(_nSBrowserSelDrawTitleOfColumnInRect, column, rect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelDrawTitleOfColumnInRect, column, rect)
+	})
 }
 
 // Returns the rectangle containing the given column.
 func (o *NSBrowser) FrameOfColumn(column int) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSBrowserSelFrameOfColumn, column)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSBrowserSelFrameOfColumn, column)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the rectangle containing the specified column, not including borders.
 func (o *NSBrowser) FrameOfInsideOfColumn(column int) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSBrowserSelFrameOfInsideOfColumn, column)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSBrowserSelFrameOfInsideOfColumn, column)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the frame of the cell at the specified location, including the expandable arrow.
 func (o *NSBrowser) FrameOfRowInColumn(row int, column int) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSBrowserSelFrameOfRowInColumn, row, column)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSBrowserSelFrameOfRowInColumn, row, column)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Gets the row and column coordinates for the specified point, if a cell exists at that point.
 func (o *NSBrowser) GetRowColumnForPoint(row *int64, column *int64, point corefoundation.CGPoint) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelGetRowColumnForPoint, row, column, point)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelGetRowColumnForPoint, row, column, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the column width for the width of the given column’s content.
 func (o *NSBrowser) ColumnWidthForColumnContentWidth(columnContentWidth float64) float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSBrowserSelColumnWidthForColumnContentWidth, columnContentWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSBrowserSelColumnWidthForColumnContentWidth, columnContentWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the content width for a given column width.
 func (o *NSBrowser) ColumnContentWidthForColumnWidth(columnWidth float64) float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSBrowserSelColumnContentWidthForColumnWidth, columnWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSBrowserSelColumnContentWidthForColumnWidth, columnWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the width of the specified column.
 func (o *NSBrowser) SetWidthOfColumn(columnWidth float64, columnIndex int) {
-	o.Ptr().Send(_nSBrowserSelSetWidthOfColumn, columnWidth, columnIndex)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetWidthOfColumn, columnWidth, columnIndex)
+	})
 }
 
 // Returns the width of the specified column.
 func (o *NSBrowser) WidthOfColumn(column int) float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSBrowserSelWidthOfColumn, column)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSBrowserSelWidthOfColumn, column)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Immediately retiles the browser’s columns using row heights specified by the browser’s delegate.
 func (o *NSBrowser) NoteHeightOfRowsWithIndexesChangedInColumn(indexSet *foundation.NSIndexSet, columnIndex int) {
-	o.Ptr().Send(_nSBrowserSelNoteHeightOfRowsWithIndexesChangedInColumn, indexSet.Ptr(), columnIndex)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelNoteHeightOfRowsWithIndexesChangedInColumn, indexSet.Ptr(), columnIndex)
+	})
 }
 
 // Sets the default column width for new browser columns that do not otherwise have an initial width from defaults or the browser’s delegate.
 func (o *NSBrowser) SetDefaultColumnWidth(columnWidth float64) {
-	o.Ptr().Send(_nSBrowserSelSetDefaultColumnWidth, columnWidth)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetDefaultColumnWidth, columnWidth)
+	})
 }
 
 // Returns the default column width of the browser’s columns.
 func (o *NSBrowser) DefaultColumnWidth() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSBrowserSelDefaultColumnWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSBrowserSelDefaultColumnWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Removes the column configuration data stored under the given name from the application’s user defaults.
 func NSBrowserRemoveSavedColumnsWithAutosaveName(name *foundation.NSString) {
-	objc.ID(_clsNSBrowser).Send(_nSBrowserSelRemoveSavedColumnsWithAutosaveName, name.Ptr())
+	purego.Main(func() {
+		objc.ID(_clsNSBrowser).Send(_nSBrowserSelRemoveSavedColumnsWithAutosaveName, name.Ptr())
+	})
 }
 
 // Indicates whether the browser can attempt to initiate a drag of the given rows for the given event.
 func (o *NSBrowser) CanDragRowsWithIndexesInColumnWithEvent(rowIndexes *foundation.NSIndexSet, column int, event *NSEvent) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelCanDragRowsWithIndexesInColumnWithEvent, rowIndexes.Ptr(), column, event.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelCanDragRowsWithIndexesInColumnWithEvent, rowIndexes.Ptr(), column, event.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Provides an image to represent dragged rows during a drag operation on the browser.
 func (o *NSBrowser) DraggingImageForRowsWithIndexesInColumnWithEventOffset(rowIndexes *foundation.NSIndexSet, column int, event *NSEvent, dragImageOffset *corefoundation.CGPoint) *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelDraggingImageForRowsWithIndexesInColumnWithEventOffset, rowIndexes.Ptr(), column, event.Ptr(), dragImageOffset)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelDraggingImageForRowsWithIndexesInColumnWithEventOffset, rowIndexes.Ptr(), column, event.Ptr(), dragImageOffset)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies the drag-operation mask for dragging operations with local or external destinations.
 func (o *NSBrowser) SetDraggingSourceOperationMaskForLocal(mask NSDragOperation, isLocal bool) {
-	o.Ptr().Send(_nSBrowserSelSetDraggingSourceOperationMaskForLocal, mask, isLocal)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetDraggingSourceOperationMaskForLocal, mask, isLocal)
+	})
 }
 
 // Begins editing the item at the specified path.
 func (o *NSBrowser) EditItemAtIndexPathWithEventSelect(indexPath *foundation.NSIndexPath, event *NSEvent, select_ bool) {
-	o.Ptr().Send(_nSBrowserSelEditItemAtIndexPathWithEventSelect, indexPath.Ptr(), event.Ptr(), select_)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelEditItemAtIndexPathWithEventSelect, indexPath.Ptr(), event.Ptr(), select_)
+	})
 }
 
 func NSBrowserCellClass() objc.Class {
-	_ret := objc.Send[objc.Class](objc.ID(_clsNSBrowser), _nSBrowserSelCellClass)
-	return _ret
+	var _mainthread0 objc.Class
+	purego.Main(func() {
+		_mainthread0 = func() objc.Class {
+			_ret := objc.Send[objc.Class](objc.ID(_clsNSBrowser), _nSBrowserSelCellClass)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) IsLoaded() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelIsLoaded)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelIsLoaded)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) DoubleAction() objc.SEL {
-	_ret := objc.Send[objc.SEL](o.Ptr(), _nSBrowserSelDoubleAction)
-	return _ret
+	var _mainthread0 objc.SEL
+	purego.Main(func() {
+		_mainthread0 = func() objc.SEL {
+			_ret := objc.Send[objc.SEL](o.Ptr(), _nSBrowserSelDoubleAction)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetDoubleAction(doubleAction objc.SEL) {
-	o.Ptr().Send(_nSBrowserSelSetDoubleAction, doubleAction)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetDoubleAction, doubleAction)
+	})
 }
 
 func (o *NSBrowser) CellPrototype() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelCellPrototype)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelCellPrototype)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetCellPrototype(cellPrototype objc.ID) {
-	o.Ptr().Send(_nSBrowserSelSetCellPrototype, cellPrototype)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetCellPrototype, cellPrototype)
+	})
 }
 
 func (o *NSBrowser) Delegate() NSBrowserDelegate {
-	_ret := objc.Send[NSBrowserDelegate](o.Ptr(), _nSBrowserSelDelegate)
-	return _ret
+	var _mainthread0 NSBrowserDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSBrowserDelegate {
+			_ret := objc.Send[NSBrowserDelegate](o.Ptr(), _nSBrowserSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetDelegate(delegate NSBrowserDelegate) {
-	o.Ptr().Send(_nSBrowserSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetDelegate, delegate)
+	})
 }
 
 func (o *NSBrowser) ReusesColumns() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelReusesColumns)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelReusesColumns)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetReusesColumns(reusesColumns bool) {
-	o.Ptr().Send(_nSBrowserSelSetReusesColumns, reusesColumns)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetReusesColumns, reusesColumns)
+	})
 }
 
 func (o *NSBrowser) HasHorizontalScroller() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelHasHorizontalScroller)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelHasHorizontalScroller)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetHasHorizontalScroller(hasHorizontalScroller bool) {
-	o.Ptr().Send(_nSBrowserSelSetHasHorizontalScroller, hasHorizontalScroller)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetHasHorizontalScroller, hasHorizontalScroller)
+	})
 }
 
 func (o *NSBrowser) AutohidesScroller() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelAutohidesScroller)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelAutohidesScroller)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetAutohidesScroller(autohidesScroller bool) {
-	o.Ptr().Send(_nSBrowserSelSetAutohidesScroller, autohidesScroller)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetAutohidesScroller, autohidesScroller)
+	})
 }
 
 func (o *NSBrowser) SeparatesColumns() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelSeparatesColumns)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelSeparatesColumns)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetSeparatesColumns(separatesColumns bool) {
-	o.Ptr().Send(_nSBrowserSelSetSeparatesColumns, separatesColumns)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetSeparatesColumns, separatesColumns)
+	})
 }
 
 func (o *NSBrowser) IsTitled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelIsTitled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelIsTitled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetTitled(titled bool) {
-	o.Ptr().Send(_nSBrowserSelSetTitled, titled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetTitled, titled)
+	})
 }
 
 func (o *NSBrowser) MinColumnWidth() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSBrowserSelMinColumnWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSBrowserSelMinColumnWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetMinColumnWidth(minColumnWidth float64) {
-	o.Ptr().Send(_nSBrowserSelSetMinColumnWidth, minColumnWidth)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetMinColumnWidth, minColumnWidth)
+	})
 }
 
 func (o *NSBrowser) MaxVisibleColumns() int {
-	_ret := objc.Send[int](o.Ptr(), _nSBrowserSelMaxVisibleColumns)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSBrowserSelMaxVisibleColumns)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetMaxVisibleColumns(maxVisibleColumns int) {
-	o.Ptr().Send(_nSBrowserSelSetMaxVisibleColumns, maxVisibleColumns)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetMaxVisibleColumns, maxVisibleColumns)
+	})
 }
 
 func (o *NSBrowser) AllowsMultipleSelection() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelAllowsMultipleSelection)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelAllowsMultipleSelection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetAllowsMultipleSelection(allowsMultipleSelection bool) {
-	o.Ptr().Send(_nSBrowserSelSetAllowsMultipleSelection, allowsMultipleSelection)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetAllowsMultipleSelection, allowsMultipleSelection)
+	})
 }
 
 func (o *NSBrowser) AllowsBranchSelection() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelAllowsBranchSelection)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelAllowsBranchSelection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetAllowsBranchSelection(allowsBranchSelection bool) {
-	o.Ptr().Send(_nSBrowserSelSetAllowsBranchSelection, allowsBranchSelection)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetAllowsBranchSelection, allowsBranchSelection)
+	})
 }
 
 func (o *NSBrowser) AllowsEmptySelection() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelAllowsEmptySelection)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelAllowsEmptySelection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetAllowsEmptySelection(allowsEmptySelection bool) {
-	o.Ptr().Send(_nSBrowserSelSetAllowsEmptySelection, allowsEmptySelection)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetAllowsEmptySelection, allowsEmptySelection)
+	})
 }
 
 func (o *NSBrowser) TakesTitleFromPreviousColumn() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelTakesTitleFromPreviousColumn)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelTakesTitleFromPreviousColumn)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetTakesTitleFromPreviousColumn(takesTitleFromPreviousColumn bool) {
-	o.Ptr().Send(_nSBrowserSelSetTakesTitleFromPreviousColumn, takesTitleFromPreviousColumn)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetTakesTitleFromPreviousColumn, takesTitleFromPreviousColumn)
+	})
 }
 
 func (o *NSBrowser) SendsActionOnArrowKeys() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelSendsActionOnArrowKeys)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelSendsActionOnArrowKeys)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetSendsActionOnArrowKeys(sendsActionOnArrowKeys bool) {
-	o.Ptr().Send(_nSBrowserSelSetSendsActionOnArrowKeys, sendsActionOnArrowKeys)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetSendsActionOnArrowKeys, sendsActionOnArrowKeys)
+	})
 }
 
 func (o *NSBrowser) PathSeparator() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelPathSeparator)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelPathSeparator)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetPathSeparator(pathSeparator *foundation.NSString) {
-	o.Ptr().Send(_nSBrowserSelSetPathSeparator, pathSeparator.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetPathSeparator, pathSeparator.Ptr())
+	})
 }
 
 func (o *NSBrowser) ClickedColumn() int {
-	_ret := objc.Send[int](o.Ptr(), _nSBrowserSelClickedColumn)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSBrowserSelClickedColumn)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) ClickedRow() int {
-	_ret := objc.Send[int](o.Ptr(), _nSBrowserSelClickedRow)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSBrowserSelClickedRow)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SelectedColumn() int {
-	_ret := objc.Send[int](o.Ptr(), _nSBrowserSelSelectedColumn)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSBrowserSelSelectedColumn)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SelectedCells() *foundation.NSArray[*NSCell] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelSelectedCells)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSCell](_ret)
+	var _mainthread0 *foundation.NSArray[*NSCell]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSCell] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelSelectedCells)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSCell](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SelectionIndexPath() *foundation.NSIndexPath {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelSelectionIndexPath)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSIndexPathFromID(_ret)
+	var _mainthread0 *foundation.NSIndexPath
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSIndexPath {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelSelectionIndexPath)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSIndexPathFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetSelectionIndexPath(selectionIndexPath *foundation.NSIndexPath) {
-	o.Ptr().Send(_nSBrowserSelSetSelectionIndexPath, selectionIndexPath.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetSelectionIndexPath, selectionIndexPath.Ptr())
+	})
 }
 
 func (o *NSBrowser) SelectionIndexPaths() *foundation.NSArray[*foundation.NSIndexPath] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelSelectionIndexPaths)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSIndexPath](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSIndexPath]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSIndexPath] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelSelectionIndexPaths)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSIndexPath](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetSelectionIndexPaths(selectionIndexPaths *foundation.NSArray[*foundation.NSIndexPath]) {
-	o.Ptr().Send(_nSBrowserSelSetSelectionIndexPaths, selectionIndexPaths.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetSelectionIndexPaths, selectionIndexPaths.Ptr())
+	})
 }
 
 func (o *NSBrowser) LastColumn() int {
-	_ret := objc.Send[int](o.Ptr(), _nSBrowserSelLastColumn)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSBrowserSelLastColumn)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetLastColumn(lastColumn int) {
-	o.Ptr().Send(_nSBrowserSelSetLastColumn, lastColumn)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetLastColumn, lastColumn)
+	})
 }
 
 func (o *NSBrowser) NumberOfVisibleColumns() int {
-	_ret := objc.Send[int](o.Ptr(), _nSBrowserSelNumberOfVisibleColumns)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSBrowserSelNumberOfVisibleColumns)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) FirstVisibleColumn() int {
-	_ret := objc.Send[int](o.Ptr(), _nSBrowserSelFirstVisibleColumn)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSBrowserSelFirstVisibleColumn)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) LastVisibleColumn() int {
-	_ret := objc.Send[int](o.Ptr(), _nSBrowserSelLastVisibleColumn)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSBrowserSelLastVisibleColumn)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) TitleHeight() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSBrowserSelTitleHeight)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSBrowserSelTitleHeight)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) ColumnResizingType() NSBrowserColumnResizingType {
-	_ret := objc.Send[NSBrowserColumnResizingType](o.Ptr(), _nSBrowserSelColumnResizingType)
-	return _ret
+	var _mainthread0 NSBrowserColumnResizingType
+	purego.Main(func() {
+		_mainthread0 = func() NSBrowserColumnResizingType {
+			_ret := objc.Send[NSBrowserColumnResizingType](o.Ptr(), _nSBrowserSelColumnResizingType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetColumnResizingType(columnResizingType NSBrowserColumnResizingType) {
-	o.Ptr().Send(_nSBrowserSelSetColumnResizingType, columnResizingType)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetColumnResizingType, columnResizingType)
+	})
 }
 
 func (o *NSBrowser) PrefersAllColumnUserResizing() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelPrefersAllColumnUserResizing)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelPrefersAllColumnUserResizing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetPrefersAllColumnUserResizing(prefersAllColumnUserResizing bool) {
-	o.Ptr().Send(_nSBrowserSelSetPrefersAllColumnUserResizing, prefersAllColumnUserResizing)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetPrefersAllColumnUserResizing, prefersAllColumnUserResizing)
+	})
 }
 
 func (o *NSBrowser) RowHeight() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSBrowserSelRowHeight)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSBrowserSelRowHeight)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetRowHeight(rowHeight float64) {
-	o.Ptr().Send(_nSBrowserSelSetRowHeight, rowHeight)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetRowHeight, rowHeight)
+	})
 }
 
 func (o *NSBrowser) ColumnsAutosaveName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelColumnsAutosaveName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelColumnsAutosaveName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetColumnsAutosaveName(columnsAutosaveName *foundation.NSString) {
-	o.Ptr().Send(_nSBrowserSelSetColumnsAutosaveName, columnsAutosaveName.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetColumnsAutosaveName, columnsAutosaveName.Ptr())
+	})
 }
 
 func (o *NSBrowser) AllowsTypeSelect() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelAllowsTypeSelect)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelAllowsTypeSelect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetAllowsTypeSelect(allowsTypeSelect bool) {
-	o.Ptr().Send(_nSBrowserSelSetAllowsTypeSelect, allowsTypeSelect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetAllowsTypeSelect, allowsTypeSelect)
+	})
 }
 
 func (o *NSBrowser) BackgroundColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelBackgroundColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelBackgroundColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSBrowser) SetBackgroundColor(backgroundColor *NSColor) {
-	o.Ptr().Send(_nSBrowserSelSetBackgroundColor, backgroundColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetBackgroundColor, backgroundColor.Ptr())
+	})
 }
 
 // Specifies whether the browser allows navigation using the arrow keys.
 // Deprecated: since macOS 10.6.
 func (o *NSBrowser) SetAcceptsArrowKeys(flag bool) {
-	o.Ptr().Send(_nSBrowserSelSetAcceptsArrowKeys, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetAcceptsArrowKeys, flag)
+	})
 }
 
 // Indicates whether the browser allows navigation using the arrow keys.
 // Deprecated: since macOS 10.6.
 func (o *NSBrowser) AcceptsArrowKeys() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelAcceptsArrowKeys)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelAcceptsArrowKeys)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Updates the browser to display the given column.
 // Deprecated: since macOS 10.3.
 func (o *NSBrowser) DisplayColumn(column int) {
-	o.Ptr().Send(_nSBrowserSelDisplayColumn, column)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelDisplayColumn, column)
+	})
 }
 
 // Updates the browser to display all loaded columns.
 // Deprecated: since macOS 10.3.
 func (o *NSBrowser) DisplayAllColumns() {
-	o.Ptr().Send(_nSBrowserSelDisplayAllColumns)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelDisplayAllColumns)
+	})
 }
 
 // Scrolls columns left or right based on an NSScroller.
 // Deprecated: since macOS 10.3.
 func (o *NSBrowser) ScrollViaScroller(sender *NSScroller) {
-	o.Ptr().Send(_nSBrowserSelScrollViaScroller, sender.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelScrollViaScroller, sender.Ptr())
+	})
 }
 
 // Updates the horizontal scroller to reflect column positions.
 // Deprecated: since macOS 10.3.
 func (o *NSBrowser) UpdateScroller() {
-	o.Ptr().Send(_nSBrowserSelUpdateScroller)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelUpdateScroller)
+	})
 }
 
 // Sets the matrix class to be used in the browser’s columns.
 // Deprecated: Use the item based NSBrowser instead
 func (o *NSBrowser) SetMatrixClass(factoryId objc.Class) {
-	o.Ptr().Send(_nSBrowserSelSetMatrixClass, factoryId)
+	purego.Main(func() {
+		o.Ptr().Send(_nSBrowserSelSetMatrixClass, factoryId)
+	})
 }
 
 // Returns the matrix class used in the browser’s columns.
 // Deprecated: Use the item based NSBrowser instead
 func (o *NSBrowser) MatrixClass() objc.Class {
-	_ret := objc.Send[objc.Class](o.Ptr(), _nSBrowserSelMatrixClass)
-	return _ret
+	var _mainthread0 objc.Class
+	purego.Main(func() {
+		_mainthread0 = func() objc.Class {
+			_ret := objc.Send[objc.Class](o.Ptr(), _nSBrowserSelMatrixClass)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the column number in which the given matrix is located.
 // Deprecated: Use the item based NSBrowser instead
 func (o *NSBrowser) ColumnOfMatrix(matrix *NSMatrix) int {
-	_ret := objc.Send[int](o.Ptr(), _nSBrowserSelColumnOfMatrix, matrix.Ptr())
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSBrowserSelColumnOfMatrix, matrix.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the matrix located in the specified column.
 // Deprecated: Use the item based NSBrowser instead
 func (o *NSBrowser) MatrixInColumn(column int) *NSMatrix {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelMatrixInColumn, column)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMatrixFromID(_ret)
+	var _mainthread0 *NSMatrix
+	purego.Main(func() {
+		_mainthread0 = func() *NSMatrix {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelMatrixInColumn, column)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMatrixFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

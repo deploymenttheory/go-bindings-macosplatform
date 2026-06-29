@@ -35,12 +35,24 @@ func WKOpenPanelParametersFromID(id objc.ID) *WKOpenPanelParameters {
 
 // @abstract Whether the file upload control supports multiple files.
 func (o *WKOpenPanelParameters) AllowsMultipleSelection() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKOpenPanelParametersSelAllowsMultipleSelection)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKOpenPanelParametersSelAllowsMultipleSelection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Whether the file upload control supports selecting directories.
 func (o *WKOpenPanelParameters) AllowsDirectories() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKOpenPanelParametersSelAllowsDirectories)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKOpenPanelParametersSelAllowsDirectories)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

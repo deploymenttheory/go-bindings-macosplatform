@@ -37,48 +37,84 @@ func WKWebExtensionDataRecordFromID(id objc.ID) *WKWebExtensionDataRecord {
 
 // @abstract Retrieves the size in bytes of the specific data types in this data record. @param dataTypes The set of data types to measure the size for. @return The total size of the specified data types. @seealso totalSizeInBytes
 func (o *WKWebExtensionDataRecord) SizeInBytesOfTypes(dataTypes *foundation.NSSet[*foundation.NSString]) uint {
-	_ret := objc.Send[uint](o.Ptr(), _wKWebExtensionDataRecordSelSizeInBytesOfTypes, dataTypes.Ptr())
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _wKWebExtensionDataRecordSelSizeInBytesOfTypes, dataTypes.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The display name for the web extension to which this data record belongs.
 func (o *WKWebExtensionDataRecord) DisplayName() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionDataRecordSelDisplayName)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionDataRecordSelDisplayName)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Unique identifier for the web extension context to which this data record belongs.
 func (o *WKWebExtensionDataRecord) UniqueIdentifier() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionDataRecordSelUniqueIdentifier)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionDataRecordSelUniqueIdentifier)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The set of data types contained in this data record.
 func (o *WKWebExtensionDataRecord) ContainedDataTypes() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionDataRecordSelContainedDataTypes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSSetFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSSet[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSSet[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionDataRecordSelContainedDataTypes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSSetFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract An array of errors that may have occurred when either calculating or deleting storage.
 func (o *WKWebExtensionDataRecord) Errors() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionDataRecordSelErrors)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[objc.ID](_ret)
+	var _mainthread0 *foundation.NSArray[objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionDataRecordSelErrors)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The total size in bytes of all data types contained in this data record. @seealso sizeInBytesOfTypes:
 func (o *WKWebExtensionDataRecord) TotalSizeInBytes() uint {
-	_ret := objc.Send[uint](o.Ptr(), _wKWebExtensionDataRecordSelTotalSizeInBytes)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _wKWebExtensionDataRecordSelTotalSizeInBytes)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

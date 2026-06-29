@@ -40,57 +40,97 @@ func WKWebExtensionCommandFromID(id objc.ID) *WKWebExtensionCommand {
 
 // @abstract The web extension context associated with the command.
 func (o *WKWebExtensionCommand) WebExtensionContext() *WKWebExtensionContext {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionCommandSelWebExtensionContext)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKWebExtensionContextFromID(_ret)
+	var _mainthread0 *WKWebExtensionContext
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebExtensionContext {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionCommandSelWebExtensionContext)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKWebExtensionContextFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract A unique identifier for the command.
 func (o *WKWebExtensionCommand) Identifier() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionCommandSelIdentifier)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionCommandSelIdentifier)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract Descriptive title for the command aiding discoverability. @discussion This title can be displayed in user interface elements such as keyboard shortcuts lists or menu items to help users understand its purpose.
 func (o *WKWebExtensionCommand) Title() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionCommandSelTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionCommandSelTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The primary key used to trigger the command, distinct from any modifier flags. @discussion This property can be customized within the app to avoid conflicts with existing shortcuts or to enable user personalization. It should accurately represent the activation key as used by the app, which the extension can use to display the complete shortcut in its interface. If no shortcut is desired for the command, the property should be set to `nil`. This value should be saved and restored as needed by the app.
 func (o *WKWebExtensionCommand) ActivationKey() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionCommandSelActivationKey)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionCommandSelActivationKey)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebExtensionCommand) SetActivationKey(activationKey *foundation.NSString) {
-	o.Ptr().Send(_wKWebExtensionCommandSelSetActivationKey, activationKey.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionCommandSelSetActivationKey, activationKey.Ptr())
+	})
 }
 
 func (o *WKWebExtensionCommand) ModifierFlags() appkit.NSEventModifierFlags {
-	_ret := objc.Send[appkit.NSEventModifierFlags](o.Ptr(), _wKWebExtensionCommandSelModifierFlags)
-	return _ret
+	var _mainthread0 appkit.NSEventModifierFlags
+	purego.Main(func() {
+		_mainthread0 = func() appkit.NSEventModifierFlags {
+			_ret := objc.Send[appkit.NSEventModifierFlags](o.Ptr(), _wKWebExtensionCommandSelModifierFlags)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebExtensionCommand) SetModifierFlags(modifierFlags appkit.NSEventModifierFlags) {
-	o.Ptr().Send(_wKWebExtensionCommandSelSetModifierFlags, modifierFlags)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionCommandSelSetModifierFlags, modifierFlags)
+	})
 }
 
 func (o *WKWebExtensionCommand) MenuItem() *appkit.NSMenuItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionCommandSelMenuItem)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSMenuItemFromID(_ret)
+	var _mainthread0 *appkit.NSMenuItem
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSMenuItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionCommandSelMenuItem)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSMenuItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

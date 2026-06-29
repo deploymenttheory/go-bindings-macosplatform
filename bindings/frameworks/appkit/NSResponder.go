@@ -113,434 +113,690 @@ func NSResponderFromID(id objc.ID) *NSResponder {
 
 // Creates a new responder object.
 func (o *NSResponder) Init() *NSResponder {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelInit)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSResponderFromID(_ret)
+	var _mainthread0 *NSResponder
+	purego.Main(func() {
+		_mainthread0 = func() *NSResponder {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelInit)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSResponderFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a new responder object with data in an unarchiver.
 func (o *NSResponder) InitWithCoder(coder *foundation.NSCoder) *NSResponder {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSResponderFromID(_ret)
+	var _mainthread0 *NSResponder
+	purego.Main(func() {
+		_mainthread0 = func() *NSResponder {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSResponderFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Attempts to perform the method indicated by an action with a specified argument.
 func (o *NSResponder) TryToPerformWith(action objc.SEL, object objc.ID) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSResponderSelTryToPerformWith, action, object)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSResponderSelTryToPerformWith, action, object)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Handle a key equivalent.
 func (o *NSResponder) PerformKeyEquivalent(event *NSEvent) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSResponderSelPerformKeyEquivalent, event.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSResponderSelPerformKeyEquivalent, event.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Overridden by subclasses to determine what services are available.
 func (o *NSResponder) ValidRequestorForSendTypeReturnType(sendType *foundation.NSString, returnType *foundation.NSString) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelValidRequestorForSendTypeReturnType, sendType.Ptr(), returnType.Ptr())
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelValidRequestorForSendTypeReturnType, sendType.Ptr(), returnType.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Informs the receiver that the user has pressed the left mouse button.
 func (o *NSResponder) MouseDown(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelMouseDown, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelMouseDown, event.Ptr())
+	})
 }
 
 // Informs the receiver that the user has pressed the right mouse button.
 func (o *NSResponder) RightMouseDown(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelRightMouseDown, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelRightMouseDown, event.Ptr())
+	})
 }
 
 // Informs the receiver that the user has pressed a mouse button other than the left or right one.
 func (o *NSResponder) OtherMouseDown(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelOtherMouseDown, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelOtherMouseDown, event.Ptr())
+	})
 }
 
 // Informs the receiver that the user has released the left mouse button.
 func (o *NSResponder) MouseUp(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelMouseUp, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelMouseUp, event.Ptr())
+	})
 }
 
 // Informs the receiver that the user has released the right mouse button.
 func (o *NSResponder) RightMouseUp(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelRightMouseUp, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelRightMouseUp, event.Ptr())
+	})
 }
 
 // Informs the receiver that the user has released a mouse button other than the left or right button.
 func (o *NSResponder) OtherMouseUp(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelOtherMouseUp, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelOtherMouseUp, event.Ptr())
+	})
 }
 
 // Informs the receiver that the mouse has moved.
 func (o *NSResponder) MouseMoved(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelMouseMoved, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelMouseMoved, event.Ptr())
+	})
 }
 
 // Informs the receiver that the user has moved the mouse with the left button pressed.
 func (o *NSResponder) MouseDragged(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelMouseDragged, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelMouseDragged, event.Ptr())
+	})
 }
 
 func (o *NSResponder) MouseCancelled(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelMouseCancelled, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelMouseCancelled, event.Ptr())
+	})
 }
 
 // Informs the receiver that the mouse’s scroll wheel has moved.
 func (o *NSResponder) ScrollWheel(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelScrollWheel, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelScrollWheel, event.Ptr())
+	})
 }
 
 // Informs the receiver that the user has moved the mouse with the right button pressed.
 func (o *NSResponder) RightMouseDragged(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelRightMouseDragged, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelRightMouseDragged, event.Ptr())
+	})
 }
 
 // Informs the receiver that the user has moved the mouse with a button other than the left or right button pressed.
 func (o *NSResponder) OtherMouseDragged(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelOtherMouseDragged, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelOtherMouseDragged, event.Ptr())
+	})
 }
 
 // Informs the receiver that the cursor has entered a tracking rectangle.
 func (o *NSResponder) MouseEntered(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelMouseEntered, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelMouseEntered, event.Ptr())
+	})
 }
 
 // Informs the receiver that the cursor has exited a tracking rectangle.
 func (o *NSResponder) MouseExited(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelMouseExited, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelMouseExited, event.Ptr())
+	})
 }
 
 // Informs the receiver that the user has pressed a key.
 func (o *NSResponder) KeyDown(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelKeyDown, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelKeyDown, event.Ptr())
+	})
 }
 
 // Informs the receiver that the user has released a key.
 func (o *NSResponder) KeyUp(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelKeyUp, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelKeyUp, event.Ptr())
+	})
 }
 
 // Informs the receiver that the user has pressed or released a modifier key (Shift, Control, and so on).
 func (o *NSResponder) FlagsChanged(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelFlagsChanged, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelFlagsChanged, event.Ptr())
+	})
 }
 
 // Informs the receiver that a tablet-point event has occurred.
 func (o *NSResponder) TabletPoint(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelTabletPoint, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelTabletPoint, event.Ptr())
+	})
 }
 
 // Informs the receiver that a tablet-proximity event has occurred.
 func (o *NSResponder) TabletProximity(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelTabletProximity, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelTabletProximity, event.Ptr())
+	})
 }
 
 // Informs the receiver that the mouse cursor has moved into a cursor rectangle.
 func (o *NSResponder) CursorUpdate(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelCursorUpdate, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelCursorUpdate, event.Ptr())
+	})
 }
 
 // Informs the receiver that the user has begun a pinch gesture.
 func (o *NSResponder) MagnifyWithEvent(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelMagnifyWithEvent, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelMagnifyWithEvent, event.Ptr())
+	})
 }
 
 // Informs the receiver that the user has begun a rotation gesture.
 func (o *NSResponder) RotateWithEvent(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelRotateWithEvent, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelRotateWithEvent, event.Ptr())
+	})
 }
 
 // Informs the receiver that the user has begun a swipe gesture.
 func (o *NSResponder) SwipeWithEvent(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelSwipeWithEvent, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelSwipeWithEvent, event.Ptr())
+	})
 }
 
 // Informs the receiver that the user has begun a touch gesture.
 func (o *NSResponder) BeginGestureWithEvent(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelBeginGestureWithEvent, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelBeginGestureWithEvent, event.Ptr())
+	})
 }
 
 // Informs the receiver that the user has ended a touch gesture.
 func (o *NSResponder) EndGestureWithEvent(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelEndGestureWithEvent, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelEndGestureWithEvent, event.Ptr())
+	})
 }
 
 // Informs the receiver that the user performed a smart zoom gesture.
 func (o *NSResponder) SmartMagnifyWithEvent(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelSmartMagnifyWithEvent, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelSmartMagnifyWithEvent, event.Ptr())
+	})
 }
 
 // Informs the responder that performed a double-tap on the side of an Apple Pencil.
 func (o *NSResponder) ChangeModeWithEvent(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelChangeModeWithEvent, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelChangeModeWithEvent, event.Ptr())
+	})
 }
 
 // Informs the receiver that new set of touches has been recognized.
 func (o *NSResponder) TouchesBeganWithEvent(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelTouchesBeganWithEvent, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelTouchesBeganWithEvent, event.Ptr())
+	})
 }
 
 // Informs the receiver that one or more touches has moved.
 func (o *NSResponder) TouchesMovedWithEvent(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelTouchesMovedWithEvent, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelTouchesMovedWithEvent, event.Ptr())
+	})
 }
 
 // Returns that a set of touches have been removed.
 func (o *NSResponder) TouchesEndedWithEvent(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelTouchesEndedWithEvent, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelTouchesEndedWithEvent, event.Ptr())
+	})
 }
 
 // Informs the receiver that tracking of touches has been cancelled for any reason.
 func (o *NSResponder) TouchesCancelledWithEvent(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelTouchesCancelledWithEvent, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelTouchesCancelledWithEvent, event.Ptr())
+	})
 }
 
 // Performs a Quick Look on the content at the location specified by the supplied event.
 func (o *NSResponder) QuickLookWithEvent(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelQuickLookWithEvent, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelQuickLookWithEvent, event.Ptr())
+	})
 }
 
 // Indicates a pressure change as the result of a user input event on a system that supports pressure sensitivity.
 func (o *NSResponder) PressureChangeWithEvent(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelPressureChangeWithEvent, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelPressureChangeWithEvent, event.Ptr())
+	})
 }
 
 // @method        `contextMenuKeyDown` @abstract      Handle a key event that should present a context menu at the user focus. @discussion    Most applications should not override this method. Instead, you should customize the context menu displayed from a keyboard event by implementing `menuForEvent:` and `selectionAnchorRect`, or `showContextMenuForSelection:`, rather than this method. You should only override this method when you do not want the system-provided default behavior for the context menu hotkey, either for a specific key combination, or for the hotkey in general. For example, if your application already provides a different behavior for control-Return (the default context menu hotkey definition), and you want to preserve that behavior, you should override this method to handle that specific key combination, and then return without calling `super`. Note that the user may customize the hotkey to a different key combination, so in this example, if any other key combination is passed to your method, you would call `super`. An implementation of this method should call `[super contextMenuKeyDown:event]` to pass the request up the responder chain. If the message reaches the application object, NSApplication's implementation of this method will send `showContextMenuForSelection:` to the responder chain. If you do not call `super`, then no further handling of the key event will be performed. @note          In some cases, `showContextMenuForSelection:` will be called without a prior call to `contextMenuKeyDown:`. This occurs when a view receives an Accessibility ShowMenu action, or when the user has created a Cocoa Text key binding to map a different key combination to the `showContextMenuForSelection:` action. @param         event The key down event that matches the system-wide context menu hotkey combination. @seealso       `showContextMenuForSelection:`
 func (o *NSResponder) ContextMenuKeyDown(event *NSEvent) {
-	o.Ptr().Send(_nSResponderSelContextMenuKeyDown, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelContextMenuKeyDown, event.Ptr())
+	})
 }
 
 // Handles the case where an event or action message falls off the end of the responder chain.
 func (o *NSResponder) NoResponderFor(eventSelector objc.SEL) {
-	o.Ptr().Send(_nSResponderSelNoResponderFor, eventSelector)
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelNoResponderFor, eventSelector)
+	})
 }
 
 // Notifies the receiver that it’s about to become first responder in its NSWindow.
 func (o *NSResponder) BecomeFirstResponder() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSResponderSelBecomeFirstResponder)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSResponderSelBecomeFirstResponder)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Notifies the receiver that it’s been asked to relinquish its status as first responder in its window.
 func (o *NSResponder) ResignFirstResponder() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSResponderSelResignFirstResponder)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSResponderSelResignFirstResponder)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Handles a series of key events.
 func (o *NSResponder) InterpretKeyEvents(eventArray *foundation.NSArray[*NSEvent]) {
-	o.Ptr().Send(_nSResponderSelInterpretKeyEvents, eventArray.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelInterpretKeyEvents, eventArray.Ptr())
+	})
 }
 
 // Clears any unprocessed key events when overridden by subclasses.
 func (o *NSResponder) FlushBufferedKeyEvents() {
-	o.Ptr().Send(_nSResponderSelFlushBufferedKeyEvents)
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelFlushBufferedKeyEvents)
+	})
 }
 
 func (o *NSResponder) ShowContextHelp(sender objc.ID) {
-	o.Ptr().Send(_nSResponderSelShowContextHelp, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelShowContextHelp, sender)
+	})
 }
 
 // Displays context-sensitive help for the receiver if help has been registered.
 func (o *NSResponder) HelpRequested(eventPtr *NSEvent) {
-	o.Ptr().Send(_nSResponderSelHelpRequested, eventPtr.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelHelpRequested, eventPtr.Ptr())
+	})
 }
 
 // Indicates whether a pen-down event should be treated as an ink event.
 func (o *NSResponder) ShouldBeTreatedAsInkEvent(event *NSEvent) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSResponderSelShouldBeTreatedAsInkEvent, event.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSResponderSelShouldBeTreatedAsInkEvent, event.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Implement this method to track gesture scroll events such as a swipe.
 func (o *NSResponder) WantsScrollEventsForSwipeTrackingOnAxis(axis NSEventGestureAxis) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSResponderSelWantsScrollEventsForSwipeTrackingOnAxis, axis)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSResponderSelWantsScrollEventsForSwipeTrackingOnAxis, axis)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns whether to forward elastic scrolling gesture events up the responder.
 func (o *NSResponder) WantsForwardedScrollEventsForAxis(axis NSEventGestureAxis) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSResponderSelWantsForwardedScrollEventsForAxis, axis)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSResponderSelWantsForwardedScrollEventsForAxis, axis)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Finds a target for an action method.
 func (o *NSResponder) SupplementalTargetForActionSender(action objc.SEL, sender objc.ID) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelSupplementalTargetForActionSender, action, sender)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelSupplementalTargetForActionSender, action, sender)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSResponder) NextResponder() *NSResponder {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelNextResponder)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSResponderFromID(_ret)
+	var _mainthread0 *NSResponder
+	purego.Main(func() {
+		_mainthread0 = func() *NSResponder {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelNextResponder)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSResponderFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSResponder) SetNextResponder(nextResponder *NSResponder) {
-	o.Ptr().Send(_nSResponderSelSetNextResponder, nextResponder.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelSetNextResponder, nextResponder.Ptr())
+	})
 }
 
 func (o *NSResponder) AcceptsFirstResponder() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSResponderSelAcceptsFirstResponder)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSResponderSelAcceptsFirstResponder)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSResponder) Menu() *NSMenu {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelMenu)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMenuFromID(_ret)
+	var _mainthread0 *NSMenu
+	purego.Main(func() {
+		_mainthread0 = func() *NSMenu {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelMenu)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMenuFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSResponder) SetMenu(menu *NSMenu) {
-	o.Ptr().Send(_nSResponderSelSetMenu, menu.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelSetMenu, menu.Ptr())
+	})
 }
 
 func (o *NSResponder) UndoManager() *foundation.NSUndoManager {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelUndoManager)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSUndoManagerFromID(_ret)
+	var _mainthread0 *foundation.NSUndoManager
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSUndoManager {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelUndoManager)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSUndoManagerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Allows controls to determine when they should become first responder.
 func (o *NSResponder) ValidateProposedFirstResponderForEvent(responder *NSResponder, event *NSEvent) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSResponderSelValidateProposedFirstResponderForEvent, responder.Ptr(), event.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSResponderSelValidateProposedFirstResponderForEvent, responder.Ptr(), event.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Presents an error alert to the user as a document-modal sheet attached to document window.
 func (o *NSResponder) PresentErrorModalForWindowDelegateDidPresentSelectorContextInfo(error_ unsafe.Pointer, window *NSWindow, delegate objc.ID, didPresentSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_nSResponderSelPresentErrorModalForWindowDelegateDidPresentSelectorContextInfo, error_, window.Ptr(), delegate, didPresentSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelPresentErrorModalForWindowDelegateDidPresentSelectorContextInfo, error_, window.Ptr(), delegate, didPresentSelector, contextInfo)
+	})
 }
 
 // Presents an error alert to the user as an application-modal dialog.
 func (o *NSResponder) PresentError(error_ unsafe.Pointer) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSResponderSelPresentError, error_)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSResponderSelPresentError, error_)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a custom version of the supplied error object that’s more suitable for presentation in alert sheets and dialogs.
 func (o *NSResponder) WillPresentError(error_ unsafe.Pointer) unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSResponderSelWillPresentError, error_)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSResponderSelWillPresentError, error_)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Performs all find oriented actions.
 func (o *NSResponder) PerformTextFinderAction(sender objc.ID) {
-	o.Ptr().Send(_nSResponderSelPerformTextFinderAction, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelPerformTextFinderAction, sender)
+	})
 }
 
 // Creates a new window to show as a tab in a tabbed window.
 func (o *NSResponder) NewWindowForTab(sender objc.ID) {
-	o.Ptr().Send(_nSResponderSelNewWindowForTab, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelNewWindowForTab, sender)
+	})
 }
 
 func (o *NSResponder) ShowWritingTools(sender objc.ID) {
-	o.Ptr().Send(_nSResponderSelShowWritingTools, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelShowWritingTools, sender)
+	})
 }
 
 // Handle a mnemonic.
 // Deprecated: This has always returned NO and had no effect on macOS
 func (o *NSResponder) PerformMnemonic(string_ *foundation.NSString) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSResponderSelPerformMnemonic, string_.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSResponderSelPerformMnemonic, string_.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Updates the state of the given user activity.
 func (o *NSResponder) UpdateUserActivityState(userActivity *foundation.NSUserActivity) {
-	o.Ptr().Send(_nSResponderSelUpdateUserActivityState, userActivity.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelUpdateUserActivityState, userActivity.Ptr())
+	})
 }
 
 func (o *NSResponder) UserActivity() *foundation.NSUserActivity {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelUserActivity)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSUserActivityFromID(_ret)
+	var _mainthread0 *foundation.NSUserActivity
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSUserActivity {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelUserActivity)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSUserActivityFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSResponder) SetUserActivity(userActivity *foundation.NSUserActivity) {
-	o.Ptr().Send(_nSResponderSelSetUserActivity, userActivity.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelSetUserActivity, userActivity.Ptr())
+	})
 }
 
 // Your custom subclass of the NSResponder class should override this method to create and configure your subclass’s default NSTouchBar object.
 func (o *NSResponder) MakeTouchBar() *NSTouchBar {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelMakeTouchBar)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTouchBarFromID(_ret)
+	var _mainthread0 *NSTouchBar
+	purego.Main(func() {
+		_mainthread0 = func() *NSTouchBar {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelMakeTouchBar)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTouchBarFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSResponder) TouchBar() *NSTouchBar {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelTouchBar)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTouchBarFromID(_ret)
+	var _mainthread0 *NSTouchBar
+	purego.Main(func() {
+		_mainthread0 = func() *NSTouchBar {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSResponderSelTouchBar)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTouchBarFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSResponder) SetTouchBar(touchBar *NSTouchBar) {
-	o.Ptr().Send(_nSResponderSelSetTouchBar, touchBar.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelSetTouchBar, touchBar.Ptr())
+	})
 }
 
 // Returns the receiver’s interface style.
 // Deprecated: since macOS 10.8.
 func (o *NSResponder) InterfaceStyle() uint {
-	_ret := objc.Send[uint](o.Ptr(), _nSResponderSelInterfaceStyle)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _nSResponderSelInterfaceStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the receiver’s style to the style specified by interfaceStyle, such as NSMacintoshInterfaceStyle or NSWindows95InterfaceStyle.
 // Deprecated: since macOS 10.8.
 func (o *NSResponder) SetInterfaceStyle(interfaceStyle uint) {
-	o.Ptr().Send(_nSResponderSelSetInterfaceStyle, interfaceStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelSetInterfaceStyle, interfaceStyle)
+	})
 }
 
 // Saves the interface-related state of the responder.
 func (o *NSResponder) EncodeRestorableStateWithCoder(coder *foundation.NSCoder) {
-	o.Ptr().Send(_nSResponderSelEncodeRestorableStateWithCoder, coder.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelEncodeRestorableStateWithCoder, coder.Ptr())
+	})
 }
 
 // Saves the interface-related state of the responder to a keyed archiver either synchronously or asynchronously on the given operation queue.
 func (o *NSResponder) EncodeRestorableStateWithCoderBackgroundQueue(coder *foundation.NSCoder, queue *foundation.NSOperationQueue) {
-	o.Ptr().Send(_nSResponderSelEncodeRestorableStateWithCoderBackgroundQueue, coder.Ptr(), queue.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelEncodeRestorableStateWithCoderBackgroundQueue, coder.Ptr(), queue.Ptr())
+	})
 }
 
 // Restores the interface-related state of the responder.
 func (o *NSResponder) RestoreStateWithCoder(coder *foundation.NSCoder) {
-	o.Ptr().Send(_nSResponderSelRestoreStateWithCoder, coder.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelRestoreStateWithCoder, coder.Ptr())
+	})
 }
 
 // Marks the responder’s interface-related state as dirty.
 func (o *NSResponder) InvalidateRestorableState() {
-	o.Ptr().Send(_nSResponderSelInvalidateRestorableState)
+	purego.Main(func() {
+		o.Ptr().Send(_nSResponderSelInvalidateRestorableState)
+	})
 }
 
 // Returns the classes that support secure coding.
 func NSResponderAllowedClassesForRestorableStateKeyPath(keyPath *foundation.NSString) *foundation.NSArray[objc.Class] {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSResponder), _nSResponderSelAllowedClassesForRestorableStateKeyPath, keyPath.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[objc.Class](_ret)
+	var _mainthread0 *foundation.NSArray[objc.Class]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[objc.Class] {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSResponder), _nSResponderSelAllowedClassesForRestorableStateKeyPath, keyPath.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[objc.Class](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func NSResponderRestorableStateKeyPaths() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSResponder), _nSResponderSelRestorableStateKeyPaths)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSResponder), _nSResponderSelRestorableStateKeyPaths)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }

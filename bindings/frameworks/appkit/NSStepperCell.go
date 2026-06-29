@@ -41,46 +41,86 @@ func NSStepperCellFromID(id objc.ID) *NSStepperCell {
 }
 
 func (o *NSStepperCell) MinValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSStepperCellSelMinValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSStepperCellSelMinValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSStepperCell) SetMinValue(minValue float64) {
-	o.Ptr().Send(_nSStepperCellSelSetMinValue, minValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStepperCellSelSetMinValue, minValue)
+	})
 }
 
 func (o *NSStepperCell) MaxValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSStepperCellSelMaxValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSStepperCellSelMaxValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSStepperCell) SetMaxValue(maxValue float64) {
-	o.Ptr().Send(_nSStepperCellSelSetMaxValue, maxValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStepperCellSelSetMaxValue, maxValue)
+	})
 }
 
 func (o *NSStepperCell) Increment() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSStepperCellSelIncrement)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSStepperCellSelIncrement)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSStepperCell) SetIncrement(increment float64) {
-	o.Ptr().Send(_nSStepperCellSelSetIncrement, increment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStepperCellSelSetIncrement, increment)
+	})
 }
 
 func (o *NSStepperCell) ValueWraps() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSStepperCellSelValueWraps)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSStepperCellSelValueWraps)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSStepperCell) SetValueWraps(valueWraps bool) {
-	o.Ptr().Send(_nSStepperCellSelSetValueWraps, valueWraps)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStepperCellSelSetValueWraps, valueWraps)
+	})
 }
 
 func (o *NSStepperCell) Autorepeat() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSStepperCellSelAutorepeat)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSStepperCellSelAutorepeat)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSStepperCell) SetAutorepeat(autorepeat bool) {
-	o.Ptr().Send(_nSStepperCellSelSetAutorepeat, autorepeat)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStepperCellSelSetAutorepeat, autorepeat)
+	})
 }

@@ -42,59 +42,103 @@ func NSCollectionViewItemFromID(id objc.ID) *NSCollectionViewItem {
 }
 
 func (o *NSCollectionViewItem) CollectionView() *NSCollectionView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewItemSelCollectionView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewFromID(_ret)
+	var _mainthread0 *NSCollectionView
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewItemSelCollectionView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewItem) IsSelected() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewItemSelIsSelected)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewItemSelIsSelected)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewItem) SetSelected(selected bool) {
-	o.Ptr().Send(_nSCollectionViewItemSelSetSelected, selected)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewItemSelSetSelected, selected)
+	})
 }
 
 func (o *NSCollectionViewItem) HighlightState() NSCollectionViewItemHighlightState {
-	_ret := objc.Send[NSCollectionViewItemHighlightState](o.Ptr(), _nSCollectionViewItemSelHighlightState)
-	return _ret
+	var _mainthread0 NSCollectionViewItemHighlightState
+	purego.Main(func() {
+		_mainthread0 = func() NSCollectionViewItemHighlightState {
+			_ret := objc.Send[NSCollectionViewItemHighlightState](o.Ptr(), _nSCollectionViewItemSelHighlightState)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewItem) SetHighlightState(highlightState NSCollectionViewItemHighlightState) {
-	o.Ptr().Send(_nSCollectionViewItemSelSetHighlightState, highlightState)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewItemSelSetHighlightState, highlightState)
+	})
 }
 
 func (o *NSCollectionViewItem) ImageView() *NSImageView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewItemSelImageView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageViewFromID(_ret)
+	var _mainthread0 *NSImageView
+	purego.Main(func() {
+		_mainthread0 = func() *NSImageView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewItemSelImageView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewItem) SetImageView(imageView *NSImageView) {
-	o.Ptr().Send(_nSCollectionViewItemSelSetImageView, imageView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewItemSelSetImageView, imageView.Ptr())
+	})
 }
 
 func (o *NSCollectionViewItem) TextField() *NSTextField {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewItemSelTextField)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextFieldFromID(_ret)
+	var _mainthread0 *NSTextField
+	purego.Main(func() {
+		_mainthread0 = func() *NSTextField {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewItemSelTextField)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextFieldFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewItem) SetTextField(textField *NSTextField) {
-	o.Ptr().Send(_nSCollectionViewItemSelSetTextField, textField.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewItemSelSetTextField, textField.Ptr())
+	})
 }
 
 func (o *NSCollectionViewItem) DraggingImageComponents() *foundation.NSArray[*NSDraggingImageComponent] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewItemSelDraggingImageComponents)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSDraggingImageComponent](_ret)
+	var _mainthread0 *foundation.NSArray[*NSDraggingImageComponent]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSDraggingImageComponent] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewItemSelDraggingImageComponents)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSDraggingImageComponent](_ret)
+		}()
+	})
+	return _mainthread0
 }

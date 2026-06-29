@@ -38,48 +38,80 @@ func NSCollectionViewCompositionalLayoutFromID(id objc.ID) *NSCollectionViewComp
 
 // Creates a compositional layout object with a single section.
 func (o *NSCollectionViewCompositionalLayout) InitWithSection(section *NSCollectionLayoutSection) *NSCollectionViewCompositionalLayout {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewCompositionalLayoutSelInitWithSection, section.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewCompositionalLayoutFromID(_ret)
+	var _mainthread0 *NSCollectionViewCompositionalLayout
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewCompositionalLayout {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewCompositionalLayoutSelInitWithSection, section.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewCompositionalLayoutFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a compositional layout object with a single section and an additional configuration.
 func (o *NSCollectionViewCompositionalLayout) InitWithSectionConfiguration(section *NSCollectionLayoutSection, configuration *NSCollectionViewCompositionalLayoutConfiguration) *NSCollectionViewCompositionalLayout {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewCompositionalLayoutSelInitWithSectionConfiguration, section.Ptr(), configuration.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewCompositionalLayoutFromID(_ret)
+	var _mainthread0 *NSCollectionViewCompositionalLayout
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewCompositionalLayout {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewCompositionalLayoutSelInitWithSectionConfiguration, section.Ptr(), configuration.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewCompositionalLayoutFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a compositional layout object with a section provider to supply the layout’s sections.
 func (o *NSCollectionViewCompositionalLayout) InitWithSectionProvider(sectionProvider objc.Block) *NSCollectionViewCompositionalLayout {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewCompositionalLayoutSelInitWithSectionProvider, sectionProvider)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewCompositionalLayoutFromID(_ret)
+	var _mainthread0 *NSCollectionViewCompositionalLayout
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewCompositionalLayout {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewCompositionalLayoutSelInitWithSectionProvider, sectionProvider)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewCompositionalLayoutFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a compositional layout object with a section provider and an additional configuration.
 func (o *NSCollectionViewCompositionalLayout) InitWithSectionProviderConfiguration(sectionProvider objc.Block, configuration *NSCollectionViewCompositionalLayoutConfiguration) *NSCollectionViewCompositionalLayout {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewCompositionalLayoutSelInitWithSectionProviderConfiguration, sectionProvider, configuration.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewCompositionalLayoutFromID(_ret)
+	var _mainthread0 *NSCollectionViewCompositionalLayout
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewCompositionalLayout {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewCompositionalLayoutSelInitWithSectionProviderConfiguration, sectionProvider, configuration.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewCompositionalLayoutFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewCompositionalLayout) Configuration() *NSCollectionViewCompositionalLayoutConfiguration {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewCompositionalLayoutSelConfiguration)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionViewCompositionalLayoutConfigurationFromID(_ret)
+	var _mainthread0 *NSCollectionViewCompositionalLayoutConfiguration
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionViewCompositionalLayoutConfiguration {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewCompositionalLayoutSelConfiguration)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionViewCompositionalLayoutConfigurationFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewCompositionalLayout) SetConfiguration(configuration *NSCollectionViewCompositionalLayoutConfiguration) {
-	o.Ptr().Send(_nSCollectionViewCompositionalLayoutSelSetConfiguration, configuration.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewCompositionalLayoutSelSetConfiguration, configuration.Ptr())
+	})
 }

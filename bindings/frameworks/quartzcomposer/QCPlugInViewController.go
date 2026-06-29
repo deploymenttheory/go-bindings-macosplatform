@@ -34,14 +34,26 @@ func QCPlugInViewControllerFromID(id objc.ID) *QCPlugInViewController {
 }
 
 func (o *QCPlugInViewController) InitWithPlugInViewNibName(plugIn *quartz.QCPlugIn, name *foundation.NSString) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qCPlugInViewControllerSelInitWithPlugInViewNibName, plugIn.Ptr(), name.Ptr())
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qCPlugInViewControllerSelInitWithPlugInViewNibName, plugIn.Ptr(), name.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QCPlugInViewController) PlugIn() *quartz.QCPlugIn {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qCPlugInViewControllerSelPlugIn)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return quartz.QCPlugInFromID(_ret)
+	var _mainthread0 *quartz.QCPlugIn
+	purego.Main(func() {
+		_mainthread0 = func() *quartz.QCPlugIn {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qCPlugInViewControllerSelPlugIn)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return quartz.QCPlugInFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

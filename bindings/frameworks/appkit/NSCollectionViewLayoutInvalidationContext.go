@@ -46,67 +46,119 @@ func NSCollectionViewLayoutInvalidationContextFromID(id objc.ID) *NSCollectionVi
 
 // Marks the specified items as invalid so that their layout information can be updated.
 func (o *NSCollectionViewLayoutInvalidationContext) InvalidateItemsAtIndexPaths(indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
-	o.Ptr().Send(_nSCollectionViewLayoutInvalidationContextSelInvalidateItemsAtIndexPaths, indexPaths.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewLayoutInvalidationContextSelInvalidateItemsAtIndexPaths, indexPaths.Ptr())
+	})
 }
 
 // Marks the specified supplementary views as invalid so that their layout information can be updated.
 func (o *NSCollectionViewLayoutInvalidationContext) InvalidateSupplementaryElementsOfKindAtIndexPaths(elementKind *foundation.NSString, indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
-	o.Ptr().Send(_nSCollectionViewLayoutInvalidationContextSelInvalidateSupplementaryElementsOfKindAtIndexPaths, elementKind.Ptr(), indexPaths.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewLayoutInvalidationContextSelInvalidateSupplementaryElementsOfKindAtIndexPaths, elementKind.Ptr(), indexPaths.Ptr())
+	})
 }
 
 // Marks the specified decoration views as invalid so that their layout information can be updated.
 func (o *NSCollectionViewLayoutInvalidationContext) InvalidateDecorationElementsOfKindAtIndexPaths(elementKind *foundation.NSString, indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
-	o.Ptr().Send(_nSCollectionViewLayoutInvalidationContextSelInvalidateDecorationElementsOfKindAtIndexPaths, elementKind.Ptr(), indexPaths.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewLayoutInvalidationContextSelInvalidateDecorationElementsOfKindAtIndexPaths, elementKind.Ptr(), indexPaths.Ptr())
+	})
 }
 
 func (o *NSCollectionViewLayoutInvalidationContext) InvalidateEverything() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewLayoutInvalidationContextSelInvalidateEverything)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewLayoutInvalidationContextSelInvalidateEverything)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewLayoutInvalidationContext) InvalidateDataSourceCounts() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewLayoutInvalidationContextSelInvalidateDataSourceCounts)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewLayoutInvalidationContextSelInvalidateDataSourceCounts)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewLayoutInvalidationContext) InvalidatedItemIndexPaths() *foundation.NSSet[*foundation.NSIndexPath] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutInvalidationContextSelInvalidatedItemIndexPaths)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSSetFromID[*foundation.NSIndexPath](_ret)
+	var _mainthread0 *foundation.NSSet[*foundation.NSIndexPath]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSSet[*foundation.NSIndexPath] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutInvalidationContextSelInvalidatedItemIndexPaths)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSSetFromID[*foundation.NSIndexPath](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewLayoutInvalidationContext) InvalidatedSupplementaryIndexPaths() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutInvalidationContextSelInvalidatedSupplementaryIndexPaths)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
+	var _mainthread0 *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutInvalidationContextSelInvalidatedSupplementaryIndexPaths)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewLayoutInvalidationContext) InvalidatedDecorationIndexPaths() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutInvalidationContextSelInvalidatedDecorationIndexPaths)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
+	var _mainthread0 *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutInvalidationContextSelInvalidatedDecorationIndexPaths)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewLayoutInvalidationContext) ContentOffsetAdjustment() corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSCollectionViewLayoutInvalidationContextSelContentOffsetAdjustment)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSCollectionViewLayoutInvalidationContextSelContentOffsetAdjustment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewLayoutInvalidationContext) SetContentOffsetAdjustment(contentOffsetAdjustment corefoundation.CGPoint) {
-	o.Ptr().Send(_nSCollectionViewLayoutInvalidationContextSelSetContentOffsetAdjustment, contentOffsetAdjustment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewLayoutInvalidationContextSelSetContentOffsetAdjustment, contentOffsetAdjustment)
+	})
 }
 
 func (o *NSCollectionViewLayoutInvalidationContext) ContentSizeAdjustment() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCollectionViewLayoutInvalidationContextSelContentSizeAdjustment)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCollectionViewLayoutInvalidationContextSelContentSizeAdjustment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewLayoutInvalidationContext) SetContentSizeAdjustment(contentSizeAdjustment corefoundation.CGSize) {
-	o.Ptr().Send(_nSCollectionViewLayoutInvalidationContextSelSetContentSizeAdjustment, contentSizeAdjustment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewLayoutInvalidationContextSelSetContentSizeAdjustment, contentSizeAdjustment)
+	})
 }

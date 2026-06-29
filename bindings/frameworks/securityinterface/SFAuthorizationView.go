@@ -50,86 +50,148 @@ func SFAuthorizationViewFromID(id objc.ID) *SFAuthorizationView {
 
 // Sets the requested-right string to use with the default authorization rights set.
 func (o *SFAuthorizationView) SetString(authorizationString string) {
-	o.Ptr().Send(_sFAuthorizationViewSelSetString, authorizationString)
+	purego.Main(func() {
+		o.Ptr().Send(_sFAuthorizationViewSelSetString, authorizationString)
+	})
 }
 
 // Sets the authorization rights for this view.
 func (o *SFAuthorizationView) SetAuthorizationRights(authorizationRights *security.AuthorizationItemSet) {
-	o.Ptr().Send(_sFAuthorizationViewSelSetAuthorizationRights, authorizationRights)
+	purego.Main(func() {
+		o.Ptr().Send(_sFAuthorizationViewSelSetAuthorizationRights, authorizationRights)
+	})
 }
 
 // Returns the authorization rights for this view.
 func (o *SFAuthorizationView) AuthorizationRights() *security.AuthorizationItemSet {
-	_ret := objc.Send[*security.AuthorizationItemSet](o.Ptr(), _sFAuthorizationViewSelAuthorizationRights)
-	return _ret
+	var _mainthread0 *security.AuthorizationItemSet
+	purego.Main(func() {
+		_mainthread0 = func() *security.AuthorizationItemSet {
+			_ret := objc.Send[*security.AuthorizationItemSet](o.Ptr(), _sFAuthorizationViewSelAuthorizationRights)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the authorization object associated with this view.
 func (o *SFAuthorizationView) Authorization() *securityfoundation.SFAuthorization {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sFAuthorizationViewSelAuthorization)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return securityfoundation.SFAuthorizationFromID(_ret)
+	var _mainthread0 *securityfoundation.SFAuthorization
+	purego.Main(func() {
+		_mainthread0 = func() *securityfoundation.SFAuthorization {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sFAuthorizationViewSelAuthorization)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return securityfoundation.SFAuthorizationFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Manually updates the authorization view.
 func (o *SFAuthorizationView) UpdateStatus(inSender objc.ID) bool {
-	_ret := objc.Send[bool](o.Ptr(), _sFAuthorizationViewSelUpdateStatus, inSender)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sFAuthorizationViewSelUpdateStatus, inSender)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the authorization view to update itself automatically.
 func (o *SFAuthorizationView) SetAutoupdate(autoupdate bool) {
-	o.Ptr().Send(_sFAuthorizationViewSelSetAutoupdate, autoupdate)
+	purego.Main(func() {
+		o.Ptr().Send(_sFAuthorizationViewSelSetAutoupdate, autoupdate)
+	})
 }
 
 // Sets the authorization view to update itself at a specific interval.
 func (o *SFAuthorizationView) SetAutoupdateInterval(autoupdate bool, interval float64) {
-	o.Ptr().Send(_sFAuthorizationViewSelSetAutoupdateInterval, autoupdate, interval)
+	purego.Main(func() {
+		o.Ptr().Send(_sFAuthorizationViewSelSetAutoupdateInterval, autoupdate, interval)
+	})
 }
 
 // Returns the current state of the authorization view.
 func (o *SFAuthorizationView) AuthorizationState() SFAuthorizationViewState {
-	_ret := objc.Send[SFAuthorizationViewState](o.Ptr(), _sFAuthorizationViewSelAuthorizationState)
-	return _ret
+	var _mainthread0 SFAuthorizationViewState
+	purego.Main(func() {
+		_mainthread0 = func() SFAuthorizationViewState {
+			_ret := objc.Send[SFAuthorizationViewState](o.Ptr(), _sFAuthorizationViewSelAuthorizationState)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the current state of the authorization view.
 func (o *SFAuthorizationView) SetEnabled(enabled bool) {
-	o.Ptr().Send(_sFAuthorizationViewSelSetEnabled, enabled)
+	purego.Main(func() {
+		o.Ptr().Send(_sFAuthorizationViewSelSetEnabled, enabled)
+	})
 }
 
 // Indicates whether the authorization view is enabled (true) or disabled (false).
 func (o *SFAuthorizationView) IsEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sFAuthorizationViewSelIsEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sFAuthorizationViewSelIsEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the current authorization flags for the view.
 func (o *SFAuthorizationView) SetFlags(flags security.AuthorizationFlags) {
-	o.Ptr().Send(_sFAuthorizationViewSelSetFlags, flags)
+	purego.Main(func() {
+		o.Ptr().Send(_sFAuthorizationViewSelSetFlags, flags)
+	})
 }
 
 // Sets the delegate for this authorization view.
 func (o *SFAuthorizationView) SetDelegate(delegate objc.ID) {
-	o.Ptr().Send(_sFAuthorizationViewSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_sFAuthorizationViewSelSetDelegate, delegate)
+	})
 }
 
 // Returns the delegate for this view.
 func (o *SFAuthorizationView) Delegate() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sFAuthorizationViewSelDelegate)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sFAuthorizationViewSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Attempts to unlock the lock icon in the view.
 func (o *SFAuthorizationView) Authorize(inSender objc.ID) bool {
-	_ret := objc.Send[bool](o.Ptr(), _sFAuthorizationViewSelAuthorize, inSender)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sFAuthorizationViewSelAuthorize, inSender)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the authorization state to unauthorized and locks the lock icon in the view.
 func (o *SFAuthorizationView) Deauthorize(inSender objc.ID) bool {
-	_ret := objc.Send[bool](o.Ptr(), _sFAuthorizationViewSelDeauthorize, inSender)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sFAuthorizationViewSelDeauthorize, inSender)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

@@ -447,7 +447,7 @@ metadata/
 
 This serves two purposes:
 
-1. **`--skip-scan` regeneration** — Phases 2 and 3 can run without Xcode or Clang. Anyone can regenerate all 250 framework packages from committed metadata:
+1. **`--skip-scan` regeneration** — Phases 2 and 3 can run without Xcode or Clang. Anyone can regenerate all 251 framework packages from committed metadata:
 
    ```sh
    go run ./cmd/generate/ --skip-scan --metadata-dir ./metadata

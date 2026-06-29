@@ -45,64 +45,112 @@ func SKEffectNodeFromID(id objc.ID) *SKEffectNode {
 
 // A CIFilter to be used as an effect Any CIFilter that requires only a single "inputImage" and produces an "outputImage" is allowed. The filter is applied to all children of the SKEffectNode. If the filter is nil, the children of this node is flattened before being drawn as long as the SKEffectNode is enabled.
 func (o *SKEffectNode) Filter() *coreimage.CIFilter {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKEffectNodeSelFilter)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return coreimage.CIFilterFromID(_ret)
+	var _mainthread0 *coreimage.CIFilter
+	purego.Main(func() {
+		_mainthread0 = func() *coreimage.CIFilter {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKEffectNodeSelFilter)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return coreimage.CIFilterFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKEffectNode) SetFilter(filter *coreimage.CIFilter) {
-	o.Ptr().Send(_sKEffectNodeSelSetFilter, filter.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKEffectNodeSelSetFilter, filter.Ptr())
+	})
 }
 
 func (o *SKEffectNode) ShouldCenterFilter() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sKEffectNodeSelShouldCenterFilter)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sKEffectNodeSelShouldCenterFilter)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKEffectNode) SetShouldCenterFilter(shouldCenterFilter bool) {
-	o.Ptr().Send(_sKEffectNodeSelSetShouldCenterFilter, shouldCenterFilter)
+	purego.Main(func() {
+		o.Ptr().Send(_sKEffectNodeSelSetShouldCenterFilter, shouldCenterFilter)
+	})
 }
 
 // Enable the SKEffectNode. The SKEffectNode has no effect when appliesEffects is not enabled, this is useful for setting up an effect to use later on. Defaults to YES.
 func (o *SKEffectNode) ShouldEnableEffects() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sKEffectNodeSelShouldEnableEffects)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sKEffectNodeSelShouldEnableEffects)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKEffectNode) SetShouldEnableEffects(shouldEnableEffects bool) {
-	o.Ptr().Send(_sKEffectNodeSelSetShouldEnableEffects, shouldEnableEffects)
+	purego.Main(func() {
+		o.Ptr().Send(_sKEffectNodeSelSetShouldEnableEffects, shouldEnableEffects)
+	})
 }
 
 // Enable the rasterization on the SKEffectNode. The SKEffectNode's output is rasterized and cached internally. This cache is reused when rendering. When the SKEffectNode's children change, the cache is updated, but changing properties on the CIFilter does *not* cause an update (you must disable rasterization and then re-enable it for the changes to apply). This is more expensive than not rasterizing if the node's children change frequently, only enable this option if you know the children is largely static.
 func (o *SKEffectNode) ShouldRasterize() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sKEffectNodeSelShouldRasterize)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sKEffectNodeSelShouldRasterize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKEffectNode) SetShouldRasterize(shouldRasterize bool) {
-	o.Ptr().Send(_sKEffectNodeSelSetShouldRasterize, shouldRasterize)
+	purego.Main(func() {
+		o.Ptr().Send(_sKEffectNodeSelSetShouldRasterize, shouldRasterize)
+	})
 }
 
 // Sets the blend mode to use when composing the effect with the final framebuffer. @see SKNode.SKBlendMode
 func (o *SKEffectNode) BlendMode() SKBlendMode {
-	_ret := objc.Send[SKBlendMode](o.Ptr(), _sKEffectNodeSelBlendMode)
-	return _ret
+	var _mainthread0 SKBlendMode
+	purego.Main(func() {
+		_mainthread0 = func() SKBlendMode {
+			_ret := objc.Send[SKBlendMode](o.Ptr(), _sKEffectNodeSelBlendMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKEffectNode) SetBlendMode(blendMode SKBlendMode) {
-	o.Ptr().Send(_sKEffectNodeSelSetBlendMode, blendMode)
+	purego.Main(func() {
+		o.Ptr().Send(_sKEffectNodeSelSetBlendMode, blendMode)
+	})
 }
 
 func (o *SKEffectNode) Shader() *SKShader {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKEffectNodeSelShader)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKShaderFromID(_ret)
+	var _mainthread0 *SKShader
+	purego.Main(func() {
+		_mainthread0 = func() *SKShader {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKEffectNodeSelShader)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKShaderFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKEffectNode) SetShader(shader *SKShader) {
-	o.Ptr().Send(_sKEffectNodeSelSetShader, shader.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKEffectNodeSelSetShader, shader.Ptr())
+	})
 }

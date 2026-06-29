@@ -42,53 +42,91 @@ func NSFontPanelFromID(id objc.ID) *NSFontPanel {
 
 // Sets the selected font in the receiver to the specified font.
 func (o *NSFontPanel) SetPanelFontIsMultiple(fontObj *NSFont, flag bool) {
-	o.Ptr().Send(_nSFontPanelSelSetPanelFontIsMultiple, fontObj.Ptr(), flag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSFontPanelSelSetPanelFontIsMultiple, fontObj.Ptr(), flag)
+	})
 }
 
 // Converts the specified font using the settings in the receiver, with the aid of the shared NSFontManager if necessary.
 func (o *NSFontPanel) PanelConvertFont(fontObj *NSFont) *NSFont {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontPanelSelPanelConvertFont, fontObj.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSFontFromID(_ret)
+	var _mainthread0 *NSFont
+	purego.Main(func() {
+		_mainthread0 = func() *NSFont {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSFontPanelSelPanelConvertFont, fontObj.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSFontFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Triggers a reload to the default state, so that the delegate is called.
 func (o *NSFontPanel) ReloadDefaultFontFamilies() {
-	o.Ptr().Send(_nSFontPanelSelReloadDefaultFontFamilies)
+	purego.Main(func() {
+		o.Ptr().Send(_nSFontPanelSelReloadDefaultFontFamilies)
+	})
 }
 
 func NSFontPanelSharedFontPanel() *NSFontPanel {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSFontPanel), _nSFontPanelSelSharedFontPanel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSFontPanelFromID(_ret)
+	var _mainthread0 *NSFontPanel
+	purego.Main(func() {
+		_mainthread0 = func() *NSFontPanel {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSFontPanel), _nSFontPanelSelSharedFontPanel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSFontPanelFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func NSFontPanelSharedFontPanelExists() bool {
-	_ret := objc.Send[bool](objc.ID(_clsNSFontPanel), _nSFontPanelSelSharedFontPanelExists)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](objc.ID(_clsNSFontPanel), _nSFontPanelSelSharedFontPanelExists)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSFontPanel) AccessoryView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontPanelSelAccessoryView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSFontPanelSelAccessoryView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSFontPanel) SetAccessoryView(accessoryView *NSView) {
-	o.Ptr().Send(_nSFontPanelSelSetAccessoryView, accessoryView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSFontPanelSelSetAccessoryView, accessoryView.Ptr())
+	})
 }
 
 func (o *NSFontPanel) IsEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSFontPanelSelIsEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSFontPanelSelIsEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSFontPanel) SetEnabled(enabled bool) {
-	o.Ptr().Send(_nSFontPanelSelSetEnabled, enabled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSFontPanelSelSetEnabled, enabled)
+	})
 }

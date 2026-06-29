@@ -49,32 +49,50 @@ func (o *WKWebExtensionMessagePort) SendMessageCompletionHandler(message objc.ID
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_wKWebExtensionMessagePortSelSendMessageCompletionHandler, message, __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionMessagePortSelSendMessageCompletionHandler, message, __block_completionHandler)
+	})
 }
 
 // @abstract Disconnects the port, terminating all further messages.
 func (o *WKWebExtensionMessagePort) Disconnect() {
-	o.Ptr().Send(_wKWebExtensionMessagePortSelDisconnect)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionMessagePortSelDisconnect)
+	})
 }
 
 // @abstract Disconnects the port, terminating all further messages with an optional error. @param error An optional error indicating the reason for disconnection.
 func (o *WKWebExtensionMessagePort) DisconnectWithError(error_ unsafe.Pointer) {
-	o.Ptr().Send(_wKWebExtensionMessagePortSelDisconnectWithError, error_)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionMessagePortSelDisconnectWithError, error_)
+	})
 }
 
 // @abstract The unique identifier for the app to which this port should be connected. @discussion This identifier is provided by the web extension and may or may not be used by the app. It's up to the app to decide how to interpret this identifier.
 func (o *WKWebExtensionMessagePort) ApplicationIdentifier() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionMessagePortSelApplicationIdentifier)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionMessagePortSelApplicationIdentifier)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The block to be executed when a message is received from the web extension. @discussion An optional block to be invoked when a message is received, taking two parameters: the message and an optional error.
 func (o *WKWebExtensionMessagePort) MessageHandler() objc.Block {
-	_ret := objc.Send[objc.Block](o.Ptr(), _wKWebExtensionMessagePortSelMessageHandler)
-	return _ret
+	var _mainthread0 objc.Block
+	purego.Main(func() {
+		_mainthread0 = func() objc.Block {
+			_ret := objc.Send[objc.Block](o.Ptr(), _wKWebExtensionMessagePortSelMessageHandler)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebExtensionMessagePort) SetMessageHandler(messageHandler func(objc.ID, unsafe.Pointer)) {
@@ -85,13 +103,21 @@ func (o *WKWebExtensionMessagePort) SetMessageHandler(messageHandler func(objc.I
 		})
 		defer __block_messageHandler.Release()
 	}
-	o.Ptr().Send(_wKWebExtensionMessagePortSelSetMessageHandler, __block_messageHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionMessagePortSelSetMessageHandler, __block_messageHandler)
+	})
 }
 
 // @abstract The block to be executed when the port disconnects. @discussion An optional block to be invoked when the port disconnects, taking an optional error that indicates if the disconnection was caused by an error.
 func (o *WKWebExtensionMessagePort) DisconnectHandler() objc.Block {
-	_ret := objc.Send[objc.Block](o.Ptr(), _wKWebExtensionMessagePortSelDisconnectHandler)
-	return _ret
+	var _mainthread0 objc.Block
+	purego.Main(func() {
+		_mainthread0 = func() objc.Block {
+			_ret := objc.Send[objc.Block](o.Ptr(), _wKWebExtensionMessagePortSelDisconnectHandler)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKWebExtensionMessagePort) SetDisconnectHandler(disconnectHandler func(unsafe.Pointer)) {
@@ -102,11 +128,19 @@ func (o *WKWebExtensionMessagePort) SetDisconnectHandler(disconnectHandler func(
 		})
 		defer __block_disconnectHandler.Release()
 	}
-	o.Ptr().Send(_wKWebExtensionMessagePortSelSetDisconnectHandler, __block_disconnectHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_wKWebExtensionMessagePortSelSetDisconnectHandler, __block_disconnectHandler)
+	})
 }
 
 // @abstract Indicates whether the message port is disconnected.
 func (o *WKWebExtensionMessagePort) IsDisconnected() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionMessagePortSelIsDisconnected)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionMessagePortSelIsDisconnected)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

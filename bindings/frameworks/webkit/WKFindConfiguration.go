@@ -38,28 +38,52 @@ func WKFindConfigurationFromID(id objc.ID) *WKFindConfiguration {
 }
 
 func (o *WKFindConfiguration) Backwards() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKFindConfigurationSelBackwards)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKFindConfigurationSelBackwards)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKFindConfiguration) SetBackwards(backwards bool) {
-	o.Ptr().Send(_wKFindConfigurationSelSetBackwards, backwards)
+	purego.Main(func() {
+		o.Ptr().Send(_wKFindConfigurationSelSetBackwards, backwards)
+	})
 }
 
 func (o *WKFindConfiguration) CaseSensitive() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKFindConfigurationSelCaseSensitive)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKFindConfigurationSelCaseSensitive)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKFindConfiguration) SetCaseSensitive(caseSensitive bool) {
-	o.Ptr().Send(_wKFindConfigurationSelSetCaseSensitive, caseSensitive)
+	purego.Main(func() {
+		o.Ptr().Send(_wKFindConfigurationSelSetCaseSensitive, caseSensitive)
+	})
 }
 
 func (o *WKFindConfiguration) Wraps() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKFindConfigurationSelWraps)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKFindConfigurationSelWraps)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKFindConfiguration) SetWraps(wraps bool) {
-	o.Ptr().Send(_wKFindConfigurationSelSetWraps, wraps)
+	purego.Main(func() {
+		o.Ptr().Send(_wKFindConfigurationSelSetWraps, wraps)
+	})
 }

@@ -37,30 +37,54 @@ func IKFilterUIViewFromID(id objc.ID) *IKFilterUIView {
 
 // @method     viewWithFrame:filter: @abstract   The viewWithFrame method creates a view that retains the filter passed into it.
 func IKFilterUIViewViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter *coreimage.CIFilter) objc.ID {
-	_ret := objc.Send[objc.ID](objc.ID(_clsIKFilterUIView), _iKFilterUIViewSelViewWithFrameFilter, frameRect, inFilter.Ptr())
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](objc.ID(_clsIKFilterUIView), _iKFilterUIViewSelViewWithFrameFilter, frameRect, inFilter.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @method     initWithFrame:filter: @abstract   The initWithFrame method initializes a view that retains the filter passed into it.
 func (o *IKFilterUIView) InitWithFrameFilter(frameRect corefoundation.CGRect, inFilter *coreimage.CIFilter) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterUIViewSelInitWithFrameFilter, frameRect, inFilter.Ptr())
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterUIViewSelInitWithFrameFilter, frameRect, inFilter.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @method     filter @abstract   Accessor method to return the filter instance that the view controls.
 func (o *IKFilterUIView) Filter() *coreimage.CIFilter {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterUIViewSelFilter)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return coreimage.CIFilterFromID(_ret)
+	var _mainthread0 *coreimage.CIFilter
+	purego.Main(func() {
+		_mainthread0 = func() *coreimage.CIFilter {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterUIViewSelFilter)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return coreimage.CIFilterFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @method     objectController @abstract   Accessor method for the object controller for all bindings between the filter and the UI representation.
 func (o *IKFilterUIView) ObjectController() *appkit.NSObjectController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterUIViewSelObjectController)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSObjectControllerFromID(_ret)
+	var _mainthread0 *appkit.NSObjectController
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSObjectController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterUIViewSelObjectController)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSObjectControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

@@ -35,19 +35,35 @@ func NSCollectionViewFlowLayoutInvalidationContextFromID(id objc.ID) *NSCollecti
 }
 
 func (o *NSCollectionViewFlowLayoutInvalidationContext) InvalidateFlowLayoutDelegateMetrics() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewFlowLayoutInvalidationContextSelInvalidateFlowLayoutDelegateMetrics)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewFlowLayoutInvalidationContextSelInvalidateFlowLayoutDelegateMetrics)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewFlowLayoutInvalidationContext) SetInvalidateFlowLayoutDelegateMetrics(invalidateFlowLayoutDelegateMetrics bool) {
-	o.Ptr().Send(_nSCollectionViewFlowLayoutInvalidationContextSelSetInvalidateFlowLayoutDelegateMetrics, invalidateFlowLayoutDelegateMetrics)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewFlowLayoutInvalidationContextSelSetInvalidateFlowLayoutDelegateMetrics, invalidateFlowLayoutDelegateMetrics)
+	})
 }
 
 func (o *NSCollectionViewFlowLayoutInvalidationContext) InvalidateFlowLayoutAttributes() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewFlowLayoutInvalidationContextSelInvalidateFlowLayoutAttributes)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionViewFlowLayoutInvalidationContextSelInvalidateFlowLayoutAttributes)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewFlowLayoutInvalidationContext) SetInvalidateFlowLayoutAttributes(invalidateFlowLayoutAttributes bool) {
-	o.Ptr().Send(_nSCollectionViewFlowLayoutInvalidationContextSelSetInvalidateFlowLayoutAttributes, invalidateFlowLayoutAttributes)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewFlowLayoutInvalidationContextSelSetInvalidateFlowLayoutAttributes, invalidateFlowLayoutAttributes)
+	})
 }

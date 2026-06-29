@@ -38,32 +38,54 @@ func NSTrackingSeparatorToolbarItemFromID(id objc.ID) *NSTrackingSeparatorToolba
 
 // Creates a new tracking separator toolbar item and configures it to align with the divider of the split view.
 func NSTrackingSeparatorToolbarItemTrackingSeparatorToolbarItemWithIdentifierSplitViewDividerIndex(identifier *foundation.NSString, splitView *NSSplitView, dividerIndex int) *NSTrackingSeparatorToolbarItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSTrackingSeparatorToolbarItem), _nSTrackingSeparatorToolbarItemSelTrackingSeparatorToolbarItemWithIdentifierSplitViewDividerIndex, identifier.Ptr(), splitView.Ptr(), dividerIndex)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTrackingSeparatorToolbarItemFromID(_ret)
+	var _mainthread0 *NSTrackingSeparatorToolbarItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSTrackingSeparatorToolbarItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSTrackingSeparatorToolbarItem), _nSTrackingSeparatorToolbarItemSelTrackingSeparatorToolbarItemWithIdentifierSplitViewDividerIndex, identifier.Ptr(), splitView.Ptr(), dividerIndex)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTrackingSeparatorToolbarItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The `splitView` must be in the same window as the toolbar containing this item by the time the toolbar is shown. Only vertical `splitViews` are supported.
 func (o *NSTrackingSeparatorToolbarItem) SplitView() *NSSplitView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTrackingSeparatorToolbarItemSelSplitView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSSplitViewFromID(_ret)
+	var _mainthread0 *NSSplitView
+	purego.Main(func() {
+		_mainthread0 = func() *NSSplitView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTrackingSeparatorToolbarItemSelSplitView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSSplitViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTrackingSeparatorToolbarItem) SetSplitView(splitView *NSSplitView) {
-	o.Ptr().Send(_nSTrackingSeparatorToolbarItemSelSetSplitView, splitView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTrackingSeparatorToolbarItemSelSetSplitView, splitView.Ptr())
+	})
 }
 
 // The specific divider of the `splitView` which will be tracked.
 func (o *NSTrackingSeparatorToolbarItem) DividerIndex() int {
-	_ret := objc.Send[int](o.Ptr(), _nSTrackingSeparatorToolbarItemSelDividerIndex)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTrackingSeparatorToolbarItemSelDividerIndex)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTrackingSeparatorToolbarItem) SetDividerIndex(dividerIndex int) {
-	o.Ptr().Send(_nSTrackingSeparatorToolbarItemSelSetDividerIndex, dividerIndex)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTrackingSeparatorToolbarItemSelSetDividerIndex, dividerIndex)
+	})
 }

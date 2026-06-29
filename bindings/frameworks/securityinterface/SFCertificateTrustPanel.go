@@ -41,34 +41,56 @@ func SFCertificateTrustPanelFromID(id objc.ID) *SFCertificateTrustPanel {
 
 // Returns a fully initialized, singleton certificate trust panel object.
 func SFCertificateTrustPanelSharedCertificateTrustPanel() *SFCertificateTrustPanel {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSFCertificateTrustPanel), _sFCertificateTrustPanelSelSharedCertificateTrustPanel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SFCertificateTrustPanelFromID(_ret)
+	var _mainthread0 *SFCertificateTrustPanel
+	purego.Main(func() {
+		_mainthread0 = func() *SFCertificateTrustPanel {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSFCertificateTrustPanel), _sFCertificateTrustPanelSelSharedCertificateTrustPanel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SFCertificateTrustPanelFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Displays a modal panel that shows the results of a certificate trust evaluation and that allows the user to edit trust settings.
 func (o *SFCertificateTrustPanel) RunModalForTrustMessage(trust unsafe.Pointer, message *foundation.NSString) int {
-	_ret := objc.Send[int](o.Ptr(), _sFCertificateTrustPanelSelRunModalForTrustMessage, trust, message.Ptr())
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _sFCertificateTrustPanelSelRunModalForTrustMessage, trust, message.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Displays a modal sheet that shows the results of a certificate trust evaluation and that allows the user to edit trust settings.
 func (o *SFCertificateTrustPanel) BeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustMessage(docWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer, trust unsafe.Pointer, message *foundation.NSString) {
-	o.Ptr().Send(_sFCertificateTrustPanelSelBeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustMessage, docWindow.Ptr(), delegate, didEndSelector, contextInfo, trust, message.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sFCertificateTrustPanelSelBeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustMessage, docWindow.Ptr(), delegate, didEndSelector, contextInfo, trust, message.Ptr())
+	})
 }
 
 // Sets the (optional) informative text displayed in the panel.
 func (o *SFCertificateTrustPanel) SetInformativeText(informativeText *foundation.NSString) {
-	o.Ptr().Send(_sFCertificateTrustPanelSelSetInformativeText, informativeText.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sFCertificateTrustPanelSelSetInformativeText, informativeText.Ptr())
+	})
 }
 
 // Returns the (optional) informative text currently displayed in the panel.
 func (o *SFCertificateTrustPanel) InformativeText() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sFCertificateTrustPanelSelInformativeText)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sFCertificateTrustPanelSelInformativeText)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

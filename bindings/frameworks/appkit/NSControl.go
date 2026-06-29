@@ -115,418 +115,716 @@ func NSControlFromID(id objc.ID) *NSControl {
 
 // Initializes a control with the specified frame rectangle.
 func (o *NSControl) InitWithFrame(frameRect corefoundation.CGRect) *NSControl {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelInitWithFrame, frameRect)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSControlFromID(_ret)
+	var _mainthread0 *NSControl
+	purego.Main(func() {
+		_mainthread0 = func() *NSControl {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelInitWithFrame, frameRect)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSControlFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a control with data in an unarchiver.
 func (o *NSControl) InitWithCoder(coder *foundation.NSCoder) *NSControl {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSControlFromID(_ret)
+	var _mainthread0 *NSControl
+	purego.Main(func() {
+		_mainthread0 = func() *NSControl {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSControlFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Asks the control to calculate and return the size that best fits the specified size.
 func (o *NSControl) SizeThatFits(size corefoundation.CGSize) corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSControlSelSizeThatFits, size)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSControlSelSizeThatFits, size)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Resizes the receiver’s frame so that it’s the minimum size needed to contain its cell.
 func (o *NSControl) SizeToFit() {
-	o.Ptr().Send(_nSControlSelSizeToFit)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSizeToFit)
+	})
 }
 
 // Sets the conditions on which the receiver sends action messages to its target.
 func (o *NSControl) SendActionOn(mask NSEventMask) int {
-	_ret := objc.Send[int](o.Ptr(), _nSControlSelSendActionOn, mask)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSControlSelSendActionOn, mask)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Causes the specified action to be sent to the target.
 func (o *NSControl) SendActionTo(action objc.SEL, target objc.ID) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSControlSelSendActionTo, action, target)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSControlSelSendActionTo, action, target)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the value of the receiver’s cell to an integer value obtained from the specified object.
 func (o *NSControl) TakeIntValueFrom(sender objc.ID) {
-	o.Ptr().Send(_nSControlSelTakeIntValueFrom, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelTakeIntValueFrom, sender)
+	})
 }
 
 // Sets the value of the receiver’s cell to a single-precision floating-point value obtained from the specified object.
 func (o *NSControl) TakeFloatValueFrom(sender objc.ID) {
-	o.Ptr().Send(_nSControlSelTakeFloatValueFrom, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelTakeFloatValueFrom, sender)
+	})
 }
 
 // Sets the value of the receiver’s cell to a double-precision floating-point value obtained from the specified object.
 func (o *NSControl) TakeDoubleValueFrom(sender objc.ID) {
-	o.Ptr().Send(_nSControlSelTakeDoubleValueFrom, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelTakeDoubleValueFrom, sender)
+	})
 }
 
 // Sets the value of the receiver’s cell to the string value obtained from the specified object.
 func (o *NSControl) TakeStringValueFrom(sender objc.ID) {
-	o.Ptr().Send(_nSControlSelTakeStringValueFrom, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelTakeStringValueFrom, sender)
+	})
 }
 
 // Sets the value of the receiver’s cell to the object value obtained from the specified object.
 func (o *NSControl) TakeObjectValueFrom(sender objc.ID) {
-	o.Ptr().Send(_nSControlSelTakeObjectValueFrom, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelTakeObjectValueFrom, sender)
+	})
 }
 
 // Sets the value of the receiver’s cell to an NSInteger value obtained from the specified object.
 func (o *NSControl) TakeIntegerValueFrom(sender objc.ID) {
-	o.Ptr().Send(_nSControlSelTakeIntegerValueFrom, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelTakeIntegerValueFrom, sender)
+	})
 }
 
 // Simulates a single mouse click on the receiver.
 func (o *NSControl) PerformClick(sender objc.ID) {
-	o.Ptr().Send(_nSControlSelPerformClick, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelPerformClick, sender)
+	})
 }
 
 // The frame in which a tool tip can be displayed, if needed.
 func (o *NSControl) ExpansionFrameWithFrame(contentFrame corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSControlSelExpansionFrameWithFrame, contentFrame)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSControlSelExpansionFrameWithFrame, contentFrame)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Performs custom expansion tool tip drawing.
 func (o *NSControl) DrawWithExpansionFrameInView(contentFrame corefoundation.CGRect, view *NSView) {
-	o.Ptr().Send(_nSControlSelDrawWithExpansionFrameInView, contentFrame, view.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelDrawWithExpansionFrameInView, contentFrame, view.Ptr())
+	})
 }
 
 func (o *NSControl) Target() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelTarget)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelTarget)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSControl) SetTarget(target objc.ID) {
-	o.Ptr().Send(_nSControlSelSetTarget, target)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetTarget, target)
+	})
 }
 
 func (o *NSControl) Action() objc.SEL {
-	_ret := objc.Send[objc.SEL](o.Ptr(), _nSControlSelAction)
-	return _ret
+	var _mainthread0 objc.SEL
+	purego.Main(func() {
+		_mainthread0 = func() objc.SEL {
+			_ret := objc.Send[objc.SEL](o.Ptr(), _nSControlSelAction)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSControl) SetAction(action objc.SEL) {
-	o.Ptr().Send(_nSControlSelSetAction, action)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetAction, action)
+	})
 }
 
 func (o *NSControl) SetTag(tag int) {
-	o.Ptr().Send(_nSControlSelSetTag, tag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetTag, tag)
+	})
 }
 
 func (o *NSControl) IgnoresMultiClick() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSControlSelIgnoresMultiClick)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSControlSelIgnoresMultiClick)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSControl) SetIgnoresMultiClick(ignoresMultiClick bool) {
-	o.Ptr().Send(_nSControlSelSetIgnoresMultiClick, ignoresMultiClick)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetIgnoresMultiClick, ignoresMultiClick)
+	})
 }
 
 func (o *NSControl) IsContinuous() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSControlSelIsContinuous)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSControlSelIsContinuous)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSControl) SetContinuous(continuous bool) {
-	o.Ptr().Send(_nSControlSelSetContinuous, continuous)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetContinuous, continuous)
+	})
 }
 
 func (o *NSControl) IsEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSControlSelIsEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSControlSelIsEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSControl) SetEnabled(enabled bool) {
-	o.Ptr().Send(_nSControlSelSetEnabled, enabled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetEnabled, enabled)
+	})
 }
 
 func (o *NSControl) RefusesFirstResponder() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSControlSelRefusesFirstResponder)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSControlSelRefusesFirstResponder)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSControl) SetRefusesFirstResponder(refusesFirstResponder bool) {
-	o.Ptr().Send(_nSControlSelSetRefusesFirstResponder, refusesFirstResponder)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetRefusesFirstResponder, refusesFirstResponder)
+	})
 }
 
 func (o *NSControl) IsHighlighted() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSControlSelIsHighlighted)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSControlSelIsHighlighted)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSControl) SetHighlighted(highlighted bool) {
-	o.Ptr().Send(_nSControlSelSetHighlighted, highlighted)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetHighlighted, highlighted)
+	})
 }
 
 func (o *NSControl) ControlSize() NSControlSize {
-	_ret := objc.Send[NSControlSize](o.Ptr(), _nSControlSelControlSize)
-	return _ret
+	var _mainthread0 NSControlSize
+	purego.Main(func() {
+		_mainthread0 = func() NSControlSize {
+			_ret := objc.Send[NSControlSize](o.Ptr(), _nSControlSelControlSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSControl) SetControlSize(controlSize NSControlSize) {
-	o.Ptr().Send(_nSControlSelSetControlSize, controlSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetControlSize, controlSize)
+	})
 }
 
 func (o *NSControl) Formatter() *foundation.NSFormatter {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelFormatter)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSFormatterFromID(_ret)
+	var _mainthread0 *foundation.NSFormatter
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSFormatter {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelFormatter)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSFormatterFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSControl) SetFormatter(formatter *foundation.NSFormatter) {
-	o.Ptr().Send(_nSControlSelSetFormatter, formatter.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetFormatter, formatter.Ptr())
+	})
 }
 
 func (o *NSControl) ObjectValue() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelObjectValue)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelObjectValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSControl) SetObjectValue(objectValue objc.ID) {
-	o.Ptr().Send(_nSControlSelSetObjectValue, objectValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetObjectValue, objectValue)
+	})
 }
 
 func (o *NSControl) StringValue() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelStringValue)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelStringValue)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSControl) SetStringValue(stringValue *foundation.NSString) {
-	o.Ptr().Send(_nSControlSelSetStringValue, stringValue.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetStringValue, stringValue.Ptr())
+	})
 }
 
 func (o *NSControl) AttributedStringValue() *foundation.NSAttributedString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelAttributedStringValue)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSAttributedStringFromID(_ret)
+	var _mainthread0 *foundation.NSAttributedString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSAttributedString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelAttributedStringValue)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSAttributedStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSControl) SetAttributedStringValue(attributedStringValue *foundation.NSAttributedString) {
-	o.Ptr().Send(_nSControlSelSetAttributedStringValue, attributedStringValue.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetAttributedStringValue, attributedStringValue.Ptr())
+	})
 }
 
 func (o *NSControl) IntValue() int {
-	_ret := objc.Send[int](o.Ptr(), _nSControlSelIntValue)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSControlSelIntValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSControl) SetIntValue(intValue int) {
-	o.Ptr().Send(_nSControlSelSetIntValue, intValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetIntValue, intValue)
+	})
 }
 
 func (o *NSControl) IntegerValue() int {
-	_ret := objc.Send[int](o.Ptr(), _nSControlSelIntegerValue)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSControlSelIntegerValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSControl) SetIntegerValue(integerValue int) {
-	o.Ptr().Send(_nSControlSelSetIntegerValue, integerValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetIntegerValue, integerValue)
+	})
 }
 
 func (o *NSControl) FloatValue() float32 {
-	_ret := objc.Send[float32](o.Ptr(), _nSControlSelFloatValue)
-	return _ret
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_ret := objc.Send[float32](o.Ptr(), _nSControlSelFloatValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSControl) SetFloatValue(floatValue float32) {
-	o.Ptr().Send(_nSControlSelSetFloatValue, floatValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetFloatValue, floatValue)
+	})
 }
 
 func (o *NSControl) DoubleValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSControlSelDoubleValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSControlSelDoubleValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSControl) SetDoubleValue(doubleValue float64) {
-	o.Ptr().Send(_nSControlSelSetDoubleValue, doubleValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetDoubleValue, doubleValue)
+	})
 }
 
 func (o *NSControl) Font() *NSFont {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelFont)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSFontFromID(_ret)
+	var _mainthread0 *NSFont
+	purego.Main(func() {
+		_mainthread0 = func() *NSFont {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelFont)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSFontFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSControl) SetFont(font *NSFont) {
-	o.Ptr().Send(_nSControlSelSetFont, font.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetFont, font.Ptr())
+	})
 }
 
 func (o *NSControl) UsesSingleLineMode() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSControlSelUsesSingleLineMode)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSControlSelUsesSingleLineMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSControl) SetUsesSingleLineMode(usesSingleLineMode bool) {
-	o.Ptr().Send(_nSControlSelSetUsesSingleLineMode, usesSingleLineMode)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetUsesSingleLineMode, usesSingleLineMode)
+	})
 }
 
 func (o *NSControl) LineBreakMode() NSLineBreakMode {
-	_ret := objc.Send[NSLineBreakMode](o.Ptr(), _nSControlSelLineBreakMode)
-	return _ret
+	var _mainthread0 NSLineBreakMode
+	purego.Main(func() {
+		_mainthread0 = func() NSLineBreakMode {
+			_ret := objc.Send[NSLineBreakMode](o.Ptr(), _nSControlSelLineBreakMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSControl) SetLineBreakMode(lineBreakMode NSLineBreakMode) {
-	o.Ptr().Send(_nSControlSelSetLineBreakMode, lineBreakMode)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetLineBreakMode, lineBreakMode)
+	})
 }
 
 func (o *NSControl) Alignment() NSTextAlignment {
-	_ret := objc.Send[NSTextAlignment](o.Ptr(), _nSControlSelAlignment)
-	return _ret
+	var _mainthread0 NSTextAlignment
+	purego.Main(func() {
+		_mainthread0 = func() NSTextAlignment {
+			_ret := objc.Send[NSTextAlignment](o.Ptr(), _nSControlSelAlignment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSControl) SetAlignment(alignment NSTextAlignment) {
-	o.Ptr().Send(_nSControlSelSetAlignment, alignment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetAlignment, alignment)
+	})
 }
 
 func (o *NSControl) BaseWritingDirection() NSWritingDirection {
-	_ret := objc.Send[NSWritingDirection](o.Ptr(), _nSControlSelBaseWritingDirection)
-	return _ret
+	var _mainthread0 NSWritingDirection
+	purego.Main(func() {
+		_mainthread0 = func() NSWritingDirection {
+			_ret := objc.Send[NSWritingDirection](o.Ptr(), _nSControlSelBaseWritingDirection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSControl) SetBaseWritingDirection(baseWritingDirection NSWritingDirection) {
-	o.Ptr().Send(_nSControlSelSetBaseWritingDirection, baseWritingDirection)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetBaseWritingDirection, baseWritingDirection)
+	})
 }
 
 func (o *NSControl) AllowsExpansionToolTips() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSControlSelAllowsExpansionToolTips)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSControlSelAllowsExpansionToolTips)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSControl) SetAllowsExpansionToolTips(allowsExpansionToolTips bool) {
-	o.Ptr().Send(_nSControlSelSetAllowsExpansionToolTips, allowsExpansionToolTips)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetAllowsExpansionToolTips, allowsExpansionToolTips)
+	})
 }
 
 // Returns the current field editor for the control.
 func (o *NSControl) CurrentEditor() *NSText {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelCurrentEditor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextFromID(_ret)
+	var _mainthread0 *NSText
+	purego.Main(func() {
+		_mainthread0 = func() *NSText {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelCurrentEditor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Terminates the current editing operation and discards any edited text.
 func (o *NSControl) AbortEditing() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSControlSelAbortEditing)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSControlSelAbortEditing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Validates changes to any user-typed text.
 func (o *NSControl) ValidateEditing() {
-	o.Ptr().Send(_nSControlSelValidateEditing)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelValidateEditing)
+	})
 }
 
 // Begins editing of the receiver’s text using the specified field editor.
 func (o *NSControl) EditWithFrameEditorDelegateEvent(rect corefoundation.CGRect, textObj *NSText, delegate objc.ID, event *NSEvent) {
-	o.Ptr().Send(_nSControlSelEditWithFrameEditorDelegateEvent, rect, textObj.Ptr(), delegate, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelEditWithFrameEditorDelegateEvent, rect, textObj.Ptr(), delegate, event.Ptr())
+	})
 }
 
 // Selects the specified text range in the receiver’s field editor.
 func (o *NSControl) SelectWithFrameEditorDelegateStartLength(rect corefoundation.CGRect, textObj *NSText, delegate objc.ID, selStart int, selLength int) {
-	o.Ptr().Send(_nSControlSelSelectWithFrameEditorDelegateStartLength, rect, textObj.Ptr(), delegate, selStart, selLength)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSelectWithFrameEditorDelegateStartLength, rect, textObj.Ptr(), delegate, selStart, selLength)
+	})
 }
 
 // Ends the editing of text in the receiver using the specified field editor.
 func (o *NSControl) EndEditing(textObj *NSText) {
-	o.Ptr().Send(_nSControlSelEndEditing, textObj.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelEndEditing, textObj.Ptr())
+	})
 }
 
 // Sets the auto-ranging and floating point number format of the receiver’s cell.
 // Deprecated: since macOS 10.0.
 func (o *NSControl) SetFloatingPointFormatLeftRight(autoRange bool, leftDigits uint, rightDigits uint) {
-	o.Ptr().Send(_nSControlSelSetFloatingPointFormatLeftRight, autoRange, leftDigits, rightDigits)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetFloatingPointFormatLeftRight, autoRange, leftDigits, rightDigits)
+	})
 }
 
 func (o *NSControl) SelectedCell() *NSCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelSelectedCell)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCellFromID(_ret)
+	var _mainthread0 *NSCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelSelectedCell)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSControl) SelectedTag() int {
-	_ret := objc.Send[int](o.Ptr(), _nSControlSelSelectedTag)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSControlSelSelectedTag)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Set the needsDisplay property to YES instead
 func (o *NSControl) SetNeedsDisplay() {
-	o.Ptr().Send(_nSControlSelSetNeedsDisplay)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetNeedsDisplay)
+	})
 }
 
 // Deprecated: Override -layout instead. This method should never be called
 func (o *NSControl) CalcSize() {
-	o.Ptr().Send(_nSControlSelCalcSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelCalcSize)
+	})
 }
 
 // Deprecated: Override -layout instead. This method should never be called
 func (o *NSControl) UpdateCell(cell *NSCell) {
-	o.Ptr().Send(_nSControlSelUpdateCell, cell.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelUpdateCell, cell.Ptr())
+	})
 }
 
 // Deprecated: Override -layout instead. This method should never be called
 func (o *NSControl) UpdateCellInside(cell *NSCell) {
-	o.Ptr().Send(_nSControlSelUpdateCellInside, cell.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelUpdateCellInside, cell.Ptr())
+	})
 }
 
 // Deprecated: Override -layout instead. This method should never be called
 func (o *NSControl) DrawCellInside(cell *NSCell) {
-	o.Ptr().Send(_nSControlSelDrawCellInside, cell.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelDrawCellInside, cell.Ptr())
+	})
 }
 
 func (o *NSControl) DrawCell(cell *NSCell) {
-	o.Ptr().Send(_nSControlSelDrawCell, cell.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelDrawCell, cell.Ptr())
+	})
 }
 
 func (o *NSControl) SelectCell(cell *NSCell) {
-	o.Ptr().Send(_nSControlSelSelectCell, cell.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSelectCell, cell.Ptr())
+	})
 }
 
 // Deprecated: since macOS 10.0.
 func NSControlCellClass() objc.Class {
-	_ret := objc.Send[objc.Class](objc.ID(_clsNSControl), _nSControlSelCellClass)
-	return _ret
+	var _mainthread0 objc.Class
+	purego.Main(func() {
+		_mainthread0 = func() objc.Class {
+			_ret := objc.Send[objc.Class](objc.ID(_clsNSControl), _nSControlSelCellClass)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.0.
 func NSControlSetCellClass(cellClass objc.Class) {
-	objc.ID(_clsNSControl).Send(_nSControlSelSetCellClass, cellClass)
+	purego.Main(func() {
+		objc.ID(_clsNSControl).Send(_nSControlSelSetCellClass, cellClass)
+	})
 }
 
 // Deprecated: since macOS 10.0.
 func (o *NSControl) Cell() *NSCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelCell)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCellFromID(_ret)
+	var _mainthread0 *NSCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSControlSelCell)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.0.
 func (o *NSControl) SetCell(cell *NSCell) {
-	o.Ptr().Send(_nSControlSelSetCell, cell.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelSetCell, cell.Ptr())
+	})
 }
 
 // Notifies the control that the intrinsic content size for its cell is no longer valid.
 func (o *NSControl) InvalidateIntrinsicContentSizeForCell(cell *NSCell) {
-	o.Ptr().Send(_nSControlSelInvalidateIntrinsicContentSizeForCell, cell.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSControlSelInvalidateIntrinsicContentSizeForCell, cell.Ptr())
+	})
 }

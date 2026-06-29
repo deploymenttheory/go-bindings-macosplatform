@@ -75,263 +75,449 @@ func NSPopUpButtonFromID(id objc.ID) *NSPopUpButton {
 
 // Creates a standard pop-up button with a menu, target, and action.
 func NSPopUpButtonPopUpButtonWithMenuTargetAction(menu *NSMenu, target objc.ID, action objc.SEL) *NSPopUpButton {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSPopUpButton), _nSPopUpButtonSelPopUpButtonWithMenuTargetAction, menu.Ptr(), target, action)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSPopUpButtonFromID(_ret)
+	var _mainthread0 *NSPopUpButton
+	purego.Main(func() {
+		_mainthread0 = func() *NSPopUpButton {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSPopUpButton), _nSPopUpButtonSelPopUpButtonWithMenuTargetAction, menu.Ptr(), target, action)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSPopUpButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a standard pull-down button with a title and menu.
 func NSPopUpButtonPullDownButtonWithTitleMenu(title *foundation.NSString, menu *NSMenu) *NSPopUpButton {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSPopUpButton), _nSPopUpButtonSelPullDownButtonWithTitleMenu, title.Ptr(), menu.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSPopUpButtonFromID(_ret)
+	var _mainthread0 *NSPopUpButton
+	purego.Main(func() {
+		_mainthread0 = func() *NSPopUpButton {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSPopUpButton), _nSPopUpButtonSelPullDownButtonWithTitleMenu, title.Ptr(), menu.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSPopUpButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a standard pull-down button with an image and menu.
 func NSPopUpButtonPullDownButtonWithImageMenu(image *NSImage, menu *NSMenu) *NSPopUpButton {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSPopUpButton), _nSPopUpButtonSelPullDownButtonWithImageMenu, image.Ptr(), menu.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSPopUpButtonFromID(_ret)
+	var _mainthread0 *NSPopUpButton
+	purego.Main(func() {
+		_mainthread0 = func() *NSPopUpButton {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSPopUpButton), _nSPopUpButtonSelPullDownButtonWithImageMenu, image.Ptr(), menu.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSPopUpButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a standard pull-down button with a title, image, and menu.
 func NSPopUpButtonPullDownButtonWithTitleImageMenu(title *foundation.NSString, image *NSImage, menu *NSMenu) *NSPopUpButton {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSPopUpButton), _nSPopUpButtonSelPullDownButtonWithTitleImageMenu, title.Ptr(), image.Ptr(), menu.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSPopUpButtonFromID(_ret)
+	var _mainthread0 *NSPopUpButton
+	purego.Main(func() {
+		_mainthread0 = func() *NSPopUpButton {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSPopUpButton), _nSPopUpButtonSelPullDownButtonWithTitleImageMenu, title.Ptr(), image.Ptr(), menu.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSPopUpButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns an NSPopUpButton object initialized to the specified dimensions.
 func (o *NSPopUpButton) InitWithFramePullsDown(buttonFrame corefoundation.CGRect, flag bool) *NSPopUpButton {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelInitWithFramePullsDown, buttonFrame, flag)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSPopUpButtonFromID(_ret)
+	var _mainthread0 *NSPopUpButton
+	purego.Main(func() {
+		_mainthread0 = func() *NSPopUpButton {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelInitWithFramePullsDown, buttonFrame, flag)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSPopUpButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Adds an item with the specified title to the end of the menu.
 func (o *NSPopUpButton) AddItemWithTitle(title *foundation.NSString) {
-	o.Ptr().Send(_nSPopUpButtonSelAddItemWithTitle, title.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopUpButtonSelAddItemWithTitle, title.Ptr())
+	})
 }
 
 // Adds multiple items to the end of the menu.
 func (o *NSPopUpButton) AddItemsWithTitles(itemTitles *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSPopUpButtonSelAddItemsWithTitles, itemTitles.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopUpButtonSelAddItemsWithTitles, itemTitles.Ptr())
+	})
 }
 
 // Inserts an item at the specified position in the menu.
 func (o *NSPopUpButton) InsertItemWithTitleAtIndex(title *foundation.NSString, index int) {
-	o.Ptr().Send(_nSPopUpButtonSelInsertItemWithTitleAtIndex, title.Ptr(), index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopUpButtonSelInsertItemWithTitleAtIndex, title.Ptr(), index)
+	})
 }
 
 // Removes the item with the specified title from the menu.
 func (o *NSPopUpButton) RemoveItemWithTitle(title *foundation.NSString) {
-	o.Ptr().Send(_nSPopUpButtonSelRemoveItemWithTitle, title.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopUpButtonSelRemoveItemWithTitle, title.Ptr())
+	})
 }
 
 // Removes the item at the specified index.
 func (o *NSPopUpButton) RemoveItemAtIndex(index int) {
-	o.Ptr().Send(_nSPopUpButtonSelRemoveItemAtIndex, index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopUpButtonSelRemoveItemAtIndex, index)
+	})
 }
 
 // Removes all items in the receiver’s item menu.
 func (o *NSPopUpButton) RemoveAllItems() {
-	o.Ptr().Send(_nSPopUpButtonSelRemoveAllItems)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopUpButtonSelRemoveAllItems)
+	})
 }
 
 // Returns the index of the specified menu item.
 func (o *NSPopUpButton) IndexOfItem(item *NSMenuItem) int {
-	_ret := objc.Send[int](o.Ptr(), _nSPopUpButtonSelIndexOfItem, item.Ptr())
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSPopUpButtonSelIndexOfItem, item.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the index of the item with the specified title.
 func (o *NSPopUpButton) IndexOfItemWithTitle(title *foundation.NSString) int {
-	_ret := objc.Send[int](o.Ptr(), _nSPopUpButtonSelIndexOfItemWithTitle, title.Ptr())
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSPopUpButtonSelIndexOfItemWithTitle, title.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the index of the menu item with the specified tag.
 func (o *NSPopUpButton) IndexOfItemWithTag(tag int) int {
-	_ret := objc.Send[int](o.Ptr(), _nSPopUpButtonSelIndexOfItemWithTag, tag)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSPopUpButtonSelIndexOfItemWithTag, tag)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the index of the menu item that holds the specified represented object.
 func (o *NSPopUpButton) IndexOfItemWithRepresentedObject(obj objc.ID) int {
-	_ret := objc.Send[int](o.Ptr(), _nSPopUpButtonSelIndexOfItemWithRepresentedObject, obj)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSPopUpButtonSelIndexOfItemWithRepresentedObject, obj)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the index of the menu item with the specified target and action.
 func (o *NSPopUpButton) IndexOfItemWithTargetAndAction(target objc.ID, actionSelector objc.SEL) int {
-	_ret := objc.Send[int](o.Ptr(), _nSPopUpButtonSelIndexOfItemWithTargetAndAction, target, actionSelector)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSPopUpButtonSelIndexOfItemWithTargetAndAction, target, actionSelector)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the menu item at the specified index.
 func (o *NSPopUpButton) ItemAtIndex(index int) *NSMenuItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelItemAtIndex, index)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMenuItemFromID(_ret)
+	var _mainthread0 *NSMenuItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSMenuItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelItemAtIndex, index)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMenuItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the menu item with the specified title.
 func (o *NSPopUpButton) ItemWithTitle(title *foundation.NSString) *NSMenuItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelItemWithTitle, title.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMenuItemFromID(_ret)
+	var _mainthread0 *NSMenuItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSMenuItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelItemWithTitle, title.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMenuItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Selects the specified menu item.
 func (o *NSPopUpButton) SelectItem(item *NSMenuItem) {
-	o.Ptr().Send(_nSPopUpButtonSelSelectItem, item.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopUpButtonSelSelectItem, item.Ptr())
+	})
 }
 
 // Selects the item in the menu at the specified index.
 func (o *NSPopUpButton) SelectItemAtIndex(index int) {
-	o.Ptr().Send(_nSPopUpButtonSelSelectItemAtIndex, index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopUpButtonSelSelectItemAtIndex, index)
+	})
 }
 
 // Selects the item with the specified title.
 func (o *NSPopUpButton) SelectItemWithTitle(title *foundation.NSString) {
-	o.Ptr().Send(_nSPopUpButtonSelSelectItemWithTitle, title.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopUpButtonSelSelectItemWithTitle, title.Ptr())
+	})
 }
 
 // Selects the menu item with the specified tag.
 func (o *NSPopUpButton) SelectItemWithTag(tag int) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSPopUpButtonSelSelectItemWithTag, tag)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSPopUpButtonSelSelectItemWithTag, tag)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Ensures that the item being displayed by the receiver agrees with the selected item.
 func (o *NSPopUpButton) SynchronizeTitleAndSelectedItem() {
-	o.Ptr().Send(_nSPopUpButtonSelSynchronizeTitleAndSelectedItem)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopUpButtonSelSynchronizeTitleAndSelectedItem)
+	})
 }
 
 // Returns the title of the item at the specified index.
 func (o *NSPopUpButton) ItemTitleAtIndex(index int) *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelItemTitleAtIndex, index)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelItemTitleAtIndex, index)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // When the value of this property is `YES` the button adopts 'pull-down' behavior, displaying static button contents and presenting its menu at the edge of the button. When the value of this property is `NO` the button behaves as a popup, displaying the currently-selected menu item and presenting its menu above the button, positioning the selected menu item to match the button's contents.
 func (o *NSPopUpButton) PullsDown() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSPopUpButtonSelPullsDown)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSPopUpButtonSelPullsDown)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // When the value of this property is `YES` the button adopts 'pull-down' behavior, displaying static button contents and presenting its menu at the edge of the button. When the value of this property is `NO` the button behaves as a popup, displaying the currently-selected menu item and presenting its menu above the button, positioning the selected menu item to match the button's contents.
 func (o *NSPopUpButton) SetPullsDown(pullsDown bool) {
-	o.Ptr().Send(_nSPopUpButtonSelSetPullsDown, pullsDown)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopUpButtonSelSetPullsDown, pullsDown)
+	})
 }
 
 // When the value of this property is `YES`, the popup button automatically enables and disables its menu items according to the `NSMenuValidation` protocol prior to user interaction.
 func (o *NSPopUpButton) AutoenablesItems() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSPopUpButtonSelAutoenablesItems)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSPopUpButtonSelAutoenablesItems)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // When the value of this property is `YES`, the popup button automatically enables and disables its menu items according to the `NSMenuValidation` protocol prior to user interaction.
 func (o *NSPopUpButton) SetAutoenablesItems(autoenablesItems bool) {
-	o.Ptr().Send(_nSPopUpButtonSelSetAutoenablesItems, autoenablesItems)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopUpButtonSelSetAutoenablesItems, autoenablesItems)
+	})
 }
 
 // For pull-down buttons and for popups under severe screen position restrictions, this property specifies the edge of the control that the menu should present from.
 func (o *NSPopUpButton) PreferredEdge() foundation.NSRectEdge {
-	_ret := objc.Send[foundation.NSRectEdge](o.Ptr(), _nSPopUpButtonSelPreferredEdge)
-	return _ret
+	var _mainthread0 foundation.NSRectEdge
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSRectEdge {
+			_ret := objc.Send[foundation.NSRectEdge](o.Ptr(), _nSPopUpButtonSelPreferredEdge)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // For pull-down buttons and for popups under severe screen position restrictions, this property specifies the edge of the control that the menu should present from.
 func (o *NSPopUpButton) SetPreferredEdge(preferredEdge foundation.NSRectEdge) {
-	o.Ptr().Send(_nSPopUpButtonSelSetPreferredEdge, preferredEdge)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopUpButtonSelSetPreferredEdge, preferredEdge)
+	})
 }
 
 // When `usesItemFromMenu` is `YES`, a pull-down button uses the title of the first menu item and hides the first menu item. A pop-up button uses the title of the currently selected menu. The default value is `YES`.
 func (o *NSPopUpButton) UsesItemFromMenu() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSPopUpButtonSelUsesItemFromMenu)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSPopUpButtonSelUsesItemFromMenu)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // When `usesItemFromMenu` is `YES`, a pull-down button uses the title of the first menu item and hides the first menu item. A pop-up button uses the title of the currently selected menu. The default value is `YES`.
 func (o *NSPopUpButton) SetUsesItemFromMenu(usesItemFromMenu bool) {
-	o.Ptr().Send(_nSPopUpButtonSelSetUsesItemFromMenu, usesItemFromMenu)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopUpButtonSelSetUsesItemFromMenu, usesItemFromMenu)
+	})
 }
 
 // When the value of this property is `YES`, the selected menu item's `state` is set to `NSControlStateValueOn`. When the value of this property is `NO`, the menu item's `state` is not changed. When this property changes, the `state` of the currently selected item is updated appropriately. This property is ignored for pull-down buttons.
 func (o *NSPopUpButton) AltersStateOfSelectedItem() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSPopUpButtonSelAltersStateOfSelectedItem)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSPopUpButtonSelAltersStateOfSelectedItem)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // When the value of this property is `YES`, the selected menu item's `state` is set to `NSControlStateValueOn`. When the value of this property is `NO`, the menu item's `state` is not changed. When this property changes, the `state` of the currently selected item is updated appropriately. This property is ignored for pull-down buttons.
 func (o *NSPopUpButton) SetAltersStateOfSelectedItem(altersStateOfSelectedItem bool) {
-	o.Ptr().Send(_nSPopUpButtonSelSetAltersStateOfSelectedItem, altersStateOfSelectedItem)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopUpButtonSelSetAltersStateOfSelectedItem, altersStateOfSelectedItem)
+	})
 }
 
 func (o *NSPopUpButton) ItemArray() *foundation.NSArray[*NSMenuItem] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelItemArray)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSMenuItem](_ret)
+	var _mainthread0 *foundation.NSArray[*NSMenuItem]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSMenuItem] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelItemArray)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSMenuItem](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPopUpButton) NumberOfItems() int {
-	_ret := objc.Send[int](o.Ptr(), _nSPopUpButtonSelNumberOfItems)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSPopUpButtonSelNumberOfItems)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPopUpButton) LastItem() *NSMenuItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelLastItem)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMenuItemFromID(_ret)
+	var _mainthread0 *NSMenuItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSMenuItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelLastItem)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMenuItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPopUpButton) SelectedItem() *NSMenuItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelSelectedItem)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMenuItemFromID(_ret)
+	var _mainthread0 *NSMenuItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSMenuItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelSelectedItem)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMenuItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPopUpButton) IndexOfSelectedItem() int {
-	_ret := objc.Send[int](o.Ptr(), _nSPopUpButtonSelIndexOfSelectedItem)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSPopUpButtonSelIndexOfSelectedItem)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPopUpButton) ItemTitles() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelItemTitles)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelItemTitles)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPopUpButton) TitleOfSelectedItem() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelTitleOfSelectedItem)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelTitleOfSelectedItem)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

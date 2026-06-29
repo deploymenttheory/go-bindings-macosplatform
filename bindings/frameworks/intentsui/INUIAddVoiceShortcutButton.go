@@ -43,49 +43,87 @@ func INUIAddVoiceShortcutButtonFromID(id objc.ID) *INUIAddVoiceShortcutButton {
 
 // Creates an Add to Siri button with the specified style.
 func (o *INUIAddVoiceShortcutButton) InitWithStyle(style INUIAddVoiceShortcutButtonStyle) *INUIAddVoiceShortcutButton {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iNUIAddVoiceShortcutButtonSelInitWithStyle, style)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return INUIAddVoiceShortcutButtonFromID(_ret)
+	var _mainthread0 *INUIAddVoiceShortcutButton
+	purego.Main(func() {
+		_mainthread0 = func() *INUIAddVoiceShortcutButton {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iNUIAddVoiceShortcutButtonSelInitWithStyle, style)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return INUIAddVoiceShortcutButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *INUIAddVoiceShortcutButton) Style() INUIAddVoiceShortcutButtonStyle {
-	_ret := objc.Send[INUIAddVoiceShortcutButtonStyle](o.Ptr(), _iNUIAddVoiceShortcutButtonSelStyle)
-	return _ret
+	var _mainthread0 INUIAddVoiceShortcutButtonStyle
+	purego.Main(func() {
+		_mainthread0 = func() INUIAddVoiceShortcutButtonStyle {
+			_ret := objc.Send[INUIAddVoiceShortcutButtonStyle](o.Ptr(), _iNUIAddVoiceShortcutButtonSelStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *INUIAddVoiceShortcutButton) SetStyle(style INUIAddVoiceShortcutButtonStyle) {
-	o.Ptr().Send(_iNUIAddVoiceShortcutButtonSelSetStyle, style)
+	purego.Main(func() {
+		o.Ptr().Send(_iNUIAddVoiceShortcutButtonSelSetStyle, style)
+	})
 }
 
 func (o *INUIAddVoiceShortcutButton) Delegate() INUIAddVoiceShortcutButtonDelegate {
-	_ret := objc.Send[INUIAddVoiceShortcutButtonDelegate](o.Ptr(), _iNUIAddVoiceShortcutButtonSelDelegate)
-	return _ret
+	var _mainthread0 INUIAddVoiceShortcutButtonDelegate
+	purego.Main(func() {
+		_mainthread0 = func() INUIAddVoiceShortcutButtonDelegate {
+			_ret := objc.Send[INUIAddVoiceShortcutButtonDelegate](o.Ptr(), _iNUIAddVoiceShortcutButtonSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *INUIAddVoiceShortcutButton) SetDelegate(delegate INUIAddVoiceShortcutButtonDelegate) {
-	o.Ptr().Send(_iNUIAddVoiceShortcutButtonSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_iNUIAddVoiceShortcutButtonSelSetDelegate, delegate)
+	})
 }
 
 func (o *INUIAddVoiceShortcutButton) Shortcut() *intents.INShortcut {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iNUIAddVoiceShortcutButtonSelShortcut)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return intents.INShortcutFromID(_ret)
+	var _mainthread0 *intents.INShortcut
+	purego.Main(func() {
+		_mainthread0 = func() *intents.INShortcut {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iNUIAddVoiceShortcutButtonSelShortcut)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return intents.INShortcutFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *INUIAddVoiceShortcutButton) SetShortcut(shortcut *intents.INShortcut) {
-	o.Ptr().Send(_iNUIAddVoiceShortcutButtonSelSetShortcut, shortcut.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iNUIAddVoiceShortcutButtonSelSetShortcut, shortcut.Ptr())
+	})
 }
 
 // @abstract A custom corner radius for the @c INUIAddVoiceShortcutButton. @discussion If the provided corner radius is greater than half of the button’s height, it will be capped at half of the button’s height.
 func (o *INUIAddVoiceShortcutButton) CornerRadius() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _iNUIAddVoiceShortcutButtonSelCornerRadius)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _iNUIAddVoiceShortcutButtonSelCornerRadius)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *INUIAddVoiceShortcutButton) SetCornerRadius(cornerRadius float64) {
-	o.Ptr().Send(_iNUIAddVoiceShortcutButtonSelSetCornerRadius, cornerRadius)
+	purego.Main(func() {
+		o.Ptr().Send(_iNUIAddVoiceShortcutButtonSelSetCornerRadius, cornerRadius)
+	})
 }

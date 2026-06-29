@@ -71,189 +71,317 @@ func IMKCandidatesFromID(id objc.ID) *IMKCandidates {
 
 // Returns the initialized IMKCandidates object.
 func (o *IMKCandidates) InitWithServerPanelType(server *IMKServer, panelType uint) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iMKCandidatesSelInitWithServerPanelType, server.Ptr(), panelType)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iMKCandidatesSelInitWithServerPanelType, server.Ptr(), panelType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IMKCandidates) InitWithServerPanelTypeStyleType(server *IMKServer, panelType uint, style uint) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iMKCandidatesSelInitWithServerPanelTypeStyleType, server.Ptr(), panelType, style)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iMKCandidatesSelInitWithServerPanelTypeStyleType, server.Ptr(), panelType, style)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the style of the candidates window.
 func (o *IMKCandidates) PanelType() uint {
-	_ret := objc.Send[uint](o.Ptr(), _iMKCandidatesSelPanelType)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _iMKCandidatesSelPanelType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the style of the candidates window.
 func (o *IMKCandidates) SetPanelType(panelType uint) {
-	o.Ptr().Send(_iMKCandidatesSelSetPanelType, panelType)
+	purego.Main(func() {
+		o.Ptr().Send(_iMKCandidatesSelSetPanelType, panelType)
+	})
 }
 
 // Shows the candidates window.
 func (o *IMKCandidates) Show(locationHint uint) {
-	o.Ptr().Send(_iMKCandidatesSelShow, locationHint)
+	purego.Main(func() {
+		o.Ptr().Send(_iMKCandidatesSelShow, locationHint)
+	})
 }
 
 // Hides a candidates window, if it is visible.
 func (o *IMKCandidates) Hide() {
-	o.Ptr().Send(_iMKCandidatesSelHide)
+	purego.Main(func() {
+		o.Ptr().Send(_iMKCandidatesSelHide)
+	})
 }
 
 // Returns whether or not the candidates window is visible.
 func (o *IMKCandidates) IsVisible() bool {
-	_ret := objc.Send[bool](o.Ptr(), _iMKCandidatesSelIsVisible)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _iMKCandidatesSelIsVisible)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Updates the candidates that are displayed in the candidates window.
 func (o *IMKCandidates) UpdateCandidates() {
-	o.Ptr().Send(_iMKCandidatesSelUpdateCandidates)
+	purego.Main(func() {
+		o.Ptr().Send(_iMKCandidatesSelUpdateCandidates)
+	})
 }
 
 // Displays an annotation string in an annotation window.
 func (o *IMKCandidates) ShowAnnotation(annotationString *foundation.NSAttributedString) {
-	o.Ptr().Send(_iMKCandidatesSelShowAnnotation, annotationString.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iMKCandidatesSelShowAnnotation, annotationString.Ptr())
+	})
 }
 
 func (o *IMKCandidates) ShowSublistSubListDelegate(candidates *foundation.NSArray[objc.ID], delegate objc.ID) {
-	o.Ptr().Send(_iMKCandidatesSelShowSublistSubListDelegate, candidates.Ptr(), delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_iMKCandidatesSelShowSublistSubListDelegate, candidates.Ptr(), delegate)
+	})
 }
 
 func (o *IMKCandidates) CandidateFrame() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _iMKCandidatesSelCandidateFrame)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _iMKCandidatesSelCandidateFrame)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the selection keys for the candidates.
 func (o *IMKCandidates) SetSelectionKeys(keyCodes *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_iMKCandidatesSelSetSelectionKeys, keyCodes.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iMKCandidatesSelSetSelectionKeys, keyCodes.Ptr())
+	})
 }
 
 // Returns an array of NSNumber objects where each NSNumber object represents a virtual key code.
 func (o *IMKCandidates) SelectionKeys() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iMKCandidatesSelSelectionKeys)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[objc.ID](_ret)
+	var _mainthread0 *foundation.NSArray[objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iMKCandidatesSelSelectionKeys)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the key layout that is used to map virtual key codes to characters.
 func (o *IMKCandidates) SetSelectionKeysKeylayout(layout unsafe.Pointer) {
-	o.Ptr().Send(_iMKCandidatesSelSetSelectionKeysKeylayout, layout)
+	purego.Main(func() {
+		o.Ptr().Send(_iMKCandidatesSelSetSelectionKeysKeylayout, layout)
+	})
 }
 
 // Returns the key layout that maps virtual key codes to selection keys.
 func (o *IMKCandidates) SelectionKeysKeylayout() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iMKCandidatesSelSelectionKeysKeylayout)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iMKCandidatesSelSelectionKeysKeylayout)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the style attributes for the candidates window.
 func (o *IMKCandidates) SetAttributes(attributes *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_iMKCandidatesSelSetAttributes, attributes.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iMKCandidatesSelSetAttributes, attributes.Ptr())
+	})
 }
 
 // Returns a dictionary of the style attributes used for the candidates window..
 func (o *IMKCandidates) Attributes() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iMKCandidatesSelAttributes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
+	var _mainthread0 *foundation.NSDictionary[objc.ID, objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSDictionary[objc.ID, objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iMKCandidatesSelAttributes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the state of the flag that determines whether the candidates window dismisses automatically.
 func (o *IMKCandidates) SetDismissesAutomatically(flag bool) {
-	o.Ptr().Send(_iMKCandidatesSelSetDismissesAutomatically, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_iMKCandidatesSelSetDismissesAutomatically, flag)
+	})
 }
 
 // Returns the state of the flag that determines whether the candidates window dismisses automatically.
 func (o *IMKCandidates) DismissesAutomatically() bool {
-	_ret := objc.Send[bool](o.Ptr(), _iMKCandidatesSelDismissesAutomatically)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _iMKCandidatesSelDismissesAutomatically)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @method @abstract	Returns the currently selected candidate identifer. @discussion Attempts to determine the identifier for the selected candidate.  If there is no selection the return value will be NSNotFound.
 func (o *IMKCandidates) SelectedCandidate() int {
-	_ret := objc.Send[int](o.Ptr(), _iMKCandidatesSelSelectedCandidate)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _iMKCandidatesSelSelectedCandidate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @method @abstract	Positions the top-left corner of the candidate window’s frame rectangle at a given point in screen coordinates.
 func (o *IMKCandidates) SetCandidateFrameTopLeft(point corefoundation.CGPoint) {
-	o.Ptr().Send(_iMKCandidatesSelSetCandidateFrameTopLeft, point)
+	purego.Main(func() {
+		o.Ptr().Send(_iMKCandidatesSelSetCandidateFrameTopLeft, point)
+	})
 }
 
 // @method @abstract	If the current selection has a child IMKCandidates object that will be shown. @discussion If there is a failure in showing the child this method will throw an exception.
 func (o *IMKCandidates) ShowChild() {
-	o.Ptr().Send(_iMKCandidatesSelShowChild)
+	purego.Main(func() {
+		o.Ptr().Send(_iMKCandidatesSelShowChild)
+	})
 }
 
 // @method @abstract	If the current selection has a child IMKCandidates that is being shown hide it. @discussion Typically a client will not need to call this as IMKCandidates automatically hides and shows children.
 func (o *IMKCandidates) HideChild() {
-	o.Ptr().Send(_iMKCandidatesSelHideChild)
+	purego.Main(func() {
+		o.Ptr().Send(_iMKCandidatesSelHideChild)
+	})
 }
 
 // @method @abstract	Attach an IMKCandidates object to the specified selection. @discussion The IMKCandidate can be a sublist or an annotation.
 func (o *IMKCandidates) AttachChildToCandidateType(child *IMKCandidates, candidateIdentifier int, theType uint) {
-	o.Ptr().Send(_iMKCandidatesSelAttachChildToCandidateType, child.Ptr(), candidateIdentifier, theType)
+	purego.Main(func() {
+		o.Ptr().Send(_iMKCandidatesSelAttachChildToCandidateType, child.Ptr(), candidateIdentifier, theType)
+	})
 }
 
 // @method @abstract	Detach the IMKCandidates object attached to candidate
 func (o *IMKCandidates) DetachChild(candidateIdentifier int) {
-	o.Ptr().Send(_iMKCandidatesSelDetachChild, candidateIdentifier)
+	purego.Main(func() {
+		o.Ptr().Send(_iMKCandidatesSelDetachChild, candidateIdentifier)
+	})
 }
 
 // @method @abstract	Set the candidates data directly rather than supplying data via [IMKInputContoller candidates:]. @discussion The elements of the array can be strings or attributed strings.
 func (o *IMKCandidates) SetCandidateData(candidatesArray *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_iMKCandidatesSelSetCandidateData, candidatesArray.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iMKCandidatesSelSetCandidateData, candidatesArray.Ptr())
+	})
 }
 
 // @method @abstract	Select the candidate whose identifier matches the identifier parameter. @result YES if the candidateIdentifier is valid an the selection was made.  NO if canidateIdentifier is invalid or it was not possible make the selection. @param An identifier for a candidate.  You can obtain an identifier by mapping a candidate to an identifier via the [IMKCandidates candidateStringIdentifier:].
 func (o *IMKCandidates) SelectCandidateWithIdentifier(candidateIdentifier int) bool {
-	_ret := objc.Send[bool](o.Ptr(), _iMKCandidatesSelSelectCandidateWithIdentifier, candidateIdentifier)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _iMKCandidatesSelSelectCandidateWithIdentifier, candidateIdentifier)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IMKCandidates) SelectCandidate(candidateIdentifier int) {
-	o.Ptr().Send(_iMKCandidatesSelSelectCandidate, candidateIdentifier)
+	purego.Main(func() {
+		o.Ptr().Send(_iMKCandidatesSelSelectCandidate, candidateIdentifier)
+	})
 }
 
 // @method @abstract	Show the candidate window. @discussion This simply shows the candidates.  No effort is made to position the candidate.  The caller should move the candidate window to an appropriate location prior to showing.
 func (o *IMKCandidates) ShowCandidates() {
-	o.Ptr().Send(_iMKCandidatesSelShowCandidates)
+	purego.Main(func() {
+		o.Ptr().Send(_iMKCandidatesSelShowCandidates)
+	})
 }
 
 // @method @abstract	Map a candidateString to an identifier. @discussion Beginning with MacOS 10.7, candidate strings are mapped internally to an unique identifier of type NSInteger.  Using identifiers to identify a particular candidate is the first stage of enabling data types other than NSString and NSAttributedString for containing the contents of a candidate.
 func (o *IMKCandidates) CandidateStringIdentifier(candidateString objc.ID) int {
-	_ret := objc.Send[int](o.Ptr(), _iMKCandidatesSelCandidateStringIdentifier, candidateString)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _iMKCandidatesSelCandidateStringIdentifier, candidateString)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @method @abstract	Returns the currently selected candidate string. @discussion Attempts to determine the string for the selected candidate.  If there is no selection the return value can be nil.  The attributed string is an autoreleased object.
 func (o *IMKCandidates) SelectedCandidateString() *foundation.NSAttributedString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iMKCandidatesSelSelectedCandidateString)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSAttributedStringFromID(_ret)
+	var _mainthread0 *foundation.NSAttributedString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSAttributedString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iMKCandidatesSelSelectedCandidateString)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSAttributedStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @method @abstract	 Returns the candidate identifier for a given line in the candidate window display. @discussion Maps the lineNumber to a candidate identifier.  Line number 0 corresponds to the candidate in the cell currently in the first (top for vertical) line of the candidate window.  This is convienient for input methods that support selecting a candidate by a number key. Line Number values depend on the column arrangement of your candidate.  If you are displaying a single column candidate window, lines that have been scrolled out of view will have negative values.  For a single row grid line, numbers will correspond to the cell's position in the row (i.e. the first cell will be 0, the second 1, etc).  Finally, for a grid, the line numbers correspond to the grid row.  If the line number is invalid, NSNotFound is returned. @param lineNumber a number representing a cells position in the candidate window.
 func (o *IMKCandidates) CandidateIdentifierAtLineNumber(lineNumber int) int {
-	_ret := objc.Send[int](o.Ptr(), _iMKCandidatesSelCandidateIdentifierAtLineNumber, lineNumber)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _iMKCandidatesSelCandidateIdentifierAtLineNumber, lineNumber)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @method @abstract	Returns the line number for a given CandidateID. @result  The line number.  NSNotFound if the candidateID is invalid. @param  candidateIdentifier - A valid identifier for a candidate. @discussion If the cell that contains the candidate is at the top line of the candidate window, the return value will be 0.
 func (o *IMKCandidates) LineNumberForCandidateWithIdentifier(candidateIdentifier int) int {
-	_ret := objc.Send[int](o.Ptr(), _iMKCandidatesSelLineNumberForCandidateWithIdentifier, candidateIdentifier)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _iMKCandidatesSelLineNumberForCandidateWithIdentifier, candidateIdentifier)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IMKCandidates) ClearSelection() {
-	o.Ptr().Send(_iMKCandidatesSelClearSelection)
+	purego.Main(func() {
+		o.Ptr().Send(_iMKCandidatesSelClearSelection)
+	})
 }

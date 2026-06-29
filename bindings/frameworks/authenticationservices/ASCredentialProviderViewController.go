@@ -48,72 +48,100 @@ func ASCredentialProviderViewControllerFromID(id objc.ID) *ASCredentialProviderV
 
 // Prepares the interface to display a list of credentials from which the user can select.
 func (o *ASCredentialProviderViewController) PrepareCredentialListForServiceIdentifiers(serviceIdentifiers *foundation.NSArray[*ASCredentialServiceIdentifier]) {
-	o.Ptr().Send(_aSCredentialProviderViewControllerSelPrepareCredentialListForServiceIdentifiers, serviceIdentifiers.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aSCredentialProviderViewControllerSelPrepareCredentialListForServiceIdentifiers, serviceIdentifiers.Ptr())
+	})
 }
 
 // Prepares the interface to display a list of passkey and password credentials from which the user can select.
 func (o *ASCredentialProviderViewController) PrepareCredentialListForServiceIdentifiersRequestParameters(serviceIdentifiers *foundation.NSArray[*ASCredentialServiceIdentifier], requestParameters *ASPasskeyCredentialRequestParameters) {
-	o.Ptr().Send(_aSCredentialProviderViewControllerSelPrepareCredentialListForServiceIdentifiersRequestParameters, serviceIdentifiers.Ptr(), requestParameters.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aSCredentialProviderViewControllerSelPrepareCredentialListForServiceIdentifiersRequestParameters, serviceIdentifiers.Ptr(), requestParameters.Ptr())
+	})
 }
 
 // Prepares the interface to display a list of one-time passcodes (OTPs) that people can select from.
 func (o *ASCredentialProviderViewController) PrepareOneTimeCodeCredentialListForServiceIdentifiers(serviceIdentifiers *foundation.NSArray[*ASCredentialServiceIdentifier]) {
-	o.Ptr().Send(_aSCredentialProviderViewControllerSelPrepareOneTimeCodeCredentialListForServiceIdentifiers, serviceIdentifiers.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aSCredentialProviderViewControllerSelPrepareOneTimeCodeCredentialListForServiceIdentifiers, serviceIdentifiers.Ptr())
+	})
 }
 
 // Attempts to provide the user-requested credential with no further user interaction.
 // Deprecated: since macOS 14.0.
 func (o *ASCredentialProviderViewController) ProvideCredentialWithoutUserInteractionForIdentity(credentialIdentity *ASPasswordCredentialIdentity) {
-	o.Ptr().Send(_aSCredentialProviderViewControllerSelProvideCredentialWithoutUserInteractionForIdentity, credentialIdentity.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aSCredentialProviderViewControllerSelProvideCredentialWithoutUserInteractionForIdentity, credentialIdentity.Ptr())
+	})
 }
 
 // Attempts to provide the user-requested credential with no further user interaction.
 func (o *ASCredentialProviderViewController) ProvideCredentialWithoutUserInteractionForRequest(credentialRequest ASCredentialRequest) {
-	o.Ptr().Send(_aSCredentialProviderViewControllerSelProvideCredentialWithoutUserInteractionForRequest, credentialRequest)
+	purego.Main(func() {
+		o.Ptr().Send(_aSCredentialProviderViewControllerSelProvideCredentialWithoutUserInteractionForRequest, credentialRequest)
+	})
 }
 
 // Prepares the interface for a user interaction, like a database login, that enables it to access and return the credential for the given identity.
 // Deprecated: since macOS 14.0.
 func (o *ASCredentialProviderViewController) PrepareInterfaceToProvideCredentialForIdentity(credentialIdentity *ASPasswordCredentialIdentity) {
-	o.Ptr().Send(_aSCredentialProviderViewControllerSelPrepareInterfaceToProvideCredentialForIdentity, credentialIdentity.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aSCredentialProviderViewControllerSelPrepareInterfaceToProvideCredentialForIdentity, credentialIdentity.Ptr())
+	})
 }
 
 // Prepare the view controller to show user interface for providing the requested credential.
 func (o *ASCredentialProviderViewController) PrepareInterfaceToProvideCredentialForRequest(credentialRequest ASCredentialRequest) {
-	o.Ptr().Send(_aSCredentialProviderViewControllerSelPrepareInterfaceToProvideCredentialForRequest, credentialRequest)
+	purego.Main(func() {
+		o.Ptr().Send(_aSCredentialProviderViewControllerSelPrepareInterfaceToProvideCredentialForRequest, credentialRequest)
+	})
 }
 
 // Prepares the interface to enable the user to configure the extension.
 func (o *ASCredentialProviderViewController) PrepareInterfaceForExtensionConfiguration() {
-	o.Ptr().Send(_aSCredentialProviderViewControllerSelPrepareInterfaceForExtensionConfiguration)
+	purego.Main(func() {
+		o.Ptr().Send(_aSCredentialProviderViewControllerSelPrepareInterfaceForExtensionConfiguration)
+	})
 }
 
 // Prepare the view controller to show user interface for registering a new passkey.
 func (o *ASCredentialProviderViewController) PrepareInterfaceForPasskeyRegistration(registrationRequest ASCredentialRequest) {
-	o.Ptr().Send(_aSCredentialProviderViewControllerSelPrepareInterfaceForPasskeyRegistration, registrationRequest)
+	purego.Main(func() {
+		o.Ptr().Send(_aSCredentialProviderViewControllerSelPrepareInterfaceForPasskeyRegistration, registrationRequest)
+	})
 }
 
 // Perform a conditional passkey registration, if possible.
 func (o *ASCredentialProviderViewController) PerformPasskeyRegistrationWithoutUserInteractionIfPossible(registrationRequest *ASPasskeyCredentialRequest) {
-	o.Ptr().Send(_aSCredentialProviderViewControllerSelPerformPasskeyRegistrationWithoutUserInteractionIfPossible, registrationRequest.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aSCredentialProviderViewControllerSelPerformPasskeyRegistrationWithoutUserInteractionIfPossible, registrationRequest.Ptr())
+	})
 }
 
 // Receives a report from the system that a relying party indicated that a passkey’s user name updated.
 func (o *ASCredentialProviderViewController) ReportPublicKeyCredentialUpdateForRelyingPartyUserHandleNewName(relyingParty *foundation.NSString, userHandle *foundation.NSData, newName *foundation.NSString) {
-	o.Ptr().Send(_aSCredentialProviderViewControllerSelReportPublicKeyCredentialUpdateForRelyingPartyUserHandleNewName, relyingParty.Ptr(), userHandle.Ptr(), newName.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aSCredentialProviderViewControllerSelReportPublicKeyCredentialUpdateForRelyingPartyUserHandleNewName, relyingParty.Ptr(), userHandle.Ptr(), newName.Ptr())
+	})
 }
 
 // Receives a report from the system that a relying party indicated a passkey credential is invalid.
 func (o *ASCredentialProviderViewController) ReportUnknownPublicKeyCredentialForRelyingPartyCredentialID(relyingParty *foundation.NSString, credentialID *foundation.NSData) {
-	o.Ptr().Send(_aSCredentialProviderViewControllerSelReportUnknownPublicKeyCredentialForRelyingPartyCredentialID, relyingParty.Ptr(), credentialID.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aSCredentialProviderViewControllerSelReportUnknownPublicKeyCredentialForRelyingPartyCredentialID, relyingParty.Ptr(), credentialID.Ptr())
+	})
 }
 
 // Receives a report from the system that a relying party sent a snapshot of all accepted credentials for an account.
 func (o *ASCredentialProviderViewController) ReportAllAcceptedPublicKeyCredentialsForRelyingPartyUserHandleAcceptedCredentialIDs(relyingParty *foundation.NSString, userHandle *foundation.NSData, acceptedCredentialIDs *foundation.NSArray[*foundation.NSData]) {
-	o.Ptr().Send(_aSCredentialProviderViewControllerSelReportAllAcceptedPublicKeyCredentialsForRelyingPartyUserHandleAcceptedCredentialIDs, relyingParty.Ptr(), userHandle.Ptr(), acceptedCredentialIDs.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aSCredentialProviderViewControllerSelReportAllAcceptedPublicKeyCredentialsForRelyingPartyUserHandleAcceptedCredentialIDs, relyingParty.Ptr(), userHandle.Ptr(), acceptedCredentialIDs.Ptr())
+	})
 }
 
 // Receives a report from the system that a relying party indicatd that a password credential isn’t needed anymore for a given user name.
 func (o *ASCredentialProviderViewController) ReportUnusedPasswordCredentialForDomainUserName(domain *foundation.NSString, userName *foundation.NSString) {
-	o.Ptr().Send(_aSCredentialProviderViewControllerSelReportUnusedPasswordCredentialForDomainUserName, domain.Ptr(), userName.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aSCredentialProviderViewControllerSelReportUnusedPasswordCredentialForDomainUserName, domain.Ptr(), userName.Ptr())
+	})
 }

@@ -51,7 +51,9 @@ func (o *WKHTTPCookieStore) GetAllCookies(completionHandler func(*foundation.NSA
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_wKHTTPCookieStoreSelGetAllCookies, __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_wKHTTPCookieStoreSelGetAllCookies, __block_completionHandler)
+	})
 }
 
 // Adds a cookie to the cookie store.
@@ -63,7 +65,9 @@ func (o *WKHTTPCookieStore) SetCookieCompletionHandler(cookie *foundation.NSHTTP
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_wKHTTPCookieStoreSelSetCookieCompletionHandler, cookie.Ptr(), __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_wKHTTPCookieStoreSelSetCookieCompletionHandler, cookie.Ptr(), __block_completionHandler)
+	})
 }
 
 // @abstract Set multiple cookies. @param cookies An array of cookies to set. @param completionHandler A block to invoke once the cookies have been stored.
@@ -75,7 +79,9 @@ func (o *WKHTTPCookieStore) SetCookiesCompletionHandler(cookies *foundation.NSAr
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_wKHTTPCookieStoreSelSetCookiesCompletionHandler, cookies.Ptr(), __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_wKHTTPCookieStoreSelSetCookiesCompletionHandler, cookies.Ptr(), __block_completionHandler)
+	})
 }
 
 // Deletes the specified cookie.
@@ -87,17 +93,23 @@ func (o *WKHTTPCookieStore) DeleteCookieCompletionHandler(cookie *foundation.NSH
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_wKHTTPCookieStoreSelDeleteCookieCompletionHandler, cookie.Ptr(), __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_wKHTTPCookieStoreSelDeleteCookieCompletionHandler, cookie.Ptr(), __block_completionHandler)
+	})
 }
 
 // Adds an observer to the cookie store.
 func (o *WKHTTPCookieStore) AddObserver(observer WKHTTPCookieStoreObserver) {
-	o.Ptr().Send(_wKHTTPCookieStoreSelAddObserver, observer)
+	purego.Main(func() {
+		o.Ptr().Send(_wKHTTPCookieStoreSelAddObserver, observer)
+	})
 }
 
 // Removes an observer from the cookie store.
 func (o *WKHTTPCookieStore) RemoveObserver(observer WKHTTPCookieStoreObserver) {
-	o.Ptr().Send(_wKHTTPCookieStoreSelRemoveObserver, observer)
+	purego.Main(func() {
+		o.Ptr().Send(_wKHTTPCookieStoreSelRemoveObserver, observer)
+	})
 }
 
 // Sets a cookie policy that indicates whether the cookie store allows cookie storage.
@@ -109,7 +121,9 @@ func (o *WKHTTPCookieStore) SetCookiePolicyCompletionHandler(policy WKCookiePoli
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_wKHTTPCookieStoreSelSetCookiePolicyCompletionHandler, policy, __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_wKHTTPCookieStoreSelSetCookiePolicyCompletionHandler, policy, __block_completionHandler)
+	})
 }
 
 // Returns a cookie policy that indicates whether the cookie store allows cookie storage.
@@ -121,5 +135,7 @@ func (o *WKHTTPCookieStore) GetCookiePolicy(completionHandler func(WKCookiePolic
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_wKHTTPCookieStoreSelGetCookiePolicy, __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_wKHTTPCookieStoreSelGetCookiePolicy, __block_completionHandler)
+	})
 }

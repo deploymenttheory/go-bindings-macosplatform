@@ -38,30 +38,52 @@ func MKCompassButtonFromID(id objc.ID) *MKCompassButton {
 
 // Creates a compass button and associates it with the specified map view.
 func MKCompassButtonCompassButtonWithMapView(mapView *MKMapView) *MKCompassButton {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMKCompassButton), _mKCompassButtonSelCompassButtonWithMapView, mapView.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKCompassButtonFromID(_ret)
+	var _mainthread0 *MKCompassButton
+	purego.Main(func() {
+		_mainthread0 = func() *MKCompassButton {
+			_ret := objc.Send[objc.ID](objc.ID(_clsMKCompassButton), _mKCompassButtonSelCompassButtonWithMapView, mapView.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKCompassButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKCompassButton) MapView() *MKMapView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKCompassButtonSelMapView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKMapViewFromID(_ret)
+	var _mainthread0 *MKMapView
+	purego.Main(func() {
+		_mainthread0 = func() *MKMapView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKCompassButtonSelMapView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKMapViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKCompassButton) SetMapView(mapView *MKMapView) {
-	o.Ptr().Send(_mKCompassButtonSelSetMapView, mapView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKCompassButtonSelSetMapView, mapView.Ptr())
+	})
 }
 
 func (o *MKCompassButton) CompassVisibility() MKFeatureVisibility {
-	_ret := objc.Send[MKFeatureVisibility](o.Ptr(), _mKCompassButtonSelCompassVisibility)
-	return _ret
+	var _mainthread0 MKFeatureVisibility
+	purego.Main(func() {
+		_mainthread0 = func() MKFeatureVisibility {
+			_ret := objc.Send[MKFeatureVisibility](o.Ptr(), _mKCompassButtonSelCompassVisibility)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKCompassButton) SetCompassVisibility(compassVisibility MKFeatureVisibility) {
-	o.Ptr().Send(_mKCompassButtonSelSetCompassVisibility, compassVisibility)
+	purego.Main(func() {
+		o.Ptr().Send(_mKCompassButtonSelSetCompassVisibility, compassVisibility)
+	})
 }

@@ -39,30 +39,52 @@ func IKImageEditPanelFromID(id objc.ID) *IKImageEditPanel {
 
 // Creates a shared instance of an image editing panel.
 func IKImageEditPanelSharedImageEditPanel() objc.ID {
-	_ret := objc.Send[objc.ID](objc.ID(_clsIKImageEditPanel), _iKImageEditPanelSelSharedImageEditPanel)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](objc.ID(_clsIKImageEditPanel), _iKImageEditPanelSelSharedImageEditPanel)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Reloads the data from the data associated with an image editing panel.
 func (o *IKImageEditPanel) ReloadData() {
-	o.Ptr().Send(_iKImageEditPanelSelReloadData)
+	purego.Main(func() {
+		o.Ptr().Send(_iKImageEditPanelSelReloadData)
+	})
 }
 
 // @property dataSource @abstract Data source associated with an image editing panel
 func (o *IKImageEditPanel) DataSource() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKImageEditPanelSelDataSource)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKImageEditPanelSelDataSource)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKImageEditPanel) SetDataSource(dataSource objc.ID) {
-	o.Ptr().Send(_iKImageEditPanelSelSetDataSource, dataSource)
+	purego.Main(func() {
+		o.Ptr().Send(_iKImageEditPanelSelSetDataSource, dataSource)
+	})
 }
 
 // @property filterArray @abstract Array of filters reflecting the current user adjustments in the adjust or effects tab.
 func (o *IKImageEditPanel) FilterArray() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKImageEditPanelSelFilterArray)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[objc.ID](_ret)
+	var _mainthread0 *foundation.NSArray[objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKImageEditPanelSelFilterArray)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }

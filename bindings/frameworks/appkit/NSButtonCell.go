@@ -84,278 +84,470 @@ func NSButtonCellFromID(id objc.ID) *NSButtonCell {
 }
 
 func (o *NSButtonCell) InitTextCell(string_ *foundation.NSString) *NSButtonCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelInitTextCell, string_.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSButtonCellFromID(_ret)
+	var _mainthread0 *NSButtonCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSButtonCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelInitTextCell, string_.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSButtonCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonCell) InitImageCell(image *NSImage) *NSButtonCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelInitImageCell, image.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSButtonCellFromID(_ret)
+	var _mainthread0 *NSButtonCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSButtonCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelInitImageCell, image.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSButtonCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonCell) InitWithCoder(coder *foundation.NSCoder) *NSButtonCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSButtonCellFromID(_ret)
+	var _mainthread0 *NSButtonCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSButtonCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSButtonCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets how the button highlights while pressed and how it shows its state.
 func (o *NSButtonCell) SetButtonType(type_ NSButtonType) {
-	o.Ptr().Send(_nSButtonCellSelSetButtonType, type_)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelSetButtonType, type_)
+	})
 }
 
 // Sets the message delay and interval for the button.
 func (o *NSButtonCell) SetPeriodicDelayInterval(delay float32, interval float32) {
-	o.Ptr().Send(_nSButtonCellSelSetPeriodicDelayInterval, delay, interval)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelSetPeriodicDelayInterval, delay, interval)
+	})
 }
 
 // Draws the button’s border.
 func (o *NSButtonCell) MouseEntered(event *NSEvent) {
-	o.Ptr().Send(_nSButtonCellSelMouseEntered, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelMouseEntered, event.Ptr())
+	})
 }
 
 // Erases the button’s border.
 func (o *NSButtonCell) MouseExited(event *NSEvent) {
-	o.Ptr().Send(_nSButtonCellSelMouseExited, event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelMouseExited, event.Ptr())
+	})
 }
 
 // Draws the border of the button using the current bezel style.
 func (o *NSButtonCell) DrawBezelWithFrameInView(frame corefoundation.CGRect, controlView *NSView) {
-	o.Ptr().Send(_nSButtonCellSelDrawBezelWithFrameInView, frame, controlView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelDrawBezelWithFrameInView, frame, controlView.Ptr())
+	})
 }
 
 // Draws the image associated with the button’s current state.
 func (o *NSButtonCell) DrawImageWithFrameInView(image *NSImage, frame corefoundation.CGRect, controlView *NSView) {
-	o.Ptr().Send(_nSButtonCellSelDrawImageWithFrameInView, image.Ptr(), frame, controlView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelDrawImageWithFrameInView, image.Ptr(), frame, controlView.Ptr())
+	})
 }
 
 // Draws the button’s title centered vertically in a specified rectangle.
 func (o *NSButtonCell) DrawTitleWithFrameInView(title *foundation.NSAttributedString, frame corefoundation.CGRect, controlView *NSView) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSButtonCellSelDrawTitleWithFrameInView, title.Ptr(), frame, controlView.Ptr())
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSButtonCellSelDrawTitleWithFrameInView, title.Ptr(), frame, controlView.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonCell) BezelStyle() NSBezelStyle {
-	_ret := objc.Send[NSBezelStyle](o.Ptr(), _nSButtonCellSelBezelStyle)
-	return _ret
+	var _mainthread0 NSBezelStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSBezelStyle {
+			_ret := objc.Send[NSBezelStyle](o.Ptr(), _nSButtonCellSelBezelStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonCell) SetBezelStyle(bezelStyle NSBezelStyle) {
-	o.Ptr().Send(_nSButtonCellSelSetBezelStyle, bezelStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelSetBezelStyle, bezelStyle)
+	})
 }
 
 func (o *NSButtonCell) HighlightsBy() NSCellStyleMask {
-	_ret := objc.Send[NSCellStyleMask](o.Ptr(), _nSButtonCellSelHighlightsBy)
-	return _ret
+	var _mainthread0 NSCellStyleMask
+	purego.Main(func() {
+		_mainthread0 = func() NSCellStyleMask {
+			_ret := objc.Send[NSCellStyleMask](o.Ptr(), _nSButtonCellSelHighlightsBy)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonCell) SetHighlightsBy(highlightsBy NSCellStyleMask) {
-	o.Ptr().Send(_nSButtonCellSelSetHighlightsBy, highlightsBy)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelSetHighlightsBy, highlightsBy)
+	})
 }
 
 func (o *NSButtonCell) ShowsStateBy() NSCellStyleMask {
-	_ret := objc.Send[NSCellStyleMask](o.Ptr(), _nSButtonCellSelShowsStateBy)
-	return _ret
+	var _mainthread0 NSCellStyleMask
+	purego.Main(func() {
+		_mainthread0 = func() NSCellStyleMask {
+			_ret := objc.Send[NSCellStyleMask](o.Ptr(), _nSButtonCellSelShowsStateBy)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonCell) SetShowsStateBy(showsStateBy NSCellStyleMask) {
-	o.Ptr().Send(_nSButtonCellSelSetShowsStateBy, showsStateBy)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelSetShowsStateBy, showsStateBy)
+	})
 }
 
 func (o *NSButtonCell) AttributedTitle() *foundation.NSAttributedString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelAttributedTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSAttributedStringFromID(_ret)
+	var _mainthread0 *foundation.NSAttributedString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSAttributedString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelAttributedTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSAttributedStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonCell) SetAttributedTitle(attributedTitle *foundation.NSAttributedString) {
-	o.Ptr().Send(_nSButtonCellSelSetAttributedTitle, attributedTitle.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelSetAttributedTitle, attributedTitle.Ptr())
+	})
 }
 
 func (o *NSButtonCell) AlternateTitle() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelAlternateTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelAlternateTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonCell) SetAlternateTitle(alternateTitle *foundation.NSString) {
-	o.Ptr().Send(_nSButtonCellSelSetAlternateTitle, alternateTitle.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelSetAlternateTitle, alternateTitle.Ptr())
+	})
 }
 
 func (o *NSButtonCell) AttributedAlternateTitle() *foundation.NSAttributedString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelAttributedAlternateTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSAttributedStringFromID(_ret)
+	var _mainthread0 *foundation.NSAttributedString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSAttributedString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelAttributedAlternateTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSAttributedStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonCell) SetAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) {
-	o.Ptr().Send(_nSButtonCellSelSetAttributedAlternateTitle, attributedAlternateTitle.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelSetAttributedAlternateTitle, attributedAlternateTitle.Ptr())
+	})
 }
 
 func (o *NSButtonCell) AlternateImage() *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelAlternateImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelAlternateImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonCell) SetAlternateImage(alternateImage *NSImage) {
-	o.Ptr().Send(_nSButtonCellSelSetAlternateImage, alternateImage.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelSetAlternateImage, alternateImage.Ptr())
+	})
 }
 
 func (o *NSButtonCell) ImagePosition() NSCellImagePosition {
-	_ret := objc.Send[NSCellImagePosition](o.Ptr(), _nSButtonCellSelImagePosition)
-	return _ret
+	var _mainthread0 NSCellImagePosition
+	purego.Main(func() {
+		_mainthread0 = func() NSCellImagePosition {
+			_ret := objc.Send[NSCellImagePosition](o.Ptr(), _nSButtonCellSelImagePosition)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonCell) SetImagePosition(imagePosition NSCellImagePosition) {
-	o.Ptr().Send(_nSButtonCellSelSetImagePosition, imagePosition)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelSetImagePosition, imagePosition)
+	})
 }
 
 func (o *NSButtonCell) ImageScaling() NSImageScaling {
-	_ret := objc.Send[NSImageScaling](o.Ptr(), _nSButtonCellSelImageScaling)
-	return _ret
+	var _mainthread0 NSImageScaling
+	purego.Main(func() {
+		_mainthread0 = func() NSImageScaling {
+			_ret := objc.Send[NSImageScaling](o.Ptr(), _nSButtonCellSelImageScaling)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonCell) SetImageScaling(imageScaling NSImageScaling) {
-	o.Ptr().Send(_nSButtonCellSelSetImageScaling, imageScaling)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelSetImageScaling, imageScaling)
+	})
 }
 
 func (o *NSButtonCell) SetKeyEquivalent(keyEquivalent *foundation.NSString) {
-	o.Ptr().Send(_nSButtonCellSelSetKeyEquivalent, keyEquivalent.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelSetKeyEquivalent, keyEquivalent.Ptr())
+	})
 }
 
 func (o *NSButtonCell) KeyEquivalentModifierMask() NSEventModifierFlags {
-	_ret := objc.Send[NSEventModifierFlags](o.Ptr(), _nSButtonCellSelKeyEquivalentModifierMask)
-	return _ret
+	var _mainthread0 NSEventModifierFlags
+	purego.Main(func() {
+		_mainthread0 = func() NSEventModifierFlags {
+			_ret := objc.Send[NSEventModifierFlags](o.Ptr(), _nSButtonCellSelKeyEquivalentModifierMask)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonCell) SetKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) {
-	o.Ptr().Send(_nSButtonCellSelSetKeyEquivalentModifierMask, keyEquivalentModifierMask)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelSetKeyEquivalentModifierMask, keyEquivalentModifierMask)
+	})
 }
 
 func (o *NSButtonCell) IsTransparent() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSButtonCellSelIsTransparent)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSButtonCellSelIsTransparent)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonCell) SetTransparent(transparent bool) {
-	o.Ptr().Send(_nSButtonCellSelSetTransparent, transparent)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelSetTransparent, transparent)
+	})
 }
 
 func (o *NSButtonCell) ImageDimsWhenDisabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSButtonCellSelImageDimsWhenDisabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSButtonCellSelImageDimsWhenDisabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonCell) SetImageDimsWhenDisabled(imageDimsWhenDisabled bool) {
-	o.Ptr().Send(_nSButtonCellSelSetImageDimsWhenDisabled, imageDimsWhenDisabled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelSetImageDimsWhenDisabled, imageDimsWhenDisabled)
+	})
 }
 
 func (o *NSButtonCell) ShowsBorderOnlyWhileMouseInside() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSButtonCellSelShowsBorderOnlyWhileMouseInside)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSButtonCellSelShowsBorderOnlyWhileMouseInside)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonCell) SetShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) {
-	o.Ptr().Send(_nSButtonCellSelSetShowsBorderOnlyWhileMouseInside, showsBorderOnlyWhileMouseInside)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelSetShowsBorderOnlyWhileMouseInside, showsBorderOnlyWhileMouseInside)
+	})
 }
 
 func (o *NSButtonCell) Sound() *NSSound {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelSound)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSSoundFromID(_ret)
+	var _mainthread0 *NSSound
+	purego.Main(func() {
+		_mainthread0 = func() *NSSound {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelSound)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSSoundFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonCell) SetSound(sound *NSSound) {
-	o.Ptr().Send(_nSButtonCellSelSetSound, sound.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelSetSound, sound.Ptr())
+	})
 }
 
 func (o *NSButtonCell) BackgroundColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelBackgroundColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelBackgroundColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSButtonCell) SetBackgroundColor(backgroundColor *NSColor) {
-	o.Ptr().Send(_nSButtonCellSelSetBackgroundColor, backgroundColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelSetBackgroundColor, backgroundColor.Ptr())
+	})
 }
 
 // Sets the title the button displays when it’s in its alternate state to the given string with an embedded mnemonic.
 // Deprecated: Mnemonics are not used on macOS. Set the alternateTitle property directly instead.
 func (o *NSButtonCell) SetAlternateTitleWithMnemonic(stringWithAmpersand *foundation.NSString) {
-	o.Ptr().Send(_nSButtonCellSelSetAlternateTitleWithMnemonic, stringWithAmpersand.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelSetAlternateTitleWithMnemonic, stringWithAmpersand.Ptr())
+	})
 }
 
 // Sets the character in the alternate title that should be the “keyboard mnemonic.”
 // Deprecated: Mnemonics are not used on macOS. Calling this method has no effect.
 func (o *NSButtonCell) SetAlternateMnemonicLocation(location uint) {
-	o.Ptr().Send(_nSButtonCellSelSetAlternateMnemonicLocation, location)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelSetAlternateMnemonicLocation, location)
+	})
 }
 
 // Returns an unsigned integer indicating the character in the alternate title that’s marked as the “keyboard mnemonic.”
 // Deprecated: Mnemonics are not used on macOS. This property always returns NSNotFound.
 func (o *NSButtonCell) AlternateMnemonicLocation() uint {
-	_ret := objc.Send[uint](o.Ptr(), _nSButtonCellSelAlternateMnemonicLocation)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _nSButtonCellSelAlternateMnemonicLocation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the character in the alternate title that’s marked as the “keyboard mnemonic.”
 // Deprecated: Mnemonics are not used on macOS. This property always returns an empty string.
 func (o *NSButtonCell) AlternateMnemonic() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelAlternateMnemonic)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelAlternateMnemonic)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets by name and size of the font used to draw the key equivalent.
 // Deprecated: The keyEquivalentFont property is no longer used. Setting it has no effect.
 func (o *NSButtonCell) SetKeyEquivalentFontSize(fontName *foundation.NSString, fontSize float64) {
-	o.Ptr().Send(_nSButtonCellSelSetKeyEquivalentFontSize, fontName.Ptr(), fontSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelSetKeyEquivalentFontSize, fontName.Ptr(), fontSize)
+	})
 }
 
 // Deprecated: The gradientType property is unused, and setting it has no effect.
 func (o *NSButtonCell) GradientType() NSGradientType {
-	_ret := objc.Send[NSGradientType](o.Ptr(), _nSButtonCellSelGradientType)
-	return _ret
+	var _mainthread0 NSGradientType
+	purego.Main(func() {
+		_mainthread0 = func() NSGradientType {
+			_ret := objc.Send[NSGradientType](o.Ptr(), _nSButtonCellSelGradientType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: The gradientType property is unused, and setting it has no effect.
 func (o *NSButtonCell) SetGradientType(gradientType NSGradientType) {
-	o.Ptr().Send(_nSButtonCellSelSetGradientType, gradientType)
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelSetGradientType, gradientType)
+	})
 }
 
 // Deprecated: The keyEquivalentFont property is no longer used. It always returns the NSButtonCell's font, and setting it has no effect.
 func (o *NSButtonCell) KeyEquivalentFont() *NSFont {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelKeyEquivalentFont)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSFontFromID(_ret)
+	var _mainthread0 *NSFont
+	purego.Main(func() {
+		_mainthread0 = func() *NSFont {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelKeyEquivalentFont)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSFontFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: The keyEquivalentFont property is no longer used. It always returns the NSButtonCell's font, and setting it has no effect.
 func (o *NSButtonCell) SetKeyEquivalentFont(keyEquivalentFont *NSFont) {
-	o.Ptr().Send(_nSButtonCellSelSetKeyEquivalentFont, keyEquivalentFont.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSButtonCellSelSetKeyEquivalentFont, keyEquivalentFont.Ptr())
+	})
 }

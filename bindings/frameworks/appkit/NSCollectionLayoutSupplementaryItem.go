@@ -40,51 +40,89 @@ func NSCollectionLayoutSupplementaryItemFromID(id objc.ID) *NSCollectionLayoutSu
 
 // Creates a supplementary item of the specified size and element kind, with an anchor relative to a container.
 func NSCollectionLayoutSupplementaryItemSupplementaryItemWithLayoutSizeElementKindContainerAnchor(layoutSize *NSCollectionLayoutSize, elementKind *foundation.NSString, containerAnchor *NSCollectionLayoutAnchor) *NSCollectionLayoutSupplementaryItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutSupplementaryItem), _nSCollectionLayoutSupplementaryItemSelSupplementaryItemWithLayoutSizeElementKindContainerAnchor, layoutSize.Ptr(), elementKind.Ptr(), containerAnchor.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutSupplementaryItemFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutSupplementaryItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutSupplementaryItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutSupplementaryItem), _nSCollectionLayoutSupplementaryItemSelSupplementaryItemWithLayoutSizeElementKindContainerAnchor, layoutSize.Ptr(), elementKind.Ptr(), containerAnchor.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutSupplementaryItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a supplementary item of the specified size and element kind, an anchor relative to a container, and an anchor relative to an item.
 func NSCollectionLayoutSupplementaryItemSupplementaryItemWithLayoutSizeElementKindContainerAnchorItemAnchor(layoutSize *NSCollectionLayoutSize, elementKind *foundation.NSString, containerAnchor *NSCollectionLayoutAnchor, itemAnchor *NSCollectionLayoutAnchor) *NSCollectionLayoutSupplementaryItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutSupplementaryItem), _nSCollectionLayoutSupplementaryItemSelSupplementaryItemWithLayoutSizeElementKindContainerAnchorItemAnchor, layoutSize.Ptr(), elementKind.Ptr(), containerAnchor.Ptr(), itemAnchor.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutSupplementaryItemFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutSupplementaryItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutSupplementaryItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutSupplementaryItem), _nSCollectionLayoutSupplementaryItemSelSupplementaryItemWithLayoutSizeElementKindContainerAnchorItemAnchor, layoutSize.Ptr(), elementKind.Ptr(), containerAnchor.Ptr(), itemAnchor.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutSupplementaryItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutSupplementaryItem) ZIndex() int {
-	_ret := objc.Send[int](o.Ptr(), _nSCollectionLayoutSupplementaryItemSelZIndex)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSCollectionLayoutSupplementaryItemSelZIndex)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutSupplementaryItem) SetZIndex(zIndex int) {
-	o.Ptr().Send(_nSCollectionLayoutSupplementaryItemSelSetZIndex, zIndex)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionLayoutSupplementaryItemSelSetZIndex, zIndex)
+	})
 }
 
 func (o *NSCollectionLayoutSupplementaryItem) ElementKind() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutSupplementaryItemSelElementKind)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutSupplementaryItemSelElementKind)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutSupplementaryItem) ContainerAnchor() *NSCollectionLayoutAnchor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutSupplementaryItemSelContainerAnchor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutAnchorFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutAnchor
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutAnchor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutSupplementaryItemSelContainerAnchor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutAnchorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutSupplementaryItem) ItemAnchor() *NSCollectionLayoutAnchor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutSupplementaryItemSelItemAnchor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutAnchorFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutAnchor
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutAnchor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutSupplementaryItemSelItemAnchor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutAnchorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

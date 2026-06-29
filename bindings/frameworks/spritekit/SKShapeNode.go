@@ -77,259 +77,443 @@ func SKShapeNodeFromID(id objc.ID) *SKShapeNode {
 
 // Creates a shape node from a Core Graphics path.
 func SKShapeNodeShapeNodeWithPath(path unsafe.Pointer) *SKShapeNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithPath, path)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKShapeNodeFromID(_ret)
+	var _mainthread0 *SKShapeNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKShapeNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithPath, path)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKShapeNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a shape node from a Core Graphics path, centered around its position.
 func SKShapeNodeShapeNodeWithPathCentered(path unsafe.Pointer, centered bool) *SKShapeNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithPathCentered, path, centered)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKShapeNodeFromID(_ret)
+	var _mainthread0 *SKShapeNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKShapeNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithPathCentered, path, centered)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKShapeNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a shape node with a rectangular path.
 func SKShapeNodeShapeNodeWithRect(rect corefoundation.CGRect) *SKShapeNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithRect, rect)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKShapeNodeFromID(_ret)
+	var _mainthread0 *SKShapeNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKShapeNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithRect, rect)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKShapeNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a shape node with a rectangular path centered on the node’s origin.
 func SKShapeNodeShapeNodeWithRectOfSize(size corefoundation.CGSize) *SKShapeNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithRectOfSize, size)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKShapeNodeFromID(_ret)
+	var _mainthread0 *SKShapeNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKShapeNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithRectOfSize, size)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKShapeNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a shape with a rectangular path that has rounded corners.
 func SKShapeNodeShapeNodeWithRectCornerRadius(rect corefoundation.CGRect, cornerRadius float64) *SKShapeNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithRectCornerRadius, rect, cornerRadius)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKShapeNodeFromID(_ret)
+	var _mainthread0 *SKShapeNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKShapeNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithRectCornerRadius, rect, cornerRadius)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKShapeNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a shape with a rectangular path that has rounded corners centered on the node’s position.
 func SKShapeNodeShapeNodeWithRectOfSizeCornerRadius(size corefoundation.CGSize, cornerRadius float64) *SKShapeNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithRectOfSizeCornerRadius, size, cornerRadius)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKShapeNodeFromID(_ret)
+	var _mainthread0 *SKShapeNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKShapeNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithRectOfSizeCornerRadius, size, cornerRadius)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKShapeNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a shape node with a circular path centered on the node’s origin.
 func SKShapeNodeShapeNodeWithCircleOfRadius(radius float64) *SKShapeNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithCircleOfRadius, radius)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKShapeNodeFromID(_ret)
+	var _mainthread0 *SKShapeNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKShapeNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithCircleOfRadius, radius)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKShapeNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a shape node with an elliptical path that fills the specified rectangle.
 func SKShapeNodeShapeNodeWithEllipseInRect(rect corefoundation.CGRect) *SKShapeNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithEllipseInRect, rect)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKShapeNodeFromID(_ret)
+	var _mainthread0 *SKShapeNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKShapeNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithEllipseInRect, rect)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKShapeNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a shape node with an elliptical path centered on the node’s origin.
 func SKShapeNodeShapeNodeWithEllipseOfSize(size corefoundation.CGSize) *SKShapeNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithEllipseOfSize, size)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKShapeNodeFromID(_ret)
+	var _mainthread0 *SKShapeNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKShapeNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithEllipseOfSize, size)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKShapeNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a shape node from a series of points.
 func SKShapeNodeShapeNodeWithPointsCount(points *corefoundation.CGPoint, numPoints uint) *SKShapeNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithPointsCount, points, numPoints)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKShapeNodeFromID(_ret)
+	var _mainthread0 *SKShapeNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKShapeNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithPointsCount, points, numPoints)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKShapeNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a shape node from a series of spline points.
 func SKShapeNodeShapeNodeWithSplinePointsCount(points *corefoundation.CGPoint, numPoints uint) *SKShapeNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithSplinePointsCount, points, numPoints)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKShapeNodeFromID(_ret)
+	var _mainthread0 *SKShapeNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKShapeNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithSplinePointsCount, points, numPoints)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKShapeNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The CGPath to be drawn (in the Node's coordinate space)
 func (o *SKShapeNode) Path() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sKShapeNodeSelPath)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sKShapeNodeSelPath)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKShapeNode) SetPath(path unsafe.Pointer) {
-	o.Ptr().Send(_sKShapeNodeSelSetPath, path)
+	purego.Main(func() {
+		o.Ptr().Send(_sKShapeNodeSelSetPath, path)
+	})
 }
 
 // The color to draw the path with. (for no stroke use [SKColor clearColor]). Defaults to [SKColor whiteColor].
 func (o *SKShapeNode) StrokeColor() *appkit.NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKShapeNodeSelStrokeColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSColorFromID(_ret)
+	var _mainthread0 *appkit.NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKShapeNodeSelStrokeColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKShapeNode) SetStrokeColor(strokeColor *appkit.NSColor) {
-	o.Ptr().Send(_sKShapeNodeSelSetStrokeColor, strokeColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKShapeNodeSelSetStrokeColor, strokeColor.Ptr())
+	})
 }
 
 // The color to fill the path with. Defaults to [SKColor clearColor] (no fill).
 func (o *SKShapeNode) FillColor() *appkit.NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKShapeNodeSelFillColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSColorFromID(_ret)
+	var _mainthread0 *appkit.NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKShapeNodeSelFillColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKShapeNode) SetFillColor(fillColor *appkit.NSColor) {
-	o.Ptr().Send(_sKShapeNodeSelSetFillColor, fillColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKShapeNodeSelSetFillColor, fillColor.Ptr())
+	})
 }
 
 // Sets the blend mode to use when composing the shape with the final framebuffer. @see SKNode.SKBlendMode
 func (o *SKShapeNode) BlendMode() SKBlendMode {
-	_ret := objc.Send[SKBlendMode](o.Ptr(), _sKShapeNodeSelBlendMode)
-	return _ret
+	var _mainthread0 SKBlendMode
+	purego.Main(func() {
+		_mainthread0 = func() SKBlendMode {
+			_ret := objc.Send[SKBlendMode](o.Ptr(), _sKShapeNodeSelBlendMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKShapeNode) SetBlendMode(blendMode SKBlendMode) {
-	o.Ptr().Send(_sKShapeNodeSelSetBlendMode, blendMode)
+	purego.Main(func() {
+		o.Ptr().Send(_sKShapeNodeSelSetBlendMode, blendMode)
+	})
 }
 
 // If set to YES, the path stroke edges and caps is smoothed (antialiased) when drawn.
 func (o *SKShapeNode) IsAntialiased() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sKShapeNodeSelIsAntialiased)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sKShapeNodeSelIsAntialiased)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKShapeNode) SetAntialiased(antialiased bool) {
-	o.Ptr().Send(_sKShapeNodeSelSetAntialiased, antialiased)
+	purego.Main(func() {
+		o.Ptr().Send(_sKShapeNodeSelSetAntialiased, antialiased)
+	})
 }
 
 // The width used to stroke the path. Widths larger than 2.0 may result in artifacts. Defaults to 1.0.
 func (o *SKShapeNode) LineWidth() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _sKShapeNodeSelLineWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _sKShapeNodeSelLineWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKShapeNode) SetLineWidth(lineWidth float64) {
-	o.Ptr().Send(_sKShapeNodeSelSetLineWidth, lineWidth)
+	purego.Main(func() {
+		o.Ptr().Send(_sKShapeNodeSelSetLineWidth, lineWidth)
+	})
 }
 
 // Add a glow to the path stroke of the specified width. Defaults to 0.0 (no glow)
 func (o *SKShapeNode) GlowWidth() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _sKShapeNodeSelGlowWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _sKShapeNodeSelGlowWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKShapeNode) SetGlowWidth(glowWidth float64) {
-	o.Ptr().Send(_sKShapeNodeSelSetGlowWidth, glowWidth)
+	purego.Main(func() {
+		o.Ptr().Send(_sKShapeNodeSelSetGlowWidth, glowWidth)
+	})
 }
 
 // The cap type that should be used when stroking a non-closed path
 func (o *SKShapeNode) LineCap() coregraphics.CGLineCap {
-	_ret := objc.Send[coregraphics.CGLineCap](o.Ptr(), _sKShapeNodeSelLineCap)
-	return _ret
+	var _mainthread0 coregraphics.CGLineCap
+	purego.Main(func() {
+		_mainthread0 = func() coregraphics.CGLineCap {
+			_ret := objc.Send[coregraphics.CGLineCap](o.Ptr(), _sKShapeNodeSelLineCap)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKShapeNode) SetLineCap(lineCap coregraphics.CGLineCap) {
-	o.Ptr().Send(_sKShapeNodeSelSetLineCap, lineCap)
+	purego.Main(func() {
+		o.Ptr().Send(_sKShapeNodeSelSetLineCap, lineCap)
+	})
 }
 
 // The join type that should be used when stroking a path
 func (o *SKShapeNode) LineJoin() coregraphics.CGLineJoin {
-	_ret := objc.Send[coregraphics.CGLineJoin](o.Ptr(), _sKShapeNodeSelLineJoin)
-	return _ret
+	var _mainthread0 coregraphics.CGLineJoin
+	purego.Main(func() {
+		_mainthread0 = func() coregraphics.CGLineJoin {
+			_ret := objc.Send[coregraphics.CGLineJoin](o.Ptr(), _sKShapeNodeSelLineJoin)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKShapeNode) SetLineJoin(lineJoin coregraphics.CGLineJoin) {
-	o.Ptr().Send(_sKShapeNodeSelSetLineJoin, lineJoin)
+	purego.Main(func() {
+		o.Ptr().Send(_sKShapeNodeSelSetLineJoin, lineJoin)
+	})
 }
 
 // When a miter join is used, the maximum ratio of miter length to line with to be used
 func (o *SKShapeNode) MiterLimit() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _sKShapeNodeSelMiterLimit)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _sKShapeNodeSelMiterLimit)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKShapeNode) SetMiterLimit(miterLimit float64) {
-	o.Ptr().Send(_sKShapeNodeSelSetMiterLimit, miterLimit)
+	purego.Main(func() {
+		o.Ptr().Send(_sKShapeNodeSelSetMiterLimit, miterLimit)
+	})
 }
 
 // The length of the node's path if it were to be stroked
 func (o *SKShapeNode) LineLength() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _sKShapeNodeSelLineLength)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _sKShapeNodeSelLineLength)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKShapeNode) FillTexture() *SKTexture {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKShapeNodeSelFillTexture)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKTextureFromID(_ret)
+	var _mainthread0 *SKTexture
+	purego.Main(func() {
+		_mainthread0 = func() *SKTexture {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKShapeNodeSelFillTexture)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKTextureFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKShapeNode) SetFillTexture(fillTexture *SKTexture) {
-	o.Ptr().Send(_sKShapeNodeSelSetFillTexture, fillTexture.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKShapeNodeSelSetFillTexture, fillTexture.Ptr())
+	})
 }
 
 func (o *SKShapeNode) FillShader() *SKShader {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKShapeNodeSelFillShader)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKShaderFromID(_ret)
+	var _mainthread0 *SKShader
+	purego.Main(func() {
+		_mainthread0 = func() *SKShader {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKShapeNodeSelFillShader)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKShaderFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKShapeNode) SetFillShader(fillShader *SKShader) {
-	o.Ptr().Send(_sKShapeNodeSelSetFillShader, fillShader.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKShapeNodeSelSetFillShader, fillShader.Ptr())
+	})
 }
 
 func (o *SKShapeNode) StrokeTexture() *SKTexture {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKShapeNodeSelStrokeTexture)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKTextureFromID(_ret)
+	var _mainthread0 *SKTexture
+	purego.Main(func() {
+		_mainthread0 = func() *SKTexture {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKShapeNodeSelStrokeTexture)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKTextureFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKShapeNode) SetStrokeTexture(strokeTexture *SKTexture) {
-	o.Ptr().Send(_sKShapeNodeSelSetStrokeTexture, strokeTexture.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKShapeNodeSelSetStrokeTexture, strokeTexture.Ptr())
+	})
 }
 
 func (o *SKShapeNode) StrokeShader() *SKShader {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKShapeNodeSelStrokeShader)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKShaderFromID(_ret)
+	var _mainthread0 *SKShader
+	purego.Main(func() {
+		_mainthread0 = func() *SKShader {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKShapeNodeSelStrokeShader)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKShaderFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKShapeNode) SetStrokeShader(strokeShader *SKShader) {
-	o.Ptr().Send(_sKShapeNodeSelSetStrokeShader, strokeShader.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKShapeNodeSelSetStrokeShader, strokeShader.Ptr())
+	})
 }

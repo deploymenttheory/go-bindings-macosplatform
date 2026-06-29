@@ -68,101 +68,167 @@ func SKFieldNodeFromID(id objc.ID) *SKFieldNode {
 
 // Creates a field node that applies a force that resists the motion of physics bodies.
 func SKFieldNodeDragField() *SKFieldNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelDragField)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKFieldNodeFromID(_ret)
+	var _mainthread0 *SKFieldNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKFieldNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelDragField)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKFieldNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a field node that applies a perpendicular force to physics bodies.
 func SKFieldNodeVortexField() *SKFieldNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelVortexField)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKFieldNodeFromID(_ret)
+	var _mainthread0 *SKFieldNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKFieldNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelVortexField)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKFieldNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a field node that accelerates physics bodies toward the field node.
 func SKFieldNodeRadialGravityField() *SKFieldNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelRadialGravityField)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKFieldNodeFromID(_ret)
+	var _mainthread0 *SKFieldNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKFieldNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelRadialGravityField)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKFieldNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a field node that accelerates physics bodies in a specific direction.
 func SKFieldNodeLinearGravityFieldWithVector(direction unsafe.Pointer) *SKFieldNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelLinearGravityFieldWithVector, direction)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKFieldNodeFromID(_ret)
+	var _mainthread0 *SKFieldNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKFieldNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelLinearGravityFieldWithVector, direction)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKFieldNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a field node that gives physics bodies a constant velocity.
 func SKFieldNodeVelocityFieldWithVector(direction unsafe.Pointer) *SKFieldNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelVelocityFieldWithVector, direction)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKFieldNodeFromID(_ret)
+	var _mainthread0 *SKFieldNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKFieldNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelVelocityFieldWithVector, direction)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKFieldNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a field node that sets the velocity of physics bodies that enter the node’s area based on the pixel values of a texture.
 func SKFieldNodeVelocityFieldWithTexture(velocityTexture *SKTexture) *SKFieldNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelVelocityFieldWithTexture, velocityTexture.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKFieldNodeFromID(_ret)
+	var _mainthread0 *SKFieldNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKFieldNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelVelocityFieldWithTexture, velocityTexture.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKFieldNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a field node that applies a randomized acceleration to physics bodies.
 func SKFieldNodeNoiseFieldWithSmoothnessAnimationSpeed(smoothness float64, speed float64) *SKFieldNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelNoiseFieldWithSmoothnessAnimationSpeed, smoothness, speed)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKFieldNodeFromID(_ret)
+	var _mainthread0 *SKFieldNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKFieldNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelNoiseFieldWithSmoothnessAnimationSpeed, smoothness, speed)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKFieldNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a field node that applies a randomized acceleration to physics bodies.
 func SKFieldNodeTurbulenceFieldWithSmoothnessAnimationSpeed(smoothness float64, speed float64) *SKFieldNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelTurbulenceFieldWithSmoothnessAnimationSpeed, smoothness, speed)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKFieldNodeFromID(_ret)
+	var _mainthread0 *SKFieldNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKFieldNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelTurbulenceFieldWithSmoothnessAnimationSpeed, smoothness, speed)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKFieldNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a field node that applies a spring-like force that pulls physics bodies toward the field node.
 func SKFieldNodeSpringField() *SKFieldNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelSpringField)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKFieldNodeFromID(_ret)
+	var _mainthread0 *SKFieldNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKFieldNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelSpringField)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKFieldNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a field node that applies an electrical force proportional to the electrical charge of physics bodies.
 func SKFieldNodeElectricField() *SKFieldNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelElectricField)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKFieldNodeFromID(_ret)
+	var _mainthread0 *SKFieldNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKFieldNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelElectricField)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKFieldNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a field node that applies a magnetic force based on the velocity and electrical charge of the physics bodies.
 func SKFieldNodeMagneticField() *SKFieldNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelMagneticField)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKFieldNodeFromID(_ret)
+	var _mainthread0 *SKFieldNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKFieldNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelMagneticField)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKFieldNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a field node that calculates and applies a custom force to the physics body.
@@ -174,125 +240,219 @@ func SKFieldNodeCustomFieldWithEvaluationBlock(block func(unsafe.Pointer, unsafe
 		})
 		defer __block_block.Release()
 	}
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelCustomFieldWithEvaluationBlock, __block_block)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKFieldNodeFromID(_ret)
+	var _mainthread0 *SKFieldNode
+	purego.Main(func() {
+		_mainthread0 = func() *SKFieldNode {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelCustomFieldWithEvaluationBlock, __block_block)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKFieldNodeFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The region property is the domain of the field's effect. No force is applied to objects outside the region.
 func (o *SKFieldNode) Region() *SKRegion {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKFieldNodeSelRegion)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKRegionFromID(_ret)
+	var _mainthread0 *SKRegion
+	purego.Main(func() {
+		_mainthread0 = func() *SKRegion {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKFieldNodeSelRegion)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKRegionFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKFieldNode) SetRegion(region *SKRegion) {
-	o.Ptr().Send(_sKFieldNodeSelSetRegion, region.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKFieldNodeSelSetRegion, region.Ptr())
+	})
 }
 
 // strength scaling value. default 1.0
 func (o *SKFieldNode) Strength() float32 {
-	_ret := objc.Send[float32](o.Ptr(), _sKFieldNodeSelStrength)
-	return _ret
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_ret := objc.Send[float32](o.Ptr(), _sKFieldNodeSelStrength)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKFieldNode) SetStrength(strength float32) {
-	o.Ptr().Send(_sKFieldNodeSelSetStrength, strength)
+	purego.Main(func() {
+		o.Ptr().Send(_sKFieldNodeSelSetStrength, strength)
+	})
 }
 
 // The falloff exponent used to calculate field strength at a distance. Falloff starts at the minimum radius. The default exponent is zero, which results in a uniform field with no falloff. @see minimumRadius
 func (o *SKFieldNode) Falloff() float32 {
-	_ret := objc.Send[float32](o.Ptr(), _sKFieldNodeSelFalloff)
-	return _ret
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_ret := objc.Send[float32](o.Ptr(), _sKFieldNodeSelFalloff)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKFieldNode) SetFalloff(falloff float32) {
-	o.Ptr().Send(_sKFieldNodeSelSetFalloff, falloff)
+	purego.Main(func() {
+		o.Ptr().Send(_sKFieldNodeSelSetFalloff, falloff)
+	})
 }
 
 // minimum radius of effect. Default is very small.
 func (o *SKFieldNode) MinimumRadius() float32 {
-	_ret := objc.Send[float32](o.Ptr(), _sKFieldNodeSelMinimumRadius)
-	return _ret
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_ret := objc.Send[float32](o.Ptr(), _sKFieldNodeSelMinimumRadius)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKFieldNode) SetMinimumRadius(minimumRadius float32) {
-	o.Ptr().Send(_sKFieldNodeSelSetMinimumRadius, minimumRadius)
+	purego.Main(func() {
+		o.Ptr().Send(_sKFieldNodeSelSetMinimumRadius, minimumRadius)
+	})
 }
 
 // If enabled, a field has an effect. default YES
 func (o *SKFieldNode) IsEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sKFieldNodeSelIsEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sKFieldNodeSelIsEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKFieldNode) SetEnabled(enabled bool) {
-	o.Ptr().Send(_sKFieldNodeSelSetEnabled, enabled)
+	purego.Main(func() {
+		o.Ptr().Send(_sKFieldNodeSelSetEnabled, enabled)
+	})
 }
 
 // If a field is exclusive, it suppresses any other field in its region of effect. If two or more exclusive fields overlap, it is undefined which one of them will take effect @see region
 func (o *SKFieldNode) IsExclusive() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sKFieldNodeSelIsExclusive)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sKFieldNodeSelIsExclusive)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKFieldNode) SetExclusive(exclusive bool) {
-	o.Ptr().Send(_sKFieldNodeSelSetExclusive, exclusive)
+	purego.Main(func() {
+		o.Ptr().Send(_sKFieldNodeSelSetExclusive, exclusive)
+	})
 }
 
 // Logical categories the field belongs to. Default is all categories. These categories correspond to fieldBitMasks, and can be used to enforce that a particular field applies to a particular category of objects. @see SKPhysicsBody.fieldBitMask @see SKEmitterNode.fieldBitMask
 func (o *SKFieldNode) CategoryBitMask() uint32 {
-	_ret := objc.Send[uint32](o.Ptr(), _sKFieldNodeSelCategoryBitMask)
-	return _ret
+	var _mainthread0 uint32
+	purego.Main(func() {
+		_mainthread0 = func() uint32 {
+			_ret := objc.Send[uint32](o.Ptr(), _sKFieldNodeSelCategoryBitMask)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKFieldNode) SetCategoryBitMask(categoryBitMask uint32) {
-	o.Ptr().Send(_sKFieldNodeSelSetCategoryBitMask, categoryBitMask)
+	purego.Main(func() {
+		o.Ptr().Send(_sKFieldNodeSelSetCategoryBitMask, categoryBitMask)
+	})
 }
 
 // directed fields' directions can be accessed here. If the field is non-directional, a zero vector will be returned @see linearGravityFieldWithVector:direction @see velocityFieldWithVector:direction
 func (o *SKFieldNode) Direction() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sKFieldNodeSelDirection)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sKFieldNodeSelDirection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKFieldNode) SetDirection(direction unsafe.Pointer) {
-	o.Ptr().Send(_sKFieldNodeSelSetDirection, direction)
+	purego.Main(func() {
+		o.Ptr().Send(_sKFieldNodeSelSetDirection, direction)
+	})
 }
 
 // fields without a smoothness component will return 0 @see noiseFieldWithSmoothness:smoothness:animationSpeed @see turbulenceFieldWithSmoothness:smoothness:animationSpeed
 func (o *SKFieldNode) Smoothness() float32 {
-	_ret := objc.Send[float32](o.Ptr(), _sKFieldNodeSelSmoothness)
-	return _ret
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_ret := objc.Send[float32](o.Ptr(), _sKFieldNodeSelSmoothness)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKFieldNode) SetSmoothness(smoothness float32) {
-	o.Ptr().Send(_sKFieldNodeSelSetSmoothness, smoothness)
+	purego.Main(func() {
+		o.Ptr().Send(_sKFieldNodeSelSetSmoothness, smoothness)
+	})
 }
 
 // fields that can be animated can have non zero values. A value of 2 will animated twice as fast as a value of 1. @see noiseFieldWithSmoothness:smoothness:animationSpeed @see turbulenceFieldWithSmoothness:smoothness:animationSpeed
 func (o *SKFieldNode) AnimationSpeed() float32 {
-	_ret := objc.Send[float32](o.Ptr(), _sKFieldNodeSelAnimationSpeed)
-	return _ret
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_ret := objc.Send[float32](o.Ptr(), _sKFieldNodeSelAnimationSpeed)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKFieldNode) SetAnimationSpeed(animationSpeed float32) {
-	o.Ptr().Send(_sKFieldNodeSelSetAnimationSpeed, animationSpeed)
+	purego.Main(func() {
+		o.Ptr().Send(_sKFieldNodeSelSetAnimationSpeed, animationSpeed)
+	})
 }
 
 // fields constructed with a texture can be uppdated by assigning a new texture @see velocityFieldWithTexture:velocityTexture
 func (o *SKFieldNode) Texture() *SKTexture {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKFieldNodeSelTexture)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SKTextureFromID(_ret)
+	var _mainthread0 *SKTexture
+	purego.Main(func() {
+		_mainthread0 = func() *SKTexture {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKFieldNodeSelTexture)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SKTextureFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *SKFieldNode) SetTexture(texture *SKTexture) {
-	o.Ptr().Send(_sKFieldNodeSelSetTexture, texture.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sKFieldNodeSelSetTexture, texture.Ptr())
+	})
 }

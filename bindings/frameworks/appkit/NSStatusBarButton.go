@@ -34,11 +34,19 @@ func NSStatusBarButtonFromID(id objc.ID) *NSStatusBarButton {
 
 // Determines whether the status bar icon has a disabled/off appearance while still being functional, such as allowing selection and actions. The default value is `false`.
 func (o *NSStatusBarButton) AppearsDisabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSStatusBarButtonSelAppearsDisabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSStatusBarButtonSelAppearsDisabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Determines whether the status bar icon has a disabled/off appearance while still being functional, such as allowing selection and actions. The default value is `false`.
 func (o *NSStatusBarButton) SetAppearsDisabled(appearsDisabled bool) {
-	o.Ptr().Send(_nSStatusBarButtonSelSetAppearsDisabled, appearsDisabled)
+	purego.Main(func() {
+		o.Ptr().Send(_nSStatusBarButtonSelSetAppearsDisabled, appearsDisabled)
+	})
 }

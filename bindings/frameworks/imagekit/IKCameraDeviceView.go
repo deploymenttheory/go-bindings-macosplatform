@@ -76,238 +76,396 @@ func IKCameraDeviceViewFromID(id objc.ID) *IKCameraDeviceView {
 
 // @method selectedIndexes @abstract current user selection.
 func (o *IKCameraDeviceView) SelectedIndexes() *foundation.NSIndexSet {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKCameraDeviceViewSelSelectedIndexes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSIndexSetFromID(_ret)
+	var _mainthread0 *foundation.NSIndexSet
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSIndexSet {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKCameraDeviceViewSelSelectedIndexes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSIndexSetFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @method selectIndexes:byExtendingSelection: @abstract setting current user selection.
 func (o *IKCameraDeviceView) SelectIndexesByExtendingSelection(indexes *foundation.NSIndexSet, extend bool) {
-	o.Ptr().Send(_iKCameraDeviceViewSelSelectIndexesByExtendingSelection, indexes.Ptr(), extend)
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelSelectIndexesByExtendingSelection, indexes.Ptr(), extend)
+	})
 }
 
 // @method rotateLeft: @abstract rotate selected items left.
 func (o *IKCameraDeviceView) RotateLeft(sender objc.ID) {
-	o.Ptr().Send(_iKCameraDeviceViewSelRotateLeft, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelRotateLeft, sender)
+	})
 }
 
 // @method rotateRight: @abstract rotate selected items right.
 func (o *IKCameraDeviceView) RotateRight(sender objc.ID) {
-	o.Ptr().Send(_iKCameraDeviceViewSelRotateRight, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelRotateRight, sender)
+	})
 }
 
 // @method deleteSelectedItems: @abstract delete selected items.
 func (o *IKCameraDeviceView) DeleteSelectedItems(sender objc.ID) {
-	o.Ptr().Send(_iKCameraDeviceViewSelDeleteSelectedItems, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelDeleteSelectedItems, sender)
+	})
 }
 
 // @method downloadSelectedItems: @abstract download selected items.
 func (o *IKCameraDeviceView) DownloadSelectedItems(sender objc.ID) {
-	o.Ptr().Send(_iKCameraDeviceViewSelDownloadSelectedItems, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelDownloadSelectedItems, sender)
+	})
 }
 
 // @method downloadAllItems: @abstract download all items.
 func (o *IKCameraDeviceView) DownloadAllItems(sender objc.ID) {
-	o.Ptr().Send(_iKCameraDeviceViewSelDownloadAllItems, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelDownloadAllItems, sender)
+	})
 }
 
 // @method setCustomIconSizeSlider: @abstract provide your own NSSlider to resize item thumbnails
 func (o *IKCameraDeviceView) SetCustomIconSizeSlider(slider *appkit.NSSlider) {
-	o.Ptr().Send(_iKCameraDeviceViewSelSetCustomIconSizeSlider, slider.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelSetCustomIconSizeSlider, slider.Ptr())
+	})
 }
 
 // @method setCustomModeControl: @abstract provide your own control to toggle between IKCameraDeviceViewDisplayMode table / icon
 func (o *IKCameraDeviceView) SetCustomModeControl(control *appkit.NSSegmentedControl) {
-	o.Ptr().Send(_iKCameraDeviceViewSelSetCustomModeControl, control.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelSetCustomModeControl, control.Ptr())
+	})
 }
 
 // @method setCustomActionButton: @abstract provide your own control to toggle between IKCameraDeviceViewDisplayMode table / icon
 func (o *IKCameraDeviceView) SetCustomActionControl(control *appkit.NSSegmentedControl) {
-	o.Ptr().Send(_iKCameraDeviceViewSelSetCustomActionControl, control.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelSetCustomActionControl, control.Ptr())
+	})
 }
 
 // @method setCustomRotateButton: @abstract provide your own control to rotate items (multiple of 90º)
 func (o *IKCameraDeviceView) SetCustomRotateControl(control *appkit.NSSegmentedControl) {
-	o.Ptr().Send(_iKCameraDeviceViewSelSetCustomRotateControl, control.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelSetCustomRotateControl, control.Ptr())
+	})
 }
 
 // @method setCustomDeleteControl: @abstract provide your own control to delete selected items
 func (o *IKCameraDeviceView) SetCustomDeleteControl(control *appkit.NSSegmentedControl) {
-	o.Ptr().Send(_iKCameraDeviceViewSelSetCustomDeleteControl, control.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelSetCustomDeleteControl, control.Ptr())
+	})
 }
 
 // @method setShowStatusInfoAsWindowSubtitle: @abstract display status info as window subtitle
 func (o *IKCameraDeviceView) SetShowStatusInfoAsWindowSubtitle(value bool) {
-	o.Ptr().Send(_iKCameraDeviceViewSelSetShowStatusInfoAsWindowSubtitle, value)
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelSetShowStatusInfoAsWindowSubtitle, value)
+	})
 }
 
 // @property delegate @abstract Delegate of the IKCameraDeviceView.
 func (o *IKCameraDeviceView) Delegate() IKCameraDeviceViewDelegate {
-	_ret := objc.Send[IKCameraDeviceViewDelegate](o.Ptr(), _iKCameraDeviceViewSelDelegate)
-	return _ret
+	var _mainthread0 IKCameraDeviceViewDelegate
+	purego.Main(func() {
+		_mainthread0 = func() IKCameraDeviceViewDelegate {
+			_ret := objc.Send[IKCameraDeviceViewDelegate](o.Ptr(), _iKCameraDeviceViewSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKCameraDeviceView) SetDelegate(delegate IKCameraDeviceViewDelegate) {
-	o.Ptr().Send(_iKCameraDeviceViewSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelSetDelegate, delegate)
+	})
 }
 
 // @property cameraDevice @abstract the camera device.
 func (o *IKCameraDeviceView) CameraDevice() *imagecapturecore.ICCameraDevice {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKCameraDeviceViewSelCameraDevice)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return imagecapturecore.ICCameraDeviceFromID(_ret)
+	var _mainthread0 *imagecapturecore.ICCameraDevice
+	purego.Main(func() {
+		_mainthread0 = func() *imagecapturecore.ICCameraDevice {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKCameraDeviceViewSelCameraDevice)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return imagecapturecore.ICCameraDeviceFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKCameraDeviceView) SetCameraDevice(cameraDevice *imagecapturecore.ICCameraDevice) {
-	o.Ptr().Send(_iKCameraDeviceViewSelSetCameraDevice, cameraDevice.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelSetCameraDevice, cameraDevice.Ptr())
+	})
 }
 
 // @property mode @abstract current display mode.
 func (o *IKCameraDeviceView) Mode() IKCameraDeviceViewDisplayMode {
-	_ret := objc.Send[IKCameraDeviceViewDisplayMode](o.Ptr(), _iKCameraDeviceViewSelMode)
-	return _ret
+	var _mainthread0 IKCameraDeviceViewDisplayMode
+	purego.Main(func() {
+		_mainthread0 = func() IKCameraDeviceViewDisplayMode {
+			_ret := objc.Send[IKCameraDeviceViewDisplayMode](o.Ptr(), _iKCameraDeviceViewSelMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKCameraDeviceView) SetMode(mode IKCameraDeviceViewDisplayMode) {
-	o.Ptr().Send(_iKCameraDeviceViewSelSetMode, mode)
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelSetMode, mode)
+	})
 }
 
 // @property hasDisplayModeTable @abstract support table view display mode.
 func (o *IKCameraDeviceView) HasDisplayModeTable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _iKCameraDeviceViewSelHasDisplayModeTable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _iKCameraDeviceViewSelHasDisplayModeTable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKCameraDeviceView) SetHasDisplayModeTable(hasDisplayModeTable bool) {
-	o.Ptr().Send(_iKCameraDeviceViewSelSetHasDisplayModeTable, hasDisplayModeTable)
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelSetHasDisplayModeTable, hasDisplayModeTable)
+	})
 }
 
 // @property hasDisplayModeIcon @abstract support icon view display mode.
 func (o *IKCameraDeviceView) HasDisplayModeIcon() bool {
-	_ret := objc.Send[bool](o.Ptr(), _iKCameraDeviceViewSelHasDisplayModeIcon)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _iKCameraDeviceViewSelHasDisplayModeIcon)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKCameraDeviceView) SetHasDisplayModeIcon(hasDisplayModeIcon bool) {
-	o.Ptr().Send(_iKCameraDeviceViewSelSetHasDisplayModeIcon, hasDisplayModeIcon)
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelSetHasDisplayModeIcon, hasDisplayModeIcon)
+	})
 }
 
 // @property downloadAllControlLabel @abstract label for the 'Download All' control - allows for example renaming to 'Import All'.
 func (o *IKCameraDeviceView) DownloadAllControlLabel() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKCameraDeviceViewSelDownloadAllControlLabel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKCameraDeviceViewSelDownloadAllControlLabel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKCameraDeviceView) SetDownloadAllControlLabel(downloadAllControlLabel *foundation.NSString) {
-	o.Ptr().Send(_iKCameraDeviceViewSelSetDownloadAllControlLabel, downloadAllControlLabel.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelSetDownloadAllControlLabel, downloadAllControlLabel.Ptr())
+	})
 }
 
 // @property downloadSelectedControlLabel @abstract label for the 'Download Selected' control.
 func (o *IKCameraDeviceView) DownloadSelectedControlLabel() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKCameraDeviceViewSelDownloadSelectedControlLabel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKCameraDeviceViewSelDownloadSelectedControlLabel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKCameraDeviceView) SetDownloadSelectedControlLabel(downloadSelectedControlLabel *foundation.NSString) {
-	o.Ptr().Send(_iKCameraDeviceViewSelSetDownloadSelectedControlLabel, downloadSelectedControlLabel.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelSetDownloadSelectedControlLabel, downloadSelectedControlLabel.Ptr())
+	})
 }
 
 // @property iconSize @abstract in icon mode: size of the image thumbnails.
 func (o *IKCameraDeviceView) IconSize() uint {
-	_ret := objc.Send[uint](o.Ptr(), _iKCameraDeviceViewSelIconSize)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _iKCameraDeviceViewSelIconSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKCameraDeviceView) SetIconSize(iconSize uint) {
-	o.Ptr().Send(_iKCameraDeviceViewSelSetIconSize, iconSize)
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelSetIconSize, iconSize)
+	})
 }
 
 // @property transferMode @abstract transfer mode either file based - or - in memory.
 func (o *IKCameraDeviceView) TransferMode() IKCameraDeviceViewTransferMode {
-	_ret := objc.Send[IKCameraDeviceViewTransferMode](o.Ptr(), _iKCameraDeviceViewSelTransferMode)
-	return _ret
+	var _mainthread0 IKCameraDeviceViewTransferMode
+	purego.Main(func() {
+		_mainthread0 = func() IKCameraDeviceViewTransferMode {
+			_ret := objc.Send[IKCameraDeviceViewTransferMode](o.Ptr(), _iKCameraDeviceViewSelTransferMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKCameraDeviceView) SetTransferMode(transferMode IKCameraDeviceViewTransferMode) {
-	o.Ptr().Send(_iKCameraDeviceViewSelSetTransferMode, transferMode)
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelSetTransferMode, transferMode)
+	})
 }
 
 // @property displaysDownloadsDirectoryControl @abstract show a downloads directory control.
 func (o *IKCameraDeviceView) DisplaysDownloadsDirectoryControl() bool {
-	_ret := objc.Send[bool](o.Ptr(), _iKCameraDeviceViewSelDisplaysDownloadsDirectoryControl)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _iKCameraDeviceViewSelDisplaysDownloadsDirectoryControl)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKCameraDeviceView) SetDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) {
-	o.Ptr().Send(_iKCameraDeviceViewSelSetDisplaysDownloadsDirectoryControl, displaysDownloadsDirectoryControl)
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelSetDisplaysDownloadsDirectoryControl, displaysDownloadsDirectoryControl)
+	})
 }
 
 // @property downloadsDirectory @abstract downloads directory.
 func (o *IKCameraDeviceView) DownloadsDirectory() *foundation.NSURL {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKCameraDeviceViewSelDownloadsDirectory)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSURLFromID(_ret)
+	var _mainthread0 *foundation.NSURL
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSURL {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKCameraDeviceViewSelDownloadsDirectory)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSURLFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKCameraDeviceView) SetDownloadsDirectory(downloadsDirectory *foundation.NSURL) {
-	o.Ptr().Send(_iKCameraDeviceViewSelSetDownloadsDirectory, downloadsDirectory.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelSetDownloadsDirectory, downloadsDirectory.Ptr())
+	})
 }
 
 // @property displaysPostProcessApplicationControl @abstract show a postprocessing application control.
 func (o *IKCameraDeviceView) DisplaysPostProcessApplicationControl() bool {
-	_ret := objc.Send[bool](o.Ptr(), _iKCameraDeviceViewSelDisplaysPostProcessApplicationControl)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _iKCameraDeviceViewSelDisplaysPostProcessApplicationControl)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKCameraDeviceView) SetDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) {
-	o.Ptr().Send(_iKCameraDeviceViewSelSetDisplaysPostProcessApplicationControl, displaysPostProcessApplicationControl)
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelSetDisplaysPostProcessApplicationControl, displaysPostProcessApplicationControl)
+	})
 }
 
 // @property postProcessApplication @abstract postprocessing application.
 func (o *IKCameraDeviceView) PostProcessApplication() *foundation.NSURL {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKCameraDeviceViewSelPostProcessApplication)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSURLFromID(_ret)
+	var _mainthread0 *foundation.NSURL
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSURL {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKCameraDeviceViewSelPostProcessApplication)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSURLFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *IKCameraDeviceView) SetPostProcessApplication(postProcessApplication *foundation.NSURL) {
-	o.Ptr().Send(_iKCameraDeviceViewSelSetPostProcessApplication, postProcessApplication.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iKCameraDeviceViewSelSetPostProcessApplication, postProcessApplication.Ptr())
+	})
 }
 
 // @property canRotateSelectedItemsLeft @abstract indicates if the user selected items can be rotated left.
 func (o *IKCameraDeviceView) CanRotateSelectedItemsLeft() bool {
-	_ret := objc.Send[bool](o.Ptr(), _iKCameraDeviceViewSelCanRotateSelectedItemsLeft)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _iKCameraDeviceViewSelCanRotateSelectedItemsLeft)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @property canRotateSelectedItemsRight @abstract indicates if the user selected items can be rotated right.
 func (o *IKCameraDeviceView) CanRotateSelectedItemsRight() bool {
-	_ret := objc.Send[bool](o.Ptr(), _iKCameraDeviceViewSelCanRotateSelectedItemsRight)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _iKCameraDeviceViewSelCanRotateSelectedItemsRight)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @property canDeleteSelectedItems @abstract indicates if the user selected items can be deleted.
 func (o *IKCameraDeviceView) CanDeleteSelectedItems() bool {
-	_ret := objc.Send[bool](o.Ptr(), _iKCameraDeviceViewSelCanDeleteSelectedItems)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _iKCameraDeviceViewSelCanDeleteSelectedItems)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @property canDownloadSelectedItems @abstract indicates if the user selected items can be downloaded.
 func (o *IKCameraDeviceView) CanDownloadSelectedItems() bool {
-	_ret := objc.Send[bool](o.Ptr(), _iKCameraDeviceViewSelCanDownloadSelectedItems)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _iKCameraDeviceViewSelCanDownloadSelectedItems)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

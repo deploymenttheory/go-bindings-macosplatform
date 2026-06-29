@@ -39,34 +39,64 @@ func GKTurnBasedMatchmakerViewControllerFromID(id objc.ID) *GKTurnBasedMatchmake
 }
 
 func (o *GKTurnBasedMatchmakerViewController) TurnBasedMatchmakerDelegate() GKTurnBasedMatchmakerViewControllerDelegate {
-	_ret := objc.Send[GKTurnBasedMatchmakerViewControllerDelegate](o.Ptr(), _gKTurnBasedMatchmakerViewControllerSelTurnBasedMatchmakerDelegate)
-	return _ret
+	var _mainthread0 GKTurnBasedMatchmakerViewControllerDelegate
+	purego.Main(func() {
+		_mainthread0 = func() GKTurnBasedMatchmakerViewControllerDelegate {
+			_ret := objc.Send[GKTurnBasedMatchmakerViewControllerDelegate](o.Ptr(), _gKTurnBasedMatchmakerViewControllerSelTurnBasedMatchmakerDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *GKTurnBasedMatchmakerViewController) SetTurnBasedMatchmakerDelegate(turnBasedMatchmakerDelegate GKTurnBasedMatchmakerViewControllerDelegate) {
-	o.Ptr().Send(_gKTurnBasedMatchmakerViewControllerSelSetTurnBasedMatchmakerDelegate, turnBasedMatchmakerDelegate)
+	purego.Main(func() {
+		o.Ptr().Send(_gKTurnBasedMatchmakerViewControllerSelSetTurnBasedMatchmakerDelegate, turnBasedMatchmakerDelegate)
+	})
 }
 
 func (o *GKTurnBasedMatchmakerViewController) ShowExistingMatches() bool {
-	_ret := objc.Send[bool](o.Ptr(), _gKTurnBasedMatchmakerViewControllerSelShowExistingMatches)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _gKTurnBasedMatchmakerViewControllerSelShowExistingMatches)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *GKTurnBasedMatchmakerViewController) SetShowExistingMatches(showExistingMatches bool) {
-	o.Ptr().Send(_gKTurnBasedMatchmakerViewControllerSelSetShowExistingMatches, showExistingMatches)
+	purego.Main(func() {
+		o.Ptr().Send(_gKTurnBasedMatchmakerViewControllerSelSetShowExistingMatches, showExistingMatches)
+	})
 }
 
 func (o *GKTurnBasedMatchmakerViewController) MatchmakingMode() GKMatchmakingMode {
-	_ret := objc.Send[GKMatchmakingMode](o.Ptr(), _gKTurnBasedMatchmakerViewControllerSelMatchmakingMode)
-	return _ret
+	var _mainthread0 GKMatchmakingMode
+	purego.Main(func() {
+		_mainthread0 = func() GKMatchmakingMode {
+			_ret := objc.Send[GKMatchmakingMode](o.Ptr(), _gKTurnBasedMatchmakerViewControllerSelMatchmakingMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *GKTurnBasedMatchmakerViewController) SetMatchmakingMode(matchmakingMode GKMatchmakingMode) {
-	o.Ptr().Send(_gKTurnBasedMatchmakerViewControllerSelSetMatchmakingMode, matchmakingMode)
+	purego.Main(func() {
+		o.Ptr().Send(_gKTurnBasedMatchmakerViewControllerSelSetMatchmakingMode, matchmakingMode)
+	})
 }
 
 // Creates a matchmaker view controller for the local player to start inviting other players to a turn-based game.
 func (o *GKTurnBasedMatchmakerViewController) InitWithMatchRequest(request *GKMatchRequest) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedMatchmakerViewControllerSelInitWithMatchRequest, request.Ptr())
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedMatchmakerViewControllerSelInitWithMatchRequest, request.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

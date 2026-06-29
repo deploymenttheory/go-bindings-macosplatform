@@ -46,71 +46,131 @@ func NSGridColumnFromID(id objc.ID) *NSGridColumn {
 }
 
 func (o *NSGridColumn) CellAtIndex(index int) *NSGridCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridColumnSelCellAtIndex, index)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGridCellFromID(_ret)
+	var _mainthread0 *NSGridCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSGridCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGridColumnSelCellAtIndex, index)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGridCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridColumn) MergeCellsInRange(range_ foundation.NSRange) {
-	o.Ptr().Send(_nSGridColumnSelMergeCellsInRange, range_)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridColumnSelMergeCellsInRange, range_)
+	})
 }
 
 func (o *NSGridColumn) GridView() *NSGridView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridColumnSelGridView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGridViewFromID(_ret)
+	var _mainthread0 *NSGridView
+	purego.Main(func() {
+		_mainthread0 = func() *NSGridView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGridColumnSelGridView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGridViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridColumn) NumberOfCells() int {
-	_ret := objc.Send[int](o.Ptr(), _nSGridColumnSelNumberOfCells)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSGridColumnSelNumberOfCells)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridColumn) XPlacement() NSGridCellPlacement {
-	_ret := objc.Send[NSGridCellPlacement](o.Ptr(), _nSGridColumnSelXPlacement)
-	return _ret
+	var _mainthread0 NSGridCellPlacement
+	purego.Main(func() {
+		_mainthread0 = func() NSGridCellPlacement {
+			_ret := objc.Send[NSGridCellPlacement](o.Ptr(), _nSGridColumnSelXPlacement)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridColumn) SetXPlacement(xPlacement NSGridCellPlacement) {
-	o.Ptr().Send(_nSGridColumnSelSetXPlacement, xPlacement)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridColumnSelSetXPlacement, xPlacement)
+	})
 }
 
 func (o *NSGridColumn) Width() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSGridColumnSelWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSGridColumnSelWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridColumn) SetWidth(width float64) {
-	o.Ptr().Send(_nSGridColumnSelSetWidth, width)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridColumnSelSetWidth, width)
+	})
 }
 
 func (o *NSGridColumn) LeadingPadding() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSGridColumnSelLeadingPadding)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSGridColumnSelLeadingPadding)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridColumn) SetLeadingPadding(leadingPadding float64) {
-	o.Ptr().Send(_nSGridColumnSelSetLeadingPadding, leadingPadding)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridColumnSelSetLeadingPadding, leadingPadding)
+	})
 }
 
 func (o *NSGridColumn) TrailingPadding() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSGridColumnSelTrailingPadding)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSGridColumnSelTrailingPadding)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridColumn) SetTrailingPadding(trailingPadding float64) {
-	o.Ptr().Send(_nSGridColumnSelSetTrailingPadding, trailingPadding)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridColumnSelSetTrailingPadding, trailingPadding)
+	})
 }
 
 func (o *NSGridColumn) IsHidden() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSGridColumnSelIsHidden)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSGridColumnSelIsHidden)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridColumn) SetHidden(hidden bool) {
-	o.Ptr().Send(_nSGridColumnSelSetHidden, hidden)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridColumnSelSetHidden, hidden)
+	})
 }

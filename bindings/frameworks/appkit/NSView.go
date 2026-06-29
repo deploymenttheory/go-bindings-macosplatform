@@ -377,1764 +377,3186 @@ func NSViewFromID(id objc.ID) *NSView {
 
 // Initializes and returns a newly allocated NSView object with a specified frame rectangle.
 func (o *NSView) InitWithFrame(frameRect corefoundation.CGRect) *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelInitWithFrame, frameRect)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelInitWithFrame, frameRect)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a view using from data in the specified coder object.
 func (o *NSView) InitWithCoder(coder *foundation.NSCoder) *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) IsDescendantOf(view *NSView) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelIsDescendantOf, view.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelIsDescendantOf, view.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) AncestorSharedWithView(view *NSView) *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelAncestorSharedWithView, view.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelAncestorSharedWithView, view.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) GetRectsBeingDrawnCount(rects *corefoundation.CGRect, count *int64) {
-	o.Ptr().Send(_nSViewSelGetRectsBeingDrawnCount, rects, count)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelGetRectsBeingDrawnCount, rects, count)
+	})
 }
 
 func (o *NSView) NeedsToDrawRect(rect corefoundation.CGRect) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelNeedsToDrawRect, rect)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelNeedsToDrawRect, rect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ViewDidHide() {
-	o.Ptr().Send(_nSViewSelViewDidHide)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelViewDidHide)
+	})
 }
 
 func (o *NSView) ViewDidUnhide() {
-	o.Ptr().Send(_nSViewSelViewDidUnhide)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelViewDidUnhide)
+	})
 }
 
 func (o *NSView) AddSubview(view *NSView) {
-	o.Ptr().Send(_nSViewSelAddSubview, view.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelAddSubview, view.Ptr())
+	})
 }
 
 func (o *NSView) AddSubviewPositionedRelativeTo(view *NSView, place NSWindowOrderingMode, otherView *NSView) {
-	o.Ptr().Send(_nSViewSelAddSubviewPositionedRelativeTo, view.Ptr(), place, otherView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelAddSubviewPositionedRelativeTo, view.Ptr(), place, otherView.Ptr())
+	})
 }
 
 func (o *NSView) SortSubviewsUsingFunctionContext(compare unsafe.Pointer, context_ unsafe.Pointer) {
-	o.Ptr().Send(_nSViewSelSortSubviewsUsingFunctionContext, compare, context_)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSortSubviewsUsingFunctionContext, compare, context_)
+	})
 }
 
 func (o *NSView) ViewWillMoveToWindow(newWindow *NSWindow) {
-	o.Ptr().Send(_nSViewSelViewWillMoveToWindow, newWindow.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelViewWillMoveToWindow, newWindow.Ptr())
+	})
 }
 
 func (o *NSView) ViewDidMoveToWindow() {
-	o.Ptr().Send(_nSViewSelViewDidMoveToWindow)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelViewDidMoveToWindow)
+	})
 }
 
 func (o *NSView) ViewWillMoveToSuperview(newSuperview *NSView) {
-	o.Ptr().Send(_nSViewSelViewWillMoveToSuperview, newSuperview.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelViewWillMoveToSuperview, newSuperview.Ptr())
+	})
 }
 
 func (o *NSView) ViewDidMoveToSuperview() {
-	o.Ptr().Send(_nSViewSelViewDidMoveToSuperview)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelViewDidMoveToSuperview)
+	})
 }
 
 func (o *NSView) DidAddSubview(subview *NSView) {
-	o.Ptr().Send(_nSViewSelDidAddSubview, subview.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelDidAddSubview, subview.Ptr())
+	})
 }
 
 func (o *NSView) WillRemoveSubview(subview *NSView) {
-	o.Ptr().Send(_nSViewSelWillRemoveSubview, subview.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelWillRemoveSubview, subview.Ptr())
+	})
 }
 
 func (o *NSView) RemoveFromSuperview() {
-	o.Ptr().Send(_nSViewSelRemoveFromSuperview)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelRemoveFromSuperview)
+	})
 }
 
 func (o *NSView) ReplaceSubviewWith(oldView *NSView, newView *NSView) {
-	o.Ptr().Send(_nSViewSelReplaceSubviewWith, oldView.Ptr(), newView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelReplaceSubviewWith, oldView.Ptr(), newView.Ptr())
+	})
 }
 
 func (o *NSView) RemoveFromSuperviewWithoutNeedingDisplay() {
-	o.Ptr().Send(_nSViewSelRemoveFromSuperviewWithoutNeedingDisplay)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelRemoveFromSuperviewWithoutNeedingDisplay)
+	})
 }
 
 func (o *NSView) ViewDidChangeBackingProperties() {
-	o.Ptr().Send(_nSViewSelViewDidChangeBackingProperties)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelViewDidChangeBackingProperties)
+	})
 }
 
 func (o *NSView) ResizeSubviewsWithOldSize(oldSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSViewSelResizeSubviewsWithOldSize, oldSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelResizeSubviewsWithOldSize, oldSize)
+	})
 }
 
 func (o *NSView) ResizeWithOldSuperviewSize(oldSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSViewSelResizeWithOldSuperviewSize, oldSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelResizeWithOldSuperviewSize, oldSize)
+	})
 }
 
 func (o *NSView) SetFrameOrigin(newOrigin corefoundation.CGPoint) {
-	o.Ptr().Send(_nSViewSelSetFrameOrigin, newOrigin)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetFrameOrigin, newOrigin)
+	})
 }
 
 func (o *NSView) SetFrameSize(newSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSViewSelSetFrameSize, newSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetFrameSize, newSize)
+	})
 }
 
 func (o *NSView) SetBoundsOrigin(newOrigin corefoundation.CGPoint) {
-	o.Ptr().Send(_nSViewSelSetBoundsOrigin, newOrigin)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetBoundsOrigin, newOrigin)
+	})
 }
 
 func (o *NSView) SetBoundsSize(newSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSViewSelSetBoundsSize, newSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetBoundsSize, newSize)
+	})
 }
 
 func (o *NSView) TranslateOriginToPoint(translation corefoundation.CGPoint) {
-	o.Ptr().Send(_nSViewSelTranslateOriginToPoint, translation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelTranslateOriginToPoint, translation)
+	})
 }
 
 func (o *NSView) ScaleUnitSquareToSize(newUnitSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSViewSelScaleUnitSquareToSize, newUnitSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelScaleUnitSquareToSize, newUnitSize)
+	})
 }
 
 func (o *NSView) RotateByAngle(angle float64) {
-	o.Ptr().Send(_nSViewSelRotateByAngle, angle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelRotateByAngle, angle)
+	})
 }
 
 func (o *NSView) ConvertPointFromView(point corefoundation.CGPoint, view *NSView) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSViewSelConvertPointFromView, point, view.Ptr())
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSViewSelConvertPointFromView, point, view.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ConvertPointToView(point corefoundation.CGPoint, view *NSView) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSViewSelConvertPointToView, point, view.Ptr())
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSViewSelConvertPointToView, point, view.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ConvertSizeFromView(size corefoundation.CGSize, view *NSView) corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewSelConvertSizeFromView, size, view.Ptr())
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewSelConvertSizeFromView, size, view.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ConvertSizeToView(size corefoundation.CGSize, view *NSView) corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewSelConvertSizeToView, size, view.Ptr())
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewSelConvertSizeToView, size, view.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ConvertRectFromView(rect corefoundation.CGRect, view *NSView) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelConvertRectFromView, rect, view.Ptr())
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelConvertRectFromView, rect, view.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ConvertRectToView(rect corefoundation.CGRect, view *NSView) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelConvertRectToView, rect, view.Ptr())
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelConvertRectToView, rect, view.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) BackingAlignedRectOptions(rect corefoundation.CGRect, options foundation.NSAlignmentOptions) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelBackingAlignedRectOptions, rect, options)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelBackingAlignedRectOptions, rect, options)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) CenterScanRect(rect corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelCenterScanRect, rect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelCenterScanRect, rect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ConvertPointToBacking(point corefoundation.CGPoint) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSViewSelConvertPointToBacking, point)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSViewSelConvertPointToBacking, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ConvertPointFromBacking(point corefoundation.CGPoint) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSViewSelConvertPointFromBacking, point)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSViewSelConvertPointFromBacking, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ConvertSizeToBacking(size corefoundation.CGSize) corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewSelConvertSizeToBacking, size)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewSelConvertSizeToBacking, size)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ConvertSizeFromBacking(size corefoundation.CGSize) corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewSelConvertSizeFromBacking, size)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewSelConvertSizeFromBacking, size)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ConvertRectToBacking(rect corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelConvertRectToBacking, rect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelConvertRectToBacking, rect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ConvertRectFromBacking(rect corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelConvertRectFromBacking, rect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelConvertRectFromBacking, rect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ConvertPointToLayer(point corefoundation.CGPoint) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSViewSelConvertPointToLayer, point)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSViewSelConvertPointToLayer, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ConvertPointFromLayer(point corefoundation.CGPoint) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSViewSelConvertPointFromLayer, point)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSViewSelConvertPointFromLayer, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ConvertSizeToLayer(size corefoundation.CGSize) corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewSelConvertSizeToLayer, size)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewSelConvertSizeToLayer, size)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ConvertSizeFromLayer(size corefoundation.CGSize) corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewSelConvertSizeFromLayer, size)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewSelConvertSizeFromLayer, size)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ConvertRectToLayer(rect corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelConvertRectToLayer, rect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelConvertRectToLayer, rect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ConvertRectFromLayer(rect corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelConvertRectFromLayer, rect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelConvertRectFromLayer, rect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: If a view needs display, -drawRect: or -updateLayer will be called automatically when the view is able to draw.  To check whether a view is in a window, call -window.  To check whether a view is hidden, call -isHiddenOrHasHiddenAncestor.
 func (o *NSView) SetNeedsDisplayInRect(invalidRect corefoundation.CGRect) {
-	o.Ptr().Send(_nSViewSelSetNeedsDisplayInRect, invalidRect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetNeedsDisplayInRect, invalidRect)
+	})
 }
 
 // Deprecated: To draw, subclass NSView and implement -drawRect:; AppKit's automatic deferred display mechanism will call -drawRect: as necessary to display the view.
 func (o *NSView) LockFocus() {
-	o.Ptr().Send(_nSViewSelLockFocus)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelLockFocus)
+	})
 }
 
 // Deprecated: To draw, subclass NSView and implement -drawRect:; AppKit's automatic deferred display mechanism will call -drawRect: as necessary to display the view.
 func (o *NSView) UnlockFocus() {
-	o.Ptr().Send(_nSViewSelUnlockFocus)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelUnlockFocus)
+	})
 }
 
 // Deprecated: To draw, subclass NSView and implement -drawRect:; AppKit's automatic deferred display mechanism will call -drawRect: as necessary to display the view.
 func (o *NSView) LockFocusIfCanDraw() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelLockFocusIfCanDraw)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelLockFocusIfCanDraw)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use -[NSView displayRectIgnoringOpacity:inContext:] to draw a view subtree into a graphics context.
 func (o *NSView) LockFocusIfCanDrawInContext(context_ *NSGraphicsContext) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelLockFocusIfCanDrawInContext, context_.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelLockFocusIfCanDrawInContext, context_.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) Display() {
-	o.Ptr().Send(_nSViewSelDisplay)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelDisplay)
+	})
 }
 
 func (o *NSView) DisplayIfNeeded() {
-	o.Ptr().Send(_nSViewSelDisplayIfNeeded)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelDisplayIfNeeded)
+	})
 }
 
 func (o *NSView) DisplayIfNeededIgnoringOpacity() {
-	o.Ptr().Send(_nSViewSelDisplayIfNeededIgnoringOpacity)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelDisplayIfNeededIgnoringOpacity)
+	})
 }
 
 func (o *NSView) DisplayRect(rect corefoundation.CGRect) {
-	o.Ptr().Send(_nSViewSelDisplayRect, rect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelDisplayRect, rect)
+	})
 }
 
 func (o *NSView) DisplayIfNeededInRect(rect corefoundation.CGRect) {
-	o.Ptr().Send(_nSViewSelDisplayIfNeededInRect, rect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelDisplayIfNeededInRect, rect)
+	})
 }
 
 func (o *NSView) DisplayRectIgnoringOpacity(rect corefoundation.CGRect) {
-	o.Ptr().Send(_nSViewSelDisplayRectIgnoringOpacity, rect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelDisplayRectIgnoringOpacity, rect)
+	})
 }
 
 func (o *NSView) DisplayIfNeededInRectIgnoringOpacity(rect corefoundation.CGRect) {
-	o.Ptr().Send(_nSViewSelDisplayIfNeededInRectIgnoringOpacity, rect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelDisplayIfNeededInRectIgnoringOpacity, rect)
+	})
 }
 
 // Overridden by subclasses to draw the view’s image within the specified rectangle.
 func (o *NSView) DrawRect(dirtyRect corefoundation.CGRect) {
-	o.Ptr().Send(_nSViewSelDrawRect, dirtyRect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelDrawRect, dirtyRect)
+	})
 }
 
 func (o *NSView) DisplayRectIgnoringOpacityInContext(rect corefoundation.CGRect, context_ *NSGraphicsContext) {
-	o.Ptr().Send(_nSViewSelDisplayRectIgnoringOpacityInContext, rect, context_.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelDisplayRectIgnoringOpacityInContext, rect, context_.Ptr())
+	})
 }
 
 func (o *NSView) BitmapImageRepForCachingDisplayInRect(rect corefoundation.CGRect) *NSBitmapImageRep {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelBitmapImageRepForCachingDisplayInRect, rect)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSBitmapImageRepFromID(_ret)
+	var _mainthread0 *NSBitmapImageRep
+	purego.Main(func() {
+		_mainthread0 = func() *NSBitmapImageRep {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelBitmapImageRepForCachingDisplayInRect, rect)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSBitmapImageRepFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) CacheDisplayInRectToBitmapImageRep(rect corefoundation.CGRect, bitmapImageRep *NSBitmapImageRep) {
-	o.Ptr().Send(_nSViewSelCacheDisplayInRectToBitmapImageRep, rect, bitmapImageRep.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelCacheDisplayInRectToBitmapImageRep, rect, bitmapImageRep.Ptr())
+	})
 }
 
 func (o *NSView) ViewWillDraw() {
-	o.Ptr().Send(_nSViewSelViewWillDraw)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelViewWillDraw)
+	})
 }
 
 func (o *NSView) ScrollPoint(point corefoundation.CGPoint) {
-	o.Ptr().Send(_nSViewSelScrollPoint, point)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelScrollPoint, point)
+	})
 }
 
 func (o *NSView) ScrollRectToVisible(rect corefoundation.CGRect) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelScrollRectToVisible, rect)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelScrollRectToVisible, rect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) Autoscroll(event *NSEvent) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelAutoscroll, event.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelAutoscroll, event.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) AdjustScroll(newVisible corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelAdjustScroll, newVisible)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelAdjustScroll, newVisible)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use NSScrollView to achieve scrolling views.
 func (o *NSView) ScrollRectBy(rect corefoundation.CGRect, delta corefoundation.CGSize) {
-	o.Ptr().Send(_nSViewSelScrollRectBy, rect, delta)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelScrollRectBy, rect, delta)
+	})
 }
 
 func (o *NSView) TranslateRectsNeedingDisplayInRectBy(clipRect corefoundation.CGRect, delta corefoundation.CGSize) {
-	o.Ptr().Send(_nSViewSelTranslateRectsNeedingDisplayInRectBy, clipRect, delta)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelTranslateRectsNeedingDisplayInRectBy, clipRect, delta)
+	})
 }
 
 func (o *NSView) HitTest(point corefoundation.CGPoint) *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelHitTest, point)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelHitTest, point)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) MouseInRect(point corefoundation.CGPoint, rect corefoundation.CGRect) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelMouseInRect, point, rect)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelMouseInRect, point, rect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ViewWithTag(tag int) *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelViewWithTag, tag)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelViewWithTag, tag)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) AcceptsFirstMouse(event *NSEvent) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelAcceptsFirstMouse, event.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelAcceptsFirstMouse, event.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ShouldDelayWindowOrderingForEvent(event *NSEvent) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelShouldDelayWindowOrderingForEvent, event.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelShouldDelayWindowOrderingForEvent, event.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) MakeBackingLayer() *quartzcore.CALayer {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelMakeBackingLayer)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return quartzcore.CALayerFromID(_ret)
+	var _mainthread0 *quartzcore.CALayer
+	purego.Main(func() {
+		_mainthread0 = func() *quartzcore.CALayer {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelMakeBackingLayer)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return quartzcore.CALayerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Updates the view’s content by modifying its underlying layer.
 func (o *NSView) UpdateLayer() {
-	o.Ptr().Send(_nSViewSelUpdateLayer)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelUpdateLayer)
+	})
 }
 
 func (o *NSView) LayoutSubtreeIfNeeded() {
-	o.Ptr().Send(_nSViewSelLayoutSubtreeIfNeeded)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelLayoutSubtreeIfNeeded)
+	})
 }
 
 func (o *NSView) Layout() {
-	o.Ptr().Send(_nSViewSelLayout)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelLayout)
+	})
 }
 
 // Overridden by subclasses to return a context-sensitive pop-up menu for a given mouse-down event.
 func (o *NSView) MenuForEvent(event *NSEvent) *NSMenu {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelMenuForEvent, event.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMenuFromID(_ret)
+	var _mainthread0 *NSMenu
+	purego.Main(func() {
+		_mainthread0 = func() *NSMenu {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelMenuForEvent, event.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMenuFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // A contextual menu is being opened from the receiving view. The view should update any visual state in response — such as making a selection. \param menu The contextual menu that is being opened on the view \param event The event that caused the menu to open.
 func (o *NSView) WillOpenMenuWithEvent(menu *NSMenu, event *NSEvent) {
-	o.Ptr().Send(_nSViewSelWillOpenMenuWithEvent, menu.Ptr(), event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelWillOpenMenuWithEvent, menu.Ptr(), event.Ptr())
+	})
 }
 
 // A contextual menu shown from the receiving view has been closed. This is only called if the menu had been opened and the view previously received \c -willOpenMenu:withEvent:. The view should update any visual state in response — such as removing a temporary selection. \param menu The contextual menu that was open on the view \param event The event that caused the menu to close. This may be nil if there is no specific event that triggered the closing.
 func (o *NSView) DidCloseMenuWithEvent(menu *NSMenu, event *NSEvent) {
-	o.Ptr().Send(_nSViewSelDidCloseMenuWithEvent, menu.Ptr(), event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelDidCloseMenuWithEvent, menu.Ptr(), event.Ptr())
+	})
 }
 
 func (o *NSView) AddToolTipRectOwnerUserData(rect corefoundation.CGRect, owner objc.ID, data unsafe.Pointer) int {
-	_ret := objc.Send[int](o.Ptr(), _nSViewSelAddToolTipRectOwnerUserData, rect, owner, data)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSViewSelAddToolTipRectOwnerUserData, rect, owner, data)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) RemoveToolTip(tag int) {
-	o.Ptr().Send(_nSViewSelRemoveToolTip, tag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelRemoveToolTip, tag)
+	})
 }
 
 func (o *NSView) RemoveAllToolTips() {
-	o.Ptr().Send(_nSViewSelRemoveAllToolTips)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelRemoveAllToolTips)
+	})
 }
 
 func (o *NSView) ViewWillStartLiveResize() {
-	o.Ptr().Send(_nSViewSelViewWillStartLiveResize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelViewWillStartLiveResize)
+	})
 }
 
 func (o *NSView) ViewDidEndLiveResize() {
-	o.Ptr().Send(_nSViewSelViewDidEndLiveResize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelViewDidEndLiveResize)
+	})
 }
 
 func (o *NSView) GetRectsExposedDuringLiveResizeCount(exposedRects *corefoundation.CGRect, count *int64) {
-	o.Ptr().Send(_nSViewSelGetRectsExposedDuringLiveResizeCount, exposedRects, count)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelGetRectsExposedDuringLiveResizeCount, exposedRects, count)
+	})
 }
 
 func (o *NSView) RectForSmartMagnificationAtPointInRect(location corefoundation.CGPoint, visibleRect corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelRectForSmartMagnificationAtPointInRect, location, visibleRect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelRectForSmartMagnificationAtPointInRect, location, visibleRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Restores the view to an initial state so that it can be reused.
 func (o *NSView) PrepareForReuse() {
-	o.Ptr().Send(_nSViewSelPrepareForReuse)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelPrepareForReuse)
+	})
 }
 
 func (o *NSView) PrepareContentInRect(rect corefoundation.CGRect) {
-	o.Ptr().Send(_nSViewSelPrepareContentInRect, rect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelPrepareContentInRect, rect)
+	})
 }
 
 // Override point for reacting to the effective appearance of the receiver changing. At this point `effectiveAppearance` property reflects the new appearance.
 func (o *NSView) ViewDidChangeEffectiveAppearance() {
-	o.Ptr().Send(_nSViewSelViewDidChangeEffectiveAppearance)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelViewDidChangeEffectiveAppearance)
+	})
 }
 
 func (o *NSView) Window() *NSWindow {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelWindow)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowFromID(_ret)
+	var _mainthread0 *NSWindow
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindow {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelWindow)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) Superview() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelSuperview)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelSuperview)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) Subviews() *foundation.NSArray[*NSView] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelSubviews)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSView](_ret)
+	var _mainthread0 *foundation.NSArray[*NSView]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSView] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelSubviews)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSView](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetSubviews(subviews *foundation.NSArray[*NSView]) {
-	o.Ptr().Send(_nSViewSelSetSubviews, subviews.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetSubviews, subviews.Ptr())
+	})
 }
 
 func (o *NSView) OpaqueAncestor() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelOpaqueAncestor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelOpaqueAncestor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) IsHidden() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelIsHidden)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelIsHidden)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetHidden(hidden bool) {
-	o.Ptr().Send(_nSViewSelSetHidden, hidden)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetHidden, hidden)
+	})
 }
 
 func (o *NSView) IsHiddenOrHasHiddenAncestor() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelIsHiddenOrHasHiddenAncestor)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelIsHiddenOrHasHiddenAncestor)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) WantsDefaultClipping() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelWantsDefaultClipping)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelWantsDefaultClipping)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) PostsFrameChangedNotifications() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelPostsFrameChangedNotifications)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelPostsFrameChangedNotifications)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetPostsFrameChangedNotifications(postsFrameChangedNotifications bool) {
-	o.Ptr().Send(_nSViewSelSetPostsFrameChangedNotifications, postsFrameChangedNotifications)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetPostsFrameChangedNotifications, postsFrameChangedNotifications)
+	})
 }
 
 func (o *NSView) AutoresizesSubviews() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelAutoresizesSubviews)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelAutoresizesSubviews)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetAutoresizesSubviews(autoresizesSubviews bool) {
-	o.Ptr().Send(_nSViewSelSetAutoresizesSubviews, autoresizesSubviews)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetAutoresizesSubviews, autoresizesSubviews)
+	})
 }
 
 func (o *NSView) AutoresizingMask() NSAutoresizingMaskOptions {
-	_ret := objc.Send[NSAutoresizingMaskOptions](o.Ptr(), _nSViewSelAutoresizingMask)
-	return _ret
+	var _mainthread0 NSAutoresizingMaskOptions
+	purego.Main(func() {
+		_mainthread0 = func() NSAutoresizingMaskOptions {
+			_ret := objc.Send[NSAutoresizingMaskOptions](o.Ptr(), _nSViewSelAutoresizingMask)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) {
-	o.Ptr().Send(_nSViewSelSetAutoresizingMask, autoresizingMask)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetAutoresizingMask, autoresizingMask)
+	})
 }
 
 func (o *NSView) Frame() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelFrame)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelFrame)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetFrame(frame corefoundation.CGRect) {
-	o.Ptr().Send(_nSViewSelSetFrame, frame)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetFrame, frame)
+	})
 }
 
 func (o *NSView) FrameRotation() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSViewSelFrameRotation)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSViewSelFrameRotation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetFrameRotation(frameRotation float64) {
-	o.Ptr().Send(_nSViewSelSetFrameRotation, frameRotation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetFrameRotation, frameRotation)
+	})
 }
 
 func (o *NSView) FrameCenterRotation() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSViewSelFrameCenterRotation)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSViewSelFrameCenterRotation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetFrameCenterRotation(frameCenterRotation float64) {
-	o.Ptr().Send(_nSViewSelSetFrameCenterRotation, frameCenterRotation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetFrameCenterRotation, frameCenterRotation)
+	})
 }
 
 func (o *NSView) BoundsRotation() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSViewSelBoundsRotation)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSViewSelBoundsRotation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetBoundsRotation(boundsRotation float64) {
-	o.Ptr().Send(_nSViewSelSetBoundsRotation, boundsRotation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetBoundsRotation, boundsRotation)
+	})
 }
 
 func (o *NSView) Bounds() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelBounds)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelBounds)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetBounds(bounds corefoundation.CGRect) {
-	o.Ptr().Send(_nSViewSelSetBounds, bounds)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetBounds, bounds)
+	})
 }
 
 func (o *NSView) IsFlipped() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelIsFlipped)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelIsFlipped)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) IsRotatedFromBase() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelIsRotatedFromBase)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelIsRotatedFromBase)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) IsRotatedOrScaledFromBase() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelIsRotatedOrScaledFromBase)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelIsRotatedOrScaledFromBase)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) IsOpaque() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelIsOpaque)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelIsOpaque)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) CanDrawConcurrently() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelCanDrawConcurrently)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelCanDrawConcurrently)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetCanDrawConcurrently(canDrawConcurrently bool) {
-	o.Ptr().Send(_nSViewSelSetCanDrawConcurrently, canDrawConcurrently)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetCanDrawConcurrently, canDrawConcurrently)
+	})
 }
 
 // Deprecated: If a view needs display, -drawRect: or -updateLayer will be called automatically when the view is able to draw.  To check whether a view is in a window, call -window.  To check whether a view is hidden, call -isHiddenOrHasHiddenAncestor.
 func (o *NSView) CanDraw() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelCanDraw)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelCanDraw)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: If a view needs display, -drawRect: or -updateLayer will be called automatically when the view is able to draw.  To check whether a view is in a window, call -window.  To check whether a view is hidden, call -isHiddenOrHasHiddenAncestor.
 func (o *NSView) NeedsDisplay() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelNeedsDisplay)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelNeedsDisplay)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: If a view needs display, -drawRect: or -updateLayer will be called automatically when the view is able to draw.  To check whether a view is in a window, call -window.  To check whether a view is hidden, call -isHiddenOrHasHiddenAncestor.
 func (o *NSView) SetNeedsDisplay(needsDisplay bool) {
-	o.Ptr().Send(_nSViewSelSetNeedsDisplay, needsDisplay)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetNeedsDisplay, needsDisplay)
+	})
 }
 
 // Deprecated: Use -[NSView displayRectIgnoringOpacity:inContext:] to draw a view subtree into a graphics context.
 func NSViewFocusView() *NSView {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSView), _nSViewSelFocusView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSView), _nSViewSelFocusView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The portion of the view that isn’t clipped by its superviews. @discussion Visibility, as reflected by this property, doesn’t account for whether other view or window objects overlap the current view or whether the current view is installed in a window at all. This value of this property is `NSZeroRect` if the current view is effectively hidden. @discussion During a printing operation, the visible rectangle is further clipped to the page being imaged.
 func (o *NSView) VisibleRect() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelVisibleRect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelVisibleRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) Tag() int {
-	_ret := objc.Send[int](o.Ptr(), _nSViewSelTag)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSViewSelTag)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) NeedsPanelToBecomeKey() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelNeedsPanelToBecomeKey)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelNeedsPanelToBecomeKey)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) MouseDownCanMoveWindow() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelMouseDownCanMoveWindow)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelMouseDownCanMoveWindow)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use allowedTouchTypes instead
 func (o *NSView) AcceptsTouchEvents() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelAcceptsTouchEvents)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelAcceptsTouchEvents)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use allowedTouchTypes instead
 func (o *NSView) SetAcceptsTouchEvents(acceptsTouchEvents bool) {
-	o.Ptr().Send(_nSViewSelSetAcceptsTouchEvents, acceptsTouchEvents)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetAcceptsTouchEvents, acceptsTouchEvents)
+	})
 }
 
 func (o *NSView) WantsRestingTouches() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelWantsRestingTouches)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelWantsRestingTouches)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetWantsRestingTouches(wantsRestingTouches bool) {
-	o.Ptr().Send(_nSViewSelSetWantsRestingTouches, wantsRestingTouches)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetWantsRestingTouches, wantsRestingTouches)
+	})
 }
 
 func (o *NSView) LayerContentsRedrawPolicy() NSViewLayerContentsRedrawPolicy {
-	_ret := objc.Send[NSViewLayerContentsRedrawPolicy](o.Ptr(), _nSViewSelLayerContentsRedrawPolicy)
-	return _ret
+	var _mainthread0 NSViewLayerContentsRedrawPolicy
+	purego.Main(func() {
+		_mainthread0 = func() NSViewLayerContentsRedrawPolicy {
+			_ret := objc.Send[NSViewLayerContentsRedrawPolicy](o.Ptr(), _nSViewSelLayerContentsRedrawPolicy)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) {
-	o.Ptr().Send(_nSViewSelSetLayerContentsRedrawPolicy, layerContentsRedrawPolicy)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetLayerContentsRedrawPolicy, layerContentsRedrawPolicy)
+	})
 }
 
 func (o *NSView) LayerContentsPlacement() NSViewLayerContentsPlacement {
-	_ret := objc.Send[NSViewLayerContentsPlacement](o.Ptr(), _nSViewSelLayerContentsPlacement)
-	return _ret
+	var _mainthread0 NSViewLayerContentsPlacement
+	purego.Main(func() {
+		_mainthread0 = func() NSViewLayerContentsPlacement {
+			_ret := objc.Send[NSViewLayerContentsPlacement](o.Ptr(), _nSViewSelLayerContentsPlacement)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) {
-	o.Ptr().Send(_nSViewSelSetLayerContentsPlacement, layerContentsPlacement)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetLayerContentsPlacement, layerContentsPlacement)
+	})
 }
 
 func (o *NSView) WantsLayer() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelWantsLayer)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelWantsLayer)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetWantsLayer(wantsLayer bool) {
-	o.Ptr().Send(_nSViewSelSetWantsLayer, wantsLayer)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetWantsLayer, wantsLayer)
+	})
 }
 
 func (o *NSView) Layer() *quartzcore.CALayer {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelLayer)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return quartzcore.CALayerFromID(_ret)
+	var _mainthread0 *quartzcore.CALayer
+	purego.Main(func() {
+		_mainthread0 = func() *quartzcore.CALayer {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelLayer)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return quartzcore.CALayerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetLayer(layer *quartzcore.CALayer) {
-	o.Ptr().Send(_nSViewSelSetLayer, layer.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetLayer, layer.Ptr())
+	})
 }
 
 func (o *NSView) WantsUpdateLayer() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelWantsUpdateLayer)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelWantsUpdateLayer)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) CanDrawSubviewsIntoLayer() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelCanDrawSubviewsIntoLayer)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelCanDrawSubviewsIntoLayer)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) {
-	o.Ptr().Send(_nSViewSelSetCanDrawSubviewsIntoLayer, canDrawSubviewsIntoLayer)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetCanDrawSubviewsIntoLayer, canDrawSubviewsIntoLayer)
+	})
 }
 
 func (o *NSView) NeedsLayout() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelNeedsLayout)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelNeedsLayout)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetNeedsLayout(needsLayout bool) {
-	o.Ptr().Send(_nSViewSelSetNeedsLayout, needsLayout)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetNeedsLayout, needsLayout)
+	})
 }
 
 func (o *NSView) AlphaValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSViewSelAlphaValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSViewSelAlphaValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetAlphaValue(alphaValue float64) {
-	o.Ptr().Send(_nSViewSelSetAlphaValue, alphaValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetAlphaValue, alphaValue)
+	})
 }
 
 func (o *NSView) LayerUsesCoreImageFilters() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelLayerUsesCoreImageFilters)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelLayerUsesCoreImageFilters)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) {
-	o.Ptr().Send(_nSViewSelSetLayerUsesCoreImageFilters, layerUsesCoreImageFilters)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetLayerUsesCoreImageFilters, layerUsesCoreImageFilters)
+	})
 }
 
 func (o *NSView) BackgroundFilters() *foundation.NSArray[*coreimage.CIFilter] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelBackgroundFilters)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*coreimage.CIFilter](_ret)
+	var _mainthread0 *foundation.NSArray[*coreimage.CIFilter]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*coreimage.CIFilter] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelBackgroundFilters)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*coreimage.CIFilter](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetBackgroundFilters(backgroundFilters *foundation.NSArray[*coreimage.CIFilter]) {
-	o.Ptr().Send(_nSViewSelSetBackgroundFilters, backgroundFilters.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetBackgroundFilters, backgroundFilters.Ptr())
+	})
 }
 
 func (o *NSView) CompositingFilter() *coreimage.CIFilter {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelCompositingFilter)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return coreimage.CIFilterFromID(_ret)
+	var _mainthread0 *coreimage.CIFilter
+	purego.Main(func() {
+		_mainthread0 = func() *coreimage.CIFilter {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelCompositingFilter)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return coreimage.CIFilterFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetCompositingFilter(compositingFilter *coreimage.CIFilter) {
-	o.Ptr().Send(_nSViewSelSetCompositingFilter, compositingFilter.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetCompositingFilter, compositingFilter.Ptr())
+	})
 }
 
 func (o *NSView) ContentFilters() *foundation.NSArray[*coreimage.CIFilter] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelContentFilters)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*coreimage.CIFilter](_ret)
+	var _mainthread0 *foundation.NSArray[*coreimage.CIFilter]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*coreimage.CIFilter] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelContentFilters)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*coreimage.CIFilter](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetContentFilters(contentFilters *foundation.NSArray[*coreimage.CIFilter]) {
-	o.Ptr().Send(_nSViewSelSetContentFilters, contentFilters.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetContentFilters, contentFilters.Ptr())
+	})
 }
 
 func (o *NSView) Shadow() *NSShadow {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelShadow)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSShadowFromID(_ret)
+	var _mainthread0 *NSShadow
+	purego.Main(func() {
+		_mainthread0 = func() *NSShadow {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelShadow)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSShadowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetShadow(shadow *NSShadow) {
-	o.Ptr().Send(_nSViewSelSetShadow, shadow.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetShadow, shadow.Ptr())
+	})
 }
 
 func (o *NSView) ClipsToBounds() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelClipsToBounds)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelClipsToBounds)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetClipsToBounds(clipsToBounds bool) {
-	o.Ptr().Send(_nSViewSelSetClipsToBounds, clipsToBounds)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetClipsToBounds, clipsToBounds)
+	})
 }
 
 func (o *NSView) PostsBoundsChangedNotifications() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelPostsBoundsChangedNotifications)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelPostsBoundsChangedNotifications)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) {
-	o.Ptr().Send(_nSViewSelSetPostsBoundsChangedNotifications, postsBoundsChangedNotifications)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetPostsBoundsChangedNotifications, postsBoundsChangedNotifications)
+	})
 }
 
 // The nearest ancestor scroll view that contains the current view as part of its document view. - Note: If the current view is not embedded inside a scroll view, the value of this property is `nil`. This property does not contain the current view if the current view is itself a scroll view. It always contains an ancestor scroll view.
 func (o *NSView) EnclosingScrollView() *NSScrollView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelEnclosingScrollView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrollViewFromID(_ret)
+	var _mainthread0 *NSScrollView
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrollView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelEnclosingScrollView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrollViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func NSViewDefaultMenu() *NSMenu {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSView), _nSViewSelDefaultMenu)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMenuFromID(_ret)
+	var _mainthread0 *NSMenu
+	purego.Main(func() {
+		_mainthread0 = func() *NSMenu {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSView), _nSViewSelDefaultMenu)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMenuFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ToolTip() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelToolTip)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelToolTip)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetToolTip(toolTip *foundation.NSString) {
-	o.Ptr().Send(_nSViewSelSetToolTip, toolTip.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetToolTip, toolTip.Ptr())
+	})
 }
 
 func (o *NSView) InLiveResize() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelInLiveResize)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelInLiveResize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) PreservesContentDuringLiveResize() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelPreservesContentDuringLiveResize)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelPreservesContentDuringLiveResize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) RectPreservedDuringLiveResize() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelRectPreservedDuringLiveResize)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelRectPreservedDuringLiveResize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) InputContext() *NSTextInputContext {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelInputContext)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTextInputContextFromID(_ret)
+	var _mainthread0 *NSTextInputContext
+	purego.Main(func() {
+		_mainthread0 = func() *NSTextInputContext {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelInputContext)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTextInputContextFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) UserInterfaceLayoutDirection() NSUserInterfaceLayoutDirection {
-	_ret := objc.Send[NSUserInterfaceLayoutDirection](o.Ptr(), _nSViewSelUserInterfaceLayoutDirection)
-	return _ret
+	var _mainthread0 NSUserInterfaceLayoutDirection
+	purego.Main(func() {
+		_mainthread0 = func() NSUserInterfaceLayoutDirection {
+			_ret := objc.Send[NSUserInterfaceLayoutDirection](o.Ptr(), _nSViewSelUserInterfaceLayoutDirection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) {
-	o.Ptr().Send(_nSViewSelSetUserInterfaceLayoutDirection, userInterfaceLayoutDirection)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetUserInterfaceLayoutDirection, userInterfaceLayoutDirection)
+	})
 }
 
 func NSViewIsCompatibleWithResponsiveScrolling() bool {
-	_ret := objc.Send[bool](objc.ID(_clsNSView), _nSViewSelIsCompatibleWithResponsiveScrolling)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](objc.ID(_clsNSView), _nSViewSelIsCompatibleWithResponsiveScrolling)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) PreparedContentRect() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelPreparedContentRect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelPreparedContentRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetPreparedContentRect(preparedContentRect corefoundation.CGRect) {
-	o.Ptr().Send(_nSViewSelSetPreparedContentRect, preparedContentRect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetPreparedContentRect, preparedContentRect)
+	})
 }
 
 func (o *NSView) AllowsVibrancy() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelAllowsVibrancy)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelAllowsVibrancy)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetKeyboardFocusRingNeedsDisplayInRect(rect corefoundation.CGRect) {
-	o.Ptr().Send(_nSViewSelSetKeyboardFocusRingNeedsDisplayInRect, rect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetKeyboardFocusRingNeedsDisplayInRect, rect)
+	})
 }
 
 func (o *NSView) DrawFocusRingMask() {
-	o.Ptr().Send(_nSViewSelDrawFocusRingMask)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelDrawFocusRingMask)
+	})
 }
 
 func (o *NSView) NoteFocusRingMaskChanged() {
-	o.Ptr().Send(_nSViewSelNoteFocusRingMaskChanged)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelNoteFocusRingMaskChanged)
+	})
 }
 
 func (o *NSView) NextKeyView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelNextKeyView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelNextKeyView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetNextKeyView(nextKeyView *NSView) {
-	o.Ptr().Send(_nSViewSelSetNextKeyView, nextKeyView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetNextKeyView, nextKeyView.Ptr())
+	})
 }
 
 func (o *NSView) PreviousKeyView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelPreviousKeyView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelPreviousKeyView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) NextValidKeyView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelNextValidKeyView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelNextValidKeyView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) PreviousValidKeyView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelPreviousValidKeyView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelPreviousValidKeyView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) CanBecomeKeyView() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelCanBecomeKeyView)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelCanBecomeKeyView)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) FocusRingType() NSFocusRingType {
-	_ret := objc.Send[NSFocusRingType](o.Ptr(), _nSViewSelFocusRingType)
-	return _ret
+	var _mainthread0 NSFocusRingType
+	purego.Main(func() {
+		_mainthread0 = func() NSFocusRingType {
+			_ret := objc.Send[NSFocusRingType](o.Ptr(), _nSViewSelFocusRingType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetFocusRingType(focusRingType NSFocusRingType) {
-	o.Ptr().Send(_nSViewSelSetFocusRingType, focusRingType)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetFocusRingType, focusRingType)
+	})
 }
 
 func NSViewDefaultFocusRingType() NSFocusRingType {
-	_ret := objc.Send[NSFocusRingType](objc.ID(_clsNSView), _nSViewSelDefaultFocusRingType)
-	return _ret
+	var _mainthread0 NSFocusRingType
+	purego.Main(func() {
+		_mainthread0 = func() NSFocusRingType {
+			_ret := objc.Send[NSFocusRingType](objc.ID(_clsNSView), _nSViewSelDefaultFocusRingType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) FocusRingMaskBounds() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelFocusRingMaskBounds)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelFocusRingMaskBounds)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) WriteEPSInsideRectToPasteboard(rect corefoundation.CGRect, pasteboard *NSPasteboard) {
-	o.Ptr().Send(_nSViewSelWriteEPSInsideRectToPasteboard, rect, pasteboard.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelWriteEPSInsideRectToPasteboard, rect, pasteboard.Ptr())
+	})
 }
 
 func (o *NSView) DataWithEPSInsideRect(rect corefoundation.CGRect) *foundation.NSData {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelDataWithEPSInsideRect, rect)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDataFromID(_ret)
+	var _mainthread0 *foundation.NSData
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSData {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelDataWithEPSInsideRect, rect)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDataFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) WritePDFInsideRectToPasteboard(rect corefoundation.CGRect, pasteboard *NSPasteboard) {
-	o.Ptr().Send(_nSViewSelWritePDFInsideRectToPasteboard, rect, pasteboard.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelWritePDFInsideRectToPasteboard, rect, pasteboard.Ptr())
+	})
 }
 
 func (o *NSView) DataWithPDFInsideRect(rect corefoundation.CGRect) *foundation.NSData {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelDataWithPDFInsideRect, rect)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDataFromID(_ret)
+	var _mainthread0 *foundation.NSData
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSData {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelDataWithPDFInsideRect, rect)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDataFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) Print(sender objc.ID) {
-	o.Ptr().Send(_nSViewSelPrint, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelPrint, sender)
+	})
 }
 
 func (o *NSView) KnowsPageRange(range_ *foundation.NSRange) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelKnowsPageRange, range_)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelKnowsPageRange, range_)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) AdjustPageWidthNewLeftRightLimit(newRight *float64, oldLeft float64, oldRight float64, rightLimit float64) {
-	o.Ptr().Send(_nSViewSelAdjustPageWidthNewLeftRightLimit, newRight, oldLeft, oldRight, rightLimit)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelAdjustPageWidthNewLeftRightLimit, newRight, oldLeft, oldRight, rightLimit)
+	})
 }
 
 func (o *NSView) AdjustPageHeightNewTopBottomLimit(newBottom *float64, oldTop float64, oldBottom float64, bottomLimit float64) {
-	o.Ptr().Send(_nSViewSelAdjustPageHeightNewTopBottomLimit, newBottom, oldTop, oldBottom, bottomLimit)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelAdjustPageHeightNewTopBottomLimit, newBottom, oldTop, oldBottom, bottomLimit)
+	})
 }
 
 func (o *NSView) RectForPage(page int) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelRectForPage, page)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelRectForPage, page)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) LocationOfPrintRect(rect corefoundation.CGRect) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSViewSelLocationOfPrintRect, rect)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSViewSelLocationOfPrintRect, rect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) DrawPageBorderWithSize(borderSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSViewSelDrawPageBorderWithSize, borderSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelDrawPageBorderWithSize, borderSize)
+	})
 }
 
 // * This method is obsolete.  It will never be invoked from within AppKit, and NSView's implementation of it does nothing. **
 // Deprecated: This is never invoked and the NSView implementation does nothing
 func (o *NSView) DrawSheetBorderWithSize(borderSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSViewSelDrawSheetBorderWithSize, borderSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelDrawSheetBorderWithSize, borderSize)
+	})
 }
 
 func (o *NSView) BeginDocument() {
-	o.Ptr().Send(_nSViewSelBeginDocument)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelBeginDocument)
+	})
 }
 
 func (o *NSView) EndDocument() {
-	o.Ptr().Send(_nSViewSelEndDocument)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelEndDocument)
+	})
 }
 
 func (o *NSView) BeginPageInRectAtPlacement(rect corefoundation.CGRect, location corefoundation.CGPoint) {
-	o.Ptr().Send(_nSViewSelBeginPageInRectAtPlacement, rect, location)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelBeginPageInRectAtPlacement, rect, location)
+	})
 }
 
 func (o *NSView) EndPage() {
-	o.Ptr().Send(_nSViewSelEndPage)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelEndPage)
+	})
 }
 
 func (o *NSView) HeightAdjustLimit() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSViewSelHeightAdjustLimit)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSViewSelHeightAdjustLimit)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) WidthAdjustLimit() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSViewSelWidthAdjustLimit)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSViewSelWidthAdjustLimit)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) PageHeader() *foundation.NSAttributedString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelPageHeader)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSAttributedStringFromID(_ret)
+	var _mainthread0 *foundation.NSAttributedString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSAttributedString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelPageHeader)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSAttributedStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) PageFooter() *foundation.NSAttributedString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelPageFooter)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSAttributedStringFromID(_ret)
+	var _mainthread0 *foundation.NSAttributedString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSAttributedString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelPageFooter)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSAttributedStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: This is never invoked and the NSView implementation does nothing
 func (o *NSView) PrintJobTitle() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelPrintJobTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelPrintJobTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) BeginDraggingSessionWithItemsEventSource(items *foundation.NSArray[*NSDraggingItem], event *NSEvent, source NSDraggingSource) *NSDraggingSession {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelBeginDraggingSessionWithItemsEventSource, items.Ptr(), event.Ptr(), source)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSDraggingSessionFromID(_ret)
+	var _mainthread0 *NSDraggingSession
+	purego.Main(func() {
+		_mainthread0 = func() *NSDraggingSession {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelBeginDraggingSessionWithItemsEventSource, items.Ptr(), event.Ptr(), source)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSDraggingSessionFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) RegisterForDraggedTypes(newTypes *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSViewSelRegisterForDraggedTypes, newTypes.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelRegisterForDraggedTypes, newTypes.Ptr())
+	})
 }
 
 func (o *NSView) UnregisterDraggedTypes() {
-	o.Ptr().Send(_nSViewSelUnregisterDraggedTypes)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelUnregisterDraggedTypes)
+	})
 }
 
 func (o *NSView) RegisteredDraggedTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelRegisteredDraggedTypes)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*foundation.NSString](_ret)
+	var _mainthread0 *foundation.NSArray[*foundation.NSString]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*foundation.NSString] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelRegisteredDraggedTypes)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*foundation.NSString](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) EnterFullScreenModeWithOptions(screen *NSScreen, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelEnterFullScreenModeWithOptions, screen.Ptr(), options.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelEnterFullScreenModeWithOptions, screen.Ptr(), options.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ExitFullScreenModeWithOptions(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSViewSelExitFullScreenModeWithOptions, options.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelExitFullScreenModeWithOptions, options.Ptr())
+	})
 }
 
 func (o *NSView) IsInFullScreenMode() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelIsInFullScreenMode)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelIsInFullScreenMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ShowDefinitionForAttributedStringAtPoint(attrString *foundation.NSAttributedString, textBaselineOrigin corefoundation.CGPoint) {
-	o.Ptr().Send(_nSViewSelShowDefinitionForAttributedStringAtPoint, attrString.Ptr(), textBaselineOrigin)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelShowDefinitionForAttributedStringAtPoint, attrString.Ptr(), textBaselineOrigin)
+	})
 }
 
 func (o *NSView) ShowDefinitionForAttributedStringRangeOptionsBaselineOriginProvider(attrString *foundation.NSAttributedString, targetRange foundation.NSRange, options *foundation.NSDictionary[*foundation.NSString, objc.ID], originProvider objc.Block) {
-	o.Ptr().Send(_nSViewSelShowDefinitionForAttributedStringRangeOptionsBaselineOriginProvider, attrString.Ptr(), targetRange, options.Ptr(), originProvider)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelShowDefinitionForAttributedStringRangeOptionsBaselineOriginProvider, attrString.Ptr(), targetRange, options.Ptr(), originProvider)
+	})
 }
 
 func (o *NSView) IsDrawingFindIndicator() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelIsDrawingFindIndicator)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelIsDrawingFindIndicator)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) AddGestureRecognizer(gestureRecognizer *NSGestureRecognizer) {
-	o.Ptr().Send(_nSViewSelAddGestureRecognizer, gestureRecognizer.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelAddGestureRecognizer, gestureRecognizer.Ptr())
+	})
 }
 
 func (o *NSView) RemoveGestureRecognizer(gestureRecognizer *NSGestureRecognizer) {
-	o.Ptr().Send(_nSViewSelRemoveGestureRecognizer, gestureRecognizer.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelRemoveGestureRecognizer, gestureRecognizer.Ptr())
+	})
 }
 
 func (o *NSView) GestureRecognizers() *foundation.NSArray[*NSGestureRecognizer] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelGestureRecognizers)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSGestureRecognizer](_ret)
+	var _mainthread0 *foundation.NSArray[*NSGestureRecognizer]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSGestureRecognizer] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelGestureRecognizers)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSGestureRecognizer](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetGestureRecognizers(gestureRecognizers *foundation.NSArray[*NSGestureRecognizer]) {
-	o.Ptr().Send(_nSViewSelSetGestureRecognizers, gestureRecognizers.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetGestureRecognizers, gestureRecognizers.Ptr())
+	})
 }
 
 func (o *NSView) AllowedTouchTypes() NSTouchTypeMask {
-	_ret := objc.Send[NSTouchTypeMask](o.Ptr(), _nSViewSelAllowedTouchTypes)
-	return _ret
+	var _mainthread0 NSTouchTypeMask
+	purego.Main(func() {
+		_mainthread0 = func() NSTouchTypeMask {
+			_ret := objc.Send[NSTouchTypeMask](o.Ptr(), _nSViewSelAllowedTouchTypes)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) {
-	o.Ptr().Send(_nSViewSelSetAllowedTouchTypes, allowedTouchTypes)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetAllowedTouchTypes, allowedTouchTypes)
+	})
 }
 
 func (o *NSView) SafeAreaInsets() foundation.NSEdgeInsets {
-	_ret := objc.Send[foundation.NSEdgeInsets](o.Ptr(), _nSViewSelSafeAreaInsets)
-	return _ret
+	var _mainthread0 foundation.NSEdgeInsets
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSEdgeInsets {
+			_ret := objc.Send[foundation.NSEdgeInsets](o.Ptr(), _nSViewSelSafeAreaInsets)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) AdditionalSafeAreaInsets() foundation.NSEdgeInsets {
-	_ret := objc.Send[foundation.NSEdgeInsets](o.Ptr(), _nSViewSelAdditionalSafeAreaInsets)
-	return _ret
+	var _mainthread0 foundation.NSEdgeInsets
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSEdgeInsets {
+			_ret := objc.Send[foundation.NSEdgeInsets](o.Ptr(), _nSViewSelAdditionalSafeAreaInsets)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) {
-	o.Ptr().Send(_nSViewSelSetAdditionalSafeAreaInsets, additionalSafeAreaInsets)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetAdditionalSafeAreaInsets, additionalSafeAreaInsets)
+	})
 }
 
 func (o *NSView) SafeAreaLayoutGuide() *NSLayoutGuide {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelSafeAreaLayoutGuide)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSLayoutGuideFromID(_ret)
+	var _mainthread0 *NSLayoutGuide
+	purego.Main(func() {
+		_mainthread0 = func() *NSLayoutGuide {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelSafeAreaLayoutGuide)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSLayoutGuideFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SafeAreaRect() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelSafeAreaRect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelSafeAreaRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) LayoutMarginsGuide() *NSLayoutGuide {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelLayoutMarginsGuide)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSLayoutGuideFromID(_ret)
+	var _mainthread0 *NSLayoutGuide
+	purego.Main(func() {
+		_mainthread0 = func() *NSLayoutGuide {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelLayoutMarginsGuide)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSLayoutGuideFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
 func (o *NSView) PrefersCompactControlSizeMetrics() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelPrefersCompactControlSizeMetrics)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelPrefersCompactControlSizeMetrics)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
 func (o *NSView) SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) {
-	o.Ptr().Send(_nSViewSelSetPrefersCompactControlSizeMetrics, prefersCompactControlSizeMetrics)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetPrefersCompactControlSizeMetrics, prefersCompactControlSizeMetrics)
+	})
 }
 
 func (o *NSView) AddTrackingArea(trackingArea *NSTrackingArea) {
-	o.Ptr().Send(_nSViewSelAddTrackingArea, trackingArea.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelAddTrackingArea, trackingArea.Ptr())
+	})
 }
 
 func (o *NSView) RemoveTrackingArea(trackingArea *NSTrackingArea) {
-	o.Ptr().Send(_nSViewSelRemoveTrackingArea, trackingArea.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelRemoveTrackingArea, trackingArea.Ptr())
+	})
 }
 
 func (o *NSView) UpdateTrackingAreas() {
-	o.Ptr().Send(_nSViewSelUpdateTrackingAreas)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelUpdateTrackingAreas)
+	})
 }
 
 func (o *NSView) AddCursorRectCursor(rect corefoundation.CGRect, object *NSCursor) {
-	o.Ptr().Send(_nSViewSelAddCursorRectCursor, rect, object.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelAddCursorRectCursor, rect, object.Ptr())
+	})
 }
 
 func (o *NSView) RemoveCursorRectCursor(rect corefoundation.CGRect, object *NSCursor) {
-	o.Ptr().Send(_nSViewSelRemoveCursorRectCursor, rect, object.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelRemoveCursorRectCursor, rect, object.Ptr())
+	})
 }
 
 func (o *NSView) DiscardCursorRects() {
-	o.Ptr().Send(_nSViewSelDiscardCursorRects)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelDiscardCursorRects)
+	})
 }
 
 func (o *NSView) ResetCursorRects() {
-	o.Ptr().Send(_nSViewSelResetCursorRects)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelResetCursorRects)
+	})
 }
 
 func (o *NSView) AddTrackingRectOwnerUserDataAssumeInside(rect corefoundation.CGRect, owner objc.ID, data unsafe.Pointer, flag bool) int {
-	_ret := objc.Send[int](o.Ptr(), _nSViewSelAddTrackingRectOwnerUserDataAssumeInside, rect, owner, data, flag)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSViewSelAddTrackingRectOwnerUserDataAssumeInside, rect, owner, data, flag)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) RemoveTrackingRect(tag int) {
-	o.Ptr().Send(_nSViewSelRemoveTrackingRect, tag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelRemoveTrackingRect, tag)
+	})
 }
 
 func (o *NSView) TrackingAreas() *foundation.NSArray[*NSTrackingArea] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelTrackingAreas)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSTrackingArea](_ret)
+	var _mainthread0 *foundation.NSArray[*NSTrackingArea]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSTrackingArea] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelTrackingAreas)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSTrackingArea](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a new display link whose callback will be invoked in-sync with the display the view is on. If the view is hidden, or not on any display, the callback will not be invoked.
 func (o *NSView) DisplayLinkWithTargetSelector(target objc.ID, selector objc.SEL) *quartzcore.CADisplayLink {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelDisplayLinkWithTargetSelector, target, selector)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return quartzcore.CADisplayLinkFromID(_ret)
+	var _mainthread0 *quartzcore.CADisplayLink
+	purego.Main(func() {
+		_mainthread0 = func() *quartzcore.CADisplayLink {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelDisplayLinkWithTargetSelector, target, selector)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return quartzcore.CADisplayLinkFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use -beginDraggingSessionWithItems:event:source: instead
 func (o *NSView) DragImageAtOffsetEventPasteboardSourceSlideBack(image *NSImage, viewLocation corefoundation.CGPoint, initialOffset corefoundation.CGSize, event *NSEvent, pboard *NSPasteboard, sourceObj objc.ID, slideFlag bool) {
-	o.Ptr().Send(_nSViewSelDragImageAtOffsetEventPasteboardSourceSlideBack, image.Ptr(), viewLocation, initialOffset, event.Ptr(), pboard.Ptr(), sourceObj, slideFlag)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelDragImageAtOffsetEventPasteboardSourceSlideBack, image.Ptr(), viewLocation, initialOffset, event.Ptr(), pboard.Ptr(), sourceObj, slideFlag)
+	})
 }
 
 // Deprecated: Use -beginDraggingSessionWithItems:event:source: instead
 func (o *NSView) DragFileFromRectSlideBackEvent(filename *foundation.NSString, rect corefoundation.CGRect, flag bool, event *NSEvent) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelDragFileFromRectSlideBackEvent, filename.Ptr(), rect, flag, event.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelDragFileFromRectSlideBackEvent, filename.Ptr(), rect, flag, event.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use -beginDraggingSessionWithItems:event:source: with an NSFilePromiseProvider instead
 func (o *NSView) DragPromisedFilesOfTypesFromRectSourceSlideBackEvent(typeArray *foundation.NSArray[*foundation.NSString], rect corefoundation.CGRect, sourceObject objc.ID, flag bool, event *NSEvent) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelDragPromisedFilesOfTypesFromRectSourceSlideBackEvent, typeArray.Ptr(), rect, sourceObject, flag, event.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelDragPromisedFilesOfTypesFromRectSourceSlideBackEvent, typeArray.Ptr(), rect, sourceObject, flag, event.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.7.
 func (o *NSView) ConvertPointToBase(point corefoundation.CGPoint) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSViewSelConvertPointToBase, point)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSViewSelConvertPointToBase, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.7.
 func (o *NSView) ConvertPointFromBase(point corefoundation.CGPoint) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSViewSelConvertPointFromBase, point)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSViewSelConvertPointFromBase, point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.7.
 func (o *NSView) ConvertSizeToBase(size corefoundation.CGSize) corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewSelConvertSizeToBase, size)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewSelConvertSizeToBase, size)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.7.
 func (o *NSView) ConvertSizeFromBase(size corefoundation.CGSize) corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewSelConvertSizeFromBase, size)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewSelConvertSizeFromBase, size)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.7.
 func (o *NSView) ConvertRectToBase(rect corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelConvertRectToBase, rect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelConvertRectToBase, rect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.7.
 func (o *NSView) ConvertRectFromBase(rect corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelConvertRectFromBase, rect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelConvertRectFromBase, rect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: This method no longer does anything
 func (o *NSView) ShouldDrawColor() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelShouldDrawColor)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelShouldDrawColor)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.10.
 func (o *NSView) GState() int {
-	_ret := objc.Send[int](o.Ptr(), _nSViewSelGState)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSViewSelGState)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.10.
 func (o *NSView) AllocateGState() {
-	o.Ptr().Send(_nSViewSelAllocateGState)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelAllocateGState)
+	})
 }
 
 // Deprecated: since macOS 10.10.
 func (o *NSView) ReleaseGState() {
-	o.Ptr().Send(_nSViewSelReleaseGState)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelReleaseGState)
+	})
 }
 
 // Deprecated: since macOS 10.10.
 func (o *NSView) SetUpGState() {
-	o.Ptr().Send(_nSViewSelSetUpGState)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetUpGState)
+	})
 }
 
 // Deprecated: since macOS 10.10.
 func (o *NSView) RenewGState() {
-	o.Ptr().Send(_nSViewSelRenewGState)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelRenewGState)
+	})
 }
 
 func (o *NSView) WritingToolsCoordinator() *NSWritingToolsCoordinator {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelWritingToolsCoordinator)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWritingToolsCoordinatorFromID(_ret)
+	var _mainthread0 *NSWritingToolsCoordinator
+	purego.Main(func() {
+		_mainthread0 = func() *NSWritingToolsCoordinator {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelWritingToolsCoordinator)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWritingToolsCoordinatorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetWritingToolsCoordinator(writingToolsCoordinator *NSWritingToolsCoordinator) {
-	o.Ptr().Send(_nSViewSelSetWritingToolsCoordinator, writingToolsCoordinator.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetWritingToolsCoordinator, writingToolsCoordinator.Ptr())
+	})
 }
 
 func (o *NSView) EnclosingMenuItem() *NSMenuItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelEnclosingMenuItem)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSMenuItemFromID(_ret)
+	var _mainthread0 *NSMenuItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSMenuItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelEnclosingMenuItem)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSMenuItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) CandidateListTouchBarItem() *NSCandidateListTouchBarItem[objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelCandidateListTouchBarItem)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCandidateListTouchBarItemFromID[objc.ID](_ret)
+	var _mainthread0 *NSCandidateListTouchBarItem[objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *NSCandidateListTouchBarItem[objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelCandidateListTouchBarItem)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCandidateListTouchBarItemFromID[objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ReflectScrolledClipView(clipView *NSClipView) {
-	o.Ptr().Send(_nSViewSelReflectScrolledClipView, clipView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelReflectScrolledClipView, clipView.Ptr())
+	})
 }
 
 func (o *NSView) ScrollClipViewToPoint(clipView *NSClipView, point corefoundation.CGPoint) {
-	o.Ptr().Send(_nSViewSelScrollClipViewToPoint, clipView.Ptr(), point)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelScrollClipViewToPoint, clipView.Ptr(), point)
+	})
 }
 
 func (o *NSView) AddConstraint(constraint *NSLayoutConstraint) {
-	o.Ptr().Send(_nSViewSelAddConstraint, constraint.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelAddConstraint, constraint.Ptr())
+	})
 }
 
 func (o *NSView) AddConstraints(constraints *foundation.NSArray[*NSLayoutConstraint]) {
-	o.Ptr().Send(_nSViewSelAddConstraints, constraints.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelAddConstraints, constraints.Ptr())
+	})
 }
 
 func (o *NSView) RemoveConstraint(constraint *NSLayoutConstraint) {
-	o.Ptr().Send(_nSViewSelRemoveConstraint, constraint.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelRemoveConstraint, constraint.Ptr())
+	})
 }
 
 func (o *NSView) RemoveConstraints(constraints *foundation.NSArray[*NSLayoutConstraint]) {
-	o.Ptr().Send(_nSViewSelRemoveConstraints, constraints.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelRemoveConstraints, constraints.Ptr())
+	})
 }
 
 func (o *NSView) LeadingAnchor() *NSLayoutXAxisAnchor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelLeadingAnchor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSLayoutXAxisAnchorFromID(_ret)
+	var _mainthread0 *NSLayoutXAxisAnchor
+	purego.Main(func() {
+		_mainthread0 = func() *NSLayoutXAxisAnchor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelLeadingAnchor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSLayoutXAxisAnchorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) TrailingAnchor() *NSLayoutXAxisAnchor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelTrailingAnchor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSLayoutXAxisAnchorFromID(_ret)
+	var _mainthread0 *NSLayoutXAxisAnchor
+	purego.Main(func() {
+		_mainthread0 = func() *NSLayoutXAxisAnchor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelTrailingAnchor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSLayoutXAxisAnchorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) LeftAnchor() *NSLayoutXAxisAnchor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelLeftAnchor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSLayoutXAxisAnchorFromID(_ret)
+	var _mainthread0 *NSLayoutXAxisAnchor
+	purego.Main(func() {
+		_mainthread0 = func() *NSLayoutXAxisAnchor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelLeftAnchor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSLayoutXAxisAnchorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) RightAnchor() *NSLayoutXAxisAnchor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelRightAnchor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSLayoutXAxisAnchorFromID(_ret)
+	var _mainthread0 *NSLayoutXAxisAnchor
+	purego.Main(func() {
+		_mainthread0 = func() *NSLayoutXAxisAnchor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelRightAnchor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSLayoutXAxisAnchorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) TopAnchor() *NSLayoutYAxisAnchor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelTopAnchor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSLayoutYAxisAnchorFromID(_ret)
+	var _mainthread0 *NSLayoutYAxisAnchor
+	purego.Main(func() {
+		_mainthread0 = func() *NSLayoutYAxisAnchor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelTopAnchor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSLayoutYAxisAnchorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) BottomAnchor() *NSLayoutYAxisAnchor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelBottomAnchor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSLayoutYAxisAnchorFromID(_ret)
+	var _mainthread0 *NSLayoutYAxisAnchor
+	purego.Main(func() {
+		_mainthread0 = func() *NSLayoutYAxisAnchor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelBottomAnchor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSLayoutYAxisAnchorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) WidthAnchor() *NSLayoutDimension {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelWidthAnchor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSLayoutDimensionFromID(_ret)
+	var _mainthread0 *NSLayoutDimension
+	purego.Main(func() {
+		_mainthread0 = func() *NSLayoutDimension {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelWidthAnchor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSLayoutDimensionFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) HeightAnchor() *NSLayoutDimension {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelHeightAnchor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSLayoutDimensionFromID(_ret)
+	var _mainthread0 *NSLayoutDimension
+	purego.Main(func() {
+		_mainthread0 = func() *NSLayoutDimension {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelHeightAnchor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSLayoutDimensionFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) CenterXAnchor() *NSLayoutXAxisAnchor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelCenterXAnchor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSLayoutXAxisAnchorFromID(_ret)
+	var _mainthread0 *NSLayoutXAxisAnchor
+	purego.Main(func() {
+		_mainthread0 = func() *NSLayoutXAxisAnchor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelCenterXAnchor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSLayoutXAxisAnchorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) CenterYAnchor() *NSLayoutYAxisAnchor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelCenterYAnchor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSLayoutYAxisAnchorFromID(_ret)
+	var _mainthread0 *NSLayoutYAxisAnchor
+	purego.Main(func() {
+		_mainthread0 = func() *NSLayoutYAxisAnchor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelCenterYAnchor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSLayoutYAxisAnchorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) FirstBaselineAnchor() *NSLayoutYAxisAnchor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelFirstBaselineAnchor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSLayoutYAxisAnchorFromID(_ret)
+	var _mainthread0 *NSLayoutYAxisAnchor
+	purego.Main(func() {
+		_mainthread0 = func() *NSLayoutYAxisAnchor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelFirstBaselineAnchor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSLayoutYAxisAnchorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) LastBaselineAnchor() *NSLayoutYAxisAnchor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelLastBaselineAnchor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSLayoutYAxisAnchorFromID(_ret)
+	var _mainthread0 *NSLayoutYAxisAnchor
+	purego.Main(func() {
+		_mainthread0 = func() *NSLayoutYAxisAnchor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelLastBaselineAnchor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSLayoutYAxisAnchorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) Constraints() *foundation.NSArray[*NSLayoutConstraint] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelConstraints)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSLayoutConstraint](_ret)
+	var _mainthread0 *foundation.NSArray[*NSLayoutConstraint]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSLayoutConstraint] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelConstraints)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSLayoutConstraint](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) UpdateConstraintsForSubtreeIfNeeded() {
-	o.Ptr().Send(_nSViewSelUpdateConstraintsForSubtreeIfNeeded)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelUpdateConstraintsForSubtreeIfNeeded)
+	})
 }
 
 func (o *NSView) UpdateConstraints() {
-	o.Ptr().Send(_nSViewSelUpdateConstraints)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelUpdateConstraints)
+	})
 }
 
 func (o *NSView) NeedsUpdateConstraints() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelNeedsUpdateConstraints)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelNeedsUpdateConstraints)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetNeedsUpdateConstraints(needsUpdateConstraints bool) {
-	o.Ptr().Send(_nSViewSelSetNeedsUpdateConstraints, needsUpdateConstraints)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetNeedsUpdateConstraints, needsUpdateConstraints)
+	})
 }
 
 func (o *NSView) TranslatesAutoresizingMaskIntoConstraints() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelTranslatesAutoresizingMaskIntoConstraints)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelTranslatesAutoresizingMaskIntoConstraints)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) {
-	o.Ptr().Send(_nSViewSelSetTranslatesAutoresizingMaskIntoConstraints, translatesAutoresizingMaskIntoConstraints)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetTranslatesAutoresizingMaskIntoConstraints, translatesAutoresizingMaskIntoConstraints)
+	})
 }
 
 func NSViewRequiresConstraintBasedLayout() bool {
-	_ret := objc.Send[bool](objc.ID(_clsNSView), _nSViewSelRequiresConstraintBasedLayout)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](objc.ID(_clsNSView), _nSViewSelRequiresConstraintBasedLayout)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) AlignmentRectForFrame(frame corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelAlignmentRectForFrame, frame)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelAlignmentRectForFrame, frame)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) FrameForAlignmentRect(alignmentRect corefoundation.CGRect) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelFrameForAlignmentRect, alignmentRect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelFrameForAlignmentRect, alignmentRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) InvalidateIntrinsicContentSize() {
-	o.Ptr().Send(_nSViewSelInvalidateIntrinsicContentSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelInvalidateIntrinsicContentSize)
+	})
 }
 
 func (o *NSView) ContentHuggingPriorityForOrientation(orientation NSLayoutConstraintOrientation) float32 {
-	_ret := objc.Send[float32](o.Ptr(), _nSViewSelContentHuggingPriorityForOrientation, orientation)
-	return _ret
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_ret := objc.Send[float32](o.Ptr(), _nSViewSelContentHuggingPriorityForOrientation, orientation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetContentHuggingPriorityForOrientation(priority float32, orientation NSLayoutConstraintOrientation) {
-	o.Ptr().Send(_nSViewSelSetContentHuggingPriorityForOrientation, priority, orientation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetContentHuggingPriorityForOrientation, priority, orientation)
+	})
 }
 
 func (o *NSView) ContentCompressionResistancePriorityForOrientation(orientation NSLayoutConstraintOrientation) float32 {
-	_ret := objc.Send[float32](o.Ptr(), _nSViewSelContentCompressionResistancePriorityForOrientation, orientation)
-	return _ret
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_ret := objc.Send[float32](o.Ptr(), _nSViewSelContentCompressionResistancePriorityForOrientation, orientation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetContentCompressionResistancePriorityForOrientation(priority float32, orientation NSLayoutConstraintOrientation) {
-	o.Ptr().Send(_nSViewSelSetContentCompressionResistancePriorityForOrientation, priority, orientation)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetContentCompressionResistancePriorityForOrientation, priority, orientation)
+	})
 }
 
 func (o *NSView) AlignmentRectInsets() foundation.NSEdgeInsets {
-	_ret := objc.Send[foundation.NSEdgeInsets](o.Ptr(), _nSViewSelAlignmentRectInsets)
-	return _ret
+	var _mainthread0 foundation.NSEdgeInsets
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSEdgeInsets {
+			_ret := objc.Send[foundation.NSEdgeInsets](o.Ptr(), _nSViewSelAlignmentRectInsets)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) FirstBaselineOffsetFromTop() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSViewSelFirstBaselineOffsetFromTop)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSViewSelFirstBaselineOffsetFromTop)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) LastBaselineOffsetFromBottom() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSViewSelLastBaselineOffsetFromBottom)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSViewSelLastBaselineOffsetFromBottom)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) BaselineOffsetFromBottom() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSViewSelBaselineOffsetFromBottom)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSViewSelBaselineOffsetFromBottom)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) IntrinsicContentSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewSelIntrinsicContentSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewSelIntrinsicContentSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) IsHorizontalContentSizeConstraintActive() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelIsHorizontalContentSizeConstraintActive)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelIsHorizontalContentSizeConstraintActive)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) {
-	o.Ptr().Send(_nSViewSelSetHorizontalContentSizeConstraintActive, horizontalContentSizeConstraintActive)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetHorizontalContentSizeConstraintActive, horizontalContentSizeConstraintActive)
+	})
 }
 
 func (o *NSView) IsVerticalContentSizeConstraintActive() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelIsVerticalContentSizeConstraintActive)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelIsVerticalContentSizeConstraintActive)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) {
-	o.Ptr().Send(_nSViewSelSetVerticalContentSizeConstraintActive, verticalContentSizeConstraintActive)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetVerticalContentSizeConstraintActive, verticalContentSizeConstraintActive)
+	})
 }
 
 func (o *NSView) FittingSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewSelFittingSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSViewSelFittingSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ConstraintsAffectingLayoutForOrientation(orientation NSLayoutConstraintOrientation) *foundation.NSArray[*NSLayoutConstraint] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelConstraintsAffectingLayoutForOrientation, orientation)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSLayoutConstraint](_ret)
+	var _mainthread0 *foundation.NSArray[*NSLayoutConstraint]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSLayoutConstraint] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelConstraintsAffectingLayoutForOrientation, orientation)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSLayoutConstraint](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) ExerciseAmbiguityInLayout() {
-	o.Ptr().Send(_nSViewSelExerciseAmbiguityInLayout)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelExerciseAmbiguityInLayout)
+	})
 }
 
 func (o *NSView) HasAmbiguousLayout() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelHasAmbiguousLayout)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelHasAmbiguousLayout)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) AddLayoutGuide(guide *NSLayoutGuide) {
-	o.Ptr().Send(_nSViewSelAddLayoutGuide, guide.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelAddLayoutGuide, guide.Ptr())
+	})
 }
 
 func (o *NSView) RemoveLayoutGuide(guide *NSLayoutGuide) {
-	o.Ptr().Send(_nSViewSelRemoveLayoutGuide, guide.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelRemoveLayoutGuide, guide.Ptr())
+	})
 }
 
 func (o *NSView) LayoutGuides() *foundation.NSArray[*NSLayoutGuide] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelLayoutGuides)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSLayoutGuide](_ret)
+	var _mainthread0 *foundation.NSArray[*NSLayoutGuide]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSLayoutGuide] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelLayoutGuides)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSLayoutGuide](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) LayoutGuideForLayoutRegion(layoutRegion *NSViewLayoutRegion) *NSLayoutGuide {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelLayoutGuideForLayoutRegion, layoutRegion.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSLayoutGuideFromID(_ret)
+	var _mainthread0 *NSLayoutGuide
+	purego.Main(func() {
+		_mainthread0 = func() *NSLayoutGuide {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelLayoutGuideForLayoutRegion, layoutRegion.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSLayoutGuideFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) EdgeInsetsForLayoutRegion(layoutRegion *NSViewLayoutRegion) foundation.NSEdgeInsets {
-	_ret := objc.Send[foundation.NSEdgeInsets](o.Ptr(), _nSViewSelEdgeInsetsForLayoutRegion, layoutRegion.Ptr())
-	return _ret
+	var _mainthread0 foundation.NSEdgeInsets
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSEdgeInsets {
+			_ret := objc.Send[foundation.NSEdgeInsets](o.Ptr(), _nSViewSelEdgeInsetsForLayoutRegion, layoutRegion.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) RectForLayoutRegion(layoutRegion *NSViewLayoutRegion) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelRectForLayoutRegion, layoutRegion.Ptr())
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSViewSelRectForLayoutRegion, layoutRegion.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) RulerViewShouldMoveMarker(ruler *NSRulerView, marker *NSRulerMarker) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelRulerViewShouldMoveMarker, ruler.Ptr(), marker.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelRulerViewShouldMoveMarker, ruler.Ptr(), marker.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) RulerViewWillMoveMarkerToLocation(ruler *NSRulerView, marker *NSRulerMarker, location float64) float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSViewSelRulerViewWillMoveMarkerToLocation, ruler.Ptr(), marker.Ptr(), location)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSViewSelRulerViewWillMoveMarkerToLocation, ruler.Ptr(), marker.Ptr(), location)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) RulerViewDidMoveMarker(ruler *NSRulerView, marker *NSRulerMarker) {
-	o.Ptr().Send(_nSViewSelRulerViewDidMoveMarker, ruler.Ptr(), marker.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelRulerViewDidMoveMarker, ruler.Ptr(), marker.Ptr())
+	})
 }
 
 func (o *NSView) RulerViewShouldRemoveMarker(ruler *NSRulerView, marker *NSRulerMarker) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelRulerViewShouldRemoveMarker, ruler.Ptr(), marker.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelRulerViewShouldRemoveMarker, ruler.Ptr(), marker.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) RulerViewDidRemoveMarker(ruler *NSRulerView, marker *NSRulerMarker) {
-	o.Ptr().Send(_nSViewSelRulerViewDidRemoveMarker, ruler.Ptr(), marker.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelRulerViewDidRemoveMarker, ruler.Ptr(), marker.Ptr())
+	})
 }
 
 func (o *NSView) RulerViewShouldAddMarker(ruler *NSRulerView, marker *NSRulerMarker) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelRulerViewShouldAddMarker, ruler.Ptr(), marker.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelRulerViewShouldAddMarker, ruler.Ptr(), marker.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) RulerViewWillAddMarkerAtLocation(ruler *NSRulerView, marker *NSRulerMarker, location float64) float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSViewSelRulerViewWillAddMarkerAtLocation, ruler.Ptr(), marker.Ptr(), location)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSViewSelRulerViewWillAddMarkerAtLocation, ruler.Ptr(), marker.Ptr(), location)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) RulerViewDidAddMarker(ruler *NSRulerView, marker *NSRulerMarker) {
-	o.Ptr().Send(_nSViewSelRulerViewDidAddMarker, ruler.Ptr(), marker.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelRulerViewDidAddMarker, ruler.Ptr(), marker.Ptr())
+	})
 }
 
 func (o *NSView) RulerViewHandleMouseDown(ruler *NSRulerView, event *NSEvent) {
-	o.Ptr().Send(_nSViewSelRulerViewHandleMouseDown, ruler.Ptr(), event.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelRulerViewHandleMouseDown, ruler.Ptr(), event.Ptr())
+	})
 }
 
 func (o *NSView) RulerViewWillSetClientView(ruler *NSRulerView, newClient *NSView) {
-	o.Ptr().Send(_nSViewSelRulerViewWillSetClientView, ruler.Ptr(), newClient.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelRulerViewWillSetClientView, ruler.Ptr(), newClient.Ptr())
+	})
 }
 
 func (o *NSView) RulerViewLocationForPoint(ruler *NSRulerView, point corefoundation.CGPoint) float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSViewSelRulerViewLocationForPoint, ruler.Ptr(), point)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSViewSelRulerViewLocationForPoint, ruler.Ptr(), point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) RulerViewPointForLocation(ruler *NSRulerView, point float64) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSViewSelRulerViewPointForLocation, ruler.Ptr(), point)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSViewSelRulerViewPointForLocation, ruler.Ptr(), point)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use NSOpenGLView instead.
 func (o *NSView) WantsBestResolutionOpenGLSurface() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelWantsBestResolutionOpenGLSurface)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelWantsBestResolutionOpenGLSurface)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use NSOpenGLView instead.
 func (o *NSView) SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) {
-	o.Ptr().Send(_nSViewSelSetWantsBestResolutionOpenGLSurface, wantsBestResolutionOpenGLSurface)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetWantsBestResolutionOpenGLSurface, wantsBestResolutionOpenGLSurface)
+	})
 }
 
 // Deprecated: Use NSOpenGLView instead.
 func (o *NSView) WantsExtendedDynamicRangeOpenGLSurface() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelWantsExtendedDynamicRangeOpenGLSurface)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSViewSelWantsExtendedDynamicRangeOpenGLSurface)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Use NSOpenGLView instead.
 func (o *NSView) SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) {
-	o.Ptr().Send(_nSViewSelSetWantsExtendedDynamicRangeOpenGLSurface, wantsExtendedDynamicRangeOpenGLSurface)
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetWantsExtendedDynamicRangeOpenGLSurface, wantsExtendedDynamicRangeOpenGLSurface)
+	})
 }
 
 func (o *NSView) PressureConfiguration() *NSPressureConfiguration {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelPressureConfiguration)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSPressureConfigurationFromID(_ret)
+	var _mainthread0 *NSPressureConfiguration
+	purego.Main(func() {
+		_mainthread0 = func() *NSPressureConfiguration {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelPressureConfiguration)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSPressureConfigurationFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSView) SetPressureConfiguration(pressureConfiguration *NSPressureConfiguration) {
-	o.Ptr().Send(_nSViewSelSetPressureConfiguration, pressureConfiguration.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSViewSelSetPressureConfiguration, pressureConfiguration.Ptr())
+	})
 }

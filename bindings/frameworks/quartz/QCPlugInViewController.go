@@ -36,15 +36,27 @@ func QCPlugInViewControllerFromID(id objc.ID) *QCPlugInViewController {
 
 // Creates and initializes a controller for the specified QCPlugIn object and nib file.
 func (o *QCPlugInViewController) InitWithPlugInViewNibName(plugIn *QCPlugIn, name *foundation.NSString) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qCPlugInViewControllerSelInitWithPlugInViewNibName, plugIn.Ptr(), name.Ptr())
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qCPlugInViewControllerSelInitWithPlugInViewNibName, plugIn.Ptr(), name.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the QCPlugIn object associated with the view controller for the custom patch.
 func (o *QCPlugInViewController) PlugIn() *QCPlugIn {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qCPlugInViewControllerSelPlugIn)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return QCPlugInFromID(_ret)
+	var _mainthread0 *QCPlugIn
+	purego.Main(func() {
+		_mainthread0 = func() *QCPlugIn {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qCPlugInViewControllerSelPlugIn)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return QCPlugInFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

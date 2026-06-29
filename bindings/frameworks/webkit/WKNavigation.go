@@ -33,6 +33,12 @@ func WKNavigationFromID(id objc.ID) *WKNavigation {
 }
 
 func (o *WKNavigation) EffectiveContentMode() WKContentMode {
-	_ret := objc.Send[WKContentMode](o.Ptr(), _wKNavigationSelEffectiveContentMode)
-	return _ret
+	var _mainthread0 WKContentMode
+	purego.Main(func() {
+		_mainthread0 = func() WKContentMode {
+			_ret := objc.Send[WKContentMode](o.Ptr(), _wKNavigationSelEffectiveContentMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

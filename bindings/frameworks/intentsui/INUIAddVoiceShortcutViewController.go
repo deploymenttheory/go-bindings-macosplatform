@@ -37,18 +37,32 @@ func INUIAddVoiceShortcutViewControllerFromID(id objc.ID) *INUIAddVoiceShortcutV
 
 // Creates a view controller with a shortcut the user can add to Siri.
 func (o *INUIAddVoiceShortcutViewController) InitWithShortcut(shortcut *intents.INShortcut) *INUIAddVoiceShortcutViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iNUIAddVoiceShortcutViewControllerSelInitWithShortcut, shortcut.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return INUIAddVoiceShortcutViewControllerFromID(_ret)
+	var _mainthread0 *INUIAddVoiceShortcutViewController
+	purego.Main(func() {
+		_mainthread0 = func() *INUIAddVoiceShortcutViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iNUIAddVoiceShortcutViewControllerSelInitWithShortcut, shortcut.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return INUIAddVoiceShortcutViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *INUIAddVoiceShortcutViewController) Delegate() INUIAddVoiceShortcutViewControllerDelegate {
-	_ret := objc.Send[INUIAddVoiceShortcutViewControllerDelegate](o.Ptr(), _iNUIAddVoiceShortcutViewControllerSelDelegate)
-	return _ret
+	var _mainthread0 INUIAddVoiceShortcutViewControllerDelegate
+	purego.Main(func() {
+		_mainthread0 = func() INUIAddVoiceShortcutViewControllerDelegate {
+			_ret := objc.Send[INUIAddVoiceShortcutViewControllerDelegate](o.Ptr(), _iNUIAddVoiceShortcutViewControllerSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *INUIAddVoiceShortcutViewController) SetDelegate(delegate INUIAddVoiceShortcutViewControllerDelegate) {
-	o.Ptr().Send(_iNUIAddVoiceShortcutViewControllerSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_iNUIAddVoiceShortcutViewControllerSelSetDelegate, delegate)
+	})
 }

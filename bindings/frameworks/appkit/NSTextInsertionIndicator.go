@@ -40,44 +40,74 @@ func NSTextInsertionIndicatorFromID(id objc.ID) *NSTextInsertionIndicator {
 
 // Sets-returns the indicator's display mode.
 func (o *NSTextInsertionIndicator) DisplayMode() NSTextInsertionIndicatorDisplayMode {
-	_ret := objc.Send[NSTextInsertionIndicatorDisplayMode](o.Ptr(), _nSTextInsertionIndicatorSelDisplayMode)
-	return _ret
+	var _mainthread0 NSTextInsertionIndicatorDisplayMode
+	purego.Main(func() {
+		_mainthread0 = func() NSTextInsertionIndicatorDisplayMode {
+			_ret := objc.Send[NSTextInsertionIndicatorDisplayMode](o.Ptr(), _nSTextInsertionIndicatorSelDisplayMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets-returns the indicator's display mode.
 func (o *NSTextInsertionIndicator) SetDisplayMode(displayMode NSTextInsertionIndicatorDisplayMode) {
-	o.Ptr().Send(_nSTextInsertionIndicatorSelSetDisplayMode, displayMode)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextInsertionIndicatorSelSetDisplayMode, displayMode)
+	})
 }
 
 // The color of the indicator. @discussion Defaults to NSColor.textInsertionPointColor. @note If set to @c nil, uses NSColor.textInsertionPointColor.
 func (o *NSTextInsertionIndicator) Color() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextInsertionIndicatorSelColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTextInsertionIndicatorSelColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The color of the indicator. @discussion Defaults to NSColor.textInsertionPointColor. @note If set to @c nil, uses NSColor.textInsertionPointColor.
 func (o *NSTextInsertionIndicator) SetColor(color *NSColor) {
-	o.Ptr().Send(_nSTextInsertionIndicatorSelSetColor, color.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextInsertionIndicatorSelSetColor, color.Ptr())
+	})
 }
 
 // Options for the NSTextInsertionIndicatorDisplayModeAutomatic display mode. Defaults to NSTextInsertionIndicatorAutomaticModeOptionsShowEffectsView.
 func (o *NSTextInsertionIndicator) AutomaticModeOptions() NSTextInsertionIndicatorAutomaticModeOptions {
-	_ret := objc.Send[NSTextInsertionIndicatorAutomaticModeOptions](o.Ptr(), _nSTextInsertionIndicatorSelAutomaticModeOptions)
-	return _ret
+	var _mainthread0 NSTextInsertionIndicatorAutomaticModeOptions
+	purego.Main(func() {
+		_mainthread0 = func() NSTextInsertionIndicatorAutomaticModeOptions {
+			_ret := objc.Send[NSTextInsertionIndicatorAutomaticModeOptions](o.Ptr(), _nSTextInsertionIndicatorSelAutomaticModeOptions)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Options for the NSTextInsertionIndicatorDisplayModeAutomatic display mode. Defaults to NSTextInsertionIndicatorAutomaticModeOptionsShowEffectsView.
 func (o *NSTextInsertionIndicator) SetAutomaticModeOptions(automaticModeOptions NSTextInsertionIndicatorAutomaticModeOptions) {
-	o.Ptr().Send(_nSTextInsertionIndicatorSelSetAutomaticModeOptions, automaticModeOptions)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextInsertionIndicatorSelSetAutomaticModeOptions, automaticModeOptions)
+	})
 }
 
 // Sets-returns a block that inserts a view into the view hierarchy. @discussion During dictation the NSTextInsertionIndicator displays a glow effect by inserting a view below the text view. If an application needs to insert the view in a different way, the application can specify a block of code that will be called when the glow effect needs to be displayed.
 func (o *NSTextInsertionIndicator) EffectsViewInserter() objc.Block {
-	_ret := objc.Send[objc.Block](o.Ptr(), _nSTextInsertionIndicatorSelEffectsViewInserter)
-	return _ret
+	var _mainthread0 objc.Block
+	purego.Main(func() {
+		_mainthread0 = func() objc.Block {
+			_ret := objc.Send[objc.Block](o.Ptr(), _nSTextInsertionIndicatorSelEffectsViewInserter)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets-returns a block that inserts a view into the view hierarchy. @discussion During dictation the NSTextInsertionIndicator displays a glow effect by inserting a view below the text view. If an application needs to insert the view in a different way, the application can specify a block of code that will be called when the glow effect needs to be displayed.
@@ -92,5 +122,7 @@ func (o *NSTextInsertionIndicator) SetEffectsViewInserter(effectsViewInserter fu
 		})
 		defer __block_effectsViewInserter.Release()
 	}
-	o.Ptr().Send(_nSTextInsertionIndicatorSelSetEffectsViewInserter, __block_effectsViewInserter)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTextInsertionIndicatorSelSetEffectsViewInserter, __block_effectsViewInserter)
+	})
 }

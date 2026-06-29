@@ -48,97 +48,173 @@ func NSScrubberLayoutFromID(id objc.ID) *NSScrubberLayout {
 
 // Initializes and returns a newly allocated scrubber layout object from code.
 func (o *NSScrubberLayout) Init() *NSScrubberLayout {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberLayoutSelInit)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrubberLayoutFromID(_ret)
+	var _mainthread0 *NSScrubberLayout
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrubberLayout {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberLayoutSelInit)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrubberLayoutFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes and returns a newly allocated scrubber layout object from a storyboard or nib file.
 func (o *NSScrubberLayout) InitWithCoder(coder *foundation.NSCoder) *NSScrubberLayout {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberLayoutSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrubberLayoutFromID(_ret)
+	var _mainthread0 *NSScrubberLayout
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrubberLayout {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberLayoutSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrubberLayoutFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Signals that the layout has been invalidated, and that the scrubber control should perform a new layout pass.
 func (o *NSScrubberLayout) InvalidateLayout() {
-	o.Ptr().Send(_nSScrubberLayoutSelInvalidateLayout)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberLayoutSelInvalidateLayout)
+	})
 }
 
 // Gives you an opportunity to perform layout calculations when the scrubber’s layout is invalidated.
 func (o *NSScrubberLayout) PrepareLayout() {
-	o.Ptr().Send(_nSScrubberLayoutSelPrepareLayout)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberLayoutSelPrepareLayout)
+	})
 }
 
 // The layout attributes for the item with the specified index.
 func (o *NSScrubberLayout) LayoutAttributesForItemAtIndex(index int) *NSScrubberLayoutAttributes {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberLayoutSelLayoutAttributesForItemAtIndex, index)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrubberLayoutAttributesFromID(_ret)
+	var _mainthread0 *NSScrubberLayoutAttributes
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrubberLayoutAttributes {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberLayoutSelLayoutAttributesForItemAtIndex, index)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrubberLayoutAttributesFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The set of layout attributes for all items within the provided rectangle.
 func (o *NSScrubberLayout) LayoutAttributesForItemsInRect(rect corefoundation.CGRect) *foundation.NSSet[*NSScrubberLayoutAttributes] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberLayoutSelLayoutAttributesForItemsInRect, rect)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSSetFromID[*NSScrubberLayoutAttributes](_ret)
+	var _mainthread0 *foundation.NSSet[*NSScrubberLayoutAttributes]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSSet[*NSScrubberLayoutAttributes] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberLayoutSelLayoutAttributesForItemsInRect, rect)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSSetFromID[*NSScrubberLayoutAttributes](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Determines whether the scrubber should refresh its layout in response to a change of its visible region.
 func (o *NSScrubberLayout) ShouldInvalidateLayoutForChangeFromVisibleRectToVisibleRect(fromVisibleRect corefoundation.CGRect, toVisibleRect corefoundation.CGRect) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSScrubberLayoutSelShouldInvalidateLayoutForChangeFromVisibleRectToVisibleRect, fromVisibleRect, toVisibleRect)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSScrubberLayoutSelShouldInvalidateLayoutForChangeFromVisibleRectToVisibleRect, fromVisibleRect, toVisibleRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies a class for describing layout attributes. By default, this is @c NSScrubberLayoutAttributes, but subclasses may override this method to use a custom subclass of @c NSScrubberLayoutAttributes.
 func NSScrubberLayoutLayoutAttributesClass() objc.Class {
-	_ret := objc.Send[objc.Class](objc.ID(_clsNSScrubberLayout), _nSScrubberLayoutSelLayoutAttributesClass)
-	return _ret
+	var _mainthread0 objc.Class
+	purego.Main(func() {
+		_mainthread0 = func() objc.Class {
+			_ret := objc.Send[objc.Class](objc.ID(_clsNSScrubberLayout), _nSScrubberLayoutSelLayoutAttributesClass)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The NSScrubber control that this layout is assigned to, or @c nil if the receiver is not assigned to a scrubber.
 func (o *NSScrubberLayout) Scrubber() *NSScrubber {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberLayoutSelScrubber)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrubberFromID(_ret)
+	var _mainthread0 *NSScrubber
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrubber {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberLayoutSelScrubber)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrubberFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The currently visible rectangle, in the coordinate space of the scrubber content. Returns @c NSZeroRect if the receiver is not assigned to a scrubber.
 func (o *NSScrubberLayout) VisibleRect() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSScrubberLayoutSelVisibleRect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSScrubberLayoutSelVisibleRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the content size for all elements within the scrubber. The base implementation returns @c NSZeroSize.
 func (o *NSScrubberLayout) ScrubberContentSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSScrubberLayoutSelScrubberContentSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSScrubberLayoutSelScrubberContentSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // If @c YES, the scrubber will invalidate its layout when the selection changes. The default value is @c NO. Subclasses should return @c YES if the selection index affects the item layout.
 func (o *NSScrubberLayout) ShouldInvalidateLayoutForSelectionChange() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSScrubberLayoutSelShouldInvalidateLayoutForSelectionChange)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSScrubberLayoutSelShouldInvalidateLayoutForSelectionChange)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // If @c YES, the scrubber will invalidate its layout when an item is highlighted. The default value is @c NO. Subclasses should return @c YES if the highlight state affects the item layout.
 func (o *NSScrubberLayout) ShouldInvalidateLayoutForHighlightChange() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSScrubberLayoutSelShouldInvalidateLayoutForHighlightChange)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSScrubberLayoutSelShouldInvalidateLayoutForHighlightChange)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // If @c YES, the layout object will automatically have its inputs and outputs mirrored in right-to-left interfaces. The default value is @c YES. Subclasses that wish to handle RTL layout manually should return @c NO.
 func (o *NSScrubberLayout) AutomaticallyMirrorsInRightToLeftLayout() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSScrubberLayoutSelAutomaticallyMirrorsInRightToLeftLayout)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSScrubberLayoutSelAutomaticallyMirrorsInRightToLeftLayout)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

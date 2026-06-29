@@ -46,69 +46,99 @@ func WKUserContentControllerFromID(id objc.ID) *WKUserContentController {
 
 // Injects the specified script into the webpage’s content.
 func (o *WKUserContentController) AddUserScript(userScript *WKUserScript) {
-	o.Ptr().Send(_wKUserContentControllerSelAddUserScript, userScript.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKUserContentControllerSelAddUserScript, userScript.Ptr())
+	})
 }
 
 // Removes all user scripts from the web view.
 func (o *WKUserContentController) RemoveAllUserScripts() {
-	o.Ptr().Send(_wKUserContentControllerSelRemoveAllUserScripts)
+	purego.Main(func() {
+		o.Ptr().Send(_wKUserContentControllerSelRemoveAllUserScripts)
+	})
 }
 
 // Installs a message handler that you can call from the specified content world in your JavaScript code.
 func (o *WKUserContentController) AddScriptMessageHandlerContentWorldName(scriptMessageHandler WKScriptMessageHandler, world *WKContentWorld, name *foundation.NSString) {
-	o.Ptr().Send(_wKUserContentControllerSelAddScriptMessageHandlerContentWorldName, scriptMessageHandler, world.Ptr(), name.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKUserContentControllerSelAddScriptMessageHandlerContentWorldName, scriptMessageHandler, world.Ptr(), name.Ptr())
+	})
 }
 
 // Installs a message handler that returns a reply to your JavaScript code.
 func (o *WKUserContentController) AddScriptMessageHandlerWithReplyContentWorldName(scriptMessageHandlerWithReply WKScriptMessageHandlerWithReply, contentWorld *WKContentWorld, name *foundation.NSString) {
-	o.Ptr().Send(_wKUserContentControllerSelAddScriptMessageHandlerWithReplyContentWorldName, scriptMessageHandlerWithReply, contentWorld.Ptr(), name.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKUserContentControllerSelAddScriptMessageHandlerWithReplyContentWorldName, scriptMessageHandlerWithReply, contentWorld.Ptr(), name.Ptr())
+	})
 }
 
 // Installs a message handler that you can call from your JavaScript code.
 func (o *WKUserContentController) AddScriptMessageHandlerName(scriptMessageHandler WKScriptMessageHandler, name *foundation.NSString) {
-	o.Ptr().Send(_wKUserContentControllerSelAddScriptMessageHandlerName, scriptMessageHandler, name.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKUserContentControllerSelAddScriptMessageHandlerName, scriptMessageHandler, name.Ptr())
+	})
 }
 
 // Uninstalls a custom message handler from the specified content world in your JavaScript code.
 func (o *WKUserContentController) RemoveScriptMessageHandlerForNameContentWorld(name *foundation.NSString, contentWorld *WKContentWorld) {
-	o.Ptr().Send(_wKUserContentControllerSelRemoveScriptMessageHandlerForNameContentWorld, name.Ptr(), contentWorld.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKUserContentControllerSelRemoveScriptMessageHandlerForNameContentWorld, name.Ptr(), contentWorld.Ptr())
+	})
 }
 
 // Uninstalls the custom message handler with the specified name from your JavaScript code.
 func (o *WKUserContentController) RemoveScriptMessageHandlerForName(name *foundation.NSString) {
-	o.Ptr().Send(_wKUserContentControllerSelRemoveScriptMessageHandlerForName, name.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKUserContentControllerSelRemoveScriptMessageHandlerForName, name.Ptr())
+	})
 }
 
 // Uninstalls all custom message handlers from the specified content world in your JavaScript code.
 func (o *WKUserContentController) RemoveAllScriptMessageHandlersFromContentWorld(contentWorld *WKContentWorld) {
-	o.Ptr().Send(_wKUserContentControllerSelRemoveAllScriptMessageHandlersFromContentWorld, contentWorld.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKUserContentControllerSelRemoveAllScriptMessageHandlersFromContentWorld, contentWorld.Ptr())
+	})
 }
 
 // Uninstalls all custom message handlers associated with the user content controller.
 func (o *WKUserContentController) RemoveAllScriptMessageHandlers() {
-	o.Ptr().Send(_wKUserContentControllerSelRemoveAllScriptMessageHandlers)
+	purego.Main(func() {
+		o.Ptr().Send(_wKUserContentControllerSelRemoveAllScriptMessageHandlers)
+	})
 }
 
 // Adds the specified content rule list to the content controller object.
 func (o *WKUserContentController) AddContentRuleList(contentRuleList *WKContentRuleList) {
-	o.Ptr().Send(_wKUserContentControllerSelAddContentRuleList, contentRuleList.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKUserContentControllerSelAddContentRuleList, contentRuleList.Ptr())
+	})
 }
 
 // Removes the specified rule list from the content controller object.
 func (o *WKUserContentController) RemoveContentRuleList(contentRuleList *WKContentRuleList) {
-	o.Ptr().Send(_wKUserContentControllerSelRemoveContentRuleList, contentRuleList.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_wKUserContentControllerSelRemoveContentRuleList, contentRuleList.Ptr())
+	})
 }
 
 // Removes all rules lists from the content controller.
 func (o *WKUserContentController) RemoveAllContentRuleLists() {
-	o.Ptr().Send(_wKUserContentControllerSelRemoveAllContentRuleLists)
+	purego.Main(func() {
+		o.Ptr().Send(_wKUserContentControllerSelRemoveAllContentRuleLists)
+	})
 }
 
 // @abstract The user scripts associated with this user content controller.
 func (o *WKUserContentController) UserScripts() *foundation.NSArray[*WKUserScript] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKUserContentControllerSelUserScripts)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*WKUserScript](_ret)
+	var _mainthread0 *foundation.NSArray[*WKUserScript]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*WKUserScript] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKUserContentControllerSelUserScripts)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*WKUserScript](_ret)
+		}()
+	})
+	return _mainthread0
 }

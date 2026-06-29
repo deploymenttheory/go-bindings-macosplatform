@@ -52,93 +52,175 @@ func NSLevelIndicatorCellFromID(id objc.ID) *NSLevelIndicatorCell {
 
 // Initializes the receiver with the style specified by levelIndicatorStyle.
 func (o *NSLevelIndicatorCell) InitWithLevelIndicatorStyle(levelIndicatorStyle NSLevelIndicatorStyle) *NSLevelIndicatorCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSLevelIndicatorCellSelInitWithLevelIndicatorStyle, levelIndicatorStyle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSLevelIndicatorCellFromID(_ret)
+	var _mainthread0 *NSLevelIndicatorCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSLevelIndicatorCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSLevelIndicatorCellSelInitWithLevelIndicatorStyle, levelIndicatorStyle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSLevelIndicatorCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the bounding rectangle of the tick mark identified by index (the minimum-value tick mark is at index 0).
 func (o *NSLevelIndicatorCell) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSLevelIndicatorCellSelRectOfTickMarkAtIndex, index)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSLevelIndicatorCellSelRectOfTickMarkAtIndex, index)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the receiver’s value represented by the tick mark at index (the minimum-value tick mark has an index of 0).
 func (o *NSLevelIndicatorCell) TickMarkValueAtIndex(index int) float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSLevelIndicatorCellSelTickMarkValueAtIndex, index)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSLevelIndicatorCellSelTickMarkValueAtIndex, index)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSLevelIndicatorCell) LevelIndicatorStyle() NSLevelIndicatorStyle {
-	_ret := objc.Send[NSLevelIndicatorStyle](o.Ptr(), _nSLevelIndicatorCellSelLevelIndicatorStyle)
-	return _ret
+	var _mainthread0 NSLevelIndicatorStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSLevelIndicatorStyle {
+			_ret := objc.Send[NSLevelIndicatorStyle](o.Ptr(), _nSLevelIndicatorCellSelLevelIndicatorStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSLevelIndicatorCell) SetLevelIndicatorStyle(levelIndicatorStyle NSLevelIndicatorStyle) {
-	o.Ptr().Send(_nSLevelIndicatorCellSelSetLevelIndicatorStyle, levelIndicatorStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSLevelIndicatorCellSelSetLevelIndicatorStyle, levelIndicatorStyle)
+	})
 }
 
 func (o *NSLevelIndicatorCell) MinValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSLevelIndicatorCellSelMinValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSLevelIndicatorCellSelMinValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSLevelIndicatorCell) SetMinValue(minValue float64) {
-	o.Ptr().Send(_nSLevelIndicatorCellSelSetMinValue, minValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSLevelIndicatorCellSelSetMinValue, minValue)
+	})
 }
 
 func (o *NSLevelIndicatorCell) MaxValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSLevelIndicatorCellSelMaxValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSLevelIndicatorCellSelMaxValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSLevelIndicatorCell) SetMaxValue(maxValue float64) {
-	o.Ptr().Send(_nSLevelIndicatorCellSelSetMaxValue, maxValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSLevelIndicatorCellSelSetMaxValue, maxValue)
+	})
 }
 
 func (o *NSLevelIndicatorCell) WarningValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSLevelIndicatorCellSelWarningValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSLevelIndicatorCellSelWarningValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSLevelIndicatorCell) SetWarningValue(warningValue float64) {
-	o.Ptr().Send(_nSLevelIndicatorCellSelSetWarningValue, warningValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSLevelIndicatorCellSelSetWarningValue, warningValue)
+	})
 }
 
 func (o *NSLevelIndicatorCell) CriticalValue() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSLevelIndicatorCellSelCriticalValue)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSLevelIndicatorCellSelCriticalValue)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSLevelIndicatorCell) SetCriticalValue(criticalValue float64) {
-	o.Ptr().Send(_nSLevelIndicatorCellSelSetCriticalValue, criticalValue)
+	purego.Main(func() {
+		o.Ptr().Send(_nSLevelIndicatorCellSelSetCriticalValue, criticalValue)
+	})
 }
 
 func (o *NSLevelIndicatorCell) TickMarkPosition() NSTickMarkPosition {
-	_ret := objc.Send[NSTickMarkPosition](o.Ptr(), _nSLevelIndicatorCellSelTickMarkPosition)
-	return _ret
+	var _mainthread0 NSTickMarkPosition
+	purego.Main(func() {
+		_mainthread0 = func() NSTickMarkPosition {
+			_ret := objc.Send[NSTickMarkPosition](o.Ptr(), _nSLevelIndicatorCellSelTickMarkPosition)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSLevelIndicatorCell) SetTickMarkPosition(tickMarkPosition NSTickMarkPosition) {
-	o.Ptr().Send(_nSLevelIndicatorCellSelSetTickMarkPosition, tickMarkPosition)
+	purego.Main(func() {
+		o.Ptr().Send(_nSLevelIndicatorCellSelSetTickMarkPosition, tickMarkPosition)
+	})
 }
 
 func (o *NSLevelIndicatorCell) NumberOfTickMarks() int {
-	_ret := objc.Send[int](o.Ptr(), _nSLevelIndicatorCellSelNumberOfTickMarks)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSLevelIndicatorCellSelNumberOfTickMarks)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSLevelIndicatorCell) SetNumberOfTickMarks(numberOfTickMarks int) {
-	o.Ptr().Send(_nSLevelIndicatorCellSelSetNumberOfTickMarks, numberOfTickMarks)
+	purego.Main(func() {
+		o.Ptr().Send(_nSLevelIndicatorCellSelSetNumberOfTickMarks, numberOfTickMarks)
+	})
 }
 
 func (o *NSLevelIndicatorCell) NumberOfMajorTickMarks() int {
-	_ret := objc.Send[int](o.Ptr(), _nSLevelIndicatorCellSelNumberOfMajorTickMarks)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSLevelIndicatorCellSelNumberOfMajorTickMarks)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSLevelIndicatorCell) SetNumberOfMajorTickMarks(numberOfMajorTickMarks int) {
-	o.Ptr().Send(_nSLevelIndicatorCellSelSetNumberOfMajorTickMarks, numberOfMajorTickMarks)
+	purego.Main(func() {
+		o.Ptr().Send(_nSLevelIndicatorCellSelSetNumberOfMajorTickMarks, numberOfMajorTickMarks)
+	})
 }

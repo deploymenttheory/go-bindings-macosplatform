@@ -58,12 +58,16 @@ func (o *MKLookAroundSnapshotter) GetSnapshotWithCompletionHandler(completionHan
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mKLookAroundSnapshotterSelGetSnapshotWithCompletionHandler, __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_mKLookAroundSnapshotterSelGetSnapshotWithCompletionHandler, __block_completionHandler)
+	})
 }
 
 // Cancels an in-progress snapshot request.
 func (o *MKLookAroundSnapshotter) Cancel() {
-	o.Ptr().Send(_mKLookAroundSnapshotterSelCancel)
+	purego.Main(func() {
+		o.Ptr().Send(_mKLookAroundSnapshotterSelCancel)
+	})
 }
 
 func (o *MKLookAroundSnapshotter) IsLoading() bool {

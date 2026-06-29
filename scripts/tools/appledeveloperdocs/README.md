@@ -35,6 +35,7 @@ Flags:
 | `--cache` | `<metadata>/.appledocs-httpcache` | HTTP response cache dir (gitignored) |
 | `--deep` | `false` | also harvest each symbol's Discussion, not just the abstract |
 | `--delay` | `50ms` | minimum delay between live HTTP requests |
+| `--concurrency` | `5` | number of parallel fetch workers, each rate-limited by `--delay` |
 
 ## How it works
 

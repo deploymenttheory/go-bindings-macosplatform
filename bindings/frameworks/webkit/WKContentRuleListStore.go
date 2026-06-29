@@ -41,20 +41,32 @@ func WKContentRuleListStoreFromID(id objc.ID) *WKContentRuleListStore {
 
 // Returns the default content rule list store.
 func WKContentRuleListStoreDefaultStore() *WKContentRuleListStore {
-	_ret := objc.Send[objc.ID](objc.ID(_clsWKContentRuleListStore), _wKContentRuleListStoreSelDefaultStore)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKContentRuleListStoreFromID(_ret)
+	var _mainthread0 *WKContentRuleListStore
+	purego.Main(func() {
+		_mainthread0 = func() *WKContentRuleListStore {
+			_ret := objc.Send[objc.ID](objc.ID(_clsWKContentRuleListStore), _wKContentRuleListStoreSelDefaultStore)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKContentRuleListStoreFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a new content rule list store in the specified directory.
 func WKContentRuleListStoreStoreWithURL(url *foundation.NSURL) *WKContentRuleListStore {
-	_ret := objc.Send[objc.ID](objc.ID(_clsWKContentRuleListStore), _wKContentRuleListStoreSelStoreWithURL, url.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKContentRuleListStoreFromID(_ret)
+	var _mainthread0 *WKContentRuleListStore
+	purego.Main(func() {
+		_mainthread0 = func() *WKContentRuleListStore {
+			_ret := objc.Send[objc.ID](objc.ID(_clsWKContentRuleListStore), _wKContentRuleListStoreSelStoreWithURL, url.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKContentRuleListStoreFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Compiles the specified JSON content into a new rule list and adds it to the current data store.
@@ -69,7 +81,9 @@ func (o *WKContentRuleListStore) CompileContentRuleListForIdentifierEncodedConte
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_wKContentRuleListStoreSelCompileContentRuleListForIdentifierEncodedContentRuleListCompletionHandler, identifier.Ptr(), encodedContentRuleList.Ptr(), __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_wKContentRuleListStoreSelCompileContentRuleListForIdentifierEncodedContentRuleListCompletionHandler, identifier.Ptr(), encodedContentRuleList.Ptr(), __block_completionHandler)
+	})
 }
 
 // Searches asynchronously for a specific rule list in the data store.
@@ -84,7 +98,9 @@ func (o *WKContentRuleListStore) LookUpContentRuleListForIdentifierCompletionHan
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_wKContentRuleListStoreSelLookUpContentRuleListForIdentifierCompletionHandler, identifier.Ptr(), __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_wKContentRuleListStoreSelLookUpContentRuleListForIdentifierCompletionHandler, identifier.Ptr(), __block_completionHandler)
+	})
 }
 
 // Removes a rule list from the current data store asynchronously.
@@ -96,7 +112,9 @@ func (o *WKContentRuleListStore) RemoveContentRuleListForIdentifierCompletionHan
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_wKContentRuleListStoreSelRemoveContentRuleListForIdentifierCompletionHandler, identifier.Ptr(), __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_wKContentRuleListStoreSelRemoveContentRuleListForIdentifierCompletionHandler, identifier.Ptr(), __block_completionHandler)
+	})
 }
 
 // Fetches the identifiers for all rule lists in the store asynchronously.
@@ -111,5 +129,7 @@ func (o *WKContentRuleListStore) GetAvailableContentRuleListIdentifiers(completi
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_wKContentRuleListStoreSelGetAvailableContentRuleListIdentifiers, __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_wKContentRuleListStoreSelGetAvailableContentRuleListIdentifiers, __block_completionHandler)
+	})
 }

@@ -37,33 +37,57 @@ func WKFrameInfoFromID(id objc.ID) *WKFrameInfo {
 
 // @abstract A Boolean value indicating whether the frame is the main frame or a subframe.
 func (o *WKFrameInfo) IsMainFrame() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKFrameInfoSelIsMainFrame)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKFrameInfoSelIsMainFrame)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The frame's current request.
 func (o *WKFrameInfo) Request() *foundation.NSURLRequest {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKFrameInfoSelRequest)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSURLRequestFromID(_ret)
+	var _mainthread0 *foundation.NSURLRequest
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSURLRequest {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKFrameInfoSelRequest)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSURLRequestFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The frame's current security origin.
 func (o *WKFrameInfo) SecurityOrigin() *WKSecurityOrigin {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKFrameInfoSelSecurityOrigin)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKSecurityOriginFromID(_ret)
+	var _mainthread0 *WKSecurityOrigin
+	purego.Main(func() {
+		_mainthread0 = func() *WKSecurityOrigin {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKFrameInfoSelSecurityOrigin)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKSecurityOriginFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The web view of the webpage that contains this frame.
 func (o *WKFrameInfo) WebView() *WKWebView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKFrameInfoSelWebView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKWebViewFromID(_ret)
+	var _mainthread0 *WKWebView
+	purego.Main(func() {
+		_mainthread0 = func() *WKWebView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKFrameInfoSelWebView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKWebViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

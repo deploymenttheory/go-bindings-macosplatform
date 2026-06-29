@@ -61,136 +61,238 @@ func NSDrawerFromID(id objc.ID) *NSDrawer {
 // Creates a new drawer with the given size on the specified edge of the parent window.
 // Deprecated: Drawers are deprecated; consider using NSSplitViewController
 func (o *NSDrawer) InitWithContentSizePreferredEdge(contentSize corefoundation.CGSize, edge foundation.NSRectEdge) *NSDrawer {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDrawerSelInitWithContentSizePreferredEdge, contentSize, edge)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSDrawerFromID(_ret)
+	var _mainthread0 *NSDrawer
+	purego.Main(func() {
+		_mainthread0 = func() *NSDrawer {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDrawerSelInitWithContentSizePreferredEdge, contentSize, edge)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSDrawerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // If the receiver is closed, this method opens it.
 func (o *NSDrawer) Open() {
-	o.Ptr().Send(_nSDrawerSelOpen)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDrawerSelOpen)
+	})
 }
 
 // Causes the receiver to open on the specified edge of the parent window.
 func (o *NSDrawer) OpenOnEdge(edge foundation.NSRectEdge) {
-	o.Ptr().Send(_nSDrawerSelOpenOnEdge, edge)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDrawerSelOpenOnEdge, edge)
+	})
 }
 
 // If the receiver is open, this method closes it.
 func (o *NSDrawer) Close() {
-	o.Ptr().Send(_nSDrawerSelClose)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDrawerSelClose)
+	})
 }
 
 // An action method to open the drawer.
 func (o *NSDrawer) Open2(sender objc.ID) {
-	o.Ptr().Send(_nSDrawerSelOpen, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDrawerSelOpen, sender)
+	})
 }
 
 // An action method to close the receiver.
 func (o *NSDrawer) Close2(sender objc.ID) {
-	o.Ptr().Send(_nSDrawerSelClose, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDrawerSelClose, sender)
+	})
 }
 
 // Toggles the drawer open or closed.
 func (o *NSDrawer) Toggle(sender objc.ID) {
-	o.Ptr().Send(_nSDrawerSelToggle, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDrawerSelToggle, sender)
+	})
 }
 
 func (o *NSDrawer) ParentWindow() *NSWindow {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDrawerSelParentWindow)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSWindowFromID(_ret)
+	var _mainthread0 *NSWindow
+	purego.Main(func() {
+		_mainthread0 = func() *NSWindow {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDrawerSelParentWindow)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSWindowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDrawer) SetParentWindow(parentWindow *NSWindow) {
-	o.Ptr().Send(_nSDrawerSelSetParentWindow, parentWindow.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDrawerSelSetParentWindow, parentWindow.Ptr())
+	})
 }
 
 func (o *NSDrawer) ContentView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDrawerSelContentView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDrawerSelContentView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDrawer) SetContentView(contentView *NSView) {
-	o.Ptr().Send(_nSDrawerSelSetContentView, contentView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDrawerSelSetContentView, contentView.Ptr())
+	})
 }
 
 func (o *NSDrawer) PreferredEdge() foundation.NSRectEdge {
-	_ret := objc.Send[foundation.NSRectEdge](o.Ptr(), _nSDrawerSelPreferredEdge)
-	return _ret
+	var _mainthread0 foundation.NSRectEdge
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSRectEdge {
+			_ret := objc.Send[foundation.NSRectEdge](o.Ptr(), _nSDrawerSelPreferredEdge)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDrawer) SetPreferredEdge(preferredEdge foundation.NSRectEdge) {
-	o.Ptr().Send(_nSDrawerSelSetPreferredEdge, preferredEdge)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDrawerSelSetPreferredEdge, preferredEdge)
+	})
 }
 
 func (o *NSDrawer) Delegate() NSDrawerDelegate {
-	_ret := objc.Send[NSDrawerDelegate](o.Ptr(), _nSDrawerSelDelegate)
-	return _ret
+	var _mainthread0 NSDrawerDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSDrawerDelegate {
+			_ret := objc.Send[NSDrawerDelegate](o.Ptr(), _nSDrawerSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDrawer) SetDelegate(delegate NSDrawerDelegate) {
-	o.Ptr().Send(_nSDrawerSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDrawerSelSetDelegate, delegate)
+	})
 }
 
 func (o *NSDrawer) State() int {
-	_ret := objc.Send[int](o.Ptr(), _nSDrawerSelState)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSDrawerSelState)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDrawer) Edge() foundation.NSRectEdge {
-	_ret := objc.Send[foundation.NSRectEdge](o.Ptr(), _nSDrawerSelEdge)
-	return _ret
+	var _mainthread0 foundation.NSRectEdge
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSRectEdge {
+			_ret := objc.Send[foundation.NSRectEdge](o.Ptr(), _nSDrawerSelEdge)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDrawer) ContentSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSDrawerSelContentSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSDrawerSelContentSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDrawer) SetContentSize(contentSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSDrawerSelSetContentSize, contentSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDrawerSelSetContentSize, contentSize)
+	})
 }
 
 func (o *NSDrawer) MinContentSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSDrawerSelMinContentSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSDrawerSelMinContentSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDrawer) SetMinContentSize(minContentSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSDrawerSelSetMinContentSize, minContentSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDrawerSelSetMinContentSize, minContentSize)
+	})
 }
 
 func (o *NSDrawer) MaxContentSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSDrawerSelMaxContentSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSDrawerSelMaxContentSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDrawer) SetMaxContentSize(maxContentSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSDrawerSelSetMaxContentSize, maxContentSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDrawerSelSetMaxContentSize, maxContentSize)
+	})
 }
 
 func (o *NSDrawer) LeadingOffset() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSDrawerSelLeadingOffset)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSDrawerSelLeadingOffset)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDrawer) SetLeadingOffset(leadingOffset float64) {
-	o.Ptr().Send(_nSDrawerSelSetLeadingOffset, leadingOffset)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDrawerSelSetLeadingOffset, leadingOffset)
+	})
 }
 
 func (o *NSDrawer) TrailingOffset() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSDrawerSelTrailingOffset)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSDrawerSelTrailingOffset)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDrawer) SetTrailingOffset(trailingOffset float64) {
-	o.Ptr().Send(_nSDrawerSelSetTrailingOffset, trailingOffset)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDrawerSelSetTrailingOffset, trailingOffset)
+	})
 }

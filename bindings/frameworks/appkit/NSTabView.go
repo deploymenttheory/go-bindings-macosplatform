@@ -73,206 +73,356 @@ func NSTabViewFromID(id objc.ID) *NSTabView {
 
 // Selects the specified tab view item.
 func (o *NSTabView) SelectTabViewItem(tabViewItem *NSTabViewItem) {
-	o.Ptr().Send(_nSTabViewSelSelectTabViewItem, tabViewItem.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewSelSelectTabViewItem, tabViewItem.Ptr())
+	})
 }
 
 // Selects the tab view item specified by index.
 func (o *NSTabView) SelectTabViewItemAtIndex(index int) {
-	o.Ptr().Send(_nSTabViewSelSelectTabViewItemAtIndex, index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewSelSelectTabViewItemAtIndex, index)
+	})
 }
 
 // Selects the tab view item specified by identifier.
 func (o *NSTabView) SelectTabViewItemWithIdentifier(identifier objc.ID) {
-	o.Ptr().Send(_nSTabViewSelSelectTabViewItemWithIdentifier, identifier)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewSelSelectTabViewItemWithIdentifier, identifier)
+	})
 }
 
 // Sets the selected tab view item to the selected item obtained from the sender.
 func (o *NSTabView) TakeSelectedTabViewItemFromSender(sender objc.ID) {
-	o.Ptr().Send(_nSTabViewSelTakeSelectedTabViewItemFromSender, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewSelTakeSelectedTabViewItemFromSender, sender)
+	})
 }
 
 // This action method selects the first tab view item.
 func (o *NSTabView) SelectFirstTabViewItem(sender objc.ID) {
-	o.Ptr().Send(_nSTabViewSelSelectFirstTabViewItem, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewSelSelectFirstTabViewItem, sender)
+	})
 }
 
 // This action method selects the last tab view item.
 func (o *NSTabView) SelectLastTabViewItem(sender objc.ID) {
-	o.Ptr().Send(_nSTabViewSelSelectLastTabViewItem, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewSelSelectLastTabViewItem, sender)
+	})
 }
 
 // This action method selects the next tab view item in the sequence.
 func (o *NSTabView) SelectNextTabViewItem(sender objc.ID) {
-	o.Ptr().Send(_nSTabViewSelSelectNextTabViewItem, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewSelSelectNextTabViewItem, sender)
+	})
 }
 
 // This action method selects the previous tab view item in the sequence.
 func (o *NSTabView) SelectPreviousTabViewItem(sender objc.ID) {
-	o.Ptr().Send(_nSTabViewSelSelectPreviousTabViewItem, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewSelSelectPreviousTabViewItem, sender)
+	})
 }
 
 // Adds the specified tab item.
 func (o *NSTabView) AddTabViewItem(tabViewItem *NSTabViewItem) {
-	o.Ptr().Send(_nSTabViewSelAddTabViewItem, tabViewItem.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewSelAddTabViewItem, tabViewItem.Ptr())
+	})
 }
 
 // Inserts the specified item into the tab view’s array of tab view items at the specified index.
 func (o *NSTabView) InsertTabViewItemAtIndex(tabViewItem *NSTabViewItem, index int) {
-	o.Ptr().Send(_nSTabViewSelInsertTabViewItemAtIndex, tabViewItem.Ptr(), index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewSelInsertTabViewItemAtIndex, tabViewItem.Ptr(), index)
+	})
 }
 
 // Removes the specified item from the tab view’s array of tab view items.
 func (o *NSTabView) RemoveTabViewItem(tabViewItem *NSTabViewItem) {
-	o.Ptr().Send(_nSTabViewSelRemoveTabViewItem, tabViewItem.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewSelRemoveTabViewItem, tabViewItem.Ptr())
+	})
 }
 
 // Returns the tab view item at the specified point.
 func (o *NSTabView) TabViewItemAtPoint(point corefoundation.CGPoint) *NSTabViewItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewSelTabViewItemAtPoint, point)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTabViewItemFromID(_ret)
+	var _mainthread0 *NSTabViewItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSTabViewItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewSelTabViewItemAtPoint, point)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTabViewItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the index of the specified item in the tab view.
 func (o *NSTabView) IndexOfTabViewItem(tabViewItem *NSTabViewItem) int {
-	_ret := objc.Send[int](o.Ptr(), _nSTabViewSelIndexOfTabViewItem, tabViewItem.Ptr())
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTabViewSelIndexOfTabViewItem, tabViewItem.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the tab view item at index in the tab view’s array of items.
 func (o *NSTabView) TabViewItemAtIndex(index int) *NSTabViewItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewSelTabViewItemAtIndex, index)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTabViewItemFromID(_ret)
+	var _mainthread0 *NSTabViewItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSTabViewItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewSelTabViewItemAtIndex, index)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTabViewItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the index of the item that matches the specified identifier or NSNotFound if the item is not found.
 func (o *NSTabView) IndexOfTabViewItemWithIdentifier(identifier objc.ID) int {
-	_ret := objc.Send[int](o.Ptr(), _nSTabViewSelIndexOfTabViewItemWithIdentifier, identifier)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTabViewSelIndexOfTabViewItemWithIdentifier, identifier)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTabView) SelectedTabViewItem() *NSTabViewItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewSelSelectedTabViewItem)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTabViewItemFromID(_ret)
+	var _mainthread0 *NSTabViewItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSTabViewItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewSelSelectedTabViewItem)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTabViewItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTabView) Font() *NSFont {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewSelFont)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSFontFromID(_ret)
+	var _mainthread0 *NSFont
+	purego.Main(func() {
+		_mainthread0 = func() *NSFont {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewSelFont)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSFontFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTabView) SetFont(font *NSFont) {
-	o.Ptr().Send(_nSTabViewSelSetFont, font.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewSelSetFont, font.Ptr())
+	})
 }
 
 func (o *NSTabView) TabViewType() NSTabViewType {
-	_ret := objc.Send[NSTabViewType](o.Ptr(), _nSTabViewSelTabViewType)
-	return _ret
+	var _mainthread0 NSTabViewType
+	purego.Main(func() {
+		_mainthread0 = func() NSTabViewType {
+			_ret := objc.Send[NSTabViewType](o.Ptr(), _nSTabViewSelTabViewType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTabView) SetTabViewType(tabViewType NSTabViewType) {
-	o.Ptr().Send(_nSTabViewSelSetTabViewType, tabViewType)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewSelSetTabViewType, tabViewType)
+	})
 }
 
 func (o *NSTabView) TabPosition() NSTabPosition {
-	_ret := objc.Send[NSTabPosition](o.Ptr(), _nSTabViewSelTabPosition)
-	return _ret
+	var _mainthread0 NSTabPosition
+	purego.Main(func() {
+		_mainthread0 = func() NSTabPosition {
+			_ret := objc.Send[NSTabPosition](o.Ptr(), _nSTabViewSelTabPosition)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTabView) SetTabPosition(tabPosition NSTabPosition) {
-	o.Ptr().Send(_nSTabViewSelSetTabPosition, tabPosition)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewSelSetTabPosition, tabPosition)
+	})
 }
 
 func (o *NSTabView) TabViewBorderType() NSTabViewBorderType {
-	_ret := objc.Send[NSTabViewBorderType](o.Ptr(), _nSTabViewSelTabViewBorderType)
-	return _ret
+	var _mainthread0 NSTabViewBorderType
+	purego.Main(func() {
+		_mainthread0 = func() NSTabViewBorderType {
+			_ret := objc.Send[NSTabViewBorderType](o.Ptr(), _nSTabViewSelTabViewBorderType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTabView) SetTabViewBorderType(tabViewBorderType NSTabViewBorderType) {
-	o.Ptr().Send(_nSTabViewSelSetTabViewBorderType, tabViewBorderType)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewSelSetTabViewBorderType, tabViewBorderType)
+	})
 }
 
 func (o *NSTabView) TabViewItems() *foundation.NSArray[*NSTabViewItem] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewSelTabViewItems)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSTabViewItem](_ret)
+	var _mainthread0 *foundation.NSArray[*NSTabViewItem]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSTabViewItem] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewSelTabViewItems)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSTabViewItem](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTabView) SetTabViewItems(tabViewItems *foundation.NSArray[*NSTabViewItem]) {
-	o.Ptr().Send(_nSTabViewSelSetTabViewItems, tabViewItems.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewSelSetTabViewItems, tabViewItems.Ptr())
+	})
 }
 
 func (o *NSTabView) AllowsTruncatedLabels() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTabViewSelAllowsTruncatedLabels)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTabViewSelAllowsTruncatedLabels)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTabView) SetAllowsTruncatedLabels(allowsTruncatedLabels bool) {
-	o.Ptr().Send(_nSTabViewSelSetAllowsTruncatedLabels, allowsTruncatedLabels)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewSelSetAllowsTruncatedLabels, allowsTruncatedLabels)
+	})
 }
 
 func (o *NSTabView) MinimumSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSTabViewSelMinimumSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSTabViewSelMinimumSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTabView) DrawsBackground() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTabViewSelDrawsBackground)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSTabViewSelDrawsBackground)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTabView) SetDrawsBackground(drawsBackground bool) {
-	o.Ptr().Send(_nSTabViewSelSetDrawsBackground, drawsBackground)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewSelSetDrawsBackground, drawsBackground)
+	})
 }
 
 func (o *NSTabView) ControlSize() NSControlSize {
-	_ret := objc.Send[NSControlSize](o.Ptr(), _nSTabViewSelControlSize)
-	return _ret
+	var _mainthread0 NSControlSize
+	purego.Main(func() {
+		_mainthread0 = func() NSControlSize {
+			_ret := objc.Send[NSControlSize](o.Ptr(), _nSTabViewSelControlSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTabView) SetControlSize(controlSize NSControlSize) {
-	o.Ptr().Send(_nSTabViewSelSetControlSize, controlSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewSelSetControlSize, controlSize)
+	})
 }
 
 func (o *NSTabView) Delegate() NSTabViewDelegate {
-	_ret := objc.Send[NSTabViewDelegate](o.Ptr(), _nSTabViewSelDelegate)
-	return _ret
+	var _mainthread0 NSTabViewDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSTabViewDelegate {
+			_ret := objc.Send[NSTabViewDelegate](o.Ptr(), _nSTabViewSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTabView) SetDelegate(delegate NSTabViewDelegate) {
-	o.Ptr().Send(_nSTabViewSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewSelSetDelegate, delegate)
+	})
 }
 
 func (o *NSTabView) ContentRect() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTabViewSelContentRect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTabViewSelContentRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSTabView) NumberOfTabViewItems() int {
-	_ret := objc.Send[int](o.Ptr(), _nSTabViewSelNumberOfTabViewItems)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSTabViewSelNumberOfTabViewItems)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: The controlTint property is not respected on 10.14 and later.
 func (o *NSTabView) ControlTint() NSControlTint {
-	_ret := objc.Send[NSControlTint](o.Ptr(), _nSTabViewSelControlTint)
-	return _ret
+	var _mainthread0 NSControlTint
+	purego.Main(func() {
+		_mainthread0 = func() NSControlTint {
+			_ret := objc.Send[NSControlTint](o.Ptr(), _nSTabViewSelControlTint)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: The controlTint property is not respected on 10.14 and later.
 func (o *NSTabView) SetControlTint(controlTint NSControlTint) {
-	o.Ptr().Send(_nSTabViewSelSetControlTint, controlTint)
+	purego.Main(func() {
+		o.Ptr().Send(_nSTabViewSelSetControlTint, controlTint)
+	})
 }

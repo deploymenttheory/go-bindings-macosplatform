@@ -39,39 +39,67 @@ func MKMapItemDetailViewControllerFromID(id objc.ID) *MKMapItemDetailViewControl
 
 // Create a map item detail view controller
 func (o *MKMapItemDetailViewController) InitWithMapItemDisplaysMap(mapItem *MKMapItem, displaysMap bool) *MKMapItemDetailViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemDetailViewControllerSelInitWithMapItemDisplaysMap, mapItem.Ptr(), displaysMap)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKMapItemDetailViewControllerFromID(_ret)
+	var _mainthread0 *MKMapItemDetailViewController
+	purego.Main(func() {
+		_mainthread0 = func() *MKMapItemDetailViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemDetailViewControllerSelInitWithMapItemDisplaysMap, mapItem.Ptr(), displaysMap)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKMapItemDetailViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Create a map item detail view controller.
 func (o *MKMapItemDetailViewController) InitWithMapItem(mapItem *MKMapItem) *MKMapItemDetailViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemDetailViewControllerSelInitWithMapItem, mapItem.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKMapItemDetailViewControllerFromID(_ret)
+	var _mainthread0 *MKMapItemDetailViewController
+	purego.Main(func() {
+		_mainthread0 = func() *MKMapItemDetailViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemDetailViewControllerSelInitWithMapItem, mapItem.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKMapItemDetailViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapItemDetailViewController) MapItem() *MKMapItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemDetailViewControllerSelMapItem)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKMapItemFromID(_ret)
+	var _mainthread0 *MKMapItem
+	purego.Main(func() {
+		_mainthread0 = func() *MKMapItem {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemDetailViewControllerSelMapItem)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKMapItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapItemDetailViewController) SetMapItem(mapItem *MKMapItem) {
-	o.Ptr().Send(_mKMapItemDetailViewControllerSelSetMapItem, mapItem.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapItemDetailViewControllerSelSetMapItem, mapItem.Ptr())
+	})
 }
 
 func (o *MKMapItemDetailViewController) Delegate() MKMapItemDetailViewControllerDelegate {
-	_ret := objc.Send[MKMapItemDetailViewControllerDelegate](o.Ptr(), _mKMapItemDetailViewControllerSelDelegate)
-	return _ret
+	var _mainthread0 MKMapItemDetailViewControllerDelegate
+	purego.Main(func() {
+		_mainthread0 = func() MKMapItemDetailViewControllerDelegate {
+			_ret := objc.Send[MKMapItemDetailViewControllerDelegate](o.Ptr(), _mKMapItemDetailViewControllerSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKMapItemDetailViewController) SetDelegate(delegate MKMapItemDetailViewControllerDelegate) {
-	o.Ptr().Send(_mKMapItemDetailViewControllerSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_mKMapItemDetailViewControllerSelSetDelegate, delegate)
+	})
 }

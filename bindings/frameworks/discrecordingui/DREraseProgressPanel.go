@@ -39,24 +39,36 @@ func DREraseProgressPanelFromID(id objc.ID) *DREraseProgressPanel {
 
 // @method			progressPanel @abstract		Creates and returns an instance of the erase progress panel. @result			A pointer to the newly created DREraseProgressPanel.
 func DREraseProgressPanelProgressPanel() *DREraseProgressPanel {
-	_ret := objc.Send[objc.ID](objc.ID(_clsDREraseProgressPanel), _dREraseProgressPanelSelProgressPanel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return DREraseProgressPanelFromID(_ret)
+	var _mainthread0 *DREraseProgressPanel
+	purego.Main(func() {
+		_mainthread0 = func() *DREraseProgressPanel {
+			_ret := objc.Send[objc.ID](objc.ID(_clsDREraseProgressPanel), _dREraseProgressPanelSelProgressPanel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return DREraseProgressPanelFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @method			beginProgressSheetForErase:modalForWindow: @abstract		Presents the progress panel as a sheet and begins the erase process. @discussion		This method returns control to the caller after it has displayed the progress sheet and begun the erase. Once the method has returned the caller can perform other operations while the erase continues. @param			erase		The object performing the erase. @param			docWindow	The window the sheet will be attached to. If docWindow is not nil, the panel slides down as a sheet running as a document modal window. If owner is nil, this is an error.
 func (o *DREraseProgressPanel) BeginProgressSheetForEraseModalForWindow(erase *discrecording.DRErase, docWindow *appkit.NSWindow) {
-	o.Ptr().Send(_dREraseProgressPanelSelBeginProgressSheetForEraseModalForWindow, erase.Ptr(), docWindow.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_dREraseProgressPanelSelBeginProgressSheetForEraseModalForWindow, erase.Ptr(), docWindow.Ptr())
+	})
 }
 
 // @method			beginProgressPanelForErase: @abstract		Presents the progress panel on screen and begins the erase process. @discussion		This method returns control to the caller after it has displayed the progress sheet and begun the erase. Once the method has returned the caller can perform other operations while the erase continues. @param			erase		The object performing the erase.
 func (o *DREraseProgressPanel) BeginProgressPanelForErase(erase *discrecording.DRErase) {
-	o.Ptr().Send(_dREraseProgressPanelSelBeginProgressPanelForErase, erase.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_dREraseProgressPanelSelBeginProgressPanelForErase, erase.Ptr())
+	})
 }
 
 // @method			setDescription: @abstract		Sets the panel text displayed to the user. @discussion		The panel's description is typically a short text string that gives an indication to the user what operation is being performed. If no description is explicitly set, the progress panel uses a standard text string suitable to the erase. @param			description	The text to display.
 func (o *DREraseProgressPanel) SetDescription(description *foundation.NSString) {
-	o.Ptr().Send(_dREraseProgressPanelSelSetDescription, description.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_dREraseProgressPanelSelSetDescription, description.Ptr())
+	})
 }

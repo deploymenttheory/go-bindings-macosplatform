@@ -52,109 +52,191 @@ func NSFormCellFromID(id objc.ID) *NSFormCell {
 
 // Returns an NSFormCell object initialized with the specified title string.
 func (o *NSFormCell) InitTextCell(string_ *foundation.NSString) *NSFormCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormCellSelInitTextCell, string_.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSFormCellFromID(_ret)
+	var _mainthread0 *NSFormCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSFormCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSFormCellSelInitTextCell, string_.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSFormCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSFormCell) InitWithCoder(coder *foundation.NSCoder) *NSFormCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormCellSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSFormCellFromID(_ret)
+	var _mainthread0 *NSFormCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSFormCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSFormCellSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSFormCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the width of the title field constrained to the specified size.
 func (o *NSFormCell) TitleWidth(size corefoundation.CGSize) float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSFormCellSelTitleWidth, size)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSFormCellSelTitleWidth, size)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSFormCell) TitleWidth2() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSFormCellSelTitleWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSFormCellSelTitleWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSFormCell) SetTitleWidth(titleWidth float64) {
-	o.Ptr().Send(_nSFormCellSelSetTitleWidth, titleWidth)
+	purego.Main(func() {
+		o.Ptr().Send(_nSFormCellSelSetTitleWidth, titleWidth)
+	})
 }
 
 func (o *NSFormCell) TitleFont() *NSFont {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormCellSelTitleFont)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSFontFromID(_ret)
+	var _mainthread0 *NSFont
+	purego.Main(func() {
+		_mainthread0 = func() *NSFont {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSFormCellSelTitleFont)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSFontFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSFormCell) SetTitleFont(titleFont *NSFont) {
-	o.Ptr().Send(_nSFormCellSelSetTitleFont, titleFont.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSFormCellSelSetTitleFont, titleFont.Ptr())
+	})
 }
 
 func (o *NSFormCell) PlaceholderString() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormCellSelPlaceholderString)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSFormCellSelPlaceholderString)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSFormCell) SetPlaceholderString(placeholderString *foundation.NSString) {
-	o.Ptr().Send(_nSFormCellSelSetPlaceholderString, placeholderString.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSFormCellSelSetPlaceholderString, placeholderString.Ptr())
+	})
 }
 
 func (o *NSFormCell) PlaceholderAttributedString() *foundation.NSAttributedString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormCellSelPlaceholderAttributedString)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSAttributedStringFromID(_ret)
+	var _mainthread0 *foundation.NSAttributedString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSAttributedString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSFormCellSelPlaceholderAttributedString)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSAttributedStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSFormCell) SetPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) {
-	o.Ptr().Send(_nSFormCellSelSetPlaceholderAttributedString, placeholderAttributedString.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSFormCellSelSetPlaceholderAttributedString, placeholderAttributedString.Ptr())
+	})
 }
 
 func (o *NSFormCell) TitleAlignment() NSTextAlignment {
-	_ret := objc.Send[NSTextAlignment](o.Ptr(), _nSFormCellSelTitleAlignment)
-	return _ret
+	var _mainthread0 NSTextAlignment
+	purego.Main(func() {
+		_mainthread0 = func() NSTextAlignment {
+			_ret := objc.Send[NSTextAlignment](o.Ptr(), _nSFormCellSelTitleAlignment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSFormCell) SetTitleAlignment(titleAlignment NSTextAlignment) {
-	o.Ptr().Send(_nSFormCellSelSetTitleAlignment, titleAlignment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSFormCellSelSetTitleAlignment, titleAlignment)
+	})
 }
 
 func (o *NSFormCell) TitleBaseWritingDirection() NSWritingDirection {
-	_ret := objc.Send[NSWritingDirection](o.Ptr(), _nSFormCellSelTitleBaseWritingDirection)
-	return _ret
+	var _mainthread0 NSWritingDirection
+	purego.Main(func() {
+		_mainthread0 = func() NSWritingDirection {
+			_ret := objc.Send[NSWritingDirection](o.Ptr(), _nSFormCellSelTitleBaseWritingDirection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSFormCell) SetTitleBaseWritingDirection(titleBaseWritingDirection NSWritingDirection) {
-	o.Ptr().Send(_nSFormCellSelSetTitleBaseWritingDirection, titleBaseWritingDirection)
+	purego.Main(func() {
+		o.Ptr().Send(_nSFormCellSelSetTitleBaseWritingDirection, titleBaseWritingDirection)
+	})
 }
 
 func (o *NSFormCell) PreferredTextFieldWidth() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSFormCellSelPreferredTextFieldWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSFormCellSelPreferredTextFieldWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSFormCell) SetPreferredTextFieldWidth(preferredTextFieldWidth float64) {
-	o.Ptr().Send(_nSFormCellSelSetPreferredTextFieldWidth, preferredTextFieldWidth)
+	purego.Main(func() {
+		o.Ptr().Send(_nSFormCellSelSetPreferredTextFieldWidth, preferredTextFieldWidth)
+	})
 }
 
 // Deprecated: since macOS 10.8.
 func (o *NSFormCell) AttributedTitle() *foundation.NSAttributedString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormCellSelAttributedTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSAttributedStringFromID(_ret)
+	var _mainthread0 *foundation.NSAttributedString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSAttributedString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSFormCellSelAttributedTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSAttributedStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: since macOS 10.8.
 func (o *NSFormCell) SetAttributedTitle(attributedTitle *foundation.NSAttributedString) {
-	o.Ptr().Send(_nSFormCellSelSetAttributedTitle, attributedTitle.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSFormCellSelSetAttributedTitle, attributedTitle.Ptr())
+	})
 }

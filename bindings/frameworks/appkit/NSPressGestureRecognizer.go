@@ -39,37 +39,69 @@ func NSPressGestureRecognizerFromID(id objc.ID) *NSPressGestureRecognizer {
 }
 
 func (o *NSPressGestureRecognizer) ButtonMask() uint {
-	_ret := objc.Send[uint](o.Ptr(), _nSPressGestureRecognizerSelButtonMask)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _nSPressGestureRecognizerSelButtonMask)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPressGestureRecognizer) SetButtonMask(buttonMask uint) {
-	o.Ptr().Send(_nSPressGestureRecognizerSelSetButtonMask, buttonMask)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPressGestureRecognizerSelSetButtonMask, buttonMask)
+	})
 }
 
 func (o *NSPressGestureRecognizer) MinimumPressDuration() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSPressGestureRecognizerSelMinimumPressDuration)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSPressGestureRecognizerSelMinimumPressDuration)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPressGestureRecognizer) SetMinimumPressDuration(minimumPressDuration float64) {
-	o.Ptr().Send(_nSPressGestureRecognizerSelSetMinimumPressDuration, minimumPressDuration)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPressGestureRecognizerSelSetMinimumPressDuration, minimumPressDuration)
+	})
 }
 
 func (o *NSPressGestureRecognizer) AllowableMovement() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSPressGestureRecognizerSelAllowableMovement)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSPressGestureRecognizerSelAllowableMovement)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPressGestureRecognizer) SetAllowableMovement(allowableMovement float64) {
-	o.Ptr().Send(_nSPressGestureRecognizerSelSetAllowableMovement, allowableMovement)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPressGestureRecognizerSelSetAllowableMovement, allowableMovement)
+	})
 }
 
 func (o *NSPressGestureRecognizer) NumberOfTouchesRequired() int {
-	_ret := objc.Send[int](o.Ptr(), _nSPressGestureRecognizerSelNumberOfTouchesRequired)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSPressGestureRecognizerSelNumberOfTouchesRequired)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPressGestureRecognizer) SetNumberOfTouchesRequired(numberOfTouchesRequired int) {
-	o.Ptr().Send(_nSPressGestureRecognizerSelSetNumberOfTouchesRequired, numberOfTouchesRequired)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPressGestureRecognizerSelSetNumberOfTouchesRequired, numberOfTouchesRequired)
+	})
 }

@@ -44,77 +44,127 @@ func NSComboButtonFromID(id objc.ID) *NSComboButton {
 
 // Creates a combo button that displays a title.
 func NSComboButtonComboButtonWithTitleMenuTargetAction(title *foundation.NSString, menu *NSMenu, target objc.ID, action objc.SEL) *NSComboButton {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSComboButton), _nSComboButtonSelComboButtonWithTitleMenuTargetAction, title.Ptr(), menu.Ptr(), target, action)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSComboButtonFromID(_ret)
+	var _mainthread0 *NSComboButton
+	purego.Main(func() {
+		_mainthread0 = func() *NSComboButton {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSComboButton), _nSComboButtonSelComboButtonWithTitleMenuTargetAction, title.Ptr(), menu.Ptr(), target, action)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSComboButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a combo button that displays an image.
 func NSComboButtonComboButtonWithImageMenuTargetAction(image *NSImage, menu *NSMenu, target objc.ID, action objc.SEL) *NSComboButton {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSComboButton), _nSComboButtonSelComboButtonWithImageMenuTargetAction, image.Ptr(), menu.Ptr(), target, action)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSComboButtonFromID(_ret)
+	var _mainthread0 *NSComboButton
+	purego.Main(func() {
+		_mainthread0 = func() *NSComboButton {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSComboButton), _nSComboButtonSelComboButtonWithImageMenuTargetAction, image.Ptr(), menu.Ptr(), target, action)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSComboButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a combo button that displays both a title and image.
 func NSComboButtonComboButtonWithTitleImageMenuTargetAction(title *foundation.NSString, image *NSImage, menu *NSMenu, target objc.ID, action objc.SEL) *NSComboButton {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSComboButton), _nSComboButtonSelComboButtonWithTitleImageMenuTargetAction, title.Ptr(), image.Ptr(), menu.Ptr(), target, action)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSComboButtonFromID(_ret)
+	var _mainthread0 *NSComboButton
+	purego.Main(func() {
+		_mainthread0 = func() *NSComboButton {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSComboButton), _nSComboButtonSelComboButtonWithTitleImageMenuTargetAction, title.Ptr(), image.Ptr(), menu.Ptr(), target, action)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSComboButtonFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The title displayed on the control. The default value is an empty string.
 func (o *NSComboButton) Title() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSComboButtonSelTitle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSComboButtonSelTitle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The title displayed on the control. The default value is an empty string.
 func (o *NSComboButton) SetTitle(title *foundation.NSString) {
-	o.Ptr().Send(_nSComboButtonSelSetTitle, title.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboButtonSelSetTitle, title.Ptr())
+	})
 }
 
 // The image displayed on the control. The default value is `nil`.
 func (o *NSComboButton) Image() *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSComboButtonSelImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSComboButtonSelImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The image displayed on the control. The default value is `nil`.
 func (o *NSComboButton) SetImage(image *NSImage) {
-	o.Ptr().Send(_nSComboButtonSelSetImage, image.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboButtonSelSetImage, image.Ptr())
+	})
 }
 
 // The scaling mode applied to fit the button's image within the content area. The default value is `NSImageScaleProportionallyDown`.
 func (o *NSComboButton) ImageScaling() NSImageScaling {
-	_ret := objc.Send[NSImageScaling](o.Ptr(), _nSComboButtonSelImageScaling)
-	return _ret
+	var _mainthread0 NSImageScaling
+	purego.Main(func() {
+		_mainthread0 = func() NSImageScaling {
+			_ret := objc.Send[NSImageScaling](o.Ptr(), _nSComboButtonSelImageScaling)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The scaling mode applied to fit the button's image within the content area. The default value is `NSImageScaleProportionallyDown`.
 func (o *NSComboButton) SetImageScaling(imageScaling NSImageScaling) {
-	o.Ptr().Send(_nSComboButtonSelSetImageScaling, imageScaling)
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboButtonSelSetImageScaling, imageScaling)
+	})
 }
 
 // Specifies the visual presentation and behavior for NSComboButton's primary action and its menu. The default value is `NSComboButtonStyleSplit`.
 func (o *NSComboButton) Style() NSComboButtonStyle {
-	_ret := objc.Send[NSComboButtonStyle](o.Ptr(), _nSComboButtonSelStyle)
-	return _ret
+	var _mainthread0 NSComboButtonStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSComboButtonStyle {
+			_ret := objc.Send[NSComboButtonStyle](o.Ptr(), _nSComboButtonSelStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Specifies the visual presentation and behavior for NSComboButton's primary action and its menu. The default value is `NSComboButtonStyleSplit`.
 func (o *NSComboButton) SetStyle(style NSComboButtonStyle) {
-	o.Ptr().Send(_nSComboButtonSelSetStyle, style)
+	purego.Main(func() {
+		o.Ptr().Send(_nSComboButtonSelSetStyle, style)
+	})
 }

@@ -48,90 +48,156 @@ func NSGroupTouchBarItemFromID(id objc.ID) *NSGroupTouchBarItem {
 
 // Initializes and returns a group item whose bar is constructed from the supplied items.
 func NSGroupTouchBarItemGroupItemWithIdentifierItems(identifier *foundation.NSString, items *foundation.NSArray[*NSTouchBarItem]) *NSGroupTouchBarItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSGroupTouchBarItem), _nSGroupTouchBarItemSelGroupItemWithIdentifierItems, identifier.Ptr(), items.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGroupTouchBarItemFromID(_ret)
+	var _mainthread0 *NSGroupTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSGroupTouchBarItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSGroupTouchBarItem), _nSGroupTouchBarItemSelGroupItemWithIdentifierItems, identifier.Ptr(), items.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGroupTouchBarItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes and returns a group item whose bar is constructed from the supplied items, and with the specified compression options.
 func NSGroupTouchBarItemGroupItemWithIdentifierItemsAllowedCompressionOptions(identifier *foundation.NSString, items *foundation.NSArray[*NSTouchBarItem], allowedCompressionOptions *NSUserInterfaceCompressionOptions) *NSGroupTouchBarItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSGroupTouchBarItem), _nSGroupTouchBarItemSelGroupItemWithIdentifierItemsAllowedCompressionOptions, identifier.Ptr(), items.Ptr(), allowedCompressionOptions.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGroupTouchBarItemFromID(_ret)
+	var _mainthread0 *NSGroupTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSGroupTouchBarItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSGroupTouchBarItem), _nSGroupTouchBarItemSelGroupItemWithIdentifierItemsAllowedCompressionOptions, identifier.Ptr(), items.Ptr(), allowedCompressionOptions.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGroupTouchBarItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes and returns a group item configured to match system alerts.
 func NSGroupTouchBarItemAlertStyleGroupItemWithIdentifier(identifier *foundation.NSString) *NSGroupTouchBarItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSGroupTouchBarItem), _nSGroupTouchBarItemSelAlertStyleGroupItemWithIdentifier, identifier.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGroupTouchBarItemFromID(_ret)
+	var _mainthread0 *NSGroupTouchBarItem
+	purego.Main(func() {
+		_mainthread0 = func() *NSGroupTouchBarItem {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSGroupTouchBarItem), _nSGroupTouchBarItemSelAlertStyleGroupItemWithIdentifier, identifier.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGroupTouchBarItemFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGroupTouchBarItem) GroupTouchBar() *NSTouchBar {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGroupTouchBarItemSelGroupTouchBar)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSTouchBarFromID(_ret)
+	var _mainthread0 *NSTouchBar
+	purego.Main(func() {
+		_mainthread0 = func() *NSTouchBar {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGroupTouchBarItemSelGroupTouchBar)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSTouchBarFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGroupTouchBarItem) SetGroupTouchBar(groupTouchBar *NSTouchBar) {
-	o.Ptr().Send(_nSGroupTouchBarItemSelSetGroupTouchBar, groupTouchBar.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGroupTouchBarItemSelSetGroupTouchBar, groupTouchBar.Ptr())
+	})
 }
 
 func (o *NSGroupTouchBarItem) SetCustomizationLabel(customizationLabel *foundation.NSString) {
-	o.Ptr().Send(_nSGroupTouchBarItemSelSetCustomizationLabel, customizationLabel.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGroupTouchBarItemSelSetCustomizationLabel, customizationLabel.Ptr())
+	})
 }
 
 func (o *NSGroupTouchBarItem) GroupUserInterfaceLayoutDirection() NSUserInterfaceLayoutDirection {
-	_ret := objc.Send[NSUserInterfaceLayoutDirection](o.Ptr(), _nSGroupTouchBarItemSelGroupUserInterfaceLayoutDirection)
-	return _ret
+	var _mainthread0 NSUserInterfaceLayoutDirection
+	purego.Main(func() {
+		_mainthread0 = func() NSUserInterfaceLayoutDirection {
+			_ret := objc.Send[NSUserInterfaceLayoutDirection](o.Ptr(), _nSGroupTouchBarItemSelGroupUserInterfaceLayoutDirection)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGroupTouchBarItem) SetGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection NSUserInterfaceLayoutDirection) {
-	o.Ptr().Send(_nSGroupTouchBarItemSelSetGroupUserInterfaceLayoutDirection, groupUserInterfaceLayoutDirection)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGroupTouchBarItemSelSetGroupUserInterfaceLayoutDirection, groupUserInterfaceLayoutDirection)
+	})
 }
 
 func (o *NSGroupTouchBarItem) PrefersEqualWidths() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSGroupTouchBarItemSelPrefersEqualWidths)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSGroupTouchBarItemSelPrefersEqualWidths)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGroupTouchBarItem) SetPrefersEqualWidths(prefersEqualWidths bool) {
-	o.Ptr().Send(_nSGroupTouchBarItemSelSetPrefersEqualWidths, prefersEqualWidths)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGroupTouchBarItemSelSetPrefersEqualWidths, prefersEqualWidths)
+	})
 }
 
 func (o *NSGroupTouchBarItem) PreferredItemWidth() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSGroupTouchBarItemSelPreferredItemWidth)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSGroupTouchBarItemSelPreferredItemWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGroupTouchBarItem) SetPreferredItemWidth(preferredItemWidth float64) {
-	o.Ptr().Send(_nSGroupTouchBarItemSelSetPreferredItemWidth, preferredItemWidth)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGroupTouchBarItemSelSetPreferredItemWidth, preferredItemWidth)
+	})
 }
 
 func (o *NSGroupTouchBarItem) EffectiveCompressionOptions() *NSUserInterfaceCompressionOptions {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGroupTouchBarItemSelEffectiveCompressionOptions)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSUserInterfaceCompressionOptionsFromID(_ret)
+	var _mainthread0 *NSUserInterfaceCompressionOptions
+	purego.Main(func() {
+		_mainthread0 = func() *NSUserInterfaceCompressionOptions {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGroupTouchBarItemSelEffectiveCompressionOptions)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSUserInterfaceCompressionOptionsFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGroupTouchBarItem) PrioritizedCompressionOptions() *foundation.NSArray[*NSUserInterfaceCompressionOptions] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGroupTouchBarItemSelPrioritizedCompressionOptions)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSUserInterfaceCompressionOptions](_ret)
+	var _mainthread0 *foundation.NSArray[*NSUserInterfaceCompressionOptions]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSUserInterfaceCompressionOptions] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGroupTouchBarItemSelPrioritizedCompressionOptions)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSUserInterfaceCompressionOptions](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGroupTouchBarItem) SetPrioritizedCompressionOptions(prioritizedCompressionOptions *foundation.NSArray[*NSUserInterfaceCompressionOptions]) {
-	o.Ptr().Send(_nSGroupTouchBarItemSelSetPrioritizedCompressionOptions, prioritizedCompressionOptions.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSGroupTouchBarItemSelSetPrioritizedCompressionOptions, prioritizedCompressionOptions.Ptr())
+	})
 }

@@ -39,31 +39,55 @@ func GKLeaderboardViewControllerFromID(id objc.ID) *GKLeaderboardViewController 
 }
 
 func (o *GKLeaderboardViewController) TimeScope() GKLeaderboardTimeScope {
-	_ret := objc.Send[GKLeaderboardTimeScope](o.Ptr(), _gKLeaderboardViewControllerSelTimeScope)
-	return _ret
+	var _mainthread0 GKLeaderboardTimeScope
+	purego.Main(func() {
+		_mainthread0 = func() GKLeaderboardTimeScope {
+			_ret := objc.Send[GKLeaderboardTimeScope](o.Ptr(), _gKLeaderboardViewControllerSelTimeScope)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *GKLeaderboardViewController) SetTimeScope(timeScope GKLeaderboardTimeScope) {
-	o.Ptr().Send(_gKLeaderboardViewControllerSelSetTimeScope, timeScope)
+	purego.Main(func() {
+		o.Ptr().Send(_gKLeaderboardViewControllerSelSetTimeScope, timeScope)
+	})
 }
 
 func (o *GKLeaderboardViewController) Category() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardViewControllerSelCategory)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardViewControllerSelCategory)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *GKLeaderboardViewController) SetCategory(category *foundation.NSString) {
-	o.Ptr().Send(_gKLeaderboardViewControllerSelSetCategory, category.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_gKLeaderboardViewControllerSelSetCategory, category.Ptr())
+	})
 }
 
 func (o *GKLeaderboardViewController) LeaderboardDelegate() GKLeaderboardViewControllerDelegate {
-	_ret := objc.Send[GKLeaderboardViewControllerDelegate](o.Ptr(), _gKLeaderboardViewControllerSelLeaderboardDelegate)
-	return _ret
+	var _mainthread0 GKLeaderboardViewControllerDelegate
+	purego.Main(func() {
+		_mainthread0 = func() GKLeaderboardViewControllerDelegate {
+			_ret := objc.Send[GKLeaderboardViewControllerDelegate](o.Ptr(), _gKLeaderboardViewControllerSelLeaderboardDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *GKLeaderboardViewController) SetLeaderboardDelegate(leaderboardDelegate GKLeaderboardViewControllerDelegate) {
-	o.Ptr().Send(_gKLeaderboardViewControllerSelSetLeaderboardDelegate, leaderboardDelegate)
+	purego.Main(func() {
+		o.Ptr().Send(_gKLeaderboardViewControllerSelSetLeaderboardDelegate, leaderboardDelegate)
+	})
 }

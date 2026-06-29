@@ -39,32 +39,58 @@ func AUGenericViewFromID(id objc.ID) *AUGenericView {
 
 // Creates a generic view for an audio unit, setting all display flags.
 func (o *AUGenericView) InitWithAudioUnit(au *carboncore.ComponentInstanceRecord) *AUGenericView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aUGenericViewSelInitWithAudioUnit, au)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return AUGenericViewFromID(_ret)
+	var _mainthread0 *AUGenericView
+	purego.Main(func() {
+		_mainthread0 = func() *AUGenericView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aUGenericViewSelInitWithAudioUnit, au)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return AUGenericViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Initializes a generic view for an audio unit, setting specific display flags.
 func (o *AUGenericView) InitWithAudioUnitDisplayFlags(inAudioUnit *carboncore.ComponentInstanceRecord, inFlags AUGenericViewDisplayFlags) *AUGenericView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aUGenericViewSelInitWithAudioUnitDisplayFlags, inAudioUnit, inFlags)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return AUGenericViewFromID(_ret)
+	var _mainthread0 *AUGenericView
+	purego.Main(func() {
+		_mainthread0 = func() *AUGenericView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _aUGenericViewSelInitWithAudioUnitDisplayFlags, inAudioUnit, inFlags)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return AUGenericViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AUGenericView) AudioUnit() *carboncore.ComponentInstanceRecord {
-	_ret := objc.Send[*carboncore.ComponentInstanceRecord](o.Ptr(), _aUGenericViewSelAudioUnit)
-	return _ret
+	var _mainthread0 *carboncore.ComponentInstanceRecord
+	purego.Main(func() {
+		_mainthread0 = func() *carboncore.ComponentInstanceRecord {
+			_ret := objc.Send[*carboncore.ComponentInstanceRecord](o.Ptr(), _aUGenericViewSelAudioUnit)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AUGenericView) ShowsExpertParameters() bool {
-	_ret := objc.Send[bool](o.Ptr(), _aUGenericViewSelShowsExpertParameters)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aUGenericViewSelShowsExpertParameters)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AUGenericView) SetShowsExpertParameters(showsExpertParameters bool) {
-	o.Ptr().Send(_aUGenericViewSelSetShowsExpertParameters, showsExpertParameters)
+	purego.Main(func() {
+		o.Ptr().Send(_aUGenericViewSelSetShowsExpertParameters, showsExpertParameters)
+	})
 }

@@ -118,20 +118,32 @@ func (o *AVPlayer) Init() *AVPlayer {
 
 // Returns a new player to play a single audiovisual resource referenced by a given URL.
 func AVPlayerPlayerWithURL(uRL *foundation.NSURL) *AVPlayer {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayer), _aVPlayerSelPlayerWithURL, uRL.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return AVPlayerFromID(_ret)
+	var _mainthread0 *AVPlayer
+	purego.Main(func() {
+		_mainthread0 = func() *AVPlayer {
+			_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayer), _aVPlayerSelPlayerWithURL, uRL.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return AVPlayerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns a new player initialized to play the specified player item.
 func AVPlayerPlayerWithPlayerItem(item *AVPlayerItem) *AVPlayer {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayer), _aVPlayerSelPlayerWithPlayerItem, item.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return AVPlayerFromID(_ret)
+	var _mainthread0 *AVPlayer
+	purego.Main(func() {
+		_mainthread0 = func() *AVPlayer {
+			_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayer), _aVPlayerSelPlayerWithPlayerItem, item.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return AVPlayerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a new player to play a single audiovisual resource referenced by a given URL.
@@ -186,7 +198,9 @@ func (o *AVPlayer) Rate() float32 {
 }
 
 func (o *AVPlayer) SetRate(rate float32) {
-	o.Ptr().Send(_aVPlayerSelSetRate, rate)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerSelSetRate, rate)
+	})
 }
 
 // Indicates the rate at which to start playback when play is called; defaults to 1.0. Setting this property does not imply playback starts automatically at this rate. Clients still have to kick off playback using `play`. Note that using setRate to start playback will skip using the value in this property nor would it update this property. Therefore, `setRate:1.0` is no longer recommended as a means to start playback. Use `play` instead. Use `setRate` for operations like scanning where the rate is to be updated instantaneously. Invoking `play` again would restore playback at the rate set in this property. The effective rate of playback may still differ from the default rate subject to restrictions imposed by the system. See documentation for the rate property for a discussion on when the desired rate does not translate to effective rate.
@@ -196,7 +210,9 @@ func (o *AVPlayer) DefaultRate() float32 {
 }
 
 func (o *AVPlayer) SetDefaultRate(defaultRate float32) {
-	o.Ptr().Send(_aVPlayerSelSetDefaultRate, defaultRate)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerSelSetDefaultRate, defaultRate)
+	})
 }
 
 // Indicates whether playback is currently paused indefinitely, suspended while waiting for appropriate conditions, or in progress. For possible values and discussion, see AVPlayerTimeControlStatus. When automaticallyWaitsToMinimizeStalling is YES, absent intervention in the form of invocations of -setRate: or -pause or, on iOS, an interruption that requires user intervention before playback can resume, the value of the property timeControlStatus automatically changes between AVPlayerTimeControlStatusPlaying and AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate depending on whether sufficient media data is available to continue playback. This property is key value observable.
@@ -235,7 +251,9 @@ func (o *AVPlayer) ActionAtItemEnd() AVPlayerActionAtItemEnd {
 }
 
 func (o *AVPlayer) SetActionAtItemEnd(actionAtItemEnd AVPlayerActionAtItemEnd) {
-	o.Ptr().Send(_aVPlayerSelSetActionAtItemEnd, actionAtItemEnd)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerSelSetActionAtItemEnd, actionAtItemEnd)
+	})
 }
 
 // Returns the current time of the current player item.
@@ -325,7 +343,9 @@ func (o *AVPlayer) AutomaticallyWaitsToMinimizeStalling() bool {
 
 // Indicates that the player is allowed to delay playback at the specified rate in order to minimize stalling When this property is YES, whenever 1) the rate is set from zero to non-zero or 2) the playback buffer becomes empty and playback stalls, the player will attempt to determine if, at the specified rate, its currentItem will play to the end without interruptions. Should it determine that such interruptions would occur and these interruptions can be avoided by delaying the start or resumption of playback, the value of timeControlStatus will become AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate and playback will start automatically when the likelihood of stalling has been minimized. You may want to set this property to NO when you need precise control over playback start times, e.g., when synchronizing multiple instances of AVPlayer, and you should set it to NO if you use an AVAssetResourceLoader delegate to load media data (more on this below). If the value of this property is NO, reasonForWaitingToPlay cannot assume a value of AVPlayerWaitingToMinimizeStallsReason. This implies that setting rate to a non-zero value in AVPlayerTimeControlStatusPaused will cause playback to start immediately as long as the playback buffer is not empty. When the playback buffer becomes empty during AVPlayerTimeControlStatusPlaying and playback stalls, playback state will switch to AVPlayerTimeControlStatusPaused and the rate will become 0.0. Changing the value of this property to NO while the value of timeControlStatus is AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate with a reasonForWaitingToPlay of AVPlayerWaitingToMinimizeStallsReason will cause the player to attempt playback at the specified rate immediately. For clients linked against iOS 10.0 and running on that version or later or linked against macOS 10.12 and running on that version or later, the default value of this property is YES. In versions of iOS prior to iOS 10.0 and versions of macOS prior to 10.12, this property is unavailable, and the behavior of the AVPlayer corresponds to the type of content being played. For streaming content, including HTTP Live Streaming, the AVPlayer acts as if automaticallyWaitsToMinimizeStalling is YES. For file-based content, including file-based content accessed via progressive http download, the AVPlayer acts as if automaticallyWaitsToMinimizeStalling is NO. If you employ an AVAssetResourceLoader delegate that loads media data for playback, you should set the value of your AVPlayer’s automaticallyWaitsToMinimizeStalling property to NO. Allowing the value of automaticallyWaitsToMinimizeStalling to remain YES when an AVAssetResourceLoader delegate is used for the loading of media data can result in poor start-up times for playback and poor recovery from stalls, because the behaviors provided by AVPlayer when automaticallyWaitsToMinimizeStalling has a value of YES depend on predictions of the future availability of media data that that do not function as expected when data is loaded via a client-controlled means, using the AVAssetResourceLoader delegate interface. You can allow the value of automaticallyWaitsToMinimizeStalling to remain YES if you use an AVAssetResourceLoader delegate to manage content keys for FairPlay Streaming, to provide dynamically-generated master playlists for HTTP Live Streaming, or to respond to authentication challenges, but not to load media data for playback. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
 func (o *AVPlayer) SetAutomaticallyWaitsToMinimizeStalling(automaticallyWaitsToMinimizeStalling bool) {
-	o.Ptr().Send(_aVPlayerSelSetAutomaticallyWaitsToMinimizeStalling, automaticallyWaitsToMinimizeStalling)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerSelSetAutomaticallyWaitsToMinimizeStalling, automaticallyWaitsToMinimizeStalling)
+	})
 }
 
 // Set to override the automatic choice of source clock for item timebases. NULL by default. This is most useful for synchronizing video-only movies with audio played via other means. IMPORTANT NOTE: If you specify a source clock other than the appropriate audio device clock, audio may drift out of sync.
@@ -335,7 +355,9 @@ func (o *AVPlayer) SourceClock() unsafe.Pointer {
 }
 
 func (o *AVPlayer) SetSourceClock(sourceClock unsafe.Pointer) {
-	o.Ptr().Send(_aVPlayerSelSetSourceClock, sourceClock)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerSelSetSourceClock, sourceClock)
+	})
 }
 
 // Requests the periodic invocation of a given block during playback to report changing time.
@@ -369,17 +391,27 @@ func (o *AVPlayer) Volume() float32 {
 }
 
 func (o *AVPlayer) SetVolume(volume float32) {
-	o.Ptr().Send(_aVPlayerSelSetVolume, volume)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerSelSetVolume, volume)
+	})
 }
 
 // Indicates whether or not audio output of the player is muted. Only affects audio muting for the player instance and not for the device.
 func (o *AVPlayer) IsMuted() bool {
-	_ret := objc.Send[bool](o.Ptr(), _aVPlayerSelIsMuted)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aVPlayerSelIsMuted)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayer) SetMuted(muted bool) {
-	o.Ptr().Send(_aVPlayerSelSetMuted, muted)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerSelSetMuted, muted)
+	})
 }
 
 // Applies automatic selection criteria for media that has the specified media characteristic.
@@ -403,7 +435,9 @@ func (o *AVPlayer) AppliesMediaSelectionCriteriaAutomatically() bool {
 }
 
 func (o *AVPlayer) SetAppliesMediaSelectionCriteriaAutomatically(appliesMediaSelectionCriteriaAutomatically bool) {
-	o.Ptr().Send(_aVPlayerSelSetAppliesMediaSelectionCriteriaAutomatically, appliesMediaSelectionCriteriaAutomatically)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerSelSetAppliesMediaSelectionCriteriaAutomatically, appliesMediaSelectionCriteriaAutomatically)
+	})
 }
 
 func (o *AVPlayer) AudioOutputDeviceUniqueID() *foundation.NSString {
@@ -415,7 +449,9 @@ func (o *AVPlayer) AudioOutputDeviceUniqueID() *foundation.NSString {
 }
 
 func (o *AVPlayer) SetAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID *foundation.NSString) {
-	o.Ptr().Send(_aVPlayerSelSetAudioOutputDeviceUniqueID, audioOutputDeviceUniqueID.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerSelSetAudioOutputDeviceUniqueID, audioOutputDeviceUniqueID.Ptr())
+	})
 }
 
 // Indicates whether the player allows switching to "external playback" mode. The default value is YES.
@@ -425,13 +461,21 @@ func (o *AVPlayer) AllowsExternalPlayback() bool {
 }
 
 func (o *AVPlayer) SetAllowsExternalPlayback(allowsExternalPlayback bool) {
-	o.Ptr().Send(_aVPlayerSelSetAllowsExternalPlayback, allowsExternalPlayback)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerSelSetAllowsExternalPlayback, allowsExternalPlayback)
+	})
 }
 
 // Indicates whether the player is currently playing video in "external playback" mode.
 func (o *AVPlayer) IsExternalPlaybackActive() bool {
-	_ret := objc.Send[bool](o.Ptr(), _aVPlayerSelIsExternalPlaybackActive)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aVPlayerSelIsExternalPlaybackActive)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayer) OutputObscuredDueToInsufficientExternalProtection() bool {
@@ -441,8 +485,14 @@ func (o *AVPlayer) OutputObscuredDueToInsufficientExternalProtection() bool {
 
 // Indicates whether HDR content can be played to an appropriate display. This property is YES if an HDR display is available and the device is capable of playing HDR content from an appropriate AVAsset, NO otherwise. This property does not indicate whether video contains HDR content, whether HDR video is currently playing, or whether video is playing on an HDR display. This property is not KVO observable.
 func AVPlayerEligibleForHDRPlayback() bool {
-	_ret := objc.Send[bool](objc.ID(_clsAVPlayer), _aVPlayerSelEligibleForHDRPlayback)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](objc.ID(_clsAVPlayer), _aVPlayerSelEligibleForHDRPlayback)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayer) PreferredVideoDecoderGPURegistryID() uint64 {
@@ -451,7 +501,9 @@ func (o *AVPlayer) PreferredVideoDecoderGPURegistryID() uint64 {
 }
 
 func (o *AVPlayer) SetPreferredVideoDecoderGPURegistryID(preferredVideoDecoderGPURegistryID uint64) {
-	o.Ptr().Send(_aVPlayerSelSetPreferredVideoDecoderGPURegistryID, preferredVideoDecoderGPURegistryID)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerSelSetPreferredVideoDecoderGPURegistryID, preferredVideoDecoderGPURegistryID)
+	})
 }
 
 // Indicates whether video playback prevents display and device sleep. Default is YES on iOS, tvOS and in Mac Catalyst apps. Default is NO on macOS. Setting this property to NO does not force the display to sleep, it simply stops preventing display sleep. Other apps or frameworks within your app may still be preventing display sleep for various reasons. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
@@ -462,7 +514,9 @@ func (o *AVPlayer) PreventsDisplaySleepDuringVideoPlayback() bool {
 
 // Indicates whether video playback prevents display and device sleep. Default is YES on iOS, tvOS and in Mac Catalyst apps. Default is NO on macOS. Setting this property to NO does not force the display to sleep, it simply stops preventing display sleep. Other apps or frameworks within your app may still be preventing display sleep for various reasons. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
 func (o *AVPlayer) SetPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) {
-	o.Ptr().Send(_aVPlayerSelSetPreventsDisplaySleepDuringVideoPlayback, preventsDisplaySleepDuringVideoPlayback)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerSelSetPreventsDisplaySleepDuringVideoPlayback, preventsDisplaySleepDuringVideoPlayback)
+	})
 }
 
 func (o *AVPlayer) AudiovisualBackgroundPlaybackPolicy() AVPlayerAudiovisualBackgroundPlaybackPolicy {
@@ -471,7 +525,9 @@ func (o *AVPlayer) AudiovisualBackgroundPlaybackPolicy() AVPlayerAudiovisualBack
 }
 
 func (o *AVPlayer) SetAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy AVPlayerAudiovisualBackgroundPlaybackPolicy) {
-	o.Ptr().Send(_aVPlayerSelSetAudiovisualBackgroundPlaybackPolicy, audiovisualBackgroundPlaybackPolicy)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerSelSetAudiovisualBackgroundPlaybackPolicy, audiovisualBackgroundPlaybackPolicy)
+	})
 }
 
 // The playback coordinator for this player. If the playback coordinator is connected to other participants, rate changes and seeks on the current item will be automatically mirrored to all connected participants. Depending on policies, the coordinator may also intercept rate changes to non-zero to coordinate playback start with the rest of the group. Use [AVPlayer playImmediatelyAtRate:] to override the coordinated startup behavior and start playback immediately. This is useful to give users an opportunity to override waiting caused by other participants' suspensions. Player configuration other than rate and seeks are not communicated to other participants and can be configured independently by each participant. A player with a connected playbackCoordinator will change behavior in situations that require the player to pause for internal reasons, such as a route change or a stall. When resuming after these events, the player will not resume at the stop time. Instead, it will attempt to rejoin the group, potentially seeking to match the other participant's progress. It is left to the owner of the AVPlayer to ensure that all participants are playing the same item. See the discussion of AVPlaybackCoordinator for considerations about item transitions.
@@ -492,34 +548,60 @@ func (o *AVPlayer) VideoOutput() *AVPlayerVideoOutput {
 }
 
 func (o *AVPlayer) SetVideoOutput(videoOutput *AVPlayerVideoOutput) {
-	o.Ptr().Send(_aVPlayerSelSetVideoOutput, videoOutput.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerSelSetVideoOutput, videoOutput.Ptr())
+	})
 }
 
 func (o *AVPlayer) NetworkResourcePriority() AVPlayerNetworkResourcePriority {
-	_ret := objc.Send[AVPlayerNetworkResourcePriority](o.Ptr(), _aVPlayerSelNetworkResourcePriority)
-	return _ret
+	var _mainthread0 AVPlayerNetworkResourcePriority
+	purego.Main(func() {
+		_mainthread0 = func() AVPlayerNetworkResourcePriority {
+			_ret := objc.Send[AVPlayerNetworkResourcePriority](o.Ptr(), _aVPlayerSelNetworkResourcePriority)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayer) SetNetworkResourcePriority(networkResourcePriority AVPlayerNetworkResourcePriority) {
-	o.Ptr().Send(_aVPlayerSelSetNetworkResourcePriority, networkResourcePriority)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerSelSetNetworkResourcePriority, networkResourcePriority)
+	})
 }
 
 func (o *AVPlayer) IntendedSpatialAudioExperience() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVPlayerSelIntendedSpatialAudioExperience)
-	return _ret
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVPlayerSelIntendedSpatialAudioExperience)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *AVPlayer) SetIntendedSpatialAudioExperience(intendedSpatialAudioExperience unsafe.Pointer) {
-	o.Ptr().Send(_aVPlayerSelSetIntendedSpatialAudioExperience, intendedSpatialAudioExperience)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerSelSetIntendedSpatialAudioExperience, intendedSpatialAudioExperience)
+	})
 }
 
 func AVPlayerIsObservationEnabled() bool {
-	_ret := objc.Send[bool](objc.ID(_clsAVPlayer), _aVPlayerSelIsObservationEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](objc.ID(_clsAVPlayer), _aVPlayerSelIsObservationEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func AVPlayerSetObservationEnabled(observationEnabled bool) {
-	objc.ID(_clsAVPlayer).Send(_aVPlayerSelSetObservationEnabled, observationEnabled)
+	purego.Main(func() {
+		objc.ID(_clsAVPlayer).Send(_aVPlayerSelSetObservationEnabled, observationEnabled)
+	})
 }
 
 func (o *AVPlayer) AllowsCaptureOfClearKeyVideo() bool {
@@ -528,19 +610,29 @@ func (o *AVPlayer) AllowsCaptureOfClearKeyVideo() bool {
 }
 
 func (o *AVPlayer) SetAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo bool) {
-	o.Ptr().Send(_aVPlayerSelSetAllowsCaptureOfClearKeyVideo, allowsCaptureOfClearKeyVideo)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerSelSetAllowsCaptureOfClearKeyVideo, allowsCaptureOfClearKeyVideo)
+	})
 }
 
 // Indicates whether display of closed captions is enabled. This property is deprecated. When the value of appliesMediaSelectionCriteriaAutomatically is YES, the receiver will enable closed captions automatically either according to user preferences or, if you provide them, according to AVPlayerMediaSelectionCriteria for the media characteristic AVMediaCharacteristicLegible. If you want to determine whether closed captions may be available for a given AVPlayerItem, you can examine the AVMediaSelectionOptions in the AVMediaSelectionGroup for the characteristic AVMediaCharacteristicLegible, as vended by -[AVAsset mediaSelectionGroupForMediaCharacteristic:]. See AVMediaCharacteristicTranscribesSpokenDialogForAccessibility and AVMediaCharacteristicDescribesMusicAndSoundForAccessibility as documented in AVMediaFormat.h for information about how to identify legible media selection options that offer the features of closed captions for accessibility purposes. You can select or deselect a specific AVMediaSelectionOption via -[AVPlayerItem selectMediaOption:inMediaSelectionGroup:]. For further information about Media Accessibility preferences, see MediaAccessibility framework documentation.
 // Deprecated: Allow AVPlayer to enable closed captions automatically according to user preferences by ensuring that the value of appliesMediaSelectionCriteriaAutomatically is YES.
 func (o *AVPlayer) IsClosedCaptionDisplayEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _aVPlayerSelIsClosedCaptionDisplayEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _aVPlayerSelIsClosedCaptionDisplayEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: Allow AVPlayer to enable closed captions automatically according to user preferences by ensuring that the value of appliesMediaSelectionCriteriaAutomatically is YES.
 func (o *AVPlayer) SetClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled bool) {
-	o.Ptr().Send(_aVPlayerSelSetClosedCaptionDisplayEnabled, closedCaptionDisplayEnabled)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerSelSetClosedCaptionDisplayEnabled, closedCaptionDisplayEnabled)
+	})
 }
 
 // Use sourceClock instead.
@@ -552,5 +644,7 @@ func (o *AVPlayer) MasterClock() unsafe.Pointer {
 
 // Deprecated: since macOS 15.0.
 func (o *AVPlayer) SetMasterClock(masterClock unsafe.Pointer) {
-	o.Ptr().Send(_aVPlayerSelSetMasterClock, masterClock)
+	purego.Main(func() {
+		o.Ptr().Send(_aVPlayerSelSetMasterClock, masterClock)
+	})
 }

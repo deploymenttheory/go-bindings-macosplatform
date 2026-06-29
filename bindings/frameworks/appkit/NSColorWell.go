@@ -55,121 +55,205 @@ func NSColorWellFromID(id objc.ID) *NSColorWell {
 
 // Creates a color well that adopts the specified appearance style.
 func NSColorWellColorWellWithStyle(style NSColorWellStyle) *NSColorWell {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorWell), _nSColorWellSelColorWellWithStyle, style)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorWellFromID(_ret)
+	var _mainthread0 *NSColorWell
+	purego.Main(func() {
+		_mainthread0 = func() *NSColorWell {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSColorWell), _nSColorWellSelColorWellWithStyle, style)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorWellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deactivates the color well.
 func (o *NSColorWell) Deactivate() {
-	o.Ptr().Send(_nSColorWellSelDeactivate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorWellSelDeactivate)
+	})
 }
 
 // Activates the color well, displays the color panel, and synchronizes the two UI elements.
 func (o *NSColorWell) Activate(exclusive bool) {
-	o.Ptr().Send(_nSColorWellSelActivate, exclusive)
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorWellSelActivate, exclusive)
+	})
 }
 
 // Draws the area inside the color well at the specified location without drawing borders.
 func (o *NSColorWell) DrawWellInside(insideRect corefoundation.CGRect) {
-	o.Ptr().Send(_nSColorWellSelDrawWellInside, insideRect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorWellSelDrawWellInside, insideRect)
+	})
 }
 
 // Changes the currently selected color to the color of the specified object.
 // Deprecated: This property will be deprecated in a future release.
 func (o *NSColorWell) TakeColorFrom(sender objc.ID) {
-	o.Ptr().Send(_nSColorWellSelTakeColorFrom, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorWellSelTakeColorFrom, sender)
+	})
 }
 
 func (o *NSColorWell) IsActive() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSColorWellSelIsActive)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSColorWellSelIsActive)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: This property will be deprecated in a future release.
 func (o *NSColorWell) IsBordered() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSColorWellSelIsBordered)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSColorWellSelIsBordered)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: This property will be deprecated in a future release.
 func (o *NSColorWell) SetBordered(bordered bool) {
-	o.Ptr().Send(_nSColorWellSelSetBordered, bordered)
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorWellSelSetBordered, bordered)
+	})
 }
 
 // Deprecated: This property will be deprecated in a future release.
 func (o *NSColorWell) Color() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorWellSelColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSColorWellSelColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: This property will be deprecated in a future release.
 func (o *NSColorWell) SetColor(color *NSColor) {
-	o.Ptr().Send(_nSColorWellSelSetColor, color.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorWellSelSetColor, color.Ptr())
+	})
 }
 
 func (o *NSColorWell) ColorWellStyle() NSColorWellStyle {
-	_ret := objc.Send[NSColorWellStyle](o.Ptr(), _nSColorWellSelColorWellStyle)
-	return _ret
+	var _mainthread0 NSColorWellStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSColorWellStyle {
+			_ret := objc.Send[NSColorWellStyle](o.Ptr(), _nSColorWellSelColorWellStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSColorWell) SetColorWellStyle(colorWellStyle NSColorWellStyle) {
-	o.Ptr().Send(_nSColorWellSelSetColorWellStyle, colorWellStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorWellSelSetColorWellStyle, colorWellStyle)
+	})
 }
 
 func (o *NSColorWell) Image() *NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorWellSelImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSImageFromID(_ret)
+	var _mainthread0 *NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSColorWellSelImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSColorWell) SetImage(image *NSImage) {
-	o.Ptr().Send(_nSColorWellSelSetImage, image.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorWellSelSetImage, image.Ptr())
+	})
 }
 
 func (o *NSColorWell) PulldownTarget() objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorWellSelPulldownTarget)
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSColorWellSelPulldownTarget)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSColorWell) SetPulldownTarget(pulldownTarget objc.ID) {
-	o.Ptr().Send(_nSColorWellSelSetPulldownTarget, pulldownTarget)
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorWellSelSetPulldownTarget, pulldownTarget)
+	})
 }
 
 func (o *NSColorWell) PulldownAction() objc.SEL {
-	_ret := objc.Send[objc.SEL](o.Ptr(), _nSColorWellSelPulldownAction)
-	return _ret
+	var _mainthread0 objc.SEL
+	purego.Main(func() {
+		_mainthread0 = func() objc.SEL {
+			_ret := objc.Send[objc.SEL](o.Ptr(), _nSColorWellSelPulldownAction)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSColorWell) SetPulldownAction(pulldownAction objc.SEL) {
-	o.Ptr().Send(_nSColorWellSelSetPulldownAction, pulldownAction)
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorWellSelSetPulldownAction, pulldownAction)
+	})
 }
 
 // Controls alpha support for the current color well, and the visibility of alpha slider in the color panel. When `NSColor.ignoresAlpha` (deprecated) is set to `YES`, this property will always return `NO` and alpha is not supported globally.
 func (o *NSColorWell) SupportsAlpha() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSColorWellSelSupportsAlpha)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSColorWellSelSupportsAlpha)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Controls alpha support for the current color well, and the visibility of alpha slider in the color panel. When `NSColor.ignoresAlpha` (deprecated) is set to `YES`, this property will always return `NO` and alpha is not supported globally.
 func (o *NSColorWell) SetSupportsAlpha(supportsAlpha bool) {
-	o.Ptr().Send(_nSColorWellSelSetSupportsAlpha, supportsAlpha)
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorWellSelSetSupportsAlpha, supportsAlpha)
+	})
 }
 
 // The maximum linear exposure a color in this color well can be set to. Defaults to 1 and ignores any value less than 1. If set to a value >= 2, the color picked for this well may have a linear exposure applied to it.
 func (o *NSColorWell) MaximumLinearExposure() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSColorWellSelMaximumLinearExposure)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSColorWellSelMaximumLinearExposure)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The maximum linear exposure a color in this color well can be set to. Defaults to 1 and ignores any value less than 1. If set to a value >= 2, the color picked for this well may have a linear exposure applied to it.
 func (o *NSColorWell) SetMaximumLinearExposure(maximumLinearExposure float64) {
-	o.Ptr().Send(_nSColorWellSelSetMaximumLinearExposure, maximumLinearExposure)
+	purego.Main(func() {
+		o.Ptr().Send(_nSColorWellSelSetMaximumLinearExposure, maximumLinearExposure)
+	})
 }

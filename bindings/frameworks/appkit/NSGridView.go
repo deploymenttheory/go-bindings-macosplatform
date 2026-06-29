@@ -65,200 +65,346 @@ func NSGridViewFromID(id objc.ID) *NSGridView {
 
 // Creates a newly allocated grid view object with the specified frame rectangle.
 func (o *NSGridView) InitWithFrame(frameRect corefoundation.CGRect) *NSGridView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelInitWithFrame, frameRect)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGridViewFromID(_ret)
+	var _mainthread0 *NSGridView
+	purego.Main(func() {
+		_mainthread0 = func() *NSGridView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelInitWithFrame, frameRect)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGridViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a newly allocated grid view object from the coder.
 func (o *NSGridView) InitWithCoder(coder *foundation.NSCoder) *NSGridView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGridViewFromID(_ret)
+	var _mainthread0 *NSGridView
+	purego.Main(func() {
+		_mainthread0 = func() *NSGridView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGridViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a newly allocated grid view object with the specified number of columns and rows.
 func NSGridViewGridViewWithNumberOfColumnsRows(columnCount int, rowCount int) *NSGridView {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSGridView), _nSGridViewSelGridViewWithNumberOfColumnsRows, columnCount, rowCount)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGridViewFromID(_ret)
+	var _mainthread0 *NSGridView
+	purego.Main(func() {
+		_mainthread0 = func() *NSGridView {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSGridView), _nSGridViewSelGridViewWithNumberOfColumnsRows, columnCount, rowCount)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGridViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a newly allocated grid view object with the specified array of arrays of views.
 func NSGridViewGridViewWithViews(rows *foundation.NSArray[objc.ID]) *NSGridView {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSGridView), _nSGridViewSelGridViewWithViews, rows.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGridViewFromID(_ret)
+	var _mainthread0 *NSGridView
+	purego.Main(func() {
+		_mainthread0 = func() *NSGridView {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSGridView), _nSGridViewSelGridViewWithViews, rows.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGridViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the grid row object at the specified index.
 func (o *NSGridView) RowAtIndex(index int) *NSGridRow {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelRowAtIndex, index)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGridRowFromID(_ret)
+	var _mainthread0 *NSGridRow
+	purego.Main(func() {
+		_mainthread0 = func() *NSGridRow {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelRowAtIndex, index)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGridRowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the index of the specified grid row.
 func (o *NSGridView) IndexOfRow(row *NSGridRow) int {
-	_ret := objc.Send[int](o.Ptr(), _nSGridViewSelIndexOfRow, row.Ptr())
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSGridViewSelIndexOfRow, row.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the grid column object at the specified index.
 func (o *NSGridView) ColumnAtIndex(index int) *NSGridColumn {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelColumnAtIndex, index)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGridColumnFromID(_ret)
+	var _mainthread0 *NSGridColumn
+	purego.Main(func() {
+		_mainthread0 = func() *NSGridColumn {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelColumnAtIndex, index)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGridColumnFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the index of the specified grid column.
 func (o *NSGridView) IndexOfColumn(column *NSGridColumn) int {
-	_ret := objc.Send[int](o.Ptr(), _nSGridViewSelIndexOfColumn, column.Ptr())
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSGridViewSelIndexOfColumn, column.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the grid cell object at the specified column and row index.
 func (o *NSGridView) CellAtColumnIndexRowIndex(columnIndex int, rowIndex int) *NSGridCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelCellAtColumnIndexRowIndex, columnIndex, rowIndex)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGridCellFromID(_ret)
+	var _mainthread0 *NSGridCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSGridCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelCellAtColumnIndexRowIndex, columnIndex, rowIndex)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGridCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the grid cell object that contains the given view or one of its ancestors.
 func (o *NSGridView) CellForView(view *NSView) *NSGridCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelCellForView, view.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGridCellFromID(_ret)
+	var _mainthread0 *NSGridCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSGridCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelCellForView, view.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGridCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Adds an array of views to a new row.
 func (o *NSGridView) AddRowWithViews(views *foundation.NSArray[*NSView]) *NSGridRow {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelAddRowWithViews, views.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGridRowFromID(_ret)
+	var _mainthread0 *NSGridRow
+	purego.Main(func() {
+		_mainthread0 = func() *NSGridRow {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelAddRowWithViews, views.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGridRowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Inserts the array of view objects into the grid view at the index.
 func (o *NSGridView) InsertRowAtIndexWithViews(index int, views *foundation.NSArray[*NSView]) *NSGridRow {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelInsertRowAtIndexWithViews, index, views.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGridRowFromID(_ret)
+	var _mainthread0 *NSGridRow
+	purego.Main(func() {
+		_mainthread0 = func() *NSGridRow {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelInsertRowAtIndexWithViews, index, views.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGridRowFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Moves the specified row to the new row location.
 func (o *NSGridView) MoveRowAtIndexToIndex(fromIndex int, toIndex int) {
-	o.Ptr().Send(_nSGridViewSelMoveRowAtIndexToIndex, fromIndex, toIndex)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridViewSelMoveRowAtIndexToIndex, fromIndex, toIndex)
+	})
 }
 
 // Removes the row from the grid view at the index.
 func (o *NSGridView) RemoveRowAtIndex(index int) {
-	o.Ptr().Send(_nSGridViewSelRemoveRowAtIndex, index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridViewSelRemoveRowAtIndex, index)
+	})
 }
 
 // Adds a new column containing the array of views.
 func (o *NSGridView) AddColumnWithViews(views *foundation.NSArray[*NSView]) *NSGridColumn {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelAddColumnWithViews, views.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGridColumnFromID(_ret)
+	var _mainthread0 *NSGridColumn
+	purego.Main(func() {
+		_mainthread0 = func() *NSGridColumn {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelAddColumnWithViews, views.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGridColumnFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Inserts the array of view objects at the specified index.
 func (o *NSGridView) InsertColumnAtIndexWithViews(index int, views *foundation.NSArray[*NSView]) *NSGridColumn {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelInsertColumnAtIndexWithViews, index, views.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSGridColumnFromID(_ret)
+	var _mainthread0 *NSGridColumn
+	purego.Main(func() {
+		_mainthread0 = func() *NSGridColumn {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelInsertColumnAtIndexWithViews, index, views.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSGridColumnFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Moves the specified column to a new column location.
 func (o *NSGridView) MoveColumnAtIndexToIndex(fromIndex int, toIndex int) {
-	o.Ptr().Send(_nSGridViewSelMoveColumnAtIndexToIndex, fromIndex, toIndex)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridViewSelMoveColumnAtIndexToIndex, fromIndex, toIndex)
+	})
 }
 
 // Removes the column from the grid view at the specified index.
 func (o *NSGridView) RemoveColumnAtIndex(index int) {
-	o.Ptr().Send(_nSGridViewSelRemoveColumnAtIndex, index)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridViewSelRemoveColumnAtIndex, index)
+	})
 }
 
 // Expands the cell at the top-leading corner of the horizontal and vertical range to cover the entire area.
 func (o *NSGridView) MergeCellsInHorizontalRangeVerticalRange(hRange foundation.NSRange, vRange foundation.NSRange) {
-	o.Ptr().Send(_nSGridViewSelMergeCellsInHorizontalRangeVerticalRange, hRange, vRange)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridViewSelMergeCellsInHorizontalRangeVerticalRange, hRange, vRange)
+	})
 }
 
 func (o *NSGridView) NumberOfRows() int {
-	_ret := objc.Send[int](o.Ptr(), _nSGridViewSelNumberOfRows)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSGridViewSelNumberOfRows)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridView) NumberOfColumns() int {
-	_ret := objc.Send[int](o.Ptr(), _nSGridViewSelNumberOfColumns)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSGridViewSelNumberOfColumns)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridView) XPlacement() NSGridCellPlacement {
-	_ret := objc.Send[NSGridCellPlacement](o.Ptr(), _nSGridViewSelXPlacement)
-	return _ret
+	var _mainthread0 NSGridCellPlacement
+	purego.Main(func() {
+		_mainthread0 = func() NSGridCellPlacement {
+			_ret := objc.Send[NSGridCellPlacement](o.Ptr(), _nSGridViewSelXPlacement)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridView) SetXPlacement(xPlacement NSGridCellPlacement) {
-	o.Ptr().Send(_nSGridViewSelSetXPlacement, xPlacement)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridViewSelSetXPlacement, xPlacement)
+	})
 }
 
 func (o *NSGridView) YPlacement() NSGridCellPlacement {
-	_ret := objc.Send[NSGridCellPlacement](o.Ptr(), _nSGridViewSelYPlacement)
-	return _ret
+	var _mainthread0 NSGridCellPlacement
+	purego.Main(func() {
+		_mainthread0 = func() NSGridCellPlacement {
+			_ret := objc.Send[NSGridCellPlacement](o.Ptr(), _nSGridViewSelYPlacement)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridView) SetYPlacement(yPlacement NSGridCellPlacement) {
-	o.Ptr().Send(_nSGridViewSelSetYPlacement, yPlacement)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridViewSelSetYPlacement, yPlacement)
+	})
 }
 
 func (o *NSGridView) RowAlignment() NSGridRowAlignment {
-	_ret := objc.Send[NSGridRowAlignment](o.Ptr(), _nSGridViewSelRowAlignment)
-	return _ret
+	var _mainthread0 NSGridRowAlignment
+	purego.Main(func() {
+		_mainthread0 = func() NSGridRowAlignment {
+			_ret := objc.Send[NSGridRowAlignment](o.Ptr(), _nSGridViewSelRowAlignment)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridView) SetRowAlignment(rowAlignment NSGridRowAlignment) {
-	o.Ptr().Send(_nSGridViewSelSetRowAlignment, rowAlignment)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridViewSelSetRowAlignment, rowAlignment)
+	})
 }
 
 func (o *NSGridView) RowSpacing() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSGridViewSelRowSpacing)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSGridViewSelRowSpacing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridView) SetRowSpacing(rowSpacing float64) {
-	o.Ptr().Send(_nSGridViewSelSetRowSpacing, rowSpacing)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridViewSelSetRowSpacing, rowSpacing)
+	})
 }
 
 func (o *NSGridView) ColumnSpacing() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSGridViewSelColumnSpacing)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSGridViewSelColumnSpacing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSGridView) SetColumnSpacing(columnSpacing float64) {
-	o.Ptr().Send(_nSGridViewSelSetColumnSpacing, columnSpacing)
+	purego.Main(func() {
+		o.Ptr().Send(_nSGridViewSelSetColumnSpacing, columnSpacing)
+	})
 }

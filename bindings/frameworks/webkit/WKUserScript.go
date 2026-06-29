@@ -38,36 +38,66 @@ func WKUserScriptFromID(id objc.ID) *WKUserScript {
 
 // Creates a user script object that contains the specified source code and attributes.
 func (o *WKUserScript) InitWithSourceInjectionTimeForMainFrameOnly(source *foundation.NSString, injectionTime WKUserScriptInjectionTime, forMainFrameOnly bool) *WKUserScript {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKUserScriptSelInitWithSourceInjectionTimeForMainFrameOnly, source.Ptr(), injectionTime, forMainFrameOnly)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKUserScriptFromID(_ret)
+	var _mainthread0 *WKUserScript
+	purego.Main(func() {
+		_mainthread0 = func() *WKUserScript {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKUserScriptSelInitWithSourceInjectionTimeForMainFrameOnly, source.Ptr(), injectionTime, forMainFrameOnly)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKUserScriptFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates a user script object that is scoped to a particular content world.
 func (o *WKUserScript) InitWithSourceInjectionTimeForMainFrameOnlyInContentWorld(source *foundation.NSString, injectionTime WKUserScriptInjectionTime, forMainFrameOnly bool, contentWorld *WKContentWorld) *WKUserScript {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKUserScriptSelInitWithSourceInjectionTimeForMainFrameOnlyInContentWorld, source.Ptr(), injectionTime, forMainFrameOnly, contentWorld.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return WKUserScriptFromID(_ret)
+	var _mainthread0 *WKUserScript
+	purego.Main(func() {
+		_mainthread0 = func() *WKUserScript {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKUserScriptSelInitWithSourceInjectionTimeForMainFrameOnlyInContentWorld, source.Ptr(), injectionTime, forMainFrameOnly, contentWorld.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return WKUserScriptFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKUserScript) Source() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKUserScriptSelSource)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKUserScriptSelSource)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKUserScript) InjectionTime() WKUserScriptInjectionTime {
-	_ret := objc.Send[WKUserScriptInjectionTime](o.Ptr(), _wKUserScriptSelInjectionTime)
-	return _ret
+	var _mainthread0 WKUserScriptInjectionTime
+	purego.Main(func() {
+		_mainthread0 = func() WKUserScriptInjectionTime {
+			_ret := objc.Send[WKUserScriptInjectionTime](o.Ptr(), _wKUserScriptSelInjectionTime)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *WKUserScript) IsForMainFrameOnly() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKUserScriptSelIsForMainFrameOnly)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKUserScriptSelIsForMainFrameOnly)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

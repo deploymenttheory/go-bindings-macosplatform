@@ -68,12 +68,16 @@ func (o *MKLocalSearch) StartWithCompletionHandler(completionHandler func(*MKLoc
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_mKLocalSearchSelStartWithCompletionHandler, __block_completionHandler)
+	purego.Main(func() {
+		o.Ptr().Send(_mKLocalSearchSelStartWithCompletionHandler, __block_completionHandler)
+	})
 }
 
 // Cancels an in-progress search operation.
 func (o *MKLocalSearch) Cancel() {
-	o.Ptr().Send(_mKLocalSearchSelCancel)
+	purego.Main(func() {
+		o.Ptr().Send(_mKLocalSearchSelCancel)
+	})
 }
 
 func (o *MKLocalSearch) IsSearching() bool {

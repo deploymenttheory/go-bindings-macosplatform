@@ -58,136 +58,238 @@ func NSPopoverFromID(id objc.ID) *NSPopover {
 }
 
 func (o *NSPopover) Init() *NSPopover {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverSelInit)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSPopoverFromID(_ret)
+	var _mainthread0 *NSPopover
+	purego.Main(func() {
+		_mainthread0 = func() *NSPopover {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverSelInit)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSPopoverFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPopover) InitWithCoder(coder *foundation.NSCoder) *NSPopover {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSPopoverFromID(_ret)
+	var _mainthread0 *NSPopover
+	purego.Main(func() {
+		_mainthread0 = func() *NSPopover {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSPopoverFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Shows the popover anchored to the specified view.
 func (o *NSPopover) ShowRelativeToRectOfViewPreferredEdge(positioningRect corefoundation.CGRect, positioningView *NSView, preferredEdge foundation.NSRectEdge) {
-	o.Ptr().Send(_nSPopoverSelShowRelativeToRectOfViewPreferredEdge, positioningRect, positioningView.Ptr(), preferredEdge)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopoverSelShowRelativeToRectOfViewPreferredEdge, positioningRect, positioningView.Ptr(), preferredEdge)
+	})
 }
 
 // Shows the popover anchored to the specified toolbar item.
 func (o *NSPopover) ShowRelativeToToolbarItem(toolbarItem *NSToolbarItem) {
-	o.Ptr().Send(_nSPopoverSelShowRelativeToToolbarItem, toolbarItem.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopoverSelShowRelativeToToolbarItem, toolbarItem.Ptr())
+	})
 }
 
 // Attempts to close the popover.
 func (o *NSPopover) PerformClose(sender objc.ID) {
-	o.Ptr().Send(_nSPopoverSelPerformClose, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopoverSelPerformClose, sender)
+	})
 }
 
 // Forces the popover to close without consulting its delegate.
 func (o *NSPopover) Close() {
-	o.Ptr().Send(_nSPopoverSelClose)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopoverSelClose)
+	})
 }
 
 func (o *NSPopover) Delegate() NSPopoverDelegate {
-	_ret := objc.Send[NSPopoverDelegate](o.Ptr(), _nSPopoverSelDelegate)
-	return _ret
+	var _mainthread0 NSPopoverDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSPopoverDelegate {
+			_ret := objc.Send[NSPopoverDelegate](o.Ptr(), _nSPopoverSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPopover) SetDelegate(delegate NSPopoverDelegate) {
-	o.Ptr().Send(_nSPopoverSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopoverSelSetDelegate, delegate)
+	})
 }
 
 // The appearance of the popover. The popover's contentView will inherit this appearance. The default effective appearance is the NSAppearanceNameVibrantLight appearance. If nil is set, nil will be returned, and the effective appearance will return to the default. To prevent conflicts with the previous appearance property, this is only available for apps that target 10.10 and higher.
 func (o *NSPopover) Appearance() *NSAppearance {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverSelAppearance)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSAppearanceFromID(_ret)
+	var _mainthread0 *NSAppearance
+	purego.Main(func() {
+		_mainthread0 = func() *NSAppearance {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverSelAppearance)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSAppearanceFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // The appearance of the popover. The popover's contentView will inherit this appearance. The default effective appearance is the NSAppearanceNameVibrantLight appearance. If nil is set, nil will be returned, and the effective appearance will return to the default. To prevent conflicts with the previous appearance property, this is only available for apps that target 10.10 and higher.
 func (o *NSPopover) SetAppearance(appearance *NSAppearance) {
-	o.Ptr().Send(_nSPopoverSelSetAppearance, appearance.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopoverSelSetAppearance, appearance.Ptr())
+	})
 }
 
 func (o *NSPopover) EffectiveAppearance() *NSAppearance {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverSelEffectiveAppearance)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSAppearanceFromID(_ret)
+	var _mainthread0 *NSAppearance
+	purego.Main(func() {
+		_mainthread0 = func() *NSAppearance {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverSelEffectiveAppearance)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSAppearanceFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPopover) Behavior() NSPopoverBehavior {
-	_ret := objc.Send[NSPopoverBehavior](o.Ptr(), _nSPopoverSelBehavior)
-	return _ret
+	var _mainthread0 NSPopoverBehavior
+	purego.Main(func() {
+		_mainthread0 = func() NSPopoverBehavior {
+			_ret := objc.Send[NSPopoverBehavior](o.Ptr(), _nSPopoverSelBehavior)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPopover) SetBehavior(behavior NSPopoverBehavior) {
-	o.Ptr().Send(_nSPopoverSelSetBehavior, behavior)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopoverSelSetBehavior, behavior)
+	})
 }
 
 func (o *NSPopover) Animates() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSPopoverSelAnimates)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSPopoverSelAnimates)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPopover) SetAnimates(animates bool) {
-	o.Ptr().Send(_nSPopoverSelSetAnimates, animates)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopoverSelSetAnimates, animates)
+	})
 }
 
 func (o *NSPopover) ContentViewController() *NSViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverSelContentViewController)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewControllerFromID(_ret)
+	var _mainthread0 *NSViewController
+	purego.Main(func() {
+		_mainthread0 = func() *NSViewController {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverSelContentViewController)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewControllerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPopover) SetContentViewController(contentViewController *NSViewController) {
-	o.Ptr().Send(_nSPopoverSelSetContentViewController, contentViewController.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopoverSelSetContentViewController, contentViewController.Ptr())
+	})
 }
 
 func (o *NSPopover) ContentSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSPopoverSelContentSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSPopoverSelContentSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPopover) SetContentSize(contentSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSPopoverSelSetContentSize, contentSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopoverSelSetContentSize, contentSize)
+	})
 }
 
 func (o *NSPopover) IsShown() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSPopoverSelIsShown)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSPopoverSelIsShown)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns \c YES if the window is detached to an implicitly created detached window, \c NO otherwise. This method does not apply when the popover is detached to a window returned with \c -detachableWindowForPopover:.
 func (o *NSPopover) IsDetached() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSPopoverSelIsDetached)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSPopoverSelIsDetached)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPopover) PositioningRect() corefoundation.CGRect {
-	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSPopoverSelPositioningRect)
-	return _ret
+	var _mainthread0 corefoundation.CGRect
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGRect {
+			_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSPopoverSelPositioningRect)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPopover) SetPositioningRect(positioningRect corefoundation.CGRect) {
-	o.Ptr().Send(_nSPopoverSelSetPositioningRect, positioningRect)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopoverSelSetPositioningRect, positioningRect)
+	})
 }
 
 func (o *NSPopover) HasFullSizeContent() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSPopoverSelHasFullSizeContent)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSPopoverSelHasFullSizeContent)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPopover) SetHasFullSizeContent(hasFullSizeContent bool) {
-	o.Ptr().Send(_nSPopoverSelSetHasFullSizeContent, hasFullSizeContent)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPopoverSelSetHasFullSizeContent, hasFullSizeContent)
+	})
 }

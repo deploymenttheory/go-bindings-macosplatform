@@ -33,5 +33,7 @@ func SFSafariExtensionViewControllerFromID(id objc.ID) *SFSafariExtensionViewCon
 }
 
 func (o *SFSafariExtensionViewController) DismissPopover() {
-	o.Ptr().Send(_sFSafariExtensionViewControllerSelDismissPopover)
+	purego.Main(func() {
+		o.Ptr().Send(_sFSafariExtensionViewControllerSelDismissPopover)
+	})
 }

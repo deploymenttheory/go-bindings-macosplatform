@@ -40,46 +40,74 @@ func NSSearchToolbarItemFromID(id objc.ID) *NSSearchToolbarItem {
 
 // Starts a search interaction and moves the keyboard focus to the search field.
 func (o *NSSearchToolbarItem) BeginSearchInteraction() {
-	o.Ptr().Send(_nSSearchToolbarItemSelBeginSearchInteraction)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSearchToolbarItemSelBeginSearchInteraction)
+	})
 }
 
 // Ends a search interaction by giving up the first responder and adjusting the size of the search field to the available width for the toolbar item if necessary.
 func (o *NSSearchToolbarItem) EndSearchInteraction() {
-	o.Ptr().Send(_nSSearchToolbarItemSelEndSearchInteraction)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSearchToolbarItemSelEndSearchInteraction)
+	})
 }
 
 // An `NSSearchField` displayed in the toolbar item. While inside the toolbar item, the field properties and layout constraints are managed by the item. The field should be configured before assigned. The width constraint for the field could be updated after assigned. When set to nil, will reset to a search field with the default configuration.
 func (o *NSSearchToolbarItem) SearchField() *NSSearchField {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchToolbarItemSelSearchField)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSSearchFieldFromID(_ret)
+	var _mainthread0 *NSSearchField
+	purego.Main(func() {
+		_mainthread0 = func() *NSSearchField {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchToolbarItemSelSearchField)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSSearchFieldFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // An `NSSearchField` displayed in the toolbar item. While inside the toolbar item, the field properties and layout constraints are managed by the item. The field should be configured before assigned. The width constraint for the field could be updated after assigned. When set to nil, will reset to a search field with the default configuration.
 func (o *NSSearchToolbarItem) SetSearchField(searchField *NSSearchField) {
-	o.Ptr().Send(_nSSearchToolbarItemSelSetSearchField, searchField.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSSearchToolbarItemSelSetSearchField, searchField.Ptr())
+	})
 }
 
 // When YES, the cancel button in the field resigns the first responder status of the search field as clearing the contents. The default is YES.
 func (o *NSSearchToolbarItem) ResignsFirstResponderWithCancel() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSSearchToolbarItemSelResignsFirstResponderWithCancel)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSSearchToolbarItemSelResignsFirstResponderWithCancel)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // When YES, the cancel button in the field resigns the first responder status of the search field as clearing the contents. The default is YES.
 func (o *NSSearchToolbarItem) SetResignsFirstResponderWithCancel(resignsFirstResponderWithCancel bool) {
-	o.Ptr().Send(_nSSearchToolbarItemSelSetResignsFirstResponderWithCancel, resignsFirstResponderWithCancel)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSearchToolbarItemSelSetResignsFirstResponderWithCancel, resignsFirstResponderWithCancel)
+	})
 }
 
 // The preferred width for the search field. This value is used to configure the search field width whenever it gets the keyboard focus. If specifying custom width constraints to the search field, they should not conflict with this value.
 func (o *NSSearchToolbarItem) PreferredWidthForSearchField() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSSearchToolbarItemSelPreferredWidthForSearchField)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSSearchToolbarItemSelPreferredWidthForSearchField)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // The preferred width for the search field. This value is used to configure the search field width whenever it gets the keyboard focus. If specifying custom width constraints to the search field, they should not conflict with this value.
 func (o *NSSearchToolbarItem) SetPreferredWidthForSearchField(preferredWidthForSearchField float64) {
-	o.Ptr().Send(_nSSearchToolbarItemSelSetPreferredWidthForSearchField, preferredWidthForSearchField)
+	purego.Main(func() {
+		o.Ptr().Send(_nSSearchToolbarItemSelSetPreferredWidthForSearchField, preferredWidthForSearchField)
+	})
 }

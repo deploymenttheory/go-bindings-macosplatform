@@ -48,21 +48,31 @@ func NSPageLayoutFromID(id objc.ID) *NSPageLayout {
 
 // Returns a newly created page layout object.
 func NSPageLayoutPageLayout() *NSPageLayout {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSPageLayout), _nSPageLayoutSelPageLayout)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSPageLayoutFromID(_ret)
+	var _mainthread0 *NSPageLayout
+	purego.Main(func() {
+		_mainthread0 = func() *NSPageLayout {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSPageLayout), _nSPageLayoutSelPageLayout)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSPageLayoutFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Adds the specified controller of an accessory view to be presented in the page setup panel.
 func (o *NSPageLayout) AddAccessoryController(accessoryController *NSViewController) {
-	o.Ptr().Send(_nSPageLayoutSelAddAccessoryController, accessoryController.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPageLayoutSelAddAccessoryController, accessoryController.Ptr())
+	})
 }
 
 // Removes the specified controller of an accessory view.
 func (o *NSPageLayout) RemoveAccessoryController(accessoryController *NSViewController) {
-	o.Ptr().Send(_nSPageLayoutSelRemoveAccessoryController, accessoryController.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPageLayoutSelRemoveAccessoryController, accessoryController.Ptr())
+	})
 }
 
 func (o *NSPageLayout) BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo *NSPrintInfo, parentWindow *NSWindow, handler func(NSPageLayoutResult)) {
@@ -73,68 +83,108 @@ func (o *NSPageLayout) BeginSheetUsingPrintInfoOnWindowCompletionHandler(printIn
 		})
 		defer __block_handler.Release()
 	}
-	o.Ptr().Send(_nSPageLayoutSelBeginSheetUsingPrintInfoOnWindowCompletionHandler, printInfo.Ptr(), parentWindow.Ptr(), __block_handler)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPageLayoutSelBeginSheetUsingPrintInfoOnWindowCompletionHandler, printInfo.Ptr(), parentWindow.Ptr(), __block_handler)
+	})
 }
 
 // Presents a page setup sheet for the specified print info object, document-modal relative to the specified window.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSPageLayout) BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo(printInfo *NSPrintInfo, docWindow *NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_nSPageLayoutSelBeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo, printInfo.Ptr(), docWindow.Ptr(), delegate, didEndSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPageLayoutSelBeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo, printInfo.Ptr(), docWindow.Ptr(), delegate, didEndSelector, contextInfo)
+	})
 }
 
 // Displays the page layout panel and begins the modal loop using the specified print info object.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSPageLayout) RunModalWithPrintInfo(printInfo *NSPrintInfo) int {
-	_ret := objc.Send[int](o.Ptr(), _nSPageLayoutSelRunModalWithPrintInfo, printInfo.Ptr())
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSPageLayoutSelRunModalWithPrintInfo, printInfo.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Displays the page layout panel and begins the modal loop using the shared print info object.
 func (o *NSPageLayout) RunModal() int {
-	_ret := objc.Send[int](o.Ptr(), _nSPageLayoutSelRunModal)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSPageLayoutSelRunModal)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPageLayout) AccessoryControllers() *foundation.NSArray[*NSViewController] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPageLayoutSelAccessoryControllers)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSViewController](_ret)
+	var _mainthread0 *foundation.NSArray[*NSViewController]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSViewController] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPageLayoutSelAccessoryControllers)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSViewController](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPageLayout) PrintInfo() *NSPrintInfo {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPageLayoutSelPrintInfo)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSPrintInfoFromID(_ret)
+	var _mainthread0 *NSPrintInfo
+	purego.Main(func() {
+		_mainthread0 = func() *NSPrintInfo {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPageLayoutSelPrintInfo)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSPrintInfoFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Adds a view object to the page layout panel.
 // Deprecated: since macOS 10.5.
 func (o *NSPageLayout) SetAccessoryView(accessoryView *NSView) {
-	o.Ptr().Send(_nSPageLayoutSelSetAccessoryView, accessoryView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPageLayoutSelSetAccessoryView, accessoryView.Ptr())
+	})
 }
 
 // Returns the page layout panel’s accessory view.
 // Deprecated: since macOS 10.5.
 func (o *NSPageLayout) AccessoryView() *NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPageLayoutSelAccessoryView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSViewFromID(_ret)
+	var _mainthread0 *NSView
+	purego.Main(func() {
+		_mainthread0 = func() *NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSPageLayoutSelAccessoryView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the page layout’s values to those stored in the print info object used when the page layout panel is run.
 // Deprecated: since macOS 10.5.
 func (o *NSPageLayout) ReadPrintInfo() {
-	o.Ptr().Send(_nSPageLayoutSelReadPrintInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPageLayoutSelReadPrintInfo)
+	})
 }
 
 // Writes the page layout’s values to the print info object used when the page layout panel is run.
 // Deprecated: since macOS 10.5.
 func (o *NSPageLayout) WritePrintInfo() {
-	o.Ptr().Send(_nSPageLayoutSelWritePrintInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPageLayoutSelWritePrintInfo)
+	})
 }

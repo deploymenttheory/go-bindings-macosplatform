@@ -35,15 +35,27 @@ func SKCameraNodeFromID(id objc.ID) *SKCameraNode {
 
 // Checks to see if a node is visible in the camera’s viewport.
 func (o *SKCameraNode) ContainsNode(node *SKNode) bool {
-	_ret := objc.Send[bool](o.Ptr(), _sKCameraNodeSelContainsNode, node.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sKCameraNodeSelContainsNode, node.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Finds nodes that are visible in the camera’s viewport.
 func (o *SKCameraNode) ContainedNodeSet() *foundation.NSSet[*SKNode] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKCameraNodeSelContainedNodeSet)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSSetFromID[*SKNode](_ret)
+	var _mainthread0 *foundation.NSSet[*SKNode]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSSet[*SKNode] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sKCameraNodeSelContainedNodeSet)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSSetFromID[*SKNode](_ret)
+		}()
+	})
+	return _mainthread0
 }

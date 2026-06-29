@@ -43,62 +43,98 @@ func NSOpenGLViewFromID(id objc.ID) *NSOpenGLView {
 
 // Returns a default NSOpenGLPixelFormat object.
 func NSOpenGLViewDefaultPixelFormat() *NSOpenGLPixelFormat {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSOpenGLView), _nSOpenGLViewSelDefaultPixelFormat)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSOpenGLPixelFormatFromID(_ret)
+	var _mainthread0 *NSOpenGLPixelFormat
+	purego.Main(func() {
+		_mainthread0 = func() *NSOpenGLPixelFormat {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSOpenGLView), _nSOpenGLViewSelDefaultPixelFormat)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSOpenGLPixelFormatFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns an NSOpenGLView object initialized with the specified frame rectangle and pixel format.
 func (o *NSOpenGLView) InitWithFramePixelFormat(frameRect corefoundation.CGRect, format *NSOpenGLPixelFormat) *NSOpenGLView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLViewSelInitWithFramePixelFormat, frameRect, format.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSOpenGLViewFromID(_ret)
+	var _mainthread0 *NSOpenGLView
+	purego.Main(func() {
+		_mainthread0 = func() *NSOpenGLView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLViewSelInitWithFramePixelFormat, frameRect, format.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSOpenGLViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Releases the NSOpenGLContext object associated with the view.
 func (o *NSOpenGLView) ClearGLContext() {
-	o.Ptr().Send(_nSOpenGLViewSelClearGLContext)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOpenGLViewSelClearGLContext)
+	})
 }
 
 // Called by Cocoa when the view’s window moves or when the view itself moves or is resized.
 func (o *NSOpenGLView) Update() {
-	o.Ptr().Send(_nSOpenGLViewSelUpdate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOpenGLViewSelUpdate)
+	})
 }
 
 // Called by Cocoa when the view’s visible rectangle or bounds change.
 func (o *NSOpenGLView) Reshape() {
-	o.Ptr().Send(_nSOpenGLViewSelReshape)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOpenGLViewSelReshape)
+	})
 }
 
 // Used by subclasses to initialize OpenGL state.
 func (o *NSOpenGLView) PrepareOpenGL() {
-	o.Ptr().Send(_nSOpenGLViewSelPrepareOpenGL)
+	purego.Main(func() {
+		o.Ptr().Send(_nSOpenGLViewSelPrepareOpenGL)
+	})
 }
 
 func (o *NSOpenGLView) OpenGLContext() *NSOpenGLContext {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLViewSelOpenGLContext)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSOpenGLContextFromID(_ret)
+	var _mainthread0 *NSOpenGLContext
+	purego.Main(func() {
+		_mainthread0 = func() *NSOpenGLContext {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLViewSelOpenGLContext)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSOpenGLContextFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSOpenGLView) SetOpenGLContext(openGLContext *NSOpenGLContext) {
-	o.Ptr().Send(_nSOpenGLViewSelSetOpenGLContext, openGLContext.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSOpenGLViewSelSetOpenGLContext, openGLContext.Ptr())
+	})
 }
 
 func (o *NSOpenGLView) PixelFormat() *NSOpenGLPixelFormat {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLViewSelPixelFormat)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSOpenGLPixelFormatFromID(_ret)
+	var _mainthread0 *NSOpenGLPixelFormat
+	purego.Main(func() {
+		_mainthread0 = func() *NSOpenGLPixelFormat {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLViewSelPixelFormat)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSOpenGLPixelFormatFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSOpenGLView) SetPixelFormat(pixelFormat *NSOpenGLPixelFormat) {
-	o.Ptr().Send(_nSOpenGLViewSelSetPixelFormat, pixelFormat.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSOpenGLViewSelSetPixelFormat, pixelFormat.Ptr())
+	})
 }

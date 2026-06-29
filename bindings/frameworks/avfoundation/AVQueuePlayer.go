@@ -41,11 +41,17 @@ func AVQueuePlayerFromID(id objc.ID) *AVQueuePlayer {
 
 // Returns an object that plays a queue of items.
 func AVQueuePlayerQueuePlayerWithItems(items *foundation.NSArray[*AVPlayerItem]) *AVQueuePlayer {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVQueuePlayer), _aVQueuePlayerSelQueuePlayerWithItems, items.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return AVQueuePlayerFromID(_ret)
+	var _mainthread0 *AVQueuePlayer
+	purego.Main(func() {
+		_mainthread0 = func() *AVQueuePlayer {
+			_ret := objc.Send[objc.ID](objc.ID(_clsAVQueuePlayer), _aVQueuePlayerSelQueuePlayerWithItems, items.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return AVQueuePlayerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates an object that plays a queue of items.

@@ -84,253 +84,451 @@ func MKAnnotationViewFromID(id objc.ID) *MKAnnotationView {
 
 // Creates and returns a new annotation view.
 func (o *MKAnnotationView) InitWithAnnotationReuseIdentifier(annotation MKAnnotation, reuseIdentifier *foundation.NSString) *MKAnnotationView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelInitWithAnnotationReuseIdentifier, annotation, reuseIdentifier.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKAnnotationViewFromID(_ret)
+	var _mainthread0 *MKAnnotationView
+	purego.Main(func() {
+		_mainthread0 = func() *MKAnnotationView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelInitWithAnnotationReuseIdentifier, annotation, reuseIdentifier.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKAnnotationViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates an annotation view using data from the specified unarchiver.
 func (o *MKAnnotationView) InitWithCoder(aDecoder *foundation.NSCoder) *MKAnnotationView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKAnnotationViewFromID(_ret)
+	var _mainthread0 *MKAnnotationView
+	purego.Main(func() {
+		_mainthread0 = func() *MKAnnotationView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelInitWithCoder, aDecoder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKAnnotationViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Notifies the annotation view that the map view is about to display it.
 func (o *MKAnnotationView) PrepareForDisplay() {
-	o.Ptr().Send(_mKAnnotationViewSelPrepareForDisplay)
+	purego.Main(func() {
+		o.Ptr().Send(_mKAnnotationViewSelPrepareForDisplay)
+	})
 }
 
 // Sets the selection state of the annotation view.
 func (o *MKAnnotationView) SetSelectedAnimated(selected bool, animated bool) {
-	o.Ptr().Send(_mKAnnotationViewSelSetSelectedAnimated, selected, animated)
+	purego.Main(func() {
+		o.Ptr().Send(_mKAnnotationViewSelSetSelectedAnimated, selected, animated)
+	})
 }
 
 // Sets the drag state for the annotation view.
 func (o *MKAnnotationView) SetDragStateAnimated(newDragState MKAnnotationViewDragState, animated bool) {
-	o.Ptr().Send(_mKAnnotationViewSelSetDragStateAnimated, newDragState, animated)
+	purego.Main(func() {
+		o.Ptr().Send(_mKAnnotationViewSelSetDragStateAnimated, newDragState, animated)
+	})
 }
 
 func (o *MKAnnotationView) ReuseIdentifier() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelReuseIdentifier)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelReuseIdentifier)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKAnnotationView) Annotation() MKAnnotation {
-	_ret := objc.Send[MKAnnotation](o.Ptr(), _mKAnnotationViewSelAnnotation)
-	return _ret
+	var _mainthread0 MKAnnotation
+	purego.Main(func() {
+		_mainthread0 = func() MKAnnotation {
+			_ret := objc.Send[MKAnnotation](o.Ptr(), _mKAnnotationViewSelAnnotation)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKAnnotationView) SetAnnotation(annotation MKAnnotation) {
-	o.Ptr().Send(_mKAnnotationViewSelSetAnnotation, annotation)
+	purego.Main(func() {
+		o.Ptr().Send(_mKAnnotationViewSelSetAnnotation, annotation)
+	})
 }
 
 func (o *MKAnnotationView) Image() *appkit.NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSImageFromID(_ret)
+	var _mainthread0 *appkit.NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKAnnotationView) SetImage(image *appkit.NSImage) {
-	o.Ptr().Send(_mKAnnotationViewSelSetImage, image.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKAnnotationViewSelSetImage, image.Ptr())
+	})
 }
 
 func (o *MKAnnotationView) CenterOffset() corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _mKAnnotationViewSelCenterOffset)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _mKAnnotationViewSelCenterOffset)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKAnnotationView) SetCenterOffset(centerOffset corefoundation.CGPoint) {
-	o.Ptr().Send(_mKAnnotationViewSelSetCenterOffset, centerOffset)
+	purego.Main(func() {
+		o.Ptr().Send(_mKAnnotationViewSelSetCenterOffset, centerOffset)
+	})
 }
 
 func (o *MKAnnotationView) AccessoryOffset() corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _mKAnnotationViewSelAccessoryOffset)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _mKAnnotationViewSelAccessoryOffset)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKAnnotationView) SetAccessoryOffset(accessoryOffset corefoundation.CGPoint) {
-	o.Ptr().Send(_mKAnnotationViewSelSetAccessoryOffset, accessoryOffset)
+	purego.Main(func() {
+		o.Ptr().Send(_mKAnnotationViewSelSetAccessoryOffset, accessoryOffset)
+	})
 }
 
 func (o *MKAnnotationView) CalloutOffset() corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _mKAnnotationViewSelCalloutOffset)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _mKAnnotationViewSelCalloutOffset)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKAnnotationView) SetCalloutOffset(calloutOffset corefoundation.CGPoint) {
-	o.Ptr().Send(_mKAnnotationViewSelSetCalloutOffset, calloutOffset)
+	purego.Main(func() {
+		o.Ptr().Send(_mKAnnotationViewSelSetCalloutOffset, calloutOffset)
+	})
 }
 
 func (o *MKAnnotationView) LeftCalloutOffset() corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _mKAnnotationViewSelLeftCalloutOffset)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _mKAnnotationViewSelLeftCalloutOffset)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKAnnotationView) SetLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) {
-	o.Ptr().Send(_mKAnnotationViewSelSetLeftCalloutOffset, leftCalloutOffset)
+	purego.Main(func() {
+		o.Ptr().Send(_mKAnnotationViewSelSetLeftCalloutOffset, leftCalloutOffset)
+	})
 }
 
 func (o *MKAnnotationView) RightCalloutOffset() corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _mKAnnotationViewSelRightCalloutOffset)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _mKAnnotationViewSelRightCalloutOffset)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKAnnotationView) SetRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) {
-	o.Ptr().Send(_mKAnnotationViewSelSetRightCalloutOffset, rightCalloutOffset)
+	purego.Main(func() {
+		o.Ptr().Send(_mKAnnotationViewSelSetRightCalloutOffset, rightCalloutOffset)
+	})
 }
 
 func (o *MKAnnotationView) IsEnabled() bool {
-	_ret := objc.Send[bool](o.Ptr(), _mKAnnotationViewSelIsEnabled)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _mKAnnotationViewSelIsEnabled)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKAnnotationView) SetEnabled(enabled bool) {
-	o.Ptr().Send(_mKAnnotationViewSelSetEnabled, enabled)
+	purego.Main(func() {
+		o.Ptr().Send(_mKAnnotationViewSelSetEnabled, enabled)
+	})
 }
 
 func (o *MKAnnotationView) IsHighlighted() bool {
-	_ret := objc.Send[bool](o.Ptr(), _mKAnnotationViewSelIsHighlighted)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _mKAnnotationViewSelIsHighlighted)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKAnnotationView) SetHighlighted(highlighted bool) {
-	o.Ptr().Send(_mKAnnotationViewSelSetHighlighted, highlighted)
+	purego.Main(func() {
+		o.Ptr().Send(_mKAnnotationViewSelSetHighlighted, highlighted)
+	})
 }
 
 func (o *MKAnnotationView) IsSelected() bool {
-	_ret := objc.Send[bool](o.Ptr(), _mKAnnotationViewSelIsSelected)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _mKAnnotationViewSelIsSelected)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKAnnotationView) SetSelected(selected bool) {
-	o.Ptr().Send(_mKAnnotationViewSelSetSelected, selected)
+	purego.Main(func() {
+		o.Ptr().Send(_mKAnnotationViewSelSetSelected, selected)
+	})
 }
 
 func (o *MKAnnotationView) CanShowCallout() bool {
-	_ret := objc.Send[bool](o.Ptr(), _mKAnnotationViewSelCanShowCallout)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _mKAnnotationViewSelCanShowCallout)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKAnnotationView) SetCanShowCallout(canShowCallout bool) {
-	o.Ptr().Send(_mKAnnotationViewSelSetCanShowCallout, canShowCallout)
+	purego.Main(func() {
+		o.Ptr().Send(_mKAnnotationViewSelSetCanShowCallout, canShowCallout)
+	})
 }
 
 func (o *MKAnnotationView) LeftCalloutAccessoryView() *appkit.NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelLeftCalloutAccessoryView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSViewFromID(_ret)
+	var _mainthread0 *appkit.NSView
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelLeftCalloutAccessoryView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKAnnotationView) SetLeftCalloutAccessoryView(leftCalloutAccessoryView *appkit.NSView) {
-	o.Ptr().Send(_mKAnnotationViewSelSetLeftCalloutAccessoryView, leftCalloutAccessoryView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKAnnotationViewSelSetLeftCalloutAccessoryView, leftCalloutAccessoryView.Ptr())
+	})
 }
 
 func (o *MKAnnotationView) RightCalloutAccessoryView() *appkit.NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelRightCalloutAccessoryView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSViewFromID(_ret)
+	var _mainthread0 *appkit.NSView
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelRightCalloutAccessoryView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKAnnotationView) SetRightCalloutAccessoryView(rightCalloutAccessoryView *appkit.NSView) {
-	o.Ptr().Send(_mKAnnotationViewSelSetRightCalloutAccessoryView, rightCalloutAccessoryView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKAnnotationViewSelSetRightCalloutAccessoryView, rightCalloutAccessoryView.Ptr())
+	})
 }
 
 func (o *MKAnnotationView) DetailCalloutAccessoryView() *appkit.NSView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelDetailCalloutAccessoryView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSViewFromID(_ret)
+	var _mainthread0 *appkit.NSView
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelDetailCalloutAccessoryView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKAnnotationView) SetDetailCalloutAccessoryView(detailCalloutAccessoryView *appkit.NSView) {
-	o.Ptr().Send(_mKAnnotationViewSelSetDetailCalloutAccessoryView, detailCalloutAccessoryView.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKAnnotationViewSelSetDetailCalloutAccessoryView, detailCalloutAccessoryView.Ptr())
+	})
 }
 
 func (o *MKAnnotationView) IsDraggable() bool {
-	_ret := objc.Send[bool](o.Ptr(), _mKAnnotationViewSelIsDraggable)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _mKAnnotationViewSelIsDraggable)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKAnnotationView) SetDraggable(draggable bool) {
-	o.Ptr().Send(_mKAnnotationViewSelSetDraggable, draggable)
+	purego.Main(func() {
+		o.Ptr().Send(_mKAnnotationViewSelSetDraggable, draggable)
+	})
 }
 
 func (o *MKAnnotationView) DragState() MKAnnotationViewDragState {
-	_ret := objc.Send[MKAnnotationViewDragState](o.Ptr(), _mKAnnotationViewSelDragState)
-	return _ret
+	var _mainthread0 MKAnnotationViewDragState
+	purego.Main(func() {
+		_mainthread0 = func() MKAnnotationViewDragState {
+			_ret := objc.Send[MKAnnotationViewDragState](o.Ptr(), _mKAnnotationViewSelDragState)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKAnnotationView) SetDragState(dragState MKAnnotationViewDragState) {
-	o.Ptr().Send(_mKAnnotationViewSelSetDragState, dragState)
+	purego.Main(func() {
+		o.Ptr().Send(_mKAnnotationViewSelSetDragState, dragState)
+	})
 }
 
 func (o *MKAnnotationView) ClusteringIdentifier() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelClusteringIdentifier)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelClusteringIdentifier)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKAnnotationView) SetClusteringIdentifier(clusteringIdentifier *foundation.NSString) {
-	o.Ptr().Send(_mKAnnotationViewSelSetClusteringIdentifier, clusteringIdentifier.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_mKAnnotationViewSelSetClusteringIdentifier, clusteringIdentifier.Ptr())
+	})
 }
 
 func (o *MKAnnotationView) ClusterAnnotationView() *MKAnnotationView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelClusterAnnotationView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return MKAnnotationViewFromID(_ret)
+	var _mainthread0 *MKAnnotationView
+	purego.Main(func() {
+		_mainthread0 = func() *MKAnnotationView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _mKAnnotationViewSelClusterAnnotationView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return MKAnnotationViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKAnnotationView) DisplayPriority() float32 {
-	_ret := objc.Send[float32](o.Ptr(), _mKAnnotationViewSelDisplayPriority)
-	return _ret
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_ret := objc.Send[float32](o.Ptr(), _mKAnnotationViewSelDisplayPriority)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKAnnotationView) SetDisplayPriority(displayPriority float32) {
-	o.Ptr().Send(_mKAnnotationViewSelSetDisplayPriority, displayPriority)
+	purego.Main(func() {
+		o.Ptr().Send(_mKAnnotationViewSelSetDisplayPriority, displayPriority)
+	})
 }
 
 func (o *MKAnnotationView) ZPriority() float32 {
-	_ret := objc.Send[float32](o.Ptr(), _mKAnnotationViewSelZPriority)
-	return _ret
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_ret := objc.Send[float32](o.Ptr(), _mKAnnotationViewSelZPriority)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKAnnotationView) SetZPriority(zPriority float32) {
-	o.Ptr().Send(_mKAnnotationViewSelSetZPriority, zPriority)
+	purego.Main(func() {
+		o.Ptr().Send(_mKAnnotationViewSelSetZPriority, zPriority)
+	})
 }
 
 func (o *MKAnnotationView) SelectedZPriority() float32 {
-	_ret := objc.Send[float32](o.Ptr(), _mKAnnotationViewSelSelectedZPriority)
-	return _ret
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_ret := objc.Send[float32](o.Ptr(), _mKAnnotationViewSelSelectedZPriority)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKAnnotationView) SetSelectedZPriority(selectedZPriority float32) {
-	o.Ptr().Send(_mKAnnotationViewSelSetSelectedZPriority, selectedZPriority)
+	purego.Main(func() {
+		o.Ptr().Send(_mKAnnotationViewSelSetSelectedZPriority, selectedZPriority)
+	})
 }
 
 func (o *MKAnnotationView) CollisionMode() MKAnnotationViewCollisionMode {
-	_ret := objc.Send[MKAnnotationViewCollisionMode](o.Ptr(), _mKAnnotationViewSelCollisionMode)
-	return _ret
+	var _mainthread0 MKAnnotationViewCollisionMode
+	purego.Main(func() {
+		_mainthread0 = func() MKAnnotationViewCollisionMode {
+			_ret := objc.Send[MKAnnotationViewCollisionMode](o.Ptr(), _mKAnnotationViewSelCollisionMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *MKAnnotationView) SetCollisionMode(collisionMode MKAnnotationViewCollisionMode) {
-	o.Ptr().Send(_mKAnnotationViewSelSetCollisionMode, collisionMode)
+	purego.Main(func() {
+		o.Ptr().Send(_mKAnnotationViewSelSetCollisionMode, collisionMode)
+	})
 }

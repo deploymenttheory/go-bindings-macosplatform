@@ -36,24 +36,42 @@ func WKSecurityOriginFromID(id objc.ID) *WKSecurityOrigin {
 
 // @abstract The security origin's protocol.
 func (o *WKSecurityOrigin) Protocol() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKSecurityOriginSelProtocol)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKSecurityOriginSelProtocol)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The security origin's host.
 func (o *WKSecurityOrigin) Host() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKSecurityOriginSelHost)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKSecurityOriginSelHost)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The security origin's port.
 func (o *WKSecurityOrigin) Port() int {
-	_ret := objc.Send[int](o.Ptr(), _wKSecurityOriginSelPort)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _wKSecurityOriginSelPort)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

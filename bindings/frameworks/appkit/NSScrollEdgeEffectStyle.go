@@ -36,27 +36,45 @@ func NSScrollEdgeEffectStyleFromID(id objc.ID) *NSScrollEdgeEffectStyle {
 
 // The automatic scroll edge effect style.
 func NSScrollEdgeEffectStyleAutomaticStyle() *NSScrollEdgeEffectStyle {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSScrollEdgeEffectStyle), _nSScrollEdgeEffectStyleSelAutomaticStyle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrollEdgeEffectStyleFromID(_ret)
+	var _mainthread0 *NSScrollEdgeEffectStyle
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrollEdgeEffectStyle {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSScrollEdgeEffectStyle), _nSScrollEdgeEffectStyleSelAutomaticStyle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrollEdgeEffectStyleFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // A scroll edge effect with a soft edge.
 func NSScrollEdgeEffectStyleSoftStyle() *NSScrollEdgeEffectStyle {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSScrollEdgeEffectStyle), _nSScrollEdgeEffectStyleSelSoftStyle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrollEdgeEffectStyleFromID(_ret)
+	var _mainthread0 *NSScrollEdgeEffectStyle
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrollEdgeEffectStyle {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSScrollEdgeEffectStyle), _nSScrollEdgeEffectStyleSelSoftStyle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrollEdgeEffectStyleFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // A scroll edge effect with a hard cutoff.
 func NSScrollEdgeEffectStyleHardStyle() *NSScrollEdgeEffectStyle {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSScrollEdgeEffectStyle), _nSScrollEdgeEffectStyleSelHardStyle)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSScrollEdgeEffectStyleFromID(_ret)
+	var _mainthread0 *NSScrollEdgeEffectStyle
+	purego.Main(func() {
+		_mainthread0 = func() *NSScrollEdgeEffectStyle {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSScrollEdgeEffectStyle), _nSScrollEdgeEffectStyleSelHardStyle)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSScrollEdgeEffectStyleFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

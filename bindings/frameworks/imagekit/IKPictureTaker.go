@@ -43,64 +43,104 @@ func IKPictureTakerFromID(id objc.ID) *IKPictureTaker {
 
 // @method pictureTaker @abstract Returns the shared IKPictureTaker instance, creating it if necessary.
 func IKPictureTakerPictureTaker() *IKPictureTaker {
-	_ret := objc.Send[objc.ID](objc.ID(_clsIKPictureTaker), _iKPictureTakerSelPictureTaker)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return IKPictureTakerFromID(_ret)
+	var _mainthread0 *IKPictureTaker
+	purego.Main(func() {
+		_mainthread0 = func() *IKPictureTaker {
+			_ret := objc.Send[objc.ID](objc.ID(_clsIKPictureTaker), _iKPictureTakerSelPictureTaker)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return IKPictureTakerFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @method runModal @abstract Launches a modal PictureTaker session. @result Returns NSOKButton if the user edits or chooses an image and confirm panel, NSCancelButton if the user canceled or didn't change the image.
 func (o *IKPictureTaker) RunModal() int {
-	_ret := objc.Send[int](o.Ptr(), _iKPictureTakerSelRunModal)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _iKPictureTakerSelRunModal)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @method beginPictureTakerWithDelegate:didEndSelector:contextInfo: @abstract Launch the PictureTaker. @param delegate the object to invoke didEndSelector when the PictureTaker terminates. @param didEndSelector the selector to invoke when the PictureTaker terminates. @param contextInfo Any data that will be passed as an argument to the delegate through didEndSelector after the session has ended. @discussion didEndSelector should have the following signature: - (void)pictureTakerDidEnd:(IKPictureTaker *)pictureTaker returnCode:(NSInteger)returnCode contextInfo:(void  *)contextInfo; returnCode value is set to NSOKButton if the user validate, or to NSCancelButton if the user cancel.
 func (o *IKPictureTaker) BeginPictureTakerWithDelegateDidEndSelectorContextInfo(delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_iKPictureTakerSelBeginPictureTakerWithDelegateDidEndSelectorContextInfo, delegate, didEndSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_iKPictureTakerSelBeginPictureTakerWithDelegateDidEndSelectorContextInfo, delegate, didEndSelector, contextInfo)
+	})
 }
 
 // @method beginPictureTakerSheetForWindow:withDelegate:didEndSelector:contextInfo: @abstract Launch the PictureTaker as a sheet for aWindow @param delegate the object to invoke didEndSelector when the PictureTaker terminates @param didEndSelector the selector to invoke when the PictureTaker terminates @param contextInfo Any data that will be passed as an argument to the delegate through didEndSelector after the session has ended @discussion didEndSelector should have the following signature: - (void)pictureTakerDidEnd:(IKPictureTaker *)pictureTaker returnCode:(NSInteger)returnCode contextInfo:(void  *)contextInfo; returnCode value is set to NSOKButton if the user validate, or to NSCancelButton if the user cancel.
 func (o *IKPictureTaker) BeginPictureTakerSheetForWindowWithDelegateDidEndSelectorContextInfo(aWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_iKPictureTakerSelBeginPictureTakerSheetForWindowWithDelegateDidEndSelectorContextInfo, aWindow.Ptr(), delegate, didEndSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_iKPictureTakerSelBeginPictureTakerSheetForWindowWithDelegateDidEndSelectorContextInfo, aWindow.Ptr(), delegate, didEndSelector, contextInfo)
+	})
 }
 
 // @method popUpRecentsMenuForView:withDelegate:didEndSelector:contextInfo: @abstract Launch the PictureTaker's recent popup. @param delegate the object to invoke didEndSelector when the PictureTaker terminates. @param didEndSelector the selector to invoke when the PictureTaker terminates. @param contextInfo Any data that will be passed as an argument to the delegate through didEndSelector after the session has ended. @discussion didEndSelector should have the following signature: - (void)pictureTakerDidEnd:(IKPictureTaker *)pictureTaker returnCode:(NSInteger)returnCode contextInfo:(void  *)contextInfo; returnCode value is set to NSOKButton if the user validate, or to NSCancelButton if the user cancel.
 func (o *IKPictureTaker) PopUpRecentsMenuForViewWithDelegateDidEndSelectorContextInfo(aView *appkit.NSView, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	o.Ptr().Send(_iKPictureTakerSelPopUpRecentsMenuForViewWithDelegateDidEndSelectorContextInfo, aView.Ptr(), delegate, didEndSelector, contextInfo)
+	purego.Main(func() {
+		o.Ptr().Send(_iKPictureTakerSelPopUpRecentsMenuForViewWithDelegateDidEndSelectorContextInfo, aView.Ptr(), delegate, didEndSelector, contextInfo)
+	})
 }
 
 // @method setInputImage: @abstract Set the image input for the PictureTaker. @param image A valid NSImage. @discussion The input image is never modified by the PictureTaker.
 func (o *IKPictureTaker) SetInputImage(image *appkit.NSImage) {
-	o.Ptr().Send(_iKPictureTakerSelSetInputImage, image.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_iKPictureTakerSelSetInputImage, image.Ptr())
+	})
 }
 
 // @method inputImage @abstract return the original PictureTaker's input-image. @discussion The input image is never modified by the PictureTaker.
 func (o *IKPictureTaker) InputImage() *appkit.NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKPictureTakerSelInputImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSImageFromID(_ret)
+	var _mainthread0 *appkit.NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKPictureTakerSelInputImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @method outputImage @abstract return the edited image.
 func (o *IKPictureTaker) OutputImage() *appkit.NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iKPictureTakerSelOutputImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSImageFromID(_ret)
+	var _mainthread0 *appkit.NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _iKPictureTakerSelOutputImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @method setMirroring: @abstract Controls whether the receiver enable/disable video mirroring durring snapshots (default is YES).
 func (o *IKPictureTaker) SetMirroring(b bool) {
-	o.Ptr().Send(_iKPictureTakerSelSetMirroring, b)
+	purego.Main(func() {
+		o.Ptr().Send(_iKPictureTakerSelSetMirroring, b)
+	})
 }
 
 // @method mirroring @abstract Returns YES if video mirroring is enabled, NO otherwise.
 func (o *IKPictureTaker) Mirroring() bool {
-	_ret := objc.Send[bool](o.Ptr(), _iKPictureTakerSelMirroring)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _iKPictureTakerSelMirroring)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

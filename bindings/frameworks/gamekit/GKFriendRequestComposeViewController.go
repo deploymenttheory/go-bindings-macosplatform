@@ -43,39 +43,61 @@ func GKFriendRequestComposeViewControllerFromID(id objc.ID) *GKFriendRequestComp
 // Returns the maximum number of recipients permitted in a single request.
 // Deprecated: No longer supported.
 func GKFriendRequestComposeViewControllerMaxNumberOfRecipients() uint {
-	_ret := objc.Send[uint](objc.ID(_clsGKFriendRequestComposeViewController), _gKFriendRequestComposeViewControllerSelMaxNumberOfRecipients)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](objc.ID(_clsGKFriendRequestComposeViewController), _gKFriendRequestComposeViewControllerSelMaxNumberOfRecipients)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the text message included in the friend invitation.
 func (o *GKFriendRequestComposeViewController) SetMessage(message *foundation.NSString) {
-	o.Ptr().Send(_gKFriendRequestComposeViewControllerSelSetMessage, message.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_gKFriendRequestComposeViewControllerSelSetMessage, message.Ptr())
+	})
 }
 
 // Adds recipients based on their Game Center player identifiers.
 func (o *GKFriendRequestComposeViewController) AddRecipientPlayers(players *foundation.NSArray[*GKPlayer]) {
-	o.Ptr().Send(_gKFriendRequestComposeViewControllerSelAddRecipientPlayers, players.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_gKFriendRequestComposeViewControllerSelAddRecipientPlayers, players.Ptr())
+	})
 }
 
 // Adds recipients based on their Game Center player identifiers.
 // Deprecated: since macOS 10.10.
 func (o *GKFriendRequestComposeViewController) AddRecipientsWithPlayerIDs(playerIDs *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_gKFriendRequestComposeViewControllerSelAddRecipientsWithPlayerIDs, playerIDs.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_gKFriendRequestComposeViewControllerSelAddRecipientsWithPlayerIDs, playerIDs.Ptr())
+	})
 }
 
 // Adds recipients based on their email addresses.
 // Deprecated: since macOS 10.10.
 func (o *GKFriendRequestComposeViewController) AddRecipientsWithEmailAddresses(emailAddresses *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_gKFriendRequestComposeViewControllerSelAddRecipientsWithEmailAddresses, emailAddresses.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_gKFriendRequestComposeViewControllerSelAddRecipientsWithEmailAddresses, emailAddresses.Ptr())
+	})
 }
 
 // Deprecated: No longer supported.
 func (o *GKFriendRequestComposeViewController) ComposeViewDelegate() GKFriendRequestComposeViewControllerDelegate {
-	_ret := objc.Send[GKFriendRequestComposeViewControllerDelegate](o.Ptr(), _gKFriendRequestComposeViewControllerSelComposeViewDelegate)
-	return _ret
+	var _mainthread0 GKFriendRequestComposeViewControllerDelegate
+	purego.Main(func() {
+		_mainthread0 = func() GKFriendRequestComposeViewControllerDelegate {
+			_ret := objc.Send[GKFriendRequestComposeViewControllerDelegate](o.Ptr(), _gKFriendRequestComposeViewControllerSelComposeViewDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Deprecated: No longer supported.
 func (o *GKFriendRequestComposeViewController) SetComposeViewDelegate(composeViewDelegate GKFriendRequestComposeViewControllerDelegate) {
-	o.Ptr().Send(_gKFriendRequestComposeViewControllerSelSetComposeViewDelegate, composeViewDelegate)
+	purego.Main(func() {
+		o.Ptr().Send(_gKFriendRequestComposeViewControllerSelSetComposeViewDelegate, composeViewDelegate)
+	})
 }

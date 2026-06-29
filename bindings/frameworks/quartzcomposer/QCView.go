@@ -59,139 +59,253 @@ func QCViewFromID(id objc.ID) *QCView {
 }
 
 func (o *QCView) LoadCompositionFromFile(path *foundation.NSString) bool {
-	_ret := objc.Send[bool](o.Ptr(), _qCViewSelLoadCompositionFromFile, path.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _qCViewSelLoadCompositionFromFile, path.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QCView) LoadComposition(composition *quartz.QCComposition) bool {
-	_ret := objc.Send[bool](o.Ptr(), _qCViewSelLoadComposition, composition.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _qCViewSelLoadComposition, composition.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QCView) LoadedComposition() *quartz.QCComposition {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelLoadedComposition)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return quartz.QCCompositionFromID(_ret)
+	var _mainthread0 *quartz.QCComposition
+	purego.Main(func() {
+		_mainthread0 = func() *quartz.QCComposition {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelLoadedComposition)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return quartz.QCCompositionFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QCView) UnloadComposition() {
-	o.Ptr().Send(_qCViewSelUnloadComposition)
+	purego.Main(func() {
+		o.Ptr().Send(_qCViewSelUnloadComposition)
+	})
 }
 
 func (o *QCView) SetAutostartsRendering(flag bool) {
-	o.Ptr().Send(_qCViewSelSetAutostartsRendering, flag)
+	purego.Main(func() {
+		o.Ptr().Send(_qCViewSelSetAutostartsRendering, flag)
+	})
 }
 
 func (o *QCView) AutostartsRendering() bool {
-	_ret := objc.Send[bool](o.Ptr(), _qCViewSelAutostartsRendering)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _qCViewSelAutostartsRendering)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QCView) SetEraseColor(color *appkit.NSColor) {
-	o.Ptr().Send(_qCViewSelSetEraseColor, color.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_qCViewSelSetEraseColor, color.Ptr())
+	})
 }
 
 func (o *QCView) EraseColor() *appkit.NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelEraseColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSColorFromID(_ret)
+	var _mainthread0 *appkit.NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelEraseColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QCView) SetEventForwardingMask(mask uint) {
-	o.Ptr().Send(_qCViewSelSetEventForwardingMask, mask)
+	purego.Main(func() {
+		o.Ptr().Send(_qCViewSelSetEventForwardingMask, mask)
+	})
 }
 
 func (o *QCView) EventForwardingMask() uint {
-	_ret := objc.Send[uint](o.Ptr(), _qCViewSelEventForwardingMask)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _qCViewSelEventForwardingMask)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QCView) SetMaxRenderingFrameRate(maxFPS float32) {
-	o.Ptr().Send(_qCViewSelSetMaxRenderingFrameRate, maxFPS)
+	purego.Main(func() {
+		o.Ptr().Send(_qCViewSelSetMaxRenderingFrameRate, maxFPS)
+	})
 }
 
 func (o *QCView) MaxRenderingFrameRate() float32 {
-	_ret := objc.Send[float32](o.Ptr(), _qCViewSelMaxRenderingFrameRate)
-	return _ret
+	var _mainthread0 float32
+	purego.Main(func() {
+		_mainthread0 = func() float32 {
+			_ret := objc.Send[float32](o.Ptr(), _qCViewSelMaxRenderingFrameRate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QCView) Erase() {
-	o.Ptr().Send(_qCViewSelErase)
+	purego.Main(func() {
+		o.Ptr().Send(_qCViewSelErase)
+	})
 }
 
 func (o *QCView) StartRendering() bool {
-	_ret := objc.Send[bool](o.Ptr(), _qCViewSelStartRendering)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _qCViewSelStartRendering)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QCView) RenderAtTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _qCViewSelRenderAtTimeArguments, time_, arguments.Ptr())
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _qCViewSelRenderAtTimeArguments, time_, arguments.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QCView) PauseRendering() {
-	o.Ptr().Send(_qCViewSelPauseRendering)
+	purego.Main(func() {
+		o.Ptr().Send(_qCViewSelPauseRendering)
+	})
 }
 
 func (o *QCView) IsPausedRendering() bool {
-	_ret := objc.Send[bool](o.Ptr(), _qCViewSelIsPausedRendering)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _qCViewSelIsPausedRendering)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QCView) ResumeRendering() {
-	o.Ptr().Send(_qCViewSelResumeRendering)
+	purego.Main(func() {
+		o.Ptr().Send(_qCViewSelResumeRendering)
+	})
 }
 
 func (o *QCView) StopRendering() {
-	o.Ptr().Send(_qCViewSelStopRendering)
+	purego.Main(func() {
+		o.Ptr().Send(_qCViewSelStopRendering)
+	})
 }
 
 func (o *QCView) IsRendering() bool {
-	_ret := objc.Send[bool](o.Ptr(), _qCViewSelIsRendering)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _qCViewSelIsRendering)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QCView) SnapshotImage() *appkit.NSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelSnapshotImage)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSImageFromID(_ret)
+	var _mainthread0 *appkit.NSImage
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSImage {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelSnapshotImage)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSImageFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QCView) CreateSnapshotImageOfType(type_ *foundation.NSString) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelCreateSnapshotImageOfType, type_.Ptr())
-	return _ret
+	var _mainthread0 objc.ID
+	purego.Main(func() {
+		_mainthread0 = func() objc.ID {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelCreateSnapshotImageOfType, type_.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QCView) OpenGLContext() *appkit.NSOpenGLContext {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelOpenGLContext)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSOpenGLContextFromID(_ret)
+	var _mainthread0 *appkit.NSOpenGLContext
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSOpenGLContext {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelOpenGLContext)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSOpenGLContextFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QCView) OpenGLPixelFormat() *appkit.NSOpenGLPixelFormat {
-	_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelOpenGLPixelFormat)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return appkit.NSOpenGLPixelFormatFromID(_ret)
+	var _mainthread0 *appkit.NSOpenGLPixelFormat
+	purego.Main(func() {
+		_mainthread0 = func() *appkit.NSOpenGLPixelFormat {
+			_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelOpenGLPixelFormat)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return appkit.NSOpenGLPixelFormatFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *QCView) Start(sender objc.ID) {
-	o.Ptr().Send(_qCViewSelStart, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_qCViewSelStart, sender)
+	})
 }
 
 func (o *QCView) Stop(sender objc.ID) {
-	o.Ptr().Send(_qCViewSelStop, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_qCViewSelStop, sender)
+	})
 }
 
 func (o *QCView) Play(sender objc.ID) {
-	o.Ptr().Send(_qCViewSelPlay, sender)
+	purego.Main(func() {
+		o.Ptr().Send(_qCViewSelPlay, sender)
+	})
 }

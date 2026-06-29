@@ -36,21 +36,39 @@ func WKNavigationResponseFromID(id objc.ID) *WKNavigationResponse {
 
 // @abstract A Boolean value indicating whether the frame being navigated is the main frame.
 func (o *WKNavigationResponse) IsForMainFrame() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKNavigationResponseSelIsForMainFrame)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKNavigationResponseSelIsForMainFrame)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract The frame's response.
 func (o *WKNavigationResponse) Response() *foundation.NSURLResponse {
-	_ret := objc.Send[objc.ID](o.Ptr(), _wKNavigationResponseSelResponse)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSURLResponseFromID(_ret)
+	var _mainthread0 *foundation.NSURLResponse
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSURLResponse {
+			_ret := objc.Send[objc.ID](o.Ptr(), _wKNavigationResponseSelResponse)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSURLResponseFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // @abstract A Boolean value indicating whether WebKit can display the response's MIME type natively. @discussion Allowing a navigation response with a MIME type that can't be shown will cause the navigation to fail.
 func (o *WKNavigationResponse) CanShowMIMEType() bool {
-	_ret := objc.Send[bool](o.Ptr(), _wKNavigationResponseSelCanShowMIMEType)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _wKNavigationResponseSelCanShowMIMEType)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

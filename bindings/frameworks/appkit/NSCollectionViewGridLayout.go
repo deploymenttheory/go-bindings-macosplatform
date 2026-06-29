@@ -49,76 +49,140 @@ func NSCollectionViewGridLayoutFromID(id objc.ID) *NSCollectionViewGridLayout {
 }
 
 func (o *NSCollectionViewGridLayout) Margins() foundation.NSEdgeInsets {
-	_ret := objc.Send[foundation.NSEdgeInsets](o.Ptr(), _nSCollectionViewGridLayoutSelMargins)
-	return _ret
+	var _mainthread0 foundation.NSEdgeInsets
+	purego.Main(func() {
+		_mainthread0 = func() foundation.NSEdgeInsets {
+			_ret := objc.Send[foundation.NSEdgeInsets](o.Ptr(), _nSCollectionViewGridLayoutSelMargins)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewGridLayout) SetMargins(margins foundation.NSEdgeInsets) {
-	o.Ptr().Send(_nSCollectionViewGridLayoutSelSetMargins, margins)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewGridLayoutSelSetMargins, margins)
+	})
 }
 
 func (o *NSCollectionViewGridLayout) MinimumInteritemSpacing() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSCollectionViewGridLayoutSelMinimumInteritemSpacing)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSCollectionViewGridLayoutSelMinimumInteritemSpacing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewGridLayout) SetMinimumInteritemSpacing(minimumInteritemSpacing float64) {
-	o.Ptr().Send(_nSCollectionViewGridLayoutSelSetMinimumInteritemSpacing, minimumInteritemSpacing)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewGridLayoutSelSetMinimumInteritemSpacing, minimumInteritemSpacing)
+	})
 }
 
 func (o *NSCollectionViewGridLayout) MinimumLineSpacing() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSCollectionViewGridLayoutSelMinimumLineSpacing)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSCollectionViewGridLayoutSelMinimumLineSpacing)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewGridLayout) SetMinimumLineSpacing(minimumLineSpacing float64) {
-	o.Ptr().Send(_nSCollectionViewGridLayoutSelSetMinimumLineSpacing, minimumLineSpacing)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewGridLayoutSelSetMinimumLineSpacing, minimumLineSpacing)
+	})
 }
 
 func (o *NSCollectionViewGridLayout) MaximumNumberOfRows() uint {
-	_ret := objc.Send[uint](o.Ptr(), _nSCollectionViewGridLayoutSelMaximumNumberOfRows)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _nSCollectionViewGridLayoutSelMaximumNumberOfRows)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewGridLayout) SetMaximumNumberOfRows(maximumNumberOfRows uint) {
-	o.Ptr().Send(_nSCollectionViewGridLayoutSelSetMaximumNumberOfRows, maximumNumberOfRows)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewGridLayoutSelSetMaximumNumberOfRows, maximumNumberOfRows)
+	})
 }
 
 func (o *NSCollectionViewGridLayout) MaximumNumberOfColumns() uint {
-	_ret := objc.Send[uint](o.Ptr(), _nSCollectionViewGridLayoutSelMaximumNumberOfColumns)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _nSCollectionViewGridLayoutSelMaximumNumberOfColumns)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewGridLayout) SetMaximumNumberOfColumns(maximumNumberOfColumns uint) {
-	o.Ptr().Send(_nSCollectionViewGridLayoutSelSetMaximumNumberOfColumns, maximumNumberOfColumns)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewGridLayoutSelSetMaximumNumberOfColumns, maximumNumberOfColumns)
+	})
 }
 
 func (o *NSCollectionViewGridLayout) MinimumItemSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCollectionViewGridLayoutSelMinimumItemSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCollectionViewGridLayoutSelMinimumItemSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewGridLayout) SetMinimumItemSize(minimumItemSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSCollectionViewGridLayoutSelSetMinimumItemSize, minimumItemSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewGridLayoutSelSetMinimumItemSize, minimumItemSize)
+	})
 }
 
 func (o *NSCollectionViewGridLayout) MaximumItemSize() corefoundation.CGSize {
-	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCollectionViewGridLayoutSelMaximumItemSize)
-	return _ret
+	var _mainthread0 corefoundation.CGSize
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGSize {
+			_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCollectionViewGridLayoutSelMaximumItemSize)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewGridLayout) SetMaximumItemSize(maximumItemSize corefoundation.CGSize) {
-	o.Ptr().Send(_nSCollectionViewGridLayoutSelSetMaximumItemSize, maximumItemSize)
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewGridLayoutSelSetMaximumItemSize, maximumItemSize)
+	})
 }
 
 func (o *NSCollectionViewGridLayout) BackgroundColors() *foundation.NSArray[*NSColor] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewGridLayoutSelBackgroundColors)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[*NSColor](_ret)
+	var _mainthread0 *foundation.NSArray[*NSColor]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[*NSColor] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewGridLayoutSelBackgroundColors)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[*NSColor](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionViewGridLayout) SetBackgroundColors(backgroundColors *foundation.NSArray[*NSColor]) {
-	o.Ptr().Send(_nSCollectionViewGridLayoutSelSetBackgroundColors, backgroundColors.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSCollectionViewGridLayoutSelSetBackgroundColors, backgroundColors.Ptr())
+	})
 }

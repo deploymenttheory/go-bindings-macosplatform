@@ -50,89 +50,145 @@ func SFCertificatePanelFromID(id objc.ID) *SFCertificatePanel {
 
 // Returns a fully initialized, singleton certificate panel object.
 func SFCertificatePanelSharedCertificatePanel() *SFCertificatePanel {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSFCertificatePanel), _sFCertificatePanelSelSharedCertificatePanel)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SFCertificatePanelFromID(_ret)
+	var _mainthread0 *SFCertificatePanel
+	purego.Main(func() {
+		_mainthread0 = func() *SFCertificatePanel {
+			_ret := objc.Send[objc.ID](objc.ID(_clsSFCertificatePanel), _sFCertificatePanelSelSharedCertificatePanel)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SFCertificatePanelFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Displays a certificate chain in a modal panel.
 func (o *SFCertificatePanel) RunModalForTrustShowGroup(trust unsafe.Pointer, showGroup bool) int {
-	_ret := objc.Send[int](o.Ptr(), _sFCertificatePanelSelRunModalForTrustShowGroup, trust, showGroup)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _sFCertificatePanelSelRunModalForTrustShowGroup, trust, showGroup)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Displays one or more specified certificates in a modal panel.
 func (o *SFCertificatePanel) RunModalForCertificatesShowGroup(certificates *foundation.NSArray[objc.ID], showGroup bool) int {
-	_ret := objc.Send[int](o.Ptr(), _sFCertificatePanelSelRunModalForCertificatesShowGroup, certificates.Ptr(), showGroup)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _sFCertificatePanelSelRunModalForCertificatesShowGroup, certificates.Ptr(), showGroup)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Displays a certificate chain in a modal sheet.
 func (o *SFCertificatePanel) BeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustShowGroup(docWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer, trust unsafe.Pointer, showGroup bool) {
-	o.Ptr().Send(_sFCertificatePanelSelBeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustShowGroup, docWindow.Ptr(), delegate, didEndSelector, contextInfo, trust, showGroup)
+	purego.Main(func() {
+		o.Ptr().Send(_sFCertificatePanelSelBeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustShowGroup, docWindow.Ptr(), delegate, didEndSelector, contextInfo, trust, showGroup)
+	})
 }
 
 // Displays one or more certificates in a modal sheet.
 func (o *SFCertificatePanel) BeginSheetForWindowModalDelegateDidEndSelectorContextInfoCertificatesShowGroup(docWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer, certificates *foundation.NSArray[objc.ID], showGroup bool) {
-	o.Ptr().Send(_sFCertificatePanelSelBeginSheetForWindowModalDelegateDidEndSelectorContextInfoCertificatesShowGroup, docWindow.Ptr(), delegate, didEndSelector, contextInfo, certificates.Ptr(), showGroup)
+	purego.Main(func() {
+		o.Ptr().Send(_sFCertificatePanelSelBeginSheetForWindowModalDelegateDidEndSelectorContextInfoCertificatesShowGroup, docWindow.Ptr(), delegate, didEndSelector, contextInfo, certificates.Ptr(), showGroup)
+	})
 }
 
 // Specifies one or more policies that apply to the displayed certificates.
 func (o *SFCertificatePanel) SetPolicies(policies objc.ID) {
-	o.Ptr().Send(_sFCertificatePanelSelSetPolicies, policies)
+	purego.Main(func() {
+		o.Ptr().Send(_sFCertificatePanelSelSetPolicies, policies)
+	})
 }
 
 // Returns an array of policies used to evaluate the status of the displayed certificates.
 func (o *SFCertificatePanel) Policies() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sFCertificatePanelSelPolicies)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSArrayFromID[objc.ID](_ret)
+	var _mainthread0 *foundation.NSArray[objc.ID]
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSArray[objc.ID] {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sFCertificatePanelSelPolicies)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSArrayFromID[objc.ID](_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Customizes the title of the default button.
 func (o *SFCertificatePanel) SetDefaultButtonTitle(title *foundation.NSString) {
-	o.Ptr().Send(_sFCertificatePanelSelSetDefaultButtonTitle, title.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sFCertificatePanelSelSetDefaultButtonTitle, title.Ptr())
+	})
 }
 
 // Customizes the title of the alternate button.
 func (o *SFCertificatePanel) SetAlternateButtonTitle(title *foundation.NSString) {
-	o.Ptr().Send(_sFCertificatePanelSelSetAlternateButtonTitle, title.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sFCertificatePanelSelSetAlternateButtonTitle, title.Ptr())
+	})
 }
 
 // Displays a Help button in the sheet or panel.
 func (o *SFCertificatePanel) SetShowsHelp(showsHelp bool) {
-	o.Ptr().Send(_sFCertificatePanelSelSetShowsHelp, showsHelp)
+	purego.Main(func() {
+		o.Ptr().Send(_sFCertificatePanelSelSetShowsHelp, showsHelp)
+	})
 }
 
 // Indicates whether the help button is currently set to be displayed.
 func (o *SFCertificatePanel) ShowsHelp() bool {
-	_ret := objc.Send[bool](o.Ptr(), _sFCertificatePanelSelShowsHelp)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _sFCertificatePanelSelShowsHelp)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Sets the help anchor string for the sheet or modal panel.
 func (o *SFCertificatePanel) SetHelpAnchor(anchor *foundation.NSString) {
-	o.Ptr().Send(_sFCertificatePanelSelSetHelpAnchor, anchor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_sFCertificatePanelSelSetHelpAnchor, anchor.Ptr())
+	})
 }
 
 // Returns the current help anchor string for the sheet or panel.
 func (o *SFCertificatePanel) HelpAnchor() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sFCertificatePanelSelHelpAnchor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sFCertificatePanelSelHelpAnchor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Returns the certificate view for the modal panel.
 func (o *SFCertificatePanel) CertificateView() *SFCertificateView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sFCertificatePanelSelCertificateView)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return SFCertificateViewFromID(_ret)
+	var _mainthread0 *SFCertificateView
+	purego.Main(func() {
+		_mainthread0 = func() *SFCertificateView {
+			_ret := objc.Send[objc.ID](o.Ptr(), _sFCertificatePanelSelCertificateView)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return SFCertificateViewFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }

@@ -45,67 +45,123 @@ func OSAScriptViewFromID(id objc.ID) *OSAScriptView {
 }
 
 func (o *OSAScriptView) Source() *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptViewSelSource)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSStringFromID(_ret)
+	var _mainthread0 *foundation.NSString
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSString {
+			_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptViewSelSource)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSStringFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *OSAScriptView) SetSource(source *foundation.NSString) {
-	o.Ptr().Send(_oSAScriptViewSelSetSource, source.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_oSAScriptViewSelSetSource, source.Ptr())
+	})
 }
 
 func (o *OSAScriptView) UsesScriptAssistant() bool {
-	_ret := objc.Send[bool](o.Ptr(), _oSAScriptViewSelUsesScriptAssistant)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _oSAScriptViewSelUsesScriptAssistant)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *OSAScriptView) SetUsesScriptAssistant(usesScriptAssistant bool) {
-	o.Ptr().Send(_oSAScriptViewSelSetUsesScriptAssistant, usesScriptAssistant)
+	purego.Main(func() {
+		o.Ptr().Send(_oSAScriptViewSelSetUsesScriptAssistant, usesScriptAssistant)
+	})
 }
 
 func (o *OSAScriptView) UsesTabs() bool {
-	_ret := objc.Send[bool](o.Ptr(), _oSAScriptViewSelUsesTabs)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _oSAScriptViewSelUsesTabs)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *OSAScriptView) SetUsesTabs(usesTabs bool) {
-	o.Ptr().Send(_oSAScriptViewSelSetUsesTabs, usesTabs)
+	purego.Main(func() {
+		o.Ptr().Send(_oSAScriptViewSelSetUsesTabs, usesTabs)
+	})
 }
 
 func (o *OSAScriptView) TabWidth() uint {
-	_ret := objc.Send[uint](o.Ptr(), _oSAScriptViewSelTabWidth)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _oSAScriptViewSelTabWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *OSAScriptView) SetTabWidth(tabWidth uint) {
-	o.Ptr().Send(_oSAScriptViewSelSetTabWidth, tabWidth)
+	purego.Main(func() {
+		o.Ptr().Send(_oSAScriptViewSelSetTabWidth, tabWidth)
+	})
 }
 
 func (o *OSAScriptView) WrapsLines() bool {
-	_ret := objc.Send[bool](o.Ptr(), _oSAScriptViewSelWrapsLines)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _oSAScriptViewSelWrapsLines)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *OSAScriptView) SetWrapsLines(wrapsLines bool) {
-	o.Ptr().Send(_oSAScriptViewSelSetWrapsLines, wrapsLines)
+	purego.Main(func() {
+		o.Ptr().Send(_oSAScriptViewSelSetWrapsLines, wrapsLines)
+	})
 }
 
 func (o *OSAScriptView) IndentsWrappedLines() bool {
-	_ret := objc.Send[bool](o.Ptr(), _oSAScriptViewSelIndentsWrappedLines)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _oSAScriptViewSelIndentsWrappedLines)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *OSAScriptView) SetIndentsWrappedLines(indentsWrappedLines bool) {
-	o.Ptr().Send(_oSAScriptViewSelSetIndentsWrappedLines, indentsWrappedLines)
+	purego.Main(func() {
+		o.Ptr().Send(_oSAScriptViewSelSetIndentsWrappedLines, indentsWrappedLines)
+	})
 }
 
 func (o *OSAScriptView) IndentWidth() uint {
-	_ret := objc.Send[uint](o.Ptr(), _oSAScriptViewSelIndentWidth)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _oSAScriptViewSelIndentWidth)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *OSAScriptView) SetIndentWidth(indentWidth uint) {
-	o.Ptr().Send(_oSAScriptViewSelSetIndentWidth, indentWidth)
+	purego.Main(func() {
+		o.Ptr().Send(_oSAScriptViewSelSetIndentWidth, indentWidth)
+	})
 }

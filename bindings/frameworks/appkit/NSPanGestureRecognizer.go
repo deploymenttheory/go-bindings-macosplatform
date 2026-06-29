@@ -40,35 +40,65 @@ func NSPanGestureRecognizerFromID(id objc.ID) *NSPanGestureRecognizer {
 
 // The distance traveled by the mouse during the gesture.
 func (o *NSPanGestureRecognizer) TranslationInView(view *NSView) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSPanGestureRecognizerSelTranslationInView, view.Ptr())
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSPanGestureRecognizerSelTranslationInView, view.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 // Changes the current translation value of the gesture recognizer.
 func (o *NSPanGestureRecognizer) SetTranslationInView(translation corefoundation.CGPoint, view *NSView) {
-	o.Ptr().Send(_nSPanGestureRecognizerSelSetTranslationInView, translation, view.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSPanGestureRecognizerSelSetTranslationInView, translation, view.Ptr())
+	})
 }
 
 // The velocity of the pan, measured in points per second.
 func (o *NSPanGestureRecognizer) VelocityInView(view *NSView) corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSPanGestureRecognizerSelVelocityInView, view.Ptr())
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSPanGestureRecognizerSelVelocityInView, view.Ptr())
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPanGestureRecognizer) ButtonMask() uint {
-	_ret := objc.Send[uint](o.Ptr(), _nSPanGestureRecognizerSelButtonMask)
-	return _ret
+	var _mainthread0 uint
+	purego.Main(func() {
+		_mainthread0 = func() uint {
+			_ret := objc.Send[uint](o.Ptr(), _nSPanGestureRecognizerSelButtonMask)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPanGestureRecognizer) SetButtonMask(buttonMask uint) {
-	o.Ptr().Send(_nSPanGestureRecognizerSelSetButtonMask, buttonMask)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPanGestureRecognizerSelSetButtonMask, buttonMask)
+	})
 }
 
 func (o *NSPanGestureRecognizer) NumberOfTouchesRequired() int {
-	_ret := objc.Send[int](o.Ptr(), _nSPanGestureRecognizerSelNumberOfTouchesRequired)
-	return _ret
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_ret := objc.Send[int](o.Ptr(), _nSPanGestureRecognizerSelNumberOfTouchesRequired)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSPanGestureRecognizer) SetNumberOfTouchesRequired(numberOfTouchesRequired int) {
-	o.Ptr().Send(_nSPanGestureRecognizerSelSetNumberOfTouchesRequired, numberOfTouchesRequired)
+	purego.Main(func() {
+		o.Ptr().Send(_nSPanGestureRecognizerSelSetNumberOfTouchesRequired, numberOfTouchesRequired)
+	})
 }

@@ -37,23 +37,41 @@ func NSScrubberArrangedViewFromID(id objc.ID) *NSScrubberArrangedView {
 
 // Updates the layout of the arranged view to respect the provided layout attributes.
 func (o *NSScrubberArrangedView) ApplyLayoutAttributes(layoutAttributes *NSScrubberLayoutAttributes) {
-	o.Ptr().Send(_nSScrubberArrangedViewSelApplyLayoutAttributes, layoutAttributes.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberArrangedViewSelApplyLayoutAttributes, layoutAttributes.Ptr())
+	})
 }
 
 func (o *NSScrubberArrangedView) IsSelected() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSScrubberArrangedViewSelIsSelected)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSScrubberArrangedViewSelIsSelected)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrubberArrangedView) SetSelected(selected bool) {
-	o.Ptr().Send(_nSScrubberArrangedViewSelSetSelected, selected)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberArrangedViewSelSetSelected, selected)
+	})
 }
 
 func (o *NSScrubberArrangedView) IsHighlighted() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSScrubberArrangedViewSelIsHighlighted)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSScrubberArrangedViewSelIsHighlighted)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSScrubberArrangedView) SetHighlighted(highlighted bool) {
-	o.Ptr().Send(_nSScrubberArrangedViewSelSetHighlighted, highlighted)
+	purego.Main(func() {
+		o.Ptr().Send(_nSScrubberArrangedViewSelSetHighlighted, highlighted)
+	})
 }

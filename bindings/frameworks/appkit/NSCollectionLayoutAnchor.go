@@ -41,47 +41,89 @@ func NSCollectionLayoutAnchorFromID(id objc.ID) *NSCollectionLayoutAnchor {
 
 // Creates an anchor with the specified edges to attach to.
 func NSCollectionLayoutAnchorLayoutAnchorWithEdges(edges NSDirectionalRectEdge) *NSCollectionLayoutAnchor {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutAnchor), _nSCollectionLayoutAnchorSelLayoutAnchorWithEdges, edges)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutAnchorFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutAnchor
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutAnchor {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutAnchor), _nSCollectionLayoutAnchorSelLayoutAnchorWithEdges, edges)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutAnchorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates an anchor with the specified edges to attach to, offset by the provided absolute value.
 func NSCollectionLayoutAnchorLayoutAnchorWithEdgesAbsoluteOffset(edges NSDirectionalRectEdge, absoluteOffset corefoundation.CGPoint) *NSCollectionLayoutAnchor {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutAnchor), _nSCollectionLayoutAnchorSelLayoutAnchorWithEdgesAbsoluteOffset, edges, absoluteOffset)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutAnchorFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutAnchor
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutAnchor {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutAnchor), _nSCollectionLayoutAnchorSelLayoutAnchorWithEdgesAbsoluteOffset, edges, absoluteOffset)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutAnchorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 // Creates an anchor with the specified edges to attach to, offset by the provided fractional value.
 func NSCollectionLayoutAnchorLayoutAnchorWithEdgesFractionalOffset(edges NSDirectionalRectEdge, fractionalOffset corefoundation.CGPoint) *NSCollectionLayoutAnchor {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutAnchor), _nSCollectionLayoutAnchorSelLayoutAnchorWithEdgesFractionalOffset, edges, fractionalOffset)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSCollectionLayoutAnchorFromID(_ret)
+	var _mainthread0 *NSCollectionLayoutAnchor
+	purego.Main(func() {
+		_mainthread0 = func() *NSCollectionLayoutAnchor {
+			_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutAnchor), _nSCollectionLayoutAnchorSelLayoutAnchorWithEdgesFractionalOffset, edges, fractionalOffset)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSCollectionLayoutAnchorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutAnchor) Edges() NSDirectionalRectEdge {
-	_ret := objc.Send[NSDirectionalRectEdge](o.Ptr(), _nSCollectionLayoutAnchorSelEdges)
-	return _ret
+	var _mainthread0 NSDirectionalRectEdge
+	purego.Main(func() {
+		_mainthread0 = func() NSDirectionalRectEdge {
+			_ret := objc.Send[NSDirectionalRectEdge](o.Ptr(), _nSCollectionLayoutAnchorSelEdges)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutAnchor) Offset() corefoundation.CGPoint {
-	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSCollectionLayoutAnchorSelOffset)
-	return _ret
+	var _mainthread0 corefoundation.CGPoint
+	purego.Main(func() {
+		_mainthread0 = func() corefoundation.CGPoint {
+			_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSCollectionLayoutAnchorSelOffset)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutAnchor) IsAbsoluteOffset() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionLayoutAnchorSelIsAbsoluteOffset)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionLayoutAnchorSelIsAbsoluteOffset)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSCollectionLayoutAnchor) IsFractionalOffset() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSCollectionLayoutAnchorSelIsFractionalOffset)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSCollectionLayoutAnchorSelIsFractionalOffset)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }

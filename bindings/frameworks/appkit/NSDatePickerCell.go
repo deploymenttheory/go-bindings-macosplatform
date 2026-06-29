@@ -62,167 +62,291 @@ func NSDatePickerCellFromID(id objc.ID) *NSDatePickerCell {
 }
 
 func (o *NSDatePickerCell) InitTextCell(string_ *foundation.NSString) *NSDatePickerCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelInitTextCell, string_.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSDatePickerCellFromID(_ret)
+	var _mainthread0 *NSDatePickerCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSDatePickerCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelInitTextCell, string_.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSDatePickerCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDatePickerCell) InitWithCoder(coder *foundation.NSCoder) *NSDatePickerCell {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelInitWithCoder, coder.Ptr())
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSDatePickerCellFromID(_ret)
+	var _mainthread0 *NSDatePickerCell
+	purego.Main(func() {
+		_mainthread0 = func() *NSDatePickerCell {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelInitWithCoder, coder.Ptr())
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSDatePickerCellFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDatePickerCell) DatePickerStyle() NSDatePickerStyle {
-	_ret := objc.Send[NSDatePickerStyle](o.Ptr(), _nSDatePickerCellSelDatePickerStyle)
-	return _ret
+	var _mainthread0 NSDatePickerStyle
+	purego.Main(func() {
+		_mainthread0 = func() NSDatePickerStyle {
+			_ret := objc.Send[NSDatePickerStyle](o.Ptr(), _nSDatePickerCellSelDatePickerStyle)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDatePickerCell) SetDatePickerStyle(datePickerStyle NSDatePickerStyle) {
-	o.Ptr().Send(_nSDatePickerCellSelSetDatePickerStyle, datePickerStyle)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDatePickerCellSelSetDatePickerStyle, datePickerStyle)
+	})
 }
 
 func (o *NSDatePickerCell) DrawsBackground() bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSDatePickerCellSelDrawsBackground)
-	return _ret
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_ret := objc.Send[bool](o.Ptr(), _nSDatePickerCellSelDrawsBackground)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDatePickerCell) SetDrawsBackground(drawsBackground bool) {
-	o.Ptr().Send(_nSDatePickerCellSelSetDrawsBackground, drawsBackground)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDatePickerCellSelSetDrawsBackground, drawsBackground)
+	})
 }
 
 func (o *NSDatePickerCell) BackgroundColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelBackgroundColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelBackgroundColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDatePickerCell) SetBackgroundColor(backgroundColor *NSColor) {
-	o.Ptr().Send(_nSDatePickerCellSelSetBackgroundColor, backgroundColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDatePickerCellSelSetBackgroundColor, backgroundColor.Ptr())
+	})
 }
 
 func (o *NSDatePickerCell) TextColor() *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelTextColor)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return NSColorFromID(_ret)
+	var _mainthread0 *NSColor
+	purego.Main(func() {
+		_mainthread0 = func() *NSColor {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelTextColor)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return NSColorFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDatePickerCell) SetTextColor(textColor *NSColor) {
-	o.Ptr().Send(_nSDatePickerCellSelSetTextColor, textColor.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDatePickerCellSelSetTextColor, textColor.Ptr())
+	})
 }
 
 func (o *NSDatePickerCell) DatePickerMode() NSDatePickerMode {
-	_ret := objc.Send[NSDatePickerMode](o.Ptr(), _nSDatePickerCellSelDatePickerMode)
-	return _ret
+	var _mainthread0 NSDatePickerMode
+	purego.Main(func() {
+		_mainthread0 = func() NSDatePickerMode {
+			_ret := objc.Send[NSDatePickerMode](o.Ptr(), _nSDatePickerCellSelDatePickerMode)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDatePickerCell) SetDatePickerMode(datePickerMode NSDatePickerMode) {
-	o.Ptr().Send(_nSDatePickerCellSelSetDatePickerMode, datePickerMode)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDatePickerCellSelSetDatePickerMode, datePickerMode)
+	})
 }
 
 func (o *NSDatePickerCell) DatePickerElements() NSDatePickerElementFlags {
-	_ret := objc.Send[NSDatePickerElementFlags](o.Ptr(), _nSDatePickerCellSelDatePickerElements)
-	return _ret
+	var _mainthread0 NSDatePickerElementFlags
+	purego.Main(func() {
+		_mainthread0 = func() NSDatePickerElementFlags {
+			_ret := objc.Send[NSDatePickerElementFlags](o.Ptr(), _nSDatePickerCellSelDatePickerElements)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDatePickerCell) SetDatePickerElements(datePickerElements NSDatePickerElementFlags) {
-	o.Ptr().Send(_nSDatePickerCellSelSetDatePickerElements, datePickerElements)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDatePickerCellSelSetDatePickerElements, datePickerElements)
+	})
 }
 
 func (o *NSDatePickerCell) Calendar() *foundation.NSCalendar {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelCalendar)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSCalendarFromID(_ret)
+	var _mainthread0 *foundation.NSCalendar
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSCalendar {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelCalendar)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSCalendarFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDatePickerCell) SetCalendar(calendar *foundation.NSCalendar) {
-	o.Ptr().Send(_nSDatePickerCellSelSetCalendar, calendar.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDatePickerCellSelSetCalendar, calendar.Ptr())
+	})
 }
 
 func (o *NSDatePickerCell) Locale() *foundation.NSLocale {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelLocale)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSLocaleFromID(_ret)
+	var _mainthread0 *foundation.NSLocale
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSLocale {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelLocale)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSLocaleFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDatePickerCell) SetLocale(locale *foundation.NSLocale) {
-	o.Ptr().Send(_nSDatePickerCellSelSetLocale, locale.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDatePickerCellSelSetLocale, locale.Ptr())
+	})
 }
 
 func (o *NSDatePickerCell) TimeZone() *foundation.NSTimeZone {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelTimeZone)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSTimeZoneFromID(_ret)
+	var _mainthread0 *foundation.NSTimeZone
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSTimeZone {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelTimeZone)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSTimeZoneFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDatePickerCell) SetTimeZone(timeZone *foundation.NSTimeZone) {
-	o.Ptr().Send(_nSDatePickerCellSelSetTimeZone, timeZone.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDatePickerCellSelSetTimeZone, timeZone.Ptr())
+	})
 }
 
 func (o *NSDatePickerCell) DateValue() *foundation.NSDate {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelDateValue)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDateFromID(_ret)
+	var _mainthread0 *foundation.NSDate
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSDate {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelDateValue)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDateFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDatePickerCell) SetDateValue(dateValue *foundation.NSDate) {
-	o.Ptr().Send(_nSDatePickerCellSelSetDateValue, dateValue.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDatePickerCellSelSetDateValue, dateValue.Ptr())
+	})
 }
 
 func (o *NSDatePickerCell) TimeInterval() float64 {
-	_ret := objc.Send[float64](o.Ptr(), _nSDatePickerCellSelTimeInterval)
-	return _ret
+	var _mainthread0 float64
+	purego.Main(func() {
+		_mainthread0 = func() float64 {
+			_ret := objc.Send[float64](o.Ptr(), _nSDatePickerCellSelTimeInterval)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDatePickerCell) SetTimeInterval(timeInterval float64) {
-	o.Ptr().Send(_nSDatePickerCellSelSetTimeInterval, timeInterval)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDatePickerCellSelSetTimeInterval, timeInterval)
+	})
 }
 
 func (o *NSDatePickerCell) MinDate() *foundation.NSDate {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelMinDate)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDateFromID(_ret)
+	var _mainthread0 *foundation.NSDate
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSDate {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelMinDate)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDateFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDatePickerCell) SetMinDate(minDate *foundation.NSDate) {
-	o.Ptr().Send(_nSDatePickerCellSelSetMinDate, minDate.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDatePickerCellSelSetMinDate, minDate.Ptr())
+	})
 }
 
 func (o *NSDatePickerCell) MaxDate() *foundation.NSDate {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelMaxDate)
-	if _ret != 0 {
-		_ret.Send(objc.RegisterName("retain"))
-	}
-	return foundation.NSDateFromID(_ret)
+	var _mainthread0 *foundation.NSDate
+	purego.Main(func() {
+		_mainthread0 = func() *foundation.NSDate {
+			_ret := objc.Send[objc.ID](o.Ptr(), _nSDatePickerCellSelMaxDate)
+			if _ret != 0 {
+				_ret.Send(objc.RegisterName("retain"))
+			}
+			return foundation.NSDateFromID(_ret)
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDatePickerCell) SetMaxDate(maxDate *foundation.NSDate) {
-	o.Ptr().Send(_nSDatePickerCellSelSetMaxDate, maxDate.Ptr())
+	purego.Main(func() {
+		o.Ptr().Send(_nSDatePickerCellSelSetMaxDate, maxDate.Ptr())
+	})
 }
 
 func (o *NSDatePickerCell) Delegate() NSDatePickerCellDelegate {
-	_ret := objc.Send[NSDatePickerCellDelegate](o.Ptr(), _nSDatePickerCellSelDelegate)
-	return _ret
+	var _mainthread0 NSDatePickerCellDelegate
+	purego.Main(func() {
+		_mainthread0 = func() NSDatePickerCellDelegate {
+			_ret := objc.Send[NSDatePickerCellDelegate](o.Ptr(), _nSDatePickerCellSelDelegate)
+			return _ret
+		}()
+	})
+	return _mainthread0
 }
 
 func (o *NSDatePickerCell) SetDelegate(delegate NSDatePickerCellDelegate) {
-	o.Ptr().Send(_nSDatePickerCellSelSetDelegate, delegate)
+	purego.Main(func() {
+		o.Ptr().Send(_nSDatePickerCellSelSetDelegate, delegate)
+	})
 }
