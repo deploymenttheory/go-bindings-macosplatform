@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.13.0](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.12.1...v0.13.0) (2026-06-29)
+
+
+### Features
+
+* **idiomatic:** auto-dispatch @MainActor calls onto the main thread ([#69](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/69)) ([72e4f9d](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/72e4f9d90443e0e64910d43070565742796cc324))
+* refactored code emitance ([#71](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/71)) ([fe3c6d2](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/fe3c6d23ddcf1db08bce8369b1bdfe60d9fad58b))
+
 ## [0.12.1](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.12.0...v0.12.1) (2026-06-25)
 
 
