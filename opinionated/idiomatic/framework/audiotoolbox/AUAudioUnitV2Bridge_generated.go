@@ -145,7 +145,7 @@ func (auvb *AudioUnitV2Bridge) WithOutputEnabled(outputEnabled bool) *AudioUnitV
 	return auvb
 }
 
-// WithIntendedSpatialExperience sets the AUAudioUnit’s intended spatial audio experience.
+// WithIntendedSpatialExperience sets the AUAudioUnit’s intended spatial experience.
 func (auvb *AudioUnitV2Bridge) WithIntendedSpatialExperience(intendedSpatialExperience unsafe.Pointer) *AudioUnitV2Bridge {
 	objc.Send[objc.ID](objref.IDOf(auvb), objc.RegisterName("setIntendedSpatialExperience:"), intendedSpatialExperience)
 	return auvb

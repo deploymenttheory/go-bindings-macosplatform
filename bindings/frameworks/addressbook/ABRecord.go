@@ -12,8 +12,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An abstract class that defines the common properties for all Address Book records.
-//
 // Apple documentation: https://developer.apple.com/documentation/addressbook/abrecord
 type ABRecord struct {
 	foundation.NSObject
@@ -42,25 +40,21 @@ func ABRecordFromID(id objc.ID) *ABRecord {
 	return o
 }
 
-// Initializes a record using the shared address book.
 func (o *ABRecord) Init() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBRecordSelInit)
 	return _ret
 }
 
-// Initializes a record using the given address book.
 func (o *ABRecord) InitWithAddressBook(addressBook *ABAddressBook) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBRecordSelInitWithAddressBook, addressBook.Ptr())
 	return _ret
 }
 
-// Returns the value of a given property for a record.
 func (o *ABRecord) ValueForProperty(property *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBRecordSelValueForProperty, property.Ptr())
 	return _ret
 }
 
-// Sets the value of a given property for a record, returning error information.
 func (o *ABRecord) SetValueForPropertyError(value objc.ID, property *foundation.NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aBRecordSelSetValueForPropertyError, value, property.Ptr(), unsafe.Pointer(&_nsErr))
@@ -70,19 +64,16 @@ func (o *ABRecord) SetValueForPropertyError(value objc.ID, property *foundation.
 	return _ret, nil
 }
 
-// Sets the value of a given property for a record.
 func (o *ABRecord) SetValueForProperty(value objc.ID, property *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aBRecordSelSetValueForProperty, value, property.Ptr())
 	return _ret
 }
 
-// Removes the value for a given property.
 func (o *ABRecord) RemoveValueForProperty(property *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aBRecordSelRemoveValueForProperty, property.Ptr())
 	return _ret
 }
 
-// Returns whether a record is read-only.
 func (o *ABRecord) IsReadOnly() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aBRecordSelIsReadOnly)
 	return _ret

@@ -19060,8 +19060,8 @@
         "url": "https://developer.apple.com/documentation/appkit/nsevent/magnification"
       },
       "modifierFlags": {
-        "doc": "The currently pressed modifier keys.",
-        "url": "https://developer.apple.com/documentation/appkit/nsevent/modifierflags-swift.type.property"
+        "doc": "An integer bit field that indicates the pressed modifier keys.",
+        "url": "https://developer.apple.com/documentation/appkit/nsevent/modifierflags-swift.property"
       },
       "momentumPhase": {
         "doc": "The momentum phase for a scroll or flick gesture.",
@@ -19986,8 +19986,8 @@
     },
     "NSImageView": {
       "addSymbolEffect(_:options:animated:)": {
-        "doc": "Adds a discrete, indefinite symbol effect to the image view with the specified options and animation.",
-        "url": "https://developer.apple.com/documentation/appkit/nsimageview/addsymboleffect(_:options:animated:)-66ckm"
+        "doc": "Adds a discrete symbol effect to the image view with the specified options and animation.",
+        "url": "https://developer.apple.com/documentation/appkit/nsimageview/addsymboleffect(_:options:animated:)-4p7p7"
       },
       "allowsCutCopyPaste": {
         "doc": "A Boolean value indicating whether the image view lets the user cut, copy, and paste the image contents.",
@@ -24288,8 +24288,8 @@
         "url": "https://developer.apple.com/documentation/appkit/nsstoryboard/instantiatecontroller(identifier:creator:)-7ddcf"
       },
       "instantiateInitialController(creator:)": {
-        "doc": "Creates the initial window controller from the storyboard and initializes it using your custom code.",
-        "url": "https://developer.apple.com/documentation/appkit/nsstoryboard/instantiateinitialcontroller(creator:)-529r1"
+        "doc": "Creates the initial view controller from the storyboard and initializes it using your custom code.",
+        "url": "https://developer.apple.com/documentation/appkit/nsstoryboard/instantiateinitialcontroller(creator:)-pi04"
       },
       "mainStoryboard": {
         "doc": "The app’s main storyboard.",

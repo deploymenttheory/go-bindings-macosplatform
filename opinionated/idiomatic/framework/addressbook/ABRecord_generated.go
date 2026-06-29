@@ -18,8 +18,6 @@ import (
 // Record is an idiomatic wrapper over the Objective-C class ABRecord.
 //
 // Record is an abstract base — you do not construct it directly. Construct one of [Group], [Person] and pass it where a Record is accepted.
-//
-// An abstract class that defines the common properties for all Address Book records.
 type Record struct {
 	objref.Handle
 }
@@ -71,20 +69,20 @@ func (r *Record) String() string {
 	return rt.Description(objref.IDOf(r))
 }
 
-// NewRecordWithAddressBook initializes a record using the given address book.
+// NewRecordWithAddressBook creates a new Record.
 func NewRecordWithAddressBook(addressBook *AddressBook) *Record {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ABRecord")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAddressBook:"), objref.IDOf(addressBook))
 	return recordAdopt(_id)
 }
 
-// ValueForProperty returns the value of a given property for a record.
+// ValueForProperty wraps the corresponding Objective-C method.
 func (r *Record) ValueForProperty(property string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("valueForProperty:"), purego.NSString(property))
 	return obj.Wrap(_r)
 }
 
-// SetValueForProperty sets the value of a given property for a record, returning error information.
+// SetValueForProperty wraps the corresponding Objective-C method.
 func (r *Record) SetValueForProperty(value obj.Object, property string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(r), objc.RegisterName("setValue:forProperty:error:"), objref.IDOf(value), purego.NSString(property), unsafe.Pointer(&_nsErr))
@@ -94,13 +92,13 @@ func (r *Record) SetValueForProperty(value obj.Object, property string) error {
 	return nil
 }
 
-// RemoveValueForProperty removes the value for a given property.
+// RemoveValueForProperty removes value for property.
 func (r *Record) RemoveValueForProperty(property string) bool {
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("removeValueForProperty:"), purego.NSString(property))
 	return _r
 }
 
-// IsReadOnly reports whether a record is read-only.
+// IsReadOnly reports whether the object is read only.
 func (r *Record) IsReadOnly() bool {
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("isReadOnly"))
 	return _r

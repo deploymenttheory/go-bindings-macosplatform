@@ -11,13 +11,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// SharedAddressBook returns the unique shared instance of ABAddressBook, or nil if the Address Book database can’t be initialized.
+// SharedAddressBook returns the shared address book.
 func SharedAddressBook() *AddressBook {
 	_r := objc.Send[objc.ID](objc.ID(_class("ABAddressBook")), objc.RegisterName("sharedAddressBook"))
 	return AddressBookFromID(_r)
 }
 
-// ABAddressBookAddressBook returns a new instance of ABAddressBook, or nil if the Address Book database can’t be initialized.
+// ABAddressBookAddressBook returns the ab address book address book.
 func ABAddressBookAddressBook() *AddressBook {
 	_r := objc.Send[objc.ID](objc.ID(_class("ABAddressBook")), objc.RegisterName("addressBook"))
 	return AddressBookFromID(_r)

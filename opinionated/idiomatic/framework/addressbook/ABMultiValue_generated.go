@@ -15,8 +15,6 @@ import (
 // MultiValue is an idiomatic wrapper over the Objective-C class ABMultiValue.
 //
 // MultiValue is an abstract base — you do not construct it directly. Construct one of [MutableMultiValue] and pass it where a MultiValue is accepted.
-//
-// An immutable representation of a property that might have multiple values.
 type MultiValue struct {
 	objref.Handle
 }
@@ -68,19 +66,19 @@ func (mv *MultiValue) String() string {
 	return rt.Description(objref.IDOf(mv))
 }
 
-// Count returns the number of entries in a multivalue list.
+// Count returns the count.
 func (mv *MultiValue) Count() int {
 	_r := objc.Send[int](objref.IDOf(mv), objc.RegisterName("count"))
 	return _r
 }
 
-// ValueAtIndex returns the value for the given index.
+// ValueAtIndex wraps the corresponding Objective-C method.
 func (mv *MultiValue) ValueAtIndex(index int) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("valueAtIndex:"), index)
 	return obj.Wrap(_r)
 }
 
-// LabelAtIndex returns the label for the given index.
+// LabelAtIndex wraps the corresponding Objective-C method.
 func (mv *MultiValue) LabelAtIndex(index int) string {
 	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("labelAtIndex:"), index)
 	if _r == 0 {
@@ -89,7 +87,7 @@ func (mv *MultiValue) LabelAtIndex(index int) string {
 	return purego.GoString(_r)
 }
 
-// IdentifierAtIndex returns the identifier for the given index.
+// IdentifierAtIndex wraps the corresponding Objective-C method.
 func (mv *MultiValue) IdentifierAtIndex(index int) string {
 	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("identifierAtIndex:"), index)
 	if _r == 0 {
@@ -98,13 +96,13 @@ func (mv *MultiValue) IdentifierAtIndex(index int) string {
 	return purego.GoString(_r)
 }
 
-// IndexForIdentifier returns the index for the given identifier.
+// IndexForIdentifier wraps the corresponding Objective-C method.
 func (mv *MultiValue) IndexForIdentifier(identifier string) int {
 	_r := objc.Send[int](objref.IDOf(mv), objc.RegisterName("indexForIdentifier:"), purego.NSString(identifier))
 	return _r
 }
 
-// PrimaryIdentifier returns the identifier for the primary value.
+// PrimaryIdentifier returns the primary identifier.
 func (mv *MultiValue) PrimaryIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("primaryIdentifier"))
 	if _r == 0 {
@@ -113,19 +111,19 @@ func (mv *MultiValue) PrimaryIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// PropertyType returns the type for the values in a multivalue list.
+// PropertyType returns the property type.
 func (mv *MultiValue) PropertyType() int {
 	_r := objc.Send[int](objref.IDOf(mv), objc.RegisterName("propertyType"))
 	return _r
 }
 
-// ValueForIdentifier returns the value for the given identifier.
+// ValueForIdentifier wraps the corresponding Objective-C method.
 func (mv *MultiValue) ValueForIdentifier(identifier string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("valueForIdentifier:"), purego.NSString(identifier))
 	return obj.Wrap(_r)
 }
 
-// LabelForIdentifier returns the label for the given identifier.
+// LabelForIdentifier wraps the corresponding Objective-C method.
 func (mv *MultiValue) LabelForIdentifier(identifier string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("labelForIdentifier:"), purego.NSString(identifier))
 	return obj.Wrap(_r)

@@ -172,7 +172,7 @@
       },
       "windowDurationConstraint": {
         "doc": "A range or list of sound duration times the request’s underlying sound classifier supports.",
-        "url": "https://developer.apple.com/documentation/soundanalysis/snclassifysoundrequest/windowdurationconstraint-5no60"
+        "url": "https://developer.apple.com/documentation/soundanalysis/snclassifysoundrequest/windowdurationconstraint-5aqvx"
       }
     }
   }

@@ -10,8 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A mutable representation of a property that might have multiple values.
-//
 // Apple documentation: https://developer.apple.com/documentation/addressbook/abmutablemultivalue
 type ABMutableMultiValue struct {
 	ABMultiValue
@@ -37,7 +35,6 @@ func ABMutableMultiValueFromID(id objc.ID) *ABMutableMultiValue {
 	return o
 }
 
-// Adds a value and its label to a multivalue list.
 func (o *ABMutableMultiValue) AddValueWithLabel(value objc.ID, label *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBMutableMultiValueSelAddValueWithLabel, value, label.Ptr())
 	if _ret != 0 {
@@ -46,7 +43,6 @@ func (o *ABMutableMultiValue) AddValueWithLabel(value objc.ID, label *foundation
 	return foundation.NSStringFromID(_ret)
 }
 
-// Inserts a value and its label at the given index in a multivalue list.
 func (o *ABMutableMultiValue) InsertValueWithLabelAtIndex(value objc.ID, label *foundation.NSString, index uint) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBMutableMultiValueSelInsertValueWithLabelAtIndex, value, label.Ptr(), index)
 	if _ret != 0 {
@@ -55,25 +51,21 @@ func (o *ABMutableMultiValue) InsertValueWithLabelAtIndex(value objc.ID, label *
 	return foundation.NSStringFromID(_ret)
 }
 
-// Removes the value and label at the given index.
 func (o *ABMutableMultiValue) RemoveValueAndLabelAtIndex(index uint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aBMutableMultiValueSelRemoveValueAndLabelAtIndex, index)
 	return _ret
 }
 
-// Replaces the value at the given index.
 func (o *ABMutableMultiValue) ReplaceValueAtIndexWithValue(index uint, value objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aBMutableMultiValueSelReplaceValueAtIndexWithValue, index, value)
 	return _ret
 }
 
-// Replaces the label at the given index.
 func (o *ABMutableMultiValue) ReplaceLabelAtIndexWithLabel(index uint, label *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aBMutableMultiValueSelReplaceLabelAtIndexWithLabel, index, label.Ptr())
 	return _ret
 }
 
-// Sets the primary value to be the value for the given identifier.
 func (o *ABMutableMultiValue) SetPrimaryIdentifier(identifier *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aBMutableMultiValueSelSetPrimaryIdentifier, identifier.Ptr())
 	return _ret

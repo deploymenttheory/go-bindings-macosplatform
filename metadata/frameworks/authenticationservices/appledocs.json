@@ -1904,8 +1904,8 @@
         "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest/init(credentialidentity:clientdatahash:userverificationpreference:supportedalgorithms:)-52txr"
       },
       "init(credentialIdentity:clientDataHash:userVerificationPreference:supportedAlgorithms:extensionInput:)": {
-        "doc": "Initializes a passkey credential request, providing additional passkey assertion data.",
-        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest/init(credentialidentity:clientdatahash:userverificationpreference:supportedalgorithms:extensioninput:)-9hsyv"
+        "doc": "Initializes a passkey credential request, providing additional passkey registration data.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest/init(credentialidentity:clientdatahash:userverificationpreference:supportedalgorithms:extensioninput:)-1258o"
       },
       "registrationExtensionInput": {
         "doc": "An input for WebAuthn extensions.",

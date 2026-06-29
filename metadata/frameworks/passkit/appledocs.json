@@ -1568,7 +1568,7 @@
       },
       "issuingCountryCode": {
         "doc": "Identifies the issuing country of the identity document.",
-        "url": "https://developer.apple.com/documentation/passkit/pkidentitydocumentmetadata/issuingcountrycode"
+        "url": "https://developer.apple.com/documentation/PassKit/PKIdentityDocumentMetadata/issuingCountryCode"
       },
       "serverEnvironmentIdentifier": {
         "doc": "An identifier that references the target server environment Apple Pay servers need to connect with to provision the pass.",
@@ -1576,7 +1576,7 @@
       },
       "sharingInstanceIdentifier": {
         "doc": "A unique identifier that refers to an instance of sharing credentials to a person’s device that another user, device, or the web initiates.",
-        "url": "https://developer.apple.com/documentation/passkit/pkidentitydocumentmetadata/sharinginstanceidentifier"
+        "url": "https://developer.apple.com/documentation/PassKit/PKIdentityDocumentMetadata/sharingInstanceIdentifier"
       }
     },
     "PKIdentityElement": {
@@ -1960,7 +1960,7 @@
       },
       "applePayLaterAvailability": {
         "doc": "A value that indicates whether Apple Pay Later is available for a transaction.",
-        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/applepaylateravailability-3dxrt"
+        "url": "https://developer.apple.com/documentation/passkit/pkpaymentrequest/applepaylateravailability-inpf"
       },
       "applicationData": {
         "doc": "Application-specific data or state.",
@@ -2347,8 +2347,8 @@
         "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassbalance/balancetype-swift.struct"
       },
       "amount": {
-        "doc": "The current balance of a stored-value pass in money or points.",
-        "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassbalance/amount-2nwf5"
+        "doc": "The current balance in money or points.",
+        "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassbalance/amount-2vfd3"
       },
       "balanceType": {
         "doc": "The type of value that the balance represents, such as money or points.",

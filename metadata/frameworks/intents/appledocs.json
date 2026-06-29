@@ -8900,7 +8900,7 @@
       },
       "numberOfCalls": {
         "doc": "The number of calls in the call record.",
-        "url": "https://developer.apple.com/documentation/intents/incallrecord/numberofcalls-r8kl"
+        "url": "https://developer.apple.com/documentation/intents/incallrecord/numberofcalls-7vv6o"
       },
       "participants": {
         "doc": "The recipient of the user’s call request.",
@@ -8908,7 +8908,7 @@
       },
       "unseen": {
         "doc": "A Boolean value indicating whether the user has seen the call.",
-        "url": "https://developer.apple.com/documentation/intents/incallrecord/unseen-8qab3"
+        "url": "https://developer.apple.com/documentation/intents/incallrecord/unseen-2m7sz"
       }
     },
     "INCallRecordFilter": {
@@ -9212,7 +9212,7 @@
       },
       "isFocused": {
         "doc": "The user’s preference for receiving communication notifications.",
-        "url": "https://developer.apple.com/documentation/intents/infocusstatus/isfocused-78wbx"
+        "url": "https://developer.apple.com/documentation/intents/infocusstatus/isfocused-8ytve"
       }
     },
     "INFocusStatusCenter": {
@@ -9322,7 +9322,7 @@
       },
       "locked": {
         "doc": "A Boolean value indicating the status of the car’s locks.",
-        "url": "https://developer.apple.com/documentation/intents/ingetcarlockstatusintentresponse/locked-1eacd"
+        "url": "https://developer.apple.com/documentation/intents/ingetcarlockstatusintentresponse/locked-357ju"
       }
     },
     "INGetCarPowerLevelStatusIntent": {
@@ -9346,7 +9346,7 @@
       },
       "charging": {
         "doc": "A Boolean value that indicates whether the electric vehicle is currently charging.",
-        "url": "https://developer.apple.com/documentation/intents/ingetcarpowerlevelstatusintentresponse/charging-7aamu"
+        "url": "https://developer.apple.com/documentation/intents/ingetcarpowerlevelstatusintentresponse/charging-6xnqj"
       },
       "chargingFormulaArguments": {
         "doc": "The parameters the electric vehicle’s charging model uses to calculate the duration of a charge.",
@@ -9405,8 +9405,8 @@
         "url": "https://developer.apple.com/documentation/intents/ingetcarpowerlevelstatusintentresponse/minimumbatterycapacity"
       },
       "minutesToFull": {
-        "doc": "The number of minutes it will take to fully charge the electric vehicle’s battery.",
-        "url": "https://developer.apple.com/documentation/intents/ingetcarpowerlevelstatusintentresponse/minutestofull-25vcb"
+        "doc": "The number of minutes it takes to fully charge the electric vehicle’s battery.",
+        "url": "https://developer.apple.com/documentation/intents/ingetcarpowerlevelstatusintentresponse/minutestofull-2kbt6"
       }
     },
     "INGetReservationDetailsIntent": {
@@ -9622,7 +9622,7 @@
       },
       "numberOfAdults": {
         "doc": "The number of adults staying at the lodging location.",
-        "url": "https://developer.apple.com/documentation/intents/inlodgingreservation/numberofadults-9r4iw"
+        "url": "https://developer.apple.com/documentation/intents/inlodgingreservation/numberofadults-6fsnq"
       },
       "numberOfChildren": {
         "doc": "The number of children staying at the lodging location.",
@@ -9712,7 +9712,7 @@
       },
       "numberOfLibraryItems": {
         "doc": "An approximate number of relevant items available in the users library.",
-        "url": "https://developer.apple.com/documentation/intents/inmediausercontext/numberoflibraryitems-881cf"
+        "url": "https://developer.apple.com/documentation/intents/inmediausercontext/numberoflibraryitems-8rnf0"
       },
       "subscriptionStatus": {
         "doc": "The user’s current subscription status.",
@@ -10072,7 +10072,7 @@
       },
       "playShuffled": {
         "doc": "A Boolean value that indicates whether the media plays in a shuffled order.",
-        "url": "https://developer.apple.com/documentation/intents/inplaymediaintent/playshuffled-93hn1"
+        "url": "https://developer.apple.com/documentation/intents/inplaymediaintent/playshuffled-2btex"
       },
       "playbackQueueLocation": {
         "doc": "The queue location for a media item during playback.",
@@ -10084,11 +10084,11 @@
       },
       "playbackSpeed": {
         "doc": "The playback speed for a media item.",
-        "url": "https://developer.apple.com/documentation/intents/inplaymediaintent/playbackspeed-17r2t"
+        "url": "https://developer.apple.com/documentation/intents/inplaymediaintent/playbackspeed-6ngbq"
       },
       "resumePlayback": {
         "doc": "The resume playback setting at the time the user plays the media item.",
-        "url": "https://developer.apple.com/documentation/intents/inplaymediaintent/resumeplayback-9zfyp"
+        "url": "https://developer.apple.com/documentation/intents/inplaymediaintent/resumeplayback-1xw6r"
       }
     },
     "INPlayMediaIntentResponse": {
@@ -10228,7 +10228,7 @@
       },
       "partySize": {
         "doc": "The number of passengers that the ride must accommodate.",
-        "url": "https://developer.apple.com/documentation/intents/inrequestrideintent/partysize-64kfc"
+        "url": "https://developer.apple.com/documentation/intents/inrequestrideintent/partysize-39k7z"
       },
       "paymentMethod": {
         "doc": "The user’s requested payment method.",
@@ -10388,7 +10388,7 @@
       },
       "partySize": {
         "doc": "The number of people in the party.",
-        "url": "https://developer.apple.com/documentation/intents/inrestaurantreservation/partysize-9mtpk"
+        "url": "https://developer.apple.com/documentation/intents/inrestaurantreservation/partysize-9ux0p"
       },
       "reservationDuration": {
         "doc": "The date and time range that defines beginning and end of the restaurant reservation.",
@@ -10588,7 +10588,7 @@
       },
       "usesMeteredFare": {
         "doc": "A Boolean value indicating whether the price uses a metered fare instead of a fixed price.",
-        "url": "https://developer.apple.com/documentation/intents/inrideoption/usesmeteredfare-25g1c"
+        "url": "https://developer.apple.com/documentation/intents/inrideoption/usesmeteredfare-1sig1"
       }
     },
     "INRidePartySizeOption": {
@@ -10704,7 +10704,7 @@
       },
       "profileNumber": {
         "doc": "The profile index in which to save the settings.",
-        "url": "https://developer.apple.com/documentation/intents/insaveprofileincarintent/profilenumber-7z4u2"
+        "url": "https://developer.apple.com/documentation/intents/insaveprofileincarintent/profilenumber-2q84c"
       }
     },
     "INSaveProfileInCarIntentResponse": {
@@ -11034,7 +11034,7 @@
       },
       "searchResultsCount": {
         "doc": "The number of photos that match the search parameters.",
-        "url": "https://developer.apple.com/documentation/intents/insearchforphotosintentresponse/searchresultscount-82lnb"
+        "url": "https://developer.apple.com/documentation/intents/insearchforphotosintentresponse/searchresultscount-3i5mz"
       }
     },
     "INSeat": {
@@ -11180,7 +11180,7 @@
       },
       "locked": {
         "doc": "A Boolean value that indicates whether to lock the car.",
-        "url": "https://developer.apple.com/documentation/intents/insetcarlockstatusintent/locked-9h0kx"
+        "url": "https://developer.apple.com/documentation/intents/insetcarlockstatusintent/locked-61uw4"
       }
     },
     "INSetCarLockStatusIntentResponse": {
@@ -11204,7 +11204,7 @@
       },
       "enableAirConditioner": {
         "doc": "A Boolean value indicating whether to turn on the air conditioner system.",
-        "url": "https://developer.apple.com/documentation/intents/insetclimatesettingsincarintent/enableairconditioner-3prnk"
+        "url": "https://developer.apple.com/documentation/intents/insetclimatesettingsincarintent/enableairconditioner-9q3dr"
       },
       "enableAutoMode": {
         "doc": "A Boolean value indicating whether to enable automatic mode for the climate control system.",
@@ -11216,15 +11216,15 @@
       },
       "enableFan": {
         "doc": "A Boolean value indicating whether to turn on the cabin fan system.",
-        "url": "https://developer.apple.com/documentation/intents/insetclimatesettingsincarintent/enablefan-3bu9e"
+        "url": "https://developer.apple.com/documentation/intents/insetclimatesettingsincarintent/enablefan-5srs9"
       },
       "fanSpeedIndex": {
         "doc": "An integer value indicating the desired fan speed position.",
-        "url": "https://developer.apple.com/documentation/intents/insetclimatesettingsincarintent/fanspeedindex-wz49"
+        "url": "https://developer.apple.com/documentation/intents/insetclimatesettingsincarintent/fanspeedindex-4c1rr"
       },
       "fanSpeedPercentage": {
         "doc": "A floating-point value indicating the requested fan speed specified as a percentage of the maximum speed.",
-        "url": "https://developer.apple.com/documentation/intents/insetclimatesettingsincarintent/fanspeedpercentage-ep0u"
+        "url": "https://developer.apple.com/documentation/intents/insetclimatesettingsincarintent/fanspeedpercentage-7i2hq"
       },
       "init(enableFan:enableAirConditioner:enableClimateControl:enableAutoMode:airCirculationMode:fanSpeedIndex:fanSpeedPercentage:relativeFanSpeedSetting:temperature:relativeTemperatureSetting:climateZone:carName:)": {
         "doc": "Creates the intent object with the specified climate settings information.",
@@ -11260,7 +11260,7 @@
       },
       "enable": {
         "doc": "A Boolean indicating whether to enable or disable the defroster.",
-        "url": "https://developer.apple.com/documentation/intents/insetdefrostersettingsincarintent/enable-8tf0i"
+        "url": "https://developer.apple.com/documentation/intents/insetdefrostersettingsincarintent/enable-9xte9"
       },
       "init(enable:defroster:carName:)": {
         "doc": "Initializes the intent object with the specified defroster information.",
@@ -11372,7 +11372,7 @@
       },
       "frequency": {
         "doc": "The broadcast frequency of the radio station.",
-        "url": "https://developer.apple.com/documentation/intents/insetradiostationintent/frequency-63rbb"
+        "url": "https://developer.apple.com/documentation/intents/insetradiostationintent/frequency-2ctw6"
       },
       "init(radioType:frequency:stationName:channel:presetNumber:)": {
         "doc": "Initializes the intent object with the specified climate settings information.",
@@ -11404,15 +11404,15 @@
       },
       "enableCooling": {
         "doc": "A Boolean value indicating whether to enable the seat cooling system.",
-        "url": "https://developer.apple.com/documentation/intents/insetseatsettingsincarintent/enablecooling-6bcu7"
+        "url": "https://developer.apple.com/documentation/intents/insetseatsettingsincarintent/enablecooling-8qqx3"
       },
       "enableHeating": {
         "doc": "A Boolean value indicating whether to enable the seat heating system.",
-        "url": "https://developer.apple.com/documentation/intents/insetseatsettingsincarintent/enableheating-5qj7i"
+        "url": "https://developer.apple.com/documentation/intents/insetseatsettingsincarintent/enableheating-8auz2"
       },
       "enableMassage": {
         "doc": "A Boolean value indicating whether to enable the seat massage system.",
-        "url": "https://developer.apple.com/documentation/intents/insetseatsettingsincarintent/enablemassage-5jf2s"
+        "url": "https://developer.apple.com/documentation/intents/insetseatsettingsincarintent/enablemassage-46ndx"
       },
       "init(enableHeating:enableCooling:enableMassage:seat:level:relativeLevel:carName:)": {
         "doc": "Initializes the intent object with the specified climate settings information.",
@@ -11420,7 +11420,7 @@
       },
       "level": {
         "doc": "An integer value indicating the desired level for the seat setting.",
-        "url": "https://developer.apple.com/documentation/intents/insetseatsettingsincarintent/level-94975"
+        "url": "https://developer.apple.com/documentation/intents/insetseatsettingsincarintent/level-5i2i"
       },
       "relativeLevelSetting": {
         "doc": "A relative change to the level value.",
@@ -11488,7 +11488,7 @@
     "INSnoozeTasksIntent": {
       "all": {
         "doc": "A Boolean value that indicates whether to snooze all of the tasks.",
-        "url": "https://developer.apple.com/documentation/intents/insnoozetasksintent/all-spsb"
+        "url": "https://developer.apple.com/documentation/intents/insnoozetasksintent/all-62ujw"
       },
       "init(tasks:nextTriggerTime:all:)": {
         "doc": "Initializes the intent object with information about the tasks to snooze and when to snooze them.",
@@ -11620,7 +11620,7 @@
       },
       "searchResultsCount": {
         "doc": "The number of photos that match the search parameters.",
-        "url": "https://developer.apple.com/documentation/intents/instartphotoplaybackintentresponse/searchresultscount-6ns8y"
+        "url": "https://developer.apple.com/documentation/intents/instartphotoplaybackintentresponse/searchresultscount-5r7e7"
       }
     },
     "INStartVideoCallIntent": {
