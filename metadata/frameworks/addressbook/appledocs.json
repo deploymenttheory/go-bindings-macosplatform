@@ -3,29 +3,13 @@
   "framework": "AddressBook",
   "source": "developer.apple.com DocC render API",
   "classes": {
-    "ABAddressBook": {
-      "doc": "The main object you use to access the Address Book database.",
-      "url": "https://developer.apple.com/documentation/addressbook/abaddressbook"
-    },
     "ABGroup": {
       "doc": "An object that represents a group of records in the Address Book database.",
       "url": "https://developer.apple.com/documentation/addressbook/abgroup"
     },
-    "ABMultiValue": {
-      "doc": "An immutable representation of a property that might have multiple values.",
-      "url": "https://developer.apple.com/documentation/addressbook/abmultivalue"
-    },
-    "ABMutableMultiValue": {
-      "doc": "A mutable representation of a property that might have multiple values.",
-      "url": "https://developer.apple.com/documentation/addressbook/abmutablemultivalue"
-    },
     "ABPerson": {
       "doc": "An object that encapsulates all information about a person in the Address Book database.",
       "url": "https://developer.apple.com/documentation/addressbook/abperson"
-    },
-    "ABRecord": {
-      "doc": "An abstract class that defines the common properties for all Address Book records.",
-      "url": "https://developer.apple.com/documentation/addressbook/abrecord"
     },
     "ABSearchElement": {
       "doc": "An object you use to specify a search query for records in the Address Book database.",
@@ -39,84 +23,6 @@
     }
   },
   "methods": {
-    "ABAddressBook": {
-      "+addressBook": {
-        "doc": "Returns a new instance of ABAddressBook, or nil if the Address Book database can’t be initialized.",
-        "url": "https://developer.apple.com/documentation/addressbook/abaddressbook/addressbook"
-      },
-      "+sharedAddressBook": {
-        "doc": "Returns the unique shared instance of ABAddressBook, or nil if the Address Book database can’t be initialized.",
-        "url": "https://developer.apple.com/documentation/addressbook/abaddressbook/shared()"
-      },
-      "-addRecord:": {
-        "doc": "Adds an ABPerson or ABGroup record to the Address Book database.",
-        "url": "https://developer.apple.com/documentation/addressbook/abaddressbook/add(_:)"
-      },
-      "-addRecord:error:": {
-        "doc": "Adds an ABPerson or ABGroup record to the Address Book database.",
-        "url": "https://developer.apple.com/documentation/addressbook/abaddressbook/add(_:error:)"
-      },
-      "-defaultCountryCode": {
-        "doc": "Returns the default country code for records with unspecified country codes.",
-        "url": "https://developer.apple.com/documentation/addressbook/abaddressbook/defaultcountrycode()"
-      },
-      "-defaultNameOrdering": {
-        "doc": "Returns the default name ordering defined by the user in the Address Book application’s preferences.",
-        "url": "https://developer.apple.com/documentation/addressbook/abaddressbook/defaultnameordering()"
-      },
-      "-formattedAddressFromDictionary:": {
-        "doc": "Returns an attributed string containing the formatted address.",
-        "url": "https://developer.apple.com/documentation/addressbook/abaddressbook/formattedaddress(from:)"
-      },
-      "-groups": {
-        "doc": "Returns an array of all the groups in the Address Book database.",
-        "url": "https://developer.apple.com/documentation/addressbook/abaddressbook/groups()"
-      },
-      "-hasUnsavedChanges": {
-        "doc": "Indicates whether an address book has changes that have not been saved to the Address Book database.",
-        "url": "https://developer.apple.com/documentation/addressbook/abaddressbook/hasunsavedchanges()"
-      },
-      "-me": {
-        "doc": "Returns the ABPerson record that represents the logged-in user.",
-        "url": "https://developer.apple.com/documentation/addressbook/abaddressbook/me()"
-      },
-      "-people": {
-        "doc": "Returns an array of all the people in the Address Book database.",
-        "url": "https://developer.apple.com/documentation/addressbook/abaddressbook/people()"
-      },
-      "-recordClassFromUniqueId:": {
-        "doc": "Returns the class name of the record that matches the given unique ID.",
-        "url": "https://developer.apple.com/documentation/addressbook/abaddressbook/recordclass(fromuniqueid:)"
-      },
-      "-recordForUniqueId:": {
-        "doc": "Returns the person or group record that matches the given unique ID.",
-        "url": "https://developer.apple.com/documentation/addressbook/abaddressbook/record(foruniqueid:)"
-      },
-      "-recordsMatchingSearchElement:": {
-        "doc": "Returns an array of records that match the given search element, or returns an empty array if no records match the search element.",
-        "url": "https://developer.apple.com/documentation/addressbook/abaddressbook/records(matching:)"
-      },
-      "-removeRecord:": {
-        "doc": "Removes an ABPerson or ABGroup record from the Address Book database.",
-        "url": "https://developer.apple.com/documentation/addressbook/abaddressbook/remove(_:)"
-      },
-      "-removeRecord:error:": {
-        "doc": "Removes an ABPerson or ABGroup record from the Address Book database.",
-        "url": "https://developer.apple.com/documentation/addressbook/abaddressbook/remove(_:error:)"
-      },
-      "-save": {
-        "doc": "Saves all the changes made since the last save.",
-        "url": "https://developer.apple.com/documentation/addressbook/abaddressbook/save()"
-      },
-      "-saveAndReturnError:": {
-        "doc": "Saves all the changes made since the last save.",
-        "url": "https://developer.apple.com/documentation/addressbook/abaddressbook/saveandreturnerror()"
-      },
-      "-setMe:": {
-        "doc": "Sets the record that represents the logged-in user.",
-        "url": "https://developer.apple.com/documentation/addressbook/abaddressbook/setme(_:)"
-      }
-    },
     "ABGroup": {
       "+addPropertiesAndTypes:": {
         "doc": "Adds the given properties to all records of this type in the Address Book database.",
@@ -175,70 +81,6 @@
         "url": "https://developer.apple.com/documentation/addressbook/abgroup/subgroups()"
       }
     },
-    "ABMultiValue": {
-      "-count": {
-        "doc": "Returns the number of entries in a multivalue list.",
-        "url": "https://developer.apple.com/documentation/addressbook/abmultivalue/count()"
-      },
-      "-identifierAtIndex:": {
-        "doc": "Returns the identifier for the given index.",
-        "url": "https://developer.apple.com/documentation/addressbook/abmultivalue/identifier(at:)"
-      },
-      "-indexForIdentifier:": {
-        "doc": "Returns the index for the given identifier.",
-        "url": "https://developer.apple.com/documentation/addressbook/abmultivalue/index(foridentifier:)"
-      },
-      "-labelAtIndex:": {
-        "doc": "Returns the label for the given index.",
-        "url": "https://developer.apple.com/documentation/addressbook/abmultivalue/label(at:)"
-      },
-      "-labelForIdentifier:": {
-        "doc": "Returns the label for the given identifier.",
-        "url": "https://developer.apple.com/documentation/addressbook/abmultivalue/label(foridentifier:)"
-      },
-      "-primaryIdentifier": {
-        "doc": "Returns the identifier for the primary value.",
-        "url": "https://developer.apple.com/documentation/addressbook/abmultivalue/primaryidentifier()"
-      },
-      "-propertyType": {
-        "doc": "Returns the type for the values in a multivalue list.",
-        "url": "https://developer.apple.com/documentation/addressbook/abmultivalue/propertytype()"
-      },
-      "-valueAtIndex:": {
-        "doc": "Returns the value for the given index.",
-        "url": "https://developer.apple.com/documentation/addressbook/abmultivalue/value(at:)"
-      },
-      "-valueForIdentifier:": {
-        "doc": "Returns the value for the given identifier.",
-        "url": "https://developer.apple.com/documentation/addressbook/abmultivalue/value(foridentifier:)"
-      }
-    },
-    "ABMutableMultiValue": {
-      "-addValue:withLabel:": {
-        "doc": "Adds a value and its label to a multivalue list.",
-        "url": "https://developer.apple.com/documentation/addressbook/abmutablemultivalue/add(_:withlabel:)"
-      },
-      "-insertValue:withLabel:atIndex:": {
-        "doc": "Inserts a value and its label at the given index in a multivalue list.",
-        "url": "https://developer.apple.com/documentation/addressbook/abmutablemultivalue/insert(_:withlabel:at:)"
-      },
-      "-removeValueAndLabelAtIndex:": {
-        "doc": "Removes the value and label at the given index.",
-        "url": "https://developer.apple.com/documentation/addressbook/abmutablemultivalue/removeandlabel(at:)"
-      },
-      "-replaceLabelAtIndex:withLabel:": {
-        "doc": "Replaces the label at the given index.",
-        "url": "https://developer.apple.com/documentation/addressbook/abmutablemultivalue/replacelabel(at:withlabel:)"
-      },
-      "-replaceValueAtIndex:withValue:": {
-        "doc": "Replaces the value at the given index.",
-        "url": "https://developer.apple.com/documentation/addressbook/abmutablemultivalue/replace(at:withvalue:)"
-      },
-      "-setPrimaryIdentifier:": {
-        "doc": "Sets the primary value to be the value for the given identifier.",
-        "url": "https://developer.apple.com/documentation/addressbook/abmutablemultivalue/setprimaryidentifier(_:)"
-      }
-    },
     "ABPerson": {
       "+addPropertiesAndTypes:": {
         "doc": "Adds the given properties to all the records of this type in the Address Book database.",
@@ -289,36 +131,6 @@
         "url": "https://developer.apple.com/documentation/addressbook/abperson/vcardrepresentation()"
       }
     },
-    "ABRecord": {
-      "-init": {
-        "doc": "Initializes a record using the shared address book.",
-        "url": "https://developer.apple.com/documentation/addressbook/abrecord/init()"
-      },
-      "-initWithAddressBook:": {
-        "doc": "Initializes a record using the given address book.",
-        "url": "https://developer.apple.com/documentation/addressbook/abrecord/init(addressbook:)"
-      },
-      "-isReadOnly": {
-        "doc": "Returns whether a record is read-only.",
-        "url": "https://developer.apple.com/documentation/addressbook/abrecord/isreadonly()"
-      },
-      "-removeValueForProperty:": {
-        "doc": "Removes the value for a given property.",
-        "url": "https://developer.apple.com/documentation/addressbook/abrecord/removevalue(forproperty:)"
-      },
-      "-setValue:forProperty:": {
-        "doc": "Sets the value of a given property for a record.",
-        "url": "https://developer.apple.com/documentation/addressbook/abrecord/setvalue(_:forproperty:)"
-      },
-      "-setValue:forProperty:error:": {
-        "doc": "Sets the value of a given property for a record, returning error information.",
-        "url": "https://developer.apple.com/documentation/addressbook/abrecord/setvalue(_:forproperty:error:)"
-      },
-      "-valueForProperty:": {
-        "doc": "Returns the value of a given property for a record.",
-        "url": "https://developer.apple.com/documentation/addressbook/abrecord/value(forproperty:)"
-      }
-    },
     "ABSearchElement": {
       "+searchElementForConjunction:children:": {
         "doc": "Returns a compound search element, created by combining the search elements in an array with the given conjunction.",
@@ -335,16 +147,6 @@
       "init(VCardRepresentation:)": {
         "doc": "Returns an ABPerson instance initialized with the given data.",
         "url": "https://developer.apple.com/documentation/addressbook/abperson/init(vcardrepresentation:)-5c7h8"
-      }
-    },
-    "ABRecord": {
-      "displayName": {
-        "doc": "A user-visible string representing the record.",
-        "url": "https://developer.apple.com/documentation/addressbook/abrecord/displayname"
-      },
-      "uniqueId": {
-        "doc": "Returns the unique ID for a record.",
-        "url": "https://developer.apple.com/documentation/addressbook/abrecord/uniqueid"
       }
     }
   }

@@ -1721,8 +1721,8 @@
     },
     "PHChange": {
       "changeDetails(for:)": {
-        "doc": "Returns detailed change information for a fetch result.",
-        "url": "https://developer.apple.com/documentation/photos/phchange/changedetails(for:)-2fne7"
+        "doc": "Returns detailed change information for the specified asset or collection.",
+        "url": "https://developer.apple.com/documentation/photos/phchange/changedetails(for:)-536rd"
       }
     },
     "PHCloudIdentifier": {
@@ -2151,8 +2151,8 @@
         "url": "https://developer.apple.com/documentation/photos/phprojectchangerequest/projectextensiondata"
       },
       "removeAssets(_:)": {
-        "doc": "Removes assets of a certain type from the collection.",
-        "url": "https://developer.apple.com/documentation/photos/phprojectchangerequest/removeassets(_:)-n825"
+        "doc": "Removes assets based on a fetch result.",
+        "url": "https://developer.apple.com/documentation/photos/phprojectchangerequest/removeassets(_:)-3ytt3"
       },
       "title": {
         "doc": "The title of the change request.",

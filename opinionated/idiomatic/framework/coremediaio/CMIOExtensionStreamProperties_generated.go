@@ -79,7 +79,7 @@ func (esp *ExtensionStreamProperties) WithActiveFormatIndex(activeFormatIndex ob
 	return esp
 }
 
-// WithFrameDuration sets the duration of the frame.
+// WithFrameDuration sets a dictionary representation of a frame duration.
 func (esp *ExtensionStreamProperties) WithFrameDuration(frameDuration obj.Object) *ExtensionStreamProperties {
 	objc.Send[objc.ID](objref.IDOf(esp), objc.RegisterName("setFrameDuration:"), objref.IDOf(frameDuration))
 	return esp

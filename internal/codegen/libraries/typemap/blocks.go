@@ -107,7 +107,7 @@ func (m *Mapper) buildBlockGoType(n string, _ Context) string {
 // parameter. Unlike buildBlockGoType (which uses raw unsafe.Pointer for all ObjC
 // objects to match MakeBlock_* trampoline signatures), this maps:
 //   - NSError * → Go error interface (idiomatic error handling)
-//   - Known ObjC class pointers in args → typed Go pointer (*ClassName or *pkg.ClassName)
+//   - Known ObjC class pointers in args → typed Go pointer (*ClassName or *packageName.ClassName)
 //   - Known ObjC class pointer return types → typed Go pointer
 //
 // ctx is used to resolve class names; imports collects cross-framework import paths.
@@ -127,7 +127,7 @@ func (m *Mapper) GoBlockUserFuncType(n string, ctx Context, imports ImportSet) s
 			t = "error"
 		} else if IsBOOLPointer(a) {
 			t = "*bool"
-		} else if cls := ClassName(a); cls != "" && (argCtx.ClassNameIndex[cls] || (m.StructIndex[cls] != "" && IsPointer(a))) {
+		} else if class := ClassName(a); class != "" && (argCtx.ClassNameIndex[class] || (m.StructIndex[class] != "" && IsPointer(a))) {
 			// Known ObjC class pointer or C struct pointer: resolve to typed Go name
 			// via GoType so that cross-framework imports are tracked in imports.
 			// Bare struct values (e.g. NSRange without *) are intentionally excluded:
@@ -203,7 +203,7 @@ func (m *Mapper) GoBlockUserFuncType(n string, ctx Context, imports ImportSet) s
 		} else {
 			goRet = "cgo.Object"
 		}
-	} else if cls := ClassName(retType); cls != "" && argCtx.ClassNameIndex[cls] {
+	} else if class := ClassName(retType); class != "" && argCtx.ClassNameIndex[class] {
 		if typed := m.GoType(retType, argCtx, imports); typed != "" && typed != "unsafe.Pointer" {
 			goRet = typed
 		}

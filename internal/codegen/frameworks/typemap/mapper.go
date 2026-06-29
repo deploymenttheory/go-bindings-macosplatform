@@ -774,7 +774,7 @@ func (m *Mapper) isBlocked(srcFramework, dstFramework string) bool {
 }
 
 // ObjCClassFromID reports whether goType represents a pointer to an ObjC class
-// (*ClassName or *pkg.ClassName) whose value lives behind a Dlsym'd global
+// (*ClassName or *packageName.ClassName) whose value lives behind a Dlsym'd global
 // variable. When true, fromIDCall is the qualified <ClassName>FromID(id)
 // expression the extern emitter should use to wrap the dereferenced objc.ID.
 // Generic instantiations (containing "[") are excluded because their FromID

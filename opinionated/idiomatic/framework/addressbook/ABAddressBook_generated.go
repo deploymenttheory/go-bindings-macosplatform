@@ -16,8 +16,6 @@ import (
 )
 
 // AddressBook is an idiomatic wrapper over the Objective-C class ABAddressBook.
-//
-// The main object you use to access the Address Book database.
 type AddressBook struct {
 	objref.Handle
 }
@@ -75,19 +73,19 @@ func NewAddressBook() *AddressBook {
 	return addressBookAdopt(_id)
 }
 
-// RecordsMatchingSearchElement returns an array of records that match the given search element, or returns an empty array if no records match the search element.
+// RecordsMatchingSearchElement wraps the corresponding Objective-C method.
 func (ab *AddressBook) RecordsMatchingSearchElement(search *SearchElement) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("recordsMatchingSearchElement:"), objref.IDOf(search))
 	return obj.Wrap(_r)
 }
 
-// Save reports whether saves all the changes made since the last save.
+// Save wraps the corresponding Objective-C method.
 func (ab *AddressBook) Save() bool {
 	_r := objc.Send[bool](objref.IDOf(ab), objc.RegisterName("save"))
 	return _r
 }
 
-// SaveAndReturnError saves all the changes made since the last save.
+// SaveAndReturnError saves and return error.
 //
 // SaveAndReturnError returns an error if the operation did not succeed.
 func (ab *AddressBook) SaveAndReturnError() error {
@@ -99,30 +97,30 @@ func (ab *AddressBook) SaveAndReturnError() error {
 	return nil
 }
 
-// HasUnsavedChanges reports whether an address book has changes that have not been saved to the Address Book database.
+// HasUnsavedChanges reports whether the object has unsaved changes.
 func (ab *AddressBook) HasUnsavedChanges() bool {
 	_r := objc.Send[bool](objref.IDOf(ab), objc.RegisterName("hasUnsavedChanges"))
 	return _r
 }
 
-// Me returns the ABPerson record that represents the logged-in user.
+// Me returns the me.
 func (ab *AddressBook) Me() *Person {
 	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("me"))
 	return PersonFromID(_r)
 }
 
-// SetMe sets the record that represents the logged-in user.
+// SetMe wraps the corresponding Objective-C method.
 func (ab *AddressBook) SetMe(moi *Person) {
 	objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("setMe:"), objref.IDOf(moi))
 }
 
-// RecordForUniqueID returns the person or group record that matches the given unique ID.
+// RecordForUniqueID wraps the corresponding Objective-C method.
 func (ab *AddressBook) RecordForUniqueID(uniqueId string) *Record {
 	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("recordForUniqueId:"), purego.NSString(uniqueId))
 	return RecordFromID(_r)
 }
 
-// AddRecord adds an ABPerson or ABGroup record to the Address Book database.
+// AddRecord adds record.
 func (ab *AddressBook) AddRecord(record *Record) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ab), objc.RegisterName("addRecord:error:"), objref.IDOf(record), unsafe.Pointer(&_nsErr))
@@ -132,7 +130,7 @@ func (ab *AddressBook) AddRecord(record *Record) error {
 	return nil
 }
 
-// RemoveRecord removes an ABPerson or ABGroup record from the Address Book database.
+// RemoveRecord removes record.
 func (ab *AddressBook) RemoveRecord(record *Record) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ab), objc.RegisterName("removeRecord:error:"), objref.IDOf(record), unsafe.Pointer(&_nsErr))
@@ -142,19 +140,19 @@ func (ab *AddressBook) RemoveRecord(record *Record) error {
 	return nil
 }
 
-// People returns an array of all the people in the Address Book database.
+// People returns the people.
 func (ab *AddressBook) People() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("people"))
 	return obj.Wrap(_r)
 }
 
-// Groups returns an array of all the groups in the Address Book database.
+// Groups returns the groups.
 func (ab *AddressBook) Groups() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("groups"))
 	return obj.Wrap(_r)
 }
 
-// RecordClassFromUniqueID returns the class name of the record that matches the given unique ID.
+// RecordClassFromUniqueID wraps the corresponding Objective-C method.
 func (ab *AddressBook) RecordClassFromUniqueID(uniqueId string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("recordClassFromUniqueId:"), purego.NSString(uniqueId))
 	if _r == 0 {
@@ -163,13 +161,13 @@ func (ab *AddressBook) RecordClassFromUniqueID(uniqueId string) string {
 	return purego.GoString(_r)
 }
 
-// FormattedAddressFromDictionary returns an attributed string containing the formatted address.
+// FormattedAddressFromDictionary wraps the corresponding Objective-C method.
 func (ab *AddressBook) FormattedAddressFromDictionary(address obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("formattedAddressFromDictionary:"), objref.IDOf(address))
 	return obj.Wrap(_r)
 }
 
-// DefaultCountryCode returns the default country code for records with unspecified country codes.
+// DefaultCountryCode returns the default country code.
 func (ab *AddressBook) DefaultCountryCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("defaultCountryCode"))
 	if _r == 0 {
@@ -178,7 +176,7 @@ func (ab *AddressBook) DefaultCountryCode() string {
 	return purego.GoString(_r)
 }
 
-// DefaultNameOrdering returns the default name ordering defined by the user in the Address Book application’s preferences.
+// DefaultNameOrdering returns the default name ordering.
 func (ab *AddressBook) DefaultNameOrdering() int {
 	_r := objc.Send[int](objref.IDOf(ab), objc.RegisterName("defaultNameOrdering"))
 	return _r

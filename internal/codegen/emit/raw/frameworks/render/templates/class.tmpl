@@ -1,0 +1,116 @@
+{{/*
+    class.tmpl — raw purego emission of an ObjC class's Go type. The struct
+    embeds either the raw ptr (root/cycle-broken classes) or its superclass
+    struct; root classes also get the promoted Ptr/InitPtr accessors. The
+    one-line method bodies are intentional — gofmt preserves them, so they must
+    match the original byte-for-byte. All decisions are made in the gather phase.
+*/}}
+{{define "class_type_decl"}}{{.CommentBlock}}type {{.TypeHeader}} struct {
+{{.EmbedLine}}
+}
+
+{{if .EmitPtrMethods}}func (o *{{.PtrReceiver}}) Ptr() objc.ID { return o.ptr }
+
+func (o *{{.PtrReceiver}}) InitPtr(id objc.ID) { o.ptr = id }
+
+{{end}}{{end}}
+
+{{/*
+    class_vars — the package-level class-reference and selector variables. Class
+    lookups go through _objcClass (force-loads the framework before its init), so
+    a plain objc.GetClass at package-var init time would resolve to a nil class.
+*/}}
+{{define "class_vars"}}{{if .Selectors}}var (
+{{.ClassVarName}} = _objcClass({{.ClassName | printf "%q"}})
+{{range .Selectors}}{{.VarName}} = objc.RegisterName({{.Selector | printf "%q"}})
+{{end}})
+
+{{else}}var {{.ClassVarName}} = _objcClass({{.ClassName | printf "%q"}})
+
+{{end}}{{end}}
+
+{{/*
+    from_id_constructor — the XFromID factory: wrap a raw objc.ID in the class's
+    Go type, register it with the runtime for finalization, and return it.
+*/}}
+{{define "from_id_constructor"}}{{.Signature}} {
+if id == 0 {
+return nil
+}
+o := &{{.AllocType}}{}
+o.InitPtr(id)
+purego.Track(o)
+return o
+}
+
+{{end}}
+
+{{/*
+    class_method — one Go method wrapping an ObjC method via objc.Send. Block
+    parameters are adapted first, then the call dispatches on the return kind.
+    The one-line `if _ret != 0 { … }` retain guard and the multiline `if _nsErr
+    != 0 { … }` blocks are intentional: gofmt preserves both forms, so they must
+    match the original byte-for-byte.
+*/}}
+{{define "class_method"}}{{.CommentBlock}}func {{.Receiver}}{{.GoName}}({{.ParamStr}}){{.ReturnSig}} {
+{{- range .Adapters}}
+{{template "block_adapter" .}}
+{{- end}}
+{{- if .HasNSError}}
+var _nsErr uintptr
+{{- end}}
+{{- if eq .ReturnKind 0}}
+{{.Target}}.Send({{.SelVar}}{{.SendArgStr}})
+{{- if .HasNSError}}
+if _nsErr != 0 {
+return purego.NSErrorToError(objc.ID(_nsErr))
+}
+return nil
+{{- end}}
+{{- else if eq .ReturnKind 1}}
+_ret := objc.Send[objc.ID]({{.Target}}, {{.SelVar}}{{.SendArgStr}})
+{{- if not .AlreadyRetained}}
+if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+{{- end}}
+{{- if .HasNSError}}
+if _nsErr != 0 {
+return nil, purego.NSErrorToError(objc.ID(_nsErr))
+}
+return {{.WrapExpr}}, nil
+{{- else}}
+return {{.WrapExpr}}
+{{- end}}
+{{- else if eq .ReturnKind 2}}
+_ret := objc.Send[objc.ID]({{.Target}}, {{.SelVar}}{{.SendArgStr}})
+{{- if .HasNSError}}
+if _nsErr != 0 {
+return "", purego.NSErrorToError(objc.ID(_nsErr))
+}
+return purego.GoString(_ret), nil
+{{- else}}
+return purego.GoString(_ret)
+{{- end}}
+{{- else if eq .ReturnKind 3}}
+_ret := objc.Send[bool]({{.Target}}, {{.SelVar}}{{.SendArgStr}})
+{{- if .HasNSError}}
+if _nsErr != 0 {
+return false, purego.NSErrorToError(objc.ID(_nsErr))
+}
+return _ret, nil
+{{- else}}
+return _ret
+{{- end}}
+{{- else}}
+_ret := objc.Send[{{.RetGoType}}]({{.Target}}, {{.SelVar}}{{.SendArgStr}})
+{{- if .HasNSError}}
+if _nsErr != 0 {
+return {{.ZeroVal}}, purego.NSErrorToError(objc.ID(_nsErr))
+}
+return _ret, nil
+{{- else}}
+return _ret
+{{- end}}
+{{- end}}
+}
+
+{{end}}

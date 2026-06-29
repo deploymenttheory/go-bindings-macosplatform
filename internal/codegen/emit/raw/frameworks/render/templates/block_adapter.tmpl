@@ -1,0 +1,19 @@
+{{/*
+    block_adapter.tmpl — the objc.NewBlock construction for one (non-degraded)
+    block-typed parameter, emitted inside a wrapper body. The caller filters out
+    degraded adapters and owns the surrounding blank lines; this template emits
+    exactly the statement block, starting at `var` and ending at the closing `}`
+    with no leading or trailing newline. gofmt indents the result.
+*/}}
+{{define "block_adapter"}}var {{.BlockVar}} objc.Block
+if {{.ParamName}} != nil {
+{{.BlockVar}} = objc.NewBlock({{.CallbackSig}} {
+{{- range .Params}}{{if .NeedsRetain}}
+if {{.ArgName}} != 0 {
+{{.ArgName}}.Send(objc.RegisterName("retain"))
+}
+{{- end}}{{end}}
+{{if .HasReturn}}return {{end}}{{.CallExpr}}
+})
+defer {{.BlockVar}}.Release()
+}{{end}}

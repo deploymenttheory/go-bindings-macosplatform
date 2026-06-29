@@ -180,7 +180,7 @@ func (m *Mapper) CType(qt string, ctx Context, imports ImportSet) string {
 	// ObjC object pointer wrappers → id (the semantically correct ObjC bridge type).
 	// id<Protocol> resolutions and typedef-resolved ObjC objects (e.g. dispatch_queue_t →
 	// NSObject<OS_dispatch_queue>) both surface as "cgo.Object" from GoType.
-	// Named ObjC class pointer wrappers surface as "*ClassName" or "*pkg.ClassName[...]".
+	// Named ObjC class pointer wrappers surface as "*ClassName" or "*packageName.ClassName[...]".
 	// C struct wrappers, CF opaque types, and other non-ObjC pointers stay as void *.
 	// The OwnerIndex check is the key discriminator: only classes registered as ObjC
 	// classes (scanned from the SDK) qualify; CF opaque types (e.g. MTAudioProcessingTapRef),
@@ -476,39 +476,39 @@ func (m *Mapper) resolvePointerType(n string, ctx Context, imports ImportSet) st
 	}
 
 	// Named ObjC class pointer: NSString * → *NSString (or *foundation.NSString)
-	cls := ClassName(n)
-	if cls != "" {
+	class := ClassName(n)
+	if class != "" {
 		for _, gp := range ctx.GenericParams {
-			if cls == gp {
+			if class == gp {
 				return "unsafe.Pointer"
 			}
 		}
-		if ctx.ClassNameIndex[cls] {
-			if m.GenericClasses[cls] {
-				return m.qualifiedType(cls, cls+"[cgo.Object]", ctx, imports)
+		if ctx.ClassNameIndex[class] {
+			if m.GenericClasses[class] {
+				return m.qualifiedType(class, class+"[cgo.Object]", ctx, imports)
 			}
-			return m.qualifiedType(cls, cls, ctx, imports)
+			return m.qualifiedType(class, class, ctx, imports)
 		}
 		// Struct pointer (e.g. `CGSize *`, `NSOperatingSystemVersion *`):
-		// In parameter position, resolve to `*<pkg>.<Name>` so callers can pass
+		// In parameter position, resolve to `*<packageName>.<Name>` so callers can pass
 		// typed Go struct pointers; goCGoArgExpr converts to unsafe.Pointer for CGo.
 		// In return position, use unsafe.Pointer — the emitter cannot call a
 		// New-constructor for a C struct (only ObjC classes have those), so the
 		// caller must manage the raw pointer.
-		if owner, ok := m.StructIndex[cls]; ok {
+		if owner, ok := m.StructIndex[class]; ok {
 			if ctx.IsReturn {
 				return "unsafe.Pointer"
 			}
-			return m.qualifiedStructType(cls, owner, true, ctx, imports)
+			return m.qualifiedStructType(class, owner, true, ctx, imports)
 		}
 		// Typedef alias struct pointer: follow the typedef chain up to 8 hops to
 		// find a known struct (e.g. NSRect*→CGRect*, AppleEvent*→AERecord*→
 		// AEDescList*→AEDesc*→struct AEDesc). Single-hop cases (NSRect→CGRect)
 		// still work on the first iteration; deep chains (Carbon/CoreServices)
 		// resolve on later iterations.
-		if target, ok := m.TypedefIndex[cls]; ok && target != cls {
+		if target, ok := m.TypedefIndex[class]; ok && target != class {
 			resolved := target
-			seen := map[string]bool{cls: true, target: true}
+			seen := map[string]bool{class: true, target: true}
 			for range 8 {
 				resolvedCls := ClassName(resolved)
 				if resolvedCls == "" {
@@ -621,4 +621,3 @@ func (m *Mapper) resolvePointerType(n string, ctx Context, imports ImportSet) st
 
 	return "unsafe.Pointer"
 }
-

@@ -1536,7 +1536,7 @@
       },
       "packetDependencies": {
         "doc": "The buffer’s array of packet dependencies.",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudiocompressedbuffer/packetdependencies-5oae6"
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudiocompressedbuffer/packetdependencies-3a6ln"
       },
       "packetDescriptions": {
         "doc": "The buffer’s array of packet descriptions.",
@@ -1834,7 +1834,7 @@
       },
       "withAudioUnit(_:)": {
         "doc": "Provides scoped access to the I/O node’s AudioUnit",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudioionode/withaudiounit(_:)-57kv"
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudioionode/withaudiounit(_:)-6i8ld"
       }
     },
     "AVAudioInputNode": {
@@ -1912,7 +1912,7 @@
     "AVAudioOutputNode": {
       "intendedSpatialExperience": {
         "doc": "The intended spatial experience for this output node.",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudiooutputnode/intendedspatialexperience-3uznq"
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudiooutputnode/intendedspatialexperience-3ts59"
       }
     },
     "AVAudioPCMBuffer": {
@@ -2306,7 +2306,7 @@
       },
       "intendedSpatialExperience": {
         "doc": "The spatial audio experience your app intends to provide the user.",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudiosession/intendedspatialexperience-qlty"
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudiosession/intendedspatialexperience-1bpnq"
       },
       "intendedSpatialExperienceOptions": {
         "doc": "A dictionary of options that customize the spatial experience.",

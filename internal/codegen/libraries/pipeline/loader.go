@@ -55,7 +55,7 @@ type Registry struct {
 	// StructIndex maps a struct name (CGSize, CGRect, NSOperatingSystemVersion,
 	// ether_addr_t, …) to the framework that owns the complete definition.
 	// Used by the type mapper to resolve value-type struct references as
-	// `<pkg>.<Name>` (or bare `<Name>` when same-framework) instead of falling
+	// `<packageName>.<Name>` (or bare `<Name>` when same-framework) instead of falling
 	// through to unsafe.Pointer. Population prefers the first metadata entry
 	// with non-empty fields — forward-declared/placeholder entries from
 	// transitively-included headers do not claim ownership.
@@ -136,7 +136,7 @@ func LoadAll(paths []string, modulePrefix string) (*Registry, error) {
 
 	// Infer ParentFramework from path depth for metadata that predate the field.
 	// Sub-framework files sit two levels deep: {metaDir}/{parent}/{child}/{file}
-	// Top-level files sit one level deep:       {metaDir}/{fw}/{file}
+	// Top-level files sit one level deep:       {metaDir}/{framework}/{file}
 	// We detect sub-frameworks by checking whether the grandparent directory
 	// is itself a known framework directory (identified by absolute path).
 	fwDirPaths := make(map[string]string) // abs dir path → framework name
@@ -205,21 +205,21 @@ func LoadAll(paths []string, modulePrefix string) (*Registry, error) {
 	type classEntry struct {
 		framework string
 		score     int
-		cls       macosplatformmetadata.Class
+		class     macosplatformmetadata.Class
 	}
 	// allEntries collects every framework's definition for each class.
 	allEntries := make(map[string][]classEntry)
 	for _, framework := range frameworks {
-		for name, cls := range framework.Classes {
-			score := len(cls.Methods) + len(cls.Properties)
-			allEntries[name] = append(allEntries[name], classEntry{framework.Framework, score, cls})
+		for name, class := range framework.Classes {
+			score := len(class.Methods) + len(class.Properties)
+			allEntries[name] = append(allEntries[name], classEntry{framework.Framework, score, class})
 		}
 	}
 
 	type bestEntry struct {
 		framework string
 		score     int
-		cls       macosplatformmetadata.Class
+		class     macosplatformmetadata.Class
 	}
 	best := make(map[string]bestEntry)
 	for name, entries := range allEntries {
@@ -250,10 +250,10 @@ func LoadAll(paths []string, modulePrefix string) (*Registry, error) {
 	for name, entry := range best {
 		reg.ClassNameIndex[name] = true
 		reg.OwnerIndex[name] = entry.framework
-		reg.ClassIndex[name] = entry.cls
-		if len(entry.cls.GenericParams) > 0 {
+		reg.ClassIndex[name] = entry.class
+		if len(entry.class.GenericParams) > 0 {
 			reg.GenericClasses[name] = true
-			reg.GenericParamIndex[name] = entry.cls.GenericParams
+			reg.GenericParamIndex[name] = entry.class.GenericParams
 		}
 	}
 
@@ -609,8 +609,8 @@ func validateSuperchainAcyclic(allClasses map[string]macosplatformmetadata.Class
 		}
 		visited[name] = true
 		inStack[name] = true
-		if cls, ok := allClasses[name]; ok && cls.Super != "" {
-			if err := dfs(cls.Super); err != nil {
+		if class, ok := allClasses[name]; ok && class.Super != "" {
+			if err := dfs(class.Super); err != nil {
 				return err
 			}
 		}
@@ -642,7 +642,7 @@ func resolvePaths(paths []string) ([]string, error) {
 			return nil, fmt.Errorf("stat %s: %w", p, err)
 		}
 		if info.IsDir() {
-			// Support both flat dirs (*.gometa.json) and metadata/<fw>/*.gometa.json
+			// Support both flat dirs (*.gometa.json) and metadata/<framework>/*.gometa.json
 			matches, err := filepath.Glob(filepath.Join(p, "*.gometa.json"))
 			if err != nil {
 				return nil, err
@@ -785,8 +785,8 @@ func buildProtocolProxyIndex(
 	classes map[string]macosplatformmetadata.Class,
 	knownProtocols, dst map[string]string,
 ) {
-	for _, cls := range classes {
-		for _, method := range cls.Methods {
+	for _, class := range classes {
+		for _, method := range class.Methods {
 			recordIDProtocolReturn(method.Return.ObjCType, knownProtocols, dst)
 		}
 	}
@@ -835,9 +835,9 @@ func recordIDProtocolReturn(objcType string, knownProtocols, dst map[string]stri
 func (r *Registry) SuperclassIndex() map[string]bool {
 	index := make(map[string]bool)
 	for _, framework := range r.Frameworks {
-		for _, cls := range framework.Classes {
-			if cls.Super != "" {
-				index[cls.Super] = true
+		for _, class := range framework.Classes {
+			if class.Super != "" {
+				index[class.Super] = true
 			}
 		}
 	}

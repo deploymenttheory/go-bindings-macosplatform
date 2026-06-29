@@ -1412,7 +1412,7 @@
     "MLStateConstraint": {
       "bufferShape": {
         "doc": "The shape of the state buffer.",
-        "url": "https://developer.apple.com/documentation/coreml/mlstateconstraint/buffershape-4zb3w"
+        "url": "https://developer.apple.com/documentation/coreml/mlstateconstraint/buffershape-6o5vn"
       },
       "dataType": {
         "doc": "The data type of scalars in the state buffer.",

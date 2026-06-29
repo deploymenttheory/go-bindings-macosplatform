@@ -10,8 +10,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/emit/library"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/emit/raw"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/libraries"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/typemap"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
 	swiftemit "github.com/deploymenttheory/go-bindings-macosplatform/internal/swift/emit"
@@ -121,7 +121,7 @@ func GenerateBindings(cfg BindingsConfig) error {
 			return fmt.Errorf("mkdir bsd package dir: %w", err)
 		}
 		if err := writeFile(filepath.Join(bsdDir, "bsd.go"), func(buf *bytes.Buffer) error {
-			return raw.EmitBSDPackage(buf)
+			return rawlib.EmitBSDPackage(buf)
 		}); err != nil {
 			return fmt.Errorf("generate bsd package: %w", err)
 		}
@@ -140,12 +140,12 @@ func GenerateBindings(cfg BindingsConfig) error {
 	{
 		frameworks := make([]*macosplatformmetadata.FrameworkMeta, 0, len(reg.Frameworks))
 		frameworks = append(frameworks, reg.Frameworks...)
-		sigs := raw.CollectBlockSignaturesFromFrameworks(frameworks, m)
+		sigs := rawlib.CollectBlockSignaturesFromFrameworks(frameworks, m)
 
 		if err := writeFile(
 			filepath.Join(blocksDir, "blocks_generated.go"),
 			func(buf *bytes.Buffer) error {
-				return raw.EmitRuntimeBlocksGo(buf, sigs, "blocks")
+				return rawlib.EmitRuntimeBlocksGo(buf, sigs, "blocks")
 			},
 		); err != nil {
 			return fmt.Errorf("generate blocks_generated.go: %w", err)
@@ -153,7 +153,7 @@ func GenerateBindings(cfg BindingsConfig) error {
 		if err := writeFile(
 			filepath.Join(blocksDir, "block_trampolines_generated.h"),
 			func(buf *bytes.Buffer) error {
-				return raw.EmitRuntimeBlocksTrampolineHeader(buf, sigs)
+				return rawlib.EmitRuntimeBlocksTrampolineHeader(buf, sigs)
 			},
 		); err != nil {
 			return fmt.Errorf("generate block_trampolines_generated.h: %w", err)
@@ -161,7 +161,7 @@ func GenerateBindings(cfg BindingsConfig) error {
 		if err := writeFile(
 			filepath.Join(blocksDir, "block_trampolines_generated.m"),
 			func(buf *bytes.Buffer) error {
-				return raw.EmitRuntimeBlocksTrampolineImpl(buf, sigs)
+				return rawlib.EmitRuntimeBlocksTrampolineImpl(buf, sigs)
 			},
 		); err != nil {
 			return fmt.Errorf("generate block_trampolines_generated.m: %w", err)
@@ -172,12 +172,12 @@ func GenerateBindings(cfg BindingsConfig) error {
 	{
 		frameworks := make([]*macosplatformmetadata.FrameworkMeta, 0, len(reg.Frameworks))
 		frameworks = append(frameworks, reg.Frameworks...)
-		sigs := raw.CollectMethodSigsFromFrameworks(frameworks, m)
+		sigs := rawlib.CollectMethodSigsFromFrameworks(frameworks, m)
 
 		if err := writeFile(
 			filepath.Join(callbacksDir, "callbacks_generated.go"),
 			func(buf *bytes.Buffer) error {
-				return raw.EmitRuntimeCallbacksGo(buf, sigs, "callbacks")
+				return rawlib.EmitRuntimeCallbacksGo(buf, sigs, "callbacks")
 			},
 		); err != nil {
 			return fmt.Errorf("generate callbacks_generated.go: %w", err)
@@ -185,7 +185,7 @@ func GenerateBindings(cfg BindingsConfig) error {
 		if err := writeFile(
 			filepath.Join(callbacksDir, "method_trampolines_generated.h"),
 			func(buf *bytes.Buffer) error {
-				return raw.EmitRuntimeCallbacksTrampolineHeader(buf, sigs)
+				return rawlib.EmitRuntimeCallbacksTrampolineHeader(buf, sigs)
 			},
 		); err != nil {
 			return fmt.Errorf("generate method_trampolines_generated.h: %w", err)
@@ -193,7 +193,7 @@ func GenerateBindings(cfg BindingsConfig) error {
 		if err := writeFile(
 			filepath.Join(callbacksDir, "method_trampolines_generated.m"),
 			func(buf *bytes.Buffer) error {
-				return raw.EmitRuntimeCallbacksTrampolineImpl(buf, sigs)
+				return rawlib.EmitRuntimeCallbacksTrampolineImpl(buf, sigs)
 			},
 		); err != nil {
 			return fmt.Errorf("generate method_trampolines_generated.m: %w", err)
@@ -270,8 +270,8 @@ func GenerateCustom(cfg CustomConfig) error {
 // filter set are processed; an empty filter means all frameworks.
 func forEachFramework(reg *Registry, filter []string, fn func(*macosplatformmetadata.FrameworkMeta) error) error {
 	filterSet := make(map[string]bool, len(filter))
-	for _, fw := range filter {
-		filterSet[strings.ToLower(fw)] = true
+	for _, frameworkName := range filter {
+		filterSet[strings.ToLower(frameworkName)] = true
 	}
 	for _, framework := range sortFrameworksByDependency(reg) {
 		if len(filterSet) > 0 && !filterSet[strings.ToLower(framework.Framework)] {
@@ -297,11 +297,11 @@ func sortFrameworksByDependency(reg *Registry) []*macosplatformmetadata.Framewor
 		deps[framework.Framework] = make(map[string]bool)
 	}
 	for _, framework := range reg.Frameworks {
-		for _, cls := range framework.Classes {
-			if cls.Super == "" {
+		for _, class := range framework.Classes {
+			if class.Super == "" {
 				continue
 			}
-			owner := reg.OwnerIndex[cls.Super]
+			owner := reg.OwnerIndex[class.Super]
 			if owner != "" && owner != framework.Framework {
 				deps[framework.Framework][owner] = true
 			}
@@ -310,25 +310,25 @@ func sortFrameworksByDependency(reg *Registry) []*macosplatformmetadata.Framewor
 
 	// Kahn's algorithm.
 	inDegree := make(map[string]int)
-	for fw := range deps {
-		if _, ok := inDegree[fw]; !ok {
-			inDegree[fw] = 0
+	for frameworkName := range deps {
+		if _, ok := inDegree[frameworkName]; !ok {
+			inDegree[frameworkName] = 0
 		}
-		for dep := range deps[fw] {
+		for dep := range deps[frameworkName] {
 			inDegree[dep] = inDegree[dep] // ensure present
 			_ = dep
 		}
 	}
 	// recalculate: inDegree[A] = number of frameworks that A depends on
-	for fw := range deps {
-		inDegree[fw] = len(deps[fw])
+	for frameworkName := range deps {
+		inDegree[frameworkName] = len(deps[frameworkName])
 	}
 
 	// Start with frameworks that have no dependencies.
 	var queue []string
-	for fw := range inDegree {
-		if inDegree[fw] == 0 {
-			queue = append(queue, fw)
+	for frameworkName := range inDegree {
+		if inDegree[frameworkName] == 0 {
+			queue = append(queue, frameworkName)
 		}
 	}
 	// Sort for determinism.
@@ -336,15 +336,15 @@ func sortFrameworksByDependency(reg *Registry) []*macosplatformmetadata.Framewor
 
 	var sorted []*macosplatformmetadata.FrameworkMeta
 	for len(queue) > 0 {
-		fw := queue[0]
+		frameworkName := queue[0]
 		queue = queue[1:]
-		if framework, ok := byName[fw]; ok {
+		if framework, ok := byName[frameworkName]; ok {
 			sorted = append(sorted, framework)
 		}
-		// Find frameworks that depended on fw.
+		// Find frameworks that depended on framework.
 		for other, otherDeps := range deps {
-			if otherDeps[fw] {
-				delete(otherDeps, fw)
+			if otherDeps[frameworkName] {
+				delete(otherDeps, frameworkName)
 				inDegree[other]--
 				if inDegree[other] == 0 {
 					queue = append(queue, other)
@@ -566,27 +566,27 @@ func emitFramework(
 		return err
 	}
 
-	// {fw}_enums.go
+	// {framework}_enums.go
 	if len(framework.Enums) > 0 {
 		if err := writeFile(
 			filepath.Join(outDir, packageName+"_enums.go"),
 			func(buf *bytes.Buffer) error {
-				needsFmt, needsStrings := raw.EnumsNeedImports(framework)
+				needsFmt, needsStrings := rawlib.EnumsNeedImports(framework)
 				writeGoHeaderEnums(buf, pkgName, needsFmt, needsStrings)
-				return raw.EmitEnums(buf, framework)
+				return rawlib.EmitEnums(buf, framework)
 			},
 		); err != nil {
 			return err
 		}
 	}
 
-	// {fw}_structs.go — two-phase: generate body first to detect import needs.
+	// {framework}_structs.go — two-phase: generate body first to detect import needs.
 	if len(framework.Structs) > 0 || len(framework.Typedefs) > 0 {
 		if err := writeFile(
 			filepath.Join(outDir, packageName+"_structs.go"),
 			func(buf *bytes.Buffer) error {
 				var body bytes.Buffer
-				crossImports, err := raw.EmitStructs(&body, framework, m, reg.ClassNameIndex)
+				crossImports, err := rawlib.EmitStructs(&body, framework, m, reg.ClassNameIndex)
 				if err != nil {
 					return err
 				}
@@ -601,24 +601,24 @@ func emitFramework(
 		}
 	}
 
-	// {fw}_externs.go
+	// {framework}_externs.go
 	if len(framework.Externs) > 0 {
 		if err := writeFile(
 			filepath.Join(outDir, packageName+"_externs.go"),
 			func(buf *bytes.Buffer) error {
-				return raw.EmitExterns(buf, pkgName, framework, m, reg.ClassNameIndex)
+				return rawlib.EmitExterns(buf, pkgName, framework, m, reg.ClassNameIndex)
 			},
 		); err != nil {
 			return err
 		}
 	}
 
-	// {fw}_protocols.go
+	// {framework}_protocols.go
 	if len(framework.Protocols) > 0 {
 		if err := writeFile(
 			filepath.Join(outDir, packageName+"_protocols.go"),
 			func(buf *bytes.Buffer) error {
-				return raw.EmitProtocols(
+				return rawlib.EmitProtocols(
 					buf,
 					pkgName,
 					framework,
@@ -633,12 +633,12 @@ func emitFramework(
 		}
 	}
 
-	// {fw}_proxies.go — id<Protocol> wrapper types for return-position protocols.
+	// {framework}_proxies.go — id<Protocol> wrapper types for return-position protocols.
 	if len(framework.Protocols) > 0 {
 		if err := writeFile(
 			filepath.Join(outDir, packageName+"_proxies.go"),
 			func(buf *bytes.Buffer) error {
-				return raw.EmitProtocolProxies(
+				return rawlib.EmitProtocolProxies(
 					buf,
 					pkgName,
 					packageName,
@@ -653,12 +653,12 @@ func emitFramework(
 		}
 	}
 
-	// {fw}_class_interfaces.go — [ClassName]able Go interface per concrete ObjC class.
+	// {framework}_class_interfaces.go — [ClassName]able Go interface per concrete ObjC class.
 	if len(framework.Classes) > 0 {
 		if err := writeFile(
 			filepath.Join(outDir, packageName+"_class_interfaces.go"),
 			func(buf *bytes.Buffer) error {
-				return raw.EmitClassInterfaces(
+				return rawlib.EmitClassInterfaces(
 					buf,
 					pkgName,
 					framework,
@@ -672,25 +672,25 @@ func emitFramework(
 		}
 	}
 
-	// {fw}_block_types.go
+	// {framework}_block_types.go
 	if len(framework.BlockTypes) > 0 {
 		if err := writeFile(
 			filepath.Join(outDir, packageName+"_block_types.go"),
 			func(buf *bytes.Buffer) error {
 				writeGoHeader(buf, pkgName, false)
-				return raw.EmitBlocks(buf, framework, m, reg.ClassNameIndex)
+				return rawlib.EmitBlocks(buf, framework, m, reg.ClassNameIndex)
 			},
 		); err != nil {
 			return err
 		}
 	}
 
-	// {fw}_functions.go
+	// {framework}_functions.go
 	if hasBridgeableFunctions(framework) {
 		if err := writeFile(
 			filepath.Join(outDir, packageName+"_functions.go"),
 			func(buf *bytes.Buffer) error {
-				return raw.EmitFunctions(
+				return rawlib.EmitFunctions(
 					buf,
 					pkgName,
 					packageName,
@@ -704,13 +704,13 @@ func emitFramework(
 		}
 	}
 
-	// bridge/{fw}_bridge.h and bridge/{fw}_bridge.m
-	if err := raw.EmitBridge(outDir, framework, m, reg.ClassNameIndex); err != nil {
+	// bridge/{framework}_bridge.h and bridge/{framework}_bridge.m
+	if err := rawlib.EmitBridge(outDir, framework, m, reg.ClassNameIndex); err != nil {
 		return fmt.Errorf("bridge %s: %w", framework.Framework, err)
 	}
 
 	// One .go file per class.
-	if err := raw.EmitClasses(
+	if err := rawlib.EmitClasses(
 		outDir,
 		framework,
 		m,
@@ -726,7 +726,7 @@ func emitFramework(
 		if err := writeFile(
 			filepath.Join(outDir, "foundation_variadic.go"),
 			func(buf *bytes.Buffer) error {
-				return raw.EmitFoundationVariadicWrappers(buf, pkgName)
+				return rawlib.EmitFoundationVariadicWrappers(buf, pkgName)
 			},
 		); err != nil {
 			return err
@@ -734,7 +734,7 @@ func emitFramework(
 	}
 
 	superIndex := reg.SuperclassIndex()
-	if err := raw.EmitSubclassFactories(
+	if err := rawlib.EmitSubclassFactories(
 		outDir,
 		framework,
 		m,
@@ -743,10 +743,10 @@ func emitFramework(
 	); err != nil {
 		return fmt.Errorf("subclass factories %s: %w", framework.Framework, err)
 	}
-	if err := raw.EmitProtocolImpls(outDir, framework, m); err != nil {
+	if err := rawlib.EmitProtocolImpls(outDir, framework, m); err != nil {
 		return fmt.Errorf("protocol impls %s: %w", framework.Framework, err)
 	}
-	if err := raw.EmitGeneratedBridgesImpl(outDir, packageName); err != nil {
+	if err := rawlib.EmitGeneratedBridgesImpl(outDir, packageName); err != nil {
 		return fmt.Errorf("generated bridges impl %s: %w", framework.Framework, err)
 	}
 
@@ -789,7 +789,7 @@ func emitOpinionated(
 	if err := writeFile(
 		filepath.Join(opDir, packageName+"_async_generated.go"),
 		func(buf *bytes.Buffer) error {
-			return library.EmitAsync(
+			return idiolib.EmitAsync(
 				buf,
 				packageName,
 				rawImportPath,
@@ -804,7 +804,7 @@ func emitOpinionated(
 	if err := writeFile(
 		filepath.Join(opDir, packageName+"_slices_generated.go"),
 		func(buf *bytes.Buffer) error {
-			return library.EmitSlices(
+			return idiolib.EmitSlices(
 				buf,
 				packageName,
 				rawImportPath,
@@ -819,7 +819,7 @@ func emitOpinionated(
 	if err := writeFile(
 		filepath.Join(opDir, packageName+"_specs_generated.go"),
 		func(buf *bytes.Buffer) error {
-			return library.EmitSpecs(
+			return idiolib.EmitSpecs(
 				buf,
 				packageName,
 				rawImportPath,
@@ -997,12 +997,12 @@ func resolveBlockedImports(reg *Registry) map[string]map[string]bool {
 	protoWeight := make(map[string]map[string]int)
 
 	for _, framework := range reg.Frameworks {
-		fw := framework.Framework
-		if methodWeight[fw] == nil {
-			methodWeight[fw] = make(map[string]int)
+		frameworkName := framework.Framework
+		if methodWeight[frameworkName] == nil {
+			methodWeight[frameworkName] = make(map[string]int)
 		}
-		if protoWeight[fw] == nil {
-			protoWeight[fw] = make(map[string]int)
+		if protoWeight[frameworkName] == nil {
+			protoWeight[frameworkName] = make(map[string]int)
 		}
 
 		// addMethodWeight counts every class or enum type reference in an ObjC type string.
@@ -1037,8 +1037,8 @@ func resolveBlockedImports(reg *Registry) map[string]map[string]bool {
 				if structOwner := reg.StructIndex[tok]; structOwner != "" {
 					owner = structOwner
 				}
-				if owner != "" && owner != fw {
-					methodWeight[fw][owner]++
+				if owner != "" && owner != frameworkName {
+					methodWeight[frameworkName][owner]++
 				}
 			}
 			// Resolve single-token typedef names to arbitrary depth.
@@ -1056,8 +1056,8 @@ func resolveBlockedImports(reg *Registry) map[string]map[string]bool {
 			}
 		}
 
-		for _, cls := range framework.Classes {
-			for _, method := range cls.Methods {
+		for _, class := range framework.Classes {
+			for _, method := range class.Methods {
 				addMethodWeight(method.Return.ObjCType)
 				for _, arg := range method.Params {
 					addMethodWeight(arg.ObjCType)
@@ -1074,8 +1074,8 @@ func resolveBlockedImports(reg *Registry) map[string]map[string]bool {
 			// Protocol InheritedProtocols relationships are protocol-embed edges, tracked separately.
 			for _, parentName := range proto.InheritedProtocols {
 				owner := reg.ProtocolIndex[parentName]
-				if owner != "" && owner != fw {
-					protoWeight[fw][owner]++
+				if owner != "" && owner != frameworkName {
+					protoWeight[frameworkName][owner]++
 				}
 			}
 		}
@@ -1091,8 +1091,8 @@ func resolveBlockedImports(reg *Registry) map[string]map[string]bool {
 		// Foreign extensions: the receiver class creates a method-weight dependency.
 		for className := range framework.ForeignExtensions {
 			owner := reg.OwnerIndex[className]
-			if owner != "" && owner != fw {
-				methodWeight[fw][owner]++
+			if owner != "" && owner != frameworkName {
+				methodWeight[frameworkName][owner]++
 			}
 		}
 	}
@@ -1101,34 +1101,34 @@ func resolveBlockedImports(reg *Registry) map[string]map[string]bool {
 	// per-class weights for tie-breaking.
 	totalWeight := make(map[string]map[string]int)
 	allFWs := make(map[string]bool)
-	for fw := range methodWeight {
-		allFWs[fw] = true
+	for frameworkName := range methodWeight {
+		allFWs[frameworkName] = true
 	}
-	for fw := range protoWeight {
-		allFWs[fw] = true
+	for frameworkName := range protoWeight {
+		allFWs[frameworkName] = true
 	}
-	for fw := range allFWs {
-		totalWeight[fw] = make(map[string]int)
-		for tgt, w := range methodWeight[fw] {
-			totalWeight[fw][tgt] += w
+	for frameworkName := range allFWs {
+		totalWeight[frameworkName] = make(map[string]int)
+		for tgt, w := range methodWeight[frameworkName] {
+			totalWeight[frameworkName][tgt] += w
 		}
-		for tgt, w := range protoWeight[fw] {
-			totalWeight[fw][tgt] += w
+		for tgt, w := range protoWeight[frameworkName] {
+			totalWeight[frameworkName][tgt] += w
 		}
 	}
 
 	// Build directed would-import adjacency list (edges with total weight > 0).
 	// Sort each adjacency list for deterministic DFS traversal.
 	adj := make(map[string][]string)
-	for fw, targets := range totalWeight {
+	for frameworkName, targets := range totalWeight {
 		var edges []string
 		for tgt, w := range targets {
-			if w > 0 && tgt != fw {
+			if w > 0 && tgt != frameworkName {
 				edges = append(edges, tgt)
 			}
 		}
 		sort.Strings(edges)
-		adj[fw] = edges
+		adj[frameworkName] = edges
 	}
 
 	blocked := make(map[string]map[string]bool)
@@ -1162,15 +1162,15 @@ func resolveBlockedImports(reg *Registry) map[string]map[string]bool {
 		// Select the edge in the cycle with the lowest score.
 		var bestSrc, bestDst string
 		bestPrio, bestTotal, bestSrcName := -1, -1, ""
-		for i, fw := range cycle {
+		for i, frameworkName := range cycle {
 			dst := cycle[(i+1)%len(cycle)]
-			p, t, s := edgeScore(fw, dst)
+			p, t, s := edgeScore(frameworkName, dst)
 			if bestPrio < 0 ||
 				p < bestPrio ||
 				(p == bestPrio && t < bestTotal) ||
 				(p == bestPrio && t == bestTotal && s > bestSrcName) {
 				bestPrio, bestTotal, bestSrcName = p, t, s
-				bestSrc, bestDst = fw, dst
+				bestSrc, bestDst = frameworkName, dst
 			}
 		}
 		ensureBlocked(bestSrc, bestDst)
@@ -1200,11 +1200,11 @@ func detectImportCycle(adj map[string][]string) []string {
 	state := make(map[string]int)
 	var stack []string
 
-	var dfs func(fw string) []string
-	dfs = func(fw string) []string {
-		state[fw] = inStack
-		stack = append(stack, fw)
-		for _, tgt := range adj[fw] {
+	var dfs func(frameworkName string) []string
+	dfs = func(frameworkName string) []string {
+		state[frameworkName] = inStack
+		stack = append(stack, frameworkName)
+		for _, tgt := range adj[frameworkName] {
 			switch state[tgt] {
 			case inStack:
 				// Back edge — extract the cycle from the stack.
@@ -1222,20 +1222,20 @@ func detectImportCycle(adj map[string][]string) []string {
 			}
 		}
 		stack = stack[:len(stack)-1]
-		state[fw] = done
+		state[frameworkName] = done
 		return nil
 	}
 
 	// Iterate in sorted order for determinism across runs.
 	fws := make([]string, 0, len(adj))
-	for fw := range adj {
-		fws = append(fws, fw)
+	for frameworkName := range adj {
+		fws = append(fws, frameworkName)
 	}
 	sort.Strings(fws)
 
-	for _, fw := range fws {
-		if state[fw] == unvisited {
-			if cycle := dfs(fw); cycle != nil {
+	for _, frameworkName := range fws {
+		if state[frameworkName] == unvisited {
+			if cycle := dfs(frameworkName); cycle != nil {
 				return cycle
 			}
 		}

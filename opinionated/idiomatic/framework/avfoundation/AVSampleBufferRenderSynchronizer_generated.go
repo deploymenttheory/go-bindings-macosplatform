@@ -87,7 +87,7 @@ func (sbrs *SampleBufferRenderSynchronizer) WithDelaysRateChangeUntilHasSufficie
 	return sbrs
 }
 
-// WithIntendedSpatialAudioExperience sets the synchronizer’s intended Spatial Audio experience.
+// WithIntendedSpatialAudioExperience sets the intended spatial audio experience applied to all AVSampleBufferAudioRenderers within this synchronizer.
 func (sbrs *SampleBufferRenderSynchronizer) WithIntendedSpatialAudioExperience(intendedSpatialAudioExperience unsafe.Pointer) *SampleBufferRenderSynchronizer {
 	objc.Send[objc.ID](objref.IDOf(sbrs), objc.RegisterName("setIntendedSpatialAudioExperience:"), intendedSpatialAudioExperience)
 	return sbrs

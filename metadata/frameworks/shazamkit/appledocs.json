@@ -232,7 +232,7 @@
       },
       "frequencySkewRanges": {
         "doc": "An array of ranges that indicate the frequency skews in the reference signature that this media item describes.",
-        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/frequencyskewranges-4yqx"
+        "url": "https://developer.apple.com/documentation/shazamkit/shmediaitem/frequencyskewranges-1j7d3"
       },
       "genres": {
         "doc": "An array of genre names for the media item.",

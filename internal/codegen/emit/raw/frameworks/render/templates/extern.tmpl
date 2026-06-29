@@ -1,0 +1,35 @@
+{{/*
+    extern.tmpl — raw purego emission of extern-symbol accessor functions. Each
+    accessor reads the symbol via purego.Dlsym and converts it to its Go type
+    according to Form (raw uintptr, ObjC object via FromID, char* string, or a
+    value type). All decisions are made in the gather phase; gofmt canonicalises.
+*/}}
+{{define "externs"}}{{range .}}{{template "extern" .}}{{end}}{{end}}
+
+{{define "extern"}}{{.CommentBlock}}func {{.GoName}}() {{.RetType}} {
+ptr, _ := purego.Dlsym({{.DylibVar}}, {{.Symbol | printf "%q"}})
+{{- if eq .Form "raw"}}
+return ptr
+{{- else if eq .Form "fromid"}}
+if ptr == 0 {
+return nil
+}
+id := *(*objc.ID)(unsafe.Pointer(ptr))
+if id == 0 {
+return nil
+}
+return {{.FromIDCall}}
+{{- else if eq .Form "string"}}
+if ptr == 0 {
+return ""
+}
+return unsafe.String((*byte)(unsafe.Pointer(ptr)), strlen(ptr))
+{{- else}}
+if ptr == 0 {
+return {{.Zero}}
+}
+return *(*{{.GoType}})(unsafe.Pointer(ptr))
+{{- end}}
+}
+
+{{end}}

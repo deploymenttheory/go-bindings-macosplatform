@@ -375,8 +375,8 @@
         "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/updatelisteneroptions-swift.struct"
       },
       "associateAppEntity(_:priority:)": {
-        "doc": "Associates an app entity with this searchable item.",
-        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/associateappentity(_:priority:)-736lx"
+        "doc": "Associates an app entity with this searchable item. Resolves deferred properties before association.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/associateappentity(_:priority:)-6h7ym"
       },
       "attributeSet": {
         "doc": "The set of attributes that contain metadata associated with the item in a CSSearchableItemAttributeSet object.",
@@ -391,8 +391,8 @@
         "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/expirationdate"
       },
       "init(appEntity:)": {
-        "doc": "Initializes a new searchable item with the relevant fields populated from the provided app entity. Resolves deferred properties before indexing.",
-        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/init(appentity:)-3hv5"
+        "doc": "Initializes a new searchable item with the relevant fields populated from the provided app entity.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/init(appentity:)-89ehq"
       },
       "init(appEntity:priority:)": {
         "doc": "Initializes a new searchable item with the relevant fields populated from the provided app entity. Resolves deferred properties before indexing.",

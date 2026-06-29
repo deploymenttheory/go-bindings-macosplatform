@@ -342,7 +342,7 @@
     "MERAWProcessorPixelBufferManager": {
       "pixelBufferAttributes": {
         "doc": "A dictionary that contains the attributes Video Toolbox uses to create a pixel buffer for the video RAW processor.",
-        "url": "https://developer.apple.com/documentation/mediaextension/merawprocessorpixelbuffermanager/pixelbufferattributes-4fe69"
+        "url": "https://developer.apple.com/documentation/mediaextension/merawprocessorpixelbuffermanager/pixelbufferattributes-2cki6"
       }
     },
     "MESampleCursorChunk": {

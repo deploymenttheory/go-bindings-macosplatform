@@ -14,8 +14,6 @@ import (
 // MutableMultiValue is an idiomatic wrapper over the Objective-C class ABMutableMultiValue.
 //
 // It embeds [MultiValue], promoting that type's methods.
-//
-// A mutable representation of a property that might have multiple values.
 type MutableMultiValue struct {
 	MultiValue
 }
@@ -52,7 +50,7 @@ func NewMutableMultiValue() *MutableMultiValue {
 	return mutableMultiValueAdopt(_id)
 }
 
-// AddValueWithLabel adds a value and its label to a multivalue list.
+// AddValueWithLabel adds value with label.
 func (mmv *MutableMultiValue) AddValueWithLabel(value obj.Object, label string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(mmv), objc.RegisterName("addValue:withLabel:"), objref.IDOf(value), purego.NSString(label))
 	if _r == 0 {
@@ -61,7 +59,7 @@ func (mmv *MutableMultiValue) AddValueWithLabel(value obj.Object, label string) 
 	return purego.GoString(_r)
 }
 
-// InsertValueWithLabelAtIndex inserts a value and its label at the given index in a multivalue list.
+// InsertValueWithLabelAtIndex inserts value with label at index.
 func (mmv *MutableMultiValue) InsertValueWithLabelAtIndex(value obj.Object, label string, index int) string {
 	_r := objc.Send[objc.ID](objref.IDOf(mmv), objc.RegisterName("insertValue:withLabel:atIndex:"), objref.IDOf(value), purego.NSString(label), index)
 	if _r == 0 {
@@ -70,25 +68,25 @@ func (mmv *MutableMultiValue) InsertValueWithLabelAtIndex(value obj.Object, labe
 	return purego.GoString(_r)
 }
 
-// RemoveValueAndLabelAtIndex removes the value and label at the given index.
+// RemoveValueAndLabelAtIndex removes value and label at index.
 func (mmv *MutableMultiValue) RemoveValueAndLabelAtIndex(index int) bool {
 	_r := objc.Send[bool](objref.IDOf(mmv), objc.RegisterName("removeValueAndLabelAtIndex:"), index)
 	return _r
 }
 
-// ReplaceValueAtIndexWithValue replaces the value at the given index.
+// ReplaceValueAtIndexWithValue replaces value at index with value.
 func (mmv *MutableMultiValue) ReplaceValueAtIndexWithValue(index int, value obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(mmv), objc.RegisterName("replaceValueAtIndex:withValue:"), index, objref.IDOf(value))
 	return _r
 }
 
-// ReplaceLabelAtIndexWithLabel replaces the label at the given index.
+// ReplaceLabelAtIndexWithLabel replaces label at index with label.
 func (mmv *MutableMultiValue) ReplaceLabelAtIndexWithLabel(index int, label string) bool {
 	_r := objc.Send[bool](objref.IDOf(mmv), objc.RegisterName("replaceLabelAtIndex:withLabel:"), index, purego.NSString(label))
 	return _r
 }
 
-// SetPrimaryIdentifier sets the primary value to be the value for the given identifier.
+// SetPrimaryIdentifier wraps the corresponding Objective-C method.
 func (mmv *MutableMultiValue) SetPrimaryIdentifier(identifier string) bool {
 	_r := objc.Send[bool](objref.IDOf(mmv), objc.RegisterName("setPrimaryIdentifier:"), purego.NSString(identifier))
 	return _r

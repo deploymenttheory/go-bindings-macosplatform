@@ -162,7 +162,7 @@ func (au *AudioUnit) WithOutputEnabled(outputEnabled bool) *AudioUnit {
 	return au
 }
 
-// WithIntendedSpatialExperience sets the AUAudioUnit’s intended spatial audio experience.
+// WithIntendedSpatialExperience sets the AUAudioUnit’s intended spatial experience.
 func (au *AudioUnit) WithIntendedSpatialExperience(intendedSpatialExperience unsafe.Pointer) *AudioUnit {
 	objc.Send[objc.ID](objref.IDOf(au), objc.RegisterName("setIntendedSpatialExperience:"), intendedSpatialExperience)
 	return au

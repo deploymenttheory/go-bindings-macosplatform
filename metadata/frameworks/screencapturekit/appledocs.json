@@ -398,7 +398,7 @@
       },
       "defaultConfiguration": {
         "doc": "The default configuration to use for the content capture picker.",
-        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpicker/defaultconfiguration-94q2b"
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpicker/defaultconfiguration-9v5sa"
       },
       "maximumStreamCount": {
         "doc": "The maximum number of streams the content capture picker allows.",

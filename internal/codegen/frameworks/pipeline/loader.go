@@ -166,20 +166,20 @@ func LoadAll(paths []string, modulePrefix, libraryModulePrefix string) (*Registr
 	type classEntry struct {
 		framework string
 		score     int
-		cls       meta.Class
+		class     meta.Class
 	}
 	allEntries := make(map[string][]classEntry)
 	for _, framework := range frameworks {
-		for name, cls := range framework.Classes {
-			score := len(cls.Methods) + len(cls.Properties)
-			allEntries[name] = append(allEntries[name], classEntry{framework.Framework, score, cls})
+		for name, class := range framework.Classes {
+			score := len(class.Methods) + len(class.Properties)
+			allEntries[name] = append(allEntries[name], classEntry{framework.Framework, score, class})
 		}
 	}
 
 	type bestEntry struct {
 		framework string
 		score     int
-		cls       meta.Class
+		class     meta.Class
 	}
 	best := make(map[string]bestEntry)
 	for name, entries := range allEntries {
@@ -206,12 +206,12 @@ func LoadAll(paths []string, modulePrefix, libraryModulePrefix string) (*Registr
 	for name, entry := range best {
 		reg.ClassNameIndex[name] = true
 		reg.OwnerIndex[name] = entry.framework
-		reg.ClassIndex[name] = entry.cls
-		if len(entry.cls.GenericParams) > 0 {
+		reg.ClassIndex[name] = entry.class
+		if len(entry.class.GenericParams) > 0 {
 			reg.GenericClasses[name] = true
-			reg.GenericParamIndex[name] = entry.cls.GenericParams
+			reg.GenericParamIndex[name] = entry.class.GenericParams
 		}
-		if entry.cls.Availability.IsUnavailable {
+		if entry.class.Availability.IsUnavailable {
 			reg.UnavailableClasses[name] = true
 		}
 	}
@@ -219,8 +219,8 @@ func LoadAll(paths []string, modulePrefix, libraryModulePrefix string) (*Registr
 	// Also mark unavailable classes from all frameworks so cross-framework
 	// references to unavailable types degrade to objc.ID.
 	for _, framework := range frameworks {
-		for name, cls := range framework.Classes {
-			if cls.Availability.IsUnavailable {
+		for name, class := range framework.Classes {
+			if class.Availability.IsUnavailable {
 				reg.UnavailableClasses[name] = true
 			}
 		}
@@ -468,8 +468,8 @@ func applyHardcodedBlocks(reg *Registry) {
 		{"MPSCore", "MetalPerformanceShaders"},
 	}
 	fwLoaded := make(map[string]bool)
-	for _, fw := range reg.Frameworks {
-		fwLoaded[fw.Framework] = true
+	for _, framework := range reg.Frameworks {
+		fwLoaded[framework.Framework] = true
 	}
 	for _, pair := range known {
 		src, dst := pair[0], pair[1]
@@ -638,13 +638,13 @@ func buildAllImportEdges(reg *Registry) map[string]map[string]int {
 
 	// Source 2: class protocol conformance edges.
 	for _, framework := range reg.Frameworks {
-		fw := framework.Framework
-		for _, cls := range framework.Classes {
-			ownerSrc := reg.OwnerIndex[cls.Super] // skip if class not canonical owner
+		frameworkName := framework.Framework
+		for _, class := range framework.Classes {
+			ownerSrc := reg.OwnerIndex[class.Super] // skip if class not canonical owner
 			_ = ownerSrc
-			for _, protoName := range cls.Protocols {
-				if ownerDst, ok := reg.ProtocolIndex[protoName]; ok && ownerDst != fw {
-					add(fw, ownerDst)
+			for _, protoName := range class.Protocols {
+				if ownerDst, ok := reg.ProtocolIndex[protoName]; ok && ownerDst != frameworkName {
+					add(frameworkName, ownerDst)
 				}
 			}
 		}
@@ -652,12 +652,12 @@ func buildAllImportEdges(reg *Registry) map[string]map[string]int {
 		// Source 3: protocol inheritance edges.
 		for protoName, proto := range framework.Protocols {
 			ownerSrc, ok := reg.ProtocolIndex[protoName]
-			if !ok || ownerSrc != fw {
+			if !ok || ownerSrc != frameworkName {
 				continue // only canonical owner emits the protocol
 			}
 			for _, parentProto := range proto.InheritedProtocols {
-				if ownerDst, ok2 := reg.ProtocolIndex[parentProto]; ok2 && ownerDst != fw {
-					add(fw, ownerDst)
+				if ownerDst, ok2 := reg.ProtocolIndex[parentProto]; ok2 && ownerDst != frameworkName {
+					add(frameworkName, ownerDst)
 				}
 			}
 		}
@@ -684,25 +684,25 @@ func buildAllImportEdges(reg *Registry) map[string]map[string]int {
 	}
 
 	for _, framework := range reg.Frameworks {
-		fw := framework.Framework
+		frameworkName := framework.Framework
 		for _, fn := range framework.Functions {
 			for _, p := range fn.Params {
-				addFromTypeStr(fw, p.ObjCType)
+				addFromTypeStr(frameworkName, p.ObjCType)
 			}
-			addFromTypeStr(fw, fn.Return.ObjCType)
+			addFromTypeStr(frameworkName, fn.Return.ObjCType)
 		}
-		for className, cls := range framework.Classes {
-			if reg.OwnerIndex[className] != fw {
+		for className, class := range framework.Classes {
+			if reg.OwnerIndex[className] != frameworkName {
 				continue // only scan methods for classes this framework owns
 			}
-			for _, method := range cls.Methods {
+			for _, method := range class.Methods {
 				for _, p := range method.Params {
-					addFromTypeStr(fw, p.ObjCType)
+					addFromTypeStr(frameworkName, p.ObjCType)
 				}
-				addFromTypeStr(fw, method.Return.ObjCType)
+				addFromTypeStr(frameworkName, method.Return.ObjCType)
 			}
-			for _, prop := range cls.Properties {
-				addFromTypeStr(fw, prop.ObjCType)
+			for _, prop := range class.Properties {
+				addFromTypeStr(frameworkName, prop.ObjCType)
 			}
 		}
 	}
@@ -789,9 +789,9 @@ func SortByDependency(reg *Registry) []*meta.FrameworkMeta {
 	deps := make(map[string]map[string]bool)
 	for _, framework := range reg.Frameworks {
 		deps[framework.Framework] = make(map[string]bool)
-		for _, cls := range framework.Classes {
-			if cls.Super != "" {
-				if owner, ok := reg.OwnerIndex[cls.Super]; ok && owner != framework.Framework {
+		for _, class := range framework.Classes {
+			if class.Super != "" {
+				if owner, ok := reg.OwnerIndex[class.Super]; ok && owner != framework.Framework {
 					deps[framework.Framework][owner] = true
 				}
 			}
@@ -835,8 +835,8 @@ func SortByDependency(reg *Registry) []*meta.FrameworkMeta {
 	for len(queue) > 0 {
 		n := queue[0]
 		queue = queue[1:]
-		if fw, ok := fwByName[n]; ok {
-			result = append(result, fw)
+		if framework, ok := fwByName[n]; ok {
+			result = append(result, framework)
 		}
 		// Find all frameworks that depend on n and decrement their in-degree.
 		var next []string
@@ -854,13 +854,13 @@ func SortByDependency(reg *Registry) []*meta.FrameworkMeta {
 
 	// Append any remaining (cycles broken by BlockedImports).
 	added := make(map[string]bool)
-	for _, fw := range result {
-		added[fw.Framework] = true
+	for _, framework := range result {
+		added[framework.Framework] = true
 	}
 	var remaining []*meta.FrameworkMeta
-	for _, fw := range reg.Frameworks {
-		if !added[fw.Framework] {
-			remaining = append(remaining, fw)
+	for _, framework := range reg.Frameworks {
+		if !added[framework.Framework] {
+			remaining = append(remaining, framework)
 		}
 	}
 	sort.Slice(remaining, func(i, j int) bool {
@@ -884,8 +884,8 @@ func validateSuperchainAcyclic(allClasses map[string]meta.Class) error {
 		}
 		visited[name] = true
 		inStack[name] = true
-		if cls, ok := allClasses[name]; ok && cls.Super != "" {
-			if err := dfs(cls.Super); err != nil {
+		if class, ok := allClasses[name]; ok && class.Super != "" {
+			if err := dfs(class.Super); err != nil {
 				return err
 			}
 		}

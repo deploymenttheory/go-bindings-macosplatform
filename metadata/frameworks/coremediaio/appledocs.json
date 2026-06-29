@@ -522,12 +522,12 @@
         "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/activeformatindex-83u7z"
       },
       "frameDuration": {
-        "doc": "The duration of the frame.",
-        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/frameduration-4rnl9"
+        "doc": "A dictionary representation of a frame duration.",
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/frameduration-lrfi"
       },
       "maxFrameDuration": {
         "doc": "The maximum duration of a frame.",
-        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/maxframeduration-8fo5t"
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/maxframeduration-5qqg"
       },
       "propertiesDictionary": {
         "doc": "A dictionary representation of the property state.",
@@ -535,15 +535,15 @@
       },
       "sinkBufferQueueSize": {
         "doc": "The buffer queue size.",
-        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/sinkbufferqueuesize-4kpug"
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/sinkbufferqueuesize-9b80c"
       },
       "sinkBufferUnderrunCount": {
         "doc": "The buffer underrun count.",
-        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/sinkbufferunderruncount-1qmbb"
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/sinkbufferunderruncount-9sph5"
       },
       "sinkBuffersRequiredForStartup": {
         "doc": "The number of buffers the stream requires for startup.",
-        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/sinkbuffersrequiredforstartup-4b5te"
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/sinkbuffersrequiredforstartup-1bgyq"
       },
       "sinkEndOfData": {
         "doc": "A value that indicates whether the stream has reached its end.",

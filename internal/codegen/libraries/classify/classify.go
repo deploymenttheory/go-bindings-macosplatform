@@ -136,9 +136,9 @@ func isBlockEnumeration(m macosplatformmetadata.Method) bool {
 
 // isPropertyPair reports whether a method selector corresponds to a getter or setter
 // of a non-readonly property declared on the class.
-func isPropertyPair(m macosplatformmetadata.Method, cls macosplatformmetadata.Class) bool {
-	sel := m.Selector
-	for _, p := range cls.Properties {
+func isPropertyPair(m macosplatformmetadata.Method, class macosplatformmetadata.Class) bool {
+	selector := m.Selector
+	for _, p := range class.Properties {
 		if p.IsReadOnly {
 			continue
 		}
@@ -153,7 +153,7 @@ func isPropertyPair(m macosplatformmetadata.Method, cls macosplatformmetadata.Cl
 				setter = "set" + strings.ToUpper(p.Name[:1]) + p.Name[1:] + ":"
 			}
 		}
-		if sel == getter || sel == setter {
+		if selector == getter || selector == setter {
 			return true
 		}
 	}
@@ -163,7 +163,7 @@ func isPropertyPair(m macosplatformmetadata.Method, cls macosplatformmetadata.Cl
 // ClassifyMethod returns pattern tags for a single method in a given class context.
 // It does NOT return DelegateHolder or DelegateProtocol — those are class/protocol-level;
 // use DelegateProperties and IsDelegateProtocol for those.
-func ClassifyMethod(m macosplatformmetadata.Method, cls macosplatformmetadata.Class, _ *macosplatformmetadata.FrameworkMeta) []PatternTag {
+func ClassifyMethod(m macosplatformmetadata.Method, class macosplatformmetadata.Class, _ *macosplatformmetadata.FrameworkMeta) []PatternTag {
 	var tags []PatternTag
 
 	// Order matters: BlockEnumeration must be checked before AsyncCompletion so that
@@ -187,7 +187,7 @@ func ClassifyMethod(m macosplatformmetadata.Method, cls macosplatformmetadata.Cl
 		tags = append(tags, CollectionParam)
 	}
 
-	if isPropertyPair(m, cls) {
+	if isPropertyPair(m, class) {
 		tags = append(tags, PropertyPair)
 	}
 
@@ -201,10 +201,10 @@ func ClassifyMethod(m macosplatformmetadata.Method, cls macosplatformmetadata.Cl
 // ClassifyFramework returns a two-level map: className → selector → []PatternTag.
 func ClassifyFramework(framework *macosplatformmetadata.FrameworkMeta) map[string]map[string][]PatternTag {
 	result := make(map[string]map[string][]PatternTag, len(framework.Classes))
-	for className, cls := range framework.Classes {
-		bySelector := make(map[string][]PatternTag, len(cls.Methods))
-		for _, m := range cls.Methods {
-			tags := ClassifyMethod(m, cls, framework)
+	for className, class := range framework.Classes {
+		bySelector := make(map[string][]PatternTag, len(class.Methods))
+		for _, m := range class.Methods {
+			tags := ClassifyMethod(m, class, framework)
 			if len(tags) > 0 {
 				bySelector[m.Selector] = tags
 			}
@@ -229,9 +229,9 @@ func IsDelegateProtocol(proto macosplatformmetadata.Protocol) bool {
 
 // DelegateProperties returns the properties on a class whose name is "delegate"
 // or "dataSource" and whose type is id<ProtocolName>.
-func DelegateProperties(cls macosplatformmetadata.Class) []DelegateProperty {
+func DelegateProperties(class macosplatformmetadata.Class) []DelegateProperty {
 	var out []DelegateProperty
-	for _, p := range cls.Properties {
+	for _, p := range class.Properties {
 		if p.Name != "delegate" && p.Name != "dataSource" {
 			continue
 		}
@@ -249,9 +249,9 @@ func DelegateProperties(cls macosplatformmetadata.Class) []DelegateProperty {
 
 // PropertyPairs returns all non-readonly properties from a class.
 // These are the candidates for PropertyPair ergonomic wrappers.
-func PropertyPairs(cls macosplatformmetadata.Class) []macosplatformmetadata.Property {
+func PropertyPairs(class macosplatformmetadata.Class) []macosplatformmetadata.Property {
 	var out []macosplatformmetadata.Property
-	for _, p := range cls.Properties {
+	for _, p := range class.Properties {
 		if !p.IsReadOnly {
 			out = append(out, p)
 		}

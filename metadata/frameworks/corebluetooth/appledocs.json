@@ -668,7 +668,7 @@
     "CBManager": {
       "authorization": {
         "doc": "The current authorization status for using Bluetooth.",
-        "url": "https://developer.apple.com/documentation/corebluetooth/cbmanager/authorization-swift.property"
+        "url": "https://developer.apple.com/documentation/corebluetooth/cbmanager/authorization-swift.type.property"
       },
       "state": {
         "doc": "The current state of the manager.",

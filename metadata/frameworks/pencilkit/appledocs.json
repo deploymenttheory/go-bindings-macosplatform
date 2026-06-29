@@ -152,7 +152,7 @@
     "PKToolPickerEraserItem": {
       "eraserTool": {
         "doc": "An eraser tool for erasing parts of a drawing.",
-        "url": "https://developer.apple.com/documentation/pencilkit/pktoolpickereraseritem/erasertool-92wqj"
+        "url": "https://developer.apple.com/documentation/pencilkit/pktoolpickereraseritem/erasertool-4q3hp"
       },
       "init(type:)": {
         "doc": "Creates a new eraser item.",
@@ -170,15 +170,15 @@
       },
       "init(type:color:width:azimuth:identifier:)": {
         "doc": "Create a new inking tool item.",
-        "url": "https://developer.apple.com/documentation/pencilkit/pktoolpickerinkingitem/init(type:color:width:azimuth:identifier:)-7gkxh"
+        "url": "https://developer.apple.com/documentation/pencilkit/pktoolpickerinkingitem/init(type:color:width:azimuth:identifier:)-y8h5"
       },
       "init(type:color:width:identifier:)": {
         "doc": "Create a new inking tool item.",
-        "url": "https://developer.apple.com/documentation/pencilkit/pktoolpickerinkingitem/init(type:color:width:identifier:)-1tsup"
+        "url": "https://developer.apple.com/documentation/pencilkit/pktoolpickerinkingitem/init(type:color:width:identifier:)-7kzdq"
       },
       "inkingTool": {
         "doc": "A tool for drawing on a canvas view.",
-        "url": "https://developer.apple.com/documentation/pencilkit/pktoolpickerinkingitem/inkingtool-625y9"
+        "url": "https://developer.apple.com/documentation/pencilkit/pktoolpickerinkingitem/inkingtool-1hcet"
       }
     },
     "PKToolPickerItem": {

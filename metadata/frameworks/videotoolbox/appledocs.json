@@ -560,8 +560,8 @@
         "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurconfiguration/frameheight"
       },
       "frameSupportedPixelFormats": {
-        "doc": "Available supported pixel formats for source frames for current configuration.",
-        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurconfiguration/framesupportedpixelformats-5a1iv"
+        "doc": "A list of source frame supported pixel formats for the current configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtmotionblurconfiguration/framesupportedpixelformats-1n4uq"
       },
       "frameWidth": {
         "doc": "The width of a source frame in pixels.",
@@ -656,8 +656,8 @@
         "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowconfiguration/frameheight"
       },
       "frameSupportedPixelFormats": {
-        "doc": "Supported pixel formats for source frames for current configuration.",
-        "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowconfiguration/framesupportedpixelformats-85kob"
+        "doc": "A list of source frame supported pixel formats for the current configuration.",
+        "url": "https://developer.apple.com/documentation/videotoolbox/vtopticalflowconfiguration/framesupportedpixelformats-gm6u"
       },
       "frameWidth": {
         "doc": "The width of a source frame in pixels.",

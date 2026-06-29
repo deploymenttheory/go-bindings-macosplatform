@@ -1245,8 +1245,8 @@
         "url": "https://developer.apple.com/documentation/sensorkit/srwristtemperaturesession/startdate"
       },
       "temperatures": {
-        "doc": "An enumerator that you use to get the wrist temperatures and their accuracies.",
-        "url": "https://developer.apple.com/documentation/sensorkit/srwristtemperaturesession/temperatures-7p7du"
+        "doc": "The wrist temperatures and their accuracies.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srwristtemperaturesession/temperatures-8bqrl"
       },
       "version": {
         "doc": "The version of the algorithm that analyzes the temperature.",
