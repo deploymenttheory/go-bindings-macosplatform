@@ -2,7 +2,7 @@
 
 // Command keychain is a runnable proof that the macOS Security framework
 // bindings can drive the keychain item API through CRUD operations across item
-// classes — using only the custom layer (opinionated/custom/keychain), with
+// classes — using only the custom layer (opinionated/tools/keychain), with
 // no raw FFI, CFDictionary building, or OSStatus decoding at the call site.
 //
 //	go run ./examples/keychain
@@ -31,14 +31,14 @@ import (
 	"os"
 	"time"
 
-	// ADOPTION: this example uses the *custom* layer (opinionated/custom/keychain),
+	// ADOPTION: this example uses the *custom* layer (opinionated/tools/keychain),
 	// not the raw Security bindings. The keychain item API is a multi-call workflow —
 	// each operation builds a CFDictionary of kSec* attributes and decodes an
 	// OSStatus — and the custom layer collapses that into CreateGenericPassword,
 	// ReadKey, and friends. When a framework's *task* is this involved, look for a
 	// custom package before reaching for the raw bindings. See examples/README.md
 	// for the full layer guide.
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/custom/keychain"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/tools/keychain"
 )
 
 // errSecMissingEntitlement is returned when an operation needs a keychain-access

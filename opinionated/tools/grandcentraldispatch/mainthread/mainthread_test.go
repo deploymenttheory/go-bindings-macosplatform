@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/custom/mainthread"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/tools/grandcentraldispatch/mainthread"
 )
 
 // TestMain pins the main goroutine to the process main thread and keeps it
