@@ -36,6 +36,7 @@ var (
 	mainQueue     uintptr
 	dispatchSyncF func(queue, ctx uintptr, work uintptr)
 	pthreadMainNp func() int32
+	dispatchMain  func()
 	trampoline    uintptr
 
 	// CoreFoundation run-loop symbols, resolved in load(), used by
@@ -62,6 +63,7 @@ func load() {
 	}
 	purego.RegisterLibFunc(&dispatchSyncF, libSystem, "dispatch_sync_f")
 	purego.RegisterLibFunc(&pthreadMainNp, libSystem, "pthread_main_np")
+	purego.RegisterLibFunc(&dispatchMain, libSystem, "dispatch_main")
 	trampoline = purego.NewCallback(runPending)
 
 	// CoreFoundation run-loop, for PumpMainRunLoop. kCFRunLoopDefaultMode is a
@@ -145,4 +147,17 @@ func PumpMainRunLoop(seconds float64) {
 	// servicing as many queued items as arrive rather than returning after the
 	// first.
 	cfRunLoopRunInMode(kCFRunLoopDefaultMode, seconds, false)
+}
+
+// DispatchMain hands the calling thread to GCD to service the main dispatch
+// queue, and never returns (it is dispatch_main). Call it on the process main
+// thread when the program drives its own work on other goroutines and only needs
+// the main queue kept alive — e.g. so the idiomatic layer's @MainActor
+// auto-dispatch (and Do) keep working — without bringing up AppKit. Unlike
+// PumpMainRunLoop, it does not spin: the thread blocks in libdispatch until a
+// queued item arrives. The program must terminate some other way (e.g. os.Exit
+// from a worker goroutine), since DispatchMain itself never returns.
+func DispatchMain() {
+	loadOnce.Do(load)
+	dispatchMain()
 }
