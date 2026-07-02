@@ -11,7 +11,10 @@
 //go:build darwin
 
 package {{.PkgName}}
-{{if eq (len .Imports) 1}}
+{{if .BridgeInclude}}
+// #include "{{.BridgeInclude}}"
+import "C"
+{{end}}{{if eq (len .Imports) 1}}
 import {{index .Imports 0 | printf "%q"}}
 {{else if .Imports}}
 import (
@@ -25,5 +28,13 @@ var (
 {{.CommentBlock}}	{{.GoName}} {{.GoType}}
 {{- end}}
 )
-
+{{if .HasInit}}
+// init populates the extern vars from the C globals via bridge address
+// getters, so package consumers read live values rather than zero stubs.
+func init() {
+{{- range .Items}}{{if .InitExpr}}
+	{{.GoName}} = {{.InitExpr}}
+{{- end}}{{end}}
+}
+{{end}}
 {{end}}

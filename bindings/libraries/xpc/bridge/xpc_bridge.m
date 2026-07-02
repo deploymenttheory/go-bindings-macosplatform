@@ -2039,3 +2039,108 @@ void xpc_fn_xpc_set_event_stream_handler(const char * stream, void * targetq, vo
     }
 }
 
+
+// ID: objc-extern-address XPC_ACTIVITY_CHECK_IN
+void * xpc_extern_XPC_ACTIVITY_CHECK_IN(void) { return (void *)&XPC_ACTIVITY_CHECK_IN; }
+
+// ID: objc-extern-address XPC_ACTIVITY_INTERVAL_15_MIN
+void * xpc_extern_XPC_ACTIVITY_INTERVAL_15_MIN(void) { return (void *)&XPC_ACTIVITY_INTERVAL_15_MIN; }
+
+// ID: objc-extern-address XPC_ACTIVITY_INTERVAL_1_DAY
+void * xpc_extern_XPC_ACTIVITY_INTERVAL_1_DAY(void) { return (void *)&XPC_ACTIVITY_INTERVAL_1_DAY; }
+
+// ID: objc-extern-address XPC_ACTIVITY_INTERVAL_1_HOUR
+void * xpc_extern_XPC_ACTIVITY_INTERVAL_1_HOUR(void) { return (void *)&XPC_ACTIVITY_INTERVAL_1_HOUR; }
+
+// ID: objc-extern-address XPC_ACTIVITY_INTERVAL_1_MIN
+void * xpc_extern_XPC_ACTIVITY_INTERVAL_1_MIN(void) { return (void *)&XPC_ACTIVITY_INTERVAL_1_MIN; }
+
+// ID: objc-extern-address XPC_ACTIVITY_INTERVAL_30_MIN
+void * xpc_extern_XPC_ACTIVITY_INTERVAL_30_MIN(void) { return (void *)&XPC_ACTIVITY_INTERVAL_30_MIN; }
+
+// ID: objc-extern-address XPC_ACTIVITY_INTERVAL_4_HOURS
+void * xpc_extern_XPC_ACTIVITY_INTERVAL_4_HOURS(void) { return (void *)&XPC_ACTIVITY_INTERVAL_4_HOURS; }
+
+// ID: objc-extern-address XPC_ACTIVITY_INTERVAL_5_MIN
+void * xpc_extern_XPC_ACTIVITY_INTERVAL_5_MIN(void) { return (void *)&XPC_ACTIVITY_INTERVAL_5_MIN; }
+
+// ID: objc-extern-address XPC_ACTIVITY_INTERVAL_7_DAYS
+void * xpc_extern_XPC_ACTIVITY_INTERVAL_7_DAYS(void) { return (void *)&XPC_ACTIVITY_INTERVAL_7_DAYS; }
+
+// ID: objc-extern-address XPC_ACTIVITY_INTERVAL_8_HOURS
+void * xpc_extern_XPC_ACTIVITY_INTERVAL_8_HOURS(void) { return (void *)&XPC_ACTIVITY_INTERVAL_8_HOURS; }
+
+// ID: objc-extern-address _xpc_bool_false
+void * xpc_extern__xpc_bool_false(void) { return (void *)&_xpc_bool_false; }
+
+// ID: objc-extern-address _xpc_bool_true
+void * xpc_extern__xpc_bool_true(void) { return (void *)&_xpc_bool_true; }
+
+// ID: objc-extern-address _xpc_error_connection_interrupted
+void * xpc_extern__xpc_error_connection_interrupted(void) { return (void *)&_xpc_error_connection_interrupted; }
+
+// ID: objc-extern-address _xpc_error_connection_invalid
+void * xpc_extern__xpc_error_connection_invalid(void) { return (void *)&_xpc_error_connection_invalid; }
+
+// ID: objc-extern-address _xpc_error_peer_code_signing_requirement
+void * xpc_extern__xpc_error_peer_code_signing_requirement(void) { return (void *)&_xpc_error_peer_code_signing_requirement; }
+
+// ID: objc-extern-address _xpc_error_termination_imminent
+void * xpc_extern__xpc_error_termination_imminent(void) { return (void *)&_xpc_error_termination_imminent; }
+
+// ID: objc-extern-address _xpc_type_activity
+void * xpc_extern__xpc_type_activity(void) { return (void *)&_xpc_type_activity; }
+
+// ID: objc-extern-address _xpc_type_array
+void * xpc_extern__xpc_type_array(void) { return (void *)&_xpc_type_array; }
+
+// ID: objc-extern-address _xpc_type_bool
+void * xpc_extern__xpc_type_bool(void) { return (void *)&_xpc_type_bool; }
+
+// ID: objc-extern-address _xpc_type_connection
+void * xpc_extern__xpc_type_connection(void) { return (void *)&_xpc_type_connection; }
+
+// ID: objc-extern-address _xpc_type_data
+void * xpc_extern__xpc_type_data(void) { return (void *)&_xpc_type_data; }
+
+// ID: objc-extern-address _xpc_type_date
+void * xpc_extern__xpc_type_date(void) { return (void *)&_xpc_type_date; }
+
+// ID: objc-extern-address _xpc_type_dictionary
+void * xpc_extern__xpc_type_dictionary(void) { return (void *)&_xpc_type_dictionary; }
+
+// ID: objc-extern-address _xpc_type_double
+void * xpc_extern__xpc_type_double(void) { return (void *)&_xpc_type_double; }
+
+// ID: objc-extern-address _xpc_type_endpoint
+void * xpc_extern__xpc_type_endpoint(void) { return (void *)&_xpc_type_endpoint; }
+
+// ID: objc-extern-address _xpc_type_error
+void * xpc_extern__xpc_type_error(void) { return (void *)&_xpc_type_error; }
+
+// ID: objc-extern-address _xpc_type_fd
+void * xpc_extern__xpc_type_fd(void) { return (void *)&_xpc_type_fd; }
+
+// ID: objc-extern-address _xpc_type_int64
+void * xpc_extern__xpc_type_int64(void) { return (void *)&_xpc_type_int64; }
+
+// ID: objc-extern-address _xpc_type_null
+void * xpc_extern__xpc_type_null(void) { return (void *)&_xpc_type_null; }
+
+// ID: objc-extern-address _xpc_type_rich_error
+void * xpc_extern__xpc_type_rich_error(void) { return (void *)&_xpc_type_rich_error; }
+
+// ID: objc-extern-address _xpc_type_session
+void * xpc_extern__xpc_type_session(void) { return (void *)&_xpc_type_session; }
+
+// ID: objc-extern-address _xpc_type_shmem
+void * xpc_extern__xpc_type_shmem(void) { return (void *)&_xpc_type_shmem; }
+
+// ID: objc-extern-address _xpc_type_string
+void * xpc_extern__xpc_type_string(void) { return (void *)&_xpc_type_string; }
+
+// ID: objc-extern-address _xpc_type_uint64
+void * xpc_extern__xpc_type_uint64(void) { return (void *)&_xpc_type_uint64; }
+
+// ID: objc-extern-address _xpc_type_uuid
+void * xpc_extern__xpc_type_uuid(void) { return (void *)&_xpc_type_uuid; }

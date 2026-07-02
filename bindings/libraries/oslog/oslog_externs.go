@@ -4,6 +4,9 @@
 
 package oslog
 
+// #include "bridge/oslog_bridge.h"
+import "C"
+
 import "unsafe"
 
 var (
@@ -14,3 +17,10 @@ var (
 	// Introduced: macOS 10.13
 	_os_log_disabled unsafe.Pointer
 )
+
+// init populates the extern vars from the C globals via bridge address
+// getters, so package consumers read live values rather than zero stubs.
+func init() {
+	_os_log_default = C.oslog_extern__os_log_default()
+	_os_log_disabled = C.oslog_extern__os_log_disabled()
+}

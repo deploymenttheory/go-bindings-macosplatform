@@ -4,6 +4,9 @@
 
 package dispatch
 
+// #include "bridge/dispatch_bridge.h"
+import "C"
+
 import "unsafe"
 
 var (
@@ -59,3 +62,23 @@ var (
 	// Introduced: macOS 10.6
 	_dispatch_source_type_write unsafe.Pointer
 )
+
+// init populates the extern vars from the C globals via bridge address
+// getters, so package consumers read live values rather than zero stubs.
+func init() {
+	_dispatch_data_empty = C.dispatch_extern__dispatch_data_empty()
+	_dispatch_main_q = C.dispatch_extern__dispatch_main_q()
+	_dispatch_queue_attr_concurrent = C.dispatch_extern__dispatch_queue_attr_concurrent()
+	_dispatch_source_type_data_add = C.dispatch_extern__dispatch_source_type_data_add()
+	_dispatch_source_type_data_or = C.dispatch_extern__dispatch_source_type_data_or()
+	_dispatch_source_type_data_replace = C.dispatch_extern__dispatch_source_type_data_replace()
+	_dispatch_source_type_mach_recv = C.dispatch_extern__dispatch_source_type_mach_recv()
+	_dispatch_source_type_mach_send = C.dispatch_extern__dispatch_source_type_mach_send()
+	_dispatch_source_type_memorypressure = C.dispatch_extern__dispatch_source_type_memorypressure()
+	_dispatch_source_type_proc = C.dispatch_extern__dispatch_source_type_proc()
+	_dispatch_source_type_read = C.dispatch_extern__dispatch_source_type_read()
+	_dispatch_source_type_signal = C.dispatch_extern__dispatch_source_type_signal()
+	_dispatch_source_type_timer = C.dispatch_extern__dispatch_source_type_timer()
+	_dispatch_source_type_vnode = C.dispatch_extern__dispatch_source_type_vnode()
+	_dispatch_source_type_write = C.dispatch_extern__dispatch_source_type_write()
+}

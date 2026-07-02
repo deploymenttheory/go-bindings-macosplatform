@@ -63,6 +63,21 @@ func EmitBridge(outDir string, framework *macosplatformmetadata.FrameworkMeta, m
 		return err
 	}
 
+	// Shim-header libraries (private dylibs with no SDK header) ship their
+	// hand-maintained prototype header inside the generated package so the
+	// bridge compiles for every consumer of the module.
+	if framework.ShimHeader != "" {
+		shimSrc := filepath.FromSlash(framework.ShimHeader)
+		data, err := os.ReadFile(shimSrc)
+		if err != nil {
+			return fmt.Errorf("read shim header %s: %w", shimSrc, err)
+		}
+		shimDst := filepath.Join(bridgeDir, filepath.Base(shimSrc))
+		if err := os.WriteFile(shimDst, data, 0o644); err != nil {
+			return fmt.Errorf("copy shim header: %w", err)
+		}
+	}
+
 	stem := strings.ToLower(framework.Framework) + "_bridge"
 	hPath := filepath.Join(bridgeDir, stem+".h")
 	mPath := filepath.Join(bridgeDir, stem+".m")
@@ -244,6 +259,8 @@ func buildBridgeHeaderModel(framework *macosplatformmetadata.FrameworkMeta, m *t
 		FunctionDecls: functionDecls,
 		ForeignDecls:  foreignDecls,
 		ProtoDecls:    protoDecls,
+	
+		ExternGetters: buildExternGetters(strings.ToLower(framework.Framework), framework, m, knownClasses),
 	}
 }
 
@@ -413,6 +430,7 @@ func buildBridgeImplModel(framework *macosplatformmetadata.FrameworkMeta, m *typ
 		Framework:       framework.Framework,
 		ParentFramework: framework.ParentFramework,
 		UmbrellaHeader:  framework.Header,
+		LocalHeader:     shimBaseName(framework),
 		HeaderName:      headerName,
 		Methods:         methods,
 		AllocImpls:      allocImpls,
@@ -420,6 +438,8 @@ func buildBridgeImplModel(framework *macosplatformmetadata.FrameworkMeta, m *typ
 		Functions:       functions,
 		ForeignMethods:  foreignMethods,
 		ProtoMethods:    protoMethods,
+	
+		ExternGetters:   buildExternGetters(strings.ToLower(framework.Framework), framework, m, knownClasses),
 	}
 }
 
@@ -1131,4 +1151,13 @@ func isObjectObjCType(qt string, knownClasses map[string]bool) bool {
 // which the ObjC runtime accepts without constraint checking.
 func stripGenericID(s string) string {
 	return strings.ReplaceAll(s, "<id>", "")
+}
+
+// shimBaseName returns the file name of the framework's shim header, or ""
+// when the library has a real SDK header.
+func shimBaseName(framework *macosplatformmetadata.FrameworkMeta) string {
+	if framework.ShimHeader == "" {
+		return ""
+	}
+	return filepath.Base(filepath.FromSlash(framework.ShimHeader))
 }

@@ -328,14 +328,24 @@ func TestExternsDuplicateCaseInsensitive(t *testing.T) {
 	}
 	out := buf.String()
 	// After dedup, exactly one "MyConst" should appear in the var block.
-	count := strings.Count(out, "MyConst")
+	// (The name may also legitimately appear in the init() assignment and the
+	// bridge getter call, so the count is scoped to the var declarations.)
+	varStart := strings.Index(out, "var (")
+	varEnd := strings.Index(out[varStart:], ")")
+	if varStart == -1 || varEnd == -1 {
+		t.Fatalf("missing var block:\n%s", out)
+	}
+	varBlock := out[varStart : varStart+varEnd]
+	count := strings.Count(varBlock, "MyConst")
 	if count != 1 {
 		t.Errorf("expected exactly 1 MyConst after dedup, got %d:\n%s", count, out)
 	}
 }
 
 // TestExternsNoImportWhenTypesResolved verifies that when all externs have
-// explicit Go types that are not "unsafe.Pointer", no import block is emitted.
+// explicit Go types that are not "unsafe.Pointer", no Go import block is
+// emitted. The cgo `import "C"` block is exempt: it appears whenever any
+// extern is initialisable (here the int64), independent of Go-type imports.
 func TestExternsNoImportWhenTypesResolved(t *testing.T) {
 	var buf bytes.Buffer
 	framework := newExternFM([]macosplatformmetadata.Extern{
@@ -346,8 +356,8 @@ func TestExternsNoImportWhenTypesResolved(t *testing.T) {
 	if err := EmitExterns(&buf, "testfw", framework, m, nil); err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
-	out := buf.String()
+	out := strings.ReplaceAll(buf.String(), `import "C"`, "")
 	if strings.Contains(out, "import") {
-		t.Errorf("unexpected import statement when no unsafe types present; got:\n%s", out)
+		t.Errorf("unexpected import statement when no unsafe types present; got:\n%s", buf.String())
 	}
 }

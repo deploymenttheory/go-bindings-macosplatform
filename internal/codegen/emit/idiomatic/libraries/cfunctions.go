@@ -63,7 +63,7 @@ func EmitCFunctions(w io.Writer, pkgName, rawImportPath string, framework *macos
 	}
 	var eligible []efn
 	for _, fn := range rawlib.EmittableFunctions(framework) {
-		rawGoName := naming.GoTypeName(fn.Name)
+		rawGoName := rawlib.FunctionGoName(framework, fn)
 		if !isExportedName(rawGoName) || fnHasBlockArg(fn, m) {
 			continue
 		}

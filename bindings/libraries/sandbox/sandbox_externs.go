@@ -4,6 +4,9 @@
 
 package sandbox
 
+// #include "bridge/sandbox_bridge.h"
+import "C"
+
 import "unsafe"
 
 var (
@@ -33,3 +36,13 @@ var (
 	// Deprecated: Deprecated in macOS 10.8. No longer supported
 	KSBXProfilePureComputation unsafe.Pointer
 )
+
+// init populates the extern vars from the C globals via bridge address
+// getters, so package consumers read live values rather than zero stubs.
+func init() {
+	KSBXProfileNoInternet = *(*unsafe.Pointer)(C.sandbox_extern_kSBXProfileNoInternet())
+	KSBXProfileNoNetwork = *(*unsafe.Pointer)(C.sandbox_extern_kSBXProfileNoNetwork())
+	KSBXProfileNoWrite = *(*unsafe.Pointer)(C.sandbox_extern_kSBXProfileNoWrite())
+	KSBXProfileNoWriteExceptTemporary = *(*unsafe.Pointer)(C.sandbox_extern_kSBXProfileNoWriteExceptTemporary())
+	KSBXProfilePureComputation = *(*unsafe.Pointer)(C.sandbox_extern_kSBXProfilePureComputation())
+}

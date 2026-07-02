@@ -1265,3 +1265,48 @@ void dispatch_fn_dispatch_workloop_set_os_workgroup(void * workloop, void * work
     }
 }
 
+
+// ID: objc-extern-address _dispatch_data_empty
+void * dispatch_extern__dispatch_data_empty(void) { return (void *)&_dispatch_data_empty; }
+
+// ID: objc-extern-address _dispatch_main_q
+void * dispatch_extern__dispatch_main_q(void) { return (void *)&_dispatch_main_q; }
+
+// ID: objc-extern-address _dispatch_queue_attr_concurrent
+void * dispatch_extern__dispatch_queue_attr_concurrent(void) { return (void *)&_dispatch_queue_attr_concurrent; }
+
+// ID: objc-extern-address _dispatch_source_type_data_add
+void * dispatch_extern__dispatch_source_type_data_add(void) { return (void *)&_dispatch_source_type_data_add; }
+
+// ID: objc-extern-address _dispatch_source_type_data_or
+void * dispatch_extern__dispatch_source_type_data_or(void) { return (void *)&_dispatch_source_type_data_or; }
+
+// ID: objc-extern-address _dispatch_source_type_data_replace
+void * dispatch_extern__dispatch_source_type_data_replace(void) { return (void *)&_dispatch_source_type_data_replace; }
+
+// ID: objc-extern-address _dispatch_source_type_mach_recv
+void * dispatch_extern__dispatch_source_type_mach_recv(void) { return (void *)&_dispatch_source_type_mach_recv; }
+
+// ID: objc-extern-address _dispatch_source_type_mach_send
+void * dispatch_extern__dispatch_source_type_mach_send(void) { return (void *)&_dispatch_source_type_mach_send; }
+
+// ID: objc-extern-address _dispatch_source_type_memorypressure
+void * dispatch_extern__dispatch_source_type_memorypressure(void) { return (void *)&_dispatch_source_type_memorypressure; }
+
+// ID: objc-extern-address _dispatch_source_type_proc
+void * dispatch_extern__dispatch_source_type_proc(void) { return (void *)&_dispatch_source_type_proc; }
+
+// ID: objc-extern-address _dispatch_source_type_read
+void * dispatch_extern__dispatch_source_type_read(void) { return (void *)&_dispatch_source_type_read; }
+
+// ID: objc-extern-address _dispatch_source_type_signal
+void * dispatch_extern__dispatch_source_type_signal(void) { return (void *)&_dispatch_source_type_signal; }
+
+// ID: objc-extern-address _dispatch_source_type_timer
+void * dispatch_extern__dispatch_source_type_timer(void) { return (void *)&_dispatch_source_type_timer; }
+
+// ID: objc-extern-address _dispatch_source_type_vnode
+void * dispatch_extern__dispatch_source_type_vnode(void) { return (void *)&_dispatch_source_type_vnode; }
+
+// ID: objc-extern-address _dispatch_source_type_write
+void * dispatch_extern__dispatch_source_type_write(void) { return (void *)&_dispatch_source_type_write; }

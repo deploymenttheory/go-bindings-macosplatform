@@ -35,3 +35,9 @@ bool oslog_fn_os_log_is_debug_enabled(void * log, void **outException);
 
 // ID: objc-sym oslog._os_log_sensitive_deprecated
 void oslog_fn__os_log_sensitive_deprecated(void **outException);
+
+// ID: objc-extern-address _os_log_default
+void * oslog_extern__os_log_default(void);
+
+// ID: objc-extern-address _os_log_disabled
+void * oslog_extern__os_log_disabled(void);

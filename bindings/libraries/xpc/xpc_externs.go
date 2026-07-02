@@ -4,6 +4,9 @@
 
 package xpc
 
+// #include "bridge/xpc_bridge.h"
+import "C"
+
 import "unsafe"
 
 var (
@@ -128,3 +131,43 @@ var (
 	// [xpc.h:247]
 	_xpc_type_uuid unsafe.Pointer
 )
+
+// init populates the extern vars from the C globals via bridge address
+// getters, so package consumers read live values rather than zero stubs.
+func init() {
+	XPC_ACTIVITY_CHECK_IN = *(*unsafe.Pointer)(C.xpc_extern_XPC_ACTIVITY_CHECK_IN())
+	XPC_ACTIVITY_INTERVAL_15_MIN = *(*int64)(C.xpc_extern_XPC_ACTIVITY_INTERVAL_15_MIN())
+	XPC_ACTIVITY_INTERVAL_1_DAY = *(*int64)(C.xpc_extern_XPC_ACTIVITY_INTERVAL_1_DAY())
+	XPC_ACTIVITY_INTERVAL_1_HOUR = *(*int64)(C.xpc_extern_XPC_ACTIVITY_INTERVAL_1_HOUR())
+	XPC_ACTIVITY_INTERVAL_1_MIN = *(*int64)(C.xpc_extern_XPC_ACTIVITY_INTERVAL_1_MIN())
+	XPC_ACTIVITY_INTERVAL_30_MIN = *(*int64)(C.xpc_extern_XPC_ACTIVITY_INTERVAL_30_MIN())
+	XPC_ACTIVITY_INTERVAL_4_HOURS = *(*int64)(C.xpc_extern_XPC_ACTIVITY_INTERVAL_4_HOURS())
+	XPC_ACTIVITY_INTERVAL_5_MIN = *(*int64)(C.xpc_extern_XPC_ACTIVITY_INTERVAL_5_MIN())
+	XPC_ACTIVITY_INTERVAL_7_DAYS = *(*int64)(C.xpc_extern_XPC_ACTIVITY_INTERVAL_7_DAYS())
+	XPC_ACTIVITY_INTERVAL_8_HOURS = *(*int64)(C.xpc_extern_XPC_ACTIVITY_INTERVAL_8_HOURS())
+	_xpc_bool_false = C.xpc_extern__xpc_bool_false()
+	_xpc_bool_true = C.xpc_extern__xpc_bool_true()
+	_xpc_error_connection_interrupted = C.xpc_extern__xpc_error_connection_interrupted()
+	_xpc_error_connection_invalid = C.xpc_extern__xpc_error_connection_invalid()
+	_xpc_error_peer_code_signing_requirement = C.xpc_extern__xpc_error_peer_code_signing_requirement()
+	_xpc_error_termination_imminent = C.xpc_extern__xpc_error_termination_imminent()
+	_xpc_type_activity = C.xpc_extern__xpc_type_activity()
+	_xpc_type_array = C.xpc_extern__xpc_type_array()
+	_xpc_type_bool = C.xpc_extern__xpc_type_bool()
+	_xpc_type_connection = C.xpc_extern__xpc_type_connection()
+	_xpc_type_data = C.xpc_extern__xpc_type_data()
+	_xpc_type_date = C.xpc_extern__xpc_type_date()
+	_xpc_type_dictionary = C.xpc_extern__xpc_type_dictionary()
+	_xpc_type_double = C.xpc_extern__xpc_type_double()
+	_xpc_type_endpoint = C.xpc_extern__xpc_type_endpoint()
+	_xpc_type_error = C.xpc_extern__xpc_type_error()
+	_xpc_type_fd = C.xpc_extern__xpc_type_fd()
+	_xpc_type_int64 = C.xpc_extern__xpc_type_int64()
+	_xpc_type_null = C.xpc_extern__xpc_type_null()
+	_xpc_type_rich_error = C.xpc_extern__xpc_type_rich_error()
+	_xpc_type_session = C.xpc_extern__xpc_type_session()
+	_xpc_type_shmem = C.xpc_extern__xpc_type_shmem()
+	_xpc_type_string = C.xpc_extern__xpc_type_string()
+	_xpc_type_uint64 = C.xpc_extern__xpc_type_uint64()
+	_xpc_type_uuid = C.xpc_extern__xpc_type_uuid()
+}
