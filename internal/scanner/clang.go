@@ -217,6 +217,13 @@ type CLibraryDef struct {
 	// Use a directory path (e.g. "bsm/") to accept all headers under that directory,
 	// or a file path (e.g. "sandbox.h") to match only that exact file.
 	HeaderDir string `json:"header_dir,omitempty"`
+	// ShimHeader is a repo-relative path to a hand-maintained prototype header
+	// for libraries that ship a linkable .tbd stub in the SDK but no public
+	// header (private dylibs such as IOReport). When set it takes precedence
+	// over Header/HeaderDir: the scan parses this file, the node filter accepts
+	// only declarations made in it, and the bridge emitter ships a copy inside
+	// the generated package's bridge/ directory.
+	ShimHeader string `json:"shim_header,omitempty"`
 }
 
 // defaultCLibraries is the built-in registry of Apple C libraries. These live
@@ -312,10 +319,24 @@ func IsCLibrary(sdkPath, name string) bool {
 // If the library definition specifies a custom Header path, that is used;
 // otherwise the default {Name}/{Name}.h convention applies.
 func CLibraryHeader(sdkPath, name string) string {
-	if def := knownCLibraries[name]; def.Header != "" {
+	def := knownCLibraries[name]
+	if def.ShimHeader != "" {
+		return shimHeaderPath(def.ShimHeader)
+	}
+	if def.Header != "" {
 		return filepath.Join(sdkPath, "usr", "include", filepath.FromSlash(def.Header))
 	}
 	return filepath.Join(sdkPath, "usr", "include", name, name+".h")
+}
+
+// shimHeaderPath resolves a repo-relative shim header to an absolute path so
+// the Clang invocation and the AST file filter agree on the same spelling.
+func shimHeaderPath(shim string) string {
+	abs, err := filepath.Abs(filepath.FromSlash(shim))
+	if err != nil {
+		return filepath.FromSlash(shim)
+	}
+	return abs
 }
 
 // CLibraryHeaderRelative returns the umbrella header include path for a known
@@ -337,6 +358,10 @@ func CLibraryHeaderRelative(name string) string {
 func CLibraryHeaderDir(sdkPath, name string) string {
 	def := knownCLibraries[name]
 	switch {
+	case def.ShimHeader != "":
+		// Exact-file filter on the shim itself: only declarations written in
+		// the shim belong to the library, not anything it #includes.
+		return shimHeaderPath(def.ShimHeader)
 	case def.HeaderDir != "":
 		return filepath.Join(sdkPath, "usr", "include", filepath.FromSlash(def.HeaderDir))
 	case def.Header != "":

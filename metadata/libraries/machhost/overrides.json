@@ -1,0 +1,4 @@
+{
+ "comment": "mach_zone_info (function) collides with mach_zone_info_t (handle type) in the idiomatic layer: both reduce to the Go name MachZoneInfo. The zone-info API is kernel-diagnostic plumbing with no binding consumers; exclude the function rather than rename-special-case the emitter.",
+ "exclude_functions": ["mach_zone_info"]
+}

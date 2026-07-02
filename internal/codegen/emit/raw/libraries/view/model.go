@@ -31,6 +31,12 @@ type ExternItemModel struct {
 	GoName       string // Go identifier
 	GoType       string // Go type string
 	CommentBlock string // Pre-rendered comment lines with "\t" prefix (may be empty)
+	// InitExpr is the Go expression assigned in init(), reading the C global
+	// through its bridge getter. Empty means the extern's shape is not
+	// supported for initialisation and the var stays zero-valued.
+	InitExpr string
+	// SymbolName is the original C symbol backing the var.
+	SymbolName string
 }
 
 // ExternsFileModel is template data for a complete _externs.go file.
@@ -38,6 +44,19 @@ type ExternsFileModel struct {
 	PkgName string
 	Imports []string
 	Items   []ExternItemModel
+	// BridgeInclude is the package-relative bridge header path (e.g.
+	// "bridge/machinit_bridge.h"), set when at least one item has an InitExpr
+	// so the file carries its own import "C" block.
+	BridgeInclude string
+	HasInit       bool
+}
+
+// BridgeExternGetterModel is template data for one extern-address getter in
+// the bridge: a C function returning the address of the extern global so Go
+// init() can populate the corresponding package var.
+type BridgeExternGetterModel struct {
+	SymbolName string // C symbol, e.g. "mach_task_self_"
+	GetterName string // bridge function, e.g. "machinit_extern_mach_task_self_"
 }
 
 // ─── Structs ──────────────────────────────────────────────────────────────────
@@ -319,6 +338,7 @@ type BridgeHeaderModel struct {
 	FunctionDecls []BridgeDeclModel
 	ForeignDecls  []BridgeDeclModel
 	ProtoDecls    []BridgeProtoDeclModel
+	ExternGetters []BridgeExternGetterModel
 }
 
 // BridgeImplMethodModel is template data for one ObjC bridge function implementation.
@@ -351,13 +371,18 @@ type BridgeImplModel struct {
 	// SDK's usr/include (e.g. "compression.h", "os/log.h"). When non-empty it
 	// replaces the framework-style <Name/Name.h> import.
 	UmbrellaHeader string
-	HeaderName     string
+	// LocalHeader is the file name of a shim prototype header copied into the
+	// bridge/ directory (private libraries with no SDK header). When non-empty
+	// it is included with quotes and takes precedence over UmbrellaHeader.
+	LocalHeader string
+	HeaderName  string
 	Methods        []BridgeImplMethodModel
 	AllocImpls     []BridgeAllocImplModel
 	CodingImpls    string // pre-rendered NSCoding implementation block
 	Functions      []BridgeImplMethodModel
 	ForeignMethods []BridgeImplMethodModel
 	ProtoMethods   []BridgeImplMethodModel
+	ExternGetters  []BridgeExternGetterModel
 }
 
 // BridgeShimModel is template data for the package-root _bridge_impl.m shim file.

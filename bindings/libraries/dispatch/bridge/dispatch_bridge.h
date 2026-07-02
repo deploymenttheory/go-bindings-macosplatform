@@ -326,3 +326,48 @@ void dispatch_fn_dispatch_workloop_set_autorelease_frequency(void * workloop, ui
 
 // ID: objc-sym dispatch.dispatch_workloop_set_os_workgroup
 void dispatch_fn_dispatch_workloop_set_os_workgroup(void * workloop, void * workgroup, void **outException);
+
+// ID: objc-extern-address _dispatch_data_empty
+void * dispatch_extern__dispatch_data_empty(void);
+
+// ID: objc-extern-address _dispatch_main_q
+void * dispatch_extern__dispatch_main_q(void);
+
+// ID: objc-extern-address _dispatch_queue_attr_concurrent
+void * dispatch_extern__dispatch_queue_attr_concurrent(void);
+
+// ID: objc-extern-address _dispatch_source_type_data_add
+void * dispatch_extern__dispatch_source_type_data_add(void);
+
+// ID: objc-extern-address _dispatch_source_type_data_or
+void * dispatch_extern__dispatch_source_type_data_or(void);
+
+// ID: objc-extern-address _dispatch_source_type_data_replace
+void * dispatch_extern__dispatch_source_type_data_replace(void);
+
+// ID: objc-extern-address _dispatch_source_type_mach_recv
+void * dispatch_extern__dispatch_source_type_mach_recv(void);
+
+// ID: objc-extern-address _dispatch_source_type_mach_send
+void * dispatch_extern__dispatch_source_type_mach_send(void);
+
+// ID: objc-extern-address _dispatch_source_type_memorypressure
+void * dispatch_extern__dispatch_source_type_memorypressure(void);
+
+// ID: objc-extern-address _dispatch_source_type_proc
+void * dispatch_extern__dispatch_source_type_proc(void);
+
+// ID: objc-extern-address _dispatch_source_type_read
+void * dispatch_extern__dispatch_source_type_read(void);
+
+// ID: objc-extern-address _dispatch_source_type_signal
+void * dispatch_extern__dispatch_source_type_signal(void);
+
+// ID: objc-extern-address _dispatch_source_type_timer
+void * dispatch_extern__dispatch_source_type_timer(void);
+
+// ID: objc-extern-address _dispatch_source_type_vnode
+void * dispatch_extern__dispatch_source_type_vnode(void);
+
+// ID: objc-extern-address _dispatch_source_type_write
+void * dispatch_extern__dispatch_source_type_write(void);

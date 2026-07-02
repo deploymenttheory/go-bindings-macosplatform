@@ -88,6 +88,15 @@ type FrameworkMeta struct {
 	// "compression.h", "os/log.h", "bsm/libbsm.h") in place of the
 	// framework-style <Name/Name.h> import.
 	Header string `json:"header,omitempty"`
+
+	// ShimHeader is the repo-relative path of a hand-maintained prototype
+	// header for C libraries that ship no header in the SDK (private dylibs
+	// such as IOReport, which has a linkable .tbd stub but no public
+	// declarations). Stamped at scan time from the C library registry. The
+	// scanner parses this file instead of an SDK header, and the bridge
+	// emitter copies it into the generated package's bridge/ directory and
+	// includes it with quotes in place of the umbrella include.
+	ShimHeader string `json:"shim_header,omitempty"`
 }
 
 // Class represents an Objective-C class (@interface).

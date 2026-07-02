@@ -26,3 +26,18 @@ void sandbox_fn_sandbox_free_error(const char * errorbuf, void **outException) {
     }
 }
 
+
+// ID: objc-extern-address kSBXProfileNoInternet
+void * sandbox_extern_kSBXProfileNoInternet(void) { return (void *)&kSBXProfileNoInternet; }
+
+// ID: objc-extern-address kSBXProfileNoNetwork
+void * sandbox_extern_kSBXProfileNoNetwork(void) { return (void *)&kSBXProfileNoNetwork; }
+
+// ID: objc-extern-address kSBXProfileNoWrite
+void * sandbox_extern_kSBXProfileNoWrite(void) { return (void *)&kSBXProfileNoWrite; }
+
+// ID: objc-extern-address kSBXProfileNoWriteExceptTemporary
+void * sandbox_extern_kSBXProfileNoWriteExceptTemporary(void) { return (void *)&kSBXProfileNoWriteExceptTemporary; }
+
+// ID: objc-extern-address kSBXProfilePureComputation
+void * sandbox_extern_kSBXProfilePureComputation(void) { return (void *)&kSBXProfilePureComputation; }

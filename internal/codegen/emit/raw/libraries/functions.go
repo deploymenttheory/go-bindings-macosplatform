@@ -27,9 +27,10 @@ func buildFunctionsModel(pkgName, packageName string, framework *macosplatformme
 	usedImports := make(typemap.ImportSet)
 	ctx := m.BaseContext(framework.Framework, knownClasses)
 
+	pkgTypeNames := packageTypeNames(framework)
 	functions := make([]view.FunctionModel, 0, len(framework.Functions))
 	for _, fn := range EmittableFunctions(framework) {
-		functions = append(functions, buildFunctionModel(fn, framework.Framework, packageName, ctx, m, usedImports))
+		functions = append(functions, buildFunctionModel(fn, functionGoName(pkgTypeNames, fn), framework.Framework, packageName, ctx, m, usedImports))
 	}
 
 	imports := buildFunctionsImports(functions, usedImports)
@@ -42,7 +43,31 @@ func buildFunctionsModel(pkgName, packageName string, framework *macosplatformme
 // unknown filters, plus collision with package-level type names). The idiomatic
 // library layer uses this so it only ever wraps raw functions that actually exist.
 func EmittableFunctions(framework *macosplatformmetadata.FrameworkMeta) []macosplatformmetadata.Function {
-	// Names of package-level Go types the function names must not collide with.
+	pkgTypeNames := packageTypeNames(framework)
+
+	seen := make(map[string]bool)
+	out := make([]macosplatformmetadata.Function, 0, len(framework.Functions))
+	for _, fn := range framework.Functions {
+		if fn.IsInline || fn.IsVariadic || fn.Availability.IsUnavailable ||
+			strings.HasPrefix(fn.Name, "__builtin") || isUPPFunction(fn.Name) {
+			continue
+		}
+		if hasVAListArgFn(fn) || hasByValueUnknownType(fn) {
+			continue
+		}
+		goName := functionGoName(pkgTypeNames, fn)
+		if seen[goName] {
+			continue
+		}
+		seen[goName] = true
+		out = append(out, fn)
+	}
+	return out
+}
+
+// packageTypeNames returns the package-level Go type names (structs,
+// struct-typedefs, enums) that function wrapper names must not collide with.
+func packageTypeNames(framework *macosplatformmetadata.FrameworkMeta) map[string]bool {
 	pkgTypeNames := make(map[string]bool)
 	for n := range framework.Structs {
 		pkgTypeNames[naming.GoTypeName(n)] = true
@@ -55,31 +80,31 @@ func EmittableFunctions(framework *macosplatformmetadata.FrameworkMeta) []macosp
 	for n := range framework.Enums {
 		pkgTypeNames[naming.GoTypeName(n)] = true
 	}
+	return pkgTypeNames
+}
 
-	seen := make(map[string]bool)
-	out := make([]macosplatformmetadata.Function, 0, len(framework.Functions))
-	for _, fn := range framework.Functions {
-		if fn.IsInline || fn.IsVariadic || fn.Availability.IsUnavailable ||
-			strings.HasPrefix(fn.Name, "__builtin") || isUPPFunction(fn.Name) {
-			continue
-		}
-		if hasVAListArgFn(fn) || hasByValueUnknownType(fn) {
-			continue
-		}
-		goName := naming.GoTypeName(fn.Name)
-		if seen[goName] || pkgTypeNames[goName] {
-			continue
-		}
-		seen[goName] = true
-		out = append(out, fn)
+// FunctionGoName returns the Go wrapper name EmitFunctions gives fn. C
+// permits a struct and a function to share a name (e.g. mach_time.h declares
+// both a mach_timebase_info struct and function); the natural Go name then
+// collides with the emitted type, so the wrapper gains an "Fn" suffix
+// (Mach_timebase_infoFn) instead of being silently dropped. The idiomatic
+// layer resolves its raw call targets through this same rule.
+func FunctionGoName(framework *macosplatformmetadata.FrameworkMeta, fn macosplatformmetadata.Function) string {
+	return functionGoName(packageTypeNames(framework), fn)
+}
+
+func functionGoName(pkgTypeNames map[string]bool, fn macosplatformmetadata.Function) string {
+	goName := naming.GoTypeName(fn.Name)
+	if pkgTypeNames[goName] {
+		goName += "Fn"
 	}
-	return out
+	return goName
 }
 
 // buildFunctionModel builds the model for a single C function → Go wrapper.
-func buildFunctionModel(fn macosplatformmetadata.Function, framework, _ string, ctx typemap.Context, m *typemap.Mapper, imports typemap.ImportSet) view.FunctionModel {
+// goName is the collision-resolved wrapper name from functionGoName.
+func buildFunctionModel(fn macosplatformmetadata.Function, goName, framework, _ string, ctx typemap.Context, m *typemap.Mapper, imports typemap.ImportSet) view.FunctionModel {
 	cFunc := strings.ToLower(framework) + "_fn_" + fn.Name
-	goName := naming.GoTypeName(fn.Name)
 
 	// Resolve return type.
 	var retType string
@@ -191,7 +216,7 @@ func buildFunctionsImports(functions []view.FunctionModel, usedImports typemap.I
 func writeFunction(w io.Writer, fn macosplatformmetadata.Function, framework string, ctx typemap.Context, m *typemap.Mapper) error {
 	packageName := strings.ToLower(framework)
 	imports := make(typemap.ImportSet)
-	model := buildFunctionModel(fn, framework, packageName, ctx, m, imports)
+	model := buildFunctionModel(fn, naming.GoTypeName(fn.Name), framework, packageName, ctx, m, imports)
 	// Emit just the function body — tests don't need the file header.
 	return render.Execute(w, "functions_file", view.FunctionsFileModel{
 		PkgName:   strings.ToLower(framework),

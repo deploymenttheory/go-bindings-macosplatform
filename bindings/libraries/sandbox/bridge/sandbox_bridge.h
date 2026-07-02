@@ -11,3 +11,18 @@ int32_t sandbox_fn_sandbox_init(const char * profile, uint64_t flags, void * err
 
 // ID: objc-sym Sandbox.sandbox_free_error
 void sandbox_fn_sandbox_free_error(const char * errorbuf, void **outException);
+
+// ID: objc-extern-address kSBXProfileNoInternet
+void * sandbox_extern_kSBXProfileNoInternet(void);
+
+// ID: objc-extern-address kSBXProfileNoNetwork
+void * sandbox_extern_kSBXProfileNoNetwork(void);
+
+// ID: objc-extern-address kSBXProfileNoWrite
+void * sandbox_extern_kSBXProfileNoWrite(void);
+
+// ID: objc-extern-address kSBXProfileNoWriteExceptTemporary
+void * sandbox_extern_kSBXProfileNoWriteExceptTemporary(void);
+
+// ID: objc-extern-address kSBXProfilePureComputation
+void * sandbox_extern_kSBXProfilePureComputation(void);

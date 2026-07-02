@@ -269,10 +269,15 @@ func Extract(root *ASTNode, sdkPath, frameworkName, sdkVersion, arch string) *ma
 	}
 
 	// Set LinkLib and the umbrella header include path for known Apple C
-	// libraries that use -l rather than -framework.
+	// libraries that use -l rather than -framework. Shim-header libraries
+	// (no SDK header) record the shim path instead of an umbrella include.
 	if def, ok := knownCLibraries[frameworkName]; ok {
 		framework.LinkLib = def.LinkLib
-		framework.Header = CLibraryHeaderRelative(frameworkName)
+		if def.ShimHeader != "" {
+			framework.ShimHeader = def.ShimHeader
+		} else {
+			framework.Header = CLibraryHeaderRelative(frameworkName)
+		}
 	}
 
 	// Post-scan classification: detect frameworks that produced no declarations.

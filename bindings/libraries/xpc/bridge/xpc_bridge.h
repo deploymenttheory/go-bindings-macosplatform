@@ -500,3 +500,108 @@ void xpc_fn_xpc_transaction_end(void **outException);
 
 // ID: objc-sym xpc.xpc_set_event_stream_handler
 void xpc_fn_xpc_set_event_stream_handler(const char * stream, void * targetq, void * handler, void **outException);
+
+// ID: objc-extern-address XPC_ACTIVITY_CHECK_IN
+void * xpc_extern_XPC_ACTIVITY_CHECK_IN(void);
+
+// ID: objc-extern-address XPC_ACTIVITY_INTERVAL_15_MIN
+void * xpc_extern_XPC_ACTIVITY_INTERVAL_15_MIN(void);
+
+// ID: objc-extern-address XPC_ACTIVITY_INTERVAL_1_DAY
+void * xpc_extern_XPC_ACTIVITY_INTERVAL_1_DAY(void);
+
+// ID: objc-extern-address XPC_ACTIVITY_INTERVAL_1_HOUR
+void * xpc_extern_XPC_ACTIVITY_INTERVAL_1_HOUR(void);
+
+// ID: objc-extern-address XPC_ACTIVITY_INTERVAL_1_MIN
+void * xpc_extern_XPC_ACTIVITY_INTERVAL_1_MIN(void);
+
+// ID: objc-extern-address XPC_ACTIVITY_INTERVAL_30_MIN
+void * xpc_extern_XPC_ACTIVITY_INTERVAL_30_MIN(void);
+
+// ID: objc-extern-address XPC_ACTIVITY_INTERVAL_4_HOURS
+void * xpc_extern_XPC_ACTIVITY_INTERVAL_4_HOURS(void);
+
+// ID: objc-extern-address XPC_ACTIVITY_INTERVAL_5_MIN
+void * xpc_extern_XPC_ACTIVITY_INTERVAL_5_MIN(void);
+
+// ID: objc-extern-address XPC_ACTIVITY_INTERVAL_7_DAYS
+void * xpc_extern_XPC_ACTIVITY_INTERVAL_7_DAYS(void);
+
+// ID: objc-extern-address XPC_ACTIVITY_INTERVAL_8_HOURS
+void * xpc_extern_XPC_ACTIVITY_INTERVAL_8_HOURS(void);
+
+// ID: objc-extern-address _xpc_bool_false
+void * xpc_extern__xpc_bool_false(void);
+
+// ID: objc-extern-address _xpc_bool_true
+void * xpc_extern__xpc_bool_true(void);
+
+// ID: objc-extern-address _xpc_error_connection_interrupted
+void * xpc_extern__xpc_error_connection_interrupted(void);
+
+// ID: objc-extern-address _xpc_error_connection_invalid
+void * xpc_extern__xpc_error_connection_invalid(void);
+
+// ID: objc-extern-address _xpc_error_peer_code_signing_requirement
+void * xpc_extern__xpc_error_peer_code_signing_requirement(void);
+
+// ID: objc-extern-address _xpc_error_termination_imminent
+void * xpc_extern__xpc_error_termination_imminent(void);
+
+// ID: objc-extern-address _xpc_type_activity
+void * xpc_extern__xpc_type_activity(void);
+
+// ID: objc-extern-address _xpc_type_array
+void * xpc_extern__xpc_type_array(void);
+
+// ID: objc-extern-address _xpc_type_bool
+void * xpc_extern__xpc_type_bool(void);
+
+// ID: objc-extern-address _xpc_type_connection
+void * xpc_extern__xpc_type_connection(void);
+
+// ID: objc-extern-address _xpc_type_data
+void * xpc_extern__xpc_type_data(void);
+
+// ID: objc-extern-address _xpc_type_date
+void * xpc_extern__xpc_type_date(void);
+
+// ID: objc-extern-address _xpc_type_dictionary
+void * xpc_extern__xpc_type_dictionary(void);
+
+// ID: objc-extern-address _xpc_type_double
+void * xpc_extern__xpc_type_double(void);
+
+// ID: objc-extern-address _xpc_type_endpoint
+void * xpc_extern__xpc_type_endpoint(void);
+
+// ID: objc-extern-address _xpc_type_error
+void * xpc_extern__xpc_type_error(void);
+
+// ID: objc-extern-address _xpc_type_fd
+void * xpc_extern__xpc_type_fd(void);
+
+// ID: objc-extern-address _xpc_type_int64
+void * xpc_extern__xpc_type_int64(void);
+
+// ID: objc-extern-address _xpc_type_null
+void * xpc_extern__xpc_type_null(void);
+
+// ID: objc-extern-address _xpc_type_rich_error
+void * xpc_extern__xpc_type_rich_error(void);
+
+// ID: objc-extern-address _xpc_type_session
+void * xpc_extern__xpc_type_session(void);
+
+// ID: objc-extern-address _xpc_type_shmem
+void * xpc_extern__xpc_type_shmem(void);
+
+// ID: objc-extern-address _xpc_type_string
+void * xpc_extern__xpc_type_string(void);
+
+// ID: objc-extern-address _xpc_type_uint64
+void * xpc_extern__xpc_type_uint64(void);
+
+// ID: objc-extern-address _xpc_type_uuid
+void * xpc_extern__xpc_type_uuid(void);

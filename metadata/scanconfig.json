@@ -4,5 +4,9 @@
   },
   "IOKit": {
     "header_override": "System/Library/Frameworks/IOKit.framework/Headers/IOKitLib.h"
+  },
+  "IOKit/PowerSources": {
+    "header_override": "System/Library/Frameworks/IOKit.framework/Headers/ps/IOPowerSources.h",
+    "extra_include_dirs": ["System/Library/Frameworks/IOKit.framework/Headers/ps"]
   }
 }

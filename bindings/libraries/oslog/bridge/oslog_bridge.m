@@ -122,3 +122,9 @@ void oslog_fn__os_log_sensitive_deprecated(void **outException) {
     }
 }
 
+
+// ID: objc-extern-address _os_log_default
+void * oslog_extern__os_log_default(void) { return (void *)&_os_log_default; }
+
+// ID: objc-extern-address _os_log_disabled
+void * oslog_extern__os_log_disabled(void) { return (void *)&_os_log_disabled; }

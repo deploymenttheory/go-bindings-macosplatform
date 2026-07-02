@@ -25,10 +25,34 @@
   "header_dir": "dispatch/",
   "link_lib": "System"
  },
+ "ioreport": {
+  "link_lib": "IOReport",
+  "shim_header": "metadata/shims/IOReport.h"
+ },
  "libproc": {
   "header": "libproc.h",
   "header_dir": "libproc.h",
   "link_lib": "proc"
+ },
+ "machhost": {
+  "header": "mach/mach_host.h",
+  "header_dir": "mach/mach_host.h",
+  "link_lib": "System"
+ },
+ "machinit": {
+  "header": "mach/mach_init.h",
+  "header_dir": "mach/mach_init.h",
+  "link_lib": "System"
+ },
+ "machtime": {
+  "header": "mach/mach_time.h",
+  "header_dir": "mach/mach_time.h",
+  "link_lib": "System"
+ },
+ "machvm": {
+  "header": "mach/vm_map.h",
+  "header_dir": "mach/vm_map.h",
+  "link_lib": "System"
  },
  "oslog": {
   "header": "os/log.h",
