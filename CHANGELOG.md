@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.15.0](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.14.0...v0.15.0) (2026-07-02)
+
+
+### Features
+
+* **bindings:** add mach, IOKit PowerSources, and IOReport telemetry surfaces ([#74](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/74)) ([2f16efc](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/2f16efc3799f2f1f02148b63dc3d4cbe66ce8ce4))
+
 ## [0.13.0](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.12.1...v0.13.0) (2026-06-29)
 
 
