@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.16.0](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.15.0...v0.16.0) (2026-07-09)
+
+
+### Features
+
+* **idiomatic:** evolve emitted layer to hand-crafted-quality Go ([#77](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/77)) ([9391398](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/9391398cdc817b7b0e2fdafc7f70752b73d3c677))
+
 ## [0.15.0](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.14.0...v0.15.0) (2026-07-02)
 
 
